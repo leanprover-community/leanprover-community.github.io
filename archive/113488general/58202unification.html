@@ -1,0 +1,310 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58202unification.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html">unification</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="156838225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838225">Kevin Buzzard (Jan 25 2019 at 09:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="n">a</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- works</span>
+</pre></div>
+
+
+<p>How does unification work? I was in the middle of something else and I wrote the first line, confident that Lean should be able to figure it out, but it didn't: I got</p>
+<div class="codehilite"><pre><span></span>type mismatch, term
+  le_refl ?m_3
+has type
+  ?m_3 ≤ ?m_3
+but is expected to have type
+  a ∈ {x : ℕ | x ≤ a}
+</pre></div>
+
+
+<p>What is Lean's algorithm for attempting to solve for these metavariables, and how does adding the extra <code>a</code> actually help it? The moment Lean unfolds the definitions of <code>has_mem.mem</code> and <code>set.mem</code> it can see what's going on -- but why does adding <code>a</code> push it towards doing this? Is the algorithm easy to explain or is it some arcane thing which I should never be thinking about?</p>
+
+<a name="156838324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838324">Kenny Lau (Jan 25 2019 at 09:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">le_refl</span> <span class="bp">ℕ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="c1">--works</span>
+</pre></div>
+
+<a name="156838326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838326">Kenny Lau (Jan 25 2019 at 09:54)</a>:</h4>
+<p>Lean can't even figure out that we're talking about the natural numbers</p>
+
+<a name="156838374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838374">Kevin Buzzard (Jan 25 2019 at 09:54)</a>:</h4>
+<p>Aah! I remember now. The <code>@</code> changes Lean's strategy doesn't it.</p>
+
+<a name="156838376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838376">Kenny Lau (Jan 25 2019 at 09:54)</a>:</h4>
+<p>but once we tell Lean that, Lean can figure it out by itself</p>
+
+<a name="156838379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838379">Kenny Lau (Jan 25 2019 at 09:54)</a>:</h4>
+<p>does it?</p>
+
+<a name="156838380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838380">Kevin Buzzard (Jan 25 2019 at 09:54)</a>:</h4>
+<p>I am not sure it's as simple as what you say</p>
+
+<a name="156838384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838384">Kevin Buzzard (Jan 25 2019 at 09:54)</a>:</h4>
+<p>I <em>think</em> the <code>@</code> changes Lean's elaboration procedure.</p>
+
+<a name="156838385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838385">Kenny Lau (Jan 25 2019 at 09:54)</a>:</h4>
+<p>well Lean sees the head term being "has_mem.mem" and is like "what? where is has_le.le?"</p>
+
+<a name="156838395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838395">Kevin Buzzard (Jan 25 2019 at 09:55)</a>:</h4>
+<p>Hey, look at us, mathematicians talking about head terms and elaboration procedures. This is progress, as far as I am concerned.</p>
+
+<a name="156838401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838401">Kenny Lau (Jan 25 2019 at 09:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_refl&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl&#39;</span> <span class="bp">ℕ</span> <span class="bp">_</span> <span class="c1">--works</span>
+</pre></div>
+
+<a name="156838402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838402">Kenny Lau (Jan 25 2019 at 09:55)</a>:</h4>
+<p>no <code>@</code></p>
+
+<a name="156838403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838403">Kevin Buzzard (Jan 25 2019 at 09:55)</a>:</h4>
+<p>Right, but when I use <code>a</code> explicitly, it must say "OK! I can't see <code>has_le.le</code> -- let's go for the unfold option.</p>
+
+<a name="156838447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838447">Kevin Buzzard (Jan 25 2019 at 09:56)</a>:</h4>
+<p>Oh so you are right.</p>
+
+<a name="156838451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838451">Kevin Buzzard (Jan 25 2019 at 09:56)</a>:</h4>
+<p>It's not using <code>a</code>, it's using its type. How does this help things I wonder?</p>
+
+<a name="156838468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838468">Kenny Lau (Jan 25 2019 at 09:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> might we plebs be honoured by your explanation?</p>
+
+<a name="156838476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838476">Kevin Buzzard (Jan 25 2019 at 09:57)</a>:</h4>
+<p>ha ha, he logs on and within seconds he's being pestered by mathematicians :-)</p>
+
+<a name="156838482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838482">Kevin Buzzard (Jan 25 2019 at 09:57)</a>:</h4>
+<p>aka plebs</p>
+
+<a name="156838544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838544">Kevin Buzzard (Jan 25 2019 at 09:58)</a>:</h4>
+<p>I should re-read the bit in TPIL where it talks about <code>elab_as_eliminator</code> etc.</p>
+
+<a name="156838634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838634">Kevin Buzzard (Jan 25 2019 at 10:00)</a>:</h4>
+<p>"Lean has to rely on heuristics to determine what to unfold or reduce, and when."</p>
+
+<a name="156838699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838699">Sebastian Ullrich (Jan 25 2019 at 10:01)</a>:</h4>
+<p><em>arrives at university</em></p>
+<blockquote>
+<p>How does unification work?</p>
+</blockquote>
+<p><em>turns around and leaves</em></p>
+
+<a name="156838749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838749">Kevin Buzzard (Jan 25 2019 at 10:02)</a>:</h4>
+<p>maybe it's hard?</p>
+
+<a name="156838755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838755">Kevin Buzzard (Jan 25 2019 at 10:02)</a>:</h4>
+<p>"using the @ symbol in front of an identifier in an expression<br>
+instructs the elaborator to use the [elab_simple] strategy" -- that was what I was remembering</p>
+
+<a name="156838765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838765">Kevin Buzzard (Jan 25 2019 at 10:03)</a>:</h4>
+<p>But </p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">elab_simple</span><span class="o">]</span> <span class="n">le_refl</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>so it's not the <code>@</code>, as Kenny suspected.</p>
+
+<a name="156838850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838850">Kevin Buzzard (Jan 25 2019 at 10:05)</a>:</h4>
+<p><code>example (a : ℕ) : a ∈ {x : ℕ | x ≤ a} := @@le_refl _ _ -- fails</code></p>
+
+<a name="156838865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838865">Kevin Buzzard (Jan 25 2019 at 10:05)</a>:</h4>
+<p>not something you see very often, the <code>@@</code></p>
+
+<a name="156838961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156838961">Kevin Buzzard (Jan 25 2019 at 10:07)</a>:</h4>
+<p>The first <code>_</code> in the above is expecting <code>preorder ?m_1</code> so again it seems to be a case of "I will unfold <code>has_mem.mem</code> iff you tell me we're talking about nats"</p>
+
+<a name="156839117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839117">Kevin Buzzard (Jan 25 2019 at 10:10)</a>:</h4>
+<p>Computers are so stupid. Why are we even here? Maybe I should go back to writing references.</p>
+
+<a name="156839144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839144">Kevin Buzzard (Jan 25 2019 at 10:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> do you know if this is "higher order unification" or something else?</p>
+
+<a name="156839158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839158">Kenny Lau (Jan 25 2019 at 10:11)</a>:</h4>
+<p>perhaps</p>
+
+<a name="156839201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839201">Kevin Buzzard (Jan 25 2019 at 10:12)</a>:</h4>
+<p>I realise I am a bit unclear about what that term even means.</p>
+
+<a name="156839205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839205">Kenny Lau (Jan 25 2019 at 10:12)</a>:</h4>
+<p>has_le.le is a function with &gt; 0 inputs</p>
+
+<a name="156839212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839212">Kevin Buzzard (Jan 25 2019 at 10:12)</a>:</h4>
+<p>i.e. what a mathematician would call "a function"</p>
+
+<a name="156839316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839316">Kevin Buzzard (Jan 25 2019 at 10:14)</a>:</h4>
+<p>It has taken me a year to be proficient enough at Lean to be able to start formalising basic questions about what I don't understand, and because I have learnt type theory in some weird way (by trying to use it in a random context, i.e. mathematics) there are still, I'm sure, several important things which I don't understand yet.</p>
+
+<a name="156839335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839335">Kevin Buzzard (Jan 25 2019 at 10:15)</a>:</h4>
+<p>It took me a year to understand what equality was, basically, and now I'm pressing on from there.</p>
+
+<a name="156839392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839392">Kenny Lau (Jan 25 2019 at 10:16)</a>:</h4>
+<p>global sections of affine schemes are dependent functions</p>
+
+<a name="156839691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156839691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156839691">Kevin Buzzard (Jan 25 2019 at 10:23)</a>:</h4>
+<p>This I know. As is Fermat's Last Theorem.</p>
+
+<a name="156840744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156840744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156840744">Kevin Buzzard (Jan 25 2019 at 10:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">a</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span> <span class="n">a</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="156840862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156840862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156840862">Kenny Lau (Jan 25 2019 at 10:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_refl&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@@</span><span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="o">(</span><span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">has_mem</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">a</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="c1">--fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span> <span class="n">a</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="c1">--works</span>
+</pre></div>
+
+<a name="156840979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156840979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156840979">Kevin Buzzard (Jan 25 2019 at 10:49)</a>:</h4>
+<p>I think this must be a bug in <code>has_mem.mem</code> ;-)</p>
+
+<a name="156841033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841033">Kevin Buzzard (Jan 25 2019 at 10:50)</a>:</h4>
+<p>but unfortunately I've now made it to work so need to do something serious.</p>
+
+<a name="156841375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841375">Sebastian Ullrich (Jan 25 2019 at 10:57)</a>:</h4>
+<p>Yeah, this one is a bit involved. In your first example, you're asking Lean to figure out all parameters of <code>le_refl</code> by unifying its type with the expected type (the goal).</p>
+<div class="codehilite"><pre><span></span>8:7: [type_context.is_def_eq_detail] [1]: @has_mem.mem nat (set nat) (@set.has_mem nat) a (@set_of nat (λ (x : nat), @has_le.le nat nat.has_le x a)) =?= @has_le.le ?m_1 (@preorder.to_has_le ?m_1 ?m_2) ?m_3 ?m_3
+[type_context.is_def_eq_detail] [2]: @set.mem nat a (@set_of nat (λ (x : nat), @has_le.le nat nat.has_le x a)) =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+[type_context.is_def_eq_detail] unfold left: set.mem
+[type_context.is_def_eq_detail] [3]: @set_of nat (λ (x : nat), @has_le.le nat nat.has_le x a) a =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+[type_context.is_def_eq_detail] unfold left: set_of
+[type_context.is_def_eq_detail] [4]: (λ (x : nat), @has_le.le nat nat.has_le x a) a =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+[type_context.is_def_eq_detail] after whnf_core: @has_le.le nat nat.has_le a a =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+[type_context.is_def_eq_detail] [5]: nat.less_than_or_equal a a =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+[type_context.is_def_eq_detail] [6]: nat.less_than_or_equal =?= preorder.le
+[type_context.is_def_eq_detail] on failure: nat.less_than_or_equal =?= preorder.le
+[type_context.is_def_eq_detail] on failure: nat.less_than_or_equal a a =?= @preorder.le ?m_1 ?m_2 ?m_3 ?m_3
+</pre></div>
+
+
+<p>At different points during unification, Lean has unfolded the LHS <code>has_le.le</code> to <code>nat.less_than_or_equal</code> and the RHS's to <code>preorder.le</code>, but in the end fails to unify these two, because it doesn't know the RHS preorder yet and so can't unfold <code>preorder.le</code>.<br>
+If Lean can otherwise figure out the preorder (by specifying one of the arguments), it works. If you use <code>set.mem</code>, it works more or less coincidentally because Lean prefers unfolding the definition <code>set.mem</code> over the projection <code>has_le.le</code>.</p>
+
+<a name="156841546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841546">Patrick Massot (Jan 25 2019 at 11:01)</a>:</h4>
+<p>Will this be easier with the Lean 4 non-monotonic elaboration?</p>
+
+<a name="156841634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841634">Kenny Lau (Jan 25 2019 at 11:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> how did you get that output?</p>
+
+<a name="156841690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841690">Sebastian Ullrich (Jan 25 2019 at 11:04)</a>:</h4>
+<div class="codehilite"><pre><span></span>set_option pp.implicit true
+set_option pp.notation false
+set_option trace.type_context.is_def_eq true
+set_option trace.type_context.is_def_eq_detail true
+</pre></div>
+
+<a name="156841741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841741">Kenny Lau (Jan 25 2019 at 11:04)</a>:</h4>
+<p>thanks</p>
+
+<a name="156841918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841918">Sebastian Ullrich (Jan 25 2019 at 11:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> No. The only thing the elaborator can do to figure out <code>le_refl _</code>'s arguments is to unify it with the expected type. Elaboration order doesn't matter if there's only a single way to proceed.</p>
+
+<a name="156841984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841984">Patrick Massot (Jan 25 2019 at 11:08)</a>:</h4>
+<p>ok, thanks</p>
+
+<a name="156841988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156841988">Kevin Buzzard (Jan 25 2019 at 11:08)</a>:</h4>
+<p>I love it when those trace outputs turn from "incomprehensible debugging messages which I can't make any sense of and hence just ignore" to "something I can actually understand". Thanks Sebastian.</p>
+
+<a name="156842132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156842132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156842132">Kevin Buzzard (Jan 25 2019 at 11:11)</a>:</h4>
+<blockquote>
+<p>If you use <code>set.mem</code>, it works more or less coincidentally because Lean prefers unfolding the definition <code>set.mem</code> over the projection <code>has_le.le</code>.</p>
+</blockquote>
+<p>One could imagine that rewriting Lean from scratch might change the coincidences that happen now to a completely different set of coincidences which may or may not happen. I wonder to what extent mathlib depends on such coincidences.</p>
+
+<a name="156842295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156842295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156842295">Kevin Buzzard (Jan 25 2019 at 11:14)</a>:</h4>
+<p>So the bug in <code>has_mem.mem</code> is that is that it is unfolded after <code>has_le.le</code>. Maybe someone should make a PR. How does one control unfolding power?</p>
+
+<a name="156842367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156842367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156842367">Sebastian Ullrich (Jan 25 2019 at 11:15)</a>:</h4>
+<p>No, they're both unfolded in the same step. You can't customize this.</p>
+
+<a name="156842486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156842486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156842486">Sebastian Ullrich (Jan 25 2019 at 11:16)</a>:</h4>
+<p>Unification isn't likely to change much, but heuristics in other parts of the elaborator may behave differently, yes.<br>
+I'm not an expert on unification, but I suppose one could argue that maybe Lean shouldn't unfold projections of stuck parent projections like <code>@has_le.le ?m_1 (@preorder.to_has_le ?m_1 ?m_2)</code>. Not sure how other systems handle that.</p>
+
+<a name="156842926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156842926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156842926">Sebastian Ullrich (Jan 25 2019 at 11:22)</a>:</h4>
+<p>Uh... which is exactly what it would do when using new-style structures. If you copy the relevant code to a context where <code>old_structure_cmd</code> is not set, it just works.</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">foo</span>
+<span class="n">class</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_le</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_lt</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">refl</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">le_refl</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">preorder</span><span class="bp">.</span><span class="n">le_refl</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span>
+<span class="kn">end</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="156843094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156843094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58202unification.html#156843094">Sebastian Ullrich (Jan 25 2019 at 11:25)</a>:</h4>
+<p>So depending on what <code>preorder</code> looks like in Lean 4 (where it may not be a part of core), this may just work. If it gets bundled, the unfication problems will look completely different anyway.</p>
+
+
+{% endraw %}

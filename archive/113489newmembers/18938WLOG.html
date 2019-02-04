@@ -1,0 +1,187 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/18938WLOG.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html">WLOG</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="132101162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101162">Ali Sever (Aug 14 2018 at 11:48)</a>:</h4>
+<p>I'm trying to get more efficient in my proofs, so I want to learn about the wlog tactic, but I didn't understand the comments where the tactic was written. Are there any examples I can read (preferably about something I could understand)?</p>
+
+<a name="132101277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101277">Sean Leather (Aug 14 2018 at 11:51)</a>:</h4>
+<p>Not to derail your question entirely, but I also recently had issues trying to understand the comments. In particular, it started with the <a href="https://github.com/leanprover-community/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/tactic/wlog.lean#L111" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/tactic/wlog.lean#L111">summary</a>:</p>
+<blockquote>
+<p>Without loss of generality: reduces to one goal under variables permutations</p>
+</blockquote>
+<p>What does “reduces to one goal under variables permutations” mean?</p>
+
+<a name="132101345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101345">Mario Carneiro (Aug 14 2018 at 11:52)</a>:</h4>
+<p><code>wlog</code> applies when the goal is symmetric under permutation of some variables, and there is a "symmetry breaking" relation that holds when disjoined over all permutations</p>
+
+<a name="132101353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101353">Mario Carneiro (Aug 14 2018 at 11:53)</a>:</h4>
+<p>i.e. you want to prove <code>x * y &lt;= 1</code>, then wlog you can assume <code>x &lt;= y</code></p>
+
+<a name="132101420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101420">Mario Carneiro (Aug 14 2018 at 11:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">wlog</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">wlog</span> <span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">,</span>
+  <span class="c1">-- x ≤ y ⊢ x * y ≤ 1</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="132101472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101472">Mario Carneiro (Aug 14 2018 at 11:56)</a>:</h4>
+<p>I agree the wording is not very good. I invite suggestions for rewording</p>
+
+<a name="132101818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101818">Ali Sever (Aug 14 2018 at 12:04)</a>:</h4>
+<p>The wlog I want to do is a little more complicated, for example I have <code>( p(a) \or p(b) )</code>, where <code>p</code> is a pseudo-order relation.  I also have stuff like <code>h1 : p(a) → c</code> and <code>h2 : p(b) → d</code>, so I want to include these in my wlog.</p>
+
+<a name="132101891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101891">Mario Carneiro (Aug 14 2018 at 12:06)</a>:</h4>
+<p>What's the goal?</p>
+
+<a name="132101933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132101933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132101933">Mario Carneiro (Aug 14 2018 at 12:07)</a>:</h4>
+<p>what do you mean by pseudo order relation? <code>wlog</code> is very general, so I'm sure it will apply, but you have to figure out how to get it in a form it can accept</p>
+
+<a name="132102577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132102577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132102577">Ali Sever (Aug 14 2018 at 12:22)</a>:</h4>
+<p>I want to wlog over <code>a b c d</code> where I have <code>p a b c d \or p c d a b</code>, I just tried <code>wlog h : p a b c d</code> and it asked me for a proof of <code>p a b c d \or p c d a b</code>, which was very surprising. Sometimes Lean is a lot smarter than I expect.</p>
+
+<a name="132103235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132103235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132103235">Ali Sever (Aug 14 2018 at 12:39)</a>:</h4>
+<p>So I started the wlog proof, and I finished the first case. Now for the second case it wants a proof of <code>h1 : p(b) → c</code> and <code>h1 : p(a) → d</code>, but those aren't true. How would I tell Lean to add <code>c</code> and <code>d</code> to the wlog, so they swap as well for the second case?</p>
+
+<a name="132104067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132104067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132104067">Kevin Buzzard (Aug 14 2018 at 12:58)</a>:</h4>
+<p>Ali -- can you formalise a MWE of what you're asking? i.e. abstract the situation and post a problem of the form <code>example (alpha : type) (p : alpha -&gt; alpha -&gt; alpha -&gt; alpha -&gt; Prop) (h1 : blah -&gt; blah) (h2 : blah) ... : goal := sorry</code> and set it as a WLOG challenge.</p>
+
+<a name="132104185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132104185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132104185">Ali Sever (Aug 14 2018 at 13:01)</a>:</h4>
+<p>I was fearing this, I'll see what I can do.</p>
+
+<a name="132106746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132106746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132106746">Ali Sever (Aug 14 2018 at 14:09)</a>:</h4>
+<p>Here's a MWE: </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">wlog</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">E</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">B</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">D</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">S</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">S</span><span class="bp">.</span><span class="n">symm</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">B</span><span class="bp">.</span><span class="n">symm</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">B</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">B</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">E</span><span class="bp">.</span><span class="n">flip</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">E</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">a</span> <span class="n">d</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">t1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="bp">∨</span> <span class="n">D</span> <span class="n">c</span> <span class="n">d</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">t2</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">D</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">c</span> <span class="n">d</span> <span class="n">r</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">D</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">t3</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">D</span> <span class="n">a</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">B</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">t4</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">B</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">B</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a</span> <span class="n">c</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">c</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- Had to name it a₁ because Lean didn&#39;t let me use a on line 39?</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">c</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">h</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+<span class="n">wlog</span> <span class="n">h4</span> <span class="o">:</span> <span class="n">D</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t1</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="n">D</span> <span class="n">p</span> <span class="n">q</span> <span class="n">p</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t2</span> <span class="n">h4</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">B</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h</span> <span class="n">h4</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h7</span> <span class="o">:</span> <span class="n">B</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h1</span> <span class="n">h5</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">t4</span> <span class="n">h6</span> <span class="n">h7</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hx</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span> <span class="n">S</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">c</span> <span class="n">b</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+<span class="c1">-- This is what I would expect the WLOG to give me to use as &quot;this&quot;,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">hx</span> <span class="n">p</span> <span class="n">r</span> <span class="n">q</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">h1</span><span class="bp">.</span><span class="n">symm</span> <span class="n">h3</span> <span class="n">h2</span><span class="o">)</span><span class="bp">.</span><span class="n">flip</span>
+<span class="kn">end</span>
+
+<span class="c1">--A way around this is to change the statement, but that isn&#39;t ideal</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span> <span class="n">S</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">c</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">wlog</span> <span class="n">h4</span> <span class="o">:</span> <span class="n">D</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t1</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">introv</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="n">D</span> <span class="n">p</span> <span class="n">q</span> <span class="n">p</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t2</span> <span class="n">h4</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">B</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h</span> <span class="n">h4</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h7</span> <span class="o">:</span> <span class="n">B</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h1</span> <span class="n">h5</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">t4</span> <span class="n">h6</span> <span class="n">h7</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">this</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">p</span> <span class="n">r</span> <span class="n">q</span> <span class="n">a</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a_2</span> <span class="n">a_1</span><span class="o">)</span><span class="bp">.</span><span class="n">flip</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="132106758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132106758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132106758">Ali Sever (Aug 14 2018 at 14:09)</a>:</h4>
+<p>I'd also like to know how to name everything WLOG gives me, and why I had to use <code>a₁</code> instead of <code>a</code>.</p>
+
+<a name="132108487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132108487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132108487">Patrick Massot (Aug 14 2018 at 14:49)</a>:</h4>
+<p>You should never try to name anything <code>a</code> in Lean. That's a name Lean uses, and trying to also use it can only lead to cryptic error messages</p>
+
+<a name="132108966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132108966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132108966">Kevin Buzzard (Aug 14 2018 at 14:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- your example, upgraded to theorem t5</span>
+<span class="kn">theorem</span> <span class="n">t5</span> <span class="o">{</span><span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span> <span class="n">S</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">c</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">wlog</span> <span class="n">h4</span> <span class="o">:</span> <span class="n">D</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t1</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₁</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">introv</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="n">D</span> <span class="n">p</span> <span class="n">q</span> <span class="n">p</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t2</span> <span class="n">h4</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">B</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h</span> <span class="n">h4</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h7</span> <span class="o">:</span> <span class="n">B</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">t3</span> <span class="n">h1</span> <span class="n">h5</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">t4</span> <span class="n">h6</span> <span class="n">h7</span> <span class="n">h2</span> <span class="n">h3</span><span class="o">,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">this</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">p</span> <span class="n">r</span> <span class="n">q</span> <span class="n">a</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a_2</span> <span class="n">a_1</span><span class="o">)</span><span class="bp">.</span><span class="n">flip</span>
+<span class="kn">end</span>
+
+<span class="c1">-- what you wanted</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">a₁</span> <span class="n">c</span> <span class="n">p</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">E</span> <span class="n">b</span> <span class="n">c</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">t5</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="132109024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132109024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132109024">Kevin Buzzard (Aug 14 2018 at 14:59)</a>:</h4>
+<p>The <code>a</code> thing is a bug in the parser, which won't be fixed until Lean 4.</p>
+
+<a name="132109241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WLOG/near/132109241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18938WLOG.html#132109241">Ali Sever (Aug 14 2018 at 15:02)</a>:</h4>
+<p>Ok thanks, I was hoping wlog could revert for me,</p>
+
+
+{% endraw %}

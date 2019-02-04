@@ -1,0 +1,371 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/66756Concurrentlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html">Concurrent lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124299642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124299642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124299642">Mario Carneiro (Mar 28 2018 at 03:54)</a>:</h4>
+<p>I've been thinking about what appropriate concurrency primitives can be used in pure lean. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Do you see any problems with modeling <code>task</code> in lean (being the same as <code>thunk</code>)? It's not clear why this needs to be <code>meta</code>.</p>
+<p>Another possible concurrency primitive is <code>fork : thunk A -&gt; thunk B -&gt; A x B</code> which runs the two thunks on separate threads and then returns the results. There is an obvious generalization here to <code>peval : list (thunk A) -&gt; list A</code>, not sure if this is better or worse than <code>join</code> as a primitive. I'm not sure how to simulate these forking strategies with <code>task</code>.</p>
+
+<a name="124299700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124299700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124299700">Mario Carneiro (Mar 28 2018 at 03:56)</a>:</h4>
+<p>I hoped to get inspiration from ML and Haskell, but ML is too declarative (<code>unit</code> functions everywhere) and Haskell has funny problems with laziness turning the evaluation order inside out. <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/parallel_haskell2.pdf" target="_blank" title="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/parallel_haskell2.pdf">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/parallel_haskell2.pdf</a></p>
+
+<a name="124308889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124308889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124308889">Sebastian Ullrich (Mar 28 2018 at 09:41)</a>:</h4>
+<p><code>fork f g = let tf = task.delay t in let tg = task.delay g in (tf.get, tg.get)</code>?</p>
+
+<a name="124308940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124308940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124308940">Gabriel Ebner (Mar 28 2018 at 09:43)</a>:</h4>
+<p><code>task</code> is perfectly sound, and does not need to be meta.  A possible model for <code>task</code> is <code>id</code>, and you should not be able to observe any differences from <code>id</code> in pure Lean code.</p>
+
+<a name="124308977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124308977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124308977">Sebastian Ullrich (Mar 28 2018 at 09:44)</a>:</h4>
+<p>Or less resource-hungry, <code>fork f g = let tf = task.delay f in let y = g () in (tf.get, y)</code></p>
+
+<a name="124309039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309039">Mario Carneiro (Mar 28 2018 at 09:47)</a>:</h4>
+<p>Isn't the evaluation semantics off from <code>id</code> though? You need <code>thunk</code> to avoid evaluating the argument too soon</p>
+
+<a name="124309040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309040">Gabriel Ebner (Mar 28 2018 at 09:47)</a>:</h4>
+<p>That's why I said <em>pure</em> Lean code. <span class="emoji emoji-1f604" title="smile">:smile:</span></p>
+
+<a name="124309079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309079">Gabriel Ebner (Mar 28 2018 at 09:48)</a>:</h4>
+<p>Of course, <code>task</code> hides nontermination and C++ exceptions.</p>
+
+<a name="124309080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309080">Sebastian Ullrich (Mar 28 2018 at 09:48)</a>:</h4>
+<p>One missing ingredient right now is <code>task.delay_io : {α : Type u} (f : io α) : io (task α)</code></p>
+
+<a name="124309081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309081">Mario Carneiro (Mar 28 2018 at 09:48)</a>:</h4>
+<p>Neither can happen in non-<code>meta</code> code though, right?</p>
+
+<a name="124309083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309083">Mario Carneiro (Mar 28 2018 at 09:48)</a>:</h4>
+<p>How is that different from <code>task.delay</code>?</p>
+
+<a name="124309088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309088">Gabriel Ebner (Mar 28 2018 at 09:49)</a>:</h4>
+<p>You can have nontermination without meta if you add <code>axiom large_cardinal : 0 = 1</code></p>
+
+<a name="124309090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309090">Mario Carneiro (Mar 28 2018 at 09:49)</a>:</h4>
+<p>lol that's quite a large cardinal</p>
+
+<a name="124309139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309139">Sebastian Ullrich (Mar 28 2018 at 09:51)</a>:</h4>
+<p>Okay, I think I fixed the signature</p>
+
+<a name="124309140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309140">Gabriel Ebner (Mar 28 2018 at 09:51)</a>:</h4>
+<p>Right now, there is also the <em>slight</em> performance problem that we serialize the thunk passed to <code>task.delay</code>, and then deserialize it on the thread where it executes.  From the last public state of the Lean 4 design document, this should be solved in Lean 4.</p>
+
+<a name="124309143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309143">Mario Carneiro (Mar 28 2018 at 09:51)</a>:</h4>
+<p>Well, you can break the VM in many ways using <code>large_cardinal</code>, you don't need <code>task</code></p>
+
+<a name="124309182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309182">Mario Carneiro (Mar 28 2018 at 09:52)</a>:</h4>
+<p>in fact you should be able to get nontermination even without <code>task</code></p>
+
+<a name="124309183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309183">Gabriel Ebner (Mar 28 2018 at 09:52)</a>:</h4>
+<blockquote>
+<p>in fact you should be able to get nontermination even without <code>task</code></p>
+</blockquote>
+<p>New results from your master thesis?</p>
+
+<a name="124309188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309188">Mario Carneiro (Mar 28 2018 at 09:53)</a>:</h4>
+<p>No, maybe it's folklore... But you can just evaluate a false proof of well_founded in the VM</p>
+
+<a name="124309192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309192">Gabriel Ebner (Mar 28 2018 at 09:54)</a>:</h4>
+<p>Ok, that's essentially the same thing as <code>large_cardinal</code>, or <code>sorry</code>.</p>
+
+<a name="124309232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309232">Mario Carneiro (Mar 28 2018 at 09:54)</a>:</h4>
+<p>right, that's my point - from a false axiom you can fake a wf definition to cause nontermination</p>
+
+<a name="124309236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309236">Mario Carneiro (Mar 28 2018 at 09:55)</a>:</h4>
+<p>(in the VM, which doesn't do reduction and so doesn't get stuck like <code>#reduce</code> would)</p>
+
+<a name="124309281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309281">Mario Carneiro (Mar 28 2018 at 09:56)</a>:</h4>
+<p>What is the behavior of <code>let f := task.delay f in ()</code>?</p>
+
+<a name="124309286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309286">Mario Carneiro (Mar 28 2018 at 09:57)</a>:</h4>
+<p>Does it just drop the thread?</p>
+
+<a name="124309287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309287">Mario Carneiro (Mar 28 2018 at 09:57)</a>:</h4>
+<p>What if you call <code>task.get</code> twice?</p>
+
+<a name="124309328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309328">Gabriel Ebner (Mar 28 2018 at 09:58)</a>:</h4>
+<blockquote>
+<p>What is the behavior of <code>let f := task.delay f in ()</code>?</p>
+</blockquote>
+<p><code>f</code> continues to execute, you can continue printing trace messages, etc., and they will show up.</p>
+
+<a name="124309339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309339">Gabriel Ebner (Mar 28 2018 at 09:59)</a>:</h4>
+<blockquote>
+<p>What if you call <code>task.get</code> twice?</p>
+</blockquote>
+<p>The first time you call <code>task.get</code>, it will wait for the task to finish and return the result.  The second time it will return immediately with the result.  The code in the task is only executed once.</p>
+
+<a name="124309340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309340">Mario Carneiro (Mar 28 2018 at 09:59)</a>:</h4>
+<p>Ooh, that sounds like memoization</p>
+
+<a name="124309383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309383">Mario Carneiro (Mar 28 2018 at 10:00)</a>:</h4>
+<p>Maybe <code>memoized</code> is definable after all...</p>
+
+<a name="124309384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309384">Sebastian Ullrich (Mar 28 2018 at 10:00)</a>:</h4>
+<p>It's what <code>thunk</code> should sound like <span class="emoji emoji-1f606" title="laughing">:laughing:</span></p>
+
+<a name="124309391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309391">Mario Carneiro (Mar 28 2018 at 10:01)</a>:</h4>
+<p>I think Leo said something about explicitly wanting <code>thunk</code> to not be memoized, although I think it's a poor name if that's the intent</p>
+
+<a name="124309394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309394">Gabriel Ebner (Mar 28 2018 at 10:01)</a>:</h4>
+<p>It's like memoization except that the code starts running immediately, and on another thread.  C++ code has the ability to create tasks that do not start immediately though (in fact, that's even the default behavior).</p>
+
+<a name="124309397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309397">Sebastian Ullrich (Mar 28 2018 at 10:01)</a>:</h4>
+<p>Btw, we will most probably move those horrible impure <code>init.util</code> functions into <code>io</code></p>
+
+<a name="124309438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309438">Mario Carneiro (Mar 28 2018 at 10:02)</a>:</h4>
+<p>You can create delayed tasks with <code>thunk (task A)</code> I guess</p>
+
+<a name="124309440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309440">Gabriel Ebner (Mar 28 2018 at 10:02)</a>:</h4>
+<p>This will create a new task every time you evaluate the thunk, probably not what you want.</p>
+
+<a name="124309446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309446">Mario Carneiro (Mar 28 2018 at 10:03)</a>:</h4>
+<p>hm... <code>task (task A)</code>? :)</p>
+
+<a name="124309447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309447">Gabriel Ebner (Mar 28 2018 at 10:03)</a>:</h4>
+<p>Immediately creates a task on another thread...</p>
+
+<a name="124309494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309494">Mario Carneiro (Mar 28 2018 at 10:04)</a>:</h4>
+<p>but I guess if the real work is in the created task that won't be executed until you <code>flatten</code></p>
+
+<a name="124309501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309501">Gabriel Ebner (Mar 28 2018 at 10:05)</a>:</h4>
+<p>If you do <code>task.delay (task.delay ())</code>, you first create task A, which immediately begins executing on thread 2.  This task A then creates task B, which again immediately begins executing <code>()</code> on thread 3.</p>
+
+<a name="124309545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309545">Mario Carneiro (Mar 28 2018 at 10:06)</a>:</h4>
+<p>Oh, I see...</p>
+
+<a name="124309595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309595">Mario Carneiro (Mar 28 2018 at 10:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> I really like those non-io functions. As long as they are observationally pure there is no problem</p>
+
+<a name="124309596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309596">Gabriel Ebner (Mar 28 2018 at 10:08)</a>:</h4>
+<p>Do you actually use them?</p>
+
+<a name="124309599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309599">Sebastian Ullrich (Mar 28 2018 at 10:08)</a>:</h4>
+<p>:)</p>
+
+<a name="124309603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309603">Mario Carneiro (Mar 28 2018 at 10:08)</a>:</h4>
+<p>I use <code>timeit</code> and <code>trace</code> all the time</p>
+
+<a name="124309614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309614">Sebastian Ullrich (Mar 28 2018 at 10:09)</a>:</h4>
+<p>Hmm, good to know I guess</p>
+
+<a name="124309656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309656">Mario Carneiro (Mar 28 2018 at 10:10)</a>:</h4>
+<p>Actually I've never used <code>io</code> in pure code. It seems like a trap</p>
+
+<a name="124309661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309661">Gabriel Ebner (Mar 28 2018 at 10:10)</a>:</h4>
+<p>I just realized that you can't even simulate them via <code>unsafe_perform_io</code>, since that is meta.</p>
+
+<a name="124309718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309718">Mario Carneiro (Mar 28 2018 at 10:12)</a>:</h4>
+<p>Here's another missing <code>task</code> primitive: Run <code>f g : thunk A</code>, and return the first one that finishes</p>
+
+<a name="124309720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309720">Gabriel Ebner (Mar 28 2018 at 10:12)</a>:</h4>
+<p>That's nondeterministic and hence unsupported by design.</p>
+
+<a name="124309721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309721">Mario Carneiro (Mar 28 2018 at 10:12)</a>:</h4>
+<p>The obvious problem is that they might not return the same thing, but <code>cached</code> solves that problem handily</p>
+
+<a name="124309726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309726">Mario Carneiro (Mar 28 2018 at 10:13)</a>:</h4>
+<p>I think it should probably be renamed <code>nondet</code></p>
+
+<a name="124309731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309731">Sebastian Ullrich (Mar 28 2018 at 10:13)</a>:</h4>
+<p>Did you see my beautiful typeclass for lifting these functions in the extended monad PR? Fortunately I found a more general monad class that subsumes it <a href="https://github.com/Kha/lean/commit/974fee78f75c8861477fba9143a49c8e08101b41#diff-f8e23e5e864df768277396e6f07b2809L67" target="_blank" title="https://github.com/Kha/lean/commit/974fee78f75c8861477fba9143a49c8e08101b41#diff-f8e23e5e864df768277396e6f07b2809L67">https://github.com/Kha/lean/commit/974fee78f75c8861477fba9143a49c8e08101b41#diff-f8e23e5e864df768277396e6f07b2809L67</a></p>
+
+<a name="124309774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309774">Gabriel Ebner (Mar 28 2018 at 10:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> This does not help you if you want to do printf-style debugging in a pure non-monadic function, right?</p>
+
+<a name="124309824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309824">Sebastian Ullrich (Mar 28 2018 at 10:16)</a>:</h4>
+<p>Then you don't need any lifting, no? This is still with the current pure definition instead of in <code>io</code>.</p>
+
+<a name="124309831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309831">Mario Carneiro (Mar 28 2018 at 10:17)</a>:</h4>
+<p>Is there a <code>@[noinline]</code> or <code>@[volatile]</code> attribute for these functions?</p>
+
+<a name="124309832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309832">Gabriel Ebner (Mar 28 2018 at 10:17)</a>:</h4>
+<p>Right.  You proposed the lifting functions as a replacement for the pure ones, that's what I was responding to.</p>
+
+<a name="124309927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309927">Mario Carneiro (Mar 28 2018 at 10:20)</a>:</h4>
+<p>Alternatively, you could accept a proof <code>f () = g ()</code> to eliminate the nondeterminism. This is roughly equivalent to the <code>cached</code> approach without boxing up the result</p>
+
+<a name="124309932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309932">Mario Carneiro (Mar 28 2018 at 10:21)</a>:</h4>
+<p>(This is not an unreasonable constraint, if it's not true you can just quotient the output type to make it true)</p>
+
+<a name="124309997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124309997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124309997">Sebastian Ullrich (Mar 28 2018 at 10:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  No, that was intended for correctly lifting "pure" scoping functions <code>thunk A -&gt; A</code> into <code>thunk (state S A) -&gt; state S A</code>, etc. But the same approach would be used for lifting <code>io A -&gt; io A</code> scoping functions, yes. The good thing is that with the latter, you can't accidentally forget the lift. Which is the main reason why I think the current definitions are pretty evil.</p>
+
+<a name="124310047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310047">Gabriel Ebner (Mar 28 2018 at 10:24)</a>:</h4>
+<p>Ah, I see.</p>
+
+<a name="124310061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310061">Mario Carneiro (Mar 28 2018 at 10:25)</a>:</h4>
+<p>I think that using scoping functions to build an <code>io</code> computation is certainly bad practice; the trace output should be expected to be nondeterministic</p>
+
+<a name="124310125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310125">Mario Carneiro (Mar 28 2018 at 10:26)</a>:</h4>
+<p>what is <code>unrun</code>? That seems a bit paradoxical</p>
+
+<a name="124310135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310135">Sebastian Ullrich (Mar 28 2018 at 10:27)</a>:</h4>
+<p><code>unrun</code> has since been removed :)</p>
+
+<a name="124310247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310247">Mario Carneiro (Mar 28 2018 at 10:30)</a>:</h4>
+<p>Now that <code>io_interface</code> is gone, is it impossible to non-meta write <code>io</code> programs?</p>
+
+<a name="124310250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310250">Sebastian Ullrich (Mar 28 2018 at 10:30)</a>:</h4>
+<p><code>io</code> is non-meta now :)</p>
+
+<a name="124310258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310258">Mario Carneiro (Mar 28 2018 at 10:31)</a>:</h4>
+<p>yeah, but not really, it relies on a meta constant that is not actually meta for some reason</p>
+
+<a name="124310352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310352">Sebastian Ullrich (Mar 28 2018 at 10:34)</a>:</h4>
+<p>I think the idea was to not force users to annotate all <code>io</code> functions with <code>meta</code>. You can't prove anything about it, but it's still sound. The replacement for <code>io_interface</code> is <code>monad_io</code>.</p>
+
+<a name="124310354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310354">Mario Carneiro (Mar 28 2018 at 10:34)</a>:</h4>
+<p>Oh, I guess the idea is you should replace <code>io_core</code> with your own implementation of <code>monad_io_terminal</code> etc</p>
+
+<a name="124310417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310417">Mario Carneiro (Mar 28 2018 at 10:37)</a>:</h4>
+<p>How do you know it's sound? Writing an implementation is not trivial, I think</p>
+
+<a name="124310420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310420">Mario Carneiro (Mar 28 2018 at 10:38)</a>:</h4>
+<p>in particular there is a constructor that gives unbounded recursion in the monad</p>
+
+<a name="124310473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310473">Sebastian Ullrich (Mar 28 2018 at 10:39)</a>:</h4>
+<p>Which should be okay as long as there's no eliminator, no?</p>
+
+<a name="124310576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310576">Mario Carneiro (Mar 28 2018 at 10:42)</a>:</h4>
+<p>hm, I guess you can do some kind of coinductive trace thing if you don't want to have it be trivial</p>
+
+<a name="124310584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310584">Mario Carneiro (Mar 28 2018 at 10:43)</a>:</h4>
+<p>Oh cool I just noticed we have a random number generator in lean now</p>
+
+<a name="124310627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310627">Gabriel Ebner (Mar 28 2018 at 10:44)</a>:</h4>
+<p>For soundness it should be enough to set <code>io_core := λ _ _, unit</code>.</p>
+
+<a name="124310643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310643">Mario Carneiro (Mar 28 2018 at 10:45)</a>:</h4>
+<p>is <code>unit</code> a monad in lean?</p>
+
+<a name="124310683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310683">Sebastian Ullrich (Mar 28 2018 at 10:46)</a>:</h4>
+<p>It's not even a type constructor...?</p>
+
+<a name="124310685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310685">Mario Carneiro (Mar 28 2018 at 10:46)</a>:</h4>
+<p>or I guess <code>λ _, unit</code></p>
+
+<a name="124310692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310692">Sebastian Ullrich (Mar 28 2018 at 10:47)</a>:</h4>
+<p>There's also <a href="https://github.com/leanprover/lean/blob/efa9d7e110ff6389e8863551a4882c84dbcf8236/tests/lean/run/rebind_bind.lean" target="_blank" title="https://github.com/leanprover/lean/blob/efa9d7e110ff6389e8863551a4882c84dbcf8236/tests/lean/run/rebind_bind.lean">https://github.com/leanprover/lean/blob/efa9d7e110ff6389e8863551a4882c84dbcf8236/tests/lean/run/rebind_bind.lean</a></p>
+
+<a name="124310741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310741">Mario Carneiro (Mar 28 2018 at 10:48)</a>:</h4>
+<p>interesting. You are using <code>do</code> notation with something that's not <code>monad.bind</code>?</p>
+
+<a name="124310749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124310749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124310749">Sebastian Ullrich (Mar 28 2018 at 10:49)</a>:</h4>
+<p>Yep, that's the main purpose of the test</p>
+
+<a name="124313219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124313219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124313219">Kevin Buzzard (Mar 28 2018 at 12:20)</a>:</h4>
+<p><code>mono_monad</code>? Reminds me of <a href="https://www.youtube.com/watch?v=8N_tupPBtWQ" target="_blank" title="https://www.youtube.com/watch?v=8N_tupPBtWQ">https://www.youtube.com/watch?v=8N_tupPBtWQ</a></p>
+<div class="youtube-video message_inline_image"><a data-id="8N_tupPBtWQ" href="https://www.youtube.com/watch?v=8N_tupPBtWQ" target="_blank" title="https://www.youtube.com/watch?v=8N_tupPBtWQ"><img src="https://i.ytimg.com/vi/8N_tupPBtWQ/default.jpg"></a></div>
+
+<a name="124402303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124402303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124402303">Mario Carneiro (Mar 30 2018 at 09:05)</a>:</h4>
+<p>Check it out:</p>
+<div class="codehilite"><pre><span></span>meta def list.par_map {α β} (f : α → β) (l : list α) : list β :=
+let fs := l.map (λ a, task.delay (λ _, f a)) in
+fs.map task.get
+
+#eval timeit &quot;&quot; ((list.range&#39; 50000 10).map (λ n, (eratosthenes n).length))
+-- 6.87s
+#eval timeit &quot;&quot; ((list.range&#39; 50000 10).par_map (λ n, (eratosthenes n).length))
+-- 2.78s
+</pre></div>
+
+<a name="124402344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124402344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124402344">Mario Carneiro (Mar 30 2018 at 09:06)</a>:</h4>
+<p>too bad it has to be <code>meta</code></p>
+
+<a name="124411857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124411857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html#124411857">Adam Kurkiewicz (Mar 30 2018 at 14:51)</a>:</h4>
+<p>impressive! What keeps it in <code>meta</code>?</p>
+
+
+{% endraw %}

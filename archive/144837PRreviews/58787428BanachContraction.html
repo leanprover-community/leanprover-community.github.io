@@ -1,0 +1,196 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/58787428BanachContraction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html">#428 Banach Contraction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="151452941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151452941">Johan Commelin (Dec 11 2018 at 16:18)</a>:</h4>
+<p>PR by <span class="user-mention" data-user-id="120559">@Rohan Mitta</span>.</p>
+
+<a name="151607136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151607136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151607136">Rohan Mitta (Dec 13 2018 at 14:41)</a>:</h4>
+<p>I edited this PR based on feedback from Patrick, I think it's ready now but any other feedback would be appreciated!</p>
+
+<a name="151618862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151618862">Patrick Massot (Dec 13 2018 at 17:16)</a>:</h4>
+<p>I think there is still overlap with existing stuff, eg <a href="https://github.com/leanprover/mathlib/blob/master/data/real/cau_seq_filter.lean#L164" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/data/real/cau_seq_filter.lean#L164">https://github.com/leanprover/mathlib/blob/master/data/real/cau_seq_filter.lean#L164</a></p>
+
+<a name="151618877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151618877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151618877">Patrick Massot (Dec 13 2018 at 17:16)</a>:</h4>
+<p>And I'm sure you can extract lemmas from the Banach contraction proof</p>
+
+<a name="151834889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151834889">Alistair Tucker (Dec 15 2018 at 13:01)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="151834942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151834942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151834942">Alistair Tucker (Dec 15 2018 at 13:03)</a>:</h4>
+<p>In fact I don't think I found a use for anything in cau_seq_filter.lean<br>
+   (Edit : I see this was because I didn't go beyond the first half of metric_sequences.lean)</p>
+
+<a name="151835097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151835097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#151835097">Alistair Tucker (Dec 15 2018 at 13:08)</a>:</h4>
+<p>We've got <code>sequentially_complete.tendsto_div</code>used in metric_sequences.lean, in</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">lim_sequence_of_mem_closure</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">∃</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">Y</span><span class="o">),</span> <span class="n">filter</span><span class="bp">.</span><span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But nothing from metric_sequences.lean is actually used in banach_contraction.lean any more</p>
+
+<a name="152036009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036009">Alistair Tucker (Dec 17 2018 at 16:31)</a>:</h4>
+<p>Isn't this basically constructive? It's a shame I that we have to mark as noncomputable the function to return the fixed point because the definition of completeness uses an exists.</p>
+
+<a name="152036085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036085">Patrick Massot (Dec 17 2018 at 16:32)</a>:</h4>
+<p>It looks very non-computable to me</p>
+
+<a name="152036140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036140">Patrick Massot (Dec 17 2018 at 16:33)</a>:</h4>
+<p>This is what we keep repeating to our students: compactness and completeness give you elements for free! Constructive maths don't give anything for free, they want you to suffer.</p>
+
+<a name="152036161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036161">Alistair Tucker (Dec 17 2018 at 16:33)</a>:</h4>
+<p>Why is that? If I have a cauchy sequence of, say, reals then I have constructed a real</p>
+
+<a name="152036192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036192">Patrick Massot (Dec 17 2018 at 16:33)</a>:</h4>
+<p>This is a very special case, because you constructed real like that</p>
+
+<a name="152036251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036251">Patrick Massot (Dec 17 2018 at 16:34)</a>:</h4>
+<p>And it's breaking an abstraction barrier</p>
+
+<a name="152036288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036288">Patrick Massot (Dec 17 2018 at 16:34)</a>:</h4>
+<p>We want to use this theorem for many complete spaces which are not constructed as completions</p>
+
+<a name="152036327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036327">Alistair Tucker (Dec 17 2018 at 16:35)</a>:</h4>
+<p>OK. Can you give me an example?</p>
+
+<a name="152036342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036342">Patrick Massot (Dec 17 2018 at 16:35)</a>:</h4>
+<p>Differentiable functions for instance</p>
+
+<a name="152036376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152036376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152036376">Patrick Massot (Dec 17 2018 at 16:35)</a>:</h4>
+<p>Say you want to prove Cauchy-Lipschitz theorem about existence and uniqueness of solutions to nice ordinary differential equations</p>
+
+<a name="152044239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152044239">Alistair Tucker (Dec 17 2018 at 18:23)</a>:</h4>
+<p>I think @Rohan Mitta will probably want to kill me because I put Mario off reviewing this <span class="emoji emoji-1f615" title="oh no">:oh_no:</span></p>
+
+<a name="152044258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152044258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152044258">Alistair Tucker (Dec 17 2018 at 18:23)</a>:</h4>
+<p>I panicked</p>
+
+<a name="152045032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045032">Mario Carneiro (Dec 17 2018 at 18:32)</a>:</h4>
+<p>if you want some more tips: the style of tactic indentation isn't quite standard, there are some funny names like <code>Banach's_fixed_point</code> and generally nonconforming names (they should be more or less strictly based on reading the symbols), <code>fixed_point_of_iteration_limit'</code> and <code>fixed_point_of_iteration_limit</code> are the same, the main theorem is far too long (I think it can be shorter, and this should also be lemma'd if not)</p>
+
+<a name="152045161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045161">Patrick Massot (Dec 17 2018 at 18:34)</a>:</h4>
+<p>I wrote that last remark many times, so I guess they'll need more help there. But I really want to finish completions (before the end of July 2018...)</p>
+
+<a name="152045274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045274">Alistair Tucker (Dec 17 2018 at 18:35)</a>:</h4>
+<p>We do have a much shorter one here <a href="https://github.com/agjftucker/mathlib/blob/Banach/analysis/topology/banach_contraction.lean#L253" target="_blank" title="https://github.com/agjftucker/mathlib/blob/Banach/analysis/topology/banach_contraction.lean#L253">https://github.com/agjftucker/mathlib/blob/Banach/analysis/topology/banach_contraction.lean#L253</a></p>
+
+<a name="152045404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045404">Patrick Massot (Dec 17 2018 at 18:37)</a>:</h4>
+<p>That's much better!</p>
+
+<a name="152045488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045488">Patrick Massot (Dec 17 2018 at 18:38)</a>:</h4>
+<p>What's the difference with the next statement?</p>
+
+<a name="152045558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045558">Patrick Massot (Dec 17 2018 at 18:39)</a>:</h4>
+<p>Why can't you get rid of <code>0 ≤ K →</code>?</p>
+
+<a name="152045561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045561">Alistair Tucker (Dec 17 2018 at 18:39)</a>:</h4>
+<p>The statement is much the same but the method is different</p>
+
+<a name="152045676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045676">Alistair Tucker (Dec 17 2018 at 18:40)</a>:</h4>
+<p>I think because otherwise you need inhabiteds ?</p>
+
+<a name="152045720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045720">Alistair Tucker (Dec 17 2018 at 18:41)</a>:</h4>
+<p>In fact you need at least two distinct points</p>
+
+<a name="152045730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045730">Mario Carneiro (Dec 17 2018 at 18:41)</a>:</h4>
+<p>the space is already inhabited</p>
+
+<a name="152045736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045736">Mario Carneiro (Dec 17 2018 at 18:41)</a>:</h4>
+<p>why two points?</p>
+
+<a name="152045796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045796">Patrick Massot (Dec 17 2018 at 18:42)</a>:</h4>
+<p>Oh I see</p>
+
+<a name="152045799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045799">Patrick Massot (Dec 17 2018 at 18:42)</a>:</h4>
+<p>crazy computers...</p>
+
+<a name="152045811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045811">Alistair Tucker (Dec 17 2018 at 18:42)</a>:</h4>
+<p>To prove that K &gt;=0 I think you need two</p>
+
+<a name="152045947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045947">Mario Carneiro (Dec 17 2018 at 18:44)</a>:</h4>
+<p>yeah, but if the space has only one point then it's a fixed point :P</p>
+
+<a name="152045958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045958">Patrick Massot (Dec 17 2018 at 18:44)</a>:</h4>
+<p>Yeah!</p>
+
+<a name="152045970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045970">Patrick Massot (Dec 17 2018 at 18:44)</a>:</h4>
+<p>Let's begin with this very natural case disjunction!</p>
+
+<a name="152045977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045977">Mario Carneiro (Dec 17 2018 at 18:44)</a>:</h4>
+<p>lol</p>
+
+<a name="152045995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152045995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152045995">Mario Carneiro (Dec 17 2018 at 18:45)</a>:</h4>
+<p>I would suggest putting <code>K &gt;= 0</code> in the definition of lipschitz</p>
+
+<a name="152046020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152046020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152046020">Alistair Tucker (Dec 17 2018 at 18:45)</a>:</h4>
+<p>OK I can change that in the main theorem :) But I might still need some <code>0 \leq K</code> in the preceding lemmas</p>
+
+<a name="152054653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152054653">Sebastien Gouezel (Dec 17 2018 at 20:43)</a>:</h4>
+<blockquote>
+<p>I would suggest putting <code>K &gt;= 0</code> in the definition of lipschitz</p>
+</blockquote>
+<p>Yes, definitely -- I played a lot with this in Isabelle, and it turned out to be much more manageable once I enforced <code>K &gt;= 0</code>.</p>
+
+<a name="152054798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152054798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152054798">Alistair Tucker (Dec 17 2018 at 20:45)</a>:</h4>
+<p>will do. Thanks</p>
+
+<a name="152056937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/152056937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html#152056937">Kevin Buzzard (Dec 17 2018 at 21:15)</a>:</h4>
+<blockquote>
+<p>Let's begin with this very natural case disjunction!</p>
+</blockquote>
+<p>That's pretty much how the proof I was taught as an undergraduate began!</p>
+
+
+{% endraw %}

@@ -1,0 +1,97 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/72721timeoutwithsplitifs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html">timeout with split_ifs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130454443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130454443">Kenny Lau (Jul 28 2018 at 09:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fin</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">fin</span><span class="bp">.</span><span class="n">fall</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">fin</span><span class="bp">.</span><span class="n">descend</span> <span class="o">(</span><span class="n">pivot</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="n">i</span> <span class="bp">≠</span> <span class="n">pivot</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span> <span class="n">H</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">pivot</span><span class="bp">.</span><span class="mi">1</span>
+  <span class="k">then</span> <span class="n">i</span><span class="bp">.</span><span class="n">fall</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_of_lt_succ</span> <span class="n">pivot</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span>
+  <span class="k">else</span> <span class="n">i</span><span class="bp">.</span><span class="n">pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">H1</span><span class="o">,</span> <span class="n">H</span> <span class="err">$</span> <span class="k">by</span> <span class="n">subst</span> <span class="n">H1</span><span class="bp">;</span>
+    <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">eq_zero_of_le_zero</span> <span class="o">(</span><span class="n">le_of_not_gt</span> <span class="n">h</span><span class="o">)</span><span class="bp">;</span>
+    <span class="k">from</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">fin</span><span class="bp">.</span><span class="n">ascend</span> <span class="o">(</span><span class="n">pivot</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">pivot</span><span class="bp">.</span><span class="mi">1</span> <span class="k">then</span> <span class="n">i</span><span class="bp">.</span><span class="n">raise</span> <span class="k">else</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">fin</span><span class="bp">.</span><span class="n">descend_ascend</span> <span class="o">(</span><span class="n">pivot</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">pivot</span><span class="bp">.</span><span class="n">ascend</span> <span class="n">i</span> <span class="bp">≠</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">pivot</span><span class="bp">.</span><span class="n">descend</span> <span class="o">(</span><span class="n">pivot</span><span class="bp">.</span><span class="n">ascend</span> <span class="n">i</span><span class="o">)</span> <span class="n">H</span> <span class="bp">=</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">fin</span><span class="bp">.</span><span class="n">descend</span> <span class="n">fin</span><span class="bp">.</span><span class="n">ascend</span><span class="o">,</span>
+  <span class="n">split_ifs</span> <span class="c1">-- (deterministic) timeout</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="130454446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130454446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130454446">Kenny Lau (Jul 28 2018 at 09:02)</a>:</h4>
+<p>I've used <code>split_ifs</code> quite a lot but it just happens to timeout here</p>
+
+<a name="130455338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130455338">Kevin Buzzard (Jul 28 2018 at 09:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">fin</span><span class="bp">.</span><span class="n">descend</span> <span class="n">fin</span><span class="bp">.</span><span class="n">ascend</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">P</span> <span class="o">:=</span> <span class="o">(</span><span class="n">ite</span> <span class="o">(</span><span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">pivot</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">raise</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span><span class="o">))</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">pivot</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">dP</span> <span class="o">:</span> <span class="n">decidable</span> <span class="n">P</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>Is <code>P</code> decidable? It looks decidable to me.</p>
+
+<a name="130455339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130455339">Kenny Lau (Jul 28 2018 at 09:34)</a>:</h4>
+<p>it should be decidable</p>
+
+<a name="130455342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130455342">Kenny Lau (Jul 28 2018 at 09:34)</a>:</h4>
+<p>but Lean is not very intelligent</p>
+
+<a name="130455351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130455351">Kevin Buzzard (Jul 28 2018 at 09:35)</a>:</h4>
+<p>Is there some missing instance <code>decidable.dite</code>?</p>
+
+<a name="130455871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130455871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130455871">Kevin Buzzard (Jul 28 2018 at 09:54)</a>:</h4>
+<blockquote>
+<p>Is there some missing instance <code>decidable.dite</code>?</p>
+</blockquote>
+<p><code>P</code> is just the statement that some nat is less than some other nat, right? But <code>example (a b : ℕ) : decidable (a &lt; b) := by apply_instance </code> works fine</p>
+
+<a name="130456027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130456027">Kevin Buzzard (Jul 28 2018 at 10:00)</a>:</h4>
+<p>Oh I'm being an idiot. I've used <code>have</code> instead of <code>let</code> again.</p>
+
+<a name="130456430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130456430">Gabriel Ebner (Jul 28 2018 at 10:15)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/pull/224" target="_blank" title="https://github.com/leanprover/mathlib/pull/224">https://github.com/leanprover/mathlib/pull/224</a></p>
+
+<a name="130456434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130456434">Kevin Buzzard (Jul 28 2018 at 10:15)</a>:</h4>
+<p>Nice one Gabriel.</p>
+
+<a name="130456474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130456474">Gabriel Ebner (Jul 28 2018 at 10:16)</a>:</h4>
+<p>Apparently <code>simp</code> cannot simplify the second ite.</p>
+
+<a name="130456480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20with%20split_ifs/near/130456480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72721timeoutwithsplitifs.html#130456480">Kenny Lau (Jul 28 2018 at 10:17)</a>:</h4>
+<p>thanks</p>
+
+
+{% endraw %}

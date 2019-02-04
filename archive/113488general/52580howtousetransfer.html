@@ -1,0 +1,620 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/52580howtousetransfer.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html">how to use transfer</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135299504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299504">Mario Carneiro (Oct 06 2018 at 07:21)</a>:</h4>
+<p>Okay, here is a mockup use of <code>transfer</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">inductive</span> <span class="n">xnat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">xnat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">xnat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">xnat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">to_xnat</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="n">def</span> <span class="n">of_xnat</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="kn">theorem</span> <span class="n">to_of_xnat</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">to_of_xnat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">of_to_xnat</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">of_to_xnat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">rel</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">to_xnat</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">x</span>
+
+<span class="kn">lemma</span> <span class="n">rel_zero</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+<span class="kn">lemma</span> <span class="n">rel_succ</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">rel_one</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">xnat</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">induction</span> <span class="n">n</span><span class="bp">;</span> <span class="o">[</span><span class="n">exact</span> <span class="n">m</span><span class="o">,</span> <span class="n">exact</span> <span class="n">n_ih</span><span class="bp">.</span><span class="n">succ</span><span class="o">]</span><span class="bp">⟩</span>
+
+<span class="kn">theorem</span> <span class="n">to_xnat_add</span> <span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">to_xnat</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_xnat</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">to_xnat</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">to_xnat_add</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">rel_add</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">apply</span> <span class="n">to_xnat_add</span>
+
+<span class="kn">lemma</span> <span class="n">rel_eq</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span>
+<span class="bp">⟨λ</span> <span class="n">e</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">of_to_xnat</span><span class="o">]</span> <span class="kn">using</span> <span class="n">congr_arg</span> <span class="n">of_xnat</span> <span class="n">e</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="bp">_⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">bi_total</span> <span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">to_of_xnat</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩⟩</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">transfer</span><span class="bp">.</span><span class="n">transfer</span> <span class="o">[</span><span class="bp">``</span><span class="n">relator</span><span class="bp">.</span><span class="n">rel_forall_of_total</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_eq</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_add</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="135299649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299649">Scott Olson (Oct 06 2018 at 07:26)</a>:</h4>
+<p>Coincidentally I was playing with some proofs recently where I wished I had automatic transport. I'm playing with (regular) languages, and I've manually proven language equivalences like <code>L₁ ≃ L₃ → L₂ ≃ L₄ → L₁ ∪ L₂ ≃ L₃ ∪ L₄</code> which feel a lot like the <code>A ≃ B → P A ≃ P B</code> univalent transport</p>
+
+<a name="135299658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299658">Johan Commelin (Oct 06 2018 at 07:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks a lot for this mock-up! Do you mind if I post my thoughts about it?</p>
+
+<a name="135299697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299697">Mario Carneiro (Oct 06 2018 at 07:28)</a>:</h4>
+<p>of course, that's the idea</p>
+
+<a name="135299698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299698">Scott Olson (Oct 06 2018 at 07:28)</a>:</h4>
+<p>I wonder if <code>transfer</code> would apply here? It might run intro trouble because these is an equivalence of functions, and <code>funext</code>-as-a-theorem would still be something cubical types have and Lean doesn't, but I haven't thought this through</p>
+
+<a name="135299700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299700">Johan Commelin (Oct 06 2018 at 07:28)</a>:</h4>
+<p>Should we take it to a different thread?</p>
+
+<a name="135299706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299706">Johan Commelin (Oct 06 2018 at 07:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> wrote a mockup use of <code>transfer</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">inductive</span> <span class="n">xnat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">xnat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">xnat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">xnat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">to_xnat</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="n">def</span> <span class="n">of_xnat</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="kn">theorem</span> <span class="n">to_of_xnat</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">to_of_xnat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">of_to_xnat</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">of_xnat</span> <span class="o">(</span><span class="n">to_xnat</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">of_to_xnat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">rel</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">to_xnat</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">x</span>
+
+<span class="kn">lemma</span> <span class="n">rel_zero</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+<span class="kn">lemma</span> <span class="n">rel_succ</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">rel_one</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">xnat</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">induction</span> <span class="n">n</span><span class="bp">;</span> <span class="o">[</span><span class="n">exact</span> <span class="n">m</span><span class="o">,</span> <span class="n">exact</span> <span class="n">n_ih</span><span class="bp">.</span><span class="n">succ</span><span class="o">]</span><span class="bp">⟩</span>
+
+<span class="kn">theorem</span> <span class="n">to_xnat_add</span> <span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">to_xnat</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_xnat</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">to_xnat</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">to_xnat_add</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">rel_add</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">apply</span> <span class="n">to_xnat_add</span>
+
+<span class="kn">lemma</span> <span class="n">rel_eq</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span>
+<span class="bp">⟨λ</span> <span class="n">e</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">of_to_xnat</span><span class="o">]</span> <span class="kn">using</span> <span class="n">congr_arg</span> <span class="n">of_xnat</span> <span class="n">e</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="bp">_⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">bi_total</span> <span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">to_of_xnat</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩⟩</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">transfer</span><span class="bp">.</span><span class="n">transfer</span> <span class="o">[</span><span class="bp">``</span><span class="n">relator</span><span class="bp">.</span><span class="n">rel_forall_of_total</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_eq</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_add</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="135299754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299754">Johan Commelin (Oct 06 2018 at 07:30)</a>:</h4>
+<p>First of all: I think for general applicability I think we need a quick way to construct <code>rel</code> from an `equiv.</p>
+
+<a name="135299803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299803">Johan Commelin (Oct 06 2018 at 07:32)</a>:</h4>
+<p>And then I have several conflicting thoughts...</p>
+
+<a name="135299809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299809">Johan Commelin (Oct 06 2018 at 07:33)</a>:</h4>
+<p>One is, given <code>nat</code> and the definition of <code>xnat</code> I would like to just immediately transfer <code>comm_semiring</code> to <code>xnat</code>.</p>
+
+<a name="135299810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299810">Johan Commelin (Oct 06 2018 at 07:33)</a>:</h4>
+<p>All the structure and proofs should be transferable using automation.</p>
+
+<a name="135299853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299853">Johan Commelin (Oct 06 2018 at 07:34)</a>:</h4>
+<p>On the other hand, one might find oneself in the situation where both sides are already equipped with some structure. In this case both already have a <code>0</code> and a <code>+</code>.</p>
+
+<a name="135299854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299854">Mario Carneiro (Oct 06 2018 at 07:34)</a>:</h4>
+<p>It is easy to define <code>equiv.rel : A ~= B -&gt; A -&gt; B -&gt; Prop</code></p>
+
+<a name="135299861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299861">Johan Commelin (Oct 06 2018 at 07:35)</a>:</h4>
+<p>Right, I'm collecting things that you find easy to define (-;</p>
+
+<a name="135299868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299868">Mario Carneiro (Oct 06 2018 at 07:35)</a>:</h4>
+<p>immediately transferring structures is both more difficult and not necessarily what we want</p>
+
+<a name="135299870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299870">Johan Commelin (Oct 06 2018 at 07:35)</a>:</h4>
+<p>So, suppose that both have a <code>0</code> and <code>+</code> like in your example.</p>
+
+<a name="135299910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299910">Mario Carneiro (Oct 06 2018 at 07:36)</a>:</h4>
+<p>I would prefer an expedited method for showing that pre-existing structures are compatible with an equiv</p>
+
+<a name="135299911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299911">Mario Carneiro (Oct 06 2018 at 07:36)</a>:</h4>
+<p>..oh wait, that's group_iso etc</p>
+
+<a name="135299912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299912">Johan Commelin (Oct 06 2018 at 07:36)</a>:</h4>
+<p>Exactly</p>
+
+<a name="135299913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299913">Mario Carneiro (Oct 06 2018 at 07:36)</a>:</h4>
+<p>so problem solved?</p>
+
+<a name="135299917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299917">Johan Commelin (Oct 06 2018 at 07:36)</a>:</h4>
+<p>So we show that <code>to_xnat</code> is an <code>add_monoid</code> iso. And then?</p>
+
+<a name="135299921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299921">Johan Commelin (Oct 06 2018 at 07:37)</a>:</h4>
+<p>Then there should be an easy way to extract those <code>rel</code>-lemmas</p>
+
+<a name="135299926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299926">Mario Carneiro (Oct 06 2018 at 07:37)</a>:</h4>
+<p>oh yes, that's a one liner</p>
+
+<a name="135299927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299927">Mario Carneiro (Oct 06 2018 at 07:37)</a>:</h4>
+<p>rel for add is literally map_add with some dressing</p>
+
+<a name="135299928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299928">Johan Commelin (Oct 06 2018 at 07:37)</a>:</h4>
+<p>After that, proving that <code>xnat</code> is a <code>comm_monoid</code> should be <code>by transfer</code>.</p>
+
+<a name="135299930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299930">Johan Commelin (Oct 06 2018 at 07:37)</a>:</h4>
+<p>Or something like that.</p>
+
+<a name="135299931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299931">Mario Carneiro (Oct 06 2018 at 07:38)</a>:</h4>
+<p>we could put that in the theorems for group_iso</p>
+
+<a name="135299972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299972">Mario Carneiro (Oct 06 2018 at 07:38)</a>:</h4>
+<p>But I am wary about <em>constructing</em> structure using <code>transfer</code></p>
+
+<a name="135299975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299975">Mario Carneiro (Oct 06 2018 at 07:38)</a>:</h4>
+<p>you might use <code>transfer</code> to prove that the addition is commutative, like I showed, but the definitions themselves should stand on their own</p>
+
+<a name="135299981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299981">Johan Commelin (Oct 06 2018 at 07:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rel_zero</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+<span class="kn">lemma</span> <span class="n">rel_succ</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">rel_one</span> <span class="o">:</span> <span class="n">rel</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+<span class="kn">lemma</span> <span class="n">rel_add</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">(</span><span class="bp">+</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">apply</span> <span class="n">to_xnat_add</span>
+
+<span class="kn">lemma</span> <span class="n">rel_eq</span> <span class="o">:</span> <span class="o">(</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">rel</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">(</span><span class="bp">=</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rintro</span> <span class="n">m</span> <span class="bp">_</span> <span class="bp">⟨⟩</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span>
+<span class="bp">⟨λ</span> <span class="n">e</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">of_to_xnat</span><span class="o">]</span> <span class="kn">using</span> <span class="n">congr_arg</span> <span class="n">of_xnat</span> <span class="n">e</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="bp">_⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">bi_total</span> <span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">to_of_xnat</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩⟩</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">transfer</span><span class="bp">.</span><span class="n">transfer</span> <span class="o">[</span><span class="bp">``</span><span class="n">relator</span><span class="bp">.</span><span class="n">rel_forall_of_total</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_eq</span><span class="o">,</span> <span class="bp">``</span><span class="n">rel_add</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I would wish that this could all be compressed into 2 or 3 lines.</p>
+
+<a name="135299983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135299983">Mario Carneiro (Oct 06 2018 at 07:40)</a>:</h4>
+<p>I don't think it needs to, it can be done in generality</p>
+
+<a name="135300030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300030">Mario Carneiro (Oct 06 2018 at 07:40)</a>:</h4>
+<p>the stuff about applying <code>transfer.transfer</code> is not nice though, it should be easier than that</p>
+
+<a name="135300039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300039">Johan Commelin (Oct 06 2018 at 07:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Why are you cautious about <code>transfer</code>ing structure?</p>
+
+<a name="135300041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300041">Mario Carneiro (Oct 06 2018 at 07:41)</a>:</h4>
+<p>because it leads to bad definitional reduction</p>
+
+<a name="135300044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300044">Mario Carneiro (Oct 06 2018 at 07:41)</a>:</h4>
+<p>there are very few cases when it is the right thing to do</p>
+
+<a name="135300094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300094">Johan Commelin (Oct 06 2018 at 07:43)</a>:</h4>
+<p>Hmmm, maybe I'm sad about that. I would have to see how it turns out in practice...</p>
+
+<a name="135300134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300134">Johan Commelin (Oct 06 2018 at 07:44)</a>:</h4>
+<p>I would wish that if someone inadvertently defined <code>xnat</code>, then we could just say: "Aaah, that's <code>equiv</code> to <code>nat</code>. Bam!!! from now one it is a <code>comm_semiring</code> and you can use all theorems about <code>nat</code> for your <code>xnat</code>."</p>
+
+<a name="135300144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300144">Johan Commelin (Oct 06 2018 at 07:45)</a>:</h4>
+<p>Hmm, I want to use more.</p>
+
+<a name="135300182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300182">Johan Commelin (Oct 06 2018 at 07:46)</a>:</h4>
+<p>I want to use that it is not just some random <code>equiv</code>. I want to use that they are structurally equivalent. Is that a thing?</p>
+
+<a name="135300186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300186">Johan Commelin (Oct 06 2018 at 07:46)</a>:</h4>
+<p>They are the <em>same</em> inductive type.</p>
+
+<a name="135300187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300187">Johan Commelin (Oct 06 2018 at 07:46)</a>:</h4>
+<p>But I'm getting distracted, I think.</p>
+
+<a name="135300193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300193">Scott Olson (Oct 06 2018 at 07:47)</a>:</h4>
+<p>So you're interested in duplicated definitions, not e.g. <code>nat</code> vs. <code>binnat</code>?</p>
+
+<a name="135300234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300234">Johan Commelin (Oct 06 2018 at 07:48)</a>:</h4>
+<p>Well, not really. Like I said, I was getting distracted.</p>
+
+<a name="135300239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300239">Johan Commelin (Oct 06 2018 at 07:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Ok, I think I know what I want. I want you to remove every mention of <code>rel</code> in your example.</p>
+
+<a name="135300240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300240">Mario Carneiro (Oct 06 2018 at 07:49)</a>:</h4>
+<p>That's the key part that makes transfer work</p>
+
+<a name="135300241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300241">Johan Commelin (Oct 06 2018 at 07:49)</a>:</h4>
+<p>In the proof that addition is commutative, I want to invoke <code>big_transfer</code></p>
+
+<a name="135300242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300242">Mario Carneiro (Oct 06 2018 at 07:49)</a>:</h4>
+<p>you could remove everything else</p>
+
+<a name="135300243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300243">Johan Commelin (Oct 06 2018 at 07:49)</a>:</h4>
+<p>And it will ask me for a <code>rel</code></p>
+
+<a name="135300279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300279">Johan Commelin (Oct 06 2018 at 07:50)</a>:</h4>
+<p>And I will answer: use this <code>equiv</code></p>
+
+<a name="135300283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300283">Mario Carneiro (Oct 06 2018 at 07:50)</a>:</h4>
+<p>but it is a logical relations proof, not a rewrite proof</p>
+
+<a name="135300287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300287">Mario Carneiro (Oct 06 2018 at 07:50)</a>:</h4>
+<p>That's fine, I think</p>
+
+<a name="135300288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300288">Johan Commelin (Oct 06 2018 at 07:50)</a>:</h4>
+<p>And then it says: Good. But then you need to prove these goals: <code>rel_zero</code>, <code>rel_add</code>.</p>
+
+<a name="135300289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300289">Mario Carneiro (Oct 06 2018 at 07:50)</a>:</h4>
+<p>the user layer can handle that</p>
+
+<a name="135300290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300290">Johan Commelin (Oct 06 2018 at 07:50)</a>:</h4>
+<p>And it generates those two goals. And I prove them with <code>tidy</code>.</p>
+
+<a name="135300291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300291">Mario Carneiro (Oct 06 2018 at 07:51)</a>:</h4>
+<p>But the user layer here <em>really</em> needs work</p>
+
+<a name="135300297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300297">Mario Carneiro (Oct 06 2018 at 07:51)</a>:</h4>
+<p>there is nothing, it's not even an interactive tactic</p>
+
+<a name="135300298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300298">Johan Commelin (Oct 06 2018 at 07:51)</a>:</h4>
+<p>And there you have a 4 line tactic proof of commutativity. And all the other stuff above is gone.</p>
+
+<a name="135300301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300301">Johan Commelin (Oct 06 2018 at 07:51)</a>:</h4>
+<p>Aaah...!</p>
+
+<a name="135300303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300303">Johan Commelin (Oct 06 2018 at 07:51)</a>:</h4>
+<p>When I asked whether there was a tactic for <code>transfer</code>, you said "Yes". And I immediately assumed it was interactive.</p>
+
+<a name="135300304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300304">Johan Commelin (Oct 06 2018 at 07:51)</a>:</h4>
+<p>Lol</p>
+
+<a name="135300343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300343">Johan Commelin (Oct 06 2018 at 07:52)</a>:</h4>
+<p>For me tactic implies interactive. Silly me.</p>
+
+<a name="135300344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300344">Mario Carneiro (Oct 06 2018 at 07:52)</a>:</h4>
+<p>In the int.basic example, there is a local redefinition of <code>transfer</code> to get the big list of relevant rel theorems for this particular relation</p>
+
+<a name="135300345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300345">Mario Carneiro (Oct 06 2018 at 07:52)</a>:</h4>
+<p>because it is often the case that you will want to use the same relation, or pair of structures, in multiple nearby proofs</p>
+
+<a name="135300350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300350">Mario Carneiro (Oct 06 2018 at 07:53)</a>:</h4>
+<p>in <code>int.basic</code> it is of course used for each of the axioms of the ring structure</p>
+
+<a name="135300351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300351">Johan Commelin (Oct 06 2018 at 07:53)</a>:</h4>
+<p>But, can a tactic automatically infer what it needs to know about a relation, given a certain goal?</p>
+
+<a name="135300352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300352">Mario Carneiro (Oct 06 2018 at 07:53)</a>:</h4>
+<p>no, it doesn't even know the target</p>
+
+<a name="135300391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300391">Mario Carneiro (Oct 06 2018 at 07:54)</a>:</h4>
+<p>For example in my mockup I have a goal on <code>xnat</code> and I said <code>transfer</code> with no info</p>
+
+<a name="135300393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300393">Mario Carneiro (Oct 06 2018 at 07:54)</a>:</h4>
+<p>how would it know that I am transferring to <code>nat</code> instead of something else? and why that relation instead of something else?</p>
+
+<a name="135300401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300401">Johan Commelin (Oct 06 2018 at 07:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">transfer</span> <span class="n">my_equiv</span><span class="bp">.</span><span class="n">to_rel</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- prove rel_zero },</span>
+  <span class="o">{</span> <span class="c1">-- prove rel_add }</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="135300403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300403">Johan Commelin (Oct 06 2018 at 07:55)</a>:</h4>
+<p>Would that be possible?</p>
+
+<a name="135300408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300408">Mario Carneiro (Oct 06 2018 at 07:55)</a>:</h4>
+<p>I think we will need to rewrite transfer anyway, I very much doubt the one in core works well enough for our purposes</p>
+
+<a name="135300449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300449">Mario Carneiro (Oct 06 2018 at 07:56)</a>:</h4>
+<p>(at least we should copy it to mathlib and give it a nice front end)</p>
+
+<a name="135300452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300452">Mario Carneiro (Oct 06 2018 at 07:56)</a>:</h4>
+<p>That would be possible, but like I said you want more reuse than that</p>
+
+<a name="135300454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300454">Johan Commelin (Oct 06 2018 at 07:56)</a>:</h4>
+<p>Cool</p>
+
+<a name="135300470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300470">Mario Carneiro (Oct 06 2018 at 07:57)</a>:</h4>
+<p>that might prove your theorem now, but in the very next theorem you will probably want this relation again and you would have to prove <code>rel_zero</code> again</p>
+
+<a name="135300471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300471">Johan Commelin (Oct 06 2018 at 07:57)</a>:</h4>
+<p>Yes, the VScode "Turn this goal into lemma" keyboard-shortcut will take care of the reuse.</p>
+
+<a name="135300515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300515">Mario Carneiro (Oct 06 2018 at 07:58)</a>:</h4>
+<p>I don't think we have to worry about proof obligations much here</p>
+
+<a name="135300516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300516">Johan Commelin (Oct 06 2018 at 07:58)</a>:</h4>
+<p>It will take everything between a pair of <code>{ .. }</code> and turn it into a proof of the subgoal. It will suggest a name for the lemma. And it will apply that lemma where previously the <code>{ .. }</code> were written.</p>
+
+<a name="135300517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300517">Johan Commelin (Oct 06 2018 at 07:58)</a>:</h4>
+<p>But I'm getting distracted again <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
+
+<a name="135300518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300518">Mario Carneiro (Oct 06 2018 at 07:58)</a>:</h4>
+<p>it will usually already have all the info it needs to prove these obligations</p>
+
+<a name="135300526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300526">Johan Commelin (Oct 06 2018 at 07:59)</a>:</h4>
+<p>Right.</p>
+
+<a name="135300529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300529">Mario Carneiro (Oct 06 2018 at 07:59)</a>:</h4>
+<p>e.g. if you are proving rel_zero and rel_add that means you have a group iso and so you probably assumed it was a group iso, and so these theorems will already be proven</p>
+
+<a name="135300570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300570">Mario Carneiro (Oct 06 2018 at 08:00)</a>:</h4>
+<p>The main point behind the <code>rel</code> stuff is to build up relations on bigger things, i.e. kernels and short exact sequences</p>
+
+<a name="135300572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300572">Johan Commelin (Oct 06 2018 at 08:00)</a>:</h4>
+<p>But then <code>interactive.transfer</code> needs to remember that the <code>rel</code> came from an <code>equiv</code>. Then it could use type class search to find those results.</p>
+
+<a name="135300573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300573">Johan Commelin (Oct 06 2018 at 08:00)</a>:</h4>
+<blockquote>
+<p>The main point behind the <code>rel</code> stuff is to build up relations on bigger things, i.e. kernels and short exact sequences</p>
+</blockquote>
+<p>This could all be <code>equiv.to_rel</code>, right?</p>
+
+<a name="135300581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300581">Mario Carneiro (Oct 06 2018 at 08:01)</a>:</h4>
+<p>there is nothing to remember, the relation is explicitly <code>equiv.rel e</code></p>
+
+<a name="135300585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300585">Mario Carneiro (Oct 06 2018 at 08:01)</a>:</h4>
+<p>not sure what you mean by that last bit</p>
+
+<a name="135300586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300586">Johan Commelin (Oct 06 2018 at 08:01)</a>:</h4>
+<p>But then transfer will have a hard time finding theorems about <code>e</code>, not?</p>
+
+<a name="135300627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300627">Johan Commelin (Oct 06 2018 at 08:02)</a>:</h4>
+<p>I meant that to me <code>equiv</code> seems a lot more natural than <code>rel</code>. And usually we will have an <code>equiv</code> floating around. Even for kernels and s.e.s's</p>
+
+<a name="135300628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300628">Mario Carneiro (Oct 06 2018 at 08:02)</a>:</h4>
+<p>We will have to think about how to discover/supply rel theorems to transfer. Currently it just accepts a big ugly list of names</p>
+
+<a name="135300630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300630">Johan Commelin (Oct 06 2018 at 08:02)</a>:</h4>
+<p>Or some <code>Isom</code> in a category. So we will need <code>Isom.rel</code></p>
+
+<a name="135300635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300635">Mario Carneiro (Oct 06 2018 at 08:03)</a>:</h4>
+<p>Note that rel is a <em>lot</em> more general</p>
+
+<a name="135300637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300637">Mario Carneiro (Oct 06 2018 at 08:03)</a>:</h4>
+<p>The relation need not be an equiv</p>
+
+<a name="135300638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300638">Johan Commelin (Oct 06 2018 at 08:03)</a>:</h4>
+<p>Yes, I know. I'm not sure if I care</p>
+
+<a name="135300639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300639">Mario Carneiro (Oct 06 2018 at 08:03)</a>:</h4>
+<p>Almost all of these theorems hold with much weaker assumptions</p>
+
+<a name="135300679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300679">Johan Commelin (Oct 06 2018 at 08:04)</a>:</h4>
+<p>I suggest that the interactive transfer generates a list of goals.<br>
+Then we can prove <code>by transfer my_rel; tidy</code>.</p>
+
+<a name="135300684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300684">Mario Carneiro (Oct 06 2018 at 08:05)</a>:</h4>
+<p>I think it will discharge all its goals</p>
+
+<a name="135300691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300691">Mario Carneiro (Oct 06 2018 at 08:05)</a>:</h4>
+<p>except the main goal</p>
+
+<a name="135300695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135300695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135300695">Mario Carneiro (Oct 06 2018 at 08:06)</a>:</h4>
+<p>I wonder whether it should deliver its iff statement instead of changing the goal... that way it can apply on hyps too</p>
+
+<a name="135301646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301646">Andrew Ashworth (Oct 06 2018 at 08:44)</a>:</h4>
+<p>I was reading <a href="https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf" target="_blank" title="https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf">https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf</a> again and I saw that Isabelle's transfer can do <code>The transfer proof method can replace a universal with an equivalent bounded quantifier:
+e.g., (∀n::nat. n &lt; n + 1) is transferred to (∀x::int ∈ {0..}. x &lt; x + 1).</code></p>
+
+<a name="135301653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301653">Andrew Ashworth (Oct 06 2018 at 08:45)</a>:</h4>
+<p>This sounds suspiciously like the number casting tactic mentioned in this chat earlier</p>
+
+<a name="135301695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301695">Mario Carneiro (Oct 06 2018 at 08:46)</a>:</h4>
+<p>Of course our <code>transfer</code> is based on isabelle's <code>transfer</code></p>
+
+<a name="135301696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301696">Mario Carneiro (Oct 06 2018 at 08:46)</a>:</h4>
+<p>The number casting tactic uses rewrites instead of logical relations</p>
+
+<a name="135301698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301698">Mario Carneiro (Oct 06 2018 at 08:46)</a>:</h4>
+<p>Maybe it would be better to use transfer for this ...?</p>
+
+<a name="135301754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301754">Andrew Ashworth (Oct 06 2018 at 08:49)</a>:</h4>
+<p>I think <code>transfer</code> in Lean will want this anyway at some point, so the same machinery may as well do double duty...? I'm unsure of what the implications are</p>
+
+<a name="135301795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301795">Andrew Ashworth (Oct 06 2018 at 08:50)</a>:</h4>
+<p>I do like that relations are stronger than rewrites</p>
+
+<a name="135301800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301800">Andrew Ashworth (Oct 06 2018 at 08:50)</a>:</h4>
+<p>I'm reading some of the follow-on papers and there are some tactics that automatically generate refinement theorems for converting algorithms over finsets to concrete algorithms over data structures like rb-trees etc</p>
+
+<a name="135301801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301801">Andrew Ashworth (Oct 06 2018 at 08:50)</a>:</h4>
+<p>using transfer or derivatives of</p>
+
+<a name="135301860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301860">Andrew Ashworth (Oct 06 2018 at 08:53)</a>:</h4>
+<p>it appears someone in Coq wanted to port <code>transfer</code> too: <a href="https://arxiv.org/pdf/1505.05028.pdf" target="_blank" title="https://arxiv.org/pdf/1505.05028.pdf">https://arxiv.org/pdf/1505.05028.pdf</a></p>
+
+<a name="135301861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301861">Andrew Ashworth (Oct 06 2018 at 08:53)</a>:</h4>
+<p>example 2 in the coq paper is exactly xnat and nat...</p>
+
+<a name="135301901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135301901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135301901">Johan Commelin (Oct 06 2018 at 08:54)</a>:</h4>
+<p>The number casting tactic would be transferring data as well, right? Not only proofs...</p>
+
+<a name="135306619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135306619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135306619">Kevin Buzzard (Oct 06 2018 at 11:56)</a>:</h4>
+<blockquote>
+<p>They are the <em>same</em> inductive type.</p>
+</blockquote>
+<p>I remember when I used to go on about this sort of thing. For computer scientists there is a very precise notion of <em>the same</em> and it's asking a lot more than what we have -- it means they are literally the same object -- structurally equal. Two inductive types with canonically isomorphic definitions are just canonically isomorphic, which is a much weaker notion. For each notion of "the same" (these groups are "the same", these topological spaces are "the same") we have to formalise our notion of sameness (e.g. with an equiv or a beefed-up equiv structure with extra proof such as "...and the maps are also group homomorphisms") and then understand exactly which constructions descend to equivalence classes. "The same" is a fluid concept in mathematics, it is really a bunch of equivalence relations. I discovered in the schemes project that it was very costly to think of the open set <code>U</code> and the open set <code>id'' U</code> (the image of U under the identity map) as "the same", because they really were not <em>the same</em>. They were "equal because of a theorem" and this is a much weaker statement. Stuff like <code>congr_arg</code> and <code>congr_fun</code> work because <code>eq</code> (which is a random inductive type remember, not at all related to whether things are <em>the same</em>) has a good recursor.</p>
+
+<a name="135306664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135306664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135306664">Kevin Buzzard (Oct 06 2018 at 11:58)</a>:</h4>
+<p>There was a thread a while ago now, possibly on gitter, where I got extremely frustrated about how <code>U</code> and <code>id'' U</code> could even <em>possibly</em> not be <em>the same</em> and it took a lot of talking from Mario and Kenny to peel me off the ceiling. Once I realised that the correct map from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">F</mi></mrow><mo>(</mo><mi>U</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathcal{F}(U)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.09931em;">F</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10903em;">U</span><span class="mclose">)</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">F</mi></mrow><mo>(</mo><mi>i</mi><mi>d</mi><mo>(</mo><mi>U</mi><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathcal{F}(id(U))</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.09931em;">F</span></span><span class="mopen">(</span><span class="mord mathit">i</span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10903em;">U</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> was not <code>id</code> but <code>res</code> all my problems went away.</p>
+
+<a name="135306746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135306746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135306746">Kevin Buzzard (Oct 06 2018 at 12:00)</a>:</h4>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">U</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi><mo>(</mo><mi>U</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">id(U)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">i</span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10903em;">U</span><span class="mclose">)</span></span></span></span> are canonically isomorphic in the computer-scientist's version of the category of open sets on a topological space, but the moment you start treating them as <em>the same</em> you get a whole bunch of errors about motives not being type correct which Reid did show me how to fight against if necessary. However these techniques turned out not to be needed once I understood that the canonical isomorphisms were not <code>id</code> but <code>res</code>.</p>
+
+<a name="135306755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135306755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html#135306755">Kevin Buzzard (Oct 06 2018 at 12:01)</a>:</h4>
+<p>In the mathematician's model of this category, these sets are <em>the same</em>.</p>
+
+
+{% endraw %}

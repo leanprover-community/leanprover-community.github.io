@@ -1,0 +1,181 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/22601calciff.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html">calc iff</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152244122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152244122">Patrick Massot (Dec 20 2018 at 10:30)</a>:</h4>
+<p>Is there anything we can do to get something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="o">(</span><span class="k">calc</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span> <span class="o">:</span> <span class="n">h</span>
+<span class="bp">...</span> <span class="bp">→</span> <span class="n">r</span> <span class="o">:</span> <span class="n">h&#39;</span>
+<span class="bp">...</span> <span class="bp">↔</span> <span class="n">s</span> <span class="o">:</span> <span class="n">h&#39;&#39;</span><span class="o">)</span> <span class="n">hp</span>
+</pre></div>
+
+
+<p>to work?</p>
+
+<a name="152244233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152244233">Patrick Massot (Dec 20 2018 at 10:33)</a>:</h4>
+<p>I'm trying to please Johannes who doesn't like</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="n">h&#39;&#39;</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>which I admit is less transparent...</p>
+
+<a name="152244390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152244390">Johan Commelin (Dec 20 2018 at 10:36)</a>:</h4>
+<p>If only <code>Prop</code> were a category... then you could write</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">h</span><span class="bp">.</span><span class="n">mp</span> <span class="err">≫</span> <span class="n">h&#39;</span> <span class="err">≫</span> <span class="n">h&#39;&#39;</span><span class="bp">.</span><span class="n">mp</span>
+</pre></div>
+
+<a name="152244479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152244479">Patrick Massot (Dec 20 2018 at 10:38)</a>:</h4>
+<p>Maybe I should say that the actual proof would rather look like</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">...</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">...</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="bp">...</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="o">(</span><span class="k">calc</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h</span>
+<span class="bp">...</span> <span class="bp">→</span> <span class="n">r</span> <span class="o">:</span> <span class="k">by</span> <span class="n">h&#39;</span>
+<span class="bp">...</span> <span class="bp">↔</span> <span class="n">s</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h&#39;&#39;</span><span class="o">)</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="152245121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245121">Mario Carneiro (Dec 20 2018 at 10:52)</a>:</h4>
+<p>unfortunately no. Here's the best we can do:</p>
+<div class="codehilite"><pre><span></span><span class="kn">abbreviation</span> <span class="n">imp</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span>
+<span class="kn">infixr</span> <span class="bp">`→→`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">imp</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">imp_of_iff_of_imp</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→→</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">h₂</span> <span class="err">∘</span> <span class="n">h₁</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">iff_of_imp_of_imp</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→→</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">↔</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→→</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">h₂</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∘</span> <span class="n">h₁</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="o">(</span><span class="k">calc</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span> <span class="o">:</span> <span class="n">h</span>
+<span class="bp">...</span> <span class="bp">→→</span> <span class="n">r</span> <span class="o">:</span> <span class="n">h&#39;</span>
+<span class="bp">...</span> <span class="bp">↔</span> <span class="n">s</span> <span class="o">:</span> <span class="n">h&#39;&#39;</span><span class="o">)</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="152245150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245150">Mario Carneiro (Dec 20 2018 at 10:53)</a>:</h4>
+<p>If you replace <code>→→</code> with <code>→</code> the trans lemmas are rejected</p>
+
+<a name="152245167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245167">Mario Carneiro (Dec 20 2018 at 10:54)</a>:</h4>
+<p>because <code>→</code> is a bit magic for a binary operator</p>
+
+<a name="152245218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245218">Patrick Massot (Dec 20 2018 at 10:54)</a>:</h4>
+<p>This magic obstruction is what I suspected when I tried to define those trans lemmas</p>
+
+<a name="152245238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245238">Patrick Massot (Dec 20 2018 at 10:55)</a>:</h4>
+<p>Here is the best I could do in order to rewrite my continuity proof so that it looks like what I see on paper:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">uniform_continuous</span><span class="bp">.</span><span class="n">continuous</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">ff</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="n">α</span><span class="bp">×</span><span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span> <span class="k">in</span>
+<span class="n">continuous_iff_tendsto</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">key</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="err">∘</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">ff</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">ext</span> <span class="n">x</span> <span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">map</span> <span class="n">ff</span> <span class="n">uniformity</span> <span class="bp">≤</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">from</span> <span class="n">hf</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">uniformity</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">ff</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">from</span> <span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="mi">1</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">uniformity</span> <span class="n">α</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">comap</span> <span class="n">ff</span> <span class="n">uniformity</span><span class="o">)),</span> <span class="k">from</span> <span class="n">comap_mono</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="o">(</span><span class="n">ff</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">comap_comap_comp</span><span class="o">,</span> <span class="err">←</span><span class="n">nhds_eq_comap_uniformity</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">by</span> <span class="n">rwa</span> <span class="n">key</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="n">uniformity</span><span class="o">),</span> <span class="k">by</span> <span class="n">rwa</span> <span class="err">←</span><span class="n">comap_comap_comp</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)),</span> <span class="k">by</span> <span class="n">rwa</span> <span class="err">←</span><span class="n">nhds_eq_comap_uniformity</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="n">tendsto_iff_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="n">this</span>
+</pre></div>
+
+<a name="152245338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245338">Patrick Massot (Dec 20 2018 at 10:56)</a>:</h4>
+<p>How do you like that style?</p>
+
+<a name="152245645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245645">Kenny Lau (Dec 20 2018 at 11:02)</a>:</h4>
+<p>too long</p>
+
+<a name="152245876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245876">Patrick Massot (Dec 20 2018 at 11:07)</a>:</h4>
+<p>Variation:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">uniform_continuous</span><span class="bp">.</span><span class="n">continuous</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">ff</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="n">α</span><span class="bp">×</span><span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span> <span class="k">in</span>
+<span class="n">continuous_iff_tendsto</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">key</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="err">∘</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">ff</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">ext</span> <span class="n">x</span> <span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">map</span> <span class="n">ff</span> <span class="n">uniformity</span> <span class="bp">≤</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">from</span> <span class="n">hf</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">uniformity</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">ff</span> <span class="n">uniformity</span><span class="o">,</span> <span class="k">from</span> <span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="mi">1</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">uniformity</span> <span class="n">α</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">comap</span> <span class="n">ff</span> <span class="n">uniformity</span><span class="o">)),</span> <span class="k">from</span> <span class="n">comap_mono</span> <span class="n">this</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">this</span> <span class="o">:=</span> <span class="k">calc</span>
+<span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="o">(</span><span class="n">ff</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span> <span class="n">uniformity</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">comap_comap_comp</span><span class="o">,</span> <span class="err">←</span><span class="n">nhds_eq_comap_uniformity</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span>
+   <span class="bp">...</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="n">uniformity</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span><span class="o">[</span><span class="n">key</span><span class="o">,</span> <span class="n">le_refl</span><span class="o">]</span>
+   <span class="bp">...</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="n">uniformity</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">comap_comap_comp</span> <span class="bp">;</span> <span class="n">exact</span> <span class="n">le_refl</span> <span class="bp">_</span>
+   <span class="bp">...</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">nhds_eq_comap_uniformity</span> <span class="bp">;</span> <span class="n">exact</span> <span class="n">le_refl</span> <span class="bp">_</span>  <span class="k">in</span>
+<span class="n">tendsto_iff_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="n">this</span>
+</pre></div>
+
+<a name="152245892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245892">Patrick Massot (Dec 20 2018 at 11:07)</a>:</h4>
+<p>It's really a pain that <code>le_refl</code> isn't inserted automatically</p>
+
+<a name="152245999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152245999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152245999">Kenny Lau (Dec 20 2018 at 11:09)</a>:</h4>
+<p>what's wrong with the current proof?</p>
+
+<a name="152246297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152246297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152246297">Sebastien Gouezel (Dec 20 2018 at 11:15)</a>:</h4>
+<p>I have added <code>le_refl</code> to the simp set in my mathlib. I will probably PR it one day, together with a lot of other stuff (but cut into atomic pieces, if this is the way we should do PRs), once (or if?) my two topology PRs are merged.</p>
+
+<a name="152246363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152246363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152246363">Patrick Massot (Dec 20 2018 at 11:16)</a>:</h4>
+<p>Kenny, the current proof is inelegant. Remember that only Lean thinks proofs are irrelevant</p>
+
+<a name="152246384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152246384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152246384">Kenny Lau (Dec 20 2018 at 11:17)</a>:</h4>
+<p>eh, I also think they're irrelevant</p>
+
+<a name="152246517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152246517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152246517">Johan Commelin (Dec 20 2018 at 11:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You've created little monsters <span class="emoji emoji-1f631" title="scream">:scream:</span>. Clearly they need to be brought up in the ways of the old masters, who value the esthetics of a good proof, and whose proofs illuminate and inspire understanding.</p>
+
+<a name="152247283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152247283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152247283">Kevin Buzzard (Dec 20 2018 at 11:36)</a>:</h4>
+<p>Kids these days</p>
+
+<a name="152247312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152247312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152247312">Scott Morrison (Dec 20 2018 at 11:37)</a>:</h4>
+<p>... uphill both ways.</p>
+
+<a name="152248786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152248786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152248786">Johan Commelin (Dec 20 2018 at 12:00)</a>:</h4>
+<blockquote>
+<p>I will probably PR it one day, ... once (or if?) my two topology PRs are merged.</p>
+</blockquote>
+<p>O.o... that doesn't sound good.</p>
+
+<a name="152248926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152248926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152248926">Kenny Lau (Dec 20 2018 at 12:02)</a>:</h4>
+<p>looks like he will PR it after Lean 4 has been released</p>
+
+<a name="152249007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152249007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152249007">Sebastien Gouezel (Dec 20 2018 at 12:04)</a>:</h4>
+<p>It's just that all my constructions build on these two PRs, so there is no way I can PR anything before those two are merged. But this does not prevent me of working steadily on my own branch, I have almost proved now that the Gromov-Hausdorff distance is a distance, which involves a lot of material (several thousands of line, I would say :)</p>
+
+<a name="152249801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152249801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22601calciff.html#152249801">Mario Carneiro (Dec 20 2018 at 12:19)</a>:</h4>
+<p>yeah okay. I've been putting it off because it's a big PR and I had to check it out and fiddle with stuff, but I will work on that now</p>
+
+
+{% endraw %}

@@ -1,0 +1,139 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/13714howtousethepowaddtheorem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html">how to use the pow_add theorem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133225323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225323">Truong Nguyen (Sep 02 2018 at 21:10)</a>:</h4>
+<p>Dear Alls,<br>
+The pow_add theorem is as follow:</p>
+<p>#check pow_add<br>
+pow_add : ∀ (a : ?M_1) (m n : ℕ), a ^ (m + n) = a ^ m * a ^ n</p>
+<p>By why can't I prove the consequence theorem: </p>
+<p>theorem th01 (a: ℕ ): ∀ m n:ℕ, a ^ (m + n) = (a ^ m) * (a ^ n) :=<br>
+begin<br>
+rw pow_add (a:ℕ)<br>
+end</p>
+<p>Here is the error that I got:</p>
+<p>rewrite tactic failed, did not find instance of the pattern in the target expression<br>
+  a ^ (?m_1 + ?m_2)<br>
+Thank you,</p>
+
+<a name="133225393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225393">Kenny Lau (Sep 02 2018 at 21:13)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="133225436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225436">Chris Hughes (Sep 02 2018 at 21:14)</a>:</h4>
+<p>It's because you need to use <code>nat.pow_add</code></p>
+
+<a name="133225444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225444">Kenny Lau (Sep 02 2018 at 21:15)</a>:</h4>
+<p>because the <code>^</code> are different</p>
+
+<a name="133225445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225445">Mario Carneiro (Sep 02 2018 at 21:15)</a>:</h4>
+<p><code>nat</code> has a different instance for the power function, so it has its own theorems to go with it, like <code>nat.pow_add</code></p>
+
+<a name="133225446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225446">Chris Hughes (Sep 02 2018 at 21:15)</a>:</h4>
+<p>This is a very annoying feature of current lean. There are two definitions of <code>pow</code> on the naturals.</p>
+
+<a name="133225489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225489">Mario Carneiro (Sep 02 2018 at 21:16)</a>:</h4>
+<p>If <code>nat.pow_add</code> was not proven, you could also use <code>by simpa using pow_add a</code> to prove it</p>
+
+<a name="133225601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225601">Truong Nguyen (Sep 02 2018 at 21:21)</a>:</h4>
+<p>Dear Mario,<br>
+can you be more specific, what is  <code>by simpa using pow_add a</code>.</p>
+
+<a name="133225696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225696">Truong Nguyen (Sep 02 2018 at 21:24)</a>:</h4>
+<p>I changed to this:</p>
+<p>theorem th01 (a: ℕ ): ∀ m n:ℕ, a ^ (m + n) = (a ^ m) * (a ^ n) :=<br>
+begin<br>
+rw [nat.pow_add (a:ℕ )]<br>
+end</p>
+<p>But, it did not work neither.</p>
+
+<a name="133225757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225757">Mario Carneiro (Sep 02 2018 at 21:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="kn">theorem</span> <span class="n">th01</span> <span class="o">(</span><span class="n">a</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">^</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">pow_add</span> <span class="n">a</span> <span class="n">m</span> <span class="n">n</span>
+</pre></div>
+
+<a name="133225765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225765">Mario Carneiro (Sep 02 2018 at 21:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">th01</span> <span class="o">(</span><span class="n">a</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">^</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_add</span>
+</pre></div>
+
+<a name="133225767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225767">Mario Carneiro (Sep 02 2018 at 21:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">th01</span> <span class="o">(</span><span class="n">a</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">^</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">pow_add</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="133225813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133225813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133225813">Mario Carneiro (Sep 02 2018 at 21:28)</a>:</h4>
+<p>note that you need to have all the variables left of the colon for <code>rw</code> to work here</p>
+
+<a name="133226550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133226550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133226550">Truong Nguyen (Sep 02 2018 at 21:55)</a>:</h4>
+<p>Oh, great<br>
+Do you know how can I find the tutorial of using "simpa".</p>
+<p>I have the following issue as well. I think it can be done in similar way.</p>
+<p>How to use the theorem:<br>
+#check cardinal.mul_power <br>
+cardinal.mul_power : (?M_1 * ?M_2) ^ ?M_3 = ?M_1 ^ ?M_3 * ?M_2 ^ ?M_3</p>
+<p>To prove that:<br>
+theorem th07 (a b n: \N): (a * b)^n = a ^n*b^n.</p>
+
+<a name="133226706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133226706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133226706">Mario Carneiro (Sep 02 2018 at 22:00)</a>:</h4>
+<p>That is an unrelated use of power; although it is possible it would be a weird way to prove that theorem for natural numbers</p>
+
+<a name="133226715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133226715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133226715">Mario Carneiro (Sep 02 2018 at 22:01)</a>:</h4>
+<p>the theorem itself is <code>nat.mul_pow</code></p>
+
+<a name="133226815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133226815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133226815">Truong Nguyen (Sep 02 2018 at 22:04)</a>:</h4>
+<p>when I run the command:<br>
+#check nat.mul_pow</p>
+<p>it gave me nothing.</p>
+
+<a name="133227003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133227003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133227003">Patrick Massot (Sep 02 2018 at 22:10)</a>:</h4>
+<p>you need to import <a href="https://github.com/leanprover/mathlib/blob/dd0c0aeefcaf6a438ab4273d7a1f42e1b8225847/data/nat/basic.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/dd0c0aeefcaf6a438ab4273d7a1f42e1b8225847/data/nat/basic.lean">https://github.com/leanprover/mathlib/blob/dd0c0aeefcaf6a438ab4273d7a1f42e1b8225847/data/nat/basic.lean</a></p>
+
+<a name="133227007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133227007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133227007">Patrick Massot (Sep 02 2018 at 22:11)</a>:</h4>
+<p><code>import data.nat.basic</code></p>
+
+<a name="133268897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133268897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133268897">Truong Nguyen (Sep 03 2018 at 18:22)</a>:</h4>
+<p>Hello,<br>
+do you know where can I find the tutorial of using "simpa".</p>
+
+<a name="133268911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133268911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133268911">Patrick Massot (Sep 03 2018 at 18:23)</a>:</h4>
+<p>I think we don't have anything better than <a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa">https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa</a></p>
+
+<a name="133270921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20use%20the%20pow_add%20theorem/near/133270921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13714howtousethepowaddtheorem.html#133270921">Truong Nguyen (Sep 03 2018 at 19:17)</a>:</h4>
+<p>Oh, thank you</p>
+
+
+{% endraw %}

@@ -1,0 +1,85 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/69770rewriteentire.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html">rewrite entire</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123679200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679200">Scott Morrison (Mar 14 2018 at 01:25)</a>:</h4>
+<p>Hi all, this is a follow-up to my difficulties with the <code>occs</code> configuration for <code>rw</code>. I'm still not there writing a "please find _all_ the possible rewrites" function.</p>
+<p>Something that would be really helpful for me would be a "rewrite entire" function, that takes <code>r:expr</code> and <code>e:expr</code>, where <code>r</code> is some rewrite rule, and tells me whether it can rewrite the entirety of <code>e</code> using it (that is, not rewriting a subexpression).</p>
+
+<a name="123679208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679208">Scott Morrison (Mar 14 2018 at 01:25)</a>:</h4>
+<p>I'm pretty confident I can implement that myself, but I think it may exist already, or be even easier than I'm anticipating, so I thought I'd ask here.</p>
+
+<a name="123679467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679467">Simon Hudon (Mar 14 2018 at 01:33)</a>:</h4>
+<p>I haven't seen it anywhere</p>
+
+<a name="123679514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679514">Simon Hudon (Mar 14 2018 at 01:34)</a>:</h4>
+<p>To be clear, <code>r</code> may be <code>forall x y z, E = F</code> and that tactic would unify E with the parameter <code>e</code>. Is that accurate?</p>
+
+<a name="123679591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679591">Scott Morrison (Mar 14 2018 at 01:36)</a>:</h4>
+<p>Yes, that's exactly what I want.</p>
+
+<a name="123679595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679595">Scott Morrison (Mar 14 2018 at 01:36)</a>:</h4>
+<p>Ok, I can do it myself easily enough.</p>
+
+<a name="123679602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679602">Mario Carneiro (Mar 14 2018 at 01:37)</a>:</h4>
+<p>I think <code>simp_lemmas</code> will do that</p>
+
+<a name="123679758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679758">Scott Morrison (Mar 14 2018 at 01:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, the documentation for <code>simp_lemmas</code> talks about simplification lemmas. Can I ignore that and<br>
+ attempt to use it with arbitrary rewrite rules? And it won't attempt to look in subexpressions, just rewrite the entire thing?</p>
+
+<a name="123679823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679823">Scott Morrison (Mar 14 2018 at 01:43)</a>:</h4>
+<p>I guess I can read the implementation of <code>simp_lemmas.rewrite</code> myself... :-)</p>
+
+<a name="123679869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679869">Mario Carneiro (Mar 14 2018 at 01:44)</a>:</h4>
+<p>Pretty sure it doesn't look in subexpressions, since it is intended for use with <code>ext_simplify_core</code> which does the subexpression traversal itself</p>
+
+<a name="123679871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679871">Scott Morrison (Mar 14 2018 at 01:44)</a>:</h4>
+<p>Ah, I see.</p>
+
+<a name="123679881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123679881">Scott Morrison (Mar 14 2018 at 01:45)</a>:</h4>
+<p>okay, I will give that a go.</p>
+
+<a name="123698442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123698442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123698442">Scott Morrison (Mar 14 2018 at 12:17)</a>:</h4>
+<p>Do we have an analogue of <code>mk_eq_symm</code> that traverses through binders?</p>
+
+<a name="123698486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123698486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123698486">Scott Morrison (Mar 14 2018 at 12:18)</a>:</h4>
+<p>e.g. turning the <code>expr</code> <code>λ a : A, λ b : B, f a b = g a b</code> into <code>λ a : A, λ b : B, g a b = f a b</code>?</p>
+
+<a name="123698913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123698913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123698913">Scott Morrison (Mar 14 2018 at 12:35)</a>:</h4>
+<p><a href="https://github.com/leanprover/lean/blob/master/library/init/meta/expr.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/expr.lean">expr.lean</a> is spectacularly unhelpful about the arguments of <code>expr.elet</code>. One can glean from it that the four <code>expr</code> arguments of <code>elet</code> ought to be called <code>n</code>, <code>g</code>, <code>e</code>, <code>f</code>, in that order, but not much more. Is there somewhere these things are written down?</p>
+
+<a name="123699122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123699122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123699122">Scott Morrison (Mar 14 2018 at 12:43)</a>:</h4>
+<p>Oh... I was asking for the wrong thing, and I don't think I know how to do it. Suppose I have an <code>expr</code> which is just the name of a equation lemma; how can I get the <code>eq.symm</code> version of that lemma?</p>
+
+<a name="123699509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123699509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html#123699509">Scott Morrison (Mar 14 2018 at 12:58)</a>:</h4>
+<p>I'm guessing I need to ... <code>infer</code> the type of my expression, and then while the type is Pi, replace the expression with a lambda wrapped around it, and then when there are no more Pis use <code>mk_eq_symm</code>?</p>
+
+
+{% endraw %}

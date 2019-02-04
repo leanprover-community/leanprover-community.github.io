@@ -1,0 +1,128 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/18193extensions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html">extensions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="129772133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772133">Patrick Massot (Jul 16 2018 at 21:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  At <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843">https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843</a> do we really need that <code>[inhabited γ]</code>? It forces lots of other inhabited assumptions that seem unnecessary from a mathematical point of view. If γ is not inhabited then there shouldn't be that many <code>f : α → γ</code> to care about</p>
+
+<a name="129772434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772434">Mario Carneiro (Jul 16 2018 at 21:55)</a>:</h4>
+<p>the inhabited is needed for <code>lim</code></p>
+
+<a name="129772460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772460">Mario Carneiro (Jul 16 2018 at 21:55)</a>:</h4>
+<p>because it takes a default value when the limit is not defined</p>
+
+<a name="129772463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772463">Patrick Massot (Jul 16 2018 at 21:55)</a>:</h4>
+<p>I understand this</p>
+
+<a name="129772485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772485">Patrick Massot (Jul 16 2018 at 21:55)</a>:</h4>
+<p>But one could hope for a definition not using <code>lim</code> then</p>
+
+<a name="129772566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772566">Mario Carneiro (Jul 16 2018 at 21:57)</a>:</h4>
+<p>I recall puzzling over this definition a while ago; I also don't particularly like this style of definition</p>
+
+<a name="129772584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772584">Mario Carneiro (Jul 16 2018 at 21:57)</a>:</h4>
+<p>it seems like we should already know that the limit is defined at this point</p>
+
+<a name="129772750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772750">Mario Carneiro (Jul 16 2018 at 22:00)</a>:</h4>
+<p>I guess we need the assumption of <code>continuous_ext</code> to know the definition makes sense</p>
+
+<a name="129772839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772839">Mario Carneiro (Jul 16 2018 at 22:02)</a>:</h4>
+<blockquote>
+<p>It forces lots of other inhabited assumptions that seem unnecessary from a mathematical point of view. </p>
+</blockquote>
+<p>Do you have any particular examples?</p>
+
+<a name="129772871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772871">Patrick Massot (Jul 16 2018 at 22:03)</a>:</h4>
+<p>Why? <code>ext de</code> is a function from <code>α → γ</code> to <code>β → γ</code>. Can't Lean be happy if both are uninhabited types and we don't write anything about the definition?</p>
+
+<a name="129772922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772922">Patrick Massot (Jul 16 2018 at 22:04)</a>:</h4>
+<p>Examples are in my work in progress in the perfectoid project. I'm working on Hausdorff completions of uniform spaces.</p>
+
+<a name="129772943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772943">Mario Carneiro (Jul 16 2018 at 22:04)</a>:</h4>
+<p>i mean maybe there is a way to pick an inhabitant in your setting</p>
+
+<a name="129772945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772945">Patrick Massot (Jul 16 2018 at 22:04)</a>:</h4>
+<p>The completion functor, which is left-adjoint to the inclusion of Hausdorff and complete uniform spaces into all uniform spaces, is constructed on homs by extension</p>
+
+<a name="129772974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129772974">Patrick Massot (Jul 16 2018 at 22:05)</a>:</h4>
+<p>If I assume the starting uniform space is inhabited then its completion is also inhabited, no problem. But it mean I keep assuming spaces are inhabited</p>
+
+<a name="129773022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773022">Mario Carneiro (Jul 16 2018 at 22:06)</a>:</h4>
+<p>No, I mean somehow argue the empty case so it's not needed</p>
+
+<a name="129773058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773058">Patrick Massot (Jul 16 2018 at 22:07)</a>:</h4>
+<p>If this is possible there, why isn't possible right in the definition of <code>dense_embedding.ext</code></p>
+
+<a name="129773067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773067">Patrick Massot (Jul 16 2018 at 22:07)</a>:</h4>
+<p>(by the way, this name is confusion since it has nothing to do with extensionality)</p>
+
+<a name="129773120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773120">Mario Carneiro (Jul 16 2018 at 22:08)</a>:</h4>
+<p>Agreed. Do you have a suggestion?</p>
+
+<a name="129773129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773129">Patrick Massot (Jul 16 2018 at 22:08)</a>:</h4>
+<p>about the name?</p>
+
+<a name="129773131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773131">Mario Carneiro (Jul 16 2018 at 22:08)</a>:</h4>
+<p>yes</p>
+
+<a name="129773136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773136">Patrick Massot (Jul 16 2018 at 22:09)</a>:</h4>
+<p><code>dense_embedding.extension</code> maybe?</p>
+
+<a name="129773533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773533">Mario Carneiro (Jul 16 2018 at 22:19)</a>:</h4>
+<p>I managed this definition:</p>
+<div class="codehilite"><pre><span></span>def extend (de : dense_embedding e) (f : α → γ) (b : β) : γ :=
+have nonempty γ, from
+let ⟨_, ⟨_, a, _⟩⟩ := exists_mem_of_ne_empty
+  (mem_closure_iff.1 (de.dense b) _ is_open_univ trivial) in ⟨f a⟩,
+@lim _ (classical.inhabited_of_nonempty this) _ (map f (vmap e (nhds b)))
+</pre></div>
+
+<a name="129773551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773551">Patrick Massot (Jul 16 2018 at 22:20)</a>:</h4>
+<p>Scary! But I don't mind being scared by the definition: can you prove the expected properties?</p>
+
+<a name="129773631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773631">Mario Carneiro (Jul 16 2018 at 22:20)</a>:</h4>
+<p>It's mostly just a proof getting stuck into the <code>inhabited γ</code> slot - it doesn't change any of the proofs</p>
+
+<a name="129773686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773686">Mario Carneiro (Jul 16 2018 at 22:21)</a>:</h4>
+<p>all the proofs immediately after the definition still work, I may have to hunt down other uses</p>
+
+<a name="129773914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129773914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18193extensions.html#129773914">Patrick Massot (Jul 16 2018 at 22:26)</a>:</h4>
+<p>and also hunt down the inhabited assumptions</p>
+
+
+{% endraw %}

@@ -1,0 +1,139 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20508patternmatching101.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html">pattern matching 101</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125662292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662292">Scott Morrison (Apr 25 2018 at 10:39)</a>:</h4>
+<p>Easy question: how do I do pattern matching against values? Given <code>k : nat</code>, naively I could try writing</p>
+<div class="codehilite"><pre><span></span>match n with
+| k := something
+| _ := something_else
+end
+</pre></div>
+
+
+<p>a glorified <code>if n = k then something else something_else</code>, but of course this doesn't work, because Lean doesn't treat the <code>k</code> in the pattern as related to the earlier <code>k</code>.</p>
+<p>Am I just meant to use <code>if ... then ... else</code>? Or can I get the pattern matcher to help me?</p>
+
+<a name="125662332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662332">Kenny Lau (Apr 25 2018 at 10:40)</a>:</h4>
+<p>you need to use <code>if then else</code>. <code>match</code> only deals with constructors.</p>
+
+<a name="125662414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662414">Scott Morrison (Apr 25 2018 at 10:43)</a>:</h4>
+<p>That's what I feared. How sad. So if I want to write something that given <code>some n</code> where <code>n = k</code> does <code>X</code>, and given any other <code>some n</code> or <code>none</code> does <code>Y</code>... What's the idiomatic way to write this?</p>
+
+<a name="125662422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662422">Scott Morrison (Apr 25 2018 at 10:43)</a>:</h4>
+<p>(Preferably your answer shouldn't use <code>option.is_some</code> or friends, just pretend <code>option</code> is a bare inductive type with no dressing up.)</p>
+
+<a name="125662463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662463">Scott Morrison (Apr 25 2018 at 10:44)</a>:</h4>
+<p>In particular, how can I do this without writing the symbol <code>Y</code> twice?</p>
+
+<a name="125662781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662781">Sebastian Ullrich (Apr 25 2018 at 10:55)</a>:</h4>
+<p>Other languages have pattern guards for this, but Lean doesn't... yet. You'll have to factor <code>Y</code> out into a <code>let</code>.</p>
+
+<a name="125662792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662792">Sean Leather (Apr 25 2018 at 10:55)</a>:</h4>
+<blockquote>
+<p>That's what I feared. How sad. So if I want to write something that given <code>some n</code> where <code>n = k</code> does <code>X</code>, and given any other <code>some n</code> or <code>none</code> does <code>Y</code>... What's the idiomatic way to write this?</p>
+</blockquote>
+<p>This sounds like something you'd use pattern match guards for in Haskell:</p>
+<div class="codehilite"><pre><span></span><span class="kr">case</span> <span class="n">n</span> <span class="kr">of</span>
+  <span class="kt">Just</span> <span class="n">k</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="n">k</span> <span class="ow">-&gt;</span> <span class="n">something</span>
+  <span class="kr">_</span> <span class="ow">-&gt;</span> <span class="n">something_else</span>
+</pre></div>
+
+<a name="125662838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662838">Kenny Lau (Apr 25 2018 at 10:56)</a>:</h4>
+<blockquote>
+<p>In particular, how can I do this without writing the symbol <code>Y</code> twice?</p>
+</blockquote>
+<p><code>if o = some k then _ else Y</code></p>
+
+<a name="125662856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662856">Scott Morrison (Apr 25 2018 at 10:57)</a>:</h4>
+<p>okay, good, except I've over-minimised of course, and there are lots of other fields that I don't care about matching :-)</p>
+
+<a name="125662899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125662899">Kenny Lau (Apr 25 2018 at 10:58)</a>:</h4>
+<p>so maybe give us more context?</p>
+
+<a name="125671684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125671684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125671684">Simon Hudon (Apr 25 2018 at 15:30)</a>:</h4>
+<p>Is it possible that your type is like the following?</p>
+<div class="codehilite"><pre><span></span>inductive my_type
+| constr : a -&gt; b -&gt; c -&gt; d -&gt; e -&gt; my_type
+| other : a&#39; -&gt; b&#39; -&gt; my_type
+</pre></div>
+
+
+<p>In Haskell, a common advice is to make that two or more types, separate the sum aspect and the product aspect.</p>
+
+<a name="125671764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125671764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125671764">Simon Hudon (Apr 25 2018 at 15:31)</a>:</h4>
+<p>Then, you can use selectors on to access whatever part of the product that you care about</p>
+
+<a name="125671847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125671847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125671847">Scott Morrison (Apr 25 2018 at 15:33)</a>:</h4>
+<p>hmm, my type </p>
+<div class="codehilite"><pre><span></span>inductive edit_distance_progress (l₁: list α) (l₂: list α)
+| exactly : ℕ → edit_distance_progress
+| at_least : ℕ → partial_edit_distance_data α → edit_distance_progress
+</pre></div>
+
+<a name="125671851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125671851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125671851">Scott Morrison (Apr 25 2018 at 15:33)</a>:</h4>
+<p>and I need to check if I have an <code>exactly _ _ k</code> for some specified value of <code>k</code>.</p>
+
+<a name="125672040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672040">Simon Hudon (Apr 25 2018 at 15:38)</a>:</h4>
+<p>Ok, it's not as bad as I thought. I thought because you didn't want to repeat <code>Y</code>. Is it a pattern for <code>partial_edit_distance_data α</code>?</p>
+
+<a name="125672190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672190">Scott Morrison (Apr 25 2018 at 15:43)</a>:</h4>
+<p>I'm not sure what you mean. The offending code (which works, just looks gross) is &lt;<a href="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/rewrite_search.lean#L64-L84" target="_blank" title="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/rewrite_search.lean#L64-L84">https://github.com/semorrison/lean-tidy/blob/master/src/tidy/rewrite_search.lean#L64-L84</a>&gt;. You can see lines 72-74 and lines 76-78 are almost identical because of this.</p>
+
+<a name="125672413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672413">Sean Leather (Apr 25 2018 at 15:49)</a>:</h4>
+<p>Why can't you do something like <code>if update_edit_distance h.distance = exactly _ _ k then ... else ...</code> as Kenny suggested?</p>
+
+<a name="125672494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672494">Scott Morrison (Apr 25 2018 at 15:51)</a>:</h4>
+<p>Oh... somehow I thought those <code>_</code>s would be a problem, but of course they're not. Thank you!</p>
+
+<a name="125672566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672566">Scott Morrison (Apr 25 2018 at 15:53)</a>:</h4>
+<p>I will need an extra decidable instance for this. I remember there is some trick for synthesising decidable instances for boring inductive types....? Anyone remember?</p>
+
+<a name="125672589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672589">Sean Leather (Apr 25 2018 at 15:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="bp">...</span>
+</pre></div>
+
+<a name="125672652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672652">Scott Morrison (Apr 25 2018 at 15:55)</a>:</h4>
+<p>Lovely! And where do I find out what derive is doing? :-)</p>
+
+<a name="125672714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672714">Sean Leather (Apr 25 2018 at 15:57)</a>:</h4>
+<p>I'm sure there's a <code>#print</code> that'll tell you, but I never remember which one. <span class="emoji emoji-1f60a" title="blush">:blush:</span></p>
+
+<a name="125672780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125672780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html#125672780">Sean Leather (Apr 25 2018 at 15:58)</a>:</h4>
+<p>Perhaps <code>#print &lt;type-name&gt;.decidable_eq</code>?</p>
+
+
+{% endraw %}

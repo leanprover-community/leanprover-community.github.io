@@ -1,0 +1,107 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/44283Thiswillbrickyourcomputer.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html">This will brick your computer!</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133943778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133943778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#133943778">Kenny Lau (Sep 14 2018 at 12:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">λ</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+</pre></div>
+
+<a name="133945380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#133945380">Kevin Buzzard (Sep 14 2018 at 13:11)</a>:</h4>
+<p>This is well known. Lean will time out trying to coerce an int into a nat rather than give up</p>
+
+<a name="133945390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#133945390">Kenny Lau (Sep 14 2018 at 13:12)</a>:</h4>
+<p>remove the first line and it's fine!</p>
+
+<a name="133945432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/133945432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#133945432">Kevin Buzzard (Sep 14 2018 at 13:12)</a>:</h4>
+<p>Hopefully fixed in Lean 4</p>
+
+<a name="134082892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134082892">Kenny Lau (Sep 17 2018 at 08:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">derivative</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span> <span class="n">p</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">c</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="err">^</span><span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">derivative_C_mul_X</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">derivative</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="err">^</span><span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="err">^</span><span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">derivative</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">single_eq_C_mul_X</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">],</span>
+  <span class="n">all_goals</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C_0</span><span class="o">,</span> <span class="n">mul_zero</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="c1">--timeout</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">derivative_C</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">derivative</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">derivative_C_mul_X</span> <span class="n">x</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="134082945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134082945">Mario Carneiro (Sep 17 2018 at 08:23)</a>:</h4>
+<p>there are some nontrivial defeq simplifications there</p>
+
+<a name="134082985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134082985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134082985">Mario Carneiro (Sep 17 2018 at 08:24)</a>:</h4>
+<p>at least try <code>by simpa using derivative_C_mul_X x 0</code> first</p>
+
+<a name="134083001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083001">Kenny Lau (Sep 17 2018 at 08:25)</a>:</h4>
+<p>it's intentionally incorrect</p>
+
+<a name="134083004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083004">Mario Carneiro (Sep 17 2018 at 08:25)</a>:</h4>
+<p>then what's the surprise?</p>
+
+<a name="134083005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083005">Kenny Lau (Sep 17 2018 at 08:25)</a>:</h4>
+<p>well Lean should tell me instead of time out</p>
+
+<a name="134083008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083008">Mario Carneiro (Sep 17 2018 at 08:25)</a>:</h4>
+<p>you just asked it to reduce some big expression to 0</p>
+
+<a name="134083048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083048">Mario Carneiro (Sep 17 2018 at 08:26)</a>:</h4>
+<p>it's got to unfold a bunch of definitions and run the power function, etc</p>
+
+<a name="134083051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083051">Mario Carneiro (Sep 17 2018 at 08:26)</a>:</h4>
+<p>it's not obviously not defeq</p>
+
+<a name="134083053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083053">Kenny Lau (Sep 17 2018 at 08:26)</a>:</h4>
+<p>I don't actually know if it's defeq</p>
+
+<a name="134083056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083056">Mario Carneiro (Sep 17 2018 at 08:26)</a>:</h4>
+<p>neither does lean...</p>
+
+<a name="134083268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083268">Kenny Lau (Sep 17 2018 at 08:33)</a>:</h4>
+<p>oh wow it's already done</p>
+
+<a name="134083271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/This%20will%20brick%20your%20computer%21/near/134083271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44283Thiswillbrickyourcomputer.html#134083271">Kenny Lau (Sep 17 2018 at 08:33)</a>:</h4>
+<p>i'm lucky i realized so soon</p>
+
+
+{% endraw %}

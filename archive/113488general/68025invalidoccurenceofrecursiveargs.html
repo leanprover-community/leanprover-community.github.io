@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/68025invalidoccurenceofrecursiveargs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html">invalid occurence of recursive args</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="128381305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128381305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128381305">Zesen Qian (Jun 20 2018 at 22:21)</a>:</h4>
+<p>Not sure if it's a place for routine trouble shooting, but I'm trying to do some theory inside lean, I defined a inductive family but lean is not happy with it. <a href="https://ptpb.pw/3O0a" target="_blank" title="https://ptpb.pw/3O0a">https://ptpb.pw/3O0a</a><br>
+The error is at the constructor satlem, "invalid occurence of recursive arg#5, the body of the functional type depends on it".</p>
+
+<a name="128381813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128381813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128381813">Mario Carneiro (Jun 20 2018 at 22:30)</a>:</h4>
+<p>I don't think lean likes that you have placed the recursive argument before the variable <code>v</code></p>
+
+<a name="128381941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128381941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128381941">Mario Carneiro (Jun 20 2018 at 22:33)</a>:</h4>
+<p>you had:</p>
+<div class="codehilite"><pre><span></span>| satlem (c : context) (cl cl&#39; : clause) :
+  proof c (type.holds cl) →
+  ∀ v : string, proof ((v, type.holds cl) :: c) (type.holds cl&#39;) →
+  proof c (type.holds cl&#39;)
+</pre></div>
+
+
+<p>This works:</p>
+<div class="codehilite"><pre><span></span>| satlem (c : context) (cl cl&#39; : clause) :
+  ∀ v : string, proof c (type.holds cl) →
+  proof ((v, type.holds cl) :: c) (type.holds cl&#39;) →
+  proof c (type.holds cl&#39;)
+</pre></div>
+
+
+<p>Or maybe you got the parentheses wrong? This works too, but means something different:</p>
+<div class="codehilite"><pre><span></span>| satlem (c : context) (cl cl&#39; : clause) :
+  proof c (type.holds cl) →
+  (∀ v : string, proof ((v, type.holds cl) :: c) (type.holds cl&#39;)) →
+  proof c (type.holds cl&#39;)
+</pre></div>
+
+<a name="128382752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128382752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128382752">Zesen Qian (Jun 20 2018 at 22:50)</a>:</h4>
+<p>Thanks! this works. I also fixed similar issues in the code.<br>
+question tho: why is this required? intuitively I don't see how it's invalid.</p>
+
+<a name="128383088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128383088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128383088">Mario Carneiro (Jun 20 2018 at 22:57)</a>:</h4>
+<p>There was a restriction along the lines that recursive arguments must come after non-recursive args, mostly for convenience of implementation, but last I checked that restriction had been lifted, so I'm not sure why you are getting the error still</p>
+
+<a name="128383377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128383377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128383377">Zesen Qian (Jun 20 2018 at 23:03)</a>:</h4>
+<p>maybe because it's inductive family, so impl. could be harder.</p>
+
+<a name="128403732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurence%20of%20recursive%20args/near/128403732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68025invalidoccurenceofrecursiveargs.html#128403732">Gabriel Ebner (Jun 21 2018 at 09:11)</a>:</h4>
+<p>There is still a restriction on <em>dependent</em> arguments, none of the arguments after the first recursive argument may occur in other arguments.  In this case <code>v</code> comes after the first recursive argument and occurs in the second recursive argument.</p>
+
+
+{% endraw %}

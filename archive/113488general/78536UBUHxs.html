@@ -1,0 +1,134 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/78536UBUHxs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html">λ (⟨U,BU,Hx,s⟩</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126741686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741686">Kevin Buzzard (May 18 2018 at 11:59)</a>:</h4>
+<p>In the middle of defining a big structure, I have <code>(λ (a : X), sorry)</code>, where X is some explicit structure which takes four...erm...inputs or whatever they're called. Everything typechecks fine. The moment I replace <code>(λ (a : X), sorry)</code> with <code>(λ (⟨U,BU,Hx,s⟩ : X),sorry)</code> I get three errors on the <code>⟨</code> (and plenty more errors too) -- <code>invalid binder, identifier expected</code>, <code>invalid match/convoy expression, expected type is not known</code> and <code>invalid type ascription, term has type
+  Π (_x : ?m_1), ?m_2[_x] : Sort (imax ? ?)
+but is expected to have type
+  X : Type u</code>. What is going on? If I try to fill in some more sorries, are things likely to get better or worse?</p>
+
+<a name="126741736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741736">Mario Carneiro (May 18 2018 at 12:00)</a>:</h4>
+<p>You can't add types to a lambda match</p>
+
+<a name="126741743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741743">Mario Carneiro (May 18 2018 at 12:01)</a>:</h4>
+<p>the syntax is literally <code>λ ⟨U,BU,Hx,s⟩, term</code></p>
+
+<a name="126741748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741748">Mario Carneiro (May 18 2018 at 12:01)</a>:</h4>
+<p>stuff like <code>λ (⟨U,BU,Hx,s⟩ : X), term</code> or <code>λ ⟨U,BU,Hx,(s:t)⟩, term</code> is not well formed</p>
+
+<a name="126741942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741942">Kevin Buzzard (May 18 2018 at 12:08)</a>:</h4>
+<p>Oh!</p>
+
+<a name="126741966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741966">Kevin Buzzard (May 18 2018 at 12:08)</a>:</h4>
+<p>And there was me trying to be helpful</p>
+
+<a name="126741971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741971">Kevin Buzzard (May 18 2018 at 12:08)</a>:</h4>
+<p>Thanks Mario.</p>
+
+<a name="126741976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126741976">Kevin Buzzard (May 18 2018 at 12:09)</a>:</h4>
+<p>What is the logic behind that?</p>
+
+<a name="126742103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742103">Mario Carneiro (May 18 2018 at 12:12)</a>:</h4>
+<p>it's just the way the syntax is. I would appreciate more space to give type ascriptions (and in particular to provide explicit types which are defeq to the "default" types), but that's a lean issue.</p>
+
+<a name="126742169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742169">Kevin Buzzard (May 18 2018 at 12:15)</a>:</h4>
+<p>The moment I take this away I am faced with <code>invalid match/convoy expression, expected type is not known</code> errors</p>
+
+<a name="126742283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742283">Mario Carneiro (May 18 2018 at 12:18)</a>:</h4>
+<p>You will often not be able to use lambda match for this reason, since it requires type information fairly early in the elaboration process. Typing <code>by exact λ ⟨U,BU,Hx,s⟩, term</code> may help, and you can also use type ascription for the whole lambda, i.e. <code>(λ ⟨U,BU,Hx,s⟩, term : X -&gt; Y)</code></p>
+
+<a name="126742363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742363">Kevin Buzzard (May 18 2018 at 12:21)</a>:</h4>
+<p>I tried type ascription for the whole lambda and it didn't seem to fix the problem.</p>
+
+<a name="126742410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742410">Kevin Buzzard (May 18 2018 at 12:22)</a>:</h4>
+<p>Maybe I should get on with some marking and come back to this later on. Thanks for the tips.</p>
+
+<a name="126742415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126742415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126742415">Kevin Buzzard (May 18 2018 at 12:22)</a>:</h4>
+<p>If I still struggle I will attempt to minimise and ask again.</p>
+
+<a name="126743335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743335">Kevin Buzzard (May 18 2018 at 12:53)</a>:</h4>
+<p><code>context: 'eliminator' elaboration is not used for 'quotient.lift' because resulting type is not of the expected form</code></p>
+
+<a name="126743336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743336">Kevin Buzzard (May 18 2018 at 12:53)</a>:</h4>
+<p>whatever that means</p>
+
+<a name="126743340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743340">Kevin Buzzard (May 18 2018 at 12:53)</a>:</h4>
+<p>I have explicitly written the type of everything</p>
+
+<a name="126743379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743379">Kevin Buzzard (May 18 2018 at 12:54)</a>:</h4>
+<p>and I replace <code>lam  (b : X), ...</code></p>
+
+<a name="126743380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743380">Kevin Buzzard (May 18 2018 at 12:54)</a>:</h4>
+<p>with <code>lam \&lt;A,B,C,D\&gt;,...</code></p>
+
+<a name="126743381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743381">Kevin Buzzard (May 18 2018 at 12:54)</a>:</h4>
+<p>and I am dead</p>
+
+<a name="126743382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743382">Kevin Buzzard (May 18 2018 at 12:54)</a>:</h4>
+<p>and everything after the ... has been given an explicit type etc</p>
+
+<a name="126743393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743393">Kevin Buzzard (May 18 2018 at 12:55)</a>:</h4>
+<p>aah</p>
+
+<a name="126743396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743396">Kevin Buzzard (May 18 2018 at 12:55)</a>:</h4>
+<p>and now the <code>by exact</code> trick works</p>
+
+<a name="126743439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743439">Kevin Buzzard (May 18 2018 at 12:56)</a>:</h4>
+<p>so in fact I had to use both <code>by exact</code> and type ascription for the whole lambda. What a struggle! Thanks Mario as ever.</p>
+
+<a name="126743454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743454">Kevin Buzzard (May 18 2018 at 12:57)</a>:</h4>
+<p>The URL for this topic is <code>.../topic/.CE.BB.20(.E2.9F.A8U.2CBU.2CHx.2Cs.E2.9F.A9</code></p>
+
+<a name="126743455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743455">Kevin Buzzard (May 18 2018 at 12:57)</a>:</h4>
+<p>:-)</p>
+
+<a name="126743576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743576">Kevin Buzzard (May 18 2018 at 13:00)</a>:</h4>
+<p>The other irritation was that after almost every edit in VS Code, I had to drag the file up and down to see what the actual errors, if any, were. Somehow the localised "just try and process the bit the user is working on" thing worked very poorly in this instance.</p>
+
+<a name="126743921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126743921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126743921">Gabriel Ebner (May 18 2018 at 13:11)</a>:</h4>
+<p>You can click on the <code>Lean: (checking ...)</code> status bar item on the bottom to change what parts of the file are being checked.</p>
+
+<a name="126797317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126797317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html#126797317">Kevin Buzzard (May 19 2018 at 16:16)</a>:</h4>
+<p>Oh this is news to me -- and helpful news too! Thanks Gabriel.</p>
+
+
+{% endraw %}

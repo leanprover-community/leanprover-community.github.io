@@ -1,0 +1,62 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/39139Unabletounfold.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html">Unable to unfold</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136968269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968269">AHan (Nov 02 2018 at 05:24)</a>:</h4>
+<p>I'm trying to prove the prime field addition that I defined is correct,  but somehow I can't unfold the equation...<br>
+<a href="https://gist.github.com/potsrevennil/0cbf2204a8a16daa6eab367f153be748#file-primefield-lean-L71" target="_blank" title="https://gist.github.com/potsrevennil/0cbf2204a8a16daa6eab367f153be748#file-primefield-lean-L71">https://gist.github.com/potsrevennil/0cbf2204a8a16daa6eab367f153be748#file-primefield-lean-L71</a></p>
+
+<a name="136968471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968471">Mario Carneiro (Nov 02 2018 at 05:28)</a>:</h4>
+<p>from your definitions it looks like the proof is just <code>eq.symm (add_equiv _)</code></p>
+
+<a name="136968579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968579">Mario Carneiro (Nov 02 2018 at 05:31)</a>:</h4>
+<p>if you want to get at this by unfolding, you should <code>dsimp [pf.add, (+)]</code>, although this might unfold too much</p>
+
+<a name="136968646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968646">Mario Carneiro (Nov 02 2018 at 05:32)</a>:</h4>
+<p>normally we would state a simp lemma expressing the definitional unfolding here, exactly because it's hard to get at unless you say it explicitly</p>
+
+<a name="136968659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968659">AHan (Nov 02 2018 at 05:32)</a>:</h4>
+<p>what's dism's usage?<br>
+And why is that I can unfold eq in add_equiv but not of_int_add?</p>
+
+<a name="136968681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968681">Mario Carneiro (Nov 02 2018 at 05:33)</a>:</h4>
+<p>because <code>of_int_add</code> does not have the form <code>of_int ... = of_int ...</code></p>
+
+<a name="136968726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968726">Mario Carneiro (Nov 02 2018 at 05:34)</a>:</h4>
+<p>you have to unfold the addition on the lhs first, then you can unfold eq</p>
+
+<a name="136968747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968747">Mario Carneiro (Nov 02 2018 at 05:34)</a>:</h4>
+<p><code>dsimp</code> and <code>unfold</code> are very similar, they are implemented as the same tactic behind the scenes with different configuration options</p>
+
+<a name="136968759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968759">Mario Carneiro (Nov 02 2018 at 05:35)</a>:</h4>
+<p>in this case it's just because <code>dsimp</code> accepts operators like <code>(+)</code> for simplifying and <code>unfold</code> doesn't</p>
+
+<a name="136968824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136968824">AHan (Nov 02 2018 at 05:37)</a>:</h4>
+<p>oh yes  I should unfold addition first!<br>
+But after unfold add, I still cannot unfold eq....</p>
+
+<a name="136970809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136970809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html#136970809">AHan (Nov 02 2018 at 06:25)</a>:</h4>
+<p>Anyway <code>eq.symm (add_equiv _)</code> is really a nice solution, thanks a lot!</p>
+
+
+{% endraw %}

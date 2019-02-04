@@ -1,0 +1,756 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/58005semimodulesneindanke.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html">semimodules nein danke</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133914925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133914925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133914925">Kevin Buzzard (Sep 13 2018 at 23:34)</a>:</h4>
+<div class="codehilite"><pre><span></span>tactic.mk_instance failed to generate instance for
+  module (polynomial R) (polynomial R)
+</pre></div>
+
+
+<p>That didn't used to happen.</p>
+<p>From <code>algebra/module.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">semiring</span><span class="bp">.</span><span class="n">to_semimodule</span> <span class="o">[</span><span class="n">r</span> <span class="o">:</span> <span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">semimodule</span> <span class="n">α</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">[</span><span class="n">stuff</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span> <span class="o">[</span><span class="n">r</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">α</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_semimodule</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Is this definitely OK? My rings are no longer modules over themselves for some reason.</p>
+
+<a name="133914954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133914954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133914954">Kenny Lau (Sep 13 2018 at 23:35)</a>:</h4>
+<blockquote>
+<p>nein danke</p>
+</blockquote>
+
+<a name="133915566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133915566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133915566">Kevin Buzzard (Sep 13 2018 at 23:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">nonzero_comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="n">is_submodule</span> <span class="n">I</span><span class="o">]</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+
+<span class="c">/-</span><span class="cm"></span>
+
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">R : Type ?,</span>
+<span class="cm">_inst_1 : nonzero_comm_ring R,</span>
+<span class="cm">I : set (polynomial R)</span>
+<span class="cm">⊢ module ?m_1 (polynomial R)</span>
+
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Am I just making a rookie error? I thought this used to work?</p>
+
+<a name="133915592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133915592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133915592">Kevin Buzzard (Sep 13 2018 at 23:49)</a>:</h4>
+<p>Oh -- I am -- this is not the problem. I need decidable equality. I'll keep looking for the problem.</p>
+
+<a name="133915650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133915650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133915650">Mario Carneiro (Sep 13 2018 at 23:51)</a>:</h4>
+<p>FYI I'm currently working on a big rewrite of most of this, so stay tuned.</p>
+
+<a name="133915817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133915817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133915817">Kevin Buzzard (Sep 13 2018 at 23:55)</a>:</h4>
+<p>Oh Ok. I just pulled again and the errors moved to different places, so I guess that's progress.</p>
+
+<a name="133916124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133916124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133916124">Kevin Buzzard (Sep 14 2018 at 00:01)</a>:</h4>
+<p>Oh I still have (in the middle of some code)</p>
+<div class="codehilite"><pre><span></span>      <span class="n">letI</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- works fine</span>
+      <span class="n">letI</span> <span class="o">:</span> <span class="n">module</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- fails to generate instance</span>
+</pre></div>
+
+
+<p>but if you're changing stuff then perhaps I will just leave things for now.</p>
+
+<a name="133939719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133939719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133939719">Kevin Buzzard (Sep 14 2018 at 10:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">submodule</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">1</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span>
+<span class="c">/-</span><span class="cm"></span>
+
+<span class="cm">@[instance]</span>
+<span class="cm">protected def ring.to_module : Π {α : Type u} [r : ring α], module α α := ...</span>
+
+<span class="cm">-/</span>
+
+<span class="kn">lemma</span> <span class="n">leading_term_bdd_deg_ideal</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">nonzero_comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="n">is_submodule</span> <span class="n">I</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">submodule</span> <span class="n">R</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">I</span> <span class="bp">∧</span> <span class="n">degree</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">leading_coeff</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">c</span><span class="o">},{</span>
+  <span class="n">zero_</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span><span class="n">is_submodule</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span><span class="n">lattice</span><span class="bp">.</span><span class="n">bot_le</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">add_</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">Hf</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">Hg</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">letI</span> <span class="o">:</span> <span class="n">ring</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- works</span>
+    <span class="n">letI</span> <span class="o">:</span> <span class="n">module</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- fails</span>
+  <span class="n">sorry</span><span class="o">,</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+<span class="o">}</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>There's a fairly minimal working example of something which is stopping me from doing anything on Hilbert basis at the minute. Type class inference can find the ring instance, and the ring to module instance is there, but type class inference can't find the module instance.</p>
+
+<a name="133939818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133939818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133939818">Kevin Buzzard (Sep 14 2018 at 10:46)</a>:</h4>
+<p>I can't add the instance explictly -- well, I can -- but then I get weird diamond errors later on. I am going to put Hilbert basis on hold for a while until I can understand what is going on here -- currently my understanding is that this is not user error and I should just wait, and of course I'm happy to wait.</p>
+
+<a name="133940044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940044">Johan Commelin (Sep 14 2018 at 10:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You could use  the explicit<br>
+<code>letI : module (polynomial R) (polynomial R) := @ring.to_module (polynomial R) _,</code></p>
+
+<a name="133940048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940048">Johan Commelin (Sep 14 2018 at 10:52)</a>:</h4>
+<p>It is a bit ugly, but maybe it would unblock you?</p>
+
+<a name="133940379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940379">Kevin Buzzard (Sep 14 2018 at 11:01)</a>:</h4>
+<p>No because then I get diamond issues with exactly the instances that Mario is currently refactoring</p>
+
+<a name="133940459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940459">Kevin Buzzard (Sep 14 2018 at 11:03)</a>:</h4>
+<p>I just thought I'd post this example because either it's something which seems to be to be currently broken or I've made a mistake and it doesn't work for a good reason (note that I go from term mode to tactic mode and for all I know this has consequences for type class inference). If I've not made a mistake then it's something that should work after the refactoring</p>
+
+<a name="133940518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940518">Johan Commelin (Sep 14 2018 at 11:04)</a>:</h4>
+<p>Hmmm... that's crazy.</p>
+
+<a name="133940963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133940963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133940963">Kevin Buzzard (Sep 14 2018 at 11:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  @is_submodule R (@polynomial R (@comm_ring.to_comm_semiring R (@nonzero_comm_ring.to_comm_ring R _inst_1)))
+    (@comm_ring.to_ring R (@nonzero_comm_ring.to_comm_ring R _inst_1))
+    (@polynomial.module R (λ (a b : R), classical.prop_decidable (a = b)) (@nonzero_comm_ring.to_comm_ring R _inst_1))
+    I
+but is expected to have type
+  @is_submodule (@polynomial R (@comm_ring.to_comm_semiring R (@nonzero_comm_ring.to_comm_ring R _inst_1)))
+    (@polynomial R (@comm_ring.to_comm_semiring R (@nonzero_comm_ring.to_comm_ring R _inst_1)))
+    (@comm_ring.to_ring (@polynomial R (@comm_ring.to_comm_semiring R (@nonzero_comm_ring.to_comm_ring R _inst_1)))
+       _inst)
+    _inst_3
+    I
+</pre></div>
+
+
+<p>for what it's worth. Oh! What is this <code>polynomial.module</code>?? That's the statement that <code>R[X]</code> is a module over <code>R</code>. Is that relevant? Anyway, this is not the point -- the point is that either my original thing should work and it doesn't (in which case I should stop, because I am using modules all over the place and will surely see other problems later, even though no module actually occurs in the proofs, only ideals, and part of me wants to define ideals as subsets of rings plus blah because we all know that type classes for modules have problems, whereas type classes for ideals will probably work fine), or I've made a mistake (in which case I need help because I can't see it).</p>
+
+<a name="133941521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133941521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133941521">Johan Commelin (Sep 14 2018 at 11:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> So the math strategy would be something like "wlog we have deg(f) ≤ deg(g), now look at <code>X^(degree g - degree f) * f + g</code>. Done."</p>
+
+<a name="133941543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133941543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133941543">Johan Commelin (Sep 14 2018 at 11:33)</a>:</h4>
+<p>I don't know how to do <code>wlog</code> in Lean, so I'll just do cases on <code>have H := le_or_gt f.degree g.degree,</code></p>
+
+<a name="133941553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133941553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133941553">Johan Commelin (Sep 14 2018 at 11:33)</a>:</h4>
+<p>The next step fails, because Lean doesn't know how to subtract <code>with_bot ℕ</code> thingies. Is that intended? Or should we use <code>nat_degree</code>?</p>
+
+<a name="133941852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133941852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133941852">Kevin Buzzard (Sep 14 2018 at 11:41)</a>:</h4>
+<p>Oh I've done all this bit -- you should look at the <code>kmb_hilbert_basis</code> branch of community mathlib.</p>
+
+<a name="133941999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133941999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133941999">Johan Commelin (Sep 14 2018 at 11:44)</a>:</h4>
+<blockquote>
+<p>why are you making me commit just becuase I want to change branch</p>
+</blockquote>
+<p><code>git stash</code></p>
+
+<a name="133942704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133942704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133942704">Kevin Buzzard (Sep 14 2018 at 12:03)</a>:</h4>
+<p>Oh that's what it's for!</p>
+
+<a name="133943962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133943962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133943962">Johan Commelin (Sep 14 2018 at 12:38)</a>:</h4>
+<p><code>unexpected occurrence of recursive function</code><br>
+Did I unlock something?</p>
+
+<a name="133943968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133943968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133943968">Johan Commelin (Sep 14 2018 at 12:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I tried using <code>wlog</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- zero ring a special case so let&#39;s deal with it separately</span>
+<span class="kn">theorem</span> <span class="n">hilbert_basis_zero_ring</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_noetherian_ring</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">ring</span><span class="bp">.</span><span class="n">is_noetherian_of_zero_eq_one</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">ext</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">semiring</span><span class="bp">.</span><span class="n">zero_of_zero_eq_one</span> <span class="n">h</span> <span class="o">(</span><span class="n">coeff</span> <span class="bp">_</span> <span class="n">n</span><span class="o">)}</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">hilbert_basis</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">hR</span> <span class="o">:</span> <span class="n">is_noetherian_ring</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_noetherian_ring</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- deal with zero ring first</span>
+  <span class="n">by_cases</span> <span class="n">h01</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hilbert_basis_zero_ring</span> <span class="n">h01</span><span class="o">,</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="n">nonzero_comm_ring</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">comm_ring</span><span class="bp">.</span><span class="n">non_zero_of_zero_ne_one</span> <span class="n">h01</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">L</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="n">leading_coeff</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">HL</span> <span class="o">:</span> <span class="n">is_ideal</span> <span class="n">L</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">zero_</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">add_</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span><span class="n">Hf</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">Hg</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">begin</span>
+      <span class="n">by_cases</span> <span class="n">h0</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h0</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">by_cases</span> <span class="n">hf</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">Hf</span><span class="o">,</span> <span class="err">←</span><span class="n">Hg</span><span class="o">,</span> <span class="n">hf</span><span class="o">,</span> <span class="n">leading_coeff_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">],</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">by_cases</span> <span class="n">hg</span> <span class="o">:</span> <span class="n">g</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">Hf</span><span class="o">,</span> <span class="err">←</span><span class="n">Hg</span><span class="o">,</span> <span class="n">hg</span><span class="o">,</span> <span class="n">leading_coeff_zero</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">],</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">wlog</span> <span class="n">hd</span> <span class="o">:</span> <span class="n">nat_degree</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">nat_degree</span> <span class="n">g</span> <span class="kn">using</span> <span class="o">[</span><span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">g</span> <span class="n">f</span><span class="o">],</span>
+      <span class="o">{</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">le_or_lt</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">g</span><span class="o">))</span> <span class="o">(</span><span class="k">assume</span> <span class="n">H</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="k">assume</span> <span class="n">H</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">H</span><span class="o">))</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="k">let</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">X</span> <span class="err">^</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">g</span> <span class="bp">-</span> <span class="n">nat_degree</span> <span class="n">f</span><span class="o">)</span> <span class="bp">+</span> <span class="n">g</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">Htemp</span> <span class="o">:</span> <span class="n">leading_coeff</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">leading_coeff</span> <span class="o">(</span><span class="n">X</span> <span class="err">^</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">g</span> <span class="bp">-</span> <span class="n">nat_degree</span> <span class="n">f</span><span class="o">))</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+          <span class="n">rw</span> <span class="o">[</span><span class="n">leading_coeff_X_pow</span><span class="o">,</span><span class="n">mul_one</span><span class="o">],</span>
+          <span class="n">exact</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">hf</span> <span class="err">$</span> <span class="n">leading_coeff_eq_zero</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">),</span>
+        <span class="k">have</span> <span class="n">Ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">leading_coeff</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">X</span> <span class="err">^</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">g</span> <span class="bp">-</span> <span class="n">nat_degree</span> <span class="n">f</span><span class="o">)),</span>
+          <span class="n">rw</span> <span class="o">[</span><span class="n">leading_coeff_mul&#39;</span> <span class="n">Htemp</span><span class="o">,</span><span class="n">leading_coeff_X_pow</span><span class="o">,</span><span class="n">mul_one</span><span class="o">,</span><span class="n">Hf</span><span class="o">],</span>
+        <span class="n">exact</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="k">begin</span> <span class="n">convert</span> <span class="n">leading_coeff_add_of_degree_eq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">Hg</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="n">degree_mul_eq&#39;</span> <span class="n">Htemp</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="n">degree_X_pow</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="n">degree_eq_nat_degree</span> <span class="n">hf</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="n">degree_eq_nat_degree</span> <span class="n">hg</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="err">←</span><span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_add</span><span class="o">,</span>
+                      <span class="n">rw</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_eq_coe</span><span class="o">,</span>
+                      <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_cancel&#39;</span> <span class="n">hd</span><span class="o">,</span>
+                    <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span><span class="n">Ha</span><span class="o">,</span><span class="n">Hg</span><span class="o">],</span>
+                  <span class="kn">end</span><span class="bp">⟩</span> <span class="o">},</span>
+    <span class="kn">end</span><span class="o">,</span>
+    <span class="n">smul</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133943976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133943976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133943976">Johan Commelin (Sep 14 2018 at 12:39)</a>:</h4>
+<p>I also proved <code>hilbert_basis_zero_ring</code></p>
+
+<a name="133944142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133944142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133944142">Reid Barton (Sep 14 2018 at 12:43)</a>:</h4>
+<p>I wonder whether Hilbert ever proved it</p>
+
+<a name="133944224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133944224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133944224">Johan Commelin (Sep 14 2018 at 12:45)</a>:</h4>
+<p>Lol...</p>
+
+<a name="133944235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133944235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133944235">Johan Commelin (Sep 14 2018 at 12:45)</a>:</h4>
+<p>Do you have any idea how I managed to get into this recursive function? Is this a bug in <code>wlog</code>?</p>
+
+<a name="133945017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945017">Reid Barton (Sep 14 2018 at 13:02)</a>:</h4>
+<p>Usually when I get that recursive function error it's because I have some <code>_fun_match</code> or similar thing among my hypotheses and some tactic tried to apply it</p>
+
+<a name="133945027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945027">Reid Barton (Sep 14 2018 at 13:03)</a>:</h4>
+<p>Is that the whole error message?<br>
+Guessing from previous discussion here I can't run your code that easily</p>
+
+<a name="133945044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945044">Reid Barton (Sep 14 2018 at 13:04)</a>:</h4>
+<p>The <code>add := λ a b ⟨f,Hf⟩ ⟨g,Hg⟩,</code> looks possibly to blame, if that is the cause</p>
+
+<a name="133945203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945203">Johan Commelin (Sep 14 2018 at 13:07)</a>:</h4>
+<p>There are indeed <code>_fun_match</code> hypotheses in the context.</p>
+
+<a name="133945257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945257">Reid Barton (Sep 14 2018 at 13:08)</a>:</h4>
+<p>see if moving that lambda stuff to an <code>rintros</code> tactic helps</p>
+
+<a name="133945263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945263">Johan Commelin (Sep 14 2018 at 13:08)</a>:</h4>
+<p>Ok, I'll try</p>
+
+<a name="133945268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945268">Johan Commelin (Sep 14 2018 at 13:08)</a>:</h4>
+<p><code>wlog</code> is too good to miss out on</p>
+
+<a name="133945363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945363">Reid Barton (Sep 14 2018 at 13:11)</a>:</h4>
+<blockquote>
+<p>Hilbert (1890) proved the theorem (for the special case of polynomial rings over a field)</p>
+</blockquote>
+
+<a name="133945386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945386">Johan Commelin (Sep 14 2018 at 13:11)</a>:</h4>
+<p>And here we are, about 130 years later, proving it for the zero ring!</p>
+
+<a name="133945454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945454">Kevin Buzzard (Sep 14 2018 at 13:13)</a>:</h4>
+<p>Maybe you don't have my most recent commits. I have more than this. I gave up on wlog for exactly the reason you posted</p>
+
+<a name="133945517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945517">Johan Commelin (Sep 14 2018 at 13:15)</a>:</h4>
+<p>Hmmm, too bad.</p>
+
+<a name="133945653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945653">Reid Barton (Sep 14 2018 at 13:18)</a>:</h4>
+<p>I feel like you could avoid this zero ring stuff if you worked at it. For example, instead of the ideal of all leading coefficients, take the ideal <code>{ coeff f i | coeff f j = 0 for all j &gt; i }</code>. Probably not worth it though.</p>
+
+<a name="133945733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945733">Johan Commelin (Sep 14 2018 at 13:20)</a>:</h4>
+<p>Hmm, I don't know. Doesn't that lead to rather clean proofs?</p>
+
+<a name="133945741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945741">Kevin Buzzard (Sep 14 2018 at 13:20)</a>:</h4>
+<p>I honestly don't think that trying to write proofs that work with the zero ring is worth it. Every third step you need to check that something is non-zero. To prove that if I is an ideal of R[X] then the set of leading terms of polynomials in I is an ideal involves so many edge cases; leading term f non-zero, leading term g non-zero, leading term f + g non-zero, and this is all in the case R non-zero. The proof is edge case after edge case and edge case 1 is very naturally R = 0.</p>
+
+<a name="133945743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945743">Johan Commelin (Sep 14 2018 at 13:20)</a>:</h4>
+<p>You need a little lemma saying <code>coeff f j = 0</code> for all <code>j &gt; degree f</code>.</p>
+
+<a name="133945826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945826">Kevin Buzzard (Sep 14 2018 at 13:22)</a>:</h4>
+<p>Loads of the lemmas about how leading coefficients of polynomials behave rely on terms being non-zero, e.g. you use f*X^(deg g - deg f) to get degree of f up to that of g, and to compute the degree of this you need degree of X is 1 and this demands a proof that 1 isn't 0</p>
+
+<a name="133945859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945859">Kevin Buzzard (Sep 14 2018 at 13:23)</a>:</h4>
+<p>Oh I see -- you mean avoid leading terms completely? But we also need the ideal of leading terms of polys of degree at most n. Maybe you're right and there's some way of doing it.</p>
+
+<a name="133945862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945862">Kevin Buzzard (Sep 14 2018 at 13:23)</a>:</h4>
+<p>PS I pushed some more commits</p>
+
+<a name="133945921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945921">Kevin Buzzard (Sep 14 2018 at 13:24)</a>:</h4>
+<p>the j thing -- you have to be careful because degree is not a nat, it's a with_bot nat, and coeff takes a nat</p>
+
+<a name="133945927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945927">Reid Barton (Sep 14 2018 at 13:24)</a>:</h4>
+<p>I think if you avoid ever saying the word "degree", and unravel its definition everywhere, then possibly all the "R is not zero" steps disappear.</p>
+
+<a name="133945951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133945951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133945951">Reid Barton (Sep 14 2018 at 13:25)</a>:</h4>
+<p>(But they may be replaced by having to do more other work, and in any case it's a bit unnatural.)</p>
+
+<a name="133946079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133946079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133946079">Reid Barton (Sep 14 2018 at 13:29)</a>:</h4>
+<p>Apparently they proved this in Mizar</p>
+<blockquote>
+<p>Let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> be a Noetherian Abelian add-associative right zeroed right complementable associative distributive well unital commutative non empty double loop structure. One can verify that Polynom-Ring <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> is Noetherian.</p>
+</blockquote>
+
+<a name="133949236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133949236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133949236">Kevin Buzzard (Sep 14 2018 at 14:41)</a>:</h4>
+<p>You need to talk about degrees because given an ideal <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mi>X</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[X]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">]</span></span></span></span> you need to consider the ideal <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">J_k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> a natural) comprising of 0 and the leading terms of the polynomials in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> of degree <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span>. But I agree there might be tricks. Here's another example of an edge case -- if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> has degree <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> and leading term <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">a</span></span></span></span>, and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">c</span></span></span></span> is in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> then you want to prove that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a*c</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.46528em;"></span><span class="strut bottom" style="height:0.46528em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">a</span><span class="mbin">∗</span><span class="mord mathit">c</span></span></span></span> is in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>, but <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mo>∗</mo><mi>f</mi></mrow><annotation encoding="application/x-tex">c*f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit">c</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> might not have degree <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span> any more and you have to deal with that case separately. It's quite an annoying proof to formalise :-)</p>
+
+<a name="133963161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133963161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133963161">Kevin Buzzard (Sep 14 2018 at 18:09)</a>:</h4>
+<p>Aah! I found my type class problem!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">submodule</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">1</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="c1">-- Maths :  &quot;Let I be an ideal of R[X]&quot;</span>
+
+<span class="kn">definition</span> <span class="n">ABC</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="n">is_submodule</span> <span class="n">I</span><span class="o">]</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+
+<span class="c1">-- ...but I is not an ideal of (polynomial R)!</span>
+
+<span class="c">/-</span><span class="cm"></span>
+
+<span class="cm">_inst_2 :</span>
+<span class="cm">  @is_submodule.{u u} R (@polynomial.{u} R (@comm_ring.to_comm_semiring.{u} R _inst_1))</span>
+<span class="cm">    (@comm_ring.to_ring.{u} R _inst_1)</span>
+<span class="cm">    (@polynomial.module.{u} R (λ (a b : R), classical.prop_decidable (@eq.{u+1} R a b)) _inst_1)</span>
+
+<span class="cm">-/</span>
+
+<span class="c1">-- I is an R-submodule :-/</span>
+
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>There's an instance making (polynomial R) an R-module, and another instance making it a (polynomial R)-module, and <code>is_submodule</code> chooses the one I don't want. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is there a coherent strategy to deal with this? Any time a ring is a module over another ring (and this happens all the time in commutative ring theory) we will have instances of <code>module R M</code> for fixed <code>M</code> and lots of <code>R</code>. I propose scrapping stuff like <code>is_submodule M</code> and replacing it with <code>is_submodule R M</code>. What do you think?</p>
+
+<a name="133963705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133963705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133963705">Kevin Buzzard (Sep 14 2018 at 18:18)</a>:</h4>
+<p>It's probably worth saying that it is not uncommon at all to hear mathematicians saying "let N be an A-submodule of B" or "let W be a k-subspace of V".</p>
+
+<a name="133975502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133975502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133975502">Kevin Buzzard (Sep 14 2018 at 21:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- Maths :  &quot;Let I be an ideal of R[X]&quot;</span>
+
+<span class="c1">-- Lean</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="bp">@</span><span class="n">is_submodule</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span><span class="o">)</span> <span class="n">I</span><span class="o">]</span>
+</pre></div>
+
+<a name="133975549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133975549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133975549">Kevin Buzzard (Sep 14 2018 at 21:57)</a>:</h4>
+<p>Lean currently has to be told that the ring <code>polynomial R</code> is a module over itself.</p>
+
+<a name="133976193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133976193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133976193">Kevin Buzzard (Sep 14 2018 at 22:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">submodule</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">1</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="c1">-- Maths :  &quot;Let I be an ideal of R[X]. Then 0 ∈ I. &quot;</span>
+
+<span class="kn">definition</span> <span class="n">ABC</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="n">is_submodule</span> <span class="n">I</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="err">∈</span> <span class="n">I</span> <span class="o">:=</span>
+<span class="n">is_submodule</span><span class="bp">.</span><span class="n">zero</span> <span class="c1">-- fails</span>
+
+<span class="c">/-</span><span class="cm"></span>
+
+<span class="cm">function expected at</span>
+<span class="cm">  is_submodule.zero</span>
+<span class="cm">term has type</span>
+<span class="cm">  ?m_1 0</span>
+<span class="cm">Additional information:</span>
+<span class="cm">/home/buzzard/lean-projects/mathlib-community/tests/scratch.lean:16:0: context: switched to simple application elaboration procedure because failed to use expected type to elaborate it, error message</span>
+<span class="cm">  too many arguments</span>
+
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Does anyone know what <code>too many arguments</code> means in this context and why it happened?</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">ABC</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="bp">@</span><span class="n">is_submodule</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span><span class="o">)</span> <span class="n">I</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="err">∈</span> <span class="n">I</span> <span class="o">:=</span>
+<span class="n">is_submodule</span><span class="bp">.</span><span class="n">zero</span> <span class="c1">-- also fails</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="133976867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133976867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133976867">Kevin Buzzard (Sep 14 2018 at 22:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">ABC</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="bp">@</span><span class="n">is_submodule</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span><span class="o">)</span> <span class="n">I</span><span class="o">]</span> <span class="o">:</span>
+<span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="err">∈</span> <span class="n">I</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_submodule</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">_</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span><span class="o">)</span> <span class="n">I</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>Zero is in an ideal of a polynomial ring! Why am I so bad at this? Is it broken or am I just overlooking something simple?</p>
+
+<a name="133976930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133976930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133976930">Kevin Buzzard (Sep 14 2018 at 22:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> how do you prove zero is in an ideal of the ring <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mi>X</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[X]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">]</span></span></span></span>?</p>
+
+<a name="133976938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133976938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133976938">Kenny Lau (Sep 14 2018 at 22:24)</a>:</h4>
+<p>I don't</p>
+
+<a name="133976946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133976946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133976946">Kevin Buzzard (Sep 14 2018 at 22:25)</a>:</h4>
+<p>Why not?</p>
+
+<a name="133977036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977036">Kevin Buzzard (Sep 14 2018 at 22:26)</a>:</h4>
+<p>You want algebraic closure to finish your rigorous formulation of the statement of the local Langlands conjectures for all abelian algebraic groups, a theorem of Langlands. More mathematicians will be interested in Lean if you do that. Tom Hales has already mentioned it in a talk of his -- did you see?</p>
+
+<a name="133977043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977043">Kevin Buzzard (Sep 14 2018 at 22:27)</a>:</h4>
+<p>and for algebraic closure you're going to have to use ideals in polynomial rings quite a lot.</p>
+
+<a name="133977058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977058">Kevin Buzzard (Sep 14 2018 at 22:28)</a>:</h4>
+<p>What is the current status of your formulation project?</p>
+
+<a name="133977216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977216">Kenny Lau (Sep 14 2018 at 22:30)</a>:</h4>
+<p>I mean, aren't we waiting for the refactoring?</p>
+
+<a name="133977241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977241">Kevin Buzzard (Sep 14 2018 at 22:31)</a>:</h4>
+<p>The Langlands philosophy is notorious for being a "philosophy", a vague web of general ideas that it's hard to make rigorous, which occasionally specialise down to very explicit conjectures but sometimes are not actually rigorous mathematical statements. If you get stuck formulating them in general then you can start asking experts in number theory how they actually formulate their grand conjectures. I think it would be really cool. Toby Gee and I spent several years of our lives trying to formulate an actual rigorous conjecture which could rightly be given the name of "Langlands' Reciprocity Conjecture for a general connected reductive group" and we still do not have a general conjecture which encompasses everything.</p>
+
+<a name="133977297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977297">Kevin Buzzard (Sep 14 2018 at 22:32)</a>:</h4>
+<p><a href="https://arxiv.org/abs/1009.0785" target="_blank" title="https://arxiv.org/abs/1009.0785">https://arxiv.org/abs/1009.0785</a></p>
+
+<a name="133977302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977302">Kenny Lau (Sep 14 2018 at 22:32)</a>:</h4>
+<blockquote>
+<p>You want algebraic closure to finish your rigorous formulation of the statement of the local Langlands conjectures for all abelian algebraic groups, a theorem of Langlands. More mathematicians will be interested in Lean if you do that. Tom Hales has already mentioned it in a talk of his -- did you see?</p>
+</blockquote>
+<p>in fact I saw it recently while searching for myself</p>
+
+<a name="133977411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977411">Kevin Buzzard (Sep 14 2018 at 22:35)</a>:</h4>
+<p>I believe that our conjecture can be formalised in Lean and I am not sure that Langlands' philosophy can, not in a way that everyone would find satisfactory at least. What if someone claimed it was the existence of some Global Langlands Group with some properties and then someone like Reid Barton or you just observed that such a group with these properties trivially exists because it's just some pullback. The "ultimate conjecture" is extremely vague. It says that the global Langlands group should be constructed in some way using some generalisation of Galois theory that we don't actually have.</p>
+
+<a name="133977541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977541">Kevin Buzzard (Sep 14 2018 at 22:37)</a>:</h4>
+<p>If you just say that it's some "Galoisish" group whose representation theory looks like the set of automorphic representations in some vague way, and then you try to formalise what you mean, then you're in danger of someone just building a group whose representation theory has this property for trivial reasons.</p>
+
+<a name="133977788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133977788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133977788">Kevin Buzzard (Sep 14 2018 at 22:42)</a>:</h4>
+<p>Jim Arthur wrote a paper about this many years ago and I wish I understood that paper better. <a href="http://www.claymath.org/library/cw/arthur/pdf/automorphic-langlands-group.pdf" target="_blank" title="http://www.claymath.org/library/cw/arthur/pdf/automorphic-langlands-group.pdf">http://www.claymath.org/library/cw/arthur/pdf/automorphic-langlands-group.pdf</a></p>
+
+<a name="133981310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133981310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133981310">Kevin Buzzard (Sep 14 2018 at 23:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  I thought a bit more about your suggestion and of course you're right. One wants a new subtype <code>deg_le n</code> of polynomials of degree at most n, we want to prove that this is an R-module, and we want to define these increasing ideals as the projection map given by the n'th coefficient. That way we should still to the construction of the finite generating set for the ideal. There's then an induction to go but it looks really easy in this optic.</p>
+
+<a name="133981394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133981394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133981394">Kevin Buzzard (Sep 14 2018 at 23:53)</a>:</h4>
+<p>No need to assume R is non zero</p>
+
+<a name="133981491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133981491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133981491">Kevin Buzzard (Sep 14 2018 at 23:55)</a>:</h4>
+<p>We just need deg (f + g) &lt;= max(deg f,deg g) and deg r*f &lt;= deg f, both of which are true unconditionally</p>
+
+<a name="133981512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133981512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133981512">Kevin Buzzard (Sep 14 2018 at 23:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> these are the nice statements about degrees of polynomials.</p>
+
+<a name="133981618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133981618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133981618">Kevin Buzzard (Sep 14 2018 at 23:57)</a>:</h4>
+<p>In some sense I'm back to square 1 with my proof but this time it's going to be far more mathlib-ready!</p>
+
+<a name="133983245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133983245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133983245">Kevin Buzzard (Sep 15 2018 at 00:27)</a>:</h4>
+<p>Dumb question: if R is a ring considered as a semiring and M is a semimodule over the semiring R, is then M a module over the ring R?</p>
+
+<a name="133984088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133984088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133984088">Reid Barton (Sep 15 2018 at 00:48)</a>:</h4>
+<p>Yes because <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mo>↦</mo><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">m \mapsto -m</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.58333em;"></span><span class="strut bottom" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">m</span><span class="mrel">↦</span><span class="mord">−</span><span class="mord mathit">m</span></span></span></span> is provided by multiplication by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mn>1</mn><mo>∈</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">-1 \in R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord">−</span><span class="mord mathrm">1</span><span class="mrel">∈</span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> and it satisfies the expected equation by distributivity <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>=</mo><mo>(</mo><mn>1</mn><mo>+</mo><mo>(</mo><mo>−</mo><mn>1</mn><mo>)</mo><mo>)</mo><mi>m</mi><mo>=</mo><mi>m</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">0 = (1 + (-1)) m = m - m</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">0</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord mathrm">1</span><span class="mbin">+</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mclose">)</span><span class="mord mathit">m</span><span class="mrel">=</span><span class="mord mathit">m</span><span class="mbin">−</span><span class="mord mathit">m</span></span></span></span>.</p>
+
+<a name="133985287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133985287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133985287">Mario Carneiro (Sep 15 2018 at 01:17)</a>:</h4>
+<p>I've been too busy to respond today but I see you have converged on the same solution as I have for the ideal of degree &lt;= n polynomials :)</p>
+
+<a name="133985565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133985565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133985565">Kevin Buzzard (Sep 15 2018 at 01:22)</a>:</h4>
+<p>it's not an ideal :-/</p>
+
+<a name="133985586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133985586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133985586">Kevin Buzzard (Sep 15 2018 at 01:23)</a>:</h4>
+<p>this is exactly the difference between an ideal and a submodule :-) It's a submodule for one module structure but not for the other.</p>
+
+<a name="133986217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133986217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#133986217">Kevin Buzzard (Sep 15 2018 at 01:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coeff_zero_iff_deg_le</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">degree</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">coeff</span> <span class="n">f</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">H</span> <span class="n">m</span> <span class="n">Hm</span><span class="o">,</span>
+    <span class="n">unfold</span> <span class="n">degree</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">m</span> <span class="err">∉</span> <span class="n">f</span><span class="bp">.</span><span class="n">support</span><span class="o">,</span>
+      <span class="n">intro</span> <span class="n">H2</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup_le_iff</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">H3</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">m</span> <span class="n">H2</span><span class="o">,</span>
+      <span class="n">revert</span> <span class="n">Hm</span><span class="o">,</span>
+      <span class="k">show</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">),</span>
+      <span class="n">apply</span> <span class="n">not_lt_of_ge</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">H3</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="err">←</span><span class="n">decidable</span><span class="bp">.</span><span class="n">not_not_iff</span> <span class="o">(</span><span class="n">coeff</span> <span class="n">f</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">),</span>
+      <span class="n">intro</span> <span class="n">H4</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">this</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_to_fun</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">H4</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="c1">--    have H2 := H (with_bot_succ n) (with_bot_lt_succ n),</span>
+    <span class="n">unfold</span> <span class="n">degree</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup_le</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">b</span> <span class="n">Hb</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_to_fun</span> <span class="n">at</span> <span class="n">Hb</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">coeff</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="n">at</span> <span class="n">Hb</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">decidable</span><span class="bp">.</span><span class="n">of_not_not</span> <span class="bp">_</span><span class="o">,</span> <span class="n">apply_instance</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">Hn</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">Hn</span> <span class="o">:=</span> <span class="n">lt_of_not_ge</span> <span class="n">Hn</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">Hb</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">Hn</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This is with the <code>poly_coeffs</code> branch of community mathlib, with Kenny's coeff commands. I think that it might be possible to golf that a bit.</p>
+
+<a name="134000891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134000891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134000891">Kevin Buzzard (Sep 15 2018 at 09:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coeff_zero_iff_deg_le</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">degree</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">coeff</span> <span class="n">f</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">support</span><span class="o">)</span> <span class="n">some</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="n">m</span> <span class="o">(</span><span class="n">Hm</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">)),</span> <span class="n">decidable</span><span class="bp">.</span><span class="n">of_not_not</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H4</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">m</span> <span class="err">∉</span> <span class="n">f</span><span class="bp">.</span><span class="n">support</span><span class="o">,</span>
+    <span class="k">from</span> <span class="bp">λ</span> <span class="n">H2</span><span class="o">,</span> <span class="n">not_lt_of_ge</span> <span class="o">((</span><span class="n">finset</span><span class="bp">.</span><span class="n">sup_le_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)</span> <span class="n">m</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">((</span><span class="n">m</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">))</span> <span class="n">Hm</span><span class="o">,</span>
+  <span class="n">H1</span> <span class="err">$</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_to_fun</span> <span class="n">f</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">H4</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup_le</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">Hb</span><span class="o">,</span> <span class="n">decidable</span><span class="bp">.</span><span class="n">of_not_not</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">Hn</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_to_fun</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">Hb</span> <span class="err">$</span> <span class="n">H</span> <span class="n">b</span> <span class="err">$</span> <span class="n">lt_of_not_ge</span> <span class="n">Hn</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>That'a a bit better</p>
+
+<a name="134006427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134006427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134006427">Kevin Buzzard (Sep 15 2018 at 12:24)</a>:</h4>
+<p>This code seems to demonstrate various things which are currently not optimal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">leading_term_bdd_deg_ideal</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">nonzero_comm_ring</span> <span class="n">R</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">[</span><span class="bp">@</span><span class="n">is_submodule</span> <span class="n">R</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">I</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">submodule</span> <span class="n">R</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="n">submodule</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">,</span> <span class="n">coeff</span> <span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">coeff_is_linear</span> <span class="n">R</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">⟨</span><span class="n">I</span><span class="o">,</span><span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span> <span class="err">⊓</span> <span class="bp">⟨</span><span class="n">deg_le</span> <span class="n">R</span> <span class="n">n</span><span class="o">,</span><span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I has type <code>set S</code> for <code>S</code> a ring which is hence an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>-module and an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module. I want to prove a relatively straightforward theorem about a sub-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>. I could have proved it for sub-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>-modules but it's true for sub-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-modules so I have written it in the correct generality. Of course I now want to immediately apply it to a sub-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>-module and type class inference is going to struggle with that because there is some content there (the lemma that the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module structure on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span> is induced by a ring map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">R\to S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span> and hence any <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>-module is naturally an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module, and that all these <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module structures are the same). I also have a problem with intersections of submodules. I carry around the <em>sets</em>, because the proofs that they are submodules are known to type class inference. However when I want to construct their intersection using the lattice structure I find myself having to explicitly magic up the instances to turn the sets into modules. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> this is real-world module usage -- in general I want to know that if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> is a map of rings then a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>-module "is" an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module. It does not sound to me like this is appropriate for type class inference. Is it? If I have to make the instances explicitly then is this an indication that modules shouldn't be typeclasses at all, or that some other sort of rethink is needed?</p>
+
+<a name="134026366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026366">Mario Carneiro (Sep 15 2018 at 23:10)</a>:</h4>
+<p>I will not start on this until I've finished the current refactoring, but I think it is the right time to bring this up. I think that we should drop the out_param on the scalar field of a module. Downsides:</p>
+<p>1. <code>linear_map</code>, <code>submodule</code>, <code>module</code> and other such types will require an explicit ring argument<br>
+2. <code>a • x</code> will not typecheck if the type of <code>a</code> is not specified<br>
+3. <code>add_comm_group B</code> cannot be a parent of <code>module A B</code></p>
+<p>I think (1) is mainly a problem for notation, i.e. something like <code>M1 -&gt;l M2</code> won't work since you have to shove <code>R</code> in the notation somewhere. (2) is possibly a problem if we are leaving off the type in pis or such but I can't see it having a big effect. (3) is the biggest problem, since it will add to the things you have to say about modules in proofs, but I'm already testing this change with the current refactoring. Upsides:</p>
+<p>1. no more mysterious module typeclass timeout problems<br>
+2. no more questions about what to have implicit and what to have typeclass implicit<br>
+3. you can freely use modules over different rings, even in the same proof or statement<br>
+4. we can fill out the module typeclass hierarchy, rather than hiding some instances that have bad behavior like the endomorphism ring</p>
+<p>I think that on the whole the benefits outweigh the downsides. The contract of an out_param is that you should only have one instance for <code>module ? B</code> for fixed B. This is just not true in advanced math. Indeed it's false even in the most trivial case, since you can always restrict the ring to a subring. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thoughts?</p>
+
+<a name="134026520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026520">Kenny Lau (Sep 15 2018 at 23:16)</a>:</h4>
+<p>will it be finally possible to tell Lean that every abelian group is a Z-module? :D</p>
+
+<a name="134026534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026534">Mario Carneiro (Sep 15 2018 at 23:17)</a>:</h4>
+<p>yes</p>
+
+<a name="134026535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026535">Kenny Lau (Sep 15 2018 at 23:17)</a>:</h4>
+<p>yay</p>
+
+<a name="134026575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026575">Mario Carneiro (Sep 15 2018 at 23:18)</a>:</h4>
+<p>it is very similar to the removal of out_param for <code>^</code></p>
+
+<a name="134026583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134026583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134026583">Mario Carneiro (Sep 15 2018 at 23:19)</a>:</h4>
+<p>now we can have has_pow instances for <code>monoid, nat</code>, <code>group, int</code>, and <code>cardinal, cardinal</code> all at the same time</p>
+
+<a name="134027008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027008">Kevin Buzzard (Sep 15 2018 at 23:34)</a>:</h4>
+<p>I don't think I am competent enough to understand the ramifications of what you are suggesting, but I am all for changing things if you think it's a good idea, and will report back if I find any problems -- when things have settled down I will simply just go back to Hilbert and see what happens.</p>
+
+<a name="134027015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027015">Kevin Buzzard (Sep 15 2018 at 23:35)</a>:</h4>
+<p>All I can say is that I have now seen with my own eyes that I want subsets of M to be either A-submodules or B-submodules and I am happy to say which.</p>
+
+<a name="134027060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027060">Mario Carneiro (Sep 15 2018 at 23:36)</a>:</h4>
+<p>are you comfortable saying which in all circumstances, even when there is only one reasonable choice?</p>
+
+<a name="134027170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027170">Kevin Buzzard (Sep 15 2018 at 23:40)</a>:</h4>
+<p>I am going to say yes I'm happy doing this. It doesn't feel unnatural to say "R-submodule" everywhere even if there is only one ring R -- after all, the axioms for a submodule really do depend on R.</p>
+
+<a name="134027183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027183">Mario Carneiro (Sep 15 2018 at 23:41)</a>:</h4>
+<p>and now <code>ideal</code> actually has some work to do - <code>ideal of R</code> means <code>R-submodule of R</code></p>
+
+<a name="134027185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027185">Kevin Buzzard (Sep 15 2018 at 23:41)</a>:</h4>
+<p>Of course others might not be so happy but I think that even when I teach students about vector spaces over k I might even say "k-subspace" a lot.</p>
+
+<a name="134027225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027225">Kevin Buzzard (Sep 15 2018 at 23:42)</a>:</h4>
+<p>Oh but actually this is now better, because for ideals I would get annoyed.</p>
+
+<a name="134027226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027226">Kevin Buzzard (Sep 15 2018 at 23:42)</a>:</h4>
+<p>For ideals there's only one choice.</p>
+
+<a name="134027229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027229">Mario Carneiro (Sep 15 2018 at 23:42)</a>:</h4>
+<p>Although <code>subspace</code> is still being useless</p>
+
+<a name="134027238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134027238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134027238">Kevin Buzzard (Sep 15 2018 at 23:43)</a>:</h4>
+<p>but that's Ok I think. I like the sound of this.</p>
+
+<a name="134028228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134028228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134028228">Johannes Hölzl (Sep 16 2018 at 00:21)</a>:</h4>
+<p>I don't understand why <code>module A B</code> cannot have <code>add_comm_group</code> as parent? What is the problem?<br>
+For me Point 3 (a type often has multiple different modules for different rings) is the main reason. I think everything else could be worked around eventually (maybe in Lean 4). And it looks we were already running into problems with the field instance for vector spaces. So I think this is a very good change!</p>
+
+<a name="134038660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134038660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134038660">Mario Carneiro (Sep 16 2018 at 06:33)</a>:</h4>
+<p>If <code>module A B</code> requires both <code>A</code> and <code>B</code> before being synthesized, as would happen if <code>A</code> was no longer marked an out_param, but it had a parent coercion to <code>add_comm_group B</code>, then you could not resolve a goal like <code>has_zero B</code>. It would climb the hierarchy to <code>add_comm_group B</code>, but then the parent coercion <code>\all A B [ring A] [module A B], add_comm_group B</code> would not be triggered since <code>A</code> is not yet known. Indeed this is a classic example of an unusable instance, since it has dependencies that don't appear in the target type.</p>
+
+<a name="134045911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134045911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134045911">Ali Sever (Sep 16 2018 at 10:36)</a>:</h4>
+<p>Is there a place where I can find all the classes (like linear_order or module)? I think my distances are a semi module, but I don't know where they are, and they might even be something stronger.</p>
+
+<a name="134045961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134045961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134045961">Kevin Buzzard (Sep 16 2018 at 10:38)</a>:</h4>
+<p><code>git grep</code> says there are about 200 classes</p>
+
+<a name="134045966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134045966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134045966">Kevin Buzzard (Sep 16 2018 at 10:38)</a>:</h4>
+<p>but probably there's a bunch of false positives. What do you want to do with them now? Just look at them?</p>
+
+<a name="134046014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046014">Ali Sever (Sep 16 2018 at 10:40)</a>:</h4>
+<p>I don't think I could sift through 200</p>
+
+<a name="134046015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046015">Kevin Buzzard (Sep 16 2018 at 10:40)</a>:</h4>
+<p>If you're now assuming the parallel postulate then you can divide by a positive integer, so your distances are now probably a semi vector space over the semi field Q_{&gt;=0}. But I am not sure that these concepts exist or are useful</p>
+
+<a name="134046021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046021">Kevin Buzzard (Sep 16 2018 at 10:41)</a>:</h4>
+<p>Hmm, I guess <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">Q</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.85556em;vertical-align:-0.16667em;"></span><span class="base"><span class="mord"><span class="mord mathbb">Q</span></span></span></span></span> is a semi-module over <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">Q</mi><mo>+</mo></msup></mrow><annotation encoding="application/x-tex">\mathbb{Q}^+</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.771331em;"></span><span class="strut bottom" style="height:0.938001em;vertical-align:-0.16667em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">Q</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span></span></span></span> with no basis, so there will be no theorem of the form that every semimodule over <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">Q</mi><mo>+</mo></msup></mrow><annotation encoding="application/x-tex">\mathbb{Q}^+</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.771331em;"></span><span class="strut bottom" style="height:0.938001em;vertical-align:-0.16667em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">Q</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span></span></span></span></span></span></span></span> has a basis (in contrast to the theory of fields, where every vector space has a basi).</p>
+
+<a name="134046058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046058">Ali Sever (Sep 16 2018 at 10:42)</a>:</h4>
+<p>I have a linear_order, with a 0. My angles have a maximum in addition to that, but I plan to turn them into mod 360 (or 2*pi).</p>
+
+<a name="134046061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046061">Kevin Buzzard (Sep 16 2018 at 10:42)</a>:</h4>
+<p>Your angles currently are [0,180] basically, right? Or (0,180) or something.</p>
+
+<a name="134046067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046067">Ali Sever (Sep 16 2018 at 10:43)</a>:</h4>
+<p>inclusive, but I don't need to make those at the moment. But I would like to have a linear order and a minimum (which is 0).</p>
+
+<a name="134046108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046108">Kevin Buzzard (Sep 16 2018 at 10:45)</a>:</h4>
+<p>The point of this thread was for me to whinge about modules and ideals and things, but mathlib is currently undergoing a bit of a transition in the way it handles this stuff. So introducing semimodules into your work might mean that you have to rewrite later. As you might have seen from yesterday, there seems to be still some discussion about exactly how the semiring will be mentioned (or perhaps decisions have been made but not implemented yet).</p>
+
+<a name="134046156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046156">Ali Sever (Sep 16 2018 at 10:46)</a>:</h4>
+<p>Ok, I guess I'll just have a linear_order, and a theorem that says everything is bigger than 0.</p>
+
+<a name="134046163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/134046163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#134046163">Kevin Buzzard (Sep 16 2018 at 10:47)</a>:</h4>
+<p>well you can certainly have a linear order. I don't think looking through all of Lean trying to spot classes is the way to see what's there. I think you should look through mathlib, spot a directory or a file which looks relevant to you like <code>order/basic.lean</code> and then take a look at the types and typeclasses being used in that file. Right click on something like <code>preorder</code> to find where it's defined (a preorder is another example of something which is used a lot in Lean but which is hardly ever defined or used in a maths UG degree, we see partial orders but this is even weaker) and then just poke around. I just tried this and ending up finding my way to core Lean's <code>init/algebra/order.lean</code> very quickly. I think doing stuff like this can be pretty instructive.</p>
+
+<a name="147286411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/147286411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html#147286411">Kenny Lau (Nov 08 2018 at 10:02)</a>:</h4>
+<blockquote>
+<p>will it be finally possible to tell Lean that every abelian group is a Z-module? :D</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you think we're ready to teach Lean this fact?</p>
+
+
+{% endraw %}

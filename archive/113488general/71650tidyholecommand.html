@@ -1,0 +1,84 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71650tidyholecommand.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html">tidy hole command</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133272160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133272160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133272160">Johan Commelin (Sep 03 2018 at 19:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> The tidy hole command is really marvellous. Here are some trivialities that might give epsilon improvement:<br>
+(1) If <code>tidy</code> generates the proof <code>begin refl end</code>, generate <code>rfl</code> instead.<br>
+(2) If <code>tidy</code> generates the proof <code>begin exact foo end</code>, generate <code>foo</code> instead.</p>
+
+<a name="133276810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276810">Scott Morrison (Sep 03 2018 at 22:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, the first is impossible, or rather useless: Lean actually decides _in the parser_ whether you not you proved by <code>rfl</code>, rather than inspecting the proof term!</p>
+
+<a name="133276820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276820">Scott Morrison (Sep 03 2018 at 22:05)</a>:</h4>
+<p>But (2) will go on my todo list. (i.e. I'll leave your message starred :-)</p>
+
+<a name="133276825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276825">Johan Commelin (Sep 03 2018 at 22:05)</a>:</h4>
+<p>No, I mean that you inspect the string you are about to return.</p>
+
+<a name="133276866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276866">Johan Commelin (Sep 03 2018 at 22:06)</a>:</h4>
+<p>The hole command returns some string, and VScode substitutes that for the hole. Is that right?</p>
+
+<a name="133276869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276869">Scott Morrison (Sep 03 2018 at 22:06)</a>:</h4>
+<p>Ah, okay. Absolutely, I can do that.</p>
+
+<a name="133276870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276870">Johan Commelin (Sep 03 2018 at 22:06)</a>:</h4>
+<p>If that string is exactly <code>begin refl end</code>, then you might as well output <code>rfl</code> instead.</p>
+
+<a name="133276875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276875">Kenny Lau (Sep 03 2018 at 22:07)</a>:</h4>
+<p>by induction convert tactic proofs to term proofs</p>
+
+<a name="133276879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276879">Scott Morrison (Sep 03 2018 at 22:07)</a>:</h4>
+<p>I can also have "begin just_one_tactic end" into "by just_one_tactic".</p>
+
+<a name="133276880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276880">Patrick Massot (Sep 03 2018 at 22:07)</a>:</h4>
+<p>I think <code>refl</code> tries slightly harder than <code>rfl</code></p>
+
+<a name="133276882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276882">Johan Commelin (Sep 03 2018 at 22:07)</a>:</h4>
+<p>That's somewhere on the VScode extension wishlist</p>
+
+<a name="133276940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276940">Johan Commelin (Sep 03 2018 at 22:08)</a>:</h4>
+<blockquote>
+<p>I think <code>refl</code> tries slightly harder than <code>rfl</code></p>
+</blockquote>
+<p>Hmmm... that might be true. So maybe we need to slightly patch tidy, to first try <code>exact rfl</code>. Then (1) will be a special case of (2).</p>
+
+<a name="133276948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133276948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133276948">Johan Commelin (Sep 03 2018 at 22:09)</a>:</h4>
+<p>Anyway, this is not high priority stuff.</p>
+
+<a name="133277149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133277149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133277149">Chris Hughes (Sep 03 2018 at 22:14)</a>:</h4>
+<p><code>refl</code> works for any reflexive relation I think. <code>rfl</code> is just equality.</p>
+
+<a name="133277163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133277163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133277163">Patrick Massot (Sep 03 2018 at 22:15)</a>:</h4>
+<p>I think it also does more definitional reduction</p>
+
+<a name="133277646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20hole%20command/near/133277646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71650tidyholecommand.html#133277646">Chris Hughes (Sep 03 2018 at 22:29)</a>:</h4>
+<p>Can you give an example? If I prove something with <code>by refl</code>, the proof term is just <code>eq.refl _</code> which is <code>rfl</code></p>
+
+
+{% endraw %}

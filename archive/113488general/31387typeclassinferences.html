@@ -1,0 +1,100 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/31387typeclassinferences.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html">typeclass inferences</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124695237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695237">Kenny Lau (Apr 06 2018 at 01:23)</a>:</h4>
+<p><a href="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72">https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72</a><br>
+In L72 of this, I needed to type <code>@linear_map R M (Hom_R_Q_div_Z R) _ _ (Hom_R_Q_div_Z.module R)</code>, i.e. I needed to manually provide the proof term <code>Hom_R_Q_div_Z.module R</code> that <code>Hom_R_Q_div_Z R</code> is a module, despite it being attributed as <code>instance</code>. Why is this the case?</p>
+
+<a name="124695367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695367">Scott Morrison (Apr 06 2018 at 01:27)</a>:</h4>
+<p>When faced with this problem, I often try to write an example beforehand, which hopefully should summon the instance via <code>by apply_instance</code>, and see if I can get that working.</p>
+
+<a name="124695372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695372">Scott Morrison (Apr 06 2018 at 01:27)</a>:</h4>
+<p>If I can't I start worrying about universe levels, which in my experience is a very common cause of typeclass inference failing.</p>
+
+<a name="124695410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695410">Scott Morrison (Apr 06 2018 at 01:28)</a>:</h4>
+<p>(I haven't actually looked at your example.)</p>
+
+<a name="124695678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695678">Scott Morrison (Apr 06 2018 at 01:37)</a>:</h4>
+<p>Having quickly looked at your example, I'd suggest trying to restrict to the case where the ring and the module live in the same universe.</p>
+
+<a name="124695682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695682">Kenny Lau (Apr 06 2018 at 01:37)</a>:</h4>
+<p>hmm, would that break generality?</p>
+
+<a name="124695722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695722">Kenny Lau (Apr 06 2018 at 01:38)</a>:</h4>
+<p><code>linear_map</code> accepts three universes</p>
+
+<a name="124695723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695723">Scott Morrison (Apr 06 2018 at 01:38)</a>:</h4>
+<p>Yeah... but that's maybe dangerous as well.</p>
+
+<a name="124695729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695729">Kenny Lau (Apr 06 2018 at 01:38)</a>:</h4>
+<p>so other universes don't have enough injectives lol</p>
+
+<a name="124695730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695730">Scott Morrison (Apr 06 2018 at 01:39)</a>:</h4>
+<p>at least check if this solves the inference problem</p>
+
+<a name="124695735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695735">Scott Morrison (Apr 06 2018 at 01:39)</a>:</h4>
+<p>If it doesn't then it's irrelevant. If it does, it's probably time to consult Mario for advice.</p>
+
+<a name="124695736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695736">Scott Morrison (Apr 06 2018 at 01:39)</a>:</h4>
+<p>(One can always <code>ulift</code> when you don't have enough universe polymorphism, and sometimes this is the better option.)</p>
+
+<a name="124695738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695738">Kenny Lau (Apr 06 2018 at 01:39)</a>:</h4>
+<p>it doesn't</p>
+
+<a name="124695782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695782">Scott Morrison (Apr 06 2018 at 01:40)</a>:</h4>
+<p>Oh well!</p>
+
+<a name="124695794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695794">Scott Morrison (Apr 06 2018 at 01:40)</a>:</h4>
+<p>try replacing the points where you explicitly provide the instances with <code>by apply_instance</code>, and then set <code>pp.all</code></p>
+
+<a name="124695869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695869">Kenny Lau (Apr 06 2018 at 01:43)</a>:</h4>
+<p>wait what</p>
+
+<a name="124695981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695981">Kenny Lau (Apr 06 2018 at 01:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> once I removed L67-69, everything worked</p>
+
+<a name="124695982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124695982">Kenny Lau (Apr 06 2018 at 01:46)</a>:</h4>
+<p>except the fact that i of course need those lines</p>
+
+<a name="124697691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124697691">Kenny Lau (Apr 06 2018 at 02:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> any idea? In <a href="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72">here</a>, I need <code> Hom_R_Q_div_Z.module R </code> to tell Lean that <code> Hom_R_Q_div_Z R </code> is a module, but once I remove L67-69, it is no longer necessary</p>
+
+<a name="124697743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124697743">Kenny Lau (Apr 06 2018 at 02:46)</a>:</h4>
+<p>I suspect it is because of the <code> injective.to_module </code></p>
+
+<a name="124697747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html#124697747">Kenny Lau (Apr 06 2018 at 02:46)</a>:</h4>
+<p>interfering with the typeclass resolutions</p>
+
+
+{% endraw %}

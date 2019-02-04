@@ -1,0 +1,114 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/23855ccfailure.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html">cc failure</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126654388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654388">Reid Barton (May 16 2018 at 19:03)</a>:</h4>
+<p>Is this a bug?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x1</span> <span class="n">x2</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x1</span> <span class="bp">=</span> <span class="n">x2</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">y&#39;</span><span class="o">,</span> <span class="n">p</span> <span class="n">y&#39;</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="n">y&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hp</span><span class="o">,</span> <span class="c1">-- ⊢ (x2, y) = (x1, y)</span>
+  <span class="n">cc</span>                          <span class="c1">-- cc tactic failed</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="126654522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654522">Reid Barton (May 16 2018 at 19:06)</a>:</h4>
+<p>(I know the lemma and proof are strange, this is a minimized version of some real code)</p>
+
+<a name="126654615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654615">Reid Barton (May 16 2018 at 19:08)</a>:</h4>
+<p>It seems that <code>cc</code> doesn't recognize that the <code>y</code>s are equal because one of them was created by substituting for a metavariable, or something.</p>
+
+<a name="126654631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654631">Kenny Lau (May 16 2018 at 19:09)</a>:</h4>
+<p><code>subst h</code></p>
+
+<a name="126654692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654692">Reid Barton (May 16 2018 at 19:10)</a>:</h4>
+<p>I observed this a few days ago as well, but in a setting which was too hard to minimize.</p>
+
+<a name="126654713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654713">Kenny Lau (May 16 2018 at 19:11)</a>:</h4>
+<p>try <code>set_option pp.all true</code></p>
+
+<a name="126654714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654714">Chris Hughes (May 16 2018 at 19:11)</a>:</h4>
+<blockquote>
+<p><code>subst h</code></p>
+</blockquote>
+<p><code>rw h</code></p>
+
+<a name="126654717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654717">Reid Barton (May 16 2018 at 19:11)</a>:</h4>
+<p>stop!</p>
+
+<a name="126654798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654798">Chris Hughes (May 16 2018 at 19:13)</a>:</h4>
+<p>this works</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x1</span> <span class="n">x2</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x1</span> <span class="bp">=</span> <span class="n">x2</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">y&#39;</span><span class="o">,</span> <span class="n">p</span> <span class="n">y&#39;</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="n">y&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">hp</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">cc</span><span class="o">,</span>
+  <span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>So it seems like a bug.</p>
+
+<a name="126654801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654801">Kenny Lau (May 16 2018 at 19:13)</a>:</h4>
+<p><code>by cc</code></p>
+
+<a name="126654812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654812">Reid Barton (May 16 2018 at 19:13)</a>:</h4>
+<p>Yeah, changing <code>cc</code> to <code>exact by cc</code> works also</p>
+
+<a name="126654831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654831">Reid Barton (May 16 2018 at 19:14)</a>:</h4>
+<p>(And also in my real code.)</p>
+
+<a name="126654862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654862">Chris Hughes (May 16 2018 at 19:14)</a>:</h4>
+<p>It's to do with the metavariable</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x1</span> <span class="n">x2</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x1</span> <span class="bp">=</span> <span class="n">x2</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">y&#39;</span><span class="o">,</span> <span class="n">p</span> <span class="n">y&#39;</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="n">y&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x1</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">existsi</span> <span class="n">y</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hp</span><span class="o">,</span> <span class="c1">-- ⊢ (x2, y) = (x1, y)</span>
+  <span class="n">cc</span>                          <span class="c1">-- cc tactic failed</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>works</p>
+
+<a name="126654867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654867">Kenny Lau (May 16 2018 at 19:14)</a>:</h4>
+<p>I thought <code>exact hp</code> unified the metavariable</p>
+
+<a name="126654875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654875">Reid Barton (May 16 2018 at 19:14)</a>:</h4>
+<p>It does. That's what makes this so confusing.</p>
+
+<a name="126654908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654908">Reid Barton (May 16 2018 at 19:15)</a>:</h4>
+<p>The displayed proof state is exactly the same whether you write <code>existsi _</code> or <code>existsi y</code></p>
+
+<a name="126654948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23855ccfailure.html#126654948">Reid Barton (May 16 2018 at 19:16)</a>:</h4>
+<p>but <code>cc</code> only works in the second case</p>
+
+
+{% endraw %}

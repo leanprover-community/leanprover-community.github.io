@@ -1,0 +1,83 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/27988reasoningaboutemptysetinlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html">reasoning about empty set in lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="150729616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729616">Marcus Klaas (Dec 02 2018 at 18:09)</a>:</h4>
+<p>Hi y'all. Sorry to bother again. I'm having trouble working with the empty set. Specifically, I'd like to prove that a set is not empty whenever I can produce a concrete element of it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">}</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>but so far, I haven't been successful. What can I do here?</p>
+
+<a name="150729661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729661">Rob Lewis (Dec 02 2018 at 18:10)</a>:</h4>
+<p><code>set.ne_empty_of_mem</code> will probably be helpful!</p>
+
+<a name="150729662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729662">Rob Lewis (Dec 02 2018 at 18:10)</a>:</h4>
+<p>You'll have to import <code>data.set.basic</code> from mathlib.</p>
+
+<a name="150729664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729664">Marcus Klaas (Dec 02 2018 at 18:10)</a>:</h4>
+<p>Thanks! I will try it.</p>
+
+<a name="150729714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729714">Kenny Lau (Dec 02 2018 at 18:12)</a>:</h4>
+<p>no import needed :)</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">}</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="o">(</span><span class="n">congr_fun</span> <span class="n">H</span> <span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="150729721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729721">Kevin Buzzard (Dec 02 2018 at 18:13)</a>:</h4>
+<p>...says the person with over 1 year's Lean experience ;-)</p>
+
+<a name="150729723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729723">Kevin Buzzard (Dec 02 2018 at 18:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">}</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">ne_empty_iff_exists_mem</span><span class="o">,</span>
+  <span class="n">use</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- refl doesn&#39;t work!</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="150729730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729730">Kevin Buzzard (Dec 02 2018 at 18:14)</a>:</h4>
+<p><code>refl</code> is really bad at set membership.</p>
+
+<a name="150729783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729783">Kevin Buzzard (Dec 02 2018 at 18:15)</a>:</h4>
+<p><code>example (a : ℕ) : a ∈ {x : ℕ | x = a} := by refl -- fails </code></p>
+
+<a name="150729785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729785">Reid Barton (Dec 02 2018 at 18:15)</a>:</h4>
+<p>I wonder whether we could fool it into working somehow</p>
+
+<a name="150729786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729786">Marcus Klaas (Dec 02 2018 at 18:15)</a>:</h4>
+<p>Hmmm I don't seem to have the mathlib tho.. <del>can I install it using elan?</del> I have found a way to do it ^^</p>
+
+<a name="150729787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729787">Reid Barton (Dec 02 2018 at 18:15)</a>:</h4>
+<p>basically by adding what Kevin just wrote as a <code>relfexivity</code> lemma</p>
+
+<a name="150729838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reasoning%20about%20empty%20set%20in%20lean/near/150729838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27988reasoningaboutemptysetinlean.html#150729838">Kevin Buzzard (Dec 02 2018 at 18:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="143658">@Marcus Klaas</span> mathlib is great. It's not just for mathematicians. It has a bunch of useful tactics in, and a whole host of useful data structures. If you work with Lean projects (as I do -- all my files, even scratch files, are within a Lean project) then you can just make mathlib a dependency for that project and then <code>leanpkg upgrade</code> will download mathlib.</p>
+
+
+{% endraw %}

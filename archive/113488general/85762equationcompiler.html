@@ -1,0 +1,224 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/85762equationcompiler.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html">equation compiler</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130222550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222550">Minchao Wu (Jul 24 2018 at 18:56)</a>:</h4>
+<p>Hi friends, is there a way to fill up this underscore?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">n</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">k</span>     <span class="o">:=</span> <span class="k">have</span> <span class="n">k</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span>
+           <span class="mi">0</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Usually <code>n</code> is of some complicated inductive types, but I really just need to handle one specific constructor. For all the other constructors the proofs are long but exactly the same.  <br>
+I could use <code>rec</code> or <code>cases</code> or <code>if then else</code> but that would be awkward. So I am wondering how I can refer to the facts that the equation compiler knows but are not listed as hypotheses?</p>
+
+<a name="130222560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222560">Kenny Lau (Jul 24 2018 at 18:56)</a>:</h4>
+<p>use k+1 instead of k</p>
+
+<a name="130222573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222573">Minchao Wu (Jul 24 2018 at 18:57)</a>:</h4>
+<p>that works in the case of nat but not other complicated inductive types</p>
+
+<a name="130222582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222582">Kenny Lau (Jul 24 2018 at 18:57)</a>:</h4>
+<p>then you can't</p>
+
+<a name="130222696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222696">Minchao Wu (Jul 24 2018 at 18:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">tt</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">b</span>     <span class="o">:=</span> <span class="k">have</span> <span class="n">b</span> <span class="bp">≠</span> <span class="n">tt</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>well maybe this one is a better toy example</p>
+
+<a name="130222747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222747">Kenny Lau (Jul 24 2018 at 19:00)</a>:</h4>
+<p>you can't.</p>
+
+<a name="130222758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222758">Minchao Wu (Jul 24 2018 at 19:00)</a>:</h4>
+<p>reason?</p>
+
+<a name="130222768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222768">Kenny Lau (Jul 24 2018 at 19:00)</a>:</h4>
+<p>in that environment you do not know that b is not tt</p>
+
+<a name="130222788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222788">Kenny Lau (Jul 24 2018 at 19:01)</a>:</h4>
+<p>also how do you use <code>rec</code> or <code>cases</code>?</p>
+
+<a name="130222792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222792">Minchao Wu (Jul 24 2018 at 19:01)</a>:</h4>
+<p>but the equation compiler knows that if it's tt then the thing is not exhaustive</p>
+
+<a name="130222798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222798">Kenny Lau (Jul 24 2018 at 19:01)</a>:</h4>
+<p>the <code>b</code> is a catch-all clause</p>
+
+<a name="130222801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222801">Kenny Lau (Jul 24 2018 at 19:01)</a>:</h4>
+<p>it is intended to match everything</p>
+
+<a name="130222804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222804">Minchao Wu (Jul 24 2018 at 19:01)</a>:</h4>
+<p>that's true</p>
+
+<a name="130222864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222864">Minchao Wu (Jul 24 2018 at 19:02)</a>:</h4>
+<p>I am saying that the compiler knows that tt will never be matched by b</p>
+
+<a name="130222869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222869">Kenny Lau (Jul 24 2018 at 19:02)</a>:</h4>
+<p>but that's already outside your environment</p>
+
+<a name="130222890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222890">Minchao Wu (Jul 24 2018 at 19:03)</a>:</h4>
+<p>perhaps, so I am asking if there is a clever hack</p>
+
+<a name="130222892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222892">Kenny Lau (Jul 24 2018 at 19:03)</a>:</h4>
+<p>what was your idea with <code>rec</code> and <code>cases</code>?</p>
+
+<a name="130222941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222941">Minchao Wu (Jul 24 2018 at 19:04)</a>:</h4>
+<blockquote>
+<p>also how do you use <code>rec</code> or <code>cases</code>?</p>
+</blockquote>
+<p>you just don't use <code>match</code></p>
+
+<a name="130222950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222950">Kenny Lau (Jul 24 2018 at 19:04)</a>:</h4>
+<blockquote>
+<p>that works in the case of nat but not other complicated inductive types</p>
+</blockquote>
+<p>does using <code>rec</code> solve this problem?</p>
+
+<a name="130222965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222965">Minchao Wu (Jul 24 2018 at 19:05)</a>:</h4>
+<p>it's the same as your suggestion of using <code>(k+1)</code></p>
+
+<a name="130222983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130222983">Minchao Wu (Jul 24 2018 at 19:05)</a>:</h4>
+<p>namely explicitly writing down all the constructors</p>
+
+<a name="130224157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224157">Simon Hudon (Jul 24 2018 at 19:28)</a>:</h4>
+<p>What you could do is:</p>
+<div class="codehilite"><pre><span></span>begin
+  cases n,
+  case 0 :
+  { /- proof -/ },
+  all_goals { /- proof -/ },
+end
+</pre></div>
+
+<a name="130224169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224169">Kenny Lau (Jul 24 2018 at 19:28)</a>:</h4>
+<p>but how are you going to prove n != 0?</p>
+
+<a name="130224343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224343">Johan Commelin (Jul 24 2018 at 19:31)</a>:</h4>
+<p>I think that you don't have to.</p>
+
+<a name="130224351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224351">Johan Commelin (Jul 24 2018 at 19:31)</a>:</h4>
+<p>That is Simon's trick.</p>
+
+<a name="130224422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224422">Johan Commelin (Jul 24 2018 at 19:32)</a>:</h4>
+<p>You just prove it case by case, for all cases. But then, you prove all but one case with a single proof.</p>
+
+<a name="130224489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224489">Minchao Wu (Jul 24 2018 at 19:33)</a>:</h4>
+<p>I forgot to mention that foll all the other cases I need the fact that n!=0</p>
+
+<a name="130224536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224536">Minchao Wu (Jul 24 2018 at 19:34)</a>:</h4>
+<p>but this trick might work</p>
+
+<a name="130224585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224585">Johan Commelin (Jul 24 2018 at 19:35)</a>:</h4>
+<p>Right, so now you somehow need to know that fact, but now it should be even true in your environment (I hope).</p>
+
+<a name="130224590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130224590">Simon Hudon (Jul 24 2018 at 19:35)</a>:</h4>
+<p>Off the top of my head, <code>cases h : n</code> will preserve the variable n and you can do your proof with <code>subst n</code> and <code>contradiction</code></p>
+
+<a name="130225161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225161">Simon Hudon (Jul 24 2018 at 19:44)</a>:</h4>
+<p>concretely, here is how I do it:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="mi">0</span> <span class="o">},</span>
+  <span class="n">all_goals</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">subst</span> <span class="n">n</span><span class="o">,</span> <span class="n">contradiction</span> <span class="o">},</span>
+    <span class="n">exact</span> <span class="n">n</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="130225220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225220">Simon Hudon (Jul 24 2018 at 19:45)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="130225363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225363">Minchao Wu (Jul 24 2018 at 19:47)</a>:</h4>
+<p>when you use <code>cases 0:</code> to handle the specific constructor, how do you supply the arguments to that constructor?</p>
+
+<a name="130225389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225389">Minchao Wu (Jul 24 2018 at 19:47)</a>:</h4>
+<p>in the case of nat there is no parameters</p>
+
+<a name="130225432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225432">Simon Hudon (Jul 24 2018 at 19:48)</a>:</h4>
+<p>(note that it's <code>case nat.zero :</code>, no s, and full constructor name)</p>
+
+<a name="130225455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130225455">Simon Hudon (Jul 24 2018 at 19:48)</a>:</h4>
+<p>if we were looking at a list for instance, it would be <code>case list.cons : x xs { /- my proof -/ }</code></p>
+
+<a name="130226138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130226138">Minchao Wu (Jul 24 2018 at 19:59)</a>:</h4>
+<p>Very cool, it worked</p>
+
+<a name="130226143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130226143">Minchao Wu (Jul 24 2018 at 19:59)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="130226210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130226210">Minchao Wu (Jul 24 2018 at 20:00)</a>:</h4>
+<p>I wasn't aware of the <code>case</code> tatic</p>
+
+<a name="130226238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130226238">Simon Hudon (Jul 24 2018 at 20:00)</a>:</h4>
+<p>The more you know <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="130226248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130226248">Minchao Wu (Jul 24 2018 at 20:00)</a>:</h4>
+<p>I'm going to embrace it from now on :)</p>
+
+<a name="130244135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130244135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html#130244135">Nicholas Scheel (Jul 25 2018 at 01:14)</a>:</h4>
+<p>(deleted)</p>
+
+
+{% endraw %}

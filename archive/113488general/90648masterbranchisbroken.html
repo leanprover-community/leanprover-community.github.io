@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/90648masterbranchisbroken.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html">master branch is broken</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135340328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340328">Scott Morrison (Oct 07 2018 at 08:07)</a>:</h4>
+<p>Ugh, <code>master</code> is broken in mathlib.</p>
+
+<a name="135340329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340329">Scott Morrison (Oct 07 2018 at 08:07)</a>:</h4>
+<div class="codehilite"><pre><span></span>arguta:mathlib scott$ git status
+On branch master
+Your branch is up-to-date with &#39;origin/master&#39;.
+
+nothing to commit, working tree clean
+arguta:mathlib scott$ lean --make tests/tactics.lean
+/Users/scott/projects/lean/mathlib/tests/tactics.lean:641:2: error: is_def_eq tactic failed, the following expressions are not definitionally equal (remark: is_def_eq tactic does modify the metavariable assignment)
+  p : Prop
+and
+  s : Prop
+state:
+p q r s : Prop,
+h₀ : p ↔ q,
+h₁ : q ↔ r,
+h₂ : r ↔ s
+⊢ p ↔ s
+</pre></div>
+
+<a name="135340330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340330">Scott Morrison (Oct 07 2018 at 08:07)</a>:</h4>
+<p>(I spent 20 minutes trying to work out how my branch had broken something, before realising it wasn't my fault.)</p>
+
+<a name="135340368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340368">Simon Hudon (Oct 07 2018 at 08:08)</a>:</h4>
+<p>My bad. we should comment out those tests while I'm fixing that tactic</p>
+
+<a name="135340518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340518">Simon Hudon (Oct 07 2018 at 08:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can you comment out these test cases please?</p>
+
+<a name="135340525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340525">Mario Carneiro (Oct 07 2018 at 08:15)</a>:</h4>
+<p>eh, can you PR it? It takes me an hour to move to and from <code>module</code> branch</p>
+
+<a name="135340729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html#135340729">Simon Hudon (Oct 07 2018 at 08:22)</a>:</h4>
+<p>Here you go: <a href="https://github.com/leanprover/mathlib/pull/398" target="_blank" title="https://github.com/leanprover/mathlib/pull/398">https://github.com/leanprover/mathlib/pull/398</a></p>
+
+
+{% endraw %}

@@ -1,0 +1,606 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53478naturalnumberhell.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html">natural number hell</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126580412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580412">Patrick Massot (May 15 2018 at 09:56)</a>:</h4>
+<p>I want to use <code>big.map</code> once I have the <code>map</code></p>
+
+<a name="126580421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580421">Patrick Massot (May 15 2018 at 09:57)</a>:</h4>
+<p>I should push something so that you can see the context</p>
+
+<a name="126580423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580423">Mario Carneiro (May 15 2018 at 09:57)</a>:</h4>
+<p>and then the <code>f</code> will be applied to the functions P and F... then what?</p>
+
+<a name="126580473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580473">Patrick Massot (May 15 2018 at 09:58)</a>:</h4>
+<p><a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L343" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L343">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L343</a></p>
+
+<a name="126580484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580484">Mario Carneiro (May 15 2018 at 09:59)</a>:</h4>
+<p>wait, so you want the function <code>f</code> to be <code>i |-&gt; a+b-i</code>?</p>
+
+<a name="126580489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580489">Mario Carneiro (May 15 2018 at 09:59)</a>:</h4>
+<p>then why are you mapping with something else in the lemma?</p>
+
+<a name="126580551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580551">Patrick Massot (May 15 2018 at 10:01)</a>:</h4>
+<p>The problem is <code>reverse_range'</code> is about your <code>range'</code>, with start and length, and my goal is to have the maths range', with start and end</p>
+
+<a name="126580614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580614">Mario Carneiro (May 15 2018 at 10:03)</a>:</h4>
+<p>Think of the problem in reverse. You want the theorem to say <code>a+b-i</code> at the end, so you want <code>f</code> to be <code>\lam i, a+b-i</code> when you apply <code>big.map</code>; the reverse theorem just adds a <code>list.reverse</code> on the set. So you should be proving <code>reverse (range' a b) = map (λ i, a+b-i) (range' a b)</code></p>
+
+<a name="126580663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580663">Mario Carneiro (May 15 2018 at 10:04)</a>:</h4>
+<p>that is, without any algebraic rearrangement this is exactly what you need to fill the gap in the proof. Right?</p>
+
+<a name="126580668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580668">Patrick Massot (May 15 2018 at 10:05)</a>:</h4>
+<p>Maybe I did so many detours I forgot the goal on the road</p>
+
+<a name="126580776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580776">Patrick Massot (May 15 2018 at 10:08)</a>:</h4>
+<p>It seems I still need <code>a + (b + 1 - a) - i = a + b - i</code> (still assuming <code>i ∈ range' a (b + 1 - a)</code>)</p>
+
+<a name="126580783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580783">Mario Carneiro (May 15 2018 at 10:09)</a>:</h4>
+<p>that's easy though, it is one of the <code>add_sub</code> theorems</p>
+
+<a name="126580785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580785">Patrick Massot (May 15 2018 at 10:09)</a>:</h4>
+<p>I think we already saw that one</p>
+
+<a name="126580824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580824">Mario Carneiro (May 15 2018 at 10:10)</a>:</h4>
+<p><code>nat.add_sub_cancel'</code>, which requires <code>a &lt;= b + 1</code></p>
+
+<a name="126580852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580852">Mario Carneiro (May 15 2018 at 10:11)</a>:</h4>
+<p>Note that your assumption is sufficient to prove this, but only in a circuitous fashion, do you have any more direct evidence that <code>a &lt;= b+1</code>?</p>
+
+<a name="126580897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580897">Patrick Massot (May 15 2018 at 10:12)</a>:</h4>
+<p>wait</p>
+
+<a name="126580898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580898">Mario Carneiro (May 15 2018 at 10:12)</a>:</h4>
+<p>wait</p>
+
+<a name="126580899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580899">Mario Carneiro (May 15 2018 at 10:13)</a>:</h4>
+<p>your theorem is nonsense</p>
+
+<a name="126580904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580904">Patrick Massot (May 15 2018 at 10:13)</a>:</h4>
+<p>your theorem is nonsense</p>
+
+<a name="126580905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580905">Patrick Massot (May 15 2018 at 10:13)</a>:</h4>
+<p><code>reverse (range' a b) = map (λ i, a+b-i) (range' a b)</code> is not true</p>
+
+<a name="126580910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580910">Patrick Massot (May 15 2018 at 10:13)</a>:</h4>
+<p>I changed all statements so many times...</p>
+
+<a name="126580927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580927">Mario Carneiro (May 15 2018 at 10:14)</a>:</h4>
+<p>I'm rather confused by the dual use of <code>range'</code> btw, could you give it another name? <code>range''</code> maybe?</p>
+
+<a name="126580953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580953">Patrick Massot (May 15 2018 at 10:14)</a>:</h4>
+<p>You mean in the name of <code>reverse_range'</code>?</p>
+
+<a name="126580963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580963">Mario Carneiro (May 15 2018 at 10:15)</a>:</h4>
+<p>I mean <code>range' a b = [a, ..., b]</code> vs <code>range' a b = [a, ..., a+b]</code></p>
+
+<a name="126580968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580968">Mario Carneiro (May 15 2018 at 10:15)</a>:</h4>
+<p>pretty sure both functions are being called <code>range'</code></p>
+
+<a name="126580970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580970">Patrick Massot (May 15 2018 at 10:15)</a>:</h4>
+<p>I don't redefine range'</p>
+
+<a name="126580973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580973">Mario Carneiro (May 15 2018 at 10:15)</a>:</h4>
+<p>What is your definition?</p>
+
+<a name="126580974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126580974">Patrick Massot (May 15 2018 at 10:16)</a>:</h4>
+<p>I use your range'</p>
+
+<a name="126581016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581016">Mario Carneiro (May 15 2018 at 10:16)</a>:</h4>
+<p>oh I see</p>
+
+<a name="126581018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581018">Patrick Massot (May 15 2018 at 10:16)</a>:</h4>
+<p>But always in <code>range' a (b+1-a)</code></p>
+
+<a name="126581019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581019">Mario Carneiro (May 15 2018 at 10:16)</a>:</h4>
+<p>In that case I need to state the theorem above with your bounds</p>
+
+<a name="126581022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581022">Mario Carneiro (May 15 2018 at 10:16)</a>:</h4>
+<p><code>reverse (range' a (b+1-a)) = map (λ i, a+b-i) (range' a (b+1-a))</code></p>
+
+<a name="126581026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581026">Patrick Massot (May 15 2018 at 10:17)</a>:</h4>
+<p>yes, this is correct</p>
+
+<a name="126581030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581030">Patrick Massot (May 15 2018 at 10:17)</a>:</h4>
+<p>(not that I can prove it, but I can check it on examples)</p>
+
+<a name="126581093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581093">Patrick Massot (May 15 2018 at 10:19)</a>:</h4>
+<p>But I wanted to deduce it from a version involving only  <code>range' a b</code> in LHS</p>
+
+<a name="126581097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581097">Patrick Massot (May 15 2018 at 10:19)</a>:</h4>
+<p>hence the "arithmetic" trouble</p>
+
+<a name="126581150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581150">Patrick Massot (May 15 2018 at 10:20)</a>:</h4>
+<p>But indeed this is the statement which makes <code>big.range_anti_mph</code> trivial to prove from the previous results</p>
+
+<a name="126581152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581152">Mario Carneiro (May 15 2018 at 10:20)</a>:</h4>
+<p>Well, there are a lot of free endpoints in the reverse theorem, maybe you need to generalize it?</p>
+
+<a name="126581159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581159">Patrick Massot (May 15 2018 at 10:21)</a>:</h4>
+<p>what reverse theorem?</p>
+
+<a name="126581276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581276">Mario Carneiro (May 15 2018 at 10:24)</a>:</h4>
+<p>I'm thinking:</p>
+<div class="codehilite"><pre><span></span>reverse (range&#39; a (n + 1)) = map (λ i, c-i) (range&#39; b (n + 1))
+</pre></div>
+
+
+<p>subject to an equation relating a,b,c</p>
+
+<a name="126581305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581305">Mario Carneiro (May 15 2018 at 10:25)</a>:</h4>
+<p>Actually I think we need another generalization of <code>range'</code> that varies the step too</p>
+
+<a name="126581346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581346">Mario Carneiro (May 15 2018 at 10:26)</a>:</h4>
+<p>that would make this easy</p>
+
+<a name="126581425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581425">Patrick Massot (May 15 2018 at 10:28)</a>:</h4>
+<p>I need to go to my office, but the situation improved a lot: <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L335-L341" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L335-L341">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L335-L341</a> Thank you very much</p>
+
+<a name="126581440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126581440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126581440">Patrick Massot (May 15 2018 at 10:29)</a>:</h4>
+<p>I hope I'll be able to prove that last missing lemma later if you don't have time to do it properly</p>
+
+<a name="126582724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126582724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126582724">Mario Carneiro (May 15 2018 at 11:07)</a>:</h4>
+<p>I did it properly. Here are the lemmas I added:</p>
+<div class="codehilite"><pre><span></span>theorem map_add_range&#39; (a) : ∀ s n : ℕ, map ((+) a) (range&#39; s n) = range&#39; (a + s) n
+| s 0     := rfl
+| s (n+1) := congr_arg (cons _) (map_add_range&#39; (s+1) n)
+
+theorem range_succ_eq_map (n : ℕ) : range (n + 1) = 0 :: map succ (range n) :=
+by rw [range_eq_range&#39;, range_eq_range&#39;, range&#39;,
+       add_comm, ← map_add_range&#39;];
+   congr; exact funext one_add
+
+theorem reverse_range&#39; : ∀ s n : ℕ,
+  reverse (range&#39; s n) = map (λ i, s + n - 1 - i) (range n)
+| s 0     := rfl
+| s (n+1) := by rw [range&#39;_concat, reverse_append, range_succ_eq_map];
+  simpa [show s + (n + 1) - 1 = s + n, from rfl, (∘),
+    λ a i, show a - 1 - i = a - succ i,
+    by rw [nat.sub_sub, add_comm]; refl]
+  using reverse_range&#39; s n
+</pre></div>
+
+<a name="126584480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126584480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126584480">Patrick Massot (May 15 2018 at 11:58)</a>:</h4>
+<p>Thank you Mario! I already had the first one at <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L126" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L126">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L126</a></p>
+
+<a name="126584495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126584495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126584495">Patrick Massot (May 15 2018 at 11:58)</a>:</h4>
+<p>Maybe I should learn to do induction using pattern matching</p>
+
+<a name="126602871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126602871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126602871">Patrick Massot (May 15 2018 at 19:42)</a>:</h4>
+<p>I read too quickly, I thought you proved the lemma I needed</p>
+
+<a name="126602882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126602882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126602882">Patrick Massot (May 15 2018 at 19:43)</a>:</h4>
+<p>But your RHS doesn't even contains <code>range'</code></p>
+
+<a name="126602935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126602935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126602935">Patrick Massot (May 15 2018 at 19:44)</a>:</h4>
+<p>Proving the lemma I stated from what you proved seems to be as much work as a direct proof, no?</p>
+
+<a name="126610298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126610298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126610298">Mario Carneiro (May 15 2018 at 22:20)</a>:</h4>
+<p>You still have some algebra before you get to the exact version you need, but you can put <code>reverse_range'</code>, <code>range_eq_range'</code>, <code>map_add_range'</code> and <code>map_map</code> together and then do some algebra</p>
+
+<a name="126610881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126610881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126610881">Mario Carneiro (May 15 2018 at 22:34)</a>:</h4>
+<div class="codehilite"><pre><span></span>theorem range&#39;_eq_map_range (s n : ℕ) : range&#39; s n = map ((+) s) (range n) :=
+by rw [range_eq_range&#39;, map_add_range&#39;]; refl
+
+example (a b : ℕ) : reverse (range&#39; a (b+1-a)) = map (λ i, a+b-i) (range&#39; a (b+1-a)) :=
+begin
+  rw [reverse_range&#39;, range&#39;_eq_map_range, map_map],
+  apply map_congr, intros i H,
+  simp at *,
+  rw [nat.add_sub_add_left, nat.add_sub_cancel&#39;], {refl},
+  refine (le_total _ _).resolve_left (λ h, _),
+  rw sub_eq_zero_of_le h at H,
+  exact not_lt_zero _ H
+end
+</pre></div>
+
+<a name="126613014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613014">Patrick Massot (May 15 2018 at 23:22)</a>:</h4>
+<p>Thank you very much Mario! I'm still not convinced this is simpler than a direct attack on this lemma, but I very much relieved to have it.</p>
+
+<a name="126613022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613022">Patrick Massot (May 15 2018 at 23:22)</a>:</h4>
+<p>What is this <code>resolve_left</code> thing?</p>
+
+<a name="126613109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613109">Patrick Massot (May 15 2018 at 23:24)</a>:</h4>
+<p>The state at the point where you write this, <code>a b i : ℕ,
+H : i &lt; b + 1 - a
+⊢ b + 1 ≥ a</code> is typically something that could have led me to harm my computer.</p>
+
+<a name="126613166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613166">Patrick Massot (May 15 2018 at 23:25)</a>:</h4>
+<p>I also note that you used <code>simp at *</code> in the middle of a proof. Isn't this frowned upon according to mathlib's docs?</p>
+
+<a name="126613168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613168">Mario Carneiro (May 15 2018 at 23:25)</a>:</h4>
+<p>That's actually a really subtle thing, it wouldn't work if it was <code>i &lt;= b+1-a</code></p>
+
+<a name="126613248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613248">Patrick Massot (May 15 2018 at 23:26)</a>:</h4>
+<p>What do you mean it wouldn't work? The statement would still be true, right?</p>
+
+<a name="126613250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613250">Mario Carneiro (May 15 2018 at 23:26)</a>:</h4>
+<p>no</p>
+
+<a name="126613267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613267">Patrick Massot (May 15 2018 at 23:27)</a>:</h4>
+<p>This is crazy</p>
+
+<a name="126613279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613279">Mario Carneiro (May 15 2018 at 23:27)</a>:</h4>
+<p>if i is zero then b+1 could be less than a</p>
+
+<a name="126613341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613341">Patrick Massot (May 15 2018 at 23:28)</a>:</h4>
+<p>Did I mentioned I hate this substraction?</p>
+
+<a name="126613362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613362">Mario Carneiro (May 15 2018 at 23:28)</a>:</h4>
+<p>the argument is basically that when you subtract small minus large you get 0, so since i is less than the subtraction it isn't zero so it is in the proper domain</p>
+
+<a name="126613460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613460">Mario Carneiro (May 15 2018 at 23:30)</a>:</h4>
+<p>You could also have taken a &lt;= b+1 as an assumption to the theorem if you like</p>
+
+<a name="126613497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613497">Patrick Massot (May 15 2018 at 23:31)</a>:</h4>
+<p>I still don't know what <code>resolve_left</code> stands for</p>
+
+<a name="126613508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613508">Mario Carneiro (May 15 2018 at 23:31)</a>:</h4>
+<p><code>or.resolve_left</code></p>
+
+<a name="126613559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613559">Kenny Lau (May 15 2018 at 23:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> The type of <code>le_total _ _</code> is <code>or _ _</code></p>
+
+<a name="126613569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613569">Kenny Lau (May 15 2018 at 23:32)</a>:</h4>
+<p>So <code>(le_total _ _).resolve_left</code> means <code>or.resolve_left (le_total _ _)</code></p>
+
+<a name="126613577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613577">Patrick Massot (May 15 2018 at 23:32)</a>:</h4>
+<p>Thanks</p>
+
+<a name="126613580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613580">Patrick Massot (May 15 2018 at 23:32)</a>:</h4>
+<p>to both of you</p>
+
+<a name="126613601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613601">Patrick Massot (May 15 2018 at 23:33)</a>:</h4>
+<p>So the strategy here is some variation on a case disjunction, right?</p>
+
+<a name="126613632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613632">Patrick Massot (May 15 2018 at 23:34)</a>:</h4>
+<p>Is it possible to use <code>by_cases</code> instead? (I only try to understand, I don't really want to use <code>by_cases</code>)</p>
+
+<a name="126613653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613653">Kenny Lau (May 15 2018 at 23:34)</a>:</h4>
+<p><code>by_cases</code> uses <code>p or not p</code> instead of any arbitrary <code>p or q</code></p>
+
+<a name="126613672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613672">Patrick Massot (May 15 2018 at 23:35)</a>:</h4>
+<p>It's true that <code>le_total</code> is almost but not quite like this</p>
+
+<a name="126613749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613749">Kenny Lau (May 15 2018 at 23:37)</a>:</h4>
+<p>however I don't see the difference between <code>or.resolve_left (le_total _ _)</code> and <code>le_of_not_le</code></p>
+
+<a name="126613805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613805">Patrick Massot (May 15 2018 at 23:38)</a>:</h4>
+<p>I still don't understand why the goal after this <code>refine</code> is <code>false</code></p>
+
+<a name="126613808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613808">Kenny Lau (May 15 2018 at 23:38)</a>:</h4>
+<p><code>refine (le_total _ _).resolve_left (λ h, _)</code></p>
+
+<a name="126613820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613820">Kenny Lau (May 15 2018 at 23:39)</a>:</h4>
+<p>the expected type of <code>(λ h, _)</code> is <code>not (le _ _)</code></p>
+
+<a name="126613832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613832">Kenny Lau (May 15 2018 at 23:39)</a>:</h4>
+<p>so <code>h</code> has type <code>le _ _</code></p>
+
+<a name="126613837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613837">Kenny Lau (May 15 2018 at 23:39)</a>:</h4>
+<p>so <code>_</code> has type <code>false</code></p>
+
+<a name="126613899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613899">Patrick Massot (May 15 2018 at 23:40)</a>:</h4>
+<p>Indeed the mysterious line has the same effect as <code>apply le_of_not_le,
+  by_contradiction h,</code></p>
+
+<a name="126613905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613905">Kenny Lau (May 15 2018 at 23:41)</a>:</h4>
+<p>try <code>refine le_of_not_le (λ h, _)</code></p>
+
+<a name="126613910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613910">Mario Carneiro (May 15 2018 at 23:41)</a>:</h4>
+<p><code>le_of_not_le</code> would also have worked</p>
+
+<a name="126613915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613915">Kenny Lau (May 15 2018 at 23:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> entao eu ganho?</p>
+
+<a name="126613925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613925">Mario Carneiro (May 15 2018 at 23:41)</a>:</h4>
+<p>vc ganhou</p>
+
+<a name="126613971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126613971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126613971">Kenny Lau (May 15 2018 at 23:42)</a>:</h4>
+<p>:D</p>
+
+<a name="126614006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614006">Patrick Massot (May 15 2018 at 23:43)</a>:</h4>
+<p>The proof of <code>le_of_not_le</code> is exactly this <code>or.resolve_left le_total</code></p>
+
+<a name="126614057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614057">Patrick Massot (May 15 2018 at 23:44)</a>:</h4>
+<p>But indeed Kenny's solution will probably be easier to remember for me</p>
+
+<a name="126614194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614194">Patrick Massot (May 15 2018 at 23:47)</a>:</h4>
+<p>So, what should we do with all those lemmas we discussed in the last few days. Do you want me to prepare a PR? Are you doing it yourself?</p>
+
+<a name="126614274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614274">Mario Carneiro (May 15 2018 at 23:49)</a>:</h4>
+<p>I've got a pot brewing, you can hold onto them locally until then</p>
+
+<a name="126614284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614284">Patrick Massot (May 15 2018 at 23:49)</a>:</h4>
+<p>No problem</p>
+
+<a name="126614634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614634">Patrick Massot (May 15 2018 at 23:56)</a>:</h4>
+<p>I extracted everything from my bigop file. It's now all in <a href="https://github.com/PatrickMassot/bigop/blob/master/src/pending_lemmas.lean" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/pending_lemmas.lean">https://github.com/PatrickMassot/bigop/blob/master/src/pending_lemmas.lean</a> if you want to make sure you have everything that was discussed here</p>
+
+<a name="126614653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126614653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126614653">Patrick Massot (May 15 2018 at 23:57)</a>:</h4>
+<p>It's bedtime now. Thank you very much again!</p>
+
+<a name="126636219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636219">Patrick Massot (May 16 2018 at 11:05)</a>:</h4>
+<p>I have three substractions now <span class="emoji emoji-1f628" title="fearful">:fearful:</span> <code>H : N ≥ 1, hyp : 0 ≤ i ∧ i &lt; N ⊢ N - (N - 1 - i) = i + 1</code></p>
+
+<a name="126636280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636280">Patrick Massot (May 16 2018 at 11:06)</a>:</h4>
+<p>Isn't it a way to first prove that we would get the same result in Z, because each substraction comes with its relevant inequality, and then <code>ring</code>?</p>
+
+<a name="126636450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636450">Mario Carneiro (May 16 2018 at 11:12)</a>:</h4>
+<p>yes, of course</p>
+
+<a name="126636462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636462">Mario Carneiro (May 16 2018 at 11:13)</a>:</h4>
+<p>just use <code>int.cast_sub</code></p>
+
+<a name="126636524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636524">Patrick Massot (May 16 2018 at 11:14)</a>:</h4>
+<p>how does that work?</p>
+
+<a name="126636528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636528">Mario Carneiro (May 16 2018 at 11:14)</a>:</h4>
+<p>that is, use <code>int.cast_inj</code> to convert the natural number equality to a Z equality, and then use <code>int.cast_add</code>, <code>int.cast_sub</code> etc lemmas to move the arrows down to the bottom</p>
+
+<a name="126636531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636531">Patrick Massot (May 16 2018 at 11:14)</a>:</h4>
+<p>Looking at the statement is pretty puzzling</p>
+
+<a name="126636540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636540">Mario Carneiro (May 16 2018 at 11:15)</a>:</h4>
+<p>simp will do the latter part</p>
+
+<a name="126636541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636541">Chris Hughes (May 16 2018 at 11:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">i</span> <span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">i</span> <span class="bp">∧</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">-</span> <span class="o">(</span><span class="n">N</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">N</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_comm</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">hyp</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_sub</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_sub_self</span> <span class="n">this</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+</pre></div>
+
+<a name="126636544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636544">Kenny Lau (May 16 2018 at 11:15)</a>:</h4>
+<p>and the winner is...</p>
+
+<a name="126636547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636547">Mario Carneiro (May 16 2018 at 11:15)</a>:</h4>
+<p>^ or just prove it directly</p>
+
+<a name="126636600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636600">Patrick Massot (May 16 2018 at 11:16)</a>:</h4>
+<p>Thanks Chris, but I'm really tired of those direct proofs</p>
+
+<a name="126636603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636603">Patrick Massot (May 16 2018 at 11:16)</a>:</h4>
+<p>I want a systematic method</p>
+
+<a name="126636607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636607">Mario Carneiro (May 16 2018 at 11:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>example {i N : ℕ} (H : N ≥ 1) (hyp : 0 ≤ i ∧ i &lt; N) : N - (N - 1 - i) = i + 1 :=
+by rw [nat.sub_sub, add_comm, nat.sub_sub_self hyp.2]
+</pre></div>
+
+<a name="126636616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636616">Kenny Lau (May 16 2018 at 11:17)</a>:</h4>
+<p>and the winner is...</p>
+
+<a name="126636619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636619">Chris Hughes (May 16 2018 at 11:17)</a>:</h4>
+<p>Is it poor form to use <code>exact hyp.2</code> instead of <code>exact nat.succ_le_of_lt hyp.2</code>?</p>
+
+<a name="126636625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636625">Mario Carneiro (May 16 2018 at 11:17)</a>:</h4>
+<p>meh</p>
+
+<a name="126636629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636629">Kenny Lau (May 16 2018 at 11:17)</a>:</h4>
+<p>maybe you should replace <code>exact hyp.2</code> with <code>cc</code></p>
+
+<a name="126636671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636671">Kenny Lau (May 16 2018 at 11:18)</a>:</h4>
+<p>I mean, it isn't like you can't prove <code>H</code> from <code>hyp</code>...</p>
+
+<a name="126636673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636673">Mario Carneiro (May 16 2018 at 11:18)</a>:</h4>
+<p>in general you should minimize your implicit definitional unfolding, but some things are too foundational to change at this point and I assume it will stay that way</p>
+
+<a name="126636676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636676">Patrick Massot (May 16 2018 at 11:19)</a>:</h4>
+<p>I don't know how to use <code>int.cast_inj</code></p>
+
+<a name="126636746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636746">Mario Carneiro (May 16 2018 at 11:20)</a>:</h4>
+<p>oops, I mean <code>int.coe_nat_inj'</code></p>
+
+<a name="126636832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636832">Mario Carneiro (May 16 2018 at 11:23)</a>:</h4>
+<div class="codehilite"><pre><span></span>example {i N : ℕ} (H : N ≥ 1) (hyp : 0 ≤ i ∧ i &lt; N) : N - (N - 1 - i) = i + 1 :=
+by rw [← int.coe_nat_inj&#39;, int.coe_nat_sub, int.coe_nat_sub, int.coe_nat_sub]
+</pre></div>
+
+
+<p>produces a bunch of side conditions about less equal stuff</p>
+
+<a name="126636880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636880">Mario Carneiro (May 16 2018 at 11:24)</a>:</h4>
+<p>actually it's a bit messy since the side conditions themselves involve natural number subtraction, so you need to rewrite them too or else prove them directly</p>
+
+<a name="126636937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636937">Mario Carneiro (May 16 2018 at 11:26)</a>:</h4>
+<p>If you want to take this route I would suggest not writing natural number subtraction at all when you can help it, so that you don't need to deal with nested subtractions and the like</p>
+
+<a name="126636946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126636946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126636946">Mario Carneiro (May 16 2018 at 11:27)</a>:</h4>
+<p>that is, just use integer subtraction and convert back to natural numbers at the end with <code>int.to_nat</code> if necessary</p>
+
+<a name="126637007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126637007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126637007">Patrick Massot (May 16 2018 at 11:29)</a>:</h4>
+<p>"not writing natural number subtraction at all" is my greatest Lean dream</p>
+
+<a name="126637069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126637069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126637069">Mario Carneiro (May 16 2018 at 11:30)</a>:</h4>
+<p>A simple way to actually do that is to replace <code>m - n</code> everywhere with <code>int.to_nat (m - n)</code> (where the subtraction there is actually integer subtraction now)</p>
+
+<a name="126637078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126637078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126637078">Patrick Massot (May 16 2018 at 11:30)</a>:</h4>
+<p>I need to go, I'll try tonight. Thanks you!</p>
+
+<a name="126637080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126637080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126637080">Mario Carneiro (May 16 2018 at 11:30)</a>:</h4>
+<p>That way the funky zero saturation operator is explicit</p>
+
+<a name="126643379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643379">Kevin Buzzard (May 16 2018 at 14:48)</a>:</h4>
+<blockquote>
+<p>I want a systematic method</p>
+</blockquote>
+<p>How about this: replace every occurrence of <code>X &lt;= Y</code> with <code>Y = X + c</code> and replace every occurrence of <code>X &lt; Y </code> with <code>Y = X + c + 1</code>, and then just use <code>add_sub_cancel</code> or whatever it's called -- <code>a + b - b = a</code>. It would not surprise me if this algorithm worked every time.</p>
+
+<a name="126643448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643448">Kevin Buzzard (May 16 2018 at 14:50)</a>:</h4>
+<p>Example: you know <code>i &lt; N</code> and you want to prove <code>N - (N - 1 - i) = i + 1</code>, well, write <code>N = i + 1 + j</code> and -- oh -- you also need <code>X - (Y + Z) = X- Y - Z</code> -- you get <code>N - (j + 1 + i - (1 + i))</code> which is <code>N - j</code> which is <code>i + 1 + j - j</code> which is <code>i + 1</code></p>
+
+<a name="126643465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643465">Kevin Buzzard (May 16 2018 at 14:51)</a>:</h4>
+<p>I am assuming that your mathematician's goals never actually rely on the fact that a - b = 0 if b&gt;a</p>
+
+<a name="126643674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643674">Kevin Buzzard (May 16 2018 at 14:56)</a>:</h4>
+<p>This should reduce everything to <code>nat.sub_sub</code> (if memory serves -- is it called that?) and <code>add_sub_cancel</code> or whatever it's called (not in front of Lean right now).</p>
+
+<a name="126643689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643689">Kevin Buzzard (May 16 2018 at 14:56)</a>:</h4>
+<p>oh and associativity and commutativity of course</p>
+
+<a name="126643699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643699">Kevin Buzzard (May 16 2018 at 14:56)</a>:</h4>
+<p>Make them simp lemmas and see if simp can do it after you make the substitutions</p>
+
+<a name="126643713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643713">Kevin Buzzard (May 16 2018 at 14:57)</a>:</h4>
+<p>(if they're not simp lemmas already)</p>
+
+<a name="126643719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643719">Kevin Buzzard (May 16 2018 at 14:57)</a>:</h4>
+<p>Might not be the optimal approach but it looks pretty systematic to me</p>
+
+<a name="126643809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643809">Chris Hughes (May 16 2018 at 14:59)</a>:</h4>
+<blockquote>
+<p>replace every occurrence of <code>X &lt;= Y</code> with `Y = X + c</p>
+</blockquote>
+<p>This bit sounds hard to do with <code>simp</code>, since it involves casing on exists.</p>
+
+<a name="126643817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643817">Kevin Buzzard (May 16 2018 at 14:59)</a>:</h4>
+<p>you just introduce another variable</p>
+
+<a name="126643823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126643823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html#126643823">Kevin Buzzard (May 16 2018 at 14:59)</a>:</h4>
+<p>you do all that before you start the simp</p>
+
+
+{% endraw %}

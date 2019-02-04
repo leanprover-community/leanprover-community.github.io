@@ -1,0 +1,96 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/34354tacticexprininteractivemode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html">`tactic expr` in interactive mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130780443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780443">Scott Morrison (Aug 02 2018 at 16:13)</a>:</h4>
+<p>Say I have a <code>tactic expr</code>. If I'm in interactive mode, how do I invoke it and assign the result to a named hypothesis?</p>
+
+<a name="130780624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780624">Scott Morrison (Aug 02 2018 at 16:16)</a>:</h4>
+<p>e.g.</p>
+<div class="codehilite"><pre><span></span>meta def J : tactic expr := to_expr ``(5)
+example : false :=
+begin
+ have j := /- execute J here -/ sorry,
+end
+</pre></div>
+
+<a name="130780759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780759">Scott Morrison (Aug 02 2018 at 16:19)</a>:</h4>
+<p>Maybe it's the wrong time of day for tactic questions, too many mathematicians are awake. :-)</p>
+
+<a name="130780842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780842">Johan Commelin (Aug 02 2018 at 16:20)</a>:</h4>
+<p>Maybe it's the wrong time of day for <del>tactic</del> questions...<br>
+It is <code>&gt; body.temp</code> over here. Although aussies might be used to this...</p>
+
+<a name="130780892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780892">Patrick Massot (Aug 02 2018 at 16:21)</a>:</h4>
+<p>I'd love to help you but my children insist it's time  to go to the beach</p>
+
+<a name="130780959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130780959">Scott Morrison (Aug 02 2018 at 16:22)</a>:</h4>
+<p>Have fun at the beach. :-) Winter here!</p>
+
+<a name="130781162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130781162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130781162">Rob Lewis (Aug 02 2018 at 16:27)</a>:</h4>
+<div class="codehilite"><pre><span></span>example : false :=
+begin
+ have j := by J &gt;&gt;= tactic.exact,
+ let j&#39; := by J &gt;&gt;= tactic.exact,
+end
+</pre></div>
+
+<a name="130781187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130781187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130781187">Rob Lewis (Aug 02 2018 at 16:28)</a>:</h4>
+<p><code>let</code> instead of <code>have</code> will give you access to the value of your tactic, maybe necessary if the expr isn't a proof.</p>
+
+<a name="130781526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130781526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130781526">Scott Morrison (Aug 02 2018 at 16:33)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="130781551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130781551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130781551">Scott Morrison (Aug 02 2018 at 16:33)</a>:</h4>
+<p>Now going the other way: if I have a named hypothesis and I want to get hold of an <code>expr</code>?</p>
+
+<a name="130781619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130781619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130781619">Rob Lewis (Aug 02 2018 at 16:34)</a>:</h4>
+<p><code>tactic.get_local</code>?</p>
+
+<a name="130812539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130812539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130812539">Scott Morrison (Aug 03 2018 at 04:03)</a>:</h4>
+<p>Thanks @Rob, that does it.</p>
+
+<a name="130812580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130812580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130812580">Scott Morrison (Aug 03 2018 at 04:04)</a>:</h4>
+<p>Now I want to get the 'other half' of a hypothesis. Say I have <code>h : t := p</code> amongst my hypotheses. How do I produce <code>p</code> as an <code>expr</code>?</p>
+
+<a name="130814956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130814956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130814956">Simon Hudon (Aug 03 2018 at 05:09)</a>:</h4>
+<p>This might help: </p>
+<p><a href="https://github.com/unitb/lean-lib/blob/master/src/util/meta/tactic/basic.lean#L16-L21" target="_blank" title="https://github.com/unitb/lean-lib/blob/master/src/util/meta/tactic/basic.lean#L16-L21">https://github.com/unitb/lean-lib/blob/master/src/util/meta/tactic/basic.lean#L16-L21</a></p>
+
+<a name="130815320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130815320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130815320">Sebastian Ullrich (Aug 03 2018 at 05:19)</a>:</h4>
+<p>Heh, nice workaround</p>
+
+<a name="130817156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130817156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130817156">Scott Morrison (Aug 03 2018 at 06:19)</a>:</h4>
+<p>Thanks, that works. Still struggling with my bigger problem, but that was helpful!</p>
+
+<a name="130821219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130821219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html#130821219">Simon Hudon (Aug 03 2018 at 08:25)</a>:</h4>
+<p>Let us know what the bigger problem is. I'll have a look when I wake up</p>
+
+
+{% endraw %}

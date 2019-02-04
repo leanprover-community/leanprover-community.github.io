@@ -1,0 +1,97 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/96918rewritingclassoperations.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html">rewriting class operations</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127602788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127602788">Reid Barton (Jun 05 2018 at 16:18)</a>:</h4>
+<p>I have this instance:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">Xplus</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">Xplus</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">Xplus_rel</span><span class="o">,</span> <span class="n">Xplus_rel</span><span class="bp">.</span><span class="n">refl</span><span class="o">,</span> <span class="n">Xplus_rel</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">Xplus_rel</span><span class="bp">.</span><span class="n">trans</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>How can I use a tactic to rewrite <code>a ≈ b</code> somewhere in the goal to <code>Xplus_rel a b</code>?</p>
+
+<a name="127602900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127602900">Reid Barton (Jun 05 2018 at 16:21)</a>:</h4>
+<p>Is there some name I can pass to <code>rw</code> or <code>simp</code>?</p>
+
+<a name="127602930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127602930">Kenny Lau (Jun 05 2018 at 16:21)</a>:</h4>
+<p><code>set_option pp.notations false</code></p>
+
+<a name="127602986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127602986">Simon Hudon (Jun 05 2018 at 16:22)</a>:</h4>
+<p>Does <code>change Xplus_rel a b</code> do it for you?</p>
+
+<a name="127603021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603021">Sebastian Ullrich (Jun 05 2018 at 16:23)</a>:</h4>
+<p><code>simp [(≈)]</code> should do it</p>
+
+<a name="127603023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603023">Reid Barton (Jun 05 2018 at 16:23)</a>:</h4>
+<p><code>change</code> works if I write out the whole new goal (which isn't bad at all using copious <code>_</code>s)</p>
+
+<a name="127603087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603087">Reid Barton (Jun 05 2018 at 16:24)</a>:</h4>
+<p><code>simp [(≈)]</code> turned it into <code>setoid.r</code>, not <code>Xplus_rel</code></p>
+
+<a name="127603093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603093">Reid Barton (Jun 05 2018 at 16:24)</a>:</h4>
+<p>Oh, but <code>[(≈), setoid.r]</code> worked</p>
+
+<a name="127603099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603099">Kenny Lau (Jun 05 2018 at 16:24)</a>:</h4>
+<p><code>≈</code> is literally <code>setoid.r</code></p>
+
+<a name="127603112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603112">Reid Barton (Jun 05 2018 at 16:25)</a>:</h4>
+<p>No, it's literally <code>has_equiv.equiv</code></p>
+
+<a name="127603118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603118">Kenny Lau (Jun 05 2018 at 16:25)</a>:</h4>
+<p>oh</p>
+
+<a name="127603181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127603181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127603181">Reid Barton (Jun 05 2018 at 16:26)</a>:</h4>
+<p>Great, this is better than what I had before. I feel like I run into this a lot</p>
+
+<a name="127604658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127604658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127604658">Chris Hughes (Jun 05 2018 at 16:54)</a>:</h4>
+<p>I often use <code>show Xplus_rel a b</code> in these situtations.</p>
+
+<a name="127604971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127604971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127604971">Simon Hudon (Jun 05 2018 at 17:01)</a>:</h4>
+<p>That's similar to <code>change</code> but <span class="user-mention" data-user-id="110032">@Reid Barton</span> pointed out that that only works if there's nothing else in your goal.</p>
+
+<a name="127605892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127605892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127605892">Chris Hughes (Jun 05 2018 at 17:20)</a>:</h4>
+<p><code>show Xplus_rel _ _</code></p>
+
+<a name="127606006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127606006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127606006">Simon Hudon (Jun 05 2018 at 17:23)</a>:</h4>
+<p>That doesn't work if the goal is <code>p ∧ Xplus_rel a b</code></p>
+
+<a name="127606012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127606012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127606012">Kenny Lau (Jun 05 2018 at 17:23)</a>:</h4>
+<p><code>split</code></p>
+
+<a name="127606149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127606149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127606149">Simon Hudon (Jun 05 2018 at 17:26)</a>:</h4>
+<p>This is an ad hoc response to it. <span class="user-mention" data-user-id="110032">@Reid Barton</span> Is looking for one solution that will work for a variety of goals</p>
+
+<a name="127606159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127606159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html#127606159">Reid Barton (Jun 05 2018 at 17:27)</a>:</h4>
+<p>And won't get longer the longer my goal is</p>
+
+
+{% endraw %}

@@ -1,0 +1,570 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20171rewriteoccs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html">rewrite occs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123546271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546271">Scott Morrison (Mar 10 2018 at 22:06)</a>:</h4>
+<p>Can anyone help me understand why the 2nd example in the following doesn't work?</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">::</span> <span class="n">l</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">::</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">baz</span><span class="o">]</span> <span class="o">{</span><span class="n">occs</span><span class="o">:=</span><span class="n">occurrences</span><span class="bp">.</span><span class="n">pos</span> <span class="o">[</span><span class="mi">1</span><span class="o">]},</span>
+<span class="kn">end</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">baz</span><span class="o">]</span> <span class="o">{</span><span class="n">occs</span><span class="o">:=</span><span class="n">occurrences</span><span class="bp">.</span><span class="n">pos</span> <span class="o">[</span><span class="mi">2</span><span class="o">]},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="123546276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546276">Scott Morrison (Mar 10 2018 at 22:07)</a>:</h4>
+<p>I have been reading <code>replace_fn.cpp</code> and <code>kabstract.cpp</code>, to no avail: my understanding of what is going on there suggests the second example should still work.</p>
+
+<a name="123546372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546372">Scott Morrison (Mar 10 2018 at 22:10)</a>:</h4>
+<p>A related confusion is why in</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">baz</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>the goal has become <code>[2, 1, 2] = [1, 2, 2]</code>, and not <code>[2, 1, 2] = [2, 2, 2]</code>. That is, why did rewrite give up on the rhs?</p>
+
+<a name="123546557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546557">Sebastian Ullrich (Mar 10 2018 at 22:18)</a>:</h4>
+<p><code>kabstract</code> does not backtrack from unification: once <code>l</code> has been assigned <code>[1, 2]</code>, it does not consider other values for it</p>
+
+<a name="123546564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546564">Sebastian Ullrich (Mar 10 2018 at 22:19)</a>:</h4>
+<p>That is, it only finds occurrences of the same instantiation of the lhs</p>
+
+<a name="123546609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546609">Sebastian Ullrich (Mar 10 2018 at 22:20)</a>:</h4>
+<p>(Don't ask me why :) )</p>
+
+<a name="123546657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546657">Scott Morrison (Mar 10 2018 at 22:22)</a>:</h4>
+<p>oh...</p>
+
+<a name="123546664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546664">Scott Morrison (Mar 10 2018 at 22:23)</a>:</h4>
+<p>I see, that <code>ctx.unify</code> call in <code>kabstract</code> is saving information about things it has seen before.</p>
+
+<a name="123546667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546667">Scott Morrison (Mar 10 2018 at 22:23)</a>:</h4>
+<p>It hadn't occurred to me that there were side effects there.</p>
+
+<a name="123546697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546697">Scott Morrison (Mar 10 2018 at 22:24)</a>:</h4>
+<p>That sucks (for my purposes)...</p>
+
+<a name="123546756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546756">Scott Morrison (Mar 10 2018 at 22:26)</a>:</h4>
+<p>So... if I really really wanted be be able to generate a list of all the rewrites of some expression <code>e</code> by some rule <code>r</code> (where we just rewrite in one place), is there any hope?</p>
+
+<a name="123546763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123546763">Scott Morrison (Mar 10 2018 at 22:27)</a>:</h4>
+<p>It seems that just calling <code>rw [r] at e {occs := occurrences.pos n}</code> and gradually increasing <code>n</code> until it fails is doomed, because of this "feature" of <code>kabstract</code>.</p>
+
+<a name="123547082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547082">Simon Hudon (Mar 10 2018 at 22:38)</a>:</h4>
+<p>if you want to hack a solution together, you might have to copy / paste the implementation of <code>rw</code> and reimplement <code>kabstract</code>. I think the key is to undo the assignment of meta variable. One way of to that is to traverse your expression and create new meta variables to replace the ones that you find.</p>
+
+<a name="123547088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547088">Sebastian Ullrich (Mar 10 2018 at 22:38)</a>:</h4>
+<p>Yes. It just won't be very fast.</p>
+
+<a name="123547146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547146">Simon Hudon (Mar 10 2018 at 22:40)</a>:</h4>
+<p>I assume with the new focus on Lean 4, that might be the one way to get the fixed tactic sooner than later.</p>
+
+<a name="123547154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547154">Scott Morrison (Mar 10 2018 at 22:41)</a>:</h4>
+<p>I see: reimplement <code>kabstract</code> in Lean?</p>
+
+<a name="123547198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547198">Scott Morrison (Mar 10 2018 at 22:42)</a>:</h4>
+<p>I was just trying to find the definition of <code>type_context_old</code>, and see if there was any hope of hacking on an extra option that would change this behaviour. But I agree it's exceedingly unlikely I could propose such a change.</p>
+
+<a name="123547201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547201">Simon Hudon (Mar 10 2018 at 22:42)</a>:</h4>
+<p>yeah pretty much. Unless <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> agrees that the current semantics is wrong and is willing to fix it for you</p>
+
+<a name="123547207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547207">Scott Morrison (Mar 10 2018 at 22:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> ? :-)</p>
+
+<a name="123547208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547208">Sebastian Ullrich (Mar 10 2018 at 22:43)</a>:</h4>
+<p>It's been that way since Lean 2, where it was even documented afair :)</p>
+
+<a name="123547209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547209">Scott Morrison (Mar 10 2018 at 22:43)</a>:</h4>
+<p>Okay!</p>
+
+<a name="123547210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547210">Scott Morrison (Mar 10 2018 at 22:43)</a>:</h4>
+<p>Looks like I will think about a really slow version of kabstract!</p>
+
+<a name="123547259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547259">Scott Morrison (Mar 10 2018 at 22:45)</a>:</h4>
+<p>(Context here is that I'm otherwise really happy with my <code>rewrite_search</code> tactic, based on greedily minimising edit distance. I have "real" examples where it successfully finds long (~10) chains of rewrites that complete a proof. Unfortunately sometimes it mysteriously fails, and this seems to be the issue.)</p>
+
+<a name="123547262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547262">Sebastian Ullrich (Mar 10 2018 at 22:46)</a>:</h4>
+<p>It's not even clear to me what a different <code>kabstract</code> would look like. Would it introduce <code>n</code> lambdas and return <code>n</code> instantiated copies of <code>e</code>?</p>
+
+<a name="123547305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547305">Sebastian Ullrich (Mar 10 2018 at 22:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> I suppose repeatedly rewriting will not solve your problem? :)</p>
+
+<a name="123547311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547311">Scott Morrison (Mar 10 2018 at 22:47)</a>:</h4>
+<p>No -- I have lots of examples where the rewrite rule needs to be applied "inside" a bigger expression where the rewrite rule also applies.</p>
+
+<a name="123547312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547312">Scott Morrison (Mar 10 2018 at 22:47)</a>:</h4>
+<p>But after you do the outer rewrite the inner rewrite is no longer available.</p>
+
+<a name="123547354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547354">Scott Morrison (Mar 10 2018 at 22:48)</a>:</h4>
+<p>(<code>rewrite_search</code> is already trying repeated rewrites itself: I only discovered this problem because it was mysteriously failing.)</p>
+
+<a name="123547355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547355">Kevin Buzzard (Mar 10 2018 at 22:48)</a>:</h4>
+<p>Scott -- has Mario made any suggestions on how to deal with your issues?</p>
+
+<a name="123547357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547357">Scott Morrison (Mar 10 2018 at 22:49)</a>:</h4>
+<p>Kevin -- I only raised this about 5 minutes ago, perhaps Mario is sleeping. :-)</p>
+
+<a name="123547414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547414">Scott Morrison (Mar 10 2018 at 22:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, I guess I was thinking not actually to reimplement <code>kabstract</code>, but reimplement all of <code>rewrite_core</code>.</p>
+
+<a name="123547416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547416">Scott Morrison (Mar 10 2018 at 22:51)</a>:</h4>
+<p>(Reimplementing <code>kabstract</code> in Lean would not be helpful, because no tactics actually call it from Lean: only things in c++.)</p>
+
+<a name="123547458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547458">Sebastian Ullrich (Mar 10 2018 at 22:53)</a>:</h4>
+<p>I'm not sure how you want to solve your issue with the current kabstract</p>
+
+<a name="123547464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547464">Scott Morrison (Mar 10 2018 at 22:53)</a>:</h4>
+<p>Or rather, to write something called <code>all_rewrites</code>, that takes an expr, and a list of lemmas, and returns <code>list (expr \times expr)</code>, where the pairs are the result of using the lemma in one place, and the proof.</p>
+
+<a name="123547505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547505">Scott Morrison (Mar 10 2018 at 22:54)</a>:</h4>
+<p>It would work by recursively going down into the expr, and repeatedly calling unify ... oh, I see your point.</p>
+
+<a name="123547509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547509">Scott Morrison (Mar 10 2018 at 22:54)</a>:</h4>
+<p>Those calls to unify are _also_ going to be cached. :-(</p>
+
+<a name="123547511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547511">Scott Morrison (Mar 10 2018 at 22:54)</a>:</h4>
+<p>This is terrible. :-)</p>
+
+<a name="123547518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547518">Sebastian Ullrich (Mar 10 2018 at 22:55)</a>:</h4>
+<p>Well, not if you create new mvars like Simon suggested</p>
+
+<a name="123547524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547524">Scott Morrison (Mar 10 2018 at 22:55)</a>:</h4>
+<p>I see; after every time you successfully find a match, you throw out the mvar you were passing to unify and make a new one.</p>
+
+<a name="123547566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547566">Scott Morrison (Mar 10 2018 at 22:56)</a>:</h4>
+<p>(Thanks, Simon, sorry I was slow to understand exactly what you meant.)</p>
+
+<a name="123547580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547580">Simon Hudon (Mar 10 2018 at 22:57)</a>:</h4>
+<p>No worries</p>
+
+<a name="123547635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547635">Kevin Buzzard (Mar 10 2018 at 22:59)</a>:</h4>
+<blockquote>
+<p>Kevin -- I only raised this about 5 minutes ago, perhaps Mario is sleeping. :-)</p>
+</blockquote>
+<p>Oh -- I knew that you had been discussing with Mario about what looked like a major refactoring job on the category theory library and I was just kind of assumed this might be something to do with the refactoring</p>
+
+<a name="123547638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547638">Simon Hudon (Mar 10 2018 at 22:59)</a>:</h4>
+<p>I believe in rewrite, when you use <code>∀ x, f x = g x</code> as your rewrite rule, you generate one mvar to instantiate x and you start matching. What you can do instead is create a unique local constant to instantiate x with (or as many as you have bound variable) and you create a table mapping those constants to mvars every time you attempt a match</p>
+
+<a name="123547691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547691">Sebastian Ullrich (Mar 10 2018 at 23:00)</a>:</h4>
+<p>Btw, it might be easier to build something on top of <code>tactic.ext_simplify_core</code>. You basically get a very configurable term DFS where you can return subterm equality proofs pre or post visit and the tactic takes care of composing them into the complete proof.</p>
+
+<a name="123547692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547692">Scott Morrison (Mar 10 2018 at 23:01)</a>:</h4>
+<p>Hmm... okay, on the 3rd reading I still don't understand that. :-) (Simon's comment about local constants.)</p>
+
+<a name="123547704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547704">Mario Carneiro (Mar 10 2018 at 23:01)</a>:</h4>
+<p>I don't have any good suggestions for your rewrite issue. One possibility is to use <code>conv</code> or <code>ext_simplify_core</code> to recurse into all subterms and try <code>rw</code> on each of them</p>
+
+<a name="123547744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547744">Kevin Buzzard (Mar 10 2018 at 23:02)</a>:</h4>
+<p>How do I do a rw in conv, by the way?</p>
+
+<a name="123547745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547745">Scott Morrison (Mar 10 2018 at 23:02)</a>:</h4>
+<p>I don't actually know how <code>conv</code> is implemented under the hood: is it using <code>ext_simplify_core</code> anyway?</p>
+
+<a name="123547746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547746">Kevin Buzzard (Mar 10 2018 at 23:02)</a>:</h4>
+<p>I don't mean a rw, I mean I want to replace something with something defeq</p>
+
+<a name="123547750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547750">Kevin Buzzard (Mar 10 2018 at 23:03)</a>:</h4>
+<p>do I have to use whnf?</p>
+
+<a name="123547756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547756">Scott Morrison (Mar 10 2018 at 23:03)</a>:</h4>
+<p>I really like these ideas. It hadn't occurred to me that I could think of <code>conv</code> as letting me recurse into all subterms in tactic mode.</p>
+
+<a name="123547798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547798">Kevin Buzzard (Mar 10 2018 at 23:04)</a>:</h4>
+<p>I only just learnt how it worked really, it's all because of this push by Patrick to get some informal docs written.</p>
+
+<a name="123547799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547799">Kevin Buzzard (Mar 10 2018 at 23:04)</a>:</h4>
+<p>I find them really enlightening</p>
+
+<a name="123547800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547800">Scott Morrison (Mar 10 2018 at 23:04)</a>:</h4>
+<p>Is there any hope that I could build a pattern corresponding to the lhs of my rewrite rule, and pass that to <code>conv</code>, and thereby only visit the places where <code>rw</code> would work anyway? Or would this run into exactly the same unification caching problem?</p>
+
+<a name="123547916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123547916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123547916">Scott Morrison (Mar 10 2018 at 23:08)</a>:</h4>
+<p>Okay, answering my own question: no, you can't pass patterns to conv, it does indeed run into this same problem.</p>
+
+<a name="123548005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548005">Scott Morrison (Mar 10 2018 at 23:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, here are two examples of using <code>rw</code> inside <code>conv</code>, solving the problem I started this thread with:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">conv</span> <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">baz</span><span class="o">]</span> <span class="o">},</span>
+<span class="kn">end</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">conv</span> <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">baz</span><span class="o">]</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="123548103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548103">Scott Morrison (Mar 10 2018 at 23:14)</a>:</h4>
+<p>I think in the end <code>ext_simplify_core</code> is going to be the right solution. Since I want to build up a list of all the possible rewrites, I think it makes sense to build it up during the run of <code>ext_simplify_core</code>, rather than making multiple calls into conv, each one looking at a different piece of the expression.</p>
+
+<a name="123548109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548109">Scott Morrison (Mar 10 2018 at 23:15)</a>:</h4>
+<p>(Please tell me if that doesn't make sense!)</p>
+
+<a name="123548158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548158">Scott Morrison (Mar 10 2018 at 23:16)</a>:</h4>
+<p>Thank you, everyone, for the extremely helpful suggestions, as usual!</p>
+
+<a name="123548204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548204">Simon Hudon (Mar 10 2018 at 23:18)</a>:</h4>
+<p>Thanks for the interesting challenges <span class="emoji emoji-1f604" title="smile">:smile:</span></p>
+
+<a name="123548272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548272">Kevin Buzzard (Mar 10 2018 at 23:21)</a>:</h4>
+<p>I don't even understand what this thread is about. What is ematch? Did someone write some informal docs yet?</p>
+
+<a name="123548304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548304">Kevin Buzzard (Mar 10 2018 at 23:22)</a>:</h4>
+<p>I really find life easier with docs. Then I have to ask fewer questions.</p>
+
+<a name="123548319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548319">Mario Carneiro (Mar 10 2018 at 23:22)</a>:</h4>
+<p>I don't think the ematch attribute is relevant to simon's example</p>
+
+<a name="123548415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548415">Andrew Ashworth (Mar 10 2018 at 23:27)</a>:</h4>
+<p>ematch: you can try reading Leo's paper.... <a href="https://link.springer.com/chapter/10.1007/978-3-540-73595-3_13" target="_blank" title="https://link.springer.com/chapter/10.1007/978-3-540-73595-3_13">https://link.springer.com/chapter/10.1007/978-3-540-73595-3_13</a></p>
+
+<a name="123548456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548456">Andrew Ashworth (Mar 10 2018 at 23:28)</a>:</h4>
+<p>it's a little arcane unless you're really into the theory though</p>
+
+<a name="123548570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548570">Andrew Ashworth (Mar 10 2018 at 23:33)</a>:</h4>
+<p>aha! something better: <a href="http://yices.csl.sri.com/papers/cav2007.pdf" target="_blank" title="http://yices.csl.sri.com/papers/cav2007.pdf">http://yices.csl.sri.com/papers/cav2007.pdf</a></p>
+
+<a name="123548609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548609">Andrew Ashworth (Mar 10 2018 at 23:34)</a>:</h4>
+<p>seems the root paper at the bottom of all this is something from the 80s: <a href="https://people.eecs.berkeley.edu/~necula/Papers/nelson-thesis.pdf" target="_blank" title="https://people.eecs.berkeley.edu/~necula/Papers/nelson-thesis.pdf">https://people.eecs.berkeley.edu/~necula/Papers/nelson-thesis.pdf</a></p>
+
+<a name="123548657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123548657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123548657">Andrew Ashworth (Mar 10 2018 at 23:36)</a>:</h4>
+<p>that said, i'm not volunteering to read everything, digest it, and then write a simple introduction to ematch :)</p>
+
+<a name="123567801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123567801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123567801">Kevin Buzzard (Mar 11 2018 at 12:52)</a>:</h4>
+<p>Oh thanks! I honestly behave like a computer. I looked at what Scott had posted, didn't understand the first word (ematch) and then just crashed and stopped reading (I was trying to get three kids to bed as well as reading chat). I see that this thread is well within my grasp now. Sorry for earlier noise.</p>
+
+<a name="123567891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123567891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123567891">Kevin Buzzard (Mar 11 2018 at 12:56)</a>:</h4>
+<p>So Scott what are you actually trying to do in the long run here? What is the problem with just writing a tactic which tries every possible rw on some term using some set of terms which are equalities but with metavariables? Is that what you want? Isn't that exactly the sort of thing one can write a tactic for? Or is the point that you want to do it without writing a tactic?</p>
+
+<a name="123568038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123568038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123568038">Kevin Buzzard (Mar 11 2018 at 13:03)</a>:</h4>
+<p>And a related question. Is Sebastian saying "there is something written in C++ which doesn't do what you want, but you could write a version in Lean which does do what you want but it would be slow"? And how does this contrast with Leo's Lean 4 plan -- goal <a href="https://github.com/leanprover/lean/issues/1" target="_blank" title="https://github.com/leanprover/lean/issues/1">#1</a> in fact -- of taking some stuff out of C++ and implementing it in Lean?</p>
+
+<a name="123568039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123568039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123568039">Kevin Buzzard (Mar 11 2018 at 13:04)</a>:</h4>
+<p>How can this ever be a good idea? I don't understand the ramifications of this idea</p>
+
+<a name="123568138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123568138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123568138">Kevin Buzzard (Mar 11 2018 at 13:07)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="123568224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123568224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123568224">Gabriel Ebner (Mar 11 2018 at 13:10)</a>:</h4>
+<p>In Lean 4 it would be fast because you could compile it to C++ that runs as fast as the current kabstract code.</p>
+
+<a name="123579238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123579238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123579238">Simon Hudon (Mar 11 2018 at 20:35)</a>:</h4>
+<p>How will that work? Will Lean run the definitions of the current file in the VM and at the end compile the whole file to C++ to accelerate the verification of the next files?</p>
+
+<a name="123580122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580122">Kevin Buzzard (Mar 11 2018 at 21:08)</a>:</h4>
+<blockquote>
+<p>I don't mean a rw, I mean I want to replace something with something defeq</p>
+</blockquote>
+<p>ooh I can use change.</p>
+
+<a name="123580123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580123">Kevin Buzzard (Mar 11 2018 at 21:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>theorem H3 : 3 + 2 = 1 + 4 := begin
+conv begin
+to_lhs,
+change 1 + 4,
+end
+end
+</pre></div>
+
+<a name="123580178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580178">Patrick Massot (Mar 11 2018 at 21:10)</a>:</h4>
+<p>Great! Do you have a slightly more realistic example?</p>
+
+<a name="123580181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580181">Kevin Buzzard (Mar 11 2018 at 21:10)</a>:</h4>
+<p>I did have the other day!</p>
+
+<a name="123580183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580183">Patrick Massot (Mar 11 2018 at 21:10)</a>:</h4>
+<p>(not necessarily super realistic, like the ones I put in the conv doc)</p>
+
+<a name="123580184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580184">Kevin Buzzard (Mar 11 2018 at 21:10)</a>:</h4>
+<p>I had a goal of the form <code>X=Y</code> but <code>Y</code> had terms in it of the form <code>\&lt;a,_\&gt;</code></p>
+
+<a name="123580228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580228">Kevin Buzzard (Mar 11 2018 at 21:12)</a>:</h4>
+<p>so I couldn't use show to replace X on LHS with something defeq because cut and paste wouldn't work for RHS. So I used conv and then realised I didn't know how to do show in conv mode and ended proving some auxiliary lemma with rfl and doing a rw. This way is much cooler :-)</p>
+
+<a name="123580229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580229">Kevin Buzzard (Mar 11 2018 at 21:12)</a>:</h4>
+<p>I was going to update the conv doc myself but then I realised you owned it rather than mathlib</p>
+
+<a name="123580231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580231">Patrick Massot (Mar 11 2018 at 21:12)</a>:</h4>
+<p>What?</p>
+
+<a name="123580236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580236">Patrick Massot (Mar 11 2018 at 21:13)</a>:</h4>
+<p>I don't own anything here</p>
+
+<a name="123580237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580237">Patrick Massot (Mar 11 2018 at 21:13)</a>:</h4>
+<p>My PR was merged into mathlib</p>
+
+<a name="123580238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580238">Patrick Massot (Mar 11 2018 at 21:13)</a>:</h4>
+<p>Please feel super free to update it</p>
+
+<a name="123580277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580277">Kevin Buzzard (Mar 11 2018 at 21:14)</a>:</h4>
+<p>wait I can't find it anywhere</p>
+
+<a name="123580279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580279">Patrick Massot (Mar 11 2018 at 21:14)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md</a></p>
+
+<a name="123580280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580280">Patrick Massot (Mar 11 2018 at 21:14)</a>:</h4>
+<p>or follow links from the main README</p>
+
+<a name="123580282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580282">Patrick Massot (Mar 11 2018 at 21:14)</a>:</h4>
+<p>Starting with link "extra Lean documentation"</p>
+
+<a name="123580283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580283">Kevin Buzzard (Mar 11 2018 at 21:14)</a>:</h4>
+<p>maybe I don't understand git. I thought I just pulled</p>
+
+<a name="123580290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580290">Kevin Buzzard (Mar 11 2018 at 21:15)</a>:</h4>
+<p>oh maybe I really don't understand git. I am pulling from my own fork not from mathlib</p>
+
+<a name="123580291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580291">Patrick Massot (Mar 11 2018 at 21:15)</a>:</h4>
+<p>(because it's no about mathlib)</p>
+
+<a name="123580294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580294">Patrick Massot (Mar 11 2018 at 21:15)</a>:</h4>
+<p>Do you have a git remote pointing to the main repo?</p>
+
+<a name="123580295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580295">Patrick Massot (Mar 11 2018 at 21:15)</a>:</h4>
+<p><code>git add remote upstream https://github.com/leanprover/mathlib.git</code></p>
+
+<a name="123580296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580296">Kevin Buzzard (Mar 11 2018 at 21:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ git remote -v
+leanprover  https://github.com/leanprover/mathlib.git (fetch)
+leanprover  https://github.com/leanprover/mathlib.git (push)
+origin  git@github.com:kbuzzard/mathlib.git (fetch)
+origin  git@github.com:kbuzzard/mathlib.git (push)
+</pre></div>
+
+<a name="123580338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580338">Kevin Buzzard (Mar 11 2018 at 21:16)</a>:</h4>
+<p>I need to pull harder somehow</p>
+
+<a name="123580342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580342">Kevin Buzzard (Mar 11 2018 at 21:16)</a>:</h4>
+<p>I am only pulling from origin</p>
+
+<a name="123580343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580343">Patrick Massot (Mar 11 2018 at 21:16)</a>:</h4>
+<p>Then <code>git pull leanprover master</code></p>
+
+<a name="123580344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580344">Patrick Massot (Mar 11 2018 at 21:16)</a>:</h4>
+<p>you called leanprover what is traditionnaly called "upstream"</p>
+
+<a name="123580347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580347">Kevin Buzzard (Mar 11 2018 at 21:16)</a>:</h4>
+<p>great, I now have extras.</p>
+
+<a name="123580358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580358">Patrick Massot (Mar 11 2018 at 21:17)</a>:</h4>
+<p>Now <code>git checkout -b docs-conv-change</code></p>
+
+<a name="123580399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580399">Patrick Massot (Mar 11 2018 at 21:18)</a>:</h4>
+<p>Do your modifications, <code>git commit -a</code>, <code>git push</code>. Then git will complain and tell you what to type instead of <code>git push</code></p>
+
+<a name="123580400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580400">Patrick Massot (Mar 11 2018 at 21:18)</a>:</h4>
+<p>(with <code>git push set-upstream</code> in it)</p>
+
+<a name="123580401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580401">Kevin Buzzard (Mar 11 2018 at 21:18)</a>:</h4>
+<p>why won't it just push to my fork?</p>
+
+<a name="123580404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580404">Patrick Massot (Mar 11 2018 at 21:18)</a>:</h4>
+<p>then go to either upstream mathlib or your fork on Github and you'll be invited to open a PR</p>
+
+<a name="123580410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580410">Patrick Massot (Mar 11 2018 at 21:19)</a>:</h4>
+<p>Because it's a new branch</p>
+
+<a name="123580411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580411">Patrick Massot (Mar 11 2018 at 21:19)</a>:</h4>
+<p>a branch that is not on github yet</p>
+
+<a name="123580412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580412">Patrick Massot (Mar 11 2018 at 21:19)</a>:</h4>
+<p>(yeah, the word upstream is used in a slightly different sense in <code>set-upstream</code>)</p>
+
+<a name="123580639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580639">Kevin Buzzard (Mar 11 2018 at 21:28)</a>:</h4>
+<p>git push just pushed to my fork</p>
+
+<a name="123580640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580640">Patrick Massot (Mar 11 2018 at 21:28)</a>:</h4>
+<p>yes</p>
+
+<a name="123580642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580642">Patrick Massot (Mar 11 2018 at 21:28)</a>:</h4>
+<p>now you can PR</p>
+
+<a name="123580648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580648">Patrick Massot (Mar 11 2018 at 21:29)</a>:</h4>
+<p>except that you skipped creating a new branch...</p>
+
+<a name="123580649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580649">Kevin Buzzard (Mar 11 2018 at 21:29)</a>:</h4>
+<p>yeah :-/</p>
+
+<a name="123580650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580650">Patrick Massot (Mar 11 2018 at 21:29)</a>:</h4>
+<p>This is bad</p>
+
+<a name="123580651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580651">Kevin Buzzard (Mar 11 2018 at 21:29)</a>:</h4>
+<p>oh :-)</p>
+
+<a name="123580701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580701">Patrick Massot (Mar 11 2018 at 21:30)</a>:</h4>
+<p>You can't have several open PR with this non-branching strategy</p>
+
+<a name="123580702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580702">Kevin Buzzard (Mar 11 2018 at 21:30)</a>:</h4>
+<p>I have loads of my own WIPs all with no branch either.</p>
+
+<a name="123580704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580704">Kevin Buzzard (Mar 11 2018 at 21:30)</a>:</h4>
+<p>I will google and sort it out. Let's not spam here.</p>
+
+<a name="123580712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123580712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123580712">Patrick Massot (Mar 11 2018 at 21:31)</a>:</h4>
+<p>Then you can't even PR since it would PR the WIP at the same time</p>
+
+<a name="123597942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123597942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123597942">Kevin Buzzard (Mar 12 2018 at 08:38)</a>:</h4>
+<p>Hmm. I can't deal with Mario's comments on my docs because travis hasn't finished building.</p>
+
+<a name="123598291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123598291">Mario Carneiro (Mar 12 2018 at 08:53)</a>:</h4>
+<p>I think you can more or less ignore travis builds for a doc change</p>
+
+<a name="123598331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123598331">Patrick Massot (Mar 12 2018 at 08:54)</a>:</h4>
+<p>Quoting Mario for <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<blockquote>
+<p>Re: PRs, I'm okay with docs of any kind. My recommendation is to try to write them with an authoritative locution style; I will let you know if you say false things. If you don't know something, leave it out, say you don't know in the doc, or ask about it here and then put in whatever you find out.</p>
+</blockquote>
+
+<a name="123598341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123598341">Mario Carneiro (Mar 12 2018 at 08:55)</a>:</h4>
+<p>(Of course, there is no guarantee that your PR won't (apparently) "break the build", since our current peculiar setup that pulls from a moving target lean nightly means that if Leo decides to break mathlib at the same time your PR will get the blame.)</p>
+
+<a name="123598348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123598348">Patrick Massot (Mar 12 2018 at 08:56)</a>:</h4>
+<p>I think you could edit a few sentences to conform to this recommendation</p>
+
+<a name="123598385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123598385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html#123598385">Mario Carneiro (Mar 12 2018 at 08:57)</a>:</h4>
+<p>I tried to respond to Kevin's parentheticals in the PR comments, so hopefully they will be addressed in the next revision</p>
+
+
+{% endraw %}

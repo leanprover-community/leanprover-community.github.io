@@ -1,0 +1,276 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/52419typemismatcherror.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html">type mismatch error</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147375133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375133">Johan Commelin (Nov 09 2018 at 15:33)</a>:</h4>
+<p>I don't have a good strategy for debugging errors like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">galois_connection</span><span class="bp">.</span><span class="n">l_supr</span> <span class="n">opens</span><span class="bp">.</span><span class="n">gc</span>
+<span class="n">term</span>
+  <span class="n">opens</span><span class="bp">.</span><span class="n">gc</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">galois_connection</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">opens</span><span class="bp">.</span><span class="n">interior</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">galois_connection</span> <span class="err">?</span><span class="n">m_5</span> <span class="err">?</span><span class="n">m_6</span>
+</pre></div>
+
+
+<p>My initial reaction is: Hey Lean, look, you just figured out what <code>?m_5</code> and <code>?m_6</code> are. Unify, and move on.<br>
+But apparently Lean thinks otherwise...</p>
+
+<a name="147375216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375216">Kenny Lau (Nov 09 2018 at 15:35)</a>:</h4>
+<p>I would <code>set_option pp.all true</code>, but that's me</p>
+
+<a name="147375240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375240">Johan Commelin (Nov 09 2018 at 15:35)</a>:</h4>
+<p>I'll try, but I fear that I get something extremely long and complicated.</p>
+
+<a name="147375263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375263">Kenny Lau (Nov 09 2018 at 15:35)</a>:</h4>
+<p>I'm not afraid of that</p>
+
+<a name="147375316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375316">Rob Lewis (Nov 09 2018 at 15:36)</a>:</h4>
+<p>This pattern shows up a lot when there's a type class argument to <code>galois_connection.l_supr</code> that <code>opens.gc</code> doesn't satisfy.</p>
+
+<a name="147375361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375361">Johan Commelin (Nov 09 2018 at 15:37)</a>:</h4>
+<p>Hmmm, it's even reasonable short:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  @galois_connection.l_supr.{?l_1 ?l_2 ?l_3} ?m_4 ?m_5 ?m_6 ?m_7 ?m_8 ?m_9 ?m_10
+    (@topological_space.opens.gc.{?l_11} ?m_12 ?m_13)
+term
+  @topological_space.opens.gc.{?l_1} ?m_2 ?m_3
+has type
+  @galois_connection.{?l_1 ?l_1}
+    (@subtype.{(max (?l_1+1) 1)} (set.{?l_1} ?m_2) (λ (s : set.{?l_1} ?m_2), @is_open.{?l_1} ?m_2 ?m_3 s))
+    (set.{?l_1} ?m_2)
+    (@subtype.preorder.{?l_1} (set.{?l_1} ?m_2)
+       (@partial_order.to_preorder.{?l_1} (set.{?l_1} ?m_2)
+          (@lattice.order_bot.to_partial_order.{?l_1} (set.{?l_1} ?m_2)
+             (@lattice.bounded_lattice.to_order_bot.{?l_1} (set.{?l_1} ?m_2)
+                (@lattice.complete_lattice.to_bounded_lattice.{?l_1} (set.{?l_1} ?m_2)
+                   (@set.lattice_set.{?l_1} ?m_2)))))
+       (λ (s : set.{?l_1} ?m_2), @is_open.{?l_1} ?m_2 ?m_3 s))
+    (@partial_order.to_preorder.{?l_1} (set.{?l_1} ?m_2)
+       (@lattice.order_bot.to_partial_order.{?l_1} (set.{?l_1} ?m_2)
+          (@lattice.bounded_lattice.to_order_bot.{?l_1} (set.{?l_1} ?m_2)
+             (@lattice.complete_lattice.to_bounded_lattice.{?l_1} (set.{?l_1} ?m_2) (@set.lattice_set.{?l_1} ?m_2)))))
+    (@subtype.val.{(max (?l_1+1) 1)} (set.{?l_1} ?m_2) (λ (s : set.{?l_1} ?m_2), @is_open.{?l_1} ?m_2 ?m_3 s))
+    (@topological_space.opens.interior.{?l_1} ?m_2 ?m_3)
+but is expected to have type
+  @galois_connection.{?l_1 ?l_2} ?m_3 ?m_4
+    (@partial_order.to_preorder.{?l_1} ?m_3
+       (@lattice.order_bot.to_partial_order.{?l_1} ?m_3
+          (@lattice.bounded_lattice.to_order_bot.{?l_1} ?m_3
+             (@lattice.complete_lattice.to_bounded_lattice.{?l_1} ?m_3 ?m_5))))
+    (@partial_order.to_preorder.{?l_2} ?m_4
+       (@lattice.order_bot.to_partial_order.{?l_2} ?m_4
+          (@lattice.bounded_lattice.to_order_bot.{?l_2} ?m_4
+             (@lattice.complete_lattice.to_bounded_lattice.{?l_2} ?m_4 ?m_6))))
+</pre></div>
+
+<a name="147375378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375378">Johan Commelin (Nov 09 2018 at 15:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> That's probably what's going on here.</p>
+
+<a name="147375392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375392">Kenny Lau (Nov 09 2018 at 15:38)</a>:</h4>
+<p>when I can't handle it, I use <a href="https://text-compare.com" target="_blank" title="https://text-compare.com">https://text-compare.com</a></p>
+
+<a name="147375456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375456">Kenny Lau (Nov 09 2018 at 15:38)</a>:</h4>
+<p>and in some rare cases it's some universe issues</p>
+
+<a name="147375481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375481">Johan Commelin (Nov 09 2018 at 15:39)</a>:</h4>
+<p>Otoh, I think all typeclass instances ought to be satisfied.</p>
+
+<a name="147375700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375700">Johan Commelin (Nov 09 2018 at 15:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> There are two <code>sorry</code>s in <code>sheaf.lean</code>. They are math-trivial, but I find them Lean-hard.</p>
+
+<a name="147375716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375716">Kenny Lau (Nov 09 2018 at 15:43)</a>:</h4>
+<p>link?</p>
+
+<a name="147375725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375725">Johan Commelin (Nov 09 2018 at 15:43)</a>:</h4>
+<p>If you have some time, I would be really happy if you could take a look.</p>
+
+<a name="147375762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375762">Johan Commelin (Nov 09 2018 at 15:43)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262">https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262</a></p>
+
+<a name="147375817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375817">Kenny Lau (Nov 09 2018 at 15:44)</a>:</h4>
+<p>I think you have a rather different definition of "math-trivial"</p>
+
+<a name="147375819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375819">Johan Commelin (Nov 09 2018 at 15:44)</a>:</h4>
+<p>What this is saying is, you've got an open set <code>V</code> and a cover <code>Us</code> of an open set <code>U</code>. And <code>V ⊆ U</code>.</p>
+
+<a name="147375831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375831">Johan Commelin (Nov 09 2018 at 15:44)</a>:</h4>
+<p>Now you intersect all the <code>Ui</code> in <code>Us</code> with <code>V</code>, and the result covers <code>V</code>.</p>
+
+<a name="147375838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375838">Kenny Lau (Nov 09 2018 at 15:44)</a>:</h4>
+<p>can you show me the context?</p>
+
+<a name="147375850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375850">Johan Commelin (Nov 09 2018 at 15:45)</a>:</h4>
+<p>You mean explain the context?</p>
+
+<a name="147375853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375853">Kenny Lau (Nov 09 2018 at 15:45)</a>:</h4>
+<p>no, the context</p>
+
+<a name="147375866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375866">Johan Commelin (Nov 09 2018 at 15:45)</a>:</h4>
+<p>Aaah</p>
+
+<a name="147375878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375878">Johan Commelin (Nov 09 2018 at 15:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us_cover</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">=</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span>
+<span class="err">⊢</span> <span class="n">V</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≤</span> <span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">Ui</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Ui</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="o">((</span><span class="n">over</span><span class="bp">.</span><span class="n">comap</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Ui</span><span class="o">)</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
+
+<a name="147375942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375942">Johan Commelin (Nov 09 2018 at 15:46)</a>:</h4>
+<p>So I want to show that <code>V ⊆ ⨆ Ui, (V ∩ Ui)</code>.</p>
+
+<a name="147375950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375950">Johan Commelin (Nov 09 2018 at 15:46)</a>:</h4>
+<p>That is the math version of the goal.</p>
+
+<a name="147375958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375958">Kenny Lau (Nov 09 2018 at 15:46)</a>:</h4>
+<p>where is V on the right hand side?</p>
+
+<a name="147375972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375972">Johan Commelin (Nov 09 2018 at 15:46)</a>:</h4>
+<p><code>V : opens X</code></p>
+
+<a name="147375980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375980">Johan Commelin (Nov 09 2018 at 15:46)</a>:</h4>
+<p>Aah, it is hidden in <code>comap i</code></p>
+
+<a name="147375990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147375990">Johan Commelin (Nov 09 2018 at 15:47)</a>:</h4>
+<p>Which in this setting just means: <code>V ∩ _</code></p>
+
+<a name="147376084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376084">Johan Commelin (Nov 09 2018 at 15:48)</a>:</h4>
+<p>Now I would think that <code>opens.gc</code> should let me transform the right hand side from<br>
+<code>(⨆ (Ui : over U) (H : Ui ∈ Us), ((over.comap i).obj Ui).left).val</code> into<br>
+<code>⨆ (Ui : over U) (H : Ui ∈ Us), (((over.comap i).obj Ui).left).val</code>.<br>
+(I moved a parentheses to before <code>over.comap</code>.)</p>
+
+<a name="147376244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376244">Kenny Lau (Nov 09 2018 at 15:51)</a>:</h4>
+<p>do you know what it is definitionally equivalent to?</p>
+
+<a name="147376250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376250">Kenny Lau (Nov 09 2018 at 15:51)</a>:</h4>
+<p>if not can you just unfold everything?</p>
+
+<a name="147376252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376252">Johan Commelin (Nov 09 2018 at 15:51)</a>:</h4>
+<p>If this goal could be transformed into <code>V.val ∩ Ui.left.val ≤ (over.comap i) blah).val</code> for all <code>Ui</code>, then I could take it from there.</p>
+
+<a name="147376399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376399">Kenny Lau (Nov 09 2018 at 15:53)</a>:</h4>
+<p>if you <code>intro x</code>, then <code>i x</code> says that <code>x \in U</code> right</p>
+
+<a name="147376408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376408">Kenny Lau (Nov 09 2018 at 15:53)</a>:</h4>
+<p>then you rewrite <code>Us_cover</code></p>
+
+<a name="147376455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376455">Johan Commelin (Nov 09 2018 at 15:54)</a>:</h4>
+<p>Ok</p>
+
+<a name="147376463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376463">Kenny Lau (Nov 09 2018 at 15:54)</a>:</h4>
+<p>so now it says <code>x \in set.bUnion _</code></p>
+
+<a name="147376471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376471">Johan Commelin (Nov 09 2018 at 15:54)</a>:</h4>
+<p><del>Make that an <code>x</code></del></p>
+
+<a name="147376502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376502">Kenny Lau (Nov 09 2018 at 15:54)</a>:</h4>
+<p>then <code>set.mem_bUnion_iff</code> or something should give you something useful</p>
+
+<a name="147376505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376505">Johan Commelin (Nov 09 2018 at 15:55)</a>:</h4>
+<p>Now I want to extract a <code>Ui</code> that contains <code>x</code></p>
+
+<a name="147376520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376520">Johan Commelin (Nov 09 2018 at 15:55)</a>:</h4>
+<p>Aah, let me try to find that one.</p>
+
+<a name="147376595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376595">Johan Commelin (Nov 09 2018 at 15:56)</a>:</h4>
+<p>Except that it is a <code>supr</code> instead of a <code>bUnion</code>.</p>
+
+<a name="147376607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376607">Kenny Lau (Nov 09 2018 at 15:56)</a>:</h4>
+<p>aren't they defeq?</p>
+
+<a name="147376616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376616">Johan Commelin (Nov 09 2018 at 15:56)</a>:</h4>
+<p>There should be a <code>lattice.mem_supr_iff</code>.</p>
+
+<a name="147376618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376618">Johan Commelin (Nov 09 2018 at 15:56)</a>:</h4>
+<p>Aah, probably yes. I'll try.</p>
+
+<a name="147376619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376619">Kenny Lau (Nov 09 2018 at 15:56)</a>:</h4>
+<p>you can't be the member of just any supremum</p>
+
+<a name="147376886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376886">Johan Commelin (Nov 09 2018 at 16:00)</a>:</h4>
+<p>Yay! First use of <code>erw</code> in my Lean-life. Context is now</p>
+<div class="codehilite"><pre><span></span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us_cover</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">=</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">V</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">x_1</span> <span class="o">:</span> <span class="n">order_dual</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)),</span>
+    <span class="n">x_1</span> <span class="err">∈</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">),</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span> <span class="n">i</span><span class="o">}</span> <span class="bp">∧</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">x_1</span><span class="bp">.</span><span class="n">val</span>
+<span class="err">⊢</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">Ui</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Ui</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="o">((</span><span class="n">over</span><span class="bp">.</span><span class="n">comap</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Ui</span><span class="o">)</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
+
+<a name="147376921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147376921">Johan Commelin (Nov 09 2018 at 16:01)</a>:</h4>
+<p>That looks encouraging, right? Especially that <code>order_dual</code> that is leaking through.</p>
+
+<a name="147377202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147377202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419typemismatcherror.html#147377202">Johan Commelin (Nov 09 2018 at 16:05)</a>:</h4>
+<p>Ok, need to go. But now I think I can complete this. Thanks a lot!</p>
+
+
+{% endraw %}

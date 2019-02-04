@@ -1,0 +1,50 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/50143bug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50143bug.html">bug</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="132035183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug/near/132035183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50143bug.html#132035183">Kenny Lau (Aug 13 2018 at 11:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="n">class</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">N</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">,</span> <span class="n">is_submodule</span> <span class="n">N</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">R : Type u,</span>
+<span class="cm">_inst_1 : comm_ring R,</span>
+<span class="cm">M : Type v,</span>
+<span class="cm">_inst_2 : module R M,</span>
+<span class="cm">M : Type v,</span>
+<span class="cm">N : set M</span>
+<span class="cm">⊢ module ?m_1 M</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="132035191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug/near/132035191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50143bug.html#132035191">Kenny Lau (Aug 13 2018 at 11:38)</a>:</h4>
+<p>why are there two <code>M : Type v</code>?</p>
+
+<a name="132036544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug/near/132036544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50143bug.html#132036544">Mario Carneiro (Aug 13 2018 at 12:08)</a>:</h4>
+<p>yes this is a bug, I think it was reported and I thought it was fixed</p>
+
+<a name="132036622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug/near/132036622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50143bug.html#132036622">Mario Carneiro (Aug 13 2018 at 12:10)</a>:</h4>
+<p>if you put <code>(M : Type v) [module R M]</code> in the class definition it works</p>
+
+
+{% endraw %}

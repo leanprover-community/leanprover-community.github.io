@@ -1,0 +1,479 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/91108Differencebetweenconstantandaxioms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html">Difference between constant and axioms</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154074362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154074362">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:38)</a>:</h4>
+<p>I just noticed that <code>propext</code> is defined as a constant:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">propext</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>Is this an alternative to <code>axiom</code>? What would change if I made it an axiom?</p>
+
+<a name="154074420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154074420">Kenny Lau (Dec 31 2018 at 07:41)</a>:</h4>
+<p>nothing at all</p>
+
+<a name="154074521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154074521">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:45)</a>:</h4>
+<p>Why are there two different commands then? I would think it may make sense to use <code>axiom</code> for things whose type has type <code>Prop</code> and <code>constant</code> for things whose type has some other type (like a function), but the two examples I've seen are exactly the opposite.</p>
+
+<a name="154074573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154074573">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:47)</a>:</h4>
+<p>I.e. <code>choice</code> defines a function and is an <code>axiom</code> but <code>propext</code> defines a (unproven) proof and is a <code>constant</code>.</p>
+
+<a name="154078889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154078889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154078889">Kevin Buzzard (Dec 31 2018 at 10:25)</a>:</h4>
+<p>There's no difference between <code>theorem</code> and <code>lemma</code> of course. But for constants and axioms I thought the rule of thumb was that constants were for data and axioms for propositions. As you spotted, this convention does not seem to be being followed here</p>
+
+<a name="154079192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154079192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154079192">Kevin Buzzard (Dec 31 2018 at 10:37)</a>:</h4>
+<p>The main difference between data and propositions in Lean is that Lean remembers how you constructed data but throws away your proof of a proposition and just remembers that it's proved. But of course here with constants and axioms this information doesn't exist, so they feel a lot more similar to each other than theorems and definitions do. If you're brave enough to look at Lean's source code and know enough C++ to understand it then you could maybe just check to see what the difference is.</p>
+
+<a name="154079304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154079304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154079304">Gabriel Ebner (Dec 31 2018 at 10:41)</a>:</h4>
+<p>Interestingly enough, <code>propext</code> was an <code>axiom</code> four years ago: <a href="https://github.com/leanprover/lean/blob/0da4f191fc2a37e34d53179d5cf924021de4fd15/library/logic/axioms/propext.lean" target="_blank" title="https://github.com/leanprover/lean/blob/0da4f191fc2a37e34d53179d5cf924021de4fd15/library/logic/axioms/propext.lean">https://github.com/leanprover/lean/blob/0da4f191fc2a37e34d53179d5cf924021de4fd15/library/logic/axioms/propext.lean</a><br>
+But yeah, it doesn't matter that much.  In the C++ code, you could tell the difference between axiom and constant, but this is not really used and not exposed to lean either.  Another difference is that you can do <code>meta constant</code> but not <code>meta axiom</code>.</p>
+
+<a name="154080836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080836">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:22)</a>:</h4>
+<p>By the way, <code>propext</code> and <code>funext</code> together prove that all proofs (of a proposition) are equal, don't they? Since <code>propext</code> shows that <code>f(trivial) = trivial, g(trivial) = trivial</code> for any two functions <code>f : true \to P</code> and <code>g : true \to P</code>. So does that mean type theories in which proofs are distinct lack <code>propext</code>?</p>
+
+<a name="154080842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080842">Chris Hughes (Dec 31 2018 at 11:23)</a>:</h4>
+<p>You don't need any axioms to prove that.</p>
+
+<a name="154080884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080884">Kevin Buzzard (Dec 31 2018 at 11:24)</a>:</h4>
+<p>I think the extra "axiom" is not just that all proofs of P are equal, but that they are definitionally equal.</p>
+
+<a name="154080886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080886">Chris Hughes (Dec 31 2018 at 11:24)</a>:</h4>
+<p>look at the theorem <code>proof_irrel</code>.</p>
+
+<a name="154080899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080899">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:25)</a>:</h4>
+<p>Oh. <code>rfl</code> is just anti-climactic.</p>
+
+<a name="154080938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080938">Kevin Buzzard (Dec 31 2018 at 11:26)</a>:</h4>
+<p>:-)</p>
+
+<a name="154080939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080939">Chris Hughes (Dec 31 2018 at 11:26)</a>:</h4>
+<p>But I see actually, even if it wasn't definitional, then propext would imply that anyway.</p>
+
+<a name="154080950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154080950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154080950">Chris Hughes (Dec 31 2018 at 11:27)</a>:</h4>
+<p>Because every true <code>Prop</code> would be equal to <code>true</code> and <code>true</code> has only one proof.</p>
+
+<a name="154081030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081030">Chris Hughes (Dec 31 2018 at 11:29)</a>:</h4>
+<p>Proof relevant type theories tend to lack the type <code>Prop</code> altogether I think. Proof irrelevance is the only thing distinguishing <code>Prop</code> and <code>Type</code> so propositions tend to be defined using <code>Type</code> and some of them I think have an <code>is_Prop</code> predicate that says that the type has only one element.</p>
+
+<a name="154081033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081033">Kevin Buzzard (Dec 31 2018 at 11:29)</a>:</h4>
+<p>My recent thoughts about <code>quot</code>, and Mario's comments about them (sparked by Chris' observation that I used quot.sound to prove quot'.sound) made all this a bit clearer to me. There is just a whole bunch of stuff which, if you don't have it, would make maths basically impossible to do, and the CS people have made what appears to a mathematician to be a random small set of this stuff into axioms and then deduced all the rest of it. I'm not sure that the fact that propext is an axiom is remotely important.</p>
+
+<a name="154081242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081242">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:36)</a>:</h4>
+<blockquote>
+<p>Because every true <code>Prop</code> would be equal to <code>true</code> and <code>true</code> has only one proof.</p>
+</blockquote>
+<p>When I try writing that proof, though, Lean just changes it to <code>eq.refl H1</code> (when I print it).</p>
+
+<a name="154081244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081244">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">proof_irrel&#39;</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">H1</span> <span class="bp">=</span> <span class="n">H2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ta</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">true</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">propext</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">trivial</span> <span class="o">},</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H1</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="n">ta</span> <span class="n">at</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="154081245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081245">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:36)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="154081246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081246">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:36)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="154081247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081247">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:36)</a>:</h4>
+<p>Oh wait, I'm using a rewrite so it tries refl.</p>
+
+<a name="154081294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081294">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:38)</a>:</h4>
+<p>Wasn't there a version of <code>rw</code> that didn't try <code>refl</code>?</p>
+
+<a name="154081304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081304">Kenny Lau (Dec 31 2018 at 11:39)</a>:</h4>
+<p>I think you can tweak the settings</p>
+
+<a name="154081307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081307">Kevin Buzzard (Dec 31 2018 at 11:39)</a>:</h4>
+<p>I completely agree that it's a pain to experiment with stuff using <code>rw</code> becasue of this refl thing. I think "dunfold" and "delta" unfold functions without trying refl at the end but I don't know about rw.</p>
+
+<a name="154081313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081313">Chris Hughes (Dec 31 2018 at 11:39)</a>:</h4>
+<p>I'm not sure this proof would actually work. Substitutions using equality of types are far more complicated and subtle than they might appear.</p>
+
+<a name="154081426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081426">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:42)</a>:</h4>
+<blockquote>
+<p>I'm not sure this proof would actually work. Substitutions using equality of types are far more complicated and subtle than they might appear.</p>
+</blockquote>
+<p>? Surely rewrite works on <code>↔</code>, which is equality of types. E.g.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">HP</span> <span class="o">:</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">HPQ</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">=</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">sorry</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">HPQ</span> <span class="n">at</span> <span class="n">HP</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">}</span>
+</pre></div>
+
+<a name="154081485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081485">Chris Hughes (Dec 31 2018 at 11:44)</a>:</h4>
+<p>Actually, it definitely does work.</p>
+
+<a name="154081500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081500">Chris Hughes (Dec 31 2018 at 11:45)</a>:</h4>
+<p>This is the easiest way.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">proof_irrel&#39;</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">H1</span> <span class="bp">=</span> <span class="n">H2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ta</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">true</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">propext</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">trivial</span> <span class="o">},</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H1</span> <span class="o">},</span>
+  <span class="n">revert</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">ta</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="154081565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081565">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:47)</a>:</h4>
+<p>And then use <code>no_confusion</code>? Hm, <code>true</code> doesn't have no_confusion.</p>
+
+<a name="154081610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081610">Chris Hughes (Dec 31 2018 at 11:48)</a>:</h4>
+<p>That's because it's unnecessary. But if there was no proof irrelevance there would be.</p>
+
+<a name="154081617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081617">Chris Hughes (Dec 31 2018 at 11:49)</a>:</h4>
+<p>Actually, this is what you should do.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">proof_irrel&#39;</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">H1</span> <span class="bp">=</span> <span class="n">H2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ta</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">true</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">propext</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">trivial</span> <span class="o">},</span> <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H1</span> <span class="o">},</span>
+  <span class="n">revert</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">ta</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">H1</span><span class="o">,</span> <span class="n">cases</span> <span class="n">H2</span><span class="o">,</span>
+  <span class="n">refl</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="154081619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081619">Chris Hughes (Dec 31 2018 at 11:49)</a>:</h4>
+<p><code>no_confusion</code> is usually good for proving things are not equal.</p>
+
+<a name="154081671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081671">Abhimanyu Pallavi Sudhir (Dec 31 2018 at 11:51)</a>:</h4>
+<p>Yeah, I got confused (between the uniqueness of the constructors and their exhaustiveness)</p>
+
+<a name="154081681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154081681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154081681">Chris Hughes (Dec 31 2018 at 11:51)</a>:</h4>
+<p>To illustrate how complicated proof relevant equality can be, try proving this <code>example</code> without using <code>eq</code> anywhere in the proof. (Hint: it's impossible)</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">eq2</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="154082070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154082070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154082070">Kenny Lau (Dec 31 2018 at 12:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">prelude</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="kt">Prop</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">Sort</span> <span class="mi">0</span>
+
+<span class="kn">structure</span> <span class="n">iff</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">mpr</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">eq</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">↔</span> <span class="bp">`</span><span class="o">:</span><span class="mi">20</span> <span class="o">:=</span> <span class="n">iff</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">=</span> <span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="o">:=</span> <span class="n">eq</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">,</span> <span class="n">subst</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">eq</span><span class="bp">.</span><span class="n">subst</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="n">h₂</span> <span class="n">h₁</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">▸</span> <span class="bp">`</span><span class="o">:</span><span class="mi">75</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">subst</span>
+
+<span class="kn">constant</span> <span class="n">propext</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">true</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="n">true</span>
+
+<span class="kn">lemma</span> <span class="n">proof_irrel</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">H1</span> <span class="bp">=</span> <span class="n">H2</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">true</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">propext</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H1</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">true</span><span class="bp">.</span><span class="n">intro</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="o">(</span><span class="n">this</span> <span class="bp">▸</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">,</span> <span class="n">true</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">H1</span> <span class="o">(</span><span class="n">true</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">H2</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="n">true</span><span class="bp">.</span><span class="n">intro</span><span class="o">)))</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">H1</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span><span class="o">,</span> <span class="n">H1</span> <span class="bp">=</span> <span class="n">H2</span><span class="o">)</span> <span class="n">H1</span> <span class="n">H2</span>
+</pre></div>
+
+<a name="154084763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154084763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154084763">Chris Hughes (Dec 31 2018 at 13:43)</a>:</h4>
+<p>What does the <code>subst</code> attribute do?</p>
+
+<a name="154087217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154087217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154087217">Kevin Buzzard (Dec 31 2018 at 15:04)</a>:</h4>
+<p>Where is a complete list of all attributes and their explanations? Oh -- is <code>[subst]</code> it only used in core? Are users not supposed to use it?</p>
+
+<a name="154087286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154087286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154087286">Kenny Lau (Dec 31 2018 at 15:06)</a>:</h4>
+<p>I have no idea, I just copied the code out of the core library</p>
+
+<a name="154088165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154088165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154088165">Patrick Massot (Dec 31 2018 at 15:32)</a>:</h4>
+<blockquote>
+<p>Proof relevant type theories tend to lack the type <code>Prop</code> altogether I think. Proof irrelevance is the only thing distinguishing <code>Prop</code> and <code>Type</code> so propositions tend to be defined using <code>Type</code> and some of them I think have an <code>is_Prop</code> predicate that says that the type has only one element.</p>
+</blockquote>
+<p>This is not true. Impredicativity is also an important difference. I think Coq has Prop for this reason, and no definitional proof irrelevance</p>
+
+<a name="154089302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154089302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154089302">Chris Hughes (Dec 31 2018 at 16:09)</a>:</h4>
+<p>What do you mean precisely by impredicativity?</p>
+
+<a name="154089447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154089447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154089447">Kevin Buzzard (Dec 31 2018 at 16:12)</a>:</h4>
+<p>Coq has no definitional proof irrelevance? But does it have proof irrelevance?</p>
+
+<a name="154089637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154089637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154089637">Chris Hughes (Dec 31 2018 at 16:17)</a>:</h4>
+<p>I heard once it was an optional extra like <code>propext</code>. Though I guess that means <code>Prop</code> would still be special in the sense that any two proofs are not provably unequal.</p>
+
+<a name="154096231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096231">Mario Carneiro (Dec 31 2018 at 19:26)</a>:</h4>
+<p>right, you have to have this property if impredicativity is to be consistent</p>
+
+<a name="154096238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096238">Mario Carneiro (Dec 31 2018 at 19:27)</a>:</h4>
+<p>because if a type has two elements, then you can build a cantor's paradox sort of thing using impredicativity</p>
+
+<a name="154096291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096291">Chris Hughes (Dec 31 2018 at 19:28)</a>:</h4>
+<p>What does impredicativity mean precisely?</p>
+
+<a name="154096563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096563">Mario Carneiro (Dec 31 2018 at 19:35)</a>:</h4>
+<p><code>forall x : A, P : Prop</code> if <code>P : Prop</code></p>
+
+<a name="154096566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096566">Mario Carneiro (Dec 31 2018 at 19:35)</a>:</h4>
+<p>even if <code>A : Type</code></p>
+
+<a name="154096610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096610">Mario Carneiro (Dec 31 2018 at 19:36)</a>:</h4>
+<p>this means that propositions can quantify over themselves</p>
+
+<a name="154096683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096683">Kevin Buzzard (Dec 31 2018 at 19:38)</a>:</h4>
+<p><code>(forall x : A, P) : Prop</code> is what we're talking about here, presumably. The universe isn't the max, it's the imax.</p>
+
+<a name="154096698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096698">Mario Carneiro (Dec 31 2018 at 19:39)</a>:</h4>
+<p>in a predicative universe, the pi type has level max of the universe levels of the parts</p>
+
+<a name="154096701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154096701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154096701">Mario Carneiro (Dec 31 2018 at 19:39)</a>:</h4>
+<p>but we have this funny imax thing for level 0</p>
+
+<a name="154114592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154114592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154114592">Abhimanyu Pallavi Sudhir (Jan 01 2019 at 05:12)</a>:</h4>
+<blockquote>
+<p>this means that propositions can quantify over themselves</p>
+</blockquote>
+<p>Isn't that just <code>P → P</code>?</p>
+
+<a name="154114602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154114602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154114602">Abhimanyu Pallavi Sudhir (Jan 01 2019 at 05:13)</a>:</h4>
+<p>Even with functions between types, the type of <code>P → Q</code> is the types of <code>P</code> and <code>Q</code>, so I don't understand why this makes <code>Prop</code> special.</p>
+
+<a name="154114948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154114948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154114948">Mario Carneiro (Jan 01 2019 at 05:25)</a>:</h4>
+<p>I mean a function whose domain of quantification includes itself</p>
+
+<a name="154115111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154115111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154115111">Mario Carneiro (Jan 01 2019 at 05:30)</a>:</h4>
+<p>which permits self application</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">⦃</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">⦄,</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span>
+<span class="n">def</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">p</span> <span class="n">p</span>
+</pre></div>
+
+<a name="154115115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154115115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154115115">Mario Carneiro (Jan 01 2019 at 05:30)</a>:</h4>
+<p>you can use this to do a variety of diagonalization type arguments</p>
+
+<a name="154116038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154116038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154116038">Kenny Lau (Jan 01 2019 at 06:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> if you quantify over all <code>Type</code>, you get <code>Type 1</code></p>
+
+<a name="154129709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154129709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154129709">Reid Barton (Jan 01 2019 at 14:36)</a>:</h4>
+<p>A classic example of an impredicative definition of a Prop is defining the subgroup generated by a subset S of a group G to be the intersection of all the subgroups of G which contain S</p>
+
+<a name="154129773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154129773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154129773">Reid Barton (Jan 01 2019 at 14:39)</a>:</h4>
+<p>which is to say <code>def belongs_to_subgroup_generated_by (S : set G) (x : G) : Prop := \forall (P : G \to Prop), is_subgroup P \and (\forall y, S y \to P y) \to P x</code></p>
+
+<a name="154129817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154129817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154129817">Reid Barton (Jan 01 2019 at 14:40)</a>:</h4>
+<p>If <code>Prop</code> had a universe hierarchy like <code>Type</code>, you wouldn't be allowed to use the same <code>Prop</code> on both sides of that equation</p>
+
+<a name="154129832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154129832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154129832">Chris Hughes (Jan 01 2019 at 14:41)</a>:</h4>
+<p>It hadn't occurred to me how important this was.</p>
+
+<a name="154129986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154129986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154129986">Kenny Lau (Jan 01 2019 at 14:47)</a>:</h4>
+<p>of course it hadn't, you guys don't even care about foundations / of course it hadn't, this is hard core logic stuff</p>
+
+<a name="154130031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130031">Reid Barton (Jan 01 2019 at 14:48)</a>:</h4>
+<p>It's really hard to imagine from a classical perspective how anyone could object to the construction "take all the subsets of G, keep the ones which are subgroups containing S, and form their intersection".</p>
+
+<a name="154130032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130032">Reid Barton (Jan 01 2019 at 14:48)</a>:</h4>
+<p>Before using Lean, I was not convinced that "impredicative" meant anything at all.</p>
+
+<a name="154130044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130044">Kenny Lau (Jan 01 2019 at 14:49)</a>:</h4>
+<p>From a "classical perspective", you run into issues like Δ0-predicates are absolute</p>
+
+<a name="154130092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130092">Kenny Lau (Jan 01 2019 at 14:50)</a>:</h4>
+<p>that somehow P(ω) (i.e. powerset of ω) is not absolute</p>
+
+<a name="154130094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130094">Kenny Lau (Jan 01 2019 at 14:50)</a>:</h4>
+<p>because taking powerset is not a predicative thing to do</p>
+
+<a name="154130151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130151">Reid Barton (Jan 01 2019 at 14:52)</a>:</h4>
+<p>Right, well, so the conclusion is that caring about predicativity is not a math thing to do.</p>
+
+<a name="154130166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130166">Reid Barton (Jan 01 2019 at 14:53)</a>:</h4>
+<p>Especially since this example of an impredicative definition is something that one will encounter in a first course on algebra, it's not some scary thing involving universes or whatever.</p>
+
+<a name="154130173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130173">Kenny Lau (Jan 01 2019 at 14:53)</a>:</h4>
+<p>mathematicians have gone too far, doing impredicative stuff like that</p>
+
+<a name="154130179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130179">Kenny Lau (Jan 01 2019 at 14:54)</a>:</h4>
+<p>how are they going to compute their examples if their definitions are impredicative</p>
+
+<a name="154130229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130229">Kevin Buzzard (Jan 01 2019 at 14:54)</a>:</h4>
+<p>who cares about examples? We want theorems!</p>
+
+<a name="154130240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130240">Kenny Lau (Jan 01 2019 at 14:55)</a>:</h4>
+<p>what do you want theorems for?</p>
+
+<a name="154130245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130245">Kevin Buzzard (Jan 01 2019 at 14:55)</a>:</h4>
+<p>fun</p>
+
+<a name="154130247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130247">Kevin Buzzard (Jan 01 2019 at 14:55)</a>:</h4>
+<p>and promotion</p>
+
+<a name="154130248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130248">Kenny Lau (Jan 01 2019 at 14:55)</a>:</h4>
+<p>wasn't number theory created to solve diophantine equations</p>
+
+<a name="154130253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130253">Kevin Buzzard (Jan 01 2019 at 14:55)</a>:</h4>
+<p>yes but now its job is to create theorems explaining what the structure of the solutions is</p>
+
+<a name="154130292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130292">Kevin Buzzard (Jan 01 2019 at 14:56)</a>:</h4>
+<p>because solving them all turned out to be too hard</p>
+
+<a name="154130294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130294">Kenny Lau (Jan 01 2019 at 14:56)</a>:</h4>
+<p>but now your impredicative definitions are not helping us to solve the equations, because they are incomputable</p>
+
+<a name="154130303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130303">Kevin Buzzard (Jan 01 2019 at 14:57)</a>:</h4>
+<p>yes but we don't care about solving them because that's too hard. We now care about whether the solutions lie on some union of simple subvarieties or something. Nobody will get promoted for solving a Diophantine equation.</p>
+
+<a name="154130343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130343">Kenny Lau (Jan 01 2019 at 14:58)</a>:</h4>
+<p>Can you compute the integers of Q[X]/(X^3-3X+1)?</p>
+
+<a name="154130349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130349">Kevin Buzzard (Jan 01 2019 at 14:59)</a>:</h4>
+<p>sure, I read an algorithm to do that once</p>
+
+<a name="154130358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130358">Kenny Lau (Jan 01 2019 at 14:59)</a>:</h4>
+<p>that doesn't mean you can compute it</p>
+
+<a name="154130359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130359">Kevin Buzzard (Jan 01 2019 at 14:59)</a>:</h4>
+<p>it's in Cohen's book on computational number theory</p>
+
+<a name="154130362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130362">Kevin Buzzard (Jan 01 2019 at 14:59)</a>:</h4>
+<p>sure it means I can compute it</p>
+
+<a name="154130364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130364">Kevin Buzzard (Jan 01 2019 at 14:59)</a>:</h4>
+<p>I just ask a PhD student to compute it for me</p>
+
+<a name="154130367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130367">Kenny Lau (Jan 01 2019 at 14:59)</a>:</h4>
+<p>that isn't <strong>you</strong> computing it</p>
+
+<a name="154130372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130372">Kevin Buzzard (Jan 01 2019 at 14:59)</a>:</h4>
+<p>I think you have a lot to learn about the real world</p>
+
+<a name="154130934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154130934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154130934">Chris Hughes (Jan 01 2019 at 15:18)</a>:</h4>
+<p>Lean is designed for computer science, so impredicative definitions can't be that useless from a computational perspective. You can't compute with them, but you can still use them to help prove your program does what it's supposed to.</p>
+
+<a name="154132613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154132613">Mario Carneiro (Jan 01 2019 at 16:20)</a>:</h4>
+<p>By the way, HoTT uses predicative universes only (in the usual setup), so if you thought it would be a great thing that solves all your problems then this is one place where it isn't all sunshine and roses</p>
+
+<a name="154132623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154132623">Mario Carneiro (Jan 01 2019 at 16:21)</a>:</h4>
+<p>Also Agda makes a big deal about being 100% predicative</p>
+
+<a name="154132730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154132730">Mario Carneiro (Jan 01 2019 at 16:24)</a>:</h4>
+<p>It's true that in regular math predicativity doesn't really come up, but it shows up in non-absoluteness like Kenny says, or in model theory where adding more ordinals causes new subsets of nat to appear... you have this weird situation where you've built the set but not the elements, and that's where things like Cohen reals come from</p>
+
+<a name="154132796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154132796">Mario Carneiro (Jan 01 2019 at 16:27)</a>:</h4>
+<p>Also, we've discussed impredicative encodings of inductive types before, like <code>xnat : Type := \all X : Type, X -&gt; (X -&gt; X) -&gt; X</code>, which doesn't typecheck in lean because <code>Type</code> is predicative</p>
+
+<a name="154132846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154132846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html#154132846">Mario Carneiro (Jan 01 2019 at 16:29)</a>:</h4>
+<p>Or when we have an object that is "defined by a universal property" and we want to just write that property but it doesn't work because the universe quantifier isn't large enough, so instead we re-express it by some kind of construction "from below"... that's predicativity</p>
+
+
+{% endraw %}

@@ -1,0 +1,214 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/35236rext.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html">rext</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133502825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133502825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133502825">Reid Barton (Sep 07 2018 at 12:41)</a>:</h4>
+<p>How about <code>rext</code> = <code>ext</code> + <code>rintros</code>? Is this going too far?</p>
+
+<a name="133502831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133502831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133502831">Reid Barton (Sep 07 2018 at 12:41)</a>:</h4>
+<p>Or <code>ext</code> + <code>rcases</code> depending on your point of view</p>
+
+<a name="133529587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133529587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133529587">Simon Hudon (Sep 07 2018 at 20:49)</a>:</h4>
+<p>That shouldn't be too hard. I thought of doing it before but I had to change the import structure to do it so in the end I didn't bother</p>
+
+<a name="133590026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133590026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133590026">Simon Hudon (Sep 09 2018 at 03:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  I just pushed this branch: <a href="https://travis-ci.org/leanprover/mathlib/builds/426239546" target="_blank" title="https://travis-ci.org/leanprover/mathlib/builds/426239546">https://travis-ci.org/leanprover/mathlib/builds/426239546</a> please let me know if it does what you wanted</p>
+
+<a name="133590396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133590396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133590396">Scott Morrison (Sep 09 2018 at 04:13)</a>:</h4>
+<p>Looks like there are problems in</p>
+<div class="codehilite"><pre><span></span>/home/travis/build/leanprover/mathlib/tactic/pi_instances.lean:25:14: error: type mismatch at application
+  cons x
+term
+  x
+has type
+  name
+but is expected to have type
+  rcases_patt
+</pre></div>
+
+<a name="133590452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133590452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133590452">Simon Hudon (Sep 09 2018 at 04:15)</a>:</h4>
+<p>I prefer to think of it as undocumented feature :D</p>
+
+<a name="133590508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133590508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133590508">Scott Morrison (Sep 09 2018 at 04:17)</a>:</h4>
+<p>:-)</p>
+
+<a name="133592972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133592972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133592972">Simon Hudon (Sep 09 2018 at 05:47)</a>:</h4>
+<p>The documentation of that feature is getting complicated, I'll just remove it</p>
+
+<a name="133605673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133605673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133605673">Reid Barton (Sep 09 2018 at 13:38)</a>:</h4>
+<p>Simon I've just finished building mathlib with your patch; about to try it on my example (although it will require some preparatory work).</p>
+
+<a name="133605680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133605680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133605680">Simon Hudon (Sep 09 2018 at 13:39)</a>:</h4>
+<p><span class="emoji emoji-1f91e" title="fingers crossed">:fingers_crossed:</span></p>
+
+<a name="133605934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133605934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133605934">Reid Barton (Sep 09 2018 at 13:48)</a>:</h4>
+<p>I see <code>ext</code> no longer applied <code>propext</code> to my goal, is that intentional?</p>
+
+<a name="133605952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133605952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133605952">Reid Barton (Sep 09 2018 at 13:49)</a>:</h4>
+<p>I had something like <code>(\lam a b, f a b) = (\lam a b, g a b)</code> and I want to intro <code>a</code> and <code>b</code> and get the goal <code>f a b \iff g a b</code> -- where <code>f a b</code> and <code>g a b</code> are propositions</p>
+
+<a name="133606023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606023">Reid Barton (Sep 09 2018 at 13:50)</a>:</h4>
+<p>anyways, it worked! I changed</p>
+<div class="codehilite"><pre><span></span><span class="n">ext</span> <span class="n">a₁</span> <span class="n">a₂</span><span class="o">,</span> <span class="n">rcases</span> <span class="n">a₁</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">i&#39;₁</span><span class="o">,</span> <span class="n">f₁</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">j₁</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rcases</span> <span class="n">a₂</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">i&#39;₂</span><span class="o">,</span> <span class="n">f₂</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">j₂</span><span class="bp">⟩</span><span class="o">,</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="n">ext</span> <span class="bp">⟨⟨</span><span class="n">i&#39;₁</span><span class="o">,</span> <span class="n">f₁</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">j₁</span><span class="bp">⟩</span> <span class="bp">⟨⟨</span><span class="n">i&#39;₂</span><span class="o">,</span> <span class="n">f₂</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">j₂</span><span class="bp">⟩</span><span class="o">,</span>
+</pre></div>
+
+<a name="133606091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606091">Simon Hudon (Sep 09 2018 at 13:52)</a>:</h4>
+<p>It is not intentional. Can you find where <code>propext</code> is labelled with <code>extentionality</code>?</p>
+
+<a name="133606127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606127">Reid Barton (Sep 09 2018 at 13:53)</a>:</h4>
+<p>It... doesn't appear to be so marked anywhere that I can find</p>
+
+<a name="133606170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606170">Reid Barton (Sep 09 2018 at 13:54)</a>:</h4>
+<p>Is there a way to tell <code>ext</code> to trace what it is doing?</p>
+
+<a name="133606267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606267">Johannes Hölzl (Sep 09 2018 at 13:57)</a>:</h4>
+<p><code>rext</code> is very nice!</p>
+
+<a name="133606277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606277">Reid Barton (Sep 09 2018 at 13:57)</a>:</h4>
+<p>Wait, maybe it never used to apply <code>propext</code>? I might have been confused because <code>set.ext</code> is very similar.</p>
+
+<a name="133606386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606386">Simon Hudon (Sep 09 2018 at 14:01)</a>:</h4>
+<p>I think that's probably it</p>
+
+<a name="133606425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606425">Simon Hudon (Sep 09 2018 at 14:02)</a>:</h4>
+<p>We can add it though</p>
+
+<a name="133606431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606431">Simon Hudon (Sep 09 2018 at 14:02)</a>:</h4>
+<p>Check what happens if you add <code>attribute [extensionality] propext</code> before your proof.</p>
+
+<a name="133606436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606436">Reid Barton (Sep 09 2018 at 14:03)</a>:</h4>
+<p><code>only constants and Pi types are supported: Prop</code></p>
+
+<a name="133606491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606491">Reid Barton (Sep 09 2018 at 14:05)</a>:</h4>
+<p>Aha, I understand why the behavior changed.<br>
+Before, it applied <code>funext</code> once and then, by chance, it happened to apply <code>set.ext</code> which is <code>funext</code> plus <code>propext</code>.<br>
+Now, it (correctly) prefers to apply <code>funext</code> twice and then it gets stuck.</p>
+
+<a name="133606597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606597">Simon Hudon (Sep 09 2018 at 14:08)</a>:</h4>
+<p><span class="emoji emoji-1f926" title="face palm">:face_palm:</span> oh dear! I was discussing this with Mario and saying that each type we care about is a named constant ... except for pi types. And now, the type of Prop is also not names so I have to think about making more exceptions</p>
+
+<a name="133606754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606754">Reid Barton (Sep 09 2018 at 14:12)</a>:</h4>
+<p><code>expr.sort</code>, I guess?</p>
+
+<a name="133606766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606766">Reid Barton (Sep 09 2018 at 14:12)</a>:</h4>
+<p>Also don't forget to implement univalence for equalities between types</p>
+
+<a name="133606824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606824">Simon Hudon (Sep 09 2018 at 14:14)</a>:</h4>
+<p>Now then next exception should be easier to add. Can you send me your example so that I can try it out?</p>
+
+<a name="133606844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606844">Reid Barton (Sep 09 2018 at 14:15)</a>:</h4>
+<p>I think I included one in the github issue (my real one has some dependencies)</p>
+
+<a name="133606848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606848">Reid Barton (Sep 09 2018 at 14:15)</a>:</h4>
+<p>But I can also provide it</p>
+
+<a name="133606958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606958">Simon Hudon (Sep 09 2018 at 14:18)</a>:</h4>
+<p>Or a link to the issue please</p>
+
+<a name="133606968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606968">Reid Barton (Sep 09 2018 at 14:18)</a>:</h4>
+<p><a href="https://gist.github.com/rwbarton/1966db9e4ba470f2a5865f5086776f84" target="_blank" title="https://gist.github.com/rwbarton/1966db9e4ba470f2a5865f5086776f84">https://gist.github.com/rwbarton/1966db9e4ba470f2a5865f5086776f84</a>, it should compile against your branch</p>
+
+<a name="133606974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606974">Reid Barton (Sep 09 2018 at 14:18)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/issues/246" target="_blank" title="https://github.com/leanprover/mathlib/issues/246">https://github.com/leanprover/mathlib/issues/246</a></p>
+
+<a name="133606977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606977">Reid Barton (Sep 09 2018 at 14:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="c1">-- ⊢ b ∈ f a ↔ b ∈ g a</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133606992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133606992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133606992">Reid Barton (Sep 09 2018 at 14:19)</a>:</h4>
+<p>My real example is no more interesting than this as far as the propext issue is concerned--it's just a test case for the <code>rext</code> feature.</p>
+
+<a name="133607603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607603">Simon Hudon (Sep 09 2018 at 14:34)</a>:</h4>
+<p>Cool, that works now. I'll push it and then get some sleep :)</p>
+
+<a name="133607651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607651">Reid Barton (Sep 09 2018 at 14:36)</a>:</h4>
+<p>(Wait aren't we in the same time zone...)</p>
+
+<a name="133607659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607659">Simon Hudon (Sep 09 2018 at 14:37)</a>:</h4>
+<p>Are you on the east coast of the US?</p>
+
+<a name="133607661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607661">Simon Hudon (Sep 09 2018 at 14:37)</a>:</h4>
+<p>But to answer your surprise, when I program, time flies and I forget to do all kinds of stuff</p>
+
+<a name="133607702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607702">Simon Hudon (Sep 09 2018 at 14:38)</a>:</h4>
+<p>... including sleeping</p>
+
+<a name="133607754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607754">Reid Barton (Sep 09 2018 at 14:40)</a>:</h4>
+<p>Yes. But still have not adjusted from being in Europe and have been up for 4 hours today...</p>
+
+<a name="133607767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607767">Simon Hudon (Sep 09 2018 at 14:41)</a>:</h4>
+<p>Were you in the UK? You seem to be driving on the wrong side of the road ... the road being a stand-in for the night, and the wrong side is being awake after 4 rather than awake until 4 :D</p>
+
+<a name="133607807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607807">Simon Hudon (Sep 09 2018 at 14:42)</a>:</h4>
+<p>Yeah, my metaphors are not that enlightening ...</p>
+
+<a name="133607808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607808">Reid Barton (Sep 09 2018 at 14:42)</a>:</h4>
+<p>So we seem to be off by a full 12 hours from each other, yes</p>
+
+<a name="133607854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rext/near/133607854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35236rext.html#133607854">Simon Hudon (Sep 09 2018 at 14:44)</a>:</h4>
+<p>For today at least</p>
+
+
+{% endraw %}

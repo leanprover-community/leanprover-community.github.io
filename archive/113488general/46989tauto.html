@@ -1,0 +1,75 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/46989tauto.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html">tauto?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136135863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136135863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136135863">Sebastien Gouezel (Oct 19 2018 at 22:13)</a>:</h4>
+<p>Suppose I have an assumption</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">dist</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and a goal</p>
+<div class="codehilite"><pre><span></span><span class="bp">∀</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">dist</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The goal is a trivial consequence of <code>h</code> (there are more assumptions in the goal than in <code>h</code>). I can prove it by hand doing the <code>intros</code>/<code>rcases</code> dance, but I did not find a tactic that would do it out of the box. Did I miss something?</p>
+
+<a name="136136157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136157">Reid Barton (Oct 19 2018 at 22:19)</a>:</h4>
+<p><code>tidy</code> can do these sometimes</p>
+
+<a name="136136222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136222">Reid Barton (Oct 19 2018 at 22:20)</a>:</h4>
+<p>Also, there's <code>rintros</code> now <span class="emoji emoji-263a" title="smile">:smile:</span></p>
+
+<a name="136136571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136571">Sebastien Gouezel (Oct 19 2018 at 22:27)</a>:</h4>
+<p>Poor <code>tidy</code> is completely lost when there are real numbers: it unfolds the Cauchy sequences definition, and asks for new goals looking like</p>
+<div class="codehilite"><pre><span></span><span class="n">dist</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="n">setoid</span><span class="bp">.</span><span class="n">r</span> <span class="bp">⟨</span><span class="n">ε_val</span><span class="o">,</span> <span class="n">ε_property</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="136136596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136596">Kenny Lau (Oct 19 2018 at 22:27)</a>:</h4>
+<p>I don't see why one can't just prove it by hand. It isn't like it's very complicated</p>
+
+<a name="136136609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136609">Kenny Lau (Oct 19 2018 at 22:27)</a>:</h4>
+<p>but yes, I agree there should be a tactic that doesn't only take <code>iff</code> things as argument</p>
+
+<a name="136136655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136655">Patrick Massot (Oct 19 2018 at 22:28)</a>:</h4>
+<p>Because proving things by hand don't scale</p>
+
+<a name="136136663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136663">Patrick Massot (Oct 19 2018 at 22:28)</a>:</h4>
+<p>We want thousands of those trivial proofs</p>
+
+<a name="136136894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136894">Sebastien Gouezel (Oct 19 2018 at 22:32)</a>:</h4>
+<p>Isabelle proof: <code>using h by blast</code> :)</p>
+
+<a name="136136930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136930">Patrick Massot (Oct 19 2018 at 22:33)</a>:</h4>
+<p>That still two words of noise, but it's getting close to acceptable</p>
+
+<a name="136136964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136136964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136136964">Patrick Massot (Oct 19 2018 at 22:34)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="136137144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%3F/near/136137144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46989tauto.html#136137144">Chris Hughes (Oct 19 2018 at 22:36)</a>:</h4>
+<p>(deleted)</p>
+
+
+{% endraw %}

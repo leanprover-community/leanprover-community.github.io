@@ -1,0 +1,308 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/51017notationstointroduceproofs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html">notations to introduce proofs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135815299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815299">Sebastien Gouezel (Oct 15 2018 at 10:17)</a>:</h4>
+<p>In the following snippet,</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span>        <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">B</span><span class="o">:=</span> <span class="k">calc</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="k">show</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span>          <span class="o">,</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>you can see that a proof after <code>have</code> is introduced by <code>:=</code>, after <code>calc</code> by <code>:</code> and after <code>show</code> by <code>,</code>. And they can essentially not be used one for the other (the only allowed change is to use <code>,</code> instead of <code>:=</code> on the first line). I am plainly used to it, but I would like to understand the rationale behind it. Is it to ease parsing? Or just for historical reasons? Would it make sense to use, say, <code>:=</code> everywhere, to avoid confusing newcomers for no reason?</p>
+
+<a name="135815435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815435">Mario Carneiro (Oct 15 2018 at 10:21)</a>:</h4>
+<p>Certainly <code>calc</code> would make sense with <code>:=</code></p>
+
+<a name="135815449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815449">Mario Carneiro (Oct 15 2018 at 10:21)</a>:</h4>
+<p>the commas in <code>show</code> and <code>have</code> are likely due to influence from Isar</p>
+
+<a name="135815458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815458">Mario Carneiro (Oct 15 2018 at 10:22)</a>:</h4>
+<p>Of course you should be looking at term proofs not tactic proofs, which are at best an approximation of the term equivalents</p>
+
+<a name="135815503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815503">Mario Carneiro (Oct 15 2018 at 10:22)</a>:</h4>
+<p>I'm not sure what notation Isar uses for <code>let</code>. Do you?</p>
+
+<a name="135815645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815645">Sebastien Gouezel (Oct 15 2018 at 10:27)</a>:</h4>
+<p>There are no commas in Isar. The formula to be proved is enclosed in quotes, and then you give the proof. Either it is a direct proof, and then you just write something like <code>using foo by auto</code>. Or it is a complex proof, and it is enclosed in <code>proof ... qed</code>. The <code>let</code> equivalent is called <code>define</code>, and used like <code>define foo where "foo = 0"</code>.</p>
+
+<a name="135815713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815713">Mario Carneiro (Oct 15 2018 at 10:29)</a>:</h4>
+<p>interesting. That's more different than I expected. Has it changed significantly in the past 10 years?</p>
+
+<a name="135815726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815726">Mario Carneiro (Oct 15 2018 at 10:29)</a>:</h4>
+<p>the base Isar syntax, I mean</p>
+
+<a name="135815737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815737">Mario Carneiro (Oct 15 2018 at 10:29)</a>:</h4>
+<p>Maybe it is Mizar influence then?</p>
+
+<a name="135815838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815838">Sebastien Gouezel (Oct 15 2018 at 10:31)</a>:</h4>
+<p>The <code>define</code>syntax is a recent change, it used to be <code>def "foo  = 0"</code>.</p>
+
+<a name="135815881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815881">Mario Carneiro (Oct 15 2018 at 10:32)</a>:</h4>
+<p>I was under the impression that the original term mode syntax of lean was basically lifted directly from the syntax of another language, probably Isar</p>
+
+<a name="135815886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815886">Mario Carneiro (Oct 15 2018 at 10:32)</a>:</h4>
+<p>and it has since been simplified a bit but is otherwise unchanged</p>
+
+<a name="135815898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815898">Mario Carneiro (Oct 15 2018 at 10:33)</a>:</h4>
+<p>like I think <code>and have</code> and <code>hence</code> used to exist and don't anymore</p>
+
+<a name="135815958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135815958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135815958">Sebastien Gouezel (Oct 15 2018 at 10:34)</a>:</h4>
+<p>Since formulas to be proved are enclosed in quotes in Isar, you don't a separator as in Lean. The comma makes sense, as would <code>:=</code>, but having two or three different separators depending on the context might be misleading to newcomers. Will it be uniformized in Lean 4, or is the syntax expected not to change?</p>
+
+<a name="135816033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816033">Mario Carneiro (Oct 15 2018 at 10:36)</a>:</h4>
+<p>I think syntax changes like that are on the table</p>
+
+<a name="135816039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816039">Mario Carneiro (Oct 15 2018 at 10:36)</a>:</h4>
+<p>I would be in support of using more <code>:=</code></p>
+
+<a name="135816055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816055">Sebastien Gouezel (Oct 15 2018 at 10:37)</a>:</h4>
+<p>I agree.</p>
+
+<a name="135816057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816057">Mario Carneiro (Oct 15 2018 at 10:37)</a>:</h4>
+<p>and drop the <code>from</code></p>
+
+<a name="135816116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816116">Mario Carneiro (Oct 15 2018 at 10:38)</a>:</h4>
+<p>i.e. <code>have A := proof in B</code> or <code>have A := by tac in B</code></p>
+
+<a name="135816119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816119">Mario Carneiro (Oct 15 2018 at 10:38)</a>:</h4>
+<p><code>show A := proof</code></p>
+
+<a name="135816182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816182">Mario Carneiro (Oct 15 2018 at 10:40)</a>:</h4>
+<p><code>calc A = B := proof ... = C := proof</code></p>
+
+<a name="135816239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816239">Mario Carneiro (Oct 15 2018 at 10:41)</a>:</h4>
+<p>although I guess <code>have in</code> has the problem that it won't look like the tactic version which is <code>have A := proof, tac</code></p>
+
+<a name="135816298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816298">Johannes Hölzl (Oct 15 2018 at 10:42)</a>:</h4>
+<p>I would prefer to get rid of the <code>in</code> in <code>let</code> and just write <code>let a := x, ...</code></p>
+
+<a name="135816310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816310">Rob Lewis (Oct 15 2018 at 10:43)</a>:</h4>
+<p>I don't mind the <code>from</code> so much, it makes things read slightly more naturally. Although I'm sure I wouldn't miss it for long if it disappeared. I get more annoyed with the difference between term and tactic <code>have</code>.</p>
+
+<a name="135816311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816311">Johannes Hölzl (Oct 15 2018 at 10:43)</a>:</h4>
+<p>and <code>have h : A, by tac, ...</code> or <code>have h : A := ..., ...</code></p>
+
+<a name="135816388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816388">Mario Carneiro (Oct 15 2018 at 10:44)</a>:</h4>
+<p>I think that <code>have h : A := by tac, ...</code> is more uniform. Putting a comma in there doesn't seem to win much</p>
+
+<a name="135816389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816389">Johannes Hölzl (Oct 15 2018 at 10:44)</a>:</h4>
+<p>it would also be nice to have parameters for <code>have</code> and <code>show</code>:<br>
+<code>have h (a : A) (b : B) : T := ..., ...</code></p>
+
+<a name="135816412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816412">Mario Carneiro (Oct 15 2018 at 10:44)</a>:</h4>
+<p>short story: <code>let</code> and <code>have</code> should have the same parser</p>
+
+<a name="135816422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816422">Sebastien Gouezel (Oct 15 2018 at 10:45)</a>:</h4>
+<blockquote>
+<p>and <code>have h : A, by tac, ...</code> or <code>have h : A := ..., ...</code></p>
+</blockquote>
+<p>So you would still use <code>,</code> to introduce a proof, and to separate a statement from the next. I think I would favor <code>:=</code> to introduce proofs, and <code>,</code> to go to the next statement (removing <code>in</code>, as you say).</p>
+
+<a name="135816434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816434">Johannes Hölzl (Oct 15 2018 at 10:45)</a>:</h4>
+<p>the comma would be just short form for tactic proofs.</p>
+
+<a name="135816502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816502">Mario Carneiro (Oct 15 2018 at 10:46)</a>:</h4>
+<p>right, but I don't think that needs to be a thing</p>
+
+<a name="135816509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816509">Mario Carneiro (Oct 15 2018 at 10:47)</a>:</h4>
+<p>like <code>have h : A := by tac, ...</code> and <code>have h : A := begin end, ...</code> are plenty short</p>
+
+<a name="135816534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816534">Johannes Hölzl (Oct 15 2018 at 10:47)</a>:</h4>
+<p>hm, yes its short enough. and nicely uniform</p>
+
+<a name="135816538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816538">Patrick Massot (Oct 15 2018 at 10:47)</a>:</h4>
+<p>what about <code>have h : A := { ... },</code>?</p>
+
+<a name="135816542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816542">Mario Carneiro (Oct 15 2018 at 10:47)</a>:</h4>
+<p>preposterous</p>
+
+<a name="135816584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816584">Johannes Hölzl (Oct 15 2018 at 10:48)</a>:</h4>
+<p>I guess it classes with set syntax</p>
+
+<a name="135816602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816602">Patrick Massot (Oct 15 2018 at 10:49)</a>:</h4>
+<p>Then we would still have inconsistency with the goal focussing {...}</p>
+
+<a name="135816617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816617">Mario Carneiro (Oct 15 2018 at 10:49)</a>:</h4>
+<p>just think of <code>begin end</code> as goal focussing brackets that work outside tactic mode</p>
+
+<a name="135816618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816618">Johannes Hölzl (Oct 15 2018 at 10:49)</a>:</h4>
+<p>another dream: not only unify <code>let</code> and <code>have</code> but unify it also with <code>def</code>, i.e. allow to use the equation compiler in proofs, ala</p>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">\/</span> <span class="n">b</span> <span class="bp">-&gt;</span> <span class="n">c</span>
+<span class="bp">|</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">a</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="bp">|</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">...</span><span class="o">,</span>
+<span class="bp">...</span>
+</pre></div>
+
+<a name="135816700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816700">Mario Carneiro (Oct 15 2018 at 10:51)</a>:</h4>
+<p><code>mutual have ... with ... </code>?</p>
+
+<a name="135816754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135816754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135816754">Mario Carneiro (Oct 15 2018 at 10:52)</a>:</h4>
+<p>yeah this makes a lot more sense than named <code>match</code></p>
+
+<a name="135819726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135819726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135819726">Edward Ayers (Oct 15 2018 at 11:50)</a>:</h4>
+<p>Is there a general notation wishlist thread?</p>
+
+<a name="135851934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135851934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135851934">Mario Carneiro (Oct 15 2018 at 21:17)</a>:</h4>
+<p>there is now</p>
+
+<a name="135852289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135852289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135852289">Edward Ayers (Oct 15 2018 at 21:22)</a>:</h4>
+<p>I would really like all of the bells and whistles you get with <code>{!...!}</code> to work with <code>_</code> when it fails to fill in the proof. But I guess that's more of an editor feature.</p>
+
+<a name="135960094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/135960094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#135960094">Sebastian Ullrich (Oct 17 2018 at 11:22)</a>:</h4>
+<p>Lean 4 will most likely replace the hole syntax with <code>_</code>. Input to hole commands should be handled by the editor (which would've been basically impossible in Lean 3's infrastructure).</p>
+
+<a name="150872739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/150872739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#150872739">Sebastien Gouezel (Dec 04 2018 at 20:38)</a>:</h4>
+<blockquote>
+<p>Is there a general notation wishlist thread?</p>
+</blockquote>
+<p>Another notation wish: as for <code>rw</code> I would like <code>simp [←foo]</code> to add reversed <code>foo</code> to the simpset. And possibly to remove <code>foo</code> if it is in the simpset. Currently, if <code>foo</code> has say two variables, I achieve this with <code>simp[-foo, (foo _ _).symm]</code>.</p>
+
+<a name="152435172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152435172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152435172">Patrick Massot (Dec 23 2018 at 18:15)</a>:</h4>
+<p>New notation wishlist item: be able to replace, say in a parameter list, <code>(n : { n : ℕ // 0 &lt; n })</code> by <code>(n : ℕ // 0 &lt; n)</code> (or, even better,  <code>(n : ℕ | 0 &lt; n)</code>)</p>
+
+<a name="152444089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152444089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152444089">Mario Carneiro (Dec 23 2018 at 23:35)</a>:</h4>
+<p>is there a reason you aren't uskng two arguments?</p>
+
+<a name="152445176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152445176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152445176">Mario Carneiro (Dec 24 2018 at 00:13)</a>:</h4>
+<p>Also <code>(n &gt; 0)</code> already does almost exactly what you are saying</p>
+
+<a name="152465051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465051">Patrick Massot (Dec 24 2018 at 11:53)</a>:</h4>
+<p>It's not exactly the same. I can indeed modify my example to:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">euclid</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">),</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">*</span><span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">∧</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">}</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n_pos</span><span class="o">,</span>
+         <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="k">then</span>
+           <span class="bp">⟨</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">m</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span> <span class="bp">*⟩</span>
+         <span class="k">else</span>
+           <span class="k">have</span> <span class="n">m</span> <span class="bp">-</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_lt</span> <span class="bp">;</span> <span class="n">linarith</span><span class="o">,</span>
+           <span class="k">let</span> <span class="bp">⟨⟨</span><span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">H</span><span class="o">,</span> <span class="n">H&#39;</span><span class="bp">⟩⟩</span> <span class="o">:=</span> <span class="n">euclid</span> <span class="o">(</span><span class="n">m</span><span class="bp">-</span><span class="n">n</span><span class="o">)</span> <span class="n">n</span> <span class="n">n_pos</span> <span class="k">in</span>
+             <span class="bp">⟨</span><span class="o">(</span><span class="n">q</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">r</span><span class="o">),</span>
+              <span class="bp">⟨</span><span class="k">begin</span>
+                <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_iff_eq_add</span> <span class="o">(</span><span class="n">le_of_not_lt</span> <span class="n">h</span><span class="o">)</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+                <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">],</span> <span class="n">ring</span><span class="o">,</span>
+               <span class="kn">end</span><span class="o">,</span> <span class="n">H&#39;</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+
+<p>but I still think the notation <code>(n : nat | n &gt; 0)</code> in a parameter list would be good to have (and they have it in Coq).</p>
+
+<a name="152465176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465176">Patrick Massot (Dec 24 2018 at 11:57)</a>:</h4>
+<p>By the way, the context is given by <a href="https://www.college-de-france.fr/site/xavier-leroy/seminar-2018-12-12-11h30.htm" target="_blank" title="https://www.college-de-france.fr/site/xavier-leroy/seminar-2018-12-12-11h30.htm">https://www.college-de-france.fr/site/xavier-leroy/seminar-2018-12-12-11h30.htm</a> which shows programming with recursion and dependent pattern matching in Coq. They have all sorts of cool tricks in this area, including deferring proof obligations after writing the program, you can have a look at minute 51 to see their version of the above function. And of course they also have <code>(q, r) : ℕ × ℕ</code> instead of our <code>p : ℕ × ℕ</code>, and a linear arithmetic tactic doing everything <span class="emoji emoji-2639" title="sad">:sad:</span></p>
+
+<a name="152465235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465235">Mario Carneiro (Dec 24 2018 at 11:59)</a>:</h4>
+<p>You can defer proof obligations using <code>refine</code></p>
+
+<a name="152465353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465353">Mario Carneiro (Dec 24 2018 at 12:03)</a>:</h4>
+<p>Isn't this just the definition of <code>div</code>?</p>
+
+<a name="152465356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465356">Mario Carneiro (Dec 24 2018 at 12:03)</a>:</h4>
+<p>you can have a look at how it's defined in core</p>
+
+<a name="152465432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465432">Mario Carneiro (Dec 24 2018 at 12:05)</a>:</h4>
+<p>You can also write something with explicit binding for <code>q,r</code> but we try not to use it because it doesn't unfold as much</p>
+
+<a name="152465552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152465552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152465552">Mario Carneiro (Dec 24 2018 at 12:08)</a>:</h4>
+<p>you can do something like this (the notation isn't there, but you get the idea)</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">euclid</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">subtype</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨</span><span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">*</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="bp">∧</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Unfortunately I think lean has a bug with generating names for the auxiliary match and it clashes with the <code>let</code> statement in the body</p>
+
+<a name="152483363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152483363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152483363">Patrick Massot (Dec 24 2018 at 21:20)</a>:</h4>
+<blockquote>
+<p>You can defer proof obligations using <code>refine</code></p>
+</blockquote>
+<p>It only defers a tiny bit. You need to close the goal before leaving the tactic block. DId you look at what <code>Program</code> does in this video? (you only have to look at the time I mentioned).</p>
+
+<a name="152483383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152483383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152483383">Patrick Massot (Dec 24 2018 at 21:21)</a>:</h4>
+<blockquote>
+<p>you can have a look at how it's defined in core</p>
+</blockquote>
+<p>In core the output type does not assert correction. I'm not saying it should, I was doing an exercise.</p>
+
+<a name="152483401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notations%20to%20introduce%20proofs/near/152483401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51017notationstointroduceproofs.html#152483401">Patrick Massot (Dec 24 2018 at 21:21)</a>:</h4>
+<blockquote>
+<p>you can do something like this (the notation isn't there, but you get the idea)</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">euclid</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">subtype</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨</span><span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">*</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="bp">∧</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Unfortunately I think lean has a bug with generating names for the auxiliary match and it clashes with the <code>let</code> statement in the body</p>
+</blockquote>
+<p>Can you use well founded recursion if m and n are left of colon?</p>
+
+
+{% endraw %}

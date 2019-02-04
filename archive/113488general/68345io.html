@@ -1,0 +1,43 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/68345io.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/68345io.html">io</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="134013184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013184">Reid Barton (Sep 15 2018 at 15:54)</a>:</h4>
+<p>Is it intentional that the whole <code>io</code> interface (notably including various constants like <code>monad_io_terminal</code>) is not <code>meta</code>?</p>
+
+<a name="134013246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013246">Reid Barton (Sep 15 2018 at 15:56)</a>:</h4>
+<p>I just wonder because for soundness, one ought to check that all these constants can be implemented (e.g., by <code>io_core = lam x y, unit</code>) in Lean</p>
+
+<a name="134013508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013508">Johannes Hölzl (Sep 15 2018 at 16:05)</a>:</h4>
+<p>Yes, to ensure soundness we would need to show that it fulfills all constraints. But then all these classes are just lists of operations which do not contain any proposition. Showing that they are inhabited is trivial.</p>
+
+<a name="134013593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013593">Johannes Hölzl (Sep 15 2018 at 16:07)</a>:</h4>
+<p>But a nice model would be cool, i.e. where <code>io_core</code> encapsulates a state with files, processes etc.</p>
+
+<a name="134013825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013825">Reid Barton (Sep 15 2018 at 16:12)</a>:</h4>
+<p>I just wonder whether there's a reason that it is handled differently from <code>tactic</code>, where as far as I can tell all the constants are marked <code>meta</code>. Maybe it's just that <code>tactic</code> has quite a lot more constants, and also the definition of the <code>tactic</code> monad is partially exposed (as <code>state</code> something).</p>
+
+<a name="134013834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013834">Reid Barton (Sep 15 2018 at 16:13)</a>:</h4>
+<p>The most interesting thing with <code>io</code> I found is that <code>monad_io_terminal.cmdline_args io_core</code> is a <code>list string</code> which is not meta, so I could do things like make a mathematical definition which depends on the length of this list</p>
+
+<a name="134013994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/io/near/134013994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68345io.html#134013994">Reid Barton (Sep 15 2018 at 16:16)</a>:</h4>
+<p>Although <code>#print axioms</code> would reveal what I had done</p>
+
+
+{% endraw %}

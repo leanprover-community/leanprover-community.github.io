@@ -1,0 +1,79 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/86357Frozenlocalinstance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html">Frozen local instance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123599507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599507">Moses Schönfinkel (Mar 12 2018 at 09:38)</a>:</h4>
+<p>What is going on in scenarios where Lean tells me <code>failed to revert 'c', it is a frozen local instance</code> and then I magically fix everything by calling <code>tactic.unfreeze_local_instances</code>?</p>
+
+<a name="123599520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599520">Simon Hudon (Mar 12 2018 at 09:39)</a>:</h4>
+<p>There was recently a change in Lean where Lean is getting more rigid with its instance cache</p>
+
+<a name="123599522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599522">Mario Carneiro (Mar 12 2018 at 09:39)</a>:</h4>
+<p>Since <a href="https://github.com/leanprover/lean/issues/1920" target="_blank" title="https://github.com/leanprover/lean/issues/1920">#1920</a> and the surrounding commits, lean no longer lets you mess with instances in the context that are "frozen", i.e. left of the colon. These are also the only instances which are used in typeclass inference</p>
+
+<a name="123599566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599566">Moses Schönfinkel (Mar 12 2018 at 09:40)</a>:</h4>
+<p>Oh, so "frozen" just means left of the colon. Alrighty, thanks.</p>
+
+<a name="123599568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599568">Mario Carneiro (Mar 12 2018 at 09:40)</a>:</h4>
+<p>By the way in mathlib, there is a name for this tactic: <code>resetI</code>. It also is bundled together with several other tactics like <code>haveI</code> and <code>exactI</code></p>
+
+<a name="123599712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123599712">Moses Schönfinkel (Mar 12 2018 at 09:46)</a>:</h4>
+<p><code>resetI</code> works like a charm and saves one control space, one down arrow and one enter; win-win</p>
+
+<a name="123908258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908258">Moses Schönfinkel (Mar 19 2018 at 10:01)</a>:</h4>
+<p>What is the right way to avoid having to <code>resetI</code> in a scenario where I have <code>lemma f {A : Type*} [X : something A]</code> and I want to do <code>cases X</code>? Is doing this actively discouraged for some reason? Or am I misunderstanding the cause of getting the <code>frozen local instance</code> error?</p>
+
+<a name="123908269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908269">Mario Carneiro (Mar 19 2018 at 10:01)</a>:</h4>
+<p>You could put <code>X</code> right of the colon</p>
+
+<a name="123908362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908362">Moses Schönfinkel (Mar 19 2018 at 10:04)</a>:</h4>
+<p>Right, so that's it, thanks.</p>
+
+<a name="123908372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908372">Mario Carneiro (Mar 19 2018 at 10:05)</a>:</h4>
+<p>Also, <code>resetI</code> is not a "code smell" or other poor practice you are making it out to be. Lean is doing an optimization that works in most cases, and to make it easy for tactic scripting it is assumed that you usually don't want to be resetting instances ('usually' meaning not after every tactic), but this requires the user to explicitly mark that they are doing this, which is a bit unpleasant to see and explain but would have otherwise been done automatically anyway.</p>
+
+<a name="123908462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908462">Moses Schönfinkel (Mar 19 2018 at 10:09)</a>:</h4>
+<p>Good enough for me, I'll keep on <code>resetI</code>ng relentlessly then.</p>
+
+<a name="123908463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123908463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123908463">Moses Schönfinkel (Mar 19 2018 at 10:09)</a>:</h4>
+<p>Thanks again :).</p>
+
+<a name="123909880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123909880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123909880">Sebastian Ullrich (Mar 19 2018 at 10:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110027">@Moses Schönfinkel</span></p>
+<blockquote>
+<p>Is doing this actively discouraged for some reason?</p>
+</blockquote>
+<p>It actually is, see the issues discussed at <a href="https://github.com/leanprover/lean/commit/16f28315eeddf996f85bff96954cd31a94aa4562#diff-b9da5b9cf1417a3f4da2b3adda3eea2fR96" target="_blank" title="https://github.com/leanprover/lean/commit/16f28315eeddf996f85bff96954cd31a94aa4562#diff-b9da5b9cf1417a3f4da2b3adda3eea2fR96">https://github.com/leanprover/lean/commit/16f28315eeddf996f85bff96954cd31a94aa4562#diff-b9da5b9cf1417a3f4da2b3adda3eea2fR96</a></p>
+
+<a name="123910208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123910208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123910208">Mario Carneiro (Mar 19 2018 at 11:07)</a>:</h4>
+<p>Ah, that's true. This only is a problem if your typeclass instance is inferred in some function in your goal (in the <code>decidable</code> case this is like when you have an <code>if</code> in your goal and you try to clean it up by case on the decidable parameter). It falls under the more general heading "don't have non-canonical typeclass proofs in your functions, it's confusing"</p>
+
+<a name="123910282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123910282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html#123910282">Mario Carneiro (Mar 19 2018 at 11:09)</a>:</h4>
+<p>But that's not to say that it is disallowed, because sometimes you just have to do it, if your typeclass is some complicated inductive thing this may be the only option. But try to get rid of those functions as soon as possible after the cases</p>
+
+
+{% endraw %}

@@ -1,0 +1,144 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/64403typeclassinstancesofsuperclasses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html">type class instances of superclasses</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="128414454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414454">Sean Leather (Jun 21 2018 at 14:08)</a>:</h4>
+<p>Given roughly the following combination of classes and instances:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">A</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="n">class</span> <span class="n">B</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">B</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="n">def</span> <span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">B</span> <span class="n">T</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>do you also automatically get:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">A</span> <span class="n">T</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>such that the latter instance is the appropriate component of the former instance?</p>
+
+<a name="128414483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414483">Mario Carneiro (Jun 21 2018 at 14:09)</a>:</h4>
+<p>Depends on what you mean by "automatically get"</p>
+
+<a name="128414546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414546">Mario Carneiro (Jun 21 2018 at 14:10)</a>:</h4>
+<p>typeclass inference should find it, but no additional def is made</p>
+
+<a name="128414547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414547">Sean Leather (Jun 21 2018 at 14:10)</a>:</h4>
+<p>Let's assume I don't have a specific meaning and would welcome a precise definition of the phrase. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="128414628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414628">Sean Leather (Jun 21 2018 at 14:13)</a>:</h4>
+<blockquote>
+<p>typeclass inference should find it, but no additional def is made</p>
+</blockquote>
+<p>So, if <code>class A</code> included a def <code>aaa : a -&gt; bool</code> and you used <code>aaa</code> on <code>t : T</code>, this would use the implementation in <code>instance : B T</code>?</p>
+
+<a name="128414686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414686">Mario Carneiro (Jun 21 2018 at 14:14)</a>:</h4>
+<p>yes</p>
+
+<a name="128414708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414708">Sean Leather (Jun 21 2018 at 14:15)</a>:</h4>
+<p>Interesting. But I would not be able to explicitly reference any definition of type <code>A T</code>: this is what you mean by “no additional def is made”?</p>
+
+<a name="128414759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414759">Mario Carneiro (Jun 21 2018 at 14:16)</a>:</h4>
+<p>typeclass inference would insert a term of the type <code>BtoA BT</code> rather than making an <code>AT</code> def and using that</p>
+
+<a name="128414845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414845">Sean Leather (Jun 21 2018 at 14:19)</a>:</h4>
+<p>Okay. Does that <code>BtoA</code> have a name that you can <code>#print</code>?</p>
+
+<a name="128414928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128414928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128414928">Mario Carneiro (Jun 21 2018 at 14:22)</a>:</h4>
+<p><code>B.to_A</code> I believe</p>
+
+<a name="128415195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415195">Sean Leather (Jun 21 2018 at 14:28)</a>:</h4>
+<p>I just noticed that <code>lattice</code> is defined in the <code>namespace lattice</code>, resulting in <code>lattice.lattice</code> as the qualified name.</p>
+
+<a name="128415218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415218">Sean Leather (Jun 21 2018 at 14:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">instances</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">finset</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">multiset</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">multiset</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">with_zero</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">with_zero</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">with_top</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">with_bot</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+<a name="128415225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415225">Sean Leather (Jun 21 2018 at 14:30)</a>:</h4>
+<p>Lots of <code>lattice.lattice</code>.</p>
+
+<a name="128415328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415328">Sean Leather (Jun 21 2018 at 14:31)</a>:</h4>
+<p>Ah, here are the conversions for <code>lattice</code> to <code>semilattice_inf</code> and <code>semilattice_sup</code>:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="bp">...</span>
+<span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">to_semilattice_inf</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf</span> <span class="n">α</span>
+<span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">to_semilattice_sup</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_sup</span> <span class="n">α</span>
+</pre></div>
+
+<a name="128415413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415413">Sean Leather (Jun 21 2018 at 14:33)</a>:</h4>
+<p>Thanks, Mario!</p>
+
+<a name="128415592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128415592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128415592">Sean Leather (Jun 21 2018 at 14:36)</a>:</h4>
+<p>I suppose the goal of this feature is to reduce the number of instances one writes. However, it does make it more difficult to determine if <code>T</code> is an instance of <code>A</code>.</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">instances</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf_bot</span><span class="bp">.</span><span class="n">to_semilattice_inf</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf_bot</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf</span> <span class="n">α</span>
+<span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf_top</span><span class="bp">.</span><span class="n">to_semilattice_inf</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf_top</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf</span> <span class="n">α</span>
+<span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">to_semilattice_inf</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">α</span><span class="o">],</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_inf</span> <span class="n">α</span>
+</pre></div>
+
+<a name="128416353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128416353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128416353">Mario Carneiro (Jun 21 2018 at 14:55)</a>:</h4>
+<p>one trick for testing instance problems and getting the result is <code>#check (by apply_instance : T A)</code></p>
+
+<a name="128416816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128416816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128416816">Sean Leather (Jun 21 2018 at 15:06)</a>:</h4>
+<p>That works only if <code>A</code> is exactly the type of the instance. For example: <code>#check (by apply_instance : lattice.semilattice_inf (finset ℕ))</code> but not <code>#check (by apply_instance : lattice.semilattice_inf (finset α))</code>.</p>
+
+<a name="128416961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128416961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128416961">Sean Leather (Jun 21 2018 at 15:10)</a>:</h4>
+<p>Also, that's a tool for diagnosing an issue. It doesn't help discovering all the instances, which I have found to be useful in Haskell (and would find useful in Lean).</p>
+
+<a name="128430586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128430586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128430586">Simon Hudon (Jun 21 2018 at 20:00)</a>:</h4>
+<p>Do you know about <code>#print instances</code>?</p>
+
+<a name="128458664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128458664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128458664">Sean Leather (Jun 22 2018 at 08:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Did you see my uses of it above? <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="128476919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20instances%20of%20superclasses/near/128476919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64403typeclassinstancesofsuperclasses.html#128476919">Simon Hudon (Jun 22 2018 at 17:00)</a>:</h4>
+<p>oops! Sorry!</p>
+
+
+{% endraw %}

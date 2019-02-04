@@ -1,0 +1,76 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58261polynomialelaboration.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html">polynomial elaboration</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157068793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157068793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157068793">Kenny Lau (Jan 29 2019 at 01:02)</a>:</h4>
+<p>So why is polynomial elaboration slow and what can we do about it?</p>
+
+<a name="157069159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157069159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157069159">Kenny Lau (Jan 29 2019 at 01:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">multivariate_polynomial</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">τ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">τ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">namespace</span> <span class="n">mv_polynomial</span>
+
+<span class="n">def</span> <span class="n">equiv_of_equiv</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">σ</span> <span class="err">≃</span> <span class="n">τ</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">mv_polynomial</span> <span class="n">τ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="n">X</span> <span class="err">∘</span> <span class="n">e</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="n">X</span> <span class="err">∘</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">induction_on</span> <span class="n">f</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">])</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="n">q</span> <span class="n">hp</span> <span class="n">hq</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">hp</span><span class="o">,</span> <span class="n">hq</span><span class="o">])</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="n">s</span> <span class="n">hp</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span> <span class="n">hp</span><span class="o">,</span> <span class="o">(</span><span class="err">∘</span><span class="o">),</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">inverse_apply_apply</span><span class="o">]),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">induction_on</span> <span class="n">f</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">])</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="n">q</span> <span class="n">hp</span> <span class="n">hq</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">hp</span><span class="o">,</span> <span class="n">hq</span><span class="o">])</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="n">s</span> <span class="n">hp</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span> <span class="n">hp</span><span class="o">,</span> <span class="o">(</span><span class="err">∘</span><span class="o">),</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">apply_inverse_apply</span><span class="o">])</span> <span class="o">}</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">ring_equiv_of_equiv</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">σ</span> <span class="err">≃</span> <span class="n">τ</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">mv_polynomial</span> <span class="n">τ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">eval₂</span><span class="bp">.</span><span class="n">is_ring_hom</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">..</span> <span class="n">equiv_of_equiv</span> <span class="n">e</span> <span class="o">}</span>
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">false</span>
+<span class="kn">end</span> <span class="n">mv_polynomial</span>
+</pre></div>
+
+<a name="157069161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157069161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157069161">Kenny Lau (Jan 29 2019 at 01:09)</a>:</h4>
+<div class="codehilite"><pre><span></span>elaboration of ring_equiv_of_equiv took 6.48s
+</pre></div>
+
+<a name="157069343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157069343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157069343">Kenny Lau (Jan 29 2019 at 01:13)</a>:</h4>
+<p>ha, this is really quick</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ring_equiv_of_equiv</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">σ</span> <span class="err">≃</span> <span class="n">τ</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">mv_polynomial</span> <span class="n">τ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">ring_equiv</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">equiv_of_equiv</span> <span class="n">e</span><span class="o">)</span> <span class="err">$</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">eval₂</span><span class="bp">.</span><span class="n">is_ring_hom</span>
+</pre></div>
+
+<a name="157069450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157069450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157069450">Kenny Lau (Jan 29 2019 at 01:15)</a>:</h4>
+<p>this is also quick:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ring_equiv_of_equiv</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">σ</span> <span class="err">≃</span> <span class="n">τ</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">mv_polynomial</span> <span class="n">τ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">eval₂</span><span class="bp">.</span><span class="n">is_ring_hom</span><span class="o">,</span> <span class="bp">..</span> <span class="n">equiv_of_equiv</span> <span class="n">e</span> <span class="o">}</span>
+</pre></div>
+
+<a name="157071810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157071810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157071810">Kenny Lau (Jan 29 2019 at 02:05)</a>:</h4>
+<p>I would appreciate it if someone could point me as to how I could debug it. the <code>set_option trace.</code> options are not very helpful.</p>
+
+<a name="157088918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157088918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html#157088918">Kenny Lau (Jan 29 2019 at 09:28)</a>:</h4>
+<p>It would also be quite helpful if the "class instance max depth reached" message could tell us which typeclass they were looking for</p>
+
+
+{% endraw %}

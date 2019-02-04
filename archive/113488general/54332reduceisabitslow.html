@@ -1,0 +1,132 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/54332reduceisabitslow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html">#reduce is a bit slow?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="129783924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129783924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129783924">Arseniy Alekseyev (Jul 17 2018 at 02:14)</a>:</h4>
+<p>These reductions work a bit slow for me:</p>
+<div class="codehilite"><pre><span></span>#reduce (10 : fin 3) -- over 10 seconds
+#reduce (15 : fin 3) -- over 5 minutes
+</pre></div>
+
+
+<p>Is this normal? :-)</p>
+
+<a name="129784259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784259">Simon Hudon (Jul 17 2018 at 02:23)</a>:</h4>
+<p>It is. Natural numbers are represented in unary notation so arithmetic on them in the kernel (not the VM) is bound to be slow. Numerals such as <code>(15 : fin 3)</code> are represented using the <code>bit0</code>, <code>bit1</code> and <code>zero</code> functions as <code>bit1 (bit1 (bit1 (bit1 zero)))</code> and <code>bit1 (x : a) := x + x + 1</code>. You're a getting a bunch of additions and each one is one addition and one modulo.</p>
+
+<a name="129784278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784278">Mario Carneiro (Jul 17 2018 at 02:23)</a>:</h4>
+<p>yes, #reduce is very slow, particularly for well founded recursive functions like mod. I would estimate this is something like cubic in the <em>value</em> of <code>n : fin 3</code> there</p>
+
+<a name="129784327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784327">Simon Hudon (Jul 17 2018 at 02:24)</a>:</h4>
+<p>If you want to test your definitions, I recommend <code>#eval</code></p>
+
+<a name="129784340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784340">Simon Hudon (Jul 17 2018 at 02:24)</a>:</h4>
+<p>It uses the virtual machine instead of the kernel to do its computations.</p>
+
+<a name="129784454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784454">Arseniy Alekseyev (Jul 17 2018 at 02:27)</a>:</h4>
+<p>Ah, #eval is probably what I want. Thanks! <br>
+@Mario, I figured unary numbers were the reason, but I'm not sure cubic is enough to explain it. Could it also be exponential due to call-by-name somewhere? Does lean use call-by-name?</p>
+
+<a name="129784467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784467">Mario Carneiro (Jul 17 2018 at 02:27)</a>:</h4>
+<p>cubic in the value of n means exponential in the length</p>
+
+<a name="129784536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784536">Mario Carneiro (Jul 17 2018 at 02:28)</a>:</h4>
+<p>And yes, #reduce is essentially call by name execution, although it's not exactly implemented that way</p>
+
+<a name="129784540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784540">Arseniy Alekseyev (Jul 17 2018 at 02:28)</a>:</h4>
+<p>Not sure what you mean, the value is 15: 15 cubed is not a large number. Do you call value something else?</p>
+
+<a name="129784547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784547">Mario Carneiro (Jul 17 2018 at 02:28)</a>:</h4>
+<p>I mean 15 cubed</p>
+
+<a name="129784583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129784583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129784583">Mario Carneiro (Jul 17 2018 at 02:29)</a>:</h4>
+<p>but there is also a large constant factor due to the kernel manipulation of expressions at every stage (the expressions get huge, like 100000 lines long)</p>
+
+<a name="129785191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785191">Arseniy Alekseyev (Jul 17 2018 at 02:42)</a>:</h4>
+<p>Ok, the expression (1 + 1 + 1 + 1 ... : fin 20) has clear exponential scaling: the time ~exactly doubles with each +1. The binary encoding (as explained by Simon) made the timings of the original example much more random-looking.</p>
+
+<a name="129785300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785300">Mario Carneiro (Jul 17 2018 at 02:44)</a>:</h4>
+<p>actually on second thought I'm not sure if it is really exponential, since it is in fact <code>bit0</code> on <code>fin 3</code>, which should be constant time - it does not first calculate <code>15 : nat</code> and then turn it into a <code>fin 3</code></p>
+
+<a name="129785576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785576">Arseniy Alekseyev (Jul 17 2018 at 02:50)</a>:</h4>
+<p>Given that it's approximately as slow as the empirically exponential-time (1 + 1 + ... ), I say it's almost certainly the same. Mod 3 won't help if all the call-by-name-duplication of the terms happens before you have a chance to compute the mod.</p>
+
+<a name="129785673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785673">Mario Carneiro (Jul 17 2018 at 02:52)</a>:</h4>
+<p>I honestly don't know exactly what kind of optimization if any is in place for duplication caused by beta reduction, but it is surely nonzero - I'm pretty sure there is a whnf_core cache which allows to avoid repeated calculation of normal forms</p>
+
+<a name="129785938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785938">Simon Hudon (Jul 17 2018 at 02:58)</a>:</h4>
+<p>Still, because we're talking about <code>fin</code>, you perform the modulo at every addition</p>
+
+<a name="129785953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129785953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129785953">Simon Hudon (Jul 17 2018 at 02:58)</a>:</h4>
+<p>It does not do it in nat first. All those <code>1</code>s are of type <code>fin 3</code></p>
+
+<a name="129786041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129786041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129786041">Arseniy Alekseyev (Jul 17 2018 at 03:00)</a>:</h4>
+<p>probably type class stuff has something to do with it too because replacing + with fin.add makes it fast again</p>
+
+<a name="129786062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129786062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129786062">Mario Carneiro (Jul 17 2018 at 03:01)</a>:</h4>
+<p>that's very strange</p>
+
+<a name="129786070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129786070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129786070">Mario Carneiro (Jul 17 2018 at 03:01)</a>:</h4>
+<p>typeclass stuff should be a negligible fraction of the work</p>
+
+<a name="129786199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129786199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129786199">Arseniy Alekseyev (Jul 17 2018 at 03:04)</a>:</h4>
+<p>I guess with call-by-name it's not really about the work but about whether you somehow duplicate the argument or not (and whether or not the detection you mentioned kicks in)</p>
+
+<a name="129786231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129786231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129786231">Arseniy Alekseyev (Jul 17 2018 at 03:05)</a>:</h4>
+<p>anyway, I'm going to stop looking because #eval solves my problem and sounds like this slowness is expected. thanks!</p>
+
+<a name="129800058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129800058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129800058">Arseniy Alekseyev (Jul 17 2018 at 10:03)</a>:</h4>
+<p>Even more pathological example:</p>
+<div class="codehilite"><pre><span></span>#reduce (λ (x : nat) (y : x &lt; 1), (fin.mk x y + 0 : fin 1)) -- 5 seconds
+#reduce (λ (x : nat) (y : x &lt; 2), (fin.mk x y + 0 : fin 2)) -- &gt; 1 minute
+</pre></div>
+
+
+<p>no "15" necessary :-)</p>
+
+<a name="129800675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129800675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129800675">Gabriel Ebner (Jul 17 2018 at 10:19)</a>:</h4>
+<p>Please be aware that <code>fin</code> contains both a natural number <em>and</em> a proof.  The <code>#reduce</code> command normalizes both parts, including the proof.  You can use <code>set_option pp.all true</code> to see the full term.  If you run <code>#reduce (10 : fin 3).1</code>, you'll only get the number (in unary) but not the proof; this is a bit faster.</p>
+
+<a name="129800677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129800677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129800677">Gabriel Ebner (Jul 17 2018 at 10:19)</a>:</h4>
+<p>In any case, avoid kernel computation.</p>
+
+<a name="129800877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129800877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html#129800877">Kevin Buzzard (Jul 17 2018 at 10:24)</a>:</h4>
+<p>Lean was not designed to do fully-verified computation quickly :-) <code>#reduce 10000+10000</code> will bring the system to its knees. This is the whole point of <code>#eval</code></p>
+
+
+{% endraw %}

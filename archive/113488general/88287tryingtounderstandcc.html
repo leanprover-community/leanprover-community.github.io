@@ -1,0 +1,353 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/88287tryingtounderstandcc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html">trying to understand cc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125602905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125602905">Johan Commelin (Apr 24 2018 at 06:27)</a>:</h4>
+<p>I had hoped this would work:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">cc</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125602950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125602950">Johan Commelin (Apr 24 2018 at 06:28)</a>:</h4>
+<p>So which tactic do I need here?</p>
+
+<a name="125602958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125602958">Simon Hudon (Apr 24 2018 at 06:29)</a>:</h4>
+<p>That's not the kind of stuff it does. Try:</p>
+<div class="codehilite"><pre><span></span>import tactic -- from mathlib
+
+lemma ... := by solve_by_elim
+</pre></div>
+
+<a name="125603006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603006">Johan Commelin (Apr 24 2018 at 06:30)</a>:</h4>
+<p>Next goal: just have <code>hf : function.injective f</code> as hypothesis</p>
+
+<a name="125603018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603018">Johan Commelin (Apr 24 2018 at 06:31)</a>:</h4>
+<p>Instead of unpacking that definition myself...</p>
+
+<a name="125603023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603023">Simon Hudon (Apr 24 2018 at 06:31)</a>:</h4>
+<p>Have you tried it?</p>
+
+<a name="125603067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603067">Johan Commelin (Apr 24 2018 at 06:33)</a>:</h4>
+<p>Yes. Then it fails:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">solve_by_elim</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125603074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603074">Johan Commelin (Apr 24 2018 at 06:33)</a>:</h4>
+<p>squiggles under <code>solve_by_elim</code></p>
+
+<a name="125603076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603076">Simon Hudon (Apr 24 2018 at 06:33)</a>:</h4>
+<p>What error message does it give you?</p>
+
+<a name="125603130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603130">Johan Commelin (Apr 24 2018 at 06:34)</a>:</h4>
+<div class="codehilite"><pre><span></span>assumption tactic failed
+state:
+A : Type u,
+_inst_1 : group A,
+B : Type u,
+_inst_2 : group B,
+f : A → B,
+_inst_3 : is_group_hom f,
+hf : function.injective f,
+x : A,
+hfx : f x = 1
+⊢ x = 1
+</pre></div>
+
+<a name="125603131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603131">Kenny Lau (Apr 24 2018 at 06:34)</a>:</h4>
+<p>to be fair the proof needs to go like f x = f 1 and then x = 1</p>
+
+<a name="125603133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603133">Kenny Lau (Apr 24 2018 at 06:34)</a>:</h4>
+<p>and it needs is_group_hom.one</p>
+
+<a name="125603138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603138">Johan Commelin (Apr 24 2018 at 06:34)</a>:</h4>
+<p>Yeah, there is a bit more to be done... but I think there should be a tactic that can do that for me</p>
+
+<a name="125603146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603146">Johan Commelin (Apr 24 2018 at 06:35)</a>:</h4>
+<p>Ideally there is a <code>diagram_chase</code> tactic</p>
+
+<a name="125603147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603147">Johan Commelin (Apr 24 2018 at 06:35)</a>:</h4>
+<p>And I think <code>cc</code> is very close to that</p>
+
+<a name="125603149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603149">Johan Commelin (Apr 24 2018 at 06:35)</a>:</h4>
+<p>It only needs to know little facts like this lemma and some similar stuff.</p>
+
+<a name="125603150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603150">Kenny Lau (Apr 24 2018 at 06:35)</a>:</h4>
+<p>try mixing is_group_hom.one into the ingredient</p>
+
+<a name="125603152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603152">Johan Commelin (Apr 24 2018 at 06:35)</a>:</h4>
+<p>And then it would be able to prove the five lemma on its own</p>
+
+<a name="125603198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603198">Kenny Lau (Apr 24 2018 at 06:36)</a>:</h4>
+<p>have := is_group_hom.one f; solve_by_elim</p>
+
+<a name="125603210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603210">Johan Commelin (Apr 24 2018 at 06:37)</a>:</h4>
+<p>That's not enough</p>
+
+<a name="125603215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603215">Johan Commelin (Apr 24 2018 at 06:37)</a>:</h4>
+<p>Alas</p>
+
+<a name="125603273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603273">Simon Hudon (Apr 24 2018 at 06:38)</a>:</h4>
+<p>This one should work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hf</span><span class="o">,</span> <span class="n">cc</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125603276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603276">Johan Commelin (Apr 24 2018 at 06:38)</a>:</h4>
+<p>Ok, so <code>have := \fo x, (fx = 1 \to x = 1)</code>. How should I prove that? Is it a one-liner?</p>
+
+<a name="125603286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603286">Johan Commelin (Apr 24 2018 at 06:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Nice!</p>
+
+<a name="125603335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603335">Kenny Lau (Apr 24 2018 at 06:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I don’t get it at all</p>
+
+<a name="125603337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603337">Simon Hudon (Apr 24 2018 at 06:40)</a>:</h4>
+<p>If you want to go fully anonymous (not name your assumptions like <code>this</code> and <code>hf</code>) you can do:</p>
+<div class="codehilite"><pre><span></span>begin
+  have := is_group_hom.one f,
+  apply_assumption, cc
+end
+</pre></div>
+
+<a name="125603339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603339">Kenny Lau (Apr 24 2018 at 06:40)</a>:</h4>
+<p>how does apply hf even succeed</p>
+
+<a name="125603349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603349">Kenny Lau (Apr 24 2018 at 06:41)</a>:</h4>
+<p>oh nvm I thought wrongly</p>
+
+<a name="125603401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603401">Simon Hudon (Apr 24 2018 at 06:42)</a>:</h4>
+<p>You apply it to <code>x = 1</code> and <code>hf </code> is <code>hf : ∀ x y, f x = f y → x = y</code>. When you apply it, you instantiate it with <code>x := x, y := 1</code> so the antecedent becomes <code>f x = f 1</code>. Your idea with <code>have</code> gets us <code>this : f 1 = 1</code></p>
+
+<a name="125603402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603402">Kenny Lau (Apr 24 2018 at 06:42)</a>:</h4>
+<p>I mean, I would just write the proof in term mode</p>
+
+<a name="125603410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603410">Simon Hudon (Apr 24 2018 at 06:43)</a>:</h4>
+<p>I think I would keep <code>cc</code> at the very least.</p>
+
+<a name="125603418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603418">Simon Hudon (Apr 24 2018 at 06:44)</a>:</h4>
+<blockquote>
+<p>Ok, so <code>have := \fo x, (fx = 1 \to x = 1)</code>. How should I prove that? Is it a one-liner?</p>
+</blockquote>
+<p>Did you find an answer for this?</p>
+
+<a name="125603474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603474">Johan Commelin (Apr 24 2018 at 06:45)</a>:</h4>
+<p>Not yet, Lean doesn't like that expression</p>
+
+<a name="125603523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603523">Simon Hudon (Apr 24 2018 at 06:46)</a>:</h4>
+<p>Error message?</p>
+<p>I would expect it to work but I don't think that's what you're looking for</p>
+
+<a name="125603526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603526">Johan Commelin (Apr 24 2018 at 06:46)</a>:</h4>
+<p>And the problem is not <code>fx</code>, I changed that to <code>f x</code></p>
+
+<a name="125603532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603532">Johan Commelin (Apr 24 2018 at 06:47)</a>:</h4>
+<p><code>invalid expression starting at xx:y</code></p>
+
+<a name="125603536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603536">Simon Hudon (Apr 24 2018 at 06:47)</a>:</h4>
+<p><code>have := expr</code> uses <code>expr</code> as a proof of an unnamed proposition. That proposition is just the type of the expression. If <code>expr</code> is the proposition you want to prove, you write <code>have : expr</code></p>
+
+<a name="125603582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603582">Simon Hudon (Apr 24 2018 at 06:48)</a>:</h4>
+<p>Can you show me the whole proof? Maybe you missed a comma</p>
+
+<a name="125603594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603594">Johan Commelin (Apr 24 2018 at 06:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ker</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+<span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)),</span>
+</pre></div>
+
+<a name="125603643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603643">Simon Hudon (Apr 24 2018 at 06:50)</a>:</h4>
+<p>Do you have an <code>end</code> keyword after that?</p>
+
+<a name="125603648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603648">Johan Commelin (Apr 24 2018 at 06:50)</a>:</h4>
+<p>yes</p>
+
+<a name="125603653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603653">Johan Commelin (Apr 24 2018 at 06:51)</a>:</h4>
+<p>several lines lower</p>
+
+<a name="125603719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603719">Simon Hudon (Apr 24 2018 at 06:53)</a>:</h4>
+<p>Can you show me what the rest of the proof is?</p>
+
+<a name="125603720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603720">Simon Hudon (Apr 24 2018 at 06:53)</a>:</h4>
+<p>Also, do you have imports?</p>
+
+<a name="125603992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125603992">Johan Commelin (Apr 24 2018 at 07:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">function</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">subgroup</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ker</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+<span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125604019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604019">Johan Commelin (Apr 24 2018 at 07:03)</a>:</h4>
+<p>All the other stuff in that file is wrapped withing a section</p>
+
+<a name="125604129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604129">Kenny Lau (Apr 24 2018 at 07:06)</a>:</h4>
+<p>hf $ hx.trans $ eq.symm $ is_group_hom.one f</p>
+
+<a name="125604198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604198">Johan Commelin (Apr 24 2018 at 07:09)</a>:</h4>
+<p>I first need to get rid of an error message: <code>invalid expression starting at &lt;coords&gt;</code></p>
+
+<a name="125604201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604201">Johan Commelin (Apr 24 2018 at 07:09)</a>:</h4>
+<p>the <code>&lt;coords&gt;</code> are of the <code>\fo</code></p>
+
+<a name="125604257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604257">Simon Hudon (Apr 24 2018 at 07:11)</a>:</h4>
+<p>I don't see a problem there. Try restarting your Lean server</p>
+
+<a name="125604365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604365">Johan Commelin (Apr 24 2018 at 07:14)</a>:</h4>
+<p>Yay, that did it (-;</p>
+
+<a name="125604377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604377">Simon Hudon (Apr 24 2018 at 07:15)</a>:</h4>
+<p>Unfortunately, that's a common solution to problems <span class="emoji emoji-1f61c" title="stuck out tongue winking eye">:stuck_out_tongue_winking_eye:</span></p>
+
+<a name="125604527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604527">Johan Commelin (Apr 24 2018 at 07:21)</a>:</h4>
+<p>Ok, need to go now</p>
+
+<a name="125604528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125604528">Johan Commelin (Apr 24 2018 at 07:21)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="125609972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125609972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125609972">Patrick Massot (Apr 24 2018 at 10:20)</a>:</h4>
+<p>I think this happens more frequently since <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> enabled the new "region of interest" thing</p>
+
+<a name="125610009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125610009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125610009">Patrick Massot (Apr 24 2018 at 10:20)</a>:</h4>
+<p>It's nice to have Lean reacting quicker but I did get quite a lot of those random <code>invalid expression starting at &lt;coords&gt;</code> yesterday</p>
+
+<a name="125610074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125610074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125610074">Gabriel Ebner (Apr 24 2018 at 10:22)</a>:</h4>
+<p>Do you have a reproducible test case?</p>
+
+<a name="125672053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125672053">Kenny Lau (Apr 25 2018 at 15:39)</a>:</h4>
+<p>Oh so <code>cc</code> deals with commutativity and associativity also?</p>
+
+<a name="125672100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125672100">Simon Hudon (Apr 25 2018 at 15:40)</a>:</h4>
+<p>No. Why do you say that?</p>
+
+<a name="125672103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125672103">Kenny Lau (Apr 25 2018 at 15:40)</a>:</h4>
+<p>apparently it did</p>
+
+<a name="125672486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125672486">Kenny Lau (Apr 25 2018 at 15:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : ℕ), m + n = n + m :=</span>
+<span class="cm">λ (m n : ℕ),</span>
+<span class="cm">  of_eq_true (eq_true_intro (eq.symm (eq.trans (eq.refl (n + m)) (eq.symm (is_commutative.comm has_add.add m n)))))</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="125672553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html#125672553">Simon Hudon (Apr 25 2018 at 15:52)</a>:</h4>
+<p>Oh interesting! I didn't think it would</p>
+
+
+{% endraw %}

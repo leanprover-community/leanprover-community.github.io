@@ -1,0 +1,72 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/07977existselimintacticmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html">exists.elim in tactic mode?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135602582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602582">Abhimanyu Pallavi Sudhir (Oct 11 2018 at 13:45)</a>:</h4>
+<p>Hi -- I've been trying to prove a certain relation is symmetric -- is there a way to use "exists.elim" in tactic mode? It always gives me errors.</p>
+
+<a name="135602627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602627">Johan Commelin (Oct 11 2018 at 13:46)</a>:</h4>
+<p>Is that <code>existsi</code>?</p>
+
+<a name="135602711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602711">Edward Ayers (Oct 11 2018 at 13:48)</a>:</h4>
+<p><code>cases h with x p</code> will take an existential hypothesis and hit it with <code>exists.elim</code></p>
+
+<a name="135602728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602728">Johan Commelin (Oct 11 2018 at 13:49)</a>:</h4>
+<p>Aah, in that case, you might also be interested in <code>rcases</code>. It is <code>cases</code> on steroids.</p>
+
+<a name="135602865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602865">Edward Ayers (Oct 11 2018 at 13:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">h₁</span> <span class="k">with</span> <span class="n">x</span> <span class="n">h₃</span><span class="o">,</span> <span class="c1">-- you can also omit the `with` and it will name them `h₁_w` and `h₁_h`</span>
+    <span class="n">apply</span> <span class="n">h₂</span> <span class="bp">_</span> <span class="n">h₃</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="135602884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135602884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135602884">Abhimanyu Pallavi Sudhir (Oct 11 2018 at 13:53)</a>:</h4>
+<p>Ok, that seems to work, thanks. It's quite natural to uses cases on ∃, certainly.</p>
+
+<a name="135603772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135603772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135603772">Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:13)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="135603852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135603852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135603852">Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:14)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="135603888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135603888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135603888">Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:15)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="135610299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135610299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135610299">Bryan Gin-ge Chen (Oct 11 2018 at 16:06)</a>:</h4>
+<p>I've been writing <code>exact exists.elim h (by { intro x hx, ... })</code>, but maybe that's considered less elegant.</p>
+
+<a name="135610649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135610649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135610649">Kenny Lau (Oct 11 2018 at 16:11)</a>:</h4>
+<p>yes, that is considered less elegant</p>
+
+<a name="135616278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135616278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135616278">Kevin Buzzard (Oct 11 2018 at 17:27)</a>:</h4>
+<p>Elegance was never my strong point when it came to Lean code.</p>
+
+<a name="135616293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists.elim%20in%20tactic%20mode%3F/near/135616293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07977existselimintacticmode.html#135616293">Kevin Buzzard (Oct 11 2018 at 17:27)</a>:</h4>
+<p>Lucky I might now have an MSc student who will elegantify my code :D</p>
+
+
+{% endraw %}

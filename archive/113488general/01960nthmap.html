@@ -1,0 +1,169 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01960nthmap.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html">nth_map</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126509555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509555">Patrick Massot (May 13 2018 at 22:59)</a>:</h4>
+<p>Do we have something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">nth_le_map</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span><span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">length</span> <span class="n">l</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">nth_le</span> <span class="o">(</span><span class="n">map</span> <span class="n">f</span> <span class="n">l</span><span class="o">)</span> <span class="n">n</span> <span class="o">((</span><span class="n">length_map</span> <span class="n">f</span> <span class="n">l</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">H</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">nth_le</span> <span class="n">l</span> <span class="n">n</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="126509560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509560">Patrick Massot (May 13 2018 at 22:59)</a>:</h4>
+<p>It feels a bit weird to stick a proof in the middle of the statement</p>
+
+<a name="126509561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509561">Patrick Massot (May 13 2018 at 22:59)</a>:</h4>
+<p>Am I doing something wrong?</p>
+
+<a name="126509612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509612">Mario Carneiro (May 13 2018 at 23:01)</a>:</h4>
+<p>One approach I have used in the past is to have two proof arguments, but this makes rewriting produce proof obligations that look superfluous</p>
+
+<a name="126509615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509615">Patrick Massot (May 13 2018 at 23:01)</a>:</h4>
+<p>And I don't know how to prove it</p>
+
+<a name="126509620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509620">Mario Carneiro (May 13 2018 at 23:01)</a>:</h4>
+<p>i.e. you would prove <code>nth_le (map f l) n H1 = f (nth_le l n H2) </code></p>
+
+<a name="126509621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509621">Patrick Massot (May 13 2018 at 23:01)</a>:</h4>
+<p>You you mean adding <code>(H' : n &lt; length (map f l))</code>?</p>
+
+<a name="126509651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509651">Patrick Massot (May 13 2018 at 23:02)</a>:</h4>
+<p>ok</p>
+
+<a name="126509663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509663">Patrick Massot (May 13 2018 at 23:02)</a>:</h4>
+<p>I still don't know how to prove it though</p>
+
+<a name="126509671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509671">Patrick Massot (May 13 2018 at 23:03)</a>:</h4>
+<p>Why is this not in mathlib? It looks like it would be useful for many proofs</p>
+
+<a name="126509672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509672">Mario Carneiro (May 13 2018 at 23:03)</a>:</h4>
+<p>I'm asking the same question</p>
+
+<a name="126509674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509674">Mario Carneiro (May 13 2018 at 23:03)</a>:</h4>
+<p>I would start with <code>nth</code></p>
+
+<a name="126509675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509675">Mario Carneiro (May 13 2018 at 23:03)</a>:</h4>
+<p>since that avoids the proof argument stuff</p>
+
+<a name="126509676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509676">Patrick Massot (May 13 2018 at 23:03)</a>:</h4>
+<p>I also thought that</p>
+
+<a name="126509677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509677">Patrick Massot (May 13 2018 at 23:03)</a>:</h4>
+<p>But I couldn't even state it <span class="emoji emoji-1f61e" title="disappointed">:disappointed:</span></p>
+
+<a name="126509716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509716">Patrick Massot (May 13 2018 at 23:04)</a>:</h4>
+<p>Because <code>f</code> doesn't want an <code>option α</code></p>
+
+<a name="126509823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509823">Mario Carneiro (May 13 2018 at 23:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>theorem nth_map (f : α → β) : ∀ l n, nth (map f l) n = (nth l n).map f
+| []       n     := rfl
+| (a :: l) 0     := rfl
+| (a :: l) (n+1) := nth_map l n
+
+theorem nth_le_map (f : α → β) {l n} (H1 H2) : nth_le (map f l) n H1 = f (nth_le l n H2) :=
+option.some.inj $ by rw [← nth_le_nth, nth_map, nth_le_nth]; refl
+</pre></div>
+
+<a name="126509824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509824">Mario Carneiro (May 13 2018 at 23:08)</a>:</h4>
+<p><code>option.map</code> takes <code>f : A -&gt; B</code> to <code>map f : option A -&gt; option B</code></p>
+
+<a name="126509827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509827">Patrick Massot (May 13 2018 at 23:09)</a>:</h4>
+<p><span class="emoji emoji-1f62e" title="open mouth">:open_mouth:</span></p>
+
+<a name="126509881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509881">Patrick Massot (May 13 2018 at 23:10)</a>:</h4>
+<p>I was clearly missing that <code>option.map</code> piece</p>
+
+<a name="126509886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509886">Patrick Massot (May 13 2018 at 23:10)</a>:</h4>
+<p>but probably not only that</p>
+
+<a name="126509887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509887">Mario Carneiro (May 13 2018 at 23:10)</a>:</h4>
+<p><code>option</code> is a functor</p>
+
+<a name="126509889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509889">Kenny Lau (May 13 2018 at 23:10)</a>:</h4>
+<p>is this proven in mathlib / Lean?</p>
+
+<a name="126509891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509891">Mario Carneiro (May 13 2018 at 23:10)</a>:</h4>
+<p>yes, because every monad is a functor</p>
+
+<a name="126509898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509898">Mario Carneiro (May 13 2018 at 23:11)</a>:</h4>
+<p>and <code>option</code> is like the very first monad you write</p>
+
+<a name="126509900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509900">Kenny Lau (May 13 2018 at 23:11)</a>:</h4>
+<p>you mean sentence</p>
+
+<a name="126509942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509942">Mario Carneiro (May 13 2018 at 23:12)</a>:</h4>
+<p>like when learning what monads are and examples, <code>option</code> is always the example</p>
+
+<a name="126509946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509946">Patrick Massot (May 13 2018 at 23:12)</a>:</h4>
+<p>Thank you very much Mario. I hope this will also be a good reference next time I'll hit this <code>option</code> stuff</p>
+
+<a name="126509947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509947">Patrick Massot (May 13 2018 at 23:12)</a>:</h4>
+<p>I still think you could put those two lemmas in mathlib</p>
+
+<a name="126509993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126509993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126509993">Mario Carneiro (May 13 2018 at 23:14)</a>:</h4>
+<p>I'm doing that now</p>
+
+<a name="126510003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126510003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126510003">Mario Carneiro (May 13 2018 at 23:15)</a>:</h4>
+<p>I definitely want more <code>nth</code> and <code>index_of</code> theorems, to make it easier to think of <code>list</code> as finitely supported functions on nat</p>
+
+<a name="126510056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126510056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126510056">Patrick Massot (May 13 2018 at 23:17)</a>:</h4>
+<p>Great</p>
+
+<a name="126510097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126510097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126510097">Patrick Massot (May 13 2018 at 23:18)</a>:</h4>
+<p>I was going after something like <code>reverse (range' a b) = map (lam x, ...) (range' a b)</code> and stuff like that</p>
+
+<a name="126510108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126510108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126510108">Patrick Massot (May 13 2018 at 23:20)</a>:</h4>
+<p>And was also thinking about defining <code>int_range k n</code> same as <code>range'</code> but <code>k</code> is an integer</p>
+
+<a name="126510154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126510154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126510154">Patrick Massot (May 13 2018 at 23:20)</a>:</h4>
+<p>and generalizing all the <code>range'</code> lemmas to this case</p>
+
+<a name="126512722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nth_map/near/126512722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01960nthmap.html#126512722">Mario Carneiro (May 14 2018 at 00:56)</a>:</h4>
+<p>That makes sense. I guess you could define <code>range'</code> generalized to any semiring, although it doesn't have the "consecutivity" property except in <code>nat</code> and <code>int</code></p>
+
+
+{% endraw %}

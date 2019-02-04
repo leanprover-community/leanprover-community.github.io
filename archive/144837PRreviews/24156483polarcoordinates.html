@@ -1,0 +1,480 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/24156483polarcoordinates.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html">#483 polar coordinates</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147885598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147885598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147885598">Kevin Buzzard (Nov 17 2018 at 18:46)</a>:</h4>
+<p>I proved some basic stuff in my undergraduate course, e.g. using polar coordinates to prove that a non-zero complex number has exactly n n'th roots if n&gt;=1 (I am still a bit confused as to why n&gt;=1 comes up so often in maths and so rarely in computer science; maybe we count stuff more). Anyway, <span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> has written up some of this stuff in Lean, including polar coordinates, which I guess didn't seem to be there before.</p>
+
+<a name="147885899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147885899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147885899">Kevin Buzzard (Nov 17 2018 at 18:56)</a>:</h4>
+<p>I guess the main thing I'm not sure about is how to put the concept of "angle" into Lean -- in maths it's the unit circle in the complexes, or <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">R</mi></mrow><mi mathvariant="normal">/</mi><mn>2</mn><mi>π</mi><mrow><mi mathvariant="double-struck">Z</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{R}/2\pi\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathbb">R</span></span><span class="mord mathrm">/</span><span class="mord mathrm">2</span><span class="mord mathit" style="margin-right:0.03588em;">π</span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>, or <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mi>π</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">[0,2\pi)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">2</span><span class="mord mathit" style="margin-right:0.03588em;">π</span><span class="mclose">)</span></span></span></span> or whatever. But there are implementation issues in Lean which I feel less confident about.</p>
+
+<a name="147885901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147885901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147885901">Kevin Buzzard (Nov 17 2018 at 18:56)</a>:</h4>
+<p>The thing you want is a map from the reals to the angles, so perhaps the quotient is best?</p>
+
+<a name="147887375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887375">Reid Barton (Nov 17 2018 at 19:44)</a>:</h4>
+<p>Nice! It looks like complex nth roots are quite close then. With those someone could try to prove FTA.</p>
+
+<a name="147887385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887385">Chris Hughes (Nov 17 2018 at 19:45)</a>:</h4>
+<p>Do you have a link to a proof that uses the existence of complex nth roots?</p>
+
+<a name="147887425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887425">Reid Barton (Nov 17 2018 at 19:46)</a>:</h4>
+<p><a href="https://ncatlab.org/nlab/show/fundamental+theorem+of+algebra#classical_fta_via_advanced_calculus" target="_blank" title="https://ncatlab.org/nlab/show/fundamental+theorem+of+algebra#classical_fta_via_advanced_calculus">https://ncatlab.org/nlab/show/fundamental+theorem+of+algebra#classical_fta_via_advanced_calculus</a></p>
+
+<a name="147887436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887436">Chris Hughes (Nov 17 2018 at 19:47)</a>:</h4>
+<p>Thaanks</p>
+
+<a name="147887718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887718">Reid Barton (Nov 17 2018 at 19:57)</a>:</h4>
+<p>Think it looks doable?</p>
+
+<a name="147887757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147887757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147887757">Reid Barton (Nov 17 2018 at 19:58)</a>:</h4>
+<p>There are some bits having to do with estimating sums which could be a little awkward</p>
+
+<a name="147888275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147888275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147888275">Chris Hughes (Nov 17 2018 at 20:14)</a>:</h4>
+<p>I'm not sure how to do Bolzano Weirstrass, because I don't know too much about analysis in Lean, or analysis in general for that matter. I think it's stated in a different way. The rest looks doable. What are the parts about estimating sums that you thought looked difficult?</p>
+
+<a name="147888549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147888549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147888549">Reid Barton (Nov 17 2018 at 20:24)</a>:</h4>
+<p>I guess just the statement that f(z) goes to infinity as z does. I was also thinking of the last bit of (2), but that's just continuity.</p>
+
+<a name="147888552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147888552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147888552">Chris Hughes (Nov 17 2018 at 20:25)</a>:</h4>
+<p>Yeah, I didn't quite notice that bit. Probably the hardest part.</p>
+
+<a name="147888558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147888558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147888558">Reid Barton (Nov 17 2018 at 20:25)</a>:</h4>
+<p>I think paragraph 1 is easier than it sounds from the proof written out there</p>
+
+<a name="147889672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147889672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147889672">Reid Barton (Nov 17 2018 at 21:05)</a>:</h4>
+<p>Minus the part about f(z) going to infinity as z does, I mean.</p>
+
+<a name="147891219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891219">Reid Barton (Nov 17 2018 at 22:01)</a>:</h4>
+<p>Well, it's easy modulo some more basic facts which we don't seem to have yet</p>
+
+<a name="147891311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891311">Reid Barton (Nov 17 2018 at 22:04)</a>:</h4>
+<p>The proof I had in mind was: We want to show that |f| attains a global minimum somewhere. Pick r large enough so that |z| &gt; r implies |f(z)| &gt; |f(0)|. The ball {|z| &lt;= r} is compact (missing fact 1), so its image under |f| is a nonempty compact subset of R and therefore contains a smallest element (missing fact 2). If w is some preimage of this smallest element, then |f| is globally minimized at w, by cases on whether or not |z| &lt;= R.</p>
+
+<a name="147891331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891331">Kenny Lau (Nov 17 2018 at 22:05)</a>:</h4>
+<p>I think we know that [0,1] is compact</p>
+
+<a name="147891333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891333">Kenny Lau (Nov 17 2018 at 22:05)</a>:</h4>
+<p>I don't know if we have extreme value theorem</p>
+
+<a name="147891385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891385">Reid Barton (Nov 17 2018 at 22:07)</a>:</h4>
+<p>Missing fact 1 is not really missing, it's just not stated in that exact form. I'm not sure about missing fact 2</p>
+
+<a name="147891495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891495">Sebastien Gouezel (Nov 17 2018 at 22:11)</a>:</h4>
+<p>I have missing fact 2 somewhere.</p>
+
+<a name="147891555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147891555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147891555">Sebastien Gouezel (Nov 17 2018 at 22:13)</a>:</h4>
+<p>Maybe it is time for me to dump a PR with a lot of useful random facts...</p>
+
+<a name="147895430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147895430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147895430">Mario Carneiro (Nov 18 2018 at 00:38)</a>:</h4>
+<p>useful random facts are my favorite</p>
+
+<a name="147918444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147918444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147918444">Sebastien Gouezel (Nov 18 2018 at 15:09)</a>:</h4>
+<p>Done in #PR484. The extreme value theorem is here under the sweet name of <code>exists_forall_le_of_compact_of_continuous</code> :)</p>
+
+<a name="147929675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147929675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147929675">Chris Hughes (Nov 18 2018 at 21:24)</a>:</h4>
+<p>I mostly proved this today, apart from a few annoying, but not too difficult sorries. Is this the right statement?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">easy_growth_lemma</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℂ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">degree</span> <span class="n">p</span> <span class="bp">→</span>
+  <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="bp">.</span><span class="n">abs</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">abs</span>
+</pre></div>
+
+<a name="147932354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932354">Chris Hughes (Nov 18 2018 at 22:43)</a>:</h4>
+<p>Sorries now filled in.</p>
+
+<a name="147932422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932422">Kevin Buzzard (Nov 18 2018 at 22:45)</a>:</h4>
+<p>You've proved polynomials are continuous at infinity. There will be a way of stating this with filters</p>
+
+<a name="147932475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932475">Kevin Buzzard (Nov 18 2018 at 22:46)</a>:</h4>
+<p>Think of x as being the epsilon for infinity, and r as being the delta</p>
+
+<a name="147932484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932484">Kevin Buzzard (Nov 18 2018 at 22:46)</a>:</h4>
+<p>Degree &gt; 0 is just the assumption that p sends infinity to infinity</p>
+
+<a name="147932497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932497">Chris Hughes (Nov 18 2018 at 22:47)</a>:</h4>
+<p>Haven't I proved p sends infinity to infinity?</p>
+
+<a name="147932540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932540">Chris Hughes (Nov 18 2018 at 22:48)</a>:</h4>
+<p>More or less. Does that mean anything rigorously?</p>
+
+<a name="147932553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932553">Chris Hughes (Nov 18 2018 at 22:49)</a>:</h4>
+<p>I think I get what you mean actually.</p>
+
+<a name="147932607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147932607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147932607">Chris Hughes (Nov 18 2018 at 22:50)</a>:</h4>
+<p>If I extended the complex numbers with infinity, then p sends infinity to infinity, but you need continuity at infinity to prove the limit is the same as the evaluation.</p>
+
+<a name="147933297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933297">Kevin Buzzard (Nov 18 2018 at 23:14)</a>:</h4>
+<p>Right. There's a topological space "complex numbers union infinity" with the "open balls centre infinity" being exactly infinity union these regions |z| &gt; M for M large, and polynomials, thought of as continuous maps from C to C, extend to continuous maps from this extended space to itself.</p>
+
+<a name="147933314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933314">Chris Hughes (Nov 18 2018 at 23:15)</a>:</h4>
+<p>Is there some clever easy proof of this by just proving add mul and neg are continuous at infinity.</p>
+
+<a name="147933366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933366">Kevin Buzzard (Nov 18 2018 at 23:17)</a>:</h4>
+<p>So this new space is called <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">P</mi><mn>1</mn></msup><mo>(</mo><mrow><mi mathvariant="double-struck">C</mi></mrow><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathbb{P}^1(\mathbb{C})</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">P</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbb">C</span></span><span class="mclose">)</span></span></span></span>, and if you put the effort into topologising it then not only are mul and neg continuous, but so is reciprocal (it swaps infinity and 0). I don't know whether it's worth the effort doing it this way in Lean but that's typically how it's done in a Riemann Surfaces course.</p>
+
+<a name="147933410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933410">Kevin Buzzard (Nov 18 2018 at 23:18)</a>:</h4>
+<p>Note that power series are typically not continuous at infinity, e.g. <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\sin(x)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mop">sin</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span></span></span></span> is zero for arbitrarily large real <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span></span></span></span>, but <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>sin</mi><mo>(</mo><mi>i</mi><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\sin(ix)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mop">sin</span><span class="mopen">(</span><span class="mord mathit">i</span><span class="mord mathit">x</span><span class="mclose">)</span></span></span></span> is something like <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">h</mi></mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">i\mathrm{sinh}(x)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">i</span><span class="mord"><span class="mord mathrm">s</span><span class="mord mathrm">i</span><span class="mord mathrm">n</span><span class="mord mathrm">h</span></span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span></span></span></span> which is huge for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span></span></span></span> large.</p>
+
+<a name="147933418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933418">Kevin Buzzard (Nov 18 2018 at 23:19)</a>:</h4>
+<p>The lingo is that functions like <code>sin</code> have "essential singularities" at infinity.</p>
+
+<a name="147933473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933473">Chris Hughes (Nov 18 2018 at 23:21)</a>:</h4>
+<p>I think I could write a shorter proof inspired by that idea though.</p>
+
+<a name="147933478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933478">Chris Hughes (Nov 18 2018 at 23:21)</a>:</h4>
+<p>Without going to a load of trouble definining a new topological space</p>
+
+<a name="147933796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933796">Kevin Buzzard (Nov 18 2018 at 23:33)</a>:</h4>
+<p>Of course, one day someone will define projective n-space in Lean anyway, and you'll be able to use that.</p>
+
+<a name="147933837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147933837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147933837">Kevin Buzzard (Nov 18 2018 at 23:34)</a>:</h4>
+<p>The variety, the scheme, the real manifold and the complex manifold all need doing :-)</p>
+
+<a name="147934663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147934663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147934663">Chris Hughes (Nov 18 2018 at 23:57)</a>:</h4>
+<p>How would one state continuous at infinity in the simplest way?</p>
+
+<a name="147935871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147935871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147935871">Kevin Buzzard (Nov 19 2018 at 00:42)</a>:</h4>
+<p>if <code>nhds infinity</code> exists (and it might well not) then you could use that, but it would just be a fancy translation of your "epsilon delta" statement.</p>
+
+<a name="147935931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147935931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147935931">Kenny Lau (Nov 19 2018 at 00:44)</a>:</h4>
+<p>what is "infinity" in Q_p?</p>
+
+<a name="147936317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147936317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147936317">Chris Hughes (Nov 19 2018 at 00:59)</a>:</h4>
+<blockquote>
+<p>if <code>nhds infinity</code> exists (and it might well not) then you could use that, but it would just be a fancy translation of your "epsilon delta" statement.</p>
+</blockquote>
+<p>I guess it's <code>at_top</code>, which is defined on a preorder, so I think <code>abs x \le abs y</code> is a preorder.</p>
+
+<a name="147936393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147936393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147936393">Chris Hughes (Nov 19 2018 at 01:01)</a>:</h4>
+<p>But that's not really what I want I don't think. Because at some point I still need to define multiplication by infinity to go down that route.</p>
+
+<a name="147944261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147944261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147944261">Mario Carneiro (Nov 19 2018 at 05:22)</a>:</h4>
+<p>by the way, I find that statement interesting not because of this continuity business but because that's part 1 of FTA</p>
+
+<a name="147944271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147944271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147944271">Reid Barton (Nov 19 2018 at 05:23)</a>:</h4>
+<p>that's why it's in a thread titled "polar coordinates" :)</p>
+
+<a name="147944940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147944940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147944940">Mario Carneiro (Nov 19 2018 at 05:46)</a>:</h4>
+<blockquote>
+<p>Note that power series are typically not continuous at infinity, e.g. sin(x) is zero for arbitrarily large real x</p>
+</blockquote>
+<p>I don't think this is true...</p>
+
+<a name="147945389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147945389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147945389">Scott Morrison (Nov 19 2018 at 06:01)</a>:</h4>
+<p>surely "for arbitrarily large" implies an existential quantifier, not a universal one...?</p>
+
+<a name="147953327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953327">Kevin Buzzard (Nov 19 2018 at 10:04)</a>:</h4>
+<p>I meant the true thing, regardless of how one can parse what I wrote and I agree that there may be a debate here. I am just pointing out that the analogue of Chris'lemma is false. Kenny -- you know what projective 1 space is over any field, as a variety. Making it an object that you can do analysis on is a different matter.</p>
+
+<a name="147953362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953362">Kevin Buzzard (Nov 19 2018 at 10:05)</a>:</h4>
+<p>I have several volumes in my office about how to do analysis and geometry over totally disconnected fields. The most fashionable answer nowadays is to use adic spaces.</p>
+
+<a name="147953367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953367">Mario Carneiro (Nov 19 2018 at 10:06)</a>:</h4>
+<p>I don't think CP^1 is as nice as you say, there is a reason infinity isn't normally treated as a number</p>
+
+<a name="147953409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953409">Mario Carneiro (Nov 19 2018 at 10:06)</a>:</h4>
+<p>I don't think multiplication is continuous?</p>
+
+<a name="147953416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953416">Mario Carneiro (Nov 19 2018 at 10:06)</a>:</h4>
+<p>plus I think there are still some undefined combinations like infty + infty and infty * 0</p>
+
+<a name="147953699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953699">Patrick Massot (Nov 19 2018 at 10:13)</a>:</h4>
+<p>Mario, Kevin never said CP¹ has a nice algebraic structure</p>
+
+<a name="147953776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953776">Mario Carneiro (Nov 19 2018 at 10:14)</a>:</h4>
+<p>he claimed that all polynomials are continuous?</p>
+
+<a name="147953783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953783">Mario Carneiro (Nov 19 2018 at 10:14)</a>:</h4>
+<p>multiplication is a polynomial</p>
+
+<a name="147953787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953787">Patrick Massot (Nov 19 2018 at 10:14)</a>:</h4>
+<p>The only case where infinity is sometimes treated as a number in this context is when discussing homographies</p>
+
+<a name="147953799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953799">Patrick Massot (Nov 19 2018 at 10:15)</a>:</h4>
+<p>He wrote that polynomial extend to P¹ as continuous functions</p>
+
+<a name="147953800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953800">Kevin Buzzard (Nov 19 2018 at 10:15)</a>:</h4>
+<p>Any rational function is continuous</p>
+
+<a name="147953806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953806">Kevin Buzzard (Nov 19 2018 at 10:15)</a>:</h4>
+<p>(2+z)/(3+z^2) is continuous</p>
+
+<a name="147953815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953815">Kevin Buzzard (Nov 19 2018 at 10:15)</a>:</h4>
+<p>but the trick is not to use infinity in your polynomials</p>
+
+<a name="147953817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953817">Kevin Buzzard (Nov 19 2018 at 10:15)</a>:</h4>
+<p>just in your values it can take</p>
+
+<a name="147953819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953819">Kevin Buzzard (Nov 19 2018 at 10:15)</a>:</h4>
+<p>and eat</p>
+
+<a name="147953862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953862">Mario Carneiro (Nov 19 2018 at 10:16)</a>:</h4>
+<p>I agree that there should be a nicer way to deal with meromorphic functions to avoid all the horrible case splits</p>
+
+<a name="147953880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953880">Mario Carneiro (Nov 19 2018 at 10:17)</a>:</h4>
+<p>defining 1/0 = 0 helps a lot, but it doesn't solve all the problems</p>
+
+<a name="147953964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953964">Patrick Massot (Nov 19 2018 at 10:18)</a>:</h4>
+<p>meromorphic functions can be defined as CP¹-valued holomorphic functions</p>
+
+<a name="147953977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953977">Patrick Massot (Nov 19 2018 at 10:19)</a>:</h4>
+<p>no problem</p>
+
+<a name="147953986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953986">Mario Carneiro (Nov 19 2018 at 10:19)</a>:</h4>
+<p>what's a holomorphic function</p>
+
+<a name="147953989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953989">Mario Carneiro (Nov 19 2018 at 10:19)</a>:</h4>
+<p>in a general sense</p>
+
+<a name="147953999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147953999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147953999">Patrick Massot (Nov 19 2018 at 10:19)</a>:</h4>
+<p>you ask for local charts are source and target where you see an undergraduate holomorphic function</p>
+
+<a name="147954051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954051">Patrick Massot (Nov 19 2018 at 10:20)</a>:</h4>
+<p>same as definining smooth functions between smooth manifolds</p>
+
+<a name="147954059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954059">Mario Carneiro (Nov 19 2018 at 10:20)</a>:</h4>
+<p>wait so it's just a manifold?</p>
+
+<a name="147954060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954060">Patrick Massot (Nov 19 2018 at 10:20)</a>:</h4>
+<p>complex manifold</p>
+
+<a name="147954063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954063">Patrick Massot (Nov 19 2018 at 10:20)</a>:</h4>
+<p>coordinate changes have to be holomorphic</p>
+
+<a name="147954084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954084">Mario Carneiro (Nov 19 2018 at 10:20)</a>:</h4>
+<p>hm... I'm sensing some circularity</p>
+
+<a name="147954093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954093">Patrick Massot (Nov 19 2018 at 10:21)</a>:</h4>
+<p>in case of CP¹ you can get away with two charts</p>
+
+<a name="147954096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147954096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#147954096">Patrick Massot (Nov 19 2018 at 10:21)</a>:</h4>
+<p>and coordinate change is 1/z</p>
+
+<a name="148409615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148409615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148409615">Chris Hughes (Nov 27 2018 at 01:27)</a>:</h4>
+<p>I mostly finished off a proof of the fundamental theorem of algebra today. The missing parts are complex nth roots and, the fact that it attains it's minimum value, given that it tends to infinity.</p>
+
+<a name="148678532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148678532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148678532">Chris Hughes (Nov 28 2018 at 01:09)</a>:</h4>
+<p>Do we have that closed balls of complexes are compact?</p>
+
+<a name="148679171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148679171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148679171">Reid Barton (Nov 28 2018 at 01:22)</a>:</h4>
+<p>We have it for R but it looks like a little bit of work is required to get it for C. I would guess that <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> has something useful here</p>
+
+<a name="148694231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148694231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148694231">Sebastien Gouezel (Nov 28 2018 at 08:16)</a>:</h4>
+<p>No, we don't have it. Even for reals, this is only in #PR484. I will add the complex case to this PR, it is not hard and definitely useful.</p>
+
+<a name="148705208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148705208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148705208">Sebastien Gouezel (Nov 28 2018 at 12:27)</a>:</h4>
+<p>#PR484 now contains the fact that C is proper, i.e., closed balls (and therefore any bounded closed set) are compact.</p>
+
+<a name="148712221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148712221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148712221">Reid Barton (Nov 28 2018 at 14:50)</a>:</h4>
+<p>Oh thanks! Somehow I had missed <a href="https://github.com/leanprover/mathlib/issues/484" target="_blank" title="https://github.com/leanprover/mathlib/issues/484">#484</a> entirely.</p>
+
+<a name="148748308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/148748308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#148748308">Chris Hughes (Nov 28 2018 at 23:17)</a>:</h4>
+<p>Back to the original topic, I feel like <code>nth_root</code> should return real nth roots of negative numbers when they exist. Currently it defaults to zero for negative numbers</p>
+
+<a name="150679507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679507">Kevin Buzzard (Dec 01 2018 at 12:03)</a>:</h4>
+<p>Maybe it could just return <code>-nth_root (-x)</code> for negative <code>x</code>.</p>
+
+<a name="150679806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679806">Mario Carneiro (Dec 01 2018 at 12:14)</a>:</h4>
+<p>but that's wrong for even n</p>
+
+<a name="150679860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679860">Johan Commelin (Dec 01 2018 at 12:16)</a>:</h4>
+<p>???</p>
+
+<a name="150679866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679866">Johan Commelin (Dec 01 2018 at 12:17)</a>:</h4>
+<p>We're talking about <code>real.nth_root</code>, not the complex version</p>
+
+<a name="150679922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679922">Kevin Buzzard (Dec 01 2018 at 12:19)</a>:</h4>
+<p>It's junk for even n</p>
+
+<a name="150679923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679923">Kevin Buzzard (Dec 01 2018 at 12:19)</a>:</h4>
+<p>There's no right answer</p>
+
+<a name="150679973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/150679973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#150679973">Johan Commelin (Dec 01 2018 at 12:21)</a>:</h4>
+<p>37</p>
+
+<a name="152496581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152496581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152496581">Reid Barton (Dec 25 2018 at 05:04)</a>:</h4>
+<blockquote>
+<p>#PR484 now contains the fact that C is proper, i.e., closed balls (and therefore any bounded closed set) are compact.</p>
+</blockquote>
+<p>And now it is merged, so we are one step closer to FTA.</p>
+
+<a name="152500414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152500414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152500414">Chris Hughes (Dec 25 2018 at 07:27)</a>:</h4>
+<p>I do have FTA on my PC. Just waiting for polar coordinates and multiplicity to be merged.</p>
+
+<a name="152502597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152502597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152502597">Mario Carneiro (Dec 25 2018 at 08:46)</a>:</h4>
+<p>Re: <code>nth_root</code>, do we need this definition? I didn't read it close enough last time but I see now that it only allows natural number roots. Why not just give <code>real</code> a has_pow instance?</p>
+
+<a name="152502603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152502603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152502603">Mario Carneiro (Dec 25 2018 at 08:47)</a>:</h4>
+<p>i.e. <code>x ^ y = exp (y * log x)</code> discounting edge cases</p>
+
+<a name="152502604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152502604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152502604">Mario Carneiro (Dec 25 2018 at 08:47)</a>:</h4>
+<p>then you can use <code>x ^ (1/n)</code> for <code>nth_root</code></p>
+
+<a name="152502794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152502794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152502794">Chris Hughes (Dec 25 2018 at 08:54)</a>:</h4>
+<p>I think that makes a lot of sense.</p>
+
+<a name="152543457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152543457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152543457">Sebastien Gouezel (Dec 26 2018 at 09:36)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>#PR484 now contains the fact that C is proper, i.e., closed balls (and therefore any bounded closed set) are compact.</p>
+</blockquote>
+<p>And now it is merged, so we are one step closer to FTA.</p>
+</blockquote>
+<p>Thanks a lot <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , for all the hard work and cleaning up the mess.</p>
+
+<a name="152545869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152545869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152545869">Patrick Massot (Dec 26 2018 at 10:56)</a>:</h4>
+<p>Sébastien, did you manage to learn something from this effort? It's difficult to see what Mario did because he squashed everything into one commit (I guess I could diff with the relevant branch)</p>
+
+<a name="152556998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152556998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152556998">Sebastien Gouezel (Dec 26 2018 at 16:06)</a>:</h4>
+<p>Mario added a commit to the branch, before squashing everything when he commited to mathlib. So, you can see the modifications he made, at <a href="https://github.com/leanprover/mathlib/pull/484/commits/76fa5711faa89549e7b4e234715d256711f32f33" target="_blank" title="https://github.com/leanprover/mathlib/pull/484/commits/76fa5711faa89549e7b4e234715d256711f32f33">https://github.com/leanprover/mathlib/pull/484/commits/76fa5711faa89549e7b4e234715d256711f32f33</a>. Very instructive!</p>
+
+<a name="152559779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152559779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152559779">Patrick Massot (Dec 26 2018 at 17:21)</a>:</h4>
+<p>Nice. I wish we could still keep your way of announcing intermediate statements, and then Mario-compress the proof. But I guess the compressed proof often skip your intermediate statements anyway</p>
+
+<a name="152560611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152560611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152560611">Sebastien Gouezel (Dec 26 2018 at 17:43)</a>:</h4>
+<p>I hope that in longer proofs it will be possible to keep the intermediate statements, but for 10-lines proofs that are compressed down to 3 lines I really don't care.</p>
+<p>In Isabelle, there is really strong emphasis on proofs that are a sequence of <code>have ...</code>, for (at least) the three following reasons:</p>
+<ul>
+<li>readability</li>
+<li>maintainability (if a proof breaks because the statement of a theorem has changed, or automation has changed, then with <code>have ...</code> you can see what was being proved, and the breakage is very localized, while with a sequence of tactics or a very long expression you can notice the breaking much later after it has happened, and this is much harder to fix)</li>
+<li>speed: different <code>have</code> statements can be handled in parallel, so on modern machines with a lot of cores even the proof of a single theorem can be split into many subtasks and therefore be processed very quickly.</li>
+</ul>
+<p>If I understand correctly, readability is not a goal in mathlib (although  I would very much like the opposite, but my opinion is not really important). For maintainability, if Mario is ready to maintain everything by himself this is not really an issue :) And for speed, if I understand correctly the proof of a single theorem is processed sequentially in Lean 3 (or am I wrong? is this going to change in Lean 4?)</p>
+
+<a name="152560741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152560741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152560741">Patrick Massot (Dec 26 2018 at 17:46)</a>:</h4>
+<p>Maybe one day Mario will get tired, or too busy, so maybe we should worry more about maintainability. It seems to me he is already less available than one year ago. About parallel processing, you are correct about Lean 3, and it could change in Lean 4 (that's one of the improvement that was flagged as very difficult to build in Lean 3)</p>
+
+<a name="152577881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152577881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152577881">Mario Carneiro (Dec 27 2018 at 01:35)</a>:</h4>
+<p>You can see now why it took so long for me to merge this PR. Every time I looked at it I thought that it can be done better but I couldn't find the time to do the cleanup. As for intermediate statements, I agree that they are useful but I think they should be chosen carefully. Sometimes you can even do a necessary part of the proof by a judiciously chosen <code>change</code> that also reports a bit of info about what's going on at the same time. But in the long term I have more hope for methods like <code>#explode</code> for displaying proofs regardless of how they are proven. This separates concerns between the proof construction process and proof review for people who actually want to learn some maths from the proof</p>
+
+<a name="152577938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152577938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152577938">Mario Carneiro (Dec 27 2018 at 01:37)</a>:</h4>
+<p>Speed was another reason I felt it necessary to revise many of Sebastien's proofs. I'm not entirely sure why but they mostly took 10s or more, and it was really noticeable. I tried to refrain from too much <code>simp</code> in the revisions</p>
+
+<a name="152578095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152578095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152578095">Mario Carneiro (Dec 27 2018 at 01:42)</a>:</h4>
+<p>But I'm glad I haven't discouraged him from submitting PRs - I see a bunch more now. Hopefully we can make some more progress on analysis with the new additions</p>
+
+<a name="152592048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152592048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152592048">Sebastien Gouezel (Dec 27 2018 at 09:43)</a>:</h4>
+<p>I am trying to submit much smaller PRs, hopefully this is a better strategy.</p>
+
+<a name="152592297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/152592297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html#152592297">Sebastien Gouezel (Dec 27 2018 at 09:50)</a>:</h4>
+<p>If you haven't started looking at #PR464 Bounded continuous functions, I can also split it into smaller chunks if you want. Tell me!</p>
+
+
+{% endraw %}

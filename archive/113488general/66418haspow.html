@@ -1,0 +1,67 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/66418haspow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html">has_pow</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124446352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124446352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124446352">Andrew Ashworth (Mar 31 2018 at 09:20)</a>:</h4>
+<p>what's the impact of the new has_pow typeclass being an out_param?</p>
+
+<a name="124446978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124446978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124446978">Mario Carneiro (Mar 31 2018 at 09:49)</a>:</h4>
+<p>I'm not sure about this change. Sebastian suggested it and it was merged before we had much discussion about it, but I don't know if it's reasonable. <code>mathlib</code> already had and discarded an earlier typeclass proposal. In particular, the reals are going to have at least three power operations on them, and it's not clear to me how to disambiguate the typeclass search</p>
+
+<a name="124449165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124449165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124449165">Sebastian Ullrich (Mar 31 2018 at 11:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Would that be <code>monoid_pow</code>/<code>group_pow</code>/<code>real_pow</code> (or whatever class that last one is defined on)? Since each one is strictly more general in its out_param type than the ones before it, would it make sense to give them increasing instance priorities?</p>
+
+<a name="124509461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124509461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124509461">Mario Carneiro (Apr 02 2018 at 04:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>  I've started working on fixing mathlib after the has_pow change. Here's an example of a problem that arises:</p>
+<div class="codehilite"><pre><span></span>variables {α : Type*} [group α]
+def gpow : α → ℤ → α := sorry
+instance group.has_pow : has_pow α ℤ := ⟨gpow⟩
+
+example (a : α) : a ^ 0 = 1 := sorry -- failed to synth ⊢ has_pow α ℕ
+example (a : α) : a ^ (0:ℕ) = 1 := sorry -- ok, coerces
+example (a : α) : a ^ (0:ℤ) = 1 := sorry -- ok
+</pre></div>
+
+<a name="124509510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124509510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124509510">Mario Carneiro (Apr 02 2018 at 04:35)</a>:</h4>
+<p>Do out_params not propagate type information to the arguments for the purpose of avoiding the nat default for number literals?</p>
+
+<a name="124520043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124520043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124520043">Mario Carneiro (Apr 02 2018 at 11:28)</a>:</h4>
+<p>Okay, this update isn't going to happen today, I need to sleep. The change is generally making me put in more type ascriptions than before, but it wasn't disambiguating anything before so maybe that's reasonable. It's not going to be fun explaining why this happens though</p>
+
+<a name="124520306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124520306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124520306">Sebastian Ullrich (Apr 02 2018 at 11:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Hmm, this is certainly unexpected</p>
+
+<a name="124546919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124546919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124546919">Sebastian Ullrich (Apr 02 2018 at 23:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Okay, it's unfortunate scheduling between the class inference and the coercion, which I don't think is a perfectly solvable problem in general. I don't know if we can do a better job for this common case, hmm.</p>
+
+<a name="124547413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124547413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124547413">Sebastian Ullrich (Apr 02 2018 at 23:51)</a>:</h4>
+<p>Would you suggest to just remove the out_param (for now)?</p>
+
+<a name="124550421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124550421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124550421">Mario Carneiro (Apr 03 2018 at 01:16)</a>:</h4>
+<p>My gut says that will perform better on the whole. We will have to give the type of things in that slot if they aren't derivable normally, but this will give more freedom to have multiple possibly incompatible power functions which are selected by type. I'll finish updating mathlib wrt the current version, and then if you change it to remove the out_param and I fix mathlib again we will have a basis for comparison.</p>
+
+<a name="124567281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124567281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66418haspow.html#124567281">Sebastian Ullrich (Apr 03 2018 at 11:06)</a>:</h4>
+<p>Okay, I'll remove it</p>
+
+
+{% endraw %}

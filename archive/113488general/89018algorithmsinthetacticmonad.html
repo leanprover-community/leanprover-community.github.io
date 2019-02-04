@@ -1,0 +1,218 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/89018algorithmsinthetacticmonad.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html">algorithms in the tactic monad</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133593072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593072">Scott Morrison (Sep 09 2018 at 05:51)</a>:</h4>
+<p>I need some remedial help with functional programming. </p>
+<p>Say I have <code>f : X -&gt; tactic X</code>, and <code>x : X</code>. Suppose that <code>f</code> is possibly very expensive to compute. I would like to recursively apply <code>f</code> to <code>x</code>, and produce an iterator-like object that can traversed elsewhere in the program, in such a way that <code>f</code> is never needlessly computed twice.</p>
+
+<a name="133593112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593112">Scott Morrison (Sep 09 2018 at 05:52)</a>:</h4>
+<p>What am I meant to do?</p>
+
+<a name="133593119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593119">Scott Morrison (Sep 09 2018 at 05:53)</a>:</h4>
+<p>(Oh, and <code>f</code> will eventually fail, and the iterator-like object needs to be able to report termination.)</p>
+
+<a name="133593162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593162">Scott Morrison (Sep 09 2018 at 05:54)</a>:</h4>
+<p>I would love to be able to package this up as merely a <code>tactic X</code>, whose every invocation magically produces the next element of the sequence, and handles piping the value of <code>f f f x</code> into the calculation of <code>f f f f x</code> "behind the scenes".</p>
+
+<a name="133593166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593166">Scott Morrison (Sep 09 2018 at 05:55)</a>:</h4>
+<p>But that seems unlikely. :-)</p>
+
+<a name="133593215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593215">Mario Carneiro (Sep 09 2018 at 05:56)</a>:</h4>
+<p>Use a <code>lazy_list</code></p>
+
+<a name="133593221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593221">Scott Morrison (Sep 09 2018 at 05:57)</a>:</h4>
+<p>How does that interact with working in the tactic monad?</p>
+
+<a name="133593223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593223">Simon Hudon (Sep 09 2018 at 05:58)</a>:</h4>
+<p>I think something is missing in <code>lazy_list</code> to allow this: the function is monadic. But I think we can make a monadic lazy list</p>
+
+<a name="133593273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593273">Mario Carneiro (Sep 09 2018 at 05:59)</a>:</h4>
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+| nil : mllist
+| cons : α → m mllist → mllist
+</pre></div>
+
+<a name="133593274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593274">Mario Carneiro (Sep 09 2018 at 05:59)</a>:</h4>
+<p>sadly this has to be meta, since it's not necessarily positive</p>
+
+<a name="133593332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593332">Simon Hudon (Sep 09 2018 at 06:01)</a>:</h4>
+<p>You could do something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mlazy_list</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">mlazy_list</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>  <span class="o">:</span> <span class="n">m</span> <span class="o">(</span><span class="n">a</span> <span class="n">x</span> <span class="n">b</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-&gt;</span> <span class="n">mlazy_list</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">mlazy_list</span>
+</pre></div>
+
+<a name="133593374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593374">Scott Morrison (Sep 09 2018 at 06:02)</a>:</h4>
+<p>Can you explain your one, Simon? I'm not understanding how to use it. :-)</p>
+
+<a name="133593489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593489">Mario Carneiro (Sep 09 2018 at 06:07)</a>:</h4>
+<p>eww, you have to package up the whole state to use that</p>
+
+<a name="133593493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593493">Mario Carneiro (Sep 09 2018 at 06:07)</a>:</h4>
+<p>also, that in no way resembles a list</p>
+
+<a name="133593536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593536">Scott Morrison (Sep 09 2018 at 06:08)</a>:</h4>
+<p>Mario, I'm failing to write <code>iterates</code> for your version... A hint?</p>
+
+<a name="133593537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593537">Simon Hudon (Sep 09 2018 at 06:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you have to squint and cock your head left</p>
+
+<a name="133593542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593542">Simon Hudon (Sep 09 2018 at 06:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Sure, let's have a look</p>
+
+<a name="133593546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593546">Mario Carneiro (Sep 09 2018 at 06:09)</a>:</h4>
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+| nil {} : mllist
+| cons : α → m mllist → mllist
+
+meta def fix {m : Type u → Type u} [monad m] [alternative m]
+  {α} (f : α → m α) : α → m (mllist m α)
+| x := (do a ← f x, return (mllist.cons a (fix a))) &lt;|&gt; pure mllist.nil
+</pre></div>
+
+<a name="133593591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593591">Mario Carneiro (Sep 09 2018 at 06:10)</a>:</h4>
+<p>the typeclass instances are a bit of a lie since the <code>monad</code> and <code>alternative</code> instances could potentially be giving different map operations, but since there are no axioms it doesn't matter</p>
+
+<a name="133593598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593598">Mario Carneiro (Sep 09 2018 at 06:11)</a>:</h4>
+<p>oh wait</p>
+<div class="codehilite"><pre><span></span>meta def fix {m : Type u → Type u} [alternative m]
+  {α} (f : α → m α) : α → m (mllist m α)
+| x := (λ a, mllist.cons a (fix a)) &lt;$&gt; f x &lt;|&gt; pure mllist.nil
+</pre></div>
+
+<a name="133593629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593629">Scott Morrison (Sep 09 2018 at 06:12)</a>:</h4>
+<p>Ah, okay, I'd just worked out a version of <code>fix</code>, but forgotten to check for failure...</p>
+
+<a name="133593650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593650">Mario Carneiro (Sep 09 2018 at 06:12)</a>:</h4>
+<p>if you skip that you have a valid infinite list representation a la haskell</p>
+
+<a name="133593869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593869">Mario Carneiro (Sep 09 2018 at 06:18)</a>:</h4>
+<div class="codehilite"><pre><span></span>meta def f : nat → tactic nat
+| 0 := tactic.failed
+| (n+1) := tactic.trace n $&gt; n
+
+run_cmd fix f 10 -- prints only 9
+
+meta def mllist.force {m} [monad m] {α} : mllist m α → m (list α)
+| mllist.nil := pure []
+| (mllist.cons a l) := list.cons a &lt;$&gt; (l &gt;&gt;= mllist.force)
+
+run_cmd (fix f 10 &gt;&gt;= mllist.force &gt;&gt;= tactic.trace) -- prints 9,...,0 and [9, ..., 0]
+</pre></div>
+
+<a name="133593870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593870">Scott Morrison (Sep 09 2018 at 06:18)</a>:</h4>
+<p>Oooh, and look at that:</p>
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+| nil {} : mllist
+| cons : α → m mllist → mllist
+
+open mllist
+
+meta def fix {m : Type u → Type u} [alternative m]
+  {α} (f : α → m α) : α → m (mllist m α)
+| x := (λ a, mllist.cons a (fix a)) &lt;$&gt; f x &lt;|&gt; pure mllist.nil
+
+meta def g (n : ℕ) : tactic ℕ :=
+do trace n,
+   return (n*n)
+
+meta def foo : tactic unit :=
+do L ← fix g 2,
+   mllist.cons n L ← return L,
+   trace &quot;!&quot;,
+   mllist.cons n L ← L,
+   trace &quot;!&quot;,
+   mllist.cons n L ← L,
+   trace &quot;!&quot;,
+   skip
+
+example : 1 = 1 :=
+begin
+  foo,
+  refl
+end
+</pre></div>
+
+
+<p>Printing: "2 ! 4 ! 16 !"</p>
+
+<a name="133593967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133593967">Simon Hudon (Sep 09 2018 at 06:21)</a>:</h4>
+<p>If you stay in tactics, Mario's version is simpler. Mine is getting tricky because of universes</p>
+
+<a name="133594092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594092">Scott Morrison (Sep 09 2018 at 06:24)</a>:</h4>
+<p>Thanks, Simon. I'm trapped in the bottom universe anyway,, <code>expr</code>-munging,  so I'll go with Mario's for now.</p>
+
+<a name="133594099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594099">Mario Carneiro (Sep 09 2018 at 06:24)</a>:</h4>
+<p>Basically you get into the standard universe issues with coinductive types. I don't know any way to avoid packing the entire state into the type</p>
+
+<a name="133594113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594113">Simon Hudon (Sep 09 2018 at 06:25)</a>:</h4>
+<p>:) good I wish I could have made something that fits in a short snippet. But now, I have to bring in a whole F-algebra which I haven't implemented yet :)</p>
+
+<a name="133594114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594114">Mario Carneiro (Sep 09 2018 at 06:25)</a>:</h4>
+<p>You can mathematically reason about the entire completed infinite process, but this has poor code behavior</p>
+
+<a name="133594158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594158">Simon Hudon (Sep 09 2018 at 06:26)</a>:</h4>
+<p>Doesn't Lean allow you to substitute pure code with something that will be efficient?</p>
+
+<a name="133594162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594162">Mario Carneiro (Sep 09 2018 at 06:26)</a>:</h4>
+<p><span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span></p>
+
+<a name="133594222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133594222">Simon Hudon (Sep 09 2018 at 06:29)</a>:</h4>
+<p>:) since you mention coinductive types, you mentioned bounded natural functors a while back. Now I'm thinking my current approach might be getting out of hand so I think I'll give them a try</p>
+
+<a name="133603765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133603765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133603765">Reid Barton (Sep 09 2018 at 12:31)</a>:</h4>
+<blockquote>
+<p>bounded natural functors</p>
+</blockquote>
+<p>Interesting. What you need to construct the initial algebra of a functor F : Set -&gt; Set by transfinite induction is that F is accessible, that is, F commutes with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>-filtered colimits for some <strong>regular cardinal</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>. For example, FX = (S -&gt; X) is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>-accessible if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><mi>S</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>κ</mi></mrow><annotation encoding="application/x-tex">|S| &lt; \kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">∣</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathrm">∣</span><span class="mrel">&lt;</span><span class="mord mathit">κ</span></span></span></span>. So I guess this "bounded" condition is related. Do CS people use regular cardinals too?<br>
+I found some paper on the topic which contains a lemma which bounds the cardinality of minimal algebras and the formula involves a successor cardinal, so I guess it is the same idea.</p>
+
+<a name="133618942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133618942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html#133618942">Simon Hudon (Sep 09 2018 at 19:37)</a>:</h4>
+<p>Thanks for the attempt at giving me an introduction. I'm afraid I'm more of a noob than that when it comes to category theory</p>
+
+
+{% endraw %}

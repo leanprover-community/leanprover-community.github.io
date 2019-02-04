@@ -1,0 +1,123 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/43922congrargandsuperficiallydependentfunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html">congr_arg and superficially dependent functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130781762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130781762">Scott Morrison (Aug 02 2018 at 16:37)</a>:</h4>
+<p>I'm having trouble constructing <code>congr_arg</code> expressions, where the function superficially looks like a dependent function, but after some definitionally unfolding you can see that it isn't really.</p>
+
+<a name="130781777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130781777">Scott Morrison (Aug 02 2018 at 16:37)</a>:</h4>
+<p>I've worked out how to get around this in interactive mode, but I can't do it with <code>expr</code>s.</p>
+
+<a name="130781780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130781780">Scott Morrison (Aug 02 2018 at 16:37)</a>:</h4>
+<p>Here's my work so far.</p>
+
+<a name="130781824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130781824">Scott Morrison (Aug 02 2018 at 16:38)</a>:</h4>
+<div class="codehilite"><pre><span></span>def F : Π n : ℕ, Type := λ n, ℕ
+def G : Π n : ℕ, F n := λ n, begin dunfold F, exact 0 end
+
+lemma test (m n : ℕ) (w : m = n) : G n == G m :=
+begin
+  -- This doesn&#39;t work, because `G` looks like a dependent function
+  success_if_fail {
+    have h := congr_arg G w
+  },
+  -- In fact it isn&#39;t really, and we can discover this with `dsimp`.
+  let g := G,
+  dsimp [F] at g,
+  -- Now we can use congr_arg.
+  let h := congr_arg g w,
+  dsimp [g] at h,
+  rw h,
+end
+
+-- Now I want to do this via `expr` munging:
+
+open tactic
+
+meta def mk_congr_arg_using_dsimp (G W : expr) (F : name) : tactic expr :=
+-- I have no idea how to achieve this: this doesn&#39;t work, but is my best guess.
+do
+  s ← simp_lemmas.mk_default,
+  t ← infer_type G,
+  t&#39; ← s.dsimplify [F] t {fail_if_unchanged := ff},
+  trace t&#39;,
+  to_expr ```(congr_arg (%%G : %%t&#39;) %%W)
+
+lemma test2 (m n : ℕ) (w : m = n) : G n == G m :=
+begin
+  let h := by tactic.get_local `w &gt;&gt;= λ W, mk_congr_arg_using_dsimp `(G) W `F,
+  rw h,
+end
+</pre></div>
+
+<a name="130781907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130781907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130781907">Scott Morrison (Aug 02 2018 at 16:39)</a>:</h4>
+<p>If anyone could replace the definition of <code>mk_congr_arg_using_dsimp</code> so that <code>test2</code> works, that would be amazing. :-)</p>
+
+<a name="130826815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130826815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130826815">Minchao Wu (Aug 03 2018 at 11:05)</a>:</h4>
+<p>A quick solution:</p>
+<div class="codehilite"><pre><span></span>meta def mk_congr_arg_using_dsimp (G W : expr) (F : name) : tactic unit :=
+do
+  eg ← to_expr ```(λ n:nat, id 0),
+  t ← infer_type G,
+  s ← simp_lemmas.mk_default,
+  t&#39; ← s.dsimplify [F] t {fail_if_unchanged := ff},
+  definev `g t&#39; eg,
+  eg ← get_local `g,
+  eeq ← to_expr ```(%%G = %%eg),
+  assert `h eeq,
+  try reflexivity
+
+lemma test2 (m n : ℕ) (w : m = n) : G n == G m :=
+begin
+  tactic.get_local `w &gt;&gt;= λ W, mk_congr_arg_using_dsimp `(G) W `F,
+  rw h
+end
+</pre></div>
+
+<a name="130827714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130827714">Minchao Wu (Aug 03 2018 at 11:23)</a>:</h4>
+<p>The attempt is to force lean to be aware that the two types of G collapse, however <code>(%%G : %%t')</code> doesn't do the trick. This introduces an additional local hypothesis which has the non-dependent type and proves that it is just <code>G</code>.</p>
+
+<a name="130827909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130827909">Scott Morrison (Aug 03 2018 at 11:26)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110187">@Minchao Wu</span>. In the meantime I'd come up with my own solution:</p>
+<div class="codehilite"><pre><span></span>-- Sometimes `mk_congr_arg` fails, when the function is &#39;superficially dependent&#39;.
+-- This hack first dsimplifies the function before building the `congr_arg` expression.
+-- Unfortunately it creates a dummy hypothesis that I can&#39;t work out how to avoid or dispose of cleanly.
+meta def mk_congr_arg_using_dsimp (G W : expr) (u : list name) : tactic expr :=
+do
+  s ← simp_lemmas.mk_default,
+  t ← infer_type G,
+  t&#39; ← s.dsimplify u t {fail_if_unchanged := ff},
+  tactic.definev `_mk_congr_arg_aux t&#39; G,
+  to_expr ```(congr_arg _mk_congr_arg_aux %%W)
+</pre></div>
+
+
+<p>which is fairly similar!</p>
+
+<a name="130827938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130827938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130827938">Scott Morrison (Aug 03 2018 at 11:27)</a>:</h4>
+<p>The next question is how to achieve this without making the local hypothesis, so this tactic doesn't pollute the current goal.</p>
+
+<a name="130828082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr_arg%20and%20superficially%20dependent%20functions/near/130828082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43922congrargandsuperficiallydependentfunctions.html#130828082">Minchao Wu (Aug 03 2018 at 11:30)</a>:</h4>
+<p>Yeah I'm also wondering if there is a neater solution :)</p>
+
+
+{% endraw %}

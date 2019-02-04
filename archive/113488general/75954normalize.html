@@ -1,0 +1,102 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75954normalize.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html">normalize</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157348940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157348940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157348940">Kenny Lau (Feb 01 2019 at 13:21)</a>:</h4>
+<p>Ok this situation is quite complicated here and I'm not sure I understand the whole situation (an import graph would be quite beneficial).</p>
+<p>So I look at <a href="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/gcd_domain.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/gcd_domain.lean">algebra/gcd_domain.lean</a> and think to myself: I should define <code>normalize x</code> to replace <code>x * norm_unit x</code> since that expression is used a lot and should have a name and is actually the whole point of <code>normalization_domain</code> (we don't really care about the unit it multiplies by, right?).</p>
+<p>But this would require lemmas from <a href="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/associated.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/associated.lean">ring_theory/associated.lean</a> about units and dvd.</p>
+<p>Unfortunately, it imports <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/int/gcd.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/int/gcd.lean">data/int/gcd.lean</a> which imports algebra.gcd_domain, and this is an essential import in the sense that a majority of the file is based on this import.</p>
+<p>However, <code>data/int/gcd.lean</code> is not an essential import of <code>ring_theory/associated.lean</code>, in the sense that &lt; 10% of the file breaks when I remove that import. Things that break include three theorems which is essentially examples about int and nat, and also a section below about normalization domain.</p>
+
+<a name="157348941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157348941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157348941">Kenny Lau (Feb 01 2019 at 13:21)</a>:</h4>
+<p>So my proposal is:</p>
+<p>1. remove the import <code>data/int/gcd.lean</code> from <code>ring_theory/associated.lean</code><br>
+2. move <code>ring_theory/associated.lean</code> to <code>algebra/associated.lean</code><br>
+3. add the import <code>algebra/associated.lean</code> to <code>algebra/gcd_domain.lean</code><br>
+4. add <code>normalize</code> in <code>algebra/gcd_domain.lean</code><br>
+5. move the three theorems that break to <code>data/int/gcd.lean</code><br>
+6. move the section that breaks to <code>algebra/gcd_domain.lean</code></p>
+
+<a name="157348944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157348944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157348944">Kenny Lau (Feb 01 2019 at 13:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  do you think this is a good idea? did I miss anything?</p>
+
+<a name="157349041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349041">Mario Carneiro (Feb 01 2019 at 13:23)</a>:</h4>
+<p>why does <code>int.gcd</code> use <code>algebra.normalization_domain</code>?</p>
+
+<a name="157349099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349099">Kenny Lau (Feb 01 2019 at 13:24)</a>:</h4>
+<p>There is no <code>algebra.normalization_domain</code>: it is just <code>algebra.gcd_domain</code>.</p>
+
+<a name="157349103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349103">Kenny Lau (Feb 01 2019 at 13:24)</a>:</h4>
+<p>And that uses that because the whole file is about gcd</p>
+
+<a name="157349107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349107">Mario Carneiro (Feb 01 2019 at 13:24)</a>:</h4>
+<p><code>nat.gcd</code> doesn't</p>
+
+<a name="157349109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349109">Kenny Lau (Feb 01 2019 at 13:24)</a>:</h4>
+<p>because <code>nat</code> isn't a <code>gcd_domain</code></p>
+
+<a name="157349239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349239">Kenny Lau (Feb 01 2019 at 13:27)</a>:</h4>
+<p>I suppose we can remove the <code>normalization_domain</code> and <code>gcd_domain</code> sections of <code>data/int/gcd.lean</code> and move them to <code>algebra/gcd_domain.lean</code>?</p>
+
+<a name="157349245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349245">Kenny Lau (Feb 01 2019 at 13:27)</a>:</h4>
+<p>What do you think?</p>
+
+<a name="157349263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349263">Kenny Lau (Feb 01 2019 at 13:27)</a>:</h4>
+<p>afterall there's a proof that <code>int</code> is <code>euclidean_domain</code> in <code>algebra/euclidean_domain.lean</code> anyway, so this wouldn't be unprecedented</p>
+
+<a name="157349345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349345">Mario Carneiro (Feb 01 2019 at 13:28)</a>:</h4>
+<p>my guess is that you can do integer gcd by reference to nat gcd, without bringing in the abstract algebra. But setting that aside, I think that moving  <code>ring_theory.associated</code> to <code>algebra</code> is okay for much of it, but not all; you will probably need to split the file</p>
+
+<a name="157349369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349369">Kenny Lau (Feb 01 2019 at 13:29)</a>:</h4>
+<p>Ok I'll experiment on a branch</p>
+
+<a name="157349426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349426">Mario Carneiro (Feb 01 2019 at 13:30)</a>:</h4>
+<p>I think that <code>data.int.gcd</code> shouldn't bring in anything from <code>ring_theory</code></p>
+
+<a name="157349455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157349455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157349455">Kenny Lau (Feb 01 2019 at 13:31)</a>:</h4>
+<p>I agree</p>
+
+<a name="157351447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157351447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157351447">Kenny Lau (Feb 01 2019 at 14:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> so where should these theorems go?</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">irreducible_iff_nat_prime</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kn">irreducible</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">a</span>
+<span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime_iff_prime</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="n">prime</span> <span class="bp">↔</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">prime</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime_iff_prime_int</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="n">prime</span> <span class="bp">↔</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">prime</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">def</span> <span class="n">associates_int_equiv_nat</span> <span class="o">:</span> <span class="o">(</span><span class="n">associates</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="err">≃</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="157351639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157351639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157351639">Kenny Lau (Feb 01 2019 at 14:12)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/normalize/src/pending/default.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/normalize/src/pending/default.lean">https://github.com/leanprover-community/mathlib/blob/normalize/src/pending/default.lean</a></p>
+
+<a name="157358389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157358389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75954normalize.html#157358389">Kevin Buzzard (Feb 01 2019 at 15:59)</a>:</h4>
+<p>Can one break up file <code>X.lean</code> into <code>X_part_1.lean</code> and <code>X_part_2.lean</code> and then just change <code>X.lean</code> into <code>import X_part_1.lean import X_part_2.lean</code>, and then you have more breathing space to fiddle with imports?</p>
+
+
+{% endraw %}

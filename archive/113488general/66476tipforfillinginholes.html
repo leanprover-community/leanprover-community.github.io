@@ -1,0 +1,103 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/66476tipforfillinginholes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html">tip for filling in holes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125425455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125425455">Kevin Buzzard (Apr 20 2018 at 12:11)</a>:</h4>
+<p>Sometimes in Lean you sit down to write a definition or a theorem, knowing that it will be really easy and fun. I was just in that situation. I need to write down some maps between localized rings and prove that they have some properties, but now I know that the localization interface is excellent and that pretty much every single one of my proofs will look like <code>name_of_function _ _ _ _ _</code>.</p>
+
+<a name="125425597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125425597">Kevin Buzzard (Apr 20 2018 at 12:12)</a>:</h4>
+<p>However, I have run into an unexpected annoyance.</p>
+
+<a name="125425716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125425716">Kevin Buzzard (Apr 20 2018 at 12:12)</a>:</h4>
+<p>Here is my skeleton set-up.</p>
+
+<a name="125425811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125425811">Kevin Buzzard (Apr 20 2018 at 12:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">localization</span><span class="bp">.</span><span class="n">loc_loc_is_loc</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Spec</span><span class="bp">.</span><span class="n">D&#39;</span> <span class="n">g</span> <span class="err">⊆</span> <span class="n">Spec</span><span class="bp">.</span><span class="n">D&#39;</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">localization</span><span class="bp">.</span><span class="n">away</span> <span class="n">g</span><span class="o">)</span> <span class="err">≃ᵣ</span> <span class="n">localization</span><span class="bp">.</span><span class="n">away</span> <span class="o">(</span><span class="n">localization</span><span class="bp">.</span><span class="n">of_comm_ring</span> <span class="n">R</span> <span class="o">(</span><span class="n">powers</span> <span class="n">f</span><span class="o">)</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">is_ring_hom</span> <span class="o">:=</span> <span class="bp">_</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="125426022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426022">Kevin Buzzard (Apr 20 2018 at 12:12)</a>:</h4>
+<p>The idea now is that I just fill in all the holes one by one.</p>
+
+<a name="125426090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426090">Kevin Buzzard (Apr 20 2018 at 12:13)</a>:</h4>
+<p>But I want the holes to have red squiggles under them!</p>
+
+<a name="125426138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426138">Kevin Buzzard (Apr 20 2018 at 12:13)</a>:</h4>
+<p>And for some reason, only the last one does</p>
+
+<a name="125426449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426449">Kevin Buzzard (Apr 20 2018 at 12:14)</a>:</h4>
+<p>and the associated complaint is full of metavariables</p>
+
+<a name="125426465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426465">Kevin Buzzard (Apr 20 2018 at 12:14)</a>:</h4>
+<p>because it depends on some earlier holes</p>
+
+<a name="125426472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426472">Kenny Lau (Apr 20 2018 at 12:14)</a>:</h4>
+<p>begin end</p>
+
+<a name="125426501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426501">Kevin Buzzard (Apr 20 2018 at 12:14)</a>:</h4>
+<p>and then remove it later?</p>
+
+<a name="125426565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426565">Kevin Buzzard (Apr 20 2018 at 12:14)</a>:</h4>
+<p>because it's a def</p>
+
+<a name="125426587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426587">Kenny Lau (Apr 20 2018 at 12:14)</a>:</h4>
+<p>i just fill in stuff in front of begin end</p>
+
+<a name="125426641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426641">Kenny Lau (Apr 20 2018 at 12:14)</a>:</h4>
+<p>I mean, replace your _ with begin end</p>
+
+<a name="125426744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426744">Kenny Lau (Apr 20 2018 at 12:15)</a>:</h4>
+<p>I can show you that in person next week ^^</p>
+
+<a name="125426832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426832">Kevin Buzzard (Apr 20 2018 at 12:15)</a>:</h4>
+<p><code>begin exact _ end</code></p>
+
+<a name="125426834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426834">Kevin Buzzard (Apr 20 2018 at 12:15)</a>:</h4>
+<p>:-)</p>
+
+<a name="125426835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125426835">Kevin Buzzard (Apr 20 2018 at 12:15)</a>:</h4>
+<p>Many thanks Kenny!</p>
+
+<a name="125427174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125427174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125427174">Kevin Buzzard (Apr 20 2018 at 12:16)</a>:</h4>
+<p>I feel like there are so many little tips like this, and it's unclear to me where they should be put.</p>
+
+<a name="125427447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125427447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html#125427447">Kenny Lau (Apr 20 2018 at 12:16)</a>:</h4>
+<p>you don’t need exact _</p>
+
+
+{% endraw %}

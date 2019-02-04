@@ -1,0 +1,77 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/18776Zeroofreallysmall.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html">Zero of really small</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="156453113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156453113">Patrick Massot (Jan 19 2019 at 22:44)</a>:</h4>
+<p>Where do we find <code>lemma zero_of_abs_lt_all (x : ℝ) (h : ∀ ε, ε &gt; 0 → |x| &lt; ε) : x = 0</code>?</p>
+
+<a name="156453250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156453250">Chris Hughes (Jan 19 2019 at 22:48)</a>:</h4>
+<p>I think something like <code>eq_of_forall_abs_sub_lt</code> is in there.</p>
+
+<a name="156453442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156453442">Patrick Massot (Jan 19 2019 at 22:54)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/search?q=eq_of_forall_abs_sub_lt&amp;unscoped_q=eq_of_forall_abs_sub_lt" target="_blank" title="https://github.com/leanprover/mathlib/search?q=eq_of_forall_abs_sub_lt&amp;unscoped_q=eq_of_forall_abs_sub_lt">https://github.com/leanprover/mathlib/search?q=eq_of_forall_abs_sub_lt&amp;unscoped_q=eq_of_forall_abs_sub_lt</a> <span class="emoji emoji-2639" title="sad">:sad:</span></p>
+
+<a name="156453462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156453462">Patrick Massot (Jan 19 2019 at 22:54)</a>:</h4>
+<p>Do you have any idea where something like this could be?</p>
+
+<a name="156454123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454123">Patrick Massot (Jan 19 2019 at 23:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">zero_of_abs_lt_all</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">eq_zero_of_abs_eq_zero</span> <span class="err">$</span> <span class="n">eq_of_le_of_forall_le_of_dense</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="n">x</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">,</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">h</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">)</span>
+</pre></div>
+
+<a name="156454138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454138">Patrick Massot (Jan 19 2019 at 23:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Should I PR that, or is it already in?</p>
+
+<a name="156454184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454184">Patrick Massot (Jan 19 2019 at 23:16)</a>:</h4>
+<p>with weaker assumptions of course</p>
+
+<a name="156454188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454188">Patrick Massot (Jan 19 2019 at 23:17)</a>:</h4>
+<p>(I mean replacing real numbers with something more general)</p>
+
+<a name="156454377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454377">Mario Carneiro (Jan 19 2019 at 23:23)</a>:</h4>
+<p>is this a theorem of normed groups or do you want a different abstraction</p>
+
+<a name="156454434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454434">Patrick Massot (Jan 19 2019 at 23:24)</a>:</h4>
+<p>I think normed groups is enough for me, but <code>eq_of_le_of_forall_le_of_dense</code> has more exotic type classes</p>
+
+<a name="156454452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454452">Patrick Massot (Jan 19 2019 at 23:26)</a>:</h4>
+<p>But I don't want you to think too hard about this when you could be hitting that merge button on <a href="https://github.com/leanprover/mathlib/pull/610" target="_blank" title="https://github.com/leanprover/mathlib/pull/610">https://github.com/leanprover/mathlib/pull/610</a></p>
+
+<a name="156454640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454640">Patrick Massot (Jan 19 2019 at 23:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">zero_of_norm_lt_all</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">norm_eq_zero</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">eq_of_le_of_forall_le_of_dense</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="n">x</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">,</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">h</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">zero_of_abs_lt_all</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">zero_of_norm_lt_all</span> <span class="n">x</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>does work</p>
+
+<a name="156454642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156454642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html#156454642">Patrick Massot (Jan 19 2019 at 23:31)</a>:</h4>
+<p>of course we could also prove them the other way around</p>
+
+
+{% endraw %}

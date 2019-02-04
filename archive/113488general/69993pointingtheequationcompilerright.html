@@ -1,0 +1,235 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/69993pointingtheequationcompilerright.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html">pointing the equation compiler right</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126495867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126495867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126495867">James Wood (May 13 2018 at 13:58)</a>:</h4>
+<p>Hi, I'm new to Lean. I'm trying to write the following, but termination checking fails for <code>weaken_term</code> in the second recursive call for <code>app</code> and the recursive call for <code>lam</code>. Each time, the reported problem is that <code>m</code> does not decrease, but that should be irrelevant because the induction is on the term. How can I give Lean this hint? Or is the Lean termination checker not sufficiently Foetus-like, so I have to do something else?</p>
+<div class="codehilite"><pre><span></span>open nat
+
+inductive fin&#39; : nat → Type
+| zero {n} : fin&#39; (succ n)
+| succ {n} : fin&#39; n → fin&#39; (succ n)
+open fin&#39;
+
+inductive dir : Type
+| syn : dir
+| chk : dir
+open dir
+
+inductive term : nat → dir → Type
+| var {n} (i : fin&#39; n)                      : term n syn
+| app {n} (e : term n syn) (s : term n chk) : term n syn
+| lam {n} (s : term (succ n) chk)           : term n chk
+open term
+
+def plus : nat → nat → nat
+| zero n := n
+| (succ m) n := succ (plus m n)
+
+def weaken_fin&#39; {n} : ∀ m, fin&#39; (plus m n) → fin&#39; (plus m (succ n))
+| zero i := succ i
+| (succ m) zero := zero
+| (succ m) (succ i) := succ (weaken_fin&#39; m i)
+
+def weaken_term {n} : ∀ m {d}, term (plus m n) d → term (plus m (succ n)) d
+| m syn (var i) := var (weaken_fin&#39; m i)
+| m syn (app e s) := app (weaken_term m e) (weaken_term m s)
+| m chk (lam s) := lam (weaken_term (succ m) s)
+</pre></div>
+
+<a name="126496313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126496313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126496313">Mario Carneiro (May 13 2018 at 14:15)</a>:</h4>
+<p>It can't be done directly by induction on <code>term</code>, since you would forget the relation to m and n</p>
+
+<a name="126496355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126496355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126496355">Mario Carneiro (May 13 2018 at 14:16)</a>:</h4>
+<p>Here's a way to write that you want to do induction explicitly with the equation compiler:</p>
+<div class="codehilite"><pre><span></span>def weaken_term&#39; {n} : ∀ {k d}, term k d → ∀ m, plus m n = k → term (plus m (succ n)) d
+| _ syn (var i) m rfl := var (weaken_fin&#39; m i)
+| _ syn (app e s) m rfl := app (weaken_term&#39; e m rfl) (weaken_term&#39; s m rfl)
+| _ chk (lam s) m rfl := lam (weaken_term&#39; s (succ m) rfl)
+
+def weaken_term {n} (m) {d} (s : term (plus m n) d) : term (plus m (succ n)) d :=
+weaken_term&#39; s m rfl
+</pre></div>
+
+<a name="126496552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126496552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126496552">James Wood (May 13 2018 at 14:24)</a>:</h4>
+<p>Thanks! Where exactly is the relation to <code>m</code> and <code>n</code> being lost? I can't quite pick out why the term is allowed to depend on the index <code>d</code> like it does.</p>
+
+<a name="126496755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126496755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126496755">Mario Carneiro (May 13 2018 at 14:33)</a>:</h4>
+<p>It might help to try using the <code>induction</code> tactic to get a sense of what lean is doing under the hood</p>
+
+<a name="126497036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497036">Mario Carneiro (May 13 2018 at 14:45)</a>:</h4>
+<div class="codehilite"><pre><span></span>def weaken_term {n} : ∀ m {d}, term (plus m n) d → term (plus m (succ n)) d :=
+begin
+  intros m d s,
+  induction s with n&#39; i n&#39; e s IH1 IH2 n&#39; s IH,
+  exact var (weaken_fin&#39; m i), --fail
+end.
+</pre></div>
+
+
+<p>Notice that you won't be able to prove the first goal because the type is <code>fin' n'</code> instead of <code>fin' (plus m n)</code>. This is where the equality assumption comes in</p>
+
+<a name="126497123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497123">Mario Carneiro (May 13 2018 at 14:48)</a>:</h4>
+<p>You can actually prove this directly in tactic mode by starting with</p>
+<div class="codehilite"><pre><span></span>  intros m d s,
+  generalize h : plus m n = k,
+  induction s with n&#39; i n&#39; e s IH1 IH2 n&#39; s IH generalizing k; subst k,
+</pre></div>
+
+
+<p>which has the effect of introducing the equality before doing the induction</p>
+
+<a name="126497175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497175">James Wood (May 13 2018 at 14:50)</a>:</h4>
+<p>Can the problem be restated in terms of induction principles, rather than tactics? If so, I think I can work that out.</p>
+
+<a name="126497229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497229">Mario Carneiro (May 13 2018 at 14:53)</a>:</h4>
+<p>Look at the proof produced by the naive induction tactic approach:</p>
+<div class="codehilite"><pre><span></span>def weaken_term {n} : ∀ m {d}, term (plus m n) d → term (plus m (succ n)) d :=
+begin
+  intros m d s,
+  induction s; admit
+end
+set_option pp.implicit true
+#print weaken_term
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>def weaken_term : Π {n : ℕ} (m : ℕ) {d : dir}, term (plus m n) d → term (plus m (succ n)) d :=
+λ {n : ℕ} (m : ℕ) (d : dir) (s : term (plus m n) d),
+  (λ (s : term (plus m n) d),
+     @term.rec (λ (_x : ℕ) {d : dir} (s : term _x d), term (plus m (succ n)) d)
+       (λ {s_n : ℕ} (s_i : fin&#39; s_n), sorry)
+       (λ {s_n : ℕ} (s_e : term s_n syn) (s_s : term s_n chk) (s_ih_e : term (plus m (succ n)) syn)
+        (s_ih_s : term (plus m (succ n)) chk), sorry)
+       (λ {s_n : ℕ} (s_s : term (succ s_n) chk) (s_ih : term (plus m (succ n)) chk), sorry)
+       (plus m n)
+       d
+       s)
+    s
+</pre></div>
+
+<a name="126497230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497230">Mario Carneiro (May 13 2018 at 14:53)</a>:</h4>
+<p>Notice that the motive to the <code>term.rec</code> is <code>λ (_x : ℕ) {d : dir} (s : term _x d), term (plus m (succ n)) d</code></p>
+
+<a name="126497271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497271">Mario Carneiro (May 13 2018 at 14:54)</a>:</h4>
+<p>In other words, it has assumed you are trying to prove <code>def not_true {n} : ∀ m {d} k, term k d → term (plus m (succ n)) d</code></p>
+
+<a name="126497278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497278">Mario Carneiro (May 13 2018 at 14:55)</a>:</h4>
+<p>where it has "forgotten" that the <code>k</code> there is actually <code>plus m n</code></p>
+
+<a name="126497464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497464">Mario Carneiro (May 13 2018 at 15:02)</a>:</h4>
+<p>By the way, something seems off about your inductive:</p>
+<div class="codehilite"><pre><span></span>theorem no_chk {n} : term n chk → false :=
+begin
+  generalize h : chk = d,
+  intro s,
+  induction s generalizing h; injection h,
+  exact s_ih rfl
+end
+</pre></div>
+
+<a name="126497469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497469">James Wood (May 13 2018 at 15:03)</a>:</h4>
+<p>That's fixed now.</p>
+
+<a name="126497994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497994">James Wood (May 13 2018 at 15:24)</a>:</h4>
+<blockquote>
+<p>You can actually prove this directly in tactic mode by starting with<br>
+...<br>
+which has the effect of introducing the equality before doing the induction</p>
+</blockquote>
+<p>I tried doing this, but I get a lot of weird-looking errors, like “vm check failed”, “invalid 'begin-end' expression, ',' expected”, and “sync”.</p>
+
+<a name="126497995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126497995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126497995">James Wood (May 13 2018 at 15:25)</a>:</h4>
+<p>Code (supporting definitions have changed a bit):</p>
+<div class="codehilite"><pre><span></span>def weaken_term&#39; {m} : ∀ n {d}, term&#39; (m + n) d → term&#39; ((m + 1) + n) d :=
+begin
+  intros n d t,
+  generalize h : m + n = k
+  induction t with n&#39; i n&#39; e s ihe ihs n&#39; s ih generalizing k; subst k,
+  { _ },
+  { _ },
+  { _ },
+  { _ },
+  { _ }
+end
+</pre></div>
+
+<a name="126498056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498056">Mario Carneiro (May 13 2018 at 15:27)</a>:</h4>
+<p>You shouldn't use <code>{ _ }</code> as a tactic. Lean doesn't like being asked to run tactics that are not yet determined</p>
+
+<a name="126498057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498057">Mario Carneiro (May 13 2018 at 15:27)</a>:</h4>
+<p>instead you can just write <code>{ }</code></p>
+
+<a name="126498058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498058">Mario Carneiro (May 13 2018 at 15:28)</a>:</h4>
+<p>meaning "run no tactic", and then it will fail at the right bracket because you aren't done yet</p>
+
+<a name="126498099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498099">James Wood (May 13 2018 at 15:28)</a>:</h4>
+<p>Aah, thanks.</p>
+
+<a name="126498100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498100">James Wood (May 13 2018 at 15:28)</a>:</h4>
+<p>The problem seemed to be a missing comma, so that's sorted.</p>
+
+<a name="126498155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498155">James Wood (May 13 2018 at 15:31)</a>:</h4>
+<p>Is <code>_</code> the best way to leave a hole in a pattern-matching definition?</p>
+
+<a name="126498157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498157">James Wood (May 13 2018 at 15:31)</a>:</h4>
+<p>Or is there some way to introduce an interactive hole?</p>
+
+<a name="126498199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498199">Mario Carneiro (May 13 2018 at 15:32)</a>:</h4>
+<p>I don't quite understand what you mean</p>
+
+<a name="126498204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498204">Mario Carneiro (May 13 2018 at 15:33)</a>:</h4>
+<p>I can't think of what an interactive hole is, but <code>_</code> is useful as a wildcard in patterns</p>
+
+<a name="126498247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498247">James Wood (May 13 2018 at 15:34)</a>:</h4>
+<p>Hole à la Agda (or Idris, to some extent).</p>
+
+<a name="126498303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498303">James Wood (May 13 2018 at 15:37)</a>:</h4>
+<p>Maybe it's not necessary with the way lean-mode works, though I still feels like a hack to use the “this should be inferrable by unification” thing to mean “I'm going to write something here”.</p>
+
+<a name="126498349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498349">Mario Carneiro (May 13 2018 at 15:39)</a>:</h4>
+<p>Lean actually has holes in term mode, <code>{! !}</code>, but they are not well developed at all and never made it past alpha</p>
+
+<a name="126498354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126498354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html#126498354">Mario Carneiro (May 13 2018 at 15:39)</a>:</h4>
+<p>for the most part you can use <code>begin end</code> or <code>_</code> where stuff is expected</p>
+
+
+{% endraw %}

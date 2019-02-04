@@ -1,0 +1,35 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html">Is there a variant of `simp` that handles reverse simps?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147897139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147897139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html#147897139">Abhimanyu Pallavi Sudhir (Nov 18 2018 at 01:41)</a>:</h4>
+<p>Is there a variant of <code>simp</code> so I can write things like <code>simp [←P, Q]</code> or <code>simp only [←P, Q]</code> where <code>P</code> and <code>Q</code> may or may not be <code>simp</code> lemmas?</p>
+
+<a name="147897178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147897178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html#147897178">Kenny Lau (Nov 18 2018 at 01:42)</a>:</h4>
+<p>nope. you need to do <code>P.symm</code></p>
+
+<a name="147897184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147897184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html#147897184">Mario Carneiro (Nov 18 2018 at 01:43)</a>:</h4>
+<p>and you alsso need to remove <code>P</code> if it is a simp lemma or it will go into a loop</p>
+
+<a name="147897700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147897700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html#147897700">Chris Hughes (Nov 18 2018 at 02:03)</a>:</h4>
+<p>remove <code>P</code>, means do <code>simp [P.symm, -P]</code></p>
+
+<a name="147898210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20variant%20of%20%60simp%60%20that%20handles%20reverse%20simps%3F/near/147898210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24816Isthereavariantofsimpthathandlesreversesimps.html#147898210">Mario Carneiro (Nov 18 2018 at 02:20)</a>:</h4>
+<p>maybe we should write <code>simp'</code>? I'm sure this isn't the last tweak we will want</p>
+
+
+{% endraw %}

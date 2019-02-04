@@ -1,0 +1,97 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/21702tactictypeclassinstance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html">tactic type class instance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154708014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708014">petercommand (Jan 09 2019 at 09:28)</a>:</h4>
+<div class="codehilite"><pre><span></span>meta def opt_fst (a: tactic unit) (b: tactic unit) : tactic unit := (a &gt;&gt; b) &lt;|&gt; b
+</pre></div>
+
+
+<p>I am trying to define a tactic combinator, but it seems that I cannot use it like this:</p>
+<div class="codehilite"><pre><span></span>opt_fst { symmetry } { symmetry }
+</pre></div>
+
+
+<p>and I am getting errors like</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+|- has_emptyc (tactic unit)
+</pre></div>
+
+
+<p>Am I doing something wrong here?</p>
+
+<a name="154708130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708130">petercommand (Jan 09 2019 at 09:30)</a>:</h4>
+<p>I want the tactic to accept begin...end blocks or {...} blocks</p>
+
+<a name="154708169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708169">Sebastian Ullrich (Jan 09 2019 at 09:31)</a>:</h4>
+<p>You'll want your parameters to have type <code>itactic</code> (for "interactive tactic"). Try searching for itactic in core or mathlib for examples.</p>
+
+<a name="154708213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708213">Rob Lewis (Jan 09 2019 at 09:32)</a>:</h4>
+<p><code>meta def tactic.interactive.opt_fst (a: tactic.interactive.itactic) (b: tactic.interactive.itactic) : tactic unit := (a &gt;&gt; b) &lt;|&gt; b</code></p>
+
+<a name="154708254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708254">petercommand (Jan 09 2019 at 09:34)</a>:</h4>
+<p>Isn't <code>tactic.interactive.itactic</code> defined as <code>tactic unit</code>?</p>
+
+<a name="154708297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708297">Sebastian Ullrich (Jan 09 2019 at 09:34)</a>:</h4>
+<p>Yes, but it's special-cased in the tactic block parser</p>
+
+<a name="154708301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708301">petercommand (Jan 09 2019 at 09:34)</a>:</h4>
+<p>Ah</p>
+
+<a name="154708303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708303">petercommand (Jan 09 2019 at 09:34)</a>:</h4>
+<p>Hmm..I am still getting the same error</p>
+
+<a name="154708334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708334">Gabriel Ebner (Jan 09 2019 at 09:35)</a>:</h4>
+<p>You need to call it inside <code>begin..end</code>: <code>begin opt_fst {} {} end</code></p>
+
+<a name="154708347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708347">petercommand (Jan 09 2019 at 09:35)</a>:</h4>
+<p>do I have to prefix the name of the tactic with <code>tactic.interactive.</code>?</p>
+
+<a name="154708385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708385">Gabriel Ebner (Jan 09 2019 at 09:36)</a>:</h4>
+<p>No.</p>
+
+<a name="154708394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708394">Sebastian Ullrich (Jan 09 2019 at 09:36)</a>:</h4>
+<p>(if you're in <code>tactic.interactive</code>, which your definition should be)</p>
+
+<a name="154708400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708400">petercommand (Jan 09 2019 at 09:36)</a>:</h4>
+<p>after changing the name of the tactic, it worked..</p>
+
+<a name="154708416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708416">Rob Lewis (Jan 09 2019 at 09:37)</a>:</h4>
+<p>The tactic should be named <code>tactic.interactive.whatever</code>. You don't need to write the <code>tactic.interactive</code> part when you use it.</p>
+
+<a name="154708478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708478">petercommand (Jan 09 2019 at 09:38)</a>:</h4>
+<blockquote>
+<p>The tactic should be named <code>tactic.interactive.whatever</code>. You don't need to write the <code>tactic.interactive</code> part when you use it.</p>
+</blockquote>
+<p>Hmm..seems that this is also hardcoded</p>
+
+<a name="154708504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html#154708504">petercommand (Jan 09 2019 at 09:39)</a>:</h4>
+<p>Thanks!</p>
+
+
+{% endraw %}

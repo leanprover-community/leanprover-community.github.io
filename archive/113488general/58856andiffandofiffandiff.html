@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58856andiffandofiffandiff.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html">and_iff_and_of_iff_and_iff</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135087802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135087802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135087802">Johan Commelin (Oct 03 2018 at 10:04)</a>:</h4>
+<p>Would this be a useful lemma for mathlib? If so, where should it go? I currently solve this by <code>split; intros; split,</code> but that is a bit of a hack, and creates 4 goals where usually 2 should suffice.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">and_iff_and_of_iff_and_iff</span> <span class="o">{</span><span class="n">P1</span> <span class="n">P2</span> <span class="n">Q1</span> <span class="n">Q2</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="n">P1</span> <span class="err">\</span><span class="n">iff</span> <span class="n">Q1</span><span class="o">)</span> <span class="err">\</span><span class="n">and</span> <span class="o">(</span><span class="n">P2</span> <span class="err">\</span><span class="n">iff</span> <span class="n">Q2</span><span class="o">))</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">P1</span> <span class="err">\</span><span class="n">and</span> <span class="n">P2</span><span class="o">)</span> <span class="err">\</span><span class="n">iff</span> <span class="o">(</span><span class="n">Q1</span> <span class="err">\</span><span class="n">and</span> <span class="n">Q2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="135087872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135087872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135087872">Mario Carneiro (Oct 03 2018 at 10:06)</a>:</h4>
+<p>This looks like <code>and_congr</code></p>
+
+<a name="135087981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135087981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135087981">Johan Commelin (Oct 03 2018 at 10:08)</a>:</h4>
+<p>Cool, I'll use that! Is there a way that I could have discovered that name myself?</p>
+
+<a name="135088008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088008">Sean Leather (Oct 03 2018 at 10:09)</a>:</h4>
+<p>I also had trouble finding that. Like me, Johan may have been look for something <code>iff</code>-named instead of <code>and</code>- and <code>congr</code>-named.</p>
+
+<a name="135088104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088104">Sean Leather (Oct 03 2018 at 10:11)</a>:</h4>
+<p>I probably tried <code>git grep 'and.*iff'</code> and <code>git grep 'iff.*and'</code>.</p>
+
+<a name="135088105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088105">Mario Carneiro (Oct 03 2018 at 10:11)</a>:</h4>
+<p>That's true. This is a special pattern, like <code>ext</code>. <code>congr</code> lemmas mean if the inputs are equal then a function applied to those inputs is equal</p>
+
+<a name="135088176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088176">Mario Carneiro (Oct 03 2018 at 10:13)</a>:</h4>
+<p>There are similar theorems for all the propositional functions, and for regular functions <code>congr</code> the tactic will often generate these on the fly</p>
+
+<a name="135088308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088308">Mario Carneiro (Oct 03 2018 at 10:16)</a>:</h4>
+<p>You will also find custom <code>congr</code> lemmas for things like <code>list.map_congr</code>, where we want to insert an additional assumption into the hypothesis (if <code>\all x \in l, f x = g x</code> then <code>map f l = map g l</code>)</p>
+
+<a name="135088324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/and_iff_and_of_iff_and_iff/near/135088324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58856andiffandofiffandiff.html#135088324">Mario Carneiro (Oct 03 2018 at 10:17)</a>:</h4>
+<p>so many higher order functions have some kind of altered <code>congr</code> lemma</p>
+
+
+{% endraw %}

@@ -1,0 +1,42 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/29488unfoldlocaldefinitions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html">unfold local definitions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126372867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126372867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html#126372867">Reid Barton (May 10 2018 at 18:35)</a>:</h4>
+<p>Is there a way in tactic mode to unfold something bound by a surrounding <code>let</code>?</p>
+
+<a name="126373312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126373312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html#126373312">Reid Barton (May 10 2018 at 18:45)</a>:</h4>
+<p>I guess I also want to do a beta reduction, since the thing I want to unfold is a function whose definition is <code>assume x, ...</code></p>
+
+<a name="126373507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126373507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html#126373507">Gabriel Ebner (May 10 2018 at 18:50)</a>:</h4>
+<p>You can do <code>dsimp [x]</code> if <code>x</code> is the let-binding in the local context.</p>
+
+<a name="126373529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126373529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html#126373529">Gabriel Ebner (May 10 2018 at 18:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">5</span> <span class="k">in</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">dsimp</span> <span class="o">[</span><span class="n">x</span><span class="o">],</span>
+<span class="c1">-- 5 + 5 &gt; 0</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="126375254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfold%20local%20definitions/near/126375254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29488unfoldlocaldefinitions.html#126375254">Reid Barton (May 10 2018 at 19:36)</a>:</h4>
+<p>Oh. Thanks!<br>
+I guess I never tried precisely this, but only <code>unfold</code> and <code>rw</code>.</p>
+
+
+{% endraw %}

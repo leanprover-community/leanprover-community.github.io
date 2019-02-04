@@ -1,0 +1,45 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71743.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71743.html">//</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154708470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic////near/154708470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71743.html#154708470">Reid Barton (Jan 09 2019 at 09:38)</a>:</h4>
+<p>I accidentally discovered that <code>//</code> seems to have some special treatment in the parser. It gives a "command expected" error if I try to use it as notation. Does it do something?</p>
+
+<a name="154708509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic////near/154708509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71743.html#154708509">Gabriel Ebner (Jan 09 2019 at 09:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">infix</span> <span class="bp">`//`</span><span class="o">:</span><span class="mi">70</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">/</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">//</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>Works for me.  Can you post a minimum failing counterexample?</p>
+
+<a name="154708563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic////near/154708563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71743.html#154708563">Reid Barton (Jan 09 2019 at 09:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">notation</span> <span class="n">a</span> <span class="bp">`+/`</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+/</span> <span class="mi">2</span><span class="o">)</span>                 <span class="c1">-- ok</span>
+
+<span class="kn">notation</span> <span class="n">a</span> <span class="bp">`//`</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">//</span> <span class="mi">2</span><span class="o">)</span>                 <span class="c1">-- errors</span>
+</pre></div>
+
+<a name="154708651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic////near/154708651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71743.html#154708651">Sebastian Ullrich (Jan 09 2019 at 09:43)</a>:</h4>
+<p>You're inheriting the precedence of <code>//</code> in the subtype notation, which is zero. This is fine for subtypes, since it's in a context surrounded by braces, but for your notation you should give an explicit precedence like Gabriel did.</p>
+
+<a name="154709098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic////near/154709098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71743.html#154709098">Reid Barton (Jan 09 2019 at 09:52)</a>:</h4>
+<p>Oh, I see. Interesting.</p>
+
+
+{% endraw %}

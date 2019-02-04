@@ -1,0 +1,417 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75082solvebyelim.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html">solve_by_elim</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123468417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468417">Scott Morrison (Mar 09 2018 at 00:54)</a>:</h4>
+<p><span class="user-mention" data-user-email="simon.hudon@gmail.com" data-user-id="110026">@Simon Hudon</span>, the new solve_by_elim is really nice, and now I’d like it to do even more. I know that there is a mechanism to pass arbitrary assumptions, rather than using local context, and perhaps I should just use that.</p>
+
+<a name="123468426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468426">Scott Morrison (Mar 09 2018 at 00:54)</a>:</h4>
+<p>But a particular thing I find myself using frequently now is applying eq.symm to various things in the context, before solve_by_elim can do its thing.</p>
+
+<a name="123468582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468582">Simon Hudon (Mar 09 2018 at 00:59)</a>:</h4>
+<p>That's interesting. Maybe I could add <code>cc</code> to <code>solve_by_elim</code>. In terms of performance, I don't know what kind of slow down that would be but maybe this could be enabled by <code>solve_by_elim!</code></p>
+
+<a name="123468654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468654">Scott Morrison (Mar 09 2018 at 01:00)</a>:</h4>
+<p>The other thing I'm finding I have to do is replace a hypothesis <code>h : f = g</code> with <code>funext</code> applied to it, to get <code>h' : \forall x : X, f x = g x</code>.</p>
+
+<a name="123468659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468659">Simon Hudon (Mar 09 2018 at 01:00)</a>:</h4>
+<p>Can you try something for me? Write:</p>
+<div class="codehilite"><pre><span></span>meta def my_solve_by_elim (asms : option (list expr) := none)  : opt_param ℕ 3 → tactic unit
+| 0 := done
+| (succ n) :=
+apply_assumption asms $ cc &lt;|&gt; my_solve_by_elim n
+</pre></div>
+
+
+<p>and tell me if that does the job</p>
+
+<a name="123468660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468660">Scott Morrison (Mar 09 2018 at 01:00)</a>:</h4>
+<p>Again, it would be nice to automate a bit.</p>
+
+<a name="123468663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468663">Scott Morrison (Mar 09 2018 at 01:01)</a>:</h4>
+<p>I'll investigate, thanks.</p>
+
+<a name="123468795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468795">Simon Hudon (Mar 09 2018 at 01:04)</a>:</h4>
+<p>For the second bit, maybe adding <code>simp [function.funext_iff] at *</code> before <code>solve_by_elim</code> would help.</p>
+
+<a name="123468807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468807">Simon Hudon (Mar 09 2018 at 01:05)</a>:</h4>
+<p>(<code>function.funext_iff</code> is a new theorem in <code>mathlib</code>)</p>
+
+<a name="123468920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123468920">Scott Morrison (Mar 09 2018 at 01:08)</a>:</h4>
+<p>(ha, I'd actually just written <code>funext_iff</code> myself)</p>
+
+<a name="123469450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469450">Scott Morrison (Mar 09 2018 at 01:24)</a>:</h4>
+<p>No, <code>cc</code> doesn't seem to help here.</p>
+
+<a name="123469466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469466">Simon Hudon (Mar 09 2018 at 01:25)</a>:</h4>
+<p>Can you should me a situation where the issue arises?</p>
+
+<a name="123469512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469512">Scott Morrison (Mar 09 2018 at 01:26)</a>:</h4>
+<p>Oh -- a bug in solve_by_elim: the recursive call doesn't pass the arguments asms.</p>
+
+<a name="123469531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469531">Scott Morrison (Mar 09 2018 at 01:27)</a>:</h4>
+<p>Well, maybe this is too trivial ... :-)</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">f</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">my_solve_by_elim</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="123469532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469532">Simon Hudon (Mar 09 2018 at 01:27)</a>:</h4>
+<p>It doesn't need to because it's declared on the left of <code>:</code></p>
+
+<a name="123469535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469535">Scott Morrison (Mar 09 2018 at 01:27)</a>:</h4>
+<p>ah, great, sorry.</p>
+
+<a name="123469596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469596">Simon Hudon (Mar 09 2018 at 01:29)</a>:</h4>
+<p>This example could be handled by <code>cc</code> on its own</p>
+
+<a name="123469598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469598">Scott Morrison (Mar 09 2018 at 01:29)</a>:</h4>
+<p>I guess it's obviously not going to help here...</p>
+
+<a name="123469736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469736">Kenny Lau (Mar 09 2018 at 01:32)</a>:</h4>
+<p>what does <code>solve_by_elim</code> do?</p>
+
+<a name="123469744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469744">Scott Morrison (Mar 09 2018 at 01:33)</a>:</h4>
+<p>repeatedly tries to apply hypotheses, discharging new goals created by <code>apply</code> by calling itself</p>
+
+<a name="123469746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469746">Scott Morrison (Mar 09 2018 at 01:33)</a>:</h4>
+<p>(i.e. discharging them by matching against other hypotheses)</p>
+
+<a name="123469801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469801">Simon Hudon (Mar 09 2018 at 01:35)</a>:</h4>
+<p><span class="user-mention" data-user-email="scott@tqft.net" data-user-id="110087">@Scott Morrison</span> Can you show me something that <code>cc</code> doesn't solve?</p>
+
+<a name="123469857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469857">Scott Morrison (Mar 09 2018 at 01:37)</a>:</h4>
+<p>I'll have to look further. I'll try to see how much <code>cc</code> and <code>solve_by_elim</code> together let me automate, and get back to you if I find such an example.</p>
+
+<a name="123469863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469863">Simon Hudon (Mar 09 2018 at 01:37)</a>:</h4>
+<p>cool :)</p>
+
+<a name="123469907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469907">Simon Hudon (Mar 09 2018 at 01:38)</a>:</h4>
+<p>btw, have you tried <code>tauto</code>? Does it help?</p>
+
+<a name="123469930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469930">Scott Morrison (Mar 09 2018 at 01:39)</a>:</h4>
+<p>no, I haven't looked much at tauto yet. I already have tactics that do a lot of automatic <code>cases</code>, so I'm guessing it won't help much?</p>
+
+<a name="123469990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123469990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123469990">Scott Morrison (Mar 09 2018 at 01:41)</a>:</h4>
+<p>The other pattern I have all the time is: a hypothesis <code>p : x = y</code>, where <code>x</code> and <code>y</code> are terms of some structure type <code>S</code>, then I go: <code>have p' := congr_arg S.f p, solve_by_elim</code>.</p>
+
+<a name="123470004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470004">Scott Morrison (Mar 09 2018 at 01:41)</a>:</h4>
+<p>It would be lovely to handle that automatically... that is, not just apply hypotheses, but apply structure fields <code>congr_arg</code>d over hypotheses.</p>
+
+<a name="123470117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470117">Simon Hudon (Mar 09 2018 at 01:44)</a>:</h4>
+<p>That's an interesting case. It's a bit like funext_iff which we talked about earlier in that we infer the equality of the parts from the equality of the whole. I feel like there's probably a greek-letter-reduction for that</p>
+
+<a name="123470312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470312">Simon Hudon (Mar 09 2018 at 01:49)</a>:</h4>
+<p>I'm wondering if <code>congr_arg</code> / <code>funext_iff</code> / <code>cc</code> might be the best combination</p>
+
+<a name="123470376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470376">Scott Morrison (Mar 09 2018 at 01:51)</a>:</h4>
+<p>I'm not sure what you mean. I guess what I'm hoping for it some automation for finding the correct applications of <code>congr_arg</code>.</p>
+
+<a name="123470431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470431">Scott Morrison (Mar 09 2018 at 01:52)</a>:</h4>
+<p>(i.e. work out for itself what the field <code>S.f</code> should be in my example above: <code>have p' := congr_arg S.f p</code>.)</p>
+
+<a name="123470446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470446">Simon Hudon (Mar 09 2018 at 01:53)</a>:</h4>
+<p>If I see <code>x = y</code> where <code>x</code> and <code>y</code> are functions, I'd specialize <code>∀ i, x i = y i</code> for every <code>i</code> such that <code>x i</code> appears in the context. Same thing <code>y</code>. I'd do the same with the fields of structure types</p>
+
+<a name="123470504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470504">Simon Hudon (Mar 09 2018 at 01:54)</a>:</h4>
+<p>I'll write something, make a PR to mathlib and send you a link. How about that?</p>
+
+<a name="123470518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123470518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123470518">Scott Morrison (Mar 09 2018 at 01:55)</a>:</h4>
+<p>sounds amazing :-)</p>
+
+<a name="123471150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123471150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#123471150">Simon Hudon (Mar 09 2018 at 02:14)</a>:</h4>
+<p>Do you have an example where that would be useful? All the examples I can think of can be handled directly by <code>cc</code></p>
+
+<a name="125017118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017118">Scott Morrison (Apr 13 2018 at 05:44)</a>:</h4>
+<p><code>cc</code> successfully solves</p>
+<div class="codehilite"><pre><span></span>example {α β : Type} (f g : α → β) (w : g = f) (y : α) : f y = g y := by cc
+</pre></div>
+
+
+<p>but not</p>
+<div class="codehilite"><pre><span></span>example {α β : Type} (f g : α → β) (w : (λ x, g x) = (λ x, f x)) (y : α) : f y = g y := by cc
+</pre></div>
+
+
+<p>Does anyone see some slight generalisation of <code>cc</code> (and/or possibly <code>solve_by_elim</code>) that can handle the second case?</p>
+
+<a name="125017465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017465">Scott Morrison (Apr 13 2018 at 05:56)</a>:</h4>
+<p>This example is unnecessarily complicated, sorry: even this pair:</p>
+<div class="codehilite"><pre><span></span>example {α β : Type} (f g : α → β) (w : f = g) (y : α) : f y = g y := by cc -- success
+example {α β : Type} (f g : α → β) (w : (λ x, f x) = (λ x, g x)) (y : α) : f y = g y := by cc -- FAIL
+</pre></div>
+
+<a name="125017472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017472">Scott Morrison (Apr 13 2018 at 05:56)</a>:</h4>
+<p>shows what's going on</p>
+
+<a name="125017524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017524">Simon Hudon (Apr 13 2018 at 05:58)</a>:</h4>
+<p>What happens if you call <code>simp</code> on <code>w</code> before <code>cc</code>? If it does eta reduction, then <code>cc</code> should succeed</p>
+
+<a name="125017540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017540">Scott Morrison (Apr 13 2018 at 05:59)</a>:</h4>
+<p>That does work, but only because my MWE is too M!</p>
+
+<a name="125017603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017603">Scott Morrison (Apr 13 2018 at 06:01)</a>:</h4>
+<p>Maybe </p>
+<div class="codehilite"><pre><span></span>example {α : Type} (f g : α → α) (w : (λ x, f (f x)) = (λ x, g (g x))) (y : α) : f (f y) = g (g y) :=
+</pre></div>
+
+
+<p>shows more of what I want.</p>
+
+<a name="125017605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017605">Simon Hudon (Apr 13 2018 at 06:01)</a>:</h4>
+<p>That sounds like my conversations with my advisor: "- what are you looking at now? - Large scale software. - Cool, do you have a small example to illustrate your idea? - ..."</p>
+
+<a name="125017708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017708">Mario Carneiro (Apr 13 2018 at 06:04)</a>:</h4>
+<p>scott, you are talking higher order matching here. It's very unlikely you will get something as powerful as what you are envisioning. Your best bet is to apply (reverse) funext on your hypotheses to turn it into a first order problem</p>
+
+<a name="125017711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017711">Simon Hudon (Apr 13 2018 at 06:04)</a>:</h4>
+<p>By reverse funext, do you mean <code>congr_fun</code>?</p>
+
+<a name="125017722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017722">Mario Carneiro (Apr 13 2018 at 06:05)</a>:</h4>
+<p>yes, with some beta postprocessing</p>
+
+<a name="125017788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125017788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125017788">Simon Hudon (Apr 13 2018 at 06:07)</a>:</h4>
+<p>Maybe <span class="user-mention" data-user-id="110524">@Scott Morrison</span> would be satisfied with converting <code>f (f x)</code> to <code>(f o f) x</code>. Then <code>simp, cc</code> would be good enough.</p>
+
+<a name="125018251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125018251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125018251">Mario Carneiro (Apr 13 2018 at 06:25)</a>:</h4>
+<p>My point is that if <code>\forall x, f (f x) = g (g x)</code> was in the context instead of the lambda equality, I think cc would get it... maybe. (Honestly I don't understand how cc works, and I never trust it for anything significant.)</p>
+
+<a name="125018302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125018302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125018302">Simon Hudon (Apr 13 2018 at 06:27)</a>:</h4>
+<p>It seems to work a bit like the ematching feature of smt solvers, doesn't it? I wouldn't count on it to do any specialization</p>
+
+<a name="125018404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125018404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125018404">Scott Morrison (Apr 13 2018 at 06:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, thanks, this had been my past solution, but I'd been a bit worried by it. I'll leave it in place for now.</p>
+
+<a name="125018449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125018449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125018449">Simon Hudon (Apr 13 2018 at 06:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Can you elaborate on why you prefer the equality between lambda terms?</p>
+
+<a name="125020210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125020210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125020210">Scott Morrison (Apr 13 2018 at 07:36)</a>:</h4>
+<p>It’s just that the earlier steps of my automation are giving my equalities<br>
+between lambdas as hypotheses, and I’m having trouble automatically always<br>
+getting these into a form that cc / solve_by_elim / rewrite_search can deal<br>
+with. I think just replacing hypotheses which are equations between<br>
+functions types with foralls will do the job, and doesn’t seem to cause<br>
+problems elsewhere.</p>
+
+<a name="125022906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125022906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125022906">Gabriel Ebner (Apr 13 2018 at 09:18)</a>:</h4>
+<p>Congruence closure (<code>cc</code>) performs purely equational reasoning via congruences.  It can prove <code>a=b, c=b |- f a = f c</code>, but that's essentially it.  One nice feature is that since it uses the congruence lemmas, it effectively ignores subsingleton arguments.</p>
+
+<a name="125022965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125022965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125022965">Gabriel Ebner (Apr 13 2018 at 09:20)</a>:</h4>
+<p>It definitely won't solve <code> forall x, f x = g x |- f a = g a</code> or <code>fun x, f x = g x |- f a = g a</code>.  (They're clearly equivalent via funext, as you've observed.)  If you solve such problems, then you have a first-order prover---and this is out of scope for <code>cc</code>.  Congruence closure is supposed to be fast, predictable, and well, do congruence closure (and not general first-order proving).</p>
+
+<a name="125023122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125023122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125023122">Gabriel Ebner (Apr 13 2018 at 09:27)</a>:</h4>
+<p>Re: E-matching.  Yes, you can solve the example with <code>forall x, f x = g x</code> using it (I think <code>by[smt] eblast</code> should do it).  What E-matching does is that it heuristically generates instances of universally quantified formulas (I think the <code>ematch</code> tactic uses the local context and lemmas tagged <code>[ematch]</code>).   In the example it would generate the instance <code>f y = g y</code>, and with this instance <code>cc</code> can solve the goal.  The instance <code>f y = g y</code> is generated because the <em>trigger</em> <code>f ?m_1</code> (in this example the lhs of the lemma)  E-<em>matches</em> a currently known subterm, namely <code>f y</code> (the lhs of the target in the example).</p>
+
+<a name="125222682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125222682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125222682">Scott Morrison (Apr 18 2018 at 01:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, how would you feel about generalising the definition of <code>solve_by_elim</code> to </p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">solve_by_elim</span> <span class="o">(</span><span class="n">asms</span> <span class="o">:</span> <span class="n">option</span> <span class="o">(</span><span class="n">list</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:=</span> <span class="n">none</span><span class="o">)</span> <span class="o">(</span><span class="n">discharger</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">done</span><span class="o">)</span> <span class="o">:</span> <span class="n">opt_param</span> <span class="bp">ℕ</span> <span class="mi">3</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">done</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">discharger</span> <span class="bp">&lt;|&gt;</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">apply_assumption</span> <span class="n">asms</span> <span class="err">$</span> <span class="n">solve_by_elim</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I find myself using this as <code>solve_by_elim none cc</code> frequently and it's very helpful.</p>
+
+<a name="125223029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223029">Mario Carneiro (Apr 18 2018 at 01:36)</a>:</h4>
+<p>Won't you have to write this as <code>tactic.cc</code> in an interactive tactic script?</p>
+
+<a name="125223045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223045">Simon Hudon (Apr 18 2018 at 01:36)</a>:</h4>
+<p>I like it. Let's switch the order of <code>asms</code> and <code>discharger</code> though.</p>
+
+<a name="125223109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223109">Simon Hudon (Apr 18 2018 at 01:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Why? <code>cc</code> is also in <code>tactic.interactive</code>, no?</p>
+
+<a name="125223202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223202">Mario Carneiro (Apr 18 2018 at 01:41)</a>:</h4>
+<p>but if it's not being parsed in interactive mode, you have to use the right namespace</p>
+
+<a name="125223249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223249">Mario Carneiro (Apr 18 2018 at 01:42)</a>:</h4>
+<p>one option is to have an <code>itactic</code> for the discharger, then you can write <code>{cc}</code> or some other tactic block</p>
+
+<a name="125223254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223254">Simon Hudon (Apr 18 2018 at 01:42)</a>:</h4>
+<p>Right. Alternatively, we can provide a variant such as <code>solve_by_elim_with { cc }</code> with a <code>itactic</code> argument (and a better name)</p>
+
+<a name="125223261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223261">Mario Carneiro (Apr 18 2018 at 01:43)</a>:</h4>
+<p>I think you can still make it optional</p>
+
+<a name="125223279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223279">Simon Hudon (Apr 18 2018 at 01:43)</a>:</h4>
+<p>No because <code>itactic</code> doesn't use the same parsing framework as everything else</p>
+
+<a name="125223288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223288">Mario Carneiro (Apr 18 2018 at 01:43)</a>:</h4>
+<p>Have you used <code>asms</code>? I think it needs a parser</p>
+
+<a name="125223349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223349">Simon Hudon (Apr 18 2018 at 01:44)</a>:</h4>
+<p>If we don't want multiple tactic names, we'd have to live with <code>solve_by_elim { }</code> when we don't use that feature.</p>
+
+<a name="125223360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223360">Mario Carneiro (Apr 18 2018 at 01:45)</a>:</h4>
+<p>or stick with just passing a regular tactic and live with <code>solve_by_elim `[cc]</code></p>
+
+<a name="125223417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125223417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125223417">Simon Hudon (Apr 18 2018 at 01:46)</a>:</h4>
+<blockquote>
+<p>Have you used <code>asms</code>? I think it needs a parser</p>
+</blockquote>
+<p>I haven't used it in interactive mode. I think similarly to the options that you can feed <code>simp</code> (e.g. <code>{ single_pass := tt }</code>) you can give it a literal as an expression</p>
+
+<a name="125335574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/125335574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#125335574">Scott Morrison (Apr 20 2018 at 03:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> just checking -- should I PR this, or would you prefer to do it? I'm happy either way.</p>
+
+<a name="128504293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504293">Scott Morrison (Jun 23 2018 at 04:22)</a>:</h4>
+<p>Hi @SimonHudon, I'm finding often <code>solve_by_elim</code> would succeed, except for the fact that an applicable equation needs to be wrapped in <code>eq.symm</code> first. In this case, <code>{discharger := cc}</code> works, but this tends to be very expensive and I'd really like to avoid it.</p>
+
+<a name="128504299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504299">Scott Morrison (Jun 23 2018 at 04:23)</a>:</h4>
+<p>It's certainly possible to pass a more limited discharger, that just tries to apply hypotheses backwards, but I'm wondering what you think about building this behaviour in?</p>
+
+<a name="128504331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504331">Scott Morrison (Jun 23 2018 at 04:24)</a>:</h4>
+<p>(e.g. by writing a version of <code>apply</code> that knows about symmetric relations, and then using that --- I'd be happy to implement if you thought this was reasonable behaviour)</p>
+
+<a name="128504349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504349">Simon Hudon (Jun 23 2018 at 04:25)</a>:</h4>
+<p>I think that's feasible. We could probably define it as <code>sym_apply (r) := apply r &lt;|&gt; (symmetry &gt;&gt; apply r)</code></p>
+
+<a name="128504366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504366">Scott Morrison (Jun 23 2018 at 04:26)</a>:</h4>
+<p>oh, that's much sneakier than what I had in mind</p>
+
+<a name="128504392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504392">Scott Morrison (Jun 23 2018 at 04:26)</a>:</h4>
+<p>Currently in <code>apply_assumption</code> you do an initial filtering step by <code>find_matching_head</code>, and I guess this wouldn't be viable.</p>
+
+<a name="128504400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504400">Scott Morrison (Jun 23 2018 at 04:27)</a>:</h4>
+<p>Do you know if this actually saves much time? I'd hope that <code>apply</code> returns very quickly on anything <code>find_matching_head</code> had discarded.</p>
+
+<a name="128504510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504510">Simon Hudon (Jun 23 2018 at 04:31)</a>:</h4>
+<p>You're right. I have a feeling we could get rid of the filtering. I'm not sure that testing the assumptions is any faster than just applying them</p>
+
+<a name="128504515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504515">Simon Hudon (Jun 23 2018 at 04:31)</a>:</h4>
+<p>It might actually be slower because we might be doing the same work twice</p>
+
+<a name="128504570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504570">Simon Hudon (Jun 23 2018 at 04:33)</a>:</h4>
+<p>I naively copied the behavior of <code>assumption</code> when I wrote that tactic. I didn't spend too much time thinking of the performances. It might be interesting to remove the filtering and measure the performances before adding the symmetry</p>
+
+<a name="128504777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504777">Simon Hudon (Jun 23 2018 at 04:41)</a>:</h4>
+<p>The other thing I'm wondering is if we should try every assumption directly first and only then try symmetry or try symmetry as we go. The upside of the first approach is that when you don't need symmetry, you get better performances. The downside is that you can't say that the tactic applies "the first assumption that matches" anymore. If assumption 11 matches directly and assumption 2 matches modulo symmetry, which one do we want the tactic to pick?</p>
+
+<a name="128504778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504778">Scott Morrison (Jun 23 2018 at 04:41)</a>:</h4>
+<p>Hmm... my preference is to just make the change. :-) We do need some better tools for measuring performance. I know I neglect doing it, and then suffer for it later. (e.g. just now realising that letting solve_by_elim call <code>cc</code> can be very expensive)</p>
+
+<a name="128504831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504831">Simon Hudon (Jun 23 2018 at 04:43)</a>:</h4>
+<p>I would prefer just making the change too. I guess the rest is for extra credits :D</p>
+
+<a name="128504832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504832">Scott Morrison (Jun 23 2018 at 04:43)</a>:</h4>
+<p>interesting... my inclination is to try symmetry as we go. When we're using <code>apply</code>, the semantic difference between <code>a=b</code> and <code>b=a</code> has pretty much disappeared.</p>
+
+<a name="128504837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504837">Scott Morrison (Jun 23 2018 at 04:43)</a>:</h4>
+<p>In that case, <a href="https://github.com/leanprover/mathlib/pull/164" target="_blank" title="https://github.com/leanprover/mathlib/pull/164">https://github.com/leanprover/mathlib/pull/164</a></p>
+
+<a name="128504879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504879">Simon Hudon (Jun 23 2018 at 04:44)</a>:</h4>
+<p>I prefer that too. And my intuition is that the difference in performances will be unnoticeable</p>
+
+<a name="128504886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504886">Simon Hudon (Jun 23 2018 at 04:44)</a>:</h4>
+<p>That was fast!</p>
+
+<a name="128504899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504899">Simon Hudon (Jun 23 2018 at 04:45)</a>:</h4>
+<p>The added benefit is the code gets shorter and neater :)</p>
+
+<a name="128504904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504904">Simon Hudon (Jun 23 2018 at 04:45)</a>:</h4>
+<p>Would you care to add a test case?</p>
+
+<a name="128504957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/128504957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html#128504957">Scott Morrison (Jun 23 2018 at 04:46)</a>:</h4>
+<p>Sure!</p>
+
+
+{% endraw %}

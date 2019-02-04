@@ -1,0 +1,256 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html">compact subset of hausdorff space is closed</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="132127153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132127153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132127153">Edward Ayers (Aug 14 2018 at 20:28)</a>:</h4>
+<p>Hi everyone. I would really appreciate any comments on how to improve this proof. Also, is this result in the library?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">open</span> <span class="n">set</span> <span class="n">filter</span> <span class="n">lattice</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">inclusion</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">-&gt;</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span>
+<span class="n">def</span> <span class="n">subspace_top</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">induced</span> <span class="o">(</span><span class="n">inclusion</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">not_bot_left</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">f</span> <span class="err">⊓</span> <span class="n">g</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">≠</span> <span class="err">⊥</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">neq_bot_of_le_neq_bot</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">H1</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">inf_le_left</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">compact_subset_of_t2space_is_closed</span>
+    <span class="o">[</span><span class="n">t2_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sc</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">is_closed</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">is_closed_iff_nhds</span><span class="o">,</span> <span class="n">clear</span> <span class="n">mp</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mpr</span><span class="o">,</span> <span class="n">clear</span> <span class="n">mpr</span><span class="o">,</span> <span class="n">intros</span><span class="o">,</span> <span class="n">rename</span> <span class="n">a</span> <span class="n">y</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">Y</span><span class="o">),</span> <span class="n">f</span> <span class="err">⊓</span> <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">),</span> <span class="k">from</span> <span class="n">sc</span> <span class="n">f</span> <span class="n">a_1</span> <span class="n">inf_le_right</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">H3</span><span class="o">,</span>
+    <span class="n">intros</span><span class="o">,</span> <span class="n">apply</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">a_2</span><span class="o">,</span> <span class="n">intros</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H5</span> <span class="o">:</span> <span class="n">nhds</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">nhds</span> <span class="n">y</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">,</span>
+        <span class="n">rewrite</span> <span class="n">inf_assoc</span> <span class="n">at</span> <span class="n">a_4</span><span class="o">,</span> <span class="c1">-- if I do inf_assoc first it fails?!</span>
+        <span class="n">rewrite</span> <span class="n">inf_comm</span> <span class="n">at</span> <span class="n">a_4</span><span class="o">,</span>
+        <span class="n">rewrite</span> <span class="n">inf_assoc</span> <span class="n">at</span> <span class="n">a_4</span><span class="o">,</span>
+        <span class="n">rewrite</span> <span class="n">inf_comm</span> <span class="n">at</span> <span class="n">a_4</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">not_bot_left</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H4</span><span class="o">:</span>  <span class="n">a</span> <span class="bp">=</span> <span class="n">y</span><span class="o">,</span> <span class="k">from</span> <span class="n">eq_of_nhds_neq_bot</span> <span class="n">H5</span><span class="o">,</span>
+    <span class="n">rewrite</span> <span class="n">H4</span> <span class="n">at</span> <span class="n">a_3</span><span class="o">,</span>
+    <span class="n">assumption</span>
+    <span class="kn">end</span>
+</pre></div>
+
+<a name="132129134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132129134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132129134">Edward Ayers (Aug 14 2018 at 20:54)</a>:</h4>
+<p>Version 2:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">compact_subset_of_t2space_is_closed_2</span>
+    <span class="o">[</span><span class="n">t2_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sc</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">is_closed</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="n">iff</span><span class="bp">.</span><span class="n">elim_right</span> <span class="n">is_closed_iff_nhds</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">H1</span><span class="o">,</span>
+        <span class="k">let</span> <span class="n">f</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span><span class="o">)</span> <span class="k">in</span>
+        <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">sc</span> <span class="n">f</span> <span class="n">H1</span> <span class="n">inf_le_right</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">H2</span><span class="o">,</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">H2</span>
+        <span class="o">(</span>
+            <span class="k">assume</span> <span class="n">H3</span> <span class="n">H4</span><span class="o">,</span>
+            <span class="n">suffices</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">this</span><span class="bp">;</span> <span class="n">assumption</span><span class="o">,</span>
+            <span class="n">suffices</span> <span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">nhds</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">,</span> <span class="k">from</span> <span class="n">eq_of_nhds_neq_bot</span> <span class="err">$</span> <span class="n">not_bot_left</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">this</span><span class="o">,</span>
+            <span class="k">by</span> <span class="n">cc</span>
+        <span class="o">)</span>
+    <span class="o">)</span>
+<span class="o">)</span>
+</pre></div>
+
+<a name="132133848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132133848">Edward Ayers (Aug 14 2018 at 22:14)</a>:</h4>
+<p>Found it in library: <code>closed_of_compact</code></p>
+
+<a name="132133886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132133886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132133886">Edward Ayers (Aug 14 2018 at 22:15)</a>:</h4>
+<p>Although I proved it with filters</p>
+
+<a name="132134882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132134882">Kevin Buzzard (Aug 14 2018 at 22:34)</a>:</h4>
+<p>First line of proof could be <code>is_closed_iff_nhds.2 (λ y H1,</code> (<code>iff</code> is a structure and you can access its elements with <code>.1</code>, <code>.2</code>). There's a mathlib style guide and you're not conforming to it (I don't think they like the one-bracket-on-a-line thing, and I know they like 2 spaces indent rather than 4).  <code>by rw this; assumption,</code> could be <code>by rwa this</code> (<code>rwa</code> = <code>rw ; assumption</code>, similarly <code>simpa</code>).</p>
+
+<a name="132134906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132134906">Kevin Buzzard (Aug 14 2018 at 22:34)</a>:</h4>
+<p>but it's certainly a darn sight better than I could have done :-)</p>
+
+<a name="132134941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132134941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132134941">Patrick Massot (Aug 14 2018 at 22:35)</a>:</h4>
+<p><code>simpa</code> is more than <code>simp ... ; assumption</code>, see <a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa">https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#simpa</a></p>
+
+<a name="132135482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135482">Kevin Buzzard (Aug 14 2018 at 22:45)</a>:</h4>
+<p>Instead of <code>λ a H2, exists.elim H2 ...</code> I wonder if you could have done <code>λ a ⟨H,H2⟩,</code> and then you can maybe avoid the <code>exists.elim</code></p>
+
+<a name="132135502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135502">Patrick Massot (Aug 14 2018 at 22:45)</a>:</h4>
+<p>Everybody dreams that could be possible, but no.</p>
+
+<a name="132135570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135570">Kevin Buzzard (Aug 14 2018 at 22:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">H3</span><span class="o">,</span><span class="n">H4</span><span class="bp">⟩</span><span class="o">,</span>
+        <span class="o">(</span>
+            <span class="n">suffices</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rwa</span> <span class="n">this</span><span class="o">,</span>
+</pre></div>
+
+
+<p>;-)</p>
+
+<a name="132135580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135580">Patrick Massot (Aug 14 2018 at 22:46)</a>:</h4>
+<p>Latest discussion is probably <a href="#narrow/stream/113488-general/topic/eta.20for.20structures" title="#narrow/stream/113488-general/topic/eta.20for.20structures">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta.20for.20structures</a></p>
+
+<a name="132135586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135586">Kevin Buzzard (Aug 14 2018 at 22:46)</a>:</h4>
+<p>I got lucky because he assumes <code>H3</code> and <code>H4</code></p>
+
+<a name="132135629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135629">Edward Ayers (Aug 14 2018 at 22:47)</a>:</h4>
+<blockquote>
+<p>There's a mathlib style guide </p>
+</blockquote>
+<p>I should read that.</p>
+
+<a name="132135806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135806">Patrick Massot (Aug 14 2018 at 22:50)</a>:</h4>
+<p>Kevin, I don't understand what you wrote? Do you have something that compiles?</p>
+
+<a name="132135863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135863">Kevin Buzzard (Aug 14 2018 at 22:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">compact_subset_of_t2space_is_closed_2</span>
+  <span class="o">[</span><span class="n">t2_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sc</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">is_closed</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">is_closed_iff_nhds</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">H1</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">f</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span><span class="o">)</span> <span class="k">in</span>
+  <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">sc</span> <span class="n">f</span> <span class="n">H1</span> <span class="n">inf_le_right</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨_</span><span class="o">,</span><span class="bp">_⟩</span><span class="o">,</span>
+    <span class="o">(</span> <span class="n">suffices</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rwa</span> <span class="n">this</span><span class="o">,</span>
+      <span class="n">suffices</span> <span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">nhds</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">,</span> <span class="k">from</span> <span class="n">eq_of_nhds_neq_bot</span> <span class="err">$</span> <span class="n">not_bot_left</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">this</span><span class="o">,</span>
+      <span class="k">by</span> <span class="n">cc</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>My attempt to conform to mathlib style guide but I'm not sure I am -- I don't normally do term mode</p>
+
+<a name="132135967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135967">Kevin Buzzard (Aug 14 2018 at 22:52)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/style.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/style.md">https://github.com/leanprover/mathlib/blob/master/docs/style.md</a></p>
+
+<a name="132135972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135972">Patrick Massot (Aug 14 2018 at 22:52)</a>:</h4>
+<p><code>from by</code> is redundant</p>
+
+<a name="132135979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135979">Patrick Massot (Aug 14 2018 at 22:52)</a>:</h4>
+<p><code>by</code> is enough</p>
+
+<a name="132135997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132135997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132135997">Patrick Massot (Aug 14 2018 at 22:52)</a>:</h4>
+<p>how is it possible that <code>λ a ⟨_,_⟩,</code>? Someone lied to me!</p>
+
+<a name="132136008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136008">Kevin Buzzard (Aug 14 2018 at 22:52)</a>:</h4>
+<p>There's a problem with that idiom</p>
+
+<a name="132136024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136024">Mario Carneiro (Aug 14 2018 at 22:53)</a>:</h4>
+<p>use <code>$</code> to drop the parentheses and indents</p>
+
+<a name="132136027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136027">Kevin Buzzard (Aug 14 2018 at 22:53)</a>:</h4>
+<p>It doesn't unfold <em>at all</em> well</p>
+
+<a name="132136044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136044">Mario Carneiro (Aug 14 2018 at 22:53)</a>:</h4>
+<p>it unfolds exactly as well as <code>exists.elim</code></p>
+
+<a name="132136071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136071">Kevin Buzzard (Aug 14 2018 at 22:54)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/naming.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/naming.md">https://github.com/leanprover/mathlib/blob/master/docs/naming.md</a> explains why this lemma is called <code>closed_of_compact</code></p>
+
+<a name="132136230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136230">Kevin Buzzard (Aug 14 2018 at 22:55)</a>:</h4>
+<p>I should also say that I don't know if any of my suggested changes are _better_, I'm just observing that they exist :-)</p>
+
+<a name="132136347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136347">Mario Carneiro (Aug 14 2018 at 22:57)</a>:</h4>
+<p>there is worth in separating stylistic improvements from proof improvements</p>
+
+<a name="132136428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136428">Mario Carneiro (Aug 14 2018 at 22:58)</a>:</h4>
+<p>space after comma <code> ⟨_, _⟩,</code></p>
+
+<a name="132136501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132136501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132136501">Mario Carneiro (Aug 14 2018 at 22:59)</a>:</h4>
+<p>you can use <code>let</code> match in place of <code>exists.elim</code></p>
+
+<a name="132137333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137333">Edward Ayers (Aug 14 2018 at 23:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">compact_subset_of_t2space_is_closed_2</span>
+  <span class="o">[</span><span class="n">t2_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sc</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="n">is_closed_iff_nhds</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">y</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="k">let</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">h₃</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">sc</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span><span class="o">)</span> <span class="n">h₁</span> <span class="n">inf_le_right</span> <span class="k">in</span>
+  <span class="n">suffices</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">rwa</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="n">nhds</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">nhds</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">principal</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">⊥</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">eq_of_nhds_neq_bot</span> <span class="err">$</span> <span class="n">not_bot_left</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">this</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">cc</span>
+</pre></div>
+
+<a name="132137444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137444">Mario Carneiro (Aug 14 2018 at 23:14)</a>:</h4>
+<p>I think you got everything</p>
+
+<a name="132137466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137466">Edward Ayers (Aug 14 2018 at 23:15)</a>:</h4>
+<p>Fabulous thanks so much for your help everyone.</p>
+
+<a name="132137479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137479">Mario Carneiro (Aug 14 2018 at 23:15)</a>:</h4>
+<p>oh, the name needs work</p>
+
+<a name="132137536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137536">Mario Carneiro (Aug 14 2018 at 23:16)</a>:</h4>
+<p>then again <code>closed_of_compact</code> is already taken, I hear</p>
+
+<a name="132137637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137637">Edward Ayers (Aug 14 2018 at 23:19)</a>:</h4>
+<p>Yes I found it in <code>continuity.lean</code>.</p>
+
+<a name="132137712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137712">Edward Ayers (Aug 14 2018 at 23:20)</a>:</h4>
+<p>My big problem with proving this was not knowing what lemmas were available. I would use vscodes find window with regex to find candidate lemmas. Are there any search tools in Lean?</p>
+
+<a name="132137720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137720">Patrick Massot (Aug 14 2018 at 23:20)</a>:</h4>
+<p>tactic.find in mathlib</p>
+
+<a name="132137729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137729">Patrick Massot (Aug 14 2018 at 23:21)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md">https://github.com/leanprover/mathlib/blob/master/docs/tactics.md</a></p>
+
+<a name="132137739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137739">Patrick Massot (Aug 14 2018 at 23:21)</a>:</h4>
+<p>Reading mathlib doc would probably be a good idea</p>
+
+<a name="132137748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132137748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132137748">Patrick Massot (Aug 14 2018 at 23:21)</a>:</h4>
+<p>That find tactic is from Sebastian btw</p>
+
+<a name="132142686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132142686">Patrick Massot (Aug 15 2018 at 01:14)</a>:</h4>
+<p>Let me try something more constructive than OS recommendations. Since you like term mode, why isn't the first lemma:<br>
+<code>lemma not_bot_left (f g : filter α) (H1 : f ⊓ g ≠ ⊥) : f ≠ ⊥ := neq_bot_of_le_neq_bot H1 inf_le_left</code></p>
+
+<a name="132142828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20subset%20of%20hausdorff%20space%20is%20closed/near/132142828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78039compactsubsetofhausdorffspaceisclosed.html#132142828">Patrick Massot (Aug 15 2018 at 01:19)</a>:</h4>
+<p>and mathlib name would probably be closer to <code>neq_bot_of_inf_neq_bot_left</code></p>
+
+
+{% endraw %}

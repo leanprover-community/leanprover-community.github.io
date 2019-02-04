@@ -1,0 +1,185 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01104proofusinginductivevsdef.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html">proof using inductive vs def</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133936109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133936109">Sean Leather (Sep 14 2018 at 09:12)</a>:</h4>
+<p>This is quite an esoteric problem, so I'm not sure if anybody would be interested in looking into it. Nonetheless, I thought I'd try to see if anybody had any ideas.</p>
+<p>So I thought I would change a inductive <code>Prop</code> to a definition. The original inductive:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">lc</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span>
+  <span class="bp">|</span> <span class="n">varf</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span>                                                                          <span class="n">lc</span> <span class="o">(</span><span class="n">varf</span> <span class="n">x</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">app</span>  <span class="o">:</span> <span class="bp">Π</span>                <span class="o">{</span><span class="n">ef</span> <span class="n">ea</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">},</span> <span class="n">lc</span> <span class="n">ef</span> <span class="bp">→</span> <span class="n">lc</span> <span class="n">ea</span> <span class="bp">→</span>                                   <span class="n">lc</span> <span class="o">(</span><span class="n">app</span> <span class="n">ef</span> <span class="n">ea</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">lam</span>  <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">eb</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">},</span>            <span class="o">(</span><span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">))</span> <span class="bp">→</span> <span class="n">lc</span> <span class="o">(</span><span class="n">lam</span> <span class="n">eb</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">let_</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">ed</span> <span class="n">eb</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">},</span> <span class="n">lc</span> <span class="n">ed</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">))</span> <span class="bp">→</span> <span class="n">lc</span> <span class="o">(</span><span class="n">let_</span> <span class="n">ed</span> <span class="n">eb</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The new def:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lc&#39;</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">varb</span> <span class="bp">_</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">false</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">varf</span> <span class="bp">_</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">true</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="n">ef</span> <span class="n">ea</span><span class="o">)</span>  <span class="o">:=</span> <span class="n">lc&#39;</span> <span class="n">ef</span> <span class="bp">∧</span> <span class="n">lc&#39;</span> <span class="n">ea</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">lam</span> <span class="n">eb</span><span class="o">)</span>     <span class="o">:=</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc&#39;</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">let_</span> <span class="n">ed</span> <span class="n">eb</span><span class="o">)</span> <span class="o">:=</span> <span class="n">lc&#39;</span> <span class="n">ed</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc&#39;</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">)</span>
+  <span class="n">using_well_founded</span> <span class="o">{</span>
+    <span class="n">dec_tac</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">simp</span> <span class="o">[</span><span class="n">measure</span><span class="o">,</span> <span class="n">inv_image</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_iff_ne_zero&#39;</span><span class="o">]],</span>
+    <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="n">depth</span><span class="bp">⟩</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>But then I ran into a problem proving a theorem that did induction on <code>lc</code>. Since I can't do induction on <code>lc'</code>, I changed the proof to do induction on the parameter to <code>lc'</code>. In the old proof, I have this at one stage:</p>
+<div class="codehilite"><pre><span></span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">has_fresh</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">e₁</span> <span class="n">e₂</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">eb</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">Fb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">),</span>
+<span class="n">rb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">e₂</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="kn">open</span><span class="bp">.</span><span class="n">rec</span> <span class="n">e₂</span> <span class="n">k</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">)</span> <span class="bp">=</span> <span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span>
+<span class="err">⊢</span> <span class="kn">open</span><span class="bp">.</span><span class="n">rec</span> <span class="n">e₂</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">eb</span> <span class="bp">=</span> <span class="n">eb</span>
+</pre></div>
+
+
+<p>In the new proof, I have this at the same stage:</p>
+<div class="codehilite"><pre><span></span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">has_fresh</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">e₂</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">eb</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">L</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">,</span>
+<span class="n">Fb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">lc&#39;</span> <span class="o">(</span><span class="n">open_var</span> <span class="n">x</span> <span class="n">eb</span><span class="o">)</span>
+<span class="n">rb</span> <span class="o">:</span> <span class="n">lc&#39;</span> <span class="n">eb</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">e₂</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="kn">open</span><span class="bp">.</span><span class="n">rec</span> <span class="n">e₂</span> <span class="n">k</span> <span class="n">eb</span> <span class="bp">=</span> <span class="n">eb</span><span class="o">,</span>
+<span class="err">⊢</span> <span class="kn">open</span><span class="bp">.</span><span class="n">rec</span> <span class="n">e₂</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">eb</span> <span class="bp">=</span> <span class="n">eb</span>
+</pre></div>
+
+
+<p>Notice the difference in <code>rb</code>. In the old proof, I have an auxiliary proof that works for <code>open.rec e₂ k (open_var x eb)</code>, but in the new proof, I'm stuck. Since the new <code>lc'</code> doesn't provide the same evidence at <code>rb</code>, I don't know what to do. I think I should somehow reproduce the old <code>rb</code> in the new proof, perhaps using some knowledge of <code>lc'</code> that is lost since I'm not doing induction on <code>lc</code>, but I don't know how.</p>
+<p>The full thing is at <a href="https://github.com/spl/tts/tree/lc-def" target="_blank" title="https://github.com/spl/tts/tree/lc-def">https://github.com/spl/tts/tree/lc-def</a> .</p>
+
+<a name="133936608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133936608">Kenny Lau (Sep 14 2018 at 09:27)</a>:</h4>
+<p>does <code>rec_on</code> solve the problem?</p>
+
+<a name="133936659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133936659">Sean Leather (Sep 14 2018 at 09:28)</a>:</h4>
+<p><code>rec_on</code> what?</p>
+
+<a name="133936828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133936828">Kenny Lau (Sep 14 2018 at 09:32)</a>:</h4>
+<p>exp</p>
+
+<a name="133936836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133936836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133936836">Sean Leather (Sep 14 2018 at 09:32)</a>:</h4>
+<p>Do you mean use <code>rec_on</code> instead of <code>induction</code>? I'm not sure, but I don't see how it could.</p>
+
+<a name="133937291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937291">Mario Carneiro (Sep 14 2018 at 09:46)</a>:</h4>
+<p>which case are you in? what is the induction proof?</p>
+
+<a name="133937349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937349">Mario Carneiro (Sep 14 2018 at 09:46)</a>:</h4>
+<p>none of the variables in the state match things in the inductive definitions you gave</p>
+
+<a name="133937489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937489">Sean Leather (Sep 14 2018 at 09:50)</a>:</h4>
+<p>The <code>lam</code> case. See <a href="https://github.com/spl/tts/commit/04e4229c0fccec935b7f615a4aefe18d14982f2b#diff-94a57c5df4a0ba5ba897bada2c897d1aR73" target="_blank" title="https://github.com/spl/tts/commit/04e4229c0fccec935b7f615a4aefe18d14982f2b#diff-94a57c5df4a0ba5ba897bada2c897d1aR73">https://github.com/spl/tts/commit/04e4229c0fccec935b7f615a4aefe18d14982f2b#diff-94a57c5df4a0ba5ba897bada2c897d1aR73</a></p>
+
+<a name="133937510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937510">Sean Leather (Sep 14 2018 at 09:50)</a>:</h4>
+<p>Just above that is the old proof (line 49).</p>
+
+<a name="133937539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937539">Mario Carneiro (Sep 14 2018 at 09:51)</a>:</h4>
+<p>you are doing induction on <code>k</code>?</p>
+
+<a name="133937593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937593">Sean Leather (Sep 14 2018 at 09:52)</a>:</h4>
+<p>In the old proof, induction was on <code>l : lc e₁</code>. In the new proof, induction is on <code>e₁ : exp V</code>.</p>
+
+<a name="133937630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937630">Sean Leather (Sep 14 2018 at 09:53)</a>:</h4>
+<p>The focus is here: <a href="https://github.com/spl/tts/blob/04e4229c0fccec935b7f615a4aefe18d14982f2b/src/exp/open.lean#L41-L77" target="_blank" title="https://github.com/spl/tts/blob/04e4229c0fccec935b7f615a4aefe18d14982f2b/src/exp/open.lean#L41-L77">https://github.com/spl/tts/blob/04e4229c0fccec935b7f615a4aefe18d14982f2b/src/exp/open.lean#L41-L77</a> (if that helps).</p>
+
+<a name="133937634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937634">Mario Carneiro (Sep 14 2018 at 09:53)</a>:</h4>
+<p>induction on <code>e1</code> isn't good enough</p>
+
+<a name="133937674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937674">Mario Carneiro (Sep 14 2018 at 09:54)</a>:</h4>
+<p>you have to do induction on the same well founded measure you used to define <code>lc'</code> in the first place</p>
+
+<a name="133937678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937678">Sean Leather (Sep 14 2018 at 09:54)</a>:</h4>
+<p>You mean induction on <code>depth</code>?</p>
+
+<a name="133937679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937679">Mario Carneiro (Sep 14 2018 at 09:54)</a>:</h4>
+<p>yes</p>
+
+<a name="133937683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937683">Sean Leather (Sep 14 2018 at 09:54)</a>:</h4>
+<p>Oh....</p>
+
+<a name="133937690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937690">Mario Carneiro (Sep 14 2018 at 09:55)</a>:</h4>
+<p>because presumably these <code>open_var</code> things don't increase depth</p>
+
+<a name="133937696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937696">Sean Leather (Sep 14 2018 at 09:55)</a>:</h4>
+<p>Correct.</p>
+
+<a name="133937708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937708">Mario Carneiro (Sep 14 2018 at 09:55)</a>:</h4>
+<p>it's a general rule that you have to prove properties about a recursive definition using the same recursion strategy as the definition</p>
+
+<a name="133937791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937791">Sean Leather (Sep 14 2018 at 09:57)</a>:</h4>
+<p>Ah, okay. The well-founded stuff still confuses me.</p>
+
+<a name="133937807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937807">Sean Leather (Sep 14 2018 at 09:57)</a>:</h4>
+<p>So, it seems that the <code>inductive</code> is already doing a lot for me that I would otherwise have to do with more work.</p>
+
+<a name="133937849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937849">Sean Leather (Sep 14 2018 at 09:58)</a>:</h4>
+<p>Would it be better just to keep using it instead of the definition version?</p>
+
+<a name="133937854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937854">Sean Leather (Sep 14 2018 at 09:58)</a>:</h4>
+<p>I thought a definition would make things easier, but it's not.</p>
+
+<a name="133937859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937859">Kenny Lau (Sep 14 2018 at 09:59)</a>:</h4>
+<p>I mean, you can always use <code>well_founded.fix</code></p>
+
+<a name="133937920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937920">Sean Leather (Sep 14 2018 at 10:00)</a>:</h4>
+<p>I've never used <code>well_founded.fix</code>.</p>
+
+<a name="133937952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937952">Mario Carneiro (Sep 14 2018 at 10:01)</a>:</h4>
+<p>it is not easier</p>
+
+<a name="133937961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133937961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133937961">Mario Carneiro (Sep 14 2018 at 10:01)</a>:</h4>
+<p>it is used behind the scenes by <code>using_well_founded</code></p>
+
+<a name="133938025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133938025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133938025">Sean Leather (Sep 14 2018 at 10:02)</a>:</h4>
+<p>Okay. So I'll stick with the inductive. Lesson learned!</p>
+
+<a name="133995045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20using%20inductive%20vs%20def/near/133995045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01104proofusinginductivevsdef.html#133995045">Simon Hudon (Sep 15 2018 at 06:04)</a>:</h4>
+<p>Inductive propositions are quite handy in those situations. You can do induction on them when they are in your assumptions and it will automatically unify the variables that should be equal and you want have to handle cases where your definition would say <code>false</code></p>
+
+
+{% endraw %}

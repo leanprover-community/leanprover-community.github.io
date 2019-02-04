@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/49562reduceXYfails.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html">#reduce "X"++"Y" fails</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133264218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133264218">Kevin Sullivan (Sep 03 2018 at 16:37)</a>:</h4>
+<p>Evaluating this expression in Lean (VSCode is what I'm using) hangs for a while then reports deep recursion detected, increase stack space. Not very undergraduate-student-friendly. Bug or feature?</p>
+
+<a name="133264296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133264296">Patrick Massot (Sep 03 2018 at 16:38)</a>:</h4>
+<p>As usual, <code>#eval</code> succeeds here</p>
+
+<a name="133264323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133264323">Kevin Sullivan (Sep 03 2018 at 16:39)</a>:</h4>
+<p>Why this failure?</p>
+
+<a name="133265394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133265394">Kevin Sullivan (Sep 03 2018 at 17:03)</a>:</h4>
+<p>Also note that #eval also fails in ways guaranteed to be confusing to new students. Try this (posted previously).</p>
+<p>theorem t : true := true.intro<br>
+#check t<br>
+#eval t</p>
+<p>The real question then, I suppose, is by what simple rule should a new student choose between #eval and #reduce?</p>
+<p>And for the curious student, why do they fail in cases where on the face of it, it looks like they might be expected to work?</p>
+
+<a name="133265406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133265406">Rob Lewis (Sep 03 2018 at 17:03)</a>:</h4>
+<p>Even just <code>#reduce 'X'</code> is asking the kernel to normalize a proof of <code>88 &lt; 55296</code>. This normalizes to 55207 nested applications of <code>nat.less_than_or_equal.step</code>. And this is a subproblem of what you're asking.</p>
+
+<a name="133265477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133265477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133265477">Rob Lewis (Sep 03 2018 at 17:05)</a>:</h4>
+<p><code>#eval</code> is useful for computing values, it will ignore <code>Prop</code>-valued terms.</p>
+
+<a name="133266004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133266004">Patrick Massot (Sep 03 2018 at 17:17)</a>:</h4>
+<p>My simple rule is to choose <code>#eval</code></p>
+
+<a name="133266225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133266225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html#133266225">Kevin Sullivan (Sep 03 2018 at 17:22)</a>:</h4>
+<p>Thanks.</p>
+
+
+{% endraw %}

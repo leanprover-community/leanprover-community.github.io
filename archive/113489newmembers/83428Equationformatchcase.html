@@ -1,0 +1,98 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/83428Equationformatchcase.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html">Equation for match-case</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147352744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147352744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147352744">Erika (Nov 09 2018 at 06:50)</a>:</h4>
+<p>Is there way to fill this hole (similar to coq's match-return)</p>
+<div class="codehilite"><pre><span></span><span class="k">match</span> <span class="n">f</span> <span class="n">x</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">case1</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">g</span> <span class="n">x</span> <span class="n">y</span> <span class="o">(</span><span class="bp">_</span><span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">case1</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">...</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="147353395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353395">Mario Carneiro (Nov 09 2018 at 07:11)</a>:</h4>
+<p>It's not built in to the <code>match</code> syntax, but there is a tactic for this, <code>cases</code></p>
+
+<a name="147353401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353401">Mario Carneiro (Nov 09 2018 at 07:11)</a>:</h4>
+<div class="codehilite"><pre><span></span>cases h : f x with y,
+{ -- case1 y
+  exact g x y h, }
+</pre></div>
+
+<a name="147353467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353467">Erika (Nov 09 2018 at 07:13)</a>:</h4>
+<p>ooh, that's good to know, I also noticed that <code>refine</code> will not make goals for <code>_</code> within a match arm</p>
+
+<a name="147353504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353504">Mario Carneiro (Nov 09 2018 at 07:14)</a>:</h4>
+<p>Lean does have match-return as well, but you have to handhold it a bit to get this goal</p>
+<div class="codehilite"><pre><span></span><span class="k">match</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">P</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">case1</span> <span class="n">y</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">g</span> <span class="n">x</span> <span class="n">y</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">case1</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">...</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="147353510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353510">Erika (Nov 09 2018 at 07:14)</a>:</h4>
+<p>ah, I see, this is acceptable too</p>
+
+<a name="147353526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353526">Mario Carneiro (Nov 09 2018 at 07:15)</a>:</h4>
+<p>I'm not sure I know what you mean by not making goals for <code>_</code></p>
+
+<a name="147353529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353529">Mario Carneiro (Nov 09 2018 at 07:15)</a>:</h4>
+<p>refine will make goals for anything it can't infer</p>
+
+<a name="147353575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353575">Mario Carneiro (Nov 09 2018 at 07:16)</a>:</h4>
+<p>oh, maybe you mean <code>match</code> blocks refine because it uses the equation compiler (so it is typechecking in a different context, for a standalone definition)</p>
+
+<a name="147353590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353590">Erika (Nov 09 2018 at 07:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="o">(</span><span class="k">match</span> <span class="n">b</span> <span class="k">with</span> <span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">tt</span> <span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="bp">_</span> <span class="kn">end</span><span class="o">),</span> <span class="c1">-- error for _, instead of new goal</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="147353592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353592">Mario Carneiro (Nov 09 2018 at 07:16)</a>:</h4>
+<p>right</p>
+
+<a name="147353593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353593">Mario Carneiro (Nov 09 2018 at 07:16)</a>:</h4>
+<p>same happens when you use <code>let &lt;...&gt; = e1 in e2</code></p>
+
+<a name="147353604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353604">Erika (Nov 09 2018 at 07:17)</a>:</h4>
+<p>thanks for the help</p>
+
+<a name="147353611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353611">Mario Carneiro (Nov 09 2018 at 07:17)</a>:</h4>
+<p>you can still use tactics in there, but you have to make a separate begin-end block</p>
+
+<a name="147353653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equation%20for%20match-case/near/147353653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83428Equationformatchcase.html#147353653">Mario Carneiro (Nov 09 2018 at 07:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="k">match</span> <span class="n">b</span> <span class="k">with</span> <span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">tt</span> <span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="bp">...</span>
+  <span class="kn">end</span> <span class="kn">end</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}

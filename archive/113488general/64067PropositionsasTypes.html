@@ -1,0 +1,485 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/64067PropositionsasTypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html">Propositions as Types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125127870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125127870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125127870">Lyle Kopnicky (Apr 16 2018 at 02:29)</a>:</h4>
+<p>I'm not clear why the definition of <code>p1</code> below is not a type error. What can it possibly mean for <code>p1</code> to be a proof of a proof of a proposition?</p>
+<div class="codehilite"><pre><span></span>constant U : Type
+constant u0 : U
+constant u1 : u0 -- type error
+
+constant p0 : Prop
+constant p1 : p0 -- no type error!
+constant p2 : p1 -- type error
+</pre></div>
+
+
+<p>I thought of <code>U</code> and <code>Prop</code> as being of the same "universe level", but apparently they're not.</p>
+
+<a name="125127979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125127979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125127979">Simon Hudon (Apr 16 2018 at 02:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="113073">@Lyle Kopnicky</span> Before I answer, do you mind editing the topic to your post (and don't forget to select "Change later messages to this topic"). Maybe set it to "Propositions as Types"</p>
+
+<a name="125128027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128027">Simon Hudon (Apr 16 2018 at 02:35)</a>:</h4>
+<p>Let's have a look at what kind of beast <code>Prop</code> is. <code>Prop</code> is actually synonymous with <code>Sort 0</code>, that is, a sort in universe 0. <code>Sort 0</code> has type <code>Sort 1</code> and <code>Sort 1</code> has type <code>Sort 2</code>:</p>
+<div class="codehilite"><pre><span></span>Prop : Sort 1
+Sort 1 : Sort 2
+Sort 2 : Sort 3
+...
+</pre></div>
+
+<a name="125128076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128076">Simon Hudon (Apr 16 2018 at 02:37)</a>:</h4>
+<p>For <code>e0 : e1</code> (a type judgement) to make sense, e1 must be a sort, i.e. there must be a universe <code>u</code> such that <code>e1 : Sort u</code>.</p>
+
+<a name="125128126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128126">Simon Hudon (Apr 16 2018 at 02:39)</a>:</h4>
+<p>Thanks!</p>
+<p>We can see that <code>p1 : p0</code> satisfies this constraint because <code>p0 : Sort 0</code>. Similarly, <code>u0 : U</code> because there is a <code>u</code> (1), such that <code>U : Sort u</code>. Note that <code>Type u = Sort (u+1)</code></p>
+
+<a name="125128133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128133">Simon Hudon (Apr 16 2018 at 02:39)</a>:</h4>
+<p>We have the same problem for <code>u1 : u0</code> as for <code>p1 : p0</code></p>
+
+<a name="125128230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128230">Kenny Lau (Apr 16 2018 at 02:42)</a>:</h4>
+<blockquote>
+<p>I'm not clear why the definition of <code>p1</code> below is not a type error. What can it possibly mean for <code>p1</code> to be a proof of a proof of a proposition?</p>
+</blockquote>
+<p>No, <code>p0</code> is the proposition and <code>p1</code> is the proof.</p>
+
+<a name="125128238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128238">Simon Hudon (Apr 16 2018 at 02:43)</a>:</h4>
+<p>If we omit universes for a moment, a type <code>t</code> is a term (or expression) such that <code>t : Sort</code> and that allows you to type expressions <code>e</code>: <code>e : t</code>.</p>
+<p>That means that <code>Sort</code> must somehow be a type. This is where universes become important. If we still ignore them we have <code>Sort : Sort</code> but that invites paradoxes so we have to rank sorts: <code>Sort u : Sort (u+1)</code></p>
+
+<a name="125128244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128244">Lyle Kopnicky (Apr 16 2018 at 02:43)</a>:</h4>
+<p>Ah, that makes sense, <span class="user-mention" data-user-id="110064">@Kenny Lau</span> , thanks.</p>
+
+<a name="125128296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128296">Lyle Kopnicky (Apr 16 2018 at 02:45)</a>:</h4>
+<p>Thanks, <span class="user-mention" data-user-id="110026">@Simon Hudon</span> . If <code>Prop</code> is <code>Sort 0</code>,  what sort does <code>p0</code> have? Is it <code>Sort (-1)</code>?</p>
+
+<a name="125128337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128337">Kenny Lau (Apr 16 2018 at 02:46)</a>:</h4>
+<p><code>p0</code> is not a sort</p>
+
+<a name="125128345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128345">Lyle Kopnicky (Apr 16 2018 at 02:47)</a>:</h4>
+<p>Is <code>Type</code> a sort?</p>
+
+<a name="125128383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128383">Kenny Lau (Apr 16 2018 at 02:48)</a>:</h4>
+<p>Type = Sort 1</p>
+
+<a name="125128384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128384">Simon Hudon (Apr 16 2018 at 02:48)</a>:</h4>
+<p>I see why you would think that. <code>Sort u</code> is inhabited by sorts. They are not necessarily inhabited by sorts themselves.</p>
+<blockquote>
+<p>p0 is not a sort</p>
+</blockquote>
+<p>p0 is a sort but it is not equal to <code>Sort u</code> for any u.</p>
+
+<a name="125128390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128390">Kenny Lau (Apr 16 2018 at 02:48)</a>:</h4>
+<p>what <strong><em>sort</em></strong> of nonsense is this</p>
+
+<a name="125128395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128395">Simon Hudon (Apr 16 2018 at 02:49)</a>:</h4>
+<p>It is a sort, it can be on the right hand side of <code>:</code></p>
+
+<a name="125128399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128399">Simon Hudon (Apr 16 2018 at 02:49)</a>:</h4>
+<p>It is not a type of sorts though</p>
+
+<a name="125128401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128401">Kenny Lau (Apr 16 2018 at 02:49)</a>:</h4>
+<p>now I'm having jamais vu on sort</p>
+
+<a name="125128459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128459">Lyle Kopnicky (Apr 16 2018 at 02:51)</a>:</h4>
+<p>I guess I am thinking that everything has some "universe level", where <code>Sort 1</code> is level 1, <code>Sort 2</code> is level 2, etc.  Then if you can write <code>a : b</code>, <code>a</code> is one level lower than <code>b</code>. And you bottom out at some point, so that you can no longer write <code>a : b</code> if <code>b</code>'s level is too low.</p>
+
+<a name="125128525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128525">Lyle Kopnicky (Apr 16 2018 at 02:53)</a>:</h4>
+<p>So, if <code>Type</code> is at level 1, <code>U</code> is at level 0 (though it's not synonymous with <code>Sort 0</code>), and <code>u0</code> is at level -1, and we can't write <code>u1 : u0</code> because <code>u0</code> has too low of a level. Does that make any sense?</p>
+
+<a name="125128530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128530">Simon Hudon (Apr 16 2018 at 02:53)</a>:</h4>
+<p>You could think of it that way, that's true. It's important to note that "too low a level" makes a term not a type. We normally reserve that universe terminology for types. There is a problem with thinking of level -1 though</p>
+
+<a name="125128574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128574">Lyle Kopnicky (Apr 16 2018 at 02:54)</a>:</h4>
+<p>I think of <code>u0</code> as the value level.</p>
+
+<a name="125128578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128578">Lyle Kopnicky (Apr 16 2018 at 02:54)</a>:</h4>
+<p>Even though that can be confusing because types are values too.</p>
+
+<a name="125128594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128594">Lyle Kopnicky (Apr 16 2018 at 02:55)</a>:</h4>
+<p>So, <code>Sort 0</code> is the lowest level of types, and just below that is the value level. Things that are not types.</p>
+
+<a name="125128595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128595">Simon Hudon (Apr 16 2018 at 02:55)</a>:</h4>
+<p>We can have some data <code>d</code> of type <code>t</code> with <code>t : Sort 3</code>. You would probably think of it as being in universe 2 but <code>d</code> is still not the type of any other terms.</p>
+
+<a name="125128648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128648">Lyle Kopnicky (Apr 16 2018 at 02:56)</a>:</h4>
+<p>OK, yeah, I guess my analogy breaks down there.</p>
+
+<a name="125128703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128703">Lyle Kopnicky (Apr 16 2018 at 02:58)</a>:</h4>
+<p>But what confuses me is, if <code>Prop : Sort 1</code>, then <code>Prop</code> would be at the same level as <code>U</code>... level 0. So you should be able to have <code>p0 : Prop</code>, but not <code>p1 : p0</code>.</p>
+
+<a name="125128707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128707">Lyle Kopnicky (Apr 16 2018 at 02:58)</a>:</h4>
+<p>That would be going to "too low of a level".</p>
+
+<a name="125128719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128719">Lyle Kopnicky (Apr 16 2018 at 02:59)</a>:</h4>
+<p>So I guess my concept of "too low of a level" doesn't really work, either.</p>
+
+<a name="125128736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128736">Simon Hudon (Apr 16 2018 at 03:00)</a>:</h4>
+<p>So think of it this way: we're talking about a formal system focused on terms. Some terms <code>t</code> are types. Every term <code>t'</code> has a type such that <code>t' : t</code>. Every type has type <code>t : Sort u</code> for some universe <code>u</code></p>
+
+<a name="125128828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128828">Lyle Kopnicky (Apr 16 2018 at 03:02)</a>:</h4>
+<p>Then in <code>p1 : p0</code>, <code>p0</code> must be a type. And <code>p0 : Prop</code>, but <code>Prop</code> is synonymous with <code>Sort 0</code>, so that works.</p>
+
+<a name="125128841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128841">Simon Hudon (Apr 16 2018 at 03:03)</a>:</h4>
+<p>Exactly</p>
+
+<a name="125128893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128893">Lyle Kopnicky (Apr 16 2018 at 03:04)</a>:</h4>
+<p>But is <code>Type</code> synonymous with some sort?</p>
+
+<a name="125128895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128895">Kenny Lau (Apr 16 2018 at 03:04)</a>:</h4>
+<p>sort 1</p>
+
+<a name="125128905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128905">Lyle Kopnicky (Apr 16 2018 at 03:05)</a>:</h4>
+<p>OK</p>
+
+<a name="125128945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128945">Lyle Kopnicky (Apr 16 2018 at 03:06)</a>:</h4>
+<p>And <code>Type 1 = Sort 2</code>, <code>Type 2 = Sort 3</code>, and so on?</p>
+
+<a name="125128946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128946">Simon Hudon (Apr 16 2018 at 03:06)</a>:</h4>
+<p>That's right</p>
+
+<a name="125128997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125128997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125128997">Lyle Kopnicky (Apr 16 2018 at 03:08)</a>:</h4>
+<p>So, <code>Prop</code> is just the universe below <code>Type</code>.</p>
+
+<a name="125129003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129003">Simon Hudon (Apr 16 2018 at 03:08)</a>:</h4>
+<p>Yep!</p>
+
+<a name="125129065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129065">Lyle Kopnicky (Apr 16 2018 at 03:10)</a>:</h4>
+<p>Coming from Haskell, where we have a value level, and a type level (which is like <code>Type</code>), and a kind level (which is like <code>Type 1</code>), and then... well, they've sort of unified the levels from <code>Type 1</code> up... I'm trying to figure out what the analogy is to <code>Prop</code> there.</p>
+
+<a name="125129072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129072">Lyle Kopnicky (Apr 16 2018 at 03:11)</a>:</h4>
+<p>What does it mean to have another type level, <em>below</em> what I thought of as the lowest level?</p>
+
+<a name="125129115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129115">Simon Hudon (Apr 16 2018 at 03:12)</a>:</h4>
+<p>Haskell doesn't really have a type <code>Prop</code>. types in <code>Prop</code> are a bit like data type that are guaranteed to be erased at run time</p>
+
+<a name="125129131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129131">Lyle Kopnicky (Apr 16 2018 at 03:13)</a>:</h4>
+<p>Haskell erases all the types at runtime anyway. Well, except maybe if you use existential types.</p>
+
+<a name="125129135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129135">Simon Hudon (Apr 16 2018 at 03:14)</a>:</h4>
+<p>What I'm saying is that the values of a type in <code>Prop</code> are erased at run time, not just the type itself</p>
+
+<a name="125129175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129175">Lyle Kopnicky (Apr 16 2018 at 03:14)</a>:</h4>
+<p>Gotcha.</p>
+
+<a name="125129179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129179">Simon Hudon (Apr 16 2018 at 03:14)</a>:</h4>
+<p>Have you ever used the singleton library in Haskell?</p>
+
+<a name="125129183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129183">Lyle Kopnicky (Apr 16 2018 at 03:14)</a>:</h4>
+<p>No, but I've seen it demonstrated.</p>
+
+<a name="125129251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129251">Lyle Kopnicky (Apr 16 2018 at 03:16)</a>:</h4>
+<p>Are you saying that the singletons are also values that are erased at runtime?</p>
+
+<a name="125129267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129267">Simon Hudon (Apr 16 2018 at 03:17)</a>:</h4>
+<p>Not quite no. So far as I know they haven't added erasure for those types. There's still an interesting comparison</p>
+
+<a name="125129270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129270">Lyle Kopnicky (Apr 16 2018 at 03:17)</a>:</h4>
+<p>I'll take a look at it sometime, thanks.</p>
+
+<a name="125129361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129361">Simon Hudon (Apr 16 2018 at 03:20)</a>:</h4>
+<p><code>singleton</code> hinges on the idea of having type level natural numbers (and other objects). If you have <code>n0</code> and <code>n1</code> are type level natural numbers, <code>n0 .&lt;= n1</code> is the type of a proof that shows that <code>n0 ≤ n1</code>. It is a data type and it is uninhabited (except for <code>undefined</code>) unless the value of <code>n0</code> is less or equal to that of <code>n1</code>. As types <code>n0</code> and <code>n1</code> have only one value (again, except for <code>undefined</code>): the number they represent.</p>
+
+<a name="125129363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129363">Simon Hudon (Apr 16 2018 at 03:20)</a>:</h4>
+<p><code>Prop</code>s are a bit like those <code>.&lt;=</code> types (I'm not sure of the exact syntax, sorry)</p>
+
+<a name="125129369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129369">Simon Hudon (Apr 16 2018 at 03:21)</a>:</h4>
+<p>Correction: the singleton operator is <code>%&lt;=</code>, not <code>.&lt;=</code></p>
+
+<a name="125129370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129370">Simon Hudon (Apr 16 2018 at 03:21)</a>:</h4>
+<p>Does it clarify things?</p>
+
+<a name="125129566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129566">Lyle Kopnicky (Apr 16 2018 at 03:28)</a>:</h4>
+<p>It seems analogous to Prop, yes. But I'm struggling to line it up with the universes.</p>
+
+<a name="125129575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129575">Simon Hudon (Apr 16 2018 at 03:29)</a>:</h4>
+<p>When you're getting started, you can mostly ignore universes. You can simply use <code>Type</code> and <code>Prop</code>. Higher universes become necessary when you bring in existential types.</p>
+
+<a name="125129632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129632">Lyle Kopnicky (Apr 16 2018 at 03:31)</a>:</h4>
+<p>OK. I meant that I'm imagining what the universes are in Haskell, and trying to figure out which level these propositions defined with the singleton library live at.</p>
+
+<a name="125129682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129682">Simon Hudon (Apr 16 2018 at 03:33)</a>:</h4>
+<p>I think the analogy with Haskell's term, type and kind is somewhat wobbly.</p>
+
+<a name="125129732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129732">Lyle Kopnicky (Apr 16 2018 at 03:34)</a>:</h4>
+<p>I was thinking that Haskell's "type" is like <code>Type</code>, and the lowest-level kind is like <code>Type 1</code>.</p>
+
+<a name="125129746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129746">Lyle Kopnicky (Apr 16 2018 at 03:35)</a>:</h4>
+<p>Or... maybe <code>Type</code> is a kind, so instances of that are types.</p>
+
+<a name="125129787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129787">Simon Hudon (Apr 16 2018 at 03:36)</a>:</h4>
+<p>The need for universes in Lean comes from a requirement that the language be a consistent logic. Haskell doesn't have that requirement. I believe the requirement for Haskell to separate terms and types is historical. It started off with an ML style language and made a lot of changes over time including <code>RankNTypes</code> and higher kinded types.</p>
+
+<a name="125129789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129789">Lyle Kopnicky (Apr 16 2018 at 03:37)</a>:</h4>
+<p>Right.</p>
+
+<a name="125129797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129797">Simon Hudon (Apr 16 2018 at 03:37)</a>:</h4>
+<p>If we forget about Haskell's existential types and GADTs, I think its types are <code>Type 0</code> and its kinds are <code>Type 1</code></p>
+
+<a name="125129843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129843">Lyle Kopnicky (Apr 16 2018 at 03:38)</a>:</h4>
+<p>Yeah, makes sense. Except now they have unified <code>Type 1</code>, <code>Type 2</code>, and so forth...</p>
+
+<a name="125129894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129894">Lyle Kopnicky (Apr 16 2018 at 03:40)</a>:</h4>
+<p>So, these type-level naturals would have type <code>Type 1</code>?</p>
+
+<a name="125129941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129941">Lyle Kopnicky (Apr 16 2018 at 03:42)</a>:</h4>
+<p>Maybe this will all make more sense if I look at Idris. It should have similar power to Lean but be easier to compare to Haskell.</p>
+
+<a name="125129987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129987">Lyle Kopnicky (Apr 16 2018 at 03:44)</a>:</h4>
+<p>So, translate concept from Lean to Idris, then from Idris to Haskell. Or vice versa.</p>
+
+<a name="125129989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129989">Simon Hudon (Apr 16 2018 at 03:44)</a>:</h4>
+<p>Let me give you an example where <code>Type 1</code> is needed in Lean.</p>
+
+<a name="125129997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125129997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125129997">Lyle Kopnicky (Apr 16 2018 at 03:45)</a>:</h4>
+<p>OK</p>
+
+<a name="125130000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130000">Mario Carneiro (Apr 16 2018 at 03:45)</a>:</h4>
+<p>Hi Lyle,<br>
+There are three kinds of things in Haskell: terms, types, and kinds. The same trichotomy appears in Lean, but kinds have kinds too</p>
+
+<a name="125130001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130001">Simon Hudon (Apr 16 2018 at 03:45)</a>:</h4>
+<p><code>(Σ t : Type 0, list t) : Type 1</code>. This is basically an existential type. Because it "contains" a <code>Type 0</code>, it has to live in universe 1</p>
+
+<a name="125130039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130039">Simon Hudon (Apr 16 2018 at 03:46)</a>:</h4>
+<p>Mario to the rescue! Thanks!</p>
+
+<a name="125130043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130043">Mario Carneiro (Apr 16 2018 at 03:46)</a>:</h4>
+<p>Also kinds are types and types are terms so it forms a subset relation</p>
+
+<a name="125130049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130049">Mario Carneiro (Apr 16 2018 at 03:47)</a>:</h4>
+<p>A kind (or a sort) is a term of the form <code>Sort u</code> for some <code>u</code>. A type is a term whose type is a kind, and a term is anything which is well typed</p>
+
+<a name="125130051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130051">Mario Carneiro (Apr 16 2018 at 03:47)</a>:</h4>
+<p>Any term has a type which is a type, which means that if <code>e : t</code> then <code>t : Sort u</code> for some <code>u</code></p>
+
+<a name="125130098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130098">Mario Carneiro (Apr 16 2018 at 03:49)</a>:</h4>
+<p>Here <code>e</code> and <code>t</code> are both logically related to <code>u</code>, which you might call the level of the expression, but obviously their relation to <code>u</code> is slightly different. <code>t</code> is level 1 means that <code>t : Sort 1</code> while <code>e</code> has type in level 1 since <code>e : t : Sort 1</code></p>
+
+<a name="125130101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130101">Lyle Kopnicky (Apr 16 2018 at 03:49)</a>:</h4>
+<p>Right, that was my understanding so far.</p>
+
+<a name="125130146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130146">Mario Carneiro (Apr 16 2018 at 03:50)</a>:</h4>
+<p>In Haskell, there are values, types, and kinds which correspond roughly to terms in types of level 1, types in level 1, and <code>Sort 1</code> with maybe some variations on it</p>
+
+<a name="125130153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130153">Mario Carneiro (Apr 16 2018 at 03:51)</a>:</h4>
+<p>The algebra of kinds in Haskell is not as rich as Lean's, they only have one universe</p>
+
+<a name="125130155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130155">Mario Carneiro (Apr 16 2018 at 03:51)</a>:</h4>
+<p>I think they call it <code>*</code></p>
+
+<a name="125130158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130158">Mario Carneiro (Apr 16 2018 at 03:51)</a>:</h4>
+<p>but it is closest to <code>Sort 1</code> aka <code>Type</code></p>
+
+<a name="125130246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130246">Lyle Kopnicky (Apr 16 2018 at 03:54)</a>:</h4>
+<p>Yeah, they actually call it <code>Type</code> now, in newer versions</p>
+
+<a name="125130254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130254">Lyle Kopnicky (Apr 16 2018 at 03:55)</a>:</h4>
+<p>So, how do the type-level nats fit into this?</p>
+
+<a name="125130255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130255">Simon Hudon (Apr 16 2018 at 03:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think it's closer to <code>Type*</code> because of existential types and GADTs</p>
+
+<a name="125130296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130296">Mario Carneiro (Apr 16 2018 at 03:56)</a>:</h4>
+<p>It's one universe, but it's system F so it is impredicative</p>
+
+<a name="125130297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130297">Mario Carneiro (Apr 16 2018 at 03:56)</a>:</h4>
+<p>and somehow contradiction is avoided by a hair</p>
+
+<a name="125130342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130342">Simon Hudon (Apr 16 2018 at 03:58)</a>:</h4>
+<p>I thought because of <code>undefined</code> you couldn't consider the whole thing a consistent logic</p>
+
+<a name="125130355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130355">Mario Carneiro (Apr 16 2018 at 04:00)</a>:</h4>
+<p>That's true too, but System F itself is consistent if you leave out bottom</p>
+
+<a name="125130402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125130402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125130402">Mario Carneiro (Apr 16 2018 at 04:00)</a>:</h4>
+<p>there are lots of extensions that break consistency because Haskell wants to be turing complete</p>
+
+<a name="125131020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131020">Lyle Kopnicky (Apr 16 2018 at 04:24)</a>:</h4>
+<p><a href="http://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#kind-polymorphism-and-type-in-type" target="_blank" title="http://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#kind-polymorphism-and-type-in-type">http://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#kind-polymorphism-and-type-in-type</a></p>
+<p>The <code>TypeInType</code> extension allows kinds to be as intricate as types, allowing explicit quantification over kind variables, higher-rank kinds, and the use of type synonyms and families in kinds, among other features.</p>
+
+<a name="125131031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131031">Mario Carneiro (Apr 16 2018 at 04:25)</a>:</h4>
+<p>I am not a haskell expert, but from what I can tell, type level nats are a way to have nats as types, so that you can quantify over them without breaking the value/type distinction (and thus get dependent types over nats)</p>
+
+<a name="125131168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131168">Mario Carneiro (Apr 16 2018 at 04:31)</a>:</h4>
+<p>In lean this is not necessary because it's fully dependent anyway. Haskell is getting closer and closer to dependent type theory as time goes on, but it's not there yet</p>
+
+<a name="125131214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131214">Lyle Kopnicky (Apr 16 2018 at 04:32)</a>:</h4>
+<p>Yeah, since in Haskell you can't write a function from values to types, but you can write a function from types to types, these type-level nats stand in for values, but can be used in functions that produce types.</p>
+
+<a name="125131264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131264">Mario Carneiro (Apr 16 2018 at 04:35)</a>:</h4>
+<p><code>array A : nat -&gt; Type</code> is an example of a dependent type family in lean</p>
+
+<a name="125131313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131313">Lyle Kopnicky (Apr 16 2018 at 04:37)</a>:</h4>
+<p>I see what you're saying about the one universe in Haskell. Traditionally in Haskell, you have kind <code>*</code>, which is Lean's <code>Sort 1</code>, and you have types whose type is <code>*</code>, and you have values of those types. With the <code>TypeInType</code> extension, the kinds can be treated like types that now have their own types, but it's all still one universe.</p>
+
+<a name="125131354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131354">Mario Carneiro (Apr 16 2018 at 04:38)</a>:</h4>
+<p>Oh right, there was something else I wanted to say about your earlier example: <code>U : Type</code> and <code>Prop : Type</code>, so these can be equated (<code>U = Prop</code> is well formed), but they are nevertheless treated differently, since if <code>u : U</code> then <code>e : u</code> is malformed but if <code>p : Prop</code> then <code>h : p</code> is okay.</p>
+
+<a name="125131362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131362">Mario Carneiro (Apr 16 2018 at 04:39)</a>:</h4>
+<p>You can't prove that a type "is" a universe, it must be so syntactically</p>
+
+<a name="125131404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131404">Lyle Kopnicky (Apr 16 2018 at 04:40)</a>:</h4>
+<p>Hmm, OK. Well that's because <code>Prop</code> is also a sort.</p>
+
+<a name="125131405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131405">Mario Carneiro (Apr 16 2018 at 04:40)</a>:</h4>
+<p>exactly</p>
+
+<a name="125131410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131410">Mario Carneiro (Apr 16 2018 at 04:41)</a>:</h4>
+<p>It is possible to consider type in type in dependent type theory, this would be a relatively small change to a lean-like language, but it is inconsistent by Girard's paradox so it is not usually used in languages that aspire to a sound proof theory</p>
+
+<a name="125131444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131444">Mario Carneiro (Apr 16 2018 at 04:42)</a>:</h4>
+<p>In fact, forgetting the universes is the first step in compiling lean programs</p>
+
+<a name="125131499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131499">Lyle Kopnicky (Apr 16 2018 at 04:44)</a>:</h4>
+<p>Right</p>
+
+<a name="125131502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131502">Lyle Kopnicky (Apr 16 2018 at 04:44)</a>:</h4>
+<p>In Haskell you can have kind <code>* -&gt; *</code>, e.g. <code>List : * -&gt; *</code>. So in Lean would <code>List</code> have type <code>Type -&gt; Type</code>? Then what's the type of <code>Type -&gt; Type</code>? Is that <code>Type 1</code>?</p>
+
+<a name="125131512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131512">Mario Carneiro (Apr 16 2018 at 04:45)</a>:</h4>
+<p>Indeed, <code>list</code> has type <code>list : Type u -&gt; Type u</code>, which itself has type <code>Type (u+1)</code></p>
+
+<a name="125131514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131514">Lyle Kopnicky (Apr 16 2018 at 04:45)</a>:</h4>
+<p>Ah, I see</p>
+
+<a name="125131556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131556">Lyle Kopnicky (Apr 16 2018 at 04:46)</a>:</h4>
+<p>Well, that helps. I have a lot more to learn about Lean. I've been working through <em>Logic &amp; Proof</em>.</p>
+
+<a name="125131558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131558">Mario Carneiro (Apr 16 2018 at 04:46)</a>:</h4>
+<p>Most type families are universe polymorphic like this, but if we restrict to <code>Type</code>, we have <code>list.{0} : Type -&gt; Type : Type 1</code></p>
+
+<a name="125131567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131567">Mario Carneiro (Apr 16 2018 at 04:47)</a>:</h4>
+<p>Most things that you think of as kinds will have type <code>Type 1</code> if you replace <code>*</code> with lean's <code>Type</code> everywhere</p>
+
+<a name="125131614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125131614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125131614">Lyle Kopnicky (Apr 16 2018 at 04:49)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="125138177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125138177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html#125138177">Kevin Buzzard (Apr 16 2018 at 09:07)</a>:</h4>
+<blockquote>
+<p>In lean this is not necessary because it's fully dependent anyway. Haskell is getting closer and closer to dependent type theory as time goes on, but it's not there yet</p>
+</blockquote>
+<p>I watched a talk by Edward Kmett on youtube recently -- "typeclasses against the world" (about Haskell and typeclasses) and, if I understood correctly, Kmett said at some point that a problem with typeclasses in DTT was that you get diamonds, and in Haskell these couldn't occur.</p>
+
+
+{% endraw %}

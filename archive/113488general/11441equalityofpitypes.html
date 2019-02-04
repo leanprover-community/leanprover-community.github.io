@@ -1,0 +1,149 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/11441equalityofpitypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html">equality of pi types?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125702762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125702762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125702762">Scott Buckley (Apr 26 2018 at 04:05)</a>:</h4>
+<p>Hi guys, I'm stuck trying to prove the following, which seems intuitively true to me:</p>
+<div class="codehilite"><pre><span></span>((T1 -&gt; T2) = (T1 -&gt; T2&#39;)) -&gt;
+T2 = T2&#39;
+</pre></div>
+
+
+<p>If it helps, I have instances of T1, (T1 -&gt; T2), and (T1 -&gt; T2'). <code>cases</code> on the equality hypotheses doesn't get me anywhere. I've tried building proofs various ways, but I always come back to the fundamental problem.</p>
+<p>Is this even true?</p>
+<p>Cheers,<br>
+Scott.<br>
+EDIT: fixed parameterisation</p>
+
+<a name="125703075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703075">Mario Carneiro (Apr 26 2018 at 04:16)</a>:</h4>
+<p>Could you post a complete statement of the claim? In particular I want to know what are the types of <code>T1</code>, <code>T2</code>, and <code>T2'</code></p>
+
+<a name="125703125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703125">Mario Carneiro (Apr 26 2018 at 04:18)</a>:</h4>
+<p>If <code>T2</code> and <code>T2'</code> are propositions, then this follows purely from the ancillary instances you have; from <code>T1</code> and <code>T1 -&gt; T2</code> we find that <code>T2</code> is true, and similarly <code>T2'</code> is true, so they are equal by <code>propext</code></p>
+
+<a name="125703310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703310">Mario Carneiro (Apr 26 2018 at 04:24)</a>:</h4>
+<p>Oh, I just realized that you are misinterpreting the binding power of equality over arrow - I think you wanted to say</p>
+<div class="codehilite"><pre><span></span>(T1 -&gt; T2) = (T1 -&gt; T2&#39;) -&gt; T2 = T2&#39;
+</pre></div>
+
+
+<p>This claim is known as injectivity of pi, and it is independent in lean's axiomatization. I am pretty sure it's consistent with DTT but for some reason it's never assumed in any interactive proof assistant I know. (Warning: Also seemingly reasonable is injectivity on the left, i.e. <code>(T1 -&gt; T2) = (T1' -&gt; T2) -&gt; T1 = T1'</code>, but this one is false when <code>T2</code> is a proposition.)</p>
+
+<a name="125703385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703385">Mario Carneiro (Apr 26 2018 at 04:26)</a>:</h4>
+<p>Oh wait, even injectivity on the right is false when <code>T1</code> is empty and <code>T2</code> and <code>T2'</code> are propositions, i.e. <code>(false -&gt; false) = (false -&gt; true)</code> but <code>false != true</code></p>
+
+<a name="125703441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703441">Scott Buckley (Apr 26 2018 at 04:30)</a>:</h4>
+<p>Thanks Mario. Yeah you're right, I mis-parameterised.<br>
+T1, T2, and T2' are Type. All are inhabited.</p>
+
+<a name="125703491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703491">Mario Carneiro (Apr 26 2018 at 04:30)</a>:</h4>
+<p>I think I will stick with my original answer then - unprovable in Lean but consistent with it</p>
+
+<a name="125703497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703497">Mario Carneiro (Apr 26 2018 at 04:31)</a>:</h4>
+<p>May I ask why you need this?</p>
+
+<a name="125703541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703541">Mario Carneiro (Apr 26 2018 at 04:32)</a>:</h4>
+<p>I know it comes up in attempting to prove</p>
+<div class="codehilite"><pre><span></span>f == g -&gt; a == b -&gt; f a == g b
+</pre></div>
+
+
+<p>which would be nice if it were provable but you have to assume <code>f = g</code> for it to work.</p>
+
+<a name="125703666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125703666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125703666">Scott Buckley (Apr 26 2018 at 04:37)</a>:</h4>
+<p>I'm proving type determinism for my operational semantics. Some expressions contain lean functions. If I have an application, its subexpressions must have function types, so the output of an application must have the same type. That's where this comes in.</p>
+
+<a name="125704324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125704324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125704324">Mario Carneiro (Apr 26 2018 at 04:57)</a>:</h4>
+<p>So the types of your functions are calculated dynamically? I think you want to bundle the types as auxiliary data for this kind of thing to work. It's not sufficient to know that they <em>can be</em> well typed, you need to keep track of the type itself so that one pi doesn't get swapped with another that is equal but has different parts (assuming pi is noninjective)</p>
+
+<a name="125704716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125704716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125704716">Scott Buckley (Apr 26 2018 at 05:12)</a>:</h4>
+<p>yeah that's a good point. thanks for the advice :)</p>
+
+<a name="125732960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125732960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125732960">Kenny Lau (Apr 26 2018 at 19:03)</a>:</h4>
+<blockquote>
+<p>I think I will stick with my original answer then - unprovable in Lean but consistent with it</p>
+</blockquote>
+<p>this is very interesting</p>
+
+<a name="125732962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/125732962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#125732962">Kenny Lau (Apr 26 2018 at 19:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="127208536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127208536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127208536">Kenny Lau (May 28 2018 at 16:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is the converse true / provable?</p>
+
+<a name="127208538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127208538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127208538">Kenny Lau (May 28 2018 at 16:38)</a>:</h4>
+<p><code>T2 = T2' -&gt; ((T1 -&gt; T2) = (T1 -&gt; T2'))</code></p>
+
+<a name="127209021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127209021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127209021">Chris Hughes (May 28 2018 at 16:51)</a>:</h4>
+<p>Isn't that just <code>rw</code></p>
+
+<a name="127209024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127209024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127209024">Kenny Lau (May 28 2018 at 16:51)</a>:</h4>
+<p>yes</p>
+
+<a name="127209029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127209029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127209029">Kenny Lau (May 28 2018 at 16:51)</a>:</h4>
+<p>what if the right hand side is a pi</p>
+
+<a name="127209033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127209033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127209033">Kenny Lau (May 28 2018 at 16:51)</a>:</h4>
+<p>does pi have an ext theorem?</p>
+
+<a name="127211597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127211597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127211597">Kenny Lau (May 28 2018 at 17:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span> <span class="bp">==</span> <span class="n">γ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">((</span><span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">==</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">γ</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="127211600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127211600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127211600">Kenny Lau (May 28 2018 at 17:55)</a>:</h4>
+<p>Is this true/false/independent?</p>
+
+<a name="127211882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127211882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127211882">Johannes Hölzl (May 28 2018 at 18:02)</a>:</h4>
+<p>You don't need <code>==</code> to state this. The type of <code>β x</code> and <code>γ x</code> are the same. dito on the rhs.</p>
+
+<a name="127211934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127211934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127211934">Johannes Hölzl (May 28 2018 at 18:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">γ</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">γ</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">β</span> <span class="bp">=</span> <span class="n">γ</span><span class="o">,</span> <span class="k">from</span> <span class="n">funext</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">subst</span> <span class="n">this</span>
+</pre></div>
+
+<a name="127212180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127212180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127212180">Kenny Lau (May 28 2018 at 18:10)</a>:</h4>
+<p>hmm</p>
+
+<a name="127219583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20pi%20types%3F/near/127219583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11441equalityofpitypes.html#127219583">Mario Carneiro (May 28 2018 at 22:05)</a>:</h4>
+<p>The converse is false for some choices of T1, and independent for others</p>
+
+
+{% endraw %}

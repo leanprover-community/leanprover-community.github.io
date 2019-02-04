@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Indexing Zulip](45931IndexingZulip.html) (79 messages, latest: Feb 04 2019 at 13:31)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (50 messages, latest: Feb 04 2019 at 08:21)
 
 * [A Counting Argument](57356ACountingArgument.html) (30 messages, latest: Feb 04 2019 at 02:29)
-
-* [Indexing Zulip](45931IndexingZulip.html) (70 messages, latest: Feb 03 2019 at 23:01)
 
 * [subst](25330subst.html) (24 messages, latest: Feb 03 2019 at 16:44)
 

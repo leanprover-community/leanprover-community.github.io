@@ -1,0 +1,70 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/52642wellfoundedrecursionlexicographicordering.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html">well-founded recursion & lexicographic ordering ?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133941390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941390">Jack Crawford (Sep 14 2018 at 11:29)</a>:</h4>
+<p>Hi, I have a pleb question about how Lean infers whether recursion is well-founded or not.<br>
+I'm writing a recursive function whose first two arguments are of type <code>fin m</code> and <code>fin n</code>,  and my algorithm:<br>
+ 1) always decreases the size of my <code>fin n</code><br>
+ 2) sometimes decreases the size of my <code>fin m</code><br>
+I would think that Lean should be able to work out that my recursion is well-founded from the first fact alone, but it does not seem able.<br>
+However, when I simply change the order that my arguments appear from <code>fin m -&gt; fin n -&gt; ...</code> to <code>fin n -&gt; fin m -&gt; ...</code> and nothing else (nontrivial), suddenly Lean recognises well-foundedness!</p>
+<p>It seems that Lean is only trying to show well-foundedness from my first argument and can't work out that there should be well-foundedness on the lexicographic order of my <code>fin m</code> and <code>fin n</code>, or that just my <code>fin n</code> alone should suffice. Everything's sort of "doing what I want it to" except that I have to write the arguments to my function in an unconventional way. How can I tell Lean to just look for well-foundedness on my second argument (the <code>fin n</code>), or on the lexicographic pair of <code>fin m</code> and <code>fin n</code>, and not just purely on my <code>fin m</code>? Thanks!</p>
+
+<a name="133941463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941463">Kenny Lau (Sep 14 2018 at 11:31)</a>:</h4>
+<p>MWE</p>
+
+<a name="133941803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941803">Kevin Buzzard (Sep 14 2018 at 11:40)</a>:</h4>
+<p>By default Lean uses lexicographic ordering when trying to prove recursive functions are well-defined, so definitely the input order matters. The notes at <a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/well_founded_recursion.md</a> probably tell you all you need to know</p>
+
+<a name="133941855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941855">Jack Crawford (Sep 14 2018 at 11:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <br>
+here's an MWE, compare the pair:</p>
+<div class="codehilite"><pre><span></span>def mwe_aux {m n : ℕ} : Π (i : fin m) (j : fin n), bool
+| ⟨0, h₁⟩ ⟨k₂, h₂⟩ := ff
+| ⟨k₁+1, h₁⟩ ⟨0, h₂⟩ := ff
+| ⟨k₁+1, h₁⟩ ⟨k₂+1, h₂⟩ :=
+begin
+    apply mwe_aux,
+    from if k₂%2 = 0 then ⟨k₁, nat.lt_of_succ_lt h₁⟩ else ⟨k₁+1, h₁⟩,
+    from ⟨k₂, nat.lt_of_succ_lt h₂⟩
+end
+
+def mwe_aux2 {m n : ℕ} : Π (j : fin n) (i : fin m), bool
+| ⟨k₂, h₂⟩ ⟨0, h₁⟩ := ff
+| ⟨0, h₂⟩ ⟨k₁+1, h₁⟩ := ff
+| ⟨k₂+1, h₂⟩ ⟨k₁+1, h₁⟩ :=
+begin
+    apply mwe_aux2,
+    from ⟨k₂, nat.lt_of_succ_lt h₂⟩,
+    from if k₂%2 = 0 then ⟨k₁, nat.lt_of_succ_lt h₁⟩ else ⟨k₁+1, h₁⟩,
+end
+</pre></div>
+
+<a name="133941878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941878">Kevin Buzzard (Sep 14 2018 at 11:41)</a>:</h4>
+<p>the linked notes explain how to change the well-order on your input.</p>
+
+<a name="133941927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941927">Jack Crawford (Sep 14 2018 at 11:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  ah oops I didn't see that before I responded to Kenny, thanks, I'll have a look!</p>
+
+<a name="133941991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html#133941991">Kenny Lau (Sep 14 2018 at 11:44)</a>:</h4>
+<p>well I mean, what are you trying to do, instead of MWE of the error</p>
+
+
+{% endraw %}

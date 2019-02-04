@@ -1,0 +1,116 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html">Additive group homeomorphisms on fields</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154907204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907204">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)</a>:</h4>
+<p>Since fields extend additive groups , I thought that something <code>hom_int_to_field</code> below should work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">field</span> <span class="n">L</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">nat_to_field</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat_to_field</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">int_to_field</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat_to_field</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">-</span><span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">nat_to_field</span><span class="o">(</span><span class="n">n</span><span class="o">))</span>
+
+<span class="kn">theorem</span> <span class="n">hom_int_to_field</span> <span class="o">:</span> <span class="n">is_add_group_hom</span> <span class="n">int_to_field</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>But it doesn't -- it tells me it can't synthesise the instance. Instead, I need to create a proof that <code>K</code> is an additive group, give it a name:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">AK</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">K</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">add</span> <span class="o">:=</span> <span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span>
+    <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">,</span>
+    <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">zero_add</span><span class="o">,</span>
+    <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">add_zero</span><span class="o">,</span>
+    <span class="n">neg</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">neg</span><span class="o">,</span>
+    <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">add_left_neg</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>And then use it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">hom_int_to_field</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_add_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">AK</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">K</span><span class="o">)</span> <span class="n">int_to_field</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Can't I use the fact that fields are -- by definition -- additive groups?</p>
+
+<a name="154907306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907306">Johan Commelin (Jan 11 2019 at 11:18)</a>:</h4>
+<p>You know about <code>int.cast</code>?</p>
+
+<a name="154907333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907333">Johan Commelin (Jan 11 2019 at 11:19)</a>:</h4>
+<p>It is your <code>int_to_field</code>, for arbitrary rings</p>
+
+<a name="154907334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907334">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:19)</a>:</h4>
+<p>Oh, I didn't know it casted to a general field. Yes, <code>int.cast.is_ring_hom</code></p>
+
+<a name="154907414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907414">Johan Commelin (Jan 11 2019 at 11:20)</a>:</h4>
+<p>And somewhere there must be a proof that it is a ring hom</p>
+
+<a name="154907423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907423">Johan Commelin (Jan 11 2019 at 11:20)</a>:</h4>
+<p>But that doesn't answer why your instance can't be found.</p>
+
+<a name="154907425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907425">Johan Commelin (Jan 11 2019 at 11:20)</a>:</h4>
+<p>I don't know what's wrong there.</p>
+
+<a name="154907451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907451">Johan Commelin (Jan 11 2019 at 11:21)</a>:</h4>
+<p>(Also, mathematician's field is <code>discrete_field</code>. For reasons that I don't get. Since I'm a mathematician <span class="emoji emoji-1f648" title="see no evil">:see_no_evil:</span>)</p>
+
+<a name="154907550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907550">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:23)</a>:</h4>
+<p>Oh -- what about subfields? Is there a "discrete subfield"?</p>
+
+<a name="154907558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907558">Johan Commelin (Jan 11 2019 at 11:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="emoji emoji-2b06" title="up">:up:</span></p>
+
+<a name="154907566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907566">Kenny Lau (Jan 11 2019 at 11:23)</a>:</h4>
+<p>I think every subfield of a discrete field is discrete by default</p>
+
+<a name="154907568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907568">Kenny Lau (Jan 11 2019 at 11:23)</a>:</h4>
+<p>but I don't think this is in mathlib yet</p>
+
+<a name="154907673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907673">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:25)</a>:</h4>
+<p>And discrete field homeomorphisms? Can I just use <code>is_field_hom</code>?</p>
+
+<a name="154907740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154907740">Kenny Lau (Jan 11 2019 at 11:26)</a>:</h4>
+<p>yes</p>
+
+<a name="154908228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154908228">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)</a>:</h4>
+<blockquote>
+<p>But that doesn't answer why your instance can't be found.</p>
+</blockquote>
+<p>If I change <code>theorem</code> to <code>instance</code>, it works.</p>
+
+<a name="154908234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html#154908234">Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)</a>:</h4>
+<p>That's how they do it in mathlib.</p>
+
+
+{% endraw %}

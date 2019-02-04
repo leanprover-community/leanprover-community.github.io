@@ -1,0 +1,99 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/88174HowmanyuniversesdidIuse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html">How many universes did I use?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127046011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046011">Kevin Buzzard (May 24 2018 at 21:49)</a>:</h4>
+<p>I proved a theorem in Lean (that an affine scheme is a scheme). Along the way I understood a little more about universes. In particular, I realised that the ZFC proof I knew that an affine scheme was a scheme "took place entirely within Type", by which I mean that every term I used was "good" -- here "good" is defined thus: (1) Type is good; (2) If X is a term of type Y and Y is good then X is good; (3) that's it. Once I realised this I went through a lot of files in my project that had lines of the form "universes u v w" and replaced them with "universe u", I also replaced many "Type v" and "Type *" with "Type u".</p>
+
+<a name="127046019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046019">Kevin Buzzard (May 24 2018 at 21:49)</a>:</h4>
+<p>How do I check that I caught all of them?</p>
+
+<a name="127046082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046082">Patrick Massot (May 24 2018 at 21:50)</a>:</h4>
+<p>What do you gain from these modifications?</p>
+
+<a name="127046330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046330">Mario Carneiro (May 24 2018 at 21:56)</a>:</h4>
+<p>Agreed - these modifications do nothing toward your goal of eliminating unverse use</p>
+
+<a name="127046359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046359">Mario Carneiro (May 24 2018 at 21:57)</a>:</h4>
+<p>What would help is using <code>Type</code> instead of <code>Type u</code> or <code>Type*</code>, but I don't recommend this</p>
+
+<a name="127046363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046363">Chris Hughes (May 24 2018 at 21:57)</a>:</h4>
+<p>Doesn't changing Type v to Type u just make the theorem less general, and just worse?</p>
+
+<a name="127046428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046428">Mario Carneiro (May 24 2018 at 21:58)</a>:</h4>
+<p>But your definition good is overly restrictive - <code>ring</code> is not good, not even <code>ring.{0}</code>, so <code>ring A</code> is also not good</p>
+
+<a name="127046459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046459">Mario Carneiro (May 24 2018 at 21:59)</a>:</h4>
+<p>In fact clearly delineating what parts of DTT make sense in ZFC is rather delicate</p>
+
+<a name="127046470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127046470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127046470">Patrick Massot (May 24 2018 at 21:59)</a>:</h4>
+<p>We should have asked how many questions he marked before answering this thread</p>
+
+<a name="127073702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073702">Kevin Buzzard (May 25 2018 at 11:59)</a>:</h4>
+<p>You're right that my definition of good is bad. I definitely don't want to put everything into Type because then other people won't want to use my code. But there <em>is</em> an underlying question here, and perhaps the answer is in Mario's comment "In fact clearly delineating what parts of DTT make sense in ZFC is rather delicate". I want to know the answer though. Is there any way I can find out whether my definition "would go through if I went through every file I used and removed all mention of universes, and changed all <code>Type u</code> and <code>Type*</code> to <code>Type</code>"?</p>
+
+<a name="127073805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073805">Chris Hughes (May 25 2018 at 12:01)</a>:</h4>
+<p>It would go through, but nobody would be able to define a scheme structure on anything outside Type if I understand the question. So it would just be a less general definition.</p>
+
+<a name="127073876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073876">Kevin Buzzard (May 25 2018 at 12:02)</a>:</h4>
+<p>"It would go through" -- how do you know this?</p>
+
+<a name="127073878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073878">Kevin Buzzard (May 25 2018 at 12:02)</a>:</h4>
+<p>Cardinals wouldn't, right?</p>
+
+<a name="127073882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073882">Kevin Buzzard (May 25 2018 at 12:02)</a>:</h4>
+<p>I agree that it would be a bad idea to do so</p>
+
+<a name="127073883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073883">Kevin Buzzard (May 25 2018 at 12:03)</a>:</h4>
+<p>however I know people who care about this question.</p>
+
+<a name="127073893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073893">Kevin Buzzard (May 25 2018 at 12:03)</a>:</h4>
+<p>People whose _definition_ of mathematics is ZFC could argue that I am not doing mathematics if I use two universes.</p>
+
+<a name="127073894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073894">Mario Carneiro (May 25 2018 at 12:03)</a>:</h4>
+<p>I've attempted to do this in my lean type theory paper</p>
+
+<a name="127073895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073895">Chris Hughes (May 25 2018 at 12:03)</a>:</h4>
+<p>I misunderstood the question.</p>
+
+<a name="127073896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073896">Mario Carneiro (May 25 2018 at 12:03)</a>:</h4>
+<p>several natural definitions were tried and dismissed</p>
+
+<a name="127073936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073936">Kevin Buzzard (May 25 2018 at 12:04)</a>:</h4>
+<p>There are parts of mathlib which really use more than one universe, right?</p>
+
+<a name="127073948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20many%20universes%20did%20I%20use%3F/near/127073948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88174HowmanyuniversesdidIuse.html#127073948">Mario Carneiro (May 25 2018 at 12:04)</a>:</h4>
+<p>All parts of mathlib are universe polymorphic, so it's often hard to say, the answer is "yes trivially" if you don't ask carefully</p>
+
+
+{% endraw %}

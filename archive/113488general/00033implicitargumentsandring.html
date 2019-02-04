@@ -1,0 +1,204 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/00033implicitargumentsandring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html">implicit arguments, and `ring`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="134878744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878744">Scott Morrison (Sep 29 2018 at 13:13)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I noticed an unfortunate feature of <code>ring</code>.</p>
+
+<a name="134878745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878745">Scott Morrison (Sep 29 2018 at 13:13)</a>:</h4>
+<p>I'd got stuck doing this:</p>
+<div class="codehilite"><pre><span></span>example (x y : ℕ) (h : x ^ 2 + 3 * y ^ 2 = 4) : false :=
+begin
+ring at h,
+simp at h,
+ring at h,
+simp at h,
+-- ...
+end
+</pre></div>
+
+<a name="134878784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878784">Scott Morrison (Sep 29 2018 at 13:14)</a>:</h4>
+<p>where it looks like the goal isn't changing.</p>
+
+<a name="134878788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878788">Scott Morrison (Sep 29 2018 at 13:14)</a>:</h4>
+<p>It just says </p>
+<div class="codehilite"><pre><span></span>x y : ℕ,
+h : x ^ 2 + 3 * y ^ 2 = 4
+⊢ false
+</pre></div>
+
+<a name="134878791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878791">Scott Morrison (Sep 29 2018 at 13:14)</a>:</h4>
+<p>but with pp.all true, you can see if flipping back and forth:</p>
+
+<a name="134878803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878803">Mario Carneiro (Sep 29 2018 at 13:14)</a>:</h4>
+<p>You shouldn't use <code>ring</code> nonterminally</p>
+
+<a name="134878808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878808">Mario Carneiro (Sep 29 2018 at 13:14)</a>:</h4>
+<p>at least not automatically (i.e. in <code>tidy</code>)</p>
+
+<a name="134878815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878815">Mario Carneiro (Sep 29 2018 at 13:15)</a>:</h4>
+<p>if it doesn't close the goal, assume it failed</p>
+
+<a name="134878817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878817">Scott Morrison (Sep 29 2018 at 13:15)</a>:</h4>
+<p>Yes, I know, but I want to for a moment anyway. :-)</p>
+
+<a name="134878818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878818">Scott Morrison (Sep 29 2018 at 13:15)</a>:</h4>
+<p>Ah, okay. :-)</p>
+
+<a name="134878821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878821">Scott Morrison (Sep 29 2018 at 13:15)</a>:</h4>
+<p>But that takes all the fun out of it.</p>
+
+<a name="134878823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878823">Mario Carneiro (Sep 29 2018 at 13:15)</a>:</h4>
+<p><code>ring</code> rewrites the goal into sum-of-products form for ease of reading when it fails</p>
+
+<a name="134878827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878827">Scott Morrison (Sep 29 2018 at 13:15)</a>:</h4>
+<p>Because sometimes <code>ring at *, exfalso, linarith</code> can get stuff done.</p>
+
+<a name="134878829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878829">Mario Carneiro (Sep 29 2018 at 13:15)</a>:</h4>
+<p>this form disagrees with simp normal form in some places</p>
+
+<a name="134878870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878870">Scott Morrison (Sep 29 2018 at 13:16)</a>:</h4>
+<p>The problem I was having here is actually just in the implicit arguments flipping back and forth.</p>
+
+<a name="134878874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878874">Scott Morrison (Sep 29 2018 at 13:16)</a>:</h4>
+<p>The expression "itself" is not being changed by either <code>simp</code> or <code>ring</code>.</p>
+
+<a name="134878881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878881">Mario Carneiro (Sep 29 2018 at 13:16)</a>:</h4>
+<p>wait, maybe I don't understand then</p>
+
+<a name="134878882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878882">Mario Carneiro (Sep 29 2018 at 13:16)</a>:</h4>
+<p>what is changing?</p>
+
+<a name="134878894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878894">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<p>With usual pretty printing, neither <code>simp</code> nor <code>ring</code> do anything, and the goal just looks like</p>
+<div class="codehilite"><pre><span></span>x y : ℕ,
+h : x ^ 2 + 3 * y ^ 2 = 4
+⊢ false
+</pre></div>
+
+<a name="134878896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878896">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<p>but with pp.all we get:</p>
+
+<a name="134878898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878898">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>x y : nat,
+h :
+  @eq.{1} nat
+    (@has_add.add.{0} nat nat.has_add
+       (@has_pow.pow.{0 0} nat nat nat.has_pow x (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
+       (@has_mul.mul.{0} nat
+          (@mul_zero_class.to_has_mul.{0} nat
+             (@semiring.to_mul_zero_class.{0} nat
+                (@comm_semiring.to_semiring.{0} nat
+                   (@canonically_ordered_comm_semiring.to_comm_semiring.{0} nat
+                      nat.canonically_ordered_comm_semiring))))
+          (@bit1.{0} nat nat.has_one nat.has_add (@has_one.one.{0} nat nat.has_one))
+          (@has_pow.pow.{0 0} nat nat nat.has_pow y (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))))
+    (@bit0.{0} nat nat.has_add (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
+⊢ false
+</pre></div>
+
+<a name="134878899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878899">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<p>after the <code>simp</code></p>
+
+<a name="134878900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878900">Mario Carneiro (Sep 29 2018 at 13:17)</a>:</h4>
+<p>oh, it's nat.pow isn't it</p>
+
+<a name="134878901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878901">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<p>and then</p>
+
+<a name="134878905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878905">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>x y : nat,
+h :
+  @eq.{1} nat
+    (@has_add.add.{0} nat nat.has_add
+       (@has_pow.pow.{0 0} nat nat
+          (@monoid.has_pow.{0} nat
+             (@semiring.to_monoid.{0} nat
+                (@comm_semiring.to_semiring.{0} nat
+                   (@canonically_ordered_comm_semiring.to_comm_semiring.{0} nat
+                      nat.canonically_ordered_comm_semiring))))
+          x
+          (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
+       (@has_mul.mul.{0} nat
+          (@mul_zero_class.to_has_mul.{0} nat
+             (@semiring.to_mul_zero_class.{0} nat
+                (@comm_semiring.to_semiring.{0} nat
+                   (@canonically_ordered_comm_semiring.to_comm_semiring.{0} nat
+                      nat.canonically_ordered_comm_semiring))))
+          (@bit1.{0} nat nat.has_one nat.has_add (@has_one.one.{0} nat nat.has_one))
+          (@has_pow.pow.{0 0} nat nat
+             (@monoid.has_pow.{0} nat
+                (@semiring.to_monoid.{0} nat
+                   (@comm_semiring.to_semiring.{0} nat
+                      (@canonically_ordered_comm_semiring.to_comm_semiring.{0} nat
+                         nat.canonically_ordered_comm_semiring))))
+             y
+             (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))))
+    (@bit0.{0} nat nat.has_add (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
+⊢ false
+</pre></div>
+
+<a name="134878906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878906">Scott Morrison (Sep 29 2018 at 13:17)</a>:</h4>
+<p>after the <code>ring</code></p>
+
+<a name="134878947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878947">Mario Carneiro (Sep 29 2018 at 13:18)</a>:</h4>
+<p>right, <code>ring</code> prefers monoid powers but that's not simp normal form</p>
+
+<a name="134878950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878950">Scott Morrison (Sep 29 2018 at 13:18)</a>:</h4>
+<p>Okay, I see.</p>
+
+<a name="134878951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878951">Scott Morrison (Sep 29 2018 at 13:18)</a>:</h4>
+<p>Nothing to be done, then!</p>
+
+<a name="134878962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878962">Mario Carneiro (Sep 29 2018 at 13:19)</a>:</h4>
+<p><code>ring </code> doesn't make any attempt to be in simp normal form; if you need that you should just call <code>ring, simp</code></p>
+
+<a name="134878965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134878965">Mario Carneiro (Sep 29 2018 at 13:20)</a>:</h4>
+<p>but even better is to just ignore the pretty failure mode</p>
+
+<a name="134879165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134879165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html#134879165">Kenny Lau (Sep 29 2018 at 13:26)</a>:</h4>
+<p>it's a feature!</p>
+
+
+{% endraw %}

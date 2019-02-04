@@ -1,0 +1,51 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/48097CreatingdefinitionsinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html">Creating definitions in Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135772739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135772739">Abhimanyu Pallavi Sudhir (Oct 14 2018 at 12:47)</a>:</h4>
+<p>I am trying to define an equivalence class in Lean, where I already have a binary relation, defined as a variable <code>variable (r : S → S → Prop)</code> -- how would I insert the requirement of <code>binary_relation</code> satisfying <code>equivalence</code> while defining an equivalence class?</p>
+
+<a name="135772781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135772781">Abhimanyu Pallavi Sudhir (Oct 14 2018 at 12:48)</a>:</h4>
+<p>I.e. surely just def <code>class (a : S) : set S := { x | r x a }</code> is not enough. Do I need some squiggly brackets here to impose the requirement <code>equivalence binary_relation</code>?</p>
+
+<a name="135772896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135772896">Kenny Lau (Oct 14 2018 at 12:52)</a>:</h4>
+<p>the philosophy is that we create the definition as general as possible, and only insert the hypothesis in the proofs</p>
+
+<a name="135772964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135772964">Abhimanyu Pallavi Sudhir (Oct 14 2018 at 12:54)</a>:</h4>
+<p>Perhaps, but I just want to learn how definitions work. Can we make them specific in this way?</p>
+
+<a name="135772975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135772975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135772975">Kenny Lau (Oct 14 2018 at 12:55)</a>:</h4>
+<p><code>def equivalence_class (h : is_equivalence r) (a : S) : set S := { x | r x a }</code></p>
+
+<a name="135773069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135773069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135773069">Abhimanyu Pallavi Sudhir (Oct 14 2018 at 12:58)</a>:</h4>
+<p>Right, and then when using the definition we'd need to provide a proof of is_equivalence r as a parameter, right?</p>
+
+<a name="135773077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135773077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135773077">Kenny Lau (Oct 14 2018 at 12:59)</a>:</h4>
+<p>yes</p>
+
+<a name="135773243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135773243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135773243">Bryan Gin-ge Chen (Oct 14 2018 at 13:04)</a>:</h4>
+<p>Note that if you use that definition, the variable <code>r</code> becomes something lean can very easily infer. Thus it's convenient to make it implicit (by writing <code>variable {r}</code> immediately beforehand), so that when you use <code>equivalence_class</code>, you won't need to write <code>equivalence_class r h a</code> but only <code>equivalence_class h a</code>.</p>
+
+<a name="135777737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Creating%20definitions%20in%20Lean/near/135777737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48097CreatingdefinitionsinLean.html#135777737">Kevin Buzzard (Oct 14 2018 at 15:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> just to note that <code>class</code> is already a keyword in Lean so you might want to stick to Kenny's suggestion of <code>equivalence_class</code> in any experiments you try.</p>
+
+
+{% endraw %}

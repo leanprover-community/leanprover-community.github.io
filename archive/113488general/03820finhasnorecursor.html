@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/03820finhasnorecursor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/03820finhasnorecursor.html">fin has no recursor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124402350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03820finhasnorecursor.html#124402350">Kenny Lau (Mar 30 2018 at 09:07)</a>:</h4>
+<p>fin doesn’t have the morally correct recursor. we should prove it maybe.</p>
+
+<a name="124402455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03820finhasnorecursor.html#124402455">Mario Carneiro (Mar 30 2018 at 09:10)</a>:</h4>
+<p>There are two obvious approaches: using <code>fz</code> and <code>fs</code> like in <code>fin2</code>, or by peeling off the right end instead, with <code>raise_fin</code> and <code>last</code> or whatever you want to call them</p>
+
+<a name="124402457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03820finhasnorecursor.html#124402457">Mario Carneiro (Mar 30 2018 at 09:10)</a>:</h4>
+<p>there should be more consistent naming here...</p>
+
+<a name="124402660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20has%20no%20recursor/near/124402660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03820finhasnorecursor.html#124402660">Mario Carneiro (Mar 30 2018 at 09:18)</a>:</h4>
+<div class="codehilite"><pre><span></span>@[elab_as_eliminator] def fin.succ_rec
+  {C : ∀ n, fin n → Sort*}
+  (H0 : ∀ n, C (succ n) 0)
+  (Hs : ∀ n i, C n i → C (succ n) i.succ) : ∀ {n : ℕ} (i : fin n), C n i
+| 0 i := i.elim0
+| (succ n) ⟨0, _⟩ := H0 _
+| (succ n) ⟨succ i, h⟩ := Hs _ _ (fin.succ_rec ⟨i, lt_of_succ_lt_succ h⟩)
+
+@[elab_as_eliminator] def fin.succ_rec_on {n : ℕ} (i : fin n)
+  {C : ∀ n, fin n → Sort*}
+  (H0 : ∀ n, C (succ n) 0)
+  (Hs : ∀ n i, C n i → C (succ n) i.succ) : C n i :=
+i.succ_rec H0 Hs
+</pre></div>
+
+
+{% endraw %}

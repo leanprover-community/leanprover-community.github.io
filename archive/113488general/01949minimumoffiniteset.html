@@ -1,0 +1,361 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01949minimumoffiniteset.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html">minimum of finite set</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="126161321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126161321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126161321">Reid Barton (May 06 2018 at 04:41)</a>:</h4>
+<p>I have a <code>finset</code> of rationals which I know is nonempty. How do I find its minimum element?</p>
+
+<a name="126163639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126163639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126163639">Mario Carneiro (May 06 2018 at 06:18)</a>:</h4>
+<p>I forget if there is a <code>max</code> operation on finsets, but you can <code>fold</code> with <code>max</code></p>
+
+<a name="126170875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126170875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126170875">Sean Leather (May 06 2018 at 11:28)</a>:</h4>
+<blockquote>
+<p>I have a <code>finset</code> of rationals which I know is nonempty. How do I find its minimum element?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> See <a href="https://github.com/spl/tts/blob/master/src/data/finset/fresh.lean#L121-L154" target="_blank" title="https://github.com/spl/tts/blob/master/src/data/finset/fresh.lean#L121-L154">https://github.com/spl/tts/blob/master/src/data/finset/fresh.lean#L121-L154</a></p>
+<p>I'd like to see something like this with <code>max</code> and <code>min</code> in mathlib. I haven't proposed it because I wasn't sure it was worth it, but, since you are also looking for it, perhaps it is.</p>
+
+<a name="126212361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212361">Sean Leather (May 07 2018 at 13:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Is this something (after replacing <code>max</code> with <code>min</code>) that would be useful to you? I can work on it next.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">namespace</span> <span class="n">finset</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">max</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="n">fold</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">max</span> <span class="n">a</span> <span class="n">id</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">max_empty</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">max</span> <span class="n">a</span> <span class="o">(</span><span class="err">∅</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">max</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">max_insert</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">s</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">max</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">max</span> <span class="n">a</span> <span class="o">(</span><span class="n">max</span> <span class="n">b</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">max</span><span class="o">,</span> <span class="n">fold_insert</span> <span class="n">h</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">max_singleton</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">max</span> <span class="n">b</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="bp">=</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">max</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">max</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">le_max_left</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">max</span> <span class="n">a</span> <span class="n">s</span> <span class="o">:=</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">max_empty</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">s</span> <span class="o">(</span><span class="n">hnm</span> <span class="o">:</span> <span class="n">b</span> <span class="err">∉</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">ih</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">max</span> <span class="n">a</span> <span class="n">s</span><span class="o">),</span>
+     <span class="k">by</span> <span class="n">rw</span> <span class="n">max_insert</span> <span class="n">hnm</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">le_trans</span> <span class="n">ih</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="n">b</span> <span class="o">(</span><span class="n">max</span> <span class="n">a</span> <span class="n">s</span><span class="o">)))</span>
+
+<span class="kn">theorem</span> <span class="n">le_max_of_mem</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">max</span> <span class="n">b</span> <span class="n">s</span> <span class="o">:=</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">max_empty</span><span class="o">,</span> <span class="n">h</span><span class="o">])</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">c</span> <span class="n">s</span> <span class="o">(</span><span class="n">hnm</span> <span class="o">:</span> <span class="n">c</span> <span class="err">∉</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">ih</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">max</span> <span class="n">b</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hins</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">insert</span> <span class="n">c</span> <span class="n">s</span><span class="o">),</span>
+     <span class="k">begin</span>
+       <span class="n">rw</span> <span class="n">max_insert</span> <span class="n">hnm</span><span class="o">,</span>
+       <span class="n">cases</span> <span class="n">mem_insert</span><span class="bp">.</span><span class="n">mp</span> <span class="n">hins</span><span class="o">,</span>
+       <span class="n">case</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">:</span> <span class="n">p</span> <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">p</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">le_max_left</span><span class="o">]</span> <span class="o">},</span>
+       <span class="n">case</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="o">:</span> <span class="n">p</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">ih</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="n">c</span> <span class="o">(</span><span class="n">max</span> <span class="n">b</span> <span class="n">s</span><span class="o">))</span> <span class="o">}</span>
+     <span class="kn">end</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">finset</span>
+</pre></div>
+
+<a name="126212689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212689">Patrick Massot (May 07 2018 at 14:09)</a>:</h4>
+<p>What's this <code>{a}</code> syntax in <code>max b {a}</code>?</p>
+
+<a name="126212753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212753">Sean Leather (May 07 2018 at 14:11)</a>:</h4>
+<p>It's notation for a singleton.</p>
+
+<a name="126212815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212815">Sean Leather (May 07 2018 at 14:13)</a>:</h4>
+<p>Actually, to correct myself, <code>{a}</code> is a singleton, but the notation comes from <code>init/core.lean</code>, I think:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Type class used to implement the notation { a ∈ c | p a } -/</span>
+<span class="n">class</span> <span class="n">has_sep</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">sep</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+</pre></div>
+
+<a name="126212817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212817">Patrick Massot (May 07 2018 at 14:13)</a>:</h4>
+<p>Oh</p>
+
+<a name="126212857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212857">Patrick Massot (May 07 2018 at 14:14)</a>:</h4>
+<p>I was confused, I thought it was an implicit parameter right of colon</p>
+
+<a name="126212858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212858">Patrick Massot (May 07 2018 at 14:14)</a>:</h4>
+<p>The theorem even has "singleton" in its name...</p>
+
+<a name="126212913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212913">Sean Leather (May 07 2018 at 14:16)</a>:</h4>
+<p>Hmm, maybe it's not from <code>has_sep</code>. I thought I knew, but I don't know anymore.</p>
+
+<a name="126212976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212976">Sean Leather (May 07 2018 at 14:19)</a>:</h4>
+<p>Ah, right, it's this one:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Type classes has_emptyc and has_insert are</span>
+<span class="cm">   used to implement polymorphic notation for collections.</span>
+<span class="cm">   Example: {a, b, c}. -/</span>
+<span class="n">class</span> <span class="n">has_emptyc</span>   <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">emptyc</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">class</span> <span class="n">has_insert</span>   <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">insert</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+</pre></div>
+
+<a name="126212990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126212990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126212990">Sean Leather (May 07 2018 at 14:19)</a>:</h4>
+<p>So, if your type has <code>has_emptyc</code> and <code>has_insert</code> instances, you can use the <code>{..., ...}</code> notation.</p>
+
+<a name="126213048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213048">Sean Leather (May 07 2018 at 14:20)</a>:</h4>
+<p>I agree that it can be confusing.</p>
+
+<a name="126213133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213133">Patrick Massot (May 07 2018 at 14:23)</a>:</h4>
+<p>It's my fault, I wasn't paying enough attention. I shouldn't be watching Zulip while grading Sage notebooks (<span class="user-mention" data-user-id="116034">@William Stein</span> when will we get auto-grading Sage notebooks so that we can focus on understanding Lean code?).</p>
+
+<a name="126213255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213255">Sean Leather (May 07 2018 at 14:27)</a>:</h4>
+<p>I don't think it's a great idea to overload <code>{...}</code> in this way, even if it isn't ambiguous to the parser. But it is notationally short, which makes it convenient.</p>
+
+<a name="126213294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213294">Patrick Massot (May 07 2018 at 14:28)</a>:</h4>
+<p>And it's the maths notations, so it should win over any other interpretation</p>
+
+<a name="126213343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213343">Sean Leather (May 07 2018 at 14:30)</a>:</h4>
+<p>True, but it doesn't see as much usage as implicit parameters, and it would be better to reserve short notation for things you type/read a lot.</p>
+
+<a name="126213355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126213355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126213355">Sean Leather (May 07 2018 at 14:30)</a>:</h4>
+<p>You pretty much only use this notation for singletons or examples.</p>
+
+<a name="126214292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126214292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126214292">Sean Leather (May 07 2018 at 15:00)</a>:</h4>
+<p>PR for <code>finset.max</code> and <code>finset.min</code>: <a href="https://github.com/leanprover/mathlib/pull/133" target="_blank" title="https://github.com/leanprover/mathlib/pull/133">https://github.com/leanprover/mathlib/pull/133</a></p>
+
+<a name="126215835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126215835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126215835">Patrick Massot (May 07 2018 at 15:45)</a>:</h4>
+<p>Nice. I will probably use it to build new normed spaces out of finitely many old ones.</p>
+
+<a name="126223645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126223645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126223645">Reid Barton (May 07 2018 at 19:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110045">@Sean Leather</span> I think this approach with a starting element (<code>a</code>) would be fine for my current application, since I have a particular element which I know belongs to the set. From a general math perspective, though, it's odd not to be able to talk about the minimum of a nonempty set, without first choosing an element of the set.</p>
+
+<a name="126223715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126223715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126223715">Reid Barton (May 07 2018 at 19:03)</a>:</h4>
+<p>I've been considering an approach that starts from <code>fold1</code>of an associative, commutative operation on a nonempty multiset, though this <code>fold1</code> was quite a challenge to define.</p>
+
+<a name="126223856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126223856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126223856">Reid Barton (May 07 2018 at 19:07)</a>:</h4>
+<p>But <code>fold1</code> seems like something one ought to have anyways.</p>
+
+<a name="126223869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126223869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126223869">Reid Barton (May 07 2018 at 19:07)</a>:</h4>
+<p>A friend suggested that I could just sort the list (<code>finset.sort</code>) and take the first element</p>
+
+<a name="126251600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251600">Sean Leather (May 08 2018 at 08:41)</a>:</h4>
+<p>My thinking is that you can write different variations using <code>max [decidable_linear_order α] : α → finset α → α</code>. I believe this definition of <code>max</code> is the most general and least prescriptive since only <code>[decidable_linear_order α]</code> is required.</p>
+
+<a name="126251644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251644">Sean Leather (May 08 2018 at 08:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <a href="https://github.com/leanprover/mathlib/pull/133#issuecomment-387110828" target="_blank" title="https://github.com/leanprover/mathlib/pull/133#issuecomment-387110828">suggested</a> <code>max [decidable_linear_order α] [inhabited α] : finset α → α</code>, but I'm not sure if that's better (<a href="https://github.com/leanprover/mathlib/pull/133#issuecomment-387300724" target="_blank" title="https://github.com/leanprover/mathlib/pull/133#issuecomment-387300724">my response</a>).</p>
+
+<a name="126251859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251859">Mario Carneiro (May 08 2018 at 08:50)</a>:</h4>
+<p>It is not true that <code>max</code> as suggested by Johannes is the same as <code>max_inhabited</code> that you wrote. If <code>s</code> is nonempty, then <code>max (default A) s</code> is the max of <code>default A</code> and the elements of <code>s</code>, while Johannes's <code>max</code> is the max of the elements of <code>s</code> only. It is closer to Reid's suggested max operation, except that the nonempty constraint is replaced by a default value.</p>
+
+<a name="126251868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251868">Sean Leather (May 08 2018 at 08:52)</a>:</h4>
+<p>Right. See the bottom of my response.</p>
+
+<a name="126251909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251909">Mario Carneiro (May 08 2018 at 08:52)</a>:</h4>
+<p>Given johannes's <code>max</code> function, you could recover your <code>max</code> function as <code>sean_max a s := @johannes_max A _ &lt;a&gt; (insert a s)</code></p>
+
+<a name="126251917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251917">Sean Leather (May 08 2018 at 08:53)</a>:</h4>
+<p>So they are equivalent?</p>
+
+<a name="126251924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251924">Mario Carneiro (May 08 2018 at 08:53)</a>:</h4>
+<p>Johannes's definition is more complicated since it requires casing on whether the list is empty</p>
+
+<a name="126251929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251929">Sean Leather (May 08 2018 at 08:54)</a>:</h4>
+<p>What is the definition?</p>
+
+<a name="126251966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251966">Mario Carneiro (May 08 2018 at 08:54)</a>:</h4>
+<p>there is not an easy expression for <code>johannes_max</code> using <code>sean_max</code>, you would need another quot.lift</p>
+
+<a name="126251969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251969">Mario Carneiro (May 08 2018 at 08:54)</a>:</h4>
+<p>You have to start from list, define <code>foldl1</code> and work your way up</p>
+
+<a name="126251977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251977">Sean Leather (May 08 2018 at 08:55)</a>:</h4>
+<p>Ah, something like that.</p>
+
+<a name="126251983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251983">Mario Carneiro (May 08 2018 at 08:55)</a>:</h4>
+<p>Alternatively, you could <code>sean_max</code> over <code>option A</code></p>
+
+<a name="126251987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126251987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126251987">Mario Carneiro (May 08 2018 at 08:55)</a>:</h4>
+<p>where <code>none</code> has the appropriate interpretation as a neutral element for max</p>
+
+<a name="126252030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252030">Sean Leather (May 08 2018 at 08:56)</a>:</h4>
+<p>You mean map/image <code>some</code> over the <code>finset</code>?</p>
+
+<a name="126252034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252034">Mario Carneiro (May 08 2018 at 08:56)</a>:</h4>
+<p>and that would give you both the partial <code>max</code> function and the inhabited max function (Johannes's max)</p>
+
+<a name="126252047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252047">Mario Carneiro (May 08 2018 at 08:56)</a>:</h4>
+<p>Any semigroup operation extends to a monoid if you add a neutral element</p>
+
+<a name="126252058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252058">Mario Carneiro (May 08 2018 at 08:57)</a>:</h4>
+<p>That means that you can take a semigroup operation like <code>max</code> and extend it to <code>option_max : option A -&gt; option A -&gt; option A</code> that is a monoid operation</p>
+
+<a name="126252096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252096">Mario Carneiro (May 08 2018 at 08:58)</a>:</h4>
+<p>and then you can <code>finset.prod</code> over this</p>
+
+<a name="126252112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252112">Mario Carneiro (May 08 2018 at 08:58)</a>:</h4>
+<p>This is essentially the same as adjoining a <code>-inf</code> element to the set</p>
+
+<a name="126252114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252114">Sean Leather (May 08 2018 at 08:59)</a>:</h4>
+<p>Can you not <code>finset.image some</code>?</p>
+
+<a name="126252120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252120">Mario Carneiro (May 08 2018 at 08:59)</a>:</h4>
+<p>That would be the input to the fold, yes</p>
+
+<a name="126252124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252124">Sean Leather (May 08 2018 at 08:59)</a>:</h4>
+<p>Right, okay.</p>
+
+<a name="126252178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252178">Mario Carneiro (May 08 2018 at 09:00)</a>:</h4>
+<p>The nice thing about this approach is that it naturally handles partiality, you don't need the <code>inhabited</code> thing; but it's easy to implement the inhabited version using <code>option.iget</code></p>
+
+<a name="126252244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252244">Sean Leather (May 08 2018 at 09:02)</a>:</h4>
+<p>Personally, I'm not a big fan of <code>inhabited</code>. I haven't found a need for it in anything I've done, and I feel like, if you need an <code>inhabited</code> type, why not use <code>option</code> in the first place?</p>
+
+<a name="126252258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252258">Sean Leather (May 08 2018 at 09:03)</a>:</h4>
+<p>But I'm happy to see <em>some</em> version of <code>finset.max</code> and <code>finset.min</code> go into mathlib, so I don't feel that strongly about which one... as long as it works with <code>nat</code>. <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
+
+<a name="126252472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252472">Mario Carneiro (May 08 2018 at 09:10)</a>:</h4>
+<p>I have a similar antipathy to <code>inhabited</code>, it's a somewhat lazy way to totalize functions like division on nonempty domains.</p>
+
+<a name="126252480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252480">Mario Carneiro (May 08 2018 at 09:11)</a>:</h4>
+<p>Arguments in favor would say that composing them is a lot cleaner than the monad stuff</p>
+
+<a name="126252500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252500">Mario Carneiro (May 08 2018 at 09:11)</a>:</h4>
+<p>i.e. <code>(x + 2) / (y + 2 / z)</code> is easier to read than <code>do a &lt;- 2 / z, (x + 2) / (y + a)</code> or some such</p>
+
+<a name="126252566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126252566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126252566">Mario Carneiro (May 08 2018 at 09:13)</a>:</h4>
+<p>The best situation is if you are literally working in a sup_bot semilattice, in which case you don't have to cheat and get a proper function</p>
+
+<a name="126253973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126253973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126253973">Johannes Hölzl (May 08 2018 at 10:03)</a>:</h4>
+<p>Working on <code>sup_bot_semilattice</code> is indeed very nice, e.g.  <a href="https://github.com/johoelzl/mason-stother/blob/master/Sup_fin.lean" target="_blank" title="https://github.com/johoelzl/mason-stother/blob/master/Sup_fin.lean">https://github.com/johoelzl/mason-stother/blob/master/Sup_fin.lean</a> But we don't have a lot of ordered types having this structure, I guess <code>nat</code>, <code>fin</code>, and <code>ennreal</code>.</p>
+
+<a name="126254143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126254143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126254143">Johannes Hölzl (May 08 2018 at 10:08)</a>:</h4>
+<p>I prefer the <code>inhabited</code> version over <code>option</code>. With <code>inhabited</code> you get not only a nicer syntax, but a lot of cases etc can be easily done in the proofs, while for <code>option</code> we are often forced to do it on the term itself.</p>
+
+<a name="126265296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126265296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126265296">Sean Leather (May 08 2018 at 15:50)</a>:</h4>
+<p>Just thinking about it a little more... It seems like there are two goals here: one for a <code>max</code> with no requirements other than <code>decidable_linear_order</code> (me) and one for a <code>max</code> that does not need the extra <code>a : α</code> (Johannes and Reid). In the latter case, which is more useful: an <code>inhabited α</code> predicate or a non-empty predicate (e.g. <code>s ≠ ∅</code> or <code>∃ a : α, a ∈ s</code>)? I'm guessing the non-empty predicate is more useful because <code>inhabited α</code> doesn't tell you anything about the <code>finset</code> itself, and if you use the <code>inhabited α</code> version and want to know that you are not getting the <code>inhabited.default</code>, you need to know if the <code>finset</code> is empty anyway.</p>
+
+<a name="126265564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126265564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126265564">Johannes Hölzl (May 08 2018 at 15:58)</a>:</h4>
+<p>It is the other way round, the <code>inhabited α</code> is more useful from a user perspective. We don't need to give <code>max</code> more information than necessary. For <code>max</code> it is enough to show that <code>α</code> is inhabited, it is <strong>not</strong> necessary to show that <code>s</code> is inhabited (from which at least <code>nonempty α</code> follows). It is very annoying when the user always needs to provide a prove that <code>s</code> is not empty, this is exactly what I want to avoid.<br>
+After all, we are in a theorem prover! Carrying around this information explicitly is not necessary, as usually we can show it in a proof.</p>
+
+<a name="126273572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126273572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126273572">Reid Barton (May 08 2018 at 19:12)</a>:</h4>
+<p>My only worry about <code>inhabited</code> is that as, on the one hand, it is not a <code>Prop</code>, and on the other hand, we may not always have a canonical <code>inhabited</code> instance at hand and need to construct one from the knowledge that <code>s</code> is nonempty, we might end up in a situation where Lean thinks <code>max s</code> depends on the choice of <code>inhabited</code> instance, even though we know it doesn't really.</p>
+
+<a name="126273648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126273648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126273648">Reid Barton (May 08 2018 at 19:14)</a>:</h4>
+<p>On the other hand, taking a <code>nonempty α</code> instance would make <code>max</code> noncomputable, which is maybe sort of okay for a theorem prover but not very attractive for programming use.</p>
+
+<a name="126273684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126273684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126273684">Reid Barton (May 08 2018 at 19:15)</a>:</h4>
+<p>(As it turns out, the theorem I really need has the conclusion <code>∃x ∈ s, ∀y ∈ s, f y ≤ f x</code>, and for this, we need <code>s</code> to be nonempty anyways.)</p>
+
+<a name="126273773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126273773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126273773">Reid Barton (May 08 2018 at 19:17)</a>:</h4>
+<p>The advantage of <code>s ≠ ∅</code> here is that it is a <code>Prop</code>, but also sufficient to define <code>max</code> computably</p>
+
+<a name="126274645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126274645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126274645">Reid Barton (May 08 2018 at 19:36)</a>:</h4>
+<p>I'm kind of tempted to make <code>s ≠ ∅</code> into a type class argument, actually, but maybe that is going too far?</p>
+
+<a name="126274905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126274905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126274905">Johannes Hölzl (May 08 2018 at 19:41)</a>:</h4>
+<p>Of course a theorem like <code>s ≠ ∅ -&gt; ∃x ∈ s, ∀y ∈ s, f y ≤ f x</code> is a nice fit for <code>max</code> with such an assumption. I'm worried about complicated constructions, where you have an elaborate proof that <code>s</code> is not empty. Putting <code>s ≠ ∅</code> in a type class argument makes also some constructions very unpleasent, like using <code>finset.filter</code></p>
+
+<a name="126322044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126322044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126322044">Reid Barton (May 09 2018 at 18:16)</a>:</h4>
+<p>Maybe the version returning <code>option</code> is most flexible then. If you want the version that uses <code>inhabited</code>, you can apply <code>option.iget</code>.</p>
+
+<a name="126330803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126330803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126330803">Sean Leather (May 09 2018 at 21:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Are you referring to <code>max [decidable_linear_order α] : finset α → option α</code>. that returns <code>none</code> for an empty <code>finset</code> and <code>some a</code> for a non-empty <code>finset</code>? That would be fine with me.</p>
+
+<a name="126332611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126332611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126332611">Reid Barton (May 09 2018 at 22:20)</a>:</h4>
+<p>Yes. Or more generally, <code>fold1 f : finset α → option α</code> for an associative and commutative operation <code>f</code>.</p>
+
+<a name="126920643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126920643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126920643">Sean Leather (May 22 2018 at 14:36)</a>:</h4>
+<p>For those not following along on GitHub, <a href="https://github.com/leanprover/mathlib/pull/133" target="_blank" title="https://github.com/leanprover/mathlib/pull/133">leanprove/mathlib#133</a> has been updated with new versions of the definitions under discussion:</p>
+<div class="codehilite"><pre><span></span><span class="n">finset</span><span class="bp">.</span><span class="n">max</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">min</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>I think this proposal is better than the original. Thanks to everyone for the discussion and collaboration. Feedback welcome.</p>
+
+<a name="126981683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126981683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126981683">Patrick Massot (May 23 2018 at 17:30)</a>:</h4>
+<p>So, how do we use this new toy? Say I want to talk about the function "max of coordinates on ℝ^n", assuming n is a British natural number, so I get a well defined function from ℝ^n to ℝ</p>
+
+<a name="126982922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126982922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126982922">Patrick Massot (May 23 2018 at 17:57)</a>:</h4>
+<p>I can't even find the lemma saying the image of <code>finset</code> is a <code>finset</code></p>
+
+<a name="126984645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126984645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html#126984645">Johannes Hölzl (May 23 2018 at 18:38)</a>:</h4>
+<p>Its already in the type of <code>finset.image</code>.<br>
+To do what you want: <code>λx, (univ.image (λn, x n)).max.iget</code></p>
+
+
+{% endraw %}

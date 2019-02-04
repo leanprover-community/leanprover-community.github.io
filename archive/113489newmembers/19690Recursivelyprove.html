@@ -1,0 +1,79 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/19690Recursivelyprove.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html">Recursively prove</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="137105029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137105029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137105029">AHan (Nov 03 2018 at 09:19)</a>:</h4>
+<p>Sorry, this might seems to be stupid, but I just can't figure out how to prove the problem inductively....</p>
+<p><code>lemma add_nat_ge_self {a :  ℕ} (b : ℕ) : a + b ≥ b :=
+  match b with
+  | 0 := begin simp, apply nat.zero_le end
+  | succ n := sorry</code></p>
+
+<a name="137107106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137107106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137107106">Mario Carneiro (Nov 03 2018 at 10:40)</a>:</h4>
+<p>In lean we write inductive definitions by pattern matching in the definition itself, not using match blocks like coq</p>
+
+<a name="137107116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137107116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137107116">Mario Carneiro (Nov 03 2018 at 10:41)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma add_nat_ge_self {a :  ℕ} : ∀(b : ℕ), a + b ≥ b
+| 0 := begin simp, apply nat.zero_le end
+| (succ n) := sorry
+</pre></div>
+
+<a name="137107156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137107156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137107156">Mario Carneiro (Nov 03 2018 at 10:42)</a>:</h4>
+<p>at the <code>sorry</code> you should now have access to <code>add_nat_ge_self</code> which you can apply recursively</p>
+
+<a name="137113734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137113734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137113734">Bryan Gin-ge Chen (Nov 03 2018 at 14:37)</a>:</h4>
+<p>What Mario wrote is cleaner but I want to point out that the following is probably what you were going for:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_nat_ge_self</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span>  <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">≥</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">simp</span><span class="o">,</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="kn">end</span>
+  <span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="137113794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137113794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137113794">Mario Carneiro (Nov 03 2018 at 14:39)</a>:</h4>
+<p>well if you write it like that you won't be able to fill in the <code>sorry</code> because you don't have access to the recursive function</p>
+
+<a name="137114175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137114175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137114175">Bryan Gin-ge Chen (Nov 03 2018 at 14:54)</a>:</h4>
+<p>It's there, but it gets a funny name:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_nat_ge_self</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span>  <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">≥</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">simp</span><span class="o">,</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="kn">end</span>
+<span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_le_succ</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">_</span><span class="n">match</span> <span class="n">a</span> <span class="n">n</span>
+<span class="kn">end</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="137114468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137114468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137114468">Bryan Gin-ge Chen (Nov 03 2018 at 15:02)</a>:</h4>
+<p>And I guess you only get access to it if you go into tactic mode; i.e. I can't remove the <code>by exact</code> below:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_nat_ge_self</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span>  <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">≥</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">simp</span><span class="o">,</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="kn">end</span>
+<span class="bp">|</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_le_succ</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact</span> <span class="bp">_</span><span class="n">match</span> <span class="n">a</span> <span class="n">n</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="137140650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137140650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html#137140650">AHan (Nov 04 2018 at 04:59)</a>:</h4>
+<p>Oh!! Thanks a lot for the explanation!!</p>
+
+
+{% endraw %}

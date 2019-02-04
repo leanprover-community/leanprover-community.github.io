@@ -1,0 +1,78 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/62391Norder0and1.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html">N, order, 0 and 1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="132369398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132369398">Ned Summers (Aug 18 2018 at 19:47)</a>:</h4>
+<p>Hey, I'm trying to prove the seemingly very simple</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) (h : n &lt; 1) : n = 0 := sorry
+</pre></div>
+
+
+<p>It's revealing a lot about what I don't know in lean (like getting stuck getting 1&gt;n from n&lt;1) and would welcome any advice/solutions. I'm not working very much at all with order or N at any other stage so, despite wading through theorems the past couple of days trying to find what I need, I'm giving up a bit. Thanks.</p>
+<p>(Also, I'm using this to show that if you take any <code>(a : fin 1)</code> then <code>a = 0</code>. I suspect too that this is probably much simpler than what I'm doing.)</p>
+
+<a name="132369562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132369562">Mario Carneiro (Aug 18 2018 at 19:52)</a>:</h4>
+<p>you should be able to do it by cases</p>
+
+<a name="132369628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132369628">Mario Carneiro (Aug 18 2018 at 19:54)</a>:</h4>
+<p>not my favorite proof:</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) (h : n &lt; 1) : n = 0 :=
+by cases h with _ h; [refl, cases h]
+</pre></div>
+
+<a name="132369681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132369681">Mario Carneiro (Aug 18 2018 at 19:56)</a>:</h4>
+<div class="codehilite"><pre><span></span>example (n : fin 1) : n = 0 :=
+fin.cases rfl (λ i, i.elim0) n
+</pre></div>
+
+<a name="132370212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132370212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132370212">Mario Carneiro (Aug 18 2018 at 20:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>example : ∀ (n : fin 1), n = 0 := dec_trivial
+</pre></div>
+
+<a name="132371079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132371079">Patrick Massot (Aug 18 2018 at 20:37)</a>:</h4>
+<blockquote>
+<p>It's revealing a lot about what I don't know in lean (like getting stuck getting 1&gt;n from n&lt;1) and would welcome any advice/solutions. </p>
+</blockquote>
+<p>This is literaly the same thing.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">h</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">change</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="132371124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132371124">Patrick Massot (Aug 18 2018 at 20:38)</a>:</h4>
+<p>Note that the <code>change</code> is here so you see it in the interative message window, but it's useless</p>
+
+<a name="132376851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132376851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132376851">Kenny Lau (Aug 18 2018 at 23:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+
+<a name="132445610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132445610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html#132445610">Ned Summers (Aug 20 2018 at 12:05)</a>:</h4>
+<p>Thanks everyone, dec_trivial is a nice thing to know about. Will be using this to ponder where my break in understanding was.</p>
+
+
+{% endraw %}

@@ -1,0 +1,121 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/62392piecewisefunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html">piecewise functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152232475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152232475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152232475">Aymon Wuolanne (Dec 20 2018 at 05:10)</a>:</h4>
+<p>Does anyone have any tips for dealing with piecewise functions, in particular showing that they're continuous? I have something like the following in mind:</p>
+<div class="codehilite"><pre><span></span>variables (a : ℝ) (f : ℝ → ℝ) (g : ℝ → ℝ)
+def pw : ℝ → ℝ := λ x, if x ≤ a then f x else g x
+lemma continuous_pw : continuous f → continuous g → f a = g a → continuous (pw a f g) := sorry
+</pre></div>
+
+<a name="152234041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152234041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152234041">Jeremy Avigad (Dec 20 2018 at 06:00)</a>:</h4>
+<p>Coincidentally, I just issued a pull request with some additions to the analysis library. There is a lemma called <code>tendsto_if</code> which will be helpful: <a href="https://github.com/avigad/mathlib/blob/limit_stuff/order/filter.lean#L1257-L1261" target="_blank" title="https://github.com/avigad/mathlib/blob/limit_stuff/order/filter.lean#L1257-L1261">https://github.com/avigad/mathlib/blob/limit_stuff/order/filter.lean#L1257-L1261</a>. I'd use the fact that a function is continuous if it is continuous at every point (which used to be called <code>continuous_iff_tendsto</code> but in my PR is <code>continuous_iff_continuous_at</code>. Using <code>metric_space</code> you can unwrap the definition of neighborhoods in terms of distance.</p>
+
+<a name="152236649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152236649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152236649">Reid Barton (Dec 20 2018 at 07:19)</a>:</h4>
+<p>There's also <code>continuous_if</code> and <code>continuous_subtype_is_closed_cover</code></p>
+
+<a name="152238561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152238561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152238561">Patrick Massot (Dec 20 2018 at 08:16)</a>:</h4>
+<blockquote>
+<p>Coincidentally, I just issued a pull request with some additions to the analysis library. </p>
+</blockquote>
+<p>You should expect a lot of homework now, that Mario guy is merciless...</p>
+
+<a name="152238630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152238630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152238630">Patrick Massot (Dec 20 2018 at 08:18)</a>:</h4>
+<p>Seriously I'm very excited to see some PR from your analysis work. I hope you already discussed it enough with Mario, and will convince Johannes quickly. It would be very nice to have a topology PR merge sprint before Amsterdam (or even before Christmas, and then a second one before Amsterdam)</p>
+
+<a name="152238643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152238643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152238643">Kenny Lau (Dec 20 2018 at 08:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> merciless</p>
+
+<a name="152239509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152239509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152239509">Johan Commelin (Dec 20 2018 at 08:41)</a>:</h4>
+<p>Completely agree. Let's get these PRs moving.</p>
+
+<a name="152240099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240099">Aymon Wuolanne (Dec 20 2018 at 08:56)</a>:</h4>
+<p>Thanks! I think I should be able to get it working with <code>continuous_if</code></p>
+
+<a name="152240118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240118">Aymon Wuolanne (Dec 20 2018 at 08:57)</a>:</h4>
+<p>Side note: <code>frontier</code> is defined as <code>closure s \ interior s</code>, isn't this usually referred to as the boundary?</p>
+
+<a name="152240169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240169">Johan Commelin (Dec 20 2018 at 08:58)</a>:</h4>
+<p>I've never heard of <code>frontier</code> before. I learned it as <code>boundary</code>.</p>
+
+<a name="152240177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240177">Mario Carneiro (Dec 20 2018 at 08:58)</a>:</h4>
+<p>I thought frontier was <code>closure s \ s</code></p>
+
+<a name="152240204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240204">Johan Commelin (Dec 20 2018 at 08:59)</a>:</h4>
+<p>So what is <code>s \ interior s</code> called?</p>
+
+<a name="152240214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240214">Reid Barton (Dec 20 2018 at 08:59)</a>:</h4>
+<p>apparently it is sometimes called the boundary! not even making this up</p>
+
+<a name="152240216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240216">Reid Barton (Dec 20 2018 at 08:59)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Boundary_(topology)" target="_blank" title="https://en.wikipedia.org/wiki/Boundary_(topology)">https://en.wikipedia.org/wiki/Boundary_(topology)</a></p>
+
+<a name="152240264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240264">Mario Carneiro (Dec 20 2018 at 09:00)</a>:</h4>
+<blockquote>
+<p>So what is <code>s \ interior s</code> called?</p>
+</blockquote>
+<p>outliers?</p>
+
+<a name="152240292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240292">Johan Commelin (Dec 20 2018 at 09:00)</a>:</h4>
+<p><a href="https://www.thesaurus.com/browse/boundary" target="_blank" title="https://www.thesaurus.com/browse/boundary">https://www.thesaurus.com/browse/boundary</a> enough words to choose from (-;</p>
+
+<a name="152240303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240303">Mario Carneiro (Dec 20 2018 at 09:01)</a>:</h4>
+<p>periphery is nice</p>
+
+<a name="152240314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240314">Johan Commelin (Dec 20 2018 at 09:01)</a>:</h4>
+<p>is borderline acceptable</p>
+
+<a name="152240318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240318">Mario Carneiro (Dec 20 2018 at 09:01)</a>:</h4>
+<p>it's borderline acceptable</p>
+
+<a name="152240374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240374">Mario Carneiro (Dec 20 2018 at 09:02)</a>:</h4>
+<p>but actually I find very little use for these concepts, they are more a historical note for me</p>
+
+<a name="152240378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152240378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152240378">Mario Carneiro (Dec 20 2018 at 09:02)</a>:</h4>
+<p>boundary is useful though</p>
+
+<a name="152284935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152284935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152284935">Jeremy Avigad (Dec 20 2018 at 21:38)</a>:</h4>
+<p>Mario has gone easy on me so far. I am about to get on a flight to California to visit my in-laws, but I should be able to make the corrections there.</p>
+
+<a name="152285351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152285351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152285351">Mario Carneiro (Dec 20 2018 at 21:45)</a>:</h4>
+<p>It looks pretty good. there is absolutely no chance of a conflict of interest, yep</p>
+
+<a name="152285645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/piecewise%20functions/near/152285645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62392piecewisefunctions.html#152285645">Patrick Massot (Dec 20 2018 at 21:50)</a>:</h4>
+<p>Would you give this PR a master's thesis?</p>
+
+
+{% endraw %}

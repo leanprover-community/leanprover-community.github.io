@@ -1,0 +1,160 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/00342efficiency.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html">efficiency</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147570420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570420">Scott Morrison (Nov 13 2018 at 06:04)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  and I are having some "fun" profiling <code>rewrite_search</code>, and discovered that all the arithmetic is slow.</p>
+
+<a name="147570429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570429">Mario Carneiro (Nov 13 2018 at 06:05)</a>:</h4>
+<p>don't generate proofs during the search</p>
+
+<a name="147570430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570430">Scott Morrison (Nov 13 2018 at 06:05)</a>:</h4>
+<p>We're going to experiment to see if typeclass resolution is partly to blame, but I'm also wondering if you have a sense of whether it's better to use <code>nat</code> or <code>int</code>.</p>
+
+<a name="147570435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570435">Mario Carneiro (Nov 13 2018 at 06:05)</a>:</h4>
+<p>how are you proving things?</p>
+
+<a name="147570438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570438">Scott Morrison (Nov 13 2018 at 06:05)</a>:</h4>
+<p>Maybe Keeley can tell me that <code>nat</code> won't actually do for our purposes.</p>
+
+<a name="147570441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570441">Scott Morrison (Nov 13 2018 at 06:05)</a>:</h4>
+<p>Nope, everything is in meta land.</p>
+
+<a name="147570457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570457">Scott Morrison (Nov 13 2018 at 06:06)</a>:</h4>
+<p>oh --- sorry, it's not that part that is slow</p>
+
+<a name="147570486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570486">Scott Morrison (Nov 13 2018 at 06:06)</a>:</h4>
+<p>it is the edit distance calculations that are slow</p>
+
+<a name="147570489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570489">Scott Morrison (Nov 13 2018 at 06:06)</a>:</h4>
+<p>so this has nothing to do with proofs</p>
+
+<a name="147570491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570491">Mario Carneiro (Nov 13 2018 at 06:06)</a>:</h4>
+<p>they should both be pretty fast</p>
+
+<a name="147570510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570510">Keeley Hoek (Nov 13 2018 at 06:07)</a>:</h4>
+<p>We could use <code>nat</code> I think<br>
+I just have to find all the typeclass names I think</p>
+
+<a name="147570511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570511">Mario Carneiro (Nov 13 2018 at 06:07)</a>:</h4>
+<p>for numbers less than 2^30 or so it's just using the C++ addition which should be super fast</p>
+
+<a name="147570517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570517">Scott Morrison (Nov 13 2018 at 06:07)</a>:</h4>
+<p>ok, all our numbers should be small enough, I think</p>
+
+<a name="147570540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570540">Keeley Hoek (Nov 13 2018 at 06:07)</a>:</h4>
+<p>do you have any idea why <code>min</code> could be (relatively speaking) slow?</p>
+
+<a name="147570542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570542">Mario Carneiro (Nov 13 2018 at 06:07)</a>:</h4>
+<p>there is a lot of overhead for VM stuff but no more than anything else</p>
+
+<a name="147570604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570604">Mario Carneiro (Nov 13 2018 at 06:08)</a>:</h4>
+<p>You can look at the code generated for a definition using <code>set_option trace.compiler.optimize_bytecode true</code></p>
+
+<a name="147570617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570617">Scott Morrison (Nov 13 2018 at 06:09)</a>:</h4>
+<p>oooh...</p>
+
+<a name="147570676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570676">Mario Carneiro (Nov 13 2018 at 06:10)</a>:</h4>
+<p>If you inline the definition of <code>min</code> it's almost as fast as it possibly could be</p>
+
+<a name="147570686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570686">Mario Carneiro (Nov 13 2018 at 06:11)</a>:</h4>
+<p>if you don't inline there is possible inefficiency in creating and destroying the <code>nat.decidable_linear_ordered_semiring</code></p>
+
+<a name="147570729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570729">Mario Carneiro (Nov 13 2018 at 06:12)</a>:</h4>
+<p>but I don't know how significant it is</p>
+
+<a name="147570739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570739">Mario Carneiro (Nov 13 2018 at 06:12)</a>:</h4>
+<p>(And by inline I mean <code>attribute [inline] min</code>)</p>
+
+<a name="147570933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570933">Keeley Hoek (Nov 13 2018 at 06:18)</a>:</h4>
+<p>ooooh</p>
+
+<a name="147570948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570948">Keeley Hoek (Nov 13 2018 at 06:19)</a>:</h4>
+<p>can you inline instances?</p>
+
+<a name="147570951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147570951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147570951">Keeley Hoek (Nov 13 2018 at 06:19)</a>:</h4>
+<p>like where they are used</p>
+
+<a name="147571233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147571233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147571233">Mario Carneiro (Nov 13 2018 at 06:26)</a>:</h4>
+<p>you don't want to inline instances, you want to inline projections. My experiments with <code>min</code> on <code>nat</code> show exactly the kind of simplification you would want</p>
+
+<a name="147582312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147582312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147582312">Keeley Hoek (Nov 13 2018 at 11:29)</a>:</h4>
+<p>Just for the record: we ended up getting a factor-of-three speedup by inlining a bunch of important things in the hotpath, and eliminating some pesky table lookups in favor of using more memory---and parallelisation is to come!</p>
+
+<a name="147582752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147582752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147582752">Kenny Lau (Nov 13 2018 at 11:36)</a>:</h4>
+<p>finally someone more clever than me is using a more clever approach to speed up things! :D</p>
+
+<a name="147668689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147668689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147668689">Kenny Lau (Nov 14 2018 at 14:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> would you have any insight as to how I could speed up <a href="https://github.com/leanprover/mathlib/pull/461/commits/f80e9fce6b081cf26f551b3ae2e5c83327f9bd59#diff-1f7cb4d661f00b6d887925434b41ad5dR293" target="_blank" title="https://github.com/leanprover/mathlib/pull/461/commits/f80e9fce6b081cf26f551b3ae2e5c83327f9bd59#diff-1f7cb4d661f00b6d887925434b41ad5dR293">this</a> without doing what I did?</p>
+
+<a name="147669081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147669081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147669081">Keeley Hoek (Nov 14 2018 at 15:00)</a>:</h4>
+<p>Unfortunately not without contriving a tactic kenny<br>
+---but I must get to bed!</p>
+
+<a name="147669084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147669084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147669084">Keeley Hoek (Nov 14 2018 at 15:00)</a>:</h4>
+<p>:O the string <code>@mv_polynomial σ α (@comm_ring.to_comm_semiring α _inst_3)</code> appears 31 times!</p>
+
+<a name="147669239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147669239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147669239">Keeley Hoek (Nov 14 2018 at 15:03)</a>:</h4>
+<p>But its definitely something to think about<br>
+<code>(@comm_ring.to_comm_semiring α _inst_3)</code> 67 times!</p>
+
+<a name="147669365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147669365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147669365">Keeley Hoek (Nov 14 2018 at 15:04)</a>:</h4>
+<p>Can you think of a general way to hint about this kind of stuff? <br>
+Maybe you could say "use <code>comm_ring.to_comm_semiring</code> everywhere you can first"</p>
+
+<a name="147669375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147669375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147669375">Keeley Hoek (Nov 14 2018 at 15:05)</a>:</h4>
+<p>To some tactic</p>
+
+<a name="147670232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147670232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147670232">Kenny Lau (Nov 14 2018 at 15:20)</a>:</h4>
+<p>I don't write tactics...</p>
+
+<a name="147670331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/efficiency/near/147670331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00342efficiency.html#147670331">Keeley Hoek (Nov 14 2018 at 15:20)</a>:</h4>
+<p>:D<br>
+It's on the list, then!</p>
+
+
+{% endraw %}

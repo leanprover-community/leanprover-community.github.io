@@ -1,0 +1,113 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75934Conflictingtransitivecoercions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html">Conflicting transitive coercions?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127117518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127117518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127117518">Nicholas Scheel (May 26 2018 at 08:25)</a>:</h4>
+<p>I have two terms that pretty-print the same but won't be considered equivalent because they seem to use slightly different coerce instances:</p>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  @eq int
+    ((@coe nat Zalpha
+        (@coe_to_lift nat Zalpha (@coe_trans nat int Zalpha int.has_coe (@coe_base int Zalpha Zalpha.has_coe)))
+        (fib (@has_add.add nat nat.has_add m 1))).r)
+    0
+but is expected to have type
+  @eq int
+    ((@coe nat Zalpha
+        (@coe_to_lift nat Zalpha
+           (@coe_base nat Zalpha (@nat.cast_coe Zalpha Zalpha.has_zero Zalpha.has_one Zalpha.has_add)))
+        (fib (@has_add.add nat nat.has_add m 1))).r)
+    0
+</pre></div>
+
+
+<p>(part of Kevin's project: <a href="https://github.com/kbuzzard/lean-squares-in-fibonacci/blob/master/src/Zalpha.lean" target="_blank" title="https://github.com/kbuzzard/lean-squares-in-fibonacci/blob/master/src/Zalpha.lean">https://github.com/kbuzzard/lean-squares-in-fibonacci/blob/master/src/Zalpha.lean</a>)<br>
+I'm giving up for tonight, but do you have any suggestions on how this could be resolved or avoided?</p>
+
+<a name="127120917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127120917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127120917">Kevin Buzzard (May 26 2018 at 10:45)</a>:</h4>
+<p>Polynomials: I think you have to avoid the general multivariate code because there is a whole bunch of theory specific to the one variable case. You can have a coercion to the multivariable case and prove it's injective and then you get some theorems for free</p>
+
+<a name="127120965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127120965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127120965">Kevin Buzzard (May 26 2018 at 10:47)</a>:</h4>
+<p>Coercions -- these are unfortunately one of the dark arts as far as mathematicians are concerned. You can't set it up the way we do it -- coercions and partial coercions invoked in all directions often without remark. Welcome to type theory. Your coercions I think in general all have to go in one direction, and if you coerce from X to Y and from Y to Z and from X to Z independently then the two maps X -&gt; Z have to be <em>definitionally</em> equal or the entire system breaks.</p>
+
+<a name="127121012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121012">Kevin Buzzard (May 26 2018 at 10:49)</a>:</h4>
+<p>This leads to non-trivial problems with the entire system -- for example if you want to coerce a metric space into a topological space then this sounds harmless on the face of it, but if you want the product of metric spaces to be a metric space and the product of topological spaces to be a topological space then you are going to have to think hard whether the two induced topological structures on the product of two metric spaces are definitionally equal, and probably for the way you naively just set it up in your head the answer is "they are equal, but it's a theorem not a definition", which is not good enough.</p>
+
+<a name="127121071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121071">Kevin Buzzard (May 26 2018 at 10:51)</a>:</h4>
+<p>This whole thing falls into a general category of "easy in maths, hard in Lean" concepts which I think are extremely important to (a) isolate and (b) work around, because I believe that Lean should not just offer "what it is" to mathematicians, it should attempt to do the much harder job of offering Lean "what mathematicians do, the way they do it".</p>
+
+<a name="127121114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121114">Mario Carneiro (May 26 2018 at 10:52)</a>:</h4>
+<p>What is <code>Zalpha.has_coe</code>?</p>
+
+<a name="127121118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121118">Mario Carneiro (May 26 2018 at 10:52)</a>:</h4>
+<p>Looks like there are two coercions there, and there is a needed theorem to show they are the same</p>
+
+<a name="127121128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121128">Mario Carneiro (May 26 2018 at 10:53)</a>:</h4>
+<p>I wouldn't go so far as to say that all coercion chains have to be defeq, but you should have a theorem proving they are equal as a simp lemma to clean these kind of things up</p>
+
+<a name="127121191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121191">Mario Carneiro (May 26 2018 at 10:55)</a>:</h4>
+<p>From what I can see, there are two paths: you have a defined coercion <code>int -&gt; Zalpha</code> which is composed with the natural map <code>nat -&gt; int</code>, and then also there is a coercion <code>nat -&gt; Zalpha</code> because <code>Zalpha</code> is a ring or ringlike thing</p>
+
+<a name="127121241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121241">Mario Carneiro (May 26 2018 at 10:56)</a>:</h4>
+<p>You can use <code>nat.eq_cast</code> to prove that they are equal</p>
+
+<a name="127121352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121352">Kevin Buzzard (May 26 2018 at 11:00)</a>:</h4>
+<p>Are they not defeq, and is this a problem?</p>
+
+<a name="127121355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121355">Mario Carneiro (May 26 2018 at 11:00)</a>:</h4>
+<p>They aren't even proven equal</p>
+
+<a name="127121357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121357">Mario Carneiro (May 26 2018 at 11:00)</a>:</h4>
+<p>there is a missing theorem here</p>
+
+<a name="127121368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121368">Mario Carneiro (May 26 2018 at 11:01)</a>:</h4>
+<p>I think you should remove <code>instance : has_coe ℤ ℤα := ⟨of_int⟩</code>, and then after proving it's a ring you should prove <code>of_int z = z</code></p>
+
+<a name="127121370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121370">Mario Carneiro (May 26 2018 at 11:01)</a>:</h4>
+<p>where the right <code>z</code> is being coerced using the cast function</p>
+
+<a name="127121460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127121460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127121460">Mario Carneiro (May 26 2018 at 11:04)</a>:</h4>
+<p>compare with how <code>rat.of_int</code> is handled in <code>rat.lean</code></p>
+
+<a name="127132931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127132931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127132931">Nicholas Scheel (May 26 2018 at 18:08)</a>:</h4>
+<p>til <code>unfold_coes</code></p>
+
+<a name="127133498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127133498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127133498">Nicholas Scheel (May 26 2018 at 18:30)</a>:</h4>
+<p>Thanks for the advice <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>! It seems to be working much much better :)</p>
+
+<a name="127133604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Conflicting%20transitive%20coercions%3F/near/127133604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75934Conflictingtransitivecoercions.html#127133604">Nicholas Scheel (May 26 2018 at 18:35)</a>:</h4>
+<p>I guess when they write "canonical" in</p>
+<blockquote>
+<p>Canonical homomorphism from the integers to any ring(-like) structure <code>α</code></p>
+</blockquote>
+<p>They really mean <em>canonical</em> – don't use anything else!</p>
+
+
+{% endraw %}

@@ -1,0 +1,75 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/08268noncomputabletheorem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html">noncomputable theorem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136123067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136123067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136123067">Reid Barton (Oct 19 2018 at 18:38)</a>:</h4>
+<p>Is there any sense in writing <code>noncomputable theorem</code>, as in mathlib <code>logic.basic</code> lines 516-519?</p>
+
+<a name="136124051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136124051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136124051">Simon Hudon (Oct 19 2018 at 18:52)</a>:</h4>
+<p>What happens if you remove <code>noncomputable</code>?</p>
+
+<a name="136124347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136124347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136124347">Reid Barton (Oct 19 2018 at 18:57)</a>:</h4>
+<p>Probably I wait a long time for mathlib to rebuild and then nothing interesting happens--I've written lots of <code>theorem</code>s that use noncomputable things before.</p>
+
+<a name="136124359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136124359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136124359">Reid Barton (Oct 19 2018 at 18:57)</a>:</h4>
+<p>I wonder whether they should be <code>noncomputable def</code>, or just <code>theorem</code>, or maybe none of this matters</p>
+
+<a name="136124519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136124519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136124519">Reid Barton (Oct 19 2018 at 18:59)</a>:</h4>
+<p>Actually I could be wrong--these <code>theorem</code>s are special because their result types are not Props (that's why I'm looking at them), and maybe that is what triggers the <code>noncomputable</code> check</p>
+
+<a name="136124688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136124688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136124688">Reid Barton (Oct 19 2018 at 19:01)</a>:</h4>
+<p>Okay yes, that seems to be the case.</p>
+
+<a name="136125141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136125141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136125141">Reid Barton (Oct 19 2018 at 19:08)</a>:</h4>
+<p>I never thought about exactly what is going on with <code>def</code> and <code>theorem</code>. I guess the difference is like <code>let</code> vs <code>have</code>, that is, something defined with <code>def</code> can be replaced by its definition by one of the reduction rules, while something defined with <code>theorem</code> can't be replaced by, well, its proof?</p>
+
+<a name="136125354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136125354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136125354">Reid Barton (Oct 19 2018 at 19:11)</a>:</h4>
+<p>The VM can't reduce a <code>theorem</code> either, right? So why bother with the <code>noncomputable</code> check for theorems?</p>
+
+<a name="136125488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136125488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136125488">Reid Barton (Oct 19 2018 at 19:13)</a>:</h4>
+<p>In the case of <code>classical.dec</code> I guess someone decided that it was useless to allow it to be unfolded because it's essentially just an application of an axiom, and it's uniquely determined up to propositional equality, anyways?</p>
+
+<a name="136125590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136125590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136125590">Reid Barton (Oct 19 2018 at 19:14)</a>:</h4>
+<p>This all seems to make sense, I'm just not sure my mental picture is actually correct.</p>
+
+<a name="136129728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136129728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136129728">Simon Hudon (Oct 19 2018 at 20:21)</a>:</h4>
+<p>I'm wondering if it's about generating byte code for the VM. If the theorem's type is in <code>Prop</code>, then, it doesn't matter.</p>
+
+<a name="136129843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136129843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136129843">Simon Hudon (Oct 19 2018 at 20:22)</a>:</h4>
+<p>But otherwise, you may have to say explicitly "Don't generate code" with <code>noncomputable</code></p>
+
+<a name="136143543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136143543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136143543">Mario Carneiro (Oct 20 2018 at 00:41)</a>:</h4>
+<p>If you mark something as <em>either</em> <code>noncomputable</code> or <code>theorem</code>, then the VM does not generate code for the definition. This is why sometimes you get those errors about bytecode generation failed when you accidentally mark something as a <code>theorem</code></p>
+
+<a name="136143755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136143755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136143755">Mario Carneiro (Oct 20 2018 at 00:45)</a>:</h4>
+<p><code>noncomputable theorem</code> is almost always not needed, but it is used in a few specialized instances. One other consequence of defining something as a <code>theorem</code> is that it is "definition irrelevant", that is, lean will not generate or use the definitional equation for this definition. This is almost never appropriate for a <code>Type</code> valued expression, since it provides relations between definiendum and definiens that we can't otherwise recover. So the place where it makes sense is when the definition is already ambiguous, as in <code>classical.some</code> - unfolding it will not tell us any more about its value - and it is also using the axiom of choice so it should not have any code generation.</p>
+
+<a name="136143757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136143757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#136143757">Mario Carneiro (Oct 20 2018 at 00:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+
+{% endraw %}

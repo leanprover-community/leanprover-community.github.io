@@ -1,0 +1,55 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/89822astrangetypeascriptionerror.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html">a strange type ascription error</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="128464038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128464038">Scott Morrison (Jun 22 2018 at 11:28)</a>:</h4>
+<p>I am getting an error of the form </p>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  @eq X a b
+but is expected to have type
+  @eq Y a b
+</pre></div>
+
+
+<p>where here <code>X</code> and (especially) <code>Y</code> are quite large expressions.</p>
+
+<a name="128464065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128464065">Scott Morrison (Jun 22 2018 at 11:29)</a>:</h4>
+<p>But <code>a</code> and <code>b</code> are just names of hypotheses. Any advice on dealing with this sort of thing?</p>
+
+<a name="128464118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128464118">Scott Morrison (Jun 22 2018 at 11:30)</a>:</h4>
+<p>It seems like merely from the fact that the two terms separately typecheck I should have a proof that <code>X = Y</code>...</p>
+
+<a name="128464203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128464203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128464203">Scott Morrison (Jun 22 2018 at 11:33)</a>:</h4>
+<p>Curiously here, even though the goal prints as <code>a = b</code>, writing <code>show a = b</code> results in <code>show tactic failed</code>.</p>
+
+<a name="128465208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128465208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128465208">Scott Morrison (Jun 22 2018 at 12:00)</a>:</h4>
+<p>... immediate problem solved, (remove a few unnecessary <code>@[reducible]</code> attributes), although I don't really understand what was going wrong.</p>
+
+<a name="128474905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128474905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128474905">Reid Barton (Jun 22 2018 at 16:16)</a>:</h4>
+<p>I have seen a tactic produce a goal which was not well-typed before, and it was very confusing. Sounds like the same sort of issue?</p>
+
+<a name="128475258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128475258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128475258">Reid Barton (Jun 22 2018 at 16:25)</a>:</h4>
+<p>In my case the offending tactic was <code>induction using quotient.ind</code>; from your resolution, it sounds unrelated</p>
+
+<a name="128475337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20strange%20type%20ascription%20error/near/128475337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89822astrangetypeascriptionerror.html#128475337">Reid Barton (Jun 22 2018 at 16:26)</a>:</h4>
+<p>I guess the main point is that "the goal in tactic mode is well-typed" is not a 100% iron-clad guarantee, although it surely indicates a bug somewhere if it is violated.</p>
+
+
+{% endraw %}

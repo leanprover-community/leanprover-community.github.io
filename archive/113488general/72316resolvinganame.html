@@ -1,0 +1,132 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/72316resolvinganame.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html">resolving a name</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133714444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714444">Keeley Hoek (Sep 11 2018 at 09:24)</a>:</h4>
+<p>Say I've got <code>n : name</code>, which I get passed, but would like to be of type <code>my_type</code>.  I know I can use <code>t &lt;- infer_type n</code> to get the type of the identifier pointed to by <code>n</code>, and then can use an if to guard against the type being wrong. But I'd really like to do more and "cast" <code>n</code> to type <code>my_type</code>, getting some <code>inst : my_type</code> from <code>n</code>.  Would anyone be able to point me to a nice/any facility for doing this? (I've grepped for <code>cast</code> without success, is <code>mk_app</code> what I'm looking for?)</p>
+
+<a name="133714683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714683">Mario Carneiro (Sep 11 2018 at 09:30)</a>:</h4>
+<p>I don't quite understand the setup here. How does <code>my_type</code> relate to <code>n</code>?</p>
+
+<a name="133714858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714858">Keeley Hoek (Sep 11 2018 at 09:35)</a>:</h4>
+<p>Sorry: secretly in some file a user wrote <code>def foo : my_type := blah</code>, and then in tactic mode later on they called my code <code>cast_fn `(foo) </code>. So here <code>n = `foo</code>, and I'd like <code>cast_fn</code> to be of type <code>name -&gt; tactic my_type</code>.</p>
+
+<a name="133714912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714912">Keeley Hoek (Sep 11 2018 at 09:36)</a>:</h4>
+<p>Maybe my attempt at an MWE confused the issue. I'm getting a <code>name</code> in an attribute handler, and I expect what was annotated to be of a particular type. I'd like to get the actual thing that was annotated and call a function on it.</p>
+
+<a name="133714916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714916">Mario Carneiro (Sep 11 2018 at 09:36)</a>:</h4>
+<p><code>eval_expr</code> is what you want</p>
+
+<a name="133714953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133714953">Keeley Hoek (Sep 11 2018 at 09:38)</a>:</h4>
+<p>Right. So to invoke it, I only get to pass a single <code>expr</code>, so I figure I need to convert the name of the function I want to call into an <code>expr</code> and then create a <code>expr</code> which says "evaluate the function at the first <code>expr</code>". How can I build such an <code>expr</code>?</p>
+
+<a name="133715275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133715275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133715275">Keeley Hoek (Sep 11 2018 at 09:44)</a>:</h4>
+<p>Ah. I think <code>eval_expr my_type (expr.app `(my_fn) n)</code> does the job!</p>
+
+<a name="133715292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133715292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133715292">Keeley Hoek (Sep 11 2018 at 09:45)</a>:</h4>
+<p>Ok, so the point of <code>mk_app</code> is that I don't need to know the type beforehand? Right.</p>
+
+<a name="133715294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133715294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133715294">Mario Carneiro (Sep 11 2018 at 09:45)</a>:</h4>
+<p><code>mk_const</code> will turn a name into an <code>expr</code></p>
+
+<a name="133715409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133715409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133715409">Kevin Buzzard (Sep 11 2018 at 09:48)</a>:</h4>
+<p>This whole area is just screaming out for a small pdf or web page containing 10 very basic examples followed by 10 very basic questions.</p>
+
+<a name="133715483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133715483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133715483">Patrick Massot (Sep 11 2018 at 09:50)</a>:</h4>
+<p>What happened to <span class="user-mention" data-user-id="121918">@Edward Ayers</span>? He started to write such documentation and then vanished? Is there a meta-documentation curse?</p>
+
+<a name="133722360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133722360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133722360">Keeley Hoek (Sep 11 2018 at 12:23)</a>:</h4>
+<p>What does the <code>local</code> in <code>local attribute ...</code> mean?</p>
+
+<a name="133722435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133722435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133722435">Kenny Lau (Sep 11 2018 at 12:25)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" target="_blank" title="https://en.wikipedia.org/wiki/Scope_(computer_science)">https://en.wikipedia.org/wiki/Scope_(computer_science)</a></p>
+
+<a name="133722660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133722660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133722660">Kevin Buzzard (Sep 11 2018 at 12:31)</a>:</h4>
+<p>I <em>think</em> it means "it's an attribute for this <code>.lean</code> file only" in this case, but I'm certainly not an expert.</p>
+
+<a name="133723327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133723327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133723327">Johan Commelin (Sep 11 2018 at 12:49)</a>:</h4>
+<p>Well, even "this <code>section</code> only"</p>
+
+<a name="133730395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133730395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133730395">Keeley Hoek (Sep 11 2018 at 15:05)</a>:</h4>
+<p>Haha thanks Kenny, I've written a fair few curly-braces in my time!</p>
+<p>In that case does anyone know if the <code>before_unset</code> member of <code>user_attribute</code> is ever actually called when a <code>local</code> attribute is removed for the reason that a section has ended? It seems that it is not, which I find very strange.</p>
+
+<a name="133730604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133730604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133730604">Keeley Hoek (Sep 11 2018 at 15:09)</a>:</h4>
+<p>It seems that the none of mathlib and only one file in the lean library itself uses the feature, and this is in <code>library/init/meta/smt/ematch.lean</code> where <code>before_unset</code> is defined to do nothing anyway.</p>
+
+<a name="133730914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133730914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133730914">Keeley Hoek (Sep 11 2018 at 15:13)</a>:</h4>
+<p>It seems that <code>tactic.unset_attribute</code> does perform the unsetting... Perhaps this is a bug in lean?</p>
+
+<a name="133746407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133746407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133746407">Sebastian Ullrich (Sep 11 2018 at 19:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> "Unsetting" an attribute means using <code>attribute [-simp] ...</code>, not just leaving the scope of a local attribute declaration</p>
+
+<a name="133746476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133746476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#133746476">Keeley Hoek (Sep 11 2018 at 19:15)</a>:</h4>
+<p>fair enough!</p>
+
+<a name="134089643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089643">Edward Ayers (Sep 17 2018 at 11:17)</a>:</h4>
+<p>Hi I've been on hols.</p>
+
+<a name="134089683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089683">Patrick Massot (Sep 17 2018 at 11:18)</a>:</h4>
+<p>Welcome back!</p>
+
+<a name="134089684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089684">Kevin Buzzard (Sep 17 2018 at 11:18)</a>:</h4>
+<p>We thought you were dead!</p>
+
+<a name="134089686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089686">Kevin Buzzard (Sep 17 2018 at 11:18)</a>:</h4>
+<p>We were worried</p>
+
+<a name="134089692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089692">Patrick Massot (Sep 17 2018 at 11:18)</a>:</h4>
+<p>Or worse than dead: decided to use another proof assistant</p>
+
+<a name="134089697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089697">Edward Ayers (Sep 17 2018 at 11:18)</a>:</h4>
+<p>I was flirting with Isabelle again a bit</p>
+
+<a name="134089761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089761">Johan Commelin (Sep 17 2018 at 11:20)</a>:</h4>
+<p>Lol, I knew that <span class="emoji emoji-1f44d" title="thumbs up">:thumbs_up:</span> was coming...</p>
+
+<a name="134089764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089764">Johannes Hölzl (Sep 17 2018 at 11:20)</a>:</h4>
+<p>hehe</p>
+
+<a name="134089767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/134089767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html#134089767">Patrick Massot (Sep 17 2018 at 11:20)</a>:</h4>
+<p>Scott, did we understand correctly what you learned in Dagstuhl?</p>
+
+
+{% endraw %}

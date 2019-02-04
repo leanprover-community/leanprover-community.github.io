@@ -1,0 +1,852 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/83717subsetofquotient.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html">subset of quotient</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="134956599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956599">Johan Commelin (Oct 01 2018 at 10:12)</a>:</h4>
+<p>For the perfectoid project we often need to work with subsets of quotient types. A mathematician would write</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foobar</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">|</span> <span class="n">formula</span> <span class="n">x</span><span class="o">}</span>
+</pre></div>
+
+
+<p>and afterwards bother with the proof obligation of showing that it is well-defined. Can we mimic this in Lean?<br>
+I imagine that this subset notation would call the appropriate <code>lift</code> lemma, and generate a proof obligation that we can prove after the subset notation. Something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foobar</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">|</span> <span class="n">formula</span> <span class="n">x</span><span class="o">}</span> <span class="o">(</span><span class="k">by</span> <span class="n">proof_of_soundness</span><span class="o">)</span>
+</pre></div>
+
+<a name="134956665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956665">Johan Commelin (Oct 01 2018 at 10:14)</a>:</h4>
+<p>Maybe we could have <code>{ .. | .. } is_well_defined ..</code> be some fancy notation for this type of things?</p>
+
+<a name="134956774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956774">Kevin Buzzard (Oct 01 2018 at 10:18)</a>:</h4>
+<p>Do you mean <code>{[[x]] : QuotType | formula x}</code>?</p>
+
+<a name="134956817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956817">Johan Commelin (Oct 01 2018 at 10:18)</a>:</h4>
+<p>Does that work?</p>
+
+<a name="134956818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956818">Chris Hughes (Oct 01 2018 at 10:18)</a>:</h4>
+<p>Looks like the image of <code>quotient.mk</code> of some set.</p>
+
+<a name="134956832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956832">Chris Hughes (Oct 01 2018 at 10:18)</a>:</h4>
+<p><code>quotient.mk '' {x | formula x}</code></p>
+
+<a name="134956838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956838">Kenny Lau (Oct 01 2018 at 10:19)</a>:</h4>
+<p>there are two ways of forming subquotient</p>
+
+<a name="134956842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956842">Kenny Lau (Oct 01 2018 at 10:19)</a>:</h4>
+<p>and a theorem that they are the same</p>
+
+<a name="134956843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956843">Kenny Lau (Oct 01 2018 at 10:19)</a>:</h4>
+<p>(in maths, not in Lean)</p>
+
+<a name="134956847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956847">Johan Commelin (Oct 01 2018 at 10:19)</a>:</h4>
+<p>Right, I see where this is going...</p>
+
+<a name="134956850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956850">Johan Commelin (Oct 01 2018 at 10:19)</a>:</h4>
+<p>In particular, they aren't defeq</p>
+
+<a name="134956970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956970">Kenny Lau (Oct 01 2018 at 10:22)</a>:</h4>
+<p>few things are</p>
+
+<a name="134956992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134956992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134956992">Johan Commelin (Oct 01 2018 at 10:24)</a>:</h4>
+<p>So Chris gives a workaround, but proving that his thing is the same as what I want is non-trivial.</p>
+
+<a name="134957502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134957502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134957502">Chris Hughes (Oct 01 2018 at 10:36)</a>:</h4>
+<p>But it's non trivial because there's mathematical content right?</p>
+
+<a name="134957509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134957509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134957509">Johan Commelin (Oct 01 2018 at 10:36)</a>:</h4>
+<p>Right, you have to prove that <code>formula</code> is constant on equivalence classes</p>
+
+<a name="134957645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134957645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134957645">Chris Hughes (Oct 01 2018 at 10:40)</a>:</h4>
+<p>The harder <code>lift</code> definition is probably the best one to use.</p>
+
+<a name="134957658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134957658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134957658">Johan Commelin (Oct 01 2018 at 10:40)</a>:</h4>
+<p>Yes, so I don't mind proving something hard, but I would like to keep a readable definition. Hence this question.</p>
+
+<a name="134958313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134958313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134958313">Mario Carneiro (Oct 01 2018 at 10:56)</a>:</h4>
+<p>To keep the definition readable, make the well definedness part a lemma that you prove immediately before</p>
+
+<a name="134959001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959001">Johan Commelin (Oct 01 2018 at 11:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> That is certainly an option, but<br>
+(1) the definition still won't be able to use subset notation;<br>
+(2) it is not what mathematicians are used to. We always define something, and afterwards fill in the proof obligation of showing that the definition is well-defined.</p>
+
+<a name="134959021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959021">Mario Carneiro (Oct 01 2018 at 11:17)</a>:</h4>
+<p>I think that it matches mathematical practice in that you aren't licensed to use the definition until you have proven the well definedness condition</p>
+
+<a name="134959030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959030">Mario Carneiro (Oct 01 2018 at 11:17)</a>:</h4>
+<p>in lean if you can say it you can use it, so you have to be intercepted right at the definition</p>
+
+<a name="134959080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959080">Mario Carneiro (Oct 01 2018 at 11:18)</a>:</h4>
+<p>I'm a little confused about what exactly you want to write though</p>
+
+<a name="134959096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959096">Johan Commelin (Oct 01 2018 at 11:19)</a>:</h4>
+<p>I completely agree.</p>
+
+<a name="134959144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959144">Johan Commelin (Oct 01 2018 at 11:20)</a>:</h4>
+<p>So my suggestion was to <em>syntactically</em> prove the well-definedness after the definition. But in fact it is just part of the definition.</p>
+
+<a name="134959148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959148">Johan Commelin (Oct 01 2018 at 11:20)</a>:</h4>
+<p>Most importantly, I would like the definition to be <em>very</em> readable.</p>
+
+<a name="134959149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959149">Mario Carneiro (Oct 01 2018 at 11:20)</a>:</h4>
+<p>Isn't that what <code>quot.lift</code> already does?</p>
+
+<a name="134959155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959155">Johan Commelin (Oct 01 2018 at 11:20)</a>:</h4>
+<p>Yes. But then my subset notation goes out of the window.</p>
+
+<a name="134959176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959176">Mario Carneiro (Oct 01 2018 at 11:21)</a>:</h4>
+<p>Can you be more specific?</p>
+
+<a name="134959189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959189">Johan Commelin (Oct 01 2018 at 11:22)</a>:</h4>
+<p>Any mathematician who first looks at Lean, and wants to look up the definition of <code>Spv</code> in the perfectoid project will not understand anything if he/she sees a <code>quot.lift</code>.</p>
+
+<a name="134959229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959229">Johan Commelin (Oct 01 2018 at 11:22)</a>:</h4>
+<p>That is completely foreign.</p>
+
+<a name="134959232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959232">Johan Commelin (Oct 01 2018 at 11:22)</a>:</h4>
+<p>And the stuff that follows it is barely recognisable.</p>
+
+<a name="134959244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959244">Johan Commelin (Oct 01 2018 at 11:23)</a>:</h4>
+<p>On the other hand</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foobar</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">|</span> <span class="n">formula</span> <span class="n">x</span><span class="o">}</span> <span class="n">is_well_defined</span> <span class="o">(</span><span class="k">by</span> <span class="n">proof_of_soundness</span><span class="o">)</span>
+</pre></div>
+
+
+<p>is very readable.</p>
+
+<a name="134959255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959255">Johan Commelin (Oct 01 2018 at 11:23)</a>:</h4>
+<p>But my Lean-fu is not sufficient to turn that into valid Lean.</p>
+
+<a name="134959266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959266">Johan Commelin (Oct 01 2018 at 11:23)</a>:</h4>
+<p>Currently in the perfectoid project we are stacking 5 subquotients on top of each other.</p>
+
+<a name="134959302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959302">Johan Commelin (Oct 01 2018 at 11:24)</a>:</h4>
+<p>And it becomes really horrible.</p>
+
+<a name="134959324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959324">Johan Commelin (Oct 01 2018 at 11:24)</a>:</h4>
+<p>(Well, <em>currently</em> there is no <code>quot</code>, but that isn't tenable either. So we need the <code>quot</code>, and we'dd like it to be readable.)</p>
+
+<a name="134959443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959443">Kevin Buzzard (Oct 01 2018 at 11:27)</a>:</h4>
+<p>I am confused about why your def is not valid lean</p>
+
+<a name="134959455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959455">Kevin Buzzard (Oct 01 2018 at 11:28)</a>:</h4>
+<p>I wrote what I thought you were trying to say but you have not adopted my change</p>
+
+<a name="134959507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959507">Johan Commelin (Oct 01 2018 at 11:28)</a>:</h4>
+<p>Sorry, which change are you talking about?</p>
+
+<a name="134959509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959509">Kevin Buzzard (Oct 01 2018 at 11:28)</a>:</h4>
+<p>I mean, I wrote what I thought was invalid lean</p>
+
+<a name="134959513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959513">Kevin Buzzard (Oct 01 2018 at 11:28)</a>:</h4>
+<p>I put the equiv class notation in</p>
+
+<a name="134959525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959525">Johan Commelin (Oct 01 2018 at 11:29)</a>:</h4>
+<p>Right. So now I tried using Chris's suggestion.</p>
+
+<a name="134959533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959533">Johan Commelin (Oct 01 2018 at 11:29)</a>:</h4>
+<p>But then you can define <code>Spa</code>, and you get stuck when you want to define the opens.</p>
+
+<a name="134959614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959614">Johan Commelin (Oct 01 2018 at 11:30)</a>:</h4>
+<p>To paraphrase Mario:</p>
+<blockquote>
+<p>But I <em>do not</em> want to be thinking about <code>quot.lift</code> and <code>subtype.val</code> when I am writing a proof<br>
+the mindset is completely different, it is a distraction</p>
+</blockquote>
+
+<a name="134959617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959617">Mario Carneiro (Oct 01 2018 at 11:31)</a>:</h4>
+<p>Is your <code>foobar</code> stuff about <code>Spa</code>? If so can you show what it looks like in situ</p>
+
+<a name="134959618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959618">Kevin Buzzard (Oct 01 2018 at 11:31)</a>:</h4>
+<p>All I am saying is that you keep saying that something is invalid lean and it looks fine to me</p>
+
+<a name="134959634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959634">Chris Hughes (Oct 01 2018 at 11:31)</a>:</h4>
+<p>But the definitional equality of <code>quotient.lift</code> is really handy. Just give a docstring. Aiming to make your code usable by someone who doesn't know what <code>quotient.lift</code> is is probably impossible.</p>
+
+<a name="134959650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959650">Kevin Buzzard (Oct 01 2018 at 11:31)</a>:</h4>
+<p>And I wrote something which was invalid lean and asked if it was what you meant and all you did was asked me if my invalid lean was valid</p>
+
+<a name="134959708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959708">Kevin Buzzard (Oct 01 2018 at 11:32)</a>:</h4>
+<p>So we're clearly at cross purposes. My question is what is invalid about your lean</p>
+
+<a name="134959722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959722">Patrick Massot (Oct 01 2018 at 11:33)</a>:</h4>
+<p>Are we talking about <code>def foobar := {x : QuotType | formula x} is_well_defined (by proof_of_soundness)</code>?</p>
+
+<a name="134959728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959728">Mario Carneiro (Oct 01 2018 at 11:33)</a>:</h4>
+<p>In the case of <code>Spa</code>, I don't think you should try to get defeq just right, because <code>Spa</code> itself is not quite a quotient in the way we want it to be anyway</p>
+
+<a name="134959729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959729">Patrick Massot (Oct 01 2018 at 11:33)</a>:</h4>
+<p>It seems pretty invalid to me</p>
+
+<a name="134959735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959735">Kevin Buzzard (Oct 01 2018 at 11:33)</a>:</h4>
+<p>I don't have access to lean right now so I'll just shut up and stop adding to the noise</p>
+
+<a name="134959782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959782">Johan Commelin (Oct 01 2018 at 11:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Sorry, I finally understand. I think <code>{[[x]] : QuotType | formula x}</code> doesn't leave any room for the proof obligation that <code>formula x</code> only depends on <code>[[x]]</code>. That proof has to go somewhere. Mathematicians also do that.</p>
+
+<a name="134959783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959783">Mario Carneiro (Oct 01 2018 at 11:34)</a>:</h4>
+<p>That's a perfectly valid definition, which means the image of such and such</p>
+
+<a name="134959806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959806">Mario Carneiro (Oct 01 2018 at 11:35)</a>:</h4>
+<p>why not <code>{q : QuotType | formula q}</code></p>
+
+<a name="134959814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959814">Mario Carneiro (Oct 01 2018 at 11:35)</a>:</h4>
+<p>and define <code>formula q</code> using a lift</p>
+
+<a name="134959816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959816">Johan Commelin (Oct 01 2018 at 11:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">Spa</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">Huber_pair</span><span class="o">)</span> <span class="o">:=</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="err">&#39;&#39;</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">A</span> <span class="bp">|</span> <span class="n">v</span><span class="bp">.</span><span class="n">is_continuous</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">A</span><span class="err">⁺</span> <span class="bp">→</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="mi">1</span><span class="o">}</span>
+</pre></div>
+
+<a name="134959855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959855">Johan Commelin (Oct 01 2018 at 11:36)</a>:</h4>
+<p>This is what I have now.</p>
+
+<a name="134959863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959863">Mario Carneiro (Oct 01 2018 at 11:36)</a>:</h4>
+<p>is <code>is_continuous</code> constant on equivalence classes?</p>
+
+<a name="134959866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959866">Johan Commelin (Oct 01 2018 at 11:36)</a>:</h4>
+<p>And</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">Valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="err">Γ</span>   <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span>
+<span class="o">(</span><span class="n">grp</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="bp">@</span><span class="n">valuation</span> <span class="n">R</span> <span class="bp">_</span> <span class="err">Γ</span> <span class="n">grp</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">Valuation</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">v</span><span class="bp">.</span><span class="err">Γ</span><span class="o">,</span> <span class="n">coe</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">val</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">linear_ordered_value_group</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="n">v</span><span class="bp">.</span><span class="err">Γ</span> <span class="o">:=</span> <span class="n">v</span><span class="bp">.</span><span class="n">grp</span>
+
+<span class="kn">end</span> <span class="n">Valuation</span>
+
+<span class="kn">instance</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v₁</span> <span class="n">v₂</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">v₁</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₁</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">v₂</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₂</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">h</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">symmetry</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span> <span class="n">r</span> <span class="n">s</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">v₃</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">iff</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span> <span class="o">}</span>
+  <span class="kn">end</span> <span class="o">}</span>
+
+<span class="kn">definition</span> <span class="n">Spv</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">Spv</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">R</span><span class="o">)</span>
+</pre></div>
+
+<a name="134959871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959871">Johan Commelin (Oct 01 2018 at 11:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Yes it is, but the proof is sorried.</p>
+
+<a name="134959879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959879">Kevin Buzzard (Oct 01 2018 at 11:36)</a>:</h4>
+<blockquote>
+<p>is <code>is_continuous</code> constant on equivalence classes?</p>
+</blockquote>
+<p>yes, although I was waiting for module refactoring to prove it.</p>
+
+<a name="134959891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959891">Johan Commelin (Oct 01 2018 at 11:37)</a>:</h4>
+<p>Yep, that will need quite some module-juggling.</p>
+
+<a name="134959900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959900">Johan Commelin (Oct 01 2018 at 11:37)</a>:</h4>
+<p>And a bit of <code>tfae</code>-icing <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
+
+<a name="134959913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959913">Kevin Buzzard (Oct 01 2018 at 11:38)</a>:</h4>
+<p>It is mostly rings but I was using module refactoring as an excuse to put it off</p>
+
+<a name="134959944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959944">Mario Carneiro (Oct 01 2018 at 11:38)</a>:</h4>
+<p>what happened to the relations?</p>
+
+<a name="134959946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959946">Johan Commelin (Oct 01 2018 at 11:38)</a>:</h4>
+<p>Which relations?</p>
+
+<a name="134959958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959958">Johan Commelin (Oct 01 2018 at 11:38)</a>:</h4>
+<p>Aah, lol, they are gone</p>
+
+<a name="134959961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959961">Johan Commelin (Oct 01 2018 at 11:38)</a>:</h4>
+<p>They are in the setoid</p>
+
+<a name="134959967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959967">Johan Commelin (Oct 01 2018 at 11:38)</a>:</h4>
+<p>So there are no longer relations on <code>R</code>.</p>
+
+<a name="134959982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959982">Mario Carneiro (Oct 01 2018 at 11:39)</a>:</h4>
+<p>The reason for that definition was because the quotient doesn't work</p>
+
+<a name="134959989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959989">Johan Commelin (Oct 01 2018 at 11:39)</a>:</h4>
+<p>So how can you define <code>lift</code> and friends using the relations?</p>
+
+<a name="134959992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134959992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134959992">Mario Carneiro (Oct 01 2018 at 11:39)</a>:</h4>
+<p>it's not universe polymorphic enough, and your definition lives in a higher universe</p>
+
+<a name="134960044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960044">Mario Carneiro (Oct 01 2018 at 11:40)</a>:</h4>
+<p>That's what the whole thing about generating valuations is for</p>
+
+<a name="134960045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960045">Johan Commelin (Oct 01 2018 at 11:40)</a>:</h4>
+<p>To me <code>quot</code> is a bunch of <code>C++</code> magic that somehow works. But I don't know how to provide my own <code>lift</code> without at some point resorting to <code>quot.lift</code>.</p>
+
+<a name="134960048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960048">Mario Carneiro (Oct 01 2018 at 11:40)</a>:</h4>
+<p>You do it the old fashioned way</p>
+
+<a name="134960050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960050">Mario Carneiro (Oct 01 2018 at 11:40)</a>:</h4>
+<p>with sets</p>
+
+<a name="134960059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960059">Johan Commelin (Oct 01 2018 at 11:41)</a>:</h4>
+<p>Sorry, I don't follow.</p>
+
+<a name="134960068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960068">Johan Commelin (Oct 01 2018 at 11:41)</a>:</h4>
+<p>Given a relation on <code>R</code>. How do you get a valuation?</p>
+
+<a name="134960073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960073">Kevin Buzzard (Oct 01 2018 at 11:41)</a>:</h4>
+<blockquote>
+<p>For the perfectoid project we often need to work with subsets of quotient types. A mathematician would write</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foobar</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">|</span> <span class="n">formula</span> <span class="n">x</span><span class="o">}</span>
+</pre></div>
+
+
+<p>and afterwards bother with the proof obligation of showing that it is well-defined. Can we mimic this in Lean?</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">QuotType</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">formula</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">definition</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">QuotType</span> <span class="bp">|</span> <span class="n">formula</span> <span class="n">x</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Mimicked. That was what I was trying to say.</p>
+
+<a name="134960081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960081">Mario Carneiro (Oct 01 2018 at 11:41)</a>:</h4>
+<p>The relation is assumed to be the image of some valuation</p>
+
+<a name="134960141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960141">Johan Commelin (Oct 01 2018 at 11:42)</a>:</h4>
+<p>Could you write down the definition of <code>lift</code> (with a <code>sorry</code>)?</p>
+
+<a name="134960150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960150">Johan Commelin (Oct 01 2018 at 11:42)</a>:</h4>
+<p>I couldn't write down anything of which I was even sure that a proof existed.</p>
+
+<a name="134960158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960158">Mario Carneiro (Oct 01 2018 at 11:42)</a>:</h4>
+<p>Wasn't this already done in an earlier version?</p>
+
+<a name="134960261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960261">Johan Commelin (Oct 01 2018 at 11:44)</a>:</h4>
+<p>No, only the claim that it should be done.</p>
+
+<a name="134960265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960265">Johan Commelin (Oct 01 2018 at 11:44)</a>:</h4>
+<p><code>mk</code> was done. That's not so hard.</p>
+
+<a name="134960267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960267">Johan Commelin (Oct 01 2018 at 11:44)</a>:</h4>
+<p>But <code>lift</code> wasn't.</p>
+
+<a name="134960269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960269">Kevin Buzzard (Oct 01 2018 at 11:44)</a>:</h4>
+<p><code>mk</code> took me forever</p>
+
+<a name="134960279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960279">Kevin Buzzard (Oct 01 2018 at 11:45)</a>:</h4>
+<p>Wasn't this the one where I had to invoke the first isomorphism theorem between objects in different universes?</p>
+
+<a name="134960288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960288">Mario Carneiro (Oct 01 2018 at 11:45)</a>:</h4>
+<p>yes</p>
+
+<a name="134960294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960294">Kevin Buzzard (Oct 01 2018 at 11:45)</a>:</h4>
+<p>I thought I did most of the hard work for this</p>
+
+<a name="134960301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960301">Kevin Buzzard (Oct 01 2018 at 11:45)</a>:</h4>
+<p>and that everything else was just noise modulo continuous being constant on equiv classes</p>
+
+<a name="134960311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960311">Johan Commelin (Oct 01 2018 at 11:46)</a>:</h4>
+<p>Hmm, sorry. That wasn't nice to say. You indeed need all the minimal_valuation stuff.</p>
+
+<a name="134960357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960357">Johan Commelin (Oct 01 2018 at 11:46)</a>:</h4>
+<p>But once that is there <code>mk</code> is not very hard.</p>
+
+<a name="134960360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960360">Kevin Buzzard (Oct 01 2018 at 11:46)</a>:</h4>
+<p>I'm not offended, I am just aware that there are issues here I don't understand so am a bit scared of messing with stuff</p>
+
+<a name="134960379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960379">Johan Commelin (Oct 01 2018 at 11:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">Spv</span> <span class="o">:=</span>
+<span class="c1">-- quotient (Spv.setoid R)</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">],</span>
+  <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+</pre></div>
+
+<a name="134960381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960381">Johan Commelin (Oct 01 2018 at 11:46)</a>:</h4>
+<p>Voila, the old definition.</p>
+
+<a name="134960396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960396">Johan Commelin (Oct 01 2018 at 11:47)</a>:</h4>
+<p>I agree that the universe issue wasn't solved by what I did. (I'm really silly when it comes to universes.)</p>
+
+<a name="134960467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960467">Johan Commelin (Oct 01 2018 at 11:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you think this would work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">lift</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="134960497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960497">Mario Carneiro (Oct 01 2018 at 11:49)</a>:</h4>
+<p>can you post enough to make <code>Spv</code> compile? Stub out the definition of <code>valuation</code> and such</p>
+
+<a name="134960670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960670">Mario Carneiro (Oct 01 2018 at 11:53)</a>:</h4>
+<p>mathlib doesn't have <code>linear_ordered_comm_group</code></p>
+
+<a name="134960675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960675">Johan Commelin (Oct 01 2018 at 11:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">valuations</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">quotient_group</span>
+
+<span class="n">universes</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span>
+
+<span class="kn">namespace</span> <span class="n">valuation</span>
+
+<span class="n">class</span> <span class="n">is_valuation</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">map_zero</span> <span class="o">:</span> <span class="n">v</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_one</span>  <span class="o">:</span> <span class="n">v</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">v</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">v</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_add</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">valuation</span>
+
+<span class="n">def</span> <span class="n">valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">v</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="err">Γ</span> <span class="bp">//</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">is_valuation</span> <span class="n">v</span> <span class="o">}</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">valuation</span>
+
+<span class="kn">structure</span> <span class="n">Valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="err">Γ</span>   <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span>
+<span class="o">(</span><span class="n">grp</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="bp">@</span><span class="n">valuation</span> <span class="n">R</span> <span class="bp">_</span> <span class="err">Γ</span> <span class="n">grp</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">Valuation</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">v</span><span class="bp">.</span><span class="err">Γ</span><span class="o">,</span> <span class="n">coe</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">val</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">linear_ordered_value_group</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="n">v</span><span class="bp">.</span><span class="err">Γ</span> <span class="o">:=</span> <span class="n">v</span><span class="bp">.</span><span class="n">grp</span>
+
+<span class="kn">end</span> <span class="n">Valuation</span>
+
+<span class="kn">instance</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v₁</span> <span class="n">v₂</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">v₁</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₁</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">v₂</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₂</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">h</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">symmetry</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span> <span class="n">r</span> <span class="n">s</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">v₃</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">iff</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span> <span class="o">}</span>
+  <span class="kn">end</span> <span class="o">}</span>
+
+<span class="kn">definition</span> <span class="n">Spv</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">],</span>
+  <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+
+<span class="kn">namespace</span> <span class="n">Spv</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span>
+
+<span class="kn">definition</span> <span class="n">mk</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span><span class="o">,</span>
+  <span class="bp">⟨</span><span class="o">(</span><span class="n">minimal_value_group</span> <span class="n">v</span><span class="o">)</span><span class="bp">.</span><span class="err">Γ</span><span class="o">,</span>
+    <span class="bp">⟨</span><span class="n">minimal_value_group</span><span class="bp">.</span><span class="n">linear_ordered_comm_group</span> <span class="n">v</span><span class="o">,</span>
+      <span class="bp">⟨</span><span class="n">v</span><span class="bp">.</span><span class="n">minimal_valuation</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">minimal_valuation_equiv</span><span class="bp">⟩⟩⟩⟩</span>
+
+<span class="kn">definition</span> <span class="n">lift</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">Spv</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">H</span>
+</pre></div>
+
+<a name="134960677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960677">Johan Commelin (Oct 01 2018 at 11:53)</a>:</h4>
+<p>Aah, too bad mathlib doesn't have that.</p>
+
+<a name="134960745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960745">Mario Carneiro (Oct 01 2018 at 11:54)</a>:</h4>
+<p>mathlib has the decidable version</p>
+
+<a name="134960750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960750">Mario Carneiro (Oct 01 2018 at 11:54)</a>:</h4>
+<p>(rather core has it)</p>
+
+<a name="134960763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960763">Mario Carneiro (Oct 01 2018 at 11:55)</a>:</h4>
+<p>is there a reason that doesn't work here?</p>
+
+<a name="134960848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960848">Kevin Buzzard (Oct 01 2018 at 11:57)</a>:</h4>
+<blockquote>
+<p>I agree that the universe issue wasn't solved by what I did. (I'm really silly when it comes to universes.)</p>
+</blockquote>
+<p>I don't know if there is a universe issue with your version. I find subtypes easier to use than quotient types but this might just be lack of practice. I am happy if you think a change will make it more readable but I don't want to run into universe issues. My understanding of the universe issues is that I should not let a valuation be an "equivalence class" of <code>v : R -&gt; with_zero Gamma</code> where Gamma is allowed to vary over any type in any universe. I instead restricted to Gamma varying over things in the same universe as R and then I had to work to show that if I had a Gamma in another universe it was equivalent to Gamma in R's universe. I think that these issues (which I don't understand fully) are not the same as the one Johan is talking about, which is defining Spv not to be the ordering on R but to be the equiv class of valuations which give the ordering, so my guess is that these changes should be fine <em>as long as the equiv reln is defined on valuations taking values in things in R's universe</em>. I am not 100% sure that this is the point but that's my current understanding; I'm currently about to start travelling for 2 hours by the way.</p>
+
+<a name="134960849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960849">Johan Commelin (Oct 01 2018 at 11:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <del>Mathlib</del>core has the additive version...</p>
+
+<a name="134960919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960919">Mario Carneiro (Oct 01 2018 at 12:00)</a>:</h4>
+<p>Unfortunately, you can't even take an equivalence class over all valuations with type in the same universe as R, because this is already too big</p>
+
+<a name="134960982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960982">Johan Commelin (Oct 01 2018 at 12:00)</a>:</h4>
+<p>I have</p>
+<div class="codehilite"><pre><span></span><span class="n">hv</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">(</span><span class="n">v_1</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span>
+    <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">v</span> <span class="n">r</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>in my local context. Somehow <code>cases hv</code> complains that it can only eliminate into <code>Prop</code>. <span class="emoji emoji-1f622" title="cry">:cry:</span></p>
+
+<a name="134960984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960984">Mario Carneiro (Oct 01 2018 at 12:00)</a>:</h4>
+<p>The best you can do is take an equivalence class over all valuations in some "small" collection of representatives</p>
+
+<a name="134960986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960986">Mario Carneiro (Oct 01 2018 at 12:00)</a>:</h4>
+<p>Use <code>classical.cases_on</code></p>
+
+<a name="134960987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134960987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134960987">Johan Commelin (Oct 01 2018 at 12:00)</a>:</h4>
+<blockquote>
+<p>Unfortunately, you can't even take an equivalence class over all valuations with type in the same universe as R, because this is already too big</p>
+</blockquote>
+<p>Like I just experienced (-;</p>
+
+<a name="134961003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961003">Mario Carneiro (Oct 01 2018 at 12:01)</a>:</h4>
+<p>I'm still struggling to get your file to compile, but that's what I was going to do</p>
+
+<a name="134961011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961011">Mario Carneiro (Oct 01 2018 at 12:01)</a>:</h4>
+<p>just use <code>classical.cases_on</code> three times and apply the function</p>
+
+<a name="134961053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961053">Mario Carneiro (Oct 01 2018 at 12:02)</a>:</h4>
+<p>You won't even need the well definedness assumption, it's just for show</p>
+
+<a name="134961068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961068">Johan Commelin (Oct 01 2018 at 12:02)</a>:</h4>
+<p>Let me try</p>
+
+<a name="134961089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961089">Johan Commelin (Oct 01 2018 at 12:03)</a>:</h4>
+<p>How do I "use" <code>classical.cases_on</code> with <code>hv</code>?</p>
+
+<a name="134961133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961133">Mario Carneiro (Oct 01 2018 at 12:04)</a>:</h4>
+<p><code>refine classical.cases_on hv (\lam Gamma h', _)</code></p>
+
+<a name="134961136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961136">Johan Commelin (Oct 01 2018 at 12:04)</a>:</h4>
+<p>I see</p>
+
+<a name="134961138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961138">Johan Commelin (Oct 01 2018 at 12:04)</a>:</h4>
+<p>Good old refine</p>
+
+<a name="134961139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961139">Mario Carneiro (Oct 01 2018 at 12:04)</a>:</h4>
+<p>You might be able to use a custom recursor with <code>induction</code> but I find <code>refine</code> the most straightforward</p>
+
+<a name="134961152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961152">Johan Commelin (Oct 01 2018 at 12:05)</a>:</h4>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  classical.cases_on hv
+term
+  hv
+has type
+  ∃ {Γ : Type u₁} [_inst_3 : linear_ordered_comm_group Γ] (v_1 : valuation R Γ),
+    ∀ (r s : R), ⇑v_1 r ≤ ⇑v_1 s ↔ v r s : Prop
+but is expected to have type
+  Prop : Type
+</pre></div>
+
+<a name="134961156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961156">Johan Commelin (Oct 01 2018 at 12:05)</a>:</h4>
+<p>Also... lunch time</p>
+
+<a name="134961157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961157">Johan Commelin (Oct 01 2018 at 12:05)</a>:</h4>
+<p>See you later</p>
+
+<a name="134961159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961159">Mario Carneiro (Oct 01 2018 at 12:05)</a>:</h4>
+<p>lol</p>
+
+<a name="134961210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961210">Mario Carneiro (Oct 01 2018 at 12:06)</a>:</h4>
+<p>sorry, I think it's called <code>classical.rec_on</code></p>
+
+<a name="134961215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961215">Mario Carneiro (Oct 01 2018 at 12:06)</a>:</h4>
+<p>it's a bad name</p>
+
+<a name="134961221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134961221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134961221">Mario Carneiro (Oct 01 2018 at 12:06)</a>:</h4>
+<p>it should be more like <code>exists.rec_on_classical</code></p>
+
+<a name="134963338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134963338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134963338">Johan Commelin (Oct 01 2018 at 13:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">lift</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">Spv</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">v</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">v</span> <span class="k">with</span> <span class="n">v</span> <span class="n">hv</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hv</span> <span class="o">(</span><span class="bp">λ</span> <span class="err">Γ</span> <span class="n">hv&#39;</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+<span class="n">refine</span> <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hv&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">inst</span> <span class="n">hv&#39;&#39;</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+<span class="n">refine</span> <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hv&#39;&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">v</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+<span class="n">exact</span> <span class="n">f</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:=</span> <span class="err">Γ</span><span class="o">,</span> <span class="n">grp</span> <span class="o">:=</span> <span class="n">inst</span><span class="o">,</span> <span class="n">val</span> <span class="o">:=</span> <span class="n">v</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="134963350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134963350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134963350">Johan Commelin (Oct 01 2018 at 13:01)</a>:</h4>
+<p>That kind of worked. But I didn't use <code>H</code></p>
+
+<a name="134964015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964015">Patrick Massot (Oct 01 2018 at 13:18)</a>:</h4>
+<p>Mario announced that you wouldn't need H</p>
+
+<a name="134964138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964138">Johan Commelin (Oct 01 2018 at 13:21)</a>:</h4>
+<p>So, is this some sort of "cheating" definition?</p>
+
+<a name="134964152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964152">Johan Commelin (Oct 01 2018 at 13:21)</a>:</h4>
+<p>I guess we should leave <code>H</code> in place, because otherwise <code>lift</code> can be abused.</p>
+
+<a name="134964277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964277">Reid Barton (Oct 01 2018 at 13:24)</a>:</h4>
+<p>You will need <code>H</code> to prove that <code>lift f H (mk v) = f v</code></p>
+
+<a name="134964394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964394">Johan Commelin (Oct 01 2018 at 13:26)</a>:</h4>
+<p>Good point. Let me prove such things now.</p>
+
+<a name="134964400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134964400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134964400">Patrick Massot (Oct 01 2018 at 13:27)</a>:</h4>
+<p>It seems this is a very convenient way to setup things: define stuff without precondition, and prove they have the expected properties under the appropriate conditions. An extreme example is <a href="https://github.com/leanprover-community/mathlib/blob/b3b50ce67c8b73442372c5141e8836c64ea13826/analysis/topology/completion.lean#L442-L446" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/b3b50ce67c8b73442372c5141e8836c64ea13826/analysis/topology/completion.lean#L442-L446">https://github.com/leanprover-community/mathlib/blob/b3b50ce67c8b73442372c5141e8836c64ea13826/analysis/topology/completion.lean#L442-L446</a></p>
+
+<a name="134965116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134965116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134965116">Johan Commelin (Oct 01 2018 at 13:42)</a>:</h4>
+<p>Now I'm stuck on the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="bp">_</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span>
+       <span class="o">(</span><span class="n">hv&#39;</span> <span class="o">:</span>
+         <span class="bp">∃</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">(</span><span class="n">v_1</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span>
+           <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">s</span> <span class="bp">↔</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">s</span><span class="o">),</span>
+         <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hv&#39;</span>
+           <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">inst</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">)</span>
+            <span class="o">(</span><span class="n">hv&#39;&#39;</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v_1</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">s</span> <span class="bp">↔</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">s</span><span class="o">),</span>
+              <span class="n">classical</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hv&#39;&#39;</span>
+                <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">v_1</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="n">v_1</span> <span class="n">s</span> <span class="bp">↔</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">r</span> <span class="bp">≤</span> <span class="err">⇑</span><span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="n">s</span><span class="o">),</span>
+                   <span class="n">f</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:=</span> <span class="err">Γ</span><span class="o">,</span> <span class="n">grp</span> <span class="o">:=</span> <span class="n">inst</span><span class="o">,</span> <span class="n">val</span> <span class="o">:=</span> <span class="n">v_1</span><span class="o">})))</span> <span class="bp">=</span>
+    <span class="n">f</span> <span class="n">v</span>
+</pre></div>
+
+
+<p>The maths is clear, but I have no idea how to work with this <code>classical.rec_on</code>. How do I fight those?</p>
+
+<a name="134965842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134965842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134965842">Johan Commelin (Oct 01 2018 at 13:59)</a>:</h4>
+<p>Ok, so I can turn it into the rather unhelpful:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lift_mk</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">}</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">lift</span> <span class="n">f</span> <span class="n">H</span> <span class="o">(</span><span class="n">mk</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c1">-- ⊢ {Γ := classical.some _, grp := classical.some _, val := classical.some _} ≈ v</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="134965907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134965907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134965907">Johan Commelin (Oct 01 2018 at 14:00)</a>:</h4>
+<p>As you can see in the code, there is this bit saying <code>(hv'' : ∃ (v_1 : valuation R Γ), ∀ (r s : R), ⇑v_1 r ≤ ⇑v_1 s ↔ ⇑(v.val) r ≤ ⇑(v.val) s),</code>. I need to extract that, and use it to close my goal.</p>
+
+<a name="134966633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134966633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134966633">Johan Commelin (Oct 01 2018 at 14:18)</a>:</h4>
+<p>Ok, from browsing code I think that I should use <code>some_spec</code> or <code>some_spec2</code>. Can anyone confirm that this is reasonable? (I have yet to figure out how I should use them...)</p>
+
+<a name="134967775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967775">Johan Commelin (Oct 01 2018 at 14:44)</a>:</h4>
+<p>This is what I have now:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lift_mk</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">}</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">lift</span> <span class="n">f</span> <span class="n">H</span> <span class="o">(</span><span class="n">mk</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">ineq</span> <span class="o">:=</span> <span class="n">mk</span> <span class="n">v</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">foo</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">ineq</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="c1">-- R : Type u₁,</span>
+<span class="c1">-- _inst_1 : comm_ring R,</span>
+<span class="c1">-- _inst_2 : decidable_eq R,</span>
+<span class="c1">-- β : Type u₃,</span>
+<span class="c1">-- f : Valuation R → β,</span>
+<span class="c1">-- H : ∀ (v₁ v₂ : Valuation R), v₁ ≈ v₂ → f v₁ = f v₂,</span>
+<span class="c1">-- v : Valuation R,</span>
+<span class="c1">-- ineq : Spv R := mk v,</span>
+<span class="c1">-- foo : ∀ (r s : R), ⇑(classical.some _) r ≤ ⇑(classical.some _) s ↔ ineq.val r s,</span>
+<span class="c1">-- r s : R</span>
+<span class="c1">-- ⊢ ⇑(classical.some _) r ≤ ⇑(classical.some _) s ↔ ⇑v r ≤ ⇑v s</span>
+</pre></div>
+
+
+<p>Looks deceptively close, but I can't finish it.</p>
+
+<a name="134967787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967787">Johannes Hölzl (Oct 01 2018 at 14:45)</a>:</h4>
+<p>Yes, if you want to proof something about <code>classical.some</code>. What you usually do is to define a the constant using <code>classical.some</code> and then proof when a corresponding value exists, then the constant has the properties.</p>
+
+<a name="134967800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967800">Johannes Hölzl (Oct 01 2018 at 14:45)</a>:</h4>
+<p>what is the type of <code>_</code> in <code>classical.some _</code>?</p>
+
+<a name="134967891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967891">Johan Commelin (Oct 01 2018 at 14:47)</a>:</h4>
+<p>Hooray!</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lift_mk</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">,</span> <span class="n">v₁</span> <span class="bp">≈</span> <span class="n">v₂</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">v₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v₂</span><span class="o">}</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">lift</span> <span class="n">f</span> <span class="n">H</span> <span class="o">(</span><span class="n">mk</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">ineq</span> <span class="o">:=</span> <span class="n">mk</span> <span class="n">v</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">spec</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">mk</span> <span class="n">v</span><span class="o">)</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">mk</span><span class="o">]</span> <span class="n">at</span> <span class="n">spec</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">spec</span> <span class="n">r</span> <span class="n">s</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="134967896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967896">Johan Commelin (Oct 01 2018 at 14:47)</a>:</h4>
+<p>Somehow I managed to convince Lean!</p>
+
+<a name="134967899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967899">Andrew Ashworth (Oct 01 2018 at 14:48)</a>:</h4>
+<p>I agree <code>some_spec</code> is awkward, but for what it's worth, it is mentioned in TPIL. When I first saw the example provided in 11.6 I didn't have any idea how it worked.</p>
+
+<a name="134967939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20of%20quotient/near/134967939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83717subsetofquotient.html#134967939">Andrew Ashworth (Oct 01 2018 at 14:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span> <span class="n">function</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">prop_decidable</span>
+
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">linv</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="k">if</span> <span class="n">ex</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="k">then</span> <span class="n">some</span> <span class="n">ex</span> <span class="k">else</span> <span class="n">arbitrary</span> <span class="n">α</span>
+
+<span class="kn">theorem</span> <span class="n">linv_comp_self</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+    <span class="o">[</span><span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">inj</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">linv</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">:=</span>
+<span class="n">funext</span> <span class="o">(</span><span class="k">assume</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">ex</span>  <span class="o">:</span> <span class="bp">∃</span> <span class="n">a₁</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="n">a₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">a</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="k">have</span>   <span class="n">feq</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">some</span> <span class="n">ex</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">some_spec</span> <span class="n">ex</span><span class="o">,</span>
+  <span class="k">calc</span> <span class="n">linv</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">ex</span> <span class="o">:</span>  <span class="n">dif_pos</span> <span class="n">ex</span>
+             <span class="bp">...</span>    <span class="bp">=</span> <span class="n">a</span>       <span class="o">:</span>  <span class="n">inj</span> <span class="n">feq</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}

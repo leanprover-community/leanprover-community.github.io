@@ -1,0 +1,38 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/06147underhandedlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06147underhandedlean.html">underhanded lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152579911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152579911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147underhandedlean.html#152579911">Mario Carneiro (Dec 27 2018 at 02:44)</a>:</h4>
+<p>wow, I didn't expect this to work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">my_print</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">tk</span> <span class="s2">&quot;#print&quot;</span><span class="o">)</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tk</span> <span class="s2">&quot;axioms&quot;</span> <span class="bp">&gt;&gt;</span> <span class="n">ident</span> <span class="err">$</span><span class="bp">&gt;</span> <span class="n">trace</span> <span class="s2">&quot;totally ok&quot;</span> <span class="o">()</span><span class="bp">.</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">tk</span> <span class="s2">&quot;def&quot;</span><span class="o">)</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">ident</span> <span class="bp">&gt;&gt;</span> <span class="n">tk</span> <span class="s2">&quot;:&quot;</span> <span class="bp">&gt;&gt;</span> <span class="n">texpr</span> <span class="bp">&gt;&gt;</span> <span class="n">tk</span> <span class="s2">&quot;:=&quot;</span> <span class="bp">&gt;&gt;</span> <span class="n">ident</span> <span class="err">$</span><span class="bp">&gt;</span> <span class="n">trace</span> <span class="s2">&quot;looks good to me&quot;</span> <span class="o">()</span><span class="bp">.</span>
+
+<span class="n">def</span> <span class="n">contradiction</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">sure</span> <span class="c1">-- looks good to me</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">contradiction</span> <span class="c1">-- totally ok</span>
+</pre></div>
+
+
+<p>Apparently you can override basically all lean command tokens, including <code>section</code>, <code>namespace</code>, <code>def</code> and <code>end</code></p>
+
+<a name="152597048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152597048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147underhandedlean.html#152597048">Keeley Hoek (Dec 27 2018 at 12:18)</a>:</h4>
+<p>Yep<br>
+At one point I tried a sneaky 'begin' override, but the problem is you can never close a block you open</p>
+
+
+{% endraw %}

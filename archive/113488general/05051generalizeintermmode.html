@@ -1,0 +1,706 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/05051generalizeintermmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html">generalize in term mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125497304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497304">Kenny Lau (Apr 21 2018 at 17:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>I have made a <code>generalize</code> in term mode</p>
+
+<a name="125497307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497307">Kenny Lau (Apr 21 2018 at 17:50)</a>:</h4>
+<p>let's say this is the goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">y</span> <span class="n">w</span> <span class="bp">∧</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">z</span> <span class="n">w</span><span class="o">)</span>
+</pre></div>
+
+<a name="125497313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497313">Kenny Lau (Apr 21 2018 at 17:51)</a>:</h4>
+<p>doing <code>generalize z _</code> will give you this on the underscore:</p>
+
+<a name="125497314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497314">Kenny Lau (Apr 21 2018 at 17:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span>
+    <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">x_1</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">y</span> <span class="n">w</span> <span class="bp">∧</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">x_1</span> <span class="n">w</span><span class="o">)</span>
+</pre></div>
+
+<a name="125497315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497315">Kenny Lau (Apr 21 2018 at 17:51)</a>:</h4>
+<p>is this a good idea?</p>
+
+<a name="125497412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497412">Kenny Lau (Apr 21 2018 at 17:55)</a>:</h4>
+<p>example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">red</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="kn">inductive</span> <span class="n">refl_trans</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">refl_trans</span> <span class="n">x</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="n">step_trans</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">}</span> <span class="o">:</span> <span class="n">red</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">x</span> <span class="n">z</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">refl_trans</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">z</span> <span class="err">$</span> <span class="n">refl_trans</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">z</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">hxy</span> <span class="n">hyz</span> <span class="n">ih</span> <span class="n">w</span> <span class="n">hzw</span><span class="o">,</span>
+<span class="n">refl_trans</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">hxy</span> <span class="err">$</span> <span class="n">ih</span> <span class="n">w</span> <span class="n">hzw</span>
+</pre></div>
+
+<a name="125497413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497413">Kenny Lau (Apr 21 2018 at 17:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <span class="user-mention" data-user-id="110031">@Patrick Massot</span> what do you guys think?</p>
+
+<a name="125497453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497453">Patrick Massot (Apr 21 2018 at 17:56)</a>:</h4>
+<p>I'm afraid I still have to learn what the tactic mode <code>generalize</code> is good for</p>
+
+<a name="125497454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497454">Patrick Massot (Apr 21 2018 at 17:56)</a>:</h4>
+<p>I'm very curious because it came up a lot recently</p>
+
+<a name="125497455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497455">Patrick Massot (Apr 21 2018 at 17:56)</a>:</h4>
+<p>But I can't learn everything at the same time</p>
+
+<a name="125497456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497456">Kenny Lau (Apr 21 2018 at 17:56)</a>:</h4>
+<p>well you know how <code>induction</code> works with <code>generalizing</code> right</p>
+
+<a name="125497457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497457">Patrick Massot (Apr 21 2018 at 17:57)</a>:</h4>
+<p>No I don't</p>
+
+<a name="125497462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497462">Kenny Lau (Apr 21 2018 at 17:57)</a>:</h4>
+<p>hmm</p>
+
+<a name="125497463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497463">Patrick Massot (Apr 21 2018 at 17:57)</a>:</h4>
+<p>I only do induction on natural numbers</p>
+
+<a name="125497464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497464">Kenny Lau (Apr 21 2018 at 17:57)</a>:</h4>
+<p>so when you're proving that natural number addition is commutative</p>
+
+<a name="125497465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497465">Kenny Lau (Apr 21 2018 at 17:57)</a>:</h4>
+<p>you want to prove that x+y=y+x</p>
+
+<a name="125497466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497466">Kenny Lau (Apr 21 2018 at 17:57)</a>:</h4>
+<p>you induct on the proposition <code>\forall y, x+y=y+x</code> instead</p>
+
+<a name="125497467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497467">Kenny Lau (Apr 21 2018 at 17:58)</a>:</h4>
+<p>(and you prove the base case and inductive step both by induction)</p>
+
+<a name="125497504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497504">Kenny Lau (Apr 21 2018 at 17:58)</a>:</h4>
+<p>(I call this "double induction')</p>
+
+<a name="125497509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497509">Kenny Lau (Apr 21 2018 at 17:58)</a>:</h4>
+<p>the very action of moving the goalpost from <code>x+y=y+x</code> to <code>\forall y, x+y=y+x</code> is called generalizing</p>
+
+<a name="125497518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497518">Kenny Lau (Apr 21 2018 at 17:59)</a>:</h4>
+<p><a href="https://math.stackexchange.com/a/2438135/328173" target="_blank" title="https://math.stackexchange.com/a/2438135/328173">https://math.stackexchange.com/a/2438135/328173</a></p>
+
+<a name="125497520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497520">Kenny Lau (Apr 21 2018 at 17:59)</a>:</h4>
+<p>here is it in Fitch style (only part 1 is relevant)</p>
+
+<a name="125497664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497664">Simon Hudon (Apr 21 2018 at 18:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I'll have to get back to you a bit later. My nephew just arrived</p>
+
+<a name="125497665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497665">Kenny Lau (Apr 21 2018 at 18:04)</a>:</h4>
+<p>ok</p>
+
+<a name="125497882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497882">Patrick Massot (Apr 21 2018 at 18:12)</a>:</h4>
+<p>I can understand why you used your Kenny identity to post such an answer</p>
+
+<a name="125497883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497883">Patrick Massot (Apr 21 2018 at 18:12)</a>:</h4>
+<p>Thanks for the explanation</p>
+
+<a name="125497888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497888">Kenny Lau (Apr 21 2018 at 18:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="kn">inductive</span> <span class="n">xnat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+
+<span class="kn">namespace</span> <span class="n">xnat</span>
+
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">(</span><span class="n">succ</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">y</span> <span class="err">$</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span>
+
+<span class="kn">end</span> <span class="n">xnat</span>
+</pre></div>
+
+<a name="125497890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497890">Kenny Lau (Apr 21 2018 at 18:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> somehow it took me a long time to prove this</p>
+
+<a name="125497891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497891">Kenny Lau (Apr 21 2018 at 18:13)</a>:</h4>
+<p>but here you go</p>
+
+<a name="125497892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497892">Kenny Lau (Apr 21 2018 at 18:13)</a>:</h4>
+<p>why did I use my Kenny identity to post such an answer?</p>
+
+<a name="125497894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497894">Kenny Lau (Apr 21 2018 at 18:13)</a>:</h4>
+<p>and you can see that <code>generalize</code> is necessary because I used <code>ih1</code> twice</p>
+
+<a name="125497934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497934">Kenny Lau (Apr 21 2018 at 18:14)</a>:</h4>
+<p>I should make <code>show</code> a term-tactic</p>
+
+<a name="125497935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497935">Kenny Lau (Apr 21 2018 at 18:14)</a>:</h4>
+<p>well that won't really be necessary, forget that</p>
+
+<a name="125497936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497936">Kenny Lau (Apr 21 2018 at 18:14)</a>:</h4>
+<p>but I like my <code>generalize</code></p>
+
+<a name="125497937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497937">Kenny Lau (Apr 21 2018 at 18:14)</a>:</h4>
+<p>a tactic in term mode</p>
+
+<a name="125497938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497938">Kenny Lau (Apr 21 2018 at 18:14)</a>:</h4>
+<p>(a tactic, here, is one which converts your goal to something useful)</p>
+
+<a name="125497945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497945">Kenny Lau (Apr 21 2018 at 18:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you think it is a good idea? I have too many <code>aux</code> theorems in my <code>free_group.lean</code> that can be eliminated by my new invention :P</p>
+
+<a name="125497946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497946">Kenny Lau (Apr 21 2018 at 18:15)</a>:</h4>
+<p>assuming that it is an invention</p>
+
+<a name="125497988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497988">Kenny Lau (Apr 21 2018 at 18:16)</a>:</h4>
+<p>bonus points! <code>generalize</code> also works as <code>revert</code></p>
+
+<a name="125497993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125497993">Kenny Lau (Apr 21 2018 at 18:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">H</span> <span class="bp">_</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">x y : ℕ,</span>
+<span class="cm">H : x = y</span>
+<span class="cm">⊢ x = y → false</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="125499063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499063">Kenny Lau (Apr 21 2018 at 19:01)</a>:</h4>
+<p>I think I made a mistake. What I have built is really <code>revert</code></p>
+
+<a name="125499065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499065">Kenny Lau (Apr 21 2018 at 19:01)</a>:</h4>
+<p>Here's the real <code>generalize</code>:</p>
+
+<a name="125499066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499066">Kenny Lau (Apr 21 2018 at 19:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">m n : ℕ</span>
+<span class="cm">⊢ ∀ (z : ℕ), m + n = z → z = 0</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="125499110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499110">Chris Hughes (Apr 21 2018 at 19:03)</a>:</h4>
+<p>I always wondered how to revert in term mode, however not sure I've ever had to do it.</p>
+
+<a name="125499111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499111">Kenny Lau (Apr 21 2018 at 19:03)</a>:</h4>
+<p>thanks for your appreciation</p>
+
+<a name="125499112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499112">Kenny Lau (Apr 21 2018 at 19:03)</a>:</h4>
+<p>so, for the sake of completeness:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="125499155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499155">Andrew Ashworth (Apr 21 2018 at 19:05)</a>:</h4>
+<p>in the old days when we didn't have a tactic mode you'd revert using clever <code>heq</code> tricks</p>
+
+<a name="125499158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499158">Chris Hughes (Apr 21 2018 at 19:05)</a>:</h4>
+<p>Usually I just do this.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">},</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="bp">@</span><span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span>
+</pre></div>
+
+<a name="125499159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499159">Kenny Lau (Apr 21 2018 at 19:05)</a>:</h4>
+<p>right, that's what I did in my free group file</p>
+
+<a name="125499160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499160">Kenny Lau (Apr 21 2018 at 19:05)</a>:</h4>
+<p>until I realized that I can build tactics in term mode</p>
+
+<a name="125499199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499199">Andrew Ashworth (Apr 21 2018 at 19:06)</a>:</h4>
+<p>does your generalize use <code>heq</code> under the hood?</p>
+
+<a name="125499200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499200">Chris Hughes (Apr 21 2018 at 19:06)</a>:</h4>
+<p>Are there any examples where you can't just do that?</p>
+
+<a name="125499201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499201">Kenny Lau (Apr 21 2018 at 19:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> so my file has a lot of auxiliary theorems</p>
+
+<a name="125499202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499202">Kenny Lau (Apr 21 2018 at 19:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L₃</span><span class="o">},</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="bp">→</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H12</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">ih</span> <span class="n">L₃</span> <span class="n">H23</span><span class="o">,</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">H1</span> <span class="err">$</span> <span class="n">ih</span> <span class="n">H23</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">(</span><span class="n">H23</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span><span class="o">)</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">trans</span><span class="bp">.</span><span class="n">aux</span> <span class="n">H12</span> <span class="n">H23</span>
+</pre></div>
+
+<a name="125499203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499203">Kenny Lau (Apr 21 2018 at 19:06)</a>:</h4>
+<p>now I can do it in one go:</p>
+
+<a name="125499204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499204">Kenny Lau (Apr 21 2018 at 19:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">(</span><span class="n">H23</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span><span class="o">)</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">revert</span> <span class="n">H23</span> <span class="err">$</span> <span class="n">revert</span> <span class="n">L₃</span> <span class="err">$</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H12</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">ih</span> <span class="n">L₃</span> <span class="n">H23</span><span class="o">,</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">H1</span> <span class="err">$</span> <span class="n">ih</span> <span class="bp">_</span> <span class="n">H23</span>
+</pre></div>
+
+<a name="125499210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499210">Kenny Lau (Apr 21 2018 at 19:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> are we talking about the same <code>heq</code>, i.e. the <code>heq</code> as in Lean? I don't know Coq at all. I showed you my code above though.</p>
+
+<a name="125499211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499211">Kenny Lau (Apr 21 2018 at 19:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> not that I'm aware of</p>
+
+<a name="125499212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499212">Kenny Lau (Apr 21 2018 at 19:07)</a>:</h4>
+<p>I just built that an hour ago, I don't know everything about it</p>
+
+<a name="125499213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499213">Andrew Ashworth (Apr 21 2018 at 19:07)</a>:</h4>
+<p>yeah, because in Coq it'd be <code>JMeq</code>, heh</p>
+
+<a name="125499214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499214">Kenny Lau (Apr 21 2018 at 19:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="125499237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499237">Kenny Lau (Apr 21 2018 at 19:08)</a>:</h4>
+<p>I don't see any <code>heq</code> here</p>
+
+<a name="125499254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499254">Andrew Ashworth (Apr 21 2018 at 19:08)</a>:</h4>
+<p>when you print an example that uses generalize</p>
+
+<a name="125499255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499255">Andrew Ashworth (Apr 21 2018 at 19:08)</a>:</h4>
+<p>do you get a <code>heq</code> term</p>
+
+<a name="125499257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499257">Andrew Ashworth (Apr 21 2018 at 19:08)</a>:</h4>
+<p>it may or may not, i'm just curious</p>
+
+<a name="125499259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499259">Chris Hughes (Apr 21 2018 at 19:08)</a>:</h4>
+<p>You can just do some extra lambdas. i.e<br>
+<code>theorem red.trans.aux  : ∀ {L₃}, red L₁ L₂ → red L₂ L₃ → red L₁ L₃</code><br>
+What's wrong with that?</p>
+
+<a name="125499262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499262">Kenny Lau (Apr 21 2018 at 19:09)</a>:</h4>
+<p>I need to rec on the first red</p>
+
+<a name="125499269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499269">Chris Hughes (Apr 21 2018 at 19:09)</a>:</h4>
+<p>I see. Makes a lot of sense then.</p>
+
+<a name="125499270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499270">Kenny Lau (Apr 21 2018 at 19:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span> <span class="n">hz</span><span class="o">,</span> <span class="n">sorry</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="125499271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499271">Kenny Lau (Apr 21 2018 at 19:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> is this what you're talking about?</p>
+
+<a name="125499317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499317">Chris Hughes (Apr 21 2018 at 19:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Are you talking about Kenny's generalize or tactics mode generalize?</p>
+
+<a name="125499320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499320">Kenny Lau (Apr 21 2018 at 19:10)</a>:</h4>
+<p>in that case:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span> <span class="n">hz</span><span class="o">,</span> <span class="n">sorry</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">-/</span>
+
+<span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">generalize</span> <span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">admit</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test&#39;</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test&#39; : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  (λ (z : nat) (h : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (@rfl.{1} nat (@has_add.add.{0} nat nat.has_add m n))</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="125499409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499409">Andrew Ashworth (Apr 21 2018 at 19:14)</a>:</h4>
+<p>hm, interesting, i'd have to dig further when I have time</p>
+
+<a name="125499416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499416">Kenny Lau (Apr 21 2018 at 19:15)</a>:</h4>
+<p>thanks for your appreciation</p>
+
+<a name="125499417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499417">Andrew Ashworth (Apr 21 2018 at 19:15)</a>:</h4>
+<p><code>heq</code> is important when doing dependent case analysis, which is why i was expecting heq to show up in the term there somewhere</p>
+
+<a name="125499418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499418">Andrew Ashworth (Apr 21 2018 at 19:15)</a>:</h4>
+<p>it's probably buried in there somewhere... maybe... underneath one of the definitions</p>
+
+<a name="125499419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499419">Andrew Ashworth (Apr 21 2018 at 19:15)</a>:</h4>
+<p>it's quite a low-level idea</p>
+
+<a name="125499421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499421">Andrew Ashworth (Apr 21 2018 at 19:15)</a>:</h4>
+<p>or i could be really wrong about how lean works, and that also wouldn't surprise me</p>
+
+<a name="125499422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499422">Kenny Lau (Apr 21 2018 at 19:16)</a>:</h4>
+<p>so, eh, which one?</p>
+
+<a name="125499463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499463">Kenny Lau (Apr 21 2018 at 19:16)</a>:</h4>
+<p><code>eq</code> is already an inductive type</p>
+
+<a name="125499464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499464">Andrew Ashworth (Apr 21 2018 at 19:16)</a>:</h4>
+<p>i can't say because i'm a lean scrub</p>
+
+<a name="125499465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499465">Kenny Lau (Apr 21 2018 at 19:16)</a>:</h4>
+<p>it doesn't depend on <code>heq</code></p>
+
+<a name="125499467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499467">Kenny Lau (Apr 21 2018 at 19:16)</a>:</h4>
+<p>I don't think it uses <code>heq</code> anywhere</p>
+
+<a name="125499522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499522">Chris Hughes (Apr 21 2018 at 19:19)</a>:</h4>
+<p>Here's an alternative method</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="bp">@</span><span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span> <span class="n">y</span>
+</pre></div>
+
+<a name="125499524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499524">Andrew Ashworth (Apr 21 2018 at 19:19)</a>:</h4>
+<p>sure, and why that might be is interesting to me, most other tactics in coq that do this sort of thing use <code>heq</code></p>
+
+<a name="125499525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499525">Andrew Ashworth (Apr 21 2018 at 19:19)</a>:</h4>
+<p><a href="https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html" target="_blank" title="https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html">https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html</a></p>
+
+<a name="125499568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499568">Kenny Lau (Apr 21 2018 at 19:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> interesting. usually it fails if I put <code>y</code> at the end</p>
+
+<a name="125499571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499571">Kenny Lau (Apr 21 2018 at 19:20)</a>:</h4>
+<p>I still like my method more :P</p>
+
+<a name="125499572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499572">Chris Hughes (Apr 21 2018 at 19:20)</a>:</h4>
+<p>I was expecting it not to work.</p>
+
+<a name="125499574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499574">Kenny Lau (Apr 21 2018 at 19:20)</a>:</h4>
+<p>did you do anything more than my eyes could see</p>
+
+<a name="125499575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499575">Kenny Lau (Apr 21 2018 at 19:20)</a>:</h4>
+<p>I can't really tell if you changed anything in the middle</p>
+
+<a name="125499576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499576">Chris Hughes (Apr 21 2018 at 19:20)</a>:</h4>
+<p>No.</p>
+
+<a name="125499579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125499579">Kenny Lau (Apr 21 2018 at 19:21)</a>:</h4>
+<p>very curious indeed</p>
+
+<a name="125500272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500272">Kenny Lau (Apr 21 2018 at 19:46)</a>:</h4>
+<p>more examples: <a href="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a" target="_blank" title="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a">https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a</a></p>
+
+<a name="125500481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500481">Patrick Massot (Apr 21 2018 at 19:55)</a>:</h4>
+<p>Congratulations!</p>
+
+<a name="125500485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500485">Patrick Massot (Apr 21 2018 at 19:55)</a>:</h4>
+<p>Two docstrings is a very good start!</p>
+
+<a name="125500486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500486">Kenny Lau (Apr 21 2018 at 19:55)</a>:</h4>
+<p>:P</p>
+
+<a name="125500488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500488">Kenny Lau (Apr 21 2018 at 19:55)</a>:</h4>
+<p>I was making docstrings</p>
+
+<a name="125500490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125500490">Kenny Lau (Apr 21 2018 at 19:55)</a>:</h4>
+<p>and then I got carried away by <code>revert</code> and <code>generalize</code></p>
+
+<a name="125521584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521584">Kenny Lau (Apr 22 2018 at 09:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you like this?</p>
+
+<a name="125521591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521591">Kenny Lau (Apr 22 2018 at 09:55)</a>:</h4>
+<p>recap:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="125521631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521631">Mario Carneiro (Apr 22 2018 at 09:56)</a>:</h4>
+<p>I'm not sure I buy the particular applications you've used it for, but this seems okay for <code>logic.basic</code></p>
+
+<a name="125521632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521632">Mario Carneiro (Apr 22 2018 at 09:56)</a>:</h4>
+<p>probably should be <code>reducible</code></p>
+
+<a name="125521633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521633">Kenny Lau (Apr 22 2018 at 09:56)</a>:</h4>
+<p>woohoo, tactics in term mode</p>
+
+<a name="125521638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521638">Mario Carneiro (Apr 22 2018 at 09:57)</a>:</h4>
+<p>I mean, you can use <code>match</code> to the same effect</p>
+
+<a name="125521640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521640">Mario Carneiro (Apr 22 2018 at 09:57)</a>:</h4>
+<p>but I usually just set up my intros in the right order so this isn't needed</p>
+
+<a name="125521641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521641">Kenny Lau (Apr 22 2018 at 09:58)</a>:</h4>
+<p>right, but setting up them make for a bunch of auxiliary theorems</p>
+
+<a name="125521682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521682">Mario Carneiro (Apr 22 2018 at 09:58)</a>:</h4>
+<p>not in my experience</p>
+
+<a name="125521683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521683">Kenny Lau (Apr 22 2018 at 09:58)</a>:</h4>
+<p><a href="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a" target="_blank" title="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a">https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a</a></p>
+
+<a name="125521684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521684">Kenny Lau (Apr 22 2018 at 09:58)</a>:</h4>
+<p>here</p>
+
+<a name="125521691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521691">Mario Carneiro (Apr 22 2018 at 09:59)</a>:</h4>
+<p>why don't you use the equation compiler?</p>
+
+<a name="125521693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521693">Kenny Lau (Apr 22 2018 at 09:59)</a>:</h4>
+<p>that also needs to be auxiliary</p>
+
+<a name="125521694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521694">Mario Carneiro (Apr 22 2018 at 09:59)</a>:</h4>
+<p>for <code>red.trans</code></p>
+
+<a name="125521695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521695">Kenny Lau (Apr 22 2018 at 09:59)</a>:</h4>
+<p>because <code>rec_on</code> is shorter</p>
+
+<a name="125521739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521739">Mario Carneiro (Apr 22 2018 at 10:00)</a>:</h4>
+<p>eww</p>
+
+<a name="125521740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521740">Kenny Lau (Apr 22 2018 at 10:00)</a>:</h4>
+<p>I thought someone likes short proofs</p>
+
+<a name="125521742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521742">Mario Carneiro (Apr 22 2018 at 10:00)</a>:</h4>
+<p>I like straightforward proofs</p>
+
+<a name="125521749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521749">Mario Carneiro (Apr 22 2018 at 10:01)</a>:</h4>
+<p>the equation compiler makes it really clear how an induction proceeds, and what is the IH</p>
+
+<a name="125521751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521751">Mario Carneiro (Apr 22 2018 at 10:01)</a>:</h4>
+<p>plus, I very much doubt you recouped the loss of having to state an auxiliary</p>
+
+<a name="125521794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521794">Mario Carneiro (Apr 22 2018 at 10:03)</a>:</h4>
+<p>We haven't talked about it much since they appear to be going extinct, but it's possible to write brittle term proofs too</p>
+
+<a name="125521797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521797">Mario Carneiro (Apr 22 2018 at 10:03)</a>:</h4>
+<p>this was a big problem in lean 2</p>
+
+<a name="125521838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html#125521838">Mario Carneiro (Apr 22 2018 at 10:04)</a>:</h4>
+<p>when you do a proof with lots of omitted type information relying on lean to pick up the pieces, if something changes in the unification algorithm or something it can be very difficult to understand the broken proof</p>
+
+
+{% endraw %}

@@ -1,0 +1,33 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/13941Importinganalysisnormedspacedmakesthingsnoncomputable.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/13941Importinganalysisnormedspacedmakesthingsnoncomputable.html">Importing analysis.normed_spaced makes things noncomputable</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152088656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13941Importinganalysisnormedspacedmakesthingsnoncomputable.html#152088656">Abhimanyu Pallavi Sudhir (Dec 18 2018 at 07:24)</a>:</h4>
+<p>The following code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">seq</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span>
+<span class="n">def</span> <span class="n">seq_add</span> <span class="o">:</span> <span class="n">seq</span> <span class="bp">→</span> <span class="n">seq</span> <span class="bp">→</span> <span class="n">seq</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">t</span> <span class="n">n</span><span class="o">,</span> <span class="n">s</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">t</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>Works perfectly fine, but if I add <code>import analysis.normed_space</code>to the top, <code>seq_add</code> becomes noncomputable, it <code>depends on real.normed_field</code>. But this line works perfectly with or without the import:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">seq_smul</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">seq</span> <span class="bp">→</span> <span class="n">seq</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">n</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="o">(</span><span class="n">s</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+<a name="152088730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Importing%20analysis.normed_spaced%20makes%20things%20noncomputable/near/152088730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13941Importinganalysisnormedspacedmakesthingsnoncomputable.html#152088730">Mario Carneiro (Dec 18 2018 at 07:26)</a>:</h4>
+<p>hm, I guess the instance priorities need adjustment</p>
+
+
+{% endraw %}

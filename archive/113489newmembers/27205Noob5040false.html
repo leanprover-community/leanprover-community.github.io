@@ -1,0 +1,164 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/27205Noob5040false.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html">Noob: 50 = 40 -> false</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136752030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136752030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136752030">Kevin Sullivan (Oct 30 2018 at 04:16)</a>:</h4>
+<p>What would be the cleanest / canonical way to prove this in a tactic script? nat.no_confusion only works when the left side is zero.</p>
+
+<a name="136752204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136752204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136752204">Kevin Sullivan (Oct 30 2018 at 04:20)</a>:</h4>
+<p>Also, when I'm proving a set membership proposition, such as x \in S, what can I do to have the goal rewritten as the underlying proposition, e.g., x = 1 \/ x = 2 \/ false, for the claim that x \in {1, 2}?</p>
+
+<a name="136752548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136752548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136752548">Simon Hudon (Oct 30 2018 at 04:32)</a>:</h4>
+<p>1) have you tried <code>norm_num</code> from <code>tactic.norm_num</code>? <br>
+2) have you tried <code>simp</code>?</p>
+
+<a name="136760725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760725">Kevin Buzzard (Oct 30 2018 at 08:53)</a>:</h4>
+<p>If 50 and 40 are nats then because equality is decidable on nat you can do <code>example : 50 = 40 → false := dec_trivial</code><br>
+`</p>
+
+<a name="136760770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760770">Kenny Lau (Oct 30 2018 at 08:54)</a>:</h4>
+<p>but that isn't the fastest way</p>
+
+<a name="136760773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760773">Kevin Buzzard (Oct 30 2018 at 08:54)</a>:</h4>
+<p>no but it is the canonical way</p>
+
+<a name="136760776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760776">Kevin Buzzard (Oct 30 2018 at 08:54)</a>:</h4>
+<p>and it scores highly for clean as well</p>
+
+<a name="136760851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760851">Kevin Buzzard (Oct 30 2018 at 08:57)</a>:</h4>
+<p>As for the other question, <code>x ∈ ({1, 2} : set ℕ)</code> is <em>definitionally equal</em> to <code>x = 2 ∨ x = 1 ∨ false</code> and you can just treat the goal like it said this, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">right</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136760896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136760896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136760896">Kevin Buzzard (Oct 30 2018 at 08:58)</a>:</h4>
+<p>The pretty printer assumes you'd rather see <code>x ∈ {1, 2}</code> so leaves it like that. If you want to explicitly change it then you can use <code>change</code>, a tactic which will change the goal to a definitionally equal goal. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">change</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">false</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136790359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136790359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136790359">Kevin Sullivan (Oct 30 2018 at 18:00)</a>:</h4>
+<p>Thank you. Up until now I've avoided using anything that my (mostly) young undergraduates won't understand from first principles. But now, it's time for black box tactics. I won't be able to explain dec_trivial to them, but it is clean and is supported in the standard libraries. As for "change," thanks for that. I was trying unfold, but it didn't get me all the way to the disjunction that defines a set.</p>
+
+<a name="136792029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136792029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136792029">Mario Carneiro (Oct 30 2018 at 18:23)</a>:</h4>
+<p>I think <code>dec_trivial</code> has a clean explanation in the type theory. Roughly, there is a term of type <code>nat -&gt; nat -&gt; bool</code> that says whether two natural numbers are equal or not, and we assert that this is <code>tt</code> by refl, so in order for the <code>dec_trivial</code> term to typecheck it forces computation of this function. The function itself is easy to define by recursion on the natural numbers.</p>
+
+<a name="136802088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136802088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136802088">Kevin Buzzard (Oct 30 2018 at 20:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">--set_option pp.notation false</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">singleton</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>We don't quite land at where you want though, the goal ultimately is</p>
+<div class="codehilite"><pre><span></span>{b : ℕ | b = 2 ∨ {b : ℕ | b = 1 ∨ false} b} x
+</pre></div>
+
+
+<p>When I knew less about Lean, I used to write code which looked like this a lot, and then when I'd finished doing all the unfolding I'd just replace it all with a <code>change</code> (or <code>show</code> -- they're the same I think, although <code>change ... at h</code> works with hypotheses too).</p>
+
+<a name="136803237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803237">Mario Carneiro (Oct 30 2018 at 21:08)</a>:</h4>
+<p>you should unfold <code>set_of</code> too</p>
+
+<a name="136803362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803362">Kevin Buzzard (Oct 30 2018 at 21:10)</a>:</h4>
+<p>I should have switched <code>pp.notation false</code> back on one last time!</p>
+
+<a name="136803371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803371">Kevin Buzzard (Oct 30 2018 at 21:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">--set_option pp.notation false</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">singleton</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">insert</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set_of</span><span class="o">,</span>
+  <span class="c1">-- ⊢ x = 2 ∨ x = 1 ∨ false</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136803540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803540">Mario Carneiro (Oct 30 2018 at 21:13)</a>:</h4>
+<p>also you can make that shorter by making one big <code>unfold</code></p>
+
+<a name="136803551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803551">Mario Carneiro (Oct 30 2018 at 21:13)</a>:</h4>
+<p>since you won't have to cycle back through the same things</p>
+
+<a name="136803745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136803745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136803745">Kevin Buzzard (Oct 30 2018 at 21:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span> <span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span> <span class="n">set</span><span class="bp">.</span><span class="n">insert</span> <span class="n">singleton</span> <span class="n">set_of</span> <span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span><span class="o">,</span>
+  <span class="c1">-- ⊢ x = 2 ∨ x = 1 ∨ false</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I never knew that. I knew I could put them all in one line but I hadn't appreciated that <code>unfold x y z</code> behaved differently to <code>unfold x, unfold y, unfold z</code></p>
+
+<a name="136804640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Noob%3A%2050%20%3D%2040%20-%3E%20false/near/136804640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27205Noob5040false.html#136804640">Chris Hughes (Oct 30 2018 at 21:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">-&gt;</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span>
+</pre></div>
+
+
+{% endraw %}

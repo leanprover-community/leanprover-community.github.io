@@ -1,0 +1,477 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/17888CoercionsNZQRC.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html">Coercions N->Z->Q->R->C</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130849802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130849802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130849802">Kevin Buzzard (Aug 03 2018 at 18:41)</a>:</h4>
+<p>My students want to move freely between these five basic objects, sometimes because they have made poor design decisions but sometimes for genuine reasons. I figured I'd try to get to the bottom of why they were having problems.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">definition</span> <span class="n">has_coe_NZ</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℕ</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_NQ</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℕ</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_NR</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℕ</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_NC</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℕ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_ZQ</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_ZR</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_ZC</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c1">-- definition has_coe_QR : has_coe ℚ ℝ := by apply_instance -- fails</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">has_coe_QR</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">ℚ</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c1">-- definition has_coe_QC : has_coe ℚ ℂ := by apply_instance -- fails</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">has_coe_QC</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">ℚ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">definition</span> <span class="n">has_coe_RC</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">ℝ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">definition</span> <span class="n">coe_NZ</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="n">has_coe_NZ</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_NQ</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="n">has_coe_NQ</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_NR</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">has_coe_NR</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_NC</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">has_coe_NC</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_ZQ</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="n">has_coe_ZQ</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_ZR</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">has_coe_ZR</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_ZC</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">has_coe_ZC</span><span class="bp">.</span><span class="n">coe</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">coe_QR</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">has_coe_QR</span><span class="bp">.</span><span class="n">coe</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">coe_QC</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">has_coe_QC</span><span class="bp">.</span><span class="n">coe</span>
+<span class="kn">definition</span> <span class="n">coe_RC</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">has_coe_RC</span><span class="bp">.</span><span class="n">coe</span>
+
+<span class="c1">-- The ten theorems below are what I would like to access easily in Lean.</span>
+<span class="c1">-- I don&#39;t know what to call them; the current names are just placeholders.</span>
+
+<span class="c1">-- N to Z is never a problem</span>
+<span class="kn">theorem</span> <span class="n">NZQ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_ZQ</span> <span class="o">(</span><span class="n">coe_NZ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NQ</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">NZR</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_ZR</span> <span class="o">(</span><span class="n">coe_NZ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NR</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">NZC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_ZC</span> <span class="o">(</span><span class="n">coe_NZ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NC</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="c1">-- the problems start now</span>
+<span class="kn">theorem</span> <span class="n">ZQR</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_QR</span> <span class="o">(</span><span class="n">coe_ZQ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_ZR</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- simp fails</span>
+<span class="kn">theorem</span> <span class="n">QRC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_RC</span> <span class="o">(</span><span class="n">coe_QR</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_QC</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- simp fails</span>
+<span class="kn">theorem</span> <span class="n">ZRC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_RC</span> <span class="o">(</span><span class="n">coe_ZR</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_ZC</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- simp fails</span>
+
+<span class="kn">theorem</span> <span class="n">NQR</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_QR</span> <span class="o">(</span><span class="n">coe_NQ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NR</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">NZQ</span><span class="o">,</span><span class="n">ZQR</span><span class="o">,</span><span class="err">←</span><span class="n">NZR</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">ZQC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_QC</span> <span class="o">(</span><span class="n">coe_ZQ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_ZC</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">QRC</span><span class="o">,</span><span class="err">←</span><span class="n">ZRC</span><span class="o">,</span><span class="err">←</span><span class="n">ZQR</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">NQC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_QC</span> <span class="o">(</span><span class="n">coe_NQ</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NC</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">NZC</span><span class="o">,</span><span class="err">←</span><span class="n">NZQ</span><span class="o">,</span><span class="err">←</span><span class="n">ZQC</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">NRC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_RC</span> <span class="o">(</span><span class="n">coe_NR</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">coe_NC</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">NQC</span><span class="o">,</span><span class="err">←</span><span class="n">QRC</span><span class="o">,</span><span class="err">←</span><span class="n">NQR</span><span class="o">]</span>
+
+<span class="c1">-- cool stuff my stuents constantly want to be able to do</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">ZQR</span> <span class="n">x</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="k">let</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">↑</span><span class="n">x</span> <span class="k">in</span> <span class="k">let</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">↑</span><span class="n">y</span> <span class="k">in</span> <span class="n">z</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">x</span> <span class="o">:=</span> <span class="n">ZQR</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>Q1) Is there a good reason for the noncomputable coercions being noncomputable? </p>
+<p>Q2) How do I prove the sorried coercion theorems?</p>
+<p>Q3) What are the correct names for these theorems that enable me to cancel <code>↑↑</code> in these specific cases?</p>
+
+<a name="130850810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130850810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130850810">Gabriel Ebner (Aug 03 2018 at 19:05)</a>:</h4>
+<p>You need to use the right syntax, then everything works out of the box <span class="emoji emoji-263a" title="smile">:smile:</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ZQR</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">theorem</span> <span class="n">QRC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">theorem</span> <span class="n">ZRC</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="130850898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130850898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130850898">Gabriel Ebner (Aug 03 2018 at 19:07)</a>:</h4>
+<p>You can use <code>set_option trace.simplify.rewrite true</code> to find the corresponding lemmas.</p>
+
+<a name="130851433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130851433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130851433">Kevin Buzzard (Aug 03 2018 at 19:19)</a>:</h4>
+<p>Oh many thanks Gabriel! I think I can take it from here</p>
+
+<a name="130852441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130852441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130852441">Chris Hughes (Aug 03 2018 at 19:41)</a>:</h4>
+<p>Q - &gt; R is noncomputable, I'm guessing because it's defined to any field using division and the integer coercion and division is noncomputable on the reals. There is a computable function Q-&gt;R, the constant sequence, but that would be less general than the current Q coercion, and computable reals are useless anyway.</p>
+
+<a name="130882150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882150">Kevin Buzzard (Aug 04 2018 at 10:18)</a>:</h4>
+<p>"computable reals are useless anyway" -- maybe to you. But to a beginner, I think</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">definition &#39;x&#39; is noncomputable, it depends on &#39;real.division_ring&#39;</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>is very confusing. What's so noncomputable about 1/2?</p>
+
+<a name="130882160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882160">Kenny Lau (Aug 04 2018 at 10:19)</a>:</h4>
+<p>I hear they have a computable division by positive numbers</p>
+
+<a name="130882206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882206">Mario Carneiro (Aug 04 2018 at 10:20)</a>:</h4>
+<p>there is a manual coercion from Q if you really care about defining 1/2 computably, but the point is that it's not the object but the way it is defined that makes it noncomputable</p>
+
+<a name="130882208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882208">Kevin Buzzard (Aug 04 2018 at 10:20)</a>:</h4>
+<p>The default coercion from nat to int isn't the generic one from nat to any semiring, it's the constructor, and my understanding was that this decision was made for efficiency reasons.</p>
+
+<a name="130882217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882217">Kevin Buzzard (Aug 04 2018 at 10:21)</a>:</h4>
+<p>Is there a similar argument saying that the default coercion from Q to R should be the one that's staring you in the face rather than the generic one?</p>
+
+<a name="130882218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882218">Kevin Buzzard (Aug 04 2018 at 10:21)</a>:</h4>
+<p>i.e. the constant series</p>
+
+<a name="130882221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882221">Kevin Buzzard (Aug 04 2018 at 10:21)</a>:</h4>
+<p>These are implementation issues I guess, which I of course know nothing about in practice</p>
+
+<a name="130882261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882261">Mario Carneiro (Aug 04 2018 at 10:22)</a>:</h4>
+<p>Short answer yes</p>
+
+<a name="130882268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882268">Mario Carneiro (Aug 04 2018 at 10:23)</a>:</h4>
+<p>But this road leads to the same confusion as why <code>int.coe_nat_*</code> and <code>nat.cast_*</code> have parallel but apparently identical statements</p>
+
+<a name="130882313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882313">Mario Carneiro (Aug 04 2018 at 10:24)</a>:</h4>
+<p>look ma, no <code>noncomputable</code></p>
+<div class="codehilite"><pre><span></span>import data.real.basic
+def one_half : ℝ := real.of_rat (1/2)
+theorem one_half_eq : one_half = 1/2 := by simp [one_half]
+</pre></div>
+
+<a name="130882432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882432">Kevin Buzzard (Aug 04 2018 at 10:28)</a>:</h4>
+<blockquote>
+<p>But this road leads to the same confusion as why <code>int.coe_nat_*</code> and <code>nat.cast_*</code> have parallel but apparently identical statements</p>
+</blockquote>
+<p>Right. And as you know I've been thinking about this recently (I'm trying to write some undergraduate example sheets which look like maths but are actually not hard to do in Lean for a beginner). A decision was made to not use the generic coercion, this then causes some issues like <code>int.coe_nat...</code> v <code>nat.cast...</code>, these are solved by the devs, the right simp lemmas are proved, people like me learn (in my case, yesterday) that if you use <code>\u</code> then everything should be fine, and then we move on. The devs could do the same for Q -&gt; R, right? Chris seems to think there's no point because who cares about computable reals, but I'm suggesting that there might be a point which has something to do with efficiency somehow.</p>
+
+<a name="130882438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882438">Mario Carneiro (Aug 04 2018 at 10:29)</a>:</h4>
+<blockquote>
+<p>this decision was made for efficiency reasons</p>
+</blockquote>
+<p>Actually it's the opposite. Efficiency would dictate using <code>real.of_rat</code> because it has the more natural implementation, and is exponentially faster if you actually run it. The decision was made for uniformity of the library - in the lean 2 library we had all 10 coercions N-&gt;Z-&gt;Q-&gt;R-&gt;C and 10 sets of lemmas about them (plus some extras for the 15 ways to combine them), while the <code>nat.cast</code> approach requires only 4 coercions and sets of lemmas</p>
+
+<a name="130882490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882490">Kevin Buzzard (Aug 04 2018 at 10:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">one_half</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">real</span><span class="bp">.</span><span class="n">of_rat</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">one_half_eq</span> <span class="o">:</span> <span class="n">one_half</span> <span class="bp">=</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">one_half</span><span class="o">]</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">real_half</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">/</span> <span class="mi">2</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">one_half</span> <span class="bp">=</span> <span class="n">real_half</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">one_half</span><span class="o">]</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>aargh. Lean why u hate me</p>
+
+<a name="130882491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882491">Mario Carneiro (Aug 04 2018 at 10:31)</a>:</h4>
+<p>If you work with reals and don't want to be surprised by <code>noncomputable</code> markings, just put <code>noncomputable theory</code> at the top. It's not worth the digression for newbies</p>
+
+<a name="130882497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882497">Kevin Buzzard (Aug 04 2018 at 10:32)</a>:</h4>
+<p>Oh that's a good idea.</p>
+
+<a name="130882536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882536">Mario Carneiro (Aug 04 2018 at 10:32)</a>:</h4>
+<p>you have to unfold both</p>
+
+<a name="130882544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882544">Kevin Buzzard (Aug 04 2018 at 10:33)</a>:</h4>
+<blockquote>
+<p>you have to unfold both</p>
+</blockquote>
+<p>I know that <code>rw</code> won't unfold. <code>simp</code> is the same? If I had to simplify something, I think I'd be tempted to start unfolding right at the start.</p>
+
+<a name="130882591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882591">Mario Carneiro (Aug 04 2018 at 10:34)</a>:</h4>
+<p>again, you should remember gabriel's advice from yesterday: <code>simp</code> cares about how you write things, so if you hide something behind a definition you can break some <code>simp</code> proofs</p>
+
+<a name="130882594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882594">Kevin Buzzard (Aug 04 2018 at 10:34)</a>:</h4>
+<p>yes exactly.</p>
+
+<a name="130882595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882595">Mario Carneiro (Aug 04 2018 at 10:34)</a>:</h4>
+<p><code>simp</code> will only unfold things you tell it to</p>
+
+<a name="130882598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882598">Kevin Buzzard (Aug 04 2018 at 10:34)</a>:</h4>
+<p>I feel like I really understand how to use <code>rw</code> now but I'm still getting the hang of <code>simp</code>. There is an art to all these things.</p>
+
+<a name="130882643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882643">Kevin Buzzard (Aug 04 2018 at 10:36)</a>:</h4>
+<p>I don't want to work with reals at all, it's just that the 250 people in front of me in October are all familiar with them (at some level -- at some other level they don't have a clue what they are, and don't have a clue that they don't know, but I don't mean that; I mean they're not scared of them). So it's very natural to use them whenever I want a random big set. They show up on the first example sheet. I've been looking back at my work from last October when I was working on my own example sheets. It took me 150 lines of code to prove that 1/2 : real wasn't an integer :-)</p>
+
+<a name="130882651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882651">Mario Carneiro (Aug 04 2018 at 10:37)</a>:</h4>
+<p>I honestly think you can use <code>Q</code> for all those types of theorems and have a much better day</p>
+
+<a name="130882653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882653">Kevin Buzzard (Aug 04 2018 at 10:37)</a>:</h4>
+<p>I honestly believe you.</p>
+
+<a name="130882693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882693">Kevin Buzzard (Aug 04 2018 at 10:38)</a>:</h4>
+<p>I had a principle back then -- "don't change the example sheets; that would be a compromise"</p>
+
+<a name="130882697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882697">Mario Carneiro (Aug 04 2018 at 10:38)</a>:</h4>
+<p>just say "there are some complications with using reals so we'll use Q for now" at the start of class and come back to it when you are ready (or not at all)</p>
+
+<a name="130882704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882704">Kevin Buzzard (Aug 04 2018 at 10:38)</a>:</h4>
+<p><a href="https://github.com/kbuzzard/xena/blob/master/M1F/2016-17/example_sheets/exsht1.pdf" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/M1F/2016-17/example_sheets/exsht1.pdf">https://github.com/kbuzzard/xena/blob/master/M1F/2016-17/example_sheets/exsht1.pdf</a></p>
+
+<a name="130882712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882712">Kevin Buzzard (Aug 04 2018 at 10:39)</a>:</h4>
+<p>Sheet 1 Q6 -- I was told "this is not possible in Lean because your sets are stupid"</p>
+
+<a name="130882713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882713">Kevin Buzzard (Aug 04 2018 at 10:39)</a>:</h4>
+<p>I had to start compromising pretty quickly</p>
+
+<a name="130882758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882758">Mario Carneiro (Aug 04 2018 at 10:40)</a>:</h4>
+<p>Heh - I could show you how to define that using inductive types</p>
+
+<a name="130882761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882761">Mario Carneiro (Aug 04 2018 at 10:40)</a>:</h4>
+<p>or trees</p>
+
+<a name="130882762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882762">Kevin Buzzard (Aug 04 2018 at 10:40)</a>:</h4>
+<p><a href="https://github.com/kbuzzard/xena/blob/2bf7737bc0fbcd3943ddadfb513bd19c1eea14a3/xenalib/half_not_an_integer.lean#L116" target="_blank" title="https://github.com/kbuzzard/xena/blob/2bf7737bc0fbcd3943ddadfb513bd19c1eea14a3/xenalib/half_not_an_integer.lean#L116">https://github.com/kbuzzard/xena/blob/2bf7737bc0fbcd3943ddadfb513bd19c1eea14a3/xenalib/half_not_an_integer.lean#L116</a></p>
+
+<a name="130882768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882768">Kevin Buzzard (Aug 04 2018 at 10:41)</a>:</h4>
+<p>triumphant proof that 1/2 wasn't an integer, so I could do Q7 part (i)</p>
+
+<a name="130882769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882769">Kevin Buzzard (Aug 04 2018 at 10:41)</a>:</h4>
+<p>Kind of amazing that I didn't give up there and then</p>
+
+<a name="130882772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882772">Kevin Buzzard (Aug 04 2018 at 10:41)</a>:</h4>
+<p>to do example sheet 2 I had to write my own square root function</p>
+
+<a name="130882815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882815">Mario Carneiro (Aug 04 2018 at 10:42)</a>:</h4>
+<p>it occurs to me that it is really easy to prove that over Q</p>
+
+<a name="130882816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882816">Mario Carneiro (Aug 04 2018 at 10:42)</a>:</h4>
+<p>since 1/2 has denom 2 and integers have denom 1</p>
+
+<a name="130882817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882817">Kevin Buzzard (Aug 04 2018 at 10:42)</a>:</h4>
+<p>right</p>
+
+<a name="130882821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882821">Kevin Buzzard (Aug 04 2018 at 10:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">lemma</span> <span class="n">rational_half_not_an_integer</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- proof by contradiction</span>
+  <span class="n">rintros</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span><span class="n">Hn</span><span class="bp">⟩</span><span class="o">,</span> <span class="c1">-- n is an integer, Hn the proof that 1/2 = n</span>
+  <span class="c1">-- goal is &quot;false&quot;</span>
+  <span class="k">have</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_int_denom</span> <span class="n">n</span><span class="o">,</span> <span class="c1">-- H says denominator of n is 1</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">Hn</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span> <span class="c1">-- H now says denominator of 1/2 is 1...</span>
+  <span class="n">revert</span> <span class="n">H</span><span class="o">,</span><span class="n">exact</span> <span class="n">dec_trivial</span> <span class="c1">-- ...but denominator of 1/2 isn&#39;t 1.</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">real_half_not_an_integer</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span><span class="n">Hn</span><span class="bp">⟩</span><span class="o">,</span> <span class="c1">-- n is an integer, Hn the proof that it&#39;s 1/2</span>
+  <span class="n">apply</span> <span class="n">rational_half_not_an_integer</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">n</span><span class="o">,</span>
+  <span class="c1">-- now our hypothesis is that 1/2 = n as reals, and we want to</span>
+  <span class="c1">-- deduce 1/2 = n as rationals!</span>
+  <span class="c1">-- This is possible by some messing around with coercionc</span>
+  <span class="c1">-- from integers to rationals to reals.</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="bp">@</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">Hn</span><span class="o">,</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="130882823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882823">Kevin Buzzard (Aug 04 2018 at 10:43)</a>:</h4>
+<p>Current version of 2018 proof</p>
+
+<a name="130882828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882828">Kevin Buzzard (Aug 04 2018 at 10:43)</a>:</h4>
+<p>no having to define my own floor function in sight!</p>
+
+<a name="130882830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882830">Kevin Buzzard (Aug 04 2018 at 10:43)</a>:</h4>
+<p>and a lot less than 150 lines too</p>
+
+<a name="130882831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882831">Kevin Buzzard (Aug 04 2018 at 10:44)</a>:</h4>
+<p>and Gabriel's proof right there at the end</p>
+
+<a name="130882870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882870">Mario Carneiro (Aug 04 2018 at 10:44)</a>:</h4>
+<p>There is a name for that lemma</p>
+
+<a name="130882872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882872">Mario Carneiro (Aug 04 2018 at 10:44)</a>:</h4>
+<p>you don't have to <code>show by simp</code></p>
+
+<a name="130882873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882873">Kevin Buzzard (Aug 04 2018 at 10:44)</a>:</h4>
+<p>yes, I even looked it up</p>
+
+<a name="130882875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882875">Kevin Buzzard (Aug 04 2018 at 10:44)</a>:</h4>
+<p>as Gabriel suggested</p>
+
+<a name="130882881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882881">Kevin Buzzard (Aug 04 2018 at 10:45)</a>:</h4>
+<p>in fact did you know that whenever you use simp, you can actually replace it with lemmas which have names?</p>
+
+<a name="130882883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882883">Kevin Buzzard (Aug 04 2018 at 10:45)</a>:</h4>
+<p>;-)</p>
+
+<a name="130882894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882894">Mario Carneiro (Aug 04 2018 at 10:46)</a>:</h4>
+<p>the advantage of <code>simp</code> is when there are a lot of lemmas, applied in complicated positions</p>
+
+<a name="130882934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882934">Kevin Buzzard (Aug 04 2018 at 10:46)</a>:</h4>
+<p>I am sort-of confused by this. I never know whether to write <code>assumption</code> or <code>exact H27</code>...</p>
+
+<a name="130882938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882938">Mario Carneiro (Aug 04 2018 at 10:46)</a>:</h4>
+<p>when the theorem name is shorter than the statement I prefer <code>rw</code></p>
+
+<a name="130882939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882939">Kevin Buzzard (Aug 04 2018 at 10:46)</a>:</h4>
+<p>...and I never know whether to write <code>simp</code> or to write <code>simp</code> and then look what it did and write that instead.</p>
+
+<a name="130882952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882952">Kevin Buzzard (Aug 04 2018 at 10:47)</a>:</h4>
+<p>Hmm, so maybe the answer is "it depends"</p>
+
+<a name="130882959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130882959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130882959">Mario Carneiro (Aug 04 2018 at 10:47)</a>:</h4>
+<p>I prefer <code>exact H27</code> over <code>assumption</code>, indeed I rarely use <code>assumption</code> because it is longer, less descriptive, and possibly time consuming if it normalizes an irrelevant hypothesis</p>
+
+<a name="130883098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883098">Kevin Buzzard (Aug 04 2018 at 10:50)</a>:</h4>
+<p>This code above has a rather strange role to play. My current idea is to present the example sheet questions and at the top have a list of lemmas which the students might find helpful. This is example sheet 1 so I'll probably get a lot of people trying it; many will have given up by sheet 2. My plan as I say was to list useful lemmas at the top which they will need, and then hopefully they can prove all the parts of Q7 with rewrites and exact. One of the lemmas I was going to offer them was the proof that 1/2 wasn't an integer, because they need it for Q7(i). But I was going to say "don't worry about these lemmas, just assume them, however anyone interested in what is going on here might want to take a look at them". So I was thinking that the code above would only be seen by people who were interested in what Lean was doing but knew nothing about Lean at all; hence the comments everywhere and the decision to use simp instead of a lemma with a to-them-incomprehensible name</p>
+
+<a name="130883113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883113">Kevin Buzzard (Aug 04 2018 at 10:51)</a>:</h4>
+<p>My goal was to stick with R but to give them the lemmas they need and then to see how well they did.</p>
+
+<a name="130883158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883158">Kevin Buzzard (Aug 04 2018 at 10:52)</a>:</h4>
+<p>I was going to get my xena undergrads to test out the problems in Sept and report back.</p>
+
+<a name="130883160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883160">Mario Carneiro (Aug 04 2018 at 10:52)</a>:</h4>
+<p>example of <code>assumption</code> going wrong:</p>
+<div class="codehilite"><pre><span></span>example {p : Prop} (h1 : if 10^4 = 10^4 then true else true)
+  (hp : p) : p := by assumption
+</pre></div>
+
+<a name="130883165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883165">Kevin Buzzard (Aug 04 2018 at 10:52)</a>:</h4>
+<p>I will happily never use <code>assumption</code> again.</p>
+
+<a name="130883168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883168">Kevin Buzzard (Aug 04 2018 at 10:52)</a>:</h4>
+<p>except for those funny cases when you prove lots of cases at once after a semicolon</p>
+
+<a name="130883179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883179">Mario Carneiro (Aug 04 2018 at 10:53)</a>:</h4>
+<p>a somewhat nicer form of <code>assumption</code> which you may not know is the french quotes <code>‹p›</code></p>
+
+<a name="130883183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883183">Kevin Buzzard (Aug 04 2018 at 10:53)</a>:</h4>
+<p>Whenever I see people using that I always figure that they should be doing something else</p>
+
+<a name="130883240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883240">Mario Carneiro (Aug 04 2018 at 10:54)</a>:</h4>
+<p>I have started using the french quotes to refer to instances that I don't want to name, when I need to refer to them directly for some reason</p>
+
+<a name="130883243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883243">Kevin Buzzard (Aug 04 2018 at 10:54)</a>:</h4>
+<p>Actually I think that's not assumption going wrong</p>
+
+<a name="130883255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883255">Kevin Buzzard (Aug 04 2018 at 10:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="k">if</span> <span class="mi">10</span><span class="err">^</span><span class="mi">4</span> <span class="bp">=</span> <span class="mi">10</span><span class="err">^</span><span class="mi">4</span> <span class="k">then</span> <span class="n">true</span> <span class="k">else</span> <span class="n">true</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="130883259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883259">Kevin Buzzard (Aug 04 2018 at 10:55)</a>:</h4>
+<p>already times out</p>
+
+<a name="130883261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883261">Kevin Buzzard (Aug 04 2018 at 10:55)</a>:</h4>
+<p>but I do believe you</p>
+
+<a name="130883269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883269">Mario Carneiro (Aug 04 2018 at 10:55)</a>:</h4>
+<p>That is a recently discovered mystery for me</p>
+
+<a name="130883340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883340">Mario Carneiro (Aug 04 2018 at 10:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Do you know what preprocessing is done on the context before a <code>begin end</code> block and why? This also came up with the person who was trying to pattern match on a beta redex in the goal only to find it was already reduced before the tactic got to it</p>
+
+<a name="130883470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883470">Mario Carneiro (Aug 04 2018 at 11:01)</a>:</h4>
+<p>this is a better example</p>
+<div class="codehilite"><pre><span></span>example {n : ℕ} (h1 : (if 10^4 = 10^4 then 1 else 1) = 1)
+  (hp : n = 1) : n = 1 := by assumption
+</pre></div>
+
+<a name="130883516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883516">Mario Carneiro (Aug 04 2018 at 11:02)</a>:</h4>
+<p>in the original example the timeout is because <code>h1</code> has a type which is not obviously even a type, so it has to do the expensive evaluation to find out if it is a type</p>
+
+<a name="130883597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883597">Mario Carneiro (Aug 04 2018 at 11:05)</a>:</h4>
+<p>Wow, even this times out</p>
+<div class="codehilite"><pre><span></span>def q : Prop := if 10^4 = 10^4 then true else true
+example (h : q) : q := h
+</pre></div>
+
+<a name="130883599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883599">Mario Carneiro (Aug 04 2018 at 11:05)</a>:</h4>
+<p>but <code>example : q → q := id</code> is okay</p>
+
+<a name="130883891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130883891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130883891">Mario Carneiro (Aug 04 2018 at 11:15)</a>:</h4>
+<p>Here is an example of an interesting partial reduction:</p>
+<div class="codehilite"><pre><span></span>example : (λ x, x ∧ x) ((λ x, x) true) :=
+by tactic.target &gt;&gt;= tactic.trace
+-- (λ (x : Prop), x) true ∧ (λ (x : Prop), x) true
+</pre></div>
+
+
+<p>It looks like the goal has whnf applied first</p>
+
+<a name="130898994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130898994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130898994">Sebastian Ullrich (Aug 04 2018 at 20:04)</a>:</h4>
+<p>I wouldn't even know where to start looking for the whnf</p>
+
+<a name="130899271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Coercions%20N-%3EZ-%3EQ-%3ER-%3EC/near/130899271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17888CoercionsNZQRC.html#130899271">Mario Carneiro (Aug 04 2018 at 20:15)</a>:</h4>
+<p>My guess is that it is making sure it is a sort first</p>
+
+
+{% endraw %}

@@ -1,0 +1,188 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/32921moreproblemswithcoercions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html">more problems with coercions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130958740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958740">Scott Morrison (Aug 06 2018 at 07:14)</a>:</h4>
+<p>So... I've been trying to implement <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s suggestion that I define the coercion allowing <code>F X</code> for a functor <code>F</code> on an object <code>X</code>, and define a @[simp] lemma unfolding the coercion.</p>
+
+<a name="130958750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958750">Scott Morrison (Aug 06 2018 at 07:15)</a>:</h4>
+<p>I immediately run into trouble, however, where <code>simp</code> fails to apply the simp lemma, because a <code>motive is not correct</code>:</p>
+
+<a name="130958756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958756">Scott Morrison (Aug 06 2018 at 07:15)</a>:</h4>
+<p>Here's my slightly minimised example:</p>
+
+<a name="130958758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958758">Scott Morrison (Aug 06 2018 at 07:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>namespace category_theory
+
+universes u v
+
+meta def obviously := `[skip]
+
+class category (Obj : Type u) : Type (max u (v+1)) :=
+(Hom     : Obj → Obj → Type v)
+(id      : Π X : Obj, Hom X X)
+(comp    : Π {X Y Z : Obj}, Hom X Y → Hom Y Z → Hom X Z)
+(id_comp : ∀ {X Y : Obj} (f : Hom X Y), comp (id X) f = f . obviously)
+(comp_id : ∀ {X Y : Obj} (f : Hom X Y), comp f (id Y) = f . obviously)
+(assoc   : ∀ {W X Y Z : Obj} (f : Hom W X) (g : Hom X Y) (h : Hom Y Z), comp (comp f g) h = comp f (comp g h) . obviously)
+
+notation `𝟙` := category.id -- type as \b1
+infixr ` ≫ `:80 := category.comp -- type as \gg
+infixr ` ⟶ `:10 := category.Hom -- type as \h
+
+attribute [simp] category.id_comp category.comp_id category.assoc
+
+universes u₁ v₁ u₂ v₂ u₃ v₃
+
+structure Functor (C : Type u₁) [category.{u₁ v₁} C] (D : Type u₂) [category.{u₂ v₂} D] : Type (max u₁ v₁ u₂ v₂) :=
+(obj           : C → D)
+(map           : Π {X Y : C}, (X ⟶ Y) → ((obj X) ⟶ (obj Y)))
+(map_id        : ∀ (X : C), map (𝟙 X) = 𝟙 (obj X) . obviously)
+(functoriality : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), map (f ≫ g) = (map f) ≫ (map g) . obviously)
+
+attribute [simp] Functor.map_id Functor.functoriality
+
+infixr ` ↝ `:70 := Functor       -- type as \lea -- unfortunately ⇒ (`\functor`) is taken by core.
+
+namespace Functor
+
+section
+variables {C : Type u₁} [𝒞 : category.{u₁ v₁} C] {D : Type u₂} [𝒟 : category.{u₂ v₂} D]
+include 𝒞 𝒟
+
+instance : has_coe_to_fun (C ↝ D) :=
+{ F   := λ F, C → D,
+  coe := λ F, F.obj }
+
+@[simp] lemma unfold_obj_coercion (F : C ↝ D) (X : C) : F X = F.obj X := by refl
+end
+
+section
+variables {C : Type u₁} [𝒞 : category.{u₁ v₁} C] {D : Type u₂} [𝒟 : category.{u₂ v₂} D] {E : Type u₃} [ℰ : category.{u₃ v₃} E]
+include 𝒞 𝒟 ℰ
+
+set_option trace.check true
+
+definition comp (F : C ↝ D) (G : D ↝ E) : C ↝ E :=
+{ obj    := λ X, G (F X),
+  map    := λ _ _ f, G.map (F.map f),
+  map_id := begin
+             intros,
+             simp, /- why didn&#39;t that unfold the coercion? -/
+             rw unfold_obj_coercion F X /- oh. -/
+            end,
+  functoriality := begin intros, simp end }
+end
+
+end Functor
+
+end category_theory
+</pre></div>
+
+<a name="130958801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958801">Scott Morrison (Aug 06 2018 at 07:16)</a>:</h4>
+<p>(Being told my motive is not correct always makes me feel very guilty.)</p>
+
+<a name="130958803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958803">Scott Morrison (Aug 06 2018 at 07:16)</a>:</h4>
+<p>Hopefully I'm just doing something dumb here...</p>
+
+<a name="130958904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958904">Scott Morrison (Aug 06 2018 at 07:20)</a>:</h4>
+<hr>
+
+<a name="130958979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958979">Mario Carneiro (Aug 06 2018 at 07:23)</a>:</h4>
+<p>You have to use <code>dsimp</code></p>
+
+<a name="130958983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958983">Mario Carneiro (Aug 06 2018 at 07:23)</a>:</h4>
+<p>is there a reason you use <code>by refl</code> instead of <code>rfl</code> to prove rfl-lemmas?</p>
+
+<a name="130958989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130958989">Mario Carneiro (Aug 06 2018 at 07:24)</a>:</h4>
+<p>this messes up dsimp</p>
+
+<a name="130959028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959028">Scott Morrison (Aug 06 2018 at 07:24)</a>:</h4>
+<p>ah..</p>
+
+<a name="130959029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959029">Scott Morrison (Aug 06 2018 at 07:24)</a>:</h4>
+<p>I never knew that.</p>
+
+<a name="130959043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959043">Scott Morrison (Aug 06 2018 at 07:25)</a>:</h4>
+<p>Okay. That should fix my problems, but wow, gross! :-)</p>
+
+<a name="130959047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959047">Mario Carneiro (Aug 06 2018 at 07:25)</a>:</h4>
+<p>You should always prove definitional theorems by <code>rfl</code></p>
+
+<a name="130959096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959096">Mario Carneiro (Aug 06 2018 at 07:26)</a>:</h4>
+<p>because lean reads that specially: <code>A = B := rfl</code> means <code>A === B</code></p>
+
+<a name="130959098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959098">Scott Morrison (Aug 06 2018 at 07:26)</a>:</h4>
+<p>what does <code>by refl</code> do?</p>
+
+<a name="130959100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959100">Mario Carneiro (Aug 06 2018 at 07:26)</a>:</h4>
+<p>It proves the theorem normally, so you just end up learning <code>A = B</code></p>
+
+<a name="130959101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959101">Scott Morrison (Aug 06 2018 at 07:26)</a>:</h4>
+<p>surely that's the same thing</p>
+
+<a name="130959109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959109">Scott Morrison (Aug 06 2018 at 07:27)</a>:</h4>
+<p>but isn't the proof term the same either way?</p>
+
+<a name="130959111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959111">Scott Morrison (Aug 06 2018 at 07:27)</a>:</h4>
+<p>I guess I can check.</p>
+
+<a name="130959112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959112">Mario Carneiro (Aug 06 2018 at 07:27)</a>:</h4>
+<p>it is, but the literal token <code>rfl</code> is used by the lean parser to add the <code>@[_refl_lemma]</code> attribute</p>
+
+<a name="130959361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959361">Johan Commelin (Aug 06 2018 at 07:34)</a>:</h4>
+<p>It really is a pity that <code>refl</code> and <code>rfl</code> have such important but subtle distinctions, while only differing by one letter.</p>
+
+<a name="130959364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130959364">Johan Commelin (Aug 06 2018 at 07:34)</a>:</h4>
+<p>And then <code>rfl</code> (without <code>e</code>) adds <code>@[_refl_lemma]</code> (with <code>e</code>)!</p>
+
+<a name="130960266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130960266">Mario Carneiro (Aug 06 2018 at 08:05)</a>:</h4>
+<p>to be fair, one is a tactic and one is a term, so they differ by more than one letter</p>
+
+<a name="130960280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130960280">Mario Carneiro (Aug 06 2018 at 08:05)</a>:</h4>
+<p>although you shouldn't confuse <code>rfl</code> with <code>eq.refl</code> either</p>
+
+<a name="130960327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130960327">Mario Carneiro (Aug 06 2018 at 08:06)</a>:</h4>
+<p>similarly there is <code>iff.rfl</code> and <code>iff.refl</code>, etc. The naming convention has <code>rfl</code> have an implicit argument and <code>refl</code> has an explicit arg</p>
+
+<a name="130961287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130961287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html#130961287">Scott Morrison (Aug 06 2018 at 08:31)</a>:</h4>
+<p>Thanks for explaining this <code>rfl</code> vs <code>refl</code> thing. Switching to <code>rfl</code> really helps, both here and elsewhere. :-)</p>
+
+
+{% endraw %}

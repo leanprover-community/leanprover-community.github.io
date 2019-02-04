@@ -1,0 +1,244 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/88074castwoes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html">cast woes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127073963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127073963">Kevin Buzzard (May 25 2018 at 12:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod_add_mod</span> <span class="c1">-- ∀ (m n k : ℤ), (m % n + k) % n = (m + k) % n</span>
+<span class="c1">-- #check nat.mod_add_mod -- unknown identifier</span>
+<span class="c1">-- so let&#39;s create it</span>
+
+<span class="c1">-- note:</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_mod</span> <span class="c1">-- ∀ (m n : ℕ), ↑m % ↑n = int.of_nat (m % n)</span>
+
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_mod</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="n">m</span> <span class="err">%</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="err">%</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="err">%</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_mod</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_mod</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span> <span class="c1">-- fails</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  rewrite tactic failed, did not find instance of the pattern in the target expression</span>
+<span class="cm">  ↑(?m_4 + ?m_5)</span>
+<span class="cm">state:</span>
+<span class="cm">m n k : ℕ</span>
+<span class="cm">⊢ ↑(m % n + k) % ↑n = ↑(m + k) % ↑n</span>
+<span class="cm">  -/</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="127073966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127073966">Kevin Buzzard (May 25 2018 at 12:05)</a>:</h4>
+<p>What am I doing wrong?</p>
+
+<a name="127073972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127073972">Kevin Buzzard (May 25 2018 at 12:05)</a>:</h4>
+<p>I found a "hole" in mathlib -- but am failing to fix it.</p>
+
+<a name="127074019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074019">Kevin Buzzard (May 25 2018 at 12:06)</a>:</h4>
+<p>I tried to be really precise:</p>
+
+<a name="127074021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074021">Kevin Buzzard (May 25 2018 at 12:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span> <span class="bp">ℤ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">m</span> <span class="err">%</span> <span class="n">n</span><span class="o">)</span> <span class="n">k</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  H1 : ↑(m % n + k) = ↑(m % n) + ↑k</span>
+<span class="cm">  ⊢ ↑(m % n + k) % ↑n = ↑(m + k) % ↑n</span>
+<span class="cm">  -/</span>
+
+  <span class="c1">-- rw H1, -- fails</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  rewrite tactic failed, did not find instance of the pattern in the target expression</span>
+<span class="cm">  ↑(m % n + k)</span>
+<span class="cm">state:</span>
+<span class="cm">m n k : ℕ,</span>
+<span class="cm">H1 : ↑(m % n + k) = ↑(m % n) + ↑k</span>
+<span class="cm">⊢ ↑(m % n + k) % ↑n = ↑(m + k) % ↑n</span>
+<span class="cm">  -/</span>
+</pre></div>
+
+<a name="127074028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074028">Kevin Buzzard (May 25 2018 at 12:06)</a>:</h4>
+<p>I switched notation off and the rewrite still looked like it should work</p>
+
+<a name="127074031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074031">Kevin Buzzard (May 25 2018 at 12:06)</a>:</h4>
+<p>I switched pp.all off and got swamped.</p>
+
+<a name="127074035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074035">Chris Hughes (May 25 2018 at 12:07)</a>:</h4>
+<p><code>int.coe_nat_add</code> is the correct lemma, rather than <code>nat.cast_add</code> I think</p>
+
+<a name="127074043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074043">Kevin Buzzard (May 25 2018 at 12:07)</a>:</h4>
+<p>You're right Chris.</p>
+
+<a name="127074045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074045">Kevin Buzzard (May 25 2018 at 12:07)</a>:</h4>
+<p>Do you know why what I tried is failing?</p>
+
+<a name="127074121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074121">Chris Hughes (May 25 2018 at 12:09)</a>:</h4>
+<p>Because <code>cast</code> is a coercion into a general ring, whereas there's a seperately defined coercion from<code>nat</code> to <code>int</code>, probably because it's in core, but cast is is in mathlib</p>
+
+<a name="127074193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074193">Chris Hughes (May 25 2018 at 12:10)</a>:</h4>
+<p>Also, <code>of_nat</code> is a more natural function to use as the coercion than <code>cast</code> which just does 1 + 1 + 1 ...</p>
+
+<a name="127074721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127074721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127074721">Mario Carneiro (May 25 2018 at 12:25)</a>:</h4>
+<p>You can probably use <code>nat.modeq</code> to prove this one, there are more modeq theorems than there are theorems about mod</p>
+
+<a name="127122090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122090">Kevin Buzzard (May 26 2018 at 11:32)</a>:</h4>
+<blockquote>
+<p>You can probably use <code>nat.modeq</code> to prove this one, there are more modeq theorems than there are theorems about mod</p>
+</blockquote>
+<p>My eyes are opened!</p>
+
+<a name="127122131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122131">Kevin Buzzard (May 26 2018 at 11:33)</a>:</h4>
+<p>I had somehow ruled out this MOD stuff as "another way of setting up the theory, which I didn't use".</p>
+
+<a name="127122133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122133">Kevin Buzzard (May 26 2018 at 11:33)</a>:</h4>
+<p>I've always thought that MOD notation was horrible, by the way.</p>
+
+<a name="127122177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122177">Kevin Buzzard (May 26 2018 at 11:35)</a>:</h4>
+<p>pmod is standard LaTeX notation</p>
+
+<a name="127122216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122216">Mario Carneiro (May 26 2018 at 11:36)</a>:</h4>
+<p>there were technical reasons I couldn't use parens and lowercase</p>
+
+<a name="127122217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122217">Kevin Buzzard (May 26 2018 at 11:36)</a>:</h4>
+<p>I think using LaTeX as a guide is a good idea. I'm really familiar with LaTeX notation and it still occasionally confuses me that <code>\equiv</code> is not <code>equiv</code></p>
+
+<a name="127122218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122218">Kevin Buzzard (May 26 2018 at 11:36)</a>:</h4>
+<p>Oh --</p>
+
+<a name="127122219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122219">Kevin Buzzard (May 26 2018 at 11:36)</a>:</h4>
+<p>this was forced upon you somehow?</p>
+
+<a name="127122220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122220">Kevin Buzzard (May 26 2018 at 11:36)</a>:</h4>
+<p>I had no idea! I just thought it was a wacky design decision</p>
+
+<a name="127122223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122223">Kevin Buzzard (May 26 2018 at 11:37)</a>:</h4>
+<p>the MOD stuff</p>
+
+<a name="127122226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122226">Mario Carneiro (May 26 2018 at 11:37)</a>:</h4>
+<p>I'm not even sure the notation is worth it</p>
+
+<a name="127122227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122227">Kevin Buzzard (May 26 2018 at 11:37)</a>:</h4>
+<p>This wasn't the fault of some labour-saving tactic was it?</p>
+
+<a name="127122264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122264">Kevin Buzzard (May 26 2018 at 11:38)</a>:</h4>
+<p>The notation is what mathematicians want</p>
+
+<a name="127122267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122267">Mario Carneiro (May 26 2018 at 11:38)</a>:</h4>
+<p>it's a parsing thing</p>
+
+<a name="127122268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122268">Kevin Buzzard (May 26 2018 at 11:38)</a>:</h4>
+<p>We are sticklers for notation</p>
+
+<a name="127122269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122269">Kevin Buzzard (May 26 2018 at 11:38)</a>:</h4>
+<p>That's why I mentioned it -- it looks funny to mathematicians because there is already standard notation</p>
+
+<a name="127122310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122310">Mario Carneiro (May 26 2018 at 11:40)</a>:</h4>
+<p>It's probably better than no notation, but even as it is it's a bit problematic</p>
+
+<a name="127122315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122315">Kevin Buzzard (May 26 2018 at 11:40)</a>:</h4>
+<p>it enables you to write uncluttered calc proofs</p>
+
+<a name="127122316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122316">Kevin Buzzard (May 26 2018 at 11:40)</a>:</h4>
+<p>so it's definitely better than no notation</p>
+
+<a name="127122317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122317">Kevin Buzzard (May 26 2018 at 11:40)</a>:</h4>
+<p>but it still looks funny</p>
+
+<a name="127122318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122318">Kevin Buzzard (May 26 2018 at 11:40)</a>:</h4>
+<p>To be honest I've never used it -- I assume it can be used in calc proofs</p>
+
+<a name="127122319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122319">Kevin Buzzard (May 26 2018 at 11:41)</a>:</h4>
+<p>I'm giving a talk on this stuff in about 10 hours</p>
+
+<a name="127122324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122324">Mario Carneiro (May 26 2018 at 11:41)</a>:</h4>
+<p>I never tried it, but I think chris did</p>
+
+<a name="127122325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122325">Kevin Buzzard (May 26 2018 at 11:41)</a>:</h4>
+<p>Maybe it's about time I learnt how it worked.</p>
+
+<a name="127122327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122327">Kevin Buzzard (May 26 2018 at 11:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> how did you learn that funny <code>MOD</code> stuff?</p>
+
+<a name="127122380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127122380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#127122380">Chris Hughes (May 26 2018 at 11:43)</a>:</h4>
+<p>What funny MOD stuff?</p>
+
+<a name="156678741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156678741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#156678741">Kevin Buzzard (Jan 23 2019 at 11:34)</a>:</h4>
+<p>I have generally got the hang of how to handle casts now. The point of view which I want to push amongst the UGs is that even though yes it's annoying that natural numbers aren't actually real numbers, <code>simp</code> should do all the translating for you. But here's an example where I couldn't make it work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">M</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">M</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">],</span>
+  <span class="c1">-- ⊢ 0 &lt; 1 + ↑M</span>
+  <span class="c1">-- gaargh</span>
+  <span class="c1">-- simp at H, -- won&#39;t change it to 0 &lt; 1 + M</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Applying <code>simp</code> to nat <code>M + 1</code> doesn't change it, but applying <code>simp</code> to real <code>M + 1</code> changes it to <code>1 + M</code> and this somehow means Lean loses track.</p>
+
+<a name="156678755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156678755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#156678755">Kevin Buzzard (Jan 23 2019 at 11:34)</a>:</h4>
+<p>I know I can use some cast_lt or whatever, but this is exactly what I am trying to avoid. <code>simp</code> is usually good at these.</p>
+
+<a name="156694974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156694974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#156694974">Andrew Ashworth (Jan 23 2019 at 15:58)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="156736166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/156736166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88074castwoes.html#156736166">Simon Hudon (Jan 24 2019 at 00:53)</a>:</h4>
+<p>I recommend finding the <code>simp</code> lemma responsible for this (probably something like <code>real.add_comm</code>) and declare in your file <code>local attribute [-simp] real.add_comm</code></p>
+
+
+{% endraw %}

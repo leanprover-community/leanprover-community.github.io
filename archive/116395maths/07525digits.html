@@ -1,0 +1,75 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/07525digits.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html">digits</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157416565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157416565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157416565">Kevin Buzzard (Feb 02 2019 at 10:52)</a>:</h4>
+<p>The students at Imperial do random maths in Lean. I run a puzzle-solving club where we look at recreational questions involving things such as digit sums of integers. In my 1st year exam last year there is a question about decimal expansions, where we needed to know for example that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>7</mn><mn>1</mn><mi mathvariant="normal">/</mi><mn>1</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">71/100</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">7</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathrm">1</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span></span></span></span> had no 8's in its decimal expansion. As far as I know there is no way of getting the $$n$$th decimal digit of a natural, or the $$n$$th digit after the decimal point of a real number, in mathlib. I need this stuff now (for example to formalise the questions and solutions on last year's M1F paper). Is this sort of nonsense the sort of thing which should go into mathlib or should I just make my own little library? I don't mind either way, it just occurs to me that whilst I am clear in my opinions that most undergraduate level pure maths is a very natural target for mathlib (indeed I think that the more undergraduate level pure maths is in mathlib, the more pure mathematicians will take Lean seriously), I am less clear about this fringe stuff. It's easy to write (indeed I've written it) but I now don't quite know what to do with it.</p>
+
+<a name="157416619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157416619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157416619">Patrick Massot (Feb 02 2019 at 10:54)</a>:</h4>
+<p>I would say we want mathlib to be ready to formalize such questions, but we don't want the questions and their answers</p>
+
+<a name="157417060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417060">Mario Carneiro (Feb 02 2019 at 11:07)</a>:</h4>
+<p>A function <code>nat -&gt; list (fin b)</code> giving the base-b expansion of a nat seems like a good idea for mathlib</p>
+
+<a name="157417111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417111">Mario Carneiro (Feb 02 2019 at 11:08)</a>:</h4>
+<p>probably you want the digits to come out in reverse order though</p>
+
+<a name="157417170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417170">Mario Carneiro (Feb 02 2019 at 11:10)</a>:</h4>
+<p>I would avoid fixation on base 10 though, for most of the functions and especially the theory</p>
+
+<a name="157417852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417852">Kevin Buzzard (Feb 02 2019 at 11:33)</a>:</h4>
+<p>I did develop a general base b theory but lots of results needed b&gt;=2 so in the end I got bored and switched to 10.</p>
+
+<a name="157417915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417915">Kevin Buzzard (Feb 02 2019 at 11:35)</a>:</h4>
+<p>On the other hand I never needed induction on b :-) so maybe I should have persevered. Proving things like "all the digits of b^N - 1 are b-1" was horrible but this was perhaps part of the recreation, not the library part</p>
+
+<a name="157417958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417958">Kevin Buzzard (Feb 02 2019 at 11:36)</a>:</h4>
+<p>It was nat subtraction hell</p>
+
+<a name="157417977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157417977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157417977">Kevin Buzzard (Feb 02 2019 at 11:37)</a>:</h4>
+<p>Yes, reverse order was far easier to work with in practice. I wanted results about things like sum of last digits</p>
+
+<a name="157418165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157418165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157418165">Mario Carneiro (Feb 02 2019 at 11:42)</a>:</h4>
+<p>I agree that <code>b &gt;= 2</code> is a natural restriction in this context (although there is a useful thing to do for <code>b = 1</code> as well)</p>
+
+<a name="157418241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157418241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157418241">Mario Carneiro (Feb 02 2019 at 11:44)</a>:</h4>
+<p>for <code>b^N - 1</code> I would try to rewrite it as <code>k + k*b+... +k*b^(N-1)</code> where <code>b = k+1</code></p>
+
+<a name="157425328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157425328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157425328">Bryan Gin-ge Chen (Feb 02 2019 at 15:29)</a>:</h4>
+<p>For nats, isn't there <a href="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/data/repr.lean#L85" target="_blank" title="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/data/repr.lean#L85">to_digits</a>?</p>
+
+<a name="157425383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157425383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157425383">Kevin Buzzard (Feb 02 2019 at 15:31)</a>:</h4>
+<p>For <code>repr</code> yes, but that's the wrong way round :-)</p>
+
+<a name="157425390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157425390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157425390">Kevin Buzzard (Feb 02 2019 at 15:31)</a>:</h4>
+<p>Oh, no it's not!</p>
+
+<a name="157425393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157425393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07525digits.html#157425393">Kevin Buzzard (Feb 02 2019 at 15:31)</a>:</h4>
+<p>the reversal takes place in <code>repr</code>.</p>
+
+
+{% endraw %}

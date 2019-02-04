@@ -1,0 +1,421 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/89980definingahilbertspace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html">defining a hilbert space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130645249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130645249">Joseph Corneli (Jul 31 2018 at 16:02)</a>:</h4>
+<p>Hi, this looks like something that might be near the edge of what's possible to define right now; would a more experienced person be able to give me some guidance?</p>
+<blockquote>
+<p>"A Hilbert space H is a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product."</p>
+</blockquote>
+<p>If this is within the range of what's possible to define maybe it's a good exercise -- but as a newbie I'd still appreciate some help!</p>
+<p>To begin with, can we define an "<a href="https://en.wikipedia.org/wiki/Inner_product_space" target="_blank" title="https://en.wikipedia.org/wiki/Inner_product_space">inner product space</a>" using <code>prod_module.lean</code>?  That file talks about "Left injection function for the inner product" (resp., right injection).  But the code doesn't seem to have much in common with my idea of an "inner product," however.</p>
+<p>On to the next step, <code>metric_space.lean</code> mentions "completeness" but the class <code>complete_space</code> is defined in <code>uniform_space.lean</code>; I guess we can get completeness from the generalisation; how would we insist upon completeness "with respect to the distance function"?</p>
+<p>My guess is that the components are not ready "off the shelf" but still are within reach.  Would this be a worthwhile project to tackle?   If not, is there another topic that is more easily within reach?</p>
+
+<a name="130645351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130645351">Johan Commelin (Jul 31 2018 at 16:04)</a>:</h4>
+<p>Hmmm, I fear it is quite hard. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> has been struggling with normed spaces for a long time.</p>
+
+<a name="130645376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130645376">Kenny Lau (Jul 31 2018 at 16:05)</a>:</h4>
+<p>the definition is just a bunch of axioms</p>
+
+<a name="130645392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130645392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130645392">Johan Commelin (Jul 31 2018 at 16:05)</a>:</h4>
+<p>Right.</p>
+
+<a name="130646185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646185">Patrick Massot (Jul 31 2018 at 16:18)</a>:</h4>
+<p>metric spaces have a canonical uniform space structure, so completeness is defined for them as well</p>
+
+<a name="130646189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646189">Patrick Massot (Jul 31 2018 at 16:18)</a>:</h4>
+<p>I think you can easily define Hilbert spaces</p>
+
+<a name="130646196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646196">Kevin Buzzard (Jul 31 2018 at 16:18)</a>:</h4>
+<p>Yes, the definition is not hard at all. It's proving the basic properties where you'll start to learn what Lean can and cannot do easily. <span class="user-mention" data-user-id="120943">@Andreas Swerdlow</span> , a first year undergraduate at Imperial College, already formalised Hilbert spaces here: <a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean">https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean</a></p>
+
+<a name="130646206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646206">Patrick Massot (Jul 31 2018 at 16:18)</a>:</h4>
+<p>Note that I struggle to get a norm on R^n, not to define normed spaces (at least not anymore)</p>
+
+<a name="130646208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646208">Kenny Lau (Jul 31 2018 at 16:18)</a>:</h4>
+<p>but maybe you're Kevin Buzzard and only care about the definition :P</p>
+
+<a name="130646233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646233">Kevin Buzzard (Jul 31 2018 at 16:19)</a>:</h4>
+<p>If you have any lemmas which you'd like proved, let Andreas know Kenny!</p>
+
+<a name="130646255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646255">Patrick Massot (Jul 31 2018 at 16:20)</a>:</h4>
+<p><a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean#L655" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean#L655">https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/inner_product_spaces/basic.lean#L655</a> is not correct</p>
+
+<a name="130646332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646332">Patrick Massot (Jul 31 2018 at 16:20)</a>:</h4>
+<p>it does not impose any relation between the uniform structure and the inner product</p>
+
+<a name="130646335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130646335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130646335">Kevin Buzzard (Jul 31 2018 at 16:20)</a>:</h4>
+<p>Maybe he's not finished yet :-)</p>
+
+<a name="130648269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130648269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130648269">Joseph Corneli (Jul 31 2018 at 16:50)</a>:</h4>
+<p>Thanks for the answers and discussion.</p>
+
+<a name="130708575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130708575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130708575">Andreas Swerdlow (Aug 01 2018 at 13:54)</a>:</h4>
+<blockquote>
+<p>it does not impose any relation between the uniform structure and the inner product</p>
+</blockquote>
+<p>Hi Patrick,</p>
+<p>I see the problem with my definition, but after looking through the definition of a complete space in lean, I realised I don't know enough to fix it.  Do you have any suggestions?</p>
+
+<a name="130709091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130709091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130709091">Johan Commelin (Aug 01 2018 at 14:04)</a>:</h4>
+<p>After <code>class hilbert_space (V : Type u) extends herm_inner_product_space V, complete_space V</code> you should have one or more fields that demand compatibility between the inner product space and the complete space.</p>
+
+<a name="130713865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130713865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130713865">Kevin Buzzard (Aug 01 2018 at 15:32)</a>:</h4>
+<p>I'm in the same room as Andreas but haven't thought about how Lean does these things. I guess he's defined an inner product so I know about that. But the definition of <code>complete_space</code> involves Cauchy filters. I would imagine that there are right and wrong ways to do this. Oh -- do we just demand that the topology induced by the metric on <code>V</code> (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>y</mi><mo>−</mo><mi>x</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">d(x,y)=||y-x||</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathrm">∣</span><span class="mord mathrm">∣</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mbin">−</span><span class="mord mathit">x</span><span class="mord mathrm">∣</span><span class="mord mathrm">∣</span></span></span></span>) equals the topology which <code>complete_space</code> is using? Andreas -- can you make any sense of what I'm saying?</p>
+
+<a name="130713913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130713913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130713913">Johan Commelin (Aug 01 2018 at 15:33)</a>:</h4>
+<p>Hmm, but I guess they have to be def.eq. Because of <span class="emoji emoji-2666" title="diamonds">:diamonds:</span></p>
+
+<a name="130714094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130714094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130714094">Kevin Buzzard (Aug 01 2018 at 15:35)</a>:</h4>
+<p>Only if there's some sort of inbuilt instance going from <code>herm_inner_product_space</code> to <code>topological_space</code> right?</p>
+
+<a name="130714208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130714208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130714208">Johan Commelin (Aug 01 2018 at 15:37)</a>:</h4>
+<p>Right, but I suppose that we do want instances for that.</p>
+
+<a name="130714256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130714256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130714256">Andreas Swerdlow (Aug 01 2018 at 15:38)</a>:</h4>
+<p>I've proved that the inner product induces the natural metric</p>
+
+<a name="130714269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130714269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130714269">Johan Commelin (Aug 01 2018 at 15:38)</a>:</h4>
+<p>Yes, but proofs are not enough.</p>
+
+<a name="130714280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130714280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130714280">Johan Commelin (Aug 01 2018 at 15:38)</a>:</h4>
+<p>Alas..., this is not mathematics. And beyond my pay-grade.</p>
+
+<a name="130715205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130715205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130715205">Kevin Buzzard (Aug 01 2018 at 15:54)</a>:</h4>
+<p>The issue I think is that there is no "natural metric", if I've understood things correctly. You wrote <code>class hilbert_space (V : Type u) extends herm_inner_product_space V, complete_space V</code> -- so this says "there's some inner product on V -- this is an assumption -- we don't know any more about it" and "there's some topology on V that makes V complete -- this is an assumption -- we don't know any more about it", so there are now perhaps two topologies on V if I've understood correctly what these typeclasses are.</p>
+
+<a name="130715968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130715968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130715968">Joseph Corneli (Aug 01 2018 at 16:04)</a>:</h4>
+<p>According to a comment in <code>uniform_space.lean</code>, "A uniform space is complete if every Cauchy filter converges." Would it not be necessary to show the latter fact?  I see three equivalent Bourbakian conditions (in the case of metric spaces) mentioned on page 8 of <a href="https://arxiv.org/pdf/1802.08521.pdf" target="_blank" title="https://arxiv.org/pdf/1802.08521.pdf">https://arxiv.org/pdf/1802.08521.pdf</a>, referring to Bourbaki, General Topology, II3.3, Def. 3.  Looks like heavy going.</p>
+
+<a name="130716250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130716250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130716250">Johannes Hölzl (Aug 01 2018 at 16:08)</a>:</h4>
+<p>this is the definition of completeness</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">complete_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">complete</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">{</span><span class="n">f</span><span class="o">:</span><span class="n">filter</span> <span class="n">α</span><span class="o">},</span> <span class="n">cauchy</span> <span class="n">f</span> <span class="bp">→</span> <span class="bp">∃</span><span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">nhds</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Which says that <code>[complete_space A]</code> is defined to be that each Cauchy filter converges.</p>
+
+<a name="130716885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130716885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130716885">Joseph Corneli (Aug 01 2018 at 16:17)</a>:</h4>
+<p>Yep, I'm of the view that this must be derived from Andreas's  assertions about Hermitian inner product space.  Without that condition it sounds like he has what's called a "pre-Hilbert space" <em>"An (incomplete) space with an inner product is called a pre-Hilbert space, since its completion with respect to the norm induced by the inner product is a Hilbert space."</em></p>
+
+<a name="130717776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130717776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130717776">Joseph Corneli (Aug 01 2018 at 16:28)</a>:</h4>
+<p>Though I guess the point is that the condition of completeness is precisely what cannot be shown in general, otherwise there would not be such a thing as pre-Hilbert spaces.  So, to round out <code>inner_product_space/basic.lean</code> it would be good to have an <em>example</em> of a Hilbert space.</p>
+
+<a name="130718011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130718011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130718011">Kevin Buzzard (Aug 01 2018 at 16:32)</a>:</h4>
+<p>So I don't quite know the best way of doing this. Andreas has defined an instance from his <code>herm_inner_product_space</code> to metric spaces, and hence to topological space. So now how to define a class Hilbert space? Should he extend <code>hern_inner_product_space</code> and then add precisely the axioms needed to prove <code>complete_space</code> -- I mean -- rewrite them all again in full? Just cutting and pasting from <code>#print complete_space</code>? And then he can make an instance from <code>Hilbert_space</code> to <code>complete_space</code>? I guess there's also the other approach -- he could have it extend <code>complete_space</code> and then write down precisely the axioms of an inner product space that aren't there already -- eew --- and then he'd have to supply a proof that the topology defined by the norm equals the original topology. Is this how to think about things? The first approach is the correct one, right?</p>
+
+<a name="130718081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130718081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130718081">Gabriel Ebner (Aug 01 2018 at 16:33)</a>:</h4>
+<blockquote>
+<p>add precisely the axioms needed to prove complete_space</p>
+</blockquote>
+<p>That's just the one line Johannes posted.</p>
+
+<a name="130719157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130719157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130719157">Kevin Buzzard (Aug 01 2018 at 16:49)</a>:</h4>
+<p>Got it :-) I didn't see Johannes' post -- too much going on! Thanks all!</p>
+
+<a name="130719242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130719242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130719242">Kevin Buzzard (Aug 01 2018 at 16:50)</a>:</h4>
+<p><a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/92b9d48860f0f68de78ccdd3c103335d9b55d5c8/src/inner_product_spaces/basic.lean#L669" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/92b9d48860f0f68de78ccdd3c103335d9b55d5c8/src/inner_product_spaces/basic.lean#L669">https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/92b9d48860f0f68de78ccdd3c103335d9b55d5c8/src/inner_product_spaces/basic.lean#L669</a></p>
+
+<a name="130719243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130719243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130719243">Kevin Buzzard (Aug 01 2018 at 16:50)</a>:</h4>
+<p>Think we got it</p>
+
+<a name="130721333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130721333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130721333">Joseph Corneli (Aug 01 2018 at 17:22)</a>:</h4>
+<p>To test it out can we now prove, e.g., that "The real numbers R^n with &lt;v,u&gt; the vector dot product of v and u" forms a Hilbert space?</p>
+
+<a name="130721998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130721998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130721998">Kevin Buzzard (Aug 01 2018 at 17:34)</a>:</h4>
+<p>That's going to need a whole lot of lemmas</p>
+
+<a name="130722018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130722018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130722018">Kevin Buzzard (Aug 01 2018 at 17:34)</a>:</h4>
+<p>...which are probably there already.</p>
+
+<a name="130722123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130722123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130722123">Kevin Buzzard (Aug 01 2018 at 17:36)</a>:</h4>
+<p>...actually maybe they're not all in mathlib. You'll need things like if n sequences all tend to zero then their sum tends to zero, you'll need that if a_n tends to zero and 0 &lt;= b_n &lt;= a_n then b_n tends to zero etc. This sort of stuff is not really mathlib's strong point at this stage.</p>
+
+<a name="130722355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130722355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130722355">Reid Barton (Aug 01 2018 at 17:40)</a>:</h4>
+<p>Maybe try n = 1 first...</p>
+
+<a name="130722518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130722518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130722518">Kevin Buzzard (Aug 01 2018 at 17:43)</a>:</h4>
+<p>...and then prove that a direct sum of two Hilbert spaces is a Hilbert space...</p>
+
+<a name="130722847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130722847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130722847">Andreas Swerdlow (Aug 01 2018 at 17:48)</a>:</h4>
+<p>I need to rewrite the definition of <code>herm_inner_product_space</code> so that it works over any subfield of the complex numbers. At the moment you can only prove that C^n is a Hilbert space</p>
+
+<a name="130723051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130723051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130723051">Joseph Corneli (Aug 01 2018 at 17:51)</a>:</h4>
+<p>No L^2 functions as yet?</p>
+
+<a name="130723247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130723247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130723247">Joseph Corneli (Aug 01 2018 at 17:54)</a>:</h4>
+<p>Anyway I do think an example, say C, would be great to include in the file.  Some test-driven development would be useful  if you're going to generalise!  If it works for C but fails for R, that would be interesting.</p>
+
+<a name="130735854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130735854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130735854">Patrick Massot (Aug 01 2018 at 21:30)</a>:</h4>
+<p>I'm sorry I didn't help earlier, I was on the road all afternoon. Your definition is still not correct. You still have an inner product and a uniform space with no relation whatsoever.</p>
+
+<a name="130735888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130735888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130735888">Patrick Massot (Aug 01 2018 at 21:31)</a>:</h4>
+<p>Did you look at <a href="https://github.com/leanprover/mathlib/pull/208" target="_blank" title="https://github.com/leanprover/mathlib/pull/208">https://github.com/leanprover/mathlib/pull/208</a>?</p>
+
+<a name="130736158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736158">Patrick Massot (Aug 01 2018 at 21:36)</a>:</h4>
+<p>The way this problem is handled is really weird for mathematicians. In <a href="https://github.com/leanprover/mathlib/pull/208/files#diff-81ed9f450352da041af7e0c731a22cdbR10" target="_blank" title="https://github.com/leanprover/mathlib/pull/208/files#diff-81ed9f450352da041af7e0c731a22cdbR10">https://github.com/leanprover/mathlib/pull/208/files#diff-81ed9f450352da041af7e0c731a22cdbR10</a> a normed group gather the attributes of a commutative additive group and a metric space, together with a function <code>norm</code> and an axiom saying that the distance of the metric space comes from the norm. Note that the <code>extends</code> keyword automatically creates an instance deriving a metric space from a normed group.</p>
+
+<a name="130736345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736345">Patrick Massot (Aug 01 2018 at 21:39)</a>:</h4>
+<p>The weirdest comes next. A metric space is also defined in the kind of way, it bundles what you think should be there together with a uniform space structure and an axiom saying the uniform space structure equals what you would define from a structure. And a uniform space structure is defined in turn as extending both a topological structure and what you would call a uniform structure, together with an axiom relating both worlds.</p>
+
+<a name="130736482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736482">Patrick Massot (Aug 01 2018 at 21:41)</a>:</h4>
+<p>The reason for this contrived setup is kind of subtle, it's meant to ensure that some stuff are definitionally equal, not only provably equal. It doesn't prevent us from using these structures, because there are various tricks (custom constructors or mechanisms to give default values to some fields) which hide them from us when building instances.</p>
+
+<a name="130736544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736544">Patrick Massot (Aug 01 2018 at 21:42)</a>:</h4>
+<p>But really the problem with your current definition if much more basic: you don't enforce any relation between the norm and the topology</p>
+
+<a name="130736627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736627">Patrick Massot (Aug 01 2018 at 21:44)</a>:</h4>
+<p>If you are serious about bringing Hilbert spaces to Lean, it would probably make more sense to pester <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> until he either merges my norms PR or ditches it and rolls his own, and then you could try to build Hilbert spaces on top of it.</p>
+
+<a name="130736917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736917">Simon Hudon (Aug 01 2018 at 21:51)</a>:</h4>
+<p>The other alternative is to work off of <span class="user-mention" data-user-id="110031">@Patrick Massot</span> 's branch of mathlib</p>
+
+<a name="130736929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736929">Kevin Buzzard (Aug 01 2018 at 21:51)</a>:</h4>
+<p>Patrick I think we're OK -- line 666 is the relation. It's my fault -- I linked to the wrong line. The definition is above where I linked -- sorry. Do you think we're OK?</p>
+
+<a name="130736932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130736932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130736932">Simon Hudon (Aug 01 2018 at 21:51)</a>:</h4>
+<p>... taking the risk that <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> will request changes and that you'll have to adapt your definitions to reflect them</p>
+
+<a name="130737271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130737271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130737271">Patrick Massot (Aug 01 2018 at 21:57)</a>:</h4>
+<p>Line 666 is a relation between the uniform structure and the topology it generates, it has nothing to do with the norm</p>
+
+<a name="130738460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738460">Kevin Buzzard (Aug 01 2018 at 22:14)</a>:</h4>
+<p>I am not so sure. <code>Hilbert_space V</code> extends <code>herm_inner_product_space V</code>. There's an instance sending <code>herm_inner_product_space V</code> to <code>topological_space V</code> [not that you can easily spot this -- it's somewhere else in this huge file]. I think that the <code>is_open</code> on line 666 refers to this topological space structure. I quite agree that if we had a topology generated by the uniform structure we'd be in trouble and this is exactly why we extend <code>uniform_space.core V</code> and not <code>uniform_space V</code>. Did I convince you yet?</p>
+
+<a name="130738520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738520">Kevin Buzzard (Aug 01 2018 at 22:15)</a>:</h4>
+<p>The instance is in line 613 and it's noncomputable because Andreas had to take the square root of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>v</mi><mo separator="true">,</mo><mi>v</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(v,v)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span> and square root is noncomputable!</p>
+
+<a name="130738615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738615">Mario Carneiro (Aug 01 2018 at 22:17)</a>:</h4>
+<p>if there are two active topologies on the structure, it should be an axiom or theorem that they are equal</p>
+
+<a name="130738688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738688">Mario Carneiro (Aug 01 2018 at 22:18)</a>:</h4>
+<p>although in this case I think you can actually get a uniform space from the inner product</p>
+
+<a name="130738699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738699">Mario Carneiro (Aug 01 2018 at 22:19)</a>:</h4>
+<p>noncomputability of a uniform space structure means nothing since it is not data</p>
+
+<a name="130738818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738818">Patrick Massot (Aug 01 2018 at 22:20)</a>:</h4>
+<p>I just realized that we don't talk about the same version</p>
+
+<a name="130738827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738827">Patrick Massot (Aug 01 2018 at 22:21)</a>:</h4>
+<p>I cloned your repo, and there were several commits on those files in the mean time</p>
+
+<a name="130738857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130738857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130738857">Patrick Massot (Aug 01 2018 at 22:21)</a>:</h4>
+<p>In particular I didn't look at that instance on line 613 which is currently commented out</p>
+
+<a name="130739715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130739715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130739715">Kevin Buzzard (Aug 01 2018 at 22:35)</a>:</h4>
+<p>Oh! :-)</p>
+
+<a name="130739904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130739904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130739904">Kevin Buzzard (Aug 01 2018 at 22:39)</a>:</h4>
+<p>We specifically avoided two topologies on the structure, I believe. This was exactly the problem which Patrick pointed out the first time around. Yes, we get a uniform space structure from the inner product -- that's exactly what we do now. Andreas extends uniform_space.core and then we make an instance of the uniform space using the topology coming from the norm plus an axiom that it agrees with the topology which comes from the uniform space. I am in the middle of doing something else right now but I assume there is no instance which gives a topology from a uniform_space.core -- I'm assuming that that's precisely the point of the structure, it's like a distrib.</p>
+
+<a name="130739993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130739993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130739993">Mario Carneiro (Aug 01 2018 at 22:40)</a>:</h4>
+<p>You probably shouldn't use <code>uniform_space.core</code> in this case</p>
+
+<a name="130740044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130740044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130740044">Mario Carneiro (Aug 01 2018 at 22:41)</a>:</h4>
+<p>you already have a topology coming from somewhere else, so use that in <code>uniform_space</code> and prove the equality axiom rather than letting <code>uniform_space.core</code> fill it in for you</p>
+
+<a name="130740761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130740761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130740761">Kevin Buzzard (Aug 01 2018 at 22:52)</a>:</h4>
+<p>V is just a vector space -- the only metric/topology we have on it is coming from the norm. All we want to do is to say that the metric is complete. We have no uniform structure or anything. I don't want to do uniform anything -- I just want to say that the metric space is complete. The only reason we're extending uniform_space.core is that this is the only way I know how to say this in Lean! What am I missing?</p>
+
+<a name="130741388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741388">Mario Carneiro (Aug 01 2018 at 23:03)</a>:</h4>
+<p>if it has a norm then it extends <code>normed_vector_space</code>, with the attendant norm, metric, uniform space and topology</p>
+
+<a name="130741406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741406">Mario Carneiro (Aug 01 2018 at 23:03)</a>:</h4>
+<p>the "agreement" here with the inner product says <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>v</mi><mo separator="true">,</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">∥</mi><mi>v</mi><msup><mi mathvariant="normal">∥</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(v, v) = \|v\|^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathrm">∥</span><span class="mord mathit" style="margin-right:0.03588em;">v</span><span class="mord"><span class="mord mathrm">∥</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="130741409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741409">Patrick Massot (Aug 01 2018 at 23:03)</a>:</h4>
+<p>Sorry, I was interrupted by a phone call</p>
+
+<a name="130741454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741454">Patrick Massot (Aug 01 2018 at 23:04)</a>:</h4>
+<p>What Mario says is why I suggested you build upon my normed space stuff</p>
+
+<a name="130741461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741461">Mario Carneiro (Aug 01 2018 at 23:04)</a>:</h4>
+<p>(or something like it - is this a real inner product space or a more general kind?)</p>
+
+<a name="130741709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741709">Patrick Massot (Aug 01 2018 at 23:09)</a>:</h4>
+<p>Also, try at the end of your file: </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Hilbert_space</span> <span class="n">V</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">H</span><span class="bp">.</span><span class="n">to_core</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">=</span> <span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>seeing this fail is a bad omen</p>
+
+<a name="130741898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741898">Simon Hudon (Aug 01 2018 at 23:12)</a>:</h4>
+<p>You're so superstitious!</p>
+
+<a name="130741905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130741905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130741905">Kevin Buzzard (Aug 01 2018 at 23:12)</a>:</h4>
+<p>This file has changed since I understood it ;-)</p>
+
+<a name="130742139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130742139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130742139">Patrick Massot (Aug 01 2018 at 23:16)</a>:</h4>
+<blockquote>
+<p>you'll need that if a_n tends to zero and 0 &lt;= b_n &lt;= a_n then b_n tends to zero etc. This sort of stuff is not really mathlib's strong point at this stage.</p>
+</blockquote>
+<p>That one is in mathlib</p>
+
+<a name="130742165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130742165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130742165">Patrick Massot (Aug 01 2018 at 23:17)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/29639b31a9808f601fa434aeed0f5756f040f0e8/analysis/topology/topological_structures.lean#L434" target="_blank" title="https://github.com/leanprover/mathlib/blob/29639b31a9808f601fa434aeed0f5756f040f0e8/analysis/topology/topological_structures.lean#L434">https://github.com/leanprover/mathlib/blob/29639b31a9808f601fa434aeed0f5756f040f0e8/analysis/topology/topological_structures.lean#L434</a></p>
+
+<a name="130742168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130742168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130742168">Mario Carneiro (Aug 01 2018 at 23:17)</a>:</h4>
+<p>also completeness is defined in terms of filters not sequences</p>
+
+<a name="130768355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130768355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130768355">Andreas Swerdlow (Aug 02 2018 at 11:30)</a>:</h4>
+<blockquote>
+<p>Also, try at the end of your file: </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Hilbert_space</span> <span class="n">V</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">H</span><span class="bp">.</span><span class="n">to_core</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">=</span> <span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>seeing this fail is a bad omen</p>
+</blockquote>
+<p>Just tried this and it fails</p>
+
+<a name="130768700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130768700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130768700">Kevin Buzzard (Aug 02 2018 at 11:41)</a>:</h4>
+<p>This sounds related to Mario's comment. We do not care one bit about the uniform space structure. Here is the actual question. Let M be a metric space. How do I make the assertion in Lean that M is complete? And the meta-question is why this isn't a darn sight easier than it is (the answer to this possibly being "it's because of diamonds and the type class inference system not really being designed for this sort of thing"). At the minute we make M an instance a class of uniform_space.core and then add an axiom that the open sets of M are equal to the open sets of the uniformity. What's the correct way to do it? Note that Andreas is a 1st year undergrad and is just doing this to learn the theory and to learn Lean, this just an educational experiment at this point rather than a project to get Hilbert spaces into mathlib.</p>
+
+<a name="130768984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130768984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130768984">Johan Commelin (Aug 02 2018 at 11:48)</a>:</h4>
+<blockquote>
+<p>Note that Andreas is a 1st year undergrad and is just doing this to learn the theory and to learn Lean, this just an educational experiment at this point rather than a project to get Hilbert spaces into mathlib.</p>
+</blockquote>
+<p>Kudos! <span class="emoji emoji-1f419" title="octopus">:octopus:</span> Your UG's are amazing Kevin!</p>
+
+<a name="130769069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130769069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130769069">Kevin Buzzard (Aug 02 2018 at 11:51)</a>:</h4>
+<p>They're producing so much stuff that I find it difficult to keep track of it all. Every few hours I pull <a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/">https://github.com/ImperialCollegeLondon/xena-UROP-2018/</a> and there's more stuff; it's got to the stage where there aren't enough hours in the day to look at it all. If anyone wants to review any of the code there then feel free :-)</p>
+
+<a name="130769206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130769206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130769206">Johan Commelin (Aug 02 2018 at 11:54)</a>:</h4>
+<blockquote>
+<p>Excluding merges, 16 authors have pushed 84 commits to master and 83 commits to all branches. On master, 37 files have changed and there have been 5,920 additions and 1,071 deletions.  -- quote from github, insights</p>
+</blockquote>
+<p>That's over the last week!</p>
+
+<a name="130771212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130771212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130771212">Joseph Corneli (Aug 02 2018 at 12:50)</a>:</h4>
+<p>With latest version of the file I get an error: <code>invalid import: norm_space</code>.  Am I missing a dependency?  There's a file <code>src/inner_product_spaces/norm_spaces</code> (no <code>.lean</code>).  Renaming the file and adjusting the import line as follows, the error goes away:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span> <span class="n">inner_product_spaces</span><span class="bp">.</span><span class="n">norm_space</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">metric_space</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">uniform_space</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="120943">@Andreas Swerdlow</span>  is this roughly what's intended?</p>
+
+<a name="130771225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130771225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130771225">Kevin Buzzard (Aug 02 2018 at 12:51)</a>:</h4>
+<p>Apologies for this. When I was involved yesterday afternoon it was all working fine but there have been some commits since then and I've not had the time to look at it all.</p>
+
+<a name="130771650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130771650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130771650">Patrick Massot (Aug 02 2018 at 13:03)</a>:</h4>
+<p>I also needed to modify this yesterday to get it to compile. I know this UROP thing is very free form, but maybe you could encourage commits which compile (I'm not talking about sorry, this is a different question)</p>
+
+<a name="130771710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130771710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130771710">Andreas Swerdlow (Aug 02 2018 at 13:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="122022">@Joseph Corneli</span>  Yes sorry, am currently working on a version of the file that is saved on my hard drive and just copied over without thinking. That is the correct import.</p>
+
+<a name="130772322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130772322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130772322">Joseph Corneli (Aug 02 2018 at 13:19)</a>:</h4>
+<p>Another small suggestion would be a doc string for the main <code>class</code> in <code>basic.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">-</span>
+<span class="cm">`herm_inner_product_space` defined such the inner product of two vectors is a value in ℂ.</span>
+<span class="cm">This definition would have to be modified to work for any field of scalars.</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="130772943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20hilbert%20space/near/130772943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89980definingahilbertspace.html#130772943">Kevin Buzzard (Aug 02 2018 at 13:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="120943">@Andreas Swerdlow</span> I have located <span class="user-mention" data-user-id="120435">@Minh Hieu Le (Kai)</span>  -- he's sitting opposite me right now :-)</p>
+
+
+{% endraw %}

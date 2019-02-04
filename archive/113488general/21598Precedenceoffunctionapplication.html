@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/21598Precedenceoffunctionapplication.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html">Precedence of function application</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="131073950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131073950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131073950">Joe Hendrix (Aug 08 2018 at 00:49)</a>:</h4>
+<p>Can notation bind tighter than function application?  e.g. For an operator <code>^</code> make <code>f x ^ y</code> parse as <code>f (x ^ y)</code>?</p>
+
+<a name="131074272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131074272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131074272">Chris Hughes (Aug 08 2018 at 00:57)</a>:</h4>
+<p>I think not.</p>
+
+<a name="131074274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131074274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131074274">Kevin Buzzard (Aug 08 2018 at 00:57)</a>:</h4>
+<p>I think that (a) function application has super-high binding power and (b) if you want to use notation which already exists in Lean (like <code>^</code>) then, whilst you can define it to mean new things, you cannot change its default binding power, which is lower than the super-high binding power of functions. So at the very least you would have to use notation which is not already used in Lean, e.g. <code>\clubsuit</code> or some random thing like that.</p>
+
+<a name="131074958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131074958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131074958">Joe Hendrix (Aug 08 2018 at 01:12)</a>:</h4>
+<p>Yes, I meant "^" as a placeholder.   It looks like I can, but it was a much higher binding power than I tested at first.</p>
+
+<a name="131075107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131075107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131075107">Joe Hendrix (Aug 08 2018 at 01:16)</a>:</h4>
+<p>This seemed to work,  but if the precedence is any lower it doesn't.</p>
+<div class="codehilite"><pre><span></span>set_option pp.all true
+
+infix ` &lt;&gt; `:1025 := and
+constant f : Prop → Prop
+#check f true &lt;&gt; false
+</pre></div>
+
+
+<p>Anyways, thanks for suggesting the "super-high" binding power.</p>
+
+<a name="131077736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131077736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131077736">Mario Carneiro (Aug 08 2018 at 02:18)</a>:</h4>
+<p>Yes, you can. The binding power of application is <code>max = 1024</code>, which despite the name is not the maximum possible bonding power; you can see <code>max+10</code> used in the <code>core.lean</code> file.</p>
+
+<a name="131078180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131078180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html#131078180">François G. Dorais (Aug 08 2018 at 02:28)</a>:</h4>
+<p>BTW: <code>max_plus</code> is useful, it evaluates to 1034 (aka <code>max+10</code>) and avoids silly incidents like <code>max+11</code> (aka <code>max_spinal_tap</code>).</p>
+
+
+{% endraw %}

@@ -1,0 +1,56 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html">Scalar multiplication not defined for functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="148196578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html#148196578">Abhimanyu Pallavi Sudhir (Nov 22 2018 at 22:55)</a>:</h4>
+<p>It seems that <code>smul</code> over <code>ℝ</code> isn't defined for functions from <code>ℝ</code> to <code>ℝ</code> -- or at least, I can't get it to work.</p>
+
+<a name="148196620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html#148196620">Abhimanyu Pallavi Sudhir (Nov 22 2018 at 22:56)</a>:</h4>
+<p>It seems to me that functions are a rather natural type to use scalar multiplication on -- or am I missing some trick?</p>
+
+<a name="148196682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html#148196682">Abhimanyu Pallavi Sudhir (Nov 22 2018 at 22:58)</a>:</h4>
+<p>(also, should there be a coercion from <code>α</code> to <code>β → α</code> -- i.e. to constant functions?)</p>
+
+<a name="148196749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html#148196749">Kevin Buzzard (Nov 22 2018 at 23:00)</a>:</h4>
+<p>Chris Hughes suggested that importing pi_instances might fix this -- but it didn't seem to.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">module</span> <span class="n">ℝ</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p><code>pi_instances</code> contains the line</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">module</span>       <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">α</span><span class="o">}</span>           <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span>  <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">module</span> <span class="n">α</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span>       <span class="o">:</span> <span class="n">module</span> <span class="n">α</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>       <span class="o">:=</span> <span class="o">{</span><span class="bp">..</span><span class="n">pi</span><span class="bp">.</span><span class="n">semimodule</span> <span class="n">α</span><span class="o">}</span>
+</pre></div>
+
+<a name="148196761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Scalar%20multiplication%20not%20defined%20for%20functions/near/148196761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15301Scalarmultiplicationnotdefinedforfunctions.html#148196761">Kevin Buzzard (Nov 22 2018 at 23:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">module</span> <span class="n">ℚ</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">ℚ</span> <span class="o">(</span><span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>That fails too so it's not some decidable equality issue</p>
+
+
+{% endraw %}

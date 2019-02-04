@@ -1,0 +1,220 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/77049typeclass.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html">typeclass</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123761005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761005">Kenny Lau (Mar 15 2018 at 19:27)</a>:</h4>
+<p>why does this have no problem:</p>
+<div class="codehilite"><pre><span></span>class add_comm_monoid (α : Type u) extends add_monoid α, add_comm_semigroup α
+
+class add_group (α : Type u) extends add_monoid α, has_neg α :=
+(add_left_neg : ∀ a : α, -a + a = 0)
+
+class add_comm_group (α : Type u) extends add_group α, add_comm_monoid α
+</pre></div>
+
+
+<p>but this gives me an error?</p>
+<div class="codehilite"><pre><span></span>class has_upair extends has_zmem α :=
+(upair : α → α → α)
+(zmem_upair_iff_eq_or_eq : ∀ x y z, z ∈ upair x y ↔ z = x ∨ z = y)
+
+class has_sUnion extends has_zmem α :=
+(sUnion : α → α)
+(zmem_sUnion_iff_zmem_zmem : ∀ x z, z ∈ sUnion x ↔ ∃ t, z ∈ t ∧ t ∈ x)
+
+class has_sUnion_upair extends has_sUnion α, has_upair α
+</pre></div>
+
+<a name="123761012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761012">Kenny Lau (Mar 15 2018 at 19:27)</a>:</h4>
+<p>error:</p>
+<div class="codehilite"><pre><span></span>invalid &#39;structure&#39; header, field &#39;to_has_zmem&#39; from &#39;zfc.has_upair&#39; has already been declared
+</pre></div>
+
+<a name="123761063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761063">Simon Hudon (Mar 15 2018 at 19:28)</a>:</h4>
+<p>Why isn't <code>α</code> a parameter of <code>has_upair</code> and <code>has_sUnion</code>?</p>
+
+<a name="123761069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761069">Kenny Lau (Mar 15 2018 at 19:28)</a>:</h4>
+<p>oh it's a variable I declared before</p>
+
+<a name="123761073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761073">Kenny Lau (Mar 15 2018 at 19:28)</a>:</h4>
+<p>(sorry for not providing MWE)</p>
+
+<a name="123761280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761280">Simon Hudon (Mar 15 2018 at 19:33)</a>:</h4>
+<p>Ah! I see! This is what is called diamond-shaped inheritance scheme. It causes you to inherit <code>to_has_zmem</code> multiple times which causes it to clash with itself.</p>
+
+<a name="123761299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761299">Simon Hudon (Mar 15 2018 at 19:33)</a>:</h4>
+<p>(C++ programmers also know that as "diamond of death")</p>
+
+<a name="123761350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761350">Simon Hudon (Mar 15 2018 at 19:34)</a>:</h4>
+<p>They have been carefully exorcised from the basic libraries</p>
+
+<a name="123761435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761435">Simon Hudon (Mar 15 2018 at 19:36)</a>:</h4>
+<p>Is there a way to not make <code>has_upair</code> inherit <code>has_zmem</code>?</p>
+
+<a name="123761461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761461">Simon Hudon (Mar 15 2018 at 19:37)</a>:</h4>
+<p>You could change:</p>
+<div class="codehilite"><pre><span></span>class has_upair extends has_zmem α :=
+</pre></div>
+
+
+<p>into</p>
+<div class="codehilite"><pre><span></span>class has_upair [has_zmem α] :=
+</pre></div>
+
+<a name="123761472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761472">Kenny Lau (Mar 15 2018 at 19:37)</a>:</h4>
+<p>then why does the first one work?</p>
+
+<a name="123761601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761601">Simon Hudon (Mar 15 2018 at 19:39)</a>:</h4>
+<p>Good question. I wonder if that's because <code>add_comm_monoid</code> doesn't have fields. You can basically inline it in the <code>extends</code> clause of <code>add_comm_group</code></p>
+
+<a name="123761784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761784">Simon Hudon (Mar 15 2018 at 19:42)</a>:</h4>
+<p>If that's the case, you maybe could take advantage of it by splitting <code>has_upair</code> in two:</p>
+<div class="codehilite"><pre><span></span>class has_upair_1 [has_zmem α] :=
+(upair : α → α → α)
+(zmem_upair_iff_eq_or_eq : ∀ x y z, z ∈ upair x y ↔ z = x ∨ z = y)
+
+class has_upair_2 extends has_zmem α,  has_upair  α
+</pre></div>
+
+
+<p>I'm not sure if that would work but it might be worth a try</p>
+
+<a name="123761803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761803">Kenny Lau (Mar 15 2018 at 19:43)</a>:</h4>
+<div class="codehilite"><pre><span></span>class has_sUnion_upair extends has_zmem α :=
+(upair : α → α → α)
+(zmem_upair_iff_eq_or_eq : ∀ x y z, z ∈ upair x y ↔ z = x ∨ z = y)
+(sUnion : α → α)
+(zmem_sUnion_iff_zmem_zmem : ∀ x z, z ∈ sUnion x ↔ ∃ t, z ∈ t ∧ t ∈ x)
+
+instance has_sUnion_upair.to_has_sUnion [s : has_sUnion_upair α] : has_sUnion α :=
+{ ..s }
+
+instance has_sUnion_upair.to_has_upair [s : has_sUnion_upair α] : has_upair α :=
+{ ..s }
+</pre></div>
+
+<a name="123761807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761807">Kenny Lau (Mar 15 2018 at 19:43)</a>:</h4>
+<p>this is what i did</p>
+
+<a name="123761870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761870">Simon Hudon (Mar 15 2018 at 19:44)</a>:</h4>
+<p>The part I don't like about your solution is that I believe it forces you to duplicate the statement of your laws.</p>
+
+<a name="123761979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123761979">Kenny Lau (Mar 15 2018 at 19:46)</a>:</h4>
+<p>the part I don't like about your solution is that I would have to have <code>has_zmem</code> as my hypothesis each time</p>
+
+<a name="123762005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762005">Simon Hudon (Mar 15 2018 at 19:47)</a>:</h4>
+<p>No. If you use <code>has_upair_2</code>, it comes with <code>has_zmem</code></p>
+
+<a name="123762095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762095">Kenny Lau (Mar 15 2018 at 19:48)</a>:</h4>
+<p>oh...</p>
+
+<a name="123762102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762102">Kenny Lau (Mar 15 2018 at 19:48)</a>:</h4>
+<p>so your solution is basically like "distrib"</p>
+
+<a name="123762106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762106">Kenny Lau (Mar 15 2018 at 19:48)</a>:</h4>
+<p>create a useless class that only has distributivity</p>
+
+<a name="123762194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762194">Simon Hudon (Mar 15 2018 at 19:50)</a>:</h4>
+<p>You could say that</p>
+
+<a name="123762295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762295">Simon Hudon (Mar 15 2018 at 19:53)</a>:</h4>
+<p>Actually, useless is not accurate: try commenting it out to see if it's useful</p>
+
+<a name="123762354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762354">Kenny Lau (Mar 15 2018 at 19:54)</a>:</h4>
+<p>I mean <code>distrib</code> is useless in the sense that no mathematician cares about it</p>
+
+<a name="123762436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762436">Simon Hudon (Mar 15 2018 at 19:56)</a>:</h4>
+<p>I think it's still useful. It might not be an interesting structure but for some theorems, you may only care about distributivity without a whole semiring</p>
+
+<a name="123762495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762495">Simon Hudon (Mar 15 2018 at 19:58)</a>:</h4>
+<p>The same theorem or tactics could then be applicable whether you have a semiring or a distributive lattice</p>
+
+<a name="123762702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123762702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123762702">Simon Hudon (Mar 15 2018 at 20:03)</a>:</h4>
+<p>In the case of my solution, the <code>has_upair_1</code> is more of a coding trick, you're right. I think it happens rarely enough that it's an ugliness we can live with. I would prefer if diamond shaped inheritance was supported properly but it has been ruled out for performance reason</p>
+
+<a name="123768060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123768060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123768060">Mario Carneiro (Mar 15 2018 at 22:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> The original code works because it is using the old structure command to merge the fields together. People seem to be scared of anything marked "old" though, so if you want to recover this behavior with the new structure command, rather than creating a useless typeclass, you should extend <code>has_upair</code> and restate the axioms of <code>has_sUnion</code>, then construct a parent instance for <code>has_sUnion</code> (or vice versa).</p>
+
+<a name="123769395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123769395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123769395">Kenny Lau (Mar 15 2018 at 22:55)</a>:</h4>
+<p>so if I use old structure, everything will work?</p>
+
+<a name="123769435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123769435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123769435">Mario Carneiro (Mar 15 2018 at 22:56)</a>:</h4>
+<p>for some value of "everything"</p>
+
+<a name="123770735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123770735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123770735">Kevin Buzzard (Mar 15 2018 at 23:37)</a>:</h4>
+<p>I guess whether or not it will work in Lean 4 is another matter...</p>
+
+<a name="123770925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123770925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123770925">Kevin Buzzard (Mar 15 2018 at 23:42)</a>:</h4>
+<p>I guess the other thing is that presumably there was a reason the structure command was changed. Hmm, they might only be performance-related though.</p>
+
+<a name="123771129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771129">Simon Hudon (Mar 15 2018 at 23:48)</a>:</h4>
+<p>I think they are. Leo considered the price to be too high despite C++ and Eiffel offering the feature with reasonable performances</p>
+
+<a name="123771153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771153">Andrew Ashworth (Mar 15 2018 at 23:49)</a>:</h4>
+<p>eh, most large software projects have moved away from large inheritance trees</p>
+
+<a name="123771236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771236">Simon Hudon (Mar 15 2018 at 23:51)</a>:</h4>
+<p>Have they? For performance reasons? I seem to remember it being a bottomless well of bugs in C++ because the design is kind of dumb. As far as I know, the feature is still in use in Eiffel code bases</p>
+
+<a name="123771293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771293">Andrew Ashworth (Mar 15 2018 at 23:53)</a>:</h4>
+<p>not for performance, but because most people do inheritance wrong. this is the feeling i get from the places i've worked at with large code-bases</p>
+
+<a name="123771351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771351">Andrew Ashworth (Mar 15 2018 at 23:54)</a>:</h4>
+<p>if you asked most people what the liskov substitution principle was they'd cross their eyes and wonder what you'd had for breakfast</p>
+
+<a name="123771426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123771426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123771426">Andrew Ashworth (Mar 15 2018 at 23:57)</a>:</h4>
+<p>well, that's a bit unfair, LSP is a bit jargon-ny, but the point is, it's easy to shoot yourself in the foot with misuse of inheritance</p>
+
+<a name="123772124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123772124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77049typeclass.html#123772124">Simon Hudon (Mar 16 2018 at 00:19)</a>:</h4>
+<p>I think that's one reason Eiffel got inheritance right. Have you ever used it?</p>
+
+
+{% endraw %}

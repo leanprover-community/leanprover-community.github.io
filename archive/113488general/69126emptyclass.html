@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/69126emptyclass.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html">empty class</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125597374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597374">Reid Barton (Apr 24 2018 at 03:12)</a>:</h4>
+<p>What's the right way to declare an empty class (i.e., one with no fields) and an instance of it? I found that this works:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">C</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">C</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">C</span><span class="bp">.</span><span class="n">mk</span> <span class="n">unit</span>
+</pre></div>
+
+
+<p>but it seems oddly non-uniform that <code>C.mk</code> takes an explicit argument, and I'd prefer not to repeat it. I guess I could define</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mkC</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:=</span> <span class="n">C</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>but I figured I'd ask here</p>
+
+<a name="125597567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597567">Simon Hudon (Apr 24 2018 at 03:18)</a>:</h4>
+<p>Try</p>
+<div class="codehilite"><pre><span></span>class C (α : Type) :=
+ mk {} ::
+instance : C unit := C.mk
+</pre></div>
+
+<a name="125597691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597691">Reid Barton (Apr 24 2018 at 03:22)</a>:</h4>
+<p>That worked, thanks. Also the <code>::</code> isn't needed.</p>
+
+<a name="125597697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597697">Reid Barton (Apr 24 2018 at 03:22)</a>:</h4>
+<p>(But I also don't know what it does, so maybe I am missing something?)</p>
+
+<a name="125597725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597725">Simon Hudon (Apr 24 2018 at 03:23)</a>:</h4>
+<p>Thanks for the tip!</p>
+
+<a name="125597771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/empty%20class/near/125597771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69126emptyclass.html#125597771">Simon Hudon (Apr 24 2018 at 03:24)</a>:</h4>
+<p>It's just a degenerate case of a notation for structure definition that allows you to pick a different name than <code>mk</code> for the constructor:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span>
+  <span class="n">my_cons</span> <span class="bp">::</span>
+    <span class="o">(</span><span class="n">field1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">field2</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}

@@ -1,0 +1,366 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/01810natsubtraction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html">nat subtraction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152392979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152392979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152392979">Patrick Thomas (Dec 22 2018 at 16:29)</a>:</h4>
+<p>I am a bit confused by the results of the following:</p>
+<p>constants m n : ℕ<br>
+#check m - n<br>
+#eval 5 - 6</p>
+<p>The check reports a natural number. The eval returns 0.</p>
+<p>example (Q : ℕ → Prop) (m : ℕ) : (∀ n : ℕ, Q n) → ( ∀ n : ℕ, Q (n - m) ) :=<br>
+    assume a1 : ∀ n : ℕ, Q n,<br>
+        assume n : ℕ,<br>
+        show Q (n - m), from a1 (n - m)</p>
+<p>I did not expect that the substitution in the last line would be allowed, since n - m might not be a natural number.</p>
+
+<a name="152393031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393031">Johan Commelin (Dec 22 2018 at 16:31)</a>:</h4>
+<p><code>n - m</code> is always a natural number. It is zero when you expect it to be negative.</p>
+
+<a name="152393174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393174">Kevin Buzzard (Dec 22 2018 at 16:36)</a>:</h4>
+<p><code>-</code> is defined on <code>nat</code> for convenience, it's not the mathematical <code>-</code>. If you want to allow negative numbers, use <code>int</code>.</p>
+
+<a name="152393219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393219">Patrick Thomas (Dec 22 2018 at 16:38)</a>:</h4>
+<p>Is there a way to override that? It does not seem like the proof I posted should be valid. I would like it to require that m &lt;= n.</p>
+
+<a name="152393233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393233">Kevin Buzzard (Dec 22 2018 at 16:39)</a>:</h4>
+<p>I don't know what you mean by "override". You can't change the definition of <code>nat.sub</code> but you could define a new function if you like and I guess you could even redefine the notation <code>-</code> on <code>nat</code> to mean your new function. What do you actually want?</p>
+
+<a name="152393290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393290">Kevin Buzzard (Dec 22 2018 at 16:41)</a>:</h4>
+<p>Remember that every function has to have a well-defined source and target type. <code>nat.sub</code> takes two nats and returns a nat.</p>
+
+<a name="152393347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393347">Patrick Thomas (Dec 22 2018 at 16:42)</a>:</h4>
+<p>I guess I am just uncomfortable that the proof I posted is valid. It seems that it should require m &lt;= n.</p>
+
+<a name="152393353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393353">Kevin Buzzard (Dec 22 2018 at 16:43)</a>:</h4>
+<p>Your example is about a function called <code>nat.sub</code></p>
+
+<a name="152393355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393355">Kevin Buzzard (Dec 22 2018 at 16:43)</a>:</h4>
+<p>because you used the notation <code>-</code> on naturals and that's what it expands to</p>
+
+<a name="152393394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393394">Kevin Buzzard (Dec 22 2018 at 16:44)</a>:</h4>
+<p>Whether or not you're uncomfortable, Lean is just doing what you told it to do. You still haven't made clear to me what you expect to happen.</p>
+
+<a name="152393410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393410">Kevin Buzzard (Dec 22 2018 at 16:45)</a>:</h4>
+<p>You can change definitions or change notation or define new functions, you can make Lean behave the way you want it to behave, but your example as it stands is behaving normally because computer scientists had reasons for defining nat.sub the way they did.</p>
+
+<a name="152393424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393424">Kevin Buzzard (Dec 22 2018 at 16:45)</a>:</h4>
+<p>Your example is <em>not</em> about usual mathematician's subtraction.</p>
+
+<a name="152393472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393472">Patrick Thomas (Dec 22 2018 at 16:46)</a>:</h4>
+<p>Is there an existing function I could use to make it the usual mathematician's subtraction?</p>
+
+<a name="152393475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393475">Kevin Buzzard (Dec 22 2018 at 16:47)</a>:</h4>
+<p><code>int.sub</code></p>
+
+<a name="152393488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393488">Kevin Buzzard (Dec 22 2018 at 16:47)</a>:</h4>
+<p>This takes two ints and returns the int that you think it should return.</p>
+
+<a name="152393546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393546">Patrick Thomas (Dec 22 2018 at 16:49)</a>:</h4>
+<p>I see. Thank you.</p>
+
+<a name="152393591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393591">Kevin Buzzard (Dec 22 2018 at 16:50)</a>:</h4>
+<p>But note that a nat is not an int -- there is a function from nat to int which to a mathematician is "the obvious inclusion". In computer science nat and int are two different types and there's a map from nat to int which you have to somehow invoke, which makes things a little more complicated than a mathematician would feel that they should be.</p>
+
+<a name="152393599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393599">Kevin Buzzard (Dec 22 2018 at 16:51)</a>:</h4>
+<p>NB notation for <code>int.sub</code> is just <code>-</code> again -- you just have to remember to feed ints to it and not nats. The notation <code>-</code> just figures out which <code>blah.sub</code> it should expand to depending on what you feed it.</p>
+
+<a name="152393602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393602">Kevin Buzzard (Dec 22 2018 at 16:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="mi">5</span> <span class="bp">-</span> <span class="mi">6</span><span class="o">)</span> <span class="c1">-- 0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">((</span><span class="mi">5</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">6</span><span class="o">)</span> <span class="c1">-- -1</span>
+</pre></div>
+
+<a name="152393647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393647">Kevin Buzzard (Dec 22 2018 at 16:52)</a>:</h4>
+<p><code>(5 : ℤ)</code> means "I mean the integer 5". The default 5 is the natural number 5.</p>
+
+<a name="152393752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393752">Patrick Thomas (Dec 22 2018 at 16:56)</a>:</h4>
+<p>So in the example I posted I should introduce the assumption m &lt;= n and use it to show that 'int.sub_nat_nat n m' is a natural number, then use 'a1 (int.sub_nat_nat n m)'?</p>
+
+<a name="152393948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393948">Johan Commelin (Dec 22 2018 at 17:02)</a>:</h4>
+<p>It's not so easy. Your function will return an <code>int</code>, which is never a <code>nat</code>.</p>
+
+<a name="152393957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393957">Johan Commelin (Dec 22 2018 at 17:02)</a>:</h4>
+<p>You could however use a function that turns an <code>int</code> into a <code>nat</code>. But it will give you garbage for negative integers.</p>
+
+<a name="152393968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152393968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152393968">Johan Commelin (Dec 22 2018 at 17:03)</a>:</h4>
+<p>Alternatively, you can continue using natural numbers. And you can prove that it gives the "correct" result when <code>m &lt;= n</code>. (Such proofs already exist in mathlib.)</p>
+
+<a name="152394015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152394015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152394015">Johan Commelin (Dec 22 2018 at 17:04)</a>:</h4>
+<p>And then you just live with the fact that you also proved something else, something garbage. But who cares.</p>
+
+<a name="152395321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152395321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152395321">Kevin Buzzard (Dec 22 2018 at 17:46)</a>:</h4>
+<blockquote>
+<p>and use it to show that <code>int.sub_nat_nat n m</code> is a natural number</p>
+</blockquote>
+<p>You have a misconception about what is going on. The integer 4 is <em>not</em> a natural number, it is a non-negative integer. It is a term of type int, and because in type theory every term has at most one type, the integer 4 is not a natural number; indeed in type theory it does not even make sense to ask whether the integer 4 and the natural number 4 are equal -- terms of different types cannot be equal.</p>
+
+<a name="152395333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152395333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152395333">Kevin Buzzard (Dec 22 2018 at 17:47)</a>:</h4>
+<p>On the other hand there is a map from the natural numbers to the integers, and a map (the absolute value function) from the integers to the naturals, so you can move between them -- but the moving has to be done.</p>
+
+<a name="152395375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152395375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152395375">Kevin Buzzard (Dec 22 2018 at 17:48)</a>:</h4>
+<p>In particular, <code>a1 x</code> will never work if <code>a1</code> is expecting a natural and <code>x</code> is an integer, even if <code>x</code> is non-negative.</p>
+
+<a name="152397122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152397122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152397122">Patrick Thomas (Dec 22 2018 at 18:47)</a>:</h4>
+<p>So there is a function that takes a positive integer and returns a natural number?</p>
+
+<a name="152397163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152397163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152397163">Johan Commelin (Dec 22 2018 at 18:48)</a>:</h4>
+<p>No, same reason as above.</p>
+
+<a name="152397166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152397166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152397166">Kevin Buzzard (Dec 22 2018 at 18:48)</a>:</h4>
+<p><code>int.nat_abs</code> takes an arbitrary integer and returns a natural number.</p>
+
+<a name="152397175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152397175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152397175">Kevin Buzzard (Dec 22 2018 at 18:49)</a>:</h4>
+<p>and if you feed it a non-negative integer, it will return the corresponding natural number.</p>
+
+<a name="152397230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152397230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152397230">Kevin Buzzard (Dec 22 2018 at 18:51)</a>:</h4>
+<p>Type theory likes total functions, and this is a bit weird for mathematicians. For example the square root function just goes from the reals to the reals -- if you feed it a non-negative real then it returns its non-negative square root, and if you feed it a negative real then it just returns some junk, maybe 0, maybe the square root of the absolute value -- as a mathematician I don't care what it returns because I never apply this function unless the input is non-negative. It's just a different way of looking at things. Took me a while to get used to.</p>
+
+<a name="152398558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152398558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152398558">Patrick Thomas (Dec 22 2018 at 19:39)</a>:</h4>
+<p>Would this be a better approach then:<br>
+example (Q : ℤ → Prop) (m : ℤ) (m ≥ 0) : (∀ n : ℤ, (n ≥ 0) → Q n) → ( ∀ n : ℤ, (n ≥ m) → Q (n - m) ) := ...</p>
+
+<a name="152398876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152398876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152398876">Johan Commelin (Dec 22 2018 at 19:50)</a>:</h4>
+<p>The better approach is to accept the fact that your theorem might have some garbage edge cases. It will create more elegant proofs, and it will create lemmas that are easier to use in other proofs.</p>
+
+<a name="152399842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152399842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152399842">Patrick Thomas (Dec 22 2018 at 20:24)</a>:</h4>
+<p>How do you avoid the risk of misinterpreting the theorem? Isn't it good to make it as explicit as possible?</p>
+
+<a name="152400178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152400178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152400178">Johan Commelin (Dec 22 2018 at 20:36)</a>:</h4>
+<p>If you want you can use the "garbage-include" version to prove the explicit morally-mathematically-correct version. That shouldn't be hard.</p>
+
+<a name="152400288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152400288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152400288">Mario Carneiro (Dec 22 2018 at 20:41)</a>:</h4>
+<p>There is no risk of the theorem being wrong, since lean is checking that. More than likely, if you try to prove anything nontrivial using <code>n - m : nat</code> you will naturally end up needing <code>m &lt;= n</code> at some point, and so you add it to the theorem hypothesis and the garbage is excluded. In this particular case, you never needed this assumption, so it's true even in the "garbage case". You can add the assumption anyway if you want, or not.</p>
+
+<a name="152401340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152401340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152401340">Patrick Thomas (Dec 22 2018 at 21:17)</a>:</h4>
+<p>I guess it is primarily a matter of not being aware of what the axioms are or how type theory works. I am a little worried that I may run into other unexpected cases. Maybe there is no easy way to avoid that?</p>
+
+<a name="152401644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152401644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152401644">Patrick Thomas (Dec 22 2018 at 21:28)</a>:</h4>
+<p>This came from my attempt to prove that the Principle of Induction implies the Principle of Induction from a Starting Point and being able to leave out m &lt;= n in the consequent. This feels somewhat nontrivial?</p>
+
+<a name="152402330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152402330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152402330">Mario Carneiro (Dec 22 2018 at 21:56)</a>:</h4>
+<p>What is the real theorem you want to state? What you quoted doesn't look like the principle of induction from a starting point</p>
+
+<a name="152403321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152403321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152403321">Patrick Thomas (Dec 22 2018 at 22:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- Principle of Induction</span>
+<span class="n">def</span> <span class="n">ind_1</span> <span class="o">:=</span>
+<span class="o">(</span> <span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+    <span class="o">(</span> <span class="o">(</span> <span class="n">P</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">P</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">)</span> <span class="o">)</span> <span class="bp">→</span>
+    <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">)</span>
+
+<span class="c1">-- Principle of Induction from a Starting Point</span>
+<span class="n">def</span> <span class="n">ind_2</span> <span class="o">:=</span>
+<span class="o">(</span> <span class="bp">∀</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+    <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">m</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="bp">→</span>
+    <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">n</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+<span class="o">)</span>
+
+<span class="c1">-- Principle of Induction -&gt; Principle of Induction from a Starting Point</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">ind_1</span> <span class="bp">→</span> <span class="n">ind_2</span> <span class="o">:=</span>
+    <span class="k">assume</span> <span class="n">a1</span> <span class="o">:</span> <span class="n">ind_1</span><span class="o">,</span>
+        <span class="k">assume</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+            <span class="k">assume</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                <span class="k">assume</span> <span class="n">a2</span> <span class="o">:</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">m</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">),</span>
+                <span class="k">have</span> <span class="n">s1</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">a2</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="n">a2</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span>
+                    <span class="k">assume</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                    <span class="k">have</span> <span class="n">s4</span> <span class="o">:</span> <span class="o">(</span> <span class="o">(</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s2</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">),</span>
+                    <span class="k">have</span> <span class="n">s5</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span><span class="o">,</span>
+                    <span class="k">have</span> <span class="n">s6</span> <span class="o">:</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s4</span> <span class="n">s5</span><span class="o">,</span>
+                    <span class="k">show</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s6</span><span class="o">,</span>
+                <span class="k">let</span> <span class="n">P&#39;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span><span class="o">,</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="k">in</span>
+                <span class="k">have</span> <span class="n">s7</span> <span class="o">:(</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">a1</span> <span class="n">P&#39;</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s8</span> <span class="o">:</span> <span class="n">P&#39;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">s1</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s9</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s3</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s10</span> <span class="o">:</span> <span class="n">P&#39;</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">s8</span> <span class="n">s9</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s11</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P&#39;</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">s7</span> <span class="n">s10</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s12</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">),</span> <span class="k">from</span> <span class="n">s11</span><span class="o">,</span>
+                    <span class="k">assume</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                        <span class="k">assume</span> <span class="n">a3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">,</span>
+                        <span class="k">have</span> <span class="n">s14</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)),</span> <span class="k">from</span> <span class="n">s12</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">),</span> <span class="c1">-- did not expect to work</span>
+                        <span class="k">show</span> <span class="n">Q</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="152403526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152403526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152403526">Kevin Buzzard (Dec 22 2018 at 22:38)</a>:</h4>
+<p>To write code on this forum enclose it in three backticks <code> ``` </code></p>
+
+<a name="152403577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152403577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152403577">Kevin Buzzard (Dec 22 2018 at 22:40)</a>:</h4>
+<p>Even better write <code> ```lean </code> for the first one and  it'll do syntax highlighting</p>
+
+<a name="152403963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152403963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152403963">Mark Dickinson (Dec 22 2018 at 22:54)</a>:</h4>
+<p>So if it helps at all, to resolve your last <code>sorry</code> you're going to need to show that <code>m + (n - m) = n</code>. And that will need the hypothesis that <code>n ≥ m</code>.</p>
+
+<a name="152403968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152403968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152403968">Mario Carneiro (Dec 22 2018 at 22:55)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">s14</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)),</span> <span class="k">from</span> <span class="n">s12</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">),</span> <span class="c1">-- did not expect to work</span>
+<span class="k">show</span> <span class="n">Q</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span>
+</pre></div>
+
+
+</blockquote>
+<p>You may not have expected the first line to work, but I think you will be vindicated when you do the second line</p>
+
+<a name="152404182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404182">Patrick Thomas (Dec 22 2018 at 23:03)</a>:</h4>
+<p>Why does <code>m + (n - m) = n</code> require <code>n &gt;= m</code>?</p>
+
+<a name="152404225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404225">Mark Dickinson (Dec 22 2018 at 23:04)</a>:</h4>
+<p>You may also want to look at <code>nat.less_than_or_equal.rec</code> at some point. It probably doesn't help here, if this is a learning exercise, but it was an "aha" moment for me (as a Lean newcomer) to understand why the recursion principle for <code>nat.less_than_or_equal</code> is pretty much exactly induction from a starting point.</p>
+
+<a name="152404226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404226">Mario Carneiro (Dec 22 2018 at 23:04)</a>:</h4>
+<p>because if <code>m &gt; n</code>, then <em>since <code>n - m</code> is a natural number and hence is <code>&gt;= 0</code></em>, we cannot possibly have <code>m + (something nonnegative) = n</code>.</p>
+
+<a name="152404235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404235">Mario Carneiro (Dec 22 2018 at 23:05)</a>:</h4>
+<p>the fact that <code>n - m</code> is a natural number is purely a fact of its type, it is impossible for any term of that type to not be nonnegative</p>
+
+<a name="152404278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404278">Mario Carneiro (Dec 22 2018 at 23:06)</a>:</h4>
+<p>If we want to have a function <code>sub : nat -&gt; nat -&gt; nat</code> (and we do), it must not behave like regular subtraction everywhere. We do the next best thing and make it 0 when it ought to be negative</p>
+
+<a name="152404285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152404285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152404285">Mario Carneiro (Dec 22 2018 at 23:07)</a>:</h4>
+<p>Not sure if it helps, but the natural number subtraction operation is called <a href="https://en.wikipedia.org/wiki/Monus" target="_blank" title="https://en.wikipedia.org/wiki/Monus">monus</a> in regular maths</p>
+
+<a name="152405626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152405626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152405626">Patrick Thomas (Dec 22 2018 at 23:57)</a>:</h4>
+<p>Is there an easy way to find the theorems for <code>(m + n) ≥ m</code> and <code>m + (n - m) = n</code>?</p>
+
+<a name="152406036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406036">Mario Carneiro (Dec 23 2018 at 00:12)</a>:</h4>
+<p>They are all in <code>init.data.nat.lemmas</code> and <code>data.nat.basic</code>. You can browse those files, or try to guess the names like <code>nat.add_sub_...</code> in the autocompletion</p>
+
+<a name="152406038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406038">Mario Carneiro (Dec 23 2018 at 00:12)</a>:</h4>
+<p>the first one is <code>nat.le_add_left</code></p>
+
+<a name="152406173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406173">Mark Dickinson (Dec 23 2018 at 00:17)</a>:</h4>
+<p>... and the second is <code>nat.sub_add_cancel</code> (<code>∀ {n m : ℕ}, n ≥ m → n - m + m = n</code>'), modulo a use of commutativity of addition.</p>
+
+<a name="152406223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406223">Patrick Thomas (Dec 23 2018 at 00:18)</a>:</h4>
+<p>Thank you.</p>
+
+<a name="152406229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406229">Mario Carneiro (Dec 23 2018 at 00:19)</a>:</h4>
+<p>the commutated version should also be there</p>
+
+<a name="152406232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406232">Mark Dickinson (Dec 23 2018 at 00:19)</a>:</h4>
+<p>Ah, looks like it's also exactly <code>nat.add_sub_cancel'</code>, from mathlib.</p>
+
+<a name="152406293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152406293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152406293">Mark Dickinson (Dec 23 2018 at 00:21)</a>:</h4>
+<p>... and <code>nat.add_sub_of_le</code> from the standard library</p>
+
+<a name="152408358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20subtraction/near/152408358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01810natsubtraction.html#152408358">Patrick Thomas (Dec 23 2018 at 01:33)</a>:</h4>
+<p>Completed proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+
+<span class="c1">-- Principle of Induction</span>
+<span class="n">def</span> <span class="n">ind_1</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+    <span class="n">P</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span>
+
+
+<span class="c1">-- Principle of Induction from a Starting Point</span>
+<span class="n">def</span> <span class="n">ind_2</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+    <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span>
+        <span class="o">(</span> <span class="n">Q</span> <span class="n">m</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">)</span> <span class="o">)</span> <span class="bp">→</span>
+        <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">n</span> <span class="o">)</span>
+    <span class="o">)</span>
+
+
+<span class="c1">-- Principle of Induction -&gt; Principle of Induction from a Starting Point</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">ind_1</span> <span class="bp">→</span> <span class="n">ind_2</span> <span class="o">:=</span>
+    <span class="k">assume</span> <span class="n">a1</span> <span class="o">:</span> <span class="n">ind_1</span><span class="o">,</span>
+        <span class="k">assume</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+            <span class="k">assume</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                <span class="k">assume</span> <span class="n">a2</span> <span class="o">:</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">m</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">),</span>
+                <span class="k">have</span> <span class="n">s1</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">a2</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="o">(</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="n">a2</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span>
+                    <span class="k">assume</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                    <span class="k">have</span> <span class="n">s4</span> <span class="o">:</span> <span class="o">(</span> <span class="o">(</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≥</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s2</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">),</span>
+                    <span class="k">have</span> <span class="n">s5</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">le_add_right</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span>
+                    <span class="k">have</span> <span class="n">s6</span> <span class="o">:</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s4</span> <span class="n">s5</span><span class="o">,</span>
+                    <span class="k">show</span> <span class="o">(</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s6</span><span class="o">,</span>
+                <span class="k">let</span> <span class="n">P&#39;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span><span class="o">,</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="k">in</span>
+                <span class="k">have</span> <span class="n">s7</span> <span class="o">:(</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="bp">→</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">a1</span> <span class="n">P&#39;</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s8</span> <span class="o">:</span> <span class="n">P&#39;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">s1</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s9</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">s3</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s10</span> <span class="o">:</span> <span class="n">P&#39;</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="o">(</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span> <span class="n">P&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">)</span> <span class="o">),</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">s8</span> <span class="n">s9</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s11</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P&#39;</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">s7</span> <span class="n">s10</span><span class="o">,</span>
+                <span class="k">have</span> <span class="n">s12</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">),</span> <span class="k">from</span> <span class="n">s11</span><span class="o">,</span>
+                    <span class="k">assume</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+                        <span class="k">assume</span> <span class="n">a3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">,</span>
+                        <span class="k">have</span> <span class="n">s13</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)),</span> <span class="k">from</span> <span class="n">s12</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">),</span>
+                        <span class="k">have</span> <span class="n">s14</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_sub_of_le</span> <span class="n">a3</span><span class="o">,</span>
+                        <span class="k">show</span> <span class="n">Q</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">eq</span><span class="bp">.</span><span class="n">subst</span> <span class="n">s14</span> <span class="n">s13</span>
+</pre></div>
+
+
+{% endraw %}

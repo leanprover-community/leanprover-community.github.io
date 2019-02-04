@@ -1,0 +1,129 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/91157spotthemetavariable.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html">spot the metavariable</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124814424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124814424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124814424">Kevin Buzzard (Apr 09 2018 at 01:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">false</span><span class="bp">.</span><span class="n">rec</span> <span class="c1">-- protected eliminator false.rec : Π (C : Sort l), false → C</span>
+<span class="kn">constant</span> <span class="n">oops</span> <span class="o">:</span> <span class="n">false</span>
+<span class="kn">definition</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">false</span><span class="bp">.</span><span class="n">rec</span> <span class="bp">ℕ</span> <span class="n">oops</span> <span class="c1">-- the &quot;expected type must not contain metavariables&quot; error</span>
+<span class="kn">definition</span> <span class="n">m</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">false</span><span class="bp">.</span><span class="n">rec</span> <span class="bp">ℕ</span> <span class="n">oops</span> <span class="c1">-- typechecks just fine</span>
+</pre></div>
+
+<a name="124814469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124814469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124814469">Kevin Buzzard (Apr 09 2018 at 01:46)</a>:</h4>
+<p>I am not sure I have seen <code>foo</code> and <code>@foo</code> behave differently before, in a situation where there are no implicit arguments</p>
+
+<a name="124823987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124823987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124823987">Gabriel Ebner (Apr 09 2018 at 08:02)</a>:</h4>
+<p>In case you didn't already see it, the metavariable is in the type of the definition:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="n">def</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+<a name="124824035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124824035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124824035">Gabriel Ebner (Apr 09 2018 at 08:04)</a>:</h4>
+<p>The elaborator does not only take a pre-expression, but also an expected type as argument.  Expected types are important to elaborate many pre-expressions, for example recursor applications or anonymous structure instances.  This is why <code>foo</code> works but <code>bar</code> doesn't:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">bar</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="124824642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124824642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124824642">Gabriel Ebner (Apr 09 2018 at 08:29)</a>:</h4>
+<p>Elaboration of recursor applications is particularly sensitive to the expected type since the motive is computed by generalizing all occurrences of the major premise in the expected type.  So when we elaborate <code>nat.rec_on k _ _</code>, we elaborate the major premise <code>k</code> and then replace <code>k</code> by a fresh variable in the expected type to get the motive.  If the expected type is <code>C k (k+1)</code> for example, then we'd compute the motive <code>λ x, C x (x+1)</code>.  In your example, the elaborator just has a metavariable as expected type and cannot replace occurrences of the major premise (in a sensible way) to compute a motive.</p>
+
+<a name="124824743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124824743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124824743">Gabriel Ebner (Apr 09 2018 at 08:32)</a>:</h4>
+<p>Maybe this is already clear, but in elaboration the "expected type" is the type the elaborated expression is supposed to have.  For example, when we elaborate <code>⟨1, 2⟩ : ℕ × ℕ</code>, we elaborate the pre-expression <code>⟨1, 2⟩</code> with the expected type <code>ℕ × ℕ</code>.</p>
+
+<a name="124824750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124824750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124824750">Gabriel Ebner (Apr 09 2018 at 08:33)</a>:</h4>
+<p>Fun trick: you can suppress expected type propagation with <code>: _</code>.</p>
+
+<a name="124831500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124831500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124831500">Kevin Buzzard (Apr 09 2018 at 12:36)</a>:</h4>
+<p>I don't understand your answer. In contrast to most <code>blah.rec</code> recursors, which have type <code> Π {C : blah -&gt; Sort u},...</code>, <code>false.rec</code> has type <code> Π (C : Sort u_1), false → C </code>, so whilst in general I can see the issue and why that generic error shows up, for <code>false.rec</code> the information is there. I guess what I am saying is that perhaps the definition <code>false.rec</code> seems to have been explicitly manipulated by the system so that the motive is not implicit, but the error seems to indicate that some generic rule for recursors has been applied without noticing that in this case it does not apply. I have given Lean all the information it needs to work out the expected type and it has chosen to ignore it because I didn't put the <code>@</code>. That's the point I'm trying to make -- the elaborator, in this case, has all the information it needs, despite no <code>@</code>.</p>
+
+<a name="124831511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124831511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124831511">Kevin Buzzard (Apr 09 2018 at 12:37)</a>:</h4>
+<p>I am trying to figure out how the elaborator works without reading the source code. Am I crazy? Is this not even possible, really? Stuff like " The elaborator does not only take a pre-expression, but also an expected type as argument. " are gold dust to me because I don't see any way of working this stuff out without asking.</p>
+
+<a name="124831692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124831692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124831692">Kevin Buzzard (Apr 09 2018 at 12:42)</a>:</h4>
+<p>Another way of saying what I don't understand -- <code> false.rec ℕ oops </code> and <code>@false.rec ℕ oops </code> carry exactly the same information, but one works in a situation where the other does not, so it looks to me like some code somewhere is incorrectly distinguishing between them based on a "oh, there's an eliminator without an @, we are going to have to do some guesswork" principle which does not apply in this case.</p>
+
+<a name="124831834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124831834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124831834">Kevin Buzzard (Apr 09 2018 at 12:48)</a>:</h4>
+<p>I guess a rather more tasteful way of demonstrating this behaviour is <code>definition  n (oops : false) := false.rec ℕ oops</code></p>
+
+<a name="124832445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832445">Gabriel Ebner (Apr 09 2018 at 13:10)</a>:</h4>
+<blockquote>
+<p>the error seems to indicate that some generic rule for recursors has been applied without noticing that in this case it does not apply.</p>
+</blockquote>
+<p>You're completely right. <a href="https://github.com/leanprover/lean/blob/8f55ec4c50379c612731ced2424fd3eda0cf69a6/src/frontends/lean/elaborator.cpp#L117-L121" target="_blank" title="https://github.com/leanprover/lean/blob/8f55ec4c50379c612731ced2424fd3eda0cf69a6/src/frontends/lean/elaborator.cpp#L117-L121">https://github.com/leanprover/lean/blob/8f55ec4c50379c612731ced2424fd3eda0cf69a6/src/frontends/lean/elaborator.cpp#L117-L121</a></p>
+<div class="codehilite"><pre><span></span>    <span class="k">if</span> <span class="p">(</span><span class="n">inductive</span><span class="o">::</span><span class="n">is_elim_rule</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">||</span>
+        <span class="n">is_aux_recursor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">||</span>
+        <span class="n">is_user_defined_recursor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">elaborator_strategy</span><span class="o">::</span><span class="n">AsEliminator</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+
+<a name="124832656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832656">Gabriel Ebner (Apr 09 2018 at 13:18)</a>:</h4>
+<blockquote>
+<p>I have given Lean all the information it needs</p>
+</blockquote>
+<p>The goal of the elaborator is not to fill in missing pieces, it is to create a type-correct expression using the pre-expression as a recipe.  The meaning of <code>false.rec _ oops</code> is <em>not</em> <code> app (app (const `false.rec [level.mvar `a]) [mvar `b]) (local_const `oops ...) </code>, it is a <em>command</em> to the elaborator, instructing it to (essentially) do an induction on <code>oops</code>.  And well, the <code>induction</code> tactic can fail even if the goal would be solvable by induction.</p>
+
+<a name="124832682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832682">Kevin Buzzard (Apr 09 2018 at 13:19)</a>:</h4>
+<p>Do you think that I will have to learn some C++ if I want to understand Lean well enough to use it in practice?</p>
+
+<a name="124832743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832743">Gabriel Ebner (Apr 09 2018 at 13:21)</a>:</h4>
+<p>I don't think it's necessary to know the Lean implementation or even just C++ in order to understand and use Lean.  I think I have a good mental model of how C++ or Scala work, without ever having seen their compilers.</p>
+
+<a name="124832748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832748">Kevin Buzzard (Apr 09 2018 at 13:22)</a>:</h4>
+<p>That's a relief :-)</p>
+
+<a name="124832790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832790">Gabriel Ebner (Apr 09 2018 at 13:23)</a>:</h4>
+<p>I think it took me about half a year to have a mental model for the Lean elaborator.  I looked into the C++ code, though.</p>
+
+<a name="124832798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832798">Gabriel Ebner (Apr 09 2018 at 13:23)</a>:</h4>
+<p>Before that, I just added type annotations everywhere until the red squiggles went away.</p>
+
+<a name="124832800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832800">Kevin Buzzard (Apr 09 2018 at 13:23)</a>:</h4>
+<p>My impression is that it's very difficult to get a clear idea of what the elaborator is doing without reading the source.</p>
+
+<a name="124832838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832838">Kevin Buzzard (Apr 09 2018 at 13:24)</a>:</h4>
+<p>Currently I just add type class annotations everywhere until the red squiggles go away.</p>
+
+<a name="124832849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832849">Kevin Buzzard (Apr 09 2018 at 13:25)</a>:</h4>
+<p>I mean, there are general principles, but to get beyond them I think you just have to look at what is actually going on.</p>
+
+<a name="124832892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832892">Kevin Buzzard (Apr 09 2018 at 13:26)</a>:</h4>
+<p>Thanks for your help, by the way!</p>
+
+<a name="124832894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124832894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html#124832894">Gabriel Ebner (Apr 09 2018 at 13:26)</a>:</h4>
+<p>You're welcome.</p>
+
+
+{% endraw %}

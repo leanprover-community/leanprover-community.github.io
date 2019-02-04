@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/59368bugwithrefinerw.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/59368bugwithrefinerw.html">bug with refine + rw</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="152093977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59368bugwithrefinerw.html#152093977">Kenny Lau (Dec 18 2018 at 09:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--fails</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">rewrite tactic failed, lemma is not an equality nor a iff</span>
+<span class="cm">state:</span>
+<span class="cm">H : (0 = 0 → 0 = 1) → true,</span>
+<span class="cm">h : 0 = 0</span>
+<span class="cm">⊢ 0 = 1</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
+
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="bp">_</span><span class="o">,</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--works</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="152094049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152094049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59368bugwithrefinerw.html#152094049">Kenny Lau (Dec 18 2018 at 09:48)</a>:</h4>
+<p>and also workaround:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">change</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--works</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}

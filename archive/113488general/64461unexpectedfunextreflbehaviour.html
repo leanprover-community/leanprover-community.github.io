@@ -1,0 +1,245 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/64461unexpectedfunextreflbehaviour.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html">unexpected funext / refl behaviour</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124946494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946494">Kevin Buzzard (Apr 11 2018 at 21:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">universes</span> <span class="n">true</span> <span class="c1">-- might help</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="c1">-- phenomenon won&#39;t occur if you replace this with theorem T!</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">,</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">),</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span> <span class="c1">-- only pulls off X, possibly because of universe issues</span>
+  <span class="c1">-- two failed attempts to pull off f now:</span>
+  <span class="c1">-- funext, -- does nothing</span>
+  <span class="c1">-- apply funext, -- fails to unify</span>
+  <span class="n">refine</span> <span class="n">funext</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- Type of X now Sort (imax ? ?) and a type mismatch error reported **but goal changes anyway**</span>
+  <span class="n">intro</span> <span class="n">f</span><span class="o">,</span>
+  <span class="c1">-- goal now f = f</span>
+  <span class="c1">-- refl, -- doesn&#39;t work! Fails to unify.</span>
+  <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- does work</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="124946536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946536">Kevin Buzzard (Apr 11 2018 at 21:32)</a>:</h4>
+<p>I am pleased to have confused tactic mode so much that <code>refl</code> won't work but <code>exact rfl</code> will.</p>
+
+<a name="124946548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946548">Kevin Buzzard (Apr 11 2018 at 21:32)</a>:</h4>
+<p>I am not sure if my goal is true, as the sorts may or may not be in different universes initially. However the funext tactic seems to buy it, although after pulling off the X it gets confused and won't pull off the <code>f</code>.</p>
+
+<a name="124946563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946563">Kevin Buzzard (Apr 11 2018 at 21:33)</a>:</h4>
+<p><code>apply f</code> won't do it but I seem to be able to explicitly do it with <code>refine funext _</code> although now Lean is in a funny state -- the refine tactic does appear to do something, but reports an error anyway.</p>
+
+<a name="124946610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946610">Kevin Buzzard (Apr 11 2018 at 21:34)</a>:</h4>
+<p>replacing <code>example</code> with <code>theorem T</code> makes all the problems go away, which is to me very surprising behaviour.</p>
+
+<a name="124946682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946682">Patrick Massot (Apr 11 2018 at 21:36)</a>:</h4>
+<p>This Lean 3 is all broken. Let's have Lean 4.</p>
+
+<a name="124946695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946695">Patrick Massot (Apr 11 2018 at 21:37)</a>:</h4>
+<p>(and hope Kevin stops trying to break everything)</p>
+
+<a name="124946760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946760">Chris Hughes (Apr 11 2018 at 21:38)</a>:</h4>
+<p>Isn't it just because your X's are in different universes. And then if you put them in the same universe, it fails because the funext tactic gets rid of both lambdas.</p>
+
+<a name="124946857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946857">Kevin Buzzard (Apr 11 2018 at 21:40)</a>:</h4>
+<p>I agree that if you put them in the same universe, all is well.</p>
+
+<a name="124946864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946864">Kevin Buzzard (Apr 11 2018 at 21:41)</a>:</h4>
+<p>But if you leave them in different universes, Lean ends up in a weird state.</p>
+
+<a name="124946940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946940">Kevin Buzzard (Apr 11 2018 at 21:42)</a>:</h4>
+<p>After the intro f, you have a goal <code>f = f</code> which refl won't close</p>
+
+<a name="124946953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946953">Kevin Buzzard (Apr 11 2018 at 21:43)</a>:</h4>
+<p>but <code>exact rfl</code> will. However we are now passed a red squiggly line and I am not too sure how seriously to take Lean.</p>
+
+<a name="124946954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946954">Chris Hughes (Apr 11 2018 at 21:43)</a>:</h4>
+<p>I'm beginning to see the problem. Is it something to do with, it let's you do funext the first time, so if you can prove their equal, it will deduce the universes are the same. So your proposition is a bit like an heq?</p>
+
+<a name="124946958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124946958">Kevin Buzzard (Apr 11 2018 at 21:43)</a>:</h4>
+<p>I was wondering if there was some implicit unification going on</p>
+
+<a name="124947005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947005">Kevin Buzzard (Apr 11 2018 at 21:44)</a>:</h4>
+<p>Also it was very strange to see a line in tactic mode fail and yet see the goal change.</p>
+
+<a name="124947019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947019">Patrick Massot (Apr 11 2018 at 21:44)</a>:</h4>
+<p>Looks a bit in the same spirit as your most recent issue on Lean github</p>
+
+<a name="124947028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947028">Chris Hughes (Apr 11 2018 at 21:45)</a>:</h4>
+<p>And it automatically lifts the functions to a different universe to be able to state that they're equal.</p>
+
+<a name="124947033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947033">Patrick Massot (Apr 11 2018 at 21:45)</a>:</h4>
+<p>Lean somehow fails to notice it's failing</p>
+
+<a name="124947109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947109">Chris Hughes (Apr 11 2018 at 21:46)</a>:</h4>
+<p>Haven't ever done anything that really tests the universe system so I don't really know.</p>
+
+<a name="124947173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124947173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#124947173">Kevin Buzzard (Apr 11 2018 at 21:48)</a>:</h4>
+<p>I just started playing with it recently. I'm just trying to get the hang of it :-)</p>
+
+<a name="125162334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162334">Kevin Buzzard (Apr 16 2018 at 21:19)</a>:</h4>
+<p>I know there's something strange going on here but I've not explained it very well. How about this</p>
+
+<a name="125162336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162336">Kevin Buzzard (Apr 16 2018 at 21:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">,</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">),</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span> <span class="c1">-- it&#39;s not very effective</span>
+  <span class="n">refine</span> <span class="bp">@</span><span class="n">funext</span> <span class="o">(</span><span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- back on track</span>
+  <span class="n">intro</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125162338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162338">Kevin Buzzard (Apr 16 2018 at 21:19)</a>:</h4>
+<p>That works fine.</p>
+
+<a name="125162340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162340">Kevin Buzzard (Apr 16 2018 at 21:20)</a>:</h4>
+<p>But now let me change <code>example</code> to <code>theorem strange</code>:</p>
+
+<a name="125162390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162390">Kevin Buzzard (Apr 16 2018 at 21:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">strange</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">,</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">),</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span> <span class="c1">-- it&#39;s super effective!</span>
+  <span class="n">refine</span> <span class="bp">@</span><span class="n">funext</span> <span class="o">(</span><span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- invalid type ascription</span>
+  <span class="n">intro</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125162393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162393">Kevin Buzzard (Apr 16 2018 at 21:20)</a>:</h4>
+<p>The proof no longer typechecks if I name the theorem</p>
+
+<a name="125162398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162398">Kevin Buzzard (Apr 16 2018 at 21:20)</a>:</h4>
+<p>because the behaviour of <code>funext</code> changes now the theorem has a name</p>
+
+<a name="125162401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162401">Kevin Buzzard (Apr 16 2018 at 21:20)</a>:</h4>
+<p>That's not right, is it?</p>
+
+<a name="125162462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162462">Kevin Buzzard (Apr 16 2018 at 21:22)</a>:</h4>
+<p>I think this has something to do with screwy universes</p>
+
+<a name="125162620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162620">Johannes Hölzl (Apr 16 2018 at 21:26)</a>:</h4>
+<p>Yes, it could be related to the fact that <code>example</code> (compared to <code>theorem</code>) does allow meta (universe) variables in its statement. So the type is not fully elaborated, it gets fully elaborated together with the value like <code>def</code>. So maybe <code>funext</code> has a problem with instantiating them.</p>
+
+<a name="125162747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162747">Kevin Buzzard (Apr 16 2018 at 21:30)</a>:</h4>
+<p>Oh yes! If I set <code>pp.universes true</code> then I see that in the <code>theorem</code> the goal has <code>(X : Sort u_1)</code></p>
+
+<a name="125162780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125162780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125162780">Kevin Buzzard (Apr 16 2018 at 21:30)</a>:</h4>
+<p>but in the <code>example</code> it has <code>(X : Sort ?l_1)</code></p>
+
+<a name="125163009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125163009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125163009">Kevin Buzzard (Apr 16 2018 at 21:37)</a>:</h4>
+<p>I see, so <code>definition strange</code> fixes the problem :-)</p>
+
+<a name="125166006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166006">Kevin Buzzard (Apr 16 2018 at 22:48)</a>:</h4>
+<p>here's some possibly related weird behaviour:</p>
+
+<a name="125166023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166023">Kevin Buzzard (Apr 16 2018 at 22:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">,</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">),</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">funext</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">f</span><span class="o">,</span>
+  <span class="c1">-- this proof isn&#39;t finished yet</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125166031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166031">Kevin Buzzard (Apr 16 2018 at 22:48)</a>:</h4>
+<p>the goal now is <code>f = f</code></p>
+
+<a name="125166037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166037">Kevin Buzzard (Apr 16 2018 at 22:48)</a>:</h4>
+<p>(at the point where the proof is not finished)</p>
+
+<a name="125166041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166041">Kevin Buzzard (Apr 16 2018 at 22:48)</a>:</h4>
+<p>or with <code>pp.all</code> on</p>
+
+<a name="125166054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166054">Kevin Buzzard (Apr 16 2018 at 22:49)</a>:</h4>
+<p><code>⊢ @eq.{?l_2} (X → X) f f</code></p>
+
+<a name="125166066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166066">Kevin Buzzard (Apr 16 2018 at 22:49)</a>:</h4>
+<p>and the red squiggle is under <code>end</code></p>
+
+<a name="125166073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166073">Kevin Buzzard (Apr 16 2018 at 22:49)</a>:</h4>
+<p>because we wrote end before the proof was complete</p>
+
+<a name="125166079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166079">Kevin Buzzard (Apr 16 2018 at 22:49)</a>:</h4>
+<p>However if we write <code>admit</code> to finish the proof</p>
+
+<a name="125166087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166087">Kevin Buzzard (Apr 16 2018 at 22:49)</a>:</h4>
+<p>we get a new red squiggle</p>
+
+<a name="125166137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166137">Kevin Buzzard (Apr 16 2018 at 22:50)</a>:</h4>
+<p>on the second funext :-)</p>
+
+<a name="125166149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166149">Kevin Buzzard (Apr 16 2018 at 22:50)</a>:</h4>
+<p>Maybe the universe unification or whatever only takes place after the admit, and then Lean decides something was wrong all along</p>
+
+<a name="125166164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166164">Kevin Buzzard (Apr 16 2018 at 22:51)</a>:</h4>
+<p>I guess this is the price I pay for the silly <code>Sort*</code> choices I made earlier</p>
+
+<a name="125166182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125166182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125166182">Kevin Buzzard (Apr 16 2018 at 22:52)</a>:</h4>
+<p>changing <code>example</code> to <code>theorem T</code> gives me the red squiggle on the second funext immediately</p>
+
+<a name="125168260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/125168260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html#125168260">Chris Hughes (Apr 16 2018 at 23:39)</a>:</h4>
+<p>I think it might be because the proof could give a clue about universes, but not if the proof is admit.</p>
+
+
+{% endraw %}

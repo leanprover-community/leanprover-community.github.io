@@ -1,0 +1,79 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/76294findingafailed.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html">finding a failed</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133643406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133643406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133643406">Keeley Hoek (Sep 10 2018 at 09:31)</a>:</h4>
+<p>What's the easiest way to find where a "failed" was generated? I've been resorting to inserting trace statements in multiple files and now its just getting out of hand</p>
+
+<a name="133643997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133643997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133643997">Keeley Hoek (Sep 10 2018 at 09:44)</a>:</h4>
+<p>also, in the tactic monad, is there a way to get a stacktrace?</p>
+
+<a name="133644045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133644045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133644045">Mario Carneiro (Sep 10 2018 at 09:45)</a>:</h4>
+<p>There is the <code>vm</code> monad, which purports to be a debugger, but I don't know anyone who knows how to use it except possibly <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span></p>
+
+<a name="133671919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133671919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133671919">Simon Hudon (Sep 10 2018 at 18:07)</a>:</h4>
+<p>What I usually do is that, if I have a function with three lines I add the following until I find the error:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_fn</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">stmt1</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line A&quot;</span><span class="o">,</span>
+   <span class="n">stmt2</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line B&quot;</span><span class="o">,</span>
+   <span class="n">stmt3</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line C&quot;</span>
+</pre></div>
+
+
+<p>When I have found the function that fails, I repeat in that function.</p>
+
+<a name="133673961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133673961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133673961">Sebastian Ullrich (Sep 10 2018 at 18:45)</a>:</h4>
+<p>I've never used <code>vm</code> <span class="emoji emoji-1f605" title="sweat smile">:sweat_smile:</span> . I suppose it should be possible to write a <code>vm_monitor</code> that prints the stack trace whenever <code>failed</code> is called.</p>
+
+<a name="133674025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133674025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133674025">Mario Carneiro (Sep 10 2018 at 18:46)</a>:</h4>
+<p>who wrote it?</p>
+
+<a name="133683100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133683100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133683100">Simon Hudon (Sep 10 2018 at 21:18)</a>:</h4>
+<p>I had never used `vm_monitor and I gave it a try. Here's what I did:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">debugger</span> <span class="n">true</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_monitor</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_mon</span> <span class="o">:</span> <span class="n">vm_monitor</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">init</span> <span class="o">:=</span> <span class="o">(),</span>
+  <span class="n">step</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">do</span> <span class="n">vm</span><span class="bp">.</span><span class="n">curr_fn</span> <span class="bp">&gt;&gt;=</span> <span class="n">vm</span><span class="bp">.</span><span class="n">trace</span> <span class="o">}</span>
+
+<span class="n">run_cmd</span> <span class="n">my_tactic</span>
+
+<span class="kn">set_option</span> <span class="n">debugger</span> <span class="n">false</span>
+</pre></div>
+
+
+<p>It sets up a monitor that, before each instruction, prints the name of the enclosing function. It does not seem to be aware of failures but at least, you can figure out where the problem is by looking at the last printout</p>
+
+<a name="133684138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133684138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76294findingafailed.html#133684138">Simon Hudon (Sep 10 2018 at 21:40)</a>:</h4>
+<p>If you use the following instead, you can get an overview of the call nesting structure:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">vm_monitor</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_mon</span> <span class="o">:</span> <span class="n">vm_monitor</span> <span class="o">(</span><span class="n">nat</span> <span class="bp">×</span> <span class="n">option</span> <span class="n">name</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">init</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">none</span><span class="o">),</span>
+  <span class="n">step</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">fn</span><span class="o">,</span>
+  <span class="n">do</span> <span class="n">fn&#39;</span> <span class="err">←</span> <span class="n">vm</span><span class="bp">.</span><span class="n">curr_fn</span><span class="o">,</span>
+     <span class="n">n&#39;</span> <span class="err">←</span> <span class="n">vm</span><span class="bp">.</span><span class="n">call_stack_size</span><span class="o">,</span>
+     <span class="n">when</span> <span class="o">(</span><span class="n">fn</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">n&#39;</span><span class="o">,</span><span class="n">some</span> <span class="n">fn&#39;</span><span class="o">))</span> <span class="err">$</span> <span class="n">vm</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="o">(</span><span class="n">string</span><span class="bp">.</span><span class="n">join</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">repeat</span> <span class="s2">&quot;| &quot;</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">fn&#39;</span><span class="o">,</span>
+     <span class="n">pure</span> <span class="o">(</span><span class="n">n&#39;</span><span class="o">,</span><span class="n">fn&#39;</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+
+{% endraw %}

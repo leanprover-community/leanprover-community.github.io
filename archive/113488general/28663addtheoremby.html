@@ -1,0 +1,51 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/28663addtheoremby.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html">add_theorem_by</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124151486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151486">Jakob von Raumer (Mar 24 2018 at 14:30)</a>:</h4>
+<p>Why does this fail?</p>
+<div class="codehilite"><pre><span></span>meta  def  foo : tactic unit :=
+do tactic.add_theorem_by `bar [] (expr.const `unit []) (do tactic.constructor, return ()),
+tactic.add_theorem_by `baz [] (expr.const `unit []) (do
+bar ← tactic.get_local `bar,
+tactic.exact bar,
+return ()),
+return ()
+</pre></div>
+
+<a name="124151531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151531">Simon Hudon (Mar 24 2018 at 14:32)</a>:</h4>
+<p>What error do you get?</p>
+
+<a name="124151537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151537">Jakob von Raumer (Mar 24 2018 at 14:34)</a>:</h4>
+<p>"get_local tactic failed, unknown 'bar'"</p>
+
+<a name="124151623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151623">Simon Hudon (Mar 24 2018 at 14:36)</a>:</h4>
+<p>Ah I see! You need <code>resolve_name</code></p>
+
+<a name="124151626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151626">Simon Hudon (Mar 24 2018 at 14:37)</a>:</h4>
+<p><code>get_local</code> is only for local constants</p>
+
+<a name="124151804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151804">Jakob von Raumer (Mar 24 2018 at 14:44)</a>:</h4>
+<p>Is there a resource for more beautiful fresh local names than <code>mk_fresh_name</code>?</p>
+
+<a name="124151860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_theorem_by/near/124151860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28663addtheoremby.html#124151860">Mario Carneiro (Mar 24 2018 at 14:47)</a>:</h4>
+<p>yes, I think it is called <code>get_unused_name</code></p>
+
+
+{% endraw %}

@@ -1,0 +1,115 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/82169inductionargument2notavariable.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html">induction: "argument 2 not a variable"</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154266676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154266676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154266676">Sarah Mameche (Jan 03 2019 at 22:11)</a>:</h4>
+<p>Hi, I have an inductive predicate SN that takes a relation as argument (here eval), see the code snippet below. An induction over the statement <code>SN eval st</code>gives me the error: induction tactic failed, argument <a href="https://github.com/leanprover/mathlib/issues/2" target="_blank" title="https://github.com/leanprover/mathlib/issues/2">#2</a> of major premise type SN eval st is not a variable. </p>
+<p>Is it a problem that SN takes eval as an argument? </p>
+<div class="codehilite"><pre><span></span>inductive tm  : nat -&gt; Type
+  | app : Π {ntm : nat}, tm ntm -&gt; tm ntm -&gt; tm ntm
+  /- ... -/
+
+reserve infixl `≻`:40
+inductive eval : Π {n}, tm n → tm n → Prop
+infixl `≻` := eval
+| eappl {n} {e₁ : tm n} {e₁&#39; e₂} : e₁ ≻ e₁&#39; →  tm.app e₁ e₂ ≻ tm.app e₁&#39; e₂
+  /- ... -/
+infix `≻` := eval
+open eval
+
+inductive SN {n} : (tm n -&gt; tm n -&gt; Prop) → tm n -&gt; Prop
+| sn_step (R: tm n → tm n → Prop) (e1 : tm n) : (forall e2, R e1 e2 -&gt; SN R e2) -&gt; SN R e1.
+
+definition SNe {n} := @SN n eval.
+
+theorem SN₁ {n} (s t : tm n) : SNe (tm.app s t) → SNe s ∧ SNe t :=
+begin
+  intro h₁, split,
+  { generalize h₂ : (tm.app s t) = st, revert h₁, rw h₂, intro h₁, revert s t h₂,
+  induction h₁ with st hst ihst,  }
+</pre></div>
+
+<a name="154268520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154268520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154268520">Rob Lewis (Jan 03 2019 at 22:40)</a>:</h4>
+<p>I get a different error on this example, <code>generalize tactic failed, failed to find expression in the target</code>, which is solved by unfolding <code>SNe</code> at <code>h1</code>. Is this the right code snippet?</p>
+
+<a name="154269026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154269026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154269026">Sarah Mameche (Jan 03 2019 at 22:49)</a>:</h4>
+<p>Oh, I still get the induction error (on the example alone)...<br>
+Unfolding <code>SNe</code> at <code>h1</code> makes the induction tactic work, but gives me this induction hypothesis:<br>
+<code>ih_1 :
+  ∀ (e2 : tm n) (a_1 : R e1 e2),
+    (λ (_x : tm n → tm n → Prop) (st : tm n) (h₁ : SN _x st), ∀ (s t : tm n), app s t = st → SNe s) R e2 _ </code></p>
+<p>where R is added to the hypotheses, <code>R : tm n → tm n → Prop</code>. I want  <code>R</code>to be <code>eval</code>, though. How can that be done?</p>
+
+<a name="154269337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154269337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154269337">Rob Lewis (Jan 03 2019 at 22:54)</a>:</h4>
+<p>Can you make <code>R</code> a parameter to <code>SN</code>? (Move it to the left of the colon in the definition of <code>SN</code>, that is.)</p>
+
+<a name="154269789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154269789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154269789">Sarah Mameche (Jan 03 2019 at 23:02)</a>:</h4>
+<p>That produces the same induction hypothesis (but unfolding <code>SNe</code> is not needed anymore)</p>
+
+<a name="154269844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154269844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154269844">Rob Lewis (Jan 03 2019 at 23:03)</a>:</h4>
+<p>I think we're either using different versions of Lean, or working on different examples.</p>
+
+<a name="154270131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154270131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154270131">Sarah Mameche (Jan 03 2019 at 23:09)</a>:</h4>
+<p>Ok, maybe my version is too old, I'm using 3-3-0</p>
+
+<a name="154273397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154273397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154273397">Kevin Buzzard (Jan 04 2019 at 00:12)</a>:</h4>
+<p>I guess most people here use 3.4.1.</p>
+
+<a name="154274246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154274246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154274246">Sarah Mameche (Jan 04 2019 at 00:26)</a>:</h4>
+<p>Yeah sorry, I switched versions now and the tip with <code>R</code>as parameter works for the induction tactic. But there are problems for <code>cases</code> and <code>constructor</code>with this definiton, for example:</p>
+<div class="codehilite"><pre><span></span>inductive tm  : nat -&gt; Type
+  | app : Π {ntm : nat}, tm ntm -&gt; tm ntm -&gt; tm ntm
+  /- ... -/
+
+reserve infixl `≻`:40
+inductive eval : Π {n}, tm n → tm n → Prop
+infixl `≻` := eval
+| eappl {n} {e₁ : tm n} {e₁&#39; e₂} : e₁ ≻ e₁&#39; →  tm.app e₁ e₂ ≻ tm.app e₁&#39; e₂
+  /- ... -/
+infix `≻` := eval
+open eval
+inductive star {n} (R : tm n → tm n → Prop) : tm n → (tm n → Prop)
+| srefl {e} : star e e
+| sstep {e₁ e₂ e₃} :  (R e₁ e₂) → star e₂ e₃ → star e₁ e₃
+open star
+infix `≻*`:40 := star eval
+
+inductive SN {n} (R : tm n -&gt; tm n -&gt; Prop ) : tm n -&gt; Prop
+| sn_step (R: tm n → tm n → Prop) (e1 : tm n) : (forall e2, R e1 e2 -&gt; SN e2) -&gt; SN e1.
+
+definition SNe {n} := @SN n eval.
+
+lemma closed_star {n} (s t): s ≻* t -&gt; SNe s -&gt; @SNe n t :=
+begin intros h1 h2,  induction h1 with s&#39; s&#39; t&#39; e h3 h4 ih,
+      { assumption },
+      { apply ih, cases h2,   },
+end
+</pre></div>
+
+
+<p>Cases adds a hypothesis of type <code>R : tm n → tm n → Prop</code> (similar to what happened with induction before)</p>
+
+<a name="154386747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%3A%20%22argument%202%20not%20a%20variable%22/near/154386747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82169inductionargument2notavariable.html#154386747">Mario Carneiro (Jan 04 2019 at 04:42)</a>:</h4>
+<p>you have <code>R</code> in the <code>sn_step</code> constructor even though it's already declared, so it's a different <code>R</code></p>
+
+
+{% endraw %}

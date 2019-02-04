@@ -1,0 +1,68 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/04116cardnonempty.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html">card_nonempty</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133577651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577651">Johan Commelin (Sep 08 2018 at 20:44)</a>:</h4>
+<p>Is there some easy way to tackle this goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">n</span>
+</pre></div>
+
+<a name="133577761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577761">Kenny Lau (Sep 08 2018 at 20:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">n</span><span class="o">]</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">by_contra</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">not_lt</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_zero_iff</span><span class="o">,</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_eq_zero_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133577817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577817">Johan Commelin (Sep 08 2018 at 20:50)</a>:</h4>
+<p>I guess this could be a simp lemma in mathlib?</p>
+
+<a name="133577822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577822">Johan Commelin (Sep 08 2018 at 20:50)</a>:</h4>
+<p>Ooh, and thanks!</p>
+
+<a name="133577926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577926">Kenny Lau (Sep 08 2018 at 20:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">mk</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">cardinal</span><span class="bp">.</span><span class="n">pos_iff_ne_zero</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">ne_zero_iff_nonempty</span><span class="o">]</span>
+</pre></div>
+
+<a name="133577929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133577929">Kenny Lau (Sep 08 2018 at 20:54)</a>:</h4>
+<p>I think Mario likes <a href="http://cardinal.mk" target="_blank" title="http://cardinal.mk">cardinal.mk</a> more than fintype.card</p>
+
+<a name="133578072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133578072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133578072">Chris Hughes (Sep 08 2018 at 20:59)</a>:</h4>
+<p>It is in mathlib. <code>fintype.card_pos_iff</code> I believe.</p>
+
+<a name="133578180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133578180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04116cardnonempty.html#133578180">Johan Commelin (Sep 08 2018 at 21:02)</a>:</h4>
+<p>Aaah, thanks! (Sorry, Kenny)</p>
+
+
+{% endraw %}

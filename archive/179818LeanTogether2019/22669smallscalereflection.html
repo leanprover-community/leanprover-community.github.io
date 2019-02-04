@@ -1,0 +1,30 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/179818LeanTogether2019/22669smallscalereflection.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html">Lean Together 2019</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/179818LeanTogether2019/22669smallscalereflection.html">small scale reflection</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="154824750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154824750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/179818LeanTogether2019/22669smallscalereflection.html#154824750">Kevin Buzzard (Jan 10 2019 at 09:47)</a>:</h4>
+<p>Assia is talking about small scale reflection. </p>
+<p>The following is reflection. Imagine we have <code>variable A : Type</code> and <code>variable add : A -&gt; A -&gt; A</code> and a hypothesis that <code>A</code> is associative. Then given some term of type <code>A</code>, of the form <code>(a + (b + c)) + d</code> or whatever, one could ask for a method of moving all the parentheses to the left (with perhaps an added theorem that the original term equals the "normalised" term). But you cannot write Lean code to do this! Lean interprets <code>(a + (b + c)) + d</code> as just some term of type <code>A</code>.</p>
+<p>To write code which moves brackets around, one has to make a new data structure, in this case a tree type with nodes and leaves (leaves indexed by <code>nat</code> say), and a "put into normal form" function <code>norm</code> which sends <code>node (t1 (node t2 t3))</code>to <code>node (node t1 t2) t3</code> and generally sends a tree to its "normal form" with all the brackets on the left. "Reification" is the small amount of meta code which one has to write which looks at the actual expression corresponding to a term of type <code>A</code> and turns it into a tree. One also has an <code>eval</code> evaluation function sending a tree plus some "association list" (saying which elements of <code>A</code> the leaves correspond to) to <code>A</code>. One then proves a "correctness theorem" that says that given a tree and a list of <code>A</code>'s, the evaluation of <code>t</code> and its normalisation are equal.</p>
+<p>"Reflection" (or "the two level approach" as Henk used to call it) is exactly this situation, where terms of type A constructed using only <code>+</code>, and terms of this abstract tree structure, reflect each other.</p>
+
+<a name="154825434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154825434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/179818LeanTogether2019/22669smallscalereflection.html#154825434">Kevin Buzzard (Jan 10 2019 at 10:03)</a>:</h4>
+<p>A really cool reflection would be between <code>Prop</code> and <code>bool</code>! <code>bool</code> is a nice easy type and we can calculate with it. There's a nice function from <code>bool</code> to <code>Prop</code> sending <code>b</code> to <code>b = tt</code> (which is an equation, which is great because it means we can rewrite). Unfortunately, writing meta code which interprets an arbitrary <code>Prop</code> as a <code>bool</code> is asking a bit much.</p>
+
+<a name="154825975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154825975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/179818LeanTogether2019/22669smallscalereflection.html#154825975">Simon Hudon (Jan 10 2019 at 10:15)</a>:</h4>
+<p>We actually have a conversion from Prop to bool for decidable Props</p>
+
+
+{% endraw %}

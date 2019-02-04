@@ -1,0 +1,159 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/55527whyisthishappening.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html">why is this happening</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="155291582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155291582">Koundinya Vajjha (Jan 16 2019 at 22:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">wat</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">app</span> <span class="n">ctx</span><span class="bp">.</span><span class="n">head</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">ctx</span><span class="o">)</span><span class="bp">.</span><span class="n">head</span><span class="o">,</span>
+  <span class="n">type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="n">type</span><span class="o">,</span>
+  <span class="n">skip</span>
+
+<span class="kn">lemma</span> <span class="n">begins</span>  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">wat</span><span class="o">,</span>  <span class="c1">-- returns ℕ</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span>  <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>returns a type mismatch error?</p>
+
+<a name="155291781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155291781">Kenny Lau (Jan 16 2019 at 22:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">expr</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">wat</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">app</span> <span class="n">ctx</span><span class="bp">.</span><span class="n">head</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">ctx</span><span class="o">)</span><span class="bp">.</span><span class="n">head</span><span class="o">,</span>
+  <span class="n">type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="n">type</span><span class="o">,</span>
+  <span class="n">skip</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">lemma</span> <span class="n">begins</span>  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">wat</span><span class="o">,</span>  <span class="c1">-- returns ℕ</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="155291999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155291999">Kenny Lau (Jan 16 2019 at 22:59)</a>:</h4>
+<p>more info:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">expr</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">wat</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">app</span> <span class="n">ctx</span><span class="bp">.</span><span class="n">head</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">ctx</span><span class="o">)</span><span class="bp">.</span><span class="n">head</span><span class="o">,</span>
+  <span class="n">type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="k">let</span> <span class="n">none</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">a</span><span class="o">),</span>
+  <span class="n">skip</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">lemma</span> <span class="n">begins</span>  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">wat</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>tactic state after <code>wat</code>:</p>
+<div class="codehilite"><pre><span></span>f : ℕ → ℕ,
+a : bool,
+this : ℕ := f a
+⊢ Prop
+</pre></div>
+
+
+<p>and error message of lemma after I put <code>sorry</code>:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  f a
+term
+  a
+has type
+  bool
+but is expected to have type
+  ℕ
+</pre></div>
+
+<a name="155292170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292170">Reid Barton (Jan 16 2019 at 23:01)</a>:</h4>
+<p>You manually built an <code>expr</code>= supposedly fully elaborated expression, but the <code>expr</code> you constructed is not actually valid. I guess that <code>infer_type</code> assumes the expression is valid and then according to the typing rules its type must be the return type of <code>f</code>. You didn't get an error because you didn't do anything with the <code>expr</code>.</p>
+
+<a name="155292366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292366">Rob Lewis (Jan 16 2019 at 23:04)</a>:</h4>
+<p>Yeah, <code>infer_type</code> doesn't completely type check the expression, otherwise it would be very expensive. There's another tactic called <code>type_check</code> that should fail if you call it on <code>a</code>.</p>
+
+<a name="155292374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292374">Reid Barton (Jan 16 2019 at 23:04)</a>:</h4>
+<p>If you used <code>tactic.exact a</code> (supposing you change the goal to <code>nat</code>) then I imagine the tactic would succeed but then you would get a type error at a later stage.</p>
+
+<a name="155292406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292406">Koundinya Vajjha (Jan 16 2019 at 23:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  yeah seems like that's what is happening.</p>
+
+<a name="155292507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292507">Kenny Lau (Jan 16 2019 at 23:06)</a>:</h4>
+<p>well it's <code>meta</code> so it can be unsound anyway</p>
+
+<a name="155292545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292545">Koundinya Vajjha (Jan 16 2019 at 23:06)</a>:</h4>
+<p><code>type_check</code> is exactly what I needed.</p>
+
+<a name="155292547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292547">Kenny Lau (Jan 16 2019 at 23:06)</a>:</h4>
+<p>you aren't actually changing the partially generated proof by <code>trace</code></p>
+
+<a name="155292687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155292687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155292687">Rob Lewis (Jan 16 2019 at 23:08)</a>:</h4>
+<p>In general, making applications manually can be difficult. Do it if you're confident in what you're doing, since it will be more efficient. Otherwise <code>mk_app</code> and <code>mk_mapp</code> are your friends. In particular the error messages will be more helpful.</p>
+
+<a name="155293217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155293217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155293217">Koundinya Vajjha (Jan 16 2019 at 23:16)</a>:</h4>
+<p>I'm having trouble figuring out how to use <code>mk_app</code>.  I have <code>f : ℕ → ℝ</code> and <code>b : ℕ</code>. How do I use this to make the application <code>f b</code>?</p>
+
+<a name="155293421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155293421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155293421">Kenny Lau (Jan 16 2019 at 23:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">expr</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">wat</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">ctx</span><span class="bp">.</span><span class="n">head</span> <span class="o">[</span><span class="n">ctx</span><span class="bp">.</span><span class="n">reverse</span><span class="bp">.</span><span class="n">head</span><span class="o">],</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">type_check</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="n">type</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="k">let</span> <span class="n">none</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">a</span><span class="o">),</span>
+  <span class="n">skip</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">lemma</span> <span class="n">begins</span>  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">wat</span><span class="o">,</span>  <span class="c1">-- returns ℕ</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="155293593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155293593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html#155293593">Koundinya Vajjha (Jan 16 2019 at 23:21)</a>:</h4>
+<p>Okay that was silly. Thanks <span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
+
+
+{% endraw %}

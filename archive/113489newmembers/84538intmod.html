@@ -1,0 +1,501 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/84538intmod.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html">int.mod</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136906477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906477">petercommand (Nov 01 2018 at 08:47)</a>:</h4>
+<p>Trying to prove <code>int.mod (int.of_nat a_1) ↑p &lt; ↑p</code> in lean, but I wasn't able to unfold int.mod.</p>
+
+<a name="136906517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906517">Mario Carneiro (Nov 01 2018 at 08:48)</a>:</h4>
+<p>there should be a theorem called <code>int.mod_lt</code> for this</p>
+
+<a name="136906523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906523">Mario Carneiro (Nov 01 2018 at 08:49)</a>:</h4>
+<p>it is <code>int.mod_lt_of_pos</code> and it isn't true when <code>a_1 = 0</code></p>
+
+<a name="136906589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906589">petercommand (Nov 01 2018 at 08:51)</a>:</h4>
+<p>I can't find int.mod_lt in C-c C-d</p>
+
+<a name="136906637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906637">petercommand (Nov 01 2018 at 08:52)</a>:</h4>
+<p>There is nat.mod_lt though</p>
+
+<a name="136906692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906692">Johan Commelin (Nov 01 2018 at 08:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> Welcome! Can you tell if Mario's suggestion works?</p>
+
+<a name="136906699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906699">petercommand (Nov 01 2018 at 08:55)</a>:</h4>
+<p>no</p>
+
+<a name="136906705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906705">Johan Commelin (Nov 01 2018 at 08:55)</a>:</h4>
+<p>Ok, can you give a more detailed version of what you want to prove? A "minimal working example" (MWE)</p>
+
+<a name="136906750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906750">Johan Commelin (Nov 01 2018 at 08:56)</a>:</h4>
+<p>So something of the form</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foobar</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="err">??</span><span class="o">)</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="n">int</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a_1</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="136906810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906810">petercommand (Nov 01 2018 at 08:58)</a>:</h4>
+<p><code>def test : Π (a b : ℤ) (p : ℕ), (a + b) % p &lt; p := sorry </code></p>
+
+<a name="136906902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906902">Johan Commelin (Nov 01 2018 at 09:01)</a>:</h4>
+<p>That isn't true if <code>p = 0</code>, right?</p>
+
+<a name="136906960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906960">Mario Carneiro (Nov 01 2018 at 09:02)</a>:</h4>
+<p>Do you have mathlib? <code>int.mod_lt_of_pos</code> is in <code>data.int.basic</code></p>
+
+<a name="136906989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136906989">petercommand (Nov 01 2018 at 09:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  ah, it should be <code>def test : Π (a b : ℤ) (p : ℕ) (p &gt;= 2), (a + b) % p &lt; p := sorry</code></p>
+
+<a name="136907038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907038">petercommand (Nov 01 2018 at 09:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Ah..Thanks! I didn't set up mathlib</p>
+
+<a name="136907099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907099">petercommand (Nov 01 2018 at 09:07)</a>:</h4>
+<p>why wasn't I able to unfold <code>int.mod</code> though</p>
+
+<a name="136907272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907272">Johan Commelin (Nov 01 2018 at 09:12)</a>:</h4>
+<p>I guess it is some sort of inductive definition</p>
+
+<a name="136907273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907273">Kevin Buzzard (Nov 01 2018 at 09:12)</a>:</h4>
+<p><code>int</code> is an inductive type with two constructors. <code>int.mod</code> eats an <code>int</code>, and how it unfolds depends on which constructor you use -- <code>int.mod</code> can't unfold unless it knows which it is.</p>
+
+<a name="136907290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907290">petercommand (Nov 01 2018 at 09:13)</a>:</h4>
+<p>Which, in <code>int.of_nat a_1</code>, is <code>of_nat</code></p>
+
+<a name="136907291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907291">Kevin Buzzard (Nov 01 2018 at 09:13)</a>:</h4>
+<p>But on the other hand you probably don't want to be unfolding <code>int.mod</code>. The devs will have made all the infrastructure you need, at least that's the philosophy.</p>
+
+<a name="136907296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907296">petercommand (Nov 01 2018 at 09:13)</a>:</h4>
+<p>True</p>
+
+<a name="136907297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907297">Kevin Buzzard (Nov 01 2018 at 09:13)</a>:</h4>
+<p>If you post a MWE I can try to help.</p>
+
+<a name="136907354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907354">petercommand (Nov 01 2018 at 09:15)</a>:</h4>
+<p><code>def test : Π (a p : ℕ) (p &gt; 0) , int.mod (int.of_nat a) ↑p &lt; ↑p := sorry </code> something like this</p>
+
+<a name="136907408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907408">petercommand (Nov 01 2018 at 09:16)</a>:</h4>
+<p>Thanks</p>
+
+<a name="136907429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907429">petercommand (Nov 01 2018 at 09:17)</a>:</h4>
+<p>My first MWE wasn't clear, this one should be a bit better</p>
+
+<a name="136907479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907479">Kevin Buzzard (Nov 01 2018 at 09:18)</a>:</h4>
+<p>the answer appears to be that the exact definition of <code>int.mod</code> uses <code>↑a</code> instead of <code>int.of_nat a</code></p>
+
+<a name="136907498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907498">Kevin Buzzard (Nov 01 2018 at 09:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--  unfold int.mod, -- fails</span>
+  <span class="n">change</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">),</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136907500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907500">Kevin Buzzard (Nov 01 2018 at 09:19)</a>:</h4>
+<p>All the more reason why you shouldn't be unfolding it ;-)</p>
+
+<a name="136907578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907578">Kevin Buzzard (Nov 01 2018 at 09:21)</a>:</h4>
+<p>I just wrote <code>#check int.mod</code> and then right clicked on <code>int.mod</code> and peeked the actual definition.</p>
+
+<a name="136907650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907650">Kevin Buzzard (Nov 01 2018 at 09:23)</a>:</h4>
+<p>Of course the two things are definitionally equal: <code>example (a : ℕ) : int.of_nat a = ↑a := rfl </code></p>
+
+<a name="136907654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907654">Kevin Buzzard (Nov 01 2018 at 09:23)</a>:</h4>
+<p>But under the hood <code>unfold</code> is using <code>simp</code>, and I think <code>simp</code> can be fussy about not changing things to definitionally equal things.</p>
+
+<a name="136907658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907658">Kevin Buzzard (Nov 01 2018 at 09:23)</a>:</h4>
+<p>Well, that's my amateur diagnosis anyway.</p>
+
+<a name="136907777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907777">Kenny Lau (Nov 01 2018 at 09:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span>
+    <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="n">dec_trivial</span> <span class="n">Hp</span><span class="o">))</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_lt_of_le_of_neg</span>
+    <span class="o">(</span><span class="n">le_refl</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_lt_zero</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136907786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907786">Kevin Buzzard (Nov 01 2018 at 09:27)</a>:</h4>
+<p>A side comment -- I think <code>test</code> is not quite what you want to prove (AFK)</p>
+
+<a name="136907800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907800">Kenny Lau (Nov 01 2018 at 09:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_lt_of_le_of_neg</span>
+    <span class="o">(</span><span class="n">le_refl</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_lt_zero</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(I just noticed that you changed the condition again)</p>
+
+<a name="136907877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907877">petercommand (Nov 01 2018 at 09:29)</a>:</h4>
+<p>hmm, this is quite annoying..I thought <code>int.mod</code> was directly matching on the constructor</p>
+
+<a name="136907942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907942">petercommand (Nov 01 2018 at 09:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> thanks</p>
+
+<a name="136907960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907960">Kenny Lau (Nov 01 2018 at 09:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">neg_add_cancel_right</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136907961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907961">Kenny Lau (Nov 01 2018 at 09:31)</a>:</h4>
+<p>it is</p>
+
+<a name="136907966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907966">Kenny Lau (Nov 01 2018 at 09:31)</a>:</h4>
+<p>oh, and it isn't <code>def</code></p>
+
+<a name="136907967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136907967">Kenny Lau (Nov 01 2018 at 09:31)</a>:</h4>
+<p>it's <code>theorem</code></p>
+
+<a name="136908008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908008">Kenny Lau (Nov 01 2018 at 09:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">neg_add_cancel_right</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136908019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908019">petercommand (Nov 01 2018 at 09:32)</a>:</h4>
+<p>aren't they synonyms?</p>
+
+<a name="136908020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908020">Kenny Lau (Nov 01 2018 at 09:32)</a>:</h4>
+<p>no</p>
+
+<a name="136908028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908028">petercommand (Nov 01 2018 at 09:33)</a>:</h4>
+<p>what's different between def and thoerem?</p>
+
+<a name="136908031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908031">Kenny Lau (Nov 01 2018 at 09:33)</a>:</h4>
+<p>def is data</p>
+
+<a name="136908032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908032">Kenny Lau (Nov 01 2018 at 09:33)</a>:</h4>
+<p>theorem is proof</p>
+
+<a name="136908082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908082">petercommand (Nov 01 2018 at 09:34)</a>:</h4>
+<p>I mean, semantically, are they different?</p>
+
+<a name="136908095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908095">Kenny Lau (Nov 01 2018 at 09:34)</a>:</h4>
+<p>yes</p>
+
+<a name="136908114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908114">petercommand (Nov 01 2018 at 09:35)</a>:</h4>
+<p>proof irrelevance?</p>
+
+<a name="136908179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908179">petercommand (Nov 01 2018 at 09:36)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html">https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html</a><br>
+Ah, it says that <br>
+<code>by proof irrelevance, any two proofs of that theorem are definitionally equal.</code></p>
+
+<a name="136908184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908184">Kenny Lau (Nov 01 2018 at 09:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="mi">5</span>
+<span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="136908186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908186">Kenny Lau (Nov 01 2018 at 09:36)</a>:</h4>
+<blockquote>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html">https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html</a><br>
+Ah, it says that <br>
+<code>by proof irrelevance, any two proofs of that theorem are definitionally equal.</code></p>
+</blockquote>
+<p>that's irrelevant</p>
+
+<a name="136908209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908209">Kevin Buzzard (Nov 01 2018 at 09:37)</a>:</h4>
+<p>Kenny, independent of that def/theorem business, what's happening below? <span class="user-mention" data-user-id="127883">@petercommand</span> 's original formulation of the MWE has something wrong with it I think:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">b</span><span class="o">,</span> <span class="c1">-- ??</span>
+  <span class="n">intro</span> <span class="n">p</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">HP</span><span class="o">,</span>
+  <span class="c1">-- ⊢ int.mod (int.of_nat a) ↑p &lt; ↑p</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="136908253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908253">Kenny Lau (Nov 01 2018 at 09:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="mi">5</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">test</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">test : 5 = 5</span>
+<span class="cm">test.equations._eqn_1 : test = rfl</span>
+<span class="cm">-/</span>
+
+<span class="kn">theorem</span> <span class="n">test2</span> <span class="o">:</span> <span class="mi">5</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">test2</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">test2 : 5 = 5</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="136908274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908274">Kenny Lau (Nov 01 2018 at 09:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> lol the conditions keep changing</p>
+
+<a name="136908278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908278">Kevin Buzzard (Nov 01 2018 at 09:39)</a>:</h4>
+<p>I think the <code>p</code> in <code>forall p</code> isn't the same as the <code>p</code> in <code>p &gt; 0</code>.</p>
+
+<a name="136908282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908282">Kenny Lau (Nov 01 2018 at 09:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> can you make up your mind?</p>
+
+<a name="136908284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908284">Kevin Buzzard (Nov 01 2018 at 09:39)</a>:</h4>
+<p>I never changed anything, I just copied his MWE.</p>
+
+<a name="136908289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908289">Kenny Lau (Nov 01 2018 at 09:39)</a>:</h4>
+<blockquote>
+<p>I think the <code>p</code> in <code>forall p</code> isn't the same as the <code>p</code> in <code>p &gt; 0</code>.</p>
+</blockquote>
+<p>I think it's the same</p>
+
+<a name="136908332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908332">Kevin Buzzard (Nov 01 2018 at 09:40)</a>:</h4>
+<p>Did you look at my tactic mode post?</p>
+
+<a name="136908334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908334">Kevin Buzzard (Nov 01 2018 at 09:40)</a>:</h4>
+<p>There's an extra nat</p>
+
+<a name="136908337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908337">Kevin Buzzard (Nov 01 2018 at 09:40)</a>:</h4>
+<p><code>-- ??</code></p>
+
+<a name="136908349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908349">Kenny Lau (Nov 01 2018 at 09:40)</a>:</h4>
+<p>I don't know why you have 4 <code>intro</code>s</p>
+
+<a name="136908354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908354">Kevin Buzzard (Nov 01 2018 at 09:40)</a>:</h4>
+<p>because Lean is asking for 4. That's the point I'm trying to make</p>
+
+<a name="136908359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908359">Kenny Lau (Nov 01 2018 at 09:41)</a>:</h4>
+<p>what do you mean Lean is asking for 4</p>
+
+<a name="136908366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908366">Kevin Buzzard (Nov 01 2018 at 09:41)</a>:</h4>
+<p>What do you mean? The function wants 4 inputs</p>
+
+<a name="136908367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908367">Kenny Lau (Nov 01 2018 at 09:41)</a>:</h4>
+<p>that's spooky</p>
+
+<a name="136908369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908369">Kevin Buzzard (Nov 01 2018 at 09:41)</a>:</h4>
+<p>Must be Halloween.</p>
+
+<a name="136908412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908412">Kenny Lau (Nov 01 2018 at 09:42)</a>:</h4>
+<p>oh!</p>
+
+<a name="136908413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908413">petercommand (Nov 01 2018 at 09:42)</a>:</h4>
+<p>o.o</p>
+
+<a name="136908420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908420">Kenny Lau (Nov 01 2018 at 09:42)</a>:</h4>
+<p>lol</p>
+
+<a name="136908427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908427">Kenny Lau (Nov 01 2018 at 09:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="136908428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908428">Kenny Lau (Nov 01 2018 at 09:42)</a>:</h4>
+<p><code>&gt;</code> is a binder or something</p>
+
+<a name="136908432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908432">Kevin Buzzard (Nov 01 2018 at 09:43)</a>:</h4>
+<p>right</p>
+
+<a name="136908489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908489">Kevin Buzzard (Nov 01 2018 at 09:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> this is fine: <code>theorem test : ∀ (a p : ℕ), (p &gt; 0) → int.mod (int.of_nat a) ↑p &lt; ↑p :=</code></p>
+
+<a name="136908504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908504">Kevin Buzzard (Nov 01 2018 at 09:44)</a>:</h4>
+<p>but <code>(p &gt; 0)</code> before the comma gets interpreted as "and there's another variable p, different to the p you just mentioned"</p>
+
+<a name="136908516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908516">Kenny Lau (Nov 01 2018 at 09:45)</a>:</h4>
+<p>I don't think <span class="user-mention" data-user-id="127883">@petercommand</span> has tested his "MWE" before posting</p>
+
+<a name="136908518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908518">Kevin Buzzard (Nov 01 2018 at 09:45)</a>:</h4>
+<p><code>def test' : Π (a : ℕ) (p &gt; 0) , int.mod (int.of_nat a) ↑p &lt; ↑p := </code> is OK</p>
+
+<a name="136908521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908521">Kevin Buzzard (Nov 01 2018 at 09:45)</a>:</h4>
+<p>I just made it a bit more minimal, that's all ;-)</p>
+
+<a name="136908569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908569">petercommand (Nov 01 2018 at 09:46)</a>:</h4>
+<blockquote>
+<p>I don't think <span class="user-mention" data-user-id="127883">@petercommand</span> has tested his "MWE" before posting</p>
+</blockquote>
+<p>Yeah, I should've tested the MWEs o.o Thought that was simple enough</p>
+
+<a name="136908575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908575">Kenny Lau (Nov 01 2018 at 09:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
+
+<a name="136908636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908636">petercommand (Nov 01 2018 at 09:48)</a>:</h4>
+<p>Hmm, actually, I tested the MWEs, but didn't discover that I got one more variable</p>
+
+<a name="136908637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908637">petercommand (Nov 01 2018 at 09:48)</a>:</h4>
+<p>anyway</p>
+
+<a name="136908828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908828">Kevin Buzzard (Nov 01 2018 at 09:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">mod_lt_of_pos</span> <span class="n">a</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
+
+<a name="136908830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908830">AHan (Nov 01 2018 at 09:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span>  About the difference between "def" and "theorem", why is there test.eqations._eqn_1 appeared in your example<br>
+<code>def test : 5=5 := rfl
+#print prefix test</code></p>
+
+<a name="136908835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908835">Kevin Buzzard (Nov 01 2018 at 09:54)</a>:</h4>
+<p>because Kenny (intentionally) wrote bad code</p>
+
+<a name="136908842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908842">Kenny Lau (Nov 01 2018 at 09:55)</a>:</h4>
+<p>because <code>test</code> is now a definition so it has definitional equations</p>
+
+<a name="136908844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908844">Kenny Lau (Nov 01 2018 at 09:55)</a>:</h4>
+<p>just write any old definition</p>
+
+<a name="136908846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908846">Kevin Buzzard (Nov 01 2018 at 09:55)</a>:</h4>
+<p>If you use def instead of theorem or theorem instead of def, expect random things</p>
+
+<a name="136908858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908858">Kevin Buzzard (Nov 01 2018 at 09:55)</a>:</h4>
+<p>because they were not designed to be used in these circumstances</p>
+
+<a name="136908901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908901">Kenny Lau (Nov 01 2018 at 09:56)</a>:</h4>
+<p>undocumented behaviour... lul</p>
+
+<a name="136908906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908906">Kevin Buzzard (Nov 01 2018 at 09:56)</a>:</h4>
+<p>I think "garbage in, garbage out" is well documented in the literature</p>
+
+<a name="136908975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136908975">AHan (Nov 01 2018 at 09:58)</a>:</h4>
+<p>What does the definitional equations refers to here?<br>
+And how to use it in a normal def?</p>
+
+<a name="136909036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909036">Kenny Lau (Nov 01 2018 at 10:00)</a>:</h4>
+<p>you don't really use it</p>
+
+<a name="136909041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909041">Kenny Lau (Nov 01 2018 at 10:00)</a>:</h4>
+<p>it's internal mechanism</p>
+
+<a name="136909042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909042">Kevin Buzzard (Nov 01 2018 at 10:00)</a>:</h4>
+<p>Every time you make a definition (especially a nice complicated one, maybe with pattern matching) Lean creates some secret "equation lemmas"</p>
+
+<a name="136909043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909043">Kevin Buzzard (Nov 01 2018 at 10:00)</a>:</h4>
+<p>and when you try and unfold the definition, Lean uses these lemmas</p>
+
+<a name="136909058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909058">Kevin Buzzard (Nov 01 2018 at 10:01)</a>:</h4>
+<p>As Kenny says, this is all done internally and the user is not supposed to have to worry about it. It's basically the trick which makes "unfold" work.</p>
+
+<a name="136909070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909070">Kevin Buzzard (Nov 01 2018 at 10:01)</a>:</h4>
+<p><code>unfold X</code> is <code>simp only [equation lemmas for X]</code></p>
+
+<a name="136909131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909131">Kevin Buzzard (Nov 01 2018 at 10:02)</a>:</h4>
+<p>(this is my slightly amateurish understanding of it -- I am a mathematician so shouldn't really be talking about implementation issues)</p>
+
+<a name="136909163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html#136909163">AHan (Nov 01 2018 at 10:03)</a>:</h4>
+<p>Are they the beta reduction rules?</p>
+
+
+{% endraw %}

@@ -1,0 +1,104 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html">Why can rw rw different has_mul instances, but not fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="128082489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128082489">Chris Hughes (Jun 14 2018 at 21:47)</a>:</h4>
+<p>In the following code, <code>rw</code> manages to recognize that two different expressions involving different paths of inferring the <code>has_mul</code> type class are equal. It can't do this with two definitionally equal <code>fintype</code> instances however. What's the difference between <code>has_mul</code> and <code>fintype</code> that leads to this behaviour?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">int2</span> <span class="o">:=</span> <span class="n">int</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">int2</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">comm_ring</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+
+<span class="kn">lemma</span> <span class="n">one_times_two</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">int2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c">/-</span><span class="cm">@eq int2</span>
+<span class="cm">    (@has_mul.mul int2</span>
+<span class="cm">       (@mul_zero_class.to_has_mul int2</span>
+<span class="cm">          (@semiring.to_mul_zero_class int2 (@ring.to_semiring int2 (@comm_ring.to_ring int2 int2.comm_ring))))</span>
+<span class="cm">       1</span>
+<span class="cm">       2)</span>
+<span class="cm">    2-/</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">integral_domain</span> <span class="n">int2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">int2</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">int2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c">/-</span><span class="cm">@eq int2</span>
+<span class="cm">    (@has_mul.mul int2</span>
+<span class="cm">       (@no_zero_divisors.to_has_mul int2</span>
+<span class="cm">          (@domain.to_no_zero_divisors int2 (@integral_domain.to_domain int2 int2.integral_domain)))</span>
+<span class="cm">       1</span>
+<span class="cm">       2)</span>
+<span class="cm">    2-/</span>
+  <span class="n">rw</span> <span class="n">one_times_two</span><span class="o">,</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="n">bool</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="n">bool</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">lemma</span> <span class="n">card_bool1</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">bool2_fintype</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">},</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">bool2_fintype3</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">},</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">⟩</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">({</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">bool</span><span class="o">)</span> <span class="bp">=</span> <span class="o">({</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">card_bool2</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">card_bool1</span> <span class="c1">-- They are defeq</span>
+
+<span class="kn">lemma</span> <span class="n">card_bool3</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">card_bool1</span><span class="o">,</span> <span class="c1">--doesn&#39;t work</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">card_bool4</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype3</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">card_bool1</span>
+</pre></div>
+
+<a name="128082839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128082839">Simon Hudon (Jun 14 2018 at 21:54)</a>:</h4>
+<p>what error do you get?</p>
+
+<a name="128083025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083025">Chris Hughes (Jun 14 2018 at 21:58)</a>:</h4>
+<p>I accidentally gave an example that did work. I've just edited it.</p>
+
+<a name="128083327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083327">Chris Hughes (Jun 14 2018 at 22:05)</a>:</h4>
+<p><code>card_bool2</code> works not because they're defeq, but perhaps because it knows fintype is a subsingleton.</p>
+
+<a name="128083559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083559">Reid Barton (Jun 14 2018 at 22:10)</a>:</h4>
+<p>I think it works because it reduced both <code>card_bool1</code> and <code>card_bool2</code> to <code>2 = 2</code></p>
+
+<a name="128083570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083570">Reid Barton (Jun 14 2018 at 22:11)</a>:</h4>
+<p>it = <code>card_bool2</code></p>
+
+<a name="128083640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083640">Reid Barton (Jun 14 2018 at 22:12)</a>:</h4>
+<p>I don't know why your <code>rw one_times_two</code> works though.</p>
+
+<a name="128083660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfintype.html#128083660">Kevin Buzzard (Jun 14 2018 at 22:13)</a>:</h4>
+<p>Yeah, rw is usually really snotty about things like this</p>
+
+
+{% endraw %}

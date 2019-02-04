@@ -1,0 +1,219 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/16498generatingallapps.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html">generating all `app`s</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125644011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125644011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125644011">Scott Morrison (Apr 25 2018 at 00:31)</a>:</h4>
+<p>Say I have an <code>e : expr</code>, which is probably some function type, and some other collection of <code>A : list expr</code>, and I would like to find all ways of plugging something from <code>A</code> into the next argument of <code>e</code>. Should I:<br>
+1) Actually look at what type <code>e</code> is, in particular the type of its first argument, and then look through <code>A</code> checking if there is anything of that type?<br>
+2) Just invoking <code>mk_app e [a]</code> for each <code>a</code> in <code>A</code>, and collect whatever succeeds?</p>
+
+<a name="125644133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125644133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125644133">Scott Morrison (Apr 25 2018 at 00:34)</a>:</h4>
+<p>Option 2) is obviously much easier to write, I'm just wondering if I should expect that it is going to be way slower, or something.</p>
+
+<a name="125645974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125645974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125645974">Simon Hudon (Apr 25 2018 at 01:23)</a>:</h4>
+<p>It might be worth experimenting but I don't think 2) would be any slower than 1)</p>
+
+<a name="125649582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125649582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125649582">Scott Morrison (Apr 25 2018 at 03:03)</a>:</h4>
+<p>err... <code>mk_app</code> takes a <code>name</code> and a <code>list expr</code> worth of arguments. If I just have <code>a b : expr</code>, what's the idiomatic way to apply <code>a</code> to <code>b</code>, inferring implicit arguments and typechecking?</p>
+
+<a name="125649764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125649764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125649764">Simon Hudon (Apr 25 2018 at 03:08)</a>:</h4>
+<p>I think <code>type_check (a b)</code> might do the trick. You can also postpone type checking until you actually use those expressions.</p>
+
+<a name="125650082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650082">Scott Morrison (Apr 25 2018 at 03:18)</a>:</h4>
+<p>Are there some backticks missing in your suggestion there?</p>
+
+<a name="125650086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650086">Scott Morrison (Apr 25 2018 at 03:18)</a>:</h4>
+<p>I haven't quite internalised quoting and antiquoting ...</p>
+
+<a name="125650146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650146">Simon Hudon (Apr 25 2018 at 03:20)</a>:</h4>
+<p>In this case, I'm just using the fact that <code>expr</code> has a <code>has_coe_to_fun</code> instance so you can use an expr as a function and it just wraps it in a <code>expr.app</code></p>
+
+<a name="125650266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650266">Scott Morrison (Apr 25 2018 at 03:25)</a>:</h4>
+<p>I think I can also use something like <code>try_core (to_expr ``(%%e %%f))</code>.</p>
+
+<a name="125650448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650448">Simon Hudon (Apr 25 2018 at 03:30)</a>:</h4>
+<p>Yes I think that's right. It might be slower because your going from <code>expr</code> to <code>pexpr</code> and back.</p>
+
+<a name="125650508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125650508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125650508">Simon Hudon (Apr 25 2018 at 03:32)</a>:</h4>
+<p>Depending on what you do with the expressions after, you might be able to do better than my proposal. Whatever you do with the resulting expression might need to be type checked again so you could just return <code>a b</code> with the understanding that it might eventually fail to type check</p>
+
+<a name="125651850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125651850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125651850">Mario Carneiro (Apr 25 2018 at 04:19)</a>:</h4>
+<p>How did you get <code>a</code> in your application <code>a b</code>? Lean works at the application list level (i.e. <code>f a1 a2 ... an</code>) when it does implicits and such</p>
+
+<a name="125652123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652123">Mario Carneiro (Apr 25 2018 at 04:28)</a>:</h4>
+<p>I think the fastest option is to whnf the type of a to a Pi type, get its binding domain, and then <code>unify</code> it with the type of <code>b \in A</code> for each <code>b</code>. That way you minimize the amount for repeated work for failures and don't have to check more than you need to (<code>type_check</code> will go through the whole term)</p>
+
+<a name="125652179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652179">Simon Hudon (Apr 25 2018 at 04:30)</a>:</h4>
+<p>Interesting! So option 1). I went the other way because I think this work will have to be done by the type checker and since that's done in C++, I would think it would be faster than anything you'd come up with.</p>
+
+<a name="125652189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652189">Mario Carneiro (Apr 25 2018 at 04:31)</a>:</h4>
+<p><code>type_check</code> is never done in C++, it's only for debugging</p>
+
+<a name="125652192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652192">Mario Carneiro (Apr 25 2018 at 04:31)</a>:</h4>
+<p>it's all incremental in the C++ stuff</p>
+
+<a name="125652235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652235">Mario Carneiro (Apr 25 2018 at 04:32)</a>:</h4>
+<p>In scott's case the <code>a</code> is constant but the <code>b</code> changes, so it makes sense to precompute it</p>
+
+<a name="125652241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652241">Simon Hudon (Apr 25 2018 at 04:32)</a>:</h4>
+<p>Good point</p>
+
+<a name="125652253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652253">Mario Carneiro (Apr 25 2018 at 04:33)</a>:</h4>
+<p>I'm guessing that Scott is building a search algorithm that just strings everything together that's well typed (trying to prove the five lemma maybe?) and for that this will be a really hot path so quick failure is important</p>
+
+<a name="125652352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125652352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125652352">Mario Carneiro (Apr 25 2018 at 04:36)</a>:</h4>
+<p>Option 2 would possibly have worked, but it's not type correct as scott points out and there's no immediate fix, lean isn't optimized for this kind of checking</p>
+
+<a name="125665542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125665542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125665542">Scott Morrison (Apr 25 2018 at 12:23)</a>:</h4>
+<p>I'm going to defer trying <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s suggested fastest option, as I'm not confident playing with binding domains yet.</p>
+
+<a name="125665550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125665550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125665550">Scott Morrison (Apr 25 2018 at 12:23)</a>:</h4>
+<p>In the meantime, it seems that when I try <code>to_expr ``(%%e %%f)</code>, Lean doesn't manage to fill in implicit arguments.</p>
+
+<a name="125665598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125665598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125665598">Scott Morrison (Apr 25 2018 at 12:24)</a>:</h4>
+<p>Is this expected? Is there a good way to do this? I'll try to come up with a MWE now.</p>
+
+<a name="125666920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125666920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125666920">Scott Morrison (Apr 25 2018 at 13:08)</a>:</h4>
+<p>It seems that the problem is that <code>to_expr ``(%%e %%f)</code> is over-eager about implicit arguments.</p>
+
+<a name="125666928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125666928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125666928">Scott Morrison (Apr 25 2018 at 13:09)</a>:</h4>
+<p>Say <code>e</code> represented something with a explicit argument then an implicit argument.</p>
+
+<a name="125666937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125666937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125666937">Scott Morrison (Apr 25 2018 at 13:09)</a>:</h4>
+<p>Then <code>to_expr ``(%%e %%f)</code> produces not <code>e f</code> but <code>e f ?m_1</code>.</p>
+
+<a name="125667061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667061">Scott Morrison (Apr 25 2018 at 13:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">f</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">g</span><span class="o">),</span>
+     <span class="n">f</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="mi">57</span><span class="o">),</span>
+     <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="err">%%</span><span class="n">e</span> <span class="err">%%</span><span class="n">f</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">pp</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125667066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667066">Scott Morrison (Apr 25 2018 at 13:13)</a>:</h4>
+<p>produces <code>@g 57 ?m_1</code></p>
+
+<a name="125667074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667074">Scott Morrison (Apr 25 2018 at 13:13)</a>:</h4>
+<p>But I'd really like it to just produce <code>g 57</code>.</p>
+
+<a name="125667526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667526">Scott Morrison (Apr 25 2018 at 13:28)</a>:</h4>
+<p>Hmm... I think this one is above my pay-grade for now. If anyone would like to help write a </p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">apps</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>that actually works (i.e. return a list of all ways to plug in an <code>f ∈ F</code> as the next explicit argument of <code>e</code>) that would be wonderful.</p>
+
+<a name="125667530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667530">Scott Morrison (Apr 25 2018 at 13:28)</a>:</h4>
+<p>My current implementation is <br>
+<code>do l ← F.mmap $ λ f, (do r ← try_core (to_expr ```(%%e %%f)), return r.to_list), return l.join</code></p>
+
+<a name="125667550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667550">Scott Morrison (Apr 25 2018 at 13:30)</a>:</h4>
+<p>But that suffers from the problem explained above. Mario suggested to me that I first inspect <code>e</code>, find the first explicit binder in it, and try to unify it with each element of <code>F</code>.</p>
+
+<a name="125667610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125667610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125667610">Scott Morrison (Apr 25 2018 at 13:30)</a>:</h4>
+<p>Unfortunately I don't know what I'm meant to do with any earlier implicit binders I find before the first explicit one, or how they would end up getting assigned by unification.</p>
+
+<a name="125671135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125671135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125671135">Simon Hudon (Apr 25 2018 at 15:15)</a>:</h4>
+<p>When you encounter implicit binders, create a meta variable and use it as a parameter.</p>
+
+<a name="125671191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125671191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125671191">Scott Morrison (Apr 25 2018 at 15:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> do you know of examples of this I can look at? I got pretty confused dealing with binders. :-(</p>
+
+<a name="125671468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125671468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125671468">Simon Hudon (Apr 25 2018 at 15:23)</a>:</h4>
+<p>Sure, have a look at <a href="https://github.com/leanprover/mathlib/blob/master/tactic/basic.lean#L100-L105" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/tactic/basic.lean#L100-L105">https://github.com/leanprover/mathlib/blob/master/tactic/basic.lean#L100-L105</a></p>
+
+<a name="125672334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125672334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125672334">Scott Morrison (Apr 25 2018 at 15:47)</a>:</h4>
+<p>Okay, that's helpful. Do you know if there is any existing code  that instead of just producing <code>expr.app e f</code>, produces <code>e</code>, with <code>f</code> stuck into the first explicit argument of <code>e</code> (and any earlier implicit arguments filled)?</p>
+
+<a name="125672812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125672812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125672812">Simon Hudon (Apr 25 2018 at 16:00)</a>:</h4>
+<p>I'm sure I have something like that around. Let's see ...</p>
+
+<a name="125673275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125673275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125673275">Simon Hudon (Apr 25 2018 at 16:11)</a>:</h4>
+<p>Actually, I can't find exactly that but let me sketch something for you</p>
+
+<a name="125673562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125673562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125673562">Scott Morrison (Apr 25 2018 at 16:18)</a>:</h4>
+<p>Thank you! I better go to sleep now, but I'll look forward to seeing your answer when I'm back.</p>
+
+<a name="125673600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125673600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125673600">Simon Hudon (Apr 25 2018 at 16:19)</a>:</h4>
+<p>Hopefully, this catches you before sleep does:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">mk_app_aux</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
+ <span class="bp">|</span> <span class="n">f</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="n">arg</span> <span class="o">:=</span> <span class="n">do</span>
+   <span class="n">infer_type</span> <span class="n">arg</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">d</span><span class="o">,</span>
+   <span class="n">return</span> <span class="err">$</span> <span class="n">f</span> <span class="n">arg</span>
+ <span class="bp">|</span> <span class="n">f</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="bp">_</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="n">arg</span> <span class="o">:=</span> <span class="n">do</span>
+   <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">d</span><span class="o">,</span>
+   <span class="n">t</span> <span class="err">←</span> <span class="n">whnf</span> <span class="o">(</span><span class="n">b</span><span class="bp">.</span><span class="n">instantiate_var</span> <span class="n">v</span><span class="o">),</span>
+   <span class="n">mk_app_aux</span> <span class="o">(</span><span class="n">f</span> <span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="n">arg</span>
+ <span class="bp">|</span> <span class="n">e</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">e</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">mk_app&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="n">arg</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">f</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span><span class="o">,</span>
+   <span class="n">mk_app_aux</span> <span class="n">f</span> <span class="n">t</span> <span class="n">arg</span>
+</pre></div>
+
+<a name="125674417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125674417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125674417">Scott Morrison (Apr 25 2018 at 16:39)</a>:</h4>
+<p>Perfect.</p>
+
+<a name="125674504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generating%20all%20%60app%60s/near/125674504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16498generatingallapps.html#125674504">Scott Morrison (Apr 25 2018 at 16:41)</a>:</h4>
+<p>(I changed <code>| e _ _ := return e</code> to <code>| e _ _ := failed</code>)</p>
+
+
+{% endraw %}

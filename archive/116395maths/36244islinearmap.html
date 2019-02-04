@@ -1,0 +1,141 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/36244islinearmap.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html">is_linear_map</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="148162896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148162896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148162896">Johan Commelin (Nov 22 2018 at 10:09)</a>:</h4>
+<p>Is there a reason why <code>is_linear_map</code> does not extend <code>is_add_group_hom</code>?</p>
+
+<a name="148163165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163165">Johan Commelin (Nov 22 2018 at 10:14)</a>:</h4>
+<p>Here is what I'm trying to do:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">namespace</span> <span class="n">finsupp</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">linear_extension</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="err">$</span> <span class="n">f</span>
+
+<span class="kn">namespace</span> <span class="n">linear_extension</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">f</span> <span class="n">x</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">m₁</span> <span class="bp">+</span> <span class="n">m₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">m₁</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">x</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_add_monoid_hom</span> <span class="err">$</span> <span class="n">linear_extension</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_zero</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">map_add</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s₁</span> <span class="n">s₂</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_add_index</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">is_add_group_hom</span> <span class="err">$</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_add_group_hom</span> <span class="err">$</span> <span class="n">linear_extension</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="n">linear_extension</span><span class="bp">.</span><span class="n">is_add_monoid_hom</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">is_add_group_hom</span><span class="bp">.</span><span class="n">zero</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">add</span><span class="o">))</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">R</span>
+
+<span class="kn">instance</span> <span class="n">is_linear_map</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="bp">@</span><span class="n">is_linear_map</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">to_module</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">$</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">@</span><span class="n">is_linear_map</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">to_module</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">to_module</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">$</span> <span class="n">linear_extension</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="n">linear_extension</span><span class="bp">.</span><span class="n">is_add_group_hom</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span><span class="o">))</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span> <span class="c1">-- gives stupid error</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">linear_extension</span>
+
+<span class="kn">end</span> <span class="n">finsupp</span>
+</pre></div>
+
+<a name="148163178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163178">Johan Commelin (Nov 22 2018 at 10:15)</a>:</h4>
+<p>The error is:</p>
+<div class="codehilite"><pre><span></span>synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  ⁇
+inferred
+  to_module Y M
+</pre></div>
+
+<a name="148163749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163749">Johan Commelin (Nov 22 2018 at 10:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Somehow the <code>@is_linear_map _ _ _ _ _ _ _</code> all over the place give me the feeling that I don't quite understand how to use modules.</p>
+
+<a name="148163772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163772">Mario Carneiro (Nov 22 2018 at 10:29)</a>:</h4>
+<p>you shouldn't be using <code>is_linear_map</code> at all</p>
+
+<a name="148163907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163907">Johan Commelin (Nov 22 2018 at 10:31)</a>:</h4>
+<p>So what should I use?</p>
+
+<a name="148163914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163914">Mario Carneiro (Nov 22 2018 at 10:31)</a>:</h4>
+<p><code>linear_map</code></p>
+
+<a name="148163971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163971">Johan Commelin (Nov 22 2018 at 10:32)</a>:</h4>
+<p>Ok, is there value in the other two instances? for add monoids/groups?</p>
+
+<a name="148163981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163981">Mario Carneiro (Nov 22 2018 at 10:32)</a>:</h4>
+<p>but I understand that the reason you are getting these errors is because <code>finsupp.to_module</code> is not an instance</p>
+
+<a name="148163986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148163986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148163986">Mario Carneiro (Nov 22 2018 at 10:32)</a>:</h4>
+<p>you should try declaring it locally</p>
+
+<a name="148164159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164159">Johan Commelin (Nov 22 2018 at 10:36)</a>:</h4>
+<p>Ok, that helps.</p>
+
+<a name="148164169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164169">Johan Commelin (Nov 22 2018 at 10:36)</a>:</h4>
+<p>But I would like to use <code>linear_extension</code> in a context with and without modules.</p>
+
+<a name="148164172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164172">Johan Commelin (Nov 22 2018 at 10:36)</a>:</h4>
+<p>Am I trying to be  too flexible?</p>
+
+<a name="148164328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164328">Mario Carneiro (Nov 22 2018 at 10:39)</a>:</h4>
+<p>no that's fine, you should just declare a wrapper for <code>linear_extension</code> making it into a linear map</p>
+
+<a name="148164410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164410">Johan Commelin (Nov 22 2018 at 10:41)</a>:</h4>
+<p>But that is already there, right. You made <code>is_linear_map.mk'</code>. Or do you mean something else?</p>
+
+<a name="148164519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164519">Mario Carneiro (Nov 22 2018 at 10:43)</a>:</h4>
+<p>I mean <code>linear_extension : linear_map A B</code></p>
+
+<a name="148164724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164724">Johan Commelin (Nov 22 2018 at 10:47)</a>:</h4>
+<p>But then it is no longer a function that can be a group hom if I'm not working with modules...</p>
+
+<a name="148164936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148164936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148164936">Mario Carneiro (Nov 22 2018 at 10:51)</a>:</h4>
+<p>you have another function for that; the function parts will be equal (even defeq)</p>
+
+<a name="148166197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148166197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148166197">Johan Commelin (Nov 22 2018 at 11:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Ok, I finally completed the proof. So what is your suggestion? I should have two different names? One for the unbundled, and one for the bundled linear map? Are there naming conventions for this?</p>
+
+<a name="148182128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148182128">Kenny Lau (Nov 22 2018 at 16:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> add <code>l</code> (that's a small <code>L</code>) in front of the name for the bundled version</p>
+
+<a name="148182132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_linear_map/near/148182132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36244islinearmap.html#148182132">Kenny Lau (Nov 22 2018 at 16:37)</a>:</h4>
+<p>so e.g. the map is <code>mul</code> and the linear_map is <code>lmul</code></p>
+
+
+{% endraw %}

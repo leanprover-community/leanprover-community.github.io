@@ -1,0 +1,506 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/67415mathlibfileorganization.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html">mathlib file organization</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127406142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406142">Sean Leather (Jun 01 2018 at 10:33)</a>:</h4>
+<p>For those interested in the file organization of mathlib, I've written up a <a href="https://github.com/leanprover/mathlib/issues/148" target="_blank" title="https://github.com/leanprover/mathlib/issues/148">proposal</a> for a small change that, I think, will improve things a bit. Feedback welcome!</p>
+
+<a name="127406319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406319">Johan Commelin (Jun 01 2018 at 10:39)</a>:</h4>
+<p>Interesting proposal. I have also noticed myself getting lost in the long files...</p>
+
+<a name="127406367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406367">Johan Commelin (Jun 01 2018 at 10:40)</a>:</h4>
+<p>I would also like to separate the "interface lemma's" from the "real beef", although maybe there is not always a clear line between them.</p>
+
+<a name="127406374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406374">Sean Leather (Jun 01 2018 at 10:41)</a>:</h4>
+<blockquote>
+<p>I have also noticed myself getting lost in the long files...</p>
+</blockquote>
+<p>I'm glad I'm not the only one. I think this is a first logical step to reducing the size of files. There are other steps that can be taken later, of course.</p>
+
+<a name="127406415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406415">Johan Commelin (Jun 01 2018 at 10:42)</a>:</h4>
+<p>Also, I have never read what the purpose of <code>default.lean</code> is. But if I inferred it correctly, then I think we should make more use of it.</p>
+
+<a name="127406421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406421">Johan Commelin (Jun 01 2018 at 10:43)</a>:</h4>
+<p>And then using more files will not increase the length of <code>import</code> lines.</p>
+
+<a name="127406424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406424">Mario Carneiro (Jun 01 2018 at 10:43)</a>:</h4>
+<p>I've been deliberately avoiding the use of <code>default.lean</code> within mathlib, and I think it's good practice without as well</p>
+
+<a name="127406464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406464">Sean Leather (Jun 01 2018 at 10:44)</a>:</h4>
+<p>AFAIK, the file <code>data/list/default.lean</code> allows you to write <code>import data.list</code> instead of <code>import data.list.default</code>. So, the <code>default.lean</code> file generally <code>import</code>s everything in the directory.</p>
+
+<a name="127406466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406466">Johan Commelin (Jun 01 2018 at 10:44)</a>:</h4>
+<p>exactly</p>
+
+<a name="127406467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406467">Mario Carneiro (Jun 01 2018 at 10:44)</a>:</h4>
+<p>right</p>
+
+<a name="127406472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406472">Mario Carneiro (Jun 01 2018 at 10:44)</a>:</h4>
+<p>and that's exactly what I don't want</p>
+
+<a name="127406479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406479">Johan Commelin (Jun 01 2018 at 10:44)</a>:</h4>
+<p>Why not?</p>
+
+<a name="127406482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406482">Mario Carneiro (Jun 01 2018 at 10:45)</a>:</h4>
+<p>that adds a bunch of spurious dependencies in an already delicate graph</p>
+
+<a name="127406493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406493">Mario Carneiro (Jun 01 2018 at 10:45)</a>:</h4>
+<p>remember that circular dependencies are bad but there isn't an obvious linear order of files</p>
+
+<a name="127406494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406494">Johan Commelin (Jun 01 2018 at 10:46)</a>:</h4>
+<p>Sure, but there is a partial order, right?</p>
+
+<a name="127406536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406536">Johannes Hölzl (Jun 01 2018 at 10:46)</a>:</h4>
+<p>It should be a DAG</p>
+
+<a name="127406537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406537">Johan Commelin (Jun 01 2018 at 10:46)</a>:</h4>
+<p>Do we already have a script that generates a graphviz visualisation?</p>
+
+<a name="127406586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406586">Mario Carneiro (Jun 01 2018 at 10:48)</a>:</h4>
+<p><a href="/user_uploads/3121/Xpw3mSr_YxZO2VxAF_owodVt/mathlib.gif" target="_blank" title="mathlib.gif">mathlib.gif</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/Xpw3mSr_YxZO2VxAF_owodVt/mathlib.gif" target="_blank" title="mathlib.gif"><img src="/user_uploads/3121/Xpw3mSr_YxZO2VxAF_owodVt/mathlib.gif"></a></div>
+
+<a name="127406596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406596">Johan Commelin (Jun 01 2018 at 10:49)</a>:</h4>
+<p>Right, I had a similar graph on the level of theorems and proofs for my thesis.</p>
+
+<a name="127406643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406643">Johan Commelin (Jun 01 2018 at 10:50)</a>:</h4>
+<p>But why are you scared that the graph becomes to delicate for Lean?</p>
+
+<a name="127406644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406644">Sean Leather (Jun 01 2018 at 10:50)</a>:</h4>
+<p>I don't quite see the problem with <code>default.lean</code>. Nonetheless, I see it as just an extra and there's no actual need to have one.</p>
+
+<a name="127406646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406646">Johan Commelin (Jun 01 2018 at 10:50)</a>:</h4>
+<p>Well, we need it to keep imports manageable.</p>
+
+<a name="127406647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406647">Johan Commelin (Jun 01 2018 at 10:50)</a>:</h4>
+<p>Already it is common to have files with &gt;8 imports</p>
+
+<a name="127406652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406652">Johan Commelin (Jun 01 2018 at 10:51)</a>:</h4>
+<p>If you want to split a 3000-line file into 5 files</p>
+
+<a name="127406653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406653">Mario Carneiro (Jun 01 2018 at 10:51)</a>:</h4>
+<p>Currently, folders are organized by topic, and files are organized by dependency units</p>
+
+<a name="127406661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406661">Mario Carneiro (Jun 01 2018 at 10:51)</a>:</h4>
+<p>so if there is no dependency issue and the topic is still the same, it all goes in one file</p>
+
+<a name="127406705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406705">Sean Leather (Jun 01 2018 at 10:52)</a>:</h4>
+<p>At least with my proposal, once you split a file into one for definitions and one for theorems, the theorems file imports the definitions file, and you just import the theorems file. The <code>default.lean</code> just allows you to leave off one part of the hierarchy.</p>
+
+<a name="127406706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406706">Johan Commelin (Jun 01 2018 at 10:52)</a>:</h4>
+<p>What is a "dependency issue"?</p>
+
+<a name="127406712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406712">Mario Carneiro (Jun 01 2018 at 10:52)</a>:</h4>
+<p>A is used by B, which is used by A'</p>
+
+<a name="127406718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406718">Mario Carneiro (Jun 01 2018 at 10:53)</a>:</h4>
+<p>and A' wants to be in the same file as A</p>
+
+<a name="127406727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406727">Johan Commelin (Jun 01 2018 at 10:53)</a>:</h4>
+<p>Ok, and there is a reason (I guess the topic) that B should not be in that file as well.</p>
+
+<a name="127406731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406731">Mario Carneiro (Jun 01 2018 at 10:53)</a>:</h4>
+<p>I've thought many times about separating out definitions. But I'm not sure it's as easy as that</p>
+
+<a name="127406774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406774">Mario Carneiro (Jun 01 2018 at 10:54)</a>:</h4>
+<p>in lean, definitions and theorems are all mixed up thanks to curry howard</p>
+
+<a name="127406781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406781">Sean Leather (Jun 01 2018 at 10:54)</a>:</h4>
+<p>As I said, there may be exceptions, but I think there are many obvious easy examples.</p>
+
+<a name="127406790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406790">Sean Leather (Jun 01 2018 at 10:55)</a>:</h4>
+<p>And I'm happy to give it a try myself.</p>
+
+<a name="127406793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406793">Mario Carneiro (Jun 01 2018 at 10:55)</a>:</h4>
+<p>If you are using <code>list</code> as your test bed it's not representative</p>
+
+<a name="127406794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406794">Sean Leather (Jun 01 2018 at 10:55)</a>:</h4>
+<p>If other people think this is a good thing.</p>
+
+<a name="127406797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406797">Mario Carneiro (Jun 01 2018 at 10:55)</a>:</h4>
+<p>programming stuff in general tends to be less dependent</p>
+
+<a name="127406841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406841">Sean Leather (Jun 01 2018 at 10:56)</a>:</h4>
+<p>Perhaps. But there is a lot of programming stuff in mathlib. <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
+
+<a name="127406844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406844">Sean Leather (Jun 01 2018 at 10:56)</a>:</h4>
+<p>And what's the harm with doing it there?</p>
+
+<a name="127406906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406906">Mario Carneiro (Jun 01 2018 at 10:58)</a>:</h4>
+<p>also, how is theorem organization handled? What to do if a definition depends on a theorem?</p>
+
+<a name="127406916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406916">Sean Leather (Jun 01 2018 at 10:59)</a>:</h4>
+<p>It probably depends on the example.</p>
+
+<a name="127406972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406972">Mario Carneiro (Jun 01 2018 at 11:00)</a>:</h4>
+<p>What about instances? are they definitions or theorems?</p>
+
+<a name="127406983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406983">Sean Leather (Jun 01 2018 at 11:00)</a>:</h4>
+<p>To keep the proposal minimal, I don't say anything about that.</p>
+
+<a name="127406990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127406990">Sean Leather (Jun 01 2018 at 11:01)</a>:</h4>
+<p>This is where concrete examples help.</p>
+
+<a name="127407044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407044">Mario Carneiro (Jun 01 2018 at 11:02)</a>:</h4>
+<p><code>rat</code> is a field</p>
+
+<a name="127407045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407045">Sean Leather (Jun 01 2018 at 11:02)</a>:</h4>
+<p>What I really want to know is whether people are, <em>in general</em>, in favor of having definitions separated from theorems. From my experience using mathlib, I believe I am. There are certainly wrinkles to be ironed out.</p>
+
+<a name="127407050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407050">Mario Carneiro (Jun 01 2018 at 11:02)</a>:</h4>
+<p>I am worried about losing topicality</p>
+
+<a name="127407061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407061">Mario Carneiro (Jun 01 2018 at 11:03)</a>:</h4>
+<p>particularly for smaller definitions that are more auxiliary or only used in a few theorems</p>
+
+<a name="127407063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407063">Sean Leather (Jun 01 2018 at 11:03)</a>:</h4>
+<p>Isn't <code>rat</code> a <code>structure</code>?</p>
+
+<a name="127407070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407070">Mario Carneiro (Jun 01 2018 at 11:03)</a>:</h4>
+<p>I mean a mathematical field</p>
+
+<a name="127407078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407078">Mario Carneiro (Jun 01 2018 at 11:04)</a>:</h4>
+<p>That's an instance</p>
+
+<a name="127407113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407113">Mario Carneiro (Jun 01 2018 at 11:04)</a>:</h4>
+<p>in rat.lean</p>
+
+<a name="127407115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407115">Sean Leather (Jun 01 2018 at 11:04)</a>:</h4>
+<p>You mean <code>instance field_rat : discrete_field ℚ</code>?</p>
+
+<a name="127407119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407119">Mario Carneiro (Jun 01 2018 at 11:04)</a>:</h4>
+<p>yeah</p>
+
+<a name="127407194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407194">Mario Carneiro (Jun 01 2018 at 11:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> may want to chip in on this topic</p>
+
+<a name="127407199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407199">Sean Leather (Jun 01 2018 at 11:07)</a>:</h4>
+<p>It seems to me that <code>data/rat.lean</code> would also benefit from extracting the <code>def</code>s.</p>
+<div class="codehilite"><pre><span></span>$ grep &#39;^def&#39; data/rat.lean | wc -l
+       7
+$ grep &#39;^theorem&#39; data/rat.lean | wc -l
+      44
+$ grep &#39;^instance&#39; data/rat.lean | wc -l
+      16
+</pre></div>
+
+
+<p>Whether you put instances in with theorems or not is a secondary question. Since I'm not familiar with it, I don't have the answer for you.</p>
+
+<a name="127407246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407246">Mario Carneiro (Jun 01 2018 at 11:08)</a>:</h4>
+<p>You can't just count them, theorems will almost always outnumber defs by a large margin</p>
+
+<a name="127407248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407248">Sean Leather (Jun 01 2018 at 11:08)</a>:</h4>
+<p>That's kind of the point. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="127407255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407255">Mario Carneiro (Jun 01 2018 at 11:09)</a>:</h4>
+<p>But there is often def -&gt; theorem -&gt; def -&gt; theorem dependencies that will be messed up with such a reorganization</p>
+
+<a name="127407258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407258">Sean Leather (Jun 01 2018 at 11:09)</a>:</h4>
+<p>Indeed! So it needs a concrete attempt.</p>
+
+<a name="127407260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407260">Johannes Hölzl (Jun 01 2018 at 11:09)</a>:</h4>
+<p>and the instances and theorems are very interdependent</p>
+
+<a name="127407328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407328">Mario Carneiro (Jun 01 2018 at 11:11)</a>:</h4>
+<p>By the way, one downside of the partial order structure of files is that it's not exactly a lattice, so it's not clear where to put cross cutting theorems</p>
+
+<a name="127407335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407335">Johan Commelin (Jun 01 2018 at 11:11)</a>:</h4>
+<p>With my current PR on algebraic topology, I split it up in 3 files... in this example, would you have rather had 1 file? (Question is for mathlib maintainers.)</p>
+
+<a name="127407344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407344">Mario Carneiro (Jun 01 2018 at 11:11)</a>:</h4>
+<p>like if you have incomparable files A and B and you have a theorem about AB which is used by C</p>
+
+<a name="127407391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407391">Sean Leather (Jun 01 2018 at 11:12)</a>:</h4>
+<blockquote>
+<p>By the way, one downside of the partial order structure of files is that it's not exactly a lattice, so it's not clear where to put cross cutting theorems</p>
+</blockquote>
+<p>Which is one of the reasons I left that concern out of the proposal.</p>
+
+<a name="127407469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407469">Johan Commelin (Jun 01 2018 at 11:15)</a>:</h4>
+<p>(Mario, in my thesis I had one theorem/def per file -- this is all LaTeX --, and it worked quite nicely. I had some LaTeX macros that hyperlinked all references to theorems and definitions. And then with a bit of bash-fu I got PDF's for every theorem/def. I wanted an HTML realisation, but it never became nice enough...)</p>
+
+<a name="127407481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407481">Johan Commelin (Jun 01 2018 at 11:15)</a>:</h4>
+<p>So... that was the other end of the spectrum (-;</p>
+
+<a name="127407488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407488">Johan Commelin (Jun 01 2018 at 11:15)</a>:</h4>
+<p>And it was on a smaller scale, and not formalised.</p>
+
+<a name="127407537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407537">Sean Leather (Jun 01 2018 at 11:16)</a>:</h4>
+<p>Yeah, that could make sense for a thesis, but it's probably too far for a library. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="127407608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407608">Mario Carneiro (Jun 01 2018 at 11:18)</a>:</h4>
+<p>By the way, metamath is organized as <a href="http://set.mm" target="_blank" title="http://set.mm">set.mm</a>, a single 20MB text file with lots of ascii headers of various levels to give it a book-like structure</p>
+
+<a name="127407619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407619">Mario Carneiro (Jun 01 2018 at 11:19)</a>:</h4>
+<p>so I guess that's the extreme opposite</p>
+
+<a name="127407624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407624">Sean Leather (Jun 01 2018 at 11:19)</a>:</h4>
+<p><a href="https://github.com/metamath/set.mm/blob/master/set.mm" target="_blank" title="https://github.com/metamath/set.mm/blob/master/set.mm">OMG</a> <span class="emoji emoji-1f4a3" title="bomb">:bomb:</span></p>
+
+<a name="127407674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407674">Mario Carneiro (Jun 01 2018 at 11:20)</a>:</h4>
+<p>One thing that I like about that is it enforces a linear dependency structure, which makes the dependency question trivial</p>
+
+<a name="127407738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407738">Mario Carneiro (Jun 01 2018 at 11:22)</a>:</h4>
+<p>the downside is that it (apparently) adds a lot of spurious dependencies, more than are truly needed by the theorems</p>
+
+<a name="127407749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407749">Mario Carneiro (Jun 01 2018 at 11:22)</a>:</h4>
+<p>But that's less of a problem when the entire file can be verified in less than 10 seconds</p>
+
+<a name="127407823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407823">Mario Carneiro (Jun 01 2018 at 11:25)</a>:</h4>
+<p>Also metamath has a separate html view so you aren't completely reliant on text navigation, you can look at abridged views and high level views of the theorems so that you can skip over the boring stuff... Maybe something like this in lean could be helpful for you</p>
+
+<a name="127407889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127407889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127407889">Sean Leather (Jun 01 2018 at 11:27)</a>:</h4>
+<p>It's still useful to browse code, and I still think good code organization is a worthy goal.</p>
+
+<a name="127427222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127427222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127427222">Jeremy Avigad (Jun 01 2018 at 19:26)</a>:</h4>
+<p>I think it generally makes it easier to read theory files when the definitions are an integral part of theory. The definitions are needed to understand the theorems and the theorems illustrate the intended usage of the definitions. It would be annoying to have to flip back and forth between files.</p>
+
+<a name="127429035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429035">Chris Hughes (Jun 01 2018 at 20:00)</a>:</h4>
+<p>How about just listing all the definitions in a comment at the top of the file?</p>
+
+<a name="127429473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429473">Kevin Buzzard (Jun 01 2018 at 20:08)</a>:</h4>
+<p>And while we're at it how about listing what goes on in the file in another comment at the top of the file?</p>
+
+<a name="127429501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429501">Kevin Buzzard (Jun 01 2018 at 20:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what would you make of such PRs? Someone adding definitions and comments explaining what is going in various files in mathlib?</p>
+
+<a name="127429555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429555">Mario Carneiro (Jun 01 2018 at 20:10)</a>:</h4>
+<p>Absolutely go ahead</p>
+
+<a name="127429564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429564">Mario Carneiro (Jun 01 2018 at 20:10)</a>:</h4>
+<p>I do my best but I also have a lot of theorems I want to prove</p>
+
+<a name="127429571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127429571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127429571">Kevin Buzzard (Jun 01 2018 at 20:10)</a>:</h4>
+<p>theorems are overrated</p>
+
+<a name="127442021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127442021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127442021">Scott Morrison (Jun 02 2018 at 00:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="127442371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127442371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127442371">Kevin Buzzard (Jun 02 2018 at 00:55)</a>:</h4>
+<p>I'm into definitions</p>
+
+<a name="127475414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475414">Johan Commelin (Jun 02 2018 at 21:29)</a>:</h4>
+<blockquote>
+<p>theorems are overrated — <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+</blockquote>
+<p>I just read the following blogpost of M. Harris: <a href="https://mathematicswithoutapologies.wordpress.com/2018/06/02/is-the-tone-appropriate-is-the-mathematics-at-the-right-level/" target="_blank" title="https://mathematicswithoutapologies.wordpress.com/2018/06/02/is-the-tone-appropriate-is-the-mathematics-at-the-right-level/">https://mathematicswithoutapologies.wordpress.com/2018/06/02/is-the-tone-appropriate-is-the-mathematics-at-the-right-level/</a><br>
+It contains the following quote of Scholze:</p>
+<blockquote>
+<p>“What I care most about are definitions. For one thing, humans describe mathematics through language, and, as always, we need sharp words in order to articulate our ideas clearly. (For example, for a long time, I had some idea of the concept of diamonds. But only when I came up with a good name could I really start to think about it, let alone communicate it to others. Finding the name took several months (or even a year?). Then it took another two or three years to finally write down the correct definition (among many close variants). The essential difficulty in writing “Etale cohomology of diamonds” was (by far) not giving the proofs, but finding the definitions.) But even beyond mere language, we perceive mathematical nature through the lenses given by definitions, and it is critical that the definitions put the essential points into focus.</p>
+<p>Unfortunately, it is impossible to find the right definitions by pure thought; one needs to detect the correct problems where progress will require the isolation of a new key concept.”</p>
+</blockquote>
+
+<a name="127475754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475754">Mario Carneiro (Jun 02 2018 at 21:41)</a>:</h4>
+<p>I think this is an over-mature view though; it is only in the context where theorems are commonplace that you can advocate a return to focus on definitions</p>
+
+<a name="127475755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475755">Mario Carneiro (Jun 02 2018 at 21:41)</a>:</h4>
+<p>it's too easy to abuse this view to focus only on definitions at the expense of theorems</p>
+
+<a name="127475795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475795">Kevin Buzzard (Jun 02 2018 at 21:42)</a>:</h4>
+<p>On the other hand there are some definitions which are much more important than theorems.</p>
+
+<a name="127475853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475853">Mario Carneiro (Jun 02 2018 at 21:45)</a>:</h4>
+<p>I don't argue that definitions aren't important, essential even. They are the core of the theory, the things that theorems relate</p>
+
+<a name="127475888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475888">Mario Carneiro (Jun 02 2018 at 21:46)</a>:</h4>
+<p>but to take one without the other is to see only half the picture</p>
+
+<a name="127475898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127475898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127475898">Johan Commelin (Jun 02 2018 at 21:47)</a>:</h4>
+<p>Maybe I like the fact that DTT muddles the distinction between the two.</p>
+
+<a name="127476060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127476060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127476060">Kevin Buzzard (Jun 02 2018 at 21:52)</a>:</h4>
+<p>That's right, so we should take the most important of both :-)</p>
+
+<a name="127476065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127476065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127476065">Kevin Buzzard (Jun 02 2018 at 21:53)</a>:</h4>
+<p>and there is surely ample evidence out there now in blogland and mathoverflow and whatever</p>
+
+<a name="127476066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127476066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127476066">Kevin Buzzard (Jun 02 2018 at 21:53)</a>:</h4>
+<p>that perfectoid spaces are a supremely important definition</p>
+
+<a name="127534230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127534230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127534230">Sean Leather (Jun 04 2018 at 10:15)</a>:</h4>
+<blockquote>
+<p>I think it generally makes it easier to read theory files when the definitions are an integral part of theory. The definitions are needed to understand the theorems and the theorems illustrate the intended usage of the definitions. It would be annoying to have to flip back and forth between files.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> Thanks for your thoughts.</p>
+<p>I agree with you that it is useful to see definitions and theorems together, but I find that most theorems beyond the simplest <code>rfl</code> involve more than one definition. Thus, when the definitions are interleaved with large chunks of theorems, I'm either flipping back and forth or viewing different parts of the same file in a split screen. Whereas with all (or as many as is reasonable) of the definitions in one file, I can view two files side-by-side, one with definitions and one with theorems involving those definitions.</p>
+<p>To summarize, while I think it would be nice to have a definition with a nearby associated group of theorems, I think that that is already problematic in mathlib in a very practical sense because the number of theorems generally surpasses the number of definitions and makes it difficult to find them. In addition to that, I think definition discovery is a useful part of learning a theory topic and would be aided by putting the definitions in one place.</p>
+
+<a name="127534547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127534547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127534547">Sean Leather (Jun 04 2018 at 10:24)</a>:</h4>
+<blockquote>
+<p>How about just listing all the definitions in a comment at the top of the file?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>: By “definition,” are you referring to either (a) the entire declaration (i.e. <code>def name := term</code>) or (b) only the name?</p>
+<p>(a) While I grant you that we are not engaging in (“full-blown”) software engineering when writing mathlib, this is one of those big no-no's in practice. Duplication in comments is notorious for getting out of sync with code. I would strongly recommend against doing this.</p>
+<p>(b) Listing the names may provide a minor benefit for reference. But, since theorems generally use the unfolded definition in some form, this won't be helpful when trying to understand a theorem that uses multiple definitions, because you will end up trying to find the declarations themselves. It won't solve the problem I'm trying to solve.</p>
+
+<a name="127536279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536279">Andrew Ashworth (Jun 04 2018 at 11:19)</a>:</h4>
+<p>I think what you really want to do is write a doxygen extension for lean :)</p>
+
+<a name="127536339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536339">Andrew Ashworth (Jun 04 2018 at 11:20)</a>:</h4>
+<p>not like other programming files don't have the same problem with separation of data structures / classes and methods...</p>
+
+<a name="127536412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536412">Sean Leather (Jun 04 2018 at 11:23)</a>:</h4>
+<blockquote>
+<p>not like other programming files don't have the same problem with separation of data structures / classes and methods...</p>
+</blockquote>
+<p>Certainly! My proposal is actually similar to a common pattern in Haskell package development: putting types in a file of their own.</p>
+
+<a name="127536545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536545">Andrew Ashworth (Jun 04 2018 at 11:26)</a>:</h4>
+<p>that's a big pain in lean though since circular dependencies are hard to handle</p>
+
+<a name="127536546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536546">Johan Commelin (Jun 04 2018 at 11:26)</a>:</h4>
+<p><a href="https://www.stack.nl/~dimitri/doxygen/manual/faq.html#faq_pgm_X" target="_blank" title="https://www.stack.nl/~dimitri/doxygen/manual/faq.html#faq_pgm_X">https://www.stack.nl/~dimitri/doxygen/manual/faq.html#faq_pgm_X</a><br>
+Seems like Lean falls in the 3rd category...</p>
+
+<a name="127536710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536710">Andrew Ashworth (Jun 04 2018 at 11:30)</a>:</h4>
+<p>it wouldn't be so bad if you wanted something quick and dirty - you just want to grab things in between def | definition, lemma, theorem, :, :=, and a newline</p>
+
+<a name="127536771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536771">Andrew Ashworth (Jun 04 2018 at 11:33)</a>:</h4>
+<p>but I am not volunteering to do this :) however it seems more likely to happen than changing how mathlib is organized</p>
+
+<a name="127536844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127536844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127536844">Andrew Ashworth (Jun 04 2018 at 11:35)</a>:</h4>
+<p>it seems straightfoward - famous last words of every project I've ever estimated ever</p>
+
+<a name="127540033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127540033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127540033">Patrick Massot (Jun 04 2018 at 13:12)</a>:</h4>
+<p>I know I'm always writing the same thing, but I think we shouldn't forget that some people already developed huge libraries in a language very close to Lean, and have a look at how they handle this. For the comments at top of files see <a href="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/vector.v" target="_blank" title="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/vector.v">https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/vector.v</a> (this is random file from math-comp, they all look the same)</p>
+
+<a name="127540045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127540045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127540045">Patrick Massot (Jun 04 2018 at 13:13)</a>:</h4>
+<p>It also seems they keep the definitions and lemmas in the same file</p>
+
+<a name="127540048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127540048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127540048">Patrick Massot (Jun 04 2018 at 13:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> will probably tell us much more</p>
+
+<a name="127540809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127540809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127540809">Assia Mahboubi (Jun 04 2018 at 13:39)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110031">@Patrick Massot</span> . I read the thread briefly, so I might have missed the point of the debate. I do not see the advantage of having definitions and theorems in separated files. Sometimes, the difference between a definition and a theorem is quite thin. Also, what makes me believe that an object in the library is what I am looking for is not only its name (and not even only its definition) but also the companion lemmas, examples, etc.  So it would not ease my inspection. Last, the definition of a list in Lean is probably no going to change, but for more complex objects, definitions often evolve during the course of the development. "Testing" the subsequent impact of the changes on notations, lemmas, theorem, etc. is easier if this content is not too far I would say. However, part of the answer might be of a technological nature. Even if I am flatted that people like <span class="user-mention" data-user-id="110031">@Patrick Massot</span> want to hear from my experience, you Lean people might benefit from tools that change the game.</p>
+
+<a name="127543190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127543190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127543190">Sebastian Ullrich (Jun 04 2018 at 14:49)</a>:</h4>
+<p>One more argument in favor of not separating definitions and lemmas: You can make uninteresting helper definitions <code>private</code>and still prove things about them</p>
+
+<a name="127543249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127543249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html#127543249">Sean Leather (Jun 04 2018 at 14:50)</a>:</h4>
+<p>That's really only an argument for not separating <em>those</em> definitions. <span class="emoji emoji-1f609" title="wink">:wink:</span> (But it is a fine argument in any case.)</p>
+
+
+{% endraw %}

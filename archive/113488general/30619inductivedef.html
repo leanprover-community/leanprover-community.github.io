@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/30619inductivedef.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html">inductive def</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="150691842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150691842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html#150691842">Patrick Massot (Dec 01 2018 at 19:07)</a>:</h4>
+<p>I very rarely use inductive def so I'm a bit confused by:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Works ok</span>
+<span class="n">def</span> <span class="n">find</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">h</span><span class="o">)</span> <span class="k">then</span> <span class="n">tt</span> <span class="k">else</span> <span class="n">find</span> <span class="n">a</span> <span class="n">t</span>
+
+<span class="c1">-- Lean complains: type mismatch at application  find&#39; a, term  a has type  ℕ but is expected to have type   list ℕ</span>
+<span class="n">def</span> <span class="n">find&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">h</span><span class="o">)</span> <span class="k">then</span> <span class="n">tt</span> <span class="k">else</span> <span class="n">find&#39;</span> <span class="n">a</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>Is there a way to get something like my second attempt to work?</p>
+
+<a name="150691886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150691886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html#150691886">Gabriel Ebner (Dec 01 2018 at 19:08)</a>:</h4>
+<p><code>find' t</code> (without the <code>a</code>)</p>
+
+<a name="150692066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150692066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html#150692066">Gabriel Ebner (Dec 01 2018 at 19:14)</a>:</h4>
+<p>(The parameters before the colon---<code>a</code> in this case---are assumed to be constant in the recursive calls, so you don't have to repeat them.)</p>
+
+<a name="150692420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150692420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html#150692420">Kevin Buzzard (Dec 01 2018 at 19:26)</a>:</h4>
+<p>That used to confuse me so much. </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">eq</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>I was like "...yeah, but what is <code>a</code> equal to??". It's equal to the <code>a</code> before the colon.</p>
+
+<a name="150692857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20def/near/150692857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30619inductivedef.html#150692857">Patrick Massot (Dec 01 2018 at 19:40)</a>:</h4>
+<p>Thanks!</p>
+
+
+{% endraw %}

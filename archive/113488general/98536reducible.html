@@ -1,0 +1,108 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/98536reducible.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html">@[reducible]</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124484786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124484786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124484786">Kenny Lau (Apr 01 2018 at 12:09)</a>:</h4>
+<p>When should I use <code>@[reducible] def</code> and when to just use <code>def</code>?</p>
+
+<a name="124493291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493291">Kevin Buzzard (Apr 01 2018 at 18:03)</a>:</h4>
+<p><code>ge</code> is tagged <code>reducible</code>, because I don't want to double the amount of theorems I have about inequalities</p>
+
+<a name="124493292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493292">Kevin Buzzard (Apr 01 2018 at 18:03)</a>:</h4>
+<p>I just want <code>a ge b</code> to unfold to <code>b le a</code> as soon as possible</p>
+
+<a name="124493333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493333">Kevin Buzzard (Apr 01 2018 at 18:04)</a>:</h4>
+<p>so whenever the elaborator or whatever runs into <code>ge</code> it should just think "that's notation for <code>le</code> and I will just unfold it right here and now"</p>
+
+<a name="124493341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493341">Kevin Buzzard (Apr 01 2018 at 18:05)</a>:</h4>
+<p>"because then stuff like <code>rw</code> will work better, I will be able to rw theorems about <code>le</code> in terms involving <code>ge</code>"</p>
+
+<a name="124493393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493393">Sebastian Ullrich (Apr 01 2018 at 18:07)</a>:</h4>
+<p>Which doesn't work because <code>rw</code> and <code>simp</code> match the term head literally</p>
+
+<a name="124493485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493485">Simon Hudon (Apr 01 2018 at 18:10)</a>:</h4>
+<p>What if you use <code>abbreviation</code> instead of <code>@[reducible]</code>?</p>
+
+<a name="124493488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493488">Kevin Buzzard (Apr 01 2018 at 18:10)</a>:</h4>
+<p>oh yes I remember this being a problem with rw!</p>
+
+<a name="124493494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493494">Kevin Buzzard (Apr 01 2018 at 18:11)</a>:</h4>
+<p>There was maybe even some issue about this.</p>
+
+<a name="124493784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493784">Sebastian Ullrich (Apr 01 2018 at 18:22)</a>:</h4>
+<blockquote>
+<p>What if you use <code>abbreviation</code> instead of <code>@[reducible]</code>?</p>
+</blockquote>
+<p><code>abbreviation</code> is <code>@[reducible]</code> + a kernel reducibility annotation, which you can most likely ignore. So use <code>abbreviation</code> if you like it more than <code>@[reducible] def</code>.</p>
+
+<a name="124493830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493830">Kenny Lau (Apr 01 2018 at 18:24)</a>:</h4>
+<p>what will happen if I just make everything reducible?</p>
+
+<a name="124493831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124493831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124493831">Kenny Lau (Apr 01 2018 at 18:24)</a>:</h4>
+<p>when is <code>@[reducible]</code> not desired?</p>
+
+<a name="124494193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124494193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124494193">Kevin Buzzard (Apr 01 2018 at 18:38)</a>:</h4>
+<p>I think you have problems with readability after a while</p>
+
+<a name="124494195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124494195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124494195">Kevin Buzzard (Apr 01 2018 at 18:38)</a>:</h4>
+<p>You define an exciting new thing and mark it reducible</p>
+
+<a name="124494196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124494196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124494196">Kevin Buzzard (Apr 01 2018 at 18:38)</a>:</h4>
+<p>and want to prove basic lemmas about it</p>
+
+<a name="124494199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124494199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124494199">Kevin Buzzard (Apr 01 2018 at 18:39)</a>:</h4>
+<p>but the moment Lean does anything with it, it unfolds the definition</p>
+
+<a name="124494205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124494205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124494205">Kevin Buzzard (Apr 01 2018 at 18:39)</a>:</h4>
+<p>and it's then harder to use because you have to keep folding it up again when you want to apply the previous lemma</p>
+
+<a name="124558714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124558714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124558714">Kenny Lau (Apr 03 2018 at 05:48)</a>:</h4>
+<p>Should I make these reducible?</p>
+<div class="codehilite"><pre><span></span>def orbit : set X :=
+{ y | ∃ g : G, g • x = y }
+
+def stab : set G :=
+{ g | g • x = x }
+</pre></div>
+
+<a name="124558770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124558770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124558770">Mario Carneiro (Apr 03 2018 at 05:50)</a>:</h4>
+<p>the answer is almost always no</p>
+
+<a name="124558782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124558782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124558782">Mario Carneiro (Apr 03 2018 at 05:51)</a>:</h4>
+<p>instead, you should have a simp lemma that says <code>g \in stab x &lt;-&gt; g \bu x = x</code></p>
+
+<a name="124558783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124558783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98536reducible.html#124558783">Kenny Lau (Apr 03 2018 at 05:51)</a>:</h4>
+<p>aha</p>
+
+
+{% endraw %}

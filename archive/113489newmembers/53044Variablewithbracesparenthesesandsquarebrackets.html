@@ -1,0 +1,259 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html">Variable with braces, parentheses and  square brackets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="147280537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147280537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147280537">AHan (Nov 08 2018 at 07:23)</a>:</h4>
+<p>The below code works.<br>
+However, if I changed the <code>h</code> to <code>pp</code> in function <code>p_mod_range</code>, pp will become unknown identifier....<br>
+No matter I changed the brackets of variable pp to parentheses or square brackets or braces, neither of them can make variable <code>pp</code> be identified by lean....<br>
+Why can't lean identifies variable <code>pp</code>, and how can I fix this ?</p>
+<div class="codehilite"><pre><span></span>import data.nat.prime
+import data.int.basic
+import data.int.modeq
+
+open nat
+
+lemma mod_range {b : ℕ} : (b &gt; 0) → ∀ (x : ℤ), 0 ≤ x % b ∧ x % b &lt; b :=
+begin
+  intros h₁ x,
+  apply and.intro,
+  begin
+    apply int.mod_nonneg, simp,
+    assume h₃,
+    rw h₃ at *,
+    cases h₁
+  end,
+  begin
+    apply int.mod_lt_of_pos,
+    apply int.coe_nat_lt.elim_right,
+    assumption
+  end,
+end
+
+namespace pf
+
+variables { p: ℕ }  {pp : prime p}
+
+lemma p_mod_range (h: prime p): ∀ (x : ℤ),  0 ≤ x % p ∧ x % p &lt; p :=
+  begin
+    intro, apply mod_range, apply (prime.pos h),
+  end
+</pre></div>
+
+<a name="147282373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282373">Mario Carneiro (Nov 08 2018 at 08:18)</a>:</h4>
+<p><code>variables</code> are not added by default to the context of the current theorem unless they appear in the type</p>
+
+<a name="147282417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282417">Mario Carneiro (Nov 08 2018 at 08:18)</a>:</h4>
+<p>you should use <code>include pp</code> to explicitly add it to the context</p>
+
+<a name="147282435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282435">AHan (Nov 08 2018 at 08:19)</a>:</h4>
+<p>Oh Yeah!! include works!</p>
+
+<a name="147282473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282473">AHan (Nov 08 2018 at 08:20)</a>:</h4>
+<p>But why isn't it be added by default to the context?</p>
+
+<a name="147282760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282760">Johan Commelin (Nov 08 2018 at 08:28)</a>:</h4>
+<p>This allows you to introduce a bunch of variables at the top, and selectively use them in the theorems you prove.</p>
+
+<a name="147282770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282770">Johan Commelin (Nov 08 2018 at 08:28)</a>:</h4>
+<p>Otherwise a lot of theorems (and definitions) would have unnecessary assumptions.</p>
+
+<a name="147282946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282946">AHan (Nov 08 2018 at 08:33)</a>:</h4>
+<p>Got it!!<br>
+Is the include scope ends until the end of the section or the namespace?<br>
+Can I stop include in the middle point, like only include the variables for one function?</p>
+
+<a name="147282993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147282993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147282993">Johan Commelin (Nov 08 2018 at 08:34)</a>:</h4>
+<p>Yes: <code>omit pp</code>. Otherwise it stops at <code>end section/namespace</code></p>
+
+<a name="147283011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147283011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147283011">AHan (Nov 08 2018 at 08:35)</a>:</h4>
+<p>Ok! Thanks a lot for the explanations!</p>
+
+<a name="147284728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147284728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147284728">AHan (Nov 08 2018 at 09:21)</a>:</h4>
+<p>Although including variable works, some functions like <code>has_mul</code>, <code>has_one</code> in the following code, will have to explicitly name out the variables <code>p</code>, <code>p_gt_one</code>.<br>
+And which seems to make using the symbols <code>*</code>, <code>1</code> failed, like in function <code>pf_is_right_inv</code> below...<br>
+Is there any better way to handle this?</p>
+<div class="codehilite"><pre><span></span>def pf {p : ℕ} := {e : ℤ// 0 ≤ e ∧ e &lt; p}
+
+namespace pf
+
+variables { p: ℕ } { p_gt_one : p &gt; 1 } { pp : prime p }
+include p_gt_one
+
+def mul (a b : @pf p) : @pf p :=  ⟨(a.val * b.val) % p,  begin apply mod_range, apply (trans p_gt_one zero_lt_one) end⟩
+instance : has_mul (@pf p) := ⟨@mul p p_gt_one⟩
+protected def one  : @pf p := ⟨1, begin apply and.intro, apply zero_le_one, apply (int.coe_nat_le.elim_right p_gt_one), end⟩
+instance : has_one (@pf p) := ⟨@pf.one p p_gt_one⟩
+
+lemma pf_is_right_inv (a : @pf p) : (a.1 &gt; 0) → a * (@pf.inv p p_gt_one a) = 1 := sorry
+end pf
+</pre></div>
+
+<a name="147284864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147284864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147284864">Johan Commelin (Nov 08 2018 at 09:25)</a>:</h4>
+<p>I don't think you should have <code>pp</code> and <code>p_gt_one</code>. Because you can deduce <code>p_gt_one</code> from <code>pp</code>.</p>
+
+<a name="147284880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147284880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147284880">Johan Commelin (Nov 08 2018 at 09:25)</a>:</h4>
+<p>Also, you should make the <code>p</code> argument of <code>pf</code> explicit, so that you can remove the <code>@</code> from <code>pf</code> later.</p>
+
+<a name="147284948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147284948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147284948">AHan (Nov 08 2018 at 09:27)</a>:</h4>
+<p>yeah I know I can deduce <code>p_gt_one</code> from <code>pp</code>, but I'm thinking of if in some cases like <code>add</code>, <code>mul</code>, <code>sub</code>, maybe I can make it a bit general, since <code>pp</code> isn't actually needed</p>
+
+<a name="147285095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285095">Johan Commelin (Nov 08 2018 at 09:30)</a>:</h4>
+<p>Ok, but then I wouldn't make it a <code>variable</code>. Just include it as an assumption on that line.</p>
+
+<a name="147285106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285106">Johan Commelin (Nov 08 2018 at 09:30)</a>:</h4>
+<p>And consider renaming <code>p</code> to <code>n</code> to show that you also care about non-primes.</p>
+
+<a name="147285194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285194">AHan (Nov 08 2018 at 09:32)</a>:</h4>
+<p>What do you mean include it as an assumption on that line?</p>
+
+<a name="147285196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285196">AHan (Nov 08 2018 at 09:32)</a>:</h4>
+<p>OH yes, renaming is a good suggestion!</p>
+
+<a name="147285207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285207">Johan Commelin (Nov 08 2018 at 09:33)</a>:</h4>
+<p><code>def mul {h : p &gt; 1} (a b : @pf p) : @pf p := blah</code></p>
+
+<a name="147285211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285211">Johan Commelin (Nov 08 2018 at 09:33)</a>:</h4>
+<p>But it will be annoying to use, because you have to carry that proof around all the time.</p>
+
+<a name="147285258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285258">Johan Commelin (Nov 08 2018 at 09:34)</a>:</h4>
+<p>And I think you don't need it.</p>
+
+<a name="147285266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285266">Johan Commelin (Nov 08 2018 at 09:34)</a>:</h4>
+<p>You can define it for <code>p = 1</code> just fine.</p>
+
+<a name="147285268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285268">AHan (Nov 08 2018 at 09:34)</a>:</h4>
+<p>Yes.... seems like really annoying...<br>
+Maybe I should give up the idea of taking care of non-primes</p>
+
+<a name="147285271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285271">Johan Commelin (Nov 08 2018 at 09:34)</a>:</h4>
+<p>I guess <code>p = 0</code> is problematic.</p>
+
+<a name="147285280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285280">Johan Commelin (Nov 08 2018 at 09:35)</a>:</h4>
+<p>Sure, after all, others have already done that. So if you are just experimenting, I wouldn't try to be as general as possible.</p>
+
+<a name="147285399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285399">AHan (Nov 08 2018 at 09:38)</a>:</h4>
+<p>Yeah I'm just experimenting, but "others have already done that", do you mean in the mathlib or is it in some other trustable third party library?</p>
+
+<a name="147285404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285404">Johan Commelin (Nov 08 2018 at 09:38)</a>:</h4>
+<p>No in mathlib.</p>
+
+<a name="147285486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285486">AHan (Nov 08 2018 at 09:40)</a>:</h4>
+<p>Which file does it reside in?<br>
+Cause this experiment isn't actually my main goal, I did this mainly because my main goal need this, and I didn't find this in mathlib...</p>
+
+<a name="147285516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285516">Mario Carneiro (Nov 08 2018 at 09:41)</a>:</h4>
+<p>What are you doing exactly? I'm not sure if it's in mathlib but I don't know what it is. It looks sort of like <code>zmod</code></p>
+
+<a name="147285657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285657">AHan (Nov 08 2018 at 09:45)</a>:</h4>
+<p>I want to examine some algorithms correctness, and the algorithms need <code>prime field</code><br>
+So I'm thinking of defining a type of <code>prime field</code> and use as an instance of class <code>field</code></p>
+
+<a name="147285717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285717">Mario Carneiro (Nov 08 2018 at 09:46)</a>:</h4>
+<p>If by prime field you mean Z/pZ where <code>p</code> is a prime, that's <code>zmod</code></p>
+
+<a name="147285740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285740">Mario Carneiro (Nov 08 2018 at 09:47)</a>:</h4>
+<p>Or do you mean the smallest subfield of a given field? I don't think we have that but you can fake it with <code>rat.cast</code></p>
+
+<a name="147285787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285787">AHan (Nov 08 2018 at 09:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  I've done what you suggested, but the problem that I can't use the symbol <code>*</code> and <code>1</code> still exists...</p>
+<div class="codehilite"><pre><span></span>def pf (p : ℕ) := {e : ℤ// 0 ≤ e ∧ e &lt; p}
+
+namespace pf
+
+variables ( p: ℕ ) ( pp : prime p )
+include pp
+
+def mul (a b : pf p) : pf p := ⟨(a.val * b.val) % p,     begin apply mod_range, apply prime.pos pp end⟩
+instance : has_mul (pf p) := ⟨@mul p pp⟩
+protected def one  : pf p := ⟨1, begin apply and.intro, apply zero_le_one, apply (int.coe_nat_lt.elim_right (prime.gt_one pp)), end⟩
+instance : has_one (pf p) := ⟨@pf.one p pp⟩
+
+lemma pf_is_right_inv (a : pf p) : (a.1 &gt; 0) → a * (@pf.inv p pp a) = 1 :=
+</pre></div>
+
+<a name="147285867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285867">Johan Commelin (Nov 08 2018 at 09:50)</a>:</h4>
+<p>Ok, what happens if you do not include <code>pp</code>?</p>
+
+<a name="147285875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285875">Johan Commelin (Nov 08 2018 at 09:50)</a>:</h4>
+<p>Just don't make any assumptions on <code>p</code>.</p>
+
+<a name="147285889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285889">Johan Commelin (Nov 08 2018 at 09:50)</a>:</h4>
+<p>But, like Mario said, you are basically redefining <code>zmod n</code>.</p>
+
+<a name="147285989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147285989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147285989">AHan (Nov 08 2018 at 09:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Yeah <code>Z/pZ </code> exactly the thing I want<br>
+Do you mean the <code>zmod</code> in <code>modeq</code> ? Isn't is some sort of equivalence class instead of some types like <code>int</code> or <code>nat</code> ?</p>
+
+<a name="147286042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147286042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147286042">Johan Commelin (Nov 08 2018 at 09:54)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/dbb3ff0b5b2e42aa71d8167d7efdb3aa12d6e483/data/zmod/basic.lean#L10" target="_blank" title="https://github.com/leanprover/mathlib/blob/dbb3ff0b5b2e42aa71d8167d7efdb3aa12d6e483/data/zmod/basic.lean#L10">https://github.com/leanprover/mathlib/blob/dbb3ff0b5b2e42aa71d8167d7efdb3aa12d6e483/data/zmod/basic.lean#L10</a></p>
+
+<a name="147286049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147286049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147286049">Johan Commelin (Nov 08 2018 at 09:54)</a>:</h4>
+<p>It is really almost the same as what you did. The set of naturals between <code>0</code> and <code>n</code>.</p>
+
+<a name="147286167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147286167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147286167">AHan (Nov 08 2018 at 09:57)</a>:</h4>
+<p>If I don't include pp, since I have to prove the result of <code>mul</code> &lt; p, I will have to include something like <code>p_gt_zero</code>in the assumption</p>
+
+<a name="147286405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147286405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147286405">AHan (Nov 08 2018 at 10:02)</a>:</h4>
+<p>Oh!! Thank you very much! (Didn't notice this... as I can't find zmod via C-c C-d....)</p>
+
+<a name="147287978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147287978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147287978">Johan Commelin (Nov 08 2018 at 10:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="133545">@AHan</span> Sure, that's right. You will notice that <code>zmod</code> uses <code>pnat</code>: positive natural numbers.</p>
+
+<a name="147296994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147296994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html#147296994">AHan (Nov 08 2018 at 13:55)</a>:</h4>
+<p>Yes, didn't even notice that there were <code>pnat</code>, this really helped a lot! Thank you!</p>
+
+
+{% endraw %}

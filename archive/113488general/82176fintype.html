@@ -1,0 +1,82 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/82176fintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html">fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="123059884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123059884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123059884">Chris Hughes (Feb 27 2018 at 22:23)</a>:</h4>
+<p>What's the reason fintype isn't marked as Prop?</p>
+
+<a name="123060084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060084">Simon Hudon (Feb 27 2018 at 22:28)</a>:</h4>
+<p>I think it can't be <code>Prop</code> because its accessor <code>elems</code> has a non-<code>Prop</code> type</p>
+
+<a name="123060323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060323">Chris Hughes (Feb 27 2018 at 22:35)</a>:</h4>
+<p>Exists is a Prop, so presumably it's possible to define it in a way such that it is a Prop. I thought that since it's a subsingleton, it may as well be a Prop, but there's probably a good reason why not.</p>
+
+<a name="123060387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060387">Simon Hudon (Feb 27 2018 at 22:37)</a>:</h4>
+<p>That's true. The difference is that <code>Exists</code> is defined using <code>inductive</code> not <code>structure</code>. Inductive doesn't come with accessors (in the case of <code>Exists</code>, the accessors could also be called the axiom of choice).</p>
+
+<a name="123060434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060434">Simon Hudon (Feb 27 2018 at 22:38)</a>:</h4>
+<p>I think allowing <code>fintype</code> to be <code>Prop</code> would render every constructivist paranoid</p>
+
+<a name="123060441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060441">Simon Hudon (Feb 27 2018 at 22:38)</a>:</h4>
+<p>(because merely declaring a structure could quietly add the axiom of choice into your development)</p>
+
+<a name="123060454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060454">Kevin Buzzard (Feb 27 2018 at 22:39)</a>:</h4>
+<blockquote>
+<p>I think allowing <code>fintype</code> to be <code>Prop</code> would render every constructivist paranoid</p>
+</blockquote>
+<p>I think they're already pretty paranoid if they're constructivists...</p>
+
+<a name="123060505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060505">Simon Hudon (Feb 27 2018 at 22:40)</a>:</h4>
+<p>Should I say "paranoider"?</p>
+
+<a name="123060543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060543">Chris Hughes (Feb 27 2018 at 22:41)</a>:</h4>
+<p>Mario mentioned that he wanted his proofs of <code>[fintype \a] \r [fintype \b] \r [fintype (\a \r \b)]</code> to be computable. Not sure why, especially since choice is everywhere in mathlib</p>
+
+<a name="123060674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123060674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123060674">Simon Hudon (Feb 27 2018 at 22:44)</a>:</h4>
+<p>Even when you assume the axiom of choice, constructive functions are great. They allow you to build programs without efforts</p>
+
+<a name="123061184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123061184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123061184">Kevin Buzzard (Feb 27 2018 at 22:55)</a>:</h4>
+<p>Try calculations with integers</p>
+
+<a name="123061227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123061227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123061227">Kevin Buzzard (Feb 27 2018 at 22:56)</a>:</h4>
+<p>What do you mean by "forever"?</p>
+
+<a name="123061255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123061255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123061255">Simon Hudon (Feb 27 2018 at 22:56)</a>:</h4>
+<p>wrong topic</p>
+
+<a name="123061261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123061261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123061261">Kevin Buzzard (Feb 27 2018 at 22:56)</a>:</h4>
+<p>damn topics</p>
+
+<a name="123067712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123067712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123067712">Mario Carneiro (Feb 28 2018 at 01:55)</a>:</h4>
+<p><code>fintype</code> and <code>finite</code> exist exactly so that you can decide whether or not you want to work in Prop</p>
+
+<a name="123067953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/123067953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#123067953">Chris Hughes (Feb 28 2018 at 02:01)</a>:</h4>
+<p>Didn't know about finite. I'll have to look at it.</p>
+
+
+{% endraw %}

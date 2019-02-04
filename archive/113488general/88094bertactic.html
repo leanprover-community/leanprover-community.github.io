@@ -1,0 +1,467 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/88094bertactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html">über-tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="135098666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098666">Patrick Massot (Oct 03 2018 at 14:13)</a>:</h4>
+<p>I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)? Something like:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">do_it</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span><span class="n">ext</span><span class="o">}],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span><span class="n">split</span><span class="o">}],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">apply_eq</span><span class="o">],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">finish</span> <span class="bp">&lt;|&gt;</span> <span class="n">tauto</span> <span class="bp">&lt;|&gt;</span> <span class="n">tidy</span><span class="o">}]</span> <span class="bp">&lt;|&gt;</span> <span class="n">failure</span>
+</pre></div>
+
+
+<p>can do everything that should be automatic in my demo file. It could even do more without the tidy bug.</p>
+
+<a name="135098676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098676">Patrick Massot (Oct 03 2018 at 14:13)</a>:</h4>
+<p>It uses Simon's apply function equalities tactic</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">apply_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">l</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+   <span class="n">l</span><span class="bp">.</span><span class="n">mmap</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">try</span> <span class="err">$</span> <span class="n">do</span> <span class="o">{</span>
+     <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">x</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">y</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+     <span class="o">(</span><span class="n">vs</span><span class="o">,</span><span class="n">t</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">x</span> <span class="bp">&gt;&gt;=</span> <span class="n">mk_local_pis</span><span class="o">,</span>
+     <span class="n">p&#39;</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span> <span class="o">[</span><span class="n">x</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">vs</span><span class="o">,</span> <span class="n">y</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">vs</span><span class="o">],</span>
+     <span class="n">p&#39;</span> <span class="err">←</span> <span class="n">pis</span> <span class="n">vs</span> <span class="n">p&#39;</span><span class="o">,</span>
+     <span class="n">assert</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">h</span><span class="bp">.</span><span class="n">local_pp_name</span> <span class="bp">++</span> <span class="s2">&quot;_ev&quot;</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="n">p&#39;</span><span class="o">,</span>
+     <span class="n">vs</span> <span class="err">←</span> <span class="n">intros</span><span class="o">,</span>
+     <span class="n">vs</span><span class="bp">.</span><span class="n">reverse</span><span class="bp">.</span><span class="n">mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">v</span><span class="o">,</span>
+       <span class="n">do</span> <span class="n">revert</span> <span class="n">v</span><span class="o">,</span>
+          <span class="n">applyc</span> <span class="bp">``</span><span class="n">congr_fun</span><span class="o">),</span>
+     <span class="n">exact</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="n">return</span> <span class="o">()</span>
+</pre></div>
+
+<a name="135098839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098839">Scott Morrison (Oct 03 2018 at 14:16)</a>:</h4>
+<p>Patrick, you should investigate whether we could put <code>finish</code> or <code>tauto</code> inside <code>tidy</code>. I suspect they would be fine, I've actually never used them!</p>
+
+<a name="135098888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098888">Johan Commelin (Oct 03 2018 at 14:17)</a>:</h4>
+<p>While you're at it, you should also add <code>cc</code> and <code>linarith</code> to <code>über</code>.</p>
+
+<a name="135098891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098891">Scott Morrison (Oct 03 2018 at 14:17)</a>:</h4>
+<p>(A big downside, by the way, of using <code>tidy</code> merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)</p>
+
+<a name="135098893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098893">Simon Hudon (Oct 03 2018 at 14:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>, didn't you add congr_fun to <code>solve_by_elim</code> recently?</p>
+
+<a name="135098899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098899">Scott Morrison (Oct 03 2018 at 14:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, yes, but the PR hasn't landed yet.</p>
+
+<a name="135098908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098908">Simon Hudon (Oct 03 2018 at 14:17)</a>:</h4>
+<p>Aaaaah! That's why!</p>
+
+<a name="135098947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098947">Johan Commelin (Oct 03 2018 at 14:18)</a>:</h4>
+<blockquote>
+<p>(A big downside, by the way, of using <code>tidy</code> merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)</p>
+</blockquote>
+<p>We need caching.</p>
+
+<a name="135098949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098949">Scott Morrison (Oct 03 2018 at 14:18)</a>:</h4>
+<p>(I need to deal with your suggestion to use <code>with</code> when passing attributes.)</p>
+
+<a name="135098965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098965">Scott Morrison (Oct 03 2018 at 14:18)</a>:</h4>
+<p>(I've also realised there is a mistake in <code>solve_by_elim</code> when dealing with multiple sub-goals, more on that later :-)</p>
+
+<a name="135098977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135098977">Simon Hudon (Oct 03 2018 at 14:18)</a>:</h4>
+<p>I keep getting confused with the PRs that haven't been merged yet</p>
+
+<a name="135099176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099176">Simon Hudon (Oct 03 2018 at 14:21)</a>:</h4>
+<blockquote>
+<p>I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)?</p>
+</blockquote>
+<p>Because proofs in first order logic and anything more expressive is undecidable, you can't build a tactic so that, when it fails, you can say "it tried everything". You could always try a little harder, maybe one more call to <code>ext</code> and then <code>simp</code> will do it.</p>
+
+<a name="135099531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099531">Scott Morrison (Oct 03 2018 at 14:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, another way to achieve this is to add the @[tidy] annotation to tactics that you want to try.</p>
+
+<a name="135099543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099543">Johan Commelin (Oct 03 2018 at 14:27)</a>:</h4>
+<p>Well, maybe if it fails we could conclude "it tried everything that is straightforward up to a reasonable depth". And then "probably this proof needs an <em>idea</em>".</p>
+
+<a name="135099562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099562">Scott Morrison (Oct 03 2018 at 14:27)</a>:</h4>
+<p>For example, if you write <code>@[tidy] meta def la := `[linarith]</code>, then after that <code>tidy</code> will also try calling linarith.</p>
+
+<a name="135099620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099620">Scott Morrison (Oct 03 2018 at 14:28)</a>:</h4>
+<p>You could make an import, for example, that super-charged <code>tidy</code> with all these other things.</p>
+
+<a name="135099623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099623">Johan Commelin (Oct 03 2018 at 14:28)</a>:</h4>
+<p>Can you just <code>local attibute [tidy] linarith</code>?</p>
+
+<a name="135099636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099636">Scott Morrison (Oct 03 2018 at 14:28)</a>:</h4>
+<p>Probably not quite that: the <code>[tidy]</code> attribute has to be on a <code>tactic unit</code> or <code>tactic string</code>.</p>
+
+<a name="135099643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099643">Scott Morrison (Oct 03 2018 at 14:29)</a>:</h4>
+<p>Any arguments (e.g. to interactive tactics) will break it.</p>
+
+<a name="135099649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099649">Scott Morrison (Oct 03 2018 at 14:29)</a>:</h4>
+<p>Although this is completely fixable.</p>
+
+<a name="135099666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099666">Scott Morrison (Oct 03 2018 at 14:29)</a>:</h4>
+<p>(and we should do so at some point...)</p>
+
+<a name="135099892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099892">Mario Carneiro (Oct 03 2018 at 14:33)</a>:</h4>
+<p>I think super-tactics like this are not uncommon</p>
+
+<a name="135099919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099919">Mario Carneiro (Oct 03 2018 at 14:33)</a>:</h4>
+<p>Everyone wants to be the one tactic to rule them all</p>
+
+<a name="135099975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135099975">Mario Carneiro (Oct 03 2018 at 14:34)</a>:</h4>
+<p>I think <code>tidy</code> has too unassuming a name for a supertactic</p>
+
+<a name="135100008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100008">Mario Carneiro (Oct 03 2018 at 14:34)</a>:</h4>
+<p>It should be called <code>crush</code> or <code>blast</code> or some similarly violent thing</p>
+
+<a name="135100025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100025">Simon Hudon (Oct 03 2018 at 14:35)</a>:</h4>
+<p>What about <code>nuke</code>?</p>
+
+<a name="135100094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100094">Simon Hudon (Oct 03 2018 at 14:36)</a>:</h4>
+<p>Either that or <code>solve_violently</code></p>
+
+<a name="135100271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100271">Johan Commelin (Oct 03 2018 at 14:38)</a>:</h4>
+<p>We're all still waiting for Mjölnir</p>
+
+<a name="135100412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100412">Simon Hudon (Oct 03 2018 at 14:40)</a>:</h4>
+<p>I was always disappointed by what <code>destruct</code> does because it feels like a synonym to <code>destroy</code>. And now we can't use <code>destroy</code> as the name of a super tactic.</p>
+
+<a name="135100421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100421">Simon Hudon (Oct 03 2018 at 14:41)</a>:</h4>
+<p>But we can use <code>annihilate</code></p>
+
+<a name="135100510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100510">Johan Commelin (Oct 03 2018 at 14:42)</a>:</h4>
+<p>You know Grothendieck's parable about proving strategies?</p>
+
+<a name="135100516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100516">Johan Commelin (Oct 03 2018 at 14:42)</a>:</h4>
+<p>We should also have <code>soak</code></p>
+
+<a name="135100524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100524">Johan Commelin (Oct 03 2018 at 14:42)</a>:</h4>
+<p>But it is very time-expensive</p>
+
+<a name="135100529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100529">Simon Hudon (Oct 03 2018 at 14:42)</a>:</h4>
+<p>I do not. Please educate me</p>
+
+<a name="135100536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100536">Johan Commelin (Oct 03 2018 at 14:42)</a>:</h4>
+<p>Might take a couple of years to run. But it will produce a couple 1000 pages of beautiful math in the end....</p>
+
+<a name="135100575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100575">Johan Commelin (Oct 03 2018 at 14:43)</a>:</h4>
+<p>I'm searching for it... give me a second</p>
+
+<a name="135100632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100632">Simon Hudon (Oct 03 2018 at 14:44)</a>:</h4>
+<p>:D</p>
+
+<a name="135100648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100648">Simon Hudon (Oct 03 2018 at 14:44)</a>:</h4>
+<p>A similar approach to <code>by grad_student</code></p>
+
+<a name="135100679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100679">Johan Commelin (Oct 03 2018 at 14:45)</a>:</h4>
+<p><a href="https://mathoverflow.net/a/7156" target="_blank" title="https://mathoverflow.net/a/7156">https://mathoverflow.net/a/7156</a></p>
+
+<a name="135100757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100757">Johan Commelin (Oct 03 2018 at 14:46)</a>:</h4>
+<p>I think <code>soak</code> or <code>immerse</code> is different from <code>grad_student</code>. It is even more expensive...</p>
+
+<a name="135100786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100786">Scott Morrison (Oct 03 2018 at 14:47)</a>:</h4>
+<p><span class="emoji emoji-1f951" title="avocado">:avocado:</span></p>
+
+<a name="135100881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135100881">Simon Hudon (Oct 03 2018 at 14:49)</a>:</h4>
+<p>I love it :D That's what I call putting a problem on the back burner</p>
+
+<a name="135104489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104489">Patrick Massot (Oct 03 2018 at 15:52)</a>:</h4>
+<p>Blindly adding the tidy attribute to tactics only gives me deterministic timeout</p>
+
+<a name="135104631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104631">Patrick Massot (Oct 03 2018 at 15:54)</a>:</h4>
+<p>especially with norm_num</p>
+
+<a name="135104661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104661">Patrick Massot (Oct 03 2018 at 15:55)</a>:</h4>
+<p>and apply_eq</p>
+
+<a name="135104737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104737">Simon Hudon (Oct 03 2018 at 15:56)</a>:</h4>
+<p><code>apply_eq</code> never fails and I believe neither does <code>norm_num</code>. Does <code>tidy</code> repeated try its tactics?</p>
+
+<a name="135104776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104776">Patrick Massot (Oct 03 2018 at 15:57)</a>:</h4>
+<p>Wow, you're still not sleeping? Did you decide to simply skip that step?</p>
+
+<a name="135104850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104850">Simon Hudon (Oct 03 2018 at 15:58)</a>:</h4>
+<p>Yeah, I'll pick it up later. I have an appointment this morning so at some point I got afraid I would sleep right passed it if I managed to fall asleep so I got out of bed</p>
+
+<a name="135104875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104875">Scott Morrison (Oct 03 2018 at 15:59)</a>:</h4>
+<p>Yes, tidy relies on the "do something or fail" model for tactics.</p>
+
+<a name="135104876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104876">Scott Morrison (Oct 03 2018 at 15:59)</a>:</h4>
+<p>Speaking of sleeping.</p>
+
+<a name="135104959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135104959">Patrick Massot (Oct 03 2018 at 16:00)</a>:</h4>
+<p>Do you still see a way to make use of norm_num inside tidy?</p>
+
+<a name="135105003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105003">Simon Hudon (Oct 03 2018 at 16:01)</a>:</h4>
+<p>You can write a tactic that checks if progress was made and fails if none was made</p>
+
+<a name="135105026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105026">Patrick Massot (Oct 03 2018 at 16:01)</a>:</h4>
+<p>how? comparing the new goal with previous goal?</p>
+
+<a name="135105072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105072">Scott Morrison (Oct 03 2018 at 16:02)</a>:</h4>
+<p>And a better solution is to change the behaviour of norm_num... Who wants tactics to silently fail, anyway? :-)</p>
+
+<a name="135105092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105092">Scott Morrison (Oct 03 2018 at 16:02)</a>:</h4>
+<p>Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)</p>
+
+<a name="135105096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105096">Simon Hudon (Oct 03 2018 at 16:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">guard_progress</span> <span class="o">(</span><span class="n">tac</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">gs</span> <span class="bp">&lt;-</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">tac</span><span class="o">,</span>
+   <span class="n">gs&#39;</span> <span class="bp">&lt;-</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">guard</span> <span class="o">(</span><span class="n">gs</span> <span class="bp">≠</span> <span class="n">gs&#39;</span><span class="o">)</span>
+</pre></div>
+
+<a name="135105120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105120">Patrick Massot (Oct 03 2018 at 16:03)</a>:</h4>
+<p>It was too fun for Simon to resist</p>
+
+<a name="135105126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105126">Simon Hudon (Oct 03 2018 at 16:03)</a>:</h4>
+<blockquote>
+<p>Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)</p>
+</blockquote>
+<p>Which one?</p>
+
+<a name="135105132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105132">Simon Hudon (Oct 03 2018 at 16:03)</a>:</h4>
+<p>I'm so greedy. Sorry</p>
+
+<a name="135105229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105229">Patrick Massot (Oct 03 2018 at 16:05)</a>:</h4>
+<p>But you are both maligning norm_num, it can actually fail</p>
+
+<a name="135105261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105261">Simon Hudon (Oct 03 2018 at 16:05)</a>:</h4>
+<p>I can make up for this theft. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> If you didn't have <code>assert</code>, <code>assertv</code>, <code>define</code>, <code>definev</code>, <code>note</code> or <code>pose</code>, how to you create a new goal and an associated assumption?</p>
+
+<a name="135105355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105355">Johan Commelin (Oct 03 2018 at 16:06)</a>:</h4>
+<p>What are <code>note</code> and <code>pose</code>?</p>
+
+<a name="135105364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105364">Patrick Massot (Oct 03 2018 at 16:06)</a>:</h4>
+<p>I don't even understand the question</p>
+
+<a name="135105380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105380">Johan Commelin (Oct 03 2018 at 16:07)</a>:</h4>
+<p>Actually, I don't recognise any of those tactics.</p>
+
+<a name="135105394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105394">Johan Commelin (Oct 03 2018 at 16:07)</a>:</h4>
+<p>I only use <code>have foo : blah,</code></p>
+
+<a name="135105405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105405">Johan Commelin (Oct 03 2018 at 16:07)</a>:</h4>
+<p>Or <code>suffices</code></p>
+
+<a name="135105407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105407">Patrick Massot (Oct 03 2018 at 16:07)</a>:</h4>
+<p>Johan, this is all meta</p>
+
+<a name="135105428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105428">Patrick Massot (Oct 03 2018 at 16:08)</a>:</h4>
+<p>we are discussing tactic writing here, not plebeian proof writing</p>
+
+<a name="135105524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105524">Simon Hudon (Oct 03 2018 at 16:09)</a>:</h4>
+<p>You got it. There's also a non-condescending way to put it :P</p>
+
+<a name="135105640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105640">Patrick Massot (Oct 03 2018 at 16:10)</a>:</h4>
+<p>Hopefully the fact <em>I</em> wrote this (instead of Scott, you or any other tactic writer) was a clear enough hint about how to read it <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="135105736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105736">Simon Hudon (Oct 03 2018 at 16:11)</a>:</h4>
+<p>I thought so too. I just had to react to the tone <span class="emoji emoji-1f606" title="laughing">:laughing:</span></p>
+
+<a name="135105831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105831">Mario Carneiro (Oct 03 2018 at 16:13)</a>:</h4>
+<p>By the way, those all used to be interactive tactics. I was the one who advocated for simplifying it all down to <code>have</code> and <code>let</code></p>
+
+<a name="135105852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105852">Mario Carneiro (Oct 03 2018 at 16:13)</a>:</h4>
+<p>and <code>suffices</code> because why not</p>
+
+<a name="135105990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135105990">Simon Hudon (Oct 03 2018 at 16:15)</a>:</h4>
+<p>That's a nice improvement</p>
+
+<a name="135106008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106008">Simon Hudon (Oct 03 2018 at 16:15)</a>:</h4>
+<p>It's especially nice that the same keywords work in tactic mode and in term mode</p>
+
+<a name="135106062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106062">Patrick Massot (Oct 03 2018 at 16:16)</a>:</h4>
+<p>it's also slightly confusing that the accepted syntaxes are not quite the same</p>
+
+<a name="135106078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106078">Patrick Massot (Oct 03 2018 at 16:16)</a>:</h4>
+<p>fortunately that issue is easily fixed by working only in tactic mode</p>
+
+<a name="135106213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106213">Patrick Massot (Oct 03 2018 at 16:18)</a>:</h4>
+<p>Returning to norm_num and tidy, I'm not able to make any progress on getting <code>example : (0 : ℝ) &lt; (1 : ℝ) := by tidy</code> to work. I tried adding norm_num to the tidy set, either with or without progress guard but no luck</p>
+
+<a name="135106356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106356">Simon Hudon (Oct 03 2018 at 16:20)</a>:</h4>
+<p>That's annoying</p>
+
+<a name="135106366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106366">Patrick Massot (Oct 03 2018 at 16:20)</a>:</h4>
+<p>That's probably only me</p>
+
+<a name="135106393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106393">Simon Hudon (Oct 03 2018 at 16:21)</a>:</h4>
+<p>That's what I meant, you keep complaining ... <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="135106409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106409">Patrick Massot (Oct 03 2018 at 16:21)</a>:</h4>
+<p>What's fun is that the guard_progress trick works with apply_eq which is not meant to modify the goal</p>
+
+<a name="135106424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106424">Patrick Massot (Oct 03 2018 at 16:21)</a>:</h4>
+<p>My tactic writing is pure Brownian motion</p>
+
+<a name="135106468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106468">Simon Hudon (Oct 03 2018 at 16:22)</a>:</h4>
+<p>Ah! It's time for the next lesson</p>
+
+<a name="135106484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106484">Johan Commelin (Oct 03 2018 at 16:22)</a>:</h4>
+<p>If we have Brownian motions in mathlib, would this help you with tactic writing <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> ?</p>
+
+<a name="135106499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106499">Simon Hudon (Oct 03 2018 at 16:23)</a>:</h4>
+<p>When you use <code>get_goals</code>, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.</p>
+
+<a name="135106574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106574">Simon Hudon (Oct 03 2018 at 16:24)</a>:</h4>
+<blockquote>
+<p>If we have Brownian motions in mathlib, would this help you with tactic writing <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> ?</p>
+</blockquote>
+<p>Sorry to disappoint: my research area is scheduling in distributed and cyber-physical systems (keyword: scheduling) and I'm still constantly procrastinating and arriving late</p>
+
+<a name="135106597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106597">Simon Hudon (Oct 03 2018 at 16:24)</a>:</h4>
+<p>You may know all the theory there is on a subject, that doesn't mean that you can do the thing yourself</p>
+
+<a name="135106704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106704">Simon Hudon (Oct 03 2018 at 16:26)</a>:</h4>
+<blockquote>
+<p>When you use <code>get_goals</code>, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.</p>
+</blockquote>
+<p>What it actually gives you is a list of unassigned meta variables. An unassigned meta variable has a type and a set of local constants that it can see. It doesn't have a value yet. Just like a proof goal: you know what you have to prove but you don't have a proof yet.</p>
+
+<a name="135106832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106832">Simon Hudon (Oct 03 2018 at 16:28)</a>:</h4>
+<p>If your goal is <code>⊢ succ x &lt; succ y</code>, you have a meta variable <code>?m_1 : succ x &lt; succ y</code>. If you want to apply <code>succ_lt_succ</code>, It</p>
+
+<a name="135106985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135106985">Simon Hudon (Oct 03 2018 at 16:30)</a>:</h4>
+<p>it's like creating a meta variable <code>?m_2 : x &lt; y</code> and then you construct an expression <code>succ_lt_succ ?m_2</code> which you assign to <code>?m_1</code>. Then, you remove <code>?m_1</code> from the list of goals and you put <code>?m_2</code> instead. The goal changes because you have a different meta variable in the list of goals now.</p>
+
+<a name="135107297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135107297">Patrick Massot (Oct 03 2018 at 16:34)</a>:</h4>
+<p>so the short version is: the goal comes with its local context, right?</p>
+
+<a name="135107588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135107588">Simon Hudon (Oct 03 2018 at 16:38)</a>:</h4>
+<p>That is correct</p>
+
+<a name="135107927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135107927">Patrick Massot (Oct 03 2018 at 16:43)</a>:</h4>
+<p>I should stop playing, and focus on the archaic manual referee process, but I have <a href="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean" target="_blank" title="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean">https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean</a></p>
+
+<a name="135108002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135108002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135108002">Patrick Massot (Oct 03 2018 at 16:44)</a>:</h4>
+<p>This is part of my demo file with tidy everywhere</p>
+
+<a name="135108465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135108465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135108465">Patrick Massot (Oct 03 2018 at 16:50)</a>:</h4>
+<p>Thanks for all your help!</p>
+
+<a name="135111366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135111366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135111366">Edward Ayers (Oct 03 2018 at 17:31)</a>:</h4>
+<blockquote>
+<p>What about <code>nuke</code>?</p>
+</blockquote>
+<p>Can emoji be tactic names?</p>
+
+<a name="135113179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135113179">Kevin Buzzard (Oct 03 2018 at 17:56)</a>:</h4>
+<p>This has come up before</p>
+
+<a name="135113199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135113199">Kevin Buzzard (Oct 03 2018 at 17:56)</a>:</h4>
+<p>and I believe there was a trick using quotations somehow</p>
+
+<a name="135113247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88094bertactic.html#135113247">Patrick Massot (Oct 03 2018 at 17:57)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817" title="#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817</a></p>
+
+
+{% endraw %}

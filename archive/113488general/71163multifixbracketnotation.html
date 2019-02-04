@@ -1,0 +1,257 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71163multifixbracketnotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html">multifix bracket notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127889037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127889037">Johan Commelin (Jun 11 2018 at 10:32)</a>:</h4>
+<p>Is this bound to become a massive headache, if possible at all?</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="n">class</span> <span class="n">has_bracket</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bracket</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">a</span> <span class="bp">`</span><span class="o">,</span><span class="bp">`</span> <span class="n">b</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">has_bracket</span><span class="bp">.</span><span class="n">bracket</span>
+</pre></div>
+
+
+<p>The notation <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[x,y]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathit">x</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mclose">]</span></span></span></span> is very common (I would say, <em>mandatory</em>) in the theory of Lie algebras.</p>
+
+<a name="127889262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127889262">Kevin Buzzard (Jun 11 2018 at 10:40)</a>:</h4>
+<p>it breaks list notation, so one question is: are you likely to be using list notation? Let's face it, list notation isn't that common in mathematics. Will you use it behind the scenes though? I am not sure I used a single list when doing schemes.</p>
+
+<a name="127889303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127889303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127889303">Kevin Buzzard (Jun 11 2018 at 10:40)</a>:</h4>
+<p>(at least, not explicitly)</p>
+
+<a name="127899035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899035">Johan Commelin (Jun 11 2018 at 15:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">class</span> <span class="n">has_bracket</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bracket</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">a</span> <span class="bp">`</span><span class="o">,</span><span class="bp">`</span> <span class="n">b</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">has_bracket</span><span class="bp">.</span><span class="n">bracket</span> <span class="n">a</span> <span class="n">b</span>
+
+<span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">has_bracket</span> <span class="err">𝔤</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">left_linear</span>  <span class="o">:=</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">right_linear</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">alternating</span>  <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">x</span><span class="o">]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Jacobi_identity</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,[</span><span class="n">y</span><span class="o">,</span><span class="n">z</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">z</span><span class="o">,[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">y</span><span class="o">,[</span><span class="n">z</span><span class="o">,</span><span class="n">x</span><span class="o">]]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">anti_comm</span>    <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">([</span><span class="n">y</span><span class="o">,</span><span class="n">x</span><span class="o">]))</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lie_algebra</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm">- `𝔥` is a Lie subalgebra: a set closed under the Lie bracket. -/</span>
+<span class="n">class</span> <span class="n">is_lie_subalgebra</span> <span class="o">(</span><span class="err">𝔥</span> <span class="o">:</span> <span class="n">set</span> <span class="err">𝔤</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">closed</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">𝔥</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∈</span> <span class="err">𝔥</span> <span class="bp">→</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]</span> <span class="err">∈</span> <span class="err">𝔥</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am bitten again by type class inference. Once again Lean can't infer the class of <code>has_bracket 𝔤</code> in the last line, even though it knows that <code>𝔤</code> is a Lie algebra. <br>
+If I compare this with</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_add_subgroup</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">is_add_submonoid</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">neg_mem</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="bp">-</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+
+<p>How does Lean figure out <code>has_mem α</code> to make sense of the <code>-a</code>? The cargo-cult programmer in me is stumped.</p>
+
+<a name="127899473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899473">Reid Barton (Jun 11 2018 at 15:32)</a>:</h4>
+<p>I don't know why, but changing the last line to</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">la</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">la</span>
+</pre></div>
+
+
+<p>made it work for me.</p>
+
+<a name="127899477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899477">Reid Barton (Jun 11 2018 at 15:32)</a>:</h4>
+<p>If I had to guess, it has something to do with the additional parameter <code>R</code></p>
+
+<a name="127899495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899495">Johan Commelin (Jun 11 2018 at 15:33)</a>:</h4>
+<p>Thanks... that'll do for now <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="127899771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899771">Sebastian Ullrich (Jun 11 2018 at 15:39)</a>:</h4>
+<p>Yes, section variables used as <code>out_param</code>s are a bit broken. Lean will auto-include section class variables only when all its parameters are (auto-)included, but it should ignore <code>out_param</code>s during that.</p>
+
+<a name="127899782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899782">Sebastian Ullrich (Jun 11 2018 at 15:39)</a>:</h4>
+<p>So <code>include R</code> should work too</p>
+
+<a name="127899849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899849">Johan Commelin (Jun 11 2018 at 15:41)</a>:</h4>
+<p>It doesn't...</p>
+
+<a name="127899927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127899927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127899927">Sebastian Ullrich (Jun 11 2018 at 15:42)</a>:</h4>
+<p>¯\_(ツ)_/¯</p>
+
+<a name="127900028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127900028">Reid Barton (Jun 11 2018 at 15:45)</a>:</h4>
+<p>Maybe need to include the <code>[comm_ring R]</code> variable also then</p>
+
+<a name="127900036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127900036">Johan Commelin (Jun 11 2018 at 15:45)</a>:</h4>
+<p>Then yours becomes more efficient (-;</p>
+
+<a name="127900184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127900184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127900184">Johan Commelin (Jun 11 2018 at 15:48)</a>:</h4>
+<p>After Reid's (hacky) fix, the next line gives problems. I would like to solve it myself, but I don't know why Lean is unhappy. Here is the line:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">subset</span><span class="bp">.</span><span class="n">lie_algebra</span> <span class="o">{</span><span class="err">𝔥</span> <span class="o">:</span> <span class="n">set</span> <span class="err">𝔤</span><span class="o">}</span> <span class="o">[</span><span class="n">is_lie_subalgebra</span> <span class="err">𝔥</span><span class="o">]</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="err">𝔥</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I get red squiggles before the <code>is_lie_subalgebra</code> instance. Lean thinks it needs to infer an extra Type. I have tried some <code>set_option</code>s to get more info, but I couldn't figure it out (e.g. <code>trace.class_instances</code> and <code>pp.all</code>). How should I attack this error?</p>
+
+<a name="127914479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127914479">Johan Commelin (Jun 11 2018 at 21:02)</a>:</h4>
+<p>Is there documentation for <code>out_param</code>? What is it's purpose? I think I heard somewhere that there have been long discussions about it. Has that been condensed into some docs? It feels to me like <code>out_param</code> is making it harder to work with modules, rather than easier.</p>
+
+<a name="127914499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127914499">Patrick Massot (Jun 11 2018 at 21:03)</a>:</h4>
+<p>I think all documentation is here on Zulip (or gitter) and source code</p>
+
+<a name="127914575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127914575">Johan Commelin (Jun 11 2018 at 21:04)</a>:</h4>
+<p>I tried implicitly turning an <code>R</code>-algebra into an <code>R</code>-module, by chaining together <code>ring.to_module</code> and restriction of scalars... guess what happened</p>
+
+<a name="127914657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127914657">Johan Commelin (Jun 11 2018 at 21:06)</a>:</h4>
+<p>(I wanted to put the commutator bracket on the algebra [to make the link with this thread])</p>
+
+<a name="127914674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127914674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127914674">Johan Commelin (Jun 11 2018 at 21:06)</a>:</h4>
+<p>Anyway, I ran head first into the type class loop again.</p>
+
+<a name="127924610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924610">Kevin Buzzard (Jun 12 2018 at 01:09)</a>:</h4>
+<p>Mario explaining out_param to me on gitter:</p>
+
+<a name="127924612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924612">Kevin Buzzard (Jun 12 2018 at 01:09)</a>:</h4>
+<div class="codehilite"><pre><span></span>elaborator deals with opt_param, type class deals with out_param
+
+Normally a typeclass won&#39;t trigger until all its parameters are fixed
+
+So for example [has_mem A B] won&#39;t be solved until A and B are known
+
+i.e. if I have x \in y and the types of x y are unknown, it will fail
+
+However, has_mem works a bit differently than this because A is marked as an out_param
+
+@[class]
+structure has_mem : out_param (Type u) → Type v → Type (max u v)
+fields:
+has_mem.mem : Π {α : out_param (Type u)} {γ : Type v} [c : has_mem α γ], α → γ → Prop
+
+In fact, if you have x \in y and y : B, even if the type of x is unknown it will try to solve the typeclass problem has_mem ?M B
+
+This is important because it often comes up in notations like \forall x \in y, ... where y : set A and x is unknown type, we want lean to figure out that x : A
+
+This doesn&#39;t affect the meta theory in any way, of course, once the full term is given the elaborator and typeclass inference is done and it&#39;s basic DTT. In that situation it really is just an identity function
+
+
+And opt_param?
+Mario Carneiro
+@digama0
+20:39
+That&#39;s just the way (x : A := y) is translated, to x : opt_param A y
+it holds the optional value so it can be inferred by the usual rules for optional arguments
+
+
+It is occasionally useful when you want to have an optional argument right of the colon (the := syntax only works on the parameters)
+</pre></div>
+
+<a name="127924746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924746">Kevin Buzzard (Jun 12 2018 at 01:12)</a>:</h4>
+<p>Mario and Sebastian talking about module and params:</p>
+
+<a name="127924752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924752">Kevin Buzzard (Jun 12 2018 at 01:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>To review, the problem is that the definition:
+
+class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
+  extends has_scalar α β, add_comm_group β :=
+...
+
+leads to a search problem in which ring ?M1 is solved before module ?M1 β, which leads to a loop when there is an instance like [ring A] [ring B] : ring (A x B)
+I would like to make lean search for module ?M1 β only, obtaining α and the ring instance by unification
+Johannes suggested using {out_param $ ring α} instead of [out_param $ ring α], but then it doesn&#39;t work as a typeclass, and all the multiplications etc in the theorem statements break
+A possible solution is to skip out_param typeclass search problems until after all the others are solved
+
+***
+
+So the real issue is: You want the elaborator to handle applying a function {A B} [ring A] [module A B] (x : B) : ..., yes...?
+Mario Carneiro
+@digama0
+Jan 19 10:10
+yes
+Sebastian Ullrich
+@Kha
+Jan 19 10:10
+Where you want it to solve the second instance first, which fixes A and the first instance
+</pre></div>
+
+<a name="127924890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924890">Kevin Buzzard (Jun 12 2018 at 01:16)</a>:</h4>
+<p><a href="https://gitter.im/leanprover_public/Lobby?at=5a61beb85ade18be399654c0" target="_blank" title="https://gitter.im/leanprover_public/Lobby?at=5a61beb85ade18be399654c0">https://gitter.im/leanprover_public/Lobby?at=5a61beb85ade18be399654c0</a></p>
+
+<a name="127924893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127924893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127924893">Kevin Buzzard (Jun 12 2018 at 01:16)</a>:</h4>
+<p>Johannes too</p>
+
+<a name="127939887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127939887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127939887">Johan Commelin (Jun 12 2018 at 09:08)</a>:</h4>
+<p>Ok, I think I half understand the issues involved. Does this mean that</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">restriction_of_scalars</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">S</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">}</span>  <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">smul</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">m</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">smul_add</span><span class="o">,</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">f</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">add_smul</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">f</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mul_smul</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">one_smul</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+<span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">restriction_of_scalars</span>
+</pre></div>
+
+
+<p>implies self-destruction <span class="emoji emoji-1f4a5" title="boom">:boom:</span> ?</p>
+
+<a name="127940673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multifix%20bracket%20notation/near/127940673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71163multifixbracketnotation.html#127940673">Johan Commelin (Jun 12 2018 at 09:32)</a>:</h4>
+<p>Ok, maybe this is asking to much. But would it be ok if we restrict to the case where <code>R</code> is a subring, and <code>f = subtype.val</code>?</p>
+
+
+{% endraw %}

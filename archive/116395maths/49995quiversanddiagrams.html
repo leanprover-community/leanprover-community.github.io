@@ -1,0 +1,166 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/49995quiversanddiagrams.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html">quivers and diagrams</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125937757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937757">Johan Commelin (May 01 2018 at 12:00)</a>:</h4>
+<p>I've got the following snippet</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">structure</span> <span class="n">quiver</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">Q</span> <span class="o">:</span> <span class="n">quiver</span><span class="o">}</span>
+
+<span class="kn">definition</span> <span class="n">is_a_path</span> <span class="o">:</span> <span class="o">(</span><span class="n">list</span> <span class="n">Q</span><span class="bp">.</span><span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">[</span><span class="n">e</span><span class="o">]</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">e₁</span> <span class="bp">::</span> <span class="n">e₂</span> <span class="bp">::</span> <span class="n">es</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Q</span><span class="bp">.</span><span class="n">s</span> <span class="n">e₁</span> <span class="bp">=</span> <span class="n">Q</span><span class="bp">.</span><span class="n">t</span> <span class="n">e₂</span> <span class="bp">∧</span> <span class="n">is_a_path</span> <span class="o">(</span><span class="n">e₂</span> <span class="bp">::</span> <span class="n">es</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">diagram</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">D</span> <span class="o">:</span> <span class="n">Q</span><span class="bp">.</span><span class="n">V</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span>
+<span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">Q</span><span class="bp">.</span><span class="n">E</span><span class="o">),</span> <span class="n">D</span> <span class="o">(</span><span class="n">Q</span><span class="bp">.</span><span class="n">s</span> <span class="n">e</span><span class="o">)</span> <span class="bp">→</span> <span class="n">D</span> <span class="o">(</span><span class="n">Q</span><span class="bp">.</span><span class="n">t</span> <span class="n">e</span><span class="o">))</span>
+</pre></div>
+
+<a name="125937763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937763">Johan Commelin (May 01 2018 at 12:00)</a>:</h4>
+<p>But now I realise that I actually only want to consider finite lists</p>
+
+<a name="125937765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937765">Kenny Lau (May 01 2018 at 12:00)</a>:</h4>
+<p>why don't you use chain lol</p>
+
+<a name="125937766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937766">Kenny Lau (May 01 2018 at 12:00)</a>:</h4>
+<p>aha</p>
+
+<a name="125937771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937771">Johan Commelin (May 01 2018 at 12:00)</a>:</h4>
+<p>How would I best go about that</p>
+
+<a name="125937772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937772">Kenny Lau (May 01 2018 at 12:00)</a>:</h4>
+<p>but lists are all finite</p>
+
+<a name="125937774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937774">Johan Commelin (May 01 2018 at 12:00)</a>:</h4>
+<p>Why?</p>
+
+<a name="125937778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937778">Kenny Lau (May 01 2018 at 12:01)</a>:</h4>
+<p>because they're defined inductively</p>
+
+<a name="125937785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937785">Kenny Lau (May 01 2018 at 12:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">list</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="n">constructors</span><span class="o">:</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="n">list</span> <span class="n">T</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">cons</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="n">T</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">T</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">T</span>
+</pre></div>
+
+<a name="125937788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937788">Kenny Lau (May 01 2018 at 12:01)</a>:</h4>
+<p>and I can inductively prove that they are finite :P</p>
+
+<a name="125937790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937790">Johan Commelin (May 01 2018 at 12:01)</a>:</h4>
+<p>I see</p>
+
+<a name="125937797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937797">Johan Commelin (May 01 2018 at 12:01)</a>:</h4>
+<p>Crazy...</p>
+
+<a name="125937835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937835">Kenny Lau (May 01 2018 at 12:02)</a>:</h4>
+<p>you want lazy lists?</p>
+
+<a name="125937838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937838">Kenny Lau (May 01 2018 at 12:02)</a>:</h4>
+<p>I see you want everything to be lazy</p>
+
+<a name="125937839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937839">Kenny Lau (May 01 2018 at 12:02)</a>:</h4>
+<p>maybe that's why you think they're crazy</p>
+
+<a name="125937844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937844">Johan Commelin (May 01 2018 at 12:02)</a>:</h4>
+<p>Hmm, maybe now I'm happy that they aren't lazy (-;</p>
+
+<a name="125937846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937846">Kenny Lau (May 01 2018 at 12:02)</a>:</h4>
+<p>maybe your ideas are a bit hazy</p>
+
+<a name="125937849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937849">Johan Commelin (May 01 2018 at 12:02)</a>:</h4>
+<p>That.</p>
+
+<a name="125937853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937853">Kenny Lau (May 01 2018 at 12:03)</a>:</h4>
+<p><a href="http://www.rhymezone.com/r/rhyme.cgi?Word=lazy&amp;typeofrhyme=perfect" target="_blank" title="http://www.rhymezone.com/r/rhyme.cgi?Word=lazy&amp;typeofrhyme=perfect">http://www.rhymezone.com/r/rhyme.cgi?Word=lazy&amp;typeofrhyme=perfect</a></p>
+
+<a name="125937857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937857">Johan Commelin (May 01 2018 at 12:03)</a>:</h4>
+<p>That is definitely true. It's one of my defining properties</p>
+
+<a name="125937859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937859">Kenny Lau (May 01 2018 at 12:03)</a>:</h4>
+<p>not many words rhyme with lazy though</p>
+
+<a name="125937861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937861">Kenny Lau (May 01 2018 at 12:03)</a>:</h4>
+<p>so I'm done coz I can't use daisy</p>
+
+<a name="125937865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937865">Mario Carneiro (May 01 2018 at 12:03)</a>:</h4>
+<p>I guess you just did</p>
+
+<a name="125937867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937867">Johan Commelin (May 01 2018 at 12:03)</a>:</h4>
+<p>And you don't wanna look like jay z</p>
+
+<a name="125937919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937919">Johan Commelin (May 01 2018 at 12:05)</a>:</h4>
+<p>Anyway... I am going to try and define the set of all paths, and then try to figure out how to define commutative diagrams</p>
+
+<a name="125937924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937924">Kenny Lau (May 01 2018 at 12:05)</a>:</h4>
+<p>hmm... I would rather use categories to define diagrams</p>
+
+<a name="125937968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937968">Kenny Lau (May 01 2018 at 12:06)</a>:</h4>
+<p><a href="https://github.com/kckennylau/category-theory/blob/master/src/natural_transformation.lean" target="_blank" title="https://github.com/kckennylau/category-theory/blob/master/src/natural_transformation.lean">https://github.com/kckennylau/category-theory/blob/master/src/natural_transformation.lean</a></p>
+
+<a name="125937970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937970">Kenny Lau (May 01 2018 at 12:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">product</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">ι</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">limit</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">ι</span><span class="o">)</span> <span class="n">C</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">of_discrete</span> <span class="n">C</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="125937973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937973">Kenny Lau (May 01 2018 at 12:07)</a>:</h4>
+<p>product is the limit of the discrete diagram</p>
+
+<a name="125937978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937978">Johan Commelin (May 01 2018 at 12:07)</a>:</h4>
+<p>But that is not how we use them, I think</p>
+
+<a name="125937981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quivers%20and%20diagrams/near/125937981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49995quiversanddiagrams.html#125937981">Kenny Lau (May 01 2018 at 12:07)</a>:</h4>
+<p>is it not?</p>
+
+
+{% endraw %}

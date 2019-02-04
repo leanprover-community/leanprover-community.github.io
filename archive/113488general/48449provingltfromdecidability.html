@@ -1,0 +1,707 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/48449provingltfromdecidability.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html">proving  lt from decidability</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124661129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661129">Adam Kurkiewicz (Apr 05 2018 at 10:04)</a>:</h4>
+<p>I'd like to show the following lemma:</p>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+false.elim (nat.decidable_lt 1  0)
+</pre></div>
+
+
+<p>Concretely, I'd like to get a proof of false from <code>nat.decidable_lt 1 0</code>. But I don't understand how to use decidabilty in lean.</p>
+
+<a name="124661254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661254">Kevin Buzzard (Apr 05 2018 at 10:08)</a>:</h4>
+<p><code>example : 1  &lt;  0  → false := dec_trivial</code></p>
+
+<a name="124661257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661257">Kevin Buzzard (Apr 05 2018 at 10:09)</a>:</h4>
+<p>I'm not saying these things are easy to use though :-)</p>
+
+<a name="124661312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661312">Kevin Buzzard (Apr 05 2018 at 10:10)</a>:</h4>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+(show  1  &lt;  0  → false, by exact dec_trivial) olt0
+</pre></div>
+
+<a name="124661314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661314">Kevin Buzzard (Apr 05 2018 at 10:10)</a>:</h4>
+<p>and as you can see, I'm certainly no master of them myself.</p>
+
+<a name="124661362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661362">Kenny Lau (Apr 05 2018 at 10:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>def big_not_zero (a : nat) (P : 1 &lt; a) : a ≠ 0 :=
+λ h, nat.not_lt_zero 1 $ h ▸ P
+</pre></div>
+
+<a name="124661363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661363">Kenny Lau (Apr 05 2018 at 10:12)</a>:</h4>
+<p>\&gt; implying I'm a master of them</p>
+
+<a name="124661364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661364">Kevin Buzzard (Apr 05 2018 at 10:12)</a>:</h4>
+<p>:-)</p>
+
+<a name="124661365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661365">Adam Kurkiewicz (Apr 05 2018 at 10:12)</a>:</h4>
+<p>Thank you! What is <code>exact</code>?</p>
+
+<a name="124661370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661370">Kevin Buzzard (Apr 05 2018 at 10:13)</a>:</h4>
+<p><code>by</code> puts me into tactic mode</p>
+
+<a name="124661371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661371">Kevin Buzzard (Apr 05 2018 at 10:13)</a>:</h4>
+<p><code>exact</code> is a tactic</p>
+
+<a name="124661372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661372">Kenny Lau (Apr 05 2018 at 10:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="111040">@Adam Kurkiewicz</span> just do <code>from dec_trivial</code> instead of <code>by exact dec_trivial</code></p>
+
+<a name="124661373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661373">Kenny Lau (Apr 05 2018 at 10:13)</a>:</h4>
+<p>there's no need to go into tactic mode</p>
+
+<a name="124661374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661374">Kevin Buzzard (Apr 05 2018 at 10:13)</a>:</h4>
+<p>I have trouble getting out of tactic mode</p>
+
+<a name="124661415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661415">Adam Kurkiewicz (Apr 05 2018 at 10:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> not working <code> exact tactic failed, type mismatch, given expression has type </code></p>
+
+<a name="124661418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661418">Kevin Buzzard (Apr 05 2018 at 10:14)</a>:</h4>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+(show  1  &lt;  0  → false, from dec_trivial) olt0
+</pre></div>
+
+<a name="124661421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661421">Kevin Buzzard (Apr 05 2018 at 10:14)</a>:</h4>
+<p>works for me</p>
+
+<a name="124661422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661422">Adam Kurkiewicz (Apr 05 2018 at 10:14)</a>:</h4>
+<p>nevermind, that works.</p>
+
+<a name="124661436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661436">Adam Kurkiewicz (Apr 05 2018 at 10:15)</a>:</h4>
+<p>I'm surprised this is not working</p>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+dec_trivial olt0
+</pre></div>
+
+<a name="124661438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661438">Kevin Buzzard (Apr 05 2018 at 10:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+begin
+intro H,
+rw H at P,
+revert P,
+exact dec_trivial
+end
+</pre></div>
+
+<a name="124661439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661439">Kevin Buzzard (Apr 05 2018 at 10:15)</a>:</h4>
+<p>aah</p>
+
+<a name="124661441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661441">Kevin Buzzard (Apr 05 2018 at 10:16)</a>:</h4>
+<p>tactic mode</p>
+
+<a name="124661481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661481">Kevin Buzzard (Apr 05 2018 at 10:16)</a>:</h4>
+<p>makes it all look so easy</p>
+
+<a name="124661486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661486">Kenny Lau (Apr 05 2018 at 10:16)</a>:</h4>
+<blockquote>
+<p>I'm surprised this is not working</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+dec_trivial olt0
+</pre></div>
+
+
+<p><code>dec_trivial</code> takes no argument</p>
+
+<a name="124661492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661492">Adam Kurkiewicz (Apr 05 2018 at 10:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  Where did you learn tactic mode from? last few chapters of lean tutorial?</p>
+
+<a name="124661494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661494">Kevin Buzzard (Apr 05 2018 at 10:17)</a>:</h4>
+<p>Tactic mode chapter</p>
+
+<a name="124661499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661499">Kevin Buzzard (Apr 05 2018 at 10:17)</a>:</h4>
+<p>I have no idea why TPIL spends so long teaching people term mode</p>
+
+<a name="124661500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661500">Adam Kurkiewicz (Apr 05 2018 at 10:17)</a>:</h4>
+<p>Fair enough, I didn't last that long :D</p>
+
+<a name="124661501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661501">Kevin Buzzard (Apr 05 2018 at 10:17)</a>:</h4>
+<p>For a beginner tactic mode is the bomb</p>
+
+<a name="124661504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661504">Kevin Buzzard (Apr 05 2018 at 10:17)</a>:</h4>
+<p>you can see what you're doing at all times</p>
+
+<a name="124661544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661544">Kevin Buzzard (Apr 05 2018 at 10:18)</a>:</h4>
+<p>what the goal is, what the hypotheses are</p>
+
+<a name="124661547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661547">Kevin Buzzard (Apr 05 2018 at 10:18)</a>:</h4>
+<p>and you can try simp on every line in case it does the job</p>
+
+<a name="124661550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661550">Adam Kurkiewicz (Apr 05 2018 at 10:18)</a>:</h4>
+<p>I like term mode, at least I have an illusion I understand what's going on :)</p>
+
+<a name="124661553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661553">Kevin Buzzard (Apr 05 2018 at 10:18)</a>:</h4>
+<p>you have far more powerful tools available to you in tactic mode</p>
+
+<a name="124661555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661555">Kevin Buzzard (Apr 05 2018 at 10:18)</a>:</h4>
+<p>and then later on you can start figuring out what the tools are doing</p>
+
+<a name="124661556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661556">Kevin Buzzard (Apr 05 2018 at 10:19)</a>:</h4>
+<p>and how they're doing it</p>
+
+<a name="124661564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661564">Kevin Buzzard (Apr 05 2018 at 10:19)</a>:</h4>
+<p>You say "I don't understand decidability or how to use it"</p>
+
+<a name="124661565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661565">Kevin Buzzard (Apr 05 2018 at 10:19)</a>:</h4>
+<p>I say "dec_trivial invokes a great tactic"</p>
+
+<a name="124661605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661605">Kevin Buzzard (Apr 05 2018 at 10:20)</a>:</h4>
+<p>so your problems are solved in the short term</p>
+
+<a name="124661612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661612">Kevin Buzzard (Apr 05 2018 at 10:20)</a>:</h4>
+<p>and then in the longer term you can start wondering about what it's doing and how it's doing it</p>
+
+<a name="124661619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661619">Kevin Buzzard (Apr 05 2018 at 10:20)</a>:</h4>
+<p>My method is more robust than Kenny's</p>
+
+<a name="124661621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661621">Kenny Lau (Apr 05 2018 at 10:21)</a>:</h4>
+<blockquote>
+<p>My method is more robust than Kenny's</p>
+</blockquote>
+<p>yeah right</p>
+
+<a name="124661626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661626">Kevin Buzzard (Apr 05 2018 at 10:21)</a>:</h4>
+<p>because his solution relies on you knowing that there's a theorem in the library</p>
+
+<a name="124661629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661629">Kevin Buzzard (Apr 05 2018 at 10:21)</a>:</h4>
+<p>called <code> nat.not_lt_zero </code></p>
+
+<a name="124661632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661632">Kenny Lau (Apr 05 2018 at 10:21)</a>:</h4>
+<p>implying one shouldn't know about theorems in the library</p>
+
+<a name="124661634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661634">Kevin Buzzard (Apr 05 2018 at 10:21)</a>:</h4>
+<p>whereas mine just relies on you being aware that stuff like this is decidable and there's a tactic which does it</p>
+
+<a name="124661636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661636">Kevin Buzzard (Apr 05 2018 at 10:21)</a>:</h4>
+<p>I am saying mine is more robust.</p>
+
+<a name="124661639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661639">Kevin Buzzard (Apr 05 2018 at 10:22)</a>:</h4>
+<p>I am not saying anything about whether it's a good idea to know the library</p>
+
+<a name="124661680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661680">Kevin Buzzard (Apr 05 2018 at 10:22)</a>:</h4>
+<p>What if tomorrow Adam wants to prove <code>2&lt;1-&gt;false</code>?</p>
+
+<a name="124661689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661689">Kevin Buzzard (Apr 05 2018 at 10:23)</a>:</h4>
+<p>We all know it's decidable</p>
+
+<a name="124661695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661695">Kevin Buzzard (Apr 05 2018 at 10:23)</a>:</h4>
+<p>and you and I know we can use no_confusion or all sorts of other tricks</p>
+
+<a name="124661698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661698">Kevin Buzzard (Apr 05 2018 at 10:23)</a>:</h4>
+<p>but <code>dec_trivial</code> just does the job</p>
+
+<a name="124661700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661700">Kenny Lau (Apr 05 2018 at 10:23)</a>:</h4>
+<div class="codehilite"><pre><span></span>def big_not_zero&#39; (a : nat) (P : 1 &lt; a) : a ≠ 0 :=
+λ h, (show ¬1 &lt; 0, from dec_trivial) (h ▸ P)
+</pre></div>
+
+<a name="124661701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661701">Kenny Lau (Apr 05 2018 at 10:23)</a>:</h4>
+<p>satisfied?</p>
+
+<a name="124661745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661745">Adam Kurkiewicz (Apr 05 2018 at 10:24)</a>:</h4>
+<p>It's good advice Kevin, I'll learn the tactic mode.</p>
+
+<a name="124661748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661748">Kenny Lau (Apr 05 2018 at 10:24)</a>:</h4>
+<p>alright</p>
+
+<a name="124661753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661753">Kevin Buzzard (Apr 05 2018 at 10:24)</a>:</h4>
+<p>I think you should start with tactic mode and move on to term mode later.</p>
+
+<a name="124661754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661754">Kevin Buzzard (Apr 05 2018 at 10:24)</a>:</h4>
+<p>It's what they do in Software Foundations</p>
+
+<a name="124661757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661757">Kevin Buzzard (Apr 05 2018 at 10:24)</a>:</h4>
+<p>and it's what I'm doing in the book I'm writing on doing maths in Lean</p>
+
+<a name="124661765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661765">Kevin Buzzard (Apr 05 2018 at 10:25)</a>:</h4>
+<p>but this is because my book is targetting mathematicians who have no idea what this lambda business is all about</p>
+
+<a name="124661766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661766">Kevin Buzzard (Apr 05 2018 at 10:25)</a>:</h4>
+<p>because typically they will know no functional programming</p>
+
+<a name="124661767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661767">Kenny Lau (Apr 05 2018 at 10:25)</a>:</h4>
+<p>let's replace matlab with haskell</p>
+
+<a name="124661768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661768">Kevin Buzzard (Apr 05 2018 at 10:25)</a>:</h4>
+<p>They do that next door</p>
+
+<a name="124661770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661770">Kevin Buzzard (Apr 05 2018 at 10:25)</a>:</h4>
+<p>in the computing department</p>
+
+<a name="124661771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661771">Kenny Lau (Apr 05 2018 at 10:25)</a>:</h4>
+<p>great</p>
+
+<a name="124661772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661772">Kenny Lau (Apr 05 2018 at 10:25)</a>:</h4>
+<p>see you</p>
+
+<a name="124661773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661773">Kenny Lau (Apr 05 2018 at 10:26)</a>:</h4>
+<p>:P</p>
+
+<a name="124661812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661812">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>in the computing department?</p>
+
+<a name="124661813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661813">Kenny Lau (Apr 05 2018 at 10:26)</a>:</h4>
+<p>right</p>
+
+<a name="124661814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661814">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>Remember I'm on the curriculum review committee!</p>
+
+<a name="124661815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661815">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>But I don't think I can push for Haskell for mathematicians</p>
+
+<a name="124661819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661819">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>I am currently pushing for Python</p>
+
+<a name="124661820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661820">Kenny Lau (Apr 05 2018 at 10:26)</a>:</h4>
+<p>i'm just kidding</p>
+
+<a name="124661822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661822">Kenny Lau (Apr 05 2018 at 10:26)</a>:</h4>
+<p>but python is already there</p>
+
+<a name="124661823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661823">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>but not maths in python</p>
+
+<a name="124661825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661825">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>just general python</p>
+
+<a name="124661828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661828">Kevin Buzzard (Apr 05 2018 at 10:26)</a>:</h4>
+<p>i.e. teach them classes etc</p>
+
+<a name="124661833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661833">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>OOP python is the worst lol</p>
+
+<a name="124661834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661834">Kevin Buzzard (Apr 05 2018 at 10:27)</a>:</h4>
+<p>oh</p>
+
+<a name="124661835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661835">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>use java for OOP</p>
+
+<a name="124661837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661837">Kevin Buzzard (Apr 05 2018 at 10:27)</a>:</h4>
+<p>oh</p>
+
+<a name="124661840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661840">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>oh</p>
+
+<a name="124661841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661841">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>pee</p>
+
+<a name="124661843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661843">Kevin Buzzard (Apr 05 2018 at 10:27)</a>:</h4>
+<p>Should I push for java?</p>
+
+<a name="124661848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661848">Kevin Buzzard (Apr 05 2018 at 10:27)</a>:</h4>
+<p>Why would a mathematician want to learn java?</p>
+
+<a name="124661849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661849">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>heh</p>
+
+<a name="124661850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661850">Kevin Buzzard (Apr 05 2018 at 10:27)</a>:</h4>
+<p>I think we should just teach them tactic mode ;-)</p>
+
+<a name="124661851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661851">Kenny Lau (Apr 05 2018 at 10:27)</a>:</h4>
+<p>push for lean</p>
+
+<a name="124661890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661890">Kenny Lau (Apr 05 2018 at 10:28)</a>:</h4>
+<p>problem solved</p>
+
+<a name="124661891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661891">Kevin Buzzard (Apr 05 2018 at 10:28)</a>:</h4>
+<p>I think that some of them might want to compute something at some point</p>
+
+<a name="124661892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661892">Kevin Buzzard (Apr 05 2018 at 10:28)</a>:</h4>
+<p>maybe they do that in the applied maths parts or something</p>
+
+<a name="124661893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661893">Kevin Buzzard (Apr 05 2018 at 10:28)</a>:</h4>
+<p>I have no idea what they do there</p>
+
+<a name="124661895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661895">Kevin Buzzard (Apr 05 2018 at 10:28)</a>:</h4>
+<p>but I don't think it's theorems</p>
+
+<a name="124661899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661899">Johannes Hölzl (Apr 05 2018 at 10:28)</a>:</h4>
+<p>Of couse</p>
+
+<a name="124661905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661905">Johannes Hölzl (Apr 05 2018 at 10:29)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="124661906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661906">Kevin Buzzard (Apr 05 2018 at 10:29)</a>:</h4>
+<p>I think they figure out what f(10) is if they know some differential equation satisfied by f, and also they know f(0)</p>
+
+<a name="124661907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124661907">Kenny Lau (Apr 05 2018 at 10:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> wrong chat</p>
+
+<a name="124662069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662069">Adam Kurkiewicz (Apr 05 2018 at 10:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.</p>
+<p>We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (<a href="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material" target="_blank" title="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material">https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material</a>).</p>
+<p>I think that's a more productive use of student's time than teaching them OOP.</p>
+
+<a name="124662070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662070">Kenny Lau (Apr 05 2018 at 10:35)</a>:</h4>
+<p>I insisted to not use jupyter</p>
+
+<a name="124662074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662074">Kenny Lau (Apr 05 2018 at 10:35)</a>:</h4>
+<p>even in the exam :P</p>
+
+<a name="124662077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662077">Kenny Lau (Apr 05 2018 at 10:35)</a>:</h4>
+<p><code>python -m pip install numpy</code></p>
+
+<a name="124662120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662120">Kevin Buzzard (Apr 05 2018 at 10:36)</a>:</h4>
+<p>So I am in the maths department at Imperial College London and we're having a top-to-bottom curriculum review, and amongst the things that can change is that we can completely rethink what we teach to the undergraduates in terms of programming.</p>
+
+<a name="124662121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662121">Kevin Buzzard (Apr 05 2018 at 10:36)</a>:</h4>
+<p>So I am definitely genuinely interested in hearing people's opinions.</p>
+
+<a name="124662123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662123">Kevin Buzzard (Apr 05 2018 at 10:36)</a>:</h4>
+<p>However we are definitely focussed on what mathematicians should need to know</p>
+
+<a name="124662131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662131">Kevin Buzzard (Apr 05 2018 at 10:37)</a>:</h4>
+<p>in the sense of "what people who employ mathematicians want them to know"</p>
+
+<a name="124662133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662133">Adam Kurkiewicz (Apr 05 2018 at 10:37)</a>:</h4>
+<p>You'd obviously want to modify the content a little bit to make it more mathsy,  but I think coding up an optimal algorithm to play Nim is definitely a worthy thing to teach first year mathematicians.</p>
+
+<a name="124662136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662136">Kevin Buzzard (Apr 05 2018 at 10:37)</a>:</h4>
+<p>Your link doesn't work btw</p>
+
+<a name="124662189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662189">Adam Kurkiewicz (Apr 05 2018 at 10:39)</a>:</h4>
+<p>Ah, it's hidden from students cause it has solutions :D. one moment</p>
+
+<a name="124662191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662191">Kevin Buzzard (Apr 05 2018 at 10:39)</a>:</h4>
+<p>don't worry</p>
+
+<a name="124662192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662192">Kevin Buzzard (Apr 05 2018 at 10:39)</a>:</h4>
+<p>I don't want to disrupt</p>
+
+<a name="124662360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662360">Adam Kurkiewicz (Apr 05 2018 at 10:44)</a>:</h4>
+<p>That's the task statement: <a href="/user_uploads/3121/US_PO9-qzNBOQE1P_W4cNQ1C/lab17-3.html" target="_blank" title="lab17-3.html">lab17-3.html</a> </p>
+<p>There are ~7 specific python template files, which walk them through a solution, and they have to implement each one.</p>
+<p>Each file gets automatically checked using something called "CMS", I believe stands  for "Contest Management System". Checking uses a regular test suite.</p>
+
+<a name="124662415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662415">Adam Kurkiewicz (Apr 05 2018 at 10:46)</a>:</h4>
+<p>Happy to share everything if you'd like, but at the moment I'm tethering and the internet is a bit slow.</p>
+
+<a name="124662419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662419">Kevin Buzzard (Apr 05 2018 at 10:46)</a>:</h4>
+<p>honestly don't worry</p>
+
+<a name="124662424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662424">Kevin Buzzard (Apr 05 2018 at 10:47)</a>:</h4>
+<p>I can imagine what is there</p>
+
+<a name="124662429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662429">Kevin Buzzard (Apr 05 2018 at 10:47)</a>:</h4>
+<p>I always imagine stuff like nim as being in the <code>recreational mathematics</code> box</p>
+
+<a name="124662430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662430">Kevin Buzzard (Apr 05 2018 at 10:48)</a>:</h4>
+<p>i.e. stuff they do outside of regular maths</p>
+
+<a name="124662469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662469">Kevin Buzzard (Apr 05 2018 at 10:48)</a>:</h4>
+<p>but I am not 100% sure whether I have this in the right box</p>
+
+<a name="124662479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662479">Kevin Buzzard (Apr 05 2018 at 10:49)</a>:</h4>
+<p>python has <code>^</code> -- do you let them use this or force them to code their own?</p>
+
+<a name="124662645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662645">Adam Kurkiewicz (Apr 05 2018 at 10:54)</a>:</h4>
+<p>I let them use that after they've learned how it works.</p>
+
+<a name="124662704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662704">Kevin Buzzard (Apr 05 2018 at 10:56)</a>:</h4>
+<p>Just the opposite of what I did with my kids</p>
+
+<a name="124662708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662708">Kevin Buzzard (Apr 05 2018 at 10:56)</a>:</h4>
+<p>I asked them how to compute powers in python and let them be completely confused for 15 minutes</p>
+
+<a name="124662709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662709">Adam Kurkiewicz (Apr 05 2018 at 10:56)</a>:</h4>
+<p>it's generally a problem with teaching python, it has everything and students sometimes just solve things with one-liners, without ever understanding it.</p>
+
+<a name="124662713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662713">Kevin Buzzard (Apr 05 2018 at 10:56)</a>:</h4>
+<p>just like tactic mode ;-)</p>
+
+<a name="124662721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662721">Kenny Lau (Apr 05 2018 at 10:57)</a>:</h4>
+<p>I don't normally use <code>numpy</code> and <code>sympy</code> :P</p>
+
+<a name="124662725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662725">Kevin Buzzard (Apr 05 2018 at 10:57)</a>:</h4>
+<p>Kenny, what do we teach the 1st years?</p>
+
+<a name="124662726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662726">Kevin Buzzard (Apr 05 2018 at 10:57)</a>:</h4>
+<p>Currently</p>
+
+<a name="124662729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662729">Kevin Buzzard (Apr 05 2018 at 10:57)</a>:</h4>
+<p>Do they import a lot of libraries?</p>
+
+<a name="124662731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662731">Kevin Buzzard (Apr 05 2018 at 10:57)</a>:</h4>
+<p><code>scipy</code>?</p>
+
+<a name="124662770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662770">Kenny Lau (Apr 05 2018 at 10:58)</a>:</h4>
+<p><code>numpy</code> and <code>sympy</code></p>
+
+<a name="124662771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662771">Kenny Lau (Apr 05 2018 at 10:58)</a>:</h4>
+<p>I thought you're the head of curiculum reform</p>
+
+<a name="124662775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662775">Kenny Lau (Apr 05 2018 at 10:58)</a>:</h4>
+<p>curriculum</p>
+
+<a name="124662776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662776">Kenny Lau (Apr 05 2018 at 10:58)</a>:</h4>
+<p>words</p>
+
+<a name="124662841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662841">Kevin Buzzard (Apr 05 2018 at 11:00)</a>:</h4>
+<p>I'm just on the committee</p>
+
+<a name="124662843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662843">Kevin Buzzard (Apr 05 2018 at 11:00)</a>:</h4>
+<p>my job is to decide what to do in the future</p>
+
+<a name="124662844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662844">Kenny Lau (Apr 05 2018 at 11:00)</a>:</h4>
+<p>well you're the acting head of the department</p>
+
+<a name="124662846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662846">Kevin Buzzard (Apr 05 2018 at 11:00)</a>:</h4>
+<p>I don't want to pollute my understanding by knowing what we currently do</p>
+
+<a name="124662857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662857">Kevin Buzzard (Apr 05 2018 at 11:01)</a>:</h4>
+<p>Maybe I should go and fill in forms :-/</p>
+
+<a name="124662900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662900">Kenny Lau (Apr 05 2018 at 11:02)</a>:</h4>
+<p>how many goddam forms do you have</p>
+
+<a name="124662901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662901">Kevin Buzzard (Apr 05 2018 at 11:02)</a>:</h4>
+<p>they come in at a rate faster than I can fill them in</p>
+
+<a name="124662903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662903">Kenny Lau (Apr 05 2018 at 11:02)</a>:</h4>
+<p>what are those forms</p>
+
+<a name="124662912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662912">Kevin Buzzard (Apr 05 2018 at 11:03)</a>:</h4>
+<p>I had to do a risk assessment form for Ana because she's pregnant. 6 pages of questions such as how much radioactive material there was in the department etc. Life is great when you're a manager.</p>
+
+<a name="124662949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662949">Kevin Buzzard (Apr 05 2018 at 11:04)</a>:</h4>
+<p>OK I'm going to fill in more right now</p>
+
+<a name="124662952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124662952">Kenny Lau (Apr 05 2018 at 11:04)</a>:</h4>
+<p>life is always great</p>
+
+<a name="124664028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124664028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124664028">Andrew Ashworth (Apr 05 2018 at 11:43)</a>:</h4>
+<p>I think between python, R, and Matlab, that's quite enough for a maths student... in a way I'm a little sad you can't get by without just pen, paper, and coffee pot</p>
+
+<a name="124686378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686378">Patrick Massot (Apr 05 2018 at 21:42)</a>:</h4>
+<blockquote>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.</p>
+<p>We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (<a href="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material" target="_blank" title="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material">https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material</a>).</p>
+<p>I think that's a more productive use of student's time than teaching them OOP.</p>
+</blockquote>
+<p>What is this crazyness? Where did you see OOP dying?</p>
+
+<a name="124686392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686392">Patrick Massot (Apr 05 2018 at 21:42)</a>:</h4>
+<p>I guess  this is what Haskell people say?</p>
+
+<a name="124686402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686402">Patrick Massot (Apr 05 2018 at 21:43)</a>:</h4>
+<p>But what about the real world?</p>
+
+<a name="124686651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686651">Moses Schönfinkel (Apr 05 2018 at 21:49)</a>:</h4>
+<p>OOP is definitely not dying in the industry.</p>
+
+<a name="124686878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686878">Patrick Massot (Apr 05 2018 at 21:54)</a>:</h4>
+<p>Yes, this very much sounds like functional programming academic fantasy</p>
+
+<a name="124686972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124686972">Sebastian Ullrich (Apr 05 2018 at 21:56)</a>:</h4>
+<p>To say that OOP is dying is certainly hyperbole, but none of the languages mentioned are particularly functional...</p>
+
+<a name="124687127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687127">Moses Schönfinkel (Apr 05 2018 at 22:00)</a>:</h4>
+<p>Go doesn't even have generics, speaking of modern design...</p>
+
+<a name="124687187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687187">Patrick Massot (Apr 05 2018 at 22:02)</a>:</h4>
+<p>Go certainly looks awful</p>
+
+<a name="124687309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687309">Patrick Massot (Apr 05 2018 at 22:04)</a>:</h4>
+<p>I never saw Rust but the wikipedia page features quite a occurrences of Haskell and ML</p>
+
+<a name="124687600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687600">Patrick Massot (Apr 05 2018 at 22:10)</a>:</h4>
+<p>Let's discuss something more productive: <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> am I correct in thinking that the nightly download link on  <a href="https://leanprover.github.io/download/" target="_blank" title="https://leanprover.github.io/download/">https://leanprover.github.io/download/</a> is no longer relevant and should not be used anymore?</p>
+
+<a name="124687691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687691">Chris Hughes (Apr 05 2018 at 22:13)</a>:</h4>
+<blockquote>
+<p>Let's discuss something more productive: <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> am I correct in thinking that the nightly download link on  <a href="https://leanprover.github.io/download/" target="_blank" title="https://leanprover.github.io/download/">https://leanprover.github.io/download/</a> is no longer relevant and should not be used anymore?</p>
+</blockquote>
+<p>Is there a new download link. It took me ages to update lean today, because MSYS didn't know where my c compiler was, and neither did I.</p>
+
+<a name="124687706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687706">Patrick Massot (Apr 05 2018 at 22:13)</a>:</h4>
+<p><a href="https://github.com/leanprover/lean-nightly/releases" target="_blank" title="https://github.com/leanprover/lean-nightly/releases">https://github.com/leanprover/lean-nightly/releases</a></p>
+
+<a name="124687752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687752">Patrick Massot (Apr 05 2018 at 22:14)</a>:</h4>
+<p>You need to compare with <a href="https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4">https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4</a></p>
+
+<a name="124687757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687757">Patrick Massot (Apr 05 2018 at 22:14)</a>:</h4>
+<p>(my understanding is it's not yet more automatic, but this is already great progress)</p>
+
+<a name="124687777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687777">Sebastian Ullrich (Apr 05 2018 at 22:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Correct. We're still waiting on AppVeyor enabling cron builds for us before we can make it official</p>
+
+<a name="124687820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48449provingltfromdecidability.html#124687820">Patrick Massot (Apr 05 2018 at 22:16)</a>:</h4>
+<p>Thanks</p>
+
+
+{% endraw %}

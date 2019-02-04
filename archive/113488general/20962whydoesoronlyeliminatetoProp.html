@@ -1,0 +1,103 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20962whydoesoronlyeliminatetoProp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html">why does or only eliminate to Prop?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124063589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124063589">Kevin Buzzard (Mar 22 2018 at 15:47)</a>:</h4>
+<p>I just noticed this. Chris Hughes wrote a proof for me, but in my application of his proof I have a function from <code>fin n</code> to <code>nat</code>, and he has implemented his proof using a function from <code>nat</code> to <code>nat</code> which he only ever evaluates at numbers less than <code>n</code>. Given my function from <code>fin n</code> to <code>nat</code> I hence need to come up with a function from <code>nat</code> to <code>nat</code> which extends it and I thought I'd just define it using <code>or.elim (decidable.em (i&lt;n))</code> but this won't work because the target can't be <code>nat</code>.</p>
+
+<a name="124063639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124063639">Chris Hughes (Mar 22 2018 at 15:48)</a>:</h4>
+<p>You can using choice, but ite is probably more natural</p>
+
+<a name="124063654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124063654">Chris Hughes (Mar 22 2018 at 15:49)</a>:</h4>
+<p><code>p or ¬p</code> is not as strong as <code>decidable p</code></p>
+
+<a name="124063729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124063729">Kevin Buzzard (Mar 22 2018 at 15:51)</a>:</h4>
+<p>I had trouble eliminating <code>dite</code> a couple of weeks ago because I couldn't remember <code>dif_pos</code>. Why isn't it called <code>dite.elim_true</code> or something?</p>
+
+<a name="124064130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124064130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124064130">Mario Carneiro (Mar 22 2018 at 16:00)</a>:</h4>
+<p>If you want to eliminate on a decidable proposition, <code>dite</code> is the standard way. You can't eliminate from an <code>or</code> to a type because the or doesn't contain information about which disjunct is true (it's been forgotten in proof irrelevance), and you can't recover the data once you drop it.</p>
+
+<a name="124064215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124064215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124064215">Mario Carneiro (Mar 22 2018 at 16:03)</a>:</h4>
+<p>Also, <code>simp</code> will simplify with <code>dif_pos</code> and its friends, I usually prefer that to using the names explicitly</p>
+
+<a name="124064628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124064628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124064628">Kevin Buzzard (Mar 22 2018 at 16:12)</a>:</h4>
+<p>I was preparing myself for the fact that <code>dite</code> will be removed from Lean 4 ;-)</p>
+
+<a name="124151668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124151668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124151668">Chris Hughes (Mar 24 2018 at 14:39)</a>:</h4>
+<p>The other reason, which only just occurred to me, is that if both sides of your <code>or</code> are true, then your function is defined to be two different things.</p>
+
+<a name="124152040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152040">Chris Hughes (Mar 24 2018 at 14:54)</a>:</h4>
+<p>I'm just trying to work out in general which inductive predicates can eliminate into Sort, and which only eliminate into Prop. It's not that obvious why something like acc doesn't have this problem, and can eliminate into Sort.</p>
+
+<a name="124152052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152052">Mario Carneiro (Mar 24 2018 at 14:56)</a>:</h4>
+<p>the basic idea is that there should only be one way to construct an element of an inductive prop if you want large elimination</p>
+
+<a name="124152093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152093">Mario Carneiro (Mar 24 2018 at 14:56)</a>:</h4>
+<p>that's why it is called subsingleton elimination</p>
+
+<a name="124152142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152142">Mario Carneiro (Mar 24 2018 at 14:58)</a>:</h4>
+<p>There are two proofs of <code>p \/ q</code>, which are equal by proof irrelevance, so inversion would be inconsistent</p>
+
+<a name="124152150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152150">Mario Carneiro (Mar 24 2018 at 14:59)</a>:</h4>
+<p>similarly there are multiple ways to prove <code>\ex x. p x</code> by giving different witnesses, so you can't extract the witness</p>
+
+<a name="124152201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152201">Mario Carneiro (Mar 24 2018 at 15:00)</a>:</h4>
+<p>The general rule is described in my paper, in the section "large elimination"</p>
+
+<a name="124152304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152304">Simon Hudon (Mar 24 2018 at 15:05)</a>:</h4>
+<p>Do you know the reason behind the choice of making universes non-cumulative?</p>
+
+<a name="124152533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152533">Mario Carneiro (Mar 24 2018 at 15:15)</a>:</h4>
+<p>It simplifies a lot of things</p>
+
+<a name="124152574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152574">Mario Carneiro (Mar 24 2018 at 15:16)</a>:</h4>
+<p>cumulativity would break unique typing, for one</p>
+
+<a name="124152580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152580">Mario Carneiro (Mar 24 2018 at 15:17)</a>:</h4>
+<p>you have to have a subtyping relation, which interacts with everything in the type theory in nontrivial ways</p>
+
+<a name="124152622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152622">Simon Hudon (Mar 24 2018 at 15:18)</a>:</h4>
+<p>Oh? I didn't think you'd need a subtype relation just because of the universes</p>
+
+<a name="124152623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152623">Mario Carneiro (Mar 24 2018 at 15:19)</a>:</h4>
+<p>I was thinking about extending my analysis to Coq, but it would not be a small modification</p>
+
+<a name="124152668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152668">Mario Carneiro (Mar 24 2018 at 15:20)</a>:</h4>
+<p>you have to also have stuff like <code>A -&gt; Sort 1 &lt;= A -&gt; Sort 2</code></p>
+
+<a name="124152723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124152723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html#124152723">Simon Hudon (Mar 24 2018 at 15:23)</a>:</h4>
+<p>... and now that I think of it, might get tricky for generic monadic code, if you want to allow<code>m α</code> <code>m β</code> even when <code>α</code>, <code>β</code> are in different universes. You might need covariance / contravariance hints in the type of <code>m</code></p>
+
+
+{% endraw %}

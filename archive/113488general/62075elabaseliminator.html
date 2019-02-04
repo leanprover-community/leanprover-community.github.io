@@ -1,0 +1,132 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/62075elabaseliminator.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html">elab_as_eliminator</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="128740170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740170">Reid Barton (Jun 27 2018 at 23:41)</a>:</h4>
+<p>Is there an explanation of what <code>elab_as_eliminator</code> actually does somewhere? I once tried reading the source, but wasn't enlightened.<br>
+I know there is a selection bias at work here, in that I never notice when it does the right thing, but several times I've found that it fails to infer apparently obvious type parameters, where <code>elab_with_expected_type</code> succeeds.</p>
+
+<a name="128740610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740610">Reid Barton (Jun 27 2018 at 23:52)</a>:</h4>
+<p>Here is a toy example where <code>elab_as_eliminator</code> fails but <code>elab_with_expected_type</code> succeeds:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equal_mod</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">c</span>
+
+<span class="n">def</span> <span class="n">mod_setoid</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">setoid</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">equal_mod</span> <span class="n">n</span><span class="o">,</span> <span class="n">iseqv</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">Z_mod</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">mod_setoid</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">elab_with_expected_type</span><span class="o">]</span> <span class="n">quot</span><span class="bp">.</span><span class="n">lift_on</span>
+
+<span class="n">def</span> <span class="n">mod_dvd</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">Z_mod</span> <span class="o">(</span><span class="n">n</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Z_mod</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quot</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="n">a</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">a&#39;</span> <span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">quot</span><span class="bp">.</span><span class="n">sound</span> <span class="bp">⟨</span><span class="n">k</span> <span class="bp">*</span> <span class="n">c</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">mul_assoc</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">)</span>
+</pre></div>
+
+<a name="128740763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740763">Mario Carneiro (Jun 27 2018 at 23:57)</a>:</h4>
+<p><code>elab_as_eliminator</code> is meant for eliminators, where lean has to infer a higher order argument, namely the "motive"</p>
+
+<a name="128740806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740806">Mario Carneiro (Jun 27 2018 at 23:58)</a>:</h4>
+<p>It's not a good fit for nondependent elimination since you can just use the usual first order unification</p>
+
+<a name="128740842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740842">Reid Barton (Jun 27 2018 at 23:59)</a>:</h4>
+<p>OK, that was what I suspected, but wasn't sure. So ideally, methods like <code>lift</code> and <code>lift_on</code> shouldn't have that attribute, since they are nondependent</p>
+
+<a name="128740909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740909">Mario Carneiro (Jun 28 2018 at 00:00)</a>:</h4>
+<p>something like <code>quot.rec_on</code> would be better</p>
+
+<a name="128740977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740977">Reid Barton (Jun 28 2018 at 00:02)</a>:</h4>
+<p>Even then, this strategy is only appropriate when you want to infer the motive from the types of the arguments, rather than from the return type, right?</p>
+
+<a name="128740984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128740984">Reid Barton (Jun 28 2018 at 00:02)</a>:</h4>
+<p>Assuming the return type is something like <code>β q</code>, for which the higher-order unification problem is trivial</p>
+
+<a name="128741005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741005">Mario Carneiro (Jun 28 2018 at 00:03)</a>:</h4>
+<p>The motive is inferred from the return type, not the types of the arguments</p>
+
+<a name="128741010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741010">Reid Barton (Jun 28 2018 at 00:03)</a>:</h4>
+<p>Oh hmm, I see</p>
+
+<a name="128741014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741014">Reid Barton (Jun 28 2018 at 00:04)</a>:</h4>
+<p>but even then the problem is not necessarily trivial</p>
+
+<a name="128741071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741071">Mario Carneiro (Jun 28 2018 at 00:04)</a>:</h4>
+<p>it finds instances of the value being inducted on and replaces them with a variable</p>
+
+<a name="128741075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741075">Mario Carneiro (Jun 28 2018 at 00:05)</a>:</h4>
+<p>and that becomes the motive</p>
+
+<a name="128741148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741148">Mario Carneiro (Jun 28 2018 at 00:06)</a>:</h4>
+<div class="codehilite"><pre><span></span>example (x y : ℕ) : x + y = y + x :=
+nat.rec_on (x + y)
+  _ -- ⊢ 0 = y + x
+  _ -- ⊢ ∀ (n : ℕ), n = y + x → nat.succ n = y + x
+</pre></div>
+
+<a name="128741162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741162">Reid Barton (Jun 28 2018 at 00:07)</a>:</h4>
+<p>So why does it fail on the <code>mod_dvd</code> example? Wouldn't it conclude that <code>quot.mk _ a : Z_mod n</code>?</p>
+
+<a name="128741233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741233">Mario Carneiro (Jun 28 2018 at 00:09)</a>:</h4>
+<p>vs:</p>
+<div class="codehilite"><pre><span></span>local attribute [elab_with_expected_type] nat.rec_on
+example (x y : ℕ) : x + y = y + x :=
+nat.rec_on (x + y) _ _
+-- unexpected argument at application
+--   nat.rec_on (x + y)
+-- given argument
+--   x + y
+-- expected argument
+--   y + x
+</pre></div>
+
+
+<p>The reason this error is reported is since the output type is <code>C n</code>, without doing higher order unification it matches against <code>eq (x + y) (y + x)</code> so it expects the major premise to be <code>y+x</code></p>
+
+<a name="128741235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741235">Reid Barton (Jun 28 2018 at 00:09)</a>:</h4>
+<p>it seems to figure this out if I give less detail in the last argument, for example replacing it by <code>(λ a a' h, sorry)</code></p>
+
+<a name="128741405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741405">Mario Carneiro (Jun 28 2018 at 00:12)</a>:</h4>
+<p>You have to put a <code>by exact</code> in the right place, to delay the elaboration of the let match</p>
+
+<a name="128741408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741408">Mario Carneiro (Jun 28 2018 at 00:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>def mod_dvd (n k : ℤ) : Z_mod (n * k) → Z_mod n :=
+λ x, quot.lift_on x
+  (λ a, quot.mk _ a)
+  (by exact λ a a&#39; ⟨c, h⟩, quot.sound ⟨k * c, by rw ←mul_assoc; exact h⟩)
+</pre></div>
+
+<a name="128741411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128741411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html#128741411">Mario Carneiro (Jun 28 2018 at 00:12)</a>:</h4>
+<p>this works</p>
+
+
+{% endraw %}

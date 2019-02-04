@@ -1,0 +1,315 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/19645caseseliminatingintotype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html">cases eliminating into type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125691805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691805">Kevin Buzzard (Apr 25 2018 at 23:02)</a>:</h4>
+<p>I've just managed to internalise something Mario told me a couple of weeks ago.</p>
+
+<a name="125691809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691809">Kevin Buzzard (Apr 25 2018 at 23:02)</a>:</h4>
+<p>Here's the <code>cases</code> tactic in action.</p>
+
+<a name="125691811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691811">Kevin Buzzard (Apr 25 2018 at 23:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">T</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">γ</span><span class="o">,</span> <span class="n">P</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">cases</span> <span class="n">H</span> <span class="k">with</span> <span class="n">g</span> <span class="n">Pg</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"> context now has</span>
+<span class="cm">g : γ,</span>
+<span class="cm">Pg : P g</span>
+<span class="cm">-/</span>
+<span class="n">admit</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125691818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691818">Kevin Buzzard (Apr 25 2018 at 23:03)</a>:</h4>
+<p>Now here's an example of it failing because we need to use the axiom of choice.</p>
+
+<a name="125691829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691829">Kevin Buzzard (Apr 25 2018 at 23:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">D</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">γ</span><span class="o">,</span> <span class="n">P</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">-- cases H with g Pg -- fails as we can only eliminate into Prop</span>
+<span class="n">admit</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125691862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691862">Kevin Buzzard (Apr 25 2018 at 23:04)</a>:</h4>
+<p>But of course us classical people want to run cases anyway.</p>
+
+<a name="125691880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691880">Kevin Buzzard (Apr 25 2018 at 23:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">D</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">γ</span><span class="o">,</span> <span class="n">P</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">-- cases H with g Pg -- fails as we can only eliminate into Prop</span>
+<span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">Pg</span> <span class="o">:</span> <span class="n">P</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">H</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"> ... but I made it anyway. Context now</span>
+<span class="cm">g : γ := ...</span>
+<span class="cm">Pg : P g</span>
+<span class="cm">-/</span>
+<span class="n">admit</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125691969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691969">Kevin Buzzard (Apr 25 2018 at 23:06)</a>:</h4>
+<p>Using this trick (classical some and some_spec, <em>plus</em> the thing which I think Mario was trying to explain to me, which was that the moment you run <code>classical.some</code> you should make something _useful_ from <code>classical.some_spec</code> rather than just <code>have Pg := classical.some_spec H</code> which is a statement about <code>classical.some _</code> and hence harder to work with.</p>
+
+<a name="125691997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125691997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125691997">Kevin Buzzard (Apr 25 2018 at 23:07)</a>:</h4>
+<p>I am going to use this idiom again and again</p>
+
+<a name="125692002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692002">Kevin Buzzard (Apr 25 2018 at 23:07)</a>:</h4>
+<p>but surely this should just be a tactic</p>
+
+<a name="125692011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692011">Kevin Buzzard (Apr 25 2018 at 23:07)</a>:</h4>
+<p><code>classical_cases H with g Pg</code></p>
+
+<a name="125692082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692082">Kevin Buzzard (Apr 25 2018 at 23:09)</a>:</h4>
+<p>I have been fretting a bit over things like the fact that the "obvious in maths" statement that if there's a surjection <code>X -&gt; Y</code> then there's an injection <code>Y -&gt; X</code> looks so convoluted in Lean.</p>
+
+<a name="125692096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692096">Kevin Buzzard (Apr 25 2018 at 23:09)</a>:</h4>
+<p>But this tactic is probably trivial to write and just looks like an extension of <code>cases</code>, which the students learn very early on when learning Lean anyway</p>
+
+<a name="125692105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692105">Kevin Buzzard (Apr 25 2018 at 23:09)</a>:</h4>
+<p>Is this there already?</p>
+
+<a name="125692161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692161">Kevin Buzzard (Apr 25 2018 at 23:10)</a>:</h4>
+<p>If not -- I _really_ think it should be! It is far more natural to write than all this classical.some_spec or indefinite_confusion or whatever it's called</p>
+
+<a name="125692256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692256">Kevin Buzzard (Apr 25 2018 at 23:12)</a>:</h4>
+<p>Let me stress that the trick is that you force the type of <code>Pg</code> to be <code>P g</code>, the thing you want it to be, by explicitly making it of this type when you construct it. Just writing <code>have Pg := classical.some_spec H</code> doesn't work.</p>
+
+<a name="125692355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692355">Reid Barton (Apr 25 2018 at 23:15)</a>:</h4>
+<p>Maybe <code>choose</code> for the tactic name?</p>
+
+<a name="125692512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125692512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125692512">Simon Hudon (Apr 25 2018 at 23:18)</a>:</h4>
+<p>Have a look at <a href="https://github.com/unitb/lean-lib/blob/master/test/tactic/classical.lean" target="_blank" title="https://github.com/unitb/lean-lib/blob/master/test/tactic/classical.lean">https://github.com/unitb/lean-lib/blob/master/test/tactic/classical.lean</a> . It is not quite behaving like <code>cases</code> but it does make <code>some</code> and <code>epsilon</code> easier to work with. (I linked to the test case so that you see how I use it rather than how it works).</p>
+
+<a name="125693176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125693176">Kevin Buzzard (Apr 25 2018 at 23:33)</a>:</h4>
+<p>How do I use <code>apply_some_spec</code> Simon? I mean how do I get it running on my machine?</p>
+
+<a name="125693242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125693242">Simon Hudon (Apr 25 2018 at 23:35)</a>:</h4>
+<div class="codehilite"><pre><span></span>leanpkg add unitb/lean-lib
+</pre></div>
+
+
+<p>and don't forget:</p>
+<div class="codehilite"><pre><span></span>import util.classical
+</pre></div>
+
+<a name="125693530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125693530">Kevin Buzzard (Apr 25 2018 at 23:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">function</span>
+<span class="kn">theorem</span> <span class="n">inj_of_surj</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">--slightly weird first move</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">swap</span><span class="o">,</span> <span class="c1">-- ha ha, swap is now overloaded because I opened function!</span>
+<span class="o">{</span> <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+  <span class="c1">--classical_cases (Hf y) with x Hx,</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">Hx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="n">x</span>
+<span class="o">},</span>
+<span class="o">{</span> <span class="n">funext</span> <span class="n">y</span><span class="o">,</span>
+  <span class="c1">--classical_cases (Hf y) with x Hx,</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">Hx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="n">Hx</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125693535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125693535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125693535">Kevin Buzzard (Apr 25 2018 at 23:41)</a>:</h4>
+<p>I think my way looks a bit less intimidating for the newbie</p>
+
+<a name="125695647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125695647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125695647">Simon Hudon (Apr 26 2018 at 00:27)</a>:</h4>
+<p>You can do it like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">ccases</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">cases</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span><span class="bp">``</span><span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">indefinite_description</span> <span class="bp">_</span> <span class="err">%%</span><span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="mi">2</span><span class="o">)))</span> <span class="n">ids</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="kn">open</span> <span class="n">function</span>
+<span class="kn">theorem</span> <span class="n">inj_of_surj</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">split</span><span class="o">,</span> <span class="c1">--slightly weird first move</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">swap</span><span class="o">,</span> <span class="c1">-- ha ha, swap is now overloaded because I opened function!</span>
+<span class="o">{</span> <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">ccases</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">)</span> <span class="k">with</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">x</span>
+<span class="o">},</span>
+<span class="o">{</span> <span class="n">funext</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">ccases</span> <span class="o">(</span><span class="n">Hf</span> <span class="n">y</span><span class="o">)</span> <span class="k">with</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span>
+  <span class="c1">-- let x := classical.some (Hf y),</span>
+  <span class="c1">-- have Hx : f x = y := classical.some_spec (Hf y),</span>
+  <span class="n">simp</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">Hx</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="125696083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696083">Mario Carneiro (Apr 26 2018 at 00:37)</a>:</h4>
+<p>Lol @ indefinite_confusion. But the right way to do this is to do cases on the pair <code>some, some_spec</code>, which is indeed <code>classical.indefinite_description</code>.</p>
+
+<a name="125696468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696468">Mario Carneiro (Apr 26 2018 at 00:47)</a>:</h4>
+<p>Here's an idea that might help:</p>
+<div class="codehilite"><pre><span></span>@[elab_as_eliminator]
+noncomputable def classical.rec_on
+  {α} {p : α → Prop} {C : Sort*}
+  (h : ∃ a, p a) (H : ∀ a, p a → C) : C :=
+H (classical.some h) (classical.some_spec h)
+</pre></div>
+
+<a name="125696509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696509">Mario Carneiro (Apr 26 2018 at 00:48)</a>:</h4>
+<p>You can <code>apply</code> that theorem to do cases on an exists without making <code>cases</code> complain</p>
+
+<a name="125696540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696540">Kenny Lau (Apr 26 2018 at 00:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> what if I told you “surjective functions have right inverse” is already in mathlib as <code>inv_fun</code></p>
+
+<a name="125696553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696553">Mario Carneiro (Apr 26 2018 at 00:50)</a>:</h4>
+<p>But in the case of <code>inj_of_surj</code>, this is the wrong approach (same for <code>ccases</code> or cases on indefinite description), because you are doing the case twice, once to define the function and again to give its properties. That means that you will have to unfold whatever proof term you constructed in the first half, i.e. <code>classical.rec_on</code> or <code>subtype.rec_on</code> or something</p>
+
+<a name="125696594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696594">Mario Carneiro (Apr 26 2018 at 00:50)</a>:</h4>
+<p>The right solution here is to use <code>axiom_of_choice</code></p>
+
+<a name="125696615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696615">Mario Carneiro (Apr 26 2018 at 00:51)</a>:</h4>
+<div class="codehilite"><pre><span></span>theorem inj_of_surj (X Y : Type) (f : X → Y) (Hf : surjective f) : ∃ g : Y → X, f ∘ g = id :=
+let ⟨g, h⟩ := classical.axiom_of_choice Hf in ⟨g, funext h⟩
+</pre></div>
+
+<a name="125696623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125696623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125696623">Mario Carneiro (Apr 26 2018 at 00:51)</a>:</h4>
+<p>(Also this theorem already exists in core IIRC)</p>
+
+<a name="125697084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125697084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125697084">Mario Carneiro (Apr 26 2018 at 01:05)</a>:</h4>
+<p>For the golfers:</p>
+<div class="codehilite"><pre><span></span>(classical.axiom_of_choice Hf).imp $ λ g, funext
+</pre></div>
+
+<a name="125711834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711834">Kevin Buzzard (Apr 26 2018 at 09:24)</a>:</h4>
+<p>The inj of surj example was pedagogical -- I know it's there, but I want to teach students how to write it without pain. There are other times this comes up too. I suspect a lot of undergraduate mathematicians will be very confused by constructive maths so I want to hide it from them. Many thanks for the tactic Simon and for the comments everyone.</p>
+
+<a name="125711847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711847">Mario Carneiro (Apr 26 2018 at 09:25)</a>:</h4>
+<p>I think in particular that you should add <code>axiom_of_choice</code> to your toolkit</p>
+
+<a name="125711911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711911">Kevin Buzzard (Apr 26 2018 at 09:27)</a>:</h4>
+<p>You are certainly right in that it's not currently in my toolkit.</p>
+
+<a name="125711913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711913">Kevin Buzzard (Apr 26 2018 at 09:27)</a>:</h4>
+<p>I remember really struggling with all of this the first time around.</p>
+
+<a name="125711954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711954">Kevin Buzzard (Apr 26 2018 at 09:28)</a>:</h4>
+<p>It's only revisiting it now I'm older and wiser that I understand it well enough to try and manipulate it into a form which I think beginners with no programming background might find more comprehensible.</p>
+
+<a name="125711961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711961">Mario Carneiro (Apr 26 2018 at 09:29)</a>:</h4>
+<p>I would think that <code>axiom_of_choice</code> is the version of choice people are most used to</p>
+
+<a name="125711965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125711965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125711965">Mario Carneiro (Apr 26 2018 at 09:29)</a>:</h4>
+<p><code>classical.some</code> is more like global choice, which ZFC doesn't usually admit so most proofs aren't framed that way</p>
+
+<a name="125712014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712014">Kevin Buzzard (Apr 26 2018 at 09:30)</a>:</h4>
+<p>The problem is that most mathematicians apply the axiom of choice without noticing, and those that are aware of it believe that it says that an infinite product of non-empty sets is non-empty.</p>
+
+<a name="125712015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712015">Kevin Buzzard (Apr 26 2018 at 09:30)</a>:</h4>
+<p>Mathematicians don't know the difference between the different kinds of non-empty</p>
+
+<a name="125712022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712022">Mario Carneiro (Apr 26 2018 at 09:31)</a>:</h4>
+<p>I'm not talking about LEM here though</p>
+
+<a name="125712027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712027">Kevin Buzzard (Apr 26 2018 at 09:31)</a>:</h4>
+<p>right</p>
+
+<a name="125712028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712028">Mario Carneiro (Apr 26 2018 at 09:31)</a>:</h4>
+<p>all notions of nonempty are basically the same modulo LEM</p>
+
+<a name="125712031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712031">Kevin Buzzard (Apr 26 2018 at 09:31)</a>:</h4>
+<p>they don't know what LEM is either</p>
+
+<a name="125712063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712063">Mario Carneiro (Apr 26 2018 at 09:32)</a>:</h4>
+<p>I'm talking about how to use AC proper</p>
+
+<a name="125712073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712073">Mario Carneiro (Apr 26 2018 at 09:32)</a>:</h4>
+<p>I think it is not a good thing that lean thinks LEM and AC are the same</p>
+
+<a name="125712074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712074">Mario Carneiro (Apr 26 2018 at 09:33)</a>:</h4>
+<p>mathematicians certainly don't</p>
+
+<a name="125712081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712081">Mario Carneiro (Apr 26 2018 at 09:33)</a>:</h4>
+<p>you can argue that mathematicians think both are true, but I think they admit LEM implicitly and don't see the need for AC until they reach a certain level</p>
+
+<a name="125712082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712082">Kevin Buzzard (Apr 26 2018 at 09:33)</a>:</h4>
+<p>exactly</p>
+
+<a name="125712084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712084">Kevin Buzzard (Apr 26 2018 at 09:34)</a>:</h4>
+<p>LEM is part of the logic</p>
+
+<a name="125712121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712121">Kevin Buzzard (Apr 26 2018 at 09:34)</a>:</h4>
+<p>AC has some content</p>
+
+<a name="125712127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20eliminating%20into%20type/near/125712127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19645caseseliminatingintotype.html#125712127">Mario Carneiro (Apr 26 2018 at 09:34)</a>:</h4>
+<p>Lean kind of gives you the ability to distinguish the two, since LEM is computable but AC is not</p>
+
+
+{% endraw %}

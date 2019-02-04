@@ -1,0 +1,64 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01137sumiteoverfin.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html">sum ite over fin</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133512435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512435">Johan Commelin (Sep 07 2018 at 15:53)</a>:</h4>
+<p>How do I kill off this one?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">MWE</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)),</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">k</span><span class="bp">.</span><span class="n">val</span> <span class="bp">*</span> <span class="n">ite</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="133512763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512763">Chris Hughes (Sep 07 2018 at 15:58)</a>:</h4>
+<p><code>finset.sum_eq_single</code></p>
+
+<a name="133512793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512793">Kenny Lau (Sep 07 2018 at 15:59)</a>:</h4>
+<p>not found</p>
+
+<a name="133512872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512872">Kenny Lau (Sep 07 2018 at 16:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">universe</span> <span class="n">v</span>
+
+<span class="kn">lemma</span> <span class="n">MWE</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)),</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">k</span><span class="bp">.</span><span class="n">val</span> <span class="bp">*</span> <span class="n">ite</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">transitivity</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)))</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">symmetry</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_subset</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">H</span><span class="o">,</span> <span class="n">simp</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">a</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">ne</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133512883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512883">Chris Hughes (Sep 07 2018 at 16:00)</a>:</h4>
+<p>It's actually <code>sum_eq_single</code> due to a naming error.</p>
+
+<a name="133512895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512895">Kenny Lau (Sep 07 2018 at 16:00)</a>:</h4>
+<p>that's the same thing, and still not found</p>
+
+<a name="133512898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133512898">Johan Commelin (Sep 07 2018 at 16:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> My Lean still doesn't find it.</p>
+
+<a name="133513251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133513251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html#133513251">Chris Hughes (Sep 07 2018 at 16:07)</a>:</h4>
+<p>I think it might be new.</p>
+
+
+{% endraw %}

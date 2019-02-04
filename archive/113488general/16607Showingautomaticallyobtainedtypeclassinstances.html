@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html">Showing automatically obtained typeclass instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="127225600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225600">Seul Baek (May 29 2018 at 01:40)</a>:</h4>
+<p>Is it possible to show which instance Lean is using when it successfully performs a typeclass inference? </p>
+<p>For instance, I know from the fact that I can use <code>neg_le_neg</code> with integers that Lean has silently performed a typeclass inference and found an instance of type <code>ordered_comm_group int</code>. But I don't know exactly <em>which</em> instance Lean has found. Is there a way to display this information, similar to how I can jump to definitions using f12?</p>
+
+<a name="127225655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225655">Kenny Lau (May 29 2018 at 01:43)</a>:</h4>
+<p>you can print the proof of your theorem</p>
+
+<a name="127225656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225656">Kenny Lau (May 29 2018 at 01:43)</a>:</h4>
+<p>using <code>#print</code></p>
+
+<a name="127225695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225695">Kenny Lau (May 29 2018 at 01:44)</a>:</h4>
+<p>and you can <code>set pp.implicit true</code> (there may be a better option) to see the implicit arguments, including the proof of the typeclass inference</p>
+
+<a name="127225696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225696">Scott Morrison (May 29 2018 at 01:44)</a>:</h4>
+<p><code>set_option trace.class_instances true</code></p>
+
+<a name="127225699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225699">Kenny Lau (May 29 2018 at 01:44)</a>:</h4>
+<p>well that displays too much information</p>
+
+<a name="127225853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127225853">Seul Baek (May 29 2018 at 01:50)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="127228102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127228102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127228102">Mario Carneiro (May 29 2018 at 03:13)</a>:</h4>
+<p>you can also test instance problems with</p>
+<div class="codehilite"><pre><span></span>theorem T : ordered_comm_group int := by apply_instance
+#print T
+</pre></div>
+
+<a name="127228104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127228104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127228104">Kenny Lau (May 29 2018 at 03:13)</a>:</h4>
+<p><code>#check (by apply_instance : ordered_comm_group int)</code></p>
+
+<a name="127228105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127228105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127228105">Kenny Lau (May 29 2018 at 03:13)</a>:</h4>
+<p>do I win?</p>
+
+<a name="127228146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127228146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html#127228146">Mario Carneiro (May 29 2018 at 03:14)</a>:</h4>
+<p>clever</p>
+
+
+{% endraw %}

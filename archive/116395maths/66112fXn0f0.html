@@ -1,0 +1,406 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/66112fXn0f0.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html">f*X^n=0 -> f=0</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133588233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133588233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133588233">Kevin Buzzard (Sep 09 2018 at 02:47)</a>:</h4>
+<p>I've been working with <code>polynomial.lean</code>. I would like</p>
+<div class="codehilite"><pre><span></span>mul_X_pow_eq_zero :
+  ∀ {α : Type u_1} [_inst_1 : decidable_eq α] [_inst_2 : comm_semiring α] (n : ℕ) (f : polynomial α),
+    f * X ^ n = 0 → f = 0
+</pre></div>
+
+
+<p>but I can't see it and it's not so clear to me how to get it from the interface. I am tempted to get my hands dirty and prove <code>(f * X ^ n) (m) = f (n + m)</code> [i.e. break the illusion and start treating polynomials as functions from nat to alpha] from which it follows relatively simply, but I suspect this would involve wading into finsupp. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> or anyone else -- am I missing a trick here?</p>
+
+<a name="133588722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133588722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133588722">Mario Carneiro (Sep 09 2018 at 03:06)</a>:</h4>
+<p>Do we have left-regular elements?</p>
+
+<a name="133588727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133588727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133588727">Mario Carneiro (Sep 09 2018 at 03:07)</a>:</h4>
+<p>i.e. non-zero divisors</p>
+
+<a name="133588774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133588774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133588774">Mario Carneiro (Sep 09 2018 at 03:09)</a>:</h4>
+<p>I would suggest using integral domain properties but I guess you don't have that in a comm_semiring</p>
+
+<a name="133598927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133598927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133598927">Chris Hughes (Sep 09 2018 at 09:33)</a>:</h4>
+<p>I think <code>leading_coeff_mul</code> and <code>leading_coeff_X_pow</code> should help  here,</p>
+
+<a name="133601842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133601842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133601842">Kevin Buzzard (Sep 09 2018 at 11:26)</a>:</h4>
+<p>The ring could even be the zero ring here! It's a particularly annoying edge case</p>
+
+<a name="133602100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133602100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133602100">Kevin Buzzard (Sep 09 2018 at 11:34)</a>:</h4>
+<p>Unfortunately that's how I got here -- I am trying to prove that the leading coefficient of <code>f*X^n</code> equals the leading coefficient of <code>f</code>and this is a goal that pops up along the way</p>
+
+<a name="133603221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133603221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133603221">Chris Hughes (Sep 09 2018 at 12:15)</a>:</h4>
+<p>I just generalized <code>leading_coeff_X_pow</code> to a <code>comm_semiring</code> which should help with the lemma about <code>leading_coeff (f * X ^ n)</code>.</p>
+
+<a name="133604218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604218">Kevin Buzzard (Sep 09 2018 at 12:44)</a>:</h4>
+<p>I'd love to be proved wrong, but I don't think this is the right direction. The problem I have is not with <code>leading_coeff_X_pow</code>, it's with <code>leading_coeff_mul</code> and friends. The <code>mul</code> version needs an integral domain so I can't use it (I need a result over a general <code>comm_ring</code>). The <code>mul'</code> version cannot say "if the leading coefficients of <code>f</code> and <code>g</code> are non-zero then the leading coefficient of <code>fg</code> is the product" because this is not true (if the product of the leading coefficients is zero then there's a problem), so it says "if the leading coefficient of <code>f*g</code> is non-zero then...". Because the leading coefficient of a polynomial is non-zero iff the polynomial is non-zero I need <em>exactly</em> that if <code>f</code> is non-zero then <code>f*X^n</code> is non-zero to apply this lemma. This was what led me to the question in the title. My instinct is that one should prove this by hand. I can't seem to find <code>coefficient f d</code>, the coefficient of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>X</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">X^d</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.849108em;"></span><span class="strut bottom" style="height:0.849108em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">d</span></span></span></span></span></span></span></span></span></span></span> in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>. Of course it's just <code>f d</code> but I think it needs some notation because it's a fundamental concept. With this notion (which I could PR no problem) we have <code>f = 0</code> iff all its coefficients are zero (no problem), and then what I want is <code>coefficient (f * X) (d + 1) = coefficient f d</code>, for which I am going to have to go beyond the interface and into the definition of multiplication of polynomials, and I guess this is the explict lemma that I am asking for advice on. Once I have this I I think I can do everything else.</p>
+
+<a name="133604373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604373">Chris Hughes (Sep 09 2018 at 12:51)</a>:</h4>
+<p>For <code>leading_coeff (f * X ^ n)</code> I would case on whether <code>f = 0</code>, if <code>f = 0</code> it's trivial, otherwise it's <code>leading_coeff_mul'</code> and you have to prove that <code>leading_coeff f * 1 != 0</code> which is easy because <code>f != 0</code> and <code>leading_coeff f = 0 iff f = 0</code></p>
+
+<a name="133604414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604414">Reid Barton (Sep 09 2018 at 12:53)</a>:</h4>
+<p>That relation <code>coefficient (f * X) (d + 1) = coefficient f d</code> seems basic and useful enough that it should be provided as a lemma in any case.</p>
+
+<a name="133604419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604419">Reid Barton (Sep 09 2018 at 12:53)</a>:</h4>
+<p>Or the same for <code>f * X^n</code>.</p>
+
+<a name="133604423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604423">Chris Hughes (Sep 09 2018 at 12:53)</a>:</h4>
+<p>Johannes was talking about some way of representing polynomial as <code>C a + X * (C b + X * (...))</code>, which might give some more general strategies for dealing with this, because I do agree it is annoying at the moment.</p>
+
+<a name="133604472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604472">Chris Hughes (Sep 09 2018 at 12:55)</a>:</h4>
+<p>It might just be a case of people getting stuck and proving millions of lemmas that I didn't think of like <code>(f * X) (d + 1) = f d</code> until the interface is good.</p>
+
+<a name="133604521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133604521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133604521">Kevin Buzzard (Sep 09 2018 at 12:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> got it -- thanks.</p>
+
+<a name="133615540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133615540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133615540">Kenny Lau (Sep 09 2018 at 17:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_pow_eq_zero</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">i</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="err">^</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="o">{</span><span class="n">rw</span> <span class="n">H</span><span class="o">,</span> <span class="n">refl</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">zero_apply</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">H2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="o">(</span><span class="bp">@</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="err">^</span><span class="n">n</span> <span class="bp">=</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single</span> <span class="n">n</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">α</span><span class="o">),</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="n">H3</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">single_eq_C_mul_X</span> <span class="n">α</span> <span class="mi">1</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">H3</span><span class="o">],</span> <span class="n">symmetry</span><span class="o">,</span> <span class="n">exact</span> <span class="n">one_mul</span> <span class="bp">_</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="n">i</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">=</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="err">^</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="n">n</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span><span class="o">],</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_subset</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intro</span> <span class="n">j</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H2</span><span class="o">]</span> <span class="o">{</span><span class="n">contextual</span><span class="o">:=</span><span class="n">tt</span><span class="o">}</span> <span class="o">},</span>
+    <span class="n">intros</span> <span class="n">k</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">H3</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">]</span><span class="bp">;</span>
+    <span class="n">rw</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_eq_of_ne</span> <span class="o">(</span><span class="n">mt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_right_cancel</span> <span class="n">h2</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_singleton</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">H3</span><span class="o">]</span> <span class="n">at</span> <span class="n">H4</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">H4</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">H2</span> <span class="n">H4</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">,</span> <span class="n">mul_zero</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133683986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133683986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133683986">Kevin Buzzard (Sep 10 2018 at 21:37)</a>:</h4>
+<p>So Kenny has proved the result in perhaps the "correct" way. But I am confused about these things more generally. I talked to Chris about these things today and he cannot see the point of adding <code>def : coeff f n := f n</code> because "it is there already". I don't like <code>f n</code> at all for the coefficient of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>X</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">X^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span> in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> because it looks misleading (it looks like evaluation) and ultimately people will need theorems such as <code>coeff (f * X ^ n) (i + n) = coeff f i</code>. Now I guess one could argue that one could still put such theorems in and give them appropriate names, but just write them as <code>(f * X ^ n) (i + n) = f i</code>. I do trust Chris in general but on the other hand I feel like making a good interface is important. Does anyone have any input on this? I feel it's a bit like making <code>set X = X -&gt; Prop</code> and then arguing that you don't need <code>mem</code> because "it is there already".</p>
+
+<a name="133684055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684055">Johan Commelin (Sep 10 2018 at 21:38)</a>:</h4>
+<p>I completely agree with you that <code>f n</code> looks very <del>evil</del>eval.</p>
+
+<a name="133684380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684380">Chris Hughes (Sep 10 2018 at 21:45)</a>:</h4>
+<p>Maybe we should change the <code>has_coe_to_fun</code> to evaluation, and use <code>coeff</code> for coefficients.</p>
+
+<a name="133684430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684430">Johan Commelin (Sep 10 2018 at 21:46)</a>:</h4>
+<p>In fact, I have even wondered if we could set up some coercion to turn <code>f x</code> into the evaluation of <code>f</code> at <code>x</code>. But maybe that is also very confusing. I don't know.</p>
+
+<a name="133684444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684444">Johan Commelin (Sep 10 2018 at 21:46)</a>:</h4>
+<p>In general I wouldn't mind having <code>coeff n f</code> for the <code>n</code>th coefficient of <code>f</code>.</p>
+
+<a name="133684551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684551">Johan Commelin (Sep 10 2018 at 21:48)</a>:</h4>
+<p>I agree that it is part of my "mental" interface to polynomials. After all "polynomials" are just some gadgets that float around. They aren't functions on <code>nat</code>. But you can somehow access their coefficients.</p>
+
+<a name="133684552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684552">Kevin Buzzard (Sep 10 2018 at 21:48)</a>:</h4>
+<p>Kenny can you prove</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_coeff</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>in a similar way?</p>
+
+<a name="133684651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684651">Kenny Lau (Sep 10 2018 at 21:50)</a>:</h4>
+<p>sure</p>
+
+<a name="133684657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684657">Kenny Lau (Sep 10 2018 at 21:50)</a>:</h4>
+<p>in fact that's what I did at first</p>
+
+<a name="133684658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684658">Kenny Lau (Sep 10 2018 at 21:50)</a>:</h4>
+<p>and then I realized that I can generalize it</p>
+
+<a name="133684662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684662">Kenny Lau (Sep 10 2018 at 21:50)</a>:</h4>
+<p>and prove your theorem directly</p>
+
+<a name="133684862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684862">Mario Carneiro (Sep 10 2018 at 21:54)</a>:</h4>
+<p>I'm okay with using <code>f x</code> for evaluation instead of coefficient extraction, but in my experience <code>eval</code> is less useful than I would have expected. Usually you actually need <code>eval2</code> since the polynomial actually lives in a different scalar ring than the one you are evaluating into</p>
+
+<a name="133684881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684881">Mario Carneiro (Sep 10 2018 at 21:54)</a>:</h4>
+<p>i.e. talking about the complex roots of an integer polynomial</p>
+
+<a name="133684993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684993">Reid Barton (Sep 10 2018 at 21:56)</a>:</h4>
+<p>Is there a reason not to make the coercion use <code>eval2</code> then?</p>
+
+<a name="133684996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133684996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133684996">Johan Commelin (Sep 10 2018 at 21:57)</a>:</h4>
+<p>That's a good point. In practice there will be a canonical ring hom floating around that you want to plug into <code>eval2</code>. But I guess this is hard to put into Lean.</p>
+
+<a name="133685003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685003">Reid Barton (Sep 10 2018 at 21:57)</a>:</h4>
+<p>oh, you need the ring hom, I see</p>
+
+<a name="133685007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685007">Reid Barton (Sep 10 2018 at 21:57)</a>:</h4>
+<p>right</p>
+
+<a name="133685024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685024">Reid Barton (Sep 10 2018 at 21:57)</a>:</h4>
+<p>well, if the target ring is an algebra over the ring of definition of the polynomial...</p>
+
+<a name="133685065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685065">Reid Barton (Sep 10 2018 at 21:58)</a>:</h4>
+<p>Excuse me, semialgebra</p>
+
+<a name="133685128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685128">Reid Barton (Sep 10 2018 at 21:59)</a>:</h4>
+<p>I'm thinking of things like P is a polynomial with integer coefficients, and then in Z[X, Y] I want to state that X - Y divides P(X) - P(Y)</p>
+
+<a name="133685267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685267">Kenny Lau (Sep 10 2018 at 22:01)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/subject/Perfectoid.20spaces/near/133304087" title="#narrow/stream/116395-maths/subject/Perfectoid.20spaces/near/133304087">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Perfectoid.20spaces/near/133304087</a></p>
+
+<a name="133685272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685272">Kenny Lau (Sep 10 2018 at 22:01)</a>:</h4>
+<p><a href="https://github.com/kckennylau/Lean/blob/master/polynomial.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/polynomial.lean">sounds like something I wrote</a></p>
+
+<a name="133685601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685601">Reid Barton (Sep 10 2018 at 22:06)</a>:</h4>
+<p><code>eval' R A x f</code> is perhaps not quite as beautiful as the <code>f x</code> I had in mind, but otherwise yes exactly this.</p>
+
+<a name="133685627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133685627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133685627">Reid Barton (Sep 10 2018 at 22:07)</a>:</h4>
+<p>Were there class inference problems with <code>R</code> and <code>A</code>?</p>
+
+<a name="133686431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133686431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133686431">Kenny Lau (Sep 10 2018 at 22:21)</a>:</h4>
+<p>I forgot</p>
+
+<a name="133686435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133686435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133686435">Kenny Lau (Sep 10 2018 at 22:21)</a>:</h4>
+<p>I don't know if this will cause troubles</p>
+
+<a name="133687008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133687008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133687008">Kevin Buzzard (Sep 10 2018 at 22:30)</a>:</h4>
+<p>I don't care about the coercion to fun, I'm just concerned that we don't have a good interface for coefficients. Is there a problem with adding <code>coeff f n</code> and using it to state lemmas and making it the "official" interface to access coefficients?</p>
+
+<a name="133688234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688234">Kenny Lau (Sep 10 2018 at 22:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_coeff</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">try_for</span> <span class="mi">400</span> <span class="o">{</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">],</span>
+  <span class="n">refine</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_single</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">],</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">if_neg</span> <span class="o">(</span><span class="n">mt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="n">h1</span><span class="o">)],</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_iff</span><span class="o">,</span> <span class="n">not_not</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">],</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133688239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688239">Kenny Lau (Sep 10 2018 at 22:54)</a>:</h4>
+<p>400 ms</p>
+
+<a name="133688313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688313">Mario Carneiro (Sep 10 2018 at 22:55)</a>:</h4>
+<p>by the way, the <code>try_for</code> is only for debugging, you don't need to leave it in finished proofs</p>
+
+<a name="133688414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688414">Kenny Lau (Sep 10 2018 at 22:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_coeff</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">try_for</span> <span class="mi">300</span> <span class="o">{</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">],</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">funext</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">],</span> <span class="n">skip</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_single</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">if_neg</span> <span class="o">(</span><span class="n">mt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="n">h1</span><span class="o">)]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_iff</span><span class="o">,</span> <span class="n">not_not</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133688422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688422">Kenny Lau (Sep 10 2018 at 22:57)</a>:</h4>
+<p>300 ms, shorter and faster</p>
+
+<a name="133688439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688439">Kenny Lau (Sep 10 2018 at 22:57)</a>:</h4>
+<p>(remember to remove the <code>try_for</code> when you copy)</p>
+
+<a name="133688699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688699">Kenny Lau (Sep 10 2018 at 23:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is <code>rw</code> faster or <code>exact</code> faster, in general?</p>
+
+<a name="133688714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688714">Mario Carneiro (Sep 10 2018 at 23:01)</a>:</h4>
+<p>this is a silly question</p>
+
+<a name="133688721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688721">Mario Carneiro (Sep 10 2018 at 23:01)</a>:</h4>
+<p>it depends on a thousand and one factors</p>
+
+<a name="133688735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688735">Kenny Lau (Sep 10 2018 at 23:02)</a>:</h4>
+<p>ok, then let's be specific</p>
+
+<a name="133688774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688774">Kenny Lau (Sep 10 2018 at 23:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_coeff</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">try_for</span> <span class="mi">400</span> <span class="o">{</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">],</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">funext</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">],</span> <span class="n">skip</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_single</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">,</span> <span class="n">if_neg</span> <span class="o">(</span><span class="n">mt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="n">h1</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">h1</span><span class="o">,</span> <span class="o">(</span><span class="n">if_pos</span> <span class="n">rfl</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">((</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span>
+      <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_iff</span><span class="o">,</span> <span class="n">not_not</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="o">((</span><span class="n">if_pos</span> <span class="n">rfl</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">))</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133688787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688787">Kenny Lau (Sep 10 2018 at 23:02)</a>:</h4>
+<p>why is this slower than the previous one?</p>
+
+<a name="133688793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688793">Mario Carneiro (Sep 10 2018 at 23:02)</a>:</h4>
+<p>the answer is "try it and find out"</p>
+
+<a name="133688824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133688824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133688824">Mario Carneiro (Sep 10 2018 at 23:03)</a>:</h4>
+<p>there are particular things that can happen that can cause a slowdown, but I don't know if I can account for each millisecond</p>
+
+<a name="133689220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133689220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133689220">Kenny Lau (Sep 10 2018 at 23:09)</a>:</h4>
+<p>ok seriously it can be as fast as 300 ms as long as I use <code>rw</code> instead of <code>refine</code>/<code>exact</code></p>
+
+<a name="133689223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133689223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133689223">Kenny Lau (Sep 10 2018 at 23:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">mul_X_coeff</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">try_for</span> <span class="mi">300</span> <span class="o">{</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_apply</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">],</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">funext</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_single_index</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_apply</span><span class="o">],</span> <span class="n">skip</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_single</span> <span class="n">n</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">],</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">if_neg</span> <span class="o">(</span><span class="n">mt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="n">h1</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_iff</span><span class="o">,</span> <span class="n">not_not</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="o">}</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133689228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133689228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133689228">Kenny Lau (Sep 10 2018 at 23:09)</a>:</h4>
+<p>which is quite counter-intuitive</p>
+
+<a name="133689346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133689346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133689346">Mario Carneiro (Sep 10 2018 at 23:11)</a>:</h4>
+<p>I would guess the <code>(if_pos rfl).trans</code> spots are hard for the elaborator</p>
+
+<a name="133689494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133689494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133689494">Kenny Lau (Sep 10 2018 at 23:13)</a>:</h4>
+<p>I need to thank the elaborator some time for his hard work</p>
+
+<a name="133727884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133727884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133727884">Reid Barton (Sep 11 2018 at 14:19)</a>:</h4>
+<blockquote>
+<p>I don't care about the coercion to fun, I'm just concerned that we don't have a good interface for coefficients. Is there a problem with adding <code>coeff f n</code> and using it to state lemmas and making it the "official" interface to access coefficients?</p>
+</blockquote>
+<p>My only real opinion here is there should be exactly one way to write "the nth coefficient of f", so if we add <code>coeff</code> (which seems <span class="emoji emoji-1f44d" title="+1">:+1:</span>) then we should remove or change the coercion to fun instance.</p>
+
+<a name="133729846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/f%2AX%5En%3D0%20-%3E%20f%3D0/near/133729846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66112fXn0f0.html#133729846">Kevin Buzzard (Sep 11 2018 at 14:57)</a>:</h4>
+<p>There are two ways to write "x is an element of the set S" (which has never caused me any problems). Oh, and two ways to write "the integer corresponding to this natural number" (which has).</p>
+
+
+{% endraw %}

@@ -1,0 +1,263 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01495Defininginverseasapartialfunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html">Defining inverse as a partial function.</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="136914681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914681">Edward Ayers (Nov 01 2018 at 12:08)</a>:</h4>
+<p>I am investigating defining field inverses so that you have to also give the inverse a certificate that the number being put in is not zero. We can have a separate debate about whether that approach is better than having <code>inv(0) = 0</code>, but for now here are my ideas:</p>
+<p>My first idea was to treat the 'non-zeroness' as a typeclass then piggyback on the type inference algorithm.</p>
+<div class="codehilite"><pre><span></span>    <span class="kn">universe</span> <span class="n">u</span>
+    <span class="n">class</span> <span class="n">not_zero</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nz</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="n">class</span> <span class="n">my_division_ring</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="o">(</span><span class="n">ring</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">inv</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">]:</span>  <span class="n">R</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">inv_l</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">],</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">inv</span> <span class="n">y</span><span class="o">)</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+    <span class="o">(</span><span class="n">inv_r</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">],</span> <span class="o">(</span><span class="n">inv</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="n">y</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>Sadly, I get a "failed to synthesize typeclass" error.<br>
+Even more sadly, the last two lines of the error read:</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">not_zero</span> <span class="n">y</span>
+<span class="err">⊢</span> <span class="n">not_zero</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>Why is the elaborator not spotting this? This seems like something the elaborator would be able to do. Supposing that the elaborator could do this, then my idea was that you could write things like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span> <span class="n">not_zero</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>Are there any roadblocks that are stopping this dream from being a feasible way of defining the inverse function?</p>
+
+<a name="136914772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914772">Johan Commelin (Nov 01 2018 at 12:10)</a>:</h4>
+<p>Can this be solved with the <code>haveI</code> magic inserting the instance into the type class system at the right points?</p>
+
+<a name="136914794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914794">Edward Ayers (Nov 01 2018 at 12:12)</a>:</h4>
+<p>My second approach was to use auto_params:</p>
+<div class="codehilite"><pre><span></span>    <span class="c1">-- eventually a sophisticated tactic that figures out if an elt is ≠ 0</span>
+    <span class="n">meta</span> <span class="n">def</span> <span class="n">nz_tactic</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">assumption</span>
+    <span class="n">class</span> <span class="n">dvr</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="o">(</span><span class="n">ring</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">inv</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">):</span>  <span class="n">R</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">inv_l</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">y</span><span class="bp">≠</span><span class="mi">0</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">inv</span> <span class="n">y</span> <span class="n">p</span><span class="o">)</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">dvr</span> <span class="n">R</span><span class="o">]</span>
+    <span class="n">def</span> <span class="n">inv</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">nz</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">.</span> <span class="n">nz_tactic</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">dvr</span><span class="bp">.</span><span class="n">inv</span> <span class="n">y</span> <span class="n">nz</span>
+
+    <span class="n">def</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">nz</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">.</span> <span class="n">nz_tactic</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">inv</span> <span class="n">y</span><span class="o">)</span>
+    <span class="kn">infix</span> <span class="bp">`</span> <span class="bp">/.</span> <span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="o">:=</span> <span class="n">div</span>
+
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span>
+    <span class="kn">variable</span> <span class="o">(</span><span class="n">xz</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">.</span> <span class="n">nz_tactic</span><span class="o">)</span> <span class="c1">-- I was really hoping that this would be allowed</span>
+
+    <span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">xz</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">yz</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/.</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/.</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/.</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="136914838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914838">Edward Ayers (Nov 01 2018 at 12:12)</a>:</h4>
+<blockquote>
+<p>Can this be solved with the <code>haveI</code> magic inserting the instance into the type class system at the right points?</p>
+</blockquote>
+<p>I don't understand what this means.</p>
+
+<a name="136914840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914840">Johan Commelin (Nov 01 2018 at 12:12)</a>:</h4>
+<p>Neither do I.</p>
+
+<a name="136914853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914853">Johan Commelin (Nov 01 2018 at 12:13)</a>:</h4>
+<p>The point is that the problem you described pops up quite often.</p>
+
+<a name="136914861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914861">Johan Commelin (Nov 01 2018 at 12:13)</a>:</h4>
+<p>And then you can write <code>haveI my_instance, blah</code> and then the type class system will pick up your instance.</p>
+
+<a name="136914867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914867">Johan Commelin (Nov 01 2018 at 12:13)</a>:</h4>
+<p>And the reason you have to do this explicitly is because Lean 3.4.x is pretty frozen.</p>
+
+<a name="136914932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914932">Edward Ayers (Nov 01 2018 at 12:15)</a>:</h4>
+<p>Please could you give a full example of <code>haveI</code>?</p>
+
+<a name="136914948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914948">Edward Ayers (Nov 01 2018 at 12:15)</a>:</h4>
+<p>I get <code>[Lean] unknown identifier 'haveI'</code> errors</p>
+
+<a name="136914955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136914955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136914955">Johan Commelin (Nov 01 2018 at 12:15)</a>:</h4>
+<p>I'll try. For starters, here are 56 examples: <a href="https://github.com/leanprover/mathlib/search?q=haveI&amp;unscoped_q=haveI" target="_blank" title="https://github.com/leanprover/mathlib/search?q=haveI&amp;unscoped_q=haveI">https://github.com/leanprover/mathlib/search?q=haveI&amp;unscoped_q=haveI</a></p>
+
+<a name="136915006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915006">Edward Ayers (Nov 01 2018 at 12:16)</a>:</h4>
+<p>ah it's a tactic</p>
+
+<a name="136915020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915020">Johan Commelin (Nov 01 2018 at 12:16)</a>:</h4>
+<p>Yes, and it has some friends, like <code>exactI</code> and I don't know what they do, and how they differ.</p>
+
+<a name="136915021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915021">Johan Commelin (Nov 01 2018 at 12:16)</a>:</h4>
+<p>I'm using them cargo-cult style.</p>
+
+<a name="136915095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915095">Edward Ayers (Nov 01 2018 at 12:19)</a>:</h4>
+<p>So my question now is: Is there a fundamental reason why the elaborator can't do my above example? Eg there might be cases where it causes the elaborator to take unbounded time or something.</p>
+
+<a name="136915157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915157">Johan Commelin (Nov 01 2018 at 12:20)</a>:</h4>
+<p>I think the fundamental reason was that Lean 3.4.x is frozen.</p>
+
+<a name="136915207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915207">Johan Commelin (Nov 01 2018 at 12:21)</a>:</h4>
+<p>Also, in your <code>inv_l</code> and <code>inv_r</code> you want <code>y = x</code>.</p>
+
+<a name="136915310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915310">Edward Ayers (Nov 01 2018 at 12:24)</a>:</h4>
+<p>That's not what I mean by reason. Why would the elaborator be able to do the below example but not the one at the top.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sq</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>  <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>It must be something to do with the fact that the elaborator is looking for typeclasses attached to the type of <code>a</code> and not to <code>a</code> itself.</p>
+
+<a name="136915315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915315">Edward Ayers (Nov 01 2018 at 12:24)</a>:</h4>
+<blockquote>
+<p>Also, in your <code>inv_l</code> and <code>inv_r</code> you want <code>y = x</code>.</p>
+</blockquote>
+<p>fixed!</p>
+
+<a name="136915660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136915660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136915660">Chris Hughes (Nov 01 2018 at 12:33)</a>:</h4>
+<p>I think it;s actually to do with being left or right of the colon. This doesn't work</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="136916579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136916579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136916579">Edward Ayers (Nov 01 2018 at 12:52)</a>:</h4>
+<p><code>    (inv_l (x : R) [not_zero x] : (x * (inv x)  = 1) )</code> has the same error though.</p>
+
+<a name="136916787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136916787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136916787">Chris Hughes (Nov 01 2018 at 12:56)</a>:</h4>
+<p>Maybe because it's part of a structure. Does the <code>ring</code> example work as part of a structure?</p>
+
+<a name="136916872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136916872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136916872">Edward Ayers (Nov 01 2018 at 12:58)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span>    <span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">my_division_ring</span> <span class="n">R</span><span class="o">]</span>
+    <span class="n">def</span> <span class="n">inv</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">my_division_ring</span><span class="bp">.</span><span class="n">inv</span> <span class="n">y</span>
+</pre></div>
+
+<a name="136916882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136916882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136916882">Edward Ayers (Nov 01 2018 at 12:58)</a>:</h4>
+<p>so maybe it is because it is part of a structure.</p>
+
+<a name="136919570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136919570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136919570">Reid Barton (Nov 01 2018 at 13:55)</a>:</h4>
+<p><code>by exactI</code> is the most succinct option here</p>
+
+<a name="136921820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136921820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136921820">Edward Ayers (Nov 01 2018 at 14:40)</a>:</h4>
+<p>Right but ideally I wouldn't even have to use a tactic.</p>
+
+<a name="136921827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136921827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136921827">Edward Ayers (Nov 01 2018 at 14:40)</a>:</h4>
+<p>The elaborator would just do it.</p>
+
+<a name="136923468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136923468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136923468">Edward Ayers (Nov 01 2018 at 15:07)</a>:</h4>
+<p>I think that I've got the elaborator to "just do it" now:</p>
+<div class="codehilite"><pre><span></span>    <span class="n">class</span> <span class="n">not_zero</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nz</span><span class="o">:</span><span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="n">class</span> <span class="n">my_division_ring</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="o">(</span><span class="n">integral_domain</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="bp">Π</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">],</span>  <span class="n">R</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">inv_l</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">nz</span><span class="o">:</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">]</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="bp">@</span><span class="n">inv</span> <span class="n">x</span> <span class="n">nz</span><span class="o">)</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+    <span class="o">(</span><span class="n">inv_r</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">nz</span><span class="o">:</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">]</span> <span class="o">,</span> <span class="o">(</span><span class="bp">@</span><span class="n">inv</span> <span class="n">x</span> <span class="n">nz</span><span class="o">)</span> <span class="bp">*</span> <span class="n">x</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">my_division_ring</span> <span class="n">R</span><span class="o">]</span>
+    <span class="n">def</span> <span class="n">inv</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">my_division_ring</span><span class="bp">.</span><span class="n">inv</span> <span class="n">y</span>
+
+    <span class="n">def</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">inv</span> <span class="n">y</span><span class="o">)</span>
+    <span class="kn">infix</span> <span class="bp">`</span> <span class="err">÷</span> <span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="o">:=</span> <span class="n">div</span>
+
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">not_zero</span> <span class="n">y</span><span class="o">]</span>
+    <span class="kn">instance</span> <span class="o">:</span> <span class="n">not_zero</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mul_ne_zero</span> <span class="o">(</span><span class="n">not_zero</span><span class="bp">.</span><span class="n">nz</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">not_zero</span><span class="bp">.</span><span class="n">nz</span> <span class="n">y</span><span class="o">)</span><span class="bp">⟩</span>
+
+    <span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="err">÷</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="err">÷</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="err">÷</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="136923562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136923562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136923562">Edward Ayers (Nov 01 2018 at 15:08)</a>:</h4>
+<p>So I was badmouthing the elaborator but I only have to be explicit with <code>inv</code> within the class definition.</p>
+
+<a name="136923605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136923605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136923605">Edward Ayers (Nov 01 2018 at 15:09)</a>:</h4>
+<p>I much prefer this approach to making the inverse total.</p>
+
+<a name="136923739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136923739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136923739">Edward Ayers (Nov 01 2018 at 15:11)</a>:</h4>
+<p>But it has its own caveats</p>
+
+<a name="136924201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136924201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136924201">Floris van Doorn (Nov 01 2018 at 15:17)</a>:</h4>
+<p>One problem you'll run into is that sooner or later type class inference is not going to figure out that arguments are <code>not_zero</code>, because the reasons get too complicated. But if you're fine with writing</p>
+<div class="codehilite"><pre><span></span>haveI : not_zero t := ...,
+</pre></div>
+
+
+<p>here and there, it should be fine.</p>
+
+<a name="136925306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136925306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136925306">Edward Ayers (Nov 01 2018 at 15:34)</a>:</h4>
+<p>Right. The problem is that the reasons get too complicated, so the elaborator would end up needing to be a general purpose prover. It seems to me that in practice, if a function needs an implicit guard proposition like <code>x != 0</code>, it is usually easy for a human to work out where the certificate is coming from, so it should be possible to make a tactic that can also figure it out 80% of the time. It would be so useful if one were able to augment the elaborator with ones own tactics, similar to the <code>(x:P . my_tactic)</code> syntax, but where I don't have to explicitly write out the tactic name all of the time and one can also write <code>variables {x : R} (x != 0 . my_tactic)</code>. <br>
+ I think my ideal syntax would be to extend the typeclass brackets to also take arbitrary propositions.</p>
+<div class="codehilite"><pre><span></span>    <span class="n">class</span> <span class="n">my_division_ring</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="o">(</span><span class="n">integral_domain</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="bp">Π</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">[</span><span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">],</span>  <span class="n">R</span><span class="o">)</span>
+
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">]</span> <span class="o">[</span><span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">]</span>
+    <span class="kn">instance</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">mul_ne_zero</span> <span class="err">‹</span><span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="err">›</span> <span class="err">‹</span><span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span><span class="err">›</span>
+</pre></div>
+
+
+<p>I know that there are lots of practical difficulties that this would surface, but I think the idea makes sense. The meaning of <code>[x ≠ 0]</code> is that this is a fact that needs to be present but which should be hidden from the user as much as possible.</p>
+
+<a name="136925627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/136925627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#136925627">Edward Ayers (Nov 01 2018 at 15:40)</a>:</h4>
+<p>You can already pretend that a proposition is a typeclass, but the elaborator doesn't know what to do with them because they don't have the <code>class</code> attribute on them.</p>
+
+<a name="137113111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/137113111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#137113111">Simon Hudon (Nov 03 2018 at 14:15)</a>:</h4>
+<p>I think you might consider auto params. It allows you to specify a tactic to use to prove non-zeroness</p>
+
+<a name="137113225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/137113225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#137113225">Simon Hudon (Nov 03 2018 at 14:18)</a>:</h4>
+<p><code>ˋ</code>lean<br>
+(inv (x : R) (h : x /= 0 . prove_non_zero) : R)<br>
+<code>ˋ</code></p>
+
+<a name="137113286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/137113286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#137113286">Simon Hudon (Nov 03 2018 at 14:20)</a>:</h4>
+<p>(Sorry for the bad formatting, I’m on my phone)</p>
+
+<a name="137116158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/137116158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#137116158">Reid Barton (Nov 03 2018 at 16:03)</a>:</h4>
+<p>Now I'm confused why this code that I found in Scott's limits branch actually does work:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">preserves_limits</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">preserves</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">small_category</span> <span class="n">J</span><span class="o">]</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">cone</span> <span class="n">K</span><span class="o">},</span> <span class="n">is_limit</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">map_cone</span> <span class="n">c</span><span class="o">))</span>
+</pre></div>
+
+<a name="137116198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20inverse%20as%20a%20partial%20function./near/137116198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01495Defininginverseasapartialfunction.html#137116198">Reid Barton (Nov 03 2018 at 16:04)</a>:</h4>
+<p><code>J \func C</code> depends on the <code>[small_category J]</code>, and if I delete the latter then I get errors.</p>
+
+
+{% endraw %}

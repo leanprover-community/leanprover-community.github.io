@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/27895transportthroughtrivialbundles.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html">transport through trivial bundles</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="125769004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125769004">Scott Morrison (Apr 27 2018 at 12:54)</a>:</h4>
+<p>I find myself needing a few lemmas about parallel transport through trivial bundles. (In the first case, this is literally the case, the later ones are close analogues.)</p>
+<div class="codehilite"><pre><span></span>universes u₁ u₂
+
+@[simp] lemma {u₁ u₂} parallel_transport_for_trivial_bundles {α : Sort u₁} {a b : α} {β : Sort u₂} (p : a = b) (x : β) : @eq.rec α a (λ _, β) x b p = x :=
+begin
+  induction p,
+  simp,
+end
+
+@[simp] lemma plift.rec.constant {α : Sort u₁} {β : Sort u₂} (b : β) : @plift.rec α (λ _, β) (λ _, b) = λ _, b :=
+begin
+  apply funext,
+  intros,
+  cases x,
+  refl,
+end
+
+@[simp] lemma ulift.rec.constant {α : Type u₁} {β : Sort u₂} (b : β) : @ulift.rec α (λ _, β) (λ _, b) = λ _, b :=
+begin
+  apply funext,
+  intros,
+  cases x,
+  refl,
+end
+</pre></div>
+
+<a name="125769016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125769016">Scott Morrison (Apr 27 2018 at 12:55)</a>:</h4>
+<p>Are these welcome in <code>mathlib</code>? If so, where do they go?</p>
+
+<a name="125769054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125769054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125769054">Scott Morrison (Apr 27 2018 at 12:56)</a>:</h4>
+<p>(These all arise after using <code>cases</code> on hypotheses in fairly harmless ways.)</p>
+
+<a name="125803956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125803956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125803956">Scott Morrison (Apr 28 2018 at 04:40)</a>:</h4>
+<p>I made a PR for this at &lt;<a href="https://github.com/leanprover/mathlib/pull/124" target="_blank" title="https://github.com/leanprover/mathlib/pull/124">https://github.com/leanprover/mathlib/pull/124</a>&gt;.</p>
+
+<a name="125805005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125805005">Johan Commelin (Apr 28 2018 at 05:23)</a>:</h4>
+<p>This is all going to follow from your <code>transportable</code> stuff later on, I guess...</p>
+
+<a name="125805006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20through%20trivial%20bundles/near/125805006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895transportthroughtrivialbundles.html#125805006">Johan Commelin (Apr 28 2018 at 05:23)</a>:</h4>
+<p>I mean, parallel transport in maths is an instance of transport of structure...</p>
+
+
+{% endraw %}

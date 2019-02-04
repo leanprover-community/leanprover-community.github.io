@@ -1,0 +1,185 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/82983rwinsidelambda.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html">rw inside lambda</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="133624964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133624964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133624964">Kenny Lau (Sep 09 2018 at 23:11)</a>:</h4>
+<p>from my experience, <code>simp</code> can change things inside lambda, but <code>rw</code> cannot. Is there a way to bypass this and let <code>rw</code> change inside lambda?</p>
+
+<a name="133624971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133624971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133624971">Mario Carneiro (Sep 09 2018 at 23:11)</a>:</h4>
+<p><code>conv</code> + <code>rw</code></p>
+
+<a name="133625661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133625661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133625661">Reid Barton (Sep 09 2018 at 23:30)</a>:</h4>
+<p>Also see topic <a href="#narrow/stream/113488-general/subject/rw.20under.20lambda/near/126107890" title="#narrow/stream/113488-general/subject/rw.20under.20lambda/near/126107890">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/rw.20under.20lambda/near/126107890</a> and the more verbose topic <a href="#narrow/stream/113488-general/subject/Why.20can't.20.60rw.60.20look.20inside.20lambda.20expressions.3F/near/130212033" title="#narrow/stream/113488-general/subject/Why.20can't.20.60rw.60.20look.20inside.20lambda.20expressions.3F/near/130212033">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/Why.20can't.20.60rw.60.20look.20inside.20lambda.20expressions.3F/near/130212033</a></p>
+
+<a name="133640326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133640326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133640326">Kenny Lau (Sep 10 2018 at 08:01)</a>:</h4>
+<p>so exactly which tactics are avaiblale inside <code>conv</code>?</p>
+
+<a name="133641348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641348">Kevin Buzzard (Sep 10 2018 at 08:30)</a>:</h4>
+<p>rw</p>
+
+<a name="133641426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641426">Kenny Lau (Sep 10 2018 at 08:32)</a>:</h4>
+<p>I mean, a complete list of tactics available inside <code>conv</code></p>
+
+<a name="133641504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641504">Kevin Buzzard (Sep 10 2018 at 08:34)</a>:</h4>
+<p>There's probably a file in core which lists them. There's to_lhs, something called something like whnf and you might want to skim Patrick's docs</p>
+
+<a name="133641835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641835">Kevin Buzzard (Sep 10 2018 at 08:45)</a>:</h4>
+<p><a href="https://github.com/leanprover/lean/blob/master/library/init/meta/converter/interactive.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/converter/interactive.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/converter/interactive.lean</a></p>
+
+<a name="133641838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641838">Kevin Buzzard (Sep 10 2018 at 08:45)</a>:</h4>
+<p>Maybe that's the definitive answer</p>
+
+<a name="133641952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133641952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133641952">Kevin Buzzard (Sep 10 2018 at 08:48)</a>:</h4>
+<p>Funext, change, simp and dsimp</p>
+
+<a name="133642024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133642024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133642024">Kevin Buzzard (Sep 10 2018 at 08:51)</a>:</h4>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md</a></p>
+
+<a name="133642027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133642027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133642027">Kevin Buzzard (Sep 10 2018 at 08:51)</a>:</h4>
+<p>Has a couple of nice tricks</p>
+
+<a name="133642625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133642625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133642625">Kenny Lau (Sep 10 2018 at 09:10)</a>:</h4>
+<p>well I would like to be able to use <code>apply/exact/refine</code> inside <code>conv</code></p>
+
+<a name="133642672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133642672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133642672">Kenny Lau (Sep 10 2018 at 09:12)</a>:</h4>
+<p><code>conv</code> inside <code>conv</code> would also be useful</p>
+
+<a name="133642676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133642676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133642676">Kenny Lau (Sep 10 2018 at 09:12)</a>:</h4>
+<p>I feel like <code>conv</code> has a lot of potential to be the most powerful tactic ever</p>
+
+<a name="133644854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133644854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133644854">Kenny Lau (Sep 10 2018 at 09:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I don't understand why there's no basic tactics (i.e. <code>exact</code>) inside conv</p>
+
+<a name="133645090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645090">Mario Carneiro (Sep 10 2018 at 10:03)</a>:</h4>
+<p><code>conv</code> is a different monad from <code>tactic</code></p>
+
+<a name="133645145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645145">Mario Carneiro (Sep 10 2018 at 10:04)</a>:</h4>
+<p><code>exact</code> doesn't even make sense</p>
+
+<a name="133645146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645146">Kenny Lau (Sep 10 2018 at 10:04)</a>:</h4>
+<p>I mean, why didn't we implement exact inside conv</p>
+
+<a name="133645150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645150">Kenny Lau (Sep 10 2018 at 10:04)</a>:</h4>
+<p>conv is just a bunch of congr_arg and funext right</p>
+
+<a name="133645172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645172">Mario Carneiro (Sep 10 2018 at 10:05)</a>:</h4>
+<p>the tactic state in the conv monad is basically <code>?p : X = ?m</code> where <code>?p</code> and <code>?m</code> are to be determined</p>
+
+<a name="133645178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645178">Kenny Lau (Sep 10 2018 at 10:05)</a>:</h4>
+<p>if we have <code>a + b = c + d</code>, and I do <code>conv { to_lhs, congr, skip, }</code> then the current state is <code>a + b = a + ?m</code> right</p>
+
+<a name="133645187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645187">Kenny Lau (Sep 10 2018 at 10:05)</a>:</h4>
+<p>if I do <code>exact (sorry : b = foo b)</code> then I can tell Lean exactly that <code>?m</code> should be <code>foo b</code> right</p>
+
+<a name="133645201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645201">Mario Carneiro (Sep 10 2018 at 10:05)</a>:</h4>
+<p>by comparison to the regular tactic state which is just <code>?m : t</code></p>
+
+<a name="133645300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645300">Mario Carneiro (Sep 10 2018 at 10:07)</a>:</h4>
+<p>I think <code>update_lhs</code> does that</p>
+
+<a name="133645375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645375">Johan Commelin (Sep 10 2018 at 10:08)</a>:</h4>
+<p>I've never heard about that one. Sounds good!</p>
+
+<a name="133645390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645390">Johan Commelin (Sep 10 2018 at 10:09)</a>:</h4>
+<p>Can you also <em>zoom out</em> in <code>conv</code>?</p>
+
+<a name="133645411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645411">Johan Commelin (Sep 10 2018 at 10:09)</a>:</h4>
+<p>You zoom in with <code>congr</code> and <code>funext</code>. But I sometimes also want to zoom out again.</p>
+
+<a name="133645430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645430">Mario Carneiro (Sep 10 2018 at 10:09)</a>:</h4>
+<p>No, zoom out doesn't make sense</p>
+
+<a name="133645496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645496">Mario Carneiro (Sep 10 2018 at 10:10)</a>:</h4>
+<p>what is possible instead is a split lhs/rhs that produces multiple subgoals</p>
+
+<a name="133645527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645527">Mario Carneiro (Sep 10 2018 at 10:10)</a>:</h4>
+<p>also, lhs/rhs is so passe. We need rcases patterns in conv!</p>
+
+<a name="133645626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645626">Kenny Lau (Sep 10 2018 at 10:12)</a>:</h4>
+<p>what is update_lhs?</p>
+
+<a name="133645646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645646">Mario Carneiro (Sep 10 2018 at 10:12)</a>:</h4>
+<p>I guess it is not an interactive command, but it is available as a conv tactic</p>
+
+<a name="133645670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645670">Mario Carneiro (Sep 10 2018 at 10:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">update_lhs</span> <span class="o">(</span><span class="n">new_lhs</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">conv</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">transitivity</span><span class="o">,</span>
+   <span class="n">rhs</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">new_lhs</span><span class="o">,</span>
+   <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+   <span class="n">t</span> <span class="err">←</span> <span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">instantiate_mvars</span><span class="o">,</span>
+   <span class="n">change</span> <span class="n">t</span>
+</pre></div>
+
+<a name="133645872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645872">Johan Commelin (Sep 10 2018 at 10:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Why would zoom out not make sense? If I drill down into a nested sum, do some <code>rw</code> there, then I would want to zoom out again and play with the sum that is 1 level up.</p>
+
+<a name="133645979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133645979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133645979">Mario Carneiro (Sep 10 2018 at 10:16)</a>:</h4>
+<p>As I said, the conv monad has a state which is <code>?p : X = ?m</code>. If you zoom in then <code>?m</code> is assigned, so you can't return to it any more than you can rewind in a proof</p>
+
+<a name="133646109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133646109">Mario Carneiro (Sep 10 2018 at 10:19)</a>:</h4>
+<p>I think that <code>to_lhs</code> would make more sense as a tactic combinator, i.e. <code>to_lhs { &lt;conv&gt; }, &lt;conv&gt;</code></p>
+
+<a name="133646119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133646119">Mario Carneiro (Sep 10 2018 at 10:19)</a>:</h4>
+<p>that would allow you to return to the outer context in the second part</p>
+
+<a name="133646183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133646183">Kenny Lau (Sep 10 2018 at 10:20)</a>:</h4>
+<p>also if I go deep inside using <code>conv</code> then all the variables have the same name and I can't even <code>dedup</code></p>
+
+<a name="133646218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133646218">Mario Carneiro (Sep 10 2018 at 10:21)</a>:</h4>
+<p>note that <code>find</code> is actually a combinator like this inside conv, so you can use it to temporarily zoom in</p>
+
+<a name="133646274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133646274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html#133646274">Mario Carneiro (Sep 10 2018 at 10:22)</a>:</h4>
+<p>however, find patterns never work the way I want them to</p>
+
+
+{% endraw %}

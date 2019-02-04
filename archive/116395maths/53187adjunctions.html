@@ -1,0 +1,673 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/53187adjunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html">adjunctions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="146960106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146960106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146960106">Johan Commelin (Nov 07 2018 at 15:49)</a>:</h4>
+<p>I feel like it is time we get adjoint functors. We now have <code>map</code> and <code>comap</code> for over-categories. They form an adjoint pair, and this would allow us to prove useful stuff. Has anyone given thought to implementing adjunctions in Lean? Are there any traps that should be avoided?</p>
+
+<a name="146964831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146964831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146964831">Kenny Lau (Nov 07 2018 at 16:14)</a>:</h4>
+<p>and then refactor galois connection :p</p>
+
+<a name="146964958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146964958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146964958">Johan Commelin (Nov 07 2018 at 16:16)</a>:</h4>
+<p>Right. Are you interested in taking a look at the bottom of <code>sheaf.lean</code> on the <code>sheaf</code> branch? It is getting a big mess. As soon as we want to apply category theory to concrete stuff thing become rather unpleasant...</p>
+
+<a name="146965246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146965246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146965246">Patrick Massot (Nov 07 2018 at 16:20)</a>:</h4>
+<p>I don't like reading "As soon as we want to apply category theory to concrete stuff thing become rather unpleasant..." <span class="emoji emoji-2639" title="sad">:sad:</span></p>
+
+<a name="146965311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146965311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146965311">Johan Commelin (Nov 07 2018 at 16:21)</a>:</h4>
+<p>I agree... and it is probably just that I'm not skilled enough in Lean.</p>
+
+<a name="146967027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146967027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146967027">Johan Commelin (Nov 07 2018 at 16:46)</a>:</h4>
+<p>It feels like <code>category_theory</code> is a monad: You can bind yourself into it. But you really shouldn't try to crawl out of it.</p>
+
+<a name="146967111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146967111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146967111">Johan Commelin (Nov 07 2018 at 16:46)</a>:</h4>
+<p>I think it is hopeless that we will be able to rewrite along equivalences of categories, right?</p>
+
+<a name="146967150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146967150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146967150">Johan Commelin (Nov 07 2018 at 16:47)</a>:</h4>
+<p>If <code>X</code> is a topological space, and <code>U</code> is an open subset of <code>X</code>, then <code>over U</code> is canonically equivalent to <code>opens U</code>. Is there any hope at all that I can teach Lean how to use this fact?</p>
+
+<a name="146967222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146967222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146967222">Johan Commelin (Nov 07 2018 at 16:48)</a>:</h4>
+<p>(Without 100 lines of scaffolding to show that I can transfer everything I want along my canonical equivalence.)</p>
+
+<a name="146967920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146967920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146967920">Johan Commelin (Nov 07 2018 at 16:59)</a>:</h4>
+<p>In this case it is even an isomorphism of categories. I'm not sure if that helps.</p>
+
+<a name="146970541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146970541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#146970541">Kevin Buzzard (Nov 07 2018 at 17:36)</a>:</h4>
+<blockquote>
+<p>I think it is hopeless that we will be able to rewrite along equivalences of categories, right?</p>
+</blockquote>
+<p>rofl how about we rewrite along isomorphisms of groups first!</p>
+
+<a name="147252668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147252668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147252668">Scott Morrison (Nov 07 2018 at 21:20)</a>:</h4>
+<p><span class="emoji emoji-2b06" title="up">:up:</span></p>
+
+<a name="147322759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147322759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147322759">Reid Barton (Nov 08 2018 at 20:28)</a>:</h4>
+<blockquote>
+<p>I feel like it is time we get adjoint functors. We now have <code>map</code> and <code>comap</code> for over-categories. They form an adjoint pair, and this would allow us to prove useful stuff. Has anyone given thought to implementing adjunctions in Lean? Are there any traps that should be avoided?</p>
+</blockquote>
+<p>I have defined adjunctions a couple of times, including at <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/adjunctions.lean" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/adjunctions.lean">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/adjunctions.lean</a> (see also <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/preserves_colimits.lean" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/preserves_colimits.lean">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.1/src/category_theory/preserves_colimits.lean</a>). But I haven't needed to push the theory very far yet, so I'm not sure about traps.</p>
+
+<a name="147322876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147322876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147322876">Reid Barton (Nov 08 2018 at 20:30)</a>:</h4>
+<p>One thing which is a bit annoying is to state the naturality of the isomorphism Hom(FX, Y) = Hom(X, GY) for an adjunction F : C -&gt; D, G : D -&gt; C.<br>
+If C and D have different morphism universes then where is this isomorphism happening...?</p>
+
+<a name="147328898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147328898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147328898">Johan Commelin (Nov 08 2018 at 22:00)</a>:</h4>
+<p>Probably in <code>max v_1 v_2</code>...</p>
+
+<a name="147328931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147328931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147328931">Johan Commelin (Nov 08 2018 at 22:01)</a>:</h4>
+<p>Maybe we can have an <code>adjunctions</code> branch where you push your stuff and we (Scott, you, me, maybe others) can play around with it till we think something is ready for merging.</p>
+
+<a name="147328996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147328996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147328996">Johan Commelin (Nov 08 2018 at 22:02)</a>:</h4>
+<p>For example, we could then merge that branch into the <code>sheaf</code> branch, and stress test it on that example.</p>
+
+<a name="147333368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147333368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147333368">Scott Morrison (Nov 08 2018 at 23:09)</a>:</h4>
+<p>When I've played with adjunctions I've settled on just putting everything in the same universe level.</p>
+
+<a name="147333380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147333380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147333380">Scott Morrison (Nov 08 2018 at 23:09)</a>:</h4>
+<p>Would this make us sad?</p>
+
+<a name="147335341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147335341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147335341">Reid Barton (Nov 08 2018 at 23:42)</a>:</h4>
+<p>I'm not sure. It might be fine, especially if we have a good interface for lifting a category to a bigger universe.</p>
+
+<a name="147356768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147356768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147356768">Kevin Buzzard (Nov 09 2018 at 08:58)</a>:</h4>
+<p>I know that the philosophy is to be maximally universe polymorphic. But when I wrote schemes originally I spent almost my entire time working in one universe, just to see what happened, and I never ran into any problems (other than Mario telling me I should stop -- I mean I didn't run into any mathematical problems). Reading SGA the other day I see that Grothendieck also was happy with just one universe for a lot of the time. If being maximally universe polymorphic is causing problems then I might venture to suggest that being maximally universe polymorphic might simply not be that good an idea when working with categories.</p>
+
+<a name="147357592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147357592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147357592">Johan Commelin (Nov 09 2018 at 09:19)</a>:</h4>
+<p>I do think that a lot of our universe annotations could then go away. And the errors related to universe issues are also quite nasty and annoying. I agree with <span class="user-mention" data-user-id="110032">@Reid Barton</span> that we would need a good way to turn lift a category to a higher universe, and I have no idea how hard this is.<br>
+<span class="user-mention" data-user-id="110087">@Scott Morrison</span> What do you think? How much of the universe issues are maths-problems, and how much of it is just <em>users fighting Lean</em>?</p>
+
+<a name="147411657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147411657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147411657">Scott Morrison (Nov 10 2018 at 01:50)</a>:</h4>
+<p>I don't think we've had any universe problem in a long while in the category_theory development. I think the current setup, where you often have to say <code>XXX.{u v}</code>, so Lean knows which morphism universe level you intend, is mildly annoying. The current setup is a minimal envelope around supporting <code>category.{v v}</code> and <code>category.{v+1 v}</code>, which is all that ever turns up in practice. Any time more than one category is involved, and there is a potential problem with mismatching universe levels, my instinct is to put everything at the same universe level. (i.e., just like Grothendieck, we work in a single universe, called <code>v</code>, except that we also have <code>u</code>, which we think of as either being <code>v</code> or <code>v+1</code> for small or large categories).</p>
+
+<a name="147411706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147411706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147411706">Scott Morrison (Nov 10 2018 at 01:50)</a>:</h4>
+<p>If that ever causes problems, then we'll announce we've learnt something, and deal with it, but for now I see no need to deal with mixed-universe level adjunctions, etc.</p>
+
+<a name="147411924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147411924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147411924">Kevin Buzzard (Nov 10 2018 at 01:56)</a>:</h4>
+<p>I guess Grothendieck fixed one universe u, and then talked about u-categories and u-small categories, which are these two cases.</p>
+
+<a name="147412697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147412697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147412697">Scott Morrison (Nov 10 2018 at 02:17)</a>:</h4>
+<p>We would suffer quite a bit by specialising to only u-categories and u-small categories, because we'd have to duplicate lots of theorems. Having <code>category.{u v}</code> lets us state theorems in both cases uniformly with not-that-much suffering, and we just remember that all the other values of <code>u</code> are not particularly relevant.</p>
+
+<a name="147425039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147425039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147425039">Kevin Buzzard (Nov 10 2018 at 09:33)</a>:</h4>
+<p>Yes, I'm now starting to understand the philosophy much better</p>
+
+<a name="147503855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147503855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147503855">Reid Barton (Nov 12 2018 at 05:00)</a>:</h4>
+<p>Status update on adjunctions: I managed to get as far as proving that right adjoints preserve limits and that any functor C -&gt; D with C small and D cocomplete induces an adjunction (like the geometric realization/Sing adjunction).</p>
+
+<a name="147503862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147503862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147503862">Reid Barton (Nov 12 2018 at 05:00)</a>:</h4>
+<p>The code still needs some cleaning up, but I'll try to push it to community tomorrow</p>
+
+<a name="147509015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147509015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147509015">Johan Commelin (Nov 12 2018 at 07:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> That sounds fantastic! I'm looking forward to seeing the code.</p>
+
+<a name="147548648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147548648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147548648">Reid Barton (Nov 12 2018 at 21:15)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/tree/adjunctions" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/adjunctions">https://github.com/leanprover-community/mathlib/tree/adjunctions</a></p>
+
+<a name="147548937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147548937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147548937">Johan Commelin (Nov 12 2018 at 21:20)</a>:</h4>
+<p>Cool!</p>
+
+<a name="147549367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147549367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147549367">Reid Barton (Nov 12 2018 at 21:30)</a>:</h4>
+<p>I'm still not sure about the best way to deal with natural isomorphisms. Sometimes I want to compose natural isomorphisms together, in which case I want to view the isomorphism and its naturality as a single object, but often I also want to just work objectwise, and check naturality as needed later</p>
+
+<a name="147549474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147549474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147549474">Reid Barton (Nov 12 2018 at 21:32)</a>:</h4>
+<p>I'm looking at this proof on paper: "<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mover accent="true"><mi>F</mi><mo>~</mo></mover><mo>(</mo><mi>y</mi><mi>c</mi><mo>)</mo><mo separator="true">,</mo><mi>d</mi><mo>)</mo><mo>=</mo><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mi>y</mi><mi>c</mi><mo separator="true">,</mo><msup><mi>F</mi><mo>∗</mo></msup><mi>d</mi><mo>)</mo><mo>=</mo><msup><mi>F</mi><mo>∗</mo></msup><mi>d</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>=</mo><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mi>F</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Hom}(\tilde F (y c), d) = \mathrm{Hom}(y c, F^* d) = F^* d(c) = \mathrm{Hom}(F c, d)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.9201899999999998em;"></span><span class="strut bottom" style="height:1.1701899999999998em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9201899999999998em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span><span style="top:-3.6023300000000003em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="margin-left:0.16668em;"><span>~</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit">c</span><span class="mpunct">,</span><span class="mord mathit">d</span><span class="mclose">)</span></span></span></span> and so there is a natural isomorphism <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mi>c</mi><mo>→</mo><mover accent="true"><mi>F</mi><mo>~</mo></mover><mo>(</mo><mi>y</mi><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F c \to \tilde F (y c)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.9201899999999998em;"></span><span class="strut bottom" style="height:1.1701899999999998em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit">c</span><span class="mrel">→</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9201899999999998em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span><span style="top:-3.6023300000000003em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="margin-left:0.16668em;"><span>~</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span>"</p>
+
+<a name="147549477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147549477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147549477">Reid Barton (Nov 12 2018 at 21:32)</a>:</h4>
+<p>and trying to figure out how to explain it to Lean</p>
+
+<a name="147549682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147549682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147549682">Johan Commelin (Nov 12 2018 at 21:37)</a>:</h4>
+<p><code>apply yoneda_lemma; obviously</code> ??? <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
+
+<a name="147553765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147553765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147553765">Reid Barton (Nov 12 2018 at 22:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I left a bit of a mess in <code>limits.lean</code> regarding <code>is_limit.equiv</code>/<code>is_limit.of_equiv</code> and the colimit versions. I found it's often easier to just work with the <code>equiv</code> type, rather than <code>iso</code> and especially <code>iso</code> between natural transformations. In particular, <code>is_limit.of_equiv</code> is nontrivially (at least in Lean) harder to use than <code>is_colimit.of_equiv</code>--for <code>is_limit.of_equiv</code> you have to produce an inverse as a natural transformation, while the fact that it's natural is actually automatic.</p>
+
+<a name="147553773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147553773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147553773">Reid Barton (Nov 12 2018 at 22:59)</a>:</h4>
+<p>This should get sorted out somehow--maybe having both <code>equiv</code> and <code>iso</code> versions</p>
+
+<a name="147554813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554813">Scott Morrison (Nov 12 2018 at 23:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>, isn't this what <code>nat_iso.of_components</code> is for?</p>
+
+<a name="147554871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554871">Scott Morrison (Nov 12 2018 at 23:20)</a>:</h4>
+<p>You specify an iso in each component, and check naturality in just one direction.</p>
+
+<a name="147554885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554885">Scott Morrison (Nov 12 2018 at 23:20)</a>:</h4>
+<p>Perhaps there should be a companion that let's you check naturality in the other direction instead.</p>
+
+<a name="147554886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554886">Reid Barton (Nov 12 2018 at 23:20)</a>:</h4>
+<p>oh, I didn't see that</p>
+
+<a name="147554900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554900">Scott Morrison (Nov 12 2018 at 23:20)</a>:</h4>
+<p>Sorry, I really should write some docs. :-(</p>
+
+<a name="147554902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554902">Reid Barton (Nov 12 2018 at 23:20)</a>:</h4>
+<p>but anyways, I shouldn't need to check naturality in either direction</p>
+
+<a name="147554907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554907">Scott Morrison (Nov 12 2018 at 23:20)</a>:</h4>
+<p>Ah, why is that?</p>
+
+<a name="147554951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554951">Reid Barton (Nov 12 2018 at 23:21)</a>:</h4>
+<p>Well, because... I actually want to use something like <code>is_limit.of_extensions_iso</code></p>
+
+<a name="147554969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147554969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147554969">Reid Barton (Nov 12 2018 at 23:21)</a>:</h4>
+<p>but <code>nat_iso.of_components</code> doesn't produce an <code>is_iso</code></p>
+
+<a name="147555016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555016">Reid Barton (Nov 12 2018 at 23:22)</a>:</h4>
+<p>The point is just that the thing which is supposed to be <code>is_iso</code> is already known to be natural</p>
+
+<a name="147555021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555021">Scott Morrison (Nov 12 2018 at 23:22)</a>:</h4>
+<p>ah!</p>
+
+<a name="147555026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555026">Scott Morrison (Nov 12 2018 at 23:22)</a>:</h4>
+<p>okay, sorry, I missed that</p>
+
+<a name="147555051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555051">Scott Morrison (Nov 12 2018 at 23:23)</a>:</h4>
+<p>so we need is_iso.of_nat_trans, which takes an input an <code>F \natt G</code>,  and and is_iso for each component?</p>
+
+<a name="147555185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555185">Scott Morrison (Nov 12 2018 at 23:25)</a>:</h4>
+<p>Regarding your</p>
+<blockquote>
+<p>I'm looking at this proof on paper: "<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mover accent="true"><mi>F</mi><mo>~</mo></mover><mo>(</mo><mi>y</mi><mi>c</mi><mo>)</mo><mo separator="true">,</mo><mi>d</mi><mo>)</mo><mo>=</mo><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mi>y</mi><mi>c</mi><mo separator="true">,</mo><msup><mi>F</mi><mo>∗</mo></msup><mi>d</mi><mo>)</mo><mo>=</mo><msup><mi>F</mi><mo>∗</mo></msup><mi>d</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>=</mo><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi></mrow><mo>(</mo><mi>F</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Hom}(\tilde F (y c), d) = \mathrm{Hom}(y c, F^* d) = F^* d(c) = \mathrm{Hom}(F c, d)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.9201899999999998em;"></span><span class="strut bottom" style="height:1.1701899999999998em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9201899999999998em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span><span style="top:-3.6023300000000003em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="margin-left:0.16668em;"><span>~</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mord mathit">d</span><span class="mopen">(</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathrm">H</span><span class="mord mathrm">o</span><span class="mord mathrm">m</span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit">c</span><span class="mpunct">,</span><span class="mord mathit">d</span><span class="mclose">)</span></span></span></span> and so there is a natural isomorphism <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mi>c</mi><mo>→</mo><mover accent="true"><mi>F</mi><mo>~</mo></mover><mo>(</mo><mi>y</mi><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F c \to \tilde F (y c)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.9201899999999998em;"></span><span class="strut bottom" style="height:1.1701899999999998em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit">c</span><span class="mrel">→</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9201899999999998em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span><span style="top:-3.6023300000000003em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="margin-left:0.16668em;"><span>~</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span>"</p>
+</blockquote>
+<p>It seems we'd want to write:</p>
+<div class="codehilite"><pre><span></span>apply nat_iso.of_components, -- giving us two goals; an iso in each component, and naturality of the forward direction,
+{ intro X,
+  apply yoneda.ext,
+  &lt;&lt;&lt;calc block goes here, doing the Hom set calculation&gt;&gt;&gt; },
+obviously -- to deal with naturality
+</pre></div>
+
+<a name="147555241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555241">Scott Morrison (Nov 12 2018 at 23:26)</a>:</h4>
+<p>I think a calc block should work fine with a string of isos.</p>
+
+<a name="147555247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555247">Scott Morrison (Nov 12 2018 at 23:26)</a>:</h4>
+<p>Because there compositions of isos is marked with <code>[trans]</code>.</p>
+
+<a name="147555262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555262">Reid Barton (Nov 12 2018 at 23:26)</a>:</h4>
+<p>There are actually two naturalities(?) involved: in c and in d</p>
+
+<a name="147555280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555280">Reid Barton (Nov 12 2018 at 23:27)</a>:</h4>
+<p>One of them gets consumed by <code>yoneda.ext</code>, the other to show the resulting transformation is natural in <code>c</code></p>
+
+<a name="147555303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555303">Scott Morrison (Nov 12 2018 at 23:27)</a>:</h4>
+<p>oh, of course</p>
+
+<a name="147555361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555361">Scott Morrison (Nov 12 2018 at 23:28)</a>:</h4>
+<p>so after the <code>calc</code> block we'd have another <code>obviously</code> to discharge the naturality goal that <code>yoneda.ext</code> creates?</p>
+
+<a name="147555382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555382">Scott Morrison (Nov 12 2018 at 23:28)</a>:</h4>
+<p>I guess <code>yoneda.ext</code> and <code>nat_iso.of_components</code> could both have <code>obviously</code> as an autoparam...</p>
+
+<a name="147555473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555473">Reid Barton (Nov 12 2018 at 23:30)</a>:</h4>
+<p>Gotta run for a bit <span class="emoji emoji-1f3c3" title="running">:running:</span></p>
+
+<a name="147555483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147555483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147555483">Scott Morrison (Nov 12 2018 at 23:30)</a>:</h4>
+<p>but that probably makes no sense; auto_param in a open argument of an applied function isn't going to help, because it should run until later...</p>
+
+<a name="147566939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147566939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147566939">Reid Barton (Nov 13 2018 at 04:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> We need that Globular integration already <a href="https://github.com/leanprover-community/mathlib/blob/adjunctions/category_theory/adjunction.lean#L156" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/adjunctions/category_theory/adjunction.lean#L156">https://github.com/leanprover-community/mathlib/blob/adjunctions/category_theory/adjunction.lean#L156</a></p>
+
+<a name="147568567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147568567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147568567">Scott Morrison (Nov 13 2018 at 05:11)</a>:</h4>
+<p>Yeah, I was wishing for globular yesterday as well. I ended up writing a page long rewrite proof, corresponding to a commutative diagram built out of two hexagons and two squares (but interminable rewriting along category.assoc to actually use it), corresponding to a string diagram in which you just had to pull some cups and caps past each other. (This was for composition of monoidal functors.)</p>
+
+<a name="147715738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147715738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147715738">Reid Barton (Nov 15 2018 at 03:23)</a>:</h4>
+<p>I can't believe this resulted in a statement I could actually prove</p>
+<div class="codehilite"><pre><span></span>    <span class="n">dsimp</span> <span class="o">[</span><span class="n">canonical_diagram</span><span class="bp">.</span><span class="n">cocone</span><span class="o">,</span> <span class="n">canonical_diagram</span><span class="bp">.</span><span class="n">to_original</span><span class="o">,</span> <span class="n">canonical_diagram</span><span class="o">,</span>
+      <span class="n">canonical_diagram</span><span class="bp">.</span><span class="n">colimit_cocone</span><span class="o">,</span> <span class="n">id_iso_yoneda_extension_yoneda</span><span class="o">,</span>
+      <span class="n">adjunction</span><span class="bp">.</span><span class="n">nat_iso_equiv</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">nat_trans_equiv</span><span class="o">,</span>
+      <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span><span class="o">,</span> <span class="n">iso</span><span class="bp">.</span><span class="n">hom_equiv_of_isos</span><span class="o">,</span>
+      <span class="n">adjunction</span><span class="bp">.</span><span class="n">mate</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">nat_equiv</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">nat_equiv&#39;</span><span class="o">,</span>
+      <span class="n">adjunction</span><span class="bp">.</span><span class="n">hom_equiv</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">id</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">adjunction_of_equiv_left</span><span class="o">,</span>
+      <span class="n">adjunction</span><span class="bp">.</span><span class="n">adjunction_of_equiv</span><span class="o">,</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">left_adjoint_of_equiv</span><span class="o">,</span>
+      <span class="n">yoneda_extension_adj</span><span class="o">,</span> <span class="n">yoneda_extension_e</span><span class="o">,</span>
+      <span class="n">equiv</span><span class="bp">.</span><span class="n">subtype_equiv_subtype</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">subtype_equiv_of_subtype</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_right</span><span class="o">,</span>
+      <span class="n">equiv</span><span class="bp">.</span><span class="n">arrow_congr</span><span class="o">,</span>
+      <span class="n">is_colimit</span><span class="bp">.</span><span class="n">equiv</span><span class="o">,</span>
+      <span class="n">restricted_yoneda</span><span class="o">,</span> <span class="n">yoneda_extension</span><span class="o">,</span> <span class="n">yoneda_extension_obj</span><span class="o">,</span>
+      <span class="n">restricted_yoneda_yoneda_iso_id</span><span class="o">,</span>
+      <span class="n">nat_iso</span><span class="bp">.</span><span class="n">of_components</span><span class="o">,</span> <span class="n">iso_of_equiv</span><span class="o">,</span> <span class="n">yoneda_equiv</span><span class="o">],</span>
+</pre></div>
+
+<a name="147715886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147715886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147715886">Kevin Buzzard (Nov 15 2018 at 03:26)</a>:</h4>
+<p>I look at that and I can see why category theory has a reputation in some quarters of just being a bunch of trivialities...</p>
+
+<a name="147716433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147716433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147716433">Scott Morrison (Nov 15 2018 at 03:41)</a>:</h4>
+<p>Sounds like more rfl lemmas were needed.</p>
+
+<a name="147853440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853440">Reid Barton (Nov 17 2018 at 00:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> did you do a second force push to the adjunctions branch, or am I imagining things?</p>
+
+<a name="147853442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853442">Scott Morrison (Nov 17 2018 at 00:22)</a>:</h4>
+<p>Oh, maybe I did. Sorry, did I mess things up? :-(</p>
+
+<a name="147853526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853526">Reid Barton (Nov 17 2018 at 00:24)</a>:</h4>
+<p>No not really, but give me a heads up if you do a force push in the future, as it's easier to deal with if I know about it earlier</p>
+
+<a name="147853596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853596">Reid Barton (Nov 17 2018 at 00:26)</a>:</h4>
+<p>I managed to prove that the category of colimit-preserving functors Set^C^op -&gt; D is equivalent to the category of functors C -&gt; D</p>
+
+<a name="147853606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853606">Reid Barton (Nov 17 2018 at 00:26)</a>:</h4>
+<p>for D cocomplete of course</p>
+
+<a name="147853610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853610">Reid Barton (Nov 17 2018 at 00:26)</a>:</h4>
+<p>though I'm not particularly happy with the proof yet</p>
+
+<a name="147853633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853633">Reid Barton (Nov 17 2018 at 00:27)</a>:</h4>
+<p>It turns out there are a lot of statements to check there...</p>
+
+<a name="147853740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/147853740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#147853740">Reid Barton (Nov 17 2018 at 00:29)</a>:</h4>
+<p>I guess I also proved the "adjoint functor theorem" for such functors, along the way</p>
+
+<a name="148386153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/148386153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#148386153">Johan Commelin (Nov 26 2018 at 19:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Shouldn't the <code>left_triangle</code> and <code>right_triangle</code> fields in adjunction get <code>obviously</code> auto_param? (I can testify that <code>obviously</code> will prove them in the case of <code>comap f</code> and <code>map f</code> between <code>presheaf X</code> and <code>presheaf Y</code>.</p>
+
+<a name="148386577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/148386577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#148386577">Johan Commelin (Nov 26 2018 at 19:25)</a>:</h4>
+<p>This is really slick:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">adj</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="o">(</span><span class="n">comap</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">unit</span>   <span class="o">:=</span> <span class="n">unit</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">counit</span> <span class="o">:=</span> <span class="n">counit</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">left_triangle</span>  <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span><span class="o">,</span>
+  <span class="n">right_triangle</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">comap</span><span class="bp">.</span><span class="n">preserves_colimits</span> <span class="o">:</span> <span class="n">preserves_colimits</span> <span class="o">(</span><span class="n">comap</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">adjunction</span><span class="bp">.</span><span class="n">left_adjoint_preserves_colimits</span> <span class="o">(</span><span class="n">adj</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="148386603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/148386603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#148386603">Reid Barton (Nov 26 2018 at 19:25)</a>:</h4>
+<p>I suppose, though I think that defining adjunctions in terms of the unit and counit was actually the wrong idea in the first place</p>
+
+<a name="148389931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/148389931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#148389931">Johan Commelin (Nov 26 2018 at 20:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  Does that mean that I shouldn't try to apply this on my sheaf branch?</p>
+
+<a name="148394873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/148394873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#148394873">Reid Barton (Nov 26 2018 at 21:13)</a>:</h4>
+<p>Using the adjunctions branch as-is should be fine for now--I don't expect you will need to make major changes later. And more users of the code is good for trying out different designs.</p>
+
+<a name="155331480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331480">Johan Commelin (Jan 17 2019 at 13:40)</a>:</h4>
+<p>I've been experimenting a bit with adjunctions. Here is a little teaser:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">discrete</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="err">⥤</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">X</span><span class="o">,</span> <span class="err">⊤</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">continuous_top</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">trivial</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="err">⥤</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">X</span><span class="o">,</span> <span class="err">⊥</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">continuous_bot</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">adj₁</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="n">discrete</span> <span class="n">forget</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">continuous_top</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span><span class="o">,</span>
+    <span class="n">right_inv</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">},</span>
+  <span class="n">unit</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="n">id</span> <span class="o">},</span>
+  <span class="n">counit</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">id</span><span class="o">,</span> <span class="n">continuous_top</span><span class="bp">⟩</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">adj₂</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="n">forget</span> <span class="n">trivial</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">continuous_bot</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span><span class="o">,</span>
+    <span class="n">right_inv</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">},</span>
+  <span class="n">unit</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">id</span><span class="o">,</span> <span class="n">continuous_bot</span><span class="bp">⟩</span> <span class="o">},</span>
+  <span class="n">counit</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="n">id</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
+
+<a name="155331490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331490">Johan Commelin (Jan 17 2019 at 13:40)</a>:</h4>
+<p>Code can be found on the <code>adjunctions-2</code> branch.</p>
+
+<a name="155331619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331619">Johan Commelin (Jan 17 2019 at 13:42)</a>:</h4>
+<p>Observations made by Reid:</p>
+<ul>
+<li>It is nice if we can have adjunctions between functors <code>F : C =&gt; D</code> and <code>G : D =&gt; C</code> where <code>C</code> and <code>D</code> don't need to live in the same universe.</li>
+<li>We should learn from the <code>metric_space</code> hierarchy, and add redundant data in our definitions, with conditions that they are compatible.</li>
+</ul>
+
+<a name="155331719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331719">Johan Commelin (Jan 17 2019 at 13:44)</a>:</h4>
+<p>So now there are 3 ways to define an adjunction (with the help of <code>obviously</code> <span class="emoji emoji-1f603" title="smiley">:smiley:</span>).<br>
+ 1. Like I did above: you specify <code>hom_equiv</code>, <code>unit</code> and <code>counit</code>.<br>
+ 2. You only give <code>hom_equiv</code>.<br>
+ 3. You only give <code>unit</code> and <code>counit</code>.<br>
+Here are two helper structures:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">core_hom_equiv</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hom_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span><span class="o">),</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">G</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Y</span><span class="o">))</span>
+<span class="o">(</span><span class="n">hom_equiv_naturality_left&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">X&#39;</span> <span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X&#39;</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">),</span>
+  <span class="o">(</span><span class="n">hom_equiv</span> <span class="n">X&#39;</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="err">≫</span> <span class="o">(</span><span class="n">hom_equiv</span> <span class="n">X</span> <span class="n">Y</span><span class="o">)</span> <span class="n">g</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom_equiv_naturality_right&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Y&#39;</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Y&#39;</span><span class="o">),</span>
+  <span class="o">(</span><span class="n">hom_equiv</span> <span class="n">X</span> <span class="n">Y&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="err">≫</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">hom_equiv</span> <span class="n">X</span> <span class="n">Y</span><span class="o">)</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">G</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">core_unit_counit</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">unit</span> <span class="o">:</span> <span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="n">C</span> <span class="err">⟹</span> <span class="n">F</span><span class="bp">.</span><span class="n">comp</span> <span class="n">G</span><span class="o">)</span>
+<span class="o">(</span><span class="n">counit</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="n">comp</span> <span class="n">F</span> <span class="err">⟹</span> <span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="n">D</span><span class="o">)</span>
+<span class="o">(</span><span class="n">left_triangle&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">whisker_right</span> <span class="n">unit</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="n">vcomp</span> <span class="o">(</span><span class="n">whisker_left</span> <span class="n">F</span> <span class="n">counit</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat_trans</span><span class="bp">.</span><span class="n">id</span> <span class="bp">_</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+<span class="o">(</span><span class="n">right_triangle&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">whisker_left</span> <span class="n">G</span> <span class="n">unit</span><span class="o">)</span><span class="bp">.</span><span class="n">vcomp</span> <span class="o">(</span><span class="n">whisker_right</span> <span class="n">counit</span> <span class="n">G</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat_trans</span><span class="bp">.</span><span class="n">id</span> <span class="bp">_</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+</pre></div>
+
+<a name="155331737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331737">Johan Commelin (Jan 17 2019 at 13:45)</a>:</h4>
+<p>We then have</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">-</span>
+<span class="cm">`adjunction F G` represents the data of an adjunction between two functors</span>
+<span class="cm">`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.</span>
+<span class="cm">-/</span>
+<span class="kn">structure</span> <span class="n">adjunction</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="kn">extends</span>
+  <span class="o">(</span><span class="n">adjunction</span><span class="bp">.</span><span class="n">core_hom_equiv</span> <span class="n">F</span> <span class="n">G</span><span class="o">),</span> <span class="o">(</span><span class="n">adjunction</span><span class="bp">.</span><span class="n">core_unit_counit</span> <span class="n">F</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">unit_hom_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">X</span><span class="o">},</span> <span class="n">unit</span><span class="bp">.</span><span class="n">app</span> <span class="n">X</span> <span class="bp">=</span> <span class="o">(</span><span class="n">hom_equiv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">))</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+<span class="o">(</span><span class="n">counit_hom_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">Y</span><span class="o">},</span> <span class="n">counit</span><span class="bp">.</span><span class="n">app</span> <span class="n">Y</span> <span class="bp">=</span> <span class="o">(</span><span class="n">hom_equiv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="o">(</span><span class="n">G</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Y</span><span class="o">))</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+</pre></div>
+
+<a name="155331794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155331794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155331794">Johan Commelin (Jan 17 2019 at 13:46)</a>:</h4>
+<p>And finally</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">of_core_hom_equiv</span> <span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">core_hom_equiv</span> <span class="n">F</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="n">F</span> <span class="n">G</span> <span class="o">:=</span> <span class="c1">-- see github for the code</span>
+<span class="n">def</span> <span class="n">of_core_unit_counit</span> <span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">core_unit_counit</span> <span class="n">F</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="n">F</span> <span class="n">G</span> <span class="o">:=</span> <span class="c1">-- see github for the code</span>
+</pre></div>
+
+<a name="155344034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155344034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155344034">Patrick Massot (Jan 17 2019 at 16:31)</a>:</h4>
+<p>It looks very nice, except that it could look much nicer. Did you miss <a href="https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb#diff-50f7eff1a2547545a820cbbeee3a0b6eL15" target="_blank" title="https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb#diff-50f7eff1a2547545a820cbbeee3a0b6eL15">https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb#diff-50f7eff1a2547545a820cbbeee3a0b6eL15</a> ?</p>
+
+<a name="155344144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155344144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155344144">Johan Commelin (Jan 17 2019 at 16:32)</a>:</h4>
+<p>Yes, I guess we should quickly make a PR that uses the correct functor symbol</p>
+
+<a name="155356649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155356649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155356649">Johan Commelin (Jan 17 2019 at 19:23)</a>:</h4>
+<p>There is one drawback that I currently see with my approach. If the categories <code>C</code> and <code>D</code> do live in the same universe, then we can extract an isomorphism between the two Hom-bifunctors from the adjunction. We can also define an adjunction given such a natural isomorphism <code>i</code>. But the extracted isomorphism will not be defeq to <code>i</code>.</p>
+
+<a name="155356679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/155356679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#155356679">Johan Commelin (Jan 17 2019 at 19:24)</a>:</h4>
+<p>I do not see how to fix this if we also want to keep the option of adjunctions for different universe levels.</p>
+
+<a name="156608839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156608839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156608839">Johan Commelin (Jan 22 2019 at 15:40)</a>:</h4>
+<p>Here is a slightly non-trivial example of a Lean checked adjunction:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">set_fintype</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">polynomial</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="err">⥤</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">mv_polynomial</span> <span class="n">α</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="n">X</span> <span class="err">∘</span> <span class="n">f</span><span class="o">),</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map_id&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="n">eval₂_eta</span><span class="o">,</span>
+  <span class="n">map_comp&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">apply</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">p</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span> <span class="n">comp_val</span><span class="o">,</span>
+      <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp_app</span><span class="o">,</span> <span class="n">types_comp</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">polynomial_obj_α</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">obj</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">α</span> <span class="bp">=</span> <span class="n">mv_polynomial</span> <span class="n">α</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">polynomial_map_val</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="n">X</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">adj</span> <span class="o">:</span> <span class="n">adjunction</span> <span class="n">polynomial</span> <span class="o">(</span><span class="n">forget</span> <span class="o">:</span> <span class="n">CommRing</span> <span class="err">⥤</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">adjunction</span><span class="bp">.</span><span class="n">mk_of_hom_equiv</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="o">{</span> <span class="n">hom_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">R</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">X</span><span class="o">,</span>
+    <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">eval₂</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast</span> <span class="n">f</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span>
+    <span class="k">begin</span>
+      <span class="k">have</span> <span class="n">H0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">congr</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">eq_cast&#39;</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">val</span> <span class="err">∘</span> <span class="n">C</span><span class="o">))</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">))</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p₁</span> <span class="n">p₂</span><span class="o">,</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span><span class="bp">.</span><span class="n">val</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p₁</span> <span class="n">p₂</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">H2</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p₁</span> <span class="n">p₂</span><span class="o">,</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span><span class="bp">.</span><span class="n">val</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p₁</span> <span class="n">p₂</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">p</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span>
+      <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span>
+        <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp_app</span><span class="o">,</span> <span class="n">hom_coe_app</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span>
+    <span class="kn">end</span><span class="o">,</span>
+    <span class="n">right_inv</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">},</span>
+  <span class="n">hom_equiv_naturality_left_symm&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X&#39;</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span>
+  <span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">p</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span>
+      <span class="n">comp_val</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">coe_fn_symm_mk</span><span class="o">,</span> <span class="n">hom_coe_app</span><span class="o">,</span> <span class="n">polynomial_map_val</span><span class="o">,</span>
+      <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp_app</span><span class="o">,</span> <span class="n">add_right_inj</span><span class="o">,</span> <span class="n">types_comp</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span>
+  <span class="kn">end</span> <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="156608907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156608907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156608907">Johan Commelin (Jan 22 2019 at 15:41)</a>:</h4>
+<p>For some reason this code is slower than I would have hoped. And as you can see there is quite a bit of <code>mv_polynomial.induction_on p</code>, so I think there are some lemmas that could be factored out...</p>
+
+<a name="156608934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156608934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156608934">Reid Barton (Jan 22 2019 at 15:41)</a>:</h4>
+<p>When I was working on adjunctions I gave up on precisely this because everything was so slow</p>
+
+<a name="156609025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609025">Johan Commelin (Jan 22 2019 at 15:42)</a>:</h4>
+<p>Somehow that doesn't feel like a good sign.</p>
+
+<a name="156609062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609062">Reid Barton (Jan 22 2019 at 15:43)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/my_polynomial.20performance/near/147887874" title="#narrow/stream/113488-general/topic/my_polynomial.20performance/near/147887874">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial.20performance/near/147887874</a></p>
+
+<a name="156609169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609169">Johan Commelin (Jan 22 2019 at 15:44)</a>:</h4>
+<p>Aah, I see.</p>
+
+<a name="156609366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609366">Johan Commelin (Jan 22 2019 at 15:46)</a>:</h4>
+<p>I just pushed.</p>
+
+<a name="156609404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609404">Patrick Massot (Jan 22 2019 at 15:47)</a>:</h4>
+<p>Is this <code>obviously</code> being slow of <code>mv_polynomial</code>?</p>
+
+<a name="156609443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609443">Johan Commelin (Jan 22 2019 at 15:47)</a>:</h4>
+<div class="codehilite"><pre><span></span>rings.lean:115:18: information
+
+parsing took 41.6ms
+rings.lean:115:18: information
+
+elaboration of adj took 15.2s
+rings.lean:115:18: information
+
+type checking of adj took 18.7ms
+rings.lean:115:18: information
+
+decl post-processing of adj took 17.5ms
+</pre></div>
+
+<a name="156609454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609454">Johan Commelin (Jan 22 2019 at 15:47)</a>:</h4>
+<p>No, I think it's <code>mv_polynomial</code></p>
+
+<a name="156609524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609524">Johan Commelin (Jan 22 2019 at 15:48)</a>:</h4>
+<p>Also:</p>
+<div class="codehilite"><pre><span></span>rings.lean:100:18: information
+
+parsing took 7.51ms
+rings.lean:100:18: information
+
+elaboration of polynomial took 4.11s
+rings.lean:100:18: information
+
+type checking of polynomial took 15.8ms
+rings.lean:100:18: information
+
+decl post-processing of polynomial took 15.3ms
+</pre></div>
+
+<a name="156609545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609545">Johan Commelin (Jan 22 2019 at 15:48)</a>:</h4>
+<p>And there is no <code>obviously</code> in</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">polynomial</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="err">⥤</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">mv_polynomial</span> <span class="n">α</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="n">X</span> <span class="err">∘</span> <span class="n">f</span><span class="o">),</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map_id&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="n">eval₂_eta</span><span class="o">,</span>
+  <span class="n">map_comp&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">apply</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">p</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_mul</span><span class="o">,</span> <span class="n">eval₂_C</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span> <span class="n">comp_val</span><span class="o">,</span>
+      <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp_app</span><span class="o">,</span> <span class="n">types_comp</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">}</span>
+</pre></div>
+
+<a name="156609647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609647">Johan Commelin (Jan 22 2019 at 15:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Is there anything that can be done here? I guess lots of the stuff that we plan on doing will depend on <code>mv_polynomial</code>. All the number theory that Kevin and Sander are interested in will need it.</p>
+
+<a name="156609654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609654">Patrick Massot (Jan 22 2019 at 15:49)</a>:</h4>
+<p>What happens if you sorry the last proof?</p>
+
+<a name="156609771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609771">Johan Commelin (Jan 22 2019 at 15:50)</a>:</h4>
+<p>Then it drops from 4s to 1s.</p>
+
+<a name="156609780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609780">Kenny Lau (Jan 22 2019 at 15:50)</a>:</h4>
+<p>Stuff involving mv_polynomial and polynomial have been known to be slow.</p>
+
+<a name="156609783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609783">Kenny Lau (Jan 22 2019 at 15:50)</a>:</h4>
+<p>I don't think <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> knows how to fix it.</p>
+
+<a name="156609862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156609862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156609862">Johan Commelin (Jan 22 2019 at 15:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> It spends 638ms in the second <code>by apply_instance</code>.</p>
+
+<a name="156610033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610033">Johan Commelin (Jan 22 2019 at 15:53)</a>:</h4>
+<p>The last <code>begin</code>-<code>end</code> block in <code>adj</code> takes 10 seconds <span class="emoji emoji-1f631" title="scream">:scream:</span></p>
+
+<a name="156610251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610251">Reid Barton (Jan 22 2019 at 15:55)</a>:</h4>
+<p>do you really need to <code>simp at *</code>?</p>
+
+<a name="156610303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610303">Johan Commelin (Jan 22 2019 at 15:56)</a>:</h4>
+<p>Yes, some of the goals need that.</p>
+
+<a name="156610418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610418">Reid Barton (Jan 22 2019 at 15:57)</a>:</h4>
+<p>I mean maybe you can do something more than <code>simp</code> but less than <code>at *</code></p>
+
+<a name="156610450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610450">Reid Barton (Jan 22 2019 at 15:58)</a>:</h4>
+<p>e.g. explicitly say where to simp</p>
+
+<a name="156610592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610592">Johan Commelin (Jan 22 2019 at 15:59)</a>:</h4>
+<p>Aah, ok. But the context is very small, and I guess <code>simp</code> will fail quickly on atomic hypotheses...</p>
+
+<a name="156610713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610713">Johan Commelin (Jan 22 2019 at 16:00)</a>:</h4>
+<p>Also, the places where I want to simplify are introduced by <code>intros</code>, and what gets intro'd depends on the goal.</p>
+
+<a name="156610722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610722">Johan Commelin (Jan 22 2019 at 16:00)</a>:</h4>
+<p>The induction step generates 3 goals.</p>
+
+<a name="156610749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/156610749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#156610749">Johan Commelin (Jan 22 2019 at 16:00)</a>:</h4>
+<p>So if I want to be explicit in the <code>simp</code>-part, I need to tackle the 3 goals separately...</p>
+
+<a name="157020948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/157020948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#157020948">Reid Barton (Jan 28 2019 at 13:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, maybe <code>is_left_adjoint</code> should be a class, and <code>left_adjoint_preserves_colimits</code> an instance?</p>
+
+<a name="157052142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/157052142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#157052142">Johan Commelin (Jan 28 2019 at 20:45)</a>:</h4>
+<p>Probably yes... I wasn't sure yet when I wrote that code (and I had just experienced that it isn't always a good idea to make things classes, viz <code>unique</code>).</p>
+
+<a name="157052152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/157052152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html#157052152">Johan Commelin (Jan 28 2019 at 20:45)</a>:</h4>
+<p>Feel free to upgrade it whenever you have code that comes close to it.</p>
+
+
+{% endraw %}

@@ -1,0 +1,69 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/51153addinganelementtoaset.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html">adding an element to a set</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="130330334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130330334">Kevin Buzzard (Jul 26 2018 at 10:52)</a>:</h4>
+<p>The notation <code>+</code> is attached to <code>has_add.add : X -&gt; X -&gt; X</code>. Mathematicians use <code>+</code> in more general ways though. I find myself wanting to write <code>r + J</code> for <code>r</code> an element of, and <code>J</code> a subset of, an additive abelian group (<code>J</code> is a subgroup in fact). This is standard notation in mathematics and I suspect I can't have it given the set-up we have. Does anyone have any thoughts as to how I might try and represent such an idea in Lean? I can make the object I want no problem, the issue is simply that I want the notation to be as close to what a mathematician would write as possible.</p>
+
+<a name="130330459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130330459">Kenny Lau (Jul 26 2018 at 10:56)</a>:</h4>
+<p>It's called a coset.</p>
+
+<a name="130330461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130330461">Kenny Lau (Jul 26 2018 at 10:56)</a>:</h4>
+<p>specifically, a left coset</p>
+
+<a name="130330474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130330474">Kevin Buzzard (Jul 26 2018 at 10:57)</a>:</h4>
+<p>I've seen cosets in group theory but unfortunately this is an additive group ;-)</p>
+
+<a name="130330478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130330478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130330478">Kenny Lau (Jul 26 2018 at 10:57)</a>:</h4>
+<p><code>additive</code></p>
+
+<a name="130331527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331527">Kevin Buzzard (Jul 26 2018 at 11:21)</a>:</h4>
+<p>How scalable is this <code>additive</code> idea I wonder? I recently wanted a free abelian group with group law multiplication but ultimately settled on group law addition because thay was what the finsupp construction gave me and I couldn't face cluttering everything up with additive and multiplicative everywhere.</p>
+
+<a name="130331592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331592">Kenny Lau (Jul 26 2018 at 11:22)</a>:</h4>
+<p>as scalable as I made it in my constructive tensor product</p>
+
+<a name="130331599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331599">Kenny Lau (Jul 26 2018 at 11:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">free_abelian_group</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">additive</span> <span class="err">$</span> <span class="n">abelianization</span> <span class="err">$</span> <span class="n">free_group</span> <span class="n">α</span>
+</pre></div>
+
+<a name="130331610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331610">Kenny Lau (Jul 26 2018 at 11:22)</a>:</h4>
+<p>and the proof that it works is that I built the whole tensor product out of the free abelian group</p>
+
+<a name="130331623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331623">Chris Hughes (Jul 26 2018 at 11:23)</a>:</h4>
+<p><code>(+ r) '' J</code></p>
+
+<a name="130331660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331660">Kenny Lau (Jul 26 2018 at 11:23)</a>:</h4>
+<p>I would prefer <code>((-) r) ⁻¹' J</code></p>
+
+<a name="130331735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130331735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130331735">Johan Commelin (Jul 26 2018 at 11:24)</a>:</h4>
+<p>I would prefer readable notation.</p>
+
+<a name="130332818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20an%20element%20to%20a%20set/near/130332818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51153addinganelementtoaset.html#130332818">Kevin Buzzard (Jul 26 2018 at 11:49)</a>:</h4>
+<p>I would prefer the notation mathematicians use, i.e. what we can't have.</p>
+
+
+{% endraw %}

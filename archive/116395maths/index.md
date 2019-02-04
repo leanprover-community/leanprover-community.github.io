@@ -10,7 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linarith failure](87044linarithfailure.html) (103 messages, latest: Feb 04 2019 at 11:54)
+* [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 04 2019 at 14:12)
+
+* [floor_ring](74194floorring.html) (50 messages, latest: Feb 04 2019 at 12:19)
+
+* [linarith failure](87044linarithfailure.html) (109 messages, latest: Feb 04 2019 at 12:03)
 
 * [card](81595card.html) (12 messages, latest: Feb 03 2019 at 20:44)
 

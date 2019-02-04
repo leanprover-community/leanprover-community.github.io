@@ -1,0 +1,222 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/40911classvsdefagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html">class vs def again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="129776099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129776099">Patrick Massot (Jul 16 2018 at 23:10)</a>:</h4>
+<p>Variation on a well-known theme: should uniform continuity of a map <code>f</code> between uniform spaces <code>a</code> and <code>b</code> be a <code>def</code> or a <code>class</code>? Or should we bundle <code>f</code> and its uniform continuity?  Currently we have a <code>def</code> and no bundling. As usual, this is all convenient to prove properties of individual maps, or compositions of two such maps. Now let's get functorial. I want to promote each such <code>f</code> to a map between the respective Hausdorff completions of <code>a</code> and <code>b</code>.  Of course in math this would be called <code>completion_lift f</code>. This currently doesn't make sense in mathlib, we need a term <code>h : uniform_continuous f</code>. So we could write <code>completion_lift f h</code>. But <code>f</code> can be inferred from <code>h</code>, so common sense dictates it should be an implicit argument, and we end up with <code>completion_lift h</code>. And it looks <em>weird</em>. And it gets worse when stating and proving properties of <code>completion_lift</code>, especially functoriality that should read <code>completion_lift f' ∘ f = (completion_lift f') ∘ completion_lift f </code> but actually reads <code>completion_lift (uniform_continuous.comp h h') = (completion_lift h') ∘ completion_lift h</code>.</p>
+
+<a name="129776108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129776108">Patrick Massot (Jul 16 2018 at 23:11)</a>:</h4>
+<p>What should we do?</p>
+
+<a name="129776783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129776783">Patrick Massot (Jul 16 2018 at 23:26)</a>:</h4>
+<p>See <a href="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean" target="_blank" title="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean">https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean</a> for the concrete situation</p>
+
+<a name="129776974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129776974">Patrick Massot (Jul 16 2018 at 23:30)</a>:</h4>
+<p>I had a lot of fun doing all this after proving the universal mapping property for completions. It was fun because it was really very close to a paper and pencil proof. But I wouldn't find it fun to do this ten times. I can't wait until we get nice abstract non-sense in mathlib. How far are we from merging <span class="user-mention" data-user-id="110087">@Scott Morrison</span> PR? Has anyone heard from Scott recently?</p>
+
+<a name="129778526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778526">Mario Carneiro (Jul 17 2018 at 00:07)</a>:</h4>
+<p>The last few times I've been asked this I advocated the bundled function approach and it's worked well thus far</p>
+
+<a name="129778652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778652">Patrick Massot (Jul 17 2018 at 00:10)</a>:</h4>
+<p>Question is then how to handle the existing code base? How to avoid duplicating too much stuff. I guess we still want to keep the current Prop</p>
+
+<a name="129778896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778896">Mario Carneiro (Jul 17 2018 at 00:16)</a>:</h4>
+<p>Hm, good point. Is it possible to define <code>completion_lift f</code> without the continuity assumption?</p>
+
+<a name="129778901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778901">Mario Carneiro (Jul 17 2018 at 00:16)</a>:</h4>
+<p>i.e. take a default value</p>
+
+<a name="129778911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778911">Patrick Massot (Jul 17 2018 at 00:16)</a>:</h4>
+<p>It depends on <code>dense_embedding.extend</code> we were discussing earlier today</p>
+
+<a name="129778935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778935">Patrick Massot (Jul 17 2018 at 00:17)</a>:</h4>
+<p>see <a href="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L95-L96" target="_blank" title="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L95-L96">https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L95-L96</a></p>
+
+<a name="129778936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778936">Mario Carneiro (Jul 17 2018 at 00:18)</a>:</h4>
+<p><code>dense_embedding.extend</code> doesn't require continuity</p>
+
+<a name="129778979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778979">Mario Carneiro (Jul 17 2018 at 00:18)</a>:</h4>
+<p>oh, weird, a unique exists</p>
+
+<a name="129778993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778993">Patrick Massot (Jul 17 2018 at 00:19)</a>:</h4>
+<p>well, it doesn't require it until <code>ext_e_eq</code></p>
+
+<a name="129778999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129778999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129778999">Patrick Massot (Jul 17 2018 at 00:19)</a>:</h4>
+<p>unique exitsts are everywhere in this abstract nonsense business</p>
+
+<a name="129779005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779005">Patrick Massot (Jul 17 2018 at 00:19)</a>:</h4>
+<p>That's an important part of the universal property</p>
+
+<a name="129779008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779008">Mario Carneiro (Jul 17 2018 at 00:19)</a>:</h4>
+<p>oh sure, but mathlib basically never uses it</p>
+
+<a name="129779056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779056">Mario Carneiro (Jul 17 2018 at 00:20)</a>:</h4>
+<p>it always defines the unique thing with a concrete term</p>
+
+<a name="129779058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779058">Patrick Massot (Jul 17 2018 at 00:20)</a>:</h4>
+<p>that's because it lacks basic category theory support</p>
+
+<a name="129779066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779066">Patrick Massot (Jul 17 2018 at 00:20)</a>:</h4>
+<p>I don't want a definition with a concrete term, I want the abstract interface, as in my file</p>
+
+<a name="129779069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779069">Mario Carneiro (Jul 17 2018 at 00:21)</a>:</h4>
+<p>no, there are plenty of places where math dictates a unique existence, it's just easier to work with terms</p>
+
+<a name="129779079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779079">Mario Carneiro (Jul 17 2018 at 00:21)</a>:</h4>
+<p>If you look at scott's development I think he's done the same</p>
+
+<a name="129779121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779121">Patrick Massot (Jul 17 2018 at 00:22)</a>:</h4>
+<p>even the explicit construction of <code>completion</code> and <code>to_completion</code> will need to be complemented by a uniqueness up to unique iso result. This is my plan for tomorrow, as well as deducing that completion of a product is isomorphic to product of completions</p>
+
+<a name="129779122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779122">Mario Carneiro (Jul 17 2018 at 00:22)</a>:</h4>
+<p>I'm sure Kevin can discuss his experiences with <code>sqrt_exists</code></p>
+
+<a name="129779137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779137">Patrick Massot (Jul 17 2018 at 00:23)</a>:</h4>
+<p>Probably the best is to have an explicit term <em>and</em> a uniqueness lemma</p>
+
+<a name="129779148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779148">Mario Carneiro (Jul 17 2018 at 00:23)</a>:</h4>
+<p>right</p>
+
+<a name="129779152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779152">Mario Carneiro (Jul 17 2018 at 00:24)</a>:</h4>
+<p>the uniqueness lemma says something like <code>x = my_thing &lt;-&gt; property</code></p>
+
+<a name="129779198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779198">Patrick Massot (Jul 17 2018 at 00:24)</a>:</h4>
+<p>I still don't know how to do that in this case. Because that <code>de.ext</code> is only half the construction. Then it must still descend to a quotient (lift to a quotient in Lean-speak)</p>
+
+<a name="129779201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779201">Patrick Massot (Jul 17 2018 at 00:24)</a>:</h4>
+<p><a href="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L99" target="_blank" title="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L99">https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/1e1fb6f6e6b03eb2e5d436851aaaa8e8fc3f1582/src/for_mathlib/completion.lean#L99</a></p>
+
+<a name="129779202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779202">Mario Carneiro (Jul 17 2018 at 00:25)</a>:</h4>
+<p>Still, you've constructed the term</p>
+
+<a name="129779208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779208">Mario Carneiro (Jul 17 2018 at 00:25)</a>:</h4>
+<p><code>g</code> in the proof</p>
+
+<a name="129779210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779210">Patrick Massot (Jul 17 2018 at 00:25)</a>:</h4>
+<p>this uses uniform continuity</p>
+
+<a name="129779214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779214">Patrick Massot (Jul 17 2018 at 00:25)</a>:</h4>
+<p>no, <code>g</code> needs <code>compat</code></p>
+
+<a name="129779220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779220">Mario Carneiro (Jul 17 2018 at 00:25)</a>:</h4>
+<p>right, it's defined by lift on the quotient</p>
+
+<a name="129779283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779283">Mario Carneiro (Jul 17 2018 at 00:26)</a>:</h4>
+<p>I'm not asking you to prove the theorem without the assumption, or even do the construction without uniform continuity</p>
+
+<a name="129779292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779292">Mario Carneiro (Jul 17 2018 at 00:27)</a>:</h4>
+<p>I want to see if you can do a similar thing to what I did for <code>extend</code></p>
+
+<a name="129779295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779295">Patrick Massot (Jul 17 2018 at 00:27)</a>:</h4>
+<p>Then I don't understand what you suggest</p>
+
+<a name="129779297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779297">Mario Carneiro (Jul 17 2018 at 00:27)</a>:</h4>
+<p>If <code>A</code> is empty, is <code>completion A</code> also empty?</p>
+
+<a name="129779300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779300">Patrick Massot (Jul 17 2018 at 00:27)</a>:</h4>
+<p>yes</p>
+
+<a name="129779303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779303">Patrick Massot (Jul 17 2018 at 00:27)</a>:</h4>
+<p>(I hope)</p>
+
+<a name="129779342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779342">Patrick Massot (Jul 17 2018 at 00:28)</a>:</h4>
+<p>In my mind it is certainly empty</p>
+
+<a name="129779346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779346">Patrick Massot (Jul 17 2018 at 00:28)</a>:</h4>
+<p>but I'm not an expert in zerology</p>
+
+<a name="129779426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779426">Mario Carneiro (Jul 17 2018 at 00:31)</a>:</h4>
+<p>Then you can follow a similar proof to what I did. Define <code>completion.extend f</code> by cases on <code>uniform_continuous f</code>. If it is, do the regular thing. Otherwise, we can pick an arbitrary element of <code>B</code> by <code>choice</code>. We know it is nonempty because we are given an element of <code>completion A</code> so we can prove <code>A</code> is nonempty, so <code>a : A</code> means <code>f a : B</code></p>
+
+<a name="129779662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779662">Patrick Massot (Jul 17 2018 at 00:36)</a>:</h4>
+<p>Oh. This is twisted</p>
+
+<a name="129779781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779781">Patrick Massot (Jul 17 2018 at 00:38)</a>:</h4>
+<p>I'll try that tomorrow, before moving on to products. It seems we don't have an instance for completion of a product of complete spaces, so there will be preparation work.</p>
+
+<a name="129779858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779858">Patrick Massot (Jul 17 2018 at 00:40)</a>:</h4>
+<p>If I'm lucky I'll even get a <code>dense_embedding.extend</code> without inhabitants in mathlib when I'll wake up <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+
+<a name="129779882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129779882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129779882">Patrick Massot (Jul 17 2018 at 00:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> don't hesitate to have a look at the current state of <a href="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/completions/src/for_mathlib/completion.lean" target="_blank" title="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/completions/src/for_mathlib/completion.lean">https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/completions/src/for_mathlib/completion.lean</a> and comment. It's all for the perfectoid project.</p>
+
+<a name="129798324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129798324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129798324">Kevin Buzzard (Jul 17 2018 at 09:10)</a>:</h4>
+<p>Patrick I'm really grateful for all of this. The perfectoid project shouldn't be too hard to do. The hard part with schemes was proving that the structure presheaf on Spec(R) was a sheaf because this had all sorts of unexpected pitfalls. The analogous statement for adic spaces isn't true -- an affinoid adic space is <em>defined</em> to be an affinoid pre-adic space Spa(R) for which the structure presheaf happens to be a sheaf, so that is a huge hurdle that we don't have to deal with. Completions are, I think, the main technical issue left, and you are dealing with them. I will try and focus on continuous valuations.</p>
+
+<a name="129917105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129917105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129917105">Johan Commelin (Jul 19 2018 at 09:38)</a>:</h4>
+<blockquote>
+<p>Has anyone heard from Scott recently?</p>
+</blockquote>
+<p>I haven't seen Scott here for a while. Maybe it's time for (winter?) holidays down under?</p>
+
+<a name="129921084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129921084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129921084">Patrick Massot (Jul 19 2018 at 11:12)</a>:</h4>
+<p>Maybe. He also doesn't answer emails.</p>
+
+<a name="129931031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129931031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129931031">Patrick Massot (Jul 19 2018 at 15:05)</a>:</h4>
+<p>His webpage revealed <a href="https://tqft.net/calendar/" target="_blank" title="https://tqft.net/calendar/">https://tqft.net/calendar/</a> which pretty clearly indicates winter vacations.</p>
+
+<a name="129935705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129935705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html#129935705">Johan Commelin (Jul 19 2018 at 16:40)</a>:</h4>
+<p>It also means he should be back next week (-;</p>
+
+
+{% endraw %}

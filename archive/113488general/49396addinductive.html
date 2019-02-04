@@ -1,0 +1,77 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/49396addinductive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html">add_inductive</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="124010223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010223">Jakob von Raumer (Mar 21 2018 at 14:42)</a>:</h4>
+<p>Why does</p>
+<div class="codehilite"><pre><span></span>tactic.add_inductive `foo [] 0 `(Type) $
+[(`mk, expr.pi `mk binder_info.default (expr.app (expr.const `list [level.zero]) (expr.const `foo [])) (expr.const `foo []))],
+</pre></div>
+
+
+<p>fail?</p>
+
+<a name="124010398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010398">Sebastian Ullrich (Mar 21 2018 at 14:46)</a>:</h4>
+<p>That's a nested inductive type, <code>add_inductive</code> only supports basic inductive types</p>
+
+<a name="124010420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010420">Jakob von Raumer (Mar 21 2018 at 14:47)</a>:</h4>
+<p>Too bad, and there's no API for the nested ones, right?</p>
+
+<a name="124010467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010467">Sebastian Ullrich (Mar 21 2018 at 14:48)</a>:</h4>
+<p>Right</p>
+
+<a name="124010567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010567">Jakob von Raumer (Mar 21 2018 at 14:50)</a>:</h4>
+<p>But are they internally reduced to basic inductive types?</p>
+
+<a name="124010636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010636">Kevin Buzzard (Mar 21 2018 at 14:53)</a>:</h4>
+<p>That's what is claimed in section 7.9 of TPIL : <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types</a></p>
+
+<a name="124010637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010637">Sebastian Ullrich (Mar 21 2018 at 14:53)</a>:</h4>
+<p>Yes <a href="https://github.com/leanprover/lean/wiki/Compiling-nested-inductive-types" target="_blank" title="https://github.com/leanprover/lean/wiki/Compiling-nested-inductive-types">https://github.com/leanprover/lean/wiki/Compiling-nested-inductive-types</a></p>
+
+<a name="124010694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010694">Jakob von Raumer (Mar 21 2018 at 14:54)</a>:</h4>
+<p>Nice, thanks!</p>
+
+<a name="124010830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010830">Jakob von Raumer (Mar 21 2018 at 14:58)</a>:</h4>
+<p>This is done in C++ but outside the kernel, right?</p>
+
+<a name="124010832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010832">Mario Carneiro (Mar 21 2018 at 14:58)</a>:</h4>
+<p>yes</p>
+
+<a name="124010842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010842">Jakob von Raumer (Mar 21 2018 at 14:59)</a>:</h4>
+<p>Why isn't it done in Lean?</p>
+
+<a name="124010976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124010976">Mario Carneiro (Mar 21 2018 at 15:01)</a>:</h4>
+<p>It could be...</p>
+
+<a name="124011034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124011034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124011034">Mario Carneiro (Mar 21 2018 at 15:02)</a>:</h4>
+<p>I started working on that a while back, but then the ground started shaking and I decided to wait for the dust to settle</p>
+
+<a name="124011580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124011580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49396addinductive.html#124011580">Moses Schönfinkel (Mar 21 2018 at 15:12)</a>:</h4>
+<p>Very poetic!</p>
+
+
+{% endraw %}
