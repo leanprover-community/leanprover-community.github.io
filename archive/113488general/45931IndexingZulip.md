@@ -220,5 +220,20 @@ permalink: archive/113488general/45931IndexingZulip.html
 #### [ Rob Lewis (Feb 03 2019 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157478873):
 <p>Alright, I think it's looking good.</p>
 
+#### [ Rob Lewis (Feb 03 2019 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157482299):
+<p>Ignore this, I need a new post for testing purposes.</p>
+
+#### [ Johan Commelin (Feb 03 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157482365):
+<blockquote>
+<p>Ignore this, I need a new post for testing purposes.</p>
+</blockquote>
+<p>Done</p>
+
+#### [ Johan Commelin (Feb 03 2019 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157482429):
+<p>Ahw, we can't see all the cute emoji's below posts.</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157485458):
+<p>I actually do have access to reactions to posts, but decided it wasn't worth my time to figure out how to display them. <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span></p>
+
 
 {% endraw %}

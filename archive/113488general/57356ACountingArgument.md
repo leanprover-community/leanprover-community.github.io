@@ -92,5 +92,26 @@ permalink: archive/113488general/57356ACountingArgument.html
 #### [ Kevin Buzzard (Feb 03 2019 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157471017):
 <p>We have all the tools for this latter result, but it's a pretty messy proof (at least the ones I've seen are). It's easier to do classification of f.g. modules over a Euclidean domain (which has the same answer), but my impression is that there's no point doing this really because ultimately we'll want PID's.</p>
 
+#### [ Mario Carneiro (Feb 03 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157484127):
+<p>The problem with this kind of argumentation is it's really tailored to the particular order (6 in this case). If you want to do the same thing with 1024 it's hopeless. I want to know if there is some in between algorithm, which uses group theory tricks but may still produce duplicates which have to be eliminated the hard way</p>
+
+#### [ Kenny Lau (Feb 03 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157484131):
+<p>We don't even know how many groups of order 2048 there are</p>
+
+#### [ Kevin Buzzard (Feb 03 2019 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157485619):
+<p>This sort of problem is notoriously difficult</p>
+
+#### [ Kevin Buzzard (Feb 03 2019 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157485692):
+<p>After a while we don't even have good notion. You have to start saying "well here's the multiplication table...". The problem is with p-groups (groups of prime power order). There are 20 groups of order 16 and by order 32 I think there are groups without names -- they're called "the 23rd one on the GAP database of groups of order 32" and things like that</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157489478):
+<p>Is there an upper bound on the number of groups up to isomorphism asymptotically better than the naive one?</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157489613):
+<p>If you view it as n permutations you get (n!)^n, which you can probably improve if you use the fact that it's a permutation in columns too, although that seems complicated</p>
+
+#### [ Reid Barton (Feb 04 2019 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157492745):
+<p><a href="https://groupprops.subwiki.org/wiki/Higman-Sims_asymptotic_formula_on_number_of_groups_of_prime_power_order" target="_blank" title="https://groupprops.subwiki.org/wiki/Higman-Sims_asymptotic_formula_on_number_of_groups_of_prime_power_order">https://groupprops.subwiki.org/wiki/Higman-Sims_asymptotic_formula_on_number_of_groups_of_prime_power_order</a></p>
+
 
 {% endraw %}

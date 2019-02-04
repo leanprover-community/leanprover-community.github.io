@@ -41,5 +41,26 @@ permalink: archive/113489newmembers/06135Anglebrackets.html
 #### [ Patrick Massot (Feb 01 2019 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157382482):
 <p>This <code>(| ... |)</code> is a nightmare for mathematicians who want to use <code>|</code> for absolute values. I really really hope Lean 4 drops it</p>
 
+#### [ Robert Spencer (Feb 04 2019 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157504096):
+<p>Hmmkay.  That's a little disappointing personally as I am loathe to install an IDE just for unicode support.</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 08:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157504689):
+<p>I mean, if you can find another means to input the unicode, by all means go ahead, but it's certainly easiest to use an editor that supports unicode</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157504712):
+<p>You don't really need an IDE - I hesitate to call the existing editors IDEs since they are mostly just error reporting and unicode input</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 08:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157504769):
+<p>but presumably you use <em>some</em> text editor to write your files, and you can probably set it up to input the lean unicode characters</p>
+
+#### [ Robert Spencer (Feb 04 2019 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157505858):
+<p>This is true.  I should just not be lazy and write some vimscript to translate <code>\forall</code> etc into unicode.</p>
+
+#### [ Robert Spencer (Feb 04 2019 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157505951):
+<p>Although if it is the opinion of the maintainers that ASCII should not be preferred, it might be worth mentioning this in the tutorial document, and possibly throwing warnings that ASCII is deprecated (a bit more extreme)</p>
+
+#### [ Patrick Massot (Feb 04 2019 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157506093):
+<p>You don't need any fancy vimscript, <code>imap</code> is all you need</p>
+
 
 {% endraw %}

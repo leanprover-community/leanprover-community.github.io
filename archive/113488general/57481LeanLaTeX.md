@@ -216,5 +216,11 @@ npm install<br>
 #### [ Mohammad Pedramfar (Feb 01 2019 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157389394):
 <p>Sure, I'll sort it out this weekend</p>
 
+#### [ Mohammad Pedramfar (Feb 04 2019 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157490886):
+<p>I worked on it a little bit and there's a bug that I haven't solved yet. I'll put it here as soon as I figure out how to make it work.</p>
+
+#### [ Patrick Massot (Feb 04 2019 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157504786):
+<p>I also worked on a prototype of a read-only online viewer this week-end (no Lean running in the browser). I hope I'll have something to show later today.</p>
+
 
 {% endraw %}

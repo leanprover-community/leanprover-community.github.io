@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Indexing Zulip](45931IndexingZulip.html) (66 messages, latest: Feb 03 2019 at 19:40)
+* [A Counting Argument](57356ACountingArgument.html) (30 messages, latest: Feb 04 2019 at 02:29)
+
+* [Indexing Zulip](45931IndexingZulip.html) (70 messages, latest: Feb 03 2019 at 23:01)
 
 * [subst](25330subst.html) (24 messages, latest: Feb 03 2019 at 16:44)
-
-* [A Counting Argument](57356ACountingArgument.html) (23 messages, latest: Feb 03 2019 at 16:01)
 
 * [mathlib PR's](53790mathlibPRs.html) (3 messages, latest: Feb 02 2019 at 17:40)
 
@@ -30,7 +30,7 @@ permalink: archive/113488general/index.html
 
 * [import everything](61377importeverything.html) (9 messages, latest: Feb 01 2019 at 23:10)
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (48 messages, latest: Feb 01 2019 at 22:57)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (50 messages, latest: Feb 04 2019 at 08:21)
 
 * [tactic wishlist](23792tacticwishlist.html) (17 messages, latest: Feb 01 2019 at 21:43)
 
