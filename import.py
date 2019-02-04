@@ -189,7 +189,7 @@ def format_message(name, date, msg, link, anchor_name, anchor_url):
 def write_topic(messages, stream_name, stream_id, topic_name, outfile):
     for c in messages:
         name = c['sender_full_name']
-        date = datetime.fromtimestamp(c['timestamp']).strftime('%b %d %Y at %H:%M')
+        date = datetime.utcfromtimestamp(c['timestamp']).strftime('%b %d %Y at %H:%M')
         msg = c['content']
         link = structure_link(stream_id, stream_name, topic_name, c['id'])
         anchor_name = str(c['id'])
