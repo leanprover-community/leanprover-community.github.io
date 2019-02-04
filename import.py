@@ -1,5 +1,6 @@
 # requires python 3
-# The workflow:
+#
+# The workflow (timing on my laptop):
 # - populate_all() builds a json file in `json_root` for each topic, containing message data,
 #   and an index json file mapping streams to their topics.
 #   This uses the Zulip API and takes ~10 minutes to crawl the whole chat.
@@ -7,7 +8,13 @@
 # - write_markdown() builds markdown files in `md_index` from the json. This takes ~15 seconds.
 # - This markdown can be pushed directly to GitHub or built locally with `jekyll serve --incremental`.
 #   Building locally takes about 1 minute.
-
+#
+# The json format for stream_index.md is:
+# { 'time': the last time stream_index.md was updated,
+#   'streams': { stream_name: { 'id': stream_id,
+#                               'latest_id': id of latest post in stream,
+#                               'topic_data': { topic_name: { topic_size: num posts in topic,
+#                                                            latest_date: time of latest post }}}}}
 
 from datetime import date, datetime
 from pathlib import Path
@@ -25,18 +32,24 @@ stream_blacklist = ['rss', 'travis', 'announce']
 # config_file should point to a Zulip api config
 client = zulip.Client(config_file="./.zuliprc")
 
+## String cleaning functions
+
+# remove non-alnum ascii symbols from string
 def sanitize(s):
     return "".join(filter(str.isalnum, s.encode('ascii', 'ignore').decode('utf-8')))
 
+# create a unique sanitized identifier for a topic
 def sanitize_topic(topic_name):
     i = str(adler32(topic_name.encode('utf-8')) % (10 ** 5)).zfill(5)
     return i + sanitize(topic_name)
 
+# create a unique sanitized identifier for a stream
 def sanitize_stream(stream_name, stream_id):
     return str(stream_id) + sanitize(stream_name)
 
-# retrieve information from Zulip
+## retrieve information from Zulip
 
+# runs client.cmd(args). If the response is a rate limit error, waits the requested time and tries again.
 def safe_request(cmd, args):
     rsp = cmd(*args)
     while rsp['result'] == 'error':
@@ -45,11 +58,15 @@ def safe_request(cmd, args):
         rsp = cmd(*args)
     return rsp
 
+# Safely open dir/filename, creating dir if it doesn't exist
 def open_outfile(dir, filename, mode):
     if not dir.exists():
         dir.mkdir()
     return (dir / filename).open(mode, encoding='utf-8')
 
+# Retrieves all messages matching request from Zulip, starting at post id anchor.
+# As recommended in the Zulip API docs, requests 1000 messages at a time.
+# Returns a list of messages.
 def request_all(request, anchor=0):
     request['anchor'] = anchor
     request['num_before'] = 0
@@ -60,9 +77,9 @@ def request_all(request, anchor=0):
         request['anchor'] = response['messages'][-1]['id'] + 1
         response = safe_request(client.get_messages, [request])
         msgs = msgs + response['messages']
-    #response['messages'] = msgs
-    return msgs #response
+    return msgs
 
+# Takes a list of messages. Returns a dict mapping topic names to lists of messages in that topic.
 def separate_results(list):
     map = {}
     for m in list:
@@ -72,7 +89,6 @@ def separate_results(list):
             map[m['subject']].append(m)
     return map
 
-# stream_index: {'time':update_time, 'streams':{name:{'id':stream_id, 'latest_id':id, 'topic_data':{topic_name:{topic_size:2, latest_date:date}}}}}
 def populate_incremental():
     streams = safe_request(client.get_streams, [])['streams']
     f = open(json_root / Path('stream_index.json'), 'r', encoding='utf-8')
