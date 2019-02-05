@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [a combinatorial challenge](12393acombinatorialchallenge.html) (58 messages, latest: Feb 05 2019 at 19:53)
+* [limits 3.0](69860limits30.html) (23 messages, latest: Feb 05 2019 at 20:43)
+
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (60 messages, latest: Feb 05 2019 at 20:24)
 
 * [Inductive limits](19454Inductivelimits.html) (9 messages, latest: Feb 05 2019 at 18:02)
 
@@ -67,8 +69,6 @@ permalink: archive/116395maths/index.html
 * [Zero of really small](18776Zeroofreallysmall.html) (13 messages, latest: Jan 19 2019 at 22:31)
 
 * [unique limit](29815uniquelimit.html) (2 messages, latest: Jan 19 2019 at 22:22)
-
-* [limits 3.0](69860limits30.html) (22 messages, latest: Jan 19 2019 at 10:45)
 
 * [refactor functor notation](92196refactorfunctornotation.html) (6 messages, latest: Jan 19 2019 at 00:26)
 

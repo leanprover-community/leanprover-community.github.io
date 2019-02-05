@@ -382,5 +382,28 @@ If <code>g</code> is a node, then <code>N(g)</code> is the set of its neighbouri
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/a%20combinatorial%20challenge/near/157635199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12393acombinatorialchallenge.html#157635199">Johan Commelin (Feb 05 2019 at 19:53)</a>:</h4>
 <p>Aah, that's good to know. Thanks for the heads up!</p>
 
+<a name="157637155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/a%20combinatorial%20challenge/near/157637155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12393acombinatorialchallenge.html#157637155">Floris van Doorn (Feb 05 2019 at 20:18)</a>:</h4>
+<p>Thanks, Jesse, for pointing to my file. It is very much WIP. My (current) definition of Dynkin diagram (with directed multiple edges and undirected single edges) is</p>
+<div class="codehilite"><pre><span></span>structure dynkin_diagram :=
+  (vertex : Type v)
+  (edge : vertex → vertex → Prop)
+  (annotation : Π{{x y}}, edge x y → ℕ+)
+  (directed : Π{{x y}} (e : edge x y), annotation e = 1 ↔ edge y x)
+</pre></div>
+
+
+<p>If you want to talk about undirected graphs, I think you should index them by unordered pairs of distinct elements:</p>
+<div class="codehilite"><pre><span></span>/-- unordered pairs of distinct elements -/
+def upair (α : Type u) : Type u := {s : finset α // s.card = 2}
+</pre></div>
+
+
+<p>This would require some scaffolding to set up a library for these creatures, but after that I think it would be more convenient to work with these "undirected graphs" as opposed to "symmetric directed graphs". I was also considering this approach for Dynkin diagrams, but since <em>some</em> edges in Dynkin diagrams are directed, I decided to use a (mostly symmetric) directed graph.</p>
+
+<a name="157637571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/a%20combinatorial%20challenge/near/157637571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12393acombinatorialchallenge.html#157637571">Floris van Doorn (Feb 05 2019 at 20:24)</a>:</h4>
+<p>When thinking a bit about this <code>upair</code> object, I was wondering the following. <code>upair</code> is a subtype (of a subtype) of a quotient. Is it formalized in Lean that a subtype of a quotient is equivalent to a quotient of a subtype? That would probably be useful when reasoning about <code>upair</code>: they would correspond to (lists of length 2 with no duplicates) quotiented by permutation.</p>
+
 
 {% endraw %}
