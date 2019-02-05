@@ -224,7 +224,7 @@ def write_topic_index(s_name, s):
             escape_pipes(topic_name),
             sanitize_topic(topic_name),
             t['size'],
-            datetime.fromtimestamp(t['latest_date']).strftime('%b %d %Y at %H:%M'),
+            datetime.utcfromtimestamp(t['latest_date']).strftime('%b %d %Y at %H:%M'),
             '' if t['size'] == 1 else 's'
         ))
     outfile.write('\n{% include archive_update.html %}')
