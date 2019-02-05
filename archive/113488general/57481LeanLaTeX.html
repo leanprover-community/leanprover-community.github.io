@@ -387,5 +387,37 @@ Basic definitions
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157636297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157636297">Mohammad Pedramfar (Feb 05 2019 at 20:07)</a>:</h4>
 <p>Fixing the latex part in the interactive code that I sent only needed a few lines, but it took me a while to figure out what was wrong. And it seems like the lean server doesn't like firefox very much. It seems to be working in Chrome. Making a good UI on the other hand is gonna take some time. It would be much easier to add the interactive part to this UI.</p>
 
+<a name="157641035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641035">Patrick Massot (Feb 05 2019 at 21:14)</a>:</h4>
+<p>I think I'm done removing all the hard-coded paths in my script, so that other people could play with it (I hope). It's not the same thing as claiming I've cleaned the code...</p>
+
+<a name="157641045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641045">Patrick Massot (Feb 05 2019 at 21:14)</a>:</h4>
+<p>You can find it at <a href="https://github.com/leanprover-community/format_lean" target="_blank" title="https://github.com/leanprover-community/format_lean">https://github.com/leanprover-community/format_lean</a></p>
+
+<a name="157641103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641103">Patrick Massot (Feb 05 2019 at 21:15)</a>:</h4>
+<p>The main thing is a very simple finite state machine. It's based on functions, so it's functional programming, right? The two main principles are:</p>
+<ul>
+<li>every function should take every opportunity to modify its arguments</li>
+<li>every function should use the state of the environment at the time it was defined</li>
+</ul>
+
+<a name="157641500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641500">Patrick Massot (Feb 05 2019 at 21:21)</a>:</h4>
+<p>Every line from the source file is read, and falls into one of three categories: blank line, normal line and special line. Each reader registers a number of special lines handlers, as in <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311</a> which is the reader used in my demo. Each handlers has a regex that is match against the current line. If it matches, the handlers has the opportunity to inspect the current state of the file reader, and change it. It particular it will most probably change how normal lines and blank lines will be interpreted. The simplest case is <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109</a> which discards the Lean header. Of course it can  say that normal lines will be somehow added to the output, maybe after querying a Lean server for tactic state. Then the collected output is passed to a renderer. The renderer I've defined in <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py</a> in based on Jinja2.</p>
+
+<a name="157641612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641612">Patrick Massot (Feb 05 2019 at 21:22)</a>:</h4>
+<p>People who only want to play with the UI can tweak the CSS at <a href="https://github.com/leanprover-community/format_lean/tree/master/sass" target="_blank" title="https://github.com/leanprover-community/format_lean/tree/master/sass">https://github.com/leanprover-community/format_lean/tree/master/sass</a> (you need to know tiny bit if SASS) and the templates at <a href="https://github.com/leanprover-community/format_lean/tree/master/templates" target="_blank" title="https://github.com/leanprover-community/format_lean/tree/master/templates">https://github.com/leanprover-community/format_lean/tree/master/templates</a> (you may need a tiny bit of Jinja2)</p>
+
+<a name="157641872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641872">Patrick Massot (Feb 05 2019 at 21:26)</a>:</h4>
+<p>Of course I can try to write proper documentation if someone actually wants to modify all this</p>
+
+<a name="157643822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157643822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157643822">Patrick Massot (Feb 05 2019 at 21:52)</a>:</h4>
+<p>I should use the VScode regex for tactic state highlighting instead of pygment</p>
+
 
 {% endraw %}
