@@ -446,7 +446,7 @@ permalink: archive/116395maths/index.html
 
 * [add_comm_group tactic](64217addcommgrouptactic.html) (34 messages, latest: Aug 09 2018 at 07:38)
 
-* [d | a -> d | (a * b)?](31786dadab.html) (2 messages, latest: Aug 09 2018 at 02:38)
+* [d \| a -> d \| (a * b)?](31786dadab.html) (2 messages, latest: Aug 09 2018 at 02:38)
 
 * [witt vectors](84655wittvectors.html) (136 messages, latest: Aug 08 2018 at 23:42)
 

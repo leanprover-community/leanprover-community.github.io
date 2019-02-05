@@ -1136,7 +1136,7 @@ permalink: archive/113488general/index.html
 
 * [monotonity](53761monotonity.html) (2 messages, latest: Sep 11 2018 at 05:15)
 
-* [is_open {x | x + u \in U}](44794isopenxxuinU.html) (18 messages, latest: Sep 11 2018 at 04:59)
+* [is_open {x \| x + u \in U}](44794isopenxxuinU.html) (18 messages, latest: Sep 11 2018 at 04:59)
 
 * [heq again](35647heqagain.html) (90 messages, latest: Sep 11 2018 at 03:48)
 
@@ -2630,7 +2630,7 @@ permalink: archive/113488general/index.html
 
 * [Frozen local instance](86357Frozenlocalinstance.html) (15 messages, latest: Mar 19 2018 at 21:09)
 
-* [{|a|}](54674a.html) (2 messages, latest: Mar 18 2018 at 16:28)
+* [{\|a\|}](54674a.html) (2 messages, latest: Mar 18 2018 at 16:28)
 
 * [lean's type theory](59576leanstypetheory.html) (102 messages, latest: Mar 18 2018 at 04:03)
 
