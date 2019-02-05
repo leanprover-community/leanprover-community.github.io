@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (57 messages, latest: Feb 05 2019 at 09:57)
+* [Web-based prover UI](41031WebbasedproverUI.html) (1 message, latest: Feb 05 2019 at 10:19)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (59 messages, latest: Feb 05 2019 at 10:00)
 
 * [tactic wishlist](23792tacticwishlist.html) (32 messages, latest: Feb 05 2019 at 08:46)
 
