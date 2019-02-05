@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [a combinatorial challenge](12393acombinatorialchallenge.html) (54 messages, latest: Feb 05 2019 at 16:27)
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (56 messages, latest: Feb 05 2019 at 17:36)
+
+* [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html) (173 messages, latest: Feb 05 2019 at 17:24)
 
 * [Inductive limits](19454Inductivelimits.html) (8 messages, latest: Feb 05 2019 at 15:49)
 
@@ -79,8 +81,6 @@ permalink: archive/116395maths/index.html
 * [classification of finite simple groups](89771classificationoffinitesimplegroups.html) (24 messages, latest: Jan 17 2019 at 23:03)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2628 messages, latest: Jan 17 2019 at 15:56)
-
-* [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html) (171 messages, latest: Jan 16 2019 at 11:13)
 
 * [div_lt_iff_lt_mul](72099divltiffltmul.html) (12 messages, latest: Jan 15 2019 at 12:24)
 

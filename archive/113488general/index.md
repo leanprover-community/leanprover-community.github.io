@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Invalid type ascription??](20644Invalidtypeascription.html) (6 messages, latest: Feb 05 2019 at 15:05)
+* [Invalid type ascription??](20644Invalidtypeascription.html) (8 messages, latest: Feb 05 2019 at 17:32)
+
+* [PhD Positions on Lean Forward](43735PhDPositionsonLeanForward.html) (2 messages, latest: Feb 05 2019 at 17:16)
 
 * [Terminology](16538Terminology.html) (6 messages, latest: Feb 05 2019 at 13:43)
 
