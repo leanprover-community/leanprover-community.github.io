@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20644Invalidtypeascription.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20644Invalidtypeascription.html">Invalid type ascription??</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157611922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Invalid%20type%20ascription%3F%3F/near/157611922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20644Invalidtypeascription.html#157611922">Neil Strickland (Feb 05 2019 at 14:55)</a>:</h4>
+<p>I am mystified by this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">a</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span> <span class="k">begin</span>
+ <span class="k">let</span> <span class="n">z</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">a</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="o">(</span><span class="n">fin</span> <span class="n">a</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span>
+ <span class="n">exact</span> <span class="n">z</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>After the definition of <code>q</code>, I get </p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">fin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">z</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="err">⊢</span> <span class="n">fin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+
+<p>So <code>q</code> has the type that I said it should have, but for some reason Lean expects it to have a different type?</p>
+
+<a name="157612066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Invalid%20type%20ascription%3F%3F/near/157612066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20644Invalidtypeascription.html#157612066">Reid Barton (Feb 05 2019 at 14:57)</a>:</h4>
+<p>You have stumbled across a highly dubious Lean feature.</p>
+
+<a name="157612175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Invalid%20type%20ascription%3F%3F/near/157612175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20644Invalidtypeascription.html#157612175">Reid Barton (Feb 05 2019 at 14:58)</a>:</h4>
+<p>In tactic mode (only), <code>q : ℕ → (fin a.succ)</code> means <code>q : Π (a : ℕ), (fin a.succ)</code>.</p>
+
+<a name="157612237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Invalid%20type%20ascription%3F%3F/near/157612237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20644Invalidtypeascription.html#157612237">Reid Barton (Feb 05 2019 at 14:59)</a>:</h4>
+<p>In other words <code>→</code> is expanded to a Pi type using the fixed variable name <code>a</code>.</p>
+
+
+{% endraw %}

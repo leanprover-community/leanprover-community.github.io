@@ -91,5 +91,33 @@ permalink: archive/116395maths/81595card.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157606721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157606721">Sebastien Gouezel (Feb 05 2019 at 13:39)</a>:</h4>
 <p>Yes, of course!</p>
 
+<a name="157608340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608340">Sebastien Gouezel (Feb 05 2019 at 14:05)</a>:</h4>
+<p>In fact a rewrite along <code>← quotient.eq</code> does not work since there are too many missing type informations. Unless there is a simple solution, I will add the lemma <code>mk_eq_mk_iff_nonempty_equiv</code>.</p>
+
+<a name="157608483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608483">Mario Carneiro (Feb 05 2019 at 14:07)</a>:</h4>
+<p>you want to rewrite with this equality? What are you doing with this?</p>
+
+<a name="157608549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608549">Mario Carneiro (Feb 05 2019 at 14:08)</a>:</h4>
+<p>In <code>cardinal.lean</code> it's pretty much all stuff like <code>refine quotient.sound ⟨function...⟩</code></p>
+
+<a name="157608800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608800">Sebastien Gouezel (Feb 05 2019 at 14:12)</a>:</h4>
+<p>I need to use some arbitrary bijection between a given finite set and some <code>fin n</code>, where <code>n</code> is the cardinality of my set. See <a href="https://github.com/sgouezel/mathlib/blob/b606163512a103ffa2e5acf335d66089b4fd661b/src/topology/metric_space/gromov_hausdorff.lean#L1345" target="_blank" title="https://github.com/sgouezel/mathlib/blob/b606163512a103ffa2e5acf335d66089b4fd661b/src/topology/metric_space/gromov_hausdorff.lean#L1345">https://github.com/sgouezel/mathlib/blob/b606163512a103ffa2e5acf335d66089b4fd661b/src/topology/metric_space/gromov_hausdorff.lean#L1345</a></p>
+
+<a name="157608915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608915">Mario Carneiro (Feb 05 2019 at 14:14)</a>:</h4>
+<p>choice is really not necessary there... you can just <code>cases</code> on it</p>
+
+<a name="157608963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157608963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157608963">Mario Carneiro (Feb 05 2019 at 14:15)</a>:</h4>
+<p>I would skip the <code>mk_eq_mk_iff</code> theorem, prove <code>mk s = mk (fin N)</code> using rw like that, and then <code>cases quotient.exact this</code> to get an equiv</p>
+
+<a name="157609359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/card/near/157609359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81595card.html#157609359">Sebastien Gouezel (Feb 05 2019 at 14:22)</a>:</h4>
+<p>Done, thanks.</p>
+
 
 {% endraw %}

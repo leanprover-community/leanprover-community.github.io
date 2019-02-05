@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [card](81595card.html) (15 messages, latest: Feb 05 2019 at 13:39)
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (29 messages, latest: Feb 05 2019 at 14:28)
 
-* [a combinatorial challenge](12393acombinatorialchallenge.html) (4 messages, latest: Feb 05 2019 at 13:33)
+* [card](81595card.html) (22 messages, latest: Feb 05 2019 at 14:22)
 
 * [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 04 2019 at 13:12)
 

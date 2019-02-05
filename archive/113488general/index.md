@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Invalid type ascription??](20644Invalidtypeascription.html) (4 messages, latest: Feb 05 2019 at 14:59)
+
 * [Terminology](16538Terminology.html) (6 messages, latest: Feb 05 2019 at 13:43)
 
 * [eq.rec goal](53122eqrecgoal.html) (224 messages, latest: Feb 05 2019 at 12:25)
