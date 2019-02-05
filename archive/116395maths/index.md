@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Inductive limits](19454Inductivelimits.html) (9 messages, latest: Feb 05 2019 at 18:02)
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (58 messages, latest: Feb 05 2019 at 19:53)
 
-* [a combinatorial challenge](12393acombinatorialchallenge.html) (56 messages, latest: Feb 05 2019 at 17:36)
+* [Inductive limits](19454Inductivelimits.html) (9 messages, latest: Feb 05 2019 at 18:02)
 
 * [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html) (173 messages, latest: Feb 05 2019 at 17:24)
 

@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [eq.rec goal](53122eqrecgoal.html) (225 messages, latest: Feb 05 2019 at 18:07)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (74 messages, latest: Feb 05 2019 at 19:58)
+
+* [eq.rec goal](53122eqrecgoal.html) (226 messages, latest: Feb 05 2019 at 19:19)
 
 * [Invalid type ascription??](20644Invalidtypeascription.html) (8 messages, latest: Feb 05 2019 at 17:32)
 
 * [PhD Positions on Lean Forward](43735PhDPositionsonLeanForward.html) (2 messages, latest: Feb 05 2019 at 17:16)
 
 * [Terminology](16538Terminology.html) (6 messages, latest: Feb 05 2019 at 13:43)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (65 messages, latest: Feb 05 2019 at 08:42)
 
 * [tactic wishlist](23792tacticwishlist.html) (33 messages, latest: Feb 05 2019 at 07:32)
 
