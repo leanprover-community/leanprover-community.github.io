@@ -12,7 +12,7 @@ permalink: archive/113488general/11835rewriteunderapi.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134751362"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751362">Kevin Buzzard (Sep 28 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751362">Kevin Buzzard (Sep 27 2018 at 15:12)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
 <span class="kn">lemma</span> <span class="n">quadroots</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">sorry</span>
@@ -28,91 +28,91 @@ permalink: archive/113488general/11835rewriteunderapi.html
 <p>I thought this would work. I have to <code>intro x</code> before it does. I know that <code>rw</code> can fail to rewrite under a lambda, but this is not a lambda, right? Can Lean also not rewrite under a pi?</p>
 
 <a name="134751519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751519">Mario Carneiro (Sep 28 2018 at 01:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751519">Mario Carneiro (Sep 27 2018 at 15:15)</a>:</h4>
 <p>it cannot rewrite under a binder, because it needs to produce a substitution instance in the outer context</p>
 
 <a name="134751597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751597">Mario Carneiro (Sep 28 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751597">Mario Carneiro (Sep 27 2018 at 15:16)</a>:</h4>
 <p>To be clear, you can rewrite expressions that don't make use of the binder, like rewriting <code>y</code> to <code>z</code> in <code>\lam x, x = y</code></p>
 
 <a name="134751631"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751631">Mario Carneiro (Sep 28 2018 at 01:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751631">Mario Carneiro (Sep 27 2018 at 15:17)</a>:</h4>
 <p>but since <code>rw</code> constructs an <code>eq.rec</code> term in the outer context it doesn't make sense to refer to <code>x</code></p>
 
 <a name="134751697"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751697">Mario Carneiro (Sep 28 2018 at 01:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751697">Mario Carneiro (Sep 27 2018 at 15:17)</a>:</h4>
 <p>Think of it this way: <code>rw quadroots</code> is really <code>rw [quadroots _]</code>. What should go in for <code>_</code>?</p>
 
 <a name="134751779"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751779">Reid Barton (Sep 28 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751779">Reid Barton (Sep 27 2018 at 15:18)</a>:</h4>
 <p>Interesting. I also encountered this exact question the other day--I expected <code>rw</code> to work in a similar situation, rewriting under a Pi, because it wasn't rewriting under a lambda. But I don't remember what ended up happening. It's possible I was in the "doesn't depend on x" situation.</p>
 
 <a name="134751917"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751917">Reid Barton (Sep 28 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751917">Reid Barton (Sep 27 2018 at 15:21)</a>:</h4>
 <p>Can I think about it this way? I expect <code>rw</code> to apply something like "<code>Pi.congr</code>". But what is the argument to <code>Pi.congr</code>. It should just be an equality I intend to rewrite along, not something of the form <code>\all x, f x = g x</code></p>
 
 <a name="134751955"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751955">Mario Carneiro (Sep 28 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751955">Mario Carneiro (Sep 27 2018 at 15:21)</a>:</h4>
 <p><code>rw</code> does not use <code>Pi.congr</code> or anything like it</p>
 
 <a name="134751965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751965">Mario Carneiro (Sep 28 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134751965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134751965">Mario Carneiro (Sep 27 2018 at 15:21)</a>:</h4>
 <p>that's how <code>simp</code> works</p>
 
 <a name="134752021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752021">Mario Carneiro (Sep 28 2018 at 01:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752021">Mario Carneiro (Sep 27 2018 at 15:22)</a>:</h4>
 <p><code>rw</code> only uses <code>eq.rec</code>, i.e. the substitution property of equality</p>
 
 <a name="134752051"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752051">Reid Barton (Sep 28 2018 at 01:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752051">Reid Barton (Sep 27 2018 at 15:22)</a>:</h4>
 <p>Right, okay. But <code>eq.rec</code> still has that argument we have to provide</p>
 
 <a name="134752086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752086">Mario Carneiro (Sep 28 2018 at 01:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752086">Mario Carneiro (Sep 27 2018 at 15:23)</a>:</h4>
 <p>so your goal has to have the form <code>|- P a</code> in the current context, and it is given an equality <code>|- a = b</code>, again in the current context (it may have metavariables but they have to be resolved in the current context), to produce <code>|- P b</code></p>
 
 <a name="134752175"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752175">Mario Carneiro (Sep 28 2018 at 01:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752175">Mario Carneiro (Sep 27 2018 at 15:24)</a>:</h4>
 <p>In particular, it must be possible to write your goal as some function applied to the thing you want to rewrite, and this implies that it can't be a term that exists under a binder</p>
 
 <a name="134752251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752251">Mario Carneiro (Sep 28 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752251">Mario Carneiro (Sep 27 2018 at 15:25)</a>:</h4>
 <p>It's like you only know equality at one point and want to generalize to equality at all points - it doesn't work</p>
 
 <a name="134752519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752519">Mario Carneiro (Sep 28 2018 at 01:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752519">Mario Carneiro (Sep 27 2018 at 15:28)</a>:</h4>
 <p>If you use a quantified equality as input to <code>rw</code>, it <em>first</em> applies some metavariables with the hope of matching them in the term, but before it has entered any binders. So that means you can always specify them yourself and give straight equations to <code>rw</code> with no loss of generality, unlike with <code>simp</code> where quantified equations are really more powerful</p>
 
 <a name="134752964"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752964">Kevin Buzzard (Sep 28 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752964">Kevin Buzzard (Sep 27 2018 at 15:34)</a>:</h4>
 <p>In my example, it's clear what I mean -- I want to rewrite "forall x, q(x)=0 -&gt; ..." as "forall x, (x=1 or x=2) -&gt; .."</p>
 
 <a name="134752988"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752988">Kevin Buzzard (Sep 28 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134752988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134752988">Kevin Buzzard (Sep 27 2018 at 15:34)</a>:</h4>
 <p>There doesn't seem to be anything stopping that rewrite in theory</p>
 
 <a name="134753029"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753029">Kevin Buzzard (Sep 28 2018 at 01:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753029">Kevin Buzzard (Sep 27 2018 at 15:35)</a>:</h4>
 <p>I can do it with intro, rw, revert. I'm not sure my users can though.</p>
 
 <a name="134753060"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753060">Kevin Buzzard (Sep 28 2018 at 01:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753060">Kevin Buzzard (Sep 27 2018 at 15:35)</a>:</h4>
 <p>I guess they'll have to ;-)</p>
 
 <a name="134753132"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753132">Mario Carneiro (Sep 28 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753132">Mario Carneiro (Sep 27 2018 at 15:36)</a>:</h4>
 <p>Of course, I follow. I'm just saying that's not how <code>rw</code> works</p>
 
 <a name="134753150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753150">Mario Carneiro (Sep 28 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753150">Mario Carneiro (Sep 27 2018 at 15:36)</a>:</h4>
 <p>the closest approximation to <code>rw</code> + binders is <code>conv {rw}</code></p>
 
 <a name="134753184"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753184">Kevin Buzzard (Sep 28 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753184">Kevin Buzzard (Sep 27 2018 at 15:36)</a>:</h4>
 <p>Thank you Mario for your explanation. I find now I'm a more mature Lean user that when things like this happen I am now interested in understanding why they're failing (rather than banging my head against a table)</p>
 
 <a name="134753303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753303">Kevin Buzzard (Sep 28 2018 at 01:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753303">Kevin Buzzard (Sep 27 2018 at 15:38)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
 <span class="kn">lemma</span> <span class="n">quadroots</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">sorry</span>
@@ -125,15 +125,15 @@ permalink: archive/113488general/11835rewriteunderapi.html
 </pre></div>
 
 <a name="134753343"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753343">Mario Carneiro (Sep 28 2018 at 01:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753343">Mario Carneiro (Sep 27 2018 at 15:39)</a>:</h4>
 <p>right. <code>simp</code> uses a different algorithm, based on congruence lemmas, which has the advantage that you can rewrite under binders</p>
 
 <a name="134753465"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753465">Mario Carneiro (Sep 28 2018 at 01:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753465">Mario Carneiro (Sep 27 2018 at 15:40)</a>:</h4>
 <p>Rather than trying to match the goal all in one go like <code>rw</code>, it recurses into the term with things like <code>funext</code> that actually give you the opportunity to bubble those equalities into the inner context</p>
 
 <a name="134753580"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753580">Kevin Buzzard (Sep 28 2018 at 01:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20under%20a%20pi/near/134753580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11835rewriteunderapi.html#134753580">Kevin Buzzard (Sep 27 2018 at 15:42)</a>:</h4>
 <p>rofl just noticed example is mathematically wrong ;-) [forall needs to go inside the brackets]</p>
 
 

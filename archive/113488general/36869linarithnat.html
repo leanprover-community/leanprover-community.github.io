@@ -12,72 +12,72 @@ permalink: archive/113488general/36869linarithnat.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134918920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134918920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134918920">Reid Barton (Sep 30 2018 at 21:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134918920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134918920">Reid Barton (Sep 30 2018 at 11:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> I started remembering to use <code>linarith</code> to solve some easy goals like <code>f &lt; g -&gt; -f - -g &lt;= 0 -&gt; false</code>.<br>
 Do you have a sense of how hard it would be to support <code>-</code> on nat? I guess at least in simple cases there should be a translation to a new linear system (maybe involving adding an extra variable).</p>
 
 <a name="134919195"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919195">Rob Lewis (Sep 30 2018 at 21:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919195">Rob Lewis (Sep 30 2018 at 11:25)</a>:</h4>
 <p>Yeah, there's a translation that can be done. My instinct: it would take more work to go from the current state to supporting <code>-</code> than it took to go from no <code>nat</code> support to here. The bigger worry is that these are all just stopgaps, ultimately we want <code>omega</code> or <code>cooper</code> or something nat/int specific. <code>linarith</code> will never work completely right on <code>nat</code>.</p>
 
 <a name="134919295"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919295">Mario Carneiro (Sep 30 2018 at 21:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919295">Mario Carneiro (Sep 30 2018 at 11:28)</a>:</h4>
 <p>does linarith support <code>max</code> and <code>min</code>?</p>
 
 <a name="134919307"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919307">Mario Carneiro (Sep 30 2018 at 21:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919307">Mario Carneiro (Sep 30 2018 at 11:29)</a>:</h4>
 <p>Maybe focus effort on that, and then you can get nat.sub easy by rewriting it to a <code>max</code></p>
 
 <a name="134919411"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919411">Rob Lewis (Sep 30 2018 at 21:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919411">Rob Lewis (Sep 30 2018 at 11:32)</a>:</h4>
 <p>Not natively. You can unfold them, <code>split_ifs</code>, and then call <code>linarith</code> a bunch of times. That's exactly how the translation would go, and it's not efficient, you get an explosion of <code>linarith</code> calls.</p>
 
 <a name="134919422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919422">Mario Carneiro (Sep 30 2018 at 21:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919422">Mario Carneiro (Sep 30 2018 at 11:33)</a>:</h4>
 <p>So <code>linarith</code> only handles convex regions?</p>
 
 <a name="134919468"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919468">Mario Carneiro (Sep 30 2018 at 21:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919468">Mario Carneiro (Sep 30 2018 at 11:34)</a>:</h4>
 <p>You can interpret a <code>max</code> or <code>min</code> as a conjunction sometimes, and then there is no case split</p>
 
 <a name="134919470"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919470">Mario Carneiro (Sep 30 2018 at 21:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919470">Mario Carneiro (Sep 30 2018 at 11:34)</a>:</h4>
 <p>but when the inequality is the wrong way you get a disjunction and have to case split</p>
 
 <a name="134919471"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919471">Mario Carneiro (Sep 30 2018 at 21:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919471">Mario Carneiro (Sep 30 2018 at 11:34)</a>:</h4>
 <p>I don't see any way to avoid exponential blowup</p>
 
 <a name="134919525"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919525">Reid Barton (Sep 30 2018 at 21:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919525">Reid Barton (Sep 30 2018 at 11:36)</a>:</h4>
 <p>Right, that makes sense.</p>
 
 <a name="134919571"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919571">Rob Lewis (Sep 30 2018 at 21:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919571">Rob Lewis (Sep 30 2018 at 11:38)</a>:</h4>
 <p>Yeah. <code>linarith</code> has no fancy logic handling at all, and again, I'm not sure how much it's worth bundling more and more into the current tactic. Eventually you just end up approximating an SMT solver.</p>
 
 <a name="134919572"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919572">Reid Barton (Sep 30 2018 at 21:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919572">Reid Barton (Sep 30 2018 at 11:38)</a>:</h4>
 <p>On the other hand, sometimes the problems we want to solve are quite small. Like I had this one: define <code>def I (j : ℕ) : ℕ := if j ≤ e then e - j else j</code>, and then prove <code>lemma II {j : ℕ} : I (I j) = j</code>. (<code>e</code> is some constant nat.)</p>
 
 <a name="134919620"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919620">Reid Barton (Sep 30 2018 at 21:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134919620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134919620">Reid Barton (Sep 30 2018 at 11:41)</a>:</h4>
 <p>Haha, that's the trick isn't it. Once you write the tactic to do X, then everything will start to look like "almost X, if only..."</p>
 
 <a name="134920648"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134920648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134920648">Kevin Buzzard (Sep 30 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134920648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134920648">Kevin Buzzard (Sep 30 2018 at 12:18)</a>:</h4>
 <p>With <code>ring</code> I started to learn how to use what we had to get what I wanted in two lines rather than one. For example if the goal is <code>(x+1)^2 &lt; x^2+2*x+2</code>then instead of thinking "a souped-up <code>ring</code> should make progress here" you prove <code>h : x^2+2*x+2=(x+1)^2+1 := by ring</code> and then rewrite. For <code>ring</code> in particular, having a very clear idea of exactly what it can and can't do is of great help to me, and I am beginning to understand <code>simp</code> and <code>dec_trivial</code> in the same way. I only wish I had a better grasp on what things like <code>cc</code>, <code>linarith</code> and <code>finish</code> did -- these are still tactics which I apply "randomly" in some sense (like how I used to apply <code>simp</code> when I was a beginner).</p>
 
 <a name="134926271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926271">Tobias Grosser (Oct 01 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926271">Tobias Grosser (Sep 30 2018 at 15:18)</a>:</h4>
 <p>We use (outside of the theorem proover world) a simplification and decision procedure for Presburger arithmetic based on linear programming / dual simplex.</p>
 
 <a name="134926325"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926325">Tobias Grosser (Oct 01 2018 at 01:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926325">Tobias Grosser (Sep 30 2018 at 15:20)</a>:</h4>
 <p>While probably the easiest is to implement omega / cooper / or Leo's extensions to cooper as used in Z3, I am interested in exploring an approach based on the mathematics implemented in a constraint based math library such as isl, visible e.g. at nhttp://playground.pollylabs.org/.</p>
 
 <a name="134926332"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926332">Tobias Grosser (Oct 01 2018 at 01:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134926332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36869linarithnat.html#134926332">Tobias Grosser (Sep 30 2018 at 15:20)</a>:</h4>
 <p>I am interested to discuss this topic in more depth (and will also be in Freiburg).</p>
 
 

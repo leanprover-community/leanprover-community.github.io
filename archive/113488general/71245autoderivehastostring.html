@@ -12,46 +12,46 @@ permalink: archive/113488general/71245autoderivehastostring.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130069413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069413">Zesen Qian (Jul 22 2018 at 06:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069413">Zesen Qian (Jul 21 2018 at 20:49)</a>:</h4>
 <p>RT, something like this in lean?</p>
 
 <a name="130069676"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069676">Mario Carneiro (Jul 22 2018 at 06:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069676">Mario Carneiro (Jul 21 2018 at 20:56)</a>:</h4>
 <p>No, I don't think this one has a derive handler, although you could totally write one</p>
 
 <a name="130069770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069770">Simon Hudon (Jul 22 2018 at 06:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130069770">Simon Hudon (Jul 21 2018 at 20:59)</a>:</h4>
 <p>If you don't mind going into <code>meta</code>-land, you can derive <code>has_reflect</code> for your type and use the following to just pretty-print the Lean expression that corresponds to a value of your type:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">to_string&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_reflect</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">string</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">to_fmt</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">to_string</span>
 </pre></div>
 
 <a name="130070006"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070006">Zesen Qian (Jul 22 2018 at 07:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070006">Zesen Qian (Jul 21 2018 at 21:04)</a>:</h4>
 <p><code>has_reflect</code> asks me to provide a <code>expr</code> for every value? Not sure how to do it for my type.</p>
 
 <a name="130070023"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070023">Zesen Qian (Jul 22 2018 at 07:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070023">Zesen Qian (Jul 21 2018 at 21:05)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> yeah, it's just a very long type.</p>
 
 <a name="130070026"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070026">Simon Hudon (Jul 22 2018 at 07:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070026">Simon Hudon (Jul 21 2018 at 21:05)</a>:</h4>
 <p>You write <code>@[derive has_reflect]</code> above your type definition</p>
 
 <a name="130070074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070074">Mario Carneiro (Jul 22 2018 at 07:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070074">Mario Carneiro (Jul 21 2018 at 21:06)</a>:</h4>
 <p>I meant write a derive handler</p>
 
 <a name="130070106"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070106">Zesen Qian (Jul 22 2018 at 07:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070106">Zesen Qian (Jul 21 2018 at 21:07)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> very cool, thanks.</p>
 
 <a name="130070171"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070171">Simon Hudon (Jul 22 2018 at 07:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070171">Simon Hudon (Jul 21 2018 at 21:09)</a>:</h4>
 <p>You're welcome</p>
 
 <a name="130070237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070237">Simon Hudon (Jul 22 2018 at 07:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html#130070237">Simon Hudon (Jul 21 2018 at 21:10)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Such a derive handler seems like a lot of work but I'm wondering if piggy backing on top of <code>has_reflect</code> might help us be extra lazy</p>
 
 

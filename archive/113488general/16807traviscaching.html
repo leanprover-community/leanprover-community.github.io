@@ -12,187 +12,187 @@ permalink: archive/113488general/16807traviscaching.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="127367872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127367872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127367872">Mario Carneiro (Jun 01 2018 at 01:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127367872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127367872">Mario Carneiro (May 31 2018 at 15:33)</a>:</h4>
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Could you help me try to set up build caching on travis? The from-scratch build times are nearing the time limit for public jobs. I tried following <a href="https://docs.travis-ci.com/user/caching/" target="_blank" title="https://docs.travis-ci.com/user/caching/">https://docs.travis-ci.com/user/caching/</a> but I can't find the <em>Build branch updates</em> option.</p>
 
 <a name="127369867"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127369867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127369867">Gabriel Ebner (Jun 01 2018 at 02:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127369867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127369867">Gabriel Ebner (May 31 2018 at 16:17)</a>:</h4>
 <p>I think this option is now called "build pushed branches".</p>
 
 <a name="127370039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370039">Gabriel Ebner (Jun 01 2018 at 02:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370039">Gabriel Ebner (May 31 2018 at 16:20)</a>:</h4>
 <p>I'm not sure the caching feature will fix the timeouts though.  The cache is only saved when a build is completed.  The next time somebody changes <code>tactic/interactive.lean</code> everything will need to be rebuilt, the build won't finish, and the cache remains out of date (forever, since all future builds fail as well).</p>
 
 <a name="127370064"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370064">Simon Hudon (Jun 01 2018 at 02:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370064">Simon Hudon (May 31 2018 at 16:21)</a>:</h4>
 <p>If you want to separate a preparatory step, you can use build stages.</p>
 
 <a name="127370225"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370225">Gabriel Ebner (Jun 01 2018 at 02:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370225">Gabriel Ebner (May 31 2018 at 16:24)</a>:</h4>
 <p>I don't see any good way to break up the build into stages though.  The main <code>lean --make</code> invocation takes almost an hour (is that right?  it's much faster locally?), and we need to cache its output.</p>
 
 <a name="127370341"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370341">Simon Hudon (Jun 01 2018 at 02:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370341">Simon Hudon (May 31 2018 at 16:27)</a>:</h4>
 <p>can we build a few directories in the first stage and then the rest?</p>
 
 <a name="127370819"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370819">Gabriel Ebner (Jun 01 2018 at 02:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370819">Gabriel Ebner (May 31 2018 at 16:37)</a>:</h4>
 <p>That's one option.  2) We could break up mathlib into multiple repositories, add binary releases, and then use the binary releases for travis in the dependent repositories.  This is also a bit of work, and the development workflow is probably worse.  3)  Probably the least effort: somebody sets up a machine with Jenkins somewhere (<span class="user-mention" data-user-id="110049">@Mario Carneiro</span>?).  Then mathlib can build for hours (probably less, a full mathlib build only takes a bit over 9 minutes here).</p>
 
 <a name="127370904"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370904">Simon Hudon (Jun 01 2018 at 02:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370904">Simon Hudon (May 31 2018 at 16:39)</a>:</h4>
 <p>I do not believe 3) is the least effort. The people I know who have their own Jenkins setup say that it's much more trouble than using Travis.</p>
 
 <a name="127370978"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370978">Simon Hudon (Jun 01 2018 at 02:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127370978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127370978">Simon Hudon (May 31 2018 at 16:40)</a>:</h4>
 <p>You could probably do a mix of 1) and 2) and create different subsets of mathlib that will build in separate stages on Travis</p>
 
 <a name="127371131"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127371131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127371131">Gabriel Ebner (Jun 01 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127371131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127371131">Gabriel Ebner (May 31 2018 at 16:44)</a>:</h4>
 <p>Jenkins has a bit of a learning curve since you can't copy a random <code>.travis.yml</code>.  But executing three lines of shell script is pretty easy, you just need to insert it as a build step.  Fighting with travis build stages and caching may be more work.  We've had a pretty good experience with jenkins in our group.</p>
 
 <a name="127372187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372187">Gabriel Ebner (Jun 01 2018 at 03:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372187">Gabriel Ebner (May 31 2018 at 17:08)</a>:</h4>
 <p>I just wanted to bring it up as an option, it took me about a minute to set up mathlib in jenkins (12 minutes build time): <a href="http://clogic92.dmg.tuwien.ac.at/job/mathlib/2/console" target="_blank" title="http://clogic92.dmg.tuwien.ac.at/job/mathlib/2/console">http://clogic92.dmg.tuwien.ac.at/job/mathlib/2/console</a>  (GH integration and zulip notification is not much more work.)  The main problem is of course hosting, so if we can easily fix travis then this is probably the way to go.</p>
 
 <a name="127372267"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372267">Simon Hudon (Jun 01 2018 at 03:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372267">Simon Hudon (May 31 2018 at 17:10)</a>:</h4>
 <p>Nice! Do you need to dedicate your own computer or can you put it only on something like AWS?</p>
 
 <a name="127372439"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372439">Gabriel Ebner (Jun 01 2018 at 03:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372439">Gabriel Ebner (May 31 2018 at 17:13)</a>:</h4>
 <p>You can of course use AWS, but that probably gets pricy.  It is probably easier and cheaper to host it at a university.</p>
 
 <a name="127372946"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372946">Simon Hudon (Jun 01 2018 at 03:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127372946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127372946">Simon Hudon (May 31 2018 at 17:25)</a>:</h4>
 <p>That's probably easier than maintaining the machines yourself too</p>
 
 <a name="127375769"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375769">Johan Commelin (Jun 01 2018 at 04:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375769">Johan Commelin (May 31 2018 at 18:21)</a>:</h4>
 <p>Maybe CoCalc wants to help, and has the experience? I have no clue if they would be open to something like that?</p>
 
 <a name="127375778"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375778">Johan Commelin (Jun 01 2018 at 04:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375778">Johan Commelin (May 31 2018 at 18:21)</a>:</h4>
 <p>Maybe we should just ask William... <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> what do you think?</p>
 
 <a name="127375786"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375786">Johan Commelin (Jun 01 2018 at 04:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375786">Johan Commelin (May 31 2018 at 18:21)</a>:</h4>
 <p>You know him best.</p>
 
 <a name="127375832"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375832">Kevin Buzzard (Jun 01 2018 at 04:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375832">Kevin Buzzard (May 31 2018 at 18:22)</a>:</h4>
 <p>I know him but I have no understanding of this thread</p>
 
 <a name="127375849"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375849">Johan Commelin (Jun 01 2018 at 04:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375849">Johan Commelin (May 31 2018 at 18:23)</a>:</h4>
 <p>We are talking about a self-hosted Travis replacement. Where we can have compile times &gt;1hr.</p>
 
 <a name="127375866"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375866">Johan Commelin (Jun 01 2018 at 04:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127375866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127375866">Johan Commelin (May 31 2018 at 18:23)</a>:</h4>
 <p>But self-hosting implies that you have to maintain stuff</p>
 
 <a name="127376502"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376502">Johan Commelin (Jun 01 2018 at 04:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376502">Johan Commelin (May 31 2018 at 18:34)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110026">@Simon Hudon</span> I don't know if you guys are familiar with CoCalc. It is a cloud environment for scientific computing. And William is a mathematician who is interested in Lean. So that helps.</p>
 
 <a name="127376614"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376614">Johan Commelin (Jun 01 2018 at 04:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376614">Johan Commelin (May 31 2018 at 18:36)</a>:</h4>
 <p>William is interested in Lean in the sense that he wants to make it available in CoCalc, once he has figured out how to make a good user interface for it.</p>
 
 <a name="127376638"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376638">Simon Hudon (Jun 01 2018 at 04:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376638">Simon Hudon (May 31 2018 at 18:36)</a>:</h4>
 <p>Cool! Does he not like the online version?</p>
 
 <a name="127376645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376645">Johan Commelin (Jun 01 2018 at 04:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376645">Johan Commelin (May 31 2018 at 18:36)</a>:</h4>
 <p>If you guys want to consider the Jenkins approach, and would like me to ask William, just tell me.</p>
 
 <a name="127376662"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376662">Johan Commelin (Jun 01 2018 at 04:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376662">Johan Commelin (May 31 2018 at 18:37)</a>:</h4>
 <p>The online version is way to slow when you want to do serious stuff. And it is not collaborative.</p>
 
 <a name="127376681"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376681">Johan Commelin (Jun 01 2018 at 04:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376681">Johan Commelin (May 31 2018 at 18:37)</a>:</h4>
 <p>With CoCalc you would have fast servers running Lean, and just a UI in the browser.</p>
 
 <a name="127376687"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376687">Simon Hudon (Jun 01 2018 at 04:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376687">Simon Hudon (May 31 2018 at 18:37)</a>:</h4>
 <p>You want it to be like Google Docs or just have some git support?</p>
 
 <a name="127376732"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376732">Johan Commelin (Jun 01 2018 at 04:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376732">Johan Commelin (May 31 2018 at 18:38)</a>:</h4>
 <p>So far he has collaborative editors for LaTeX (with live preview) and Python (+ all its scientific extensions), Jupyter etc...</p>
 
 <a name="127376740"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376740">Johan Commelin (Jun 01 2018 at 04:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376740">Johan Commelin (May 31 2018 at 18:38)</a>:</h4>
 <p>No, Google Docs like</p>
 
 <a name="127376748"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376748">Johan Commelin (Jun 01 2018 at 04:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376748">Johan Commelin (May 31 2018 at 18:38)</a>:</h4>
 <p>But a VScode-like UI</p>
 
 <a name="127376834"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376834">Johan Commelin (Jun 01 2018 at 04:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376834">Johan Commelin (May 31 2018 at 18:40)</a>:</h4>
 <p>So, they definitely have the computing power for the Jenkins instance. The question is if they want to support it. (They don't have that much staff...)</p>
 
 <a name="127376846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376846">Simon Hudon (Jun 01 2018 at 04:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376846">Simon Hudon (May 31 2018 at 18:40)</a>:</h4>
 <p>VSCode is available online for some languages: <a href="https://stackblitz.com/" target="_blank" title="https://stackblitz.com/">https://stackblitz.com/</a> maybe that would help</p>
 
 <a name="127376853"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376853">Johan Commelin (Jun 01 2018 at 04:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376853">Johan Commelin (May 31 2018 at 18:40)</a>:</h4>
 <p>Yes, I gave him that link.</p>
 
 <a name="127376859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376859">Simon Hudon (Jun 01 2018 at 04:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376859">Simon Hudon (May 31 2018 at 18:40)</a>:</h4>
 <p>Cool</p>
 
 <a name="127376862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376862">Johan Commelin (Jun 01 2018 at 04:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127376862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127376862">Johan Commelin (May 31 2018 at 18:40)</a>:</h4>
 <p>But now you need to add in collaboration, and the Lean extension.</p>
 
 <a name="127389254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127389254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127389254">Scott Morrison (Jun 01 2018 at 09:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127389254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127389254">Scott Morrison (May 31 2018 at 23:32)</a>:</h4>
 <p>I don't think we should be asking William Stein to help us with things like travis.</p>
 
 <a name="127391794"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391794">Mario Carneiro (Jun 01 2018 at 10:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391794">Mario Carneiro (Jun 01 2018 at 00:44)</a>:</h4>
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> I'm okay with self-hosting Jenkins, provided that it doesn't need 100% uptime. That is, the server does not need to be running when someone pushes a commit, it just builds when it's available</p>
 
 <a name="127391801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391801">Mario Carneiro (Jun 01 2018 at 10:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391801">Mario Carneiro (Jun 01 2018 at 00:45)</a>:</h4>
 <p>I don't know that much about Jenkins though</p>
 
 <a name="127391816"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391816">Mario Carneiro (Jun 01 2018 at 10:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127391816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127391816">Mario Carneiro (Jun 01 2018 at 00:45)</a>:</h4>
 <p>Not sure about available CMU resources</p>
 
 <a name="127404557"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127404557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127404557">Gabriel Ebner (Jun 01 2018 at 17:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127404557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127404557">Gabriel Ebner (Jun 01 2018 at 07:39)</a>:</h4>
 <p>I don't think running Jenkins on your laptop is a good idea.  It should have a public IP so that other people can look at the build logs in case of failure.  (But you don't need six nines availability either.)</p>
 
 <a name="127479860"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127479860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127479860">Mario Carneiro (Jun 03 2018 at 08:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127479860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127479860">Mario Carneiro (Jun 02 2018 at 22:16)</a>:</h4>
 <p>Simon suggested that we use a staged build <a href="https://docs.travis-ci.com/user/build-stages/" target="_blank" title="https://docs.travis-ci.com/user/build-stages/">https://docs.travis-ci.com/user/build-stages/</a> , since the different jobs have independent timeouts. The idea would be to run <code>lean --make</code> for 45 minutes or so in the first job, and then always succeed and update the cache. Then stage 2 would be a regular lean build using the artifacts from the first run. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Could you see if this works with the caching? Travis documentation suggests using S3 for common files so I'm not sure if the cache sharing trick will work.</p>
 
 <a name="127479873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127479873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127479873">Simon Hudon (Jun 03 2018 at 08:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127479873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127479873">Simon Hudon (Jun 02 2018 at 22:18)</a>:</h4>
 <p>What do you mean by the cache sharing trick?</p>
 
 <a name="127480016"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480016">Simon Hudon (Jun 03 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480016">Simon Hudon (Jun 02 2018 at 22:23)</a>:</h4>
 <p>Rather: why do you think that sharing cache between phases might not work?</p>
 
 <a name="127480017"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480017">Mario Carneiro (Jun 03 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480017">Mario Carneiro (Jun 02 2018 at 22:23)</a>:</h4>
 <p>They run in separate VMs</p>
 
 <a name="127480560"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480560">Simon Hudon (Jun 03 2018 at 08:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127480560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127480560">Simon Hudon (Jun 02 2018 at 22:44)</a>:</h4>
 <p>Ok but when I used it, my later stages inherited the cache from the early stages. I don't see why that wouldn't happen for mathlib</p>
 
 <a name="127539236"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127539236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127539236">Scott Morrison (Jun 04 2018 at 20:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127539236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127539236">Scott Morrison (Jun 04 2018 at 10:49)</a>:</h4>
 <p>I just investigated setting up a copy of Jenkins (it's easy!), but couldn't get too far. When I asked it to scan the leanprover organization on github, it quickly errored: it asks for things through the API that only people with commit access can use:</p>
 <div class="codehilite"><pre><span></span>ERROR: [Mon Jun 04 20:46:32 AEST 2018] Could not fetch sources from navigator org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator@48f109dc
 java.io.FileNotFoundException: https://api.github.com/repos/leanprover/lean/collaborators/Kha/permission
@@ -213,55 +213,55 @@ Caused: org.kohsuke.github.GHFileNotFoundException: {&quot;message&quot;:&quot;M
 </pre></div>
 
 <a name="127540280"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540280">Johan Commelin (Jun 04 2018 at 21:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540280">Johan Commelin (Jun 04 2018 at 11:20)</a>:</h4>
 <p>Can you get it to work with one of your own lean repos?</p>
 
 <a name="127540943"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540943">Scott Morrison (Jun 04 2018 at 21:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540943">Scott Morrison (Jun 04 2018 at 11:43)</a>:</h4>
 <p>I got Jenkins to read the .travis.yml file from one of my own repos, and it starts off happily enough, but then says:</p>
 <div class="codehilite"><pre><span></span>leanpkg test
 OSX &#39;readlink&#39; command does not support option &#39;-f&#39;, please install &#39;greadlink&#39;. If you use &#39;brew&#39;, you can install &#39;greadlink&#39; using &#39;brew install coreutils&#39;
 </pre></div>
 
 <a name="127540984"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540984">Scott Morrison (Jun 04 2018 at 21:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540984">Scott Morrison (Jun 04 2018 at 11:44)</a>:</h4>
 <p><code>coreutils</code> is already installed, and <code>leanpkg test</code> works just fine on the command line. :-(</p>
 
 <a name="127540996"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540996">Sebastian Ullrich (Jun 04 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540996">Sebastian Ullrich (Jun 04 2018 at 11:45)</a>:</h4>
 <p>Different <code>PATH</code>s, probably?</p>
 
 <a name="127540998"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540998">Johan Commelin (Jun 04 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127540998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127540998">Johan Commelin (Jun 04 2018 at 11:45)</a>:</h4>
 <p>Hmmm, I don't know how to help you with that one. (I don't really have any Jenkins experience myself.) Are you on a Mac? Or is Jenkins just very Mac-oriented?</p>
 
 <a name="127541257"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127541257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127541257">Scott Morrison (Jun 04 2018 at 21:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127541257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127541257">Scott Morrison (Jun 04 2018 at 11:52)</a>:</h4>
 <p>I think I'm going to pause my Jenkins experiments for now. (I have a big fat machine with plenty of RAM and cores, with a fixed IP address, but I would have to negotiate some holes in firewalls with my ... uncooperative ... IT staff.)</p>
 
 <a name="127541270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127541270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127541270">Johan Commelin (Jun 04 2018 at 21:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127541270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127541270">Johan Commelin (Jun 04 2018 at 11:53)</a>:</h4>
 <p>Aah, yes, I forgot that William isn't the only one with big fat machines. So do you (-;</p>
 
 <a name="127592452"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127592452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127592452">Gabriel Ebner (Jun 05 2018 at 20:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127592452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127592452">Gabriel Ebner (Jun 05 2018 at 10:18)</a>:</h4>
 <p>I think the easiest way to setup jenkins with github nowadays is to use the blue ocean interface with Jenkinsfile (docs <a href="https://jenkins.io/doc/book/blueocean/getting-started/" target="_blank" title="https://jenkins.io/doc/book/blueocean/getting-started/">here</a> and <a href="https://jenkins.io/doc/book/blueocean/creating-pipelines/" target="_blank" title="https://jenkins.io/doc/book/blueocean/creating-pipelines/">here</a>).  All you need to do is install elan and add <a href="https://github.com/gebner/mathlib/blob/master/Jenkinsfile" target="_blank" title="https://github.com/gebner/mathlib/blob/master/Jenkinsfile">this file to the repo</a>.  Then everything seems to work out of the box, including status information on PRs (<a href="https://github.com/gebner/mathlib/pull/1" target="_blank" title="https://github.com/gebner/mathlib/pull/1">look here</a>).  (This is a linux machine btw, and we use it for another project so I can't easily repurpose it for mathlib.)<br>
 You definitely want a public IP with an open http port so people can look at the build log.  On the permission side, I think anybody in the lean github organization can authorize it.  The best way to automatically trigger jenkins is via webhooks, then it starts building a few seconds after a PR gets created or a commit is pushed.  Unfortunately I can't create webhooks on <em>any</em> of the lean projects.  In the worst case, jenkins can poll github in regular intervals.</p>
 
 <a name="127693739"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127693739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127693739">Scott Morrison (Jun 07 2018 at 14:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127693739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127693739">Scott Morrison (Jun 07 2018 at 04:35)</a>:</h4>
 <p>So while I have a machine I can run Jenkins on, it seems there’s no way I can convince local IT people to let that Jenkins interface be publicly accessible. I could set it up to poll github in order to initiate builds, but I’d need some mechanism to output the build logs to a web server. If anyone knows of an out-of-the-box solution to this, I’m happy to pursue it, but perhaps there are better avenues.</p>
 
 <a name="127695721"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127695721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127695721">Johan Commelin (Jun 07 2018 at 15:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127695721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127695721">Johan Commelin (Jun 07 2018 at 05:26)</a>:</h4>
 <p>Can't you have it push the build logs by ssh to some web server?</p>
 
 <a name="127695909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127695909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127695909">Scott Morrison (Jun 07 2018 at 15:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/127695909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#127695909">Scott Morrison (Jun 07 2018 at 05:31)</a>:</h4>
 <p>Yes, that's what I had in mind. I guess I was asking if someone knows of an easy-to-configure Jenkins plugin that does this. I'd be happy to contribute hardware and a little setup time, but I don't want to feel responsible for managing an intricate web of scripts. :-)</p>
 
 <a name="157223784"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157223784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157223784">Reid Barton (Jan 31 2019 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157223784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157223784">Reid Barton (Jan 30 2019 at 21:27)</a>:</h4>
 <p>from <code>.travis.yml</code>:</p>
 <div class="codehilite"><pre><span></span>  - rm `git status | grep &quot;\.lean&quot; | sed &quot;s/\.lean/.olean/&quot;` ||  true
   - rm `git status | grep &quot;\.lean&quot;` || true
@@ -276,35 +276,35 @@ You definitely want a public IP with an open http port so people can look at the
 <p>This should remove all untracked files, which I think is what the <code>rm</code> lines are trying to accomplish, while leaving ignored files, e.g. built <code>.olean</code> files.</p>
 
 <a name="157224087"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224087">Reid Barton (Jan 31 2019 at 08:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224087">Reid Barton (Jan 30 2019 at 21:30)</a>:</h4>
 <p>The <code>rm</code> lines failed for <a href="https://github.com/leanprover/mathlib/issues/641" target="_blank" title="https://github.com/leanprover/mathlib/issues/641">#641</a>, because the cache contained an entire directory left over from a rename, and in that situation <code>git status</code> only reports the directory as a whole as untracked.</p>
 
 <a name="157224385"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224385">Kevin Buzzard (Jan 31 2019 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224385">Kevin Buzzard (Jan 30 2019 at 21:33)</a>:</h4>
 <p>641 divides <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><msup><mn>2</mn><mn>5</mn></msup></msup><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{2^5}+1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.9869199999999999em;"></span><span class="strut bottom" style="height:1.07025em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord"><span class="mord mathrm">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9869199999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913142857142857em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathrm mtight">5</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span>, the 5th Fermat number, disproving a conjecture of Fermat.</p>
 
 <a name="157224926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224926">Reid Barton (Jan 31 2019 at 08:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157224926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157224926">Reid Barton (Jan 30 2019 at 21:39)</a>:</h4>
 <p>Oh wait this won't actually work, because the old <code>.olean</code> files will still be left behind and lean will use them (argh)</p>
 
 <a name="157225645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225645">Sebastian Ullrich (Jan 31 2019 at 08:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225645">Sebastian Ullrich (Jan 30 2019 at 21:46)</a>:</h4>
 <p><code>git clean</code> first, then remove all .olean files without corresponding .lean file?</p>
 
 <a name="157225832"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225832">Reid Barton (Jan 31 2019 at 08:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225832">Reid Barton (Jan 30 2019 at 21:48)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> and I arrived at the same conclusion</p>
 
 <a name="157225861"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225861">Sebastian Ullrich (Jan 31 2019 at 08:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157225861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157225861">Sebastian Ullrich (Jan 30 2019 at 21:48)</a>:</h4>
 <p>Definitely an improvement over the old code :)</p>
 
 <a name="157226203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157226203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157226203">Reid Barton (Jan 31 2019 at 08:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157226203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157226203">Reid Barton (Jan 30 2019 at 21:53)</a>:</h4>
 <p>By the way, GHC seems to ignore object files without matching source files. I think that's a better behavior than Lean's</p>
 
 <a name="157226787"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157226787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157226787">Reid Barton (Jan 31 2019 at 09:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20caching/near/157226787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16807traviscaching.html#157226787">Reid Barton (Jan 30 2019 at 22:00)</a>:</h4>
 <p>GHC is also pretty smart about not recompiling downstream modules if a dependency was modified in a way that can't affect clients. It might be worth borrowing those techniques at some point, though I don't know how effective they would be in the Lean world</p>
 
 

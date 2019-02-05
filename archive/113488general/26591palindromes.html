@@ -12,27 +12,27 @@ permalink: archive/113488general/26591palindromes.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124591860"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591860">Kevin Buzzard (Apr 04 2018 at 06:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591860">Kevin Buzzard (Apr 03 2018 at 20:23)</a>:</h4>
 <p>For recreational reasons I was interested in working with lists which were palindromes, i.e. lists <code>G</code> satisfying <code>G = list.reverse G</code>. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general <code>G</code> of length 2 or more as <code>G=[head G] ++ middle G ++ [head G]</code> and have a recursor of the form <code>C [] -&gt; C [x] -&gt; forall palindromes H, C H -&gt; C ([a] ++ H ++ [a]) -&gt; forall palindromes G, C G</code></p>
 
 <a name="124591884"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591884">Kevin Buzzard (Apr 04 2018 at 06:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591884">Kevin Buzzard (Apr 03 2018 at 20:23)</a>:</h4>
 <p>What is the idiomatic way to do this in Lean? I am at the stage now where I could probably get several methods to go through</p>
 
 <a name="124591886"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591886">Kevin Buzzard (Apr 04 2018 at 06:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591886">Kevin Buzzard (Apr 03 2018 at 20:23)</a>:</h4>
 <p>but I would like to choose the one with the least pain.</p>
 
 <a name="124591890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591890">Kevin Buzzard (Apr 04 2018 at 06:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124591890">Kevin Buzzard (Apr 03 2018 at 20:23)</a>:</h4>
 <p>Should I actually make a new inductive type?</p>
 
 <a name="124593010"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593010">Mario Carneiro (Apr 04 2018 at 06:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593010">Mario Carneiro (Apr 03 2018 at 20:50)</a>:</h4>
 <p>You should look at <code>list.reverse_rec_on</code> for a similar eliminator. You could encode it as an inductive predicate, and then prove that it is equivalent to <code>g = list.reverse g</code>, or you could prove the eliminator you wrote with <code>palindromes</code> defined using reverse</p>
 
 <a name="124593011"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593011">Chris Hughes (Apr 04 2018 at 06:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593011">Chris Hughes (Apr 03 2018 at 20:50)</a>:</h4>
 <p>I stopped as soon as it got hard</p>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span>  <span class="n">palindrome</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span>  <span class="kt">Prop</span>
 <span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="o">[]</span>
@@ -50,104 +50,104 @@ permalink: archive/113488general/26591palindromes.html
 </pre></div>
 
 <a name="124593343"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593343">Mario Carneiro (Apr 04 2018 at 06:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124593343">Mario Carneiro (Apr 03 2018 at 20:58)</a>:</h4>
 <p>In the cons case you have <code>a::l = list.reverse (a::l) = l.reverse ++ [a]</code>. By cases on <code>l.reverse</code>, if <code>l.reverse = []</code> then <code>a::l = [a]</code> is a palindrome, and if <code>l.reverse = b::l'</code> then <code>a::l = b::l'++[a]</code> so <code>a = b</code> and <code>l = l' ++ [a]</code>, so <code>a :: l'.reverse = l.reverse = a::l'</code> and hence <code>l' = l'.reverse</code>, so <code>l'</code> is a palindrome by IH and hence <code>a::l</code> is a palindrome</p>
 
 <a name="124594253"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594253">Chris Hughes (Apr 04 2018 at 07:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594253">Chris Hughes (Apr 03 2018 at 21:18)</a>:</h4>
 <p>Is there a lemma saying <code>a :: l = b :: m -&gt; a = b</code>?</p>
 
 <a name="124594260"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594260">Kevin Buzzard (Apr 04 2018 at 07:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594260">Kevin Buzzard (Apr 03 2018 at 21:18)</a>:</h4>
 <p>no_confusion</p>
 
 <a name="124594271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594271">Kevin Buzzard (Apr 04 2018 at 07:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594271">Kevin Buzzard (Apr 03 2018 at 21:19)</a>:</h4>
 <p>or cons_inj or whatever</p>
 
 <a name="124594377"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594377">Chris Hughes (Apr 04 2018 at 07:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594377">Chris Hughes (Apr 03 2018 at 21:20)</a>:</h4>
 <p>cons_inj tells me about the lists being equal.</p>
 
 <a name="124594398"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594398">Sebastian Ullrich (Apr 04 2018 at 07:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594398">Sebastian Ullrich (Apr 03 2018 at 21:21)</a>:</h4>
 <p>or the <code>injection</code> tactic</p>
 
 <a name="124594462"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594462">Chris Hughes (Apr 04 2018 at 07:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124594462">Chris Hughes (Apr 03 2018 at 21:22)</a>:</h4>
 <p>Thanks <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> I'd never used injection successfully before.</p>
 
 <a name="124595081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595081">Kevin Buzzard (Apr 04 2018 at 07:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595081">Kevin Buzzard (Apr 03 2018 at 21:35)</a>:</h4>
 <p><code>example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -&gt; a = b :=  λ H, (list.cons.inj H).1</code></p>
 
 <a name="124595142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595142">Kevin Buzzard (Apr 04 2018 at 07:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595142">Kevin Buzzard (Apr 03 2018 at 21:36)</a>:</h4>
 <p>I feel confident with this sort of stuff now I've seen how it all works.</p>
 
 <a name="124595241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595241">Kevin Buzzard (Apr 04 2018 at 07:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595241">Kevin Buzzard (Apr 03 2018 at 21:38)</a>:</h4>
 <p><code>example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -&gt; a = b := λ H, @list.no_confusion _ _ (a::l) (b::m) H (λ x y,x)</code></p>
 
 <a name="124595265"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595265">Kevin Buzzard (Apr 04 2018 at 07:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595265">Kevin Buzzard (Apr 03 2018 at 21:39)</a>:</h4>
 <p>Chris, it was your questioning a week last Thurs which pushed me to learn this stuff. We didn't quite go as far as we should have done. We looked at no_confusion for bool and nat, but if you look at it for list you see how all the terms involved in the constructors are used.</p>
 
 <a name="124595342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595342">Kevin Buzzard (Apr 04 2018 at 07:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595342">Kevin Buzzard (Apr 03 2018 at 21:41)</a>:</h4>
 <div class="codehilite"><pre><span></span>variables {a b : β} {L M : list β} {P : Type}
 #reduce list.no_confusion_type P (a::L) (b::M) -- (a = b → L = M → P) → P
 </pre></div>
 
 <a name="124595391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595391">Kevin Buzzard (Apr 04 2018 at 07:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595391">Kevin Buzzard (Apr 03 2018 at 21:42)</a>:</h4>
 <p>You use no_confusion to make an instance of that type.</p>
 
 <a name="124595732"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595732">Kevin Buzzard (Apr 04 2018 at 07:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595732">Kevin Buzzard (Apr 03 2018 at 21:50)</a>:</h4>
 <blockquote>
 <p>In the cons case you have <code>a::l = list.reverse (a::l) = l.reverse ++ [a]</code>. By cases on <code>l.reverse</code>, if <code>l.reverse = []</code> then <code>a::l = [a]</code> is a palindrome, and if <code>l.reverse = b::l'</code> then <code>a::l = b::l'++[a]</code> so <code>a = b</code> and <code>l = l' ++ [a]</code>, so <code>a :: l'.reverse = l.reverse = a::l'</code> and hence <code>l' = l'.reverse</code>, so <code>l'</code> is a palindrome by IH and hence <code>a::l</code> is a palindrome</p>
 </blockquote>
 <p>For me, I can prove l' = l'.reverse but the inductive hypothesis doesn't let me conclude l' is a palindrome, the inductive hypothesis the way I've set it up says at this point that if (a::l') is its own reverse then (a::l') is a palindrome.</p>
 
 <a name="124595764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595764">Kevin Buzzard (Apr 04 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595764">Kevin Buzzard (Apr 03 2018 at 21:52)</a>:</h4>
 <p>Somehow this is exactly the issue I keep running into: list has the wrong recursor for me.</p>
 
 <a name="124595820"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595820">Kevin Buzzard (Apr 04 2018 at 07:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124595820">Kevin Buzzard (Apr 03 2018 at 21:53)</a>:</h4>
 <p>I can see that because I have <code>list.rec_on</code> and <code>list.reverse_rec_on</code> I should have all I need, but I don't know what <code>C</code> should be in some sense (what is <code>C</code> called? The motive?)</p>
 
 <a name="124596524"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124596524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124596524">Chris Hughes (Apr 04 2018 at 08:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124596524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124596524">Chris Hughes (Apr 03 2018 at 22:09)</a>:</h4>
 <p>I've been struggling with this too. I think the best would be some sort of strong induction on the list.</p>
 
 <a name="124597147"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597147">Mario Carneiro (Apr 04 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597147">Mario Carneiro (Apr 03 2018 at 22:23)</a>:</h4>
 <p>You should do strong induction on the length of the list</p>
 
 <a name="124597485"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597485">Kenny Lau (Apr 04 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597485">Kenny Lau (Apr 03 2018 at 22:33)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you could use a custom recursor</p>
 
 <a name="124597486"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597486">Kenny Lau (Apr 04 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597486">Kenny Lau (Apr 03 2018 at 22:33)</a>:</h4>
 <p>see <a href="https://github.com/kckennylau/Lean/blob/master/recursion.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/recursion.lean">https://github.com/kckennylau/Lean/blob/master/recursion.lean</a></p>
 
 <a name="124597487"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597487">Kenny Lau (Apr 04 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124597487">Kenny Lau (Apr 03 2018 at 22:33)</a>:</h4>
 <p>for an example</p>
 
 <a name="124599343"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124599343">Ching-Tsun Chou (Apr 04 2018 at 09:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124599343">Ching-Tsun Chou (Apr 03 2018 at 23:26)</a>:</h4>
 <p>The trick to prove the lemma Chris wants to prove is to consider the two cases (a) length l = 2<em>n and (b) length l = 2</em>n + 1 separately and then use induction on n in each case.</p>
 
 <a name="124599350"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124599350">Kenny Lau (Apr 04 2018 at 09:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124599350">Kenny Lau (Apr 03 2018 at 23:26)</a>:</h4>
 <p>omg someone from hong kong</p>
 
 <a name="124638255"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638255">Chris Hughes (Apr 05 2018 at 05:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638255">Chris Hughes (Apr 04 2018 at 19:41)</a>:</h4>
 <p>Finally did it. </p>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">palindrome</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
 <span class="bp">|</span> <span class="n">nil</span>       <span class="o">:</span> <span class="n">palindrome</span> <span class="o">[]</span>
@@ -189,15 +189,15 @@ permalink: archive/113488general/26591palindromes.html
 </pre></div>
 
 <a name="124638434"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638434">Kevin Buzzard (Apr 05 2018 at 05:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638434">Kevin Buzzard (Apr 04 2018 at 19:47)</a>:</h4>
 <p>Yes, I did it too. Here's the reason I was asking: Q1(c) of <a href="http://www.olympiad.org.uk/papers/2015/bio/round_one.html" target="_blank" title="http://www.olympiad.org.uk/papers/2015/bio/round_one.html">http://www.olympiad.org.uk/papers/2015/bio/round_one.html</a></p>
 
 <a name="124638445"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638445">Kevin Buzzard (Apr 05 2018 at 05:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124638445">Kevin Buzzard (Apr 04 2018 at 19:47)</a>:</h4>
 <p>My son wrote code to do Q1(a) so I thought I'd write code to do Q1(c) because I thought that the idea of writing code to do 1c would be interesting to him.</p>
 
 <a name="124639841"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639841">Kevin Buzzard (Apr 05 2018 at 06:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639841">Kevin Buzzard (Apr 04 2018 at 20:19)</a>:</h4>
 <p>FWIW:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
 <span class="kn">open</span> <span class="n">list</span>
@@ -275,23 +275,23 @@ permalink: archive/113488general/26591palindromes.html
 </pre></div>
 
 <a name="124639896"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639896">Kevin Buzzard (Apr 05 2018 at 06:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639896">Kevin Buzzard (Apr 04 2018 at 20:20)</a>:</h4>
 <p>My code didn't get highlighted. Possibly because the FWIW was in the same post.</p>
 
 <a name="124639900"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639900">Kevin Buzzard (Apr 05 2018 at 06:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639900">Kevin Buzzard (Apr 04 2018 at 20:20)</a>:</h4>
 <p>No wait Chris also didn't post a pure code post</p>
 
 <a name="124639914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639914">Kevin Buzzard (Apr 05 2018 at 06:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124639914">Kevin Buzzard (Apr 04 2018 at 20:21)</a>:</h4>
 <p>Aah got it, you have to write <code>lean</code> after the three backticks</p>
 
 <a name="124640132"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124640132">Kevin Buzzard (Apr 05 2018 at 06:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124640132">Kevin Buzzard (Apr 04 2018 at 20:26)</a>:</h4>
 <p>Oh Chris you didn't use strong induction for the main theorem! (<code>palindrome_of_eq_reverse</code>). I made an aux lemma saying "forall n, if list length is n then blah" and applied strong induction to n, and then deduced the statement we wanted as a trivial corollary.</p>
 
 <a name="124640484"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124640484">Chris Hughes (Apr 05 2018 at 06:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124640484">Chris Hughes (Apr 04 2018 at 20:34)</a>:</h4>
 <p>I did use strong induction, note <code> using_well_founded {rel_tac := λ _ _, ``[exact ⟨_, measure_wf length⟩]} </code></p>
 <p>I also did question 1a, although in 2^(2^n) time, so I might lose some points for that.</p>
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">palindrome</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
@@ -302,94 +302,94 @@ permalink: archive/113488general/26591palindromes.html
 </pre></div>
 
 <a name="124641990"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124641990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124641990">Mario Carneiro (Apr 05 2018 at 07:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124641990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124641990">Mario Carneiro (Apr 04 2018 at 21:13)</a>:</h4>
 <p>haha that solution</p>
 
 <a name="124642031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124642031">Mario Carneiro (Apr 05 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124642031">Mario Carneiro (Apr 04 2018 at 21:14)</a>:</h4>
 <p>You should write the deterministic bogosort, which enumerates permutations until it finds the sorted one</p>
 
 <a name="124642035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124642035">Kevin Buzzard (Apr 05 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124642035">Kevin Buzzard (Apr 04 2018 at 21:14)</a>:</h4>
 <p>The mark scheme is just a bunch of tests, and you have to pass each one in under a second to get the marks.</p>
 
 <a name="124644819"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644819">Kevin Buzzard (Apr 05 2018 at 08:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644819">Kevin Buzzard (Apr 04 2018 at 22:29)</a>:</h4>
 <p>So I finished the proof that the word has to have an even number of letters.</p>
 
 <a name="124644823"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644823">Kevin Buzzard (Apr 05 2018 at 08:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644823">Kevin Buzzard (Apr 04 2018 at 22:29)</a>:</h4>
 <p>My proof was 240 lines, longer than my son's program to do 1(a).</p>
 
 <a name="124644873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644873">Kevin Buzzard (Apr 05 2018 at 08:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644873">Kevin Buzzard (Apr 04 2018 at 22:30)</a>:</h4>
 <p>But I had to develop some concepts from scratch; in a parallel universe they would have already been in some library.</p>
 
 <a name="124644889"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644889">Kevin Buzzard (Apr 05 2018 at 08:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644889">Kevin Buzzard (Apr 04 2018 at 22:31)</a>:</h4>
 <p>It was quite an interesting task. The question is about the following definition:</p>
 
 <a name="124644891"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644891">Kevin Buzzard (Apr 05 2018 at 08:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644891">Kevin Buzzard (Apr 04 2018 at 22:31)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">definition</span>  <span class="n">listunfold</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span>
 <span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="o">[]</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">++</span> <span class="o">(</span><span class="n">listunfold</span> <span class="n">L</span><span class="o">)</span>
 </pre></div>
 
 <a name="124644939"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644939">Kevin Buzzard (Apr 05 2018 at 08:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644939">Kevin Buzzard (Apr 04 2018 at 22:32)</a>:</h4>
 <p>but then I had to write <code>listunfold_append : listunfold (G1 ++ G2) = listunfold G1 ++ listunfold G2</code> and <code>listunfold_singleton</code>and so on</p>
 
 <a name="124644960"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644960">Kevin Buzzard (Apr 05 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644960">Kevin Buzzard (Apr 04 2018 at 22:33)</a>:</h4>
 <p>And similarly for <code>palindrome</code> (the inductive prop) I had to prove palindrome iff L = reverse L</p>
 
 <a name="124644967"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644967">Chris Hughes (Apr 05 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124644967">Chris Hughes (Apr 04 2018 at 22:33)</a>:</h4>
 <p>Listunfold could also be defined as a fold. Then those two lemmas are probably there already because of associativity</p>
 
 <a name="124645013"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645013">Kevin Buzzard (Apr 05 2018 at 08:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645013">Kevin Buzzard (Apr 04 2018 at 22:34)</a>:</h4>
 <p>Is that right?</p>
 
 <a name="124645022"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645022">Kevin Buzzard (Apr 05 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645022">Kevin Buzzard (Apr 04 2018 at 22:35)</a>:</h4>
 <p>I feel like if I defined it as a fold then I would then have to prove the two things I've used for my definition immediately afterwards</p>
 
 <a name="124645024"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645024">Chris Hughes (Apr 05 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645024">Chris Hughes (Apr 04 2018 at 22:35)</a>:</h4>
 <p>Not in that exact form, but they'd be quite easy.</p>
 
 <a name="124645025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645025">Kevin Buzzard (Apr 05 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645025">Kevin Buzzard (Apr 04 2018 at 22:35)</a>:</h4>
 <p>and then the same proof for my append and singleton :-)</p>
 
 <a name="124645031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645031">Kevin Buzzard (Apr 05 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645031">Kevin Buzzard (Apr 04 2018 at 22:35)</a>:</h4>
 <p>Oh everything was easy, but of course because this was recreational I did it all in tactic mode so my proofs go on for ages :-)</p>
 
 <a name="124645032"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645032">Chris Hughes (Apr 05 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645032">Chris Hughes (Apr 04 2018 at 22:35)</a>:</h4>
 <p>Those two things are lemmas about fold probably</p>
 
 <a name="124645079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645079">Kevin Buzzard (Apr 05 2018 at 08:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645079">Kevin Buzzard (Apr 04 2018 at 22:36)</a>:</h4>
 <p>You might well be right. I feel like I know enough Lean to write the definitions and basic properties of these new concepts like listunfold or palindrome</p>
 
 <a name="124645080"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645080">Kevin Buzzard (Apr 05 2018 at 08:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645080">Kevin Buzzard (Apr 04 2018 at 22:36)</a>:</h4>
 <p>but</p>
 
 <a name="124645084"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645084">Kevin Buzzard (Apr 05 2018 at 08:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645084">Kevin Buzzard (Apr 04 2018 at 22:36)</a>:</h4>
 <p>I feel like if I really knew everything that was already there, properly, then I would write things far more efficiently.</p>
 
 <a name="124645097"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645097">Chris Hughes (Apr 05 2018 at 08:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124645097">Chris Hughes (Apr 04 2018 at 22:37)</a>:</h4>
 <p>It's not about knowing what's there, it's knowing what's probably there.</p>
 
 <a name="124650234"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124650234">Mario Carneiro (Apr 05 2018 at 11:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26591palindromes.html#124650234">Mario Carneiro (Apr 05 2018 at 01:21)</a>:</h4>
 <p>Your <code>listunfold</code> is defined in core and proven in mathlib, by the name <code>list.join</code>. It is the monad "flattening" operation for lists</p>
 
 

@@ -12,32 +12,32 @@ permalink: archive/116395maths/29201zeroring.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133613106"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613106">Kevin Buzzard (Sep 10 2018 at 00:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613106">Kevin Buzzard (Sep 09 2018 at 14:56)</a>:</h4>
 <p>I'm working with polynomials and the zero ring is constantly a special case. There is a class <code>nonzero_comm_ring</code> extending comm_ring with the proposition that <code>0 \ne 1</code>, and several of Chris' results on polynomials need this as a hypothesis (for example the fact that degree of <code>X</code> is 1, and every corollary of this). Of course everything is true (and trivial) for the zero ring, but often the proofs need to be separate because of this. Because of the constructor for <code>nonzero_comm_ring</code> I am coming around to the idea to be splitting on <code>(0 : R) = 1</code> for lemmas which are true in the case R=0 but where the proof in the non-zero case is far from working for the zero ring.</p>
 <p>So I now find myself wanting to prove things such as "if R is a ring and 0 = 1 then R is a fintype". I don't really know how to make that an instance, and I am not sure whether it should be an instance. On the other hand if I made a new class <code>zero_ring</code> then in some sense my life would be easier. Having said that, making a class for such a silly edge case seems a bit ridiculous. Should I just stick to proving lemmas rather than making this a class? I am slightly concerned that really I should be working with <code>zero_semiring</code> or something.</p>
 <p>Another issue is that if I put <code>0 = 1 -&gt; fintype R</code> into <code>ring.lean</code> then I have to add an import to <code>ring.lean</code> and I have this vague worry that I don't really know "which comes first" out of rings and fintypes.</p>
 
 <a name="133613814"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613814">Reid Barton (Sep 10 2018 at 01:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613814">Reid Barton (Sep 09 2018 at 15:11)</a>:</h4>
 <blockquote>
 <p>"if R is a ring and 0 = 1 then R is a fintype"</p>
 </blockquote>
 <p>Is this a real example, including the <code>fintype</code> part?</p>
 
 <a name="133613889"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613889">Reid Barton (Sep 10 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613889">Reid Barton (Sep 09 2018 at 15:12)</a>:</h4>
 <p>Your <code>zero_ring</code> could be "lifted" all the way up to <code>is_singleton</code>, except we don't have it.</p>
 
 <a name="133613892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613892">Chris Hughes (Sep 10 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613892">Chris Hughes (Sep 09 2018 at 15:12)</a>:</h4>
 <p>Rings definitely come before <code>fintype</code>. A more useful instance would perhaps be <code>0 = 1 -&gt; subsingleton R</code></p>
 
 <a name="133613899"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613899">Reid Barton (Sep 10 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613899">Reid Barton (Sep 09 2018 at 15:12)</a>:</h4>
 <p>You can also use <code>subsingleton</code> in this case, yeah</p>
 
 <a name="133613915"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613915">Kevin Buzzard (Sep 10 2018 at 01:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613915">Kevin Buzzard (Sep 09 2018 at 15:13)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">ring</span><span class="bp">.</span><span class="n">zero_of_zero_eq_one</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">h01</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
 <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">one_mul</span> <span class="n">a</span><span class="o">,</span><span class="err">←</span><span class="n">h01</span><span class="o">,</span><span class="n">zero_mul</span><span class="o">]</span>
 
@@ -54,77 +54,77 @@ permalink: archive/116395maths/29201zeroring.html
 </pre></div>
 
 <a name="133613971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613971">Reid Barton (Sep 10 2018 at 01:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613971">Reid Barton (Sep 09 2018 at 15:14)</a>:</h4>
 <p>Aha I see. I was wondering how you were using the <code>fintype</code>, but this makes sense.</p>
 
 <a name="133613973"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613973">Kevin Buzzard (Sep 10 2018 at 01:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133613973">Kevin Buzzard (Sep 09 2018 at 15:14)</a>:</h4>
 <p>I am trying to prove the Hilbert basis theorem for the zero ring :-)</p>
 
 <a name="133614007"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614007">Kevin Buzzard (Sep 10 2018 at 01:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614007">Kevin Buzzard (Sep 09 2018 at 15:15)</a>:</h4>
 <p>I've proved that if a module is a fintype then it's Noetherian so I figured I'd use that.</p>
 
 <a name="133614049"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614049">Reid Barton (Sep 10 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614049">Reid Barton (Sep 09 2018 at 15:16)</a>:</h4>
 <p>So you could use case analysis on whether R is a subsingleton, and show that if it isn't then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>≠</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 \ne 1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.716em;"></span><span class="strut bottom" style="height:0.9309999999999999em;vertical-align:-0.215em;"></span><span class="base"><span class="mord mathrm">0</span><span class="mrel">≠</span><span class="mord mathrm">1</span></span></span></span>.<br>
 Then also make an instance that says that if R is a subsingleton then so is R[X].</p>
 
 <a name="133614079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614079">Reid Barton (Sep 10 2018 at 01:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614079">Reid Barton (Sep 09 2018 at 15:17)</a>:</h4>
 <p>Or write a lemma <code>∀ R, subsingleton R ∨ ((0 : R) ≠ 1)</code></p>
 
 <a name="133614109"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614109">Kevin Buzzard (Sep 10 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614109">Kevin Buzzard (Sep 09 2018 at 15:18)</a>:</h4>
 <p>I see. You're suggesting that I use what we currently have in the type class system by using a different class to convey what I'm trying to say, rather than making a new class. Thanks!</p>
 
 <a name="133614126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614126">Reid Barton (Sep 10 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614126">Reid Barton (Sep 09 2018 at 15:18)</a>:</h4>
 <p>Well, I would actually prefer that you make a new class but that it should be called <code>is_singleton</code> :)</p>
 
 <a name="133614395"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614395">Kevin Buzzard (Sep 10 2018 at 01:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614395">Kevin Buzzard (Sep 09 2018 at 15:26)</a>:</h4>
 <p>Hmm. <code>subsingleton</code> is a Prop. Does this mean that type class inference won't get me from it to <code>fintype</code>?</p>
 
 <a name="133614443"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614443">Chris Hughes (Sep 10 2018 at 01:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614443">Chris Hughes (Sep 09 2018 at 15:26)</a>:</h4>
 <p>Not computably.</p>
 
 <a name="133614459"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614459">Chris Hughes (Sep 10 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133614459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133614459">Chris Hughes (Sep 09 2018 at 15:27)</a>:</h4>
 <p>It will for rings though</p>
 
 <a name="133615195"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133615195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133615195">Kevin Buzzard (Sep 10 2018 at 01:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133615195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133615195">Kevin Buzzard (Sep 09 2018 at 15:41)</a>:</h4>
 <p>Proof now looks like</p>
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ring</span><span class="bp">.</span><span class="n">is_noetherian_of_zero_eq_one</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">h01</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_noetherian_ring</span> <span class="n">R</span> <span class="o">:=</span>
 <span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">ring</span><span class="bp">.</span><span class="n">subsingleton_of_zero_eq_one</span> <span class="n">h01</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">ring</span><span class="bp">.</span><span class="n">is_noetherian_of_fintype</span> <span class="n">R</span> <span class="n">R</span>
 </pre></div>
 
 <a name="133793917"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133793917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133793917">Patrick Massot (Sep 12 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133793917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133793917">Patrick Massot (Sep 12 2018 at 11:54)</a>:</h4>
 <p>I read that Kevin fights the zero ring. But what's the point of allowing this ring? Why don't we defined a ring with the assumption that 0 and 1 are different? Is it a trick in order to totalize certain constructions? Or is it needed from a categorical point of view (I guess it's a terminal object)?</p>
 
 <a name="133793951"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133793951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133793951">Johan Commelin (Sep 12 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133793951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133793951">Johan Commelin (Sep 12 2018 at 11:55)</a>:</h4>
 <p>I've never thought this through carefully, but I think it is indeed useful from a categorical point of view.</p>
 
 <a name="133794730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794730">Kevin Buzzard (Sep 12 2018 at 22:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794730">Kevin Buzzard (Sep 12 2018 at 12:14)</a>:</h4>
 <p>Funnily enough in my undergraduate ring theory course the lecturer made 0 not= 1 an axiom, and it caused them all sorts of problems. Whenever they formed a quotient ring R / I I would put my hand up and point out that they needed to assume that I was not R (which was not a natural thing to do on many occasions). On the other hand I was only an undergraduate and just assumed that this was an axiom of rings. It was only when I learnt algebraic geometry that I found out that it wasn't. Assuming 0 isn't 1 is a disastrous idea. In a separated scheme, the intersection of two affines is affine -- this sort of thing is used all the time. It would not be true if the empty scheme were not affine.</p>
 
 <a name="133794785"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794785">Patrick Massot (Sep 12 2018 at 22:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794785">Patrick Massot (Sep 12 2018 at 12:15)</a>:</h4>
 <p>The quotient case is one of the examples I had in mind when I wrote "totalizing construction". The same probably happens with localization</p>
 
 <a name="133794890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794890">Patrick Massot (Sep 12 2018 at 22:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133794890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133794890">Patrick Massot (Sep 12 2018 at 12:17)</a>:</h4>
 <blockquote>
 <p>and i̶t̶  Kevin caused them all sorts of problems</p>
 </blockquote>
 
 <a name="133812772"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133812772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133812772">Mario Carneiro (Sep 13 2018 at 03:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133812772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29201zeroring.html#133812772">Mario Carneiro (Sep 12 2018 at 17:10)</a>:</h4>
 <p>of course, Kevin's behavior there is exactly what lean would do to you if you tried to formalize it</p>
 
 

@@ -12,7 +12,7 @@ permalink: archive/113488general/34376hascoetofunquestions.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="136859792"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136859792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136859792">Kevin Buzzard (Nov 01 2018 at 02:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136859792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136859792">Kevin Buzzard (Oct 31 2018 at 15:34)</a>:</h4>
 <p>1) What's going on here?</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
 
@@ -34,28 +34,28 @@ permalink: archive/113488general/34376hascoetofunquestions.html
 <p>nothing I wrote contains a <code>[]</code>. So some extra magic is happening. Is this something to do with some C++ type unification algorithm going "oh-oh, <code>H</code> doesn't have the right type, but the user is looking for a function, why don't I see if <code>has_coe_to_fun</code> can help?" Or is there some more  down-to-earth explanation which I've missed?</p>
 
 <a name="136860331"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860331">Johannes Hölzl (Nov 01 2018 at 02:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860331">Johannes Hölzl (Oct 31 2018 at 15:43)</a>:</h4>
 <p>For 1) you see the difference when you activate <code>set_option pp.all true</code> in the <code>definition</code> case, the inferred function is into an type universe which is still a meta variable (which is important as it will be fixed to 1). In the <code>theorem</code> case it is fixed to a universe variable, and hence fails</p>
 
 <a name="136860427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860427">Johannes Hölzl (Nov 01 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860427">Johannes Hölzl (Oct 31 2018 at 15:44)</a>:</h4>
 <p><code>definition</code> does not require that the type is fully elaborated, quiet the opposite, that's why one can write a definition without a result type. The result type is inferred from the right-hand side.</p>
 
 <a name="136860469"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860469">Johannes Hölzl (Nov 01 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860469">Johannes Hölzl (Oct 31 2018 at 15:44)</a>:</h4>
 <p><code>theorem</code> works different, it fully elaborates the statement, and any universe hole is filled in with a fresh variable.</p>
 
 <a name="136860492"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860492">Floris van Doorn (Nov 01 2018 at 02:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860492">Floris van Doorn (Oct 31 2018 at 15:45)</a>:</h4>
 <p>2) Yes, there is some extra magic happening. If Lean knows that the type of some term <code>t</code> is <code>T</code>, and knows that the expected type is a function type, then it will automatically fire type-class inference to find an instance of <code>has_coe_to_fun T</code>.</p>
 
 <a name="136860704"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860704">Johannes Hölzl (Nov 01 2018 at 02:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860704">Johannes Hölzl (Oct 31 2018 at 15:48)</a>:</h4>
 <p>One might wonder why the universe parameters are not filled in by stating <code>has_coe_to_fun (α ≃ β)</code> for <code>α</code> and <code>β</code> in <code>Type 0</code> (which is the case in the examples):<br>
 <code>has_coe_to_fun</code> actually allows to map to a different type universe!</p>
 
 <a name="136860778"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860778">Kevin Buzzard (Nov 01 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136860778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html#136860778">Kevin Buzzard (Oct 31 2018 at 15:49)</a>:</h4>
 <p>Thanks to both of you. I remember it taking me a very long time to understand type class inference, and I had always assumed I understood it until I started thinking about it more carefully just the other day. For (1) I remember running into these subtleties with the difference between <code>definition</code> and <code>theorem</code> before, but maybe I have just never fully understood them. Usually they only show up (for me) when I foolishly use the wrong one :-) I think we should have a little VS Code paperclip that pops up saying "I see you're writing a theorem. Do you want some help with that, specifically because you seem to be constructing a term whose type is not a proposition?".</p>
 
 

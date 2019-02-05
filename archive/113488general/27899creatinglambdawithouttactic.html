@@ -12,15 +12,15 @@ permalink: archive/113488general/27899creatinglambdawithouttactic.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130588564"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130588564">Zesen Qian (Jul 31 2018 at 02:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130588564">Zesen Qian (Jul 30 2018 at 16:02)</a>:</h4>
 <p>meta programming problem: So I have a function body represented as <code>expr -&gt; expr</code>, which receives a reference to the argument, and return the body. Is it possible to abstract the argument away(that is, wrap it with a lambda) and get the anonymous function back as <code>expr</code>?</p>
 
 <a name="130588588"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130588588">Zesen Qian (Jul 31 2018 at 02:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130588588">Zesen Qian (Jul 30 2018 at 16:02)</a>:</h4>
 <p>I might have been blur about <code>expr</code> and <code>pexpr</code>, but I hope that won't cause too much confusion.</p>
 
 <a name="130599168"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130599168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130599168">Jeremy Avigad (Jul 31 2018 at 05:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130599168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130599168">Jeremy Avigad (Jul 30 2018 at 19:10)</a>:</h4>
 <p>Look in <code>init/meta/expr.lean</code>. The trick is to create an <code>expr</code> with a local constant, use <code>abstract_local</code> to replace it by an index, and then bind it.</p>
 <p>My experiments follow. In the first example, I used a local variable in the context. For some reason, <code>bind_lambda</code> didn't work in that case (the abstracted variable did not get the right type), so I did it by hand. In the second example, I made a fresh local variable.</p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
@@ -48,43 +48,43 @@ permalink: archive/113488general/27899creatinglambdawithouttactic.html
 </pre></div>
 
 <a name="130599995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130599995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130599995">Zesen Qian (Jul 31 2018 at 05:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130599995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130599995">Zesen Qian (Jul 30 2018 at 19:30)</a>:</h4>
 <p>Thank you jeremy. But it seems <code>tactic</code> is still used in both cases? Specifically, you used <code>mk_local</code>. It seems quite hard to do this without tactic monad?</p>
 
 <a name="130600130"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600130">Zesen Qian (Jul 31 2018 at 05:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600130">Zesen Qian (Jul 30 2018 at 19:32)</a>:</h4>
 <p>yeah I think I shouldn't be bother by using <code>tactic</code>.</p>
 
 <a name="130600142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600142">Zesen Qian (Jul 31 2018 at 05:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600142">Zesen Qian (Jul 30 2018 at 19:33)</a>:</h4>
 <p>I looked in the definition of <code>mk_local</code> and really, <code>mk_fresh_name</code> is all I need from the <code>tactic</code>.</p>
 
 <a name="130600826"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600826">Simon Hudon (Jul 31 2018 at 05:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600826">Simon Hudon (Jul 30 2018 at 19:49)</a>:</h4>
 <p>Why is it important to not have the tactic monad?</p>
 
 <a name="130600984"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600984">Zesen Qian (Jul 31 2018 at 05:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130600984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130600984">Zesen Qian (Jul 30 2018 at 19:52)</a>:</h4>
 <p>because this is a proof that in principle can be exclusively derived from a data structure, without looking at the environment.</p>
 
 <a name="130601087"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130601087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130601087">Zesen Qian (Jul 31 2018 at 05:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130601087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130601087">Zesen Qian (Jul 30 2018 at 19:54)</a>:</h4>
 <p>but anyway, the current solution is good enough, I only need a fresh name from the <code>tactic</code>monad, so that's minimal side effect.</p>
 
 <a name="130608722"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130608722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130608722">Jeremy Avigad (Jul 31 2018 at 08:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130608722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130608722">Jeremy Avigad (Jul 30 2018 at 22:36)</a>:</h4>
 <p>If you are building expressions entirely from scratch, you can make up your own unique name if you want. But <code>expr</code> is <code>meta</code>, so if you want to stay entirely within the logic, you have to define your own type of expressions.</p>
 
 <a name="130608796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130608796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130608796">Zesen Qian (Jul 31 2018 at 08:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130608796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130608796">Zesen Qian (Jul 30 2018 at 22:38)</a>:</h4>
 <p>I'm actually thinking about using <code>pexpr.var : nat -&gt; pexpr</code> which is de-bruijn index. So I don't have to worry about all the details of <code>local_const</code>.  I plan to construct the <code>pexpr</code> as a pure function of the LSEC proof, and elaborate the huge proof altogether.</p>
 
 <a name="130609160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130609160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130609160">Zesen Qian (Jul 31 2018 at 08:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130609160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130609160">Zesen Qian (Jul 30 2018 at 22:47)</a>:</h4>
 <p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> yeah but if I do that we still need a conversion from my custom expr to the lean <code>expr</code>.</p>
 
 <a name="130609351"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130609351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130609351">Jeremy Avigad (Jul 31 2018 at 08:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130609351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html#130609351">Jeremy Avigad (Jul 30 2018 at 22:52)</a>:</h4>
 <p>If you are building Lean expressions, don't hesitate to use the tactic framework. You will probably need constants from the environment anyway, and your code will be easier to debug if you elaborate expressions piece by piece.</p>
 
 

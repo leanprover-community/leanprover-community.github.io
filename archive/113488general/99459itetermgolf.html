@@ -12,15 +12,15 @@ permalink: archive/113488general/99459itetermgolf.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="127155648"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127155648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127155648">Andrew Ashworth (May 27 2018 at 17:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127155648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127155648">Andrew Ashworth (May 27 2018 at 07:28)</a>:</h4>
 <p>Suppose I need to prove <code>ite (x = y) tt ff = tt → x = y</code> and <code>x = y → ite (x = y) tt ff = tt</code>. Is there a succint way to do this in term mode? (I know <code>simp</code> and <code>split_ifs</code> is amazing here, but I'd like to do inversion by hand if possible)</p>
 
 <a name="127156020"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156020">Nicholas Scheel (May 27 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156020">Nicholas Scheel (May 27 2018 at 07:43)</a>:</h4>
 <p>this should take care of the second part: <a href="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L839" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L839">https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L839</a></p>
 
 <a name="127156150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156150">Nicholas Scheel (May 27 2018 at 17:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156150">Nicholas Scheel (May 27 2018 at 07:48)</a>:</h4>
 <p>for the first part I wonder if something like the following would work (untested):</p>
 <div class="codehilite"><pre><span></span>λ h,
 if p : (x = y) then p else
@@ -31,23 +31,23 @@ if p : (x = y) then p else
 <p>basically you decide the proposition (equivalent to the by_cases tactic) and then return the true case, or prove the false case is absurd</p>
 
 <a name="127156160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156160">Nicholas Scheel (May 27 2018 at 17:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156160">Nicholas Scheel (May 27 2018 at 07:50)</a>:</h4>
 <p>maybe this is easier than no_confusion: <a href="https://github.com/leanprover/lean/blob/master/library/init/logic.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/logic.lean">https://github.com/leanprover/lean/blob/master/library/init/logic.lean</a></p>
 
 <a name="127156203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156203">Nicholas Scheel (May 27 2018 at 17:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156203">Nicholas Scheel (May 27 2018 at 07:50)</a>:</h4>
 <p><code>absurd (eq.symm (eq.trans .....)) bool.ff_ne_tt</code></p>
 
 <a name="127156220"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156220">Nicholas Scheel (May 27 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127156220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127156220">Nicholas Scheel (May 27 2018 at 07:51)</a>:</h4>
 <p>btw I think this is just <code>if p then tt else ff</code>: <a href="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L590" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L590">https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L590</a></p>
 
 <a name="127164043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127164043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127164043">Mario Carneiro (May 27 2018 at 23:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127164043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127164043">Mario Carneiro (May 27 2018 at 13:11)</a>:</h4>
 <p>use <code>to_bool</code>, it has lots of lemmas for this</p>
 
 <a name="127165905"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127165905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127165905">Andrew Ashworth (May 28 2018 at 00:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127165905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html#127165905">Andrew Ashworth (May 27 2018 at 14:19)</a>:</h4>
 <p>thanks Nicholas / Mario for the pointers</p>
 
 

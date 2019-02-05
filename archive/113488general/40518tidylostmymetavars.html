@@ -12,40 +12,40 @@ permalink: archive/113488general/40518tidylostmymetavars.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="148774987"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148774987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148774987">Johan Commelin (Nov 29 2018 at 20:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148774987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148774987">Johan Commelin (Nov 29 2018 at 09:29)</a>:</h4>
 <p>Somehow <code>tidy</code> claims it closed all goals, but the kernel says there are still metavariables left. Is there a good approach to debugging this? Somewhere a metavariable got removed from the goal-list without being fully instantiated. I guess it should be possible to track this, right?</p>
 
 <a name="148776730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776730">Mario Carneiro (Nov 29 2018 at 21:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776730">Mario Carneiro (Nov 29 2018 at 10:07)</a>:</h4>
 <p>it is possible to write a tactic that will tell you if the current tactic state is broken, but you will have to sprinkle it around and it will often give false positives because of <code>focus</code> and such</p>
 
 <a name="148776794"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776794">Mario Carneiro (Nov 29 2018 at 21:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776794">Mario Carneiro (Nov 29 2018 at 10:08)</a>:</h4>
 <p>the <code>recover</code> tactic does this, essentially</p>
 
 <a name="148776998"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776998">Johan Commelin (Nov 29 2018 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148776998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148776998">Johan Commelin (Nov 29 2018 at 10:12)</a>:</h4>
 <p>Thanks. Didn't know about <code>recover</code>. I'll try it out.</p>
 
 <a name="148782330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148782330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148782330">Johan Commelin (Nov 29 2018 at 23:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148782330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148782330">Johan Commelin (Nov 29 2018 at 12:06)</a>:</h4>
 <p>Oh by the way, <code>recover</code> worked. It figured out that there was some naturality condition that wasn't proven. I don't know how it got lost.</p>
 
 <a name="148782541"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148782541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148782541">Keeley Hoek (Nov 29 2018 at 23:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148782541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148782541">Keeley Hoek (Nov 29 2018 at 12:11)</a>:</h4>
 <p>It'd be really great to see a reproducible case of that Johan, probably there is a bug in a tactic somewhere</p>
 
 <a name="148783366"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148783366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148783366">Johan Commelin (Nov 29 2018 at 23:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148783366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148783366">Johan Commelin (Nov 29 2018 at 12:26)</a>:</h4>
 <p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> <a href="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/presheaf.lean#L113" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/presheaf.lean#L113">https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/presheaf.lean#L113</a><br>
 Voila. I retried this with a freshly restarted Lean. Problem still occurs. I have no idea how I could build a MWE out of this. It's pretty deep down in ugly maths.</p>
 
 <a name="148786857"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786857">Keeley Hoek (Nov 30 2018 at 00:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786857">Keeley Hoek (Nov 29 2018 at 13:40)</a>:</h4>
 <p>Seems like a bug in <code>constructor</code> to me</p>
 
 <a name="148786936"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786936">Keeley Hoek (Nov 30 2018 at 00:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786936">Keeley Hoek (Nov 29 2018 at 13:41)</a>:</h4>
 <p>For anyone who is interested:</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">oopsie</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">C</span><span class="o">)</span> <span class="err">⟹</span> <span class="n">yoneda_extension</span> <span class="n">F</span> <span class="err">⋙</span> <span class="n">restricted_yoneda</span> <span class="n">F</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -58,32 +58,32 @@ Voila. I retried this with a freshly restarted Lean. Problem still occurs. I hav
 </pre></div>
 
 <a name="148786989"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786989">Johan Commelin (Nov 30 2018 at 00:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148786989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148786989">Johan Commelin (Nov 29 2018 at 13:42)</a>:</h4>
 <p>But I guess this ties in to the auto_params, doesn't it?</p>
 
 <a name="148787002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787002">Keeley Hoek (Nov 30 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787002">Keeley Hoek (Nov 29 2018 at 13:43)</a>:</h4>
 <p>I'm not sure I understand</p>
 
 <a name="148787009"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787009">Keeley Hoek (Nov 30 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787009">Keeley Hoek (Nov 29 2018 at 13:43)</a>:</h4>
 <p>I mean, surely it shouldn't erase a metavar it creates from history</p>
 
 <a name="148787015"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787015">Johan Commelin (Nov 30 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787015">Johan Commelin (Nov 29 2018 at 13:43)</a>:</h4>
 <p>Maybe <code>constructor</code> is throwing away goals that have an auto_param attached to them?</p>
 
 <a name="148787126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787126">Keeley Hoek (Nov 30 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787126">Keeley Hoek (Nov 29 2018 at 13:45)</a>:</h4>
 <p>I wonder if the <code>extract_opt_auto_param</code> in <code>get_constructors_for</code> has anything to do with it<br>
 Actually, I bet it is the <code>mk_const</code> on line 23 of constructor_tactic.lean in lean core</p>
 
 <a name="148787138"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787138">Keeley Hoek (Nov 30 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787138">Keeley Hoek (Nov 29 2018 at 13:45)</a>:</h4>
 <p>That could create metavariables which don't get fully bound by the <code>apply</code> maybe</p>
 
 <a name="148787258"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787258">Johan Commelin (Nov 30 2018 at 00:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20lost%20my%20metavars/near/148787258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40518tidylostmymetavars.html#148787258">Johan Commelin (Nov 29 2018 at 13:48)</a>:</h4>
 <p>Thanks for debugging this!</p>
 
 

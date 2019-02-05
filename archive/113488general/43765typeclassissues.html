@@ -12,7 +12,7 @@ permalink: archive/113488general/43765typeclassissues.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="147694692"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147694692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147694692">Johan Commelin (Nov 15 2018 at 06:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147694692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147694692">Johan Commelin (Nov 14 2018 at 19:54)</a>:</h4>
 <p>This is amazing: <a href="https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean" target="_blank" title="https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean">https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean</a><br>
 I feel like the algorithm could be a lot smarter here. For example, search for <code>x_52</code> on that page, and go to the first match. You will be on the last line of this chunk of code:</p>
 <div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_32</span> <span class="o">:</span> <span class="n">category</span>
@@ -34,7 +34,7 @@ I feel like the algorithm could be a lot smarter here. For example, search for <
 <p>So basically it has already figured out all these type class instances, and it should immediately be able to fill in <code>?x_52</code> and friends. But it doesn't... and then it hits the search limit.</p>
 
 <a name="147695687"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695687">Johan Commelin (Nov 15 2018 at 07:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695687">Johan Commelin (Nov 14 2018 at 20:10)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="err">?</span><span class="n">x_238</span> <span class="o">:</span> <span class="n">category</span> <span class="n">punit</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">small_category</span> <span class="err">?</span><span class="n">x_422</span> <span class="err">?</span><span class="n">x_423</span>
 </pre></div>
 
@@ -47,63 +47,63 @@ I feel like the algorithm could be a lot smarter here. For example, search for <
 <p>I guess it might be a good idea to insert a shortcut somewhere?</p>
 
 <a name="147695787"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695787">Reid Barton (Nov 15 2018 at 07:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695787">Reid Barton (Nov 14 2018 at 20:12)</a>:</h4>
 <p>looks like the actual solution is <code>category punit := category_theory.punit_category</code></p>
 
 <a name="147695801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695801">Reid Barton (Nov 15 2018 at 07:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695801">Reid Barton (Nov 14 2018 at 20:13)</a>:</h4>
 <p>can we use instance priority to guide the search here?</p>
 
 <a name="147695900"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695900">Reid Barton (Nov 15 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695900">Reid Barton (Nov 14 2018 at 20:14)</a>:</h4>
 <p>the funny thing is that <code>punit</code>actually has a unique structure of all those classes it looks for</p>
 
 <a name="147695970"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695970">Johan Commelin (Nov 15 2018 at 07:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147695970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147695970">Johan Commelin (Nov 14 2018 at 20:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I'm really confused, because a lot of the time it is finding that instance. But that sometimes it goes astray...</p>
 
 <a name="147696000"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696000">Reid Barton (Nov 15 2018 at 07:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696000">Reid Barton (Nov 14 2018 at 20:15)</a>:</h4>
 <p>Well, it did find it here, eventually</p>
 
 <a name="147696077"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696077">Reid Barton (Nov 15 2018 at 07:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696077">Reid Barton (Nov 14 2018 at 20:16)</a>:</h4>
 <p>Everything looks more or less fine until the max depth error</p>
 
 <a name="147696157"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696157">Johan Commelin (Nov 15 2018 at 07:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696157">Johan Commelin (Nov 14 2018 at 20:18)</a>:</h4>
 <p>Hmmm, would it be good strategy if Lean is searching for an instance of <code>foo bar</code> to first check if maybe <code>bar.foo</code> exists?</p>
 
 <a name="147696190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696190">Johan Commelin (Nov 15 2018 at 07:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696190">Johan Commelin (Nov 14 2018 at 20:18)</a>:</h4>
 <p>Because that would find <code>punit.category</code> instantly...</p>
 
 <a name="147696563"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696563">Johan Commelin (Nov 15 2018 at 07:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696563">Johan Commelin (Nov 14 2018 at 20:24)</a>:</h4>
 <p>Ahrg, this is so annoying. So now I can start writing lots of <code>@</code> signs, and insert the typeclass instances manually, and the code becomes unreadable...</p>
 
 <a name="147696720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696720">Kenny Lau (Nov 15 2018 at 07:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696720">Kenny Lau (Nov 14 2018 at 20:27)</a>:</h4>
 <p>I really doubt how this will scale</p>
 
 <a name="147696724"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696724">Kenny Lau (Nov 15 2018 at 07:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696724">Kenny Lau (Nov 14 2018 at 20:27)</a>:</h4>
 <p>as we get more things into mathlib</p>
 
 <a name="147696835"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696835">Mario Carneiro (Nov 15 2018 at 07:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147696835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147696835">Mario Carneiro (Nov 14 2018 at 20:29)</a>:</h4>
 <p>I think <code>category_theory.small_category</code> is misnamed...</p>
 
 <a name="147697038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697038">Reid Barton (Nov 15 2018 at 07:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697038">Reid Barton (Nov 14 2018 at 20:32)</a>:</h4>
 <p>Either <span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span> will have to improve the instance search algorithm, or we will have to start being more careful about how we write instances, with other tradeoffs</p>
 
 <a name="147697069"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697069">Johan Commelin (Nov 15 2018 at 07:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697069">Johan Commelin (Nov 14 2018 at 20:33)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can you elaborate?</p>
 
 <a name="147697085"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697085">Johan Commelin (Nov 15 2018 at 07:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697085">Johan Commelin (Nov 14 2018 at 20:33)</a>:</h4>
 <p>I now have</p>
 <div class="codehilite"><pre><span></span><span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="bp">@</span><span class="n">limit</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">opposite</span> <span class="bp">_</span>
 <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">comma_category</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">punit_category</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="bp">_</span> <span class="bp">_</span>
@@ -114,7 +114,7 @@ I feel like the algorithm could be a lot smarter here. For example, search for <
 <p>and I get red squiggles under the <code>⋙</code> at the end.</p>
 
 <a name="147697150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697150">Johan Commelin (Nov 15 2018 at 07:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697150">Johan Commelin (Nov 14 2018 at 20:34)</a>:</h4>
 <p>Errors:</p>
 <div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">type</span> <span class="n">class</span> <span class="kn">instance</span> <span class="n">for</span>
 <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">,</span>
@@ -189,27 +189,27 @@ I feel like the algorithm could be a lot smarter here. For example, search for <
 </pre></div>
 
 <a name="147697169"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697169">Reid Barton (Nov 15 2018 at 07:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697169">Reid Barton (Nov 14 2018 at 20:34)</a>:</h4>
 <p><code>instance [preorder α] : small_category α := ...</code> got the name <code>category_theory.small_category</code></p>
 
 <a name="147697217"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697217">Johan Commelin (Nov 15 2018 at 07:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697217">Johan Commelin (Nov 14 2018 at 20:35)</a>:</h4>
 <p>Aaah, that's not so nice. That should be in the <code>preorder</code> namespace.</p>
 
 <a name="147697224"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697224">Kenny Lau (Nov 15 2018 at 07:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697224">Kenny Lau (Nov 14 2018 at 20:35)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> talk about <code>is_ring_hom.is_ring_hom</code></p>
 
 <a name="147697277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697277">Mario Carneiro (Nov 15 2018 at 07:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697277">Mario Carneiro (Nov 14 2018 at 20:36)</a>:</h4>
 <p>what is that even?</p>
 
 <a name="147697318"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697318">Kenny Lau (Nov 15 2018 at 07:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697318">Kenny Lau (Nov 14 2018 at 20:37)</a>:</h4>
 <p><a href="https://github.com/leanprover/mathlib/blob/master/ring_theory/subring.lean#L28" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/ring_theory/subring.lean#L28">https://github.com/leanprover/mathlib/blob/master/ring_theory/subring.lean#L28</a></p>
 
 <a name="147697322"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697322">Kenny Lau (Nov 15 2018 at 07:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697322">Kenny Lau (Nov 14 2018 at 20:37)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">is_ring_hom</span>
 
 <span class="kn">instance</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subring</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="bp">@</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
@@ -219,322 +219,322 @@ I feel like the algorithm could be a lot smarter here. For example, search for <
 </pre></div>
 
 <a name="147697323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697323">Kenny Lau (Nov 15 2018 at 07:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697323">Kenny Lau (Nov 14 2018 at 20:37)</a>:</h4>
 <p>guess how this would be called</p>
 
 <a name="147697386"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697386">Kenny Lau (Nov 15 2018 at 07:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697386">Kenny Lau (Nov 14 2018 at 20:38)</a>:</h4>
 <p>also what on earth is it with the <code>local attribute [instance] classical.prop_decidable</code></p>
 
 <a name="147697389"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697389">Reid Barton (Nov 15 2018 at 07:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697389">Reid Barton (Nov 14 2018 at 20:38)</a>:</h4>
 <p>There's also some bug where Lean's normal naming strategy for an instance is not used under certain circumstances (I'm not sure exactly which)</p>
 
 <a name="147697402"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697402">Mario Carneiro (Nov 15 2018 at 07:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697402">Mario Carneiro (Nov 14 2018 at 20:39)</a>:</h4>
 <p><code>classical.prop_decidable</code> existed long before <code>classical.dec</code>, I think it's in the style guide and TPIL</p>
 
 <a name="147697419"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697419">Kenny Lau (Nov 15 2018 at 07:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697419">Kenny Lau (Nov 14 2018 at 20:39)</a>:</h4>
 <p>I mean, who on earth put it there</p>
 
 <a name="147697433"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697433">Kenny Lau (Nov 15 2018 at 07:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697433">Kenny Lau (Nov 14 2018 at 20:39)</a>:</h4>
 <p>you don't need any classical stuff for subrings</p>
 
 <a name="147697448"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697448">Reid Barton (Nov 15 2018 at 07:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697448">Reid Barton (Nov 14 2018 at 20:39)</a>:</h4>
 <p>We could have a strategy where we don't write instances like <code>instance [preorder α] : small_category α</code>, but rather <code>instance [preorder α] : small_category (preorder α)</code>, where <code>def preorder α := α</code></p>
 
 <a name="147697501"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697501">Mario Carneiro (Nov 15 2018 at 07:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697501">Mario Carneiro (Nov 14 2018 at 20:40)</a>:</h4>
 <p>maybe it was needed once, or a mathematician wrote the file</p>
 
 <a name="147697510"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697510">Mario Carneiro (Nov 15 2018 at 07:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697510">Mario Carneiro (Nov 14 2018 at 20:40)</a>:</h4>
 <div class="codehilite"><pre><span></span>Authors: Johan Commelin
 </pre></div>
 
 <a name="147697534"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697534">Kenny Lau (Nov 15 2018 at 07:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697534">Kenny Lau (Nov 14 2018 at 20:41)</a>:</h4>
 <p>but curiously he was never part of the file's history</p>
 
 <a name="147697546"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697546">Reid Barton (Nov 15 2018 at 07:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697546">Reid Barton (Nov 14 2018 at 20:41)</a>:</h4>
 <p>That would cut out all the silly search starting <code>preorder punit</code> (actually it is not really silly, since <code>punit</code> could very well be a <code>preorder</code>, but anyways we want a different instance)</p>
 
 <a name="147697571"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697571">Mario Carneiro (Nov 15 2018 at 07:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697571">Mario Carneiro (Nov 14 2018 at 20:42)</a>:</h4>
 <p>I think we need to think about a more principled approach to instance priorities</p>
 
 <a name="147697726"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697726">Mario Carneiro (Nov 15 2018 at 07:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697726">Mario Carneiro (Nov 14 2018 at 20:44)</a>:</h4>
 <p>for preorder categories, I guess it depends on whether you view it as "a preorder is a special kind of category" or "any preorder can be equipped with a canonical category structure"</p>
 
 <a name="147697751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697751">Kenny Lau (Nov 15 2018 at 07:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697751">Kenny Lau (Nov 14 2018 at 20:44)</a>:</h4>
 <p>I think we need to refactor the typeclass search system</p>
 
 <a name="147697754"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697754">Kenny Lau (Nov 15 2018 at 07:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697754">Kenny Lau (Nov 14 2018 at 20:44)</a>:</h4>
 <p>but I don't know how any of those things work</p>
 
 <a name="147697761"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697761">Kenny Lau (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697761">Kenny Lau (Nov 14 2018 at 20:45)</a>:</h4>
 <p>so I might have said nothing in the first place</p>
 
 <a name="147697770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697770">Reid Barton (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697770">Reid Barton (Nov 14 2018 at 20:45)</a>:</h4>
 <p>Well I'm not necessarily thinking about anything as anything, I just want to avoid these 20 pages of failed instance searches whenever I try to look for a category instance which is after the preorder one.</p>
 
 <a name="147697771"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697771">Mario Carneiro (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697771">Mario Carneiro (Nov 14 2018 at 20:45)</a>:</h4>
 <p><span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span></p>
 
 <a name="147697786"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697786">Kenny Lau (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697786">Kenny Lau (Nov 14 2018 at 20:45)</a>:</h4>
 <p>I think the instance search is as stupid as <code>simp</code></p>
 
 <a name="147697792"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697792">Mario Carneiro (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697792">Mario Carneiro (Nov 14 2018 at 20:45)</a>:</h4>
 <p>it's much worse than <code>simp</code></p>
 
 <a name="147697793"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697793">Kenny Lau (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697793">Kenny Lau (Nov 14 2018 at 20:45)</a>:</h4>
 <p>and we still haven't fixed the problem with <code>simp</code></p>
 
 <a name="147697796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697796">Kenny Lau (Nov 15 2018 at 07:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697796">Kenny Lau (Nov 14 2018 at 20:45)</a>:</h4>
 <p>for the love of god</p>
 
 <a name="147697859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697859">Kenny Lau (Nov 15 2018 at 07:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697859">Kenny Lau (Nov 14 2018 at 20:46)</a>:</h4>
 <p>who thought depth first search is a good idea (instance) and who thought breadth first search is a good idea (simp)</p>
 
 <a name="147697865"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697865">Kenny Lau (Nov 15 2018 at 07:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697865">Kenny Lau (Nov 14 2018 at 20:46)</a>:</h4>
 <p>but I don't study CS</p>
 
 <a name="147697892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697892">Mario Carneiro (Nov 15 2018 at 07:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697892">Mario Carneiro (Nov 14 2018 at 20:47)</a>:</h4>
 <p>But it's not a tactic, it's built into lean, so there is very little customization or alternatives we can try in lean 3</p>
 
 <a name="147697903"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697903">Mario Carneiro (Nov 15 2018 at 07:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697903">Mario Carneiro (Nov 14 2018 at 20:47)</a>:</h4>
 <p>at least not without forking lean</p>
 
 <a name="147697923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697923">Reid Barton (Nov 15 2018 at 07:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697923">Reid Barton (Nov 14 2018 at 20:48)</a>:</h4>
 <p>OK here is a thought. What if we by convention give each instance which doesn't match against the head a lower priority</p>
 
 <a name="147697982"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697982">Reid Barton (Nov 15 2018 at 07:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147697982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147697982">Reid Barton (Nov 14 2018 at 20:48)</a>:</h4>
 <p>i.e. each instance of the form \Pi a, ... : C a</p>
 
 <a name="147698031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698031">Reid Barton (Nov 15 2018 at 07:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698031">Reid Barton (Nov 14 2018 at 20:49)</a>:</h4>
 <p>Because of course we want to match against things like ... : C (T a) first, if we're trying to find an instance C (T ...)</p>
 
 <a name="147698041"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698041">Kenny Lau (Nov 15 2018 at 07:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698041">Kenny Lau (Nov 14 2018 at 20:49)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> but from your CS experience, what is the best search method?</p>
 
 <a name="147698061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698061">Mario Carneiro (Nov 15 2018 at 07:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698061">Mario Carneiro (Nov 14 2018 at 20:49)</a>:</h4>
 <p>There are two essentially different kinds of instances: "parent coercions" that change the head, and things that change the type to something smaller and leave the head alone</p>
 
 <a name="147698151"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698151">Mario Carneiro (Nov 15 2018 at 07:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698151">Mario Carneiro (Nov 14 2018 at 20:50)</a>:</h4>
 <p>we know the search terminates in the second case because it's well founded on the structure construction, and in the first case because our tree of classes is finite</p>
 
 <a name="147698155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698155">Johan Commelin (Nov 15 2018 at 07:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698155">Johan Commelin (Nov 14 2018 at 20:50)</a>:</h4>
 <div class="codehilite"><pre><span></span>git grep &quot;^instance&quot; | wc -l
 1515
 </pre></div>
 
 <a name="147698156"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698156">Mario Carneiro (Nov 15 2018 at 07:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698156">Mario Carneiro (Nov 14 2018 at 20:50)</a>:</h4>
 <p>that last one is obviously problematic</p>
 
 <a name="147698176"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698176">Mario Carneiro (Nov 15 2018 at 07:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698176">Mario Carneiro (Nov 14 2018 at 20:50)</a>:</h4>
 <p>because it gets worse as you add more things anywhere in mathlib</p>
 
 <a name="147698179"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698179">Kenny Lau (Nov 15 2018 at 07:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698179">Kenny Lau (Nov 14 2018 at 20:51)</a>:</h4>
 <p>I think TREE(3) is also finite so I don't really get your point</p>
 
 <a name="147698220"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698220">Kenny Lau (Nov 15 2018 at 07:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698220">Kenny Lau (Nov 14 2018 at 20:51)</a>:</h4>
 <p>are we satisfied with "it will eventually terminate"?</p>
 
 <a name="147698273"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698273">Mario Carneiro (Nov 15 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698273">Mario Carneiro (Nov 14 2018 at 20:52)</a>:</h4>
 <p>it's an important first step</p>
 
 <a name="147698287"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698287">Mario Carneiro (Nov 15 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698287">Mario Carneiro (Nov 14 2018 at 20:52)</a>:</h4>
 <p>the next question is "how finite" of course</p>
 
 <a name="147698316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698316">Mario Carneiro (Nov 15 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698316">Mario Carneiro (Nov 14 2018 at 20:52)</a>:</h4>
 <p>and this depends on how much typeclass caching lean does</p>
 
 <a name="147698326"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698326">Mario Carneiro (Nov 15 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698326">Mario Carneiro (Nov 14 2018 at 20:52)</a>:</h4>
 <p>so I'm not sure on the details</p>
 
 <a name="147698353"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698353">Mario Carneiro (Nov 15 2018 at 07:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698353">Mario Carneiro (Nov 14 2018 at 20:53)</a>:</h4>
 <p>We want it to be mostly linear</p>
 
 <a name="147698380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698380">Johan Commelin (Nov 15 2018 at 07:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698380">Johan Commelin (Nov 14 2018 at 20:53)</a>:</h4>
 <p>How about prioritizing type 1? Like Reid suggested?</p>
 
 <a name="147698457"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698457">Mario Carneiro (Nov 15 2018 at 07:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698457">Mario Carneiro (Nov 14 2018 at 20:54)</a>:</h4>
 <p>Parent coercions have a fixed priority, I don't think we can change it</p>
 
 <a name="147698471"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698471">Mario Carneiro (Nov 15 2018 at 07:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698471">Mario Carneiro (Nov 14 2018 at 20:54)</a>:</h4>
 <p>This is one place where I think lean is using the wrong search strategy btw</p>
 
 <a name="147698489"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698489">Reid Barton (Nov 15 2018 at 07:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698489">Reid Barton (Nov 14 2018 at 20:55)</a>:</h4>
 <p>Oh I forgot about parent coercions.</p>
 
 <a name="147698509"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698509">Kenny Lau (Nov 15 2018 at 07:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698509">Kenny Lau (Nov 14 2018 at 20:55)</a>:</h4>
 <p>we don't we ask the big guys about the typeclass system  in lean 4?</p>
 
 <a name="147698568"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698568">Mario Carneiro (Nov 15 2018 at 07:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698568">Mario Carneiro (Nov 14 2018 at 20:56)</a>:</h4>
 <p>If we call type coercions type 1 and parent / "head changing" coercions type 2, then I think we should use backward chaining for type 1 and forward chaining for type 2</p>
 
 <a name="147698636"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698636">Mario Carneiro (Nov 15 2018 at 07:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698636">Mario Carneiro (Nov 14 2018 at 20:57)</a>:</h4>
 <p>For example, if you prove that <code>ordered_field real</code> then lean will pre-calculate proofs of <code>preorder real</code> and a bunch of other stuff</p>
 
 <a name="147698639"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698639">Reid Barton (Nov 15 2018 at 07:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698639">Reid Barton (Nov 14 2018 at 20:57)</a>:</h4>
 <p>Are we talking about actual parent coercions like from <code>group</code> to <code>monoid</code>?</p>
 
 <a name="147698640"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698640">Mario Carneiro (Nov 15 2018 at 07:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698640">Mario Carneiro (Nov 14 2018 at 20:57)</a>:</h4>
 <p>yes</p>
 
 <a name="147698651"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698651">Reid Barton (Nov 15 2018 at 07:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698651">Reid Barton (Nov 14 2018 at 20:57)</a>:</h4>
 <p>So then there are also things like <code>preorder</code> to <code>category</code></p>
 
 <a name="147698657"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698657">Mario Carneiro (Nov 15 2018 at 07:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698657">Mario Carneiro (Nov 14 2018 at 20:57)</a>:</h4>
 <p>yes</p>
 
 <a name="147698711"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698711">Reid Barton (Nov 15 2018 at 07:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698711">Reid Barton (Nov 14 2018 at 20:58)</a>:</h4>
 <p>And I guess both of those fall under type 2</p>
 
 <a name="147698721"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698721">Mario Carneiro (Nov 15 2018 at 07:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698721">Mario Carneiro (Nov 14 2018 at 20:58)</a>:</h4>
 <p>and if you have <code>ordered_field A</code> in the context then it calculates <code>preorder A</code> when solving typeclass problems</p>
 
 <a name="147698730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698730">Kenny Lau (Nov 15 2018 at 07:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698730">Kenny Lau (Nov 14 2018 at 20:58)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> how does this work in metamath?</p>
 
 <a name="147698822"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698822">Mario Carneiro (Nov 15 2018 at 08:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698822">Mario Carneiro (Nov 14 2018 at 21:00)</a>:</h4>
 <p>You get to do this stuff yourself, but there is a smallish spine so it's at most two or three theorem applications to get from anything to anything else</p>
 
 <a name="147698838"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698838">Mario Carneiro (Nov 15 2018 at 08:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698838">Mario Carneiro (Nov 14 2018 at 21:00)</a>:</h4>
 <p>the backward chaining stuff might be done automatically in later versions?</p>
 
 <a name="147698844"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698844">Mario Carneiro (Nov 15 2018 at 08:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698844">Mario Carneiro (Nov 14 2018 at 21:01)</a>:</h4>
 <p>It's all third party stuff though</p>
 
 <a name="147698856"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698856">Johan Commelin (Nov 15 2018 at 08:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698856">Johan Commelin (Nov 14 2018 at 21:01)</a>:</h4>
 <p>So is there any hope we can improve the system in Lean 3?</p>
 
 <a name="147698861"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698861">Mario Carneiro (Nov 15 2018 at 08:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698861">Mario Carneiro (Nov 14 2018 at 21:01)</a>:</h4>
 <p>this is emphatically not part of "metamath core"</p>
 
 <a name="147698889"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698889">Mario Carneiro (Nov 15 2018 at 08:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698889">Mario Carneiro (Nov 14 2018 at 21:01)</a>:</h4>
 <p>priorities seem like the best option, but we need a good rule</p>
 
 <a name="147698960"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698960">Mario Carneiro (Nov 15 2018 at 08:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147698960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147698960">Mario Carneiro (Nov 14 2018 at 21:02)</a>:</h4>
 <p>I have hope for reid's proposal</p>
 
 <a name="147699006"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699006">Reid Barton (Nov 15 2018 at 08:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699006">Reid Barton (Nov 14 2018 at 21:03)</a>:</h4>
 <p>The obvious, but more annoying variant is to raise the priority of every "type 1" instance</p>
 
 <a name="147699081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699081">Johan Commelin (Nov 15 2018 at 08:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699081">Johan Commelin (Nov 14 2018 at 21:04)</a>:</h4>
 <p>I think Mario said that those were fixed... but maybe I misunderstood which type he referred to...</p>
 
 <a name="147699099"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699099">Reid Barton (Nov 15 2018 at 08:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699099">Reid Barton (Nov 14 2018 at 21:04)</a>:</h4>
 <p>I'm also a little confused about Mario's description of the two types</p>
 
 <a name="147699106"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699106">Reid Barton (Nov 15 2018 at 08:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699106">Reid Barton (Nov 14 2018 at 21:04)</a>:</h4>
 <p>In Haskell, if we have an instance C (T a b), we call T the instance head</p>
 
 <a name="147699112"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699112">Reid Barton (Nov 15 2018 at 08:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699112">Reid Barton (Nov 14 2018 at 21:05)</a>:</h4>
 <p>C is the class</p>
 
 <a name="147699143"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699143">Reid Barton (Nov 15 2018 at 08:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699143">Reid Barton (Nov 14 2018 at 21:05)</a>:</h4>
 <p>I'm not sure whether Mario is using the same terminology, or switched the classes or what</p>
 
 <a name="147699181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699181">Mario Carneiro (Nov 15 2018 at 08:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699181">Mario Carneiro (Nov 14 2018 at 21:05)</a>:</h4>
 <p>I called <code>C</code> the head there</p>
 
 <a name="147699257"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699257">Mario Carneiro (Nov 15 2018 at 08:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699257">Mario Carneiro (Nov 14 2018 at 21:06)</a>:</h4>
 <p>so parent coercions change the head, i.e. C a =&gt; D a</p>
 
 <a name="147699274"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699274">Mario Carneiro (Nov 15 2018 at 08:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699274">Mario Carneiro (Nov 14 2018 at 21:06)</a>:</h4>
 <p>and type coercions are like C a , C b =&gt; C (T a b)</p>
 
 <a name="147699409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699409">Reid Barton (Nov 15 2018 at 08:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699409">Reid Barton (Nov 14 2018 at 21:08)</a>:</h4>
 <p>I might be wrong in assuming instances like C a, C b =&gt; C (T a b) are more common in mathlib--in standard Haskell they're the only kind of instances you are allowed to write</p>
 
 <a name="147699421"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699421">Reid Barton (Nov 15 2018 at 08:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699421">Reid Barton (Nov 14 2018 at 21:08)</a>:</h4>
 <p>(instance C a =&gt; D a is illegal)</p>
 
 <a name="147699422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699422">Mario Carneiro (Nov 15 2018 at 08:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699422">Mario Carneiro (Nov 14 2018 at 21:08)</a>:</h4>
 <p>That's not true, I think you can do parent coercions in Haskell too</p>
 
 <a name="147699436"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699436">Reid Barton (Nov 15 2018 at 08:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699436">Reid Barton (Nov 14 2018 at 21:09)</a>:</h4>
 <p>With GHC extensions</p>
 
 <a name="147699460"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699460">Reid Barton (Nov 15 2018 at 08:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699460">Reid Barton (Nov 14 2018 at 21:09)</a>:</h4>
 <p>But the effect is probably like 99% of all instances are of the C (T a b) form</p>
 
 <a name="147699675"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699675">Mario Carneiro (Nov 15 2018 at 08:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699675">Mario Carneiro (Nov 14 2018 at 21:12)</a>:</h4>
 <p>oh, I see, there are parent coercions but no user defined parent coercions</p>
 
 <a name="147699698"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699698">Mario Carneiro (Nov 15 2018 at 08:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699698">Mario Carneiro (Nov 14 2018 at 21:12)</a>:</h4>
 <div class="codehilite"><pre><span></span>class Test a where
   test :: a -&gt; a
 class Test a =&gt; Test2 a where
@@ -542,31 +542,31 @@ class Test a =&gt; Test2 a where
 </pre></div>
 
 <a name="147699702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699702">Mario Carneiro (Nov 15 2018 at 08:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699702">Mario Carneiro (Nov 14 2018 at 21:12)</a>:</h4>
 <p>this is okay</p>
 
 <a name="147699713"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699713">Reid Barton (Nov 15 2018 at 08:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699713">Reid Barton (Nov 14 2018 at 21:12)</a>:</h4>
 <p>There isn't even a coercion in the same sense as in Lean</p>
 
 <a name="147699716"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699716">Reid Barton (Nov 15 2018 at 08:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699716">Reid Barton (Nov 14 2018 at 21:13)</a>:</h4>
 <p>There, to write a <code>Test2</code> instance, you must first write a <code>Test</code> instance</p>
 
 <a name="147699746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699746">Reid Barton (Nov 15 2018 at 08:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699746">Reid Barton (Nov 14 2018 at 21:13)</a>:</h4>
 <p>The purpose of <code>Test a =&gt; Test2 a</code> is instead to avoid writing contexts like <code>(Test a, Test2 a) =&gt; t</code></p>
 
 <a name="147699751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699751">Mario Carneiro (Nov 15 2018 at 08:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699751">Mario Carneiro (Nov 14 2018 at 21:13)</a>:</h4>
 <p>that's the same as in lean</p>
 
 <a name="147699839"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699839">Reid Barton (Nov 15 2018 at 08:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699839">Reid Barton (Nov 14 2018 at 21:14)</a>:</h4>
 <p>Oh, well... I guess Lean hides the need to write the <code>Test</code> instance separately</p>
 
 <a name="147699854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699854">Mario Carneiro (Nov 15 2018 at 08:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699854">Mario Carneiro (Nov 14 2018 at 21:14)</a>:</h4>
 <div class="codehilite"><pre><span></span>class Test (a : Type) := (test : a → a)
 class Test2 (a : Type) extends Test a := (test2 : a → a)
 
@@ -575,43 +575,43 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 </pre></div>
 
 <a name="147699882"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699882">Reid Barton (Nov 15 2018 at 08:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699882">Reid Barton (Nov 14 2018 at 21:15)</a>:</h4>
 <p>But you can also write <code>instance : Test2 nat := {test := id, test2 := id}</code> without the first instance, which has no equivalent in Haskell</p>
 
 <a name="147699933"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699933">Mario Carneiro (Nov 15 2018 at 08:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699933">Mario Carneiro (Nov 14 2018 at 21:16)</a>:</h4>
 <p>Maybe lean should do that too</p>
 
 <a name="147699943"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699943">Mario Carneiro (Nov 15 2018 at 08:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699943">Mario Carneiro (Nov 14 2018 at 21:16)</a>:</h4>
 <p>that is essentially requiring the user to do the forward chaining thing I said</p>
 
 <a name="147699966"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699966">Reid Barton (Nov 15 2018 at 08:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699966">Reid Barton (Nov 14 2018 at 21:16)</a>:</h4>
 <p>I actually don't know off-hand how GHC solves a <code>Test a</code> constraint if you only have <code>Test2</code> in the context</p>
 
 <a name="147699996"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699996">Reid Barton (Nov 15 2018 at 08:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147699996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147699996">Reid Barton (Nov 14 2018 at 21:17)</a>:</h4>
 <p>I wouldn't be surprised if it does forward chaining in that situation</p>
 
 <a name="147700076"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700076">Mario Carneiro (Nov 15 2018 at 08:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700076">Mario Carneiro (Nov 14 2018 at 21:18)</a>:</h4>
 <p>you mean when you have <code>test :: Test2 a =&gt; a -&gt; a</code>?</p>
 
 <a name="147700092"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700092">Reid Barton (Nov 15 2018 at 08:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700092">Reid Barton (Nov 14 2018 at 21:18)</a>:</h4>
 <p>Basically, yeah.</p>
 
 <a name="147700424"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700424">Mario Carneiro (Nov 15 2018 at 08:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147700424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147700424">Mario Carneiro (Nov 14 2018 at 21:24)</a>:</h4>
 <p>I think it is complete in Haskell's case to always saturate downwards (derive all superclasses of all the things in the context) and then backward chain from uses (without using any parent coercions)</p>
 
 <a name="147731225"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731225">Johan Commelin (Nov 15 2018 at 20:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731225">Johan Commelin (Nov 15 2018 at 09:48)</a>:</h4>
 <p>Aahrg, Lean is just becoming completely unresponsive when I try to fill in the instances by hand.</p>
 
 <a name="147731254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731254">Johan Commelin (Nov 15 2018 at 20:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731254">Johan Commelin (Nov 15 2018 at 09:49)</a>:</h4>
 <p>Look at the code that I have now: this is getting pretty crazy...</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">extend</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span> <span class="o">:=</span>
 <span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="bp">@</span><span class="n">limit</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">opposite</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span> <span class="n">v</span><span class="o">}</span> <span class="bp">_</span>
@@ -626,11 +626,11 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 </pre></div>
 
 <a name="147731470"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731470">Kenny Lau (Nov 15 2018 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731470">Kenny Lau (Nov 15 2018 at 09:54)</a>:</h4>
 <p>welcome to the club :P</p>
 
 <a name="147731810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731810">Johan Commelin (Nov 15 2018 at 21:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147731810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147731810">Johan Commelin (Nov 15 2018 at 10:03)</a>:</h4>
 <p>Ok, I need to confess. I'm making a big fool out of myself. There was actually a missing assumption... so no wonder Lean couldn't find the instance. The code is now back to</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">extend</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span> <span class="o">:=</span>
 <span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="n">limit</span> <span class="o">((</span><span class="n">comma</span><span class="bp">.</span><span class="n">fst</span> <span class="o">(</span><span class="n">full_subcategory_inclusion</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">of_obj</span> <span class="n">U</span><span class="o">))</span><span class="bp">.</span><span class="n">op</span> <span class="err">⋙</span> <span class="n">F</span><span class="o">),</span>
@@ -641,7 +641,7 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 <p><strong>However</strong> it is still taking &gt;10s to typecheck this stuff. Before I removed all the explicit instances, it also took &gt;10s.</p>
 
 <a name="147797050"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797050">Leonardo de Moura (Nov 16 2018 at 16:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797050">Leonardo de Moura (Nov 16 2018 at 05:23)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> </p>
 <blockquote>
 <p>Johan Commelin: So is there any hope we can improve the system in Lean 3?</p>
@@ -649,7 +649,7 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 <p>To improve Lean 3, you need to fork it, and improve it yourself. The development is frozen in the main repo, and all efforts are focused on Lean 4. That being said, nobody should expect Lean 4 will solve all problems and everybody will be happy.</p>
 
 <a name="147797116"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797116">Leonardo de Moura (Nov 16 2018 at 16:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797116">Leonardo de Moura (Nov 16 2018 at 05:25)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> </p>
 <blockquote>
 <p>Kenny Lau: we don't we ask the big guys about the typeclass system in lean 4?</p>
@@ -657,7 +657,7 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 <p>We didn't get there yet. We have only random ideas on how to improve the typeclass system in lean 4.</p>
 
 <a name="147797179"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797179">Leonardo de Moura (Nov 16 2018 at 16:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797179">Leonardo de Moura (Nov 16 2018 at 05:27)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> </p>
 <blockquote>
 <p>Kenny Lau: I think we need to refactor the typeclass search system</p>
@@ -665,35 +665,35 @@ instance : Test2 nat := {test2 := id} --requires the first instance
 <p>If you want a better typeclass system in the next few months, you should fork the current system, and refactor the typeclass search system yourself.</p>
 
 <a name="147797342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797342">Johan Commelin (Nov 16 2018 at 16:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797342">Johan Commelin (Nov 16 2018 at 05:33)</a>:</h4>
 <p><span class="user-mention" data-user-id="112857">@Leonardo de Moura</span> Ok, I was hoping that maybe we could use priorities to guide the type class system. Anyway, thanks for the input! And thanks for all you're doing for Lean (3 and 4).</p>
 
 <a name="147797450"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797450">Leonardo de Moura (Nov 16 2018 at 16:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797450">Leonardo de Moura (Nov 16 2018 at 05:36)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Yes, priorities will help. Shortcuts will help too. Example: <a href="https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean#L418-L429" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean#L418-L429">https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean#L418-L429</a></p>
 
 <a name="147797467"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797467">Leonardo de Moura (Nov 16 2018 at 16:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147797467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147797467">Leonardo de Moura (Nov 16 2018 at 05:37)</a>:</h4>
 <p>These are just workarounds.</p>
 
 <a name="147800392"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800392">Mario Carneiro (Nov 16 2018 at 18:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800392">Mario Carneiro (Nov 16 2018 at 07:07)</a>:</h4>
 <p>It's not clear to me how much shortcuts actually help, though, because they make the typeclass graph even larger</p>
 
 <a name="147800445"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800445">Mario Carneiro (Nov 16 2018 at 18:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800445">Mario Carneiro (Nov 16 2018 at 07:08)</a>:</h4>
 <p>if you have instances from A -&gt; B -&gt; C and add a shortcut A -&gt; C, then a typeclass search for some unrelated F will traverse both paths to C (and possibly the entire subtree rooted at C)</p>
 
 <a name="147800469"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800469">Mario Carneiro (Nov 16 2018 at 18:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800469">Mario Carneiro (Nov 16 2018 at 07:09)</a>:</h4>
 <p>Are there any plans for lean 4 to do anything with the typeclass system?</p>
 
 <a name="147800852"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800852">Leonardo de Moura (Nov 16 2018 at 18:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800852">Leonardo de Moura (Nov 16 2018 at 07:20)</a>:</h4>
 <p>You can add the shortcuts using local attributes. In this way, you can add shortcuts to a file without affecting other files.</p>
 
 <a name="147800886"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800886">Leonardo de Moura (Nov 16 2018 at 18:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147800886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html#147800886">Leonardo de Moura (Nov 16 2018 at 07:21)</a>:</h4>
 <p>Sebastian and I discussed a few improvements (e.g., better indexing and caching), but as I said above these are just ideas on the whiteboard. We didn’t get there yet.</p>
 
 

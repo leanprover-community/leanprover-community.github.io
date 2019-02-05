@@ -12,7 +12,7 @@ permalink: archive/113488general/88815metatimeout.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="132015530"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015530">Patrick Massot (Aug 13 2018 at 09:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015530">Patrick Massot (Aug 12 2018 at 23:47)</a>:</h4>
 <p>I'm still playing with Lean introspection, but I can't sort declarations in order to print first axioms, then constants, then definition, and then theorems. I try</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">declaration_kind_nb</span> <span class="o">:</span> <span class="n">declaration</span> <span class="bp">→</span> <span class="bp">ℕ</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">ax</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span>
@@ -35,11 +35,11 @@ permalink: archive/113488general/88815metatimeout.html
 <p>and get either determistic timeout or worse (excessive memory consumption, segfault...)</p>
 
 <a name="132015764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015764">Simon Hudon (Aug 13 2018 at 09:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015764">Simon Hudon (Aug 12 2018 at 23:56)</a>:</h4>
 <p>What if you print only the length of the resulting list?</p>
 
 <a name="132015805"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015805">Mario Carneiro (Aug 13 2018 at 09:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015805">Mario Carneiro (Aug 12 2018 at 23:56)</a>:</h4>
 <p>this works for me:</p>
 <div class="codehilite"><pre><span></span>meta instance : decidable_rel declaration_compare :=
 λ _ _, nat.decidable_le _ _
@@ -53,39 +53,39 @@ run_cmd sort_env
 </pre></div>
 
 <a name="132015812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015812">Mario Carneiro (Aug 13 2018 at 09:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015812">Mario Carneiro (Aug 12 2018 at 23:57)</a>:</h4>
 <p>the problem is that the format instance for <code>list string</code> involves a recursion, so it is very deeply nested and hits the recursion limit</p>
 
 <a name="132015817"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015817">Mario Carneiro (Aug 13 2018 at 09:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015817">Mario Carneiro (Aug 12 2018 at 23:57)</a>:</h4>
 <p>(this is why TCO is important in functional programming languages)</p>
 
 <a name="132015861"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015861">Patrick Massot (Aug 13 2018 at 09:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015861">Patrick Massot (Aug 12 2018 at 23:58)</a>:</h4>
 <p>Thanks!</p>
 
 <a name="132015934"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015934">Patrick Massot (Aug 13 2018 at 10:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132015934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132015934">Patrick Massot (Aug 13 2018 at 00:00)</a>:</h4>
 <p>Is there a more natural way to do define that comparison function?</p>
 
 <a name="132016013"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016013">Mario Carneiro (Aug 13 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016013">Mario Carneiro (Aug 13 2018 at 00:03)</a>:</h4>
 <p>Not particularly; you could do a cases on both and return true or false in each case</p>
 
 <a name="132016054"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016054">Patrick Massot (Aug 13 2018 at 10:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016054">Patrick Massot (Aug 13 2018 at 00:04)</a>:</h4>
 <p>This was my original plan, but I decided there were too many cases</p>
 
 <a name="132016068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016068">Mario Carneiro (Aug 13 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016068">Mario Carneiro (Aug 13 2018 at 00:05)</a>:</h4>
 <p>this is a legitimate way to cut down the number of cases from O(n^2) to O(n)</p>
 
 <a name="132016119"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016119">Mario Carneiro (Aug 13 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016119">Mario Carneiro (Aug 13 2018 at 00:06)</a>:</h4>
 <p>I wish there was a built in (autogenerated) <code>T.discr</code> function that returns the discriminant of the type, which is basically this</p>
 
 <a name="132016126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016126">Mario Carneiro (Aug 13 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20timeout/near/132016126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88815metatimeout.html#132016126">Mario Carneiro (Aug 13 2018 at 00:07)</a>:</h4>
 <p>it has an O(1) implementation, since this is the tag on the vm object</p>
 
 

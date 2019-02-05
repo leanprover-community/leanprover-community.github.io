@@ -12,19 +12,19 @@ permalink: archive/113488general/93837CharacterencodingofVM.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="132047636"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132047636">Keeley Hoek (Aug 13 2018 at 23:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132047636">Keeley Hoek (Aug 13 2018 at 13:45)</a>:</h4>
 <p>Does anyone know the internal character encoding of strings after a to_char_buffer? It seems to not be UTF-8.</p>
 
 <a name="132047850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132047850">Simon Hudon (Aug 13 2018 at 23:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132047850">Simon Hudon (Aug 13 2018 at 13:48)</a>:</h4>
 <p><code>init.data.string.basic</code> says that it is</p>
 
 <a name="132056801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132056801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132056801">Sebastian Ullrich (Aug 14 2018 at 02:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132056801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132056801">Sebastian Ullrich (Aug 13 2018 at 16:15)</a>:</h4>
 <p><code>char</code> is a Unicode code point, so a <code>char_buffer</code> is not encoded at all</p>
 
 <a name="132250034"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132250034">Keeley Hoek (Aug 17 2018 at 02:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132250034">Keeley Hoek (Aug 16 2018 at 16:22)</a>:</h4>
 <p>I think there is a serious problem in fs_write() in vm_io.cpp in the frozen final version of Lean 3.</p>
 <p>Inside, there is a static_cast to &lt;unsigned char&gt;, which is just wrong when the passed char_buffer has some multibyte unicode characters.</p>
 <p>The effect is that nonsense is written by io.fs.write when a char_buffer containing a character such as "𝟙" is passed. e.g. when you execute the following lean program the single byte 0xD9 is written.</p>
@@ -41,33 +41,33 @@ def main : io unit := do
 <p>I'm sure the fix won't be a big deal. Does anyone know of a workaround in the meantime?</p>
 
 <a name="132250668"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132250668">Sebastian Ullrich (Aug 17 2018 at 02:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132250668">Sebastian Ullrich (Aug 16 2018 at 16:33)</a>:</h4>
 <p>Hmm, perhaps a <code>char_buffer</code> is supposed to be encoded in UTF-8 then after all. In that case, the bug is in <code>buffer.append_string</code>, which you could reimplement to do proper UTF-8 encoding</p>
 
 <a name="132251650"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132251650">Keeley Hoek (Aug 17 2018 at 02:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132251650">Keeley Hoek (Aug 16 2018 at 16:52)</a>:</h4>
 <p>It looks to me like every time the vm needs to turn an honest std::string into a list of chars it does a utf8_decode (on purpose) to make sure a "char" is a single unicode character, so because char_buffer = buffer char I think that would be breaking the rules!</p>
 
 <a name="132251818"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132251818">Keeley Hoek (Aug 17 2018 at 02:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132251818">Keeley Hoek (Aug 16 2018 at 16:56)</a>:</h4>
 <p>I would expect that fs_write should call some variant of push_unicode_scalar which pushes char into the temporary buffer it is building. Do you think it'd be okay if I made it do that?</p>
 
 <a name="132252378"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132252378">Sebastian Ullrich (Aug 17 2018 at 03:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132252378">Sebastian Ullrich (Aug 16 2018 at 17:05)</a>:</h4>
 <p>Do you really want to change the Lean binary instead of fixing the issue in Lean code? This also won't work for <code>fs_read</code> since reading a fixed amount of bytes does not necessarily result in a correctly terminated UTF-8 string.</p>
 
 <a name="132252969"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132252969">Keeley Hoek (Aug 17 2018 at 03:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132252969">Keeley Hoek (Aug 16 2018 at 17:15)</a>:</h4>
 <p>I suppose you are right. But certainly the current behaviour is broken. It seems that there is some confusion as to whether a <code>char_buffer</code> should morally be a buffer of characters of text, or of bytes. Much effort is currently gone to to ensure that a <code>char</code> is a text-character, so that things like string.length can be the length of the underlying list of chars, etc.</p>
 <p>I suppose in an ideal world io.fs.write would produce a <code>buffer byte</code>, and io.fs.read should return such a buffer (of course the latter of these actually happens currently, but everything is still called a <code>char</code>). And there would be <code>char_buffer.decode</code> or something.</p>
 <p>One can only dream!</p>
 
 <a name="132259214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132259214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132259214">Sebastian Ullrich (Aug 17 2018 at 05:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132259214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#132259214">Sebastian Ullrich (Aug 16 2018 at 19:03)</a>:</h4>
 <p>Yes, it should look pretty much like this in Lean 4 :)</p>
 
 <a name="148225244"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148225244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148225244">Keeley Hoek (Nov 23 2018 at 23:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148225244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148225244">Keeley Hoek (Nov 23 2018 at 12:07)</a>:</h4>
 <p>Hi again <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>  sorry to resurrect this thread<br>
 At the original time of this thread I implemented the UTF-8 decoding you suggested, and we began to use it:<br>
 <a href="https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17" target="_blank" title="https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17">https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17</a><br>
@@ -77,35 +77,35 @@ However we found that the decoder was slowing down the tactic it was part of (pa
 <p>This makes me very sad---would you at all consider merging a patch to lean which by default transcodes UTF-8 characters when reading and writing, when the file stream was opened in non-binary mode? The patch is under 100 lines. We address your <code>fs_read</code> problem above by reading the UTF-8 characters, making the length argument a number of UTF-8 characters, not just bytes (and again, this would only be in non-binary mode).</p>
 
 <a name="148226040"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148226040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148226040">Sebastian Ullrich (Nov 23 2018 at 23:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148226040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148226040">Sebastian Ullrich (Nov 23 2018 at 12:25)</a>:</h4>
 <p>I see. Do you have the patch somewhere?</p>
 
 <a name="148228670"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148228670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148228670">Keeley Hoek (Nov 24 2018 at 00:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148228670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148228670">Keeley Hoek (Nov 23 2018 at 13:18)</a>:</h4>
 <p>I'll extract a nice commit for you</p>
 
 <a name="148267458"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148267458">Keeley Hoek (Nov 24 2018 at 18:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148267458">Keeley Hoek (Nov 24 2018 at 07:51)</a>:</h4>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry about the delay, here you go:<br>
 <a href="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8" target="_blank" title="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8">https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8</a><br>
 I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everything was reproduced correctly without crashing</p>
 
 <a name="148267991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148267991">Scott Morrison (Nov 24 2018 at 19:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148267991">Scott Morrison (Nov 24 2018 at 08:08)</a>:</h4>
 <p>Exciting! (especially if you know what comes next :-)</p>
 
 <a name="148362422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362422">Keeley Hoek (Nov 26 2018 at 22:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362422">Keeley Hoek (Nov 26 2018 at 11:51)</a>:</h4>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry to keep bugging you<br>
 I have a tiny little puzzle you might be interested in. If you clone <a href="https://github.com/khoek/leandemo-for-sebastian" target="_blank" title="https://github.com/khoek/leandemo-for-sebastian">https://github.com/khoek/leandemo-for-sebastian</a> and run <code>lean --make test.lean</code> (a program which just reads the accompanying file in the repo into memory) lean will finish executing essentially instantly.<br>
 On the other hand, try opening up <code>test.lean</code> in vscode. I observe a multiple-second pause when lean reads in the file in "interactive mode". Why could this discrepancy be happening?</p>
 
 <a name="148362472"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362472">Keeley Hoek (Nov 26 2018 at 22:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362472">Keeley Hoek (Nov 26 2018 at 11:52)</a>:</h4>
 <p>I measure less than 100ms in the first case</p>
 
 <a name="148362685"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362685">Sebastian Ullrich (Nov 26 2018 at 22:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362685">Sebastian Ullrich (Nov 26 2018 at 11:59)</a>:</h4>
 <p>Are you sure it's actually rebuilding the file?</p>
 <div class="codehilite"><pre><span></span>$ time lean +3.4.1 test.lean
 running
@@ -115,11 +115,11 @@ done
 </pre></div>
 
 <a name="148362744"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362744">Patrick Massot (Nov 26 2018 at 23:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362744">Patrick Massot (Nov 26 2018 at 12:00)</a>:</h4>
 <p>Did you have any olean floating around Keeley?</p>
 
 <a name="148362996"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362996">Keeley Hoek (Nov 26 2018 at 23:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148362996">Keeley Hoek (Nov 26 2018 at 12:07)</a>:</h4>
 <p>I got embarrassed for a second, but I don't think its an olean problem<br>
 What does "rebuilding" mean Sebastian?<br>
 But on my computer at the terminal I get</p>
@@ -138,11 +138,11 @@ But in vscode I can comfortably count one-thousand-and-one one-thousand-and-two 
 And if you make the file bigger (more MB) then it takes longer, too</p>
 
 <a name="148363371"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148363371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148363371">Keeley Hoek (Nov 26 2018 at 23:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148363371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148363371">Keeley Hoek (Nov 26 2018 at 12:16)</a>:</h4>
 <p>copy-and-pasting the contents of the <code>test.dat</code> file a few times to get the file size up to 87mb, at the terminal it takes 1.967seconds to run, while in vscode it is more than 10</p>
 
 <a name="148367812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148367812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148367812">Sebastian Ullrich (Nov 27 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148367812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148367812">Sebastian Ullrich (Nov 26 2018 at 13:50)</a>:</h4>
 <p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> What do you get if you use <code>--server</code> like this?</p>
 <div class="codehilite"><pre><span></span>echo &#39;{&quot;seq_num&quot;: 0, &quot;command&quot;: &quot;sync&quot;, &quot;file_name&quot;: &quot;test.lean&quot;}&#39; | time lean +3.4.1 --server
 </pre></div>
@@ -151,25 +151,25 @@ And if you make the file bigger (more MB) then it takes longer, too</p>
 <p>For me, it's about as fast after the first run (i.e. after the file cache is hot, probably)</p>
 
 <a name="148368092"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148368092">Keeley Hoek (Nov 27 2018 at 00:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148368092">Keeley Hoek (Nov 26 2018 at 13:55)</a>:</h4>
 <p>When I run that it starts/finishes really quick without printing <code>running</code> and <code>done</code>, so I don't think its actually running<br>
 I made sure to delete the olean file</p>
 
 <a name="148368796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148368796">Sebastian Ullrich (Nov 27 2018 at 01:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148368796">Sebastian Ullrich (Nov 26 2018 at 14:07)</a>:</h4>
 <p>Ah, you should probably use <code>-j0</code> to force it into serial mode. I don't even remember half of these things.</p>
 
 <a name="148369274"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148369274">Keeley Hoek (Nov 27 2018 at 01:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148369274">Keeley Hoek (Nov 26 2018 at 14:15)</a>:</h4>
 <p>Yep that worked</p>
 
 <a name="148369357"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148369357">Keeley Hoek (Nov 27 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#148369357">Keeley Hoek (Nov 26 2018 at 14:16)</a>:</h4>
 <p>14.14 seconds for the file in my repository (now updated, I made it way bigger)<br>
 2.348 from the terminal</p>
 
 <a name="151237681"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151237681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#151237681">Sebastian Ullrich (Dec 10 2018 at 08:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151237681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#151237681">Sebastian Ullrich (Dec 09 2018 at 21:53)</a>:</h4>
 <blockquote>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry about the delay, here you go:<br>
 <a href="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8" target="_blank" title="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8">https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8</a><br>
@@ -178,7 +178,7 @@ I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everyt
 <p>merged</p>
 
 <a name="151268884"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151268884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#151268884">Scott Morrison (Dec 10 2018 at 23:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151268884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html#151268884">Scott Morrison (Dec 10 2018 at 12:29)</a>:</h4>
 <p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> did you see this?</p>
 
 

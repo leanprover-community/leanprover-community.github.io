@@ -12,7 +12,7 @@ permalink: archive/113488general/7573412n1.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134526569"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134526569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134526569">Reid Barton (Sep 24 2018 at 23:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134526569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134526569">Reid Barton (Sep 24 2018 at 13:34)</a>:</h4>
 <p>As Scott mentioned elsewhere, I had some difficulty defining the set {1, 2, ..., n-1} : <code>finset pnat</code>. I ended up using recursion--thanks Chris for providing the magical last line.</p>
 <div class="codehilite"><pre><span></span><span class="c1">--- The set {1, 2, ..., n-1}</span>
 <span class="n">def</span> <span class="n">my_range</span> <span class="o">:</span> <span class="bp">ℕ+</span> <span class="bp">→</span> <span class="n">multiset</span> <span class="bp">ℕ+</span>
@@ -26,84 +26,84 @@ permalink: archive/113488general/7573412n1.html
 <p>I know <code>multiset</code> is not <code>finset</code>--using <code>multiset</code> made things a bit easier later because I wanted to subtract a sum over {1, 2, ..., n-1} from the same sum over {1, 2, ..., n} and this way I didn't have to prove that the element n is not in the former set. But I guess if I could define {1, 2, ..., n-1} in terms of stuff that's already in mathlib then checking that last side condition would also have been easy.</p>
 
 <a name="134526586"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134526586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134526586">Reid Barton (Sep 24 2018 at 23:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134526586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134526586">Reid Barton (Sep 24 2018 at 13:34)</a>:</h4>
 <p>Any suggestions?<br>
 I think I could have used <code>finset.range</code>, <code>finset.filter</code>, <code>finset.attach</code>, and <code>finset.map</code>, but that also sounded a bit awkward.</p>
 
 <a name="134536670"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536670">Chris Hughes (Sep 25 2018 at 02:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536670">Chris Hughes (Sep 24 2018 at 16:17)</a>:</h4>
 <p>I had to do something similar once, and I used <code>(finset.range n).erase 0</code>. I really should be defined though. We have <code>range'</code> on lists, perhaps it should be extended to finsets.</p>
 
 <a name="134536735"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536735">Reid Barton (Sep 25 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536735">Reid Barton (Sep 24 2018 at 16:18)</a>:</h4>
 <p>The extra complication here is that I need a <code>finset pnat</code></p>
 
 <a name="134536741"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536741">Reid Barton (Sep 25 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536741">Reid Barton (Sep 24 2018 at 16:18)</a>:</h4>
 <p>Not a <code>finset nat</code></p>
 
 <a name="134536767"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536767">Reid Barton (Sep 25 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134536767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134536767">Reid Barton (Sep 24 2018 at 16:18)</a>:</h4>
 <p>Haskell has an <code>Enum</code> class, maybe we could adapt it...</p>
 
 <a name="134539021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539021">Simon Hudon (Sep 25 2018 at 03:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539021">Simon Hudon (Sep 24 2018 at 17:04)</a>:</h4>
 <p>mathlib has <code>fintype</code> and <code>countable</code> which you may be able to use for this purpose</p>
 
 <a name="134539480"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539480">Reid Barton (Sep 25 2018 at 03:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539480">Reid Barton (Sep 24 2018 at 17:12)</a>:</h4>
 <p>I'm not sure it is good to rely on what the <code>countable</code> instance is. But the underlying idea is good. Namely, I could start with <code>range (n-1) : finset nat</code> and then <code>finset.map</code> the function which takes <code>n : nat</code> to <code>n+1 : pnat</code></p>
 
 <a name="134539489"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539489">Reid Barton (Sep 25 2018 at 03:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539489">Reid Barton (Sep 24 2018 at 17:13)</a>:</h4>
 <p>That's much simpler than the roundabout way I suggested earlier.</p>
 
 <a name="134539635"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539635">Johannes Hölzl (Sep 25 2018 at 03:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539635">Johannes Hölzl (Sep 24 2018 at 17:16)</a>:</h4>
 <p>what about changing range to <code>range : nat -&gt; nat -&gt; finset nat</code>?  With <code>range n m = {n, ..., m - 1}</code> or <code>range n m = {m + 1, ..., n}</code> if <code>m &lt; n</code></p>
 
 <a name="134539649"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539649">Johannes Hölzl (Sep 25 2018 at 03:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134539649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134539649">Johannes Hölzl (Sep 24 2018 at 17:16)</a>:</h4>
 <p>or adding an <code>interval</code> for this</p>
 
 <a name="134541041"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134541041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134541041">Simon Hudon (Sep 25 2018 at 03:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134541041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134541041">Simon Hudon (Sep 24 2018 at 17:44)</a>:</h4>
 <blockquote>
 <p>I'm not sure it is good to rely on what the countable instance is.</p>
 </blockquote>
 <p>I think you're right. We need to assume a linear order on the elements. Maybe mapping the elements to integers would be better though.</p>
 
 <a name="134560767"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134560767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134560767">Mario Carneiro (Sep 25 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134560767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134560767">Mario Carneiro (Sep 24 2018 at 22:23)</a>:</h4>
 <p>I would suggest using <code>finset.map succ_pnat (finset.range n.pred)</code></p>
 
 <a name="134579309"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579309">Kevin Buzzard (Sep 25 2018 at 17:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579309">Kevin Buzzard (Sep 25 2018 at 07:14)</a>:</h4>
 <p>Because computers were less prevalent when I was younger, I had done a lot of mathematics on paper before I seriously engaged with mathematical software. I remember being very surprised by this computer science idea of starting at 0 instead of 1, and for some time I would keep track of where I was summing from and whether it would be easier to start at 0 or 1 (in the sense that e.g. the indices are simpler if you make one choice over the other). In computer-sciency things it seems to me that 0 is often a good choice, but in maths the positive naturals do play an important role, and it is not uncommon that starting to sum at 1 is a natural thing to do.</p>
 <p>I still have a very poor understanding of why the following is not what is done: define pnat to be an inductive type with two constructors <code>one</code> and <code>succ</code>, write a tactic which proves everything about <code>pnat</code> from the corresponding statements for <code>nat</code> and then perhaps with a little human help prove the important things about prange(n)={1,2,...,n}.</p>
 
 <a name="134579385"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579385">Mario Carneiro (Sep 25 2018 at 17:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579385">Mario Carneiro (Sep 25 2018 at 07:16)</a>:</h4>
 <p>one downside of that is that <code>pnat</code> would certainly be much bigger this way</p>
 
 <a name="134579676"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579676">Kevin Buzzard (Sep 25 2018 at 17:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579676">Kevin Buzzard (Sep 25 2018 at 07:22)</a>:</h4>
 <p>Does that matter? Give it a coercion to nat, prove the lemmas, forget about it.</p>
 
 <a name="134579794"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579794">Mario Carneiro (Sep 25 2018 at 17:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579794">Mario Carneiro (Sep 25 2018 at 07:26)</a>:</h4>
 <p>You could say the same the other way around. To prove a type is inductive with some constructors you prove an appropriate <code>rec_on</code> theorem</p>
 
 <a name="134579923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579923">Kevin Buzzard (Sep 25 2018 at 17:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134579923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134579923">Kevin Buzzard (Sep 25 2018 at 07:29)</a>:</h4>
 <p>Fair point. I will need to think harder about why I was at some point concerned that pnat was "only" a subtype and see if any of my reasons make any sense in the cold light of day.</p>
 
 <a name="134589702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134589702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134589702">Reid Barton (Sep 25 2018 at 21:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134589702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134589702">Reid Barton (Sep 25 2018 at 11:26)</a>:</h4>
 <p>I was surprised to see that there was no <code>pnat.rec_on</code> yet, which made my recursive definition more complicated than expected. I failed to make a note of that so it's good that that came up again.</p>
 
 <a name="134589746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134589746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134589746">Reid Barton (Sep 25 2018 at 21:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%7B1%2C%202%2C%20...%2C%20n-1%7D/near/134589746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/7573412n1.html#134589746">Reid Barton (Sep 25 2018 at 11:27)</a>:</h4>
 <p>Just to clarify, in the particular case of the IMO problem I'm solving, there's no technical reason whatsoever that I couldn't just reindex things starting at 0--the only purpose I have for not doing that is to see what are the little issues like this which crop up when starting from 1. (And the problem does <em>say</em> "a_1, a_2, ...".)</p>
 
 

@@ -12,7 +12,7 @@ permalink: archive/113488general/76761recursiononconstructorwithlistargument.htm
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="127832469"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127832469">Seul Baek (Jun 10 2018 at 06:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127832469">Seul Baek (Jun 09 2018 at 20:40)</a>:</h4>
 <p>I'm experimenting with embedding first-order logic in Lean, and I'm using the following definition of terms : </p>
 <div class="codehilite"><pre><span></span>inductive trm : Type
 | var : nat → trm
@@ -58,15 +58,15 @@ list.head_nonempty
 <p>...but this does not feel quite right. I wonder if there's a better solution?</p>
 
 <a name="127832568"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127832568">Simon Hudon (Jun 10 2018 at 06:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127832568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127832568">Simon Hudon (Jun 09 2018 at 20:44)</a>:</h4>
 <p>I haven't tried it recently but you may be able to get an improvement by writing two mutually recursive functions: one on the list of terms and one on individual terms. This is the kind of feature that has improved quickly in the last year so I'm not sure at what point it is now.</p>
 
 <a name="127850700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127850700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127850700">Mario Carneiro (Jun 10 2018 at 18:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127850700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127850700">Mario Carneiro (Jun 10 2018 at 08:56)</a>:</h4>
 <p>This is a known issue with nested inductives. Like Simon suggests, you should use mutual recursion to define functions on the type.</p>
 
 <a name="127867644"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127867644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127867644">Seul Baek (Jun 11 2018 at 05:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20on%20constructor%20with%20list%20argument/near/127867644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76761recursiononconstructorwithlistargument.html#127867644">Seul Baek (Jun 10 2018 at 19:46)</a>:</h4>
 <p>Thank you. It looks a lot better with mutual recursion now.</p>
 
 

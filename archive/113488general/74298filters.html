@@ -12,7 +12,7 @@ permalink: archive/113488general/74298filters.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133377621"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133377621">Rohan Mitta (Sep 06 2018 at 00:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133377621">Rohan Mitta (Sep 05 2018 at 14:03)</a>:</h4>
 <p>Hi,</p>
 <p>I'm attempting to prove a proposition from a Topology book and am getting stuck using filters, which I'm not very comfortable with in lean. Can anyone help me with the first sorry? I'm pretty sure that step is true due to the uniform continuity of f but I can't figure out what to do with it.</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
@@ -48,20 +48,20 @@ permalink: archive/113488general/74298filters.html
 </pre></div>
 
 <a name="133378115"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378115">Reid Barton (Sep 06 2018 at 00:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378115">Reid Barton (Sep 05 2018 at 14:11)</a>:</h4>
 <p>H3 must be true because <code>nhds</code> only depends on the topology and f and g are homeomorphisms.<br>
 One direction of the equality will be from continuous.tendsto. The other one should require the continuity of g</p>
 
 <a name="133378211"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378211">Johannes Hölzl (Sep 06 2018 at 00:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378211">Johannes Hölzl (Sep 05 2018 at 14:12)</a>:</h4>
 <p>Also, you have an uniform isomorphism (i.e. <code>f</code> with <code>g</code> as inverse). This implies that it is an topological <code>embedding</code>, a <code>dense_embedding</code> and <code>uniform_embedding</code>. If you look for them this should give you enough rules to prove your statement.</p>
 
 <a name="133378251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378251">Reid Barton (Sep 06 2018 at 00:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378251">Reid Barton (Sep 05 2018 at 14:13)</a>:</h4>
 <p>... plus either left_inv or right_inv, and filter.map_map</p>
 
 <a name="133378669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378669">Patrick Massot (Sep 06 2018 at 00:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378669">Patrick Massot (Sep 05 2018 at 14:20)</a>:</h4>
 <p><span class="user-mention" data-user-id="120559">@Rohan Mitta</span> don't listen to them, you were almost done. Stating only only implication since the other one follows by symmetry:</p>
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">complete_iff_of_uniform_cts_bij</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
     <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">Hg</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">left_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span>
@@ -84,15 +84,15 @@ One direction of the equality will be from continuous.tendsto. The other one sho
 </pre></div>
 
 <a name="133378866"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378866">Kevin Buzzard (Sep 06 2018 at 00:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378866">Kevin Buzzard (Sep 05 2018 at 14:23)</a>:</h4>
 <p>Thanks all of you (I'm sitting next to Rohan)</p>
 
 <a name="133378965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378965">Rohan Mitta (Sep 06 2018 at 00:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378965">Rohan Mitta (Sep 05 2018 at 14:25)</a>:</h4>
 <p>Amazing, thanks everyone!</p>
 
 <a name="133379170"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379170">Patrick Massot (Sep 06 2018 at 00:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379170">Patrick Massot (Sep 05 2018 at 14:29)</a>:</h4>
 <p>Small cleanup:</p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">function</span>
 <span class="kn">theorem</span> <span class="n">complete_iff_of_uniform_cts_bij</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
@@ -113,7 +113,7 @@ One direction of the equality will be from continuous.tendsto. The other one sho
 </pre></div>
 
 <a name="133379874"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379874">Johannes Hölzl (Sep 06 2018 at 00:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379874">Johannes Hölzl (Sep 05 2018 at 14:39)</a>:</h4>
 <p>Thanks Patrick to actually look at the proof (obviously, I didn't ...)</p>
 
 

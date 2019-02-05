@@ -12,7 +12,7 @@ permalink: archive/113488general/35579Defaultargumentswithtypeparameter.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="132355082"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132355082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132355082">Keeley Hoek (Aug 18 2018 at 20:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132355082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132355082">Keeley Hoek (Aug 18 2018 at 10:42)</a>:</h4>
 <p>I've got a (honest, in-a-program) function</p>
 <div class="codehilite"><pre><span></span>def do_some_stuff {α : Type} (cfg : config α) := xxx
 </pre></div>
@@ -28,7 +28,7 @@ def do_some_stuff {α : Type} (cfg : config α := default_config) := xxx
 <p>I see that I might be "fighting the system". What do you think is the best way to emulate this kind of option-passing interface?</p>
 
 <a name="132357334"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357334">Mario Carneiro (Aug 18 2018 at 21:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357334">Mario Carneiro (Aug 18 2018 at 11:50)</a>:</h4>
 <p>This comes up in core lean in some of the structures, where you have to give <code>A</code> such that <code>A = B</code>, and the proof of <code>A = B</code> is <code>rfl</code> but this only works if <code>A</code> is <code>B</code>. You can set this up using auto params instead of opt params:</p>
 <div class="codehilite"><pre><span></span>def config : Type → Type := sorry
 def default_config : config string := sorry
@@ -41,23 +41,23 @@ example : nat := do_some_stuff -- error
 </pre></div>
 
 <a name="132357505"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357505">Keeley Hoek (Aug 18 2018 at 21:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357505">Keeley Hoek (Aug 18 2018 at 11:56)</a>:</h4>
 <p>Thanks so much Mario. Do you know where I could read about the auto params "." period syntax?</p>
 
 <a name="132357514"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357514">Mario Carneiro (Aug 18 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357514">Mario Carneiro (Aug 18 2018 at 11:57)</a>:</h4>
 <p>It might be in the reference manual? It's very simple. You can only put a name of a def of a <code>tactic unit</code> there, and it gets called when the argument is not supplied</p>
 
 <a name="132357522"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357522">Mario Carneiro (Aug 18 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357522">Mario Carneiro (Aug 18 2018 at 11:57)</a>:</h4>
 <p>I wish it would accept an expression so you could write a tactic inline there, but alas</p>
 
 <a name="132357563"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357563">Keeley Hoek (Aug 18 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357563">Keeley Hoek (Aug 18 2018 at 11:58)</a>:</h4>
 <p>ok sweet! cheers!</p>
 
 <a name="132357567"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357567">Mario Carneiro (Aug 18 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132357567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html#132357567">Mario Carneiro (Aug 18 2018 at 11:58)</a>:</h4>
 <p>(actually there is a good reason you can't write a tactic inline, since that would be <code>meta</code>)</p>
 
 

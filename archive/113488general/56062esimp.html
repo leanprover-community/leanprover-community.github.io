@@ -12,16 +12,16 @@ permalink: archive/113488general/56062esimp.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="129626646"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129626646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129626646">Reid Barton (Jul 14 2018 at 06:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129626646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129626646">Reid Barton (Jul 13 2018 at 20:31)</a>:</h4>
 <p>Using Scott's category theory library, I sometimes encounter subexpressions like <code>compose f (identity X)</code>, but with the caveat that one or both of the implicit "object" arguments of <code>compose</code> is not syntactically equal to <code>X</code>. This appears to stymie <code>simp</code> from reducing the subexpression to <code>f</code>. Is there a way to make <code>simp</code> smarter here?<br>
 I know about <code>erw</code>, which in my experience solves this problem when I want to use <code>rw</code>, but I haven't found a good solution for <code>simp</code>.</p>
 
 <a name="129626765"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129626765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129626765">Reid Barton (Jul 14 2018 at 06:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129626765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129626765">Reid Barton (Jul 13 2018 at 20:32)</a>:</h4>
 <p>It's kind of annoying, since I guess <code>simp</code> could just generalize the wildcards in the pattern when trying to match the identity lemma...</p>
 
 <a name="129627291"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627291">Reid Barton (Jul 14 2018 at 06:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627291">Reid Barton (Jul 13 2018 at 20:41)</a>:</h4>
 <p>that is, rather than match against</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">categories</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">compose</span><span class="bp">.</span><span class="o">{</span><span class="err">?</span><span class="n">u_0</span> <span class="err">?</span><span class="n">u_1</span><span class="o">}</span> <span class="err">?</span><span class="n">x_0</span> <span class="err">?</span><span class="n">x_1</span> <span class="err">?</span><span class="n">x_2</span> <span class="err">?</span><span class="n">x_3</span> <span class="err">?</span><span class="n">x_3</span> <span class="err">?</span><span class="n">x_4</span>
   <span class="o">(</span><span class="bp">@</span><span class="n">categories</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">identity</span><span class="bp">.</span><span class="o">{</span><span class="err">?</span><span class="n">u_0</span> <span class="err">?</span><span class="n">u_1</span><span class="o">}</span> <span class="err">?</span><span class="n">x_0</span> <span class="err">?</span><span class="n">x_1</span> <span class="err">?</span><span class="n">x_3</span><span class="o">)</span>
@@ -37,7 +37,7 @@ I know about <code>erw</code>, which in my experience solves this problem when I
 <p>on the assumption that, if we found this, we can conclude that definitionally <code>?x_3 = ?x_3' = ?x_3''</code>, and no need to check syntactic equality</p>
 
 <a name="129627378"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627378">Mario Carneiro (Jul 14 2018 at 06:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627378">Mario Carneiro (Jul 13 2018 at 20:42)</a>:</h4>
 <p>In my experience this doesn't stop simp...</p>
 <div class="codehilite"><pre><span></span>def nat2 := nat
 example (x : ℕ) : x + @has_zero.zero nat2 nat.has_zero = x :=
@@ -45,15 +45,15 @@ by simp
 </pre></div>
 
 <a name="129627423"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627423">Mario Carneiro (Jul 14 2018 at 06:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627423">Mario Carneiro (Jul 13 2018 at 20:43)</a>:</h4>
 <p>I don't think it tries to match arguments that are dependencies at all</p>
 
 <a name="129627533"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627533">Reid Barton (Jul 14 2018 at 06:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129627533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129627533">Reid Barton (Jul 13 2018 at 20:44)</a>:</h4>
 <p>Hmm, strange. I have several uses of <code>dsimp, simp</code> where I'm pretty sure the <code>dsimp</code> is just simplifying one of these object arguments. Let me look more closely at a simple one...</p>
 
 <a name="129628422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628422">Reid Barton (Jul 14 2018 at 06:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628422">Reid Barton (Jul 13 2018 at 20:57)</a>:</h4>
 <p>Here is a small reproducer that depends on <code>lean-category-theory</code> (or <code>-pr</code>):</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">categories</span><span class="bp">.</span><span class="n">category</span>
 <span class="kn">open</span> <span class="n">categories</span>
@@ -80,51 +80,51 @@ by simp
 </pre></div>
 
 <a name="129628559"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628559">Reid Barton (Jul 14 2018 at 06:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628559">Reid Barton (Jul 13 2018 at 20:59)</a>:</h4>
 <p>With the <code>dsimp [M]</code>, the only change in the goal is that <code>(@M C _inst_1 b)</code> is replaced by <code>b</code></p>
 
 <a name="129628628"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628628">Mario Carneiro (Jul 14 2018 at 07:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628628">Mario Carneiro (Jul 13 2018 at 21:00)</a>:</h4>
 <p>is there any change if you <code>dsimp</code> the type of <code>f</code> instead of the goal?</p>
 
 <a name="129628679"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628679">Reid Barton (Jul 14 2018 at 07:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628679">Reid Barton (Jul 13 2018 at 21:01)</a>:</h4>
 <p>How would I do that?</p>
 
 <a name="129628686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628686">Mario Carneiro (Jul 14 2018 at 07:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628686">Mario Carneiro (Jul 13 2018 at 21:01)</a>:</h4>
 <p><code>dsimp [M] at f</code></p>
 
 <a name="129628750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628750">Reid Barton (Jul 14 2018 at 07:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628750">Reid Barton (Jul 13 2018 at 21:02)</a>:</h4>
 <p>Subsequent <code>simp</code> is still stuck</p>
 
 <a name="129628770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628770">Mario Carneiro (Jul 14 2018 at 07:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628770">Mario Carneiro (Jul 13 2018 at 21:02)</a>:</h4>
 <p>does <code>rw</code> work?</p>
 
 <a name="129628796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628796">Reid Barton (Jul 14 2018 at 07:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628796">Reid Barton (Jul 13 2018 at 21:03)</a>:</h4>
 <p><code>rw</code> doesn't work, but <code>erw</code> does</p>
 
 <a name="129628826"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628826">Reid Barton (Jul 14 2018 at 07:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628826">Reid Barton (Jul 13 2018 at 21:03)</a>:</h4>
 <p>(Which I learned about from its usage in Scott's library.)</p>
 
 <a name="129628889"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628889">Mario Carneiro (Jul 14 2018 at 07:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129628889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129628889">Mario Carneiro (Jul 13 2018 at 21:04)</a>:</h4>
 <p><code>erw</code> will work because it's basically just <code>dsimp [M], rw</code></p>
 
 <a name="129629349"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129629349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129629349">Reid Barton (Jul 14 2018 at 07:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129629349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129629349">Reid Barton (Jul 13 2018 at 21:12)</a>:</h4>
 <p>Maybe your example works because of this <code>canonize_instances</code> stuff?</p>
 
 <a name="129629451"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129629451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129629451">Reid Barton (Jul 14 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129629451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129629451">Reid Barton (Jul 13 2018 at 21:14)</a>:</h4>
 <p>Or maybe not</p>
 
 <a name="129664139"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129664139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129664139">Reid Barton (Jul 15 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129664139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129664139">Reid Barton (Jul 14 2018 at 14:44)</a>:</h4>
 <p>A related example that I don't understand.</p>
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
 <span class="kn">variable</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">nat</span><span class="o">)</span>
@@ -151,11 +151,11 @@ by simp
 </pre></div>
 
 <a name="129664199"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129664199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129664199">Reid Barton (Jul 15 2018 at 00:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/129664199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#129664199">Reid Barton (Jul 14 2018 at 14:47)</a>:</h4>
 <p>Note that the <code>simp</code> tactic actually succeeded, and used <code>add_zero</code>. So somehow <code>simp</code> didn't care that the <code>has_zero</code> dictionary was the wrong one. But looking at <code>trace.type_context.is_def_eq_detail</code> output and the <code>type_context.cpp</code> code, I don't see how this is possible.</p>
 
 <a name="131044904"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/131044904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#131044904">Chris Hughes (Aug 07 2018 at 23:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/esimp%3F/near/131044904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56062esimp.html#131044904">Chris Hughes (Aug 07 2018 at 13:38)</a>:</h4>
 <p>This problem came up for me today, helping someone who had a proof that was approved by the <code>tactics</code> but not by the kernel, where there was a <code>nat.pow</code> versus <code>monoid.pow</code> issue somewhere.</p>
 
 

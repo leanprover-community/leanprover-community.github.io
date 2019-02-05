@@ -12,15 +12,15 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123790494"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790494">Scott Morrison (Mar 16 2018 at 21:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790494">Scott Morrison (Mar 16 2018 at 10:19)</a>:</h4>
 <p>I am really struggling to write a tactic that "does mk_eq_symm, but even inside binders". I would like to have something that given <code>h : \forall x : X, f x = g x</code>, spits back <code>\forall x : X, g x = f x</code>. Can anyone point me in the right direction?</p>
 
 <a name="123790545"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790545">Scott Morrison (Mar 16 2018 at 21:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790545">Scott Morrison (Mar 16 2018 at 10:20)</a>:</h4>
 <p>(I need this to work its way through arbitrarily many binders, possibly zero.)</p>
 
 <a name="123790763"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790763">Scott Morrison (Mar 16 2018 at 21:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790763">Scott Morrison (Mar 16 2018 at 10:27)</a>:</h4>
 <p>So far I have</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">mk_eq_symm_under_binders_aux</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="n">e</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
@@ -33,39 +33,39 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 </pre></div>
 
 <a name="123790818"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790818">Kevin Buzzard (Mar 16 2018 at 21:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123790818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123790818">Kevin Buzzard (Mar 16 2018 at 10:28)</a>:</h4>
 <p>Whilst of course I can't help, the recent thread here about using rw really opened my eyes to how this sort of thing wasn't "happening by default" as it were. I am still a little unclear about why <code>eq.symm</code> can't be used directly but this is probably just my poor understanding of the notion of equality in type theory. If I had write a tactic proof which did this I would just continually apply conv to everything.</p>
 
 <a name="123791017"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791017">Scott Morrison (Mar 16 2018 at 21:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791017">Scott Morrison (Mar 16 2018 at 10:34)</a>:</h4>
 <p>Yes! I know how to achieve this with <code>conv</code>. I need this tactic in service of my "rewrite searching" tactic, unfortunately, so a human isn't available to help direct the <code>conv</code>. I need to be able to determine if a rewrite is applying to the entire expression, or just a subexpression, but the only way to ask Lean to rewrite an entire expression seems to be via <code>simp_lemmas.rewrite</code>, which doesn't provide a facility for applying the rule in reverse, so I'm going to have to build the reverse rule myself.</p>
 
 <a name="123791083"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791083">Scott Morrison (Mar 16 2018 at 21:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791083">Scott Morrison (Mar 16 2018 at 10:36)</a>:</h4>
 <p>But what I have above is stupid. The <code>expr.app e b</code> is silly, it's not <code>b</code> that I'm meant to put in there, it's.... something. :-)</p>
 
 <a name="123791084"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791084">Kevin Buzzard (Mar 16 2018 at 21:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791084">Kevin Buzzard (Mar 16 2018 at 10:36)</a>:</h4>
 <p>I am a little disappointed that something like <code>repeat {by conv in (_ = _) {rw eq.symm}}</code> doesn't work in tactic mode :-)</p>
 
 <a name="123791093"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791093">Kevin Buzzard (Mar 16 2018 at 21:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791093">Kevin Buzzard (Mar 16 2018 at 10:37)</a>:</h4>
 <p>Or, more precisely, that I couldn't get it to work :-)</p>
 
 <a name="123791337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791337">Mario Carneiro (Mar 16 2018 at 21:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791337">Mario Carneiro (Mar 16 2018 at 10:44)</a>:</h4>
 <p>I wrote an extremely similar tactic for <code>alias</code></p>
 
 <a name="123791338"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791338">Scott Morrison (Mar 16 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791338">Scott Morrison (Mar 16 2018 at 10:45)</a>:</h4>
 <p>I think my fundamental difficulty is I don't know how to construct an <code>expr.lam</code>.</p>
 
 <a name="123791345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791345">Scott Morrison (Mar 16 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791345">Scott Morrison (Mar 16 2018 at 10:45)</a>:</h4>
 <p>I will look at <code>alias</code>!</p>
 
 <a name="123791349"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791349">Mario Carneiro (Mar 16 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791349">Mario Carneiro (Mar 16 2018 at 10:45)</a>:</h4>
 <div class="codehilite"><pre><span></span>meta def mk_iff_mp_app (iffmp : name) : expr → (nat → expr) → tactic expr
 | (expr.pi n bi e t) f := expr.lam n bi e &lt;$&gt; mk_iff_mp_app t (λ n, f (n+1) (expr.var n))
 | `(%%a ↔ %%b) f := pure $ @expr.const tt iffmp [] a b (f 0)
@@ -73,123 +73,123 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 </pre></div>
 
 <a name="123791350"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791350">Scott Morrison (Mar 16 2018 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791350">Scott Morrison (Mar 16 2018 at 10:45)</a>:</h4>
 <p>e.g., if I have <code>f : \nat \to \nat</code>, how to I construct the <code>expr</code> for <code>\lambda n, f (n+1)</code>?</p>
 
 <a name="123791390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791390">Mario Carneiro (Mar 16 2018 at 21:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791390">Mario Carneiro (Mar 16 2018 at 10:46)</a>:</h4>
 <p>That tactic directly constructs a proof of <code>\forall x y z, a -&gt; b</code> from <code>\forall x y z, a &lt;-&gt; b</code></p>
 
 <a name="123791405"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791405">Mario Carneiro (Mar 16 2018 at 21:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791405">Mario Carneiro (Mar 16 2018 at 10:47)</a>:</h4>
 <p>I don't think it even needs to be a tactic (I only used a tactic in that case so I could fail with a nice error message)</p>
 
 <a name="123791446"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791446">Scott Morrison (Mar 16 2018 at 21:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791446">Scott Morrison (Mar 16 2018 at 10:48)</a>:</h4>
 <p>So how does <code>expr.var</code> work?</p>
 
 <a name="123791447"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791447">Scott Morrison (Mar 16 2018 at 21:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791447">Scott Morrison (Mar 16 2018 at 10:48)</a>:</h4>
 <p>That has me confused.</p>
 
 <a name="123791450"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791450">Mario Carneiro (Mar 16 2018 at 21:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791450">Mario Carneiro (Mar 16 2018 at 10:48)</a>:</h4>
 <p><code>expr.var</code> is a de bruijn variable</p>
 
 <a name="123791456"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791456">Mario Carneiro (Mar 16 2018 at 21:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791456">Mario Carneiro (Mar 16 2018 at 10:49)</a>:</h4>
 <p>so <code>\forall x y z, x = y</code> becomes roughly <code>pi "x" (pi "y" (pi "z" (app (app (const "eq") (var 2)) (var 1)))</code></p>
 
 <a name="123791506"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791506">Mario Carneiro (Mar 16 2018 at 21:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791506">Mario Carneiro (Mar 16 2018 at 10:50)</a>:</h4>
 <p>the number counts how many binders back the variable is</p>
 
 <a name="123791513"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791513">Scott Morrison (Mar 16 2018 at 21:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791513">Scott Morrison (Mar 16 2018 at 10:51)</a>:</h4>
 <p>I see. (Or, at least I can imagine writing voodoo code based on what I see. :-)</p>
 
 <a name="123791558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791558">Mario Carneiro (Mar 16 2018 at 21:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791558">Mario Carneiro (Mar 16 2018 at 10:52)</a>:</h4>
 <p>I have an aversion to writing code that has suboptimal asymptotics, so I may have been too clever in the definition there, what with the accumulation function and all</p>
 
 <a name="123791609"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791609">Mario Carneiro (Mar 16 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791609">Mario Carneiro (Mar 16 2018 at 10:54)</a>:</h4>
 <p>Also, I don't think you will be able to use <code>mk_eq_symm</code> in the function</p>
 
 <a name="123791613"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791613">Kevin Buzzard (Mar 16 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791613">Kevin Buzzard (Mar 16 2018 at 10:54)</a>:</h4>
 <p>I guess one question for Scott then is whether he is likely to be applying his tactic to terms built from strings of length 10^10 :-)</p>
 
 <a name="123791616"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791616">Scott Morrison (Mar 16 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791616">Scott Morrison (Mar 16 2018 at 10:54)</a>:</h4>
 <p>What will go wrong with <code>mk_eq_symm</code>?</p>
 
 <a name="123791617"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791617">Mario Carneiro (Mar 16 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791617">Mario Carneiro (Mar 16 2018 at 10:54)</a>:</h4>
 <p>because when you are working on an expr manually like this, you have to deal with open terms, and tactics don't like open terms</p>
 
 <a name="123791624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791624">Mario Carneiro (Mar 16 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791624">Mario Carneiro (Mar 16 2018 at 10:55)</a>:</h4>
 <p>open meaning containing an unbound <code>var</code></p>
 
 <a name="123791625"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791625">Scott Morrison (Mar 16 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791625">Scott Morrison (Mar 16 2018 at 10:55)</a>:</h4>
 <p>(Or you can let me find out for myself in a minute or two..)</p>
 
 <a name="123791628"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791628">Scott Morrison (Mar 16 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791628">Scott Morrison (Mar 16 2018 at 10:55)</a>:</h4>
 <p>I see. But I can just build it directly myself?</p>
 
 <a name="123791630"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791630">Scott Morrison (Mar 16 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791630">Scott Morrison (Mar 16 2018 at 10:55)</a>:</h4>
 <p>(as you did in your example)</p>
 
 <a name="123791670"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791670">Mario Carneiro (Mar 16 2018 at 21:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791670">Mario Carneiro (Mar 16 2018 at 10:56)</a>:</h4>
 <p>yes</p>
 
 <a name="123791690"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791690">Kevin Buzzard (Mar 16 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791690">Kevin Buzzard (Mar 16 2018 at 10:57)</a>:</h4>
 <p>Is it just a coincidence that Mario posted code with the line <code>lam n, f (n+1)</code> seconds before Scott asked about how to construct the <code>expr</code> for <code>lam n, f (n+1)</code>?</p>
 
 <a name="123791736"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791736">Scott Morrison (Mar 16 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791736">Scott Morrison (Mar 16 2018 at 10:58)</a>:</h4>
 <p>apparently yes :-)</p>
 
 <a name="123791740"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791740">Scott Morrison (Mar 16 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791740">Scott Morrison (Mar 16 2018 at 10:58)</a>:</h4>
 <p>They have nothing to do with each other. :-)</p>
 
 <a name="123791741"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791741">Scott Morrison (Mar 16 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791741">Scott Morrison (Mar 16 2018 at 10:58)</a>:</h4>
 <p>(and wow, this looks like it may be working!)</p>
 
 <a name="123791747"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791747">Kevin Buzzard (Mar 16 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791747">Kevin Buzzard (Mar 16 2018 at 10:59)</a>:</h4>
 <p>I thought so but I thought I'd ask as I am frantically cut-and-pasting into a text file and just wanted to check that zulip didn't have some "slightly re-order the messages" functionality</p>
 
 <a name="123791810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791810">Kevin Buzzard (Mar 16 2018 at 22:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791810">Kevin Buzzard (Mar 16 2018 at 11:01)</a>:</h4>
 <p>It's about time I learnt something about tactics and one way of learning is to write some docs.</p>
 
 <a name="123791850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791850">Scott Morrison (Mar 16 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791850">Scott Morrison (Mar 16 2018 at 11:02)</a>:</h4>
 <p>Thank you all! Things are looking good here. :-) <code>all_rewrites</code> seems to be working, finding lots of rewrites that <code>rw</code> itself can't see.</p>
 
 <a name="123791853"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791853">Kevin Buzzard (Mar 16 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791853">Kevin Buzzard (Mar 16 2018 at 11:02)</a>:</h4>
 <p>Can you post what you wrote?</p>
 
 <a name="123791854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791854">Kevin Buzzard (Mar 16 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791854">Kevin Buzzard (Mar 16 2018 at 11:02)</a>:</h4>
 <p>[if you're happy to do so of course!]</p>
 
 <a name="123791855"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791855">Scott Morrison (Mar 16 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791855">Scott Morrison (Mar 16 2018 at 11:02)</a>:</h4>
 <p>It's probably slow as molasses ... but that's a different problem.</p>
 
 <a name="123791902"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791902">Scott Morrison (Mar 16 2018 at 22:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791902">Scott Morrison (Mar 16 2018 at 11:04)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">mk_eq_symm_under_binders_aux</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="o">(</span><span class="n">nat</span> <span class="bp">→</span> <span class="n">expr</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">lam</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">mk_eq_symm_under_binders_aux</span> <span class="n">b</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">var</span> <span class="n">n</span><span class="o">))</span>
 <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">a</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">b</span><span class="o">)</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">mk_eq_symm</span> <span class="o">(</span><span class="n">e</span> <span class="mi">0</span><span class="o">)</span>
@@ -200,11 +200,11 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 </pre></div>
 
 <a name="123791903"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791903">Scott Morrison (Mar 16 2018 at 22:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791903">Scott Morrison (Mar 16 2018 at 11:04)</a>:</h4>
 <p>That's just the <code>mk_eq_symm_under_binders</code> part.</p>
 
 <a name="123791907"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791907">Scott Morrison (Mar 16 2018 at 22:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791907">Scott Morrison (Mar 16 2018 at 11:05)</a>:</h4>
 <p>Then there's</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">rewrite_entire</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="o">(</span><span class="n">expr</span> <span class="bp">×</span> <span class="n">bool</span><span class="o">))</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">expr</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:=</span>
 <span class="n">do</span> <span class="k">let</span> <span class="n">sl</span> <span class="o">:=</span> <span class="n">simp_lemmas</span><span class="bp">.</span><span class="n">mk</span><span class="o">,</span>
@@ -214,27 +214,27 @@ permalink: archive/113488general/01789generalisationofmkeqsymm.html
 </pre></div>
 
 <a name="123791924"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791924">Scott Morrison (Mar 16 2018 at 22:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791924">Scott Morrison (Mar 16 2018 at 11:05)</a>:</h4>
 <p>which given <code>r</code>, a rule and a <code>bool</code> flag indicating whether to use the rule in reverse, and an expression <code>e</code>, either rewrite the entire expression <code>e</code> using the rule, returning the replacement and the proof, or fails.</p>
 
 <a name="123791965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791965">Kevin Buzzard (Mar 16 2018 at 22:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791965">Kevin Buzzard (Mar 16 2018 at 11:06)</a>:</h4>
 <p>Now I will tell my students to alias rw to this and they will never have to worry about why it used to sometimes fail :-)</p>
 
 <a name="123791971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791971">Scott Morrison (Mar 16 2018 at 22:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791971">Scott Morrison (Mar 16 2018 at 11:07)</a>:</h4>
 <p>And then there's <a href="https://gist.github.com/semorrison/9b3a0f42fbd697d562a8b6daa960f14e" target="_blank" title="https://gist.github.com/semorrison/9b3a0f42fbd697d562a8b6daa960f14e">https://gist.github.com/semorrison/9b3a0f42fbd697d562a8b6daa960f14e</a></p>
 
 <a name="123791976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791976">Scott Morrison (Mar 16 2018 at 22:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791976">Scott Morrison (Mar 16 2018 at 11:07)</a>:</h4>
 <p>for the actual implementation of <code>all_rewrites</code></p>
 
 <a name="123791977"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791977">Scott Morrison (Mar 16 2018 at 22:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123791977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123791977">Scott Morrison (Mar 16 2018 at 11:07)</a>:</h4>
 <p>which still needs a little more wrapper before you can use it in interactive mode...</p>
 
 <a name="123792018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123792018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123792018">Kevin Buzzard (Mar 16 2018 at 22:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalisation%20of%20mk_eq_symm/near/123792018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01789generalisationofmkeqsymm.html#123792018">Kevin Buzzard (Mar 16 2018 at 11:09)</a>:</h4>
 <p>Thanks for this. I know I could just try to learn tactics by reading the tactic code in core Lean etc but the problem with doing that is that it can often be pretty hard-core. It's like trying to learn Lean by reading core lean and instantly finding opt_params everywhere with no explanation as to what they are.</p>
 
 

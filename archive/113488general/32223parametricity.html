@@ -12,28 +12,28 @@ permalink: archive/113488general/32223parametricity.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="147487744"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147487744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147487744">Cyril Cohen (Nov 12 2018 at 06:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147487744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147487744">Cyril Cohen (Nov 11 2018 at 19:10)</a>:</h4>
 <p>Hi, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110596">@Rob Lewis</span>,<br>
 I am debugging my -- very buggy -- parametricity plugin. Could you tell me the shortest way to get the name of an inductive type from the name of its recursor? (I found <code>environment.inductive_type_of</code> to get it from the name of a constructor, but I cannot find the same for the recursor, and taking just the namespace sounds dirty to me...)</p>
 
 <a name="147488000"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147488000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147488000">Johannes Hölzl (Nov 12 2018 at 06:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147488000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147488000">Johannes Hölzl (Nov 11 2018 at 19:19)</a>:</h4>
 <p>Hm, it looks like there is no other (easy) option. You can analyse the type of the recursor, and try to get the inductive type from this, but this is not easy: there is an arbitrary number of parameters, I guess you need to analyse the motive to figure out what is a parameter and what is the actual inductive value...</p>
 
 <a name="147491817"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491817">Mario Carneiro (Nov 12 2018 at 08:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491817">Mario Carneiro (Nov 11 2018 at 21:16)</a>:</h4>
 <p>For an arbitrary recursor accepted by <code>induction</code>, the type is a bunch of pis followed by <code>C a1 ... an</code> where <code>C</code> is a variable in the context. The type of this variable is a bunch of pis ending in <code>Type</code> or <code>Prop</code>, and the last argument should have the type <code>T b1 ... bn</code> where <code>T</code> is the type in question</p>
 
 <a name="147491835"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491835">Mario Carneiro (Nov 12 2018 at 08:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491835">Mario Carneiro (Nov 11 2018 at 21:17)</a>:</h4>
 <p>But if you know it's a builtin recursor the easiest way is just to knock off the last segment from the name</p>
 
 <a name="147491970"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491970">Mario Carneiro (Nov 12 2018 at 08:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147491970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147491970">Mario Carneiro (Nov 11 2018 at 21:20)</a>:</h4>
 <p>Oh wait, that doesn't work for the nondependent recursors. I think you can always look at the last pi in the type, which will have type <code>T b1 ... bn</code></p>
 
 <a name="147492002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492002">Mario Carneiro (Nov 12 2018 at 08:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492002">Mario Carneiro (Nov 11 2018 at 21:21)</a>:</h4>
 <p>for example:</p>
 <div class="codehilite"><pre><span></span>inductive T (α : Type) : Type → Prop
 | mk1 : T nat
@@ -51,70 +51,70 @@ I am debugging my -- very buggy -- parametricity plugin. Could you tell me the s
 <p>Note that the last pi in the type has <code>T α a</code> as its domain, where <code>T</code> is what you want</p>
 
 <a name="147492061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492061">Cyril Cohen (Nov 12 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492061">Cyril Cohen (Nov 11 2018 at 21:23)</a>:</h4>
 <p>Sure I know where to get the the type of the inductive from the type of the recursor, but I was looking for a primitive that I think is missing from the API... What does not work for nondependent recursors?</p>
 
 <a name="147492067"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492067">Mario Carneiro (Nov 12 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492067">Mario Carneiro (Nov 11 2018 at 21:23)</a>:</h4>
 <p>I think if we can figure it out there is no need for an API function</p>
 
 <a name="147492068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492068">Mario Carneiro (Nov 12 2018 at 08:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492068">Mario Carneiro (Nov 11 2018 at 21:24)</a>:</h4>
 <p>we can add it to mathlib</p>
 
 <a name="147492136"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492136">Cyril Cohen (Nov 12 2018 at 08:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492136">Cyril Cohen (Nov 11 2018 at 21:25)</a>:</h4>
 <p>an API function would always be more efficient than retro-engineering... since the recursor is generated when the inductive type is added it should be indexed in the same way the constructors are...</p>
 
 <a name="147492146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492146">Mario Carneiro (Nov 12 2018 at 08:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492146">Mario Carneiro (Nov 11 2018 at 21:25)</a>:</h4>
 <p>the API function would do what I just said, this information is not stored</p>
 
 <a name="147492191"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492191">Cyril Cohen (Nov 12 2018 at 08:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492191">Cyril Cohen (Nov 11 2018 at 21:26)</a>:</h4>
 <p>at least it would be coded in C++... meh I guess for my use case efficiency does not matter, but it's a matter of uniformity</p>
 
 <a name="147492196"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492196">Cyril Cohen (Nov 12 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492196">Cyril Cohen (Nov 11 2018 at 21:27)</a>:</h4>
 <p>anyway, take the number of parameters + 1 pis out, then take the next pi, take its head symbol, done</p>
 
 <a name="147492199"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492199">Mario Carneiro (Nov 12 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492199">Mario Carneiro (Nov 11 2018 at 21:27)</a>:</h4>
 <p>sure but you could say that about anything</p>
 
 <a name="147492201"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492201">Cyril Cohen (Nov 12 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492201">Cyril Cohen (Nov 11 2018 at 21:27)</a>:</h4>
 <p>oh + the number of constructors</p>
 
 <a name="147492203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492203">Mario Carneiro (Nov 12 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492203">Mario Carneiro (Nov 11 2018 at 21:27)</a>:</h4>
 <p>well you can't get the constructors until you know the type...</p>
 
 <a name="147492244"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492244">Cyril Cohen (Nov 12 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492244">Cyril Cohen (Nov 11 2018 at 21:28)</a>:</h4>
 <p>oh right... so last pi then</p>
 
 <a name="147492249"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492249">Mario Carneiro (Nov 12 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492249">Mario Carneiro (Nov 11 2018 at 21:28)</a>:</h4>
 <p>right</p>
 
 <a name="147492324"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492324">Cyril Cohen (Nov 12 2018 at 08:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492324">Cyril Cohen (Nov 11 2018 at 21:31)</a>:</h4>
 <blockquote>
 <p>sure but you could say that about anything</p>
 </blockquote>
 <p>Since the API function is there for constructors, it should also be there for anything that is generated by adding an inductive, such as recursors. I think none or both should be part of the core api, that is all I am saying.</p>
 
 <a name="147492390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492390">Mario Carneiro (Nov 12 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492390">Mario Carneiro (Nov 11 2018 at 21:33)</a>:</h4>
 <p>I think that's reasonable, but, well, core is frozen</p>
 
 <a name="147492486"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492486">Cyril Cohen (Nov 12 2018 at 08:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147492486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147492486">Cyril Cohen (Nov 11 2018 at 21:36)</a>:</h4>
 <p>Oh right, I forgot about that, sorry for the noise <span class="emoji emoji-1f914" title="thinking">:thinking:</span></p>
 
 <a name="147493073"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147493073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147493073">Cyril Cohen (Nov 12 2018 at 08:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147493073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147493073">Cyril Cohen (Nov 11 2018 at 21:57)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">environment</span><span class="bp">.</span><span class="n">trailing_pi_type_of</span> <span class="o">(</span><span class="n">env</span> <span class="o">:</span> <span class="n">environment</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">name</span>
  <span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">t</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="k">match</span> <span class="n">b</span> <span class="k">with</span>
    <span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">environment</span><span class="bp">.</span><span class="n">trailing_pi_type_of</span> <span class="n">b</span>
@@ -131,7 +131,7 @@ I am debugging my -- very buggy -- parametricity plugin. Could you tell me the s
 </pre></div>
 
 <a name="147493139"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147493139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147493139">Cyril Cohen (Nov 12 2018 at 08:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147493139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147493139">Cyril Cohen (Nov 11 2018 at 21:59)</a>:</h4>
 <p>or  for the second one:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">environment</span><span class="bp">.</span><span class="n">inductive_type_of_rec</span> <span class="o">(</span><span class="n">env</span> <span class="o">:</span> <span class="n">environment</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="n">name</span> <span class="o">:=</span>
   <span class="k">match</span> <span class="n">env</span><span class="bp">.</span><span class="n">get</span> <span class="n">n</span> <span class="k">with</span>
@@ -141,7 +141,7 @@ I am debugging my -- very buggy -- parametricity plugin. Could you tell me the s
 </pre></div>
 
 <a name="147494991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147494991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147494991">Cyril Cohen (Nov 12 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147494991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147494991">Cyril Cohen (Nov 11 2018 at 23:03)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110596">@Rob Lewis</span> I am confused by the output of <code>#print has_zero.zero</code> i.e. </p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="o">:=</span>
 <span class="bp">λ</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span><span class="o">],</span> <span class="o">[</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="n">c</span><span class="o">]</span>
@@ -151,11 +151,11 @@ I am debugging my -- very buggy -- parametricity plugin. Could you tell me the s
 <p>what construction is <code>[has_zero.zero c]</code> internally? I figured it is a "macro", but I cannot find its API... is it possible to get its expansion?</p>
 
 <a name="147495052"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147495052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147495052">Johannes Hölzl (Nov 12 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147495052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147495052">Johannes Hölzl (Nov 11 2018 at 23:05)</a>:</h4>
 <p>its a projection. so the projection data you get out of <code>environment</code> should tell you what the inductive is and which position of the constructor it is from. The macro hides a application of the recursor.</p>
 
 <a name="147496075"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147496075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147496075">Cyril Cohen (Nov 12 2018 at 10:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147496075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32223parametricity.html#147496075">Cyril Cohen (Nov 11 2018 at 23:40)</a>:</h4>
 <p>Nevermind, I was looking for <code>environment.unfold_all_macros</code></p>
 
 

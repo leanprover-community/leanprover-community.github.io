@@ -12,91 +12,91 @@ permalink: archive/113488general/65096Leanrebuilds.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="129503329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129503329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129503329">Simon Hudon (Jul 12 2018 at 08:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129503329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129503329">Simon Hudon (Jul 11 2018 at 22:32)</a>:</h4>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> What criterion does <code>leanpkg</code> use to decide whether a certain file has to be rebuilt or not? I'm caching <code>.olean</code> files on travis and the whole thing gets rebuilt anyway. If I also cache <code>.lean</code> files, then the rebuild is more conservative.</p>
 
 <a name="129504063"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504063">Gabriel Ebner (Jul 12 2018 at 08:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504063">Gabriel Ebner (Jul 11 2018 at 22:50)</a>:</h4>
 <p>It's modification time.</p>
 
 <a name="129504133"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504133">Simon Hudon (Jul 12 2018 at 08:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504133">Simon Hudon (Jul 11 2018 at 22:52)</a>:</h4>
 <p>It's curious that caching doesn't play well with that.</p>
 
 <a name="129504141"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504141">Simon Hudon (Jul 12 2018 at 08:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504141">Simon Hudon (Jul 11 2018 at 22:52)</a>:</h4>
 <p>Is the <code>.lean</code> modification time recorded inside the <code>.olean</code> file?</p>
 
 <a name="129504298"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504298">Gabriel Ebner (Jul 12 2018 at 08:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129504298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129504298">Gabriel Ebner (Jul 11 2018 at 22:56)</a>:</h4>
 <p>No, but we also compare the olean modification times with the imports.  So the olean files need to be newer than the lean files and also in the same temporal order as the import order.</p>
 
 <a name="129506308"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129506308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129506308">Simon Hudon (Jul 12 2018 at 09:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129506308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129506308">Simon Hudon (Jul 11 2018 at 23:47)</a>:</h4>
 <p>Yes, I noticed that. Caching <code>~/.elan</code> became necessary for any <code>.olean</code> files to be reused at all</p>
 
 <a name="129786566"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786566">Mario Carneiro (Jul 17 2018 at 11:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786566">Mario Carneiro (Jul 17 2018 at 01:14)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you know what is up with the latest build failure? <a href="https://travis-ci.org/leanprover/mathlib/jobs/404668129" target="_blank" title="https://travis-ci.org/leanprover/mathlib/jobs/404668129">https://travis-ci.org/leanprover/mathlib/jobs/404668129</a> It seems like <code>travis_long</code> is messing with some kind of change detection</p>
 
 <a name="129786753"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786753">Simon Hudon (Jul 17 2018 at 11:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786753">Simon Hudon (Jul 17 2018 at 01:18)</a>:</h4>
 <p>what might be happening is a sort of race condition: some builds share the same cache  (for example, the builds of the same branch) so it's possible that one build finishes its stage one, uploads its new version of the cache, then the other build does the same and then the first build tries to start its stage two. I have guarded stage two so that it fails when the binaries in the cache were built from a different commit. The only thing to do is to restart the build.</p>
 
 <a name="129786773"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786773">Simon Hudon (Jul 17 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786773">Simon Hudon (Jul 17 2018 at 01:19)</a>:</h4>
 <p>One may try to remove that guard but what would happen then is that Travis would try to redo all the work of stage 1 only to fail at the end.</p>
 
 <a name="129786777"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786777">Simon Hudon (Jul 17 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129786777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129786777">Simon Hudon (Jul 17 2018 at 01:19)</a>:</h4>
 <p>I chose to make it fail as quickly as possible</p>
 
 <a name="129787237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787237">Simon Hudon (Jul 17 2018 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787237">Simon Hudon (Jul 17 2018 at 01:29)</a>:</h4>
 <p>That will probably happen at time of high affluence. It's annoying but it should still be better than before. Would it make it better if it sent you an email when it happens?</p>
 
 <a name="129787294"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787294">Mario Carneiro (Jul 17 2018 at 11:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787294">Mario Carneiro (Jul 17 2018 at 01:30)</a>:</h4>
 <p>I always get an email when it fails</p>
 
 <a name="129787309"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787309">Mario Carneiro (Jul 17 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787309">Mario Carneiro (Jul 17 2018 at 01:31)</a>:</h4>
 <p>but I've reset the build a few times and it's still not working</p>
 
 <a name="129787310"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787310">Simon Hudon (Jul 17 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787310">Simon Hudon (Jul 17 2018 at 01:31)</a>:</h4>
 <p>This email would tell you its a race condition. Nothing you can't check yourself, that's true</p>
 
 <a name="129787319"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787319">Simon Hudon (Jul 17 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787319">Simon Hudon (Jul 17 2018 at 01:31)</a>:</h4>
 <p>The whole build or only stage two?</p>
 
 <a name="129787399"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787399">Simon Hudon (Jul 17 2018 at 11:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787399">Simon Hudon (Jul 17 2018 at 01:33)</a>:</h4>
 <p>I'm starting to consider it might be worth letting the build restart in stage two when there's a race condition. With the cache, the build time sometimes gets much shorter than 45 minutes; it might just succeed</p>
 
 <a name="129787441"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787441">Mario Carneiro (Jul 17 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787441">Mario Carneiro (Jul 17 2018 at 01:34)</a>:</h4>
 <p>Does stage 1 ever use the cache?</p>
 
 <a name="129787454"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787454">Mario Carneiro (Jul 17 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787454">Mario Carneiro (Jul 17 2018 at 01:34)</a>:</h4>
 <p>If we give the old oleans to lean and let it sort them out we may gain a big improvement on many commits</p>
 
 <a name="129787471"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787471">Simon Hudon (Jul 17 2018 at 11:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787471">Simon Hudon (Jul 17 2018 at 01:35)</a>:</h4>
 <p>It does. but that doesn't cause significant trouble. The cache contains code and binaries. Stage 1 just discards the code from the cache and ensure the right code from <code>git</code> is used.</p>
 
 <a name="129787477"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787477">Simon Hudon (Jul 17 2018 at 11:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787477">Simon Hudon (Jul 17 2018 at 01:35)</a>:</h4>
 <p>That's actually what has been happening</p>
 
 <a name="129787579"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787579">Simon Hudon (Jul 17 2018 at 11:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787579">Simon Hudon (Jul 17 2018 at 01:38)</a>:</h4>
 <p>Ok, I'll remove the guard. That will be easier to handle.</p>
 
 <a name="129787582"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787582">Simon Hudon (Jul 17 2018 at 11:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20re-builds/near/129787582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65096Leanrebuilds.html#129787582">Simon Hudon (Jul 17 2018 at 01:38)</a>:</h4>
 <p>When stage 2 fails, be sure to restart the whole thing</p>
 
 

@@ -12,7 +12,7 @@ permalink: archive/113488general/29242Graphssubtypessetsfintypes.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="128121007"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121007">Pablo Le Hénaff (Jun 15 2018 at 23:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121007">Pablo Le Hénaff (Jun 15 2018 at 13:56)</a>:</h4>
 <p>Hello hello<br>
 I would like to formalize some theorems of graph theory, but before going any further I would like to get the basis of the implementation right.<br>
 I did do some work representing the edges as a set, but I didn't feel it was the most natural ways to do it. I tried another approach using the binary edge relation between vertices and lots of coercions from sets to subtypes, but it had me write lots of instances which I don't find particularily aesthetic. Here is a piece of code which is right but doesn't seem to carry the best design choices that could be made. What do you think ? :)</p>
@@ -54,27 +54,27 @@ I did do some work representing the edges as a set, but I didn't feel it was the
 </pre></div>
 
 <a name="128121155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121155">Mario Carneiro (Jun 15 2018 at 23:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121155">Mario Carneiro (Jun 15 2018 at 13:59)</a>:</h4>
 <p>I think you are misusing <code>constants</code> here - this is equivalent to <code>axiom</code> in lean, while I think you mean something more like <code>variables</code> or <code>parameters</code></p>
 
 <a name="128121326"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121326">Pablo Le Hénaff (Jun 16 2018 at 00:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121326">Pablo Le Hénaff (Jun 15 2018 at 14:02)</a>:</h4>
 <p>Probably ! My initial script involved the definition of a graph structure and then a graph as a variable. The "constants" part was just to make it shorter, should be "variables" then.</p>
 
 <a name="128121338"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121338">Mario Carneiro (Jun 16 2018 at 00:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121338">Mario Carneiro (Jun 15 2018 at 14:02)</a>:</h4>
 <p>For the theory of possibly infinite graphs, I recommend using a type alpha of vertices and a binary relation E for the edges. In this context it does not differ substantially with order theory</p>
 
 <a name="128121400"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121400">Pablo Le Hénaff (Jun 16 2018 at 00:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121400">Pablo Le Hénaff (Jun 15 2018 at 14:03)</a>:</h4>
 <p>But then, how would you describe a subset of the vertices, for instance a clique ?</p>
 
 <a name="128121450"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121450">Mario Carneiro (Jun 16 2018 at 00:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121450">Mario Carneiro (Jun 15 2018 at 14:04)</a>:</h4>
 <p>the subset itself can just be a <code>set A</code></p>
 
 <a name="128121456"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121456">Mario Carneiro (Jun 16 2018 at 00:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29242Graphssubtypessetsfintypes.html#128121456">Mario Carneiro (Jun 15 2018 at 14:04)</a>:</h4>
 <p>but if you want to talk about the induced subgraph you can use <code>subtype</code></p>
 
 

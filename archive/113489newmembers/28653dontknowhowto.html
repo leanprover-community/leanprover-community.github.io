@@ -12,7 +12,7 @@ permalink: archive/113489newmembers/28653dontknowhowto.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130864937"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130864937">Etienne Laurin (Aug 04 2018 at 08:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130864937">Etienne Laurin (Aug 03 2018 at 22:21)</a>:</h4>
 <p>Hi! I'm a C++ developer in Dublin. I'm trying to learn Lean by doing some exercises.</p>
 <div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
 <span class="kn">lemma</span> <span class="n">t₁</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">A</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">B</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">p</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">p</span><span class="bp">⟩</span>
@@ -24,80 +24,80 @@ permalink: archive/113489newmembers/28653dontknowhowto.html
 <p>t₁ works but t₂ fails with "don't know how to synthesize placeholder". How can I get Lean to tell me what/where this placeholder is? Is there something better than or.cases_on that I could be using?</p>
 
 <a name="130865206"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865206">Mario Carneiro (Aug 04 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865206">Mario Carneiro (Aug 03 2018 at 22:28)</a>:</h4>
 <p>There is a known issue with using projection notation in conjunction with <code>@[elab_as_eliminator]</code> definitions like <code>or.cases_on</code>. You can fix the proof by either not using projection notation, i.e. <code>or.cases_on h</code> instead of <code>h.cases_on</code>, or by using <code>h.elim</code> instead (which is basically the same as <code>or.cases_on</code> without the weird elaborator marking)</p>
 
 <a name="130865584"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865584">Etienne Laurin (Aug 04 2018 at 08:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865584">Etienne Laurin (Aug 03 2018 at 22:40)</a>:</h4>
 <p>Thanks!</p>
 
 <a name="130865651"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865651">Kevin Buzzard (Aug 04 2018 at 08:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865651">Kevin Buzzard (Aug 03 2018 at 22:42)</a>:</h4>
 <p>How can you tell <code>or.cases_on</code> is tagged <code>@[elab_as_eliminator]</code>? <code>#print or.cases_on</code> only tells me it's <code>@[reducible]</code></p>
 
 <a name="130865788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865788">Mario Carneiro (Aug 04 2018 at 08:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865788">Mario Carneiro (Aug 03 2018 at 22:46)</a>:</h4>
 <p>Hm, that's interesting. <code>T.rec</code>, <code>T.rec_on</code>, and <code>T.cases_on</code> are automatically generated for every inductive type and are always treated as if they have <code>elab_as_eliminator</code> enabled, although you are right that there is no explicit indication of such. You can test it by making a copy of <code>or.cases_on</code> with exactly the definition <code>#print</code> says, and the lemma will typecheck; then if you add <code>elab_as_eliminator</code> you get exactly the same errors</p>
 
 <a name="130865850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865850">Kevin Buzzard (Aug 04 2018 at 08:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865850">Kevin Buzzard (Aug 03 2018 at 22:48)</a>:</h4>
 <p><code>example : @or.cases_on = @or.elim := rfl</code>, and they're both there, so they must be different somehow ;-) It's how the elaborator elaborates them.</p>
 
 <a name="130865947"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865947">Mario Carneiro (Aug 04 2018 at 08:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130865947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130865947">Mario Carneiro (Aug 03 2018 at 22:50)</a>:</h4>
 <p>you should be aware that that's not the best way to check that two definitions are the same according to lean, that is only up to defeq which ignores annotations and bindings, as well as unifying universes</p>
 
 <a name="130866021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130866021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130866021">Mario Carneiro (Aug 04 2018 at 08:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130866021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#130866021">Mario Carneiro (Aug 03 2018 at 22:52)</a>:</h4>
 <p>Also, strange as it may sound I'm pretty sure there are duplicate definitions (completely identical) in lean. Often this has to do with renaming</p>
 
 <a name="131118119"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118119">Edward Ayers (Aug 09 2018 at 02:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118119">Edward Ayers (Aug 08 2018 at 16:20)</a>:</h4>
 <p>I got this to work with <br>
 <code>λ h, or.cases_on h (λ ⟨x, p⟩, ⟨x, or.inl p⟩) (λ ⟨x, p⟩, ⟨x, or.inr p⟩)</code></p>
 
 <a name="131118228"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118228">Edward Ayers (Aug 09 2018 at 02:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118228">Edward Ayers (Aug 08 2018 at 16:22)</a>:</h4>
 <p>Can someone explain what the "synthesize placeholder" error actually means? It is by far the most common error I get and I currently get rid of it by making random transformations to the source until it goes away</p>
 
 <a name="131118304"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118304">Mario Carneiro (Aug 09 2018 at 02:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118304">Mario Carneiro (Aug 08 2018 at 16:24)</a>:</h4>
 <p>it means the proof is unfinished</p>
 
 <a name="131118316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118316">Edward Ayers (Aug 09 2018 at 02:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118316">Edward Ayers (Aug 08 2018 at 16:24)</a>:</h4>
 <p>proof that the term typechecks?</p>
 
 <a name="131118320"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118320">Mario Carneiro (Aug 09 2018 at 02:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118320">Mario Carneiro (Aug 08 2018 at 16:24)</a>:</h4>
 <p>lean is saying "there is a missing part of the proof and I don't know how to fill it in"</p>
 
 <a name="131118344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118344">Mario Carneiro (Aug 09 2018 at 02:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118344">Mario Carneiro (Aug 08 2018 at 16:25)</a>:</h4>
 <p>No, the term itself is the proof</p>
 
 <a name="131118347"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118347">Edward Ayers (Aug 09 2018 at 02:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118347">Edward Ayers (Aug 08 2018 at 16:25)</a>:</h4>
 <p>I often get it where the goal that it is trying to prove is <code>Type ?</code>. What should I do then?</p>
 
 <a name="131118365"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118365">Mario Carneiro (Aug 09 2018 at 02:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118365">Mario Carneiro (Aug 08 2018 at 16:25)</a>:</h4>
 <p>That means there is a missing type somewhere</p>
 
 <a name="131118414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118414">Mario Carneiro (Aug 09 2018 at 02:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118414">Mario Carneiro (Aug 08 2018 at 16:26)</a>:</h4>
 <p>for example, looking at the term you just gave without any other context, I can't figure out the type of <code>h</code></p>
 
 <a name="131118422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118422">Mario Carneiro (Aug 09 2018 at 02:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118422">Mario Carneiro (Aug 08 2018 at 16:26)</a>:</h4>
 <p>I know it is an <code>or</code> of something but I don't know what</p>
 
 <a name="131118427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118427">Mario Carneiro (Aug 09 2018 at 02:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131118427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131118427">Mario Carneiro (Aug 08 2018 at 16:26)</a>:</h4>
 <p>so if I were lean I would say "couldn't synth placeholder <code>|- Type ?</code>"</p>
 
 <a name="131119049"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119049">Edward Ayers (Aug 09 2018 at 02:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119049">Edward Ayers (Aug 08 2018 at 16:38)</a>:</h4>
 <p>Ok let me paste some code where I can't figure out what it wants<br>
 I put this file in <code>mathlib/category_theory/scratch.lean</code></p>
 <div class="codehilite"><pre><span></span>import .category
@@ -121,51 +121,51 @@ end category_theory
 <p>And I get a synth <code>Type ?</code> error for <code>t</code> in <code>t2</code> but I can't figure out which type I am missing</p>
 
 <a name="131119269"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119269">Reid Barton (Aug 09 2018 at 02:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119269">Reid Barton (Aug 08 2018 at 16:43)</a>:</h4>
 <p>Just looking at this (haven't built recent mathlib yet), I think the problem is that <code>t</code> "depends on" <code>C</code>, because of <code>include 𝒞</code>, but there's nothing in the type of <code>t</code> which can ever determine what <code>C</code> has to be.</p>
 
 <a name="131119333"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119333">Edward Ayers (Aug 09 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119333">Edward Ayers (Aug 08 2018 at 16:44)</a>:</h4>
 <p>Ah, so if you are in a section and write <code>variables</code>, then all definitions in that section implicitly depend on these variables, even if they are not used in the definition?</p>
 
 <a name="131119335"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119335">Reid Barton (Aug 09 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119335">Reid Barton (Aug 08 2018 at 16:44)</a>:</h4>
 <p>And so there's no reason that <code>t</code>'s <code>C</code> in the use of <code>t</code> in <code>t2</code>needs to be the same as the <code>C</code> in <code>t2</code>, so Lean can't figure out how to assign it.</p>
 
 <a name="131119347"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119347">Reid Barton (Aug 09 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119347">Reid Barton (Aug 08 2018 at 16:44)</a>:</h4>
 <p>Not in general, but using <code>include</code> forces the <code>variable</code> to be included as a parameter to every subsequent definition.</p>
 
 <a name="131119364"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119364">Edward Ayers (Aug 09 2018 at 02:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119364">Edward Ayers (Aug 08 2018 at 16:45)</a>:</h4>
 <p>Where can I find some docs on <code>include</code>? I find it cryptic</p>
 
 <a name="131119365"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119365">Reid Barton (Aug 09 2018 at 02:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119365">Reid Barton (Aug 08 2018 at 16:45)</a>:</h4>
 <p>So if you show the full inferred type of <code>t</code>, it should begin <code>t : \Pi {C : Type u1} [𝒞 : category.{u1 v1} C] ...</code></p>
 
 <a name="131119421"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119421">Reid Barton (Aug 09 2018 at 02:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119421">Reid Barton (Aug 08 2018 at 16:46)</a>:</h4>
 <p><code>𝒞</code>was included because of the <code>include</code>, and <code>C</code> was included because <code>𝒞</code> depends on it</p>
 
 <a name="131119458"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119458">Edward Ayers (Aug 09 2018 at 02:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119458">Edward Ayers (Aug 08 2018 at 16:47)</a>:</h4>
 <p>If I comment out <code>include</code>, then the <code>\hom</code> arrows become errors. How would I get rid of those errors without using <code>include</code>?</p>
 
 <a name="131119525"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119525">Edward Ayers (Aug 09 2018 at 02:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119525">Edward Ayers (Aug 08 2018 at 16:48)</a>:</h4>
 <p>It can't find evidence for <code>category D</code>.</p>
 
 <a name="131119547"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119547">Reid Barton (Aug 09 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119547">Reid Barton (Aug 08 2018 at 16:49)</a>:</h4>
 <p><a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html">https://leanprover.github.io/theorem_proving_in_lean/tactics.html</a> mentions <code>include</code>/<code>omit</code> in the first section. I don't remember whether it is also explained elsewhere in TPIL</p>
 
 <a name="131119558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119558">Reid Barton (Aug 09 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119558">Reid Barton (Aug 08 2018 at 16:49)</a>:</h4>
 <p>In this case, you could put <code>include 𝒟</code> between the definitions of <code>t</code> and <code>t2</code></p>
 
 <a name="131119625"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119625">Edward Ayers (Aug 09 2018 at 02:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119625">Edward Ayers (Aug 08 2018 at 16:50)</a>:</h4>
 <p>Fixed code:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="bp">.</span><span class="n">category</span>
 <span class="kn">import</span> <span class="bp">.</span><span class="n">functor</span>
@@ -186,11 +186,11 @@ end category_theory
 </pre></div>
 
 <a name="131119700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119700">Reid Barton (Aug 09 2018 at 02:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119700">Reid Barton (Aug 08 2018 at 16:52)</a>:</h4>
 <p>Normally you could just omit the names <code>𝒞 : </code> and <code>𝒟 : </code> and the include statements and Lean would figure out where it needs the instance variables. The fact that that doesn't work here is some combination of there being extra universe parameters involved and a bug in Lean, I think.</p>
 
 <a name="131119729"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119729">Edward Ayers (Aug 09 2018 at 02:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119729">Edward Ayers (Aug 08 2018 at 16:52)</a>:</h4>
 <p>Ok but this then errors for me:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="bp">.</span><span class="n">category</span>
 <span class="kn">import</span> <span class="bp">.</span><span class="n">functor</span>
@@ -211,62 +211,62 @@ end category_theory
 </pre></div>
 
 <a name="131119748"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119748">Edward Ayers (Aug 09 2018 at 02:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119748">Edward Ayers (Aug 08 2018 at 16:53)</a>:</h4>
 <p><code>kernel failed to type check declaration 't' this is usually due to a buggy tactic or a bug in the builtin elaborator</code></p>
 
 <a name="131119757"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119757">Edward Ayers (Aug 09 2018 at 02:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119757">Edward Ayers (Aug 08 2018 at 16:53)</a>:</h4>
 <p>cool</p>
 
 <a name="131119821"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119821">Edward Ayers (Aug 09 2018 at 02:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119821">Edward Ayers (Aug 08 2018 at 16:54)</a>:</h4>
 <p>which must be why it had <code>𝒞 : </code> in to start with, to avoid the lean bug</p>
 
 <a name="131119827"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119827">Reid Barton (Aug 09 2018 at 02:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119827">Reid Barton (Aug 08 2018 at 16:54)</a>:</h4>
 <p>Yes. The reason is either that Lean doesn't know what universe parameters to specialize <code>⟶</code> to, or that there's a bug where including the instance variable doesn't cause <code>C</code> to also get included.  I don't remember the exact details any more.<br>
 When you get that "kernel failed to type check declaration" error, it means it failed to include <code>C</code>, I think.</p>
 
 <a name="131119926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119926">Reid Barton (Aug 09 2018 at 02:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119926">Reid Barton (Aug 08 2018 at 16:56)</a>:</h4>
 <p>Right, the workaround is that when you manually tell it to include the <code>category</code> instance, then it can correctly infer that it needs <code>C</code> too. The downside is that now you are responsible for making sure the right variables are <code>include</code>d--if you have too many then you end up with your original issue.</p>
 
 <a name="131119929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119929">Edward Ayers (Aug 09 2018 at 02:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119929">Edward Ayers (Aug 08 2018 at 16:56)</a>:</h4>
 <p>thanks so much for your help</p>
 
 <a name="131119952"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119952">Reid Barton (Aug 09 2018 at 02:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119952">Reid Barton (Aug 08 2018 at 16:57)</a>:</h4>
 <p>In general, this class of error can be tough to figure out. I don't know of a better way than thinking really hard about what Lean is trying to do and figuring out where it might be getting stuck.</p>
 
 <a name="131119954"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119954">Reid Barton (Aug 09 2018 at 02:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131119954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131119954">Reid Barton (Aug 08 2018 at 16:57)</a>:</h4>
 <p>No problem</p>
 
 <a name="131120046"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120046">Edward Ayers (Aug 09 2018 at 02:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120046">Edward Ayers (Aug 08 2018 at 16:59)</a>:</h4>
 <p>It seems like solving these errors requires intimately knowing what the elaborator is doing.  And from what I know, the elaborator is very elaborate</p>
 
 <a name="131120215"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120215">Patrick Massot (Aug 09 2018 at 03:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120215">Patrick Massot (Aug 08 2018 at 17:02)</a>:</h4>
 <blockquote>
 <p>Normally you could just omit the names <code>𝒞 : </code> and <code>𝒟 : </code> and the include statements and Lean would figure out where it needs the instance variables.</p>
 </blockquote>
 <p>I think this is not true. To me it seems Lean will always include these statements. That explains why we sometimes see unneeded or duplicate instance arguments, even in mathlib</p>
 
 <a name="131120241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120241">Patrick Massot (Aug 09 2018 at 03:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120241">Patrick Massot (Aug 08 2018 at 17:03)</a>:</h4>
 <blockquote>
 <p>It seems like solving these errors requires intimately knowing what the elaborator is doing.  And from what I know, the elaborator is very elaborate</p>
 </blockquote>
 <p>Unfortunately and fortunately, this is all very true.</p>
 
 <a name="131120395"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120395">Edward Ayers (Aug 09 2018 at 03:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120395">Edward Ayers (Aug 08 2018 at 17:06)</a>:</h4>
 <p>It would be great if when there was an elaborator error, a textbox appeared that you could enter the missing type or proof into.</p>
 
 <a name="131120407"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120407">Mario Carneiro (Aug 09 2018 at 03:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120407">Mario Carneiro (Aug 08 2018 at 17:06)</a>:</h4>
 <p>Lean will include an unnamed typeclass variable when all of its dependencies are included (usually because they are mentioned directly in the statement or are dependencies of something mentioned). Like so:</p>
 <div class="codehilite"><pre><span></span>variables (A : Type) [group A]
 example (x : A) : true := ... -- group A is included
@@ -274,15 +274,15 @@ example : true := ... -- group A is not included
 </pre></div>
 
 <a name="131120439"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120439">Patrick Massot (Aug 09 2018 at 03:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120439">Patrick Massot (Aug 08 2018 at 17:07)</a>:</h4>
 <p>yes, this matches what I saw</p>
 
 <a name="131120443"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120443">Reid Barton (Aug 09 2018 at 03:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120443">Reid Barton (Aug 08 2018 at 17:07)</a>:</h4>
 <p>Yes, good point <span class="user-mention" data-user-id="110031">@Patrick Massot</span>.</p>
 
 <a name="131120505"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120505">Mario Carneiro (Aug 09 2018 at 03:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131120505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131120505">Mario Carneiro (Aug 08 2018 at 17:08)</a>:</h4>
 <p>Lean will never include a named typeclass variable unless it is mentioned:</p>
 <div class="codehilite"><pre><span></span>variables (A : Type) [G : group A]
 example (x : A) : true := ... -- group A is not included
@@ -298,7 +298,7 @@ example : true := ... -- group A is included
 </pre></div>
 
 <a name="131137096"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131137096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131137096">Scott Morrison (Aug 09 2018 at 08:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/131137096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html#131137096">Scott Morrison (Aug 08 2018 at 22:46)</a>:</h4>
 <p>I will add some documentation about <code>include</code> right in the <code>category_theory</code> files, specialised to the use case there.</p>
 <p>Unfortunately <code>category C</code> has an unbound universe level, because we need to know the universe level of the morphisms, and this is not determined by the universe level of <code>C</code> itself. (This design decision is constrained by the desire to be able to write uniform code for small categories and large categories.)</p>
 <p>When we write <code>variable [category.{u v} C]</code>, Lean is reasonably rather hesistant to use this variable, unless it is sure that <code>v</code> is the actually intended universe level. To avoid having to explicitly write this universe variable in every definition that you're hoping will make use of this <code>[category C]</code> variable, we give it a name as in <code>[𝒞 :  category.{u v} C]</code> and explicitly include it in every following declaration, via <code>include 𝒞</code>.</p>

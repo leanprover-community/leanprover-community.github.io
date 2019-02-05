@@ -12,122 +12,122 @@ permalink: archive/116395maths/71627Ringcompletion.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="152110493"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110493">Patrick Massot (Dec 19 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110493">Patrick Massot (Dec 18 2018 at 14:16)</a>:</h4>
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  I think I just completed the topological ring completion project. Remember where we got stuck last time: we could define a ring structure on <code>completion a</code> assuming that <code>a</code> was a <em>separated</em> topological ring, see <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168">https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168</a>. We could also construct a ring structure on <code>quotient (separatation_setoid a)</code>, see <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204">https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204</a>. I did that by leveraging the algebraic quotient construction, using that the separation relation for uniform groups is the same as the left coset relation for the closure of zero. This meant fighting the system to use an equivalence relation equality to relate the quotients. Then I constructed <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711">https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711</a> <code>completion (quotient $ separatation_setoid a) ≃ completion α</code> which I hoped to use to glue the preceding two constructions and get a ring structure on <code>completion α</code>. But this meant fighting Lean again, for lack of transport of structure along this equiv.</p>
 
 <a name="152110596"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110596">Johannes Hölzl (Dec 19 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110596">Johannes Hölzl (Dec 18 2018 at 14:18)</a>:</h4>
 <p>Yes, I remember. How did you solve it. Or did you copy the structure and wrote down the transport for each rule?</p>
 
 <a name="152110617"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110617">Patrick Massot (Dec 19 2018 at 01:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110617">Patrick Massot (Dec 18 2018 at 14:19)</a>:</h4>
 <p>So I backtracked completely. I defined a ring structure on <code>sep_quot α := quotient (separatation_setoid a)</code> directly, using the link between the separation relation and the closure of zero only in the lemma proving that multiplication descends to the quotient. And then I defined <code>hcompletion α := completion (sep_quot α)</code>. This looks really weird because remember <code>completion α := quotient (separation_setoid $ Cauchy α)</code>, so we use the separation relation twice. But it works very smoothly</p>
 
 <a name="152110717"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110717">Patrick Massot (Dec 19 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110717">Patrick Massot (Dec 18 2018 at 14:21)</a>:</h4>
 <p>Remember how Bourbaki does it: they replace <code>Cauchy α</code> with the space of <em>minimal</em> Cauchy filters on α. And they define the completion as <code>min_cauchy (quotient $ separatation_setoid a)</code>. That's how they avoid the double quotient</p>
 
 <a name="152110728"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110728">Patrick Massot (Dec 19 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110728">Patrick Massot (Dec 18 2018 at 14:21)</a>:</h4>
 <p>while still first getting rid of the separation issue</p>
 
 <a name="152110785"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110785">Patrick Massot (Dec 19 2018 at 01:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110785">Patrick Massot (Dec 18 2018 at 14:22)</a>:</h4>
 <p>I didn't start that road because I saw you did everything with non-minimal Cauchy filters. And of course all three constructions solve the same universal problem, so there are uniquely isomorphic</p>
 
 <a name="152110831"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110831">Johan Commelin (Dec 19 2018 at 01:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110831">Johan Commelin (Dec 18 2018 at 14:23)</a>:</h4>
 <p>Cool! Congrats on completing this! <span class="emoji emoji-1f389" title="tada">:tada:</span></p>
 
 <a name="152110892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110892">Patrick Massot (Dec 19 2018 at 01:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152110892">Patrick Massot (Dec 18 2018 at 14:24)</a>:</h4>
 <p>The messy thing with my construction is that <code>completion α</code> becomes a purely intermediate thing, still with a rather large theory, which needs to be restated for <code>hcompletion</code></p>
 
 <a name="152111034"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111034">Kevin Buzzard (Dec 19 2018 at 01:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111034">Kevin Buzzard (Dec 18 2018 at 14:26)</a>:</h4>
 <p>Is "Bourbaki did it this way" an argument for or against "Lean should do it this way", or are they just independent things?</p>
 
 <a name="152111074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111074">Patrick Massot (Dec 19 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111074">Patrick Massot (Dec 18 2018 at 14:27)</a>:</h4>
 <p>It's part of my excuse for creating this mess</p>
 
 <a name="152111173"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111173">Patrick Massot (Dec 19 2018 at 01:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111173">Patrick Massot (Dec 18 2018 at 14:28)</a>:</h4>
 <p>I mean this mess: <code>instance : has_coe α (hcompletion α) := ⟨quotient.mk ∘ Cauchy.pure_cauchy ∘ quotient.mk⟩</code></p>
 
 <a name="152111181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111181">Kevin Buzzard (Dec 19 2018 at 01:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111181">Kevin Buzzard (Dec 18 2018 at 14:28)</a>:</h4>
 <p>If it works, it works :-)</p>
 
 <a name="152111293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111293">Kenny Lau (Dec 19 2018 at 01:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111293">Kenny Lau (Dec 18 2018 at 14:30)</a>:</h4>
 <p>you can't maintain a library by bodging...</p>
 
 <a name="152111369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111369">Patrick Massot (Dec 19 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111369">Patrick Massot (Dec 18 2018 at 14:31)</a>:</h4>
 <p>It has a very clean interface since it solves a very clearly specified universal problem</p>
 
 <a name="152111438"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111438">Kevin Buzzard (Dec 19 2018 at 01:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111438">Kevin Buzzard (Dec 18 2018 at 14:32)</a>:</h4>
 <p>Is one of the the issues that we need to transport theorems along isomorphisms and this is still not yet possible, so we fudge our way around it?</p>
 
 <a name="152111474"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111474">Patrick Massot (Dec 19 2018 at 01:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152111474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152111474">Patrick Massot (Dec 18 2018 at 14:33)</a>:</h4>
 <p>The transport idea was already a work-around actually</p>
 
 <a name="152113098"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113098">Patrick Massot (Dec 19 2018 at 01:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113098">Patrick Massot (Dec 18 2018 at 14:56)</a>:</h4>
 <p>The big thing is at <a href="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8" target="_blank" title="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8">https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8</a></p>
 
 <a name="152113142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113142">Patrick Massot (Dec 19 2018 at 01:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113142">Patrick Massot (Dec 18 2018 at 14:57)</a>:</h4>
 <p>That's 500 more lines to <code>completion.lean</code></p>
 
 <a name="152113277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113277">Patrick Massot (Dec 19 2018 at 01:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113277">Patrick Massot (Dec 18 2018 at 14:59)</a>:</h4>
 <p>But some of them should move elsewhere, independently of the reorganization discussion</p>
 
 <a name="152113409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113409">Patrick Massot (Dec 19 2018 at 02:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113409">Patrick Massot (Dec 18 2018 at 15:01)</a>:</h4>
 <p>It includes using <code>def function.comp₂ (f : α → β → γ) (g : γ → δ) : α → β → δ := λ  x y, g (f x y)</code> and its companions <code>def continuous₂ (f : α → β → γ) := continuous (function.uncurry f)</code> etc to nicely handle functions of two variables (like addition and multiplication), as was mentioned in another thread</p>
 
 <a name="152113626"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113626">Patrick Massot (Dec 19 2018 at 02:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113626">Patrick Massot (Dec 18 2018 at 15:04)</a>:</h4>
 <p>I'd like to get <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> input before finishing restating stuff for <code>hcompletion</code></p>
 
 <a name="152113645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113645">Johannes Hölzl (Dec 19 2018 at 02:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113645">Johannes Hölzl (Dec 18 2018 at 15:04)</a>:</h4>
 <p>I think <code> continuous₂</code> and <code>uniform_continuous₂</code> should be fully transparent, without any rules about them. So only use them when writing down concrete instances</p>
 
 <a name="152113690"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113690">Patrick Massot (Dec 19 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113690">Patrick Massot (Dec 18 2018 at 15:05)</a>:</h4>
 <p>I need them as assumption for many statements</p>
 
 <a name="152113703"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113703">Johannes Hölzl (Dec 19 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113703">Johannes Hölzl (Dec 18 2018 at 15:05)</a>:</h4>
 <p>Yes, there its okay</p>
 
 <a name="152113719"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113719">Patrick Massot (Dec 19 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113719">Patrick Massot (Dec 18 2018 at 15:05)</a>:</h4>
 <p>and the most important piece is the composition lemma</p>
 
 <a name="152113731"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113731">Patrick Massot (Dec 19 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113731">Patrick Massot (Dec 18 2018 at 15:05)</a>:</h4>
 <p><a href="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120" target="_blank" title="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120">https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120</a></p>
 
 <a name="152113791"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113791">Patrick Massot (Dec 19 2018 at 02:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152113791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152113791">Patrick Massot (Dec 18 2018 at 15:06)</a>:</h4>
 <p>This is what make this so convenient</p>
 
 <a name="152124223"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152124223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152124223">Patrick Massot (Dec 19 2018 at 04:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152124223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152124223">Patrick Massot (Dec 18 2018 at 17:31)</a>:</h4>
 <blockquote>
 <p>Remember how Bourbaki does it: they replace <code>Cauchy α</code> with the space of <em>minimal</em> Cauchy filters on α. And they define the completion as <code>min_cauchy (quotient $ separatation_setoid a)</code>. That's how they avoid the double quotient</p>
 </blockquote>
 <p>I just checked, and actually the above is not quite correct. It seems that minimal Cauchy filters are already separated.</p>
 
 <a name="152124381"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152124381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152124381">Patrick Massot (Dec 19 2018 at 04:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152124381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html#152124381">Patrick Massot (Dec 18 2018 at 17:34)</a>:</h4>
 <p>So this is a really more economical way of building the Hausdorff completion. But they don't solve problem of factorizing morphisms into complete spaces (not hausdorff complete spaces), whereas we do it.</p>
 
 

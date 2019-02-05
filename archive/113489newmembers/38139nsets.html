@@ -12,7 +12,7 @@ permalink: archive/113489newmembers/38139nsets.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134373435"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373435">Alistair Tucker (Sep 21 2018 at 22:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373435">Alistair Tucker (Sep 21 2018 at 12:04)</a>:</h4>
 <p>Hi! I am trying to work with sets of a certain cardinality so I can prove some things by induction. I have defined</p>
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">nset</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">N</span><span class="o">)</span>
@@ -23,28 +23,28 @@ permalink: archive/113489newmembers/38139nsets.html
 <p>but it's a bit of a pain. Is there something like this already?</p>
 
 <a name="134373642"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373642">Kevin Buzzard (Sep 21 2018 at 22:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373642">Kevin Buzzard (Sep 21 2018 at 12:09)</a>:</h4>
 <p>Instead of making new structures, I would be tempted to formalise the exact statement of the inductive hypothesis I wanted to use. Do you want a result of the form "(done for all sizes a &lt; b implies done for size b) -&gt; (done for all finsets)" or of the form "(done for empty finset) + (done for size n implies done for size n+1) -&gt; (done for all finsets)?"</p>
 
 <a name="134373817"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373817">Kevin Buzzard (Sep 21 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373817">Kevin Buzzard (Sep 21 2018 at 12:12)</a>:</h4>
 <p><code>finset</code> is a structure made up of a multiset and a proof of something about it, so it comes with a default inductive hypothesis <code>finset.rec</code> which is useless: "if you've proved it for all pairs consisting of a multiset and a proof of the relevant thing, you've proved it for all finsets!". Duh. But there's nothing stopping you proving other more useful recursors.</p>
 
 <a name="134373841"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373841">Alistair Tucker (Sep 21 2018 at 22:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134373841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134373841">Alistair Tucker (Sep 21 2018 at 12:13)</a>:</h4>
 <p>Yes :)<br>
 I am using nat.rec_on to do the latter, but it incorporates a hypothesis that looks a lot like the former.</p>
 
 <a name="134374231"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374231">Kevin Buzzard (Sep 21 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374231">Kevin Buzzard (Sep 21 2018 at 12:20)</a>:</h4>
 <p>I am asking you if you can formalise the exact statement of what you want. The type. That's like making the level of the game. And then someone here will come along and formalise the proof, and it's like they solved the level. And some solutions will be more elegant than others. But you have to make the level first. You haven't said precisely what you want.</p>
 
 <a name="134374257"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374257">Kevin Buzzard (Sep 21 2018 at 22:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374257">Kevin Buzzard (Sep 21 2018 at 12:21)</a>:</h4>
 <p>See my first message</p>
 
 <a name="134374404"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374404">Alistair Tucker (Sep 21 2018 at 22:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134374404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134374404">Alistair Tucker (Sep 21 2018 at 12:24)</a>:</h4>
 <p>OK thanks. It's a bit complicated though. Perhaps this is the most relevant snippet</p>
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">soln</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">nset</span> <span class="n">n</span><span class="o">),</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
@@ -54,19 +54,19 @@ I am using nat.rec_on to do the latter, but it incorporates a hypothesis that lo
 </pre></div>
 
 <a name="134375161"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375161">Kevin Buzzard (Sep 21 2018 at 22:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375161">Kevin Buzzard (Sep 21 2018 at 12:42)</a>:</h4>
 <p>Your statement of the kind of induction you want should be a theorem.</p>
 
 <a name="134375284"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375284">Kevin Buzzard (Sep 21 2018 at 22:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375284">Kevin Buzzard (Sep 21 2018 at 12:44)</a>:</h4>
 <p>Or even better a definition if you want recursion.</p>
 
 <a name="134375286"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375286">Kevin Buzzard (Sep 21 2018 at 22:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375286">Kevin Buzzard (Sep 21 2018 at 12:44)</a>:</h4>
 <p>Hang on I'll try and knock one up.</p>
 
 <a name="134375298"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375298">Alistair Tucker (Sep 21 2018 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375298">Alistair Tucker (Sep 21 2018 at 12:45)</a>:</h4>
 <p>Hmm I have hoping to define V and v in the induction so it's not a theorem exactly</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">solve</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">soln</span> <span class="n">α</span> <span class="n">β</span> <span class="n">n</span> <span class="o">:=</span>
 <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span>
@@ -90,19 +90,19 @@ I am using nat.rec_on to do the latter, but it incorporates a hypothesis that lo
 </pre></div>
 
 <a name="134375371"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375371">Kevin Buzzard (Sep 21 2018 at 22:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375371">Kevin Buzzard (Sep 21 2018 at 12:46)</a>:</h4>
 <p>Oh wow it's super-complicated. I don't even understand the question any more. I thought you were just asking how to do induction on the cardinality of a finset and I was trying to establish if you meant usual induction or strong induction.</p>
 
 <a name="134375540"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375540">Alistair Tucker (Sep 21 2018 at 22:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134375540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134375540">Alistair Tucker (Sep 21 2018 at 12:49)</a>:</h4>
 <p>I have probably made it look more complicated than it is :) I should learn how to use tactics</p>
 
 <a name="134382524"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134382524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134382524">Chris Hughes (Sep 22 2018 at 00:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134382524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134382524">Chris Hughes (Sep 21 2018 at 14:49)</a>:</h4>
 <p>You probably want something like finest.strong_induction</p>
 
 <a name="134385479"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134385479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134385479">Alistair Tucker (Sep 22 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/n-sets/near/134385479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38139nsets.html#134385479">Alistair Tucker (Sep 21 2018 at 15:36)</a>:</h4>
 <p>You may be right. I guess I was thinking if I built it up one layer at a time then each element of a layer could use all the results of the previous layer without recalculating them. But I'm not sure it works like that. My first version was in Python where I was able to store those intermediate results explicitly.</p>
 
 

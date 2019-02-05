@@ -12,7 +12,7 @@ permalink: archive/116395maths/56858orderofzmodn.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130770849"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130770849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130770849">Guy Leroy (Aug 02 2018 at 20:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130770849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130770849">Guy Leroy (Aug 02 2018 at 10:40)</a>:</h4>
 <p>Hi, I'm trying to find the order of zmod n.<br>
 Chris helped me and wrote this code:</p>
 <p>instance (n : nat) : pos_nat (nat.succ n) := ⟨nat.succ_pos _⟩ <br>
@@ -23,71 +23,71 @@ instance : decidable_eq (units (zmod 5)) := <br>
 <p>However the eval command sends the error "units.fintype: trying to evaluate sorry" presumably because we didn't prove instance : fintype  (units (zmod 5)). So I guess my question is how can I prove the latter?</p>
 
 <a name="130771157"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771157">Kenny Lau (Aug 02 2018 at 20:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771157">Kenny Lau (Aug 02 2018 at 10:49)</a>:</h4>
 <p>MWE please</p>
 
 <a name="130771164"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771164">Kevin Buzzard (Aug 02 2018 at 20:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771164">Kevin Buzzard (Aug 02 2018 at 10:49)</a>:</h4>
 <p>I think Chris said that <code>units R</code> is not just the subtype of R -- to construct a term of type <code>units R</code> you actually need to give both <code>u</code> and its inverse <code>v</code>. So you will need to prove some lemma (which might be already there) saying that there's an injection from <code>units R</code> to <code>R</code>, and then convince lean that a subtype of a fintype is a fintype.</p>
 <p>To look for the injection from <code>units R</code> into <code>R</code> I would find where <code>units</code> are defined and then look at the code written shortly afterwards to see if there's anything useful. Then one might hope that all the rest is there already.</p>
 
 <a name="130771214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771214">Kenny Lau (Aug 02 2018 at 20:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771214">Kenny Lau (Aug 02 2018 at 10:50)</a>:</h4>
 <p>no, the subtype of a fintype is not a fintype. that's why you can create a fintype by a surjection but not by an injection</p>
 
 <a name="130771219"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771219">Kenny Lau (Aug 02 2018 at 20:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771219">Kenny Lau (Aug 02 2018 at 10:50)</a>:</h4>
 <p>(but you can do various things if you have a finset of R that contains all the units, such as <code>finset.attach</code>)</p>
 
 <a name="130771228"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771228">Kenny Lau (Aug 02 2018 at 20:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771228">Kenny Lau (Aug 02 2018 at 10:51)</a>:</h4>
 <p>and the injection is just <code>units.val</code></p>
 
 <a name="130771277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771277">Kevin Buzzard (Aug 02 2018 at 20:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771277">Kevin Buzzard (Aug 02 2018 at 10:52)</a>:</h4>
 <blockquote>
 <p>no, the subtype of a fintype is not a fintype.</p>
 </blockquote>
 <p>Wait what? Even when everything is decidable?</p>
 
 <a name="130771279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771279">Kenny Lau (Aug 02 2018 at 20:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771279">Kenny Lau (Aug 02 2018 at 10:52)</a>:</h4>
 <p>if it's decidable then it's ok</p>
 
 <a name="130771291"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771291">Kevin Buzzard (Aug 02 2018 at 20:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771291">Kevin Buzzard (Aug 02 2018 at 10:53)</a>:</h4>
 <p>I don't know if decidability is proved, but for a in Zmod n I can decide if it's a unit or not. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> do you know if this needs doing, or is it already done?</p>
 
 <a name="130771406"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771406">Kevin Buzzard (Aug 02 2018 at 20:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771406">Kevin Buzzard (Aug 02 2018 at 10:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="111947">@Guy Leroy</span> Chris suggests you prove an equiv between <code>units (zmod n)</code> and the nats between 0 and n-1 which are coprime to n. That would do it.</p>
 
 <a name="130771415"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771415">Kevin Buzzard (Aug 02 2018 at 20:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771415">Kevin Buzzard (Aug 02 2018 at 10:57)</a>:</h4>
 <p>Oh Ellen just messaged me, she's sitting next to me. I can't believe I'm in a room full of people all talking to each other online. Guy is about 4 metres from me. Is this how kids work nowadays?</p>
 
 <a name="130771464"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771464">Guy Leroy (Aug 02 2018 at 20:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771464">Guy Leroy (Aug 02 2018 at 10:58)</a>:</h4>
 <p>Thanks for the answers!</p>
 
 <a name="130771479"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771479">Scott Morrison (Aug 02 2018 at 20:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771479">Scott Morrison (Aug 02 2018 at 10:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> just wait until they get the neural implants...</p>
 
 <a name="130771543"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771543">Kenny Lau (Aug 02 2018 at 21:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130771543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130771543">Kenny Lau (Aug 02 2018 at 11:00)</a>:</h4>
 <p>kids these days, only focussing on their laptops instead of on their newspapers</p>
 
 <a name="130772043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772043">Patrick Massot (Aug 02 2018 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772043">Patrick Massot (Aug 02 2018 at 11:12)</a>:</h4>
 <p>I'm pretty surprised they gathered in the same room. Where I studied, all freely accessible computer rooms disappeared because students stopped using them when internet reached the student housing 15 years ago.</p>
 
 <a name="130772049"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772049">Kenny Lau (Aug 02 2018 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772049">Kenny Lau (Aug 02 2018 at 11:12)</a>:</h4>
 <p>they're doing UROP</p>
 
 <a name="130772978"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772978">Kevin Buzzard (Aug 02 2018 at 21:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130772978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html#130772978">Kevin Buzzard (Aug 02 2018 at 11:35)</a>:</h4>
 <p>I force them to come in :-) In fact I don't even know why we're meeting in the computer room -- everyone brings their own computers.</p>
 
 

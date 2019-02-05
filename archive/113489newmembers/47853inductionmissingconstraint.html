@@ -12,19 +12,19 @@ permalink: archive/113489newmembers/47853inductionmissingconstraint.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133180811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180811">Etienne Laurin (Sep 02 2018 at 01:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180811">Etienne Laurin (Sep 01 2018 at 15:05)</a>:</h4>
 <p>Given <code>(a b : ℕ) (h : a ≤ b)</code>, after doing <code>induction h</code>, the <code>case less_than_or_equal.refl</code> doesn't have any hypothesis allowing to conclude <code>a = b</code>. Why not? Is there another way to perform induction that does introduce <code>a = b</code> in that case?</p>
 
 <a name="133180865"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180865">Mario Carneiro (Sep 02 2018 at 01:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180865">Mario Carneiro (Sep 01 2018 at 15:07)</a>:</h4>
 <p>in the refl case, you should already have <code>b</code> replaced by <code>a</code> in the goal</p>
 
 <a name="133180929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180929">Mario Carneiro (Sep 02 2018 at 01:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133180929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133180929">Mario Carneiro (Sep 01 2018 at 15:09)</a>:</h4>
 <p>By the way, I don't recommend doing induction on an le hypothesis. Instead, do induction on <code>a</code> and/or <code>b</code> and use lemmas on le to satisfy the induction hypothesis</p>
 
 <a name="133181092"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181092">Etienne Laurin (Sep 02 2018 at 01:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181092">Etienne Laurin (Sep 01 2018 at 15:14)</a>:</h4>
 <p>What if a and b are expressions? In this example, the goal is still <code>a ≤ b</code></p>
 <div class="codehilite"><pre><span></span>example (a b : ℕ) (h : nat.succ a ≤ nat.succ b) : a ≤ b := begin
   induction h,
@@ -33,39 +33,39 @@ end
 </pre></div>
 
 <a name="133181104"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181104">Mario Carneiro (Sep 02 2018 at 01:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181104">Mario Carneiro (Sep 01 2018 at 15:15)</a>:</h4>
 <p>use cases instead for that</p>
 
 <a name="133181150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181150">Mario Carneiro (Sep 02 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181150">Mario Carneiro (Sep 01 2018 at 15:16)</a>:</h4>
 <p>If you need to combine induction with the parameter equalities, you should first use <code>generalize h : nat.succ a</code> with all the variables you are holding fixed in the induction, then use <code>induction</code></p>
 
 <a name="133181412"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181412">Etienne Laurin (Sep 02 2018 at 01:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181412">Etienne Laurin (Sep 01 2018 at 15:24)</a>:</h4>
 <p>Thanks, that seems to work</p>
 
 <a name="133181414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181414">Etienne Laurin (Sep 02 2018 at 01:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181414">Etienne Laurin (Sep 01 2018 at 15:24)</a>:</h4>
 <p>I haven't used a lot of explicit lemmas so far, I often have trouble finding the right one. I usually get by with a lot of unfold/delta/induction/cases followed by simp</p>
 
 <a name="133181437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181437">Mario Carneiro (Sep 02 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181437">Mario Carneiro (Sep 01 2018 at 15:25)</a>:</h4>
 <p>That's not very sustainable. I suggest learning to browse the source files of core lib and/or mathlib</p>
 
 <a name="133181486"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181486">Etienne Laurin (Sep 02 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181486">Etienne Laurin (Sep 01 2018 at 15:27)</a>:</h4>
 <p>I recently discovered M-. will jump to lean and mathlib sources, I'll start using it more</p>
 
 <a name="133181487"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181487">Mario Carneiro (Sep 02 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181487">Mario Carneiro (Sep 01 2018 at 15:27)</a>:</h4>
 <p>autocompletion also helps for discoverability, once you learn the naming convention</p>
 
 <a name="133181653"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181653">Etienne Laurin (Sep 02 2018 at 01:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181653">Etienne Laurin (Sep 01 2018 at 15:32)</a>:</h4>
 <p>Oh nice. But I notice that doesn't work too well if I haven't imported the right theory. Is there a better way to find lemmas than grep?</p>
 
 <a name="133181720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181720">Kevin Buzzard (Sep 02 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20missing%20constraint/near/133181720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47853inductionmissingconstraint.html#133181720">Kevin Buzzard (Sep 01 2018 at 15:34)</a>:</h4>
 <p><code>#find</code> might be helpful for you. But I would definitely recommend (a) learning the rules of thumb for lemma names and (b) the ctrl-space dance for auto-completion. If you're trying to prove something about int then just import <code>data.int.basic</code></p>
 
 

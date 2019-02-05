@@ -12,47 +12,47 @@ permalink: archive/113488general/60387declarationinspection.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="132184814"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184814">Patrick Massot (Aug 16 2018 at 02:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184814">Patrick Massot (Aug 15 2018 at 16:34)</a>:</h4>
 <p>I'm still trying to discover what a Lean file can reveal about itself. I found <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean</a> and <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean</a> but there still very basic questions I can't answer. Say I have an environment and a declaration name. I can distinguish a lemma/theorem from a definition or constant (although I'm not sure what's the difference between definition and constant). But how can I distinguish between <code>def</code>, <code>class</code>, <code>instance</code>, <code>structure</code>, <code>inductive</code>? I saw the series of functions around <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47">https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47</a> but trying them on examples only confuses me.</p>
 
 <a name="132184954"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184954">Mario Carneiro (Aug 16 2018 at 02:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184954">Mario Carneiro (Aug 15 2018 at 16:37)</a>:</h4>
 <p><code>class</code> means <code>@[class] structure</code> so you can use the attribute</p>
 
 <a name="132184971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184971">Mario Carneiro (Aug 16 2018 at 02:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132184971">Mario Carneiro (Aug 15 2018 at 16:37)</a>:</h4>
 <p>similarly <code>@[instance]</code> is an attribute</p>
 
 <a name="132185017"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185017">Patrick Massot (Aug 16 2018 at 02:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185017">Patrick Massot (Aug 15 2018 at 16:38)</a>:</h4>
 <p>How do you get attributes of a declaration?</p>
 
 <a name="132185129"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185129">Patrick Massot (Aug 16 2018 at 02:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185129">Patrick Massot (Aug 15 2018 at 16:40)</a>:</h4>
 <p>Can one strip off <code>Pi</code> from an <code>expr</code> and get to the first function appearing next? (This would be to understand what an instance declaration is an instance of)</p>
 
 <a name="132185232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185232">Mario Carneiro (Aug 16 2018 at 02:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185232">Mario Carneiro (Aug 15 2018 at 16:42)</a>:</h4>
 <p><code>tactic.has_attribute</code></p>
 
 <a name="132185432"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185432">Patrick Massot (Aug 16 2018 at 02:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185432">Patrick Massot (Aug 15 2018 at 16:46)</a>:</h4>
 <p>Is it possible do use this outside of a tactic? (in meta land of course)</p>
 
 <a name="132185506"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185506">Mario Carneiro (Aug 16 2018 at 02:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185506">Mario Carneiro (Aug 15 2018 at 16:48)</a>:</h4>
 <p>I doubt it, it looks like environment doesn't know anything about attributes</p>
 
 <a name="132185695"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185695">Patrick Massot (Aug 16 2018 at 02:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185695">Patrick Massot (Aug 15 2018 at 16:53)</a>:</h4>
 <p>Do you see away to get the list of classes defined in the currently opened file then?</p>
 
 <a name="132185760"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185760">Edward Ayers (Aug 16 2018 at 02:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132185760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132185760">Edward Ayers (Aug 15 2018 at 16:54)</a>:</h4>
 <p>It also doesn't seem possible to get any information on what notation is defined.</p>
 
 <a name="132186062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186062">Mario Carneiro (Aug 16 2018 at 03:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186062">Mario Carneiro (Aug 15 2018 at 17:00)</a>:</h4>
 <div class="codehilite"><pre><span></span>import tactic.basic
 
 class foo : Type.
@@ -71,7 +71,7 @@ run_cmd do
 </pre></div>
 
 <a name="132186126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186126">Mario Carneiro (Aug 16 2018 at 03:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186126">Mario Carneiro (Aug 15 2018 at 17:01)</a>:</h4>
 <p>alternatively:</p>
 <div class="codehilite"><pre><span></span>run_cmd do
   env ← get_env,
@@ -82,39 +82,39 @@ run_cmd do
 </pre></div>
 
 <a name="132186311"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186311">Mario Carneiro (Aug 16 2018 at 03:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186311">Mario Carneiro (Aug 15 2018 at 17:05)</a>:</h4>
 <p>as I'm sure you've heard by now, this introspection stuff is getting an overhaul in lean 4, so fingers crossed</p>
 
 <a name="132186593"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186593">Patrick Massot (Aug 16 2018 at 03:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186593">Patrick Massot (Aug 15 2018 at 17:11)</a>:</h4>
 <p>Thanks!</p>
 
 <a name="132186636"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186636">Patrick Massot (Aug 16 2018 at 03:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132186636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132186636">Patrick Massot (Aug 15 2018 at 17:12)</a>:</h4>
 <p>What is the difference between <code>run_cmd</code> and <code>#eval</code> here?</p>
 
 <a name="132187368"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132187368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132187368">Patrick Massot (Aug 16 2018 at 03:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132187368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132187368">Patrick Massot (Aug 15 2018 at 17:27)</a>:</h4>
 <p>Inside a function which will ultimately return a <code>tactic unit</code> can I have some <code>if</code> consuming a <code>tactic Prop</code> or <code>tactic bool</code>?</p>
 
 <a name="132187933"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132187933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132187933">Mario Carneiro (Aug 16 2018 at 03:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132187933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132187933">Mario Carneiro (Aug 15 2018 at 17:37)</a>:</h4>
 <p>there is <code>mcond</code> as a shortcut for this, but you can always do <code>b &lt;- tac, if b then ... else ...</code></p>
 
 <a name="132188027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188027">Patrick Massot (Aug 16 2018 at 03:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188027">Patrick Massot (Aug 15 2018 at 17:38)</a>:</h4>
 <p>thanks</p>
 
 <a name="132188037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188037">Patrick Massot (Aug 16 2018 at 03:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188037">Patrick Massot (Aug 15 2018 at 17:38)</a>:</h4>
 <p>I'm sorry I'm very slowly getting used to monads</p>
 
 <a name="132188081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188081">Patrick Massot (Aug 16 2018 at 03:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188081">Patrick Massot (Aug 15 2018 at 17:39)</a>:</h4>
 <p>Do you have ideas to traverse an <code>expr</code> until you see what an instance is an instance of?</p>
 
 <a name="132188330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188330">Mario Carneiro (Aug 16 2018 at 03:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188330">Mario Carneiro (Aug 15 2018 at 17:43)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">expr</span><span class="bp">.</span><span class="n">get_pi_app_fn</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="n">e</span><span class="bp">.</span><span class="n">get_pi_app_fn</span>
 <span class="bp">|</span> <span class="n">e</span>                 <span class="o">:=</span> <span class="n">e</span><span class="bp">.</span><span class="n">get_app_fn</span>
@@ -127,67 +127,67 @@ run_cmd do
 </pre></div>
 
 <a name="132188717"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188717">Patrick Massot (Aug 16 2018 at 03:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188717">Patrick Massot (Aug 15 2018 at 17:49)</a>:</h4>
 <p>great!</p>
 
 <a name="132188810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188810">Patrick Massot (Aug 16 2018 at 03:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132188810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132188810">Patrick Massot (Aug 15 2018 at 17:50)</a>:</h4>
 <p>I think I even understand this code (but wouldn't have none where to search)</p>
 
 <a name="132189258"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132189258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132189258">Patrick Massot (Aug 16 2018 at 03:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132189258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132189258">Patrick Massot (Aug 15 2018 at 17:57)</a>:</h4>
 <p>Two last questions and then I cook dinner: how would you distinguish between <code>inductive</code> and <code>structure</code> declarations? What does constant mean in the definition of the declaration type? How is is more constant than a definition?</p>
 
 <a name="132197062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197062">Patrick Massot (Aug 16 2018 at 06:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197062">Patrick Massot (Aug 15 2018 at 20:09)</a>:</h4>
 <p>Mario, do you also have hints for me?</p>
 
 <a name="132197217"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197217">Rob Lewis (Aug 16 2018 at 06:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197217">Rob Lewis (Aug 15 2018 at 20:12)</a>:</h4>
 <p><code>declaration.cnst</code> is the kind of declaration you get if you write <code>constant A : ℕ</code>. It's an undefined constant, basically the same as an axiom.</p>
 
 <a name="132197290"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197290">Rob Lewis (Aug 16 2018 at 06:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197290">Rob Lewis (Aug 15 2018 at 20:13)</a>:</h4>
 <p>You can have a <code>meta constant</code> but not a <code>meta axiom</code>. I'm not sure if there are any other differences between the two.</p>
 
 <a name="132197349"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197349">Patrick Massot (Aug 16 2018 at 06:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197349">Patrick Massot (Aug 15 2018 at 20:14)</a>:</h4>
 <p>I'm sorry but this doesn't match what I'm seeing</p>
 
 <a name="132197431"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197431">Mario Carneiro (Aug 16 2018 at 06:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197431">Mario Carneiro (Aug 15 2018 at 20:15)</a>:</h4>
 <p>I think <code>constant</code> is to <code>axiom</code> as <code>def</code> is to <code>theorem</code></p>
 
 <a name="132197478"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197478">Rob Lewis (Aug 16 2018 at 06:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197478">Rob Lewis (Aug 15 2018 at 20:16)</a>:</h4>
 <p>What are you seeing?</p>
 
 <a name="132197543"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197543">Rob Lewis (Aug 16 2018 at 06:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197543">Rob Lewis (Aug 15 2018 at 20:17)</a>:</h4>
 <p>The differences between def and theorem are when the bodies get elaborated, right? But there are no bodies in a constant or axiom.</p>
 
 <a name="132197609"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197609">Rob Lewis (Aug 16 2018 at 06:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197609">Rob Lewis (Aug 15 2018 at 20:18)</a>:</h4>
 <p>And you can have axioms with non-<code>Prop</code> type.</p>
 
 <a name="132197749"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197749">Rob Lewis (Aug 16 2018 at 06:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197749">Rob Lewis (Aug 15 2018 at 20:21)</a>:</h4>
 <p>Actually, it looks like using the <code>axiom</code> command with a non-<code>Prop</code> type creates a <code>declaration.cnst</code> in the end. (edit- scratch that, typo)</p>
 
 <a name="132197798"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197798">Mario Carneiro (Aug 16 2018 at 06:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197798">Mario Carneiro (Aug 15 2018 at 20:22)</a>:</h4>
 <p>I'm going through the code now, trying to figure out the difference</p>
 
 <a name="132197808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197808">Mario Carneiro (Aug 16 2018 at 06:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132197808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132197808">Mario Carneiro (Aug 15 2018 at 20:22)</a>:</h4>
 <p>it is disambiguated in loads of places just so it can print <code>constant</code> instead of <code>axiom</code> but that's not so helpful</p>
 
 <a name="132198136"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198136">Patrick Massot (Aug 16 2018 at 06:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198136">Patrick Massot (Aug 15 2018 at 20:30)</a>:</h4>
 <p>Sorry I was interrupted. Maybe there is a misunderstanding, I'm talking about <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean#L67" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean#L67">https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean#L67</a></p>
 
 <a name="132198153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198153">Patrick Massot (Aug 16 2018 at 06:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198153">Patrick Massot (Aug 15 2018 at 20:30)</a>:</h4>
 <p>See </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
 <span class="kn">open</span> <span class="n">tactic</span> <span class="n">environment</span> <span class="n">declaration</span>
@@ -213,27 +213,27 @@ run_cmd do
 <p>lots of cnst there</p>
 
 <a name="132198311"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198311">Rob Lewis (Aug 16 2018 at 06:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198311">Rob Lewis (Aug 15 2018 at 20:34)</a>:</h4>
 <p>"Built-ins" are implemented as constants too. So when you declare an inductive type, the constructors, recursor, etc. are constants.</p>
 
 <a name="132198325"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198325">Rob Lewis (Aug 16 2018 at 06:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198325">Rob Lewis (Aug 15 2018 at 20:35)</a>:</h4>
 <p>If you change a line to <code>| (cnst nm _ _ _) := do trace "cnst", trace nm</code> you can see what the constants are called.</p>
 
 <a name="132198345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198345">Mario Carneiro (Aug 16 2018 at 06:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198345">Mario Carneiro (Aug 15 2018 at 20:35)</a>:</h4>
 <p>Did you know about <code>#print definition</code>?</p>
 
 <a name="132198404"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198404">Mario Carneiro (Aug 16 2018 at 06:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198404">Mario Carneiro (Aug 15 2018 at 20:36)</a>:</h4>
 <p>I just discovered that you can print definitions with <code>#print definition foo</code>. it's the same as <code>#print foo</code> but the printout is slightly different and it doesn't work on constants</p>
 
 <a name="132198494"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198494">Rob Lewis (Aug 16 2018 at 06:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198494">Rob Lewis (Aug 15 2018 at 20:38)</a>:</h4>
 <p>I had no idea, heh.</p>
 
 <a name="132198658"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198658">Patrick Massot (Aug 16 2018 at 06:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198658">Patrick Massot (Aug 15 2018 at 20:40)</a>:</h4>
 <p>I know, maybe it's clearer with </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
 <span class="kn">open</span> <span class="n">tactic</span> <span class="n">environment</span> <span class="n">declaration</span>
@@ -254,39 +254,39 @@ run_cmd do
 </pre></div>
 
 <a name="132198673"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198673">Patrick Massot (Aug 16 2018 at 06:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198673">Patrick Massot (Aug 15 2018 at 20:41)</a>:</h4>
 <p>you see that <code>toto</code> is also <code>cnst</code></p>
 
 <a name="132198710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198710">Mario Carneiro (Aug 16 2018 at 06:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198710">Mario Carneiro (Aug 15 2018 at 20:41)</a>:</h4>
 <p>Oh, <span class="user-mention" data-user-id="110031">@Patrick Massot</span> I found out that even lean internally doesn't store the list of attributes associated to a definition. When printing a definition with <code>#print</code>, it gets the list of all attributes and just asks for each whether <code>foo</code> has that attribute</p>
 
 <a name="132198786"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198786">Patrick Massot (Aug 16 2018 at 06:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198786">Patrick Massot (Aug 15 2018 at 20:42)</a>:</h4>
 <p>but where does the answer come from then?</p>
 
 <a name="132198801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198801">Rob Lewis (Aug 16 2018 at 06:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198801">Rob Lewis (Aug 15 2018 at 20:43)</a>:</h4>
 <p>Yeah. When you declare an inductive type <code>T</code>, you're basically saying, "there is a type <code>T</code>. This is how you create a <code>T</code> (the constructors). This is how you use a <code>T</code> (the recursors)."</p>
 
 <a name="132198813"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198813">Rob Lewis (Aug 16 2018 at 06:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198813">Rob Lewis (Aug 15 2018 at 20:43)</a>:</h4>
 <p>You're not defining <code>T</code> in terms of something else, so there's no value for the declaration <code>T</code> to have.</p>
 
 <a name="132198884"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198884">Patrick Massot (Aug 16 2018 at 06:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198884">Patrick Massot (Aug 15 2018 at 20:44)</a>:</h4>
 <p>Makes sense, thanks</p>
 
 <a name="132198896"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198896">Patrick Massot (Aug 16 2018 at 06:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132198896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132198896">Patrick Massot (Aug 15 2018 at 20:45)</a>:</h4>
 <p>Do you have an idea to distinguish between <code>inductive</code> and <code>structure</code>?</p>
 
 <a name="132199003"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199003">Mario Carneiro (Aug 16 2018 at 06:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199003">Mario Carneiro (Aug 15 2018 at 20:47)</a>:</h4>
 <p>I'm working on it</p>
 
 <a name="132199047"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199047">Mario Carneiro (Aug 16 2018 at 06:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199047">Mario Carneiro (Aug 15 2018 at 20:48)</a>:</h4>
 <p>in the meantime, I found something odd:</p>
 <div class="codehilite"><pre><span></span>structure foo : Type.
 #print foo
@@ -296,45 +296,45 @@ run_cmd do
 </pre></div>
 
 <a name="132199052"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199052">Mario Carneiro (Aug 16 2018 at 06:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199052">Mario Carneiro (Aug 15 2018 at 20:48)</a>:</h4>
 <p>lean does not remember structureness</p>
 
 <a name="132199131"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199131">Mario Carneiro (Aug 16 2018 at 06:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199131">Mario Carneiro (Aug 15 2018 at 20:50)</a>:</h4>
 <p>or at least, nullary structures don't count as structures</p>
 
 <a name="132199175"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199175">Patrick Massot (Aug 16 2018 at 06:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199175">Patrick Massot (Aug 15 2018 at 20:51)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">toto</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">tata</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
 <span class="bp">#</span><span class="kn">print</span> <span class="n">toto</span>
 </pre></div>
 
 <a name="132199245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199245">Patrick Massot (Aug 16 2018 at 06:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199245">Patrick Massot (Aug 15 2018 at 20:52)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">toto</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span>
 <span class="n">fields</span><span class="o">:</span>
 <span class="n">toto</span><span class="bp">.</span><span class="n">tata</span> <span class="o">:</span> <span class="n">toto</span> <span class="bp">→</span> <span class="kt">Type</span>
 </pre></div>
 
 <a name="132199271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199271">Mario Carneiro (Aug 16 2018 at 06:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199271">Mario Carneiro (Aug 15 2018 at 20:53)</a>:</h4>
 <p>Lean reconstructs structurehood based on structure like things</p>
 
 <a name="132199282"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199282">Mario Carneiro (Aug 16 2018 at 06:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199282">Mario Carneiro (Aug 15 2018 at 20:53)</a>:</h4>
 <p>specifically, the projections</p>
 
 <a name="132199802"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199802">Patrick Massot (Aug 16 2018 at 07:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132199802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132199802">Patrick Massot (Aug 15 2018 at 21:04)</a>:</h4>
 <p>where do you see the code of <code>#print</code>?</p>
 
 <a name="132200606"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132200606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132200606">Patrick Massot (Aug 16 2018 at 07:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132200606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132200606">Patrick Massot (Aug 15 2018 at 21:24)</a>:</h4>
 <p>are you looking at <a href="https://github.com/leanprover/lean/blob/703d12d594f1591296d529e72794a00ba42dbade/src/frontends/lean/structure_cmd.cpp#L111" target="_blank" title="https://github.com/leanprover/lean/blob/703d12d594f1591296d529e72794a00ba42dbade/src/frontends/lean/structure_cmd.cpp#L111">https://github.com/leanprover/lean/blob/703d12d594f1591296d529e72794a00ba42dbade/src/frontends/lean/structure_cmd.cpp#L111</a>?</p>
 
 <a name="132200886"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132200886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132200886">Mario Carneiro (Aug 16 2018 at 07:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132200886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132200886">Mario Carneiro (Aug 15 2018 at 21:30)</a>:</h4>
 <p>I think this replicates lean's <code>is_structure</code> function</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">name</span><span class="bp">.</span><span class="n">deinternalize_field</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">name</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">name</span><span class="bp">.</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">name</span><span class="bp">.</span><span class="n">anonymous</span><span class="o">)</span> <span class="o">:=</span>
@@ -362,26 +362,26 @@ run_cmd do
 </pre></div>
 
 <a name="132226399"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132226399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132226399">Patrick Massot (Aug 16 2018 at 18:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132226399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132226399">Patrick Massot (Aug 16 2018 at 08:46)</a>:</h4>
 <p>Nice!</p>
 
 <a name="132487331"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132487331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132487331">Patrick Massot (Aug 21 2018 at 09:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132487331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132487331">Patrick Massot (Aug 20 2018 at 23:26)</a>:</h4>
 <blockquote>
 <p>I think this replicates lean's <code>is_structure</code> function</p>
 </blockquote>
 <p>I'm sorry, I wasted your time. For some mysterious reason I missed <a href="https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/library/init/meta/environment.lean#L87" target="_blank" title="https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/library/init/meta/environment.lean#L87">https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/library/init/meta/environment.lean#L87</a> (and its implementation <a href="https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/src/library/vm/vm_environment.cpp#L227" target="_blank" title="https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/src/library/vm/vm_environment.cpp#L227">https://github.com/leanprover/lean/blob/776b440d5595e5eaa3f16e633c9ca85a834f147a/src/library/vm/vm_environment.cpp#L227</a>)</p>
 
 <a name="132542303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542303">Patrick Massot (Aug 22 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542303">Patrick Massot (Aug 21 2018 at 21:14)</a>:</h4>
 <p>Does Lean keep any trace of whether something was declared as a lemma or a theorem? Or are they purely synonym from the parsing stage on?</p>
 
 <a name="132542417"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542417">Mario Carneiro (Aug 22 2018 at 07:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542417">Mario Carneiro (Aug 21 2018 at 21:17)</a>:</h4>
 <p>pure synonyms</p>
 
 <a name="132542484"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542484">Patrick Massot (Aug 22 2018 at 07:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132542484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html#132542484">Patrick Massot (Aug 21 2018 at 21:18)</a>:</h4>
 <p>thanks</p>
 
 

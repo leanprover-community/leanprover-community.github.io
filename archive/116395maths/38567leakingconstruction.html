@@ -12,19 +12,19 @@ permalink: archive/116395maths/38567leakingconstruction.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133622397"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622397">Patrick Massot (Sep 10 2018 at 05:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622397">Patrick Massot (Sep 09 2018 at 19:46)</a>:</h4>
 <p>Sometimes I see things like: <code>quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _</code> in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?</p>
 
 <a name="133622571"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622571">Mario Carneiro (Sep 10 2018 at 05:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622571">Mario Carneiro (Sep 09 2018 at 19:52)</a>:</h4>
 <p>how are you "playing"?</p>
 
 <a name="133622577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622577">Mario Carneiro (Sep 10 2018 at 05:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622577">Mario Carneiro (Sep 09 2018 at 19:52)</a>:</h4>
 <p>if you unfold stuff you can see this</p>
 
 <a name="133622621"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622621">Patrick Massot (Sep 10 2018 at 05:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622621">Patrick Massot (Sep 09 2018 at 19:54)</a>:</h4>
 <p>More precisely, I have:</p>
 <div class="codehilite"><pre><span></span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
 <span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span><span class="o">,</span>
@@ -44,47 +44,47 @@ permalink: archive/116395maths/38567leakingconstruction.html
 <p>but I can do instead <code>have : {b | u b ∈ ball a ε} ∈ f.sets := mem_map.2 this,</code> and Lean won't unfold it</p>
 
 <a name="133622685"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622685">Mario Carneiro (Sep 10 2018 at 05:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622685">Mario Carneiro (Sep 09 2018 at 19:57)</a>:</h4>
 <p>You are going the wrong way</p>
 
 <a name="133622686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622686">Mario Carneiro (Sep 10 2018 at 05:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622686">Mario Carneiro (Sep 09 2018 at 19:57)</a>:</h4>
 <p>use <code>mem_map.1 this</code></p>
 
 <a name="133622735"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622735">Mario Carneiro (Sep 10 2018 at 05:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622735">Mario Carneiro (Sep 09 2018 at 19:58)</a>:</h4>
 <p>(it works because the two sides are defeq so it doesn't really matter if you apply it, but then the matching goes crazy)</p>
 
 <a name="133622736"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622736">Patrick Massot (Sep 10 2018 at 05:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622736">Patrick Massot (Sep 09 2018 at 19:58)</a>:</h4>
 <p>oh</p>
 
 <a name="133622737"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622737">Patrick Massot (Sep 10 2018 at 05:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622737">Patrick Massot (Sep 09 2018 at 19:58)</a>:</h4>
 <p>weird</p>
 
 <a name="133622751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622751">Patrick Massot (Sep 10 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622751">Patrick Massot (Sep 09 2018 at 19:59)</a>:</h4>
 <p>That's biconditional in action: try one direction at random and, if Lean is willing to apply it, never look back</p>
 
 <a name="133622752"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622752">Mario Carneiro (Sep 10 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622752">Mario Carneiro (Sep 09 2018 at 19:59)</a>:</h4>
 <p>notice that you have another <code>map</code> in the result</p>
 
 <a name="133622755"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622755">Mario Carneiro (Sep 10 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622755">Mario Carneiro (Sep 09 2018 at 19:59)</a>:</h4>
 <p><code>(map (λ (y : α), dist y a) (map u f)).sets</code></p>
 
 <a name="133622757"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622757">Patrick Massot (Sep 10 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622757">Patrick Massot (Sep 09 2018 at 19:59)</a>:</h4>
 <p>true</p>
 
 <a name="133622809"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622809">Mario Carneiro (Sep 10 2018 at 06:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622809">Mario Carneiro (Sep 09 2018 at 20:00)</a>:</h4>
 <p>so it tried to figure out how to read <code>ball a ε</code> as <code>{x | m x ∈ t}</code> for some <code>m, t</code> and chaos ensues</p>
 
 <a name="133622819"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622819">Patrick Massot (Sep 10 2018 at 06:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622819">Patrick Massot (Sep 09 2018 at 20:01)</a>:</h4>
 <p>That's wonderful. In the proof I posted earlier:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">u</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span>
   <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">dist</span> <span class="o">(</span><span class="n">u</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="o">:=</span>
@@ -98,15 +98,15 @@ permalink: archive/116395maths/38567leakingconstruction.html
 <p>There is a <code>$ mem_map.2 $ </code>. You can change 2 into 1, it still works. Then you can remove that bit entirely and it still works!</p>
 
 <a name="133622825"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622825">Mario Carneiro (Sep 10 2018 at 06:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622825">Mario Carneiro (Sep 09 2018 at 20:01)</a>:</h4>
 <p>because the proof is <code>rfl</code></p>
 
 <a name="133622827"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622827">Patrick Massot (Sep 10 2018 at 06:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133622827">Patrick Massot (Sep 09 2018 at 20:01)</a>:</h4>
 <p>Yeah, I understand</p>
 
 <a name="133633334"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133633334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133633334">Johannes Hölzl (Sep 10 2018 at 12:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133633334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html#133633334">Johannes Hölzl (Sep 10 2018 at 02:08)</a>:</h4>
 <p><code>simp</code> can do this:</p>
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_at_top_nhds_metric</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
   <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="n">ε</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span><span class="n">N</span><span class="o">,</span> <span class="bp">∀</span><span class="n">n</span><span class="bp">≥</span><span class="n">N</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:=</span>

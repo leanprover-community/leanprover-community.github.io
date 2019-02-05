@@ -12,7 +12,7 @@ permalink: archive/113488general/37131applydefortheorem.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="131070910"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131070910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131070910">Hoang Le Truong (Aug 08 2018 at 07:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131070910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131070910">Hoang Le Truong (Aug 07 2018 at 21:41)</a>:</h4>
 <p>I have the following definitions </p>
 <div class="codehilite"><pre><span></span> def index  {s : set( set α)} (n:ℕ)  [fintype s] (H:∀i∈ s, finite i)
     : set(set(set α )) :=  { t| t ⊆ s ∧   fintype.card t=n}
@@ -40,39 +40,39 @@ by rw ← inter_eq_self_of_subset_right h; apply_instance
 <p>How can I apply it to my definition?</p>
 
 <a name="131071337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071337">Kevin Buzzard (Aug 08 2018 at 07:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071337">Kevin Buzzard (Aug 07 2018 at 21:51)</a>:</h4>
 <p>So alpha is a random type, s is a set of subsets of alpha (so s could be empty), _inst_1 is a proof that s is finite (so s could still be empty), H says something about all elements of s (so if s is empty then H is true), but alpha could still be a random type, and now t is some set of subsets of alpha so there's no reason to expect that t is finite, unless I made a slip.</p>
 
 <a name="131071399"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071399">Chris Hughes (Aug 08 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071399">Chris Hughes (Aug 07 2018 at 21:52)</a>:</h4>
 <p><code>{ t| ∃ h : t ⊆ s, @fintype.card t (fintype_subset s h) =n}</code></p>
 
 <a name="131071404"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071404">Kevin Buzzard (Aug 08 2018 at 07:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071404">Kevin Buzzard (Aug 07 2018 at 21:52)</a>:</h4>
 <p>Oh, so that type class instance can't be synthesized because Lean hasn't got to the point where t is a subset of s yet.</p>
 
 <a name="131071421"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071421">Kevin Buzzard (Aug 08 2018 at 07:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071421">Kevin Buzzard (Aug 07 2018 at 21:53)</a>:</h4>
 <p>So Chris' clever trick is to give a name to the fact that t is a subset of s, and then we can use it later.</p>
 
 <a name="131071427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071427">Chris Hughes (Aug 08 2018 at 07:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071427">Chris Hughes (Aug 07 2018 at 21:53)</a>:</h4>
 <p>The other set is finite too, since it's a subset of the powerset of s, which is finite.</p>
 
 <a name="131071519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071519">Kevin Buzzard (Aug 08 2018 at 07:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071519">Kevin Buzzard (Aug 07 2018 at 21:55)</a>:</h4>
 <p>Right -- I was just looking at the error, where there were no assumptions on t at all. You managed to insert the subset assumption into the system so Lean could see it.</p>
 
 <a name="131071726"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071726">Chris Hughes (Aug 08 2018 at 07:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071726">Chris Hughes (Aug 07 2018 at 21:59)</a>:</h4>
 <p>There is a case for a dependent and. The trouble with the exists trick is there's no <code>exists.left</code> and <code>exists</code> doesn't eliminate into data, but dependent and could.</p>
 
 <a name="131071738"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071738">Chris Hughes (Aug 08 2018 at 08:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071738">Chris Hughes (Aug 07 2018 at 22:00)</a>:</h4>
 <p>But I don't think it comes up that often.</p>
 
 <a name="131071810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071810">Hoang Le Truong (Aug 08 2018 at 08:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131071810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131071810">Hoang Le Truong (Aug 07 2018 at 22:00)</a>:</h4>
 <p>I try  <code>{ t| ∃ h : t ⊆ s, @fintype.card t (fintype_subset s h) =n}</code> but I get </p>
 <div class="codehilite"><pre><span></span>failed to synthesize type class instance for
 α : Type,
@@ -86,11 +86,11 @@ h : t ⊆ s
 </pre></div>
 
 <a name="131072001"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072001">Chris Hughes (Aug 08 2018 at 08:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072001">Chris Hughes (Aug 07 2018 at 22:05)</a>:</h4>
 <p>You can use <code>local attribute [instance] classical.prop_decidable</code> before the statement of the theorem.</p>
 
 <a name="131072181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072181">Hoang Le Truong (Aug 08 2018 at 08:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072181">Hoang Le Truong (Aug 07 2018 at 22:09)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Since <code>s</code> is finite and <code>t ⊆ s</code> then <code>t </code> is finite by def <code> fintype_subset</code></p>
 <div class="codehilite"><pre><span></span>def index   {s : set( set α)} (n:ℕ)  [fintype s] (H:∀i∈ s, finite i)
     : set(set(set α )) :=  { t| ∃ h : t ⊆ s, @fintype.card t (fintype_subset s h) =n}
@@ -100,19 +100,19 @@ h : t ⊆ s
 <p>where am I use <code>local attribute [instance] classical.prop_decidable</code></p>
 
 <a name="131072280"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072280">Chris Hughes (Aug 08 2018 at 08:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072280">Chris Hughes (Aug 07 2018 at 22:11)</a>:</h4>
 <p>On its own line before the definition.</p>
 
 <a name="131072342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072342">Chris Hughes (Aug 08 2018 at 08:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072342">Chris Hughes (Aug 07 2018 at 22:12)</a>:</h4>
 <p>You might be better off using <code>finsets</code> for this actually.</p>
 
 <a name="131072354"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072354">Chris Hughes (Aug 08 2018 at 08:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072354">Chris Hughes (Aug 07 2018 at 22:13)</a>:</h4>
 <p>Then you don't have to worry about proving things are finite.</p>
 
 <a name="131072422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072422">Hoang Le Truong (Aug 08 2018 at 08:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20def%20or%20theorem/near/131072422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37131applydefortheorem.html#131072422">Hoang Le Truong (Aug 07 2018 at 22:14)</a>:</h4>
 <p>Ok I will try it</p>
 
 

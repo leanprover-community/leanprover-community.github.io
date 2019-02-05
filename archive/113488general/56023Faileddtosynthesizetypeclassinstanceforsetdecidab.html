@@ -12,7 +12,7 @@ permalink: archive/113488general/56023Faileddtosynthesizetypeclassinstanceforset
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="151749704"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151749704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151749704">AHan (Dec 14 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151749704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151749704">AHan (Dec 14 2018 at 02:28)</a>:</h4>
 <p>In the following example,  I don't understand why lean failed to synthesize type class instance for <code>decidable (x ∈ s)</code> ?<br>
 What did I miss?</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
@@ -23,25 +23,25 @@ What did I miss?</p>
 </pre></div>
 
 <a name="151751109"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151751109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151751109">Bryan Gin-ge Chen (Dec 14 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151751109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151751109">Bryan Gin-ge Chen (Dec 14 2018 at 03:04)</a>:</h4>
 <p><code>if P then _ else _</code> requires <code>P</code> to be <code>decidable</code>, otherwise how will lean know which branch to take? <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#decidable-propositions" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#decidable-propositions">Here's the discussion in TPiL</a>. One thing you could do is use </p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span>
 <span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">prop_decidable</span>
 </pre></div>
 
 <a name="151751350"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151751350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151751350">Mario Carneiro (Dec 14 2018 at 14:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151751350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151751350">Mario Carneiro (Dec 14 2018 at 03:11)</a>:</h4>
 <p>Another way is to write the set without an if statement, i.e.</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="bp">|</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span><span class="o">}</span>
 </pre></div>
 
 <a name="151759037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151759037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151759037">AHan (Dec 14 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151759037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151759037">AHan (Dec 14 2018 at 07:10)</a>:</h4>
 <p>Thanks a lot! <br>
 Both solutions are nice!!</p>
 
 <a name="151761275"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151761275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151761275">Kenny Lau (Dec 14 2018 at 19:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Failedd%20to%20synthesize%20type%20class%20instance%20for%20set.decidab.../near/151761275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56023Faileddtosynthesizetypeclassinstanceforsetdecidab.html#151761275">Kenny Lau (Dec 14 2018 at 08:14)</a>:</h4>
 <p>but the latter is nicer</p>
 
 

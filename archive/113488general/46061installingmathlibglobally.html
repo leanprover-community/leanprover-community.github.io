@@ -12,90 +12,90 @@ permalink: archive/113488general/46061installingmathlibglobally.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="128610501"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128610501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128610501">Kevin Buzzard (Jun 26 2018 at 02:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128610501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128610501">Kevin Buzzard (Jun 25 2018 at 16:57)</a>:</h4>
 <p>Cocalc want to install one mathlib globally. I think Sebastian Ullrich once told me that there was no documentation for <code>leanpkg.path</code> because this was not a file that an end user was ever supposed to mess with. I am assuming <code>builtin_path</code> points to where the core lean library is. I am assuming that there's no file with the same name in Lean and mathlib, so I guess in theory they could do the slightly horrible-sounding thing of dumping all of mathlib in the core lean directory. But actually I am a bit confused about what is really reading leanpkg.path. Oh -- is this something the lean plugin does in VS Code?</p>
 
 <a name="128614273"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128614273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128614273">Gabriel Ebner (Jun 26 2018 at 04:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128614273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128614273">Gabriel Ebner (Jun 25 2018 at 18:10)</a>:</h4>
 <p>My suggestion would be to create a dummy project with all of the suggested dependencies (e.g. mathlib) listed in the leanpkg.toml file.  Then you can run <code>leanpkg build</code> as usual to create the olean files.  To check files you then run <code>lean my_file.lean</code> or <code>lean --server</code> <em>from that directory</em>, this will pick up the correct leanpkg.path file.  I believe this is the solution that is easiest to maintain.</p>
 
 <a name="128615134"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615134">Johan Commelin (Jun 26 2018 at 04:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615134">Johan Commelin (Jun 25 2018 at 18:27)</a>:</h4>
 <p>I think CoCalc wants to have 1 install of mathlib for &gt;1000 users.</p>
 
 <a name="128615169"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615169">Johan Commelin (Jun 26 2018 at 04:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615169">Johan Commelin (Jun 25 2018 at 18:27)</a>:</h4>
 <p>So, I imagine an install of mathlib in <code>/opt/lean/mathlib/</code>, and then users can add that path as a dependency to their projects.</p>
 
 <a name="128615252"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615252">Johan Commelin (Jun 26 2018 at 04:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615252">Johan Commelin (Jun 25 2018 at 18:29)</a>:</h4>
 <p>Even better (and this is what Kevin is saying, I think) would be if Lean could automatically pick up mathlib, without users even having to specify it as a dependency. So Lean should look in <code>/opt/lean/</code> or something like that, and automatically make all those libs available to all users.</p>
 
 <a name="128615345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615345">Gabriel Ebner (Jun 26 2018 at 04:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615345">Gabriel Ebner (Jun 25 2018 at 18:30)</a>:</h4>
 <p>Does cocalc support multiple files (that can include each other)?</p>
 
 <a name="128615355"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615355">Johan Commelin (Jun 26 2018 at 04:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615355">Johan Commelin (Jun 25 2018 at 18:30)</a>:</h4>
 <p>What do you mean with that? CoCalc is just a website.</p>
 
 <a name="128615363"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615363">Johan Commelin (Jun 26 2018 at 04:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615363">Johan Commelin (Jun 25 2018 at 18:30)</a>:</h4>
 <p>With a gigantic cloud (i.e. server park) behind it.</p>
 
 <a name="128615380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615380">Johan Commelin (Jun 26 2018 at 04:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615380">Johan Commelin (Jun 25 2018 at 18:31)</a>:</h4>
 <p>You create an account (or login with Github) and you get an online python/LaTeX/etc environment.</p>
 
 <a name="128615385"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615385">Johan Commelin (Jun 26 2018 at 04:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615385">Johan Commelin (Jun 25 2018 at 18:31)</a>:</h4>
 <p>(Even shell access!)</p>
 
 <a name="128615390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615390">Johan Commelin (Jun 26 2018 at 04:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615390">Johan Commelin (Jun 25 2018 at 18:31)</a>:</h4>
 <p>And you can collaboratively edit those files.</p>
 
 <a name="128615436"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615436">Johan Commelin (Jun 26 2018 at 04:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615436">Johan Commelin (Jun 25 2018 at 18:32)</a>:</h4>
 <p>So it is quite nice for typing up a LaTeX document, or doing some scientific computing in python/Sage...</p>
 
 <a name="128615445"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615445">Gabriel Ebner (Jun 26 2018 at 04:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615445">Gabriel Ebner (Jun 25 2018 at 18:32)</a>:</h4>
 <p>Ah, so you can have multiple files and directories and so on.  This was not really clear from the first look.  I only saw single jupyter notebooks.</p>
 
 <a name="128615452"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615452">Johan Commelin (Jun 26 2018 at 04:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615452">Johan Commelin (Jun 25 2018 at 18:32)</a>:</h4>
 <p>No, you basically get a free linux account on a cloud server, together with a nice web-frontend</p>
 
 <a name="128615478"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615478">Johan Commelin (Jun 26 2018 at 04:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615478">Johan Commelin (Jun 25 2018 at 18:33)</a>:</h4>
 <p>So, if we want realtime online collaboration for Lean, then we should lend these guys a helping hand!</p>
 
 <a name="128615533"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615533">Gabriel Ebner (Jun 26 2018 at 04:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128615533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128615533">Gabriel Ebner (Jun 25 2018 at 18:34)</a>:</h4>
 <p>I don't think we should promote completely non-standard configurations on cocalc.  It makes the transition between cocalc and your personal machine unnecessarily hard.  One option is to have a script that creates a standard <code>leanpkg.toml</code>, but then symlinks the <code>_target/mathlib</code> directory from a read-only compiled version in <code>/opt/lean/mathlib</code> or sth like that.</p>
 
 <a name="128616386"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616386">Johan Commelin (Jun 26 2018 at 04:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616386">Johan Commelin (Jun 25 2018 at 18:53)</a>:</h4>
 <p>Yes, that might be an idea.</p>
 
 <a name="128616437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616437">Johan Commelin (Jun 26 2018 at 04:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616437">Johan Commelin (Jun 25 2018 at 18:54)</a>:</h4>
 <p>Maybe even <code>/opt/lean/mathlib/v2018_summer/</code></p>
 
 <a name="128616442"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616442">Johan Commelin (Jun 26 2018 at 04:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128616442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128616442">Johan Commelin (Jun 25 2018 at 18:54)</a>:</h4>
 <p>So that we don't get lots of users complaining that their stuff ain't compiling after an upgrade.</p>
 
 <a name="128618868"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128618868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128618868">Kevin Buzzard (Jun 26 2018 at 05:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128618868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128618868">Kevin Buzzard (Jun 25 2018 at 19:42)</a>:</h4>
 <blockquote>
 <p>I don't think we should promote completely non-standard configurations on cocalc.  It makes the transition between cocalc and your personal machine unnecessarily hard.  </p>
 </blockquote>
 <p>This will be for kids who want to do their homework in Lean but don't want to go through the hassle of installing it; I am not 100% sure that the accounts can access the internet, so I am not sure how well leanpkg will work.</p>
 
 <a name="128619714"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128619714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128619714">Johan Commelin (Jun 26 2018 at 06:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128619714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html#128619714">Johan Commelin (Jun 25 2018 at 20:00)</a>:</h4>
 <p>The default accounts on CoCalc do not have internet access</p>
 
 

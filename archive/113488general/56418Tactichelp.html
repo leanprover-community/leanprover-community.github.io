@@ -12,7 +12,7 @@ permalink: archive/113488general/56418Tactichelp.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="154186308"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154186308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154186308">Koundinya Vajjha (Jan 03 2019 at 03:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154186308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154186308">Koundinya Vajjha (Jan 02 2019 at 16:54)</a>:</h4>
 <p>Hi, in order to get familiar with writing tactics, I am trying to write a simple tactic to count the number of occurrences of <code>∅</code> in a goal. Here is what I have so far:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">is_empty&#39;</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">bool</span>
 <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tt</span>
@@ -40,27 +40,27 @@ permalink: archive/113488general/56418Tactichelp.html
 <p>I only get <code>[∅]</code>. Can someone help me figure out what I am doing wrong? I'm guessing it's me not understanding how <code>fold</code> works for <code>expr</code>...</p>
 
 <a name="154187855"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187855">Mario Carneiro (Jan 03 2019 at 04:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187855">Mario Carneiro (Jan 02 2019 at 17:23)</a>:</h4>
 <p>you used <code>insert</code> to accumulate the list, this removes duplicates</p>
 
 <a name="154187873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187873">Mario Carneiro (Jan 03 2019 at 04:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187873">Mario Carneiro (Jan 02 2019 at 17:23)</a>:</h4>
 <p>and the only thing you ever put in the list is <code>∅</code> (twice)</p>
 
 <a name="154187929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187929">Mario Carneiro (Jan 03 2019 at 04:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187929">Mario Carneiro (Jan 02 2019 at 17:24)</a>:</h4>
 <p>use <code>::</code> instead</p>
 
 <a name="154187975"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187975">Koundinya Vajjha (Jan 03 2019 at 04:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154187975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154187975">Koundinya Vajjha (Jan 02 2019 at 17:25)</a>:</h4>
 <p>Aha! that worked. Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 <a name="154188502"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154188502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154188502">Kenny Lau (Jan 03 2019 at 04:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154188502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154188502">Kenny Lau (Jan 02 2019 at 17:33)</a>:</h4>
 <p>anticlimax...</p>
 
 <a name="154191437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154191437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154191437">Johan Commelin (Jan 03 2019 at 05:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20help/near/154191437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56418Tactichelp.html#154191437">Johan Commelin (Jan 02 2019 at 18:25)</a>:</h4>
 <p><span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span> Have you seen <a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/tactic_writing.md</a>? I have no idea about your level of experience with Lean or other programming languages. But for mathematicians who have never written anything in a functional programming language before, I think this is a very good introduction.</p>
 
 

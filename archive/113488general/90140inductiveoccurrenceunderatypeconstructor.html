@@ -12,7 +12,7 @@ permalink: archive/113488general/90140inductiveoccurrenceunderatypeconstructor.h
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="129838639"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838639">Arseniy Alekseyev (Jul 18 2018 at 08:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838639">Arseniy Alekseyev (Jul 17 2018 at 22:19)</a>:</h4>
 <p>I've got a rose tree definition:</p>
 <div class="codehilite"><pre><span></span>inductive tree : Type
 | branch : list tree -&gt; tree
@@ -59,43 +59,43 @@ with lst : Type
 <p>Basically my question is: what's going wrong in the original example?</p>
 
 <a name="129838763"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838763">Mario Carneiro (Jul 18 2018 at 08:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838763">Mario Carneiro (Jul 17 2018 at 22:22)</a>:</h4>
 <blockquote>
 <p>The interesting/unusual part here is that the recursive occurrence of "tree" is inside a list, so this can only work if list is strictly positive, which makes elaboration perhaps tricky, but it does get accepted.</p>
 </blockquote>
 <p>Lean compiles nested inductive types like these to plain inductive types by unfolding the inductive definitions under the hood. This usually doesn't matter so much but you should be aware that this isn't the kernel being lenient, it is the equation compiler doing extra work</p>
 
 <a name="129838764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838764">Arseniy Alekseyev (Jul 18 2018 at 08:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838764">Arseniy Alekseyev (Jul 17 2018 at 22:23)</a>:</h4>
 <p>Having formulated the question now I can find a relevant wiki page too: <a href="https://github.com/leanprover/lean/wiki/Inductive-datatypes" target="_blank" title="https://github.com/leanprover/lean/wiki/Inductive-datatypes">https://github.com/leanprover/lean/wiki/Inductive-datatypes</a>. I guess the answer is making it compute is hard.</p>
 
 <a name="129838837"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838837">Mario Carneiro (Jul 18 2018 at 08:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838837">Mario Carneiro (Jul 17 2018 at 22:24)</a>:</h4>
 <blockquote>
 <p>but refuses to compute during typechecking:</p>
 </blockquote>
 <p>The equation compiler defaults to well founded recursion for definitions on mutual and nested inductives. These have the side effect that the definition's equalities are not by rfl, so you have to use the provided equalities instead of definitional equality</p>
 
 <a name="129838862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838862">Arseniy Alekseyev (Jul 18 2018 at 08:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838862">Arseniy Alekseyev (Jul 17 2018 at 22:25)</a>:</h4>
 <p>do those have predictable names?</p>
 
 <a name="129838923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838923">Mario Carneiro (Jul 18 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838923">Mario Carneiro (Jul 17 2018 at 22:27)</a>:</h4>
 <p>they are called <code>f.equations.stuff</code> but <code>rw</code>, <code>simp</code> and <code>unfold</code> will use them by direct reference to the definition:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">branch</span> <span class="o">[])</span> <span class="bp">=</span> <span class="s2">&quot;hello&quot;</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">f</span>
 </pre></div>
 
 <a name="129838932"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838932">Mario Carneiro (Jul 18 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838932">Mario Carneiro (Jul 17 2018 at 22:27)</a>:</h4>
 <p><code>rw f</code> and <code>simp [f]</code> also work</p>
 
 <a name="129838984"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838984">Arseniy Alekseyev (Jul 18 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838984">Arseniy Alekseyev (Jul 17 2018 at 22:28)</a>:</h4>
 <p>oh!</p>
 
 <a name="129838985"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838985">Mario Carneiro (Jul 18 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129838985">Mario Carneiro (Jul 17 2018 at 22:28)</a>:</h4>
 <div class="codehilite"><pre><span></span>#print prefix f
 </pre></div>
 
@@ -111,23 +111,23 @@ f.equations._eqn_1 : ∀ (_x : list tree), f (branch _x) = &quot;hello&quot;
 <p>the operative lemma is <code>f.equations._eqn_1</code></p>
 
 <a name="129839065"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839065">Arseniy Alekseyev (Jul 18 2018 at 08:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839065">Arseniy Alekseyev (Jul 17 2018 at 22:30)</a>:</h4>
 <p>Do #eval/#reduce also use these equations then? (they are both able to reduce this)</p>
 
 <a name="129839079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839079">Mario Carneiro (Jul 18 2018 at 08:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839079">Mario Carneiro (Jul 17 2018 at 22:31)</a>:</h4>
 <p><code>#reduce</code> does not, it unfolds everything by rfl but it also unfolds theorems and stuff as well which is what makes this work</p>
 
 <a name="129839147"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839147">Arseniy Alekseyev (Jul 18 2018 at 08:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839147">Arseniy Alekseyev (Jul 17 2018 at 22:33)</a>:</h4>
 <p>Those f.equations are pretty cool, thank you!</p>
 
 <a name="129839192"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839192">Mario Carneiro (Jul 18 2018 at 08:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839192">Mario Carneiro (Jul 17 2018 at 22:34)</a>:</h4>
 <p><code>#eval</code> does not use equations at all, it does unbounded recursion using the original match equations and ignores all the encoding stuff</p>
 
 <a name="129839226"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839226">Mario Carneiro (Jul 18 2018 at 08:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129839226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html#129839226">Mario Carneiro (Jul 17 2018 at 22:35)</a>:</h4>
 <p>(Your example doesn't show too much of this since it is nonrecursive, but recursive definitions use a completely different meta implementation in <code>#eval</code>)</p>
 
 

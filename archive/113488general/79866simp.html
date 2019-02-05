@@ -12,7 +12,7 @@ permalink: archive/113488general/79866simp.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="148272942"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148272942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148272942">Sebastien Gouezel (Nov 24 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148272942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148272942">Sebastien Gouezel (Nov 24 2018 at 10:59)</a>:</h4>
 <p>I was really surprised by the following <code>simp</code> behavior. There is a lemma in <code>ennreal</code> that reads</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">sub_eq_zero_of_le</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
 </pre></div>
@@ -27,19 +27,19 @@ permalink: archive/113488general/79866simp.html
 It turns out I am wrong: if I remove the first lemma and add the second instead, then some proofs break. I would like to understand why, and what it means on the way we should state simp lemmas.</p>
 
 <a name="148273070"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273070">Mario Carneiro (Nov 24 2018 at 22:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273070">Mario Carneiro (Nov 24 2018 at 11:03)</a>:</h4>
 <p>Having the second one as a rewrite lemma means that if <code>a - b = 0</code> appears in the statement, then it can be replaced by <code>a &lt;= b</code>. Having the first means that if simp can prove <code>a &lt;= b</code> then it can replace <code>a - b</code> in the goal with <code>0</code>. That means that things like <code>(a - b) + b = b</code> will simplify as well, where the iff version won't trigger</p>
 
 <a name="148273147"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273147">Mario Carneiro (Nov 24 2018 at 22:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273147">Mario Carneiro (Nov 24 2018 at 11:04)</a>:</h4>
 <p>generally speaking it is important to view a simp lemma as <code>conditions -&gt; LHS =&gt; RHS</code>, and modifications like this change the structure of the rewrite</p>
 
 <a name="148273161"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273161">Mario Carneiro (Nov 24 2018 at 22:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273161">Mario Carneiro (Nov 24 2018 at 11:05)</a>:</h4>
 <p>it might be that you want to rewrite <code>a - b = 0</code> to <code>a &lt;= b</code> but that's a different rule</p>
 
 <a name="148273252"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273252">Sebastien Gouezel (Nov 24 2018 at 22:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273252">Sebastien Gouezel (Nov 24 2018 at 11:07)</a>:</h4>
 <p>Yes, of course. I was thinking of the lemma <code>lemma foo (h : a ≤ b) : (a - b = 0) ↔ true</code>, but this is a different rewrite rule.</p>
 
 

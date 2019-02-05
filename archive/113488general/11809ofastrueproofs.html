@@ -12,7 +12,7 @@ permalink: archive/113488general/11809ofastrueproofs.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="152632359"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152632359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152632359">Joe Hendrix (Dec 28 2018 at 13:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152632359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152632359">Joe Hendrix (Dec 28 2018 at 02:40)</a>:</h4>
 <p>I'm trying to build up a mental model of the efficiency of using decidable predicates to construct proofs in tactics..<br>
 Let's say I have a decidable predicate <code>P : nat -&gt; Prop</code> with an instance <code>h : decidable_pred P</code>, and a concrete value <code>x : nat</code> in a tactic.  <br>
 I can match on <code>h x</code> within the tactic monad (which I think is using the VM), and see if the prop is true or false.<br>
@@ -20,52 +20,52 @@ However, I'd also like to have an expression for the proof of <code>P x</code>. 
 Is the above correct, and is so is there some way like reflection to have the VM (or the compiler in Lean 4) run <code>h x</code> and efficiently construct the needed proof?</p>
 
 <a name="152634914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152634914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152634914">Mario Carneiro (Dec 28 2018 at 15:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152634914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152634914">Mario Carneiro (Dec 28 2018 at 04:12)</a>:</h4>
 <p>No, you can't directly produce a "fast" kernel proof from a "fast" VM function. For many common operations on <code>nat</code>, <code>norm_num</code> will produce efficient kernel proofs using VM evaluation to guide the construction, but the method is generally completely different than what the decidable instance does</p>
 
 <a name="152638440"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638440">Joe Hendrix (Dec 28 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638440">Joe Hendrix (Dec 28 2018 at 06:06)</a>:</h4>
 <p>Good to know I'm not missing something.  I think it would be useful to have some way to write a verified decision procedure in logic mode, and then be able to use it to discharge proof obligations in tactic mode.<br>
 For similar reasons, I started down the path of building up <code>has_reflect</code> instances for datatypes in proofs (e.g., <code>has_reflect (and P Q)</code>), but it's (1) a lot of work, and (2) still unclear how to support for some properties.  Specifically, I have <code>decidable (\forall (x : fin n), P x)</code>, but I'm struck on <code>has_reflect (\forall (x : fin n), P x)</code>.</p>
 
 <a name="152638542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638542">Mario Carneiro (Dec 28 2018 at 17:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638542">Mario Carneiro (Dec 28 2018 at 06:10)</a>:</h4>
 <p>hm, that's an interesting use of <code>has_reflect</code>. Usually we don't use <code>has_reflect</code> for propositions, what's the goal here?</p>
 
 <a name="152638564"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638564">Mario Carneiro (Dec 28 2018 at 17:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638564">Mario Carneiro (Dec 28 2018 at 06:11)</a>:</h4>
 <p>I think what you want is actually <code>decidable</code>, or at least <code>semidecidable</code> (where <code>semidecidable p</code> is basically <code>option p</code>)</p>
 
 <a name="152638567"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638567">Mario Carneiro (Dec 28 2018 at 17:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638567">Mario Carneiro (Dec 28 2018 at 06:11)</a>:</h4>
 <p>but you are limited by the same things as <code>decidable</code> proofs</p>
 
 <a name="152638568"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638568">Joe Hendrix (Dec 28 2018 at 17:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638568">Joe Hendrix (Dec 28 2018 at 06:11)</a>:</h4>
 <p>The idea for that use was to get the VM to produce the proof object using the decidable instance, then call <code>has_reflect.reflect</code> to construct the appropriate expression.</p>
 
 <a name="152638610"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638610">Mario Carneiro (Dec 28 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638610">Mario Carneiro (Dec 28 2018 at 06:12)</a>:</h4>
 <p>decidable instances don't have proof objects</p>
 
 <a name="152638613"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638613">Mario Carneiro (Dec 28 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638613">Mario Carneiro (Dec 28 2018 at 06:12)</a>:</h4>
 <p>they put all the computation in the kernel</p>
 
 <a name="152638624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638624">Joe Hendrix (Dec 28 2018 at 17:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638624">Joe Hendrix (Dec 28 2018 at 06:13)</a>:</h4>
 <p>I'm referring to the proof object <code>p</code> that is the argument to <code>decidable.is_true p</code></p>
 
 <a name="152638671"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638671">Mario Carneiro (Dec 28 2018 at 17:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638671">Mario Carneiro (Dec 28 2018 at 06:14)</a>:</h4>
 <p>You could infer <code>decidable p</code>, normalize it to <code>is_true h</code> and return <code>h</code>, but this is going to be almost as slow as kernel computing it</p>
 
 <a name="152638673"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638673">Mario Carneiro (Dec 28 2018 at 17:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152638673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152638673">Mario Carneiro (Dec 28 2018 at 06:14)</a>:</h4>
 <p>you are "elaborator computing" it in this case</p>
 
 <a name="152639243"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639243">Joe Hendrix (Dec 28 2018 at 17:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639243">Joe Hendrix (Dec 28 2018 at 06:32)</a>:</h4>
 <p>I think I haven't been clear.  I use the tactic <code>decidable_tac</code> below that uses uses the elaborator fairly often.  As a work around to get more use of the VM, I was hoping to be able to use both <code>decidable</code> and <code>has_reflect</code> instances to get something a bit more efficient in the <code>decidable_reflected</code> tactic below:</p>
 <div class="codehilite"><pre><span></span>meta def decidable_tac : tactic unit := do
   tgt ← tactic.target,
@@ -83,35 +83,35 @@ meta def decidable_reflected (P:Prop) [h:decidable P] [g:has_reflect P] : tactic
 <p>Unfortunately, I can't actually write the necessary <code>has_reflect</code> instances.  It seems like I would need some more support within Lean (perhaps constants that auto generated reflect instances for propositions).</p>
 
 <a name="152639535"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639535">Mario Carneiro (Dec 28 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639535">Mario Carneiro (Dec 28 2018 at 06:43)</a>:</h4>
 <p>You can't write <code>has_reflect</code> instances for many propositions</p>
 
 <a name="152639536"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639536">Mario Carneiro (Dec 28 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639536">Mario Carneiro (Dec 28 2018 at 06:43)</a>:</h4>
 <p>like <code>or</code></p>
 
 <a name="152639635"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639635">Mario Carneiro (Dec 28 2018 at 17:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639635">Mario Carneiro (Dec 28 2018 at 06:46)</a>:</h4>
 <p>A <code>has_reflect</code> instance is a function that produces an expression that is a proof of <code>p</code>, provided <code>p</code> is in fact true</p>
 
 <a name="152639645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639645">Mario Carneiro (Dec 28 2018 at 17:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639645">Mario Carneiro (Dec 28 2018 at 06:47)</a>:</h4>
 <p>So <code>decidable p</code> implies <code>has_reflect p</code> because you can evaluate the decidable instance and take the proof out</p>
 
 <a name="152639695"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639695">Joe Hendrix (Dec 28 2018 at 17:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639695">Joe Hendrix (Dec 28 2018 at 06:48)</a>:</h4>
 <p>Yep, I got <code>and</code> and <code>true</code>  and thought this would work, then got stuck with forall.  I tried <code>or</code> while writing up the example, and got the error about only being able to return a value of type <code>P</code>.</p>
 
 <a name="152639711"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639711">Mario Carneiro (Dec 28 2018 at 17:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639711">Mario Carneiro (Dec 28 2018 at 06:49)</a>:</h4>
 <p>If you know one or the other of the propositions is decidable, you can reflect an <code>or</code></p>
 
 <a name="152639715"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639715">Mario Carneiro (Dec 28 2018 at 17:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639715">Mario Carneiro (Dec 28 2018 at 06:49)</a>:</h4>
 <p>but really decidable is the one you want, it's closed under all the operations</p>
 
 <a name="152639761"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639761">Joe Hendrix (Dec 28 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639761">Joe Hendrix (Dec 28 2018 at 06:51)</a>:</h4>
 <p>Here was my attempt at <code>or</code>, but I can't match on the or value due to proof irrelevance:</p>
 <div class="codehilite"><pre><span></span>meta instance or.reflect (P Q : Prop) [reflected P] [reflected Q] [hp:has_reflect P] [hq:reflected Q]
 : has_reflect (P ∨ Q)
@@ -120,15 +120,15 @@ meta def decidable_reflected (P:Prop) [h:decidable P] [g:has_reflect P] : tactic
 </pre></div>
 
 <a name="152639766"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639766">Mario Carneiro (Dec 28 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639766">Mario Carneiro (Dec 28 2018 at 06:51)</a>:</h4>
 <p>exactly</p>
 
 <a name="152639768"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639768">Mario Carneiro (Dec 28 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639768">Mario Carneiro (Dec 28 2018 at 06:51)</a>:</h4>
 <p>In a tactic, a proof value isn't very useful. It's only going to help avoid some code paths that weren't going to be exercised anyway</p>
 
 <a name="152639769"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639769">Joe Hendrix (Dec 28 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639769">Joe Hendrix (Dec 28 2018 at 06:51)</a>:</h4>
 <p>Interesting <code>and</code> did not complain even though it looks like it recurses:</p>
 <div class="codehilite"><pre><span></span>meta instance and.reflect (P Q : Prop) [reflected P] [reflected Q] [hp:has_reflect P] [hq:has_reflect Q]
 : has_reflect (P ∧ Q)
@@ -136,64 +136,64 @@ meta def decidable_reflected (P:Prop) [h:decidable P] [g:has_reflect P] : tactic
 </pre></div>
 
 <a name="152639770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639770">Mario Carneiro (Dec 28 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639770">Mario Carneiro (Dec 28 2018 at 06:51)</a>:</h4>
 <p><code>and</code> has large elimination because it only has one constructor</p>
 
 <a name="152639815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639815">Joe Hendrix (Dec 28 2018 at 17:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639815">Joe Hendrix (Dec 28 2018 at 06:52)</a>:</h4>
 <p>The proof value is needed just so I can discharge theorems I'm proving.</p>
 
 <a name="152639823"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639823">Mario Carneiro (Dec 28 2018 at 17:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639823">Mario Carneiro (Dec 28 2018 at 06:53)</a>:</h4>
 <p>so if you have a function <code>p -&gt; expr</code> coming from your has reflect instance, you could just as well have a function producing <code>option expr</code> with no proof preconditions</p>
 
 <a name="152639879"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639879">Mario Carneiro (Dec 28 2018 at 17:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639879">Mario Carneiro (Dec 28 2018 at 06:54)</a>:</h4>
 <p>So when you are writing a has_reflect instance you are just constructing a proof from nothing. Sometimes that's easy, like <code>and</code>, sometimes that requires backtracking like <code>or</code>, and sometimes it's really hard</p>
 
 <a name="152639936"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639936">Mario Carneiro (Dec 28 2018 at 17:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639936">Mario Carneiro (Dec 28 2018 at 06:56)</a>:</h4>
 <p>How are you supposed to use <code>decidable_reflected</code>?</p>
 
 <a name="152639938"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639938">Mario Carneiro (Dec 28 2018 at 17:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639938">Mario Carneiro (Dec 28 2018 at 06:56)</a>:</h4>
 <p>nothing says what <code>P</code> is</p>
 
 <a name="152639949"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639949">Mario Carneiro (Dec 28 2018 at 17:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639949">Mario Carneiro (Dec 28 2018 at 06:57)</a>:</h4>
 <p>it seems like it's mixing meta levels, and that's why you need <code>has_reflect</code></p>
 
 <a name="152639952"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639952">Mario Carneiro (Dec 28 2018 at 17:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639952">Mario Carneiro (Dec 28 2018 at 06:57)</a>:</h4>
 <p><code>decidable_tac</code> is the same as <code>exact_dec_trivial</code> afaict</p>
 
 <a name="152639997"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639997">Joe Hendrix (Dec 28 2018 at 17:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152639997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152639997">Joe Hendrix (Dec 28 2018 at 06:58)</a>:</h4>
 <p>Let me work on an example.  Is <code>exact_dec_trivial</code> in Lean standard library or mathlib?</p>
 
 <a name="152640005"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640005">Mario Carneiro (Dec 28 2018 at 17:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640005">Mario Carneiro (Dec 28 2018 at 06:59)</a>:</h4>
 <p>It's in mathlib, but it's literally <code>exact dec_trivial</code> which is core only</p>
 
 <a name="152640062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640062">Joe Hendrix (Dec 28 2018 at 18:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640062">Joe Hendrix (Dec 28 2018 at 07:00)</a>:</h4>
 <p>I forget why I didn't just use <code>exact dec_trivial</code> -- I may not have known about it, I've used that tactic for a while now.</p>
 
 <a name="152640118"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640118">Mario Carneiro (Dec 28 2018 at 18:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640118">Mario Carneiro (Dec 28 2018 at 07:02)</a>:</h4>
 <p>note that <code>dec_trivial</code> is notation for <code>of_as_true (by trivial)</code>; the tactic is there I think to stage the elaboration</p>
 
 <a name="152640234"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640234">Mario Carneiro (Dec 28 2018 at 18:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640234">Mario Carneiro (Dec 28 2018 at 07:06)</a>:</h4>
 <p>Okay, so I think I understand now what you are trying to do. You need a combination of <code>decidable</code> and <code>has_reflect</code> that produces exprs rather than proof values. You can automatically construct one by reflecting a decidable instance, but you can also produce much smarter proofs for nats and such</p>
 
 <a name="152640287"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640287">Joe Hendrix (Dec 28 2018 at 18:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152640287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152640287">Joe Hendrix (Dec 28 2018 at 07:08)</a>:</h4>
 <p>That's right.  I want proof search to run within the VM (or compiler in Lean 4), then either I can reflect on the generated proof, or maybe just have some magic constant that pretends to do it for me (say a safe version of <code>sorry</code>).<br>
 (edit, apparently I can't spell)</p>
 
 <a name="152641068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152641068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152641068">Mario Carneiro (Dec 28 2018 at 18:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152641068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152641068">Mario Carneiro (Dec 28 2018 at 07:34)</a>:</h4>
 <p><span class="user-mention" data-user-id="110994">@Joe Hendrix</span> Here's an example of what I mean. Unfortunately I had to fight lean somewhat to write the instance, possibly the ergonomics of instance writing needs work.</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">meta</span> <span class="kn">inductive</span> <span class="n">reflect_decidable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
 <span class="bp">|</span> <span class="n">is_true</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="c">/-</span><span class="cm">reflected h-/</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">reflect_decidable</span>
@@ -224,19 +224,19 @@ meta def decidable_reflected (P:Prop) [h:decidable P] [g:has_reflect P] : tactic
 </pre></div>
 
 <a name="152644194"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152644194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152644194">Joe Hendrix (Dec 28 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152644194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152644194">Joe Hendrix (Dec 28 2018 at 09:04)</a>:</h4>
 <p>That would kind of work.  One downside is that <code>reflect_decidable</code> is meta.  I'm interested in trying to write provably correct decision procedures, not just proof producing.  I'll try this approach in the short term though.</p>
 
 <a name="152645158"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645158">Mario Carneiro (Dec 28 2018 at 20:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645158">Mario Carneiro (Dec 28 2018 at 09:32)</a>:</h4>
 <p>it has to be meta, because it's creating <code>expr</code>s</p>
 
 <a name="152645165"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645165">Mario Carneiro (Dec 28 2018 at 20:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645165">Mario Carneiro (Dec 28 2018 at 09:33)</a>:</h4>
 <p>this is a limitation of lean 3 tactic framework</p>
 
 <a name="152645210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645210">Mario Carneiro (Dec 28 2018 at 20:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/of_as_true%20proofs/near/152645210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11809ofastrueproofs.html#152645210">Mario Carneiro (Dec 28 2018 at 09:34)</a>:</h4>
 <p>You could create objects that are like <code>expr</code> but not meta, and then post process at the end, but that would add some extra overhead</p>
 
 

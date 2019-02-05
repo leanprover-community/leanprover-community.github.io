@@ -12,14 +12,14 @@ permalink: archive/113488general/27916reflection.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134585528"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134585528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134585528">Sarah Mameche (Sep 25 2018 at 19:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134585528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134585528">Sarah Mameche (Sep 25 2018 at 09:44)</a>:</h4>
 <p>Hi, <br>
 I'm trying to map meta expressions to an inductive type in the object language (with pattern matching on expr as described in <a href="https://leanprover.github.io/papers/tactic.pdf" target="_blank" title="https://leanprover.github.io/papers/tactic.pdf">https://leanprover.github.io/papers/tactic.pdf</a>). <br>
 There's a constructor taking a natural number as argument (var : ℕ → term). How can the number be extracted from an expression with this constructor?<br>
 Also, how does this work if I go from the inductive type back to exprs?</p>
 
 <a name="134586345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134586345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134586345">Rob Lewis (Sep 25 2018 at 20:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134586345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134586345">Rob Lewis (Sep 25 2018 at 10:05)</a>:</h4>
 <p>I'm not sure if I understand exactly what you're after. You want a function <code>expr → ℕ</code> that will return the index if the input is made with <code>expr.var</code>?</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">var_index</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="bp">ℕ</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">var</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
@@ -30,11 +30,11 @@ Also, how does this work if I go from the inductive type back to exprs?</p>
 <p>You can do the same in the other direction, if the nat appears in a constructor of your inductive type. Match on your type, get the nat argument, and feed it back into <code>expr.var</code>.</p>
 
 <a name="134586346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134586346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134586346">Rob Lewis (Sep 25 2018 at 20:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134586346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134586346">Rob Lewis (Sep 25 2018 at 10:05)</a>:</h4>
 <p>Or did you mean something else?</p>
 
 <a name="134592201"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134592201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134592201">Sarah Mameche (Sep 25 2018 at 22:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflection/near/134592201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27916reflection.html#134592201">Sarah Mameche (Sep 25 2018 at 12:16)</a>:</h4>
 <p>No, that helped, thanks!</p>
 
 
