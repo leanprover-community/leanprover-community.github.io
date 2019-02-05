@@ -1,0 +1,73 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53122eqrecgoal.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html">eq.rec goal</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157593938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157593938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157593938">Kevin Buzzard (Feb 05 2019 at 09:37)</a>:</h4>
+<p>If my goal is</p>
+<div class="codehilite"><pre><span></span>eq.rec (finsupp.prod g₂ (λ (r : R) (n : ℤ), minimal_value_group.mk v₂ r ^ n)) _ =
+    finsupp.prod g₂ (λ (r : R) (n : ℤ), minimal_value_group.mk v₂ r ^ n)
+</pre></div>
+
+
+<p>then did I take a wrong turn or is there some easy way to finish this?</p>
+
+<a name="157594186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594186">Johannes Hölzl (Feb 05 2019 at 09:42)</a>:</h4>
+<p>If both sides are definitional equal then you can just apply <code>refl</code>. Proof irrelevance in definitional equality allows<code>eq.rec</code> to compute as long as the data fits.</p>
+
+<a name="157594266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594266">Johannes Hölzl (Feb 05 2019 at 09:44)</a>:</h4>
+<p>So the <code>_</code> (before <code>=</code>) may be an arbitrary proof, even a variable. Still <code>eq.rec</code> can reduce by computation, Lean will interpret an arbitrary proof as <code>refl _</code> as this always fits</p>
+
+<a name="157594847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594847">Kevin Buzzard (Feb 05 2019 at 09:56)</a>:</h4>
+<p>I tried <code>refl</code> and it didn't work, that's why I posted here :-/</p>
+
+<a name="157594962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594962">Kevin Buzzard (Feb 05 2019 at 09:58)</a>:</h4>
+<p><code>dsimp</code> takes me to</p>
+<div class="codehilite"><pre><span></span>⊢ eq.rec (finsupp.prod g₂ (λ (r : R), pow (minimal_value_group.mk v₂ r))) _ =
+    finsupp.prod g₂ (λ (r : R), pow (minimal_value_group.mk v₂ r))
+</pre></div>
+
+<a name="157594973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594973">Kevin Buzzard (Feb 05 2019 at 09:59)</a>:</h4>
+<p>I haven't got my head around the goal really.</p>
+
+<a name="157594991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec%20goal/near/157594991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53122eqrecgoal.html#157594991">Kevin Buzzard (Feb 05 2019 at 09:59)</a>:</h4>
+<p>There are no weird variable names occurring twice:</p>
+<div class="codehilite"><pre><span></span>R : Type u₁,
+_inst_4 : comm_ring R,
+Γ₁ : Type u₂,
+_inst_5 : linear_ordered_comm_group Γ₁,
+Γ₂ : Type u₃,
+_inst_6 : linear_ordered_comm_group Γ₂,
+v₁ : valuation R Γ₁,
+v₂ : valuation R Γ₂,
+h : is_equiv v₁ v₂,
+g₁ g₂ : multiplicative (R →₀ ℤ),
+h12 :
+  (λ (f : multiplicative (R →₀ ℤ)),
+       finsupp.prod f (λ (r : R) (n : ℤ), (λ (r : R), option.get_or_else (⇑v₁ r) 1) r ^ n))
+      (g₁⁻¹ * g₂) =
+    1,
+this :
+  finsupp.prod g₁ (λ (r : R) (n : ℤ), minimal_value_group.mk v₂ r ^ n) =
+    finsupp.prod g₂ (λ (r : R) (n : ℤ), minimal_value_group.mk v₂ r ^ n)
+⊢ eq.rec (finsupp.prod g₂ (λ (r : R), pow (minimal_value_group.mk v₂ r))) _ =
+    finsupp.prod g₂ (λ (r : R), pow (minimal_value_group.mk v₂ r))
+</pre></div>
+
+
+{% endraw %}
