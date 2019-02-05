@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/19454Inductivelimits.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html">Inductive limits</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157612795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157612795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157612795">Sebastien Gouezel (Feb 05 2019 at 15:07)</a>:</h4>
+<p>What is the current status of inductive limits with respect to mathlib? I have a sequence of isometric embeddings <code>i n : C n -&gt; C (n+1)</code> for <code>n : nat</code>, and I want to get the inductive limit as a metric space in which all <code>C n</code> embed isometrically. I can definitely do it by hand, but if the direct limit in <code>Set</code> is already there it might be fun to try to use it. And if mathlib is ready for a categoric framework with metric spaces as objects and isometric embeddings as maps, why not!</p>
+
+<a name="157613017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157613017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157613017">Reid Barton (Feb 05 2019 at 15:10)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/limits/types.lean#L49" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/limits/types.lean#L49">https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/limits/types.lean#L49</a> has the colimit of a general diagram of types. You can specialize the index category to <code>nat</code> (which is a poset, and therefore automatically a category).<br>
+I also have the more specific description of the equivalence relation on a filtered colimit of types in a form which is more or less ready to PR.</p>
+
+<a name="157613165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157613165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157613165">Sebastien Gouezel (Feb 05 2019 at 15:12)</a>:</h4>
+<p>Do you know the joke that, when you ask a question to a category theorist and you listen to his answer, then after that you don't understand your own question any more? :)</p>
+
+<a name="157613256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157613256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157613256">Sebastien Gouezel (Feb 05 2019 at 15:14)</a>:</h4>
+<p>To be honest, I don't know what a cocone is, or a colimit, but I would very much like to see how the general framework works in a super-concrete setting just like the one I asked, on <code>Set</code>.</p>
+
+<a name="157613404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157613404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157613404">Sebastien Gouezel (Feb 05 2019 at 15:16)</a>:</h4>
+<p>Btw, for what I am asking #PR585 by Kenny would be very useful.</p>
+
+<a name="157614377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157614377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157614377">Johan Commelin (Feb 05 2019 at 15:28)</a>:</h4>
+<p>inductive limits are special cases of colimits</p>
+
+<a name="157615682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157615682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157615682">Reid Barton (Feb 05 2019 at 15:45)</a>:</h4>
+<p>And a cocone is the thing that shows up in the statement of the universal property: another object together with compatible maps from all the objects in the diagram (the <code>C n</code>).</p>
+
+<a name="157615950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20limits/near/157615950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19454Inductivelimits.html#157615950">Reid Barton (Feb 05 2019 at 15:49)</a>:</h4>
+<p>Is the statement you need just that there exists a metric space in which all the <code>C n</code> embed isometrically and compatibly with the give maps <code>i n</code>?</p>
+
+
+{% endraw %}

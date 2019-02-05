@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [a combinatorial challenge](12393acombinatorialchallenge.html) (29 messages, latest: Feb 05 2019 at 14:28)
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (52 messages, latest: Feb 05 2019 at 15:58)
+
+* [Inductive limits](19454Inductivelimits.html) (8 messages, latest: Feb 05 2019 at 15:49)
 
 * [card](81595card.html) (22 messages, latest: Feb 05 2019 at 14:22)
 
