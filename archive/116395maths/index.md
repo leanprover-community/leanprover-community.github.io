@@ -10,13 +10,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [card](81595card.html) (15 messages, latest: Feb 05 2019 at 13:39)
+
+* [a combinatorial challenge](12393acombinatorialchallenge.html) (4 messages, latest: Feb 05 2019 at 13:33)
+
 * [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 04 2019 at 13:12)
 
 * [floor_ring](74194floorring.html) (50 messages, latest: Feb 04 2019 at 11:19)
 
 * [linarith failure](87044linarithfailure.html) (109 messages, latest: Feb 04 2019 at 11:03)
-
-* [card](81595card.html) (12 messages, latest: Feb 03 2019 at 19:44)
 
 * [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 14:31)
 
