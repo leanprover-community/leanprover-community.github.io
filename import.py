@@ -47,6 +47,10 @@ def sanitize_topic(topic_name):
 def sanitize_stream(stream_name, stream_id):
     return str(stream_id) + sanitize(stream_name)
 
+# escape | character with \|
+def escape_pipes(s):
+    return s.replace('|','\|')
+
 ## retrieve information from Zulip
 
 # runs client.cmd(args). If the response is a rate limit error, waits the requested time and tries again.
@@ -217,7 +221,7 @@ def write_topic_index(s_name, s):
     for topic_name in sorted(s['topic_data'], key=lambda tn: s['topic_data'][tn]['latest_date'], reverse=True): #s['topic_data']:
         t = s['topic_data'][topic_name]
         outfile.write("* [{0}]({1}.html) ({2} message{4}, latest: {3})\n\n".format(
-            topic_name,
+            escape_pipes(topic_name),
             sanitize_topic(topic_name),
             t['size'],
             datetime.fromtimestamp(t['latest_date']).strftime('%b %d %Y at %H:%M'),
