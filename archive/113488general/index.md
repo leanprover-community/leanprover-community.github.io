@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
+* [windows recompiling](75717windowsrecompiling.html) (5 messages, latest: Feb 06 2019 at 08:37)
 
-* [windows recompiling](75717windowsrecompiling.html) (4 messages, latest: Feb 06 2019 at 00:34)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
 
 * [eq.rec goal](53122eqrecgoal.html) (226 messages, latest: Feb 05 2019 at 19:19)
 
