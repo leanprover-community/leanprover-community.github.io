@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (83 messages, latest: Feb 05 2019 at 22:02)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (84 messages, latest: Feb 05 2019 at 23:44)
 
 * [eq.rec goal](53122eqrecgoal.html) (226 messages, latest: Feb 05 2019 at 19:19)
 
