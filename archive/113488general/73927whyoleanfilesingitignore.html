@@ -1,0 +1,31 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/73927whyoleanfilesingitignore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/73927whyoleanfilesingitignore.html">why olean files in .gitignore?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157680600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20olean%20files%20in%20.gitignore%3F/near/157680600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73927whyoleanfilesingitignore.html#157680600">Kevin Buzzard (Feb 06 2019 at 10:45)</a>:</h4>
+<p>I am fiddling around with two non-master branches in my local clone of mathlib, which is not the sort of thing I usually do. I make new .lean files in one branch, compile to get .olean files in the same branch and then switch to the other branch and the lean files disappear but the olean files don't. This is expected behaviour (I think), but I think it means that work done in one branch can affect the other branch, which doesn't sound right to me. If the olean files are OS-independent then why are they in .gitignore? It would save people from having to compile mathlib. I could completely understand why OS-dependent files wouldn't be there but not these. Is the issue to do with timestamps? Or because there's some unwritten rule that non-human-readable files should always for some reason be in .gitignore?</p>
+
+<a name="157680778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20olean%20files%20in%20.gitignore%3F/near/157680778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73927whyoleanfilesingitignore.html#157680778">Mario Carneiro (Feb 06 2019 at 10:48)</a>:</h4>
+<p>one issue is that they will muddle up the git diffs</p>
+
+<a name="157680808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20olean%20files%20in%20.gitignore%3F/near/157680808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73927whyoleanfilesingitignore.html#157680808">Mario Carneiro (Feb 06 2019 at 10:49)</a>:</h4>
+<p>people won't compile them half the time when making PRs so I don't know how trustworthy they would be</p>
+
+<a name="157680905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20olean%20files%20in%20.gitignore%3F/near/157680905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73927whyoleanfilesingitignore.html#157680905">Mario Carneiro (Feb 06 2019 at 10:51)</a>:</h4>
+<p>it has more to do with the fact that it's a build artifact than a binary file, although the binary thing might cause diff problems, both that the diff is unreadable, and also that it's probably unnecessarily large because of things like renumbering causing big propagating changes from small changes</p>
+
+
+{% endraw %}

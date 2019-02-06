@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [windows recompiling](75717windowsrecompiling.html) (5 messages, latest: Feb 06 2019 at 08:37)
+* [Lean in the wild](43625Leaninthewild.html) (9 messages, latest: Feb 06 2019 at 10:55)
+
+* [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (4 messages, latest: Feb 06 2019 at 10:51)
+
+* [windows recompiling](75717windowsrecompiling.html) (7 messages, latest: Feb 06 2019 at 10:29)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
 
@@ -87,8 +91,6 @@ permalink: archive/113488general/index.html
 * [non-persistent attributes](10577nonpersistentattributes.html) (4 messages, latest: Jan 26 2019 at 23:06)
 
 * [binding powers](07324bindingpowers.html) (46 messages, latest: Jan 26 2019 at 22:43)
-
-* [Lean in the wild](43625Leaninthewild.html) (8 messages, latest: Jan 26 2019 at 22:02)
 
 * [Module refactor](28061Modulerefactor.html) (15 messages, latest: Jan 26 2019 at 21:40)
 

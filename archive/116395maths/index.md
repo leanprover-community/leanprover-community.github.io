@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (85 messages, latest: Feb 06 2019 at 10:13)
+
 * [limits 3.0](69860limits30.html) (30 messages, latest: Feb 06 2019 at 07:50)
 
 * [a combinatorial challenge](12393acombinatorialchallenge.html) (60 messages, latest: Feb 05 2019 at 20:24)
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 14:31)
 
 * [groups acting on sets](00627groupsactingonsets.html) (6 messages, latest: Jan 31 2019 at 16:20)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (84 messages, latest: Jan 30 2019 at 12:14)
 
 * [modules](57882modules.html) (7 messages, latest: Jan 30 2019 at 08:07)
 
