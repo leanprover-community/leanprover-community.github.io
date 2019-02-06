@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (35 messages, latest: Feb 06 2019 at 19:25)
+* [hiding from prelude](75961hidingfromprelude.html) (5 messages, latest: Feb 06 2019 at 20:47)
 
-* [hiding from prelude](75961hidingfromprelude.html) (3 messages, latest: Feb 06 2019 at 18:18)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (36 messages, latest: Feb 06 2019 at 20:02)
 
 * [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html) (76 messages, latest: Feb 04 2019 at 19:28)
 
