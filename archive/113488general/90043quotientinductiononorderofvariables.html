@@ -40,5 +40,57 @@ permalink: archive/113488general/90043quotientinductiononorderofvariables.html
 
 <p>People here are smart and they must have realised this before. Is my <code>quotient.induction_on₂''</code> function already in Lean or mathlib?</p>
 
+<a name="157700838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157700838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157700838">Kevin Buzzard (Feb 06 2019 at 16:01)</a>:</h4>
+<p>Hmm, does <code>_on</code> mean "I am going to ask for the variables first", like <code>rec_on</code>?</p>
+
+<a name="157701025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157701025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157701025">Rob Lewis (Feb 06 2019 at 16:03)</a>:</h4>
+<blockquote>
+<p>Hmm, does <code>_on</code> mean "I am going to ask for the variables first", like <code>rec_on</code>?</p>
+</blockquote>
+<p>Yes, usually. Without looking at the details, is <code>quotient.ind₂</code> what you want?</p>
+
+<a name="157702693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157702693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157702693">Patrick Massot (Feb 06 2019 at 16:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Did you trying using more <code>rintro</code> magic as I told you?</p>
+
+<a name="157702751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157702751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157702751">Patrick Massot (Feb 06 2019 at 16:24)</a>:</h4>
+<p>as in </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">I</span><span class="bp">.</span><span class="n">quotient</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>look at tactic state after the first line</p>
+
+<a name="157703197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157703197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157703197">Kevin Buzzard (Feb 06 2019 at 16:29)</a>:</h4>
+<p>I am not even in tactic mode; I want to say "this is trivial" as quickly as possible.</p>
+
+<a name="157703342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157703342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157703342">Kevin Buzzard (Feb 06 2019 at 16:31)</a>:</h4>
+<p>I wasn't in front of Lean when the penny dropped about <code>_on</code> but now I am, and I think that the <code>'</code> also has a meaning -- <code>'</code> means "use <a href="http://quotient.mk" target="_blank" title="http://quotient.mk">quotient.mk</a>' not <a href="http://quotient.mk" target="_blank" title="http://quotient.mk">quotient.mk</a>". I am only just getting to the bottom of things. Maybe I want <code>quotient.ind₂'</code>? Is that the name of this function? It doesn't appear to be there.</p>
+
+<a name="157703512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157703512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157703512">Kevin Buzzard (Feb 06 2019 at 16:33)</a>:</h4>
+<p>So apparently <code>quotient.mk</code> means "infer the equivalence relation using type class inference" and  <code>quotient.mk'</code> means "infer it using unification"</p>
+
+<a name="157703633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157703633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157703633">Kevin Buzzard (Feb 06 2019 at 16:35)</a>:</h4>
+<p>In my situation I have a quotient of a ring by an ideal, and rings have lots of ideals, so I guess I will not be using type class inference. This seems to put me in the <code>'</code> world. So currently my belief is that the function I want should be called <code>quotient.ind₂'</code>.</p>
+
+<a name="157704054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157704054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157704054">Kevin Buzzard (Feb 06 2019 at 16:40)</a>:</h4>
+<p>And I can't find this. Have I got this straight? My conclusion is that I should write a short PR adding <code>quotient.ind'</code> and <code>quotient.ind₂'</code> and maybe a 3 variable version, to <code>data/quot.lean</code>.</p>
+
 
 {% endraw %}
