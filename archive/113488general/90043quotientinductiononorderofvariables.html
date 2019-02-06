@@ -92,5 +92,32 @@ permalink: archive/113488general/90043quotientinductiononorderofvariables.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157704054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157704054">Kevin Buzzard (Feb 06 2019 at 16:40)</a>:</h4>
 <p>And I can't find this. Have I got this straight? My conclusion is that I should write a short PR adding <code>quotient.ind'</code> and <code>quotient.ind₂'</code> and maybe a 3 variable version, to <code>data/quot.lean</code>.</p>
 
+<a name="157706433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157706433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157706433">Chris Hughes (Feb 06 2019 at 17:08)</a>:</h4>
+<p><code>quotient.induction_on'</code> and <code>quotient.induction_on₂'</code></p>
+
+<a name="157706902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157706902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157706902">Kevin Buzzard (Feb 06 2019 at 17:13)</a>:</h4>
+<p>The variables are in the wrong order for me with <code>_on</code></p>
+
+<a name="157707076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.induction_on%20order%20of%20variables/near/157707076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90043quotientinductiononorderofvariables.html#157707076">Kevin Buzzard (Feb 06 2019 at 17:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">ind&#39;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">quotient.ind&#39; :</span>
+<span class="cm">  ∀ {α : Sort u_5} {s₁ : setoid α} {p : quotient s₁ → Prop},</span>
+<span class="cm">    (∀ (a : α), p (quotient.mk&#39; a)) → ∀ (q : quotient s₁), p q</span>
+<span class="cm">    -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on&#39;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">quotient.induction_on&#39; :</span>
+<span class="cm">  ∀ {α : Sort u_5} {s₁ : setoid α} {p : quotient s₁ → Prop} (q : quotient s₁),</span>
+<span class="cm">    (∀ (a : α), p (quotient.mk&#39; a)) → p q</span>
+<span class="cm">    -/</span>
+</pre></div>
+
+
+<p>I want the hypothesis before the quotient variables. I hope I've understood the rules for naming these functions correctly.</p>
+
 
 {% endraw %}

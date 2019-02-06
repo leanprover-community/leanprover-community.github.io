@@ -1,0 +1,97 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/56506BorsukUlamtheorem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html">Borsuk Ulam theorem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157709109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709109">Nguyen Duc Hoan (Feb 06 2019 at 17:40)</a>:</h4>
+<p>Hello,  I am trying to formulate Borsuk-Ulam theorem (the theorem in this link: <a href="https://en.wikipedia.org/wiki/Borsuk%E2%80%93Ulam_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Borsuk%E2%80%93Ulam_theorem">https://en.wikipedia.org/wiki/Borsuk%E2%80%93Ulam_theorem</a>) but I have some questions. Could you please help me?  <br>
+1. In my code, why do I need two properties <code>has_mem ↥(sphere_Sn n r) (set (fin (n + 1) → ℝ))</code> and <code>has_neg ↥(sphere_Sn n r)</code> in the theorem? <br>
+2. In my code, I use the theorem <code>mem_sphere_Sn</code>  to define what is member of sphere_Sn. Moreover, the theorem <code>sym_sphere_Sn</code> defines if <code> p ∈ sphere_Sn</code> then <code>(-p) ∈ sphere_Sn</code>. However, LEAN could not use that properties in the <code>Borsuk_Ulam_theorem</code>. So how to use two theorems <code>mem_sphere_Sn</code> and <code>sym_sphere_Sn</code> into <code>Borsuk_Ulam_theorem</code>?<br>
+This is my code </p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">n</span><span class="o">:</span><span class="n">nat</span>
+<span class="kn">variable</span> <span class="n">r</span><span class="o">:</span><span class="n">real</span>
+<span class="kn">variable</span> <span class="n">p</span><span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span>
+
+<span class="kn">variable</span> <span class="o">[</span><span class="n">metric_space</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)]</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)]</span>
+
+<span class="n">def</span> <span class="n">sphere_Sn</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">y</span> <span class="bp">|</span> <span class="n">dist</span> <span class="n">y</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span><span class="o">}</span>
+
+
+<span class="kn">theorem</span> <span class="n">mem_sphere_Sn</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">dist</span> <span class="n">p</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">sym_sphere_Sn</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span> <span class="bp">↔</span> <span class="bp">-</span><span class="n">p</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span> <span class="o">:=</span><span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">Borsuk_Ulam_theorem</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mem</span> <span class="err">↥</span><span class="o">(</span><span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">))]</span> <span class="o">[</span><span class="n">has_neg</span> <span class="err">↥</span><span class="o">(</span><span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span><span class="o">)]</span>
+<span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span> <span class="bp">→</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">))</span> <span class="o">(</span><span class="n">h1</span><span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="n">r</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">p</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">p</span>
+<span class="o">:=</span><span class="n">sorry</span>
+</pre></div>
+
+<a name="157709463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709463">Kevin Buzzard (Feb 06 2019 at 17:45)</a>:</h4>
+<p>You have a variable <code>p ∈ sphere_Sn n r</code> and you talk about <code>-p</code>, so Lean wants to know what <code>-p</code> means.</p>
+
+<a name="157709542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709542">Kevin Buzzard (Feb 06 2019 at 17:46)</a>:</h4>
+<p>Because <code>-p</code> is short for <code>has_neg.neg p</code> Lean comes up with this rather elaborate error about <code>has_neg</code>.</p>
+
+<a name="157709594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709594">Kevin Buzzard (Feb 06 2019 at 17:47)</a>:</h4>
+<p>But you cannot solve the problem correctly with <code>[has_neg ↥(sphere_Sn n r)]</code>. That line means "let's just assume we have a completely random function <code>has_neg.neg</code> sending <code>p</code> to <code>-p</code>, about which we know absolutely nothing".</p>
+
+<a name="157709644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709644">Kevin Buzzard (Feb 06 2019 at 17:48)</a>:</h4>
+<p>I would imagine that you have a certain function in mind, and you need to tell Lean to use that function.</p>
+
+<a name="157709815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709815">Bryan Gin-ge Chen (Feb 06 2019 at 17:50)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#inferring-notation" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#inferring-notation">This section on inferring notation</a> in TPiL may help.</p>
+
+<a name="157709821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157709821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157709821">Kevin Buzzard (Feb 06 2019 at 17:50)</a>:</h4>
+<p>Every occurrence of <code>[...]</code> in your code is very suspicious to me. They all mean "let's assume we have a random function". For example <code>variable [vector_space ℝ (fin (n+1) → ℝ)]</code> means "Let's assume that the space of functions from <code>fin (n+1)</code> to the reals has a completely arbitrary vector space structure, about which we know nothing at all, other than the fact that it satisfies the axioms of a vector space". We do not even know that the map sending everything to zero will be the zero of the vector space -- we know literally nothing about this structure. What you almost certainly want to do is to tell Lean to use the obvious vector space structure on this type.</p>
+
+<a name="157710025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710025">Kevin Buzzard (Feb 06 2019 at 17:53)</a>:</h4>
+<p>Let's start at the beginning. I should say now that I have never used vector spaces in Lean, so I don't know the answer to this question: Is the vector space <code>ℝ^n</code> already built in Lean? I suspect it is, and you should use Lean's pre-built one, which will have the correct vector space structure on it, rather than trying to build your own (which is of course possible, you can define addition and scalar multiplication on <code>(fin (n+1) → ℝ)</code> and then prove all the axioms yourself).</p>
+
+<a name="157710102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710102">Kevin Buzzard (Feb 06 2019 at 17:54)</a>:</h4>
+<p>The theory of modules over a ring (and hence vector spaces over a field) changed only a few weeks ago. Are you completely up to date with Lean 3.4.2 release and the current version of mathlib?</p>
+
+<a name="157710374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710374">Nguyen Duc Hoan (Feb 06 2019 at 17:57)</a>:</h4>
+<p>yes, I were up to date with Lean 3.4.2 release and the current version mathlib</p>
+
+<a name="157710445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710445">Kevin Buzzard (Feb 06 2019 at 17:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="kn">definition</span> <span class="n">is_it_there_already</span> <span class="o">:</span> <span class="n">vector_space</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>Instead of <code>[vector_space ℝ (fin (n+1) → ℝ)]</code> (which means "put an arbitrary real vector space structure on <code>(fin (n+1) → ℝ)</code>) about which we know nothing"), I am trying to get Lean to guess what vector space structure we want. But I am failing.</p>
+
+<a name="157710488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710488">Kevin Buzzard (Feb 06 2019 at 17:58)</a>:</h4>
+<p>So I think we need to start there.</p>
+
+<a name="157710535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710535">Kevin Buzzard (Feb 06 2019 at 17:59)</a>:</h4>
+<p>Once we get this right, Lean will know the correct vector space structure on <code>(fin (n+1) → ℝ)</code>.</p>
+
+
+{% endraw %}

@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (10 messages, latest: Feb 06 2019 at 16:40)
+* [Qualification](82762Qualification.html) (1 message, latest: Feb 06 2019 at 17:39)
+
+* [newline at end of file](01588newlineatendoffile.html) (4 messages, latest: Feb 06 2019 at 17:36)
+
+* [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (13 messages, latest: Feb 06 2019 at 17:15)
 
 * [Parsing left arrows](93054Parsingleftarrows.html) (5 messages, latest: Feb 06 2019 at 14:20)
 
