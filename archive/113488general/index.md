@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
+* [Parsing left arrows](93054Parsingleftarrows.html) (3 messages, latest: Feb 06 2019 at 12:31)
 
-* [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (4 messages, latest: Feb 06 2019 at 10:51)
+* [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
+
+* [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
 
 * [windows recompiling](75717windowsrecompiling.html) (7 messages, latest: Feb 06 2019 at 10:29)
 

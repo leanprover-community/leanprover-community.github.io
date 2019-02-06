@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (85 messages, latest: Feb 06 2019 at 10:13)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (86 messages, latest: Feb 06 2019 at 12:09)
 
 * [limits 3.0](69860limits30.html) (30 messages, latest: Feb 06 2019 at 07:50)
 
