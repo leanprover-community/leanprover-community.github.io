@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [limits 3.0](69860limits30.html) (25 messages, latest: Feb 05 2019 at 21:37)
+* [limits 3.0](69860limits30.html) (27 messages, latest: Feb 06 2019 at 04:59)
 
 * [a combinatorial challenge](12393acombinatorialchallenge.html) (60 messages, latest: Feb 05 2019 at 20:24)
 
