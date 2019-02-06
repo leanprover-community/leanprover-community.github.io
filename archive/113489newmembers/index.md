@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (30 messages, latest: Feb 06 2019 at 18:38)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (35 messages, latest: Feb 06 2019 at 19:25)
 
 * [hiding from prelude](75961hidingfromprelude.html) (3 messages, latest: Feb 06 2019 at 18:18)
 
