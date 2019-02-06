@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Qualification](82762Qualification.html) (1 message, latest: Feb 06 2019 at 17:39)
+* [newline at end of file](01588newlineatendoffile.html) (7 messages, latest: Feb 06 2019 at 18:36)
 
-* [newline at end of file](01588newlineatendoffile.html) (4 messages, latest: Feb 06 2019 at 17:36)
+* [Qualification](82762Qualification.html) (3 messages, latest: Feb 06 2019 at 18:12)
 
 * [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (13 messages, latest: Feb 06 2019 at 17:15)
 

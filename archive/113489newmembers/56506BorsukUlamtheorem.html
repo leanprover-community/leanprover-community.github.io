@@ -93,5 +93,88 @@ This is my code </p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157710535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157710535">Kevin Buzzard (Feb 06 2019 at 17:59)</a>:</h4>
 <p>Once we get this right, Lean will know the correct vector space structure on <code>(fin (n+1) → ℝ)</code>.</p>
 
+<a name="157711245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711245">Nguyen Duc Hoan (Feb 06 2019 at 18:06)</a>:</h4>
+<p>So I need to build vector space structure on <code>(fin (n+1) \to \R)</code>?</p>
+
+<a name="157711634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711634">Rob Lewis (Feb 06 2019 at 18:11)</a>:</h4>
+<p>Kevin, either you're missing an import, or this will be added soon. I just tried it in the repo Johannes and I are working on and we have that instance.</p>
+
+<a name="157711770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711770">Patrick Massot (Feb 06 2019 at 18:12)</a>:</h4>
+<p>He is missing an import, this has been there forever</p>
+
+<a name="157711815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711815">Kevin Buzzard (Feb 06 2019 at 18:13)</a>:</h4>
+<p>I knew for sure that it was there before the module refactor.</p>
+
+<a name="157711825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711825">Kevin Buzzard (Feb 06 2019 at 18:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="119054">@Nguyen Duc Hoan</span> it's OK, the vector space structure is there already, I just appear to have mislaid it.</p>
+
+<a name="157711878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711878">Rob Lewis (Feb 06 2019 at 18:14)</a>:</h4>
+<p>Ah, this is the magic instance.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">discrete_field</span><span class="bp">.</span><span class="n">to_vector_space</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">vector_space</span> <span class="n">α</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span> <span class="o">}</span>
+</pre></div>
+
+<a name="157711960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157711960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157711960">Kevin Buzzard (Feb 06 2019 at 18:15)</a>:</h4>
+<p>Is this in mathlib?</p>
+
+<a name="157712014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712014">Kevin Buzzard (Feb 06 2019 at 18:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="119054">@Nguyen Duc Hoan</span> we've nearly found it.</p>
+
+<a name="157712015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712015">Rob Lewis (Feb 06 2019 at 18:16)</a>:</h4>
+<p>Apparently not, but it will be before long.</p>
+
+<a name="157712031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712031">Kevin Buzzard (Feb 06 2019 at 18:16)</a>:</h4>
+<p>Aah, apparently it's too cutting edge :-)</p>
+
+<a name="157712035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712035">Kevin Buzzard (Feb 06 2019 at 18:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  :P</p>
+
+<a name="157712043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712043">Kevin Buzzard (Feb 06 2019 at 18:16)</a>:</h4>
+<p>;-)</p>
+
+<a name="157712230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712230">Kevin Buzzard (Feb 06 2019 at 18:19)</a>:</h4>
+<p>We are finally there!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">instance</span> <span class="n">discrete_field</span><span class="bp">.</span><span class="n">to_vector_space</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">vector_space</span> <span class="n">α</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span> <span class="o">}</span>
+
+<span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">is_it_there_already</span> <span class="o">:</span> <span class="n">vector_space</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>So you don't need to write the line defining <code>is_it_there_already</code> : this line is just a test to see that Lean can guess that <code>(fin (n+1) → ℝ)</code> is a vector space. But you do need this funny <code>instance</code> line above. I think Patrick is right, this maybe was there before, but there have been a lot of changes to rings and modules recently and maybe this stopped working.</p>
+
+<a name="157712302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712302">Kevin Buzzard (Feb 06 2019 at 18:20)</a>:</h4>
+<p>But the point is that you can now <em>remove</em> the line <code>[vector_space ℝ (fin (n+1) → ℝ)]</code> because Lean knows the right vector space structure now.</p>
+
+<a name="157712338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712338">Kevin Buzzard (Feb 06 2019 at 18:20)</a>:</h4>
+<p>[you need to add the funny <code>instance</code> line instead -- and in a few weeks' time mathlib will perhaps give you an error on this line with message "this is defined already" and then you can just remove it]</p>
+
+<a name="157712695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157712695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157712695">Kevin Buzzard (Feb 06 2019 at 18:26)</a>:</h4>
+<p>The same story is true with <code>variable [metric_space (fin (n+1) → ℝ)]</code>. This cannot be right, because this means "put a random metric space structure on <code> (fin (n+1) → ℝ)</code>. I might use this in the following setting: <code>variables (X : Type) [metric space X]</code> -- this is how you tell Lean "let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> be a metric space". It means "let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> be a random set, and then put a random metric space structure on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span>". In that context you can see it's the right thing to do -- but in your context you have a very concrete set <code>(fin (n+1) → ℝ)</code> and you almost certainly want the "standard" metric space on that. Now actually here is where we do need <span class="user-mention" data-user-id="110031">@Patrick Massot</span>  -- do we have the metric space structure on this set Patrick, or will Nguyen have to build it himself?</p>
+
+<a name="157713729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/157713729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#157713729">Patrick Massot (Feb 06 2019 at 18:38)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/metric_space/basic.lean#L915" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/metric_space/basic.lean#L915">https://github.com/leanprover-community/mathlib/blob/master/src/topology/metric_space/basic.lean#L915</a></p>
+
 
 {% endraw %}
