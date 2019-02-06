@@ -22,5 +22,13 @@ permalink: archive/113488general/40291Customattributes.html
 <span class="n">meta</span> <span class="n">def</span> <span class="n">foo_attr</span> <span class="o">:</span> <span class="n">user_attribute</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">name</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">foo</span><span class="o">,</span> <span class="n">descr</span> <span class="o">:=</span> <span class="s2">&quot;bar&quot;</span> <span class="o">}</span><span class="bp">`</span>
 </pre></div>
 
+<a name="157732855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Custom%20attributes/near/157732855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40291Customattributes.html#157732855">Wojciech Nawrocki (Feb 06 2019 at 22:33)</a>:</h4>
+<p>Hm no, that doesn't seem to work with <code>simp</code>. What I would like to do is define custom attributes, say e.g. a <code>cnf</code>, so that I can tag lemmas which bring Boolean expressions into CNF form with <code>@[cnf]</code> and then use <code>simp with cnf</code> to convert into CNF. But <code>simp</code> throws an error of the form <code>unknown identifier simp_attr.cnf</code> when I try that. The only reference to that seems to be <a href="https://github.com/leanprover/lean/blob/master/src/library/tactic/simp_lemmas.cpp#L1572" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/library/tactic/simp_lemmas.cpp#L1572">here</a> but I don't understand the kernel well enough to figure out how to define simp attrs from that.</p>
+
+<a name="157734426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Custom%20attributes/near/157734426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40291Customattributes.html#157734426">Wojciech Nawrocki (Feb 06 2019 at 22:54)</a>:</h4>
+<p>Really found it this time I think, <code>run_cmd mk_simp_attr ``cnf [``simp]</code>. Probably not supposed to do this, but it seems to work.</p>
+
 
 {% endraw %}
