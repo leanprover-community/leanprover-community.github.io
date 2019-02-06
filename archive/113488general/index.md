@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [windows recompiling](75717windowsrecompiling.html) (8 messages, latest: Feb 06 2019 at 13:59)
+* [Parsing left arrows](93054Parsingleftarrows.html) (5 messages, latest: Feb 06 2019 at 14:20)
 
-* [Parsing left arrows](93054Parsingleftarrows.html) (3 messages, latest: Feb 06 2019 at 12:31)
+* [windows recompiling](75717windowsrecompiling.html) (8 messages, latest: Feb 06 2019 at 13:59)
 
 * [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
 
