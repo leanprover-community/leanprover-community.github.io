@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (1 message, latest: Feb 06 2019 at 15:53)
+
 * [Parsing left arrows](93054Parsingleftarrows.html) (5 messages, latest: Feb 06 2019 at 14:20)
 
 * [windows recompiling](75717windowsrecompiling.html) (8 messages, latest: Feb 06 2019 at 13:59)
