@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [windows recompiling](75717windowsrecompiling.html) (8 messages, latest: Feb 06 2019 at 13:59)
+
 * [Parsing left arrows](93054Parsingleftarrows.html) (3 messages, latest: Feb 06 2019 at 12:31)
 
 * [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
 
 * [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
-
-* [windows recompiling](75717windowsrecompiling.html) (7 messages, latest: Feb 06 2019 at 10:29)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
 
