@@ -54,5 +54,65 @@ permalink: archive/113488general/55061defbreaksthings.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20breaks%20things/near/157802567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html#157802567">Simon Hudon (Feb 07 2019 at 18:56)</a>:</h4>
 <p>What do you get as an error message?</p>
 
+<a name="157803795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20breaks%20things/near/157803795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html#157803795">Chris Hughes (Feb 07 2019 at 19:10)</a>:</h4>
+<p><code>type mismatch at definition 'equiv.perm.list_to_cycle._proof_3', has type
+  ∀ {α : Type u} [_inst_1 : decidable_eq α] (l : list α),
+    (ℤ → α → α) →
+    (∀ (n : ℤ),
+       left_inverse
+         ((λ (n : ℤ) (a : α),
+             dite (a ∈ l)
+               (λ (h : a ∈ l),
+                  let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+                  in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+               (λ (h : a ∉ l), a))
+            n)
+         ((λ (n : ℤ) (a : α),
+             dite (a ∈ l)
+               (λ (h : a ∈ l),
+                  let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+                  in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+               (λ (h : a ∉ l), a))
+            (-n))) →
+    left_inverse
+      ((λ (n : ℤ) (a : α),
+          dite (a ∈ l)
+            (λ (h : a ∈ l),
+               let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+               in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+            (λ (h : a ∉ l), a))
+         (-1))
+      ((λ (n : ℤ) (a : α),
+          dite (a ∈ l)
+            (λ (h : a ∈ l),
+               let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+               in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+            (λ (h : a ∉ l), a))
+         (- -1))
+but is expected to have type
+  ∀ {α : Type u} [_inst_1 : decidable_eq α] (l : list α) (f : ℤ → α → α),
+    (∀ (n : ℤ),
+       left_inverse
+         ((λ (n : ℤ) (a : α),
+             dite (a ∈ l)
+               (λ (h : a ∈ l),
+                  let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+                  in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+               (λ (h : a ∉ l), a))
+            n)
+         ((λ (n : ℤ) (a : α),
+             dite (a ∈ l)
+               (λ (h : a ∈ l),
+                  let ll : ℕ+ := ⟨length l, list_to_cycle._proof_1 α l a h⟩
+                  in nth_le l ((↑(index_of a l) + ↑n).val) (list_to_cycle._proof_2 α _inst_1 l n a h))
+               (λ (h : a ∉ l), a))
+            (-n))) →
+    left_inverse (f (-1)) (f (- -1))</code></p>
+
+<a name="157806310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20breaks%20things/near/157806310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html#157806310">Simon Hudon (Feb 07 2019 at 19:40)</a>:</h4>
+<p>That's probably a bug in the equation compiler. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, what do you think?</p>
+
 
 {% endraw %}
