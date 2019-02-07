@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Qualification](82762Qualification.html) (4 messages, latest: Feb 07 2019 at 06:25)
+
 * [Custom attributes](40291Customattributes.html) (5 messages, latest: Feb 06 2019 at 23:25)
 
 * [newline at end of file](01588newlineatendoffile.html) (8 messages, latest: Feb 06 2019 at 19:46)
-
-* [Qualification](82762Qualification.html) (3 messages, latest: Feb 06 2019 at 18:12)
 
 * [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (13 messages, latest: Feb 06 2019 at 17:15)
 
