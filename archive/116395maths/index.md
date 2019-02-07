@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [floor_ring](74194floorring.html) (53 messages, latest: Feb 07 2019 at 10:46)
+
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (87 messages, latest: Feb 06 2019 at 13:12)
 
 * [limits 3.0](69860limits30.html) (30 messages, latest: Feb 06 2019 at 07:50)
@@ -23,8 +25,6 @@ permalink: archive/116395maths/index.html
 * [card](81595card.html) (22 messages, latest: Feb 05 2019 at 14:22)
 
 * [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 04 2019 at 13:12)
-
-* [floor_ring](74194floorring.html) (50 messages, latest: Feb 04 2019 at 11:19)
 
 * [linarith failure](87044linarithfailure.html) (109 messages, latest: Feb 04 2019 at 11:03)
 
