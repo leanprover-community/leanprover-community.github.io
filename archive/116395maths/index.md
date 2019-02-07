@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [floor_ring](74194floorring.html) (53 messages, latest: Feb 07 2019 at 10:46)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (88 messages, latest: Feb 07 2019 at 12:34)
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (87 messages, latest: Feb 06 2019 at 13:12)
+* [floor_ring](74194floorring.html) (54 messages, latest: Feb 07 2019 at 12:06)
 
 * [limits 3.0](69860limits30.html) (30 messages, latest: Feb 06 2019 at 07:50)
 
