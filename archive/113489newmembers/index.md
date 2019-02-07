@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Raymond](37083Raymond.html) (1 message, latest: Feb 07 2019 at 20:26)
+
 * [type class inference sadness](84569typeclassinferencesadness.html) (34 messages, latest: Feb 07 2019 at 14:36)
 
 * [hiding from prelude](75961hidingfromprelude.html) (6 messages, latest: Feb 07 2019 at 04:22)
