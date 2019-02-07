@@ -1,0 +1,58 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/55061defbreaksthings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html">def breaks things</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157801945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20breaks%20things/near/157801945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html#157801945">Chris Hughes (Feb 07 2019 at 18:48)</a>:</h4>
+<p>The following definition works as a <code>lemma</code> but not as a <code>def</code>. What's the problem?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">order_of_element</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">enat</span> <span class="n">data</span><span class="bp">.</span><span class="n">zmod</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">open</span> <span class="n">equiv</span> <span class="n">function</span> <span class="n">fintype</span> <span class="n">finset</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="kn">namespace</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">perm</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">list</span>
+<span class="kn">lemma</span> <span class="n">list_to_cycle</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hl</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">nodup</span><span class="o">)</span> <span class="o">:</span> <span class="n">perm</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span> <span class="k">then</span>
+      <span class="k">let</span> <span class="n">ll</span> <span class="o">:</span> <span class="bp">ℕ+</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="n">mt</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_eq_zero</span><span class="bp">.</span><span class="mi">1</span>
+        <span class="err">$</span> <span class="bp">λ</span> <span class="n">hl</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">not_mem_nil</span> <span class="n">a</span> <span class="err">$</span> <span class="n">hl</span> <span class="bp">▸</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">in</span>
+      <span class="n">l</span><span class="bp">.</span><span class="n">nth_le</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">index_of</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:</span> <span class="n">zmod</span> <span class="n">ll</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">index_of</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:</span> <span class="n">zmod</span> <span class="n">ll</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span>
+    <span class="k">else</span> <span class="n">a</span> <span class="k">in</span>
+<span class="k">have</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">left_inverse</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">n</span><span class="o">)),</span>
+  <span class="k">from</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span>
+    <span class="k">then</span>
+    <span class="k">let</span> <span class="n">ll</span> <span class="o">:</span> <span class="bp">ℕ+</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="n">mt</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_eq_zero</span><span class="bp">.</span><span class="mi">1</span>
+        <span class="err">$</span> <span class="bp">λ</span> <span class="n">hl</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">not_mem_nil</span> <span class="n">a</span> <span class="err">$</span> <span class="n">hl</span> <span class="bp">▸</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">in</span>
+    <span class="k">begin</span>
+      <span class="n">suffices</span> <span class="o">:</span> <span class="n">nth_le</span> <span class="n">l</span> <span class="o">((</span><span class="err">↑</span><span class="o">(</span><span class="n">index_of</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span> <span class="o">:</span> <span class="n">zmod</span> <span class="n">ll</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">f</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">nth_le_mem</span><span class="o">,</span> <span class="n">nth_le_index_of</span> <span class="n">hl</span><span class="o">]</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">conv</span> <span class="o">{</span> <span class="n">to_rhs</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">index_of_nth_le</span> <span class="o">(</span><span class="n">index_of_lt_length</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">)},</span>
+        <span class="n">congr</span><span class="o">,</span>
+        <span class="n">erw</span> <span class="o">[</span><span class="n">zmod</span><span class="bp">.</span><span class="n">val_cast_nat</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_eq_of_lt</span> <span class="o">(</span><span class="n">index_of_lt_length</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">)]</span> <span class="o">},</span>
+    <span class="kn">end</span>
+    <span class="k">else</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">f</span><span class="o">],</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">f</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">this</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">this</span> <span class="mi">1</span> <span class="o">}</span>
+</pre></div>
+
+<a name="157802567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20breaks%20things/near/157802567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55061defbreaksthings.html#157802567">Simon Hudon (Feb 07 2019 at 18:56)</a>:</h4>
+<p>What do you get as an error message?</p>
+
+
+{% endraw %}
