@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [def breaks things](55061defbreaksthings.html) (5 messages, latest: Feb 07 2019 at 20:01)
+* [AFP](94264AFP.html) (13 messages, latest: Feb 07 2019 at 22:51)
 
-* [AFP](94264AFP.html) (6 messages, latest: Feb 07 2019 at 19:02)
+* [windows recompiling](75717windowsrecompiling.html) (9 messages, latest: Feb 07 2019 at 22:20)
+
+* [def breaks things](55061defbreaksthings.html) (5 messages, latest: Feb 07 2019 at 20:01)
 
 * [VScode extension](56578VScodeextension.html) (313 messages, latest: Feb 07 2019 at 15:42)
 
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [quotient.induction_on order of variables](90043quotientinductiononorderofvariables.html) (13 messages, latest: Feb 06 2019 at 17:15)
 
 * [Parsing left arrows](93054Parsingleftarrows.html) (5 messages, latest: Feb 06 2019 at 14:20)
-
-* [windows recompiling](75717windowsrecompiling.html) (8 messages, latest: Feb 06 2019 at 13:59)
 
 * [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
 
