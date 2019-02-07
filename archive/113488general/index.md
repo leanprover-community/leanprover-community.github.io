@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (313 messages, latest: Feb 07 2019 at 15:42)
+
 * [AFP](94264AFP.html) (3 messages, latest: Feb 07 2019 at 14:41)
 
 * [Qualification](82762Qualification.html) (5 messages, latest: Feb 07 2019 at 10:21)
@@ -573,8 +575,6 @@ permalink: archive/113488general/index.html
 * [dsimp_config](42739dsimpconfig.html) (12 messages, latest: Nov 16 2018 at 11:07)
 
 * [type class issues](43765typeclassissues.html) (133 messages, latest: Nov 16 2018 at 07:21)
-
-* [VScode extension](56578VScodeextension.html) (312 messages, latest: Nov 15 2018 at 10:07)
 
 * [zmod](77019zmod.html) (6 messages, latest: Nov 15 2018 at 07:30)
 
