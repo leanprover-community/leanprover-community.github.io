@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [windows recompiling](75717windowsrecompiling.html) (11 messages, latest: Feb 08 2019 at 15:34)
+
 * [will this make typclass inference loop?](79274willthismaketypclassinferenceloop.html) (10 messages, latest: Feb 08 2019 at 11:43)
 
 * [AFP](94264AFP.html) (27 messages, latest: Feb 08 2019 at 08:30)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (6 messages, latest: Feb 08 2019 at 06:16)
 
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (2 messages, latest: Feb 08 2019 at 05:01)
-
-* [windows recompiling](75717windowsrecompiling.html) (10 messages, latest: Feb 08 2019 at 00:37)
 
 * [def breaks things](55061defbreaksthings.html) (5 messages, latest: Feb 07 2019 at 20:01)
 
