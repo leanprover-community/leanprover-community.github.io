@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
+* [Coinduction](02528Coinduction.html) (3 messages, latest: Feb 08 2019 at 08:58)
 
-* [Raymond](37083Raymond.html) (10 messages, latest: Feb 08 2019 at 07:12)
+* [Raymond](37083Raymond.html) (12 messages, latest: Feb 08 2019 at 08:57)
+
+* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
 
 * [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
 

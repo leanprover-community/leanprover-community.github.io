@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/02528Coinduction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html">Coinduction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157843574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157843574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157843574">Hans-Dieter Hiep (Feb 08 2019 at 08:34)</a>:</h4>
+<p>I have a basic question about the use of coinduction. Do you think it would be possible to define a coinductive type, that looks like the following?</p>
+<div class="codehilite"><pre><span></span>coinductive ostream (α : Type) : Type
+| head : ostream → α
+| otail: ostream → option ostream
+</pre></div>
+
+
+<p>That is: a stream that can possibly be finite, but it is not yet known when. I could encode it as a stream as follows:</p>
+<div class="codehilite"><pre><span></span>structure gstream (α : Type) : Type :=
+(carrier : stream (option α))
+(head : carrier 0 ≠ none)
+(definite : ∀n, carrier n = none → ∀m ≥ n, carrier m = none)
+</pre></div>
+
+
+<p>But dealing with the proof objects here is kind of tedious. Any suggestions?</p>
+
+<a name="157844592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157844592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157844592">Johannes Hölzl (Feb 08 2019 at 08:57)</a>:</h4>
+<p>what you wrote are the destructors of a record, but for <code>coinductive</code> you would need to write down the constructors, like:</p>
+<div class="codehilite"><pre><span></span><span class="n">coinductive</span> <span class="n">llist</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">llist</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">llist</span> <span class="bp">→</span> <span class="n">llist</span>
+</pre></div>
+
+
+<p>At least in Isabelle it's called a lazy list, a maybe terminating list. As far as I know, there is no encoding which is nicely reducing in Lean</p>
+
+<a name="157844659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157844659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157844659">Mario Carneiro (Feb 08 2019 at 08:58)</a>:</h4>
+<p>There are plans to support coinductive data types similar to isabelle. This type would fall under the scope, but for now you have to do it "by hand" like you did.</p>
+
+
+{% endraw %}
