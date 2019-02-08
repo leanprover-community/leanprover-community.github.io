@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (14 messages, latest: Feb 08 2019 at 04:23)
+
 * [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
 
 * [Raymond](37083Raymond.html) (9 messages, latest: Feb 08 2019 at 00:57)
