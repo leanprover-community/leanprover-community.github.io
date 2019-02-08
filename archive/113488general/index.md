@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [eq.rec goal](53122eqrecgoal.html) (231 messages, latest: Feb 08 2019 at 21:56)
+
 * [VSCode expanding folders](03538VSCodeexpandingfolders.html) (11 messages, latest: Feb 08 2019 at 20:32)
 
 * [Custom attributes](40291Customattributes.html) (6 messages, latest: Feb 08 2019 at 18:59)
@@ -41,8 +43,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
-
-* [eq.rec goal](53122eqrecgoal.html) (226 messages, latest: Feb 05 2019 at 19:19)
 
 * [Invalid type ascription??](20644Invalidtypeascription.html) (8 messages, latest: Feb 05 2019 at 17:32)
 

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (8 messages, latest: Feb 08 2019 at 21:50)
+
 * [Raymond](37083Raymond.html) (25 messages, latest: Feb 08 2019 at 20:26)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (46 messages, latest: Feb 08 2019 at 15:20)
