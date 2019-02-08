@@ -66,5 +66,60 @@ permalink: archive/113488general/94264AFP.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157820548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157820548">Mario Carneiro (Feb 07 2019 at 22:51)</a>:</h4>
 <p>The only thing I would try to maintain is monotonicity with respect to proven theorems, i.e. if you prove Sylow's theorem then you can be sure that all future versions of mathlib will have Sylow's theorem, although the proof might change completely, the statement might change, the file could move, etc. (Your name will remain attached to any future versions though)</p>
 
+<a name="157840876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157840876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157840876">Sebastien Gouezel (Feb 08 2019 at 07:25)</a>:</h4>
+<blockquote>
+<p>I guess putting everything all together puts the burden of maintenance on whoever makes a PR that breaks everything.</p>
+</blockquote>
+<p>For instance, if someone changes the name of a lemma in mathlib for better coherence, then she should change the name of all applications of this lemma in mathlib, but also in the AFP. That sounds reasonable, since she knows exactly which lemmas can break, and the new names. On the other hand, the author of the AFP entry  is not aware of the name change, he will only see that the old name does not work anymore, but he will have no clue on the new name and it will take much longer for him to find the new name.</p>
+
+<a name="157840941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157840941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157840941">Sebastien Gouezel (Feb 08 2019 at 07:27)</a>:</h4>
+<p>To be sure that this is the job of the PR author and not of the maintainer, it is enough that the green light on travis indicates that both mathlib and AFP compile correctly together.</p>
+
+<a name="157840999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157840999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157840999">Mario Carneiro (Feb 08 2019 at 07:29)</a>:</h4>
+<p>I don't really see what the benefit is of a quarantine like this for some part of mathlib</p>
+
+<a name="157841056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841056">Mario Carneiro (Feb 08 2019 at 07:30)</a>:</h4>
+<p>so what if it's specialized? I think that we should focus more on being able to make use of mathlib where only half of it is compiled because you don't care about the rest</p>
+
+<a name="157841072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841072">Johan Commelin (Feb 08 2019 at 07:30)</a>:</h4>
+<p>That would be cool, I'm perfectly able to use half of a math book and not care about the rest. Lean should be able to do that to.</p>
+
+<a name="157841087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841087">Mario Carneiro (Feb 08 2019 at 07:31)</a>:</h4>
+<p>I mean lean <em>can</em> do this now. It's just a question of what to <code>lean --make</code></p>
+
+<a name="157841089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841089">Mario Carneiro (Feb 08 2019 at 07:31)</a>:</h4>
+<p>But it's simpler and easier to just compile everything when in doubt currently</p>
+
+<a name="157841154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841154">Mario Carneiro (Feb 08 2019 at 07:33)</a>:</h4>
+<p>I am not sure if <code>lean --make foo.lean</code> will compile all and only the dependencies of foo, but if so then if <code>foo</code> is your project then you can just make sure that all the theories you care about are imported, then compile it</p>
+
+<a name="157841369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841369">Mario Carneiro (Feb 08 2019 at 07:39)</a>:</h4>
+<p>One option is to have a generalization of <code>init.default</code> import lists, where we have a curated collection of big theory imports. So for example "core only", "mathlib tactics", "programming tools", "basic natural numbers", "commutative algebra", "analysis and measure theory", "computability", "everything" etc. You load one of these files and they import a relatively complete list of files useful for the target area. That way if you care about analysis and measure theory you just <code>lean --make</code> this file, import it, and you are all set</p>
+
+<a name="157841428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841428">Mario Carneiro (Feb 08 2019 at 07:41)</a>:</h4>
+<p>One of these lists can be a rough analogue of what Isabelle calls the standard library (as distinct from the AFP). Anything not in that list is "more specialized" and probably isn't useful for people who just say "I want mathlib"</p>
+
+<a name="157841484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841484">Mario Carneiro (Feb 08 2019 at 07:42)</a>:</h4>
+<p>(Note, these would not be used inside mathlib itself, which needs more fine grained dependency tracking)</p>
+
+<a name="157841532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841532">Johan Commelin (Feb 08 2019 at 07:44)</a>:</h4>
+<p>But a helper tool could explode the <code>import init.big.list</code> into <code>import fine.grained dep.end.encies</code>.</p>
+
+<a name="157841537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AFP/near/157841537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94264AFP.html#157841537">Mario Carneiro (Feb 08 2019 at 07:44)</a>:</h4>
+<p>sure... couple that with import analysis and it could be a quick post processing step on PRs</p>
+
 
 {% endraw %}
