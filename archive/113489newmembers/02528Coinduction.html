@@ -45,5 +45,95 @@ permalink: archive/113489newmembers/02528Coinduction.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157844659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157844659">Mario Carneiro (Feb 08 2019 at 08:58)</a>:</h4>
 <p>There are plans to support coinductive data types similar to isabelle. This type would fall under the scope, but for now you have to do it "by hand" like you did.</p>
 
+<a name="157844790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157844790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157844790">Mario Carneiro (Feb 08 2019 at 09:00)</a>:</h4>
+<p>Technically, this coinductive type represents a nonempty lazy list, but something like this would work:</p>
+<div class="codehilite"><pre><span></span><span class="n">coinductive</span> <span class="n">ostream</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span><span class="n">head</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">otail</span> <span class="o">:</span> <span class="n">option</span> <span class="n">ostream</span><span class="o">)</span> <span class="o">:</span> <span class="n">ostream</span>
+</pre></div>
+
+<a name="157844845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157844845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157844845">Mario Carneiro (Feb 08 2019 at 09:01)</a>:</h4>
+<p>I'm not sure if we will have special support for "record-like" coinductives with projections, instead of the usual constructor/destructor/corec</p>
+
+<a name="157845133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845133">Hans-Dieter Hiep (Feb 08 2019 at 09:07)</a>:</h4>
+<p>Thanks!<br>
+Unfortunately, both</p>
+<div class="codehilite"><pre><span></span>coinductive ostream (α : Type) : Type
+| mk (head : α) (otail : option ostream) : ostream
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>coinductive nellist (α : Type) : Type
+| sing : α → nellist
+| cons : α → nellist → nellist
+</pre></div>
+
+
+<p>give me an error: <code>vm check failed: is_closure(o) (possibly due to incorrect axioms, or sorry)</code>.<br>
+Do I need to import anything?</p>
+
+<a name="157845302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845302">Mario Carneiro (Feb 08 2019 at 09:10)</a>:</h4>
+<p>you have to import the future, maybe 3 months</p>
+
+<a name="157845365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845365">Mario Carneiro (Feb 08 2019 at 09:11)</a>:</h4>
+<p>That's not a great error, though. Are you using 3.4.2? I thought <code>coinductive</code> was removed as a token, so you should get <code>command expected</code></p>
+
+<a name="157845504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845504">Hans-Dieter Hiep (Feb 08 2019 at 09:14)</a>:</h4>
+<p>Yes.</p>
+<div class="codehilite"><pre><span></span>$ lean -v
+Lean (version 3.4.2, commit cbd2b6686ddb, Release)
+$ lean --make src
+/ufs/hdh/projects/lean-abs/src/util.lean:29:0: error: vm check failed: is_closure(o) (possibly due to incorrect axioms, or sorry)
+</pre></div>
+
+<a name="157845627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845627">Mario Carneiro (Feb 08 2019 at 09:17)</a>:</h4>
+<p>weird... when I put</p>
+<div class="codehilite"><pre><span></span><span class="n">coinductive</span> <span class="n">ostream</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span><span class="n">head</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">otail</span> <span class="o">:</span> <span class="n">option</span> <span class="n">ostream</span><span class="o">)</span> <span class="o">:</span> <span class="n">ostream</span>
+</pre></div>
+
+
+<p>alone in a file I get</p>
+<div class="codehilite"><pre><span></span>test.lean:1:0: error: unknown command &#39;coinductive&#39;
+test.lean:1:12: error: command expected
+</pre></div>
+
+<a name="157845687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845687">Mario Carneiro (Feb 08 2019 at 09:18)</a>:</h4>
+<p>do you have <code>import meta.coinductive_predicates</code>?</p>
+
+<a name="157845699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845699">Mario Carneiro (Feb 08 2019 at 09:19)</a>:</h4>
+<p>looks like the old coinductive predicates code fails with that error on a coinductive data type</p>
+
+<a name="157845763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845763">Hans-Dieter Hiep (Feb 08 2019 at 09:20)</a>:</h4>
+<p>When you add <code>import data.finmap</code> on top, two errors appear:<br>
+the vm check, and <code>invalid introduction rule, ':' expected</code></p>
+
+<a name="157845851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845851">Mario Carneiro (Feb 08 2019 at 09:22)</a>:</h4>
+<p>hm, can't repro, I just get the vm check</p>
+
+<a name="157845876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845876">Hans-Dieter Hiep (Feb 08 2019 at 09:23)</a>:</h4>
+<p>OK, perhaps it is because I am using a non-standard mathlib:<br>
+<code>mathlib = {git = "https://github.com/leanprover/mathlib", branch = "master", rev = "9615b385615e51359dce12af181d8cfcc386d105"}</code></p>
+
+<a name="157845881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845881">Mario Carneiro (Feb 08 2019 at 09:23)</a>:</h4>
+<p>in any case you aren't going to find an automatic solution right now... this is all just hypothetical syntax at this point, so lean is just finding new and interesting ways to crash</p>
+
+<a name="157845925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coinduction/near/157845925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02528Coinduction.html#157845925">Hans-Dieter Hiep (Feb 08 2019 at 09:24)</a>:</h4>
+<p>Thanks for answering! Also thanks to <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> :-)</p>
+
 
 {% endraw %}

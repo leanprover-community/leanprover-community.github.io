@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Coinduction](02528Coinduction.html) (3 messages, latest: Feb 08 2019 at 08:58)
+* [Coinduction](02528Coinduction.html) (17 messages, latest: Feb 08 2019 at 09:24)
 
-* [Raymond](37083Raymond.html) (12 messages, latest: Feb 08 2019 at 08:57)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (38 messages, latest: Feb 08 2019 at 09:06)
+
+* [Raymond](37083Raymond.html) (13 messages, latest: Feb 08 2019 at 09:02)
 
 * [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
 
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [type class inference sadness](84569typeclassinferencesadness.html) (35 messages, latest: Feb 07 2019 at 21:16)
 
 * [hiding from prelude](75961hidingfromprelude.html) (6 messages, latest: Feb 07 2019 at 04:22)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (36 messages, latest: Feb 06 2019 at 20:02)
 
 * [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html) (76 messages, latest: Feb 04 2019 at 19:28)
 
