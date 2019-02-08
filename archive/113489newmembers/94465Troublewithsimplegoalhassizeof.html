@@ -54,5 +54,27 @@ permalink: archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157896312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157896312">Kevin Buzzard (Feb 08 2019 at 21:50)</a>:</h4>
 <p>I think that the <code>generalize</code> should work. I am guessing you have two different things called <code>h</code></p>
 
+<a name="157899519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157899519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157899519">cbailey (Feb 08 2019 at 22:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  <code>set_option pp.all_true</code> is awesome, I learned something new already, thank you.  It does seem to have something to do with the fact that I had to define has_sizeof. The goal</p>
+<div class="codehilite"><pre><span></span><span class="n">t</span> <span class="o">:</span> <span class="n">zTree</span>
+<span class="err">⊢</span> <span class="n">list</span><span class="bp">.</span><span class="n">sizeof</span> <span class="o">(</span><span class="n">zTree_pr2</span> <span class="n">t</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">sizeof</span> <span class="o">(</span><span class="n">zTree_pr2</span> <span class="n">t</span><span class="o">))</span>
+</pre></div>
+
+
+<p>has this term <code>has_sizeof_inst</code> which I wasn't able to find any info about in the source on github, but I guess is enough to prevent unification, since the only parts that are different are <code>zTree.has_sizeof</code> vs <code>zTree.has_sizeof_inst</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">t</span> <span class="o">:</span> <span class="n">zTree</span>
+<span class="err">⊢</span> <span class="bp">@</span><span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_lt</span> <span class="o">(</span><span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">sizeof</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">zTree</span> <span class="n">zTree</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="o">(</span><span class="n">zTree_pr2</span> <span class="n">t</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">sizeof</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">zTree</span> <span class="n">zTree</span><span class="bp">.</span><span class="n">has_sizeof_inst</span> <span class="o">(</span><span class="n">zTree_pr2</span> <span class="n">t</span><span class="o">)))</span>
+</pre></div>
+
+<a name="157899733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157899733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157899733">Kevin Buzzard (Feb 08 2019 at 22:42)</a>:</h4>
+<p>It's hard for me to make any coherent comment because I don't know the type of anything</p>
+
+<a name="157899735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157899735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157899735">Mario Carneiro (Feb 08 2019 at 22:42)</a>:</h4>
+<p>It sounds like you made some poor choices earlier to lead you here. Why are you defining a has_sizeof instance? What is the context of this goal?</p>
+
 
 {% endraw %}
