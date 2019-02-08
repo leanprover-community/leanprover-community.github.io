@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (5 messages, latest: Feb 08 2019 at 05:51)
+
+* [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (2 messages, latest: Feb 08 2019 at 05:01)
+
 * [windows recompiling](75717windowsrecompiling.html) (10 messages, latest: Feb 08 2019 at 00:37)
 
 * [AFP](94264AFP.html) (13 messages, latest: Feb 07 2019 at 22:51)

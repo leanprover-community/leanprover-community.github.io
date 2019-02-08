@@ -1,0 +1,81 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/90069simptacticfailsresultinginwierdcoercions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html">simp tactic fails resulting in wierd coercions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157837431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20tactic%20fails%20resulting%20in%20wierd%20coercions/near/157837431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html#157837431">Aditya Agarwal (Feb 08 2019 at 05:36)</a>:</h4>
+<p>Trying to prove <code>lemma minimal (n : ℕ) : degree (X^n : polynomial α) = n := by simp</code> fails with the error  </p>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+α : Type u,
+_inst_1 : decidable_eq α,
+_inst_2 : integral_domain α,
+n : ℕ
+⊢ ↑n = ↑n
+</pre></div>
+
+
+<p>Because of  slightly different coercions </p>
+<div class="codehilite"><pre><span></span>set_option pp.all true
+</pre></div>
+
+
+<p>Produces</p>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+α : Type u,
+_inst_1 : decidable_eq.{u+1} α,
+_inst_2 : integral_domain.{u} α,
+n : nat
+⊢ @eq.{1} (with_bot.{0} nat)
+    (@coe.{1 1} nat (with_bot.{0} nat)
+       (@coe_to_lift.{1 1} nat (with_bot.{0} nat)
+          (@coe_base.{1 1} nat (with_bot.{0} nat)
+             (@nat.cast_coe.{0} (with_bot.{0} nat)
+                (@add_monoid.to_has_zero.{0} (with_bot.{0} nat) (@with_bot.add_monoid.{0} nat nat.add_monoid))
+                (@with_bot.has_one.{0} nat nat.has_one)
+                (@add_semigroup.to_has_add.{0} (with_bot.{0} nat)
+                   (@add_monoid.to_add_semigroup.{0} (with_bot.{0} nat)
+                      (@with_bot.add_monoid.{0} nat nat.add_monoid))))))
+       n)
+    (@coe.{1 1} nat (with_bot.{0} nat) (@coe_to_lift.{1 1} nat (with_bot.{0} nat) (@with_bot.has_coe_t.{0} nat)) n)
+</pre></div>
+
+<a name="157837487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20tactic%20fails%20resulting%20in%20wierd%20coercions/near/157837487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html#157837487">Aditya Agarwal (Feb 08 2019 at 05:38)</a>:</h4>
+<p>I have written a minimal example here <a href="https://github.com/chocolatier/theoremproving/blob/master/src/coe_mwe.lean" target="_blank" title="https://github.com/chocolatier/theoremproving/blob/master/src/coe_mwe.lean">https://github.com/chocolatier/theoremproving/blob/master/src/coe_mwe.lean</a></p>
+
+<a name="157837526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20tactic%20fails%20resulting%20in%20wierd%20coercions/near/157837526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html#157837526">Aditya Agarwal (Feb 08 2019 at 05:39)</a>:</h4>
+<p>Lean should be able to identify that these two coercions are identical.</p>
+
+<a name="157837640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20tactic%20fails%20resulting%20in%20wierd%20coercions/near/157837640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html#157837640">Aditya Agarwal (Feb 08 2019 at 05:42)</a>:</h4>
+<p>In a somewhat related point, the lemma is basically <code>degree_X_pow</code>, which is a simp lemma in data.polynomial.  Using the simp tactic with that specified explicitly works.</p>
+
+<a name="157837883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20tactic%20fails%20resulting%20in%20wierd%20coercions/near/157837883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90069simptacticfailsresultinginwierdcoercions.html#157837883">Aditya Agarwal (Feb 08 2019 at 05:51)</a>:</h4>
+<p>Our goal is to show <code>lemma deg_c_times_x_to_n_eq_n (n : ℕ) {c : α} (hc : c ≠ 0) : degree (C c * X^n) = n</code>, which should ideally just be a simp, but currently requires the proof in the linked example.<br>
+It breaks if we replace </p>
+<div class="codehilite"><pre><span></span> ... = 0 + n : by rw [degree_X_pow] -- simp [degree_X_pow] also works fine.
+</pre></div>
+
+
+<p>with </p>
+<div class="codehilite"><pre><span></span>  ... = 0 + n : by simp
+</pre></div>
+
+
+<p>Producing the same error as the mwe above.</p>
+
+
+{% endraw %}
