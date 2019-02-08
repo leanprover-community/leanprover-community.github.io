@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (45 messages, latest: Feb 08 2019 at 14:40)
+
 * [Raymond](37083Raymond.html) (19 messages, latest: Feb 08 2019 at 13:57)
 
 * [Coinduction](02528Coinduction.html) (18 messages, latest: Feb 08 2019 at 13:09)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (38 messages, latest: Feb 08 2019 at 09:06)
 
 * [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
 

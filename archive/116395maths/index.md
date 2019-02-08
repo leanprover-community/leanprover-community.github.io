@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [quotient classes](98632quotientclasses.html) (8 messages, latest: Feb 08 2019 at 13:05)
+* [quotient classes](98632quotientclasses.html) (9 messages, latest: Feb 08 2019 at 14:00)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (90 messages, latest: Feb 07 2019 at 13:59)
 
