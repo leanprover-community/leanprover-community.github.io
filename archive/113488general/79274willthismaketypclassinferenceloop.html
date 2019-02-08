@@ -1,0 +1,56 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/79274willthismaketypclassinferenceloop.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html">will this make typclass inference loop?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157852433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852433">Kevin Buzzard (Feb 08 2019 at 11:27)</a>:</h4>
+<p>A field is an integral domain. The field of fractions of an integral domain is a field. We have an instance <code>discrete_field X -&gt; integral_domain X</code>. But I just noticed that <code>integral_domain X -&gt; discrete_field (quotient_ring X)</code> is a definition and not an instance. Are there problems with making it an instance?</p>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/f623d346a09cc7716389a406ee6bb1139fff28da/src/ring_theory/localization.lean#L212" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/f623d346a09cc7716389a406ee6bb1139fff28da/src/ring_theory/localization.lean#L212">https://github.com/leanprover-community/mathlib/blob/f623d346a09cc7716389a406ee6bb1139fff28da/src/ring_theory/localization.lean#L212</a></p>
+
+<a name="157852634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852634">Johan Commelin (Feb 08 2019 at 11:30)</a>:</h4>
+<p>If I understand things correctly, there shouldn't really be a problem.</p>
+
+<a name="157852671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852671">Kevin Buzzard (Feb 08 2019 at 11:31)</a>:</h4>
+<p>I would make a PR changing "def" to "instance" but I don't want to waste people's time if this is a bad idea.</p>
+
+<a name="157852756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852756">Kevin Buzzard (Feb 08 2019 at 11:32)</a>:</h4>
+<p>I can see that Lean could now go ahead and prove <code>integral_domain (quotient_ring $ quotient_ring $ quotient_ring $ ... $ X)</code> but I don't understand the system well enough to know whether it would ever be tempted by this lunacy</p>
+
+<a name="157852801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852801">Kevin Buzzard (Feb 08 2019 at 11:33)</a>:</h4>
+<p>[example for non-maths folk: the field of fractions of Z is Q, the field of fractions of Q is Q]</p>
+
+<a name="157852820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852820">Kevin Buzzard (Feb 08 2019 at 11:33)</a>:</h4>
+<p>[except that in Lean they're not equal, just isomorphic]</p>
+
+<a name="157852905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157852905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157852905">Kenny Lau (Feb 08 2019 at 11:35)</a>:</h4>
+<p>I think I got stuck in a typeclass loop before</p>
+
+<a name="157853236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157853236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157853236">Kevin Buzzard (Feb 08 2019 at 11:40)</a>:</h4>
+<p>If the answer actually _is_ "you might get stuck in a typeclass loop" then this will trigger another of my "typeclass inference is not fit for purpose when it comes to mathematics" rants.</p>
+
+<a name="157853264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157853264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157853264">Kevin Buzzard (Feb 08 2019 at 11:41)</a>:</h4>
+<p>Am I allowed to make it a local instance and just gamble in my one particular file?</p>
+
+<a name="157853345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/will%20this%20make%20typclass%20inference%20loop%3F/near/157853345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79274willthismaketypclassinferenceloop.html#157853345">Kenny Lau (Feb 08 2019 at 11:43)</a>:</h4>
+<p>sure?</p>
+
+
+{% endraw %}

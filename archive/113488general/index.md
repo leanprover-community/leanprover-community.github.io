@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [will this make typclass inference loop?](79274willthismaketypclassinferenceloop.html) (10 messages, latest: Feb 08 2019 at 11:43)
+
 * [AFP](94264AFP.html) (27 messages, latest: Feb 08 2019 at 08:30)
 
 * [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (6 messages, latest: Feb 08 2019 at 06:16)
