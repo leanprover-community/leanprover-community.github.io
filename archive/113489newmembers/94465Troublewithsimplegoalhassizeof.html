@@ -76,5 +76,64 @@ permalink: archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157899735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157899735">Mario Carneiro (Feb 08 2019 at 22:42)</a>:</h4>
 <p>It sounds like you made some poor choices earlier to lead you here. Why are you defining a has_sizeof instance? What is the context of this goal?</p>
 
+<a name="157949098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949098">cbailey (Feb 09 2019 at 22:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> You're probably right; I spent last night/this morning doing some more reading so as not to waste everyone's time. I'm using the nested inductive definition from TPIL ch. 7,</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">tree</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">tree</span> <span class="bp">→</span> <span class="n">tree</span>
+</pre></div>
+
+
+<p>I was writing a mutually recursive function from tree -&gt; string to give it has_repr following the pattern in Ch. 8, and the the proof Lean wanted for termination became:</p>
+<div class="codehilite"><pre><span></span><span class="n">list</span><span class="bp">.</span><span class="n">sizeof</span> <span class="o">(</span><span class="n">tree_tail</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">tree</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>so between that and a few other attempts using patterns from TPIL chapter 8 that also got stuck on <code>list.sizeof</code> issues, I started (naively) prodding the has_sizeof typeclass  since TPIL ch. 7 doesn't go into any detail about how to define recursive functions on nested inductive types other than to say it's tricky; The mutually recursive definitions in 8.5 are on a type with two constructors. In searching Zulip I saw Dr. Carneiro and Dr. DeMoura mention that lean 3 does not supported nested inductive types and instead reduces them to normal inductive types internally, but that v4 will include support for nested inductive types. Will this kind of recursive function become admissible/feasible in version 4?</p>
+
+<a name="157949144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949144">Mario Carneiro (Feb 09 2019 at 22:54)</a>:</h4>
+<p>I don't say that to judge you; it is actually very common to have XY problems asked here because you make a choice that seems okay and it doesn't really cause a problem until way down the line</p>
+
+<a name="157949153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949153">Kenny Lau (Feb 09 2019 at 22:54)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/Lean.20assignment.20from.20Kenny" title="#narrow/stream/113488-general/topic/Lean.20assignment.20from.20Kenny">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean.20assignment.20from.20Kenny</a></p>
+
+<a name="157949158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949158">Kenny Lau (Feb 09 2019 at 22:54)</a>:</h4>
+<p>I think that inductive type would be very messy, right</p>
+
+<a name="157949169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949169">Mario Carneiro (Feb 09 2019 at 22:55)</a>:</h4>
+<p>My first instinct is to say "nested inductive = bad idea" here</p>
+
+<a name="157949172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949172">Chris Hughes (Feb 09 2019 at 22:55)</a>:</h4>
+<p>The trouble with nested inductive types at the moment is that the code doesn't give you a strong enough recursor, so you're forced to use the equation compiler.</p>
+
+<a name="157949218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949218">Mario Carneiro (Feb 09 2019 at 22:56)</a>:</h4>
+<p>Also I'm not a Dr yet. :)</p>
+
+<a name="157949222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949222">Chris Hughes (Feb 09 2019 at 22:56)</a>:</h4>
+<p>And I guess the <code>sizeof</code> proof obligations are probably going to be quite difficult if they're not filled in automatically by the equation compiler.</p>
+
+<a name="157949238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949238">Mario Carneiro (Feb 09 2019 at 22:57)</a>:</h4>
+<p>v4 will not include support for nested inductive types, but it will have native support for mutual inductives</p>
+
+<a name="157949239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949239">Mario Carneiro (Feb 09 2019 at 22:57)</a>:</h4>
+<p>at least as far as I know</p>
+
+<a name="157949291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949291">Mario Carneiro (Feb 09 2019 at 22:58)</a>:</h4>
+<p>However Jeremy, Simon and I are working on a better compilation of nested inductive types, which will probably be fairly similar to the current implementation in this case</p>
+
+<a name="157949301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20simple%20goal/has_sizeof/near/157949301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94465Troublewithsimplegoalhassizeof.html#157949301">Mario Carneiro (Feb 09 2019 at 22:59)</a>:</h4>
+<p>except that you get a proper recursion principle using list.map instead of a mutual def</p>
+
 
 {% endraw %}

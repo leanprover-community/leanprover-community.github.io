@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [normalize](75954normalize.html) (20 messages, latest: Feb 09 2019 at 21:57)
+* [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (104 messages, latest: Feb 09 2019 at 21:55)
 
