@@ -28,5 +28,81 @@ permalink: archive/113488general/94305simplemmaswithhypotheses.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157900224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157900224">Simon Hudon (Feb 08 2019 at 22:50)</a>:</h4>
 <p>Yes, you just need <code>simp *</code></p>
 
+<a name="157902105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157902105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157902105">Scott Morrison (Feb 08 2019 at 23:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, sorry, I don't understand. Here's my example:</p>
+<div class="codehilite"><pre><span></span>import data.polynomial
+
+open polynomial
+
+variables {α : Type} [integral_domain α] [decidable_eq α]
+
+lemma test (a : α) (ha : a ≠ 0) : degree (C a) = (0 : with_bot ℕ) :=
+by simp [degree_C ha]
+
+lemma test&#39; (a : α) (ha : a ≠ 0) : degree (C a) = (0 : with_bot ℕ) :=
+by simp * -- fails
+</pre></div>
+
+<a name="157902127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157902127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157902127">Scott Morrison (Feb 08 2019 at 23:23)</a>:</h4>
+<p>I don't understand how to convince <code>simp</code> to use <code>degree_C</code>, without holding its hand.</p>
+
+<a name="157902517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157902517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157902517">Simon Hudon (Feb 08 2019 at 23:29)</a>:</h4>
+<p>Can you show the error message?</p>
+
+<a name="157902742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157902742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157902742">Scott Morrison (Feb 08 2019 at 23:32)</a>:</h4>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+α : Type,
+_inst_1 : integral_domain α,
+_inst_2 : decidable_eq α,
+a : α,
+ha : a ≠ 0
+⊢ some 0 = 0
+</pre></div>
+
+<a name="157902793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157902793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157902793">Simon Hudon (Feb 08 2019 at 23:33)</a>:</h4>
+<p>what if you write <code>by simp * ; refl</code>?</p>
+
+<a name="157903326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903326">Mario Carneiro (Feb 08 2019 at 23:42)</a>:</h4>
+<p>where did <code>some 0</code> come from?</p>
+
+<a name="157903438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903438">Scott Morrison (Feb 08 2019 at 23:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, <code>by simp *; refl</code> seems to do it.</p>
+
+<a name="157903459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903459">Scott Morrison (Feb 08 2019 at 23:45)</a>:</h4>
+<p>I think I don't understand what <code>simp *</code> does. I always thought that just included all the local hypotheses as simp lemmas.</p>
+
+<a name="157903558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903558">Scott Morrison (Feb 08 2019 at 23:47)</a>:</h4>
+<p>I'm not really sure how we got a <code>some 0</code> here, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>. This seems to be closely related to the question <span class="user-mention" data-user-id="137449">@Aditya Agarwal</span> had: there are many ways to get something in <code>with_bot nat</code>...</p>
+
+<a name="157903635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903635">Mario Carneiro (Feb 08 2019 at 23:48)</a>:</h4>
+<p>The preferred way is the coercion, which has the advantage that it actually has type <code>with_bot nat</code> instead of <code>option nat</code></p>
+
+<a name="157903650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157903650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157903650">Mario Carneiro (Feb 08 2019 at 23:48)</a>:</h4>
+<p>with <code>some n</code> a lot of simp lemmas won't trigger for it</p>
+
+<a name="157904075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157904075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157904075">Scott Morrison (Feb 08 2019 at 23:55)</a>:</h4>
+<p>Shoot... I've been working with a copy of mathlib with a dumb stray simp lemma I introduced earlier.</p>
+
+<a name="157904087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157904087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157904087">Scott Morrison (Feb 08 2019 at 23:55)</a>:</h4>
+<p>My "minimal working examples" are just wrong...</p>
+
+<a name="157904157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas%20with%20hypotheses/near/157904157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94305simplemmaswithhypotheses.html#157904157">Scott Morrison (Feb 08 2019 at 23:56)</a>:</h4>
+<p>In particular, that <code>some 0</code> was entirely my doing.</p>
+
 
 {% endraw %}

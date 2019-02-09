@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [type class inference sadness](84569typeclassinferencesadness.html) (36 messages, latest: Feb 08 2019 at 23:30)
+
 * [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (11 messages, latest: Feb 08 2019 at 22:42)
 
 * [Raymond](37083Raymond.html) (25 messages, latest: Feb 08 2019 at 20:26)
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
 
 * [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
-
-* [type class inference sadness](84569typeclassinferencesadness.html) (35 messages, latest: Feb 07 2019 at 21:16)
 
 * [hiding from prelude](75961hidingfromprelude.html) (6 messages, latest: Feb 07 2019 at 04:22)
 
