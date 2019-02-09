@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AFP](94264AFP.html) (45 messages, latest: Feb 09 2019 at 07:03)
+
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
 
 * [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (6 messages, latest: Feb 09 2019 at 00:09)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (17 messages, latest: Feb 08 2019 at 23:56)
 
 * [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (14 messages, latest: Feb 08 2019 at 23:54)
-
-* [AFP](94264AFP.html) (44 messages, latest: Feb 08 2019 at 23:38)
 
 * [programming in lean](20507programminginlean.html) (1 message, latest: Feb 08 2019 at 22:45)
 
