@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (26 messages, latest: Feb 09 2019 at 10:59)
+
 * [ST monad is impossible](36458STmonadisimpossible.html) (12 messages, latest: Feb 09 2019 at 09:52)
 
 * [AFP](94264AFP.html) (45 messages, latest: Feb 09 2019 at 07:03)
