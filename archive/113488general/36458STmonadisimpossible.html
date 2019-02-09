@@ -99,5 +99,50 @@ permalink: archive/113488general/36458STmonadisimpossible.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923923">Kevin Buzzard (Feb 09 2019 at 09:52)</a>:</h4>
 <p>It is a very cool name though. You can see why it caught on in the Haskell community.</p>
 
+<a name="157926140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157926140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157926140">Mario Carneiro (Feb 09 2019 at 11:06)</a>:</h4>
+<p>Actually, it looks like the haskell implementation is not pure functional, although maybe I peeled back too many layers. Here are two ways to play with mutable variables in Haskell, demonstrating that restoring the state before a write does not actually undo the write</p>
+<div class="codehilite"><pre><span></span><span class="cm">{-# LANGUAGE MagicHash, UnboxedTuples #-}</span>
+
+<span class="kr">import</span> <span class="nn">GHC.ST</span>
+<span class="kr">import</span> <span class="nn">GHC.Base</span>
+<span class="kr">import</span> <span class="nn">Data.STRef</span>
+
+<span class="kr">data</span> <span class="kt">State</span> <span class="n">s</span> <span class="ow">=</span> <span class="kt">State</span> <span class="p">(</span><span class="kt">State</span><span class="o">#</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="nf">readST</span> <span class="ow">::</span> <span class="kt">ST</span> <span class="n">s</span> <span class="p">(</span><span class="kt">State</span> <span class="n">s</span><span class="p">)</span>
+<span class="nf">readST</span> <span class="ow">=</span> <span class="kt">ST</span> <span class="p">(</span><span class="nf">\</span><span class="n">s</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="o">#</span> <span class="n">s</span><span class="p">,</span> <span class="kt">State</span> <span class="n">s</span> <span class="o">#</span><span class="p">))</span>
+
+<span class="nf">writeST</span> <span class="ow">::</span> <span class="kt">State</span> <span class="n">s</span> <span class="ow">-&gt;</span> <span class="kt">ST</span> <span class="n">s</span> <span class="nb">()</span>
+<span class="nf">writeST</span> <span class="p">(</span><span class="kt">State</span> <span class="n">s</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">ST</span> <span class="p">(</span><span class="nf">\</span><span class="kr">_</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="o">#</span> <span class="n">s</span><span class="p">,</span> <span class="nb">()</span> <span class="o">#</span><span class="p">))</span>
+
+<span class="nf">example1</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">)</span>
+<span class="nf">example1</span> <span class="ow">=</span> <span class="n">runST</span> <span class="o">$</span> <span class="kr">do</span>
+  <span class="n">v</span> <span class="ow">&lt;-</span> <span class="n">newSTRef</span> <span class="kt">False</span>
+  <span class="n">s</span> <span class="ow">&lt;-</span> <span class="n">readST</span>
+  <span class="n">a</span> <span class="ow">&lt;-</span> <span class="n">readSTRef</span> <span class="n">v</span>
+  <span class="n">writeSTRef</span> <span class="n">v</span> <span class="kt">True</span>
+  <span class="n">writeST</span> <span class="n">s</span>
+  <span class="n">b</span> <span class="ow">&lt;-</span> <span class="n">readSTRef</span> <span class="n">v</span>
+  <span class="n">pure</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="nf">example2</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">)</span>
+<span class="nf">example2</span> <span class="ow">=</span> <span class="kt">IO</span> <span class="o">$</span> <span class="nf">\</span><span class="n">s&#39;</span> <span class="ow">-&gt;</span>
+  <span class="kr">let</span> <span class="p">(</span><span class="o">#</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">#</span><span class="p">)</span> <span class="ow">=</span> <span class="n">newMutVar</span><span class="o">#</span> <span class="kt">False</span> <span class="n">s&#39;</span> <span class="kr">in</span>
+  <span class="kr">let</span> <span class="p">(</span><span class="o">#</span> <span class="kr">_</span><span class="p">,</span> <span class="n">a</span> <span class="o">#</span><span class="p">)</span> <span class="ow">=</span> <span class="n">readMutVar</span><span class="o">#</span> <span class="n">v</span> <span class="n">s</span> <span class="kr">in</span>
+  <span class="kr">let</span> <span class="kr">_</span> <span class="ow">=</span> <span class="n">writeMutVar</span><span class="o">#</span> <span class="n">v</span> <span class="kt">True</span> <span class="n">s</span> <span class="kr">in</span>
+  <span class="kr">let</span> <span class="p">(</span><span class="o">#</span> <span class="kr">_</span><span class="p">,</span> <span class="n">b</span> <span class="o">#</span><span class="p">)</span> <span class="ow">=</span> <span class="n">readMutVar</span><span class="o">#</span> <span class="n">v</span> <span class="n">s</span> <span class="kr">in</span>
+  <span class="p">(</span><span class="o">#</span> <span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">#</span><span class="p">)</span>
+
+<span class="nf">main</span> <span class="ow">=</span> <span class="n">print</span> <span class="n">example1</span> <span class="o">&gt;&gt;</span> <span class="n">example2</span> <span class="o">&gt;&gt;=</span> <span class="n">print</span>
+</pre></div>
+
+
+<p>Each example should print <code>(False, False)</code>. However:</p>
+<div class="codehilite"><pre><span></span>$ runhaskell test.hs
+(False,True)
+(False,True)
+</pre></div>
+
 
 {% endraw %}

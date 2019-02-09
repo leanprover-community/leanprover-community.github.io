@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (26 messages, latest: Feb 09 2019 at 10:59)
+* [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (1 message, latest: Feb 09 2019 at 11:51)
 
-* [ST monad is impossible](36458STmonadisimpossible.html) (12 messages, latest: Feb 09 2019 at 09:52)
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (80 messages, latest: Feb 09 2019 at 11:22)
+
+* [ST monad is impossible](36458STmonadisimpossible.html) (13 messages, latest: Feb 09 2019 at 11:06)
 
 * [AFP](94264AFP.html) (45 messages, latest: Feb 09 2019 at 07:03)
 
