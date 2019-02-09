@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (11 messages, latest: Feb 09 2019 at 00:57)
+
+* [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (6 messages, latest: Feb 09 2019 at 00:09)
+
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (17 messages, latest: Feb 08 2019 at 23:56)
 
 * [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (14 messages, latest: Feb 08 2019 at 23:54)

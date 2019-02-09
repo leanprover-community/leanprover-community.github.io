@@ -1,0 +1,74 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/35926hasonebutexpectedhaszero.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html">has_one but expected has_zero</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157906397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906397">Scott Morrison (Feb 09 2019 at 00:37)</a>:</h4>
+<p>Woah... Lean confused by the difference between zero and one?</p>
+<div class="codehilite"><pre><span></span>error: type mismatch at application
+  0
+term
+  nat.has_one
+has type
+  has_one ℕ
+but is expected to have type
+  has_zero ℕ
+</pre></div>
+
+<a name="157906459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906459">Scott Morrison (Feb 09 2019 at 00:38)</a>:</h4>
+<p>This is generated in the (apparently innocuous?)</p>
+<div class="codehilite"><pre><span></span>lemma Ico_prod_split_first (n m : ℕ) (h₁ : n &lt; m) (f : ℕ → β) :
+(Ico n m).prod f = f n * (Ico (n+1) m).prod f := ...
+</pre></div>
+
+
+<p>The error appears on the <code>1</code> in <code>Ico (n+1)</code>.</p>
+
+<a name="157906475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906475">Scott Morrison (Feb 09 2019 at 00:39)</a>:</h4>
+<p>Ahh</p>
+
+<a name="157906476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906476">Scott Morrison (Feb 09 2019 at 00:39)</a>:</h4>
+<p>it is <code>to_additive</code>s fault.</p>
+
+<a name="157906642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906642">Mario Carneiro (Feb 09 2019 at 00:42)</a>:</h4>
+<p>that happens, especially when you mix your type beta with nat</p>
+
+<a name="157906647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906647">Mario Carneiro (Feb 09 2019 at 00:42)</a>:</h4>
+<p>there are lots of examples in <code>group_power</code> of manual to_additive</p>
+
+<a name="157906771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906771">Scott Morrison (Feb 09 2019 at 00:45)</a>:</h4>
+<p>so it's okay to just reprove it, copying and pasting the proof?</p>
+
+<a name="157906844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906844">Kenny Lau (Feb 09 2019 at 00:46)</a>:</h4>
+<p>deja vu</p>
+
+<a name="157906845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157906845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157906845">Kenny Lau (Feb 09 2019 at 00:46)</a>:</h4>
+<p>this all feels like discussed before</p>
+
+<a name="157907024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157907024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157907024">Scott Morrison (Feb 09 2019 at 00:50)</a>:</h4>
+<p>Sorry, <span class="user-mention" data-user-id="110064">@Kenny Lau</span>, but of course I can't read everything here.</p>
+
+<a name="157907272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_one%20but%20expected%20has_zero/near/157907272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35926hasonebutexpectedhaszero.html#157907272">Mario Carneiro (Feb 09 2019 at 00:57)</a>:</h4>
+<p>better than copy and paste the proof, you will notice that most of the <code>group_power</code> theorems are proven by applying the original theorem via <code>multiplicative</code></p>
+
+
+{% endraw %}
