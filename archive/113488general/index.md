@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (89 messages, latest: Feb 09 2019 at 15:59)
+
 * [AFP](94264AFP.html) (46 messages, latest: Feb 09 2019 at 14:35)
 
 * [ST monad is impossible](36458STmonadisimpossible.html) (14 messages, latest: Feb 09 2019 at 14:00)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (87 messages, latest: Feb 09 2019 at 12:48)
 
 * [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (7 messages, latest: Feb 09 2019 at 12:21)
 
