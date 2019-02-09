@@ -1,0 +1,103 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/36458STmonadisimpossible.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html">ST monad is impossible</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157923445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923445">Mario Carneiro (Feb 09 2019 at 09:37)</a>:</h4>
+<p>Just a little proof that might be of general interest. Haskell uses an <code>ST</code> monad for handling mutable variables. Here's a reasonable axiomatization of the primitives:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">State</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">State</span><span class="bp">.</span><span class="n">run</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">σ</span><span class="o">,</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">×</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span>
+
+<span class="kn">axiom</span> <span class="n">State</span><span class="bp">.</span><span class="n">run_eq</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">σ</span><span class="o">,</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">×</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">σ</span> <span class="n">s</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">σ</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">State</span><span class="bp">.</span><span class="n">run</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">a</span>
+
+<span class="kn">constant</span> <span class="n">mut_var</span> <span class="o">(</span><span class="n">σ</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+
+<span class="kn">namespace</span> <span class="n">mut_var</span>
+
+<span class="kn">constant</span> <span class="n">mk</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">×</span> <span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span>
+<span class="kn">constant</span> <span class="n">read</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">×</span> <span class="n">α</span>
+<span class="kn">constant</span> <span class="n">write</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="kn">constant</span> <span class="n">decidable_eq</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="o">(</span><span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">has_val</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">State</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span><span class="n">a</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_val</span> <span class="o">(</span><span class="n">mk</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">mk</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">read</span> <span class="o">{</span><span class="n">v</span> <span class="n">s</span> <span class="n">a</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">v&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_val</span> <span class="n">v</span> <span class="n">s</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">has_val</span> <span class="n">v</span> <span class="o">(</span><span class="bp">@</span><span class="n">read</span> <span class="bp">_</span> <span class="n">β</span> <span class="n">v&#39;</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">write_ne</span> <span class="o">{</span><span class="n">v</span> <span class="n">s</span> <span class="n">a</span> <span class="n">v&#39;</span><span class="o">}</span> <span class="o">(</span><span class="n">a&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">v</span> <span class="bp">≠</span> <span class="n">v&#39;</span> <span class="bp">→</span> <span class="n">has_val</span> <span class="n">v</span> <span class="n">s</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">has_val</span> <span class="n">v</span> <span class="o">(</span><span class="n">write</span> <span class="n">v&#39;</span> <span class="n">a&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">write_eq</span> <span class="o">{</span><span class="n">v</span> <span class="n">s</span> <span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_val</span> <span class="n">v</span> <span class="o">(</span><span class="n">write</span> <span class="n">v</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span> <span class="n">a</span>
+
+<span class="kn">axiom</span> <span class="n">read_has_val</span> <span class="o">{</span><span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">mut_var</span> <span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="n">a</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">has_val</span> <span class="n">v</span> <span class="n">s</span> <span class="n">a</span> <span class="bp">→</span> <span class="o">(</span><span class="n">read</span> <span class="n">v</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">a</span>
+
+<span class="kn">end</span> <span class="n">mut_var</span>
+</pre></div>
+
+
+<p>and here's a proof that it's not consistent:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">plift</span><span class="bp">.</span><span class="n">down</span> <span class="err">$</span> <span class="n">State</span><span class="bp">.</span><span class="n">run</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">σ</span> <span class="n">s</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">$</span>
+<span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="o">(</span><span class="n">mut_var</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s&#39;</span> <span class="o">:</span> <span class="n">State</span> <span class="n">σ</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="k">in</span>
+<span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">cantor_injective</span> <span class="o">(</span><span class="n">State</span> <span class="n">σ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">write</span> <span class="n">p</span> <span class="n">s</span><span class="o">)</span> <span class="err">$</span>
+<span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">injective_of_left_inverse</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s&#39;</span><span class="o">,</span> <span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">read</span> <span class="n">s&#39;</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="bp">_</span> <span class="err">$</span>
+<span class="k">by</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">mut_var</span><span class="bp">.</span><span class="n">read_has_val</span> <span class="n">mut_var</span><span class="bp">.</span><span class="n">has_val</span><span class="bp">.</span><span class="n">write_eq</span>
+</pre></div>
+
+<a name="157923553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923553">Kenny Lau (Feb 09 2019 at 09:40)</a>:</h4>
+<p>so Haskell is inconsistent? :o</p>
+
+<a name="157923696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923696">Mario Carneiro (Feb 09 2019 at 09:45)</a>:</h4>
+<p>Not exactly; Haskell uses a different semantics for functions and types, so this proof is not directly applicable. In fact Haskell has a proof of soundness of the ST monad specifically</p>
+
+<a name="157923745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923745">Mario Carneiro (Feb 09 2019 at 09:47)</a>:</h4>
+<p>They use System F for the underlying type theory, which is like <code>Type : Type</code> but without choice and other noncomputable things, so function spaces are "smaller than they appear" from the point of view of a rich type theory like lean</p>
+
+<a name="157923754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923754">Kevin Buzzard (Feb 09 2019 at 09:47)</a>:</h4>
+<p>So Haskell's proofs are incorrect? :o</p>
+
+<a name="157923799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923799">Kevin Buzzard (Feb 09 2019 at 09:48)</a>:</h4>
+<p><a href="https://www.discogs.com/artist/68181-System-F" target="_blank" title="https://www.discogs.com/artist/68181-System-F">https://www.discogs.com/artist/68181-System-F</a></p>
+<p>I remember System F from my 90's raving days. Or is this another System F?</p>
+
+<a name="157923803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923803">Mario Carneiro (Feb 09 2019 at 09:48)</a>:</h4>
+<p>System F is inconsistent with the types-as-sets model</p>
+
+<a name="157923816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923816">Kevin Buzzard (Feb 09 2019 at 09:49)</a>:</h4>
+<p>I'll tell him if I ever run into him again</p>
+
+<a name="157923865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923865">Mario Carneiro (Feb 09 2019 at 09:50)</a>:</h4>
+<p>Unfortunately wikipedia doesn't say where his name came from</p>
+
+<a name="157923878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923878">Mario Carneiro (Feb 09 2019 at 09:51)</a>:</h4>
+<p>The type system System F was apparently carefully named though -</p>
+<blockquote>
+<p>According to Girard, the "F" in System F was picked by chance.</p>
+</blockquote>
+
+<a name="157923882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923882">Kevin Buzzard (Feb 09 2019 at 09:51)</a>:</h4>
+<p>The quote about where Ferry Corsten got it from on discogs is not backed up by a reliable secondary source.</p>
+
+<a name="157923923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ST%20monad%20is%20impossible/near/157923923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36458STmonadisimpossible.html#157923923">Kevin Buzzard (Feb 09 2019 at 09:52)</a>:</h4>
+<p>It is a very cool name though. You can see why it caught on in the Haskell community.</p>
+
+
+{% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ST monad is impossible](36458STmonadisimpossible.html) (12 messages, latest: Feb 09 2019 at 09:52)
+
 * [AFP](94264AFP.html) (45 messages, latest: Feb 09 2019 at 07:03)
 
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
