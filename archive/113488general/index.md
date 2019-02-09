@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (95 messages, latest: Feb 09 2019 at 20:31)
+* [normalize](75954normalize.html) (20 messages, latest: Feb 09 2019 at 21:57)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (104 messages, latest: Feb 09 2019 at 21:55)
 
 * [AFP](94264AFP.html) (48 messages, latest: Feb 09 2019 at 18:55)
 
@@ -91,8 +93,6 @@ permalink: archive/113488general/index.html
 * [github](15396github.html) (12 messages, latest: Feb 01 2019 at 22:46)
 
 * [import everything](61377importeverything.html) (9 messages, latest: Feb 01 2019 at 22:10)
-
-* [normalize](75954normalize.html) (18 messages, latest: Feb 01 2019 at 14:59)
 
 * [module refactoring](97723modulerefactoring.html) (561 messages, latest: Feb 01 2019 at 11:30)
 
