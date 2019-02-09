@@ -16,5 +16,29 @@ permalink: archive/113488general/16297scrollingwhencompilinginlinux.html
 <p>When I type <code>lean --make</code> in Ubuntu, in the directory <code>/home/buzzard/Encfs/Computer_languages/Lean/lean-projects/lean-perfectoid-spaces/_target/deps/mathlib</code>, I get a lot of output which scrolls and scrolls because it's a lot more than 80 characters long. If I make my terminal window super-big and the font super-small so that everything fits onto one line then the scrolling doesn't happen, and it's better when the scrolling doesn't happen because then any errors are far more apparent (I would not expect errors in mathlib but say I'm compiling one of my own projects). Is there any way of stopping the scrolling somehow? I notice that in Windows there doesn't seem to be any output <em>at all</em>. If I redirect STDOUT to /dev/null I could reproduce this -- but then do I still see errors reported? Are they piped to STDERR?</p>
 <p>Related I guess -- is it safe to stop compilation with Ctrl-C and then type <code>lean --make</code> again?</p>
 
+<a name="157927847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157927847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157927847">Mario Carneiro (Feb 09 2019 at 12:02)</a>:</h4>
+<p>I think you can pipe lean through a command to disable the progress reporting (i.e. the windows experience). Does <code>lean --make | cat</code> work?</p>
+
+<a name="157927924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157927924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157927924">Rob Lewis (Feb 09 2019 at 12:05)</a>:</h4>
+<p>It's safe to stop compilation with Ctrl-C on Linux. I've noticed this doesn't work in the msys2 shell on Windows, but I've never investigated, maybe there's an easy fix.</p>
+
+<a name="157928081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157928081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157928081">Mario Carneiro (Feb 09 2019 at 12:10)</a>:</h4>
+<p>I have never had an issue, but possibly you have to Ctrl-C twice</p>
+
+<a name="157928190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157928190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157928190">Rob Lewis (Feb 09 2019 at 12:14)</a>:</h4>
+<p>It locks up the whole terminal for me more often than not, and I have to kill Lean from the process manager.</p>
+
+<a name="157928247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157928247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157928247">Rob Lewis (Feb 09 2019 at 12:16)</a>:</h4>
+<p>But yeah, if it works for you then there's probably an easy fix for me that I should look for!</p>
+
+<a name="157928368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/scrolling%20when%20compiling%20in%20linux/near/157928368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16297scrollingwhencompilinginlinux.html#157928368">Kevin Buzzard (Feb 09 2019 at 12:21)</a>:</h4>
+<p>I'd rather see the names of the files flashing by all on one line without any scrolling, and then a scroll iff there's a sorry / error</p>
+
 
 {% endraw %}

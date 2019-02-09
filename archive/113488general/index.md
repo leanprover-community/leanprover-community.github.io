@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (1 message, latest: Feb 09 2019 at 11:51)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (87 messages, latest: Feb 09 2019 at 12:48)
+
+* [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (7 messages, latest: Feb 09 2019 at 12:21)
 
 * ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (80 messages, latest: Feb 09 2019 at 11:22)
 
@@ -53,8 +55,6 @@ permalink: archive/113488general/index.html
 * [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
 
 * [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (85 messages, latest: Feb 06 2019 at 01:00)
 
 * [Invalid type ascription??](20644Invalidtypeascription.html) (8 messages, latest: Feb 05 2019 at 17:32)
 
