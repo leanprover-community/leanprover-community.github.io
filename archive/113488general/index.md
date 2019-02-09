@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AFP](94264AFP.html) (46 messages, latest: Feb 09 2019 at 14:35)
+
+* [ST monad is impossible](36458STmonadisimpossible.html) (14 messages, latest: Feb 09 2019 at 14:00)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (87 messages, latest: Feb 09 2019 at 12:48)
 
 * [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (7 messages, latest: Feb 09 2019 at 12:21)
 
 * ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (80 messages, latest: Feb 09 2019 at 11:22)
-
-* [ST monad is impossible](36458STmonadisimpossible.html) (13 messages, latest: Feb 09 2019 at 11:06)
-
-* [AFP](94264AFP.html) (45 messages, latest: Feb 09 2019 at 07:03)
 
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
 
