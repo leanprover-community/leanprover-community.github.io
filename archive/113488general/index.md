@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (89 messages, latest: Feb 09 2019 at 15:59)
+* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (9 messages, latest: Feb 09 2019 at 16:53)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (94 messages, latest: Feb 09 2019 at 16:05)
 
 * [AFP](94264AFP.html) (46 messages, latest: Feb 09 2019 at 14:35)
 

@@ -1,0 +1,105 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/47076leanpkgupgradegivingme342branch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html">leanpkg upgrade giving me 3.4.2 branch</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157935869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157935869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157935869">Kevin Buzzard (Feb 09 2019 at 16:22)</a>:</h4>
+<p>I use elan. In a project I have, which I want to keep up to date with mathlib head, <code>leanpkg upgrade</code> gives me the lean-3.4.2 branch of mathlib. Why is this happening? My <code>leanpkg.toml</code> contains the line <code>lean_version = "3.4.2"</code>. Is that the problem? If so, what should it say?</p>
+
+<a name="157935900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157935900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157935900">Kevin Buzzard (Feb 09 2019 at 16:22)</a>:</h4>
+<p>the mathlib <code>lean-3.4.2</code> branch is currently 9 days behind HEAD.</p>
+
+<a name="157935917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157935917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157935917">Kevin Buzzard (Feb 09 2019 at 16:23)</a>:</h4>
+<p>Changing <code>3.4.2</code> to <code>master</code> in my <code>leanpkg.toml</code> gives me</p>
+<div class="codehilite"><pre><span></span>$ leanpkg upgrade
+error: override toolchain &#39;master&#39; is not installed
+info: caused by: the toolchain file at &#39;/home/buzzard/Encfs/Computer_languages/Lean/lean-projects/M1P1-lean/leanpkg.toml&#39; specifies an uninstalled toolchain
+buzzard@bob:~/Lean/lean-projects/M1P1-lean$
+</pre></div>
+
+<a name="157936038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157936038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157936038">Kevin Buzzard (Feb 09 2019 at 16:26)</a>:</h4>
+<p>With <code>3.4.2</code> I get</p>
+<div class="codehilite"><pre><span></span>$ leanpkg upgrade
+mathlib: trying to update _target/deps/mathlib to revision 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609
+&gt; git checkout --detach 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609    # in directory _target/deps/mathlib
+HEAD is now at 50a03f7 chore(test): fix test directory structure
+configuring M1P1-lean 0.1
+mathlib: trying to update _target/deps/mathlib to revision 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609
+&gt; git checkout --detach 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609    # in directory _target/deps/mathlib
+HEAD is now at 50a03f7 chore(test): fix test directory structure
+buzzard@bob:~/Lean/lean-projects/M1P1-lean$
+</pre></div>
+
+
+<p>which is precisely <a href="https://github.com/leanprover-community/mathlib/tree/lean-3.4.2" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/lean-3.4.2">https://github.com/leanprover-community/mathlib/tree/lean-3.4.2</a></p>
+
+<a name="157936057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157936057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157936057">Kevin Buzzard (Feb 09 2019 at 16:27)</a>:</h4>
+<div class="codehilite"><pre><span></span>buzzard@bob:~/.elan/toolchains$ ls
+3.3.0  3.4.2  nightly-2018-06-21  stable
+</pre></div>
+
+
+<p>Hmm....</p>
+
+<a name="157936119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157936119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157936119">Kevin Buzzard (Feb 09 2019 at 16:28)</a>:</h4>
+<p><code>lean_version = "stable"</code></p>
+<p>...</p>
+<div class="codehilite"><pre><span></span>$ leanpkg upgrade
+
+WARNING: Lean version mismatch: installed version is 3.4.2, but package requires stable
+
+mathlib: trying to update _target/deps/mathlib to revision 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609
+&gt; git checkout --detach 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609    # in directory _target/deps/mathlib
+HEAD is now at 50a03f7 chore(test): fix test directory structure
+From https://github.com/leanprover-community/mathlib
+ * [new tag]         bin-20190209-162751-484d864 -&gt; bin-20190209-162751-484d864
+
+WARNING: Lean version mismatch: installed version is 3.4.2, but package requires stable
+
+configuring M1P1-lean 0.1
+mathlib: trying to update _target/deps/mathlib to revision 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609
+&gt; git checkout --detach 50a03f76bb89ee5cf9d9703f78e1eb2139d9b609    # in directory _target/deps/mathlib
+HEAD is now at 50a03f7 chore(test): fix test directory structure
+</pre></div>
+
+
+<p>GAARGH</p>
+
+<a name="157936273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157936273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157936273">Kevin Buzzard (Feb 09 2019 at 16:33)</a>:</h4>
+<p>I think I can push to lean-3.4.2 but I am scared I'll screw up.</p>
+
+<a name="157937052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157937052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157937052">Kevin Buzzard (Feb 09 2019 at 16:53)</a>:</h4>
+<p>If I do (within my clone of <code>leanprover-community/mathlib</code>)</p>
+<div class="codehilite"><pre><span></span>$ git checkout master
+$ git pull
+$ git checkout lean-3.4.2
+$ git pull
+$ git merge master
+$ git push
+</pre></div>
+
+
+<p>will that be a good thing or will something bad happen?</p>
+
+<a name="157937062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20giving%20me%203.4.2%20branch/near/157937062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47076leanpkgupgradegivingme342branch.html#157937062">Kevin Buzzard (Feb 09 2019 at 16:53)</a>:</h4>
+<p>There's a chance it will solve my problem, at least temporarily</p>
+
+
+{% endraw %}
