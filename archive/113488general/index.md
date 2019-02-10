@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notation keyword](70418notationkeyword.html) (5 messages, latest: Feb 10 2019 at 15:59)
+* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (8 messages, latest: Feb 10 2019 at 16:59)
+
+* [notation keyword](70418notationkeyword.html) (24 messages, latest: Feb 10 2019 at 16:23)
 
 * [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (57 messages, latest: Feb 10 2019 at 15:58)
 
 * [lean community fork](45880leancommunityfork.html) (3 messages, latest: Feb 10 2019 at 15:13)
 
 * [quote tactic](04423quotetactic.html) (19 messages, latest: Feb 10 2019 at 10:54)
-
-* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (6 messages, latest: Feb 10 2019 at 10:02)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (140 messages, latest: Feb 10 2019 at 08:44)
 
