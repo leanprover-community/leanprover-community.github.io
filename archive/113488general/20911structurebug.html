@@ -1,0 +1,86 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20911structurebug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html">structure bug?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157989557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157989557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157989557">François G. Dorais (Feb 10 2019 at 20:22)</a>:</h4>
+<p>This fails to generate <code>foo.mk.inj_eq</code>:</p>
+<div class="codehilite"><pre><span></span>structure foo {α : Type} (β : α → α → Type) := (bar : Π (a : α), β a a)
+</pre></div>
+
+
+<p>Seems like a bug to me. Any thoughts on a workaround?</p>
+<p>Also, is it still good form to report bugs on the leanprover/lean Github? They're unlikely to get fixed until Lean 4 but there could be some use in reporting them.</p>
+<p>PS: This is a MWE so <code>def foo.bar {α : Type} (β : α → α → Type) := Π (a : α), β a a</code> won't do for my use case.</p>
+
+<a name="157990248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990248">Kevin Buzzard (Feb 10 2019 at 20:41)</a>:</h4>
+<p>I don't know the rules for what is guaranteed to be generated. If you get <code>rec</code> then you can make everything else yourself. I think there is very little point filling a bug, it won't be fixed in Lean 3 and Lean 4 is a complete rewrite</p>
+
+<a name="157990262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990262">Kevin Buzzard (Feb 10 2019 at 20:41)</a>:</h4>
+<p>What is the theorem you want?</p>
+
+<a name="157990391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990391">François G. Dorais (Feb 10 2019 at 20:45)</a>:</h4>
+<p>I want the structure itself. <code>*.mk.inj_eq</code> is an internal thing. I don't know how essential it is but I don't know how to prevent lean from trying to generate it.</p>
+
+<a name="157990476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990476">Kevin Buzzard (Feb 10 2019 at 20:47)</a>:</h4>
+<p>I don't understand this question at all. I'm looking through the source code for any mention of <code>mk.inj_eq</code></p>
+
+<a name="157990478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990478">Kevin Buzzard (Feb 10 2019 at 20:47)</a>:</h4>
+<p>I see <code>sigma.mk.inj_eq</code> but that is defined in the code base</p>
+
+<a name="157990540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990540">Kevin Buzzard (Feb 10 2019 at 20:49)</a>:</h4>
+<p>Oh!</p>
+
+<a name="157990551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990551">Rob Lewis (Feb 10 2019 at 20:49)</a>:</h4>
+<p>That's an odd one. This works, but I have no idea why.</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">structure</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">foo&#39;</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">a</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+<a name="157990557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990557">Kevin Buzzard (Feb 10 2019 at 20:49)</a>:</h4>
+<p>The structure itself fails to compile!</p>
+
+<a name="157990563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990563">Kevin Buzzard (Feb 10 2019 at 20:49)</a>:</h4>
+<p>I thought you were just complaining that an auxiliary lemma was not generated.</p>
+
+<a name="157990613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990613">Kevin Buzzard (Feb 10 2019 at 20:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">a</span> <span class="n">a</span><span class="o">)</span> <span class="c1">-- error</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to generate auxiliary lemma &#39;foo.mk.inj_eq&#39;</span>
+<span class="cm">nested exception message:</span>
+<span class="cm">assumption tactic failed</span>
+<span class="cm">state:</span>
+<span class="cm">α : Type,</span>
+<span class="cm">β : α → α → Type,</span>
+<span class="cm">bar bar_1 : Π (a : α), β a a,</span>
+<span class="cm">h : {bar := bar} = {bar := bar_1}</span>
+<span class="cm">⊢ {bar := bar} = {bar := bar_1}</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="157990622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990622">Kevin Buzzard (Feb 10 2019 at 20:51)</a>:</h4>
+<p>man, that assumption tactic looked like it was going to work fine.</p>
+
+
+{% endraw %}

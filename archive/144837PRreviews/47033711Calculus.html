@@ -50,5 +50,29 @@ Experience has shown that it works best if you make lots of small PRs (&lt;200 l
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23711%20Calculus/near/157988591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/47033711Calculus.html#157988591">Patrick Massot (Feb 10 2019 at 19:54)</a>:</h4>
 <p><a href="https://github.com/leanprover-community/mathlib/blob/cfd2b75e7a80462001fd1c2b835196b28dcd25c1/src/topology/basic.lean#L1750" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/cfd2b75e7a80462001fd1c2b835196b28dcd25c1/src/topology/basic.lean#L1750">https://github.com/leanprover-community/mathlib/blob/cfd2b75e7a80462001fd1c2b835196b28dcd25c1/src/topology/basic.lean#L1750</a></p>
 
+<a name="157990080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23711%20Calculus/near/157990080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/47033711Calculus.html#157990080">Jeremy Avigad (Feb 10 2019 at 20:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> , this is very nice! Coincidentally, I have just started formalizing the Frechet derivative. I put my current work in progress here:</p>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/multivariate/src/analysis/deriv.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/multivariate/src/analysis/deriv.lean">https://github.com/leanprover-community/mathlib/blob/multivariate/src/analysis/deriv.lean</a></p>
+<p>The basic notion is <code>has_fderiv_at_within f f' x s</code>, which says that <code>f</code> has Frechet derivative <code>f'</code> at point <code>x</code>, where everything is relativized to the set <code>s</code>.</p>
+<p>The approach is more general than yours, in two ways:<br>
+- The Frechet derivative works on functions between arbitrary normed spaces.<br>
+- Everything is relativized to a set <code>s</code>.</p>
+<p>But I have not gotten nearly as far as you. (I am planning to do the chain rule next.) Can we somehow merge the two approaches?</p>
+<p>In my experience, relativizing to a set is important. Sooner or later we will need the relativized versions. It is not too hard to do everything that way from the start, and, if we don't, there is no good way to fix it later without redoing everything.</p>
+<p>Once we have the <code>at_within</code> notions, we can define</p>
+<p><code>has_fderiv_at f f' x := has_fderiv_at_within f f' x univ</code><br>
+<code>has_fderiv f f'</code> := forall x, has_fderiv_at f (f' x) x`</p>
+<p>and so on. Note that we have similar notions for continuity, <code>continuous_at_within</code>, <code>continuous_at</code>, and <code>continuous</code>. </p>
+<p>We can also define the univariate version,</p>
+<p><code>has_deriv_at_within f y x s := has_fderiv_at_within f (λ x', y * x') x s</code>  </p>
+<p>Regarding punctured neighborhoods, we can get this e.g. using <code>nhds_within x (λ x', x' ≠ x)</code>. But are you sure you need them? Note that, by convention, <code>x / 0 = 0</code>.</p>
+<p>I suggest shortening <code>derivative</code> to <code>deriv</code>. That will save us a lot of typing. Also, the theorem names should approximate the statements as closely as possible, e.g. <code>has_deriv_at_within id 1 x s</code> should be named <code>has_deriv_id</code>. I took the liberty of dropping the <code>at_within</code> from the name. You can then apply <code>has_deriv_id</code> to a goal of the form <code>has_deriv_at id 1 x</code>.</p>
+<p>I really like the fact that you have started computing concrete derivatives. That is really useful.</p>
+
+<a name="157990318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23711%20Calculus/near/157990318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/47033711Calculus.html#157990318">Jeremy Avigad (Feb 10 2019 at 20:43)</a>:</h4>
+<p>Oh, also, in response to your PR: I think we should skip Riemann integration, and use the Lebesgue integral instead. Some people here at CMU might be willing to do the fundamental theorem of calculus, formalizing bounded variation and so on.</p>
+
 
 {% endraw %}
