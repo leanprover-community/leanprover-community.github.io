@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (8 messages, latest: Feb 10 2019 at 16:59)
+* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (18 messages, latest: Feb 10 2019 at 17:40)
 
 * [notation keyword](70418notationkeyword.html) (24 messages, latest: Feb 10 2019 at 16:23)
 
