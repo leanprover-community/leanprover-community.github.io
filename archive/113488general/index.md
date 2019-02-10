@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [quote tactic](04423quotetactic.html) (9 messages, latest: Feb 10 2019 at 09:57)
+* [quote tactic](04423quotetactic.html) (19 messages, latest: Feb 10 2019 at 10:54)
+
+* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (53 messages, latest: Feb 10 2019 at 10:48)
+
+* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (6 messages, latest: Feb 10 2019 at 10:02)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (140 messages, latest: Feb 10 2019 at 08:44)
-
-* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (5 messages, latest: Feb 10 2019 at 08:33)
-
-* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (51 messages, latest: Feb 10 2019 at 01:49)
 
 * [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
 

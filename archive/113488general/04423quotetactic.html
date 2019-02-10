@@ -84,5 +84,45 @@ permalink: archive/113488general/04423quotetactic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968677">Simon Hudon (Feb 10 2019 at 09:57)</a>:</h4>
 <p>That kind of looks like the beginning of a compiler, am I close?</p>
 
+<a name="157968984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968984">Mario Carneiro (Feb 10 2019 at 10:07)</a>:</h4>
+<p>it's also useful for custom lean compilers ;)</p>
+
+<a name="157969513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157969513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157969513">Simon Hudon (Feb 10 2019 at 10:23)</a>:</h4>
+<p>Who would ever want that? :P</p>
+
+<a name="157969985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157969985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157969985">Mario Carneiro (Feb 10 2019 at 10:39)</a>:</h4>
+<p>Unfortunately it's still pretty limited since the quoted expression has to be a valid expr. It's possible to relax it to pexprs, but the pattern matching for pexpr is not nearly as nice. I also haven't figured out how to support antiquoting or really anything that's not well typed by lean standards</p>
+
+<a name="157970047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970047">Simon Hudon (Feb 10 2019 at 10:42)</a>:</h4>
+<p>What kind of expression would you like Lean to accept?</p>
+
+<a name="157970227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970227">Mario Carneiro (Feb 10 2019 at 10:47)</a>:</h4>
+<p><code>by quote 2 + AQ e</code> is one thing I'm trying for the <code>ring_expr</code> example, where <code>e : ring_expr</code></p>
+
+<a name="157970286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970286">Mario Carneiro (Feb 10 2019 at 10:49)</a>:</h4>
+<p>but there are plenty of things that aren't even syntactically correct lean terms that I would like to support. Probably most of this will need to wait for Sebastian's parser work</p>
+
+<a name="157970289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970289">Simon Hudon (Feb 10 2019 at 10:49)</a>:</h4>
+<p>When you parse it, you could temporarily add functions <code>quote</code> and <code>AQ</code> of the right type and then restore the environment</p>
+
+<a name="157970333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970333">Simon Hudon (Feb 10 2019 at 10:50)</a>:</h4>
+<p>Yeah, that can't be helped</p>
+
+<a name="157970422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970422">Mario Carneiro (Feb 10 2019 at 10:53)</a>:</h4>
+<p>Getting <code>AQ</code> to have the right type is not easy. In this case it should have type <code>ring_expr -&gt; nat</code> but <code>nat</code> isn't mentioned anywhere else</p>
+
+<a name="157970472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157970472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157970472">Mario Carneiro (Feb 10 2019 at 10:54)</a>:</h4>
+<p>Plus in cases like formula quotation we want two kinds of AQ, <code>formula -&gt; Prop</code> and <code>term -&gt; A</code> where <code>A</code> is the fictional domain of the FOL formula</p>
+
 
 {% endraw %}
