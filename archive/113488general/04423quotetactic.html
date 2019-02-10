@@ -1,0 +1,88 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/04423quotetactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html">quote tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157967981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157967981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157967981">Mario Carneiro (Feb 10 2019 at 09:33)</a>:</h4>
+<p>Here's a demo of a new <code>quote</code> tactic, indended for working with domain-specific languages:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">class</span> <span class="n">has_quote</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">quote_with</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">has_reflect</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_quote</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">a</span> <span class="err">←</span> <span class="n">has_quote</span><span class="bp">.</span><span class="n">f</span> <span class="n">α</span> <span class="n">e</span><span class="o">,</span> <span class="n">pure</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">quote</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">i_to_expr_strict</span> <span class="n">q</span><span class="o">,</span>
+  <span class="n">α</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="n">f</span> <span class="err">←</span> <span class="n">i_to_expr_strict</span> <span class="bp">``</span><span class="o">(</span><span class="n">quote_with</span> <span class="err">%%</span><span class="n">α</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">eval_expr&#39;</span> <span class="o">(</span><span class="n">expr</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">expr</span><span class="o">),</span>
+  <span class="n">r</span> <span class="err">←</span> <span class="n">f</span> <span class="n">e</span> <span class="bp">|</span> <span class="n">fail</span> <span class="s2">&quot;conversion failed&quot;</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="n">r</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="157967982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157967982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157967982">Mario Carneiro (Feb 10 2019 at 09:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_reflect</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">ring_expr</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">num</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ring_expr</span>
+<span class="bp">|</span> <span class="n">add</span> <span class="o">:</span> <span class="n">ring_expr</span> <span class="bp">→</span> <span class="n">ring_expr</span> <span class="bp">→</span> <span class="n">ring_expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">to_ring_expr</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">ring_expr</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">e₁</span> <span class="bp">+</span> <span class="err">%%</span><span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ring_expr</span><span class="bp">.</span><span class="n">add</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">to_ring_expr</span> <span class="n">e₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">to_ring_expr</span> <span class="n">e₂</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">ring_expr</span><span class="bp">.</span><span class="n">num</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">e</span><span class="bp">.</span><span class="n">to_nat</span>
+<span class="n">meta</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">has_quote</span> <span class="n">ring_expr</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">to_ring_expr</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">E</span> <span class="o">:</span> <span class="n">ring_expr</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">quote</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">E</span>
+
+<span class="c1">-- def E : ring_expr :=</span>
+<span class="c1">-- ring_expr.add (ring_expr.num 2) (ring_expr.num 2)</span>
+</pre></div>
+
+<a name="157968085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968085">Mario Carneiro (Feb 10 2019 at 09:36)</a>:</h4>
+<p>the idea is that you write a parser function for your target syntax, as a function <code>expr -&gt; option A</code>, and then <code>quote</code> will spit out parsed values of your type</p>
+
+<a name="157968430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968430">Patrick Massot (Feb 10 2019 at 09:48)</a>:</h4>
+<p>Do you have a more realistic use case in mind?</p>
+
+<a name="157968498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968498">Mario Carneiro (Feb 10 2019 at 09:51)</a>:</h4>
+<p>Jesse and Floris could use this for parsing formulas in first order logic into their embedded language</p>
+
+<a name="157968499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968499">Mario Carneiro (Feb 10 2019 at 09:51)</a>:</h4>
+<p>I'm thinking about using it for writing programs and embedding in an AST without too much notational overhead</p>
+
+<a name="157968549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968549">Mario Carneiro (Feb 10 2019 at 09:52)</a>:</h4>
+<p>The nice thing is that it's completely non-meta after the parsing stage, just like any other proof producing tactic</p>
+
+<a name="157968658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968658">Mario Carneiro (Feb 10 2019 at 09:56)</a>:</h4>
+<p>It's probably not that useful for regular maths, but for anything involving deep embeddings or embedded DSLs this is a very important technique</p>
+
+<a name="157968677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quote%20tactic/near/157968677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04423quotetactic.html#157968677">Simon Hudon (Feb 10 2019 at 09:57)</a>:</h4>
+<p>That kind of looks like the beginning of a compiler, am I close?</p>
+
+
+{% endraw %}

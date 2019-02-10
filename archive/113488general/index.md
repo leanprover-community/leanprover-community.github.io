@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quote tactic](04423quotetactic.html) (9 messages, latest: Feb 10 2019 at 09:57)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (140 messages, latest: Feb 10 2019 at 08:44)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (5 messages, latest: Feb 10 2019 at 08:33)
