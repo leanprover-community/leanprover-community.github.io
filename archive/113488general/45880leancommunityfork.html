@@ -1,0 +1,23 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/45880leancommunityfork.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html">lean community fork</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157973553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20community%20fork/near/157973553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html#157973553">Mario Carneiro (Feb 10 2019 at 12:31)</a>:</h4>
+<p>The fork <code>leanprover-community/lean</code> was recently created. Before we go crazy on it, I would like to have a public discussion on the pros and cons: A list of things we want to do with it, problems that can arise from moving mathlib to compiling on a fork (should we maintain compatibility to 3.4.2?), the possibility of having to give these changes up when lean 4 comes around, and so on. Some of this might involve dredging up old closed PRs from the lean repo for re-evaluation.</p>
+<p>We considered and rejected a proposal for a fork last year, when development on 3.4.0 was still ongoing, and we decided that tracking changes in lean would be too difficult if a community fork diverged too much. I think the situation is quite different now, since lean 3 is essentially abandoned while official development (read Leo + Sebastian) has continued on lean 4 in private. My current thoughts are to use a community fork to continue support and development on lean 3, with the understanding that lean 4 may change everything when it eventually comes. I would propose to have mathlib maintain an experimental lean 4 branch during the initial stage after the release, without much serious porting except for proof of concepts, until we are all comfortable enough with it that we think we can leave lean 3, and the fork, behind for good. (We may also want to fork lean 4 but that's a bit far off to plan at this point.)</p>
+<p>I think we should probably minimize changes to lean, but I also think that it will be difficult to impossible to maintain compatibility with two lean versions simultaneously - even moving a single theorem from mathlib to core or vice versa causes a mismatch that will cause an error either way around. Pure additions to the C++ code might allow backwards compatibility, but something like a bugfix that we want to take advantage of in mathlib would be prevented by attempts at backward compatibility.</p>
+<p>If we decide against using the fork for mathlib, it can still be used as an experimental testing grounds for changes to lean, but in this case backward compatibility would be a bigger problem (unless one is okay with using the experimental branch on its own without mathlib).</p>
+<p>Plans are not finalized yet, but I'm hoping that having the fork available for use now will help spark the conversation.</p>
+
+
+{% endraw %}
