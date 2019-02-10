@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (23 messages, latest: Feb 09 2019 at 22:59)
+* [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (37 messages, latest: Feb 09 2019 at 23:35)
 
 * [type class inference sadness](84569typeclassinferencesadness.html) (36 messages, latest: Feb 08 2019 at 23:30)
 
