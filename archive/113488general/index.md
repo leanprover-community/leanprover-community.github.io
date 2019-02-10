@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (107 messages, latest: Feb 10 2019 at 00:48)
+* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (51 messages, latest: Feb 10 2019 at 01:49)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (139 messages, latest: Feb 10 2019 at 01:43)
 
 * [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
 
 * [AFP](94264AFP.html) (48 messages, latest: Feb 09 2019 at 18:55)
-
-* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (10 messages, latest: Feb 09 2019 at 17:33)
 
 * [ST monad is impossible](36458STmonadisimpossible.html) (14 messages, latest: Feb 09 2019 at 14:00)
 
