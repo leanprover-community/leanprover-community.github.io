@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (51 messages, latest: Feb 10 2019 at 01:49)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (140 messages, latest: Feb 10 2019 at 08:44)
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (139 messages, latest: Feb 10 2019 at 01:43)
+* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (5 messages, latest: Feb 10 2019 at 08:33)
+
+* [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (51 messages, latest: Feb 10 2019 at 01:49)
 
 * [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
 

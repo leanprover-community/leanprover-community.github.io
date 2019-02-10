@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/80362Provingfalsevsdoublenegation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html">Proving false vs double negation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157965656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965656">Dominic Farolino (Feb 10 2019 at 08:12)</a>:</h4>
+<p>Hey, I originally posted the question here (<a href="https://github.com/leanprover/lean/issues/1993#issuecomment-462112225" target="_blank" title="https://github.com/leanprover/lean/issues/1993#issuecomment-462112225">https://github.com/leanprover/lean/issues/1993#issuecomment-462112225</a>) if reading it there wouldn’t be too much trouble. The question basically revolves around why two nearly identical proofs of false are interpreted differently in Lean. One proof shows false and results in a negation, then other results in a double negation. The natural deduction for each are both very similar, however the Lean proofs must vary in where the assumptions are placed for it to be valid, which I don’t understand.</p>
+
+<a name="157965714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965714">Mario Carneiro (Feb 10 2019 at 08:14)</a>:</h4>
+<p>This example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="bp">¬</span><span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="bp">¬¬</span><span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="n">h1</span>
+</pre></div>
+
+
+<p>is almost correct, but the type of the <code>show</code> is wrong - it should be <code>show false, from h2 h1</code></p>
+
+<a name="157965738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965738">Mario Carneiro (Feb 10 2019 at 08:15)</a>:</h4>
+<p><code>show</code> will assert the type of the thing you are about to write. I can insert a bunch more shows to see how the <code>assume</code> lines change things:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+<span class="k">show</span> <span class="bp">¬¬</span><span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="bp">¬</span><span class="n">B</span><span class="o">,</span>
+<span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="n">h1</span>
+</pre></div>
+
+<a name="157965802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965802">Mario Carneiro (Feb 10 2019 at 08:17)</a>:</h4>
+<p>This reflects how the first line above an -&gt;I rule is the consequent of the implication, without mentioning the LHS which has gone into an assumption</p>
+
+<a name="157966283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157966283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157966283">Dominic Farolino (Feb 10 2019 at 08:33)</a>:</h4>
+<p>Ahh ok so that makes it more clear how it can be broken down. So the only reason we can say show not not B, from assume h2: not B, is because of the line after it then? I think that makes more sense to me now</p>
+
+
+{% endraw %}
