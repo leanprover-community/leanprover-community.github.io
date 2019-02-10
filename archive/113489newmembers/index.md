@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (20 messages, latest: Feb 10 2019 at 21:44)
+
 * [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (37 messages, latest: Feb 09 2019 at 23:35)
 
 * [type class inference sadness](84569typeclassinferencesadness.html) (36 messages, latest: Feb 08 2019 at 23:30)
@@ -19,8 +21,6 @@ permalink: archive/113489newmembers/index.html
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (46 messages, latest: Feb 08 2019 at 15:20)
 
 * [Coinduction](02528Coinduction.html) (18 messages, latest: Feb 08 2019 at 13:09)
-
-* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (15 messages, latest: Feb 08 2019 at 07:24)
 
 * [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
 

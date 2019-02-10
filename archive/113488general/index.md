@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [structure bug?](20911structurebug.html) (12 messages, latest: Feb 10 2019 at 20:51)
+* [structure bug?](20911structurebug.html) (15 messages, latest: Feb 10 2019 at 21:25)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (22 messages, latest: Feb 10 2019 at 18:44)
 

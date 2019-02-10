@@ -82,5 +82,32 @@ permalink: archive/113488general/20911structurebug.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157990622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157990622">Kevin Buzzard (Feb 10 2019 at 20:51)</a>:</h4>
 <p>man, that assumption tactic looked like it was going to work fine.</p>
 
+<a name="157991226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157991226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157991226">Kevin Buzzard (Feb 10 2019 at 21:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">a</span> <span class="n">a</span><span class="o">)</span> <span class="c1">-- works fine ;-)</span>
+</pre></div>
+
+<a name="157991578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157991578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157991578">François G. Dorais (Feb 10 2019 at 21:18)</a>:</h4>
+<p>Yep, it's disabled for classes, I just found this comment in  <code>lean/src/library/constructions/injective.h</code>:</p>
+<blockquote>
+<p>Generate injectivity lemmas <code>*.inj</code>, <code>*.inj_arrow</code> and <code>*.inj_eq</code>.<br>
+If <code>gen_inj_eq</code> is false, then <code>*.inj_eq</code> lemma is not generated.<br>
+The <code>*.inj_eq</code> lemma is used by the simplifier.<br>
+We don't generate it for classes because they can be expensive to generate and are rarely used in this case.</p>
+</blockquote>
+<p>The bug is too deep in the code for me to figure out what's going on but I'd love to hear about it if someone knows.</p>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Thanks! That's easier than I had imagined it would be.</p>
+
+<a name="157991812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20bug%3F/near/157991812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20911structurebug.html#157991812">Rob Lewis (Feb 10 2019 at 21:25)</a>:</h4>
+<p>The problem isn't specific to the structure command at all.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span>  <span class="n">foo&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">a</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="n">foo&#39;</span>
+</pre></div>
+
+
+<p>The tactic that (I think) is failing is actually implemented in Lean. (<a href="https://github.com/leanprover/lean/blob/master/library/init/meta/interactive.lean#L1610" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/interactive.lean#L1610">https://github.com/leanprover/lean/blob/master/library/init/meta/interactive.lean#L1610</a>) In principle one could poke around there and see what's going on. It's a little late for me to start messing with core though.</p>
+
 
 {% endraw %}
