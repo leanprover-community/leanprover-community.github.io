@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (18 messages, latest: Feb 10 2019 at 17:40)
+* [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (22 messages, latest: Feb 10 2019 at 18:44)
+
+* [lean community fork](45880leancommunityfork.html) (6 messages, latest: Feb 10 2019 at 18:09)
 
 * [notation keyword](70418notationkeyword.html) (24 messages, latest: Feb 10 2019 at 16:23)
 
 * [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (57 messages, latest: Feb 10 2019 at 15:58)
-
-* [lean community fork](45880leancommunityfork.html) (3 messages, latest: Feb 10 2019 at 15:13)
 
 * [quote tactic](04423quotetactic.html) (19 messages, latest: Feb 10 2019 at 10:54)
 
