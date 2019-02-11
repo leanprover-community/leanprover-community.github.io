@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [semiring polynomials](13910semiringpolynomials.html) (16 messages, latest: Feb 11 2019 at 21:02)
+
 * [localisation of rings](78299localisationofrings.html) (10 messages, latest: Feb 11 2019 at 19:55)
 
 * [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (5 messages, latest: Feb 11 2019 at 18:18)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2636 messages, latest: Feb 11 2019 at 13:08)
 
 * [duplicate is_group_hom](90791duplicateisgrouphom.html) (2 messages, latest: Feb 11 2019 at 11:50)
-
-* [semiring polynomials](13910semiringpolynomials.html) (14 messages, latest: Feb 11 2019 at 09:44)
 
 * [quotient classes](98632quotientclasses.html) (10 messages, latest: Feb 08 2019 at 21:26)
 

@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (152 messages, latest: Feb 11 2019 at 20:58)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (153 messages, latest: Feb 11 2019 at 21:47)
 
 * [lean web editor on firefox](60630leanwebeditoronfirefox.html) (3 messages, latest: Feb 11 2019 at 20:14)
 
