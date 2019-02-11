@@ -1,0 +1,21 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/94329Strassensalgorithmwithintandznum.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html">Strassen's algorithm with int and znum</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158006089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158006089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158006089">Seul Baek (Feb 11 2019 at 04:37)</a>:</h4>
+<p>I've implemented Strassen's algorithm in Lean (<a href="https://github.com/skbaek/strassen" target="_blank" title="https://github.com/skbaek/strassen">https://github.com/skbaek/strassen</a>). The hope was that it will help with multiplication of large matrices, but its behavior is a bit strange.</p>
+<p>1. When multiplying <code>znum</code> matrices I get a nice U-curve for (execution time / crossover point), where the optimum crossover point (in numbers of rows/columns) seems to be in the 32-128 range. But with <code>int</code> matrices the algorithm shows only negligible improvements over naive multiplication. Since Strassen's algorithm cuts down on multiplications at the expense of more additions/subtractions of matrices,  I think this means that the cost of addition/subtraction (relative to that of multiplication) in <code>int</code> is higher than that in <code>znum</code>. Am I correct about this?</p>
+<p>2. What's really puzzling is that multiplication of <code>int</code> matrices is faster than that of <code>znum</code> matrices, by about a factor of 5. At first I thought this is because matrix entries are not large enough, but the difference persists even when matrices are multiplied by constant factors of 1000-100000. The only time when <code>znum</code> outperforms <code>int</code> is when it involves a lot of additions of the form <code>z+z</code> that just require a bit shift. I thought <code>znum</code> was the better datatype for arithmetic with large numbers — I wonder if I'm doing something wrong here?</p>
+
+
+{% endraw %}
