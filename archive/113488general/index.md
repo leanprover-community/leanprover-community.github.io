@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Strassen's algorithm with int and znum](94329Strassensalgorithmwithintandznum.html) (28 messages, latest: Feb 11 2019 at 06:53)
+* [Strassen's algorithm with int and znum](94329Strassensalgorithmwithintandznum.html) (29 messages, latest: Feb 11 2019 at 07:06)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (26 messages, latest: Feb 11 2019 at 02:51)
 
