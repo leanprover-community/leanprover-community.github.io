@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (2 messages, latest: Feb 11 2019 at 17:55)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2636 messages, latest: Feb 11 2019 at 13:08)
 
 * [duplicate is_group_hom](90791duplicateisgrouphom.html) (2 messages, latest: Feb 11 2019 at 11:50)
