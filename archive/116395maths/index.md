@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localisation of rings](78299localisationofrings.html) (4 messages, latest: Feb 11 2019 at 18:31)
+* [localisation of rings](78299localisationofrings.html) (10 messages, latest: Feb 11 2019 at 19:55)
 
 * [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (5 messages, latest: Feb 11 2019 at 18:18)
 

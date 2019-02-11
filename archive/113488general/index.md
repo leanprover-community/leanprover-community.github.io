@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cases on wrapper type](53104casesonwrappertype.html) (1 message, latest: Feb 11 2019 at 19:03)
+
 * [lean web editor on firefox](60630leanwebeditoronfirefox.html) (2 messages, latest: Feb 11 2019 at 18:53)
 
 * [missing simp lemmas?](38034missingsimplemmas.html) (10 messages, latest: Feb 11 2019 at 16:47)

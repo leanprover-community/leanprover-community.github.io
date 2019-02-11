@@ -1,0 +1,29 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53104casesonwrappertype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html">cases on wrapper type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158054969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/158054969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#158054969">Johan Commelin (Feb 11 2019 at 19:03)</a>:</h4>
+<p>We have</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">with_zero</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">option</span> <span class="n">X</span>
+
+<span class="kn">instance</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">with_zero</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="err">\</span><span class="bp">&lt;</span> <span class="n">none</span> <span class="err">\</span><span class="bp">&gt;</span>
+
+<span class="kn">instance</span> <span class="n">has_coe</span> <span class="n">X</span> <span class="o">(</span><span class="n">with_zero</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="err">\</span><span class="bp">&lt;</span> <span class="n">some</span> <span class="err">\</span><span class="bp">&gt;</span>
+</pre></div>
+
+
+<p>Now, if I have <code>x : with_zero X</code>, and I run <code>cases x</code>,<br>
+I get two cases, <code>none</code> or <code>some x</code>. However, this means that the <code>option</code>-type is leaking through. I already have a ton of simp-lemmas and other API in the form of zero and coercions: <code>0</code> and <code>\u x</code>. Can I somehow produce cases that manifestly stay in the <code>with_zero</code> world, instead of leaking into the <code>option</code> world?</p>
+
+
+{% endraw %}

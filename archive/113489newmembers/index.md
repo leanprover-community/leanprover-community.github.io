@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Variable locality](27048Variablelocality.html) (2 messages, latest: Feb 11 2019 at 18:59)
+* [Variable locality](27048Variablelocality.html) (5 messages, latest: Feb 11 2019 at 19:10)
 
 * [universal properties for topology](31979universalpropertiesfortopology.html) (19 messages, latest: Feb 11 2019 at 00:53)
 
