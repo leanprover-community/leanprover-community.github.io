@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (152 messages, latest: Feb 11 2019 at 20:58)
+
+* [lean web editor on firefox](60630leanwebeditoronfirefox.html) (3 messages, latest: Feb 11 2019 at 20:14)
+
 * [cases on wrapper type](53104casesonwrappertype.html) (1 message, latest: Feb 11 2019 at 19:03)
 
-* [lean web editor on firefox](60630leanwebeditoronfirefox.html) (2 messages, latest: Feb 11 2019 at 18:53)
-
 * [missing simp lemmas?](38034missingsimplemmas.html) (10 messages, latest: Feb 11 2019 at 16:47)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (149 messages, latest: Feb 11 2019 at 12:49)
 
 * [golfing identical left and right cases](60095golfingidenticalleftandrightcases.html) (12 messages, latest: Feb 11 2019 at 09:48)
 
