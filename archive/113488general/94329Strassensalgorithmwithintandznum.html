@@ -17,5 +17,92 @@ permalink: archive/113488general/94329Strassensalgorithmwithintandznum.html
 <p>1. When multiplying <code>znum</code> matrices I get a nice U-curve for (execution time / crossover point), where the optimum crossover point (in numbers of rows/columns) seems to be in the 32-128 range. But with <code>int</code> matrices the algorithm shows only negligible improvements over naive multiplication. Since Strassen's algorithm cuts down on multiplications at the expense of more additions/subtractions of matrices,  I think this means that the cost of addition/subtraction (relative to that of multiplication) in <code>int</code> is higher than that in <code>znum</code>. Am I correct about this?</p>
 <p>2. What's really puzzling is that multiplication of <code>int</code> matrices is faster than that of <code>znum</code> matrices, by about a factor of 5. At first I thought this is because matrix entries are not large enough, but the difference persists even when matrices are multiplied by constant factors of 1000-100000. The only time when <code>znum</code> outperforms <code>int</code> is when it involves a lot of additions of the form <code>z+z</code> that just require a bit shift. I thought <code>znum</code> was the better datatype for arithmetic with large numbers — I wonder if I'm doing something wrong here?</p>
 
+<a name="158007350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007350">Simon Hudon (Feb 11 2019 at 05:15)</a>:</h4>
+<p>Are you doing the computation in kernel reductions or in the VM?</p>
+
+<a name="158007398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007398">Mario Carneiro (Feb 11 2019 at 05:16)</a>:</h4>
+<p><code>vector.halve</code> can be constructed in one pass</p>
+
+<a name="158007415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007415">Mario Carneiro (Feb 11 2019 at 05:17)</a>:</h4>
+<p>As a kernel data structure, I would use balanced binary trees instead of vectors of length 2^k</p>
+
+<a name="158007416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007416">Seul Baek (Feb 11 2019 at 05:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  In the kernel</p>
+
+<a name="158007488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007488">Seul Baek (Feb 11 2019 at 05:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> That's a good point, I should have used trees</p>
+
+<a name="158007529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007529">Mario Carneiro (Feb 11 2019 at 05:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">big_vector</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">big_vector</span> <span class="n">n</span> <span class="bp">×</span> <span class="n">big_vector</span> <span class="n">n</span>
+</pre></div>
+
+<a name="158007548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007548">Mario Carneiro (Feb 11 2019 at 05:21)</a>:</h4>
+<p>I'm a bit worried about the kernel having to compute with the proofs</p>
+
+<a name="158007549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007549">Mario Carneiro (Feb 11 2019 at 05:21)</a>:</h4>
+<p>since vectors have a proof component</p>
+
+<a name="158007600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007600">Seul Baek (Feb 11 2019 at 05:22)</a>:</h4>
+<p>Although it can't be trees all the way down, since we have to resort to regular matrix multiplication at some crossover point &gt; 1 for efficiency</p>
+
+<a name="158007611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007611">Mario Carneiro (Feb 11 2019 at 05:22)</a>:</h4>
+<p>You can also implement regular matrix multiplication on these kind of matrices</p>
+
+<a name="158007625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007625">Mario Carneiro (Feb 11 2019 at 05:23)</a>:</h4>
+<p>although perhaps the size being a power of 2 is a bit restrictive</p>
+
+<a name="158007629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007629">Mario Carneiro (Feb 11 2019 at 05:23)</a>:</h4>
+<p>but I guess <code>strassen</code> has that built in so it should be fine</p>
+
+<a name="158007681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007681">Mario Carneiro (Feb 11 2019 at 05:24)</a>:</h4>
+<p>You have more tupling and untupling than you need</p>
+
+<a name="158007698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007698">Mario Carneiro (Feb 11 2019 at 05:25)</a>:</h4>
+<p>like there is no reason <code>quadruple</code> and <code>double_cols</code> should be uncurried</p>
+
+<a name="158007749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007749">Seul Baek (Feb 11 2019 at 05:26)</a>:</h4>
+<p>The only reason they are uncurried is that it makes statements of correctness lemmas simpler,  should I want to verify them</p>
+
+<a name="158007767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007767">Seul Baek (Feb 11 2019 at 05:27)</a>:</h4>
+<p>Do the (un)tuplings significantly slow things down? In that case, I guess they should be curried</p>
+
+<a name="158007817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007817">Mario Carneiro (Feb 11 2019 at 05:28)</a>:</h4>
+<p>Not sure by how much, but I expect so. I don't think I've identified any big problems yet, just linear slowdowns</p>
+
+<a name="158007917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007917">Mario Carneiro (Feb 11 2019 at 05:31)</a>:</h4>
+<p>all your tests use <code>#eval</code>?</p>
+
+<a name="158007972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007972">Seul Baek (Feb 11 2019 at 05:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Yes, I used <code>#eval</code></p>
+
+<a name="158007982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158007982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158007982">Mario Carneiro (Feb 11 2019 at 05:33)</a>:</h4>
+<p>well, it's no surprise <code>int</code> is fast then</p>
+
+<a name="158008154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strassen%27s%20algorithm%20with%20int%20and%20znum/near/158008154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94329Strassensalgorithmwithintandznum.html#158008154">Seul Baek (Feb 11 2019 at 05:38)</a>:</h4>
+<p>Oops... you're right, I forgot <code>#eval</code> is VM by default</p>
+
 
 {% endraw %}
