@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (149 messages, latest: Feb 11 2019 at 12:49)
+
 * [golfing identical left and right cases](60095golfingidenticalleftandrightcases.html) (12 messages, latest: Feb 11 2019 at 09:48)
 
 * [missing simp lemmas?](38034missingsimplemmas.html) (6 messages, latest: Feb 11 2019 at 09:26)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [leanpkg upgrade giving me 3.4.2 branch](47076leanpkgupgradegivingme342branch.html) (57 messages, latest: Feb 10 2019 at 15:58)
 
 * [quote tactic](04423quotetactic.html) (19 messages, latest: Feb 10 2019 at 10:54)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (140 messages, latest: Feb 10 2019 at 08:44)
 
 * [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
 

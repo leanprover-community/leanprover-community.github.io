@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2632 messages, latest: Feb 11 2019 at 12:55)
+
 * [duplicate is_group_hom](90791duplicateisgrouphom.html) (2 messages, latest: Feb 11 2019 at 11:50)
 
 * [semiring polynomials](13910semiringpolynomials.html) (14 messages, latest: Feb 11 2019 at 09:44)
@@ -85,8 +87,6 @@ permalink: archive/116395maths/index.html
 * [norm_num weirdness](48256normnumweirdness.html) (34 messages, latest: Jan 18 2019 at 10:57)
 
 * [classification of finite simple groups](89771classificationoffinitesimplegroups.html) (24 messages, latest: Jan 17 2019 at 23:03)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2628 messages, latest: Jan 17 2019 at 15:56)
 
 * [div_lt_iff_lt_mul](72099divltiffltmul.html) (12 messages, latest: Jan 15 2019 at 12:24)
 
