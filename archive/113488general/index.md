@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean web editor on firefox](60630leanwebeditoronfirefox.html) (1 message, latest: Feb 11 2019 at 17:43)
+* [lean web editor on firefox](60630leanwebeditoronfirefox.html) (2 messages, latest: Feb 11 2019 at 18:53)
 
 * [missing simp lemmas?](38034missingsimplemmas.html) (10 messages, latest: Feb 11 2019 at 16:47)
 

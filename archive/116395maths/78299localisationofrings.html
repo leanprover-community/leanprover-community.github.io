@@ -1,0 +1,35 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/78299localisationofrings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/78299localisationofrings.html">localisation of rings</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158051679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation%20of%20rings/near/158051679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78299localisationofrings.html#158051679">Kevin Buzzard (Feb 11 2019 at 18:21)</a>:</h4>
+<p>I've had enough of the fascinating localisation topic being hidden within <a href="#narrow/stream/116395-maths/topic/cardinality.20of.20integers.20modulo.20n" title="#narrow/stream/116395-maths/topic/cardinality.20of.20integers.20modulo.20n">this thread</a> so I'm moving some of it here.</p>
+<p>Summary: <span class="user-mention" data-user-id="130308">@Neil Strickland</span> wrote a predicate <code>is_localization A S B f</code> where A and B are rings, S is a submonoid of A, f : A -&gt; B is a ring hom, and the predicate is true iff B is isomorphic to A[1/S] and the triangle involving f commutes. Kenny <a href="https://github.com/kckennylau/Lean/blob/master/localization_alt.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/localization_alt.lean">then Kenny'd it</a> and I think there is still no PR. Neil wrote down an excellent-looking <a href="#narrow/stream/116395-maths/topic/cardinality.20of.20integers.20modulo.20n/near/155197619" title="#narrow/stream/116395-maths/topic/cardinality.20of.20integers.20modulo.20n/near/155197619">list of tests</a> which as far as I know nobody has yet tried. <span class="user-mention" data-user-id="132858">@Ramon Fernandez Mir</span> did you get as far as seeing whether this <a href="https://github.com/kbuzzard/lean-stacks-project/blob/595aa1d6c5ce5a6fa0259c5a0a2226a91b07d96e/src/canonical_isomorphism_nonsense.lean#L268" target="_blank" title="https://github.com/kbuzzard/lean-stacks-project/blob/595aa1d6c5ce5a6fa0259c5a0a2226a91b07d96e/src/canonical_isomorphism_nonsense.lean#L268">ugly part of the schemes project</a> was made any simpler using this approach?</p>
+<p>Johan is asking about localisations in <a href="https://github.com/leanprover/mathlib/issues/481" target="_blank" title="https://github.com/leanprover/mathlib/issues/481">#481</a> and the stuff above might make us rethink the entire approach.</p>
+
+<a name="158051777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation%20of%20rings/near/158051777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78299localisationofrings.html#158051777">Johan Commelin (Feb 11 2019 at 18:22)</a>:</h4>
+<p>I was just thinking about this... does <code>S</code> even have to be a submonoid? Or can it be any set?</p>
+
+<a name="158052076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation%20of%20rings/near/158052076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78299localisationofrings.html#158052076">Kevin Buzzard (Feb 11 2019 at 18:27)</a>:</h4>
+<p>I talked to Kenny about this, and Neil mentioned something too. Neil pointed out that for log geometry you have a morphism from a monoid into a ring, but there you really do need monoids. I was forever needing stuff like A[1/f][1/g]=A[1/fg] and for that it would have been much easier to have subsets of A. <span class="user-mention" data-user-id="110064">@Kenny Lau</span>  then told me that if you don't use all the monoid but instead just the subset then there would be problems with constructiveness or something -- apparently just because you know all the inverses of f(s) for all s in some generating set T doesn't mean you know all the inverses of all the elements of T? I didn't really understand what he was saying but he knows a darn sight more about this sort of stuff than I do.</p>
+<p>I talked about this with Ramon and we came up with the idea of leaving the predicate as it is, together with its proof that it satisfies the universal property, but then writing another predicate on top, defining <code>is_localisation' A T B f</code> to be <code>is_localisation A &lt;T&gt; B f</code> or whatever, and working with that. This way we don't completely rip up Neil's interface and then realise that we needed it all along, but we can probably also prove the lemmas which we need about A[1/f][1/g]=A[1/fg] relatively painlessly. Kenny also remarked that A[1/S] was equal to A[1/U] where U is the "saturation" of S, which I quickly discovered did not mean the u such that u^n in S for some n&gt;=1 but the u which divide an element of S.</p>
+<p>I think that's everything I know. I've not had a chance to think about this stuff recently. Maybe tomorrow I'll work with Ramon on it.</p>
+
+<a name="158052376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation%20of%20rings/near/158052376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78299localisationofrings.html#158052376">Kevin Buzzard (Feb 11 2019 at 18:31)</a>:</h4>
+<p>I guess one big question is: is Neil or Kenny actually going to PR this predicate? It seemed to me that after we had the universal property, which we did have, we had enough to make it worth PR'ing.</p>
+
+
+{% endraw %}

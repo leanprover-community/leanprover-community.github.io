@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (2 messages, latest: Feb 11 2019 at 17:55)
+* [localisation of rings](78299localisationofrings.html) (4 messages, latest: Feb 11 2019 at 18:31)
+
+* [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (5 messages, latest: Feb 11 2019 at 18:18)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2636 messages, latest: Feb 11 2019 at 13:08)
 

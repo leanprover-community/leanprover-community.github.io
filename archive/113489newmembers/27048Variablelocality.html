@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/27048Variablelocality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/27048Variablelocality.html">Variable locality</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158052845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20locality/near/158052845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27048Variablelocality.html#158052845">Wojciech Nawrocki (Feb 11 2019 at 18:37)</a>:</h4>
+<p>I noticed that using a <code>variable</code> declaration in inductive type constructors makes them "non-local", in the sense that they apply to the whole type rather than just the constructor, even though they are irrelevant to the type. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">a</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+<span class="kn">inductive</span> <span class="n">Foo</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">of_nat</span><span class="o">:</span> <span class="n">Foo</span> <span class="n">a</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">Foo</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">inductive Foo : Π {a : ℕ}, ℕ → Type</span>
+<span class="cm">constructors:</span>
+<span class="cm">Foo.of_nat : Π {a : ℕ}, Foo a</span>
+<span class="cm">-/</span>
+
+<span class="kn">inductive</span> <span class="n">Foo&#39;</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">of_nat</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">a</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">Foo&#39;</span> <span class="n">a</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">Foo&#39;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">inductive Foo&#39; : ℕ → Type</span>
+<span class="cm">constructors:</span>
+<span class="cm">Foo&#39;.of_nat : Π {a : ℕ}, Foo&#39; a</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>I would like Lean to generate something like <code>Foo'</code> for me, where only the constructor is a pi-type, but the type being defined is not, but Lean generates <code>Foo</code>, which depends on <code>a</code> resulting in inference errors anywhere. Can I somehow achieve <code>Foo'</code> without explicitly specifying the Pi in every constructor?</p>
+
+<a name="158054671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20locality/near/158054671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27048Variablelocality.html#158054671">Andrew Ashworth (Feb 11 2019 at 18:59)</a>:</h4>
+<p>don't use variable names that overlap?</p>
+
+
+{% endraw %}

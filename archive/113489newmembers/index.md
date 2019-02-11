@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Variable locality](27048Variablelocality.html) (2 messages, latest: Feb 11 2019 at 18:59)
+
 * [universal properties for topology](31979universalpropertiesfortopology.html) (19 messages, latest: Feb 11 2019 at 00:53)
 
 * [typing up solutions in Lean](35624typingupsolutionsinLean.html) (20 messages, latest: Feb 10 2019 at 21:44)
