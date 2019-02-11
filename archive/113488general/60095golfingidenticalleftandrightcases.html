@@ -1,0 +1,92 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/60095golfingidenticalleftandrightcases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html">golfing identical left and right cases</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158016176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158016176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158016176">Johan Commelin (Feb 11 2019 at 09:01)</a>:</h4>
+<p>I've got</p>
+<div class="codehilite"><pre><span></span>    <span class="n">cases</span> <span class="n">is_valuation</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">v₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">left</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map_le</span> <span class="n">Hle</span><span class="o">,</span>
+      <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span><span class="n">H12</span><span class="o">,</span> <span class="err">←</span><span class="n">H12</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">right</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map_le</span> <span class="n">Hle</span><span class="o">,</span>
+      <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span><span class="n">H12</span><span class="o">,</span> <span class="err">←</span><span class="n">H12</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span> <span class="o">},</span>
+</pre></div>
+
+
+<p>Is there a tactic that allows to golf this? The only difference is the <code>left</code> and <code>right</code> tactic...</p>
+
+<a name="158017864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158017864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158017864">Seul Baek (Feb 11 2019 at 09:34)</a>:</h4>
+<p>You can do slightly better with</p>
+<div class="codehilite"><pre><span></span>    cases is_valuation.map_add v₂ r s;
+    [{left},{right}];
+    { rw with_zero.map_le Hle,
+      rwa [←H12, ←H12] at h }
+</pre></div>
+
+
+<p>but it's not by much</p>
+
+<a name="158017900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158017900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158017900">Johan Commelin (Feb 11 2019 at 09:35)</a>:</h4>
+<p>Cool, that is more or less what I was looking for!<br>
+Can you explain the magic on line 2?</p>
+
+<a name="158017922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158017922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158017922">Mario Carneiro (Feb 11 2019 at 09:35)</a>:</h4>
+<p>How about </p>
+<div class="codehilite"><pre><span></span>  apply (is_valuation.map_add v₂ r s).imp;
+  { intro Hle,
+    rw with_zero.map_le Hle,
+    rwa [←H12, ←H12] at h }
+</pre></div>
+
+<a name="158018066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018066">Mario Carneiro (Feb 11 2019 at 09:38)</a>:</h4>
+<p>The magic on line 2 is the <code>tac; [tac1, tac2]</code> combinator. It applies <code>tac1</code> to the first goal and <code>tac2</code> to the second. If you put another <code>; tac</code> at the end, it will be applied to all subgoals generated by the first combination of tactics</p>
+
+<a name="158018101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018101">Johan Commelin (Feb 11 2019 at 09:39)</a>:</h4>
+<p>Ok, nice.</p>
+
+<a name="158018263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018263">Johan Commelin (Feb 11 2019 at 09:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Your suggestion isn't working. <code>is_valuation.map_add _ _ _</code> returns an <code>_ ∨ _</code>. And I do <code>cases</code> on that.</p>
+
+<a name="158018276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018276">Mario Carneiro (Feb 11 2019 at 09:42)</a>:</h4>
+<p>does <code>refine (is_valuation.map_add v₂ r s).imp (\lam Hle, _) (\lam Hle, _);</code> work?</p>
+
+<a name="158018291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018291">Mario Carneiro (Feb 11 2019 at 09:43)</a>:</h4>
+<p>or <code>refine (is_valuation.map_add v₂ r s).imp _ _</code> with the intro line</p>
+
+<a name="158018353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018353">Mario Carneiro (Feb 11 2019 at 09:44)</a>:</h4>
+<p>You are casing on <code>or</code>, and then reconstructing an <code>or</code> where the left goes left and the right goes right. That's <code>or.imp</code></p>
+
+<a name="158018360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018360">Seul Baek (Feb 11 2019 at 09:44)</a>:</h4>
+<p>In general the syntax <code>tac_0; [tac_1, ..., tac_n]</code> will apply <code>tac_i</code> to the <code>i</code>th subgoal generated by <code>tac_0</code>, with the restriction that the number of tactics <code>n</code> matches the number of subgoals generated</p>
+
+<a name="158018586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golfing%20identical%20left%20and%20right%20cases/near/158018586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60095golfingidenticalleftandrightcases.html#158018586">Johan Commelin (Feb 11 2019 at 09:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> This works. Thanks!</p>
+<div class="codehilite"><pre><span></span>    <span class="n">apply</span> <span class="o">(</span><span class="n">is_valuation</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">v₂</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">imp</span> <span class="bp">_</span> <span class="bp">_;</span>
+    <span class="n">erw</span> <span class="o">[</span><span class="n">with_zero</span><span class="bp">.</span><span class="n">map_le</span> <span class="n">Hle</span><span class="o">,</span> <span class="err">←</span><span class="n">H12</span><span class="o">,</span> <span class="err">←</span><span class="n">H12</span><span class="o">]</span><span class="bp">;</span>
+    <span class="n">exact</span> <span class="n">id</span>
+</pre></div>
+
+
+{% endraw %}

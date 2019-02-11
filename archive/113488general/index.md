@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [golfing identical left and right cases](60095golfingidenticalleftandrightcases.html) (12 messages, latest: Feb 11 2019 at 09:48)
+
+* [missing simp lemmas?](38034missingsimplemmas.html) (6 messages, latest: Feb 11 2019 at 09:26)
+
 * [Strassen's algorithm with int and znum](94329Strassensalgorithmwithintandznum.html) (29 messages, latest: Feb 11 2019 at 07:06)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (26 messages, latest: Feb 11 2019 at 02:51)

@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/38034missingsimplemmas.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html">missing simp lemmas?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158016353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158016353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158016353">Johan Commelin (Feb 11 2019 at 09:05)</a>:</h4>
+<p>Shouldn't these be simp lemmas?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">is_ring_hom</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">map_zero</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">-</span> <span class="n">f</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">map_add</span> <span class="n">f</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span>
+     <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+
+<span class="kn">lemma</span> <span class="n">map_neg</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">map_add</span> <span class="n">f</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">f</span> <span class="n">x</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">map_zero</span> <span class="n">f</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">map_sub</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span> <span class="n">map_neg</span> <span class="n">f</span><span class="o">]</span>
+</pre></div>
+
+<a name="158016372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158016372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158016372">Mario Carneiro (Feb 11 2019 at 09:05)</a>:</h4>
+<p>won't work</p>
+
+<a name="158016440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158016440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158016440">Mario Carneiro (Feb 11 2019 at 09:06)</a>:</h4>
+<p>If <code>ring_hom</code> becomes a type then these can be simp lemmas</p>
+
+<a name="158016580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158016580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158016580">Johan Commelin (Feb 11 2019 at 09:09)</a>:</h4>
+<p>Too bad...</p>
+
+<a name="158017216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158017216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158017216">Kevin Buzzard (Feb 11 2019 at 09:21)</a>:</h4>
+<p>You could make them typeclasses ;-)</p>
+
+<a name="158017438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20simp%20lemmas%3F/near/158017438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38034missingsimplemmas.html#158017438">Mario Carneiro (Feb 11 2019 at 09:26)</a>:</h4>
+<p>huh? it's already a typeclass</p>
+
+
+{% endraw %}
