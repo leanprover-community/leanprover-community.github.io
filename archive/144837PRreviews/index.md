@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#711 Calculus](47033711Calculus.html) (47 messages, latest: Feb 11 2019 at 07:58)
+* [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (6 messages, latest: Feb 11 2019 at 08:46)
 
-* [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (5 messages, latest: Feb 10 2019 at 10:26)
+* [#711 Calculus](47033711Calculus.html) (47 messages, latest: Feb 11 2019 at 07:58)
 
 * [#706 refactor geo_sum](83110706refactorgeosum.html) (1 message, latest: Feb 09 2019 at 15:40)
 
