@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean community fork](45880leancommunityfork.html) (8 messages, latest: Feb 10 2019 at 23:58)
+
 * [structure bug?](20911structurebug.html) (15 messages, latest: Feb 10 2019 at 21:25)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (22 messages, latest: Feb 10 2019 at 18:44)
-
-* [lean community fork](45880leancommunityfork.html) (6 messages, latest: Feb 10 2019 at 18:09)
 
 * [notation keyword](70418notationkeyword.html) (24 messages, latest: Feb 10 2019 at 16:23)
 
