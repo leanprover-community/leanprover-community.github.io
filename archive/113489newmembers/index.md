@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [universal properties for topology](31979universalpropertiesfortopology.html) (19 messages, latest: Feb 11 2019 at 00:53)
+
 * [typing up solutions in Lean](35624typingupsolutionsinLean.html) (20 messages, latest: Feb 10 2019 at 21:44)
 
 * [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (37 messages, latest: Feb 09 2019 at 23:35)

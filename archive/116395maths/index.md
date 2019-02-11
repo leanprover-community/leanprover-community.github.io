@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [semiring polynomials](13910semiringpolynomials.html) (1 message, latest: Feb 10 2019 at 23:12)
+* [semiring polynomials](13910semiringpolynomials.html) (2 messages, latest: Feb 11 2019 at 00:25)
 
 * [quotient classes](98632quotientclasses.html) (10 messages, latest: Feb 08 2019 at 21:26)
 

@@ -50,5 +50,55 @@ permalink: archive/113488general/45880leancommunityfork.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20community%20fork/near/157996918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html#157996918">Scott Morrison (Feb 10 2019 at 23:58)</a>:</h4>
 <p>In particular, instead of writing <code>lean_version = "3.4.2"</code> you just write <code>lean_version = "khoek/klean:3.4.4"</code></p>
 
+<a name="157996991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20community%20fork/near/157996991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html#157996991">Mario Carneiro (Feb 11 2019 at 00:00)</a>:</h4>
+<blockquote>
+<p>I think I won't be really enthusiastic about this before I see a compelling list of things we could do using this fork.</p>
+</blockquote>
+<p>Yes, that's partly the reason for this thread.</p>
+<blockquote>
+<p>I would rather like to see more maths going into mathlib.</p>
+</blockquote>
+<p>I am not planning on sinking major time into work on lean core. But I want to provide an outlet for people for whom the inconvenience of a bug or missing feature is sufficiently higher than the inconvenience of learning how to write and test a PR for lean.</p>
+<blockquote>
+<p>And I would really like to see Leo writing that he is happy, or at least doesn't care at all.</p>
+</blockquote>
+<p>My understanding of the recent move of mathlib away from the <code>leanprover</code> account is that Leo doesn't care at all, or more precisely he wants mathlib to be our problem and not his. It's an independent project, and if it is better for us to run a forked version of lean then that's our prerogative. He has also sent clear signals that he doesn't want to be bothered by user problems or be involved in reviewing PRs or what have you, and a fork is the easiest way to achieve both goals (leaving Leo alone and respecting issues and PRs from the community).</p>
+<blockquote>
+<p>What's the extent of the changes you'd expect to make on the fork? Small bug fixes (e.g. to some of the tactics we have primed versions of) and name changes wouldn't be so disruptive, but to me there's nothing that's worth the cost of forking.</p>
+</blockquote>
+<p>Small bug fixes, like incorporating primed versions of tactics, is an easy thing. Another major class of changes involves increasing the API surface area in order to make certain things that are currently impossible possible in lean. So rather than putting <code>#where</code> in lean C++, we add enough hooks so that a lean <code>#where</code> can ask all the questions it needs to ask.</p>
+<blockquote>
+<p>We'd also have to find a better way to synchronize mathlib with forked-Lean releases. Updating to the most recent changes to Lean didn't go 100% smoothly, and presumably there would be more activity on the fork if it happens. I've really enjoyed the stability of Lean versions compared to a few years ago.</p>
+</blockquote>
+<p>This is true. We were clearly out of practice for lean updates and 3.4.2 didn't go as smoothly as expected. We would need to get better at that. Back in the day, mathlib ran on nightly lean releases, until Leo closed up shop. I don't recall there being much problem with that, but I think the community was smaller back then and there weren't so many mathematicians; we need to make sure the tooling is available to make this pain-free or it will only be an inconvenience, like Patrick says.</p>
+<p>The line between "stable" and "abandoned" is thin. Of course lean is much more stable now than it was back when Leo made commits to lean repo. But it came at exactly the cost I was worried about back then: monkey patches, workarounds, and rejecting issues with "sorry, you're out of luck".</p>
+<p>Some suggestions, based on previous conversations:</p>
+<ul>
+<li>VM overrides. This would require its own thread to discuss in detail, but the basic idea is that you can mark a definition <code>@[vm_override bar] def foo</code> and then the VM will call <code>bar</code> instead of <code>foo</code>. This can be used to make existing VM overrides manifest in the code (they aren't visible right now, which leads to nonlocality of definition where you see a lean definition and it isn't being used and the code says nothing to indicate this), and can also be used to support definitions that compute efficiently in both the kernel and the VM. (I have a ton of applications of this.)</li>
+<li><code>cached A</code>: maybe the name needs work, I think <code>mutable A</code> might be better. It's a wrapper for <code>trunc A</code> that allows mutation of the contained element. Type theory mumbo jumbo ensures that you can't observe the change of representation.</li>
+<li>User computation rules. The kernel already has support for normalizer_extensions, this is just providing an interface for it. "You could break consistency!" Yes, it's an axiom-like thing. It is not intended for general use but there are some applications where it is necessary.</li>
+<li>Hook for the equation compiler: Using custom recursors in the equation compiler, and providing a way to use equation syntax with a custom equation compiler.</li>
+<li>More tactic API: more pexpr functions, pattern matching on <code>macro_def</code>, custom parser hooks, more direct manipulation of the type context.</li>
+<li>Tracing and timing for <code>#reduce</code></li>
+<li>Additions and fixes for <code>leanpkg</code>: allow tracking master branch, add extra commands like <code>init-travis</code> for setting up a travis.yml file for your project, probably some other things I've forgotten.</li>
+<li>Bug fixes all around</li>
+</ul>
+<p>As you can see it's mostly hooks - I want to minimize the stuff that goes into lean repo and instead just set up the minimum necessary to allow building actual tools in mathlib. Of course each of these needs its own issue / RFC and PR, and we should keep in mind the disruptive effect of each of them when considering whether to merge them, and for many of these no code has been written yet so someone would have to feel strongly enough about them to implement them to get the process started. But at least now we can have the conversation.</p>
+<p>In the core library, I am more torn, because of the issues with moving things around and references in dependent projects.</p>
+<ul>
+<li>One of the projects I got most of the way to completion, before leo closed up shop and I quietly dropped it, was a change of <code>discrete_field -&gt; field</code> and eliminating the <code>field</code> class.</li>
+<li>Proof changes should be less disruptive, for example removing AC from the proof that <code>int</code> is a ring.</li>
+<li>Removing notations that aren't used and are blocking better uses, i.e. <code>|&gt;</code> <code>&lt;|</code> <code>&gt;=&gt;</code> and I'm sure you all have some other examples.</li>
+</ul>
+
+<a name="157997112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20community%20fork/near/157997112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html#157997112">Kenny Lau (Feb 11 2019 at 00:03)</a>:</h4>
+<p><code>&gt;=&gt;</code> looks like a fish</p>
+
+<a name="157997114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20community%20fork/near/157997114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45880leancommunityfork.html#157997114">Mario Carneiro (Feb 11 2019 at 00:03)</a>:</h4>
+<p>thank haskell for that one</p>
+
 
 {% endraw %}
