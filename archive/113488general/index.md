@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [missing simp lemmas?](38034missingsimplemmas.html) (10 messages, latest: Feb 11 2019 at 16:47)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (149 messages, latest: Feb 11 2019 at 12:49)
 
 * [golfing identical left and right cases](60095golfingidenticalleftandrightcases.html) (12 messages, latest: Feb 11 2019 at 09:48)
-
-* [missing simp lemmas?](38034missingsimplemmas.html) (6 messages, latest: Feb 11 2019 at 09:26)
 
 * [Strassen's algorithm with int and znum](94329Strassensalgorithmwithintandznum.html) (29 messages, latest: Feb 11 2019 at 07:06)
 
