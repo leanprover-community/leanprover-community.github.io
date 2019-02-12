@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (163 messages, latest: Feb 12 2019 at 09:23)
+
 * [Big Proof](59609BigProof.html) (5 messages, latest: Feb 12 2019 at 08:45)
 
 * [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (12 messages, latest: Feb 12 2019 at 08:09)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (154 messages, latest: Feb 12 2019 at 00:57)
 
 * [lean web editor on firefox](60630leanwebeditoronfirefox.html) (3 messages, latest: Feb 11 2019 at 20:14)
 
