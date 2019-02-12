@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (115 messages, latest: Feb 12 2019 at 16:34)
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (117 messages, latest: Feb 12 2019 at 17:56)
+
+* [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (1 message, latest: Feb 12 2019 at 17:55)
 
 * [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
 
