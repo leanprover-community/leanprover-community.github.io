@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localisation of rings](78299localisationofrings.html) (16 messages, latest: Feb 12 2019 at 16:43)
+* [localisation of rings](78299localisationofrings.html) (19 messages, latest: Feb 12 2019 at 22:05)
 
 * [bundling functions](72781bundlingfunctions.html) (3 messages, latest: Feb 12 2019 at 14:47)
 
