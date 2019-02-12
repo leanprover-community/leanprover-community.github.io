@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [semiring polynomials](13910semiringpolynomials.html) (22 messages, latest: Feb 12 2019 at 03:47)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2637 messages, latest: Feb 12 2019 at 07:59)
+
+* [semiring polynomials](13910semiringpolynomials.html) (24 messages, latest: Feb 12 2019 at 07:30)
 
 * [localisation of rings](78299localisationofrings.html) (10 messages, latest: Feb 11 2019 at 19:55)
 
 * [(a * b) * c * d = (d * (b * c)) * a](70497abcddbca.html) (5 messages, latest: Feb 11 2019 at 18:18)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2636 messages, latest: Feb 11 2019 at 13:08)
 
 * [duplicate is_group_hom](90791duplicateisgrouphom.html) (2 messages, latest: Feb 11 2019 at 11:50)
 
