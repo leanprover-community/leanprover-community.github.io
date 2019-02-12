@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (90 messages, latest: Feb 12 2019 at 14:54)
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (108 messages, latest: Feb 12 2019 at 15:59)
+
+* [Big Proof](59609BigProof.html) (8 messages, latest: Feb 12 2019 at 15:53)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [basic logic](07729basiclogic.html) (22 messages, latest: Feb 12 2019 at 13:04)
 
 * [use and exists_prop](21313useandexistsprop.html) (2 messages, latest: Feb 12 2019 at 12:39)
-
-* [Big Proof](59609BigProof.html) (5 messages, latest: Feb 12 2019 at 08:45)
 
 * [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (12 messages, latest: Feb 12 2019 at 08:09)
 

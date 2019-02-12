@@ -52,5 +52,202 @@ permalink: archive/113489newmembers/09628Crypticerrors.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158122846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158122846">Kevin Buzzard (Feb 12 2019 at 14:53)</a>:</h4>
 <p>you're doing <code>cases r\1</code>. What is the type of r\1?</p>
 
+<a name="158123523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158123523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158123523">Mario Carneiro (Feb 12 2019 at 15:01)</a>:</h4>
+<p>minimized:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">algebra</span>
+
+<span class="n">run_cmd</span> <span class="n">mk_simp_attr</span> <span class="bp">`</span><span class="n">sop_form</span> <span class="o">[</span><span class="bp">`</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">run_cmd</span> <span class="n">mk_simp_attr</span> <span class="bp">`</span><span class="n">unfold_</span> <span class="o">[</span><span class="bp">`</span><span class="n">simp</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">mult</span><span class="o">:</span> <span class="kt">Type</span>
+
+<span class="kn">namespace</span> <span class="n">mult</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">mult</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mult</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">mult</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">mult</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span> <span class="n">mult</span>
+
+
+<span class="kn">inductive</span> <span class="n">tp</span><span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nat</span><span class="o">:</span> <span class="n">tp</span>
+<span class="bp">|</span> <span class="n">bool</span><span class="o">:</span> <span class="n">tp</span>
+<span class="bp">|</span> <span class="n">fn</span><span class="o">:</span> <span class="n">mult</span> <span class="bp">→</span> <span class="n">tp</span> <span class="bp">→</span> <span class="n">tp</span> <span class="bp">→</span> <span class="n">tp</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">⟦</span><span class="bp">`</span><span class="n">π</span><span class="bp">`⬝`</span><span class="n">T</span><span class="bp">`</span><span class="err">⟧⊸</span><span class="bp">`</span><span class="n">U</span><span class="o">:</span><span class="mi">90</span> <span class="o">:=</span> <span class="n">tp</span><span class="bp">.</span><span class="n">fn</span> <span class="n">π</span> <span class="n">T</span> <span class="n">U</span>
+
+<span class="n">def</span> <span class="n">precontext</span> <span class="o">:=</span> <span class="n">list</span> <span class="n">tp</span>
+
+<span class="kn">inductive</span> <span class="kn">context</span><span class="o">:</span> <span class="n">precontext</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span><span class="o">:</span> <span class="kn">context</span> <span class="o">[]</span>
+<span class="c1">-- You have a dependent pi (n) after a recursive arg (_ : context ns)</span>
+<span class="c1">-- and Lean doesn&#39;t like this.</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="err">Γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">(</span><span class="n">π</span><span class="o">:</span> <span class="n">mult</span><span class="o">)</span> <span class="o">(</span><span class="n">T</span><span class="o">:</span> <span class="n">tp</span><span class="o">):</span> <span class="kn">context</span> <span class="err">Γ</span> <span class="bp">→</span> <span class="kn">context</span> <span class="o">(</span><span class="n">T</span><span class="bp">::</span><span class="err">Γ</span><span class="o">)</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">⟦</span><span class="bp">`</span><span class="n">π</span><span class="bp">`⬝`</span><span class="n">T</span><span class="bp">`</span><span class="err">⟧</span><span class="bp">::`</span><span class="err">Γ</span><span class="o">:</span><span class="mi">90</span> <span class="o">:=</span> <span class="kn">context</span><span class="bp">.</span><span class="n">cons</span> <span class="n">π</span> <span class="n">T</span> <span class="err">Γ</span>
+
+<span class="kn">namespace</span> <span class="kn">context</span>
+
+<span class="n">def</span> <span class="n">zeros</span><span class="o">:</span> <span class="bp">Π</span> <span class="n">γ</span><span class="o">,</span> <span class="kn">context</span> <span class="n">γ</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">nil</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">T</span><span class="bp">::</span><span class="n">δ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⟦</span><span class="mi">0</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧</span><span class="bp">::</span><span class="o">(</span><span class="n">zeros</span> <span class="n">δ</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="o">(</span><span class="kn">context</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">⟨</span><span class="n">zeros</span> <span class="n">γ</span><span class="bp">⟩</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">add</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">},</span> <span class="kn">context</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kn">context</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kn">context</span> <span class="n">γ</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="n">nil</span> <span class="n">nil</span> <span class="o">:=</span> <span class="n">nil</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">(</span><span class="err">⟦</span><span class="n">π₁</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧</span><span class="bp">::</span><span class="err">Γ₁</span><span class="o">)</span> <span class="o">(</span><span class="err">⟦</span><span class="n">π₂</span><span class="bp">⬝.</span><span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="err">⟧</span><span class="bp">::</span><span class="err">Γ₂</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">(</span><span class="n">π₁</span><span class="bp">+</span><span class="n">π₂</span><span class="o">)</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧</span><span class="bp">::</span><span class="o">(</span><span class="n">add</span> <span class="err">Γ₁</span> <span class="err">Γ₂</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="kn">context</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">⟨</span><span class="kn">context</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">smul</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">},</span> <span class="n">mult</span> <span class="bp">→</span> <span class="kn">context</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kn">context</span> <span class="n">γ</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="n">π</span> <span class="n">nil</span> <span class="o">:=</span> <span class="n">nil</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="n">π</span> <span class="o">(</span><span class="err">⟦</span><span class="n">π&#39;</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧</span><span class="bp">::</span><span class="err">Γ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">(</span><span class="n">π</span><span class="bp">*</span><span class="n">π&#39;</span><span class="o">)</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧</span><span class="bp">::</span><span class="o">(</span><span class="n">smul</span> <span class="n">π</span> <span class="err">Γ</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">mult</span> <span class="o">(</span><span class="kn">context</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">⟨</span><span class="kn">context</span><span class="bp">.</span><span class="n">smul</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="kn">context</span>
+<span class="c">/-</span><span class="cm"> Introduces matrices and horrifying linear algebra. -/</span>
+
+
+<span class="kn">open</span> <span class="kn">context</span>
+
+<span class="kn">inductive</span> <span class="n">term</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">},</span> <span class="kn">context</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">tp</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">Nat</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">},</span>
+  <span class="c1">--------------------------</span>
+  <span class="n">term</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">)</span> <span class="n">tp</span><span class="bp">.</span><span class="n">nat</span>
+
+<span class="bp">|</span> <span class="n">Bool</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span> <span class="n">bool</span><span class="o">):</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">},</span>
+  <span class="c1">---------------------------</span>
+  <span class="n">term</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">)</span> <span class="n">tp</span><span class="bp">.</span><span class="n">bool</span>
+
+<span class="bp">|</span> <span class="n">App</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span> <span class="err">Γ&#39;</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">T</span> <span class="n">U</span><span class="o">:</span> <span class="n">tp</span><span class="o">}</span> <span class="o">{</span><span class="n">π</span><span class="o">:</span> <span class="n">mult</span><span class="o">},</span>
+  <span class="n">term</span> <span class="err">Γ</span> <span class="err">⟦</span><span class="n">π</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧⊸</span><span class="n">U</span>
+<span class="bp">→</span> <span class="n">term</span> <span class="err">Γ&#39;</span> <span class="n">T</span>
+  <span class="c1">----------------------</span>
+<span class="bp">→</span> <span class="n">term</span> <span class="o">(</span><span class="err">Γ</span> <span class="bp">+</span> <span class="n">π</span><span class="err">•Γ&#39;</span><span class="o">)</span> <span class="n">U</span>
+
+<span class="kn">open</span> <span class="n">term</span>
+
+<span class="c1">-- preservation proven by construction</span>
+<span class="kn">inductive</span> <span class="n">reduces</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">T</span><span class="o">:</span> <span class="n">tp</span><span class="o">},</span> <span class="n">term</span> <span class="err">Γ</span> <span class="n">T</span> <span class="bp">→</span> <span class="n">term</span> <span class="err">Γ</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">AppEtaLeft</span><span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span> <span class="err">Γ&#39;</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">T</span> <span class="n">U</span><span class="o">:</span> <span class="n">tp</span><span class="o">}</span> <span class="o">{</span><span class="n">π</span><span class="o">:</span> <span class="n">mult</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">fn</span> <span class="n">fn&#39;</span><span class="o">:</span> <span class="n">term</span> <span class="err">Γ</span> <span class="err">⟦</span><span class="n">π</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧⊸</span><span class="n">U</span><span class="o">}</span> <span class="o">{</span><span class="n">arg</span><span class="o">:</span> <span class="n">term</span> <span class="err">Γ&#39;</span> <span class="n">T</span><span class="o">},</span>
+  <span class="n">reduces</span> <span class="n">fn</span> <span class="n">fn&#39;</span>
+  <span class="c1">----------------------------------</span>
+<span class="bp">→</span> <span class="n">reduces</span> <span class="o">(</span><span class="n">App</span> <span class="n">fn</span> <span class="n">arg</span><span class="o">)</span> <span class="o">(</span><span class="n">App</span> <span class="n">fn&#39;</span> <span class="n">arg</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">reduces</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">lemma</span> <span class="n">diamond_property</span><span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span><span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">T</span><span class="o">:</span> <span class="n">tp</span><span class="o">}</span> <span class="o">{</span><span class="n">e</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">:</span> <span class="n">term</span> <span class="err">Γ</span> <span class="n">T</span><span class="o">},</span>
+    <span class="n">reduces</span> <span class="n">e</span> <span class="n">e₁</span>
+  <span class="bp">→</span> <span class="n">reduces</span> <span class="n">e</span> <span class="n">e₂</span>
+    <span class="c1">------------------------------</span>
+  <span class="bp">→</span> <span class="bp">∃</span> <span class="n">e&#39;</span><span class="o">,</span> <span class="n">reduces</span> <span class="n">e₁</span> <span class="n">e&#39;</span> <span class="bp">∧</span> <span class="n">reduces</span> <span class="n">e₂</span> <span class="n">e&#39;</span>
+<span class="c">/-</span><span class="cm"> TODO cases r₁ fails almost everywhere -/</span>
+<span class="bp">|</span> <span class="n">γ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Nat</span> <span class="n">n</span><span class="o">)</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="n">r₁</span> <span class="n">r₂</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span>
+  <span class="n">cases</span> <span class="n">γ</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">r₁</span><span class="o">,</span>
+
+ <span class="o">}</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Bool</span> <span class="n">b</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">r₁</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">T</span> <span class="o">(</span><span class="bp">@</span><span class="n">App</span> <span class="n">γ&#39;</span> <span class="err">Γ&#39;</span> <span class="err">Γ&#39;&#39;</span> <span class="n">T&#39;</span> <span class="n">U&#39;</span> <span class="n">π&#39;</span> <span class="n">fn</span> <span class="n">arg</span><span class="o">)</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="n">r₁</span> <span class="n">r₂</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+</pre></div>
+
+<a name="158124090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158124090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158124090">Mario Carneiro (Feb 12 2019 at 15:07)</a>:</h4>
+<p>The type of <code>r₁</code> is <code>@reduces (@list.nil tp) 0 tp.nat (@Nat n (@list.nil tp)) e₁</code> before the cases. In the cases we try to match it against the <code>AppEtaLeft</code> constructor, which has type <code>@reduces γ (Γ + π • Γ') U (@App γ Γ Γ' T U π fn arg) (@App γ Γ Γ' T U π fn' arg)</code>. This involves matching <code>(@list.nil tp) = γ</code> (no problem), <code>0 = Γ + π • Γ'</code> (big problem), <code>tp.nat = U</code> (no problem), before we get to <code>(@Nat n (@list.nil tp)) =  (@App γ Γ Γ' T U π fn arg)</code> (ill typed)</p>
+
+<a name="158124210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158124210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158124210">Mario Carneiro (Feb 12 2019 at 15:08)</a>:</h4>
+<p>The reason <code>0 = Γ + π • Γ'</code> is problematic is because the lhs is a constructor (okay) and the rhs is a function, namely <code>add</code> which is not a constructor. <code>cases</code> doesn't know what to do with this</p>
+
+<a name="158124564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158124564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158124564">Mario Carneiro (Feb 12 2019 at 15:12)</a>:</h4>
+<p>I'm looking at this definition.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">precontext</span> <span class="o">:=</span> <span class="n">list</span> <span class="n">tp</span>
+
+<span class="kn">inductive</span> <span class="kn">context</span><span class="o">:</span> <span class="n">precontext</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span><span class="o">:</span> <span class="kn">context</span> <span class="o">[]</span>
+<span class="c1">-- You have a dependent pi (n) after a recursive arg (_ : context ns)</span>
+<span class="c1">-- and Lean doesn&#39;t like this.</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="err">Γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">(</span><span class="n">π</span><span class="o">:</span> <span class="n">mult</span><span class="o">)</span> <span class="o">(</span><span class="n">T</span><span class="o">:</span> <span class="n">tp</span><span class="o">):</span> <span class="kn">context</span> <span class="err">Γ</span> <span class="bp">→</span> <span class="kn">context</span> <span class="o">(</span><span class="n">T</span><span class="bp">::</span><span class="err">Γ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I think you want <code>context</code> to be nondependent. You aren't really using the precontext in the definition - a context is only a list of <code>mult * tp</code> pairs of the same length as the precontext. I would suggest using a well formedness property to express this</p>
+
+<a name="158124748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158124748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158124748">Mario Carneiro (Feb 12 2019 at 15:14)</a>:</h4>
+<p>Same for <code>term</code>, maybe even more so. A dependent type of terms will lead only to weeping and gnashing of teeth</p>
+
+<a name="158126385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158126385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158126385">Wojciech Nawrocki (Feb 12 2019 at 15:37)</a>:</h4>
+<p>First of all, thanks a lot! I was just trying to conjure up an artificial example that people could run, but your minimization works better (and TIL about <code>pp.implicit</code>).<br>
+On the topic of <code>cases</code>:<br>
+As you rightly mentioned, <code>(@Nat n (@list.nil tp)) =  (@App γ Γ Γ' T U π fn arg)</code>is ill-typed. What I wanted <code>cases</code> to do in the first place was to simply discharge the cases of <code>Nat n</code> as absurd using this condition (and similar ones for <code>AppEtaRight</code> et al). Do you think it would be possible to modify <code>cases</code> so that it checks for impossible conditions such as this first? That way, even if it runs into something it can't unify such as <code>0 = Γ + π • Γ'</code>, it wouldn't matter as the case cannot occur anyway. It is true that all of <code>Γ Γ' π</code> are used in the ill-typed expression, but <code>@Nat .. = @App ..</code> is ill-typed regardless of argument values.<br>
+Alternatively, could the <code>cases</code> tactic simply generate a <code>0 = Γ + π • Γ'</code> goal? Is there a tactic which already does this?</p>
+<p>On the dependency of <code>context</code>/<code>term</code>:<br>
+This is essentially a strongly-typed representation of a particular lambda calculus, as described e.g. <a href="https://people.mpi-sws.org/~gil/publications/typedsyntaxfull.pdf" target="_blank" title="https://people.mpi-sws.org/~gil/publications/typedsyntaxfull.pdf">here</a>. The reason why <code>context</code>s depend on <code>precontext</code>s is that, for example, the definition of <code>App</code> in <code>term</code> (function application) allows the function and argument to have different <code>context</code>s, i.e. different <code>mult</code>s per <code>tp</code>, but they must have the same <code>precontext</code>,  i.e. the same list of <code>tp</code>s. This way, terms are correct-by-construction, meaning it's impossible to construct a <code>term</code> of an invalid embedded type (<code>tp</code>). Similarly, <code>term</code>s depend on <code>context</code>s, making the definition of <code>reduces</code> trivially uphold the type-preservation property of the described calculus. By "well formedness property", do you mean something that could achieve the same without messing with dependent types?</p>
+
+<a name="158126656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158126656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158126656">Mario Carneiro (Feb 12 2019 at 15:41)</a>:</h4>
+<blockquote>
+<p>As you rightly mentioned, (@Nat n (@list.nil tp)) =  (@App γ Γ Γ' T U π fn arg)is ill-typed. What I wanted cases to do in the first place was to simply discharge the cases of Nat n as absurd using this condition (and similar ones for AppEtaRight et al). Do you think it would be possible to modify cases so that it checks for impossible conditions such as this first?</p>
+</blockquote>
+<p>That's exactly what it was trying to do. But it never got that far - you can't prove two different constructors are distinct if the proof of distinctness is not even type correct</p>
+
+<a name="158126808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158126808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158126808">Mario Carneiro (Feb 12 2019 at 15:43)</a>:</h4>
+<blockquote>
+<p>Alternatively, could the cases tactic simply generate a 0 = Γ + π • Γ' goal? Is there a tactic which already does this?</p>
+</blockquote>
+<p>I wish it did this; <code>cases</code> failing is a kind of messy solution. You can actually capture the error state and attempt to proceed from there, but I don't recommend it. The failure of the equality to be discharged means all later equalities are heterogeneous, which makes them that much harder to work with</p>
+
+<a name="158127093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127093">Mario Carneiro (Feb 12 2019 at 15:46)</a>:</h4>
+<p>In the Coq paper, it is important that all the terms that appear in dependent arguments are constructors. That's what makes them pattern match nicely. You are using <code>Γ + π • Γ'</code> in a dependent argument, which will cause many problems</p>
+
+<a name="158127108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127108">Mario Carneiro (Feb 12 2019 at 15:46)</a>:</h4>
+<p>see the top of p. 7</p>
+
+<a name="158127223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127223">Mario Carneiro (Feb 12 2019 at 15:48)</a>:</h4>
+<blockquote>
+<p>By "well formedness property", do you mean something that could achieve the same without messing with dependent types?</p>
+</blockquote>
+<p>Yes. The idea is to have two definitions: a weakly typed type of terms, which is really just the syntax of the expressions, and an inductive typechecking relation</p>
+
+<a name="158127451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127451">Mario Carneiro (Feb 12 2019 at 15:50)</a>:</h4>
+<p>The real reason <code>App</code> is badly typed is that you can't really change it out for anything else, even if <code>Γ + π • Γ' = Γ2 + π • Γ'2</code></p>
+
+<a name="158127596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127596">Mario Carneiro (Feb 12 2019 at 15:52)</a>:</h4>
+<p>One way to fix this problem without an overhaul is to give <code>app</code> the type</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="n">App</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">γ</span><span class="o">:</span> <span class="n">precontext</span><span class="o">}</span> <span class="o">{</span><span class="err">Γ</span> <span class="err">Γ&#39;</span> <span class="err">Γ&#39;&#39;</span> <span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">T</span> <span class="n">U</span><span class="o">:</span> <span class="n">tp</span><span class="o">}</span> <span class="o">{</span><span class="n">π</span><span class="o">:</span> <span class="n">mult</span><span class="o">},</span>
+  <span class="n">term</span> <span class="err">Γ</span> <span class="err">⟦</span><span class="n">π</span><span class="bp">⬝</span><span class="n">T</span><span class="err">⟧⊸</span><span class="n">U</span>
+<span class="bp">→</span> <span class="n">term</span> <span class="err">Γ&#39;</span> <span class="n">T</span>
+<span class="bp">→</span> <span class="err">Γ&#39;&#39;</span> <span class="bp">=</span> <span class="err">Γ</span> <span class="bp">+</span> <span class="n">π</span><span class="err">•Γ&#39;</span>
+  <span class="c1">----------------------</span>
+<span class="bp">→</span> <span class="n">term</span> <span class="err">Γ&#39;&#39;</span> <span class="n">U</span>
+</pre></div>
+
+<a name="158127638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cryptic%20errors/near/158127638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09628Crypticerrors.html#158127638">Mario Carneiro (Feb 12 2019 at 15:53)</a>:</h4>
+<p>This way <code>Γ''</code> is free to be whatever the context needs it to be, and you get an equality hypothesis out instead</p>
+
 
 {% endraw %}

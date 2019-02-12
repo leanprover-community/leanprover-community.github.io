@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Cryptic errors](09628Crypticerrors.html) (8 messages, latest: Feb 12 2019 at 14:53)
+* [Cryptic errors](09628Crypticerrors.html) (22 messages, latest: Feb 12 2019 at 15:53)
 
 * [Variable locality](27048Variablelocality.html) (5 messages, latest: Feb 11 2019 at 19:10)
 
