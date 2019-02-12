@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [semiring polynomials](13910semiringpolynomials.html) (16 messages, latest: Feb 11 2019 at 21:02)
+* [semiring polynomials](13910semiringpolynomials.html) (20 messages, latest: Feb 12 2019 at 01:51)
 
 * [localisation of rings](78299localisationofrings.html) (10 messages, latest: Feb 11 2019 at 19:55)
 
