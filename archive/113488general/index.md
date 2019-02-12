@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (153 messages, latest: Feb 11 2019 at 21:47)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (154 messages, latest: Feb 12 2019 at 00:57)
+
+* [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (5 messages, latest: Feb 12 2019 at 00:55)
 
 * [lean web editor on firefox](60630leanwebeditoronfirefox.html) (3 messages, latest: Feb 11 2019 at 20:14)
 
@@ -487,8 +489,6 @@ permalink: archive/113488general/index.html
 * [multiplayer lean](64025multiplayerlean.html) (6 messages, latest: Nov 30 2018 at 06:30)
 
 * [notation and variables](73049notationandvariables.html) (8 messages, latest: Nov 30 2018 at 00:25)
-
-* [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (4 messages, latest: Nov 29 2018 at 21:13)
 
 * [tidy lost my metavars](40518tidylostmymetavars.html) (16 messages, latest: Nov 29 2018 at 13:48)
 
