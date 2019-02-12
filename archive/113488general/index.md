@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Big Proof](59609BigProof.html) (1 message, latest: Feb 12 2019 at 05:22)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (154 messages, latest: Feb 12 2019 at 00:57)
 
 * [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (5 messages, latest: Feb 12 2019 at 00:55)
