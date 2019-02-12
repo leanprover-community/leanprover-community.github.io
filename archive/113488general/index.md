@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (90 messages, latest: Feb 12 2019 at 14:54)
+
+* [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
+
 * [vscode snippets](92603vscodesnippets.html) (24 messages, latest: Feb 12 2019 at 13:45)
 
 * [AFP](94264AFP.html) (54 messages, latest: Feb 12 2019 at 13:34)
@@ -55,8 +59,6 @@ permalink: archive/113488general/index.html
 * [ST monad is impossible](36458STmonadisimpossible.html) (14 messages, latest: Feb 09 2019 at 14:00)
 
 * [scrolling when compiling in linux](16297scrollingwhencompilinginlinux.html) (7 messages, latest: Feb 09 2019 at 12:21)
-
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (80 messages, latest: Feb 09 2019 at 11:22)
 
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
 
