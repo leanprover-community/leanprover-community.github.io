@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ring modulo maximal](79786ringmodulomaximal.html) (1 message, latest: Feb 12 2019 at 10:00)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2727 messages, latest: Feb 12 2019 at 13:40)
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2719 messages, latest: Feb 12 2019 at 09:01)
+* [ring modulo maximal](79786ringmodulomaximal.html) (1 message, latest: Feb 12 2019 at 10:00)
 
 * [semiring polynomials](13910semiringpolynomials.html) (24 messages, latest: Feb 12 2019 at 07:30)
 

@@ -10,15 +10,19 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [basic logic](07729basiclogic.html) (12 messages, latest: Feb 12 2019 at 12:58)
+* [vscode snippets](92603vscodesnippets.html) (24 messages, latest: Feb 12 2019 at 13:45)
+
+* [AFP](94264AFP.html) (54 messages, latest: Feb 12 2019 at 13:34)
+
+* [Lean in the wild](43625Leaninthewild.html) (38 messages, latest: Feb 12 2019 at 13:28)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (165 messages, latest: Feb 12 2019 at 13:23)
+
+* [lt_of_le_of_ne{,'}](56278ltofleofne.html) (15 messages, latest: Feb 12 2019 at 13:16)
+
+* [basic logic](07729basiclogic.html) (22 messages, latest: Feb 12 2019 at 13:04)
 
 * [use and exists_prop](21313useandexistsprop.html) (2 messages, latest: Feb 12 2019 at 12:39)
-
-* [Lean in the wild](43625Leaninthewild.html) (37 messages, latest: Feb 12 2019 at 12:32)
-
-* [lt_of_le_of_ne{,'}](56278ltofleofne.html) (12 messages, latest: Feb 12 2019 at 12:25)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (164 messages, latest: Feb 12 2019 at 12:08)
 
 * [Big Proof](59609BigProof.html) (5 messages, latest: Feb 12 2019 at 08:45)
 
@@ -47,8 +51,6 @@ permalink: archive/113488general/index.html
 * [quote tactic](04423quotetactic.html) (19 messages, latest: Feb 10 2019 at 10:54)
 
 * [normalize](75954normalize.html) (27 messages, latest: Feb 09 2019 at 22:47)
-
-* [AFP](94264AFP.html) (48 messages, latest: Feb 09 2019 at 18:55)
 
 * [ST monad is impossible](36458STmonadisimpossible.html) (14 messages, latest: Feb 09 2019 at 14:00)
 

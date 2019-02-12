@@ -102,5 +102,51 @@ permalink: archive/113488general/07729basiclogic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115146">Patrick Massot (Feb 12 2019 at 12:58)</a>:</h4>
 <p>I mean normal students, not constructive Kenny</p>
 
+<a name="158115295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115295">Mario Carneiro (Feb 12 2019 at 13:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">prop_decidable</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">is_peak</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">lemma</span> <span class="n">finite_or_infinite_peaks</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_peak</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">N</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_peak</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">∧</span> <span class="n">i</span> <span class="bp">&gt;</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">not_forall</span><span class="o">]</span> <span class="kn">using</span> <span class="n">em</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_peak</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">N</span><span class="o">)</span>
+</pre></div>
+
+<a name="158115363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115363">Mario Carneiro (Feb 12 2019 at 13:01)</a>:</h4>
+<p>I would usually use <code>by_cases ∃ N, ∀ i, is_peak a i → i ≤ N</code> and simplify the hypothesis in the second branch</p>
+
+<a name="158115367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115367">Patrick Massot (Feb 12 2019 at 13:01)</a>:</h4>
+<p>I should have written my solution works with <code>simpa only </code></p>
+
+<a name="158115444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115444">Patrick Massot (Feb 12 2019 at 13:02)</a>:</h4>
+<p>I still don't know why <code>not_exists</code> is a simp lemma while <code>not_forall</code> isn't</p>
+
+<a name="158115461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115461">Mario Carneiro (Feb 12 2019 at 13:03)</a>:</h4>
+<p>I was just asking myself the same question</p>
+
+<a name="158115485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115485">Patrick Massot (Feb 12 2019 at 13:03)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/not_forall" title="#narrow/stream/113488-general/topic/not_forall">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/not_forall</a></p>
+
+<a name="158115487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115487">Mario Carneiro (Feb 12 2019 at 13:03)</a>:</h4>
+<p>those decidability assumptions are really awkward tho</p>
+
+<a name="158115488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115488">Kenny Lau (Feb 12 2019 at 13:03)</a>:</h4>
+<p>because one is constructive and the other isn't?</p>
+
+<a name="158115543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115543">Mario Carneiro (Feb 12 2019 at 13:04)</a>:</h4>
+<p>they are both constructive kenny</p>
+
+<a name="158115554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20logic/near/158115554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07729basiclogic.html#158115554">Kenny Lau (Feb 12 2019 at 13:04)</a>:</h4>
+<p>you know what I mean</p>
+
 
 {% endraw %}
