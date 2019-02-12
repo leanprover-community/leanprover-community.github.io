@@ -172,5 +172,108 @@ permalink: archive/113488general/12456decidability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377615">Chris Hughes (Feb 12 2019 at 18:59)</a>:</h4>
 <p>What does the <code>...</code> say?</p>
 
+<a name="158377744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377744">Reid Barton (Feb 12 2019 at 19:01)</a>:</h4>
+<p>Would be easier to say looking at the code and actual error message, but I think <code>...</code> is the class you want to derive, e.g., <code>decidable_eq</code></p>
+
+<a name="158377747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377747">Hans-Dieter Hiep (Feb 12 2019 at 19:01)</a>:</h4>
+<p><code>failed to find a derive handler for 'choice decidable_eq value.decidable_eq'</code><br>
+Here, choice and decidable_eq are built-in, but value.decidable_eq seems to be related to the generated instance for the type <code>value</code> that I defined earlier.</p>
+
+<a name="158377836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377836">Hans-Dieter Hiep (Feb 12 2019 at 19:02)</a>:</h4>
+<div class="codehilite"><pre><span></span>@[derive decidable_eq]
+inductive value (β : Type) [objects α β] : type α → Type 1
+| object {c : class_name α} (o : β)
+    (H : c = class_of α o) : value (ref c)
+| null (c : class_name α) : value (ref c)
+| term {γ : datatype} : γ → value (data α γ)
+</pre></div>
+
+
+<p>Now, I change the name <code>value</code> to <code>valu</code>. Then the error changes!</p>
+
+<a name="158377933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377933">Hans-Dieter Hiep (Feb 12 2019 at 19:03)</a>:</h4>
+<p>Hmmm, never mind. Unable to reproduce that now. It still is: <code>failed to find a derive handler for 'choice decidable_eq valu.decidable_eq'</code></p>
+
+<a name="158377951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158377951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158377951">Chris Hughes (Feb 12 2019 at 19:03)</a>:</h4>
+<p>Is it confused by something you've defined called<code> decidable_eq</code>? I replicated the error.</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">foo</span>
+
+<span class="n">def</span> <span class="n">decidable_eq</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="158378030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378030">Reid Barton (Feb 12 2019 at 19:04)</a>:</h4>
+<p>maybe a manually-written instance of <code>decidable_eq</code> got a name like that?</p>
+
+<a name="158378069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378069">Hans-Dieter Hiep (Feb 12 2019 at 19:05)</a>:</h4>
+<p>Sure, but I have never defined any decidable_eq myself. The <code>value.decidable_eq</code> is not defined by me, but derived.</p>
+
+<a name="158378227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378227">Chris Hughes (Feb 12 2019 at 19:07)</a>:</h4>
+<p>What namespaces do you have open? Maybe the error is something you've imported.</p>
+
+<a name="158378302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378302">Hans-Dieter Hiep (Feb 12 2019 at 19:08)</a>:</h4>
+<p>If I remove <code>@[derive decidable_eq]</code> from the <code>value</code> definition, the error changes into something more sensible: <code>mk_dec_eq_instance failed, failed to generate instance for
+  Π (a b : Π (p : param_name m), value β (param_type p)), decidable (a = b)</code> So it must be caused by the derived instance of <code>value</code>.</p>
+
+<a name="158378497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378497">Chris Hughes (Feb 12 2019 at 19:10)</a>:</h4>
+<p>Of course. I'm confused by <code>choice</code> in the error message. Is this <code>classical.choice</code>?</p>
+
+<a name="158378500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378500">Hans-Dieter Hiep (Feb 12 2019 at 19:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Indeed, I have opened the namespace <code>value</code> in which the name <code>decidable_eq</code> was defined by the derivation. Thanks, stupid mistake!</p>
+
+<a name="158378712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378712">Reid Barton (Feb 12 2019 at 19:13)</a>:</h4>
+<p>aha!<br>
+Maybe <code>choice X.foo Y.foo</code> is how Lean represents "I haven't figured out whether you're talking about <code>X.foo</code> or <code>Y.foo</code> yet"?</p>
+
+<a name="158378829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378829">Hans-Dieter Hiep (Feb 12 2019 at 19:14)</a>:</h4>
+<p>I confirm that. You can see that here:</p>
+<div class="codehilite"><pre><span></span>namespace foo
+
+def value.decidable_eq : Type := sorry
+open value
+
+@[derive decidable_eq] structure foo :=
+(bar : ℕ)
+
+end foo
+</pre></div>
+
+<a name="158378864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378864">Reid Barton (Feb 12 2019 at 19:15)</a>:</h4>
+<p><code>open</code>ing previous inductive types when defining new ones is a totally reasonable thing to do, it's annoying that it causes this <code>derive decidable_eq</code> mechanism to break.</p>
+
+<a name="158378919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158378919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158378919">Reid Barton (Feb 12 2019 at 19:15)</a>:</h4>
+<p>Well, it's a totally reasonable thing to want to do, at any rate.</p>
+
+<a name="158379021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158379021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158379021">Reid Barton (Feb 12 2019 at 19:16)</a>:</h4>
+<p>Seems like <code>value.decidable_eq</code> should have been <code>protected</code>, then I guess this wouldn't have happened.</p>
+
+<a name="158379096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158379096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158379096">Hans-Dieter Hiep (Feb 12 2019 at 19:17)</a>:</h4>
+<p>I agree; if you add <code>protected</code> in the foo snippet above, the derive mechanism works as expected.</p>
+
+<a name="158379363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidability/near/158379363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12456decidability.html#158379363">Reid Barton (Feb 12 2019 at 19:20)</a>:</h4>
+<p>I'm surprised the lack of <code>protected</code> doesn't break other things though. Seems like having open an inductive/structure type with derived <code>decidable_eq</code> would be pretty common. Maybe Lean is able to resolve the ambiguity in most other situations</p>
+
 
 {% endraw %}

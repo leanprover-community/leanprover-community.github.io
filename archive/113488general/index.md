@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [decidability](12456decidability.html) (39 messages, latest: Feb 12 2019 at 18:59)
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (119 messages, latest: Feb 12 2019 at 19:59)
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (118 messages, latest: Feb 12 2019 at 18:04)
+* [AFP](94264AFP.html) (55 messages, latest: Feb 12 2019 at 19:48)
+
+* [decidability](12456decidability.html) (57 messages, latest: Feb 12 2019 at 19:20)
 
 * [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (1 message, latest: Feb 12 2019 at 17:55)
 
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
 * [vscode snippets](92603vscodesnippets.html) (24 messages, latest: Feb 12 2019 at 13:45)
-
-* [AFP](94264AFP.html) (54 messages, latest: Feb 12 2019 at 13:34)
 
 * [Lean in the wild](43625Leaninthewild.html) (38 messages, latest: Feb 12 2019 at 13:28)
 
