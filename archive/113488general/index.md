@@ -10,9 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (14 messages, latest: Feb 12 2019 at 10:41)
+* [basic logic](07729basiclogic.html) (12 messages, latest: Feb 12 2019 at 12:58)
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (163 messages, latest: Feb 12 2019 at 09:23)
+* [use and exists_prop](21313useandexistsprop.html) (2 messages, latest: Feb 12 2019 at 12:39)
+
+* [Lean in the wild](43625Leaninthewild.html) (37 messages, latest: Feb 12 2019 at 12:32)
+
+* [lt_of_le_of_ne{,'}](56278ltofleofne.html) (12 messages, latest: Feb 12 2019 at 12:25)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (164 messages, latest: Feb 12 2019 at 12:08)
 
 * [Big Proof](59609BigProof.html) (5 messages, latest: Feb 12 2019 at 08:45)
 
