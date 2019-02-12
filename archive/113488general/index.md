@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (119 messages, latest: Feb 12 2019 at 19:59)
+* [rw fails](55897rwfails.html) (18 messages, latest: Feb 12 2019 at 20:40)
 
-* [AFP](94264AFP.html) (55 messages, latest: Feb 12 2019 at 19:48)
+* [AFP](94264AFP.html) (76 messages, latest: Feb 12 2019 at 20:36)
 
-* [decidability](12456decidability.html) (57 messages, latest: Feb 12 2019 at 19:20)
+* [decidability](12456decidability.html) (59 messages, latest: Feb 12 2019 at 20:34)
 
-* [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (1 message, latest: Feb 12 2019 at 17:55)
+* [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (4 messages, latest: Feb 12 2019 at 20:23)
+
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (127 messages, latest: Feb 12 2019 at 20:06)
 
 * [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
 
@@ -549,8 +551,6 @@ permalink: archive/113488general/index.html
 * [finset.sum](35885finsetsum.html) (144 messages, latest: Nov 26 2018 at 14:48)
 
 * [order of simp lemmas](72682orderofsimplemmas.html) (1 message, latest: Nov 25 2018 at 16:38)
-
-* [rw fails](55897rwfails.html) (8 messages, latest: Nov 24 2018 at 18:37)
 
 * [linarith](04284linarith.html) (90 messages, latest: Nov 24 2018 at 16:24)
 

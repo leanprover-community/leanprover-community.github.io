@@ -93,5 +93,77 @@ expected type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#148286967">Kenny Lau (Nov 24 2018 at 18:37)</a>:</h4>
 <p>je kant het proberen... toch</p>
 
+<a name="158385369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385369">Kevin Buzzard (Feb 12 2019 at 20:36)</a>:</h4>
+<p>I was surprised <code>rw</code> failed here:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_pow</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">  ∀ {α : Type u_1} {β : Type u_2} [_inst_1 : semiring α]</span>
+<span class="cm">  [_inst_2 : semiring β] (f : α → β)</span>
+<span class="cm">  [_inst_3 : is_semiring_hom f] (x : α) (n : ℕ), f (x ^ n) = f x ^ n</span>
+<span class="cm">  -/</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">B</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">37</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--  rw is_semiring_hom.map_pow, -- fails</span>
+  <span class="n">rw</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_pow</span> <span class="bp">_</span> <span class="n">a</span> <span class="n">n</span><span class="o">,</span> <span class="c1">-- even this fails</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  rewrite tactic failed, did not find instance of the</span>
+<span class="cm">  pattern in the target expression</span>
+<span class="cm">  ?m_1 (a ^ n)</span>
+
+<span class="cm">  ⊢ f (a ^ n) = 37</span>
+<span class="cm">  -/</span>
+  <span class="n">rw</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_pow</span> <span class="n">f</span><span class="o">,</span> <span class="c1">-- works</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I am used to cutting corners like that. What's the reason it fails?</p>
+
+<a name="158385421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385421">Kenny Lau (Feb 12 2019 at 20:37)</a>:</h4>
+<p>higher order unification</p>
+
+<a name="158385433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385433">Kevin Buzzard (Feb 12 2019 at 20:37)</a>:</h4>
+<p>no kidding</p>
+
+<a name="158385437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385437">Kenny Lau (Feb 12 2019 at 20:37)</a>:</h4>
+<p>yet another argument for bundling everything</p>
+
+<a name="158385438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385438">Patrick Massot (Feb 12 2019 at 20:37)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="158385512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385512">Kevin Buzzard (Feb 12 2019 at 20:38)</a>:</h4>
+<p>So what does Lean need to solve when trying to do this rewrite exactly?</p>
+
+<a name="158385546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385546">Kevin Buzzard (Feb 12 2019 at 20:38)</a>:</h4>
+<blockquote>
+<p>yet another argument for bundling everything</p>
+</blockquote>
+<p>I don't understand this.</p>
+
+<a name="158385580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385580">Kevin Buzzard (Feb 12 2019 at 20:39)</a>:</h4>
+<p>But I've not been following the bundling conversation, I don't understand the subtleties and I have other things to worry about right now. I trust it's in good hands. The only thing that worries me is that Assia and Patrick seemed to think that more bundling was when canonical structures came into their own, and we hear from Sebastian that they're going to be removed from Lean 4.</p>
+
+<a name="158385634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385634">Kevin Buzzard (Feb 12 2019 at 20:40)</a>:</h4>
+<p>Now where's the emoji for a 5 leaf clover?</p>
+
+<a name="158385668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/158385668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/55897rwfails.html#158385668">Kevin Buzzard (Feb 12 2019 at 20:40)</a>:</h4>
+<p>But I thought I understood higher order unification.</p>
+
 
 {% endraw %}
