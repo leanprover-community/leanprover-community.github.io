@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (117 messages, latest: Feb 12 2019 at 17:56)
+* [decidability](12456decidability.html) (39 messages, latest: Feb 12 2019 at 18:59)
+
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (118 messages, latest: Feb 12 2019 at 18:04)
 
 * [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (1 message, latest: Feb 12 2019 at 17:55)
 
 * [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
-
-* [decidability](12456decidability.html) (35 messages, latest: Feb 12 2019 at 16:06)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
