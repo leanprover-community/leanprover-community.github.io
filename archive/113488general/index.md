@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (14 messages, latest: Feb 12 2019 at 10:41)
+
 * [Lean + LaTeX?](57481LeanLaTeX.html) (163 messages, latest: Feb 12 2019 at 09:23)
 
 * [Big Proof](59609BigProof.html) (5 messages, latest: Feb 12 2019 at 08:45)
@@ -81,8 +83,6 @@ permalink: archive/113488general/index.html
 * [Parsing left arrows](93054Parsingleftarrows.html) (5 messages, latest: Feb 06 2019 at 14:20)
 
 * [why olean files in .gitignore?](73927whyoleanfilesingitignore.html) (6 messages, latest: Feb 06 2019 at 12:14)
-
-* [Lean in the wild](43625Leaninthewild.html) (13 messages, latest: Feb 06 2019 at 11:37)
 
 * [Invalid type ascription??](20644Invalidtypeascription.html) (8 messages, latest: Feb 05 2019 at 17:32)
 
