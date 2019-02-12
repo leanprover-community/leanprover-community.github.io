@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (108 messages, latest: Feb 12 2019 at 15:59)
+* ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (115 messages, latest: Feb 12 2019 at 16:34)
 
-* [Big Proof](59609BigProof.html) (8 messages, latest: Feb 12 2019 at 15:53)
+* [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
+
+* [decidability](12456decidability.html) (35 messages, latest: Feb 12 2019 at 16:06)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
@@ -2601,8 +2603,6 @@ permalink: archive/113488general/index.html
 * [mathlib nightly](57153mathlibnightly.html) (8 messages, latest: Mar 31 2018 at 06:35)
 
 * [unicode](95720unicode.html) (3 messages, latest: Mar 31 2018 at 05:11)
-
-* [decidability](12456decidability.html) (33 messages, latest: Mar 30 2018 at 22:49)
 
 * [lean travis problems](39550leantravisproblems.html) (40 messages, latest: Mar 30 2018 at 22:48)
 
