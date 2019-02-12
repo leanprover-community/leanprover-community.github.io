@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [rw fails](55897rwfails.html) (18 messages, latest: Feb 12 2019 at 20:40)
+* [AFP](94264AFP.html) (86 messages, latest: Feb 12 2019 at 21:57)
 
-* [AFP](94264AFP.html) (76 messages, latest: Feb 12 2019 at 20:36)
+* [rw fails](55897rwfails.html) (18 messages, latest: Feb 12 2019 at 20:40)
 
 * [decidability](12456decidability.html) (59 messages, latest: Feb 12 2019 at 20:34)
 
