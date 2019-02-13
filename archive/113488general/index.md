@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (13 messages, latest: Feb 13 2019 at 11:47)
+
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
 
 * [use and exists_prop](21313useandexistsprop.html) (4 messages, latest: Feb 13 2019 at 07:28)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [vscode snippets](92603vscodesnippets.html) (26 messages, latest: Feb 13 2019 at 07:28)
 
 * [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (7 messages, latest: Feb 13 2019 at 07:08)
-
-* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (12 messages, latest: Feb 13 2019 at 06:53)
 
 * [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
 
