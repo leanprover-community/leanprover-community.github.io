@@ -10,17 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [derive](25024derive.html) (9 messages, latest: Feb 13 2019 at 16:56)
+* [global have](75446globalhave.html) (23 messages, latest: Feb 13 2019 at 17:40)
 
-* [VScode extension](56578VScodeextension.html) (333 messages, latest: Feb 13 2019 at 16:48)
+* [VScode extension](56578VScodeextension.html) (338 messages, latest: Feb 13 2019 at 17:33)
 
-* [global have](75446globalhave.html) (21 messages, latest: Feb 13 2019 at 16:13)
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (15 messages, latest: Feb 13 2019 at 17:26)
+
+* [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
 
 * [solve_by_elim](75082solvebyelim.html) (90 messages, latest: Feb 13 2019 at 14:38)
 
 * [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
-
-* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (13 messages, latest: Feb 13 2019 at 11:47)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
 

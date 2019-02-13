@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [kernels of quotient maps](93780kernelsofquotientmaps.html) (19 messages, latest: Feb 13 2019 at 17:20)
+
 * [Teaching with Lean](76352TeachingwithLean.html) (10 messages, latest: Feb 13 2019 at 16:42)
 
 * [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
-
-* [kernels of quotient maps](93780kernelsofquotientmaps.html) (17 messages, latest: Feb 13 2019 at 09:49)
 
 * [bundling functions](72781bundlingfunctions.html) (3 messages, latest: Feb 12 2019 at 14:47)
 
