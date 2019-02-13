@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vscode snippets](92603vscodesnippets.html) (25 messages, latest: Feb 13 2019 at 05:56)
+
+* [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (3 messages, latest: Feb 13 2019 at 05:51)
+
 * [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
 
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (11 messages, latest: Feb 13 2019 at 00:41)
@@ -27,8 +31,6 @@ permalink: archive/113488general/index.html
 * [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
-
-* [vscode snippets](92603vscodesnippets.html) (24 messages, latest: Feb 12 2019 at 13:45)
 
 * [Lean in the wild](43625Leaninthewild.html) (38 messages, latest: Feb 12 2019 at 13:28)
 
