@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (4 messages, latest: Feb 13 2019 at 08:58)
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
 
 * [use and exists_prop](21313useandexistsprop.html) (4 messages, latest: Feb 13 2019 at 07:28)
 

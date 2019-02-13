@@ -1,0 +1,105 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/93780kernelsofquotientmaps.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html">kernels of quotient maps</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158424441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424441">Kevin Buzzard (Feb 13 2019 at 09:13)</a>:</h4>
+<p>I was surprised that I couldn't find that the kernel of R -&gt; R / I was I (R a ring, I an ideal)</p>
+
+<a name="158424445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424445">Kevin Buzzard (Feb 13 2019 at 09:13)</a>:</h4>
+<p>Then I was more surprised that I couldn't find kernels at all.</p>
+
+<a name="158424446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424446">Kevin Buzzard (Feb 13 2019 at 09:13)</a>:</h4>
+<p>Kenny says I should bundle linear maps</p>
+
+<a name="158424457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424457">Kevin Buzzard (Feb 13 2019 at 09:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+
+<span class="n">def</span> <span class="n">module</span><span class="bp">.</span><span class="n">kernel</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">N</span><span class="o">]</span>
+<span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">linear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="err">⊥</span>
+</pre></div>
+
+
+<p>How am I doing so far?</p>
+
+<a name="158424533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424533">Kevin Buzzard (Feb 13 2019 at 09:14)</a>:</h4>
+<p>What confuses me now is that <code>submodule.quotient.mk</code> is not a <code>linear_map R M M/P</code> for P a submodule</p>
+
+<a name="158424542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424542">Kevin Buzzard (Feb 13 2019 at 09:15)</a>:</h4>
+<p>it's just a map M -&gt; M / P</p>
+
+<a name="158424587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424587">Kevin Buzzard (Feb 13 2019 at 09:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> is what I need already in mathlib? Some analogue of <a href="http://submodule.quotient.mk" target="_blank" title="http://submodule.quotient.mk">submodule.quotient.mk</a> which produces the structure you want me to use?</p>
+
+<a name="158424662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424662">Kenny Lau (Feb 13 2019 at 09:16)</a>:</h4>
+<p>well it's a ring hom <code>R -&gt; R/I</code></p>
+
+<a name="158424681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424681">Kevin Buzzard (Feb 13 2019 at 09:17)</a>:</h4>
+<p>I thought I'd do the module case</p>
+
+<a name="158424683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424683">Kenny Lau (Feb 13 2019 at 09:17)</a>:</h4>
+<p>wait <code>submodule.quotient.mk</code> isn't linear...?</p>
+
+<a name="158424685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424685">Kenny Lau (Feb 13 2019 at 09:17)</a>:</h4>
+<p>try <code>submodule.mkq</code> or something</p>
+
+<a name="158424697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424697">Kevin Buzzard (Feb 13 2019 at 09:17)</a>:</h4>
+<p><code>submodule.quotient.mk</code> is just the map M -&gt; M / N</p>
+
+<a name="158424701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424701">Kevin Buzzard (Feb 13 2019 at 09:17)</a>:</h4>
+<p>No doubt there's a theorem that it's linear</p>
+
+<a name="158424710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424710">Kevin Buzzard (Feb 13 2019 at 09:17)</a>:</h4>
+<p>but my understanding is that you don't want me to use that map in public</p>
+
+<a name="158424759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158424759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158424759">Kenny Lau (Feb 13 2019 at 09:18)</a>:</h4>
+<p>does <code>submodule.mkq</code> work?</p>
+
+<a name="158426504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158426504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158426504">Kevin Buzzard (Feb 13 2019 at 09:48)</a>:</h4>
+<p>Yes.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+
+<span class="n">def</span> <span class="n">module</span><span class="bp">.</span><span class="n">kernel</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">N</span><span class="o">]</span>
+<span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">linear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="err">⊥</span>
+
+<span class="kn">lemma</span> <span class="n">module</span><span class="bp">.</span><span class="n">ker_quotient</span>
+  <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">N</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">module</span><span class="bp">.</span><span class="n">kernel</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">mkq</span> <span class="n">N</span><span class="o">)</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="158426547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/kernels%20of%20quotient%20maps/near/158426547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/93780kernelsofquotientmaps.html#158426547">Kevin Buzzard (Feb 13 2019 at 09:49)</a>:</h4>
+<p>I don't know the API for this bundled version but in principle it feels like tehe right thing to do</p>
+
+
+{% endraw %}
