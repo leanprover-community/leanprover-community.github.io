@@ -40,5 +40,85 @@ permalink: archive/113488general/51350Newstructuresbreakingdefinitionalequality.
 </blockquote>
 <p>That's not it. When you have <code>extends A a</code>, that gives <code>B</code> a <code>to_A</code> field of type <code>A a</code></p>
 
+<a name="158399659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158399659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158399659">Simon Hudon (Feb 13 2019 at 00:00)</a>:</h4>
+<p>In the example, where is the <code>C</code> instance coming from?</p>
+
+<a name="158399791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158399791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158399791">Chris Hughes (Feb 13 2019 at 00:02)</a>:</h4>
+<p>In real life <code>B</code> is euclidean domain, <code>C</code> is integral domain and <code>A</code> is comm ring more or less. I'm getting rid of <code>nonzero_comm_ring </code>and replacing it with <code>zero_ne_one_class'</code> as discussed in</p>
+
+<a name="158399801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158399801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158399801">Chris Hughes (Feb 13 2019 at 00:02)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/semiring.20polynomials" title="#narrow/stream/116395-maths/topic/semiring.20polynomials">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semiring.20polynomials</a></p>
+
+<a name="158401174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401174">Chris Hughes (Feb 13 2019 at 00:28)</a>:</h4>
+<p>I guess the difference is an eta expansion somewhere. This one works.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">n</span> <span class="o">:</span> <span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">A</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">n</span> <span class="o">:</span> <span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A&#39;</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="158401405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401405">Kenny Lau (Feb 13 2019 at 00:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">class</span> <span class="n">A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">B</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">C</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">true</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">C</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span><span class="k">show</span> <span class="n">C</span> <span class="n">α</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_C</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">trivial</span><span class="o">,</span> <span class="bp">..</span> <span class="k">show</span> <span class="n">B</span> <span class="n">α</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfreezeI</span><span class="bp">;</span> <span class="n">cases</span> <span class="bp">_</span><span class="n">inst_1</span><span class="bp">;</span> <span class="n">cases</span> <span class="bp">_</span><span class="n">to_A</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
+
+<a name="158401630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401630">Kenny Lau (Feb 13 2019 at 00:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> a surprising solution to your question:</p>
+
+<a name="158401632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401632">Kenny Lau (Feb 13 2019 at 00:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
+
+<span class="n">class</span> <span class="n">A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">B</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">C</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">true</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">C</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">C</span><span class="bp">.</span><span class="n">a</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_C</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">.</span><span class="n">a</span> <span class="n">α</span><span class="o">,</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">trivial</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="158401635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401635">Kenny Lau (Feb 13 2019 at 00:37)</a>:</h4>
+<p>the solution is old_structure_cmd</p>
+
+<a name="158401830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158401830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158401830">Kenny Lau (Feb 13 2019 at 00:41)</a>:</h4>
+<p>could this be the solution for the snailish elaboration of polynomials?</p>
+
 
 {% endraw %}

@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (2 messages, latest: Feb 12 2019 at 23:59)
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (11 messages, latest: Feb 13 2019 at 00:41)
+
+* [Negation of ∃ elimination](81809Negationofelimination.html) (1 message, latest: Feb 13 2019 at 00:16)
 
 * [AFP](94264AFP.html) (92 messages, latest: Feb 12 2019 at 23:01)
 
