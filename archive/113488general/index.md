@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (12 messages, latest: Feb 13 2019 at 06:53)
+
+* [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (6 messages, latest: Feb 13 2019 at 06:50)
+
 * [vscode snippets](92603vscodesnippets.html) (25 messages, latest: Feb 13 2019 at 05:56)
 
-* [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (3 messages, latest: Feb 13 2019 at 05:51)
-
 * [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
-
-* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (11 messages, latest: Feb 13 2019 at 00:41)
 
 * [AFP](94264AFP.html) (92 messages, latest: Feb 12 2019 at 23:01)
 
