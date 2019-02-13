@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [kernels of quotient maps](93780kernelsofquotientmaps.html) (32 messages, latest: Feb 13 2019 at 19:41)
+* [kernels of quotient maps](93780kernelsofquotientmaps.html) (36 messages, latest: Feb 13 2019 at 20:37)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (10 messages, latest: Feb 13 2019 at 16:42)
 

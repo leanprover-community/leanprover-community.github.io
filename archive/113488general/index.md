@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AFP](94264AFP.html) (94 messages, latest: Feb 13 2019 at 20:58)
+
 * [global have](75446globalhave.html) (23 messages, latest: Feb 13 2019 at 17:40)
 
 * [VScode extension](56578VScodeextension.html) (338 messages, latest: Feb 13 2019 at 17:33)
@@ -29,8 +31,6 @@ permalink: archive/113488general/index.html
 * [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (7 messages, latest: Feb 13 2019 at 07:08)
 
 * [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
-
-* [AFP](94264AFP.html) (92 messages, latest: Feb 12 2019 at 23:01)
 
 * [rw fails](55897rwfails.html) (18 messages, latest: Feb 12 2019 at 20:40)
 
