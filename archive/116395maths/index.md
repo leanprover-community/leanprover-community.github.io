@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [free module](95273freemodule.html) (11 messages, latest: Feb 13 2019 at 22:59)
+
 * [kernels of quotient maps](93780kernelsofquotientmaps.html) (36 messages, latest: Feb 13 2019 at 20:37)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (10 messages, latest: Feb 13 2019 at 16:42)
