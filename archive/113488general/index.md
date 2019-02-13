@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [use and exists_prop](21313useandexistsprop.html) (8 messages, latest: Feb 13 2019 at 13:40)
+* [solve_by_elim](75082solvebyelim.html) (90 messages, latest: Feb 13 2019 at 14:38)
+
+* [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
 
 * [VScode extension](56578VScodeextension.html) (321 messages, latest: Feb 13 2019 at 13:34)
 
@@ -1847,8 +1849,6 @@ permalink: archive/113488general/index.html
 * [computational reflection in 3 lines](58833computationalreflectionin3lines.html) (5 messages, latest: Jun 25 2018 at 10:57)
 
 * [Hard but obvious lemma](07070Hardbutobviouslemma.html) (10 messages, latest: Jun 23 2018 at 02:51)
-
-* [solve_by_elim](75082solvebyelim.html) (89 messages, latest: Jun 23 2018 at 02:46)
 
 * [calculations with eq](13525calculationswitheq.html) (7 messages, latest: Jun 23 2018 at 02:46)
 
