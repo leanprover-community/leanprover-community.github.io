@@ -1,0 +1,111 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75446globalhave.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html">global have</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158450113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450113">Johan Commelin (Feb 13 2019 at 15:37)</a>:</h4>
+<p>I'm playing a bit with automation. Somehow I want to tell Lean some facts that it should use, and then it should blast its way through to the finish line.<br>
+So I would like to write</p>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">fact₁</span> <span class="o">:</span> <span class="n">foo</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">key_lemma</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">fact₂</span> <span class="o">:</span> <span class="n">bar</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">fact₃</span> <span class="o">:</span> <span class="n">xyzzy</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="o">{</span><span class="n">some_auto</span><span class="o">}</span>
+</pre></div>
+
+
+<p>The natural order (for mathematicians) would be to state these facts in such an order that the proof of <code>fact₃</code> may depend on <code>fact₁</code> and <code>fact₂</code>. All these facts together will be used to prove the main goal.<br>
+However, Lean doesn't like that order. Because now the <code>have fact₃</code> claim is nested in the proof of <code>fact₂</code>, which is nested in the proof of <code>fact₁</code>. And so these facts aren't actually available when trying to prove the main goal.</p>
+<p>To some extent <code>suffices</code> makes the "correct" order available. However, then you can't say <code>apply key_lemma</code> right after stating some claim.</p>
+<p>So what I would like is <code>global_have</code>, which adds a claim to the global scope, instead of nested in the proof of a subgoal. Is something like that possible?</p>
+
+<a name="158450301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450301">Reid Barton (Feb 13 2019 at 15:39)</a>:</h4>
+<p>I'm a little confused--do you intend to prove these <code>fact</code>s yourself?</p>
+
+<a name="158450390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450390">Reid Barton (Feb 13 2019 at 15:40)</a>:</h4>
+<p>because after <code>have fact₂ : bar</code>, say, you should be giving the proof of <code>fact₂</code></p>
+
+<a name="158450418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450418">Johan Commelin (Feb 13 2019 at 15:40)</a>:</h4>
+<p>No. Not really. They are just to guide the automation.</p>
+
+<a name="158450468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450468">Johan Commelin (Feb 13 2019 at 15:41)</a>:</h4>
+<p>It should be able to prove these subgoals. And once it knows these facts, go on to prove the main goal.</p>
+
+<a name="158450485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450485">Reid Barton (Feb 13 2019 at 15:41)</a>:</h4>
+<p>Okay, so basically you want to continue working on the main goal first. Then you can use <code>swap</code>, or possibly <code>have fact₂ : bar := _,</code></p>
+
+<a name="158450525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450525">Reid Barton (Feb 13 2019 at 15:41)</a>:</h4>
+<blockquote>
+<p>It should be able to prove these subgoals. And once it knows these facts, go on to prove the main goal.</p>
+</blockquote>
+<p>If you want to do it in that order, then you should put your prove-everything tactic after each <code>have</code></p>
+
+<a name="158450627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450627">Johan Commelin (Feb 13 2019 at 15:42)</a>:</h4>
+<p>I see, so I want a <code>swap_have</code> <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="158450661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450661">Johan Commelin (Feb 13 2019 at 15:42)</a>:</h4>
+<p>I don't want my prove-everything tactic after each <code>have</code>. That doesn't look nice.</p>
+
+<a name="158450705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158450705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158450705">Reid Barton (Feb 13 2019 at 15:43)</a>:</h4>
+<p>I tested and <code> := _</code> does work, and it's the same number of characters as <code>swap_</code></p>
+
+<a name="158451175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158451175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158451175">Johan Commelin (Feb 13 2019 at 15:47)</a>:</h4>
+<p>I want <code>swap_to_main_goal</code>.</p>
+
+<a name="158451220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158451220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158451220">Johan Commelin (Feb 13 2019 at 15:48)</a>:</h4>
+<p>Is that possible?</p>
+
+<a name="158451932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158451932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158451932">Johan Commelin (Feb 13 2019 at 15:55)</a>:</h4>
+<p>Ok, I now have this</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Euclid</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span> <span class="bp">≥</span> <span class="n">n</span><span class="o">,</span> <span class="n">prime</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">n</span><span class="bp">.</span><span class="n">fact</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">min_fac</span> <span class="n">N</span><span class="o">,</span>
+  <span class="n">use_this</span> <span class="n">p</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">p_is_prime</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">min_fac_prime</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">by_contradiction</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">key_fact</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">n</span><span class="bp">.</span><span class="n">fact</span> <span class="o">:=</span> <span class="n">dvd_fact</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">oops</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∣</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">all_goals</span> <span class="o">{</span> <span class="n">auto</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>where <code>auto</code> is a wrapper around <code>solve_by_elim</code> and <code>tidy</code>. I'm reasonably happy with this.</p>
+
+<a name="158451952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158451952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158451952">Johan Commelin (Feb 13 2019 at 15:55)</a>:</h4>
+<p>Thanks for the tips <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+<a name="158452211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158452211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158452211">Reid Barton (Feb 13 2019 at 15:58)</a>:</h4>
+<p>I feel like I no longer know why this theorem is true</p>
+
+<a name="158452275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/global%20have/near/158452275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75446globalhave.html#158452275">Johan Commelin (Feb 13 2019 at 15:59)</a>:</h4>
+<p>You think mathlib's version is more readable?</p>
+
+
+{% endraw %}

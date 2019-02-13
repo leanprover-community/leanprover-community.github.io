@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [global have](75446globalhave.html) (16 messages, latest: Feb 13 2019 at 15:59)
+
+* [VScode extension](56578VScodeextension.html) (323 messages, latest: Feb 13 2019 at 15:58)
+
 * [solve_by_elim](75082solvebyelim.html) (90 messages, latest: Feb 13 2019 at 14:38)
 
 * [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
-
-* [VScode extension](56578VScodeextension.html) (321 messages, latest: Feb 13 2019 at 13:34)
 
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (13 messages, latest: Feb 13 2019 at 11:47)
 
