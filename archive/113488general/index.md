@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode extension](56578VScodeextension.html) (319 messages, latest: Feb 13 2019 at 12:55)
+* [use and exists_prop](21313useandexistsprop.html) (8 messages, latest: Feb 13 2019 at 13:40)
+
+* [VScode extension](56578VScodeextension.html) (321 messages, latest: Feb 13 2019 at 13:34)
 
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (13 messages, latest: Feb 13 2019 at 11:47)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
-
-* [use and exists_prop](21313useandexistsprop.html) (4 messages, latest: Feb 13 2019 at 07:28)
 
 * [vscode snippets](92603vscodesnippets.html) (26 messages, latest: Feb 13 2019 at 07:28)
 

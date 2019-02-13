@@ -27,5 +27,33 @@ permalink: archive/113488general/21313useandexistsprop.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158419512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158419512">Johan Commelin (Feb 13 2019 at 07:28)</a>:</h4>
 <p>You have my vote.</p>
 
+<a name="158440032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440032">Johan Commelin (Feb 13 2019 at 13:35)</a>:</h4>
+<p>/me <del>wrote</del> edited his first tactic...</p>
+
+<a name="158440096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440096">Johan Commelin (Feb 13 2019 at 13:36)</a>:</h4>
+<p>Voila:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">use_this</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="n">l</span> <span class="bp">&gt;&gt;</span> <span class="o">(</span><span class="n">triv</span> <span class="bp">&lt;|&gt;</span> <span class="n">try</span> <span class="bp">`</span><span class="o">[</span><span class="n">rw</span> <span class="n">exists_prop</span><span class="o">]))</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="158440339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440339">Johan Commelin (Feb 13 2019 at 13:39)</a>:</h4>
+<p>In fact, I would rather see that <code>∃ p ≥ n, prime p</code> is expanded to the sane thing as soon as I enter the <code>begin end</code>-block.<br>
+Now I see <code>∃ (p : ℕ) (H : p ≥ n), prime p</code>, which is of course quite ugly. Can't some magic in <code>begin</code> turn this into<br>
+<code>∃ (p : ℕ), p ≥ n ∧ prime p</code> immediately?</p>
+
+<a name="158440419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440419">Johan Commelin (Feb 13 2019 at 13:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> you seem to be able to make <code>begin</code> do magic tricks. Is this something that could be done?</p>
+
 
 {% endraw %}
