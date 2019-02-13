@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (319 messages, latest: Feb 13 2019 at 12:55)
+
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (13 messages, latest: Feb 13 2019 at 11:47)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
@@ -95,8 +97,6 @@ permalink: archive/113488general/index.html
 * [will this make typclass inference loop?](79274willthismaketypclassinferenceloop.html) (10 messages, latest: Feb 08 2019 at 11:43)
 
 * [def breaks things](55061defbreaksthings.html) (5 messages, latest: Feb 07 2019 at 20:01)
-
-* [VScode extension](56578VScodeextension.html) (313 messages, latest: Feb 07 2019 at 15:42)
 
 * [Qualification](82762Qualification.html) (5 messages, latest: Feb 07 2019 at 10:21)
 
