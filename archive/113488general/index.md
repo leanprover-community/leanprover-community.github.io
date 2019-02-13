@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Negation of ∃ elimination](81809Negationofelimination.html) (2 messages, latest: Feb 13 2019 at 01:27)
+* [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
 
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (11 messages, latest: Feb 13 2019 at 00:41)
 
