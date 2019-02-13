@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/25024derive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html">derive</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158455271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455271">Hans-Dieter Hiep (Feb 13 2019 at 16:36)</a>:</h4>
+<p>With <code>@[derive decidable_eq]</code> one can automatically make the following inductive type an instance of decidable equality. How about automatically deriving inhabitance for inductive types? Is that also possible? Currently, <code>failed to find a derive handler for 'inhabited'</code>.</p>
+
+<a name="158455668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455668">Edward Ayers (Feb 13 2019 at 16:41)</a>:</h4>
+<p><code>@[derive X]</code> looks for derive_handler with the <code>@[derive_handler] </code> attribute on it and then uses that tactic to derive stuff. Afaik nobody has made one for <code>inhabited</code> but you can write your own in Lean.</p>
+
+<a name="158455763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455763">Edward Ayers (Feb 13 2019 at 16:42)</a>:</h4>
+<p>Lean core has support for <code>decidable_eq</code>, <code>sizeof</code>, <code>has_reflect</code>.</p>
+
+<a name="158455802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455802">Edward Ayers (Feb 13 2019 at 16:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> wrote some in mathlib for category theory.</p>
+
+<a name="158455898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455898">Edward Ayers (Feb 13 2019 at 16:44)</a>:</h4>
+<p>You can see how <code>@[derive decidable_eq]</code> works in <code>library/init/meta/mk_dec_eq_instance.lean</code>.</p>
+
+<a name="158455941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158455941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158455941">Edward Ayers (Feb 13 2019 at 16:45)</a>:</h4>
+<p>Something on my todo list is to write a <code>@[derive decidable_lt]</code>.</p>
+
+<a name="158456592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158456592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158456592">Edward Ayers (Feb 13 2019 at 16:53)</a>:</h4>
+<p>Ah, there's a <code>library/init/meta/mk_inhabited_instance.lean</code></p>
+
+<a name="158456839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158456839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158456839">Edward Ayers (Feb 13 2019 at 16:55)</a>:</h4>
+<p>So this works for me:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive_handler</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">inhabited_derive_handler</span> <span class="o">:=</span>
+<span class="n">instance_derive_handler</span> <span class="bp">``</span><span class="n">inhabited</span> <span class="n">mk_inhabited_instance</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">inhabited</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">hello</span> <span class="bp">|</span> <span class="n">A</span> <span class="bp">|</span> <span class="n">B</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">inhabited</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">world</span>
+<span class="bp">|</span> <span class="n">A</span> <span class="o">:</span> <span class="n">string</span> <span class="bp">→</span> <span class="n">world</span>
+
+<span class="kn">lemma</span> <span class="n">world_inhabited</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">world</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="158456955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive/near/158456955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25024derive.html#158456955">Edward Ayers (Feb 13 2019 at 16:56)</a>:</h4>
+<p>I don't know why Leo didn't add the <code>@[derive_handler]</code> for inhabited.</p>
+
+
+{% endraw %}

@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [global have](75446globalhave.html) (16 messages, latest: Feb 13 2019 at 15:59)
+* [derive](25024derive.html) (9 messages, latest: Feb 13 2019 at 16:56)
 
-* [VScode extension](56578VScodeextension.html) (323 messages, latest: Feb 13 2019 at 15:58)
+* [VScode extension](56578VScodeextension.html) (333 messages, latest: Feb 13 2019 at 16:48)
+
+* [global have](75446globalhave.html) (21 messages, latest: Feb 13 2019 at 16:13)
 
 * [solve_by_elim](75082solvebyelim.html) (90 messages, latest: Feb 13 2019 at 14:38)
 

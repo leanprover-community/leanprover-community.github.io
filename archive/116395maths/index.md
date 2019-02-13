@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localisation of rings](78299localisationofrings.html) (37 messages, latest: Feb 13 2019 at 15:25)
+* [Teaching with Lean](76352TeachingwithLean.html) (10 messages, latest: Feb 13 2019 at 16:42)
 
-* [Teaching with Lean](76352TeachingwithLean.html) (8 messages, latest: Feb 13 2019 at 15:23)
+* [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
 
 * [kernels of quotient maps](93780kernelsofquotientmaps.html) (17 messages, latest: Feb 13 2019 at 09:49)
 
