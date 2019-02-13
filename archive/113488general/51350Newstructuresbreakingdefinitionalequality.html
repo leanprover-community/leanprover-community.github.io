@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/51350Newstructuresbreakingdefinitionalequality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html">New structures breaking definitional equality</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158396821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158396821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158396821">Chris Hughes (Feb 12 2019 at 23:13)</a>:</h4>
+<p>The last lemma here is hard to prove, and really should be defeq for type class inference to be useful. Is this a bug or user error? I think the use of macros maybe breaks it, since <code>B.to_A</code> is defined using a macro and not <code>A.mk _</code>, but I don't really know what I'm talking about.</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">B</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">C</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">true</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">C</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span><span class="k">show</span> <span class="n">C</span> <span class="n">α</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_C</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">trivial</span><span class="o">,</span> <span class="bp">..</span> <span class="k">show</span> <span class="n">B</span> <span class="n">α</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="158399571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158399571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158399571">Simon Hudon (Feb 12 2019 at 23:59)</a>:</h4>
+<blockquote>
+<p>think the use of macros maybe breaks it, since B.to_A is defined using a macro and not <code>A.mk _</code></p>
+</blockquote>
+<p>That's not it. When you have <code>extends A a</code>, that gives <code>B</code> a <code>to_A</code> field of type <code>A a</code></p>
+
+
+{% endraw %}

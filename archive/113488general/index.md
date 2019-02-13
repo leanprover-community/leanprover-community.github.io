@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AFP](94264AFP.html) (90 messages, latest: Feb 12 2019 at 22:08)
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (2 messages, latest: Feb 12 2019 at 23:59)
+
+* [AFP](94264AFP.html) (92 messages, latest: Feb 12 2019 at 23:01)
 
 * [rw fails](55897rwfails.html) (18 messages, latest: Feb 12 2019 at 20:40)
 
