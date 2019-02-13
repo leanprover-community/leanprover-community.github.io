@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [use and exists_prop](21313useandexistsprop.html) (4 messages, latest: Feb 13 2019 at 07:28)
+
+* [vscode snippets](92603vscodesnippets.html) (26 messages, latest: Feb 13 2019 at 07:28)
+
+* [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (7 messages, latest: Feb 13 2019 at 07:08)
+
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (12 messages, latest: Feb 13 2019 at 06:53)
-
-* [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (6 messages, latest: Feb 13 2019 at 06:50)
-
-* [vscode snippets](92603vscodesnippets.html) (25 messages, latest: Feb 13 2019 at 05:56)
 
 * [Negation of ∃ elimination](81809Negationofelimination.html) (3 messages, latest: Feb 13 2019 at 02:44)
 
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [lt_of_le_of_ne{,'}](56278ltofleofne.html) (15 messages, latest: Feb 12 2019 at 13:16)
 
 * [basic logic](07729basiclogic.html) (22 messages, latest: Feb 12 2019 at 13:04)
-
-* [use and exists_prop](21313useandexistsprop.html) (2 messages, latest: Feb 12 2019 at 12:39)
 
 * [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (12 messages, latest: Feb 12 2019 at 08:09)
 
