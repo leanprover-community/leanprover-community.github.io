@@ -1,0 +1,67 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/90550contextwithinmatchexpression.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html">context within match expression</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158535334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20within%20match%20expression/near/158535334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html#158535334">Hans-Dieter Hiep (Feb 14 2019 at 15:02)</a>:</h4>
+<p>Hi! I have a basic question about match expressions. It seems that part of the context is missing. Let me demonstrate by example:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">H</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">admit</span> <span class="kn">end</span> <span class="k">in</span> <span class="n">t</span>
+  <span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="n">ff</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>Here, before the <code>admit</code> tactic, we see as context:</p>
+<div class="codehilite"><pre><span></span>t : bool,
+_match : bool → bool
+⊢ t = tt
+</pre></div>
+
+
+<p>But the point is that within this case, we <em>know</em> that <code>t = tt</code>, otherwise it would not be matched. How do I gain back this information? Do I need to use the recursor of bool, <code>bool.rec</code>?</p>
+
+<a name="158536100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20within%20match%20expression/near/158536100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html#158536100">Hans-Dieter Hiep (Feb 14 2019 at 15:09)</a>:</h4>
+<p>I have written this program now:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test2</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">H</span> <span class="o">:</span> <span class="n">t</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">ff</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">,</span> <span class="n">apply</span> <span class="n">H</span><span class="o">,</span> <span class="n">exact</span> <span class="n">t</span> <span class="o">}</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>And printed the result. It appears that printing <code>#print test._match_1</code> and <code>#print test2</code> reveals their difference. The match clause apparently hides this fact. By using <code>bool.cases_on</code> I can directly access the needed information.</p>
+
+<a name="158536248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20within%20match%20expression/near/158536248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html#158536248">Hans-Dieter Hiep (Feb 14 2019 at 15:10)</a>:</h4>
+<p>Somehow, I expected a similar functionality for the match clause as is provided by the cases tactic. Something like <code>match (H : t) with</code>, but that is not syntactically valid, nor documented. Am I missing something?</p>
+
+<a name="158536288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20within%20match%20expression/near/158536288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html#158536288">Rob Lewis (Feb 14 2019 at 15:11)</a>:</h4>
+<p>Another option:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">_</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">tt</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">H</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">admit</span> <span class="kn">end</span> <span class="k">in</span> <span class="n">t</span>
+  <span class="bp">|</span> <span class="n">ff</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">ff</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="158536791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20within%20match%20expression/near/158536791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90550contextwithinmatchexpression.html#158536791">Hans-Dieter Hiep (Feb 14 2019 at 15:16)</a>:</h4>
+<p>Thanks! That is much neater than going into proof mode!</p>
+
+
+{% endraw %}

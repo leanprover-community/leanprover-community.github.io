@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [free module](95273freemodule.html) (450 messages, latest: Feb 14 2019 at 15:47)
+
 * [kernels of quotient maps](93780kernelsofquotientmaps.html) (41 messages, latest: Feb 14 2019 at 14:21)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2772 messages, latest: Feb 14 2019 at 11:58)
-
-* [free module](95273freemodule.html) (449 messages, latest: Feb 14 2019 at 10:47)
 
 * [base change for modules](88002basechangeformodules.html) (2 messages, latest: Feb 14 2019 at 05:39)
 
