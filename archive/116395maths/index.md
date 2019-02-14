@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [kernels of quotient maps](93780kernelsofquotientmaps.html) (37 messages, latest: Feb 14 2019 at 12:16)
+* [kernels of quotient maps](93780kernelsofquotientmaps.html) (41 messages, latest: Feb 14 2019 at 14:21)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2772 messages, latest: Feb 14 2019 at 11:58)
 
