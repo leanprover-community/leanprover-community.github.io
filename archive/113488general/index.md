@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 3.4.2](37206Lean342.html) (122 messages, latest: Feb 14 2019 at 04:29)
+* [solve_by_elim](75082solvebyelim.html) (93 messages, latest: Feb 14 2019 at 05:55)
 
-* [solve_by_elim](75082solvebyelim.html) (92 messages, latest: Feb 14 2019 at 00:38)
+* [Lean 3.4.2](37206Lean342.html) (122 messages, latest: Feb 14 2019 at 04:29)
 
 * [3.4.1 branch](74787341branch.html) (5 messages, latest: Feb 13 2019 at 22:56)
 
