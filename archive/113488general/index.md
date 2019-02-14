@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [3.4.1 branch](74787341branch.html) (7 messages, latest: Feb 14 2019 at 16:49)
+
 * [context within match expression](90550contextwithinmatchexpression.html) (5 messages, latest: Feb 14 2019 at 15:16)
 
 * [nested data types](88499nesteddatatypes.html) (25 messages, latest: Feb 14 2019 at 11:12)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [Lean 3.4.2](37206Lean342.html) (123 messages, latest: Feb 14 2019 at 07:53)
 
 * [solve_by_elim](75082solvebyelim.html) (93 messages, latest: Feb 14 2019 at 05:55)
-
-* [3.4.1 branch](74787341branch.html) (5 messages, latest: Feb 13 2019 at 22:56)
 
 * [AFP](94264AFP.html) (94 messages, latest: Feb 13 2019 at 20:58)
 
