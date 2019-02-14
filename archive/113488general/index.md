@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 3.4.2](37206Lean342.html) (121 messages, latest: Feb 13 2019 at 23:59)
+
 * [3.4.1 branch](74787341branch.html) (5 messages, latest: Feb 13 2019 at 22:56)
 
 * [AFP](94264AFP.html) (94 messages, latest: Feb 13 2019 at 20:58)
@@ -169,8 +171,6 @@ permalink: archive/113488general/index.html
 * [instance obfuscation](27699instanceobfuscation.html) (5 messages, latest: Jan 30 2019 at 18:53)
 
 * [golf challenge](25036golfchallenge.html) (11 messages, latest: Jan 30 2019 at 15:23)
-
-* [Lean 3.4.2](37206Lean342.html) (119 messages, latest: Jan 30 2019 at 12:39)
 
 * [polynomial elaboration](58261polynomialelaboration.html) (7 messages, latest: Jan 29 2019 at 08:28)
 

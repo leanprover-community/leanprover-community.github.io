@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [free module](95273freemodule.html) (11 messages, latest: Feb 13 2019 at 22:59)
+* [free module](95273freemodule.html) (19 messages, latest: Feb 13 2019 at 23:53)
+
+* [finitely generated (sub)module](01813finitelygeneratedsubmodule.html) (1 message, latest: Feb 13 2019 at 23:45)
 
 * [kernels of quotient maps](93780kernelsofquotientmaps.html) (36 messages, latest: Feb 13 2019 at 20:37)
 
