@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [eq.rec_on](20347eqrecon.html) (27 messages, latest: Feb 14 2019 at 18:58)
+* [eq.rec_on](20347eqrecon.html) (29 messages, latest: Feb 14 2019 at 19:03)
 
 * [unification hints](21856unificationhints.html) (3 messages, latest: Feb 14 2019 at 17:51)
 
