@@ -12492,5 +12492,52 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117833">Johan Commelin (Feb 12 2019 at 13:40)</a>:</h4>
 <p><code>is_{,add_}monoid_hom</code>, similar for <code>semigroup</code>s</p>
 
+<a name="158514768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158514768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158514768">Johan Commelin (Feb 14 2019 at 09:21)</a>:</h4>
+<p>This is failing</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">of_inj_value_group</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_value_group</span><span class="bp">.</span><span class="err">Γ</span> <span class="bp">→</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">minimal_value_group</span><span class="bp">.</span><span class="err">Γ</span><span class="o">)</span>
+<span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">monotone</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">minimal_valuation</span> <span class="bp">=</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_valuation</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="n">hf</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₂</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">transitivity</span><span class="o">,</span> <span class="c1">-- invalid apply tactic, failed to synthesize type class instance</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but I proved</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">trans</span> <span class="o">(</span><span class="n">h₁₂</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂₃</span> <span class="o">:</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₃</span><span class="o">)</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₃</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">h₁₂</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂₃</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+
+<p>What else should I do to make the transitivity tactic work?</p>
+
+<a name="158514853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158514853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158514853">Johan Commelin (Feb 14 2019 at 09:22)</a>:</h4>
+<p>Oooh snap... this doesn't look good</p>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : linear_ordered_comm_group ?m__fresh.1182.788 := _inst_4
+failed is_def_eq
+[class_instances] (0) ?x_0 : linear_ordered_comm_group ?m__fresh.1182.788 := _inst_3
+failed is_def_eq
+[class_instances] (0) ?x_0 : linear_ordered_comm_group ?m__fresh.1182.788 := @minimal_value_group.linear_ordered_comm_group ?x_1 ?x_2 ?x_3 ?x_4 ?x_5 ?x_6
+failed is_def_eq
+</pre></div>
+
+<a name="158514888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158514888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158514888">Johan Commelin (Feb 14 2019 at 09:23)</a>:</h4>
+<p>Even if I explicitly give an argument</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">transitivity</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_valuation</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>it is still not willing to create two subgoals and apply the trans-lemma.</p>
+
+<a name="158515074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158515074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158515074">Johan Commelin (Feb 14 2019 at 09:26)</a>:</h4>
+<p><code>refine trans _ _,</code> does work... I wish <code>transitivity</code> would work in a similar way.</p>
+
 
 {% endraw %}

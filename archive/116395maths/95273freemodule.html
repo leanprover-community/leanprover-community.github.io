@@ -670,5 +670,657 @@ This is what I would call the free module on a set, right?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158513479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158513479">Kevin Buzzard (Feb 14 2019 at 08:58)</a>:</h4>
 <p>It's just like alg closure, I'm now a little uncomfortable with this argument even though I've known it for years. Start with P which is Reid-projective. Reid then conjures up a free module which is isomorphic to K + P. Now say N -&gt; P is a surjection. I said "Reid's module is universal, so..." but there is actually no uniqueness in this claim: the projection K + P -&gt; P now lifts (not necessarily uniquely) to a map K + P -&gt; N, because you simply choose a basis for K + P and lift each element randomly and then use universal property of free objects. We now have maps K + P -&gt; N -&gt; P with the composite being the projection, so if P -&gt; K + P is the inclusion then P -&gt; K + P -&gt; N -&gt; P is the identity, hence P -&gt; K + P -&gt; N splits N -&gt; P. Thinking that Reid's object was "universal" leads you to this argument, but the map K + P -&gt; N is not at all canonical.</p>
 
+<a name="158513640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158513640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158513640">Kevin Buzzard (Feb 14 2019 at 09:01)</a>:</h4>
+<p>Anyway, the reason this is somehow one of the more interesting parts of the equivalence from Lean's point of view is that Reid's definition has no universe issues, whereas I am quantifying over all N in the "all surjections split" definition.</p>
+
+<a name="158513927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158513927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158513927">Mario Carneiro (Feb 14 2019 at 09:06)</a>:</h4>
+<p>But this still doesn't answer how to change the codomain of the surjection away from P</p>
+
+<a name="158513934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158513934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158513934">Kevin Buzzard (Feb 14 2019 at 09:06)</a>:</h4>
+<p>no but that's just more standard maths</p>
+
+<a name="158514018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514018">Kevin Buzzard (Feb 14 2019 at 09:08)</a>:</h4>
+<p>Which way do you want to see?</p>
+
+<a name="158514026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514026">Kevin Buzzard (Feb 14 2019 at 09:08)</a>:</h4>
+<p>I was just interested in one argument which had as a conclusion that you can quantify over all universes</p>
+
+<a name="158514089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514089">Kevin Buzzard (Feb 14 2019 at 09:10)</a>:</h4>
+<p>For decades all these definitions were equivalent to me but now I see that some, in my language, have set-theoretic issues</p>
+
+<a name="158514128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514128">Kevin Buzzard (Feb 14 2019 at 09:10)</a>:</h4>
+<p>Whereas Reid's most definitely does not</p>
+
+<a name="158514283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514283">Mario Carneiro (Feb 14 2019 at 09:13)</a>:</h4>
+<p>Assume it is Reid surjective, show that every surjection M -&gt;&gt; N splits over P -&gt; N</p>
+
+<a name="158514291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514291">Kevin Buzzard (Feb 14 2019 at 09:13)</a>:</h4>
+<p>Ok so the more general statement is just the same principle. Reid's definition shows that there's some K such that P + K is free. Now say A-&gt;B is surjective and we have P -&gt; B. We extend this to P+ K to B via the projection P + K -&gt; P</p>
+
+<a name="158514383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514383">Kevin Buzzard (Feb 14 2019 at 09:14)</a>:</h4>
+<p>Now by surjectivity the map P + K to B lifts to P + K to A</p>
+
+<a name="158514405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514405">Mario Carneiro (Feb 14 2019 at 09:14)</a>:</h4>
+<p>is that what surjectivity does?</p>
+
+<a name="158514409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514409">Kevin Buzzard (Feb 14 2019 at 09:14)</a>:</h4>
+<p>And we have P -&gt; P + K</p>
+
+<a name="158514415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514415">Mario Carneiro (Feb 14 2019 at 09:14)</a>:</h4>
+<p>do we have AC for Mod(R)?</p>
+
+<a name="158514425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514425">Kevin Buzzard (Feb 14 2019 at 09:14)</a>:</h4>
+<p>and on a good day with a following wind the diagram will commute</p>
+
+<a name="158514457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514457">Kevin Buzzard (Feb 14 2019 at 09:15)</a>:</h4>
+<p>I don't know what AC is</p>
+
+<a name="158514474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514474">Mario Carneiro (Feb 14 2019 at 09:15)</a>:</h4>
+<p>oh, I guess we have it: <code>exists_right_inverse_linear_map_of_surjective</code></p>
+
+<a name="158514489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514489">Mario Carneiro (Feb 14 2019 at 09:15)</a>:</h4>
+<p>I mean every surjection splits in Mod(R)</p>
+
+<a name="158514544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514544">Johan Commelin (Feb 14 2019 at 09:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> AC = axiom of choice <span aria-label="lol" class="emoji emoji-1f606" role="img" title="lol">:lol:</span></p>
+
+<a name="158514545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514545">Kevin Buzzard (Feb 14 2019 at 09:16)</a>:</h4>
+<p>The diagram commutes. We think of the map P -&gt; B as P -&gt; P + K -&gt; P -&gt; B</p>
+
+<a name="158514584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514584">Kevin Buzzard (Feb 14 2019 at 09:17)</a>:</h4>
+<p>and then as P -&gt; P + K -&gt; B</p>
+
+<a name="158514589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514589">Kevin Buzzard (Feb 14 2019 at 09:17)</a>:</h4>
+<p>And that's the map we can lift</p>
+
+<a name="158514590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514590">Mario Carneiro (Feb 14 2019 at 09:17)</a>:</h4>
+<p>when you say P + K do you mean lc(P)?</p>
+
+<a name="158514597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514597">Mario Carneiro (Feb 14 2019 at 09:17)</a>:</h4>
+<p>like is that K needed at all?</p>
+
+<a name="158514600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514600">Kevin Buzzard (Feb 14 2019 at 09:17)</a>:</h4>
+<p>Yes</p>
+
+<a name="158514654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514654">Mario Carneiro (Feb 14 2019 at 09:18)</a>:</h4>
+<p>so pi1 : P + K -&gt; P is lc.total and P -&gt; P+K is Reid's inverse</p>
+
+<a name="158514659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514659">Kevin Buzzard (Feb 14 2019 at 09:18)</a>:</h4>
+<p>Reid's definition is that lc(P) is isomorphic to P + K (K the kernel of the canonical map lc(P) -&gt; P)</p>
+
+<a name="158514662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514662">Kevin Buzzard (Feb 14 2019 at 09:18)</a>:</h4>
+<p>Right</p>
+
+<a name="158514692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514692">Kevin Buzzard (Feb 14 2019 at 09:19)</a>:</h4>
+<p>And I'm using this basic but fundamental fact that a surjection having an inverse is equivalent to the surjection being a projection</p>
+
+<a name="158514742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514742">Mario Carneiro (Feb 14 2019 at 09:20)</a>:</h4>
+<p>being a projection doesn't mean much to me</p>
+
+<a name="158514749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514749">Mario Carneiro (Feb 14 2019 at 09:20)</a>:</h4>
+<p>but I understand the first thing, so if it's equivalent I'm happy</p>
+
+<a name="158514775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514775">Kevin Buzzard (Feb 14 2019 at 09:21)</a>:</h4>
+<p>Being a projection is a way of extending a map P -&gt; M to a map P + K -&gt; M</p>
+
+<a name="158514780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514780">Kevin Buzzard (Feb 14 2019 at 09:21)</a>:</h4>
+<p>You just let it be 0 on K</p>
+
+<a name="158514796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514796">Kevin Buzzard (Feb 14 2019 at 09:21)</a>:</h4>
+<p>Wait</p>
+
+<a name="158514843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514843">Kevin Buzzard (Feb 14 2019 at 09:22)</a>:</h4>
+<p>It's more than an extension</p>
+
+<a name="158514848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514848">Mario Carneiro (Feb 14 2019 at 09:22)</a>:</h4>
+<p>So we split f : A -&gt;&gt; B to f^-1 : B -&gt; A, and the desired map comes from P -&gt; lc(P) -&gt; P -&gt; B -&gt; A</p>
+
+<a name="158514854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514854">Kevin Buzzard (Feb 14 2019 at 09:22)</a>:</h4>
+<p>It's the fact that we can factor any map P -&gt; M as P -&gt; P + K -&gt; M</p>
+
+<a name="158514855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514855">Kevin Buzzard (Feb 14 2019 at 09:22)</a>:</h4>
+<p>That's the key</p>
+
+<a name="158514872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514872">Kevin Buzzard (Feb 14 2019 at 09:23)</a>:</h4>
+<p>f^-1 might not be linear</p>
+
+<a name="158514879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514879">Mario Carneiro (Feb 14 2019 at 09:23)</a>:</h4>
+<p>I mean the inverse coming from that theorem</p>
+
+<a name="158514883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514883">Mario Carneiro (Feb 14 2019 at 09:23)</a>:</h4>
+<p>every surjection splits</p>
+
+<a name="158514884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514884">Kevin Buzzard (Feb 14 2019 at 09:23)</a>:</h4>
+<p>Wait</p>
+
+<a name="158514938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514938">Kevin Buzzard (Feb 14 2019 at 09:24)</a>:</h4>
+<p>A random surjection does not split</p>
+
+<a name="158514947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514947">Kevin Buzzard (Feb 14 2019 at 09:24)</a>:</h4>
+<p>This is exactly what we're trying to work around</p>
+
+<a name="158514951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514951">Mario Carneiro (Feb 14 2019 at 09:24)</a>:</h4>
+<p>oh crap that theorem's in vector spaces</p>
+
+<a name="158514953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514953">Johan Commelin (Feb 14 2019 at 09:24)</a>:</h4>
+<p>Those are free</p>
+
+<a name="158514965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514965">Johan Commelin (Feb 14 2019 at 09:25)</a>:</h4>
+<p>Sorry, I wasn't paying attention. Should have warned you when you started talking about AC</p>
+
+<a name="158514988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514988">Kevin Buzzard (Feb 14 2019 at 09:25)</a>:</h4>
+<p>Every vector space has a basis.</p>
+
+<a name="158514992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514992">Mario Carneiro (Feb 14 2019 at 09:25)</a>:</h4>
+<p>okay, so then I'm still stuck on</p>
+<blockquote>
+<p>Now by surjectivity the map P + K to B lifts to P + K to A</p>
+</blockquote>
+
+<a name="158514995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158514995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158514995">Kevin Buzzard (Feb 14 2019 at 09:25)</a>:</h4>
+<p>That says that every k-module is free, if k is a field</p>
+
+<a name="158515003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515003">Kevin Buzzard (Feb 14 2019 at 09:25)</a>:</h4>
+<p>but the integers are not so forgiving.</p>
+
+<a name="158515011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515011">Kevin Buzzard (Feb 14 2019 at 09:26)</a>:</h4>
+<p>Z-modules are abelian groups</p>
+
+<a name="158515057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515057">Kevin Buzzard (Feb 14 2019 at 09:26)</a>:</h4>
+<p>and Z/2Z is not free</p>
+
+<a name="158515063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515063">Mario Carneiro (Feb 14 2019 at 09:26)</a>:</h4>
+<p>yeah, I get that not all modules are free, although I don't see immediately what this has to do with inverting surjections, but I can believe it</p>
+
+<a name="158515065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515065">Kevin Buzzard (Feb 14 2019 at 09:26)</a>:</h4>
+<p>and Z/4Z -&gt; Z/2Z is a surjection which does not split, because Z/4Z is not isomorphic to Z/2Z + Z/2Z</p>
+
+<a name="158515075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515075">Kevin Buzzard (Feb 14 2019 at 09:26)</a>:</h4>
+<p>The key definition is that a surjection M -&gt; N <em>splits</em> if there's a linear injection N -&gt; M which is a one-sided inverse</p>
+
+<a name="158515091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515091">Kevin Buzzard (Feb 14 2019 at 09:27)</a>:</h4>
+<p>The lemma is that a surjection splits iff it's isomorphic to a projection</p>
+
+<a name="158515114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515114">Johan Commelin (Feb 14 2019 at 09:27)</a>:</h4>
+<blockquote>
+<p>yeah, I get that not all modules are free, although I don't see immediately what this has to do with inverting surjections, but I can believe it</p>
+</blockquote>
+<p>Free =&gt; projective =&gt; surjections split</p>
+
+<a name="158515115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515115">Kevin Buzzard (Feb 14 2019 at 09:27)</a>:</h4>
+<p>If M-&gt;N has kernel K and M -&gt; N splits, then choose a splitting i: N -&gt; M. We now get a map N + K -&gt; M and this is an isomorphism</p>
+
+<a name="158515172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515172">Kevin Buzzard (Feb 14 2019 at 09:28)</a>:</h4>
+<p>The theorem is that if P is projective then all surjections onto P split</p>
+
+<a name="158515178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515178">Kevin Buzzard (Feb 14 2019 at 09:28)</a>:</h4>
+<p>Or maybe it's the definition, who knows</p>
+
+<a name="158515195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515195">Kevin Buzzard (Feb 14 2019 at 09:29)</a>:</h4>
+<blockquote>
+<p>okay, so then I'm still stuck on</p>
+<blockquote>
+<p>Now by surjectivity the map P + K to B lifts to P + K to A</p>
+</blockquote>
+</blockquote>
+<p>This is where we use that P + K is free. We construct a completely non-canonical lift of P+K-&gt;B to P+K-&gt;A</p>
+
+<a name="158515264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515264">Mario Carneiro (Feb 14 2019 at 09:30)</a>:</h4>
+<p>okay, so <code>exists_left_inverse_linear_map_of_injective</code> needs generalizing</p>
+
+<a name="158515270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515270">Kevin Buzzard (Feb 14 2019 at 09:30)</a>:</h4>
+<p>by saying "pick a basis of P+K, because it's free. Choose a random basis element. It gets mapped to an element of A which we know lifts (via a completely random non-linear set-theoretic splitting A -&gt; B) to an element of B. Send the basis element here. Extend by linearity"</p>
+
+<a name="158515314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515314">Kevin Buzzard (Feb 14 2019 at 09:31)</a>:</h4>
+<p>The "extend by linearity" line is exactly where you assume that something is free. If I have a random module M and a random generating subset, I can't be defining maps M -&gt; N by saying "send the generators to random things and extend linearly" because the generators might satisfy random relations which won't work in N</p>
+
+<a name="158515319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515319">Mario Carneiro (Feb 14 2019 at 09:31)</a>:</h4>
+<p>the proof constructs a basis C extending the image of a basis of the domain basis</p>
+
+<a name="158515373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515373">Kevin Buzzard (Feb 14 2019 at 09:32)</a>:</h4>
+<p>I am using the obvious basis of lc(P) in my head</p>
+
+<a name="158515376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515376">Mario Carneiro (Feb 14 2019 at 09:32)</a>:</h4>
+<p>both sides need vector space assumption, but the basis on the domain follows if the domain is free, and the basis on the target comes from... where?</p>
+
+<a name="158515377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515377">Kevin Buzzard (Feb 14 2019 at 09:32)</a>:</h4>
+<p>I think that's the only basis in the argument</p>
+
+<a name="158515394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515394">Kevin Buzzard (Feb 14 2019 at 09:32)</a>:</h4>
+<p>You have lost me</p>
+
+<a name="158515404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515404">Mario Carneiro (Feb 14 2019 at 09:32)</a>:</h4>
+<p>the second basis is used for the "extend by linearity" part</p>
+
+<a name="158515435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515435">Mario Carneiro (Feb 14 2019 at 09:33)</a>:</h4>
+<p>each basis element of lc(P) goes somewhere, so you take these elements and throw more in to make a basis of B</p>
+
+<a name="158515448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515448">Kevin Buzzard (Feb 14 2019 at 09:33)</a>:</h4>
+<p><code>exists_left_inverse_linear_map_of_injective</code> generalises to the statement that if M is a random module and P is a projective module then every injection M -&gt; P has a one-sided inverse.</p>
+
+<a name="158515499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515499">Mario Carneiro (Feb 14 2019 at 09:34)</a>:</h4>
+<p>oh, oops wrong proof</p>
+
+<a name="158515500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515500">Mario Carneiro (Feb 14 2019 at 09:34)</a>:</h4>
+<p><code>exists_right_inverse_linear_map_of_surjective</code></p>
+
+<a name="158515514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515514">Mario Carneiro (Feb 14 2019 at 09:34)</a>:</h4>
+<p>ah, this one only needs one basis</p>
+
+<a name="158515549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515549">Mario Carneiro (Feb 14 2019 at 09:35)</a>:</h4>
+<p>oh, it's actually a zero cost generalization, there is no need to assume beta is a vector space , except that alpha is a field anyway in the theorem statement</p>
+
+<a name="158515596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515596">Kevin Buzzard (Feb 14 2019 at 09:36)</a>:</h4>
+<p><code>exists_right_inverse_linear_map_of_surjective</code> generalizes to the assertion that if P is a projective module then every surjection P -&gt; M has a right inverse</p>
+
+<a name="158515613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515613">Kevin Buzzard (Feb 14 2019 at 09:36)</a>:</h4>
+<p>Every module over a field is a vector space, hence has a basis, hence is free, hence is projective</p>
+
+<a name="158515637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515637">Kevin Buzzard (Feb 14 2019 at 09:37)</a>:</h4>
+<p>Over a general ring you get two new phenomena which stop things from being free.</p>
+
+<a name="158515656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515656">Kevin Buzzard (Feb 14 2019 at 09:37)</a>:</h4>
+<p>The first is that modules over the ring can "wrap around themselves" -- e.g. Z/10Z is a module over Z but {1} isn't a basis because it's linearly dependent -- 10 * 1 = 0</p>
+
+<a name="158515717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515717">Kevin Buzzard (Feb 14 2019 at 09:38)</a>:</h4>
+<p>The second is that you can have abelian groups like Q which have no torsion as Z-modules but which aren't free anyway, because any two elements are linearly dependent</p>
+
+<a name="158515729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515729">Kevin Buzzard (Feb 14 2019 at 09:38)</a>:</h4>
+<p>Neither Q nor Z/10Z is free over Z</p>
+
+<a name="158515733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515733">Mario Carneiro (Feb 14 2019 at 09:38)</a>:</h4>
+<p>right</p>
+
+<a name="158515734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515734">Kevin Buzzard (Feb 14 2019 at 09:38)</a>:</h4>
+<p>But Q is flat over Z :-)</p>
+
+<a name="158515762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515762">Kevin Buzzard (Feb 14 2019 at 09:39)</a>:</h4>
+<p>but that's probably a story for another day</p>
+
+<a name="158515764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515764">Mario Carneiro (Feb 14 2019 at 09:39)</a>:</h4>
+<p>okay, I am convinced that projective modules are interesting enough to have a few theorems in mathlib</p>
+
+<a name="158515822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515822">Kevin Buzzard (Feb 14 2019 at 09:40)</a>:</h4>
+<p>A nice example of a projective module that isn't free is a non-zero ideal in the integers of a number field.</p>
+
+<a name="158515827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515827">Mario Carneiro (Feb 14 2019 at 09:40)</a>:</h4>
+<p>not Z?</p>
+
+<a name="158515830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515830">Kevin Buzzard (Feb 14 2019 at 09:40)</a>:</h4>
+<p>If R = Z[sqrt(-5)] then numbers do not factor uniquely into primes</p>
+
+<a name="158515843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515843">Mario Carneiro (Feb 14 2019 at 09:41)</a>:</h4>
+<p>oh right Z is free</p>
+
+<a name="158515849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515849">Kevin Buzzard (Feb 14 2019 at 09:41)</a>:</h4>
+<p>All ideals of Z are principal, and a non-zero ideal is hence free -- the generator is a basis</p>
+
+<a name="158515857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515857">Kevin Buzzard (Feb 14 2019 at 09:41)</a>:</h4>
+<p>But for R you have <code>2*3=(1+sqrt(-5))*(1-sqrt(-5))</code></p>
+
+<a name="158515899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515899">Kevin Buzzard (Feb 14 2019 at 09:42)</a>:</h4>
+<p>and all of these are primes</p>
+
+<a name="158515910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515910">Mario Carneiro (Feb 14 2019 at 09:42)</a>:</h4>
+<p>aside: How do you check stuff like that?</p>
+
+<a name="158515919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515919">Kevin Buzzard (Feb 14 2019 at 09:43)</a>:</h4>
+<p>However uniqueness of factorization is restored if you have the amazing insight to invent "ideal numbers", generalisations of numbers which do have unique factorization, and which historically I believe is the reason that ideals are called ideal.</p>
+
+<a name="158515941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515941">Kevin Buzzard (Feb 14 2019 at 09:43)</a>:</h4>
+<p>The incredibly tedious proof that 2,3, etc are all primes is "embed everything in the complexes and observe that if r in R is non-zero then |r|&gt;=1"</p>
+
+<a name="158515961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158515961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158515961">Kevin Buzzard (Feb 14 2019 at 09:43)</a>:</h4>
+<p>and so an algorithm for checking to see if x is prime is to consider the finitely many elements of R whose norm is &lt;= |x| and see if any of them go into x</p>
+
+<a name="158516006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516006">Mario Carneiro (Feb 14 2019 at 09:44)</a>:</h4>
+<p>Don't some primes factor in number fields like that?</p>
+
+<a name="158516009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516009">Kevin Buzzard (Feb 14 2019 at 09:44)</a>:</h4>
+<p>Normal prime numbers can factor, yes</p>
+
+<a name="158516015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516015">Mario Carneiro (Feb 14 2019 at 09:44)</a>:</h4>
+<p>oh, did you mean something other than 2,3, etc</p>
+
+<a name="158516020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516020">Kevin Buzzard (Feb 14 2019 at 09:44)</a>:</h4>
+<p>Oh wait, I am using incorrect notation.</p>
+
+<a name="158516047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516047">Kevin Buzzard (Feb 14 2019 at 09:45)</a>:</h4>
+<p>I should say that if R=Z[sqrt(-5)] then elements of R do not in general factor uniquely into <em>irreducibles</em></p>
+
+<a name="158516060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516060">Kevin Buzzard (Feb 14 2019 at 09:45)</a>:</h4>
+<p>And the tedious proof I gave you above is that 2,3,1+sqrt(-5) and 1-sqrt(-5) are all <em>irreducible</em></p>
+
+<a name="158516063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516063">Mario Carneiro (Feb 14 2019 at 09:45)</a>:</h4>
+<p>aha, not the same because Z{sqrt(-5)] is not a UFD, yes?</p>
+
+<a name="158516069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516069">Kevin Buzzard (Feb 14 2019 at 09:46)</a>:</h4>
+<p>Yeah.</p>
+
+<a name="158516123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516123">Kevin Buzzard (Feb 14 2019 at 09:46)</a>:</h4>
+<p>For Z[sqrt(-5)] you can use the embedding into C as an algorithm for checking for irreducibility.</p>
+
+<a name="158516126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516126">Kevin Buzzard (Feb 14 2019 at 09:46)</a>:</h4>
+<p>(C the complexes)</p>
+
+<a name="158516130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516130">Mario Carneiro (Feb 14 2019 at 09:46)</a>:</h4>
+<p>When you talk about the norm, you mean the norm on C, not that funny number field norm?</p>
+
+<a name="158516144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516144">Mario Carneiro (Feb 14 2019 at 09:47)</a>:</h4>
+<p>a^2 + 5b^2 or something</p>
+
+<a name="158516147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516147">Kevin Buzzard (Feb 14 2019 at 09:47)</a>:</h4>
+<p>Well using the funny number field norm is a bit saner for this example</p>
+
+<a name="158516154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516154">Kevin Buzzard (Feb 14 2019 at 09:47)</a>:</h4>
+<p>because it's nat-valued and is the square of the complex norm</p>
+
+<a name="158516163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516163">Kevin Buzzard (Feb 14 2019 at 09:47)</a>:</h4>
+<p>so for this example the stories are the same.</p>
+
+<a name="158516166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516166">Mario Carneiro (Feb 14 2019 at 09:48)</a>:</h4>
+<p>I guess as long as you have Z[sqrt(-n)] the norm is positive definite so this list is finite</p>
+
+<a name="158516212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516212">Mario Carneiro (Feb 14 2019 at 09:48)</a>:</h4>
+<p>but for Z[sqrt(n)] it's some kind of pell's equation</p>
+
+<a name="158516213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516213">Kevin Buzzard (Feb 14 2019 at 09:48)</a>:</h4>
+<p>So some German mathematician 150 years ago had the idea that 2  and 1+sqrt(-5) seemed to be coprime in the sense that they couldn't find anything dividing both of them</p>
+
+<a name="158516230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516230">Mario Carneiro (Feb 14 2019 at 09:49)</a>:</h4>
+<p>dedekind, I presume?</p>
+
+<a name="158516231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516231">Kevin Buzzard (Feb 14 2019 at 09:49)</a>:</h4>
+<p>For Z[sqrt(n)] you'd be better off using the funny number field norm, but now there are issues because there are infinitely many elements of norm &lt;= B</p>
+
+<a name="158516235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516235">Kevin Buzzard (Feb 14 2019 at 09:49)</a>:</h4>
+<p>so you need tricks to cut your search space down</p>
+
+<a name="158516239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516239">Kevin Buzzard (Feb 14 2019 at 09:49)</a>:</h4>
+<p>the first of which is that you need a good way to solve Pell's equation</p>
+
+<a name="158516246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516246">Mario Carneiro (Feb 14 2019 at 09:49)</a>:</h4>
+<p>is there a reason to believe that the large ones don't matter?</p>
+
+<a name="158516292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516292">Kevin Buzzard (Feb 14 2019 at 09:50)</a>:</h4>
+<p>So dammit 2 and 1+sqrt(-5) seem to be distinct "primes" i.e. irreducible, but we can't solve lambda * 2 + mu * 1+sqrt(-5) = 1</p>
+
+<a name="158516300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516300">Kevin Buzzard (Feb 14 2019 at 09:50)</a>:</h4>
+<p>even though they're "coprime"</p>
+
+<a name="158516301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516301">Mario Carneiro (Feb 14 2019 at 09:50)</a>:</h4>
+<p>lol sorry for the distractions</p>
+
+<a name="158516303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516303">Kevin Buzzard (Feb 14 2019 at 09:50)</a>:</h4>
+<p>and then they were left with this big pile of elements of the form lambda * 2 + mu * (1+sqrt(-5))</p>
+
+<a name="158516310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516310">Kevin Buzzard (Feb 14 2019 at 09:50)</a>:</h4>
+<p>and they left them under a microscope and there was some chemical reaction or something</p>
+
+<a name="158516326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516326">Kevin Buzzard (Feb 14 2019 at 09:51)</a>:</h4>
+<p>and when they came back they realised they'd invented ideals</p>
+
+<a name="158516344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516344">Kevin Buzzard (Feb 14 2019 at 09:51)</a>:</h4>
+<p>and that instead of trying to find 1 in this set, they should just let this entire set be the model for the highest common factor</p>
+
+<a name="158516390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516390">Kevin Buzzard (Feb 14 2019 at 09:52)</a>:</h4>
+<p>and then it turned out that they could multiply two sets of this form</p>
+
+<a name="158516393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516393">Kevin Buzzard (Feb 14 2019 at 09:52)</a>:</h4>
+<p>and after the dust had cleared, uniqueness of factorization had been restored!</p>
+
+<a name="158516398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516398">Mario Carneiro (Feb 14 2019 at 09:52)</a>:</h4>
+<p>what does that statement mean here?</p>
+
+<a name="158516403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516403">Kevin Buzzard (Feb 14 2019 at 09:52)</a>:</h4>
+<p>So if I=(2,1+sqrt(-5)) and J = (3,1+sqrt(-5)) then I and J are prime ideals</p>
+
+<a name="158516417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516417">Kevin Buzzard (Feb 14 2019 at 09:53)</a>:</h4>
+<p>and 2=I^2</p>
+
+<a name="158516422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516422">Kevin Buzzard (Feb 14 2019 at 09:53)</a>:</h4>
+<p>and if K = (3,1-sqrt(-5)) then K is prime too and 3 = J*K</p>
+
+<a name="158516431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516431">Kevin Buzzard (Feb 14 2019 at 09:53)</a>:</h4>
+<p>and (1+sqrt(-5)) is I*K</p>
+
+<a name="158516483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516483">Kevin Buzzard (Feb 14 2019 at 09:54)</a>:</h4>
+<p>and the non-unique <code>2*3=(1+sqrt(-5))(1-sqrt(-5))</code> now can be written as <code>(I^2)*(J*K)=(I*J)*(I*K)</code></p>
+
+<a name="158516493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516493">Mario Carneiro (Feb 14 2019 at 09:54)</a>:</h4>
+<p>interesting</p>
+
+<a name="158516497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516497">Kevin Buzzard (Feb 14 2019 at 09:54)</a>:</h4>
+<p>which becomes the unique <code>(6)=I^2*J*K</code></p>
+
+<a name="158516501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516501">Kevin Buzzard (Feb 14 2019 at 09:54)</a>:</h4>
+<p>so these sets were behaving better than numbers, so they called them ideal numbers</p>
+
+<a name="158516524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516524">Mario Carneiro (Feb 14 2019 at 09:55)</a>:</h4>
+<p>so why isn't this the even more fundamental theorem of arithmetic?</p>
+
+<a name="158516526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516526">Kevin Buzzard (Feb 14 2019 at 09:55)</a>:</h4>
+<p>and the principal ideal <code>(6)</code> is factoring uniquely into prime ideals</p>
+
+<a name="158516530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516530">Kevin Buzzard (Feb 14 2019 at 09:55)</a>:</h4>
+<p>The correct theorem is that for a Dedekind domain, every non-zero ideal is uniquely the product of prime ideals.</p>
+
+<a name="158516536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516536">Kevin Buzzard (Feb 14 2019 at 09:55)</a>:</h4>
+<p>The proof is that this is true by one of the definitions of a Dedekind domain</p>
+
+<a name="158516577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516577">Mario Carneiro (Feb 14 2019 at 09:56)</a>:</h4>
+<p>lol figures</p>
+
+<a name="158516585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516585">Kevin Buzzard (Feb 14 2019 at 09:56)</a>:</h4>
+<p>Another definition is that it's an integrally closed integral domain for which all non-zero prime ideals are maximal. We have all of those notions in Lean.</p>
+
+<a name="158516590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516590">Kevin Buzzard (Feb 14 2019 at 09:57)</a>:</h4>
+<p>Assuming Kenny PR'ed integrally closed and someone accepted it, which might not be true</p>
+
+<a name="158516600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516600">Kevin Buzzard (Feb 14 2019 at 09:57)</a>:</h4>
+<p>Or maybe Johan PR'ed it</p>
+
+<a name="158516606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516606">Kevin Buzzard (Feb 14 2019 at 09:57)</a>:</h4>
+<p>I know they were both thinking about it but it was when I was mired in teaching hell</p>
+
+<a name="158516610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516610">Mario Carneiro (Feb 14 2019 at 09:57)</a>:</h4>
+<p>We don't have this factorization statement in mathlib, right?</p>
+
+<a name="158516618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516618">Kevin Buzzard (Feb 14 2019 at 09:57)</a>:</h4>
+<p>No, but I did consider setting it as an undergraduate project</p>
+
+<a name="158516620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516620">Mario Carneiro (Feb 14 2019 at 09:57)</a>:</h4>
+<p>or dedekind domains at all</p>
+
+<a name="158516624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516624">Kevin Buzzard (Feb 14 2019 at 09:58)</a>:</h4>
+<p>Right.</p>
+
+<a name="158516669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516669">Mario Carneiro (Feb 14 2019 at 09:58)</a>:</h4>
+<p>but I guess you can also unfold the statement PID =&gt; DD using this definition</p>
+
+<a name="158516673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516673">Kevin Buzzard (Feb 14 2019 at 09:58)</a>:</h4>
+<p>The reason that such a theorem would be important for mathlib, is that the ring of integers of a number field is by definition an integral closure</p>
+
+<a name="158516677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516677">Kevin Buzzard (Feb 14 2019 at 09:58)</a>:</h4>
+<p>and it is not hard to go from that to checking that the ring of integers of a number field is a Dedekind domain</p>
+
+<a name="158516680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516680">Mario Carneiro (Feb 14 2019 at 09:58)</a>:</h4>
+<p>oh wait PID =&gt; DD is trivial isn't it</p>
+
+<a name="158516681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516681">Kevin Buzzard (Feb 14 2019 at 09:59)</a>:</h4>
+<p>However there are other examples, for example <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">C</mi></mrow><mo>[</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo>]</mo><mi mathvariant="normal">/</mi><mo>(</mo><msup><mi>Y</mi><mn>2</mn></msup><mo>−</mo><msup><mi>X</mi><mn>3</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">\mathbb{C}[X,Y]/(Y^2-X^3-1)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathbb">C</span></span><span class="mopen">[</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mord mathrm">/</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span><span class="mbin">−</span><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">3</span></span></span></span></span></span></span></span><span class="mbin">−</span><span class="mord mathrm">1</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="158516693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516693">Kevin Buzzard (Feb 14 2019 at 09:59)</a>:</h4>
+<p>Well, it depends on which definition of DD you use I guess</p>
+
+<a name="158516701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516701">Kevin Buzzard (Feb 14 2019 at 09:59)</a>:</h4>
+<p>You can make everything trivial if you choose your definitions carefully</p>
+
+<a name="158516710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516710">Kevin Buzzard (Feb 14 2019 at 09:59)</a>:</h4>
+<p>PID -&gt; UFD and UFD's are integrally closed</p>
+
+<a name="158516711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158516711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158516711">Mario Carneiro (Feb 14 2019 at 09:59)</a>:</h4>
+<p>that's my hope</p>
+
 
 {% endraw %}
