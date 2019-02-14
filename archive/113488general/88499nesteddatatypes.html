@@ -117,5 +117,37 @@ How can I still make use of such a parameter?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158520169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158520169">Hans-Dieter Hiep (Feb 14 2019 at 10:52)</a>:</h4>
 <p>Wow, that seems to be what I was looking for! So, if I understand correctly, the bool argument determines what constructors are applicable.</p>
 
+<a name="158520779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158520779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158520779">Mario Carneiro (Feb 14 2019 at 11:04)</a>:</h4>
+<p>right. This is actually what the nested inductive type you wrote (is supposed to) compile to</p>
+
+<a name="158520903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158520903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158520903">Edward Ayers (Feb 14 2019 at 11:07)</a>:</h4>
+<p>Mutual inductives also compile down to something like this right?</p>
+
+<a name="158521002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521002">Mario Carneiro (Feb 14 2019 at 11:08)</a>:</h4>
+<p>yes, technically it's two-step, the nested inductive translates to a mutual inductive of <code>stmt</code> and <code>list_stmt</code>, and that gets compiled to an indexed inductive like the above</p>
+
+<a name="158521042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521042">Edward Ayers (Feb 14 2019 at 11:09)</a>:</h4>
+<p>So if I may highjack the converstation; am I right in remembering there were talks to put mutual inductives in the kernel? Why bother if you can get them to compile down?</p>
+
+<a name="158521046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521046">Mario Carneiro (Feb 14 2019 at 11:09)</a>:</h4>
+<p>because they are slow</p>
+
+<a name="158521116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521116">Mario Carneiro (Feb 14 2019 at 11:10)</a>:</h4>
+<p>the kernel "sees" the entire compilation process when trying to reduce the computation rule</p>
+
+<a name="158521142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521142">Mario Carneiro (Feb 14 2019 at 11:11)</a>:</h4>
+<p>Also they are slow to compile the initial definitions; if you watch how long it takes to compile a nested inductive vs a plain inductive it's way slower</p>
+
+<a name="158521199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158521199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158521199">Mario Carneiro (Feb 14 2019 at 11:12)</a>:</h4>
+<p>And mutual defs have to be done by well founded recursion, which is hit or miss</p>
+
 
 {% endraw %}
