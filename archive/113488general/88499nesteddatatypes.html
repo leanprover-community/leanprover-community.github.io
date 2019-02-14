@@ -1,0 +1,121 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/88499nesteddatatypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html">nested data types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158519486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519486">Hans-Dieter Hiep (Feb 14 2019 at 10:41)</a>:</h4>
+<p>Hi! I am trying to define a nested data type, but encounter some confusing error messages. I have reduced the problem to the following small case:</p>
+<div class="codehilite"><pre><span></span>inductive tree (α : Type) (current : {x : α // true})
+| ite: α → list tree → list tree → tree
+</pre></div>
+
+
+<p>It gives the error: <code>nested occurrence 'list.{0} (tree α current)' contains variables that are not parameters</code>.<br>
+Removing the parameter <code>current</code> gets rid of the error.<br>
+Can someone explain what is going on?<br>
+How can I still make use of such a parameter?</p>
+
+<a name="158519555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519555">Mario Carneiro (Feb 14 2019 at 10:42)</a>:</h4>
+<p>what is it doing there? You aren't using it</p>
+
+<a name="158519572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519572">Hans-Dieter Hiep (Feb 14 2019 at 10:42)</a>:</h4>
+<p>True, but in the definition with the same error, I do use it.</p>
+
+<a name="158519585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519585">Hans-Dieter Hiep (Feb 14 2019 at 10:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">stmt</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">signature</span> <span class="n">α</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">self</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">tenv</span> <span class="n">self</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">ite</span><span class="o">:</span> <span class="n">pexp</span> <span class="n">e</span> <span class="o">(</span><span class="n">boolean</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">stmt</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">stmt</span> <span class="bp">→</span> <span class="n">stmt</span>
+<span class="bp">|</span> <span class="n">while</span><span class="o">:</span> <span class="n">pexp</span> <span class="n">e</span> <span class="o">(</span><span class="n">boolean</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">stmt</span> <span class="bp">→</span> <span class="n">stmt</span>
+<span class="bp">|</span> <span class="n">assign</span> <span class="o">{</span><span class="n">ty</span> <span class="o">:</span> <span class="n">type</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">svar</span> <span class="n">e</span> <span class="n">ty</span><span class="o">):</span>
+    <span class="n">pexp</span> <span class="n">e</span> <span class="n">ty</span> <span class="bp">→</span> <span class="n">stmt</span>
+<span class="bp">|</span> <span class="n">async</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="n">method_name</span> <span class="n">c</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">≠</span> <span class="n">constructor</span> <span class="n">c</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">o</span> <span class="o">:</span> <span class="n">rvar</span> <span class="n">e</span> <span class="o">(</span><span class="n">ref</span> <span class="n">c</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">τ</span> <span class="o">:</span> <span class="n">arglist</span> <span class="n">e</span> <span class="n">m</span><span class="o">):</span> <span class="n">stmt</span>
+<span class="bp">|</span> <span class="n">alloc</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">svar</span> <span class="n">e</span> <span class="o">(</span><span class="n">ref</span> <span class="n">c</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">τ</span> <span class="o">:</span> <span class="n">arglist</span> <span class="n">e</span> <span class="o">(</span><span class="n">constructor</span> <span class="n">c</span><span class="o">)):</span> <span class="n">stmt</span>
+</pre></div>
+
+<a name="158519599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519599">Mario Carneiro (Feb 14 2019 at 10:43)</a>:</h4>
+<p>Also this is a nested inductive, those aren't handled well</p>
+
+<a name="158519606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519606">Mario Carneiro (Feb 14 2019 at 10:43)</a>:</h4>
+<p>If you can avoid <code>list stmt</code> it will be better</p>
+
+<a name="158519610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519610">Mario Carneiro (Feb 14 2019 at 10:43)</a>:</h4>
+<p>for example adding a <code>seq</code> constructor</p>
+
+<a name="158519620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519620">Mario Carneiro (Feb 14 2019 at 10:43)</a>:</h4>
+<p>and <code>nop</code> I guess</p>
+
+<a name="158519679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519679">Hans-Dieter Hiep (Feb 14 2019 at 10:44)</a>:</h4>
+<p>Yes, that was my previous approach. However, I was trying to find out whether working with nested lists of stmt would work too.</p>
+
+<a name="158519690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519690">Mario Carneiro (Feb 14 2019 at 10:45)</a>:</h4>
+<p>Why the type 1?</p>
+
+<a name="158519720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519720">Hans-Dieter Hiep (Feb 14 2019 at 10:45)</a>:</h4>
+<p>That's because <code>ty : type \alpha</code> consists of all inhabited <code>Type</code>s with decidable equality.</p>
+
+<a name="158519818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519818">Mario Carneiro (Feb 14 2019 at 10:47)</a>:</h4>
+<p>I think this is just an issue with nested inductive compilation. It's pretty buggy, we're working on a replacement</p>
+
+<a name="158519826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519826">Mario Carneiro (Feb 14 2019 at 10:47)</a>:</h4>
+<p>You can also do the nested inductives yourself if you really want it like this</p>
+
+<a name="158519902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519902">Hans-Dieter Hiep (Feb 14 2019 at 10:48)</a>:</h4>
+<p>OK, that seems reasonable. Thanks, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> !</p>
+
+<a name="158519912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519912">Mario Carneiro (Feb 14 2019 at 10:48)</a>:</h4>
+<p>This is what it looks like as a plain inductive:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">stmt</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">signature</span> <span class="n">α</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">self</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">tenv</span> <span class="n">self</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">ite</span><span class="o">:</span> <span class="n">pexp</span> <span class="n">e</span> <span class="o">(</span><span class="n">boolean</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">stmt</span> <span class="n">tt</span> <span class="bp">→</span> <span class="n">stmt</span> <span class="n">tt</span> <span class="bp">→</span> <span class="o">(</span><span class="n">stmt</span> <span class="n">ff</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">while</span><span class="o">:</span> <span class="n">pexp</span> <span class="n">e</span> <span class="o">(</span><span class="n">boolean</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">stmt</span> <span class="n">tt</span> <span class="bp">→</span> <span class="o">(</span><span class="n">stmt</span> <span class="n">ff</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">assign</span> <span class="o">{</span><span class="n">ty</span> <span class="o">:</span> <span class="n">type</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">svar</span> <span class="n">e</span> <span class="n">ty</span><span class="o">):</span>
+    <span class="n">pexp</span> <span class="n">e</span> <span class="n">ty</span> <span class="bp">→</span> <span class="o">(</span><span class="n">stmt</span> <span class="n">ff</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">async</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="n">method_name</span> <span class="n">c</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">≠</span> <span class="n">constructor</span> <span class="n">c</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">o</span> <span class="o">:</span> <span class="n">rvar</span> <span class="n">e</span> <span class="o">(</span><span class="n">ref</span> <span class="n">c</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">τ</span> <span class="o">:</span> <span class="n">arglist</span> <span class="n">e</span> <span class="n">m</span><span class="o">):</span> <span class="o">(</span><span class="n">stmt</span> <span class="n">ff</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">alloc</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">class_name</span> <span class="n">α</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">svar</span> <span class="n">e</span> <span class="o">(</span><span class="n">ref</span> <span class="n">c</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">τ</span> <span class="o">:</span> <span class="n">arglist</span> <span class="n">e</span> <span class="o">(</span><span class="n">constructor</span> <span class="n">c</span><span class="o">)):</span> <span class="o">(</span><span class="n">stmt</span> <span class="n">ff</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">stmt</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">stmt</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">stmt</span> <span class="n">tt</span> <span class="bp">→</span> <span class="n">stmt</span> <span class="n">tt</span>
+</pre></div>
+
+<a name="158519986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158519986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158519986">Mario Carneiro (Feb 14 2019 at 10:49)</a>:</h4>
+<p>the actual <code>stmt</code> is <code>stmt ff</code> here, and <code>stmt tt</code> is isomorphic to <code>list (stmt ff)</code></p>
+
+<a name="158520169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20data%20types/near/158520169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88499nesteddatatypes.html#158520169">Hans-Dieter Hiep (Feb 14 2019 at 10:52)</a>:</h4>
+<p>Wow, that seems to be what I was looking for! So, if I understand correctly, the bool argument determines what constructors are applicable.</p>
+
+
+{% endraw %}

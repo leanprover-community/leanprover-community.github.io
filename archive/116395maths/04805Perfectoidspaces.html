@@ -12539,5 +12539,182 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158515074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158515074">Johan Commelin (Feb 14 2019 at 09:26)</a>:</h4>
 <p><code>refine trans _ _,</code> does work... I wish <code>transitivity</code> would work in a similar way.</p>
 
+<a name="158517637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158517637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158517637">Johan Commelin (Feb 14 2019 at 10:13)</a>:</h4>
+<p>Voila: Wedhorn 1.27 (i) =&gt; (iii)</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- why is this not in the library???</span>
+<span class="c1">-- there are other theorems about strict monos!!!</span>
+<span class="kn">lemma</span> <span class="n">monotone_of_strict_mono</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">monotone</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">le_iff_le_of_strict_mono</span> <span class="bp">_</span> <span class="n">H</span>
+
+<span class="kn">lemma</span> <span class="n">of_map_of_strict_mono</span> <span class="o">{</span><span class="err">Γ₁</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ₁</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="err">Γ</span> <span class="bp">→</span> <span class="err">Γ₁</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+<span class="c1">-- for some reason there is no definition of strict monos. But there are theorems about them.</span>
+<span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_equiv</span> <span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">monotone_of_strict_mono</span> <span class="n">H</span><span class="o">))</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">swap</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map_monotone</span> <span class="o">(</span><span class="n">monotone_of_strict_mono</span> <span class="n">H</span><span class="o">)</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="bp">_</span> <span class="bp">→</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="o">(</span><span class="n">le_iff_le_of_strict_mono</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map_strict_mono</span> <span class="n">H</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158517744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158517744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158517744">Johan Commelin (Feb 14 2019 at 10:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- Wedhorn 1.27 (i) =&gt; (iii)</span>
+<span class="kn">lemma</span> <span class="n">of_inj_value_group</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_value_group</span><span class="bp">.</span><span class="err">Γ</span> <span class="bp">→</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">minimal_value_group</span><span class="bp">.</span><span class="err">Γ</span><span class="o">)</span>
+<span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span>
+<span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">minimal_valuation</span> <span class="bp">=</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_valuation</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">monotone_of_strict_mono</span> <span class="n">H</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₂</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">v₂</span><span class="bp">.</span><span class="n">minimal_valuation_is_equiv</span><span class="o">),</span>
+  <span class="n">refine</span> <span class="n">trans</span> <span class="o">(</span><span class="n">v₁</span><span class="bp">.</span><span class="n">minimal_valuation_is_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">of_map_of_strict_mono</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158519828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519828">Kevin Buzzard (Feb 14 2019 at 10:47)</a>:</h4>
+<p>Hello, sorry, I was on a number theory thing</p>
+
+<a name="158519910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519910">Kevin Buzzard (Feb 14 2019 at 10:48)</a>:</h4>
+<p>Did you find a workaround for your question?</p>
+
+<a name="158519955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519955">Kevin Buzzard (Feb 14 2019 at 10:49)</a>:</h4>
+<p>Oh this is great!</p>
+
+<a name="158519956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519956">Johan Commelin (Feb 14 2019 at 10:49)</a>:</h4>
+<p>A workaround yes. But I think <code>transitivity</code> is "broken". I think it can be more general.</p>
+
+<a name="158519966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519966">Johan Commelin (Feb 14 2019 at 10:49)</a>:</h4>
+<p>Of course we don't need those tactics, but they are cute.</p>
+
+<a name="158519970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519970">Kevin Buzzard (Feb 14 2019 at 10:49)</a>:</h4>
+<p>Do we now have all of 1.27?</p>
+
+<a name="158519985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158519985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158519985">Johan Commelin (Feb 14 2019 at 10:49)</a>:</h4>
+<p>Nope, not yet.</p>
+
+<a name="158520030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520030">Kevin Buzzard (Feb 14 2019 at 10:50)</a>:</h4>
+<p>What's still missing?</p>
+
+<a name="158520051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520051">Kevin Buzzard (Feb 14 2019 at 10:50)</a>:</h4>
+<p>I did the easy bit of (iii) -&gt; (ii)</p>
+
+<a name="158520057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520057">Johan Commelin (Feb 14 2019 at 10:50)</a>:</h4>
+<p>We have (i) =&gt; (iii) and (iii) =&gt; (ii).a</p>
+
+<a name="158520058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520058">Johan Commelin (Feb 14 2019 at 10:50)</a>:</h4>
+<p>Right.</p>
+
+<a name="158520067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520067">Kevin Buzzard (Feb 14 2019 at 10:50)</a>:</h4>
+<p>but we now know how to do (iii) -&gt; (ii)</p>
+
+<a name="158520069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520069">Johan Commelin (Feb 14 2019 at 10:50)</a>:</h4>
+<p>And I proved that (ii).a =&gt; K(v1) = K(v2)</p>
+
+<a name="158520077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520077">Kevin Buzzard (Feb 14 2019 at 10:51)</a>:</h4>
+<p>that's a key step :-)</p>
+
+<a name="158520081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520081">Johan Commelin (Feb 14 2019 at 10:51)</a>:</h4>
+<p>So now we need to show (ii).b</p>
+
+<a name="158520085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520085">Kevin Buzzard (Feb 14 2019 at 10:51)</a>:</h4>
+<p>because it now means we can <em>state</em> (ii).b :-)</p>
+
+<a name="158520088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520088">Johan Commelin (Feb 14 2019 at 10:51)</a>:</h4>
+<p>Yep, it's an <code>equiv</code> that is also a <code>field_hom</code>.</p>
+
+<a name="158520103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520103">Johan Commelin (Feb 14 2019 at 10:51)</a>:</h4>
+<p>Yes, but it's not so clean. You want to restrict an <code>equiv</code> to subtypes...</p>
+
+<a name="158520104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520104">Kevin Buzzard (Feb 14 2019 at 10:51)</a>:</h4>
+<p>Aah, I was wondering what you meant by <code>K(v1)=K(v2)</code></p>
+
+<a name="158520136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520136">Kevin Buzzard (Feb 14 2019 at 10:52)</a>:</h4>
+<p>You mean "mathematician's ="</p>
+
+<a name="158520157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520157">Johan Commelin (Feb 14 2019 at 10:52)</a>:</h4>
+<p>Are there theorems about that? (Right, and that restriction should be a <code>ring_hom</code>)</p>
+
+<a name="158520177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520177">Johan Commelin (Feb 14 2019 at 10:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What is the best way to prove that a certain <code>equiv</code> preserves two given subtypes?</p>
+
+<a name="158520189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520189">Kevin Buzzard (Feb 14 2019 at 10:53)</a>:</h4>
+<p>We have two fields which are "mathematician-equal", i.e. an equiv, and we want to prove that two subrings are also equiv</p>
+
+<a name="158520195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520195">Johan Commelin (Feb 14 2019 at 10:53)</a>:</h4>
+<p>I guess we first need to prove <code>x \in S1 \iff e.to_fun x \in S2</code>?</p>
+
+<a name="158520205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520205">Kevin Buzzard (Feb 14 2019 at 10:53)</a>:</h4>
+<p>That's the guts of (iii) -&gt; (ii).b</p>
+
+<a name="158520251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520251">Mario Carneiro (Feb 14 2019 at 10:54)</a>:</h4>
+<p>something like <code>subtype_equiv_of_subtype</code>?</p>
+
+<a name="158520270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520270">Mario Carneiro (Feb 14 2019 at 10:54)</a>:</h4>
+<p>you might want another version of that where both subtypes are variable...</p>
+
+<a name="158520272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520272">Johan Commelin (Feb 14 2019 at 10:54)</a>:</h4>
+<p>No, that takes only 1 Prop.</p>
+
+<a name="158520359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520359">Mario Carneiro (Feb 14 2019 at 10:56)</a>:</h4>
+<p>like this</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">subtype_equiv_of_subtype&#39;</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">p</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">q</span> <span class="o">(</span><span class="n">e</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">a</span><span class="o">}</span> <span class="err">≃</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">//</span> <span class="n">q</span> <span class="n">b</span><span class="o">}</span>
+</pre></div>
+
+<a name="158520400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520400">Johan Commelin (Feb 14 2019 at 10:57)</a>:</h4>
+<p>If you have two subtypes of <code>X</code>, given by props <code>P</code> and <code>Q</code>, and you know <code>P \iff Q</code>, does that give an equality of the subtypes, or an equiv?</p>
+
+<a name="158520408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520408">Johan Commelin (Feb 14 2019 at 10:57)</a>:</h4>
+<p>I guess the equality is again evil, right?</p>
+
+<a name="158520410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520410">Johan Commelin (Feb 14 2019 at 10:57)</a>:</h4>
+<p>But is that equiv in mathlib?</p>
+
+<a name="158520456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158520456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158520456">Johan Commelin (Feb 14 2019 at 10:58)</a>:</h4>
+<p>If so, we could chain it to <code>subtype_equiv_of_subtype</code></p>
+
 
 {% endraw %}
