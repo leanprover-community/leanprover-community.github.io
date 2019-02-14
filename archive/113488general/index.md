@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unification hints](21856unificationhints.html) (1 message, latest: Feb 14 2019 at 08:36)
+
 * [Lean 3.4.2](37206Lean342.html) (123 messages, latest: Feb 14 2019 at 07:53)
 
 * [solve_by_elim](75082solvebyelim.html) (93 messages, latest: Feb 14 2019 at 05:55)
