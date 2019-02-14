@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/79952havingexistentialstatements.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html">having existential statements</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158570616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158570616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158570616">Scott Morrison (Feb 14 2019 at 22:21)</a>:</h4>
+<p>My student <span class="user-mention" data-user-id="137449">@Aditya Agarwal</span>  has some code that has many instances of the following pattern:</p>
+<div class="codehilite"><pre><span></span>have h2_irred : ∃(c&#39; : α) (d&#39; : polynomial α), (primitive d&#39;) ∧ ((C c&#39;) * d&#39; = d) := has_primitive_factorisation d,
+apply exists.elim h2_irred,
+intros c&#39; hc&#39;,
+apply exists.elim hc&#39;,
+intros d&#39; hd&#39;,
+</pre></div>
+
+
+<p>Is there a more efficient means to achieve this <code>have/apply exists.elim/intros</code> effect?</p>
+
+<a name="158570847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158570847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158570847">Mario Carneiro (Feb 14 2019 at 22:24)</a>:</h4>
+<p>what is the goal?</p>
+
+<a name="158571153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571153">Rob Lewis (Feb 14 2019 at 22:28)</a>:</h4>
+<p><code>rcases has_primitive_factorization_d with &lt;c', d', hc', hd'&gt;</code>?</p>
+
+<a name="158571157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571157">Mario Carneiro (Feb 14 2019 at 22:28)</a>:</h4>
+<p>I think the <code>apply exists.intro</code>/<code>intros</code> can be combined into <code>cases</code> or <code>rcases</code>. Thus:</p>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="n">has_primitive_factorisation</span> <span class="n">d</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">c&#39;</span><span class="o">,</span> <span class="n">d&#39;</span><span class="o">,</span> <span class="n">primd</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+</pre></div>
+
+<a name="158571190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571190">Patrick Massot (Feb 14 2019 at 22:29)</a>:</h4>
+<p>Mario is really getting old</p>
+
+<a name="158571215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571215">Rob Lewis (Feb 14 2019 at 22:29)</a>:</h4>
+<p>He took the time to type it with the proper angle brackets.</p>
+
+<a name="158571219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571219">Mario Carneiro (Feb 14 2019 at 22:29)</a>:</h4>
+<p>I went for coffee :)</p>
+
+<a name="158571351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571351">Patrick Massot (Feb 14 2019 at 22:31)</a>:</h4>
+<p>Those <code>rintro</code> and <code>rcases</code> really give me trouble with my students. I wanted to use a minimal set of tactics, at least in the beginning. So I didn't introduce those. But it's too painful...</p>
+
+<a name="158571764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571764">Mario Carneiro (Feb 14 2019 at 22:37)</a>:</h4>
+<p>I think it's better to learn <code>rcases</code> style than <code>cases</code>. You can start by saying it's the same as <code>cases</code> but with funny brackets, and then work it up to bigger tuples later</p>
+
+<a name="158571852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/having%20existential%20statements/near/158571852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79952havingexistentialstatements.html#158571852">Mario Carneiro (Feb 14 2019 at 22:38)</a>:</h4>
+<p>I think it's pretty intuitive if you haven't seen <code>cases</code> yet</p>
+
+
+{% endraw %}

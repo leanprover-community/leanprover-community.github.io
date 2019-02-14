@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [having existential statements](79952havingexistentialstatements.html) (10 messages, latest: Feb 14 2019 at 22:38)
+
 * [eq.rec_on](20347eqrecon.html) (29 messages, latest: Feb 14 2019 at 19:03)
 
 * [unification hints](21856unificationhints.html) (3 messages, latest: Feb 14 2019 at 17:51)
