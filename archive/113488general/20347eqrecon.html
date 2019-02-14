@@ -1,0 +1,152 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/20347eqrecon.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html">eq.rec_on</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158550456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158550456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158550456">Johan Commelin (Feb 14 2019 at 18:09)</a>:</h4>
+<p>Ok, so apparently <code>eq.rec_on</code> is evil. I'm not sure that I really understand when it is ok to use it, and when not. Can someone explain this to me in more detail?<br>
+I still find it somewhat hard to stomach that if I have two ideals in a ring, and they are provably equal, that I have to do so much work to get a ring isomorphism between the quotients. This is not <em>transport of structure</em> along some "canonical" isomorphism. This is equality. I had really hoped that proof irrelevance would help here.</p>
+
+<a name="158550579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158550579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158550579">Kevin Buzzard (Feb 14 2019 at 18:11)</a>:</h4>
+<p>Shouldn't this all be in Lean already? If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>⊆</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I\subseteq J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">⊆</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> then there should be a surjection <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>I</mi><mo>→</mo><mi>R</mi><mi mathvariant="normal">/</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">R/I\to R/J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span>.</p>
+
+<a name="158550603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158550603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158550603">Kevin Buzzard (Feb 14 2019 at 18:11)</a>:</h4>
+<p>At the very least there will be a surjection of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-modules.</p>
+
+<a name="158550679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158550679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158550679">Kevin Buzzard (Feb 14 2019 at 18:12)</a>:</h4>
+<p>But you're supposed to use <code>quotient.lift</code> not <code>eq.rec</code></p>
+
+<a name="158550701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158550701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158550701">Kevin Buzzard (Feb 14 2019 at 18:12)</a>:</h4>
+<p>because this preserves computability mumble mumble don't know what I'm talking about</p>
+
+<a name="158551833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158551833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158551833">Johan Commelin (Feb 14 2019 at 18:26)</a>:</h4>
+<p>That still doesn't explain why <code>eq.rec</code> is evil, and why it exists, and why it is sometimes useful. Also, I know that workarounds exist. But really we are now writing &gt;500 lines of code just to show that if two valuations are equivalent, then so are their valuation rings. And after 10 lines we know that if two valuations are equivalent, then they define two ideals that are <strong>equal</strong>. After that, it should be a no-brainer. But it's not.</p>
+
+<a name="158552162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552162">Kenny Lau (Feb 14 2019 at 18:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">I</span> <span class="n">J</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">=</span> <span class="n">J</span><span class="o">)</span> <span class="o">:</span> <span class="n">I</span><span class="bp">.</span><span class="n">quotient</span> <span class="err">≃</span><span class="n">r</span> <span class="n">J</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">subst</span> <span class="n">h</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="158552487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552487">Johan Commelin (Feb 14 2019 at 18:34)</a>:</h4>
+<p>But that requires your bundled ring maps (-;<br>
+I don't have those yet.</p>
+
+<a name="158552499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552499">Chris Hughes (Feb 14 2019 at 18:34)</a>:</h4>
+<p>They're in mathlib</p>
+
+<a name="158552543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552543">Johan Commelin (Feb 14 2019 at 18:35)</a>:</h4>
+<p>When did that happen?</p>
+
+<a name="158552547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552547">Johan Commelin (Feb 14 2019 at 18:35)</a>:</h4>
+<p>How did I miss that?</p>
+
+<a name="158552554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552554">Kenny Lau (Feb 14 2019 at 18:35)</a>:</h4>
+<p>no that's a ring equiv, not a bundled ring hom</p>
+
+<a name="158552555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552555">Chris Hughes (Feb 14 2019 at 18:35)</a>:</h4>
+<p>Don't you want a particular isomorphism though? This is the right one, but it's hard to prove.</p>
+
+<a name="158552560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552560">Kenny Lau (Feb 14 2019 at 18:35)</a>:</h4>
+<p>what do you mean by hard to prove?</p>
+
+<a name="158552621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552621">Kenny Lau (Feb 14 2019 at 18:36)</a>:</h4>
+<p>aha so "ring equiv" is like a cheating version of ring hom</p>
+
+<a name="158552626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552626">Kenny Lau (Feb 14 2019 at 18:36)</a>:</h4>
+<p>and that turns out to work</p>
+
+<a name="158552633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552633">Kenny Lau (Feb 14 2019 at 18:36)</a>:</h4>
+<p>so again, bundled maps for the win</p>
+
+<a name="158552643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552643">Johan Commelin (Feb 14 2019 at 18:36)</a>:</h4>
+<p>No, I think <code>ring_equiv</code> is fine for my purposes.</p>
+
+<a name="158552646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552646">Chris Hughes (Feb 14 2019 at 18:36)</a>:</h4>
+<p>prove that (<a href="http://quotient.mk" target="_blank" title="http://quotient.mk">quotient.mk</a> \circ example) = <a href="http://quotient.mk" target="_blank" title="http://quotient.mk">quotient.mk</a></p>
+
+<a name="158552685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552685">Chris Hughes (Feb 14 2019 at 18:37)</a>:</h4>
+<p>Maybe that's easy actually</p>
+
+<a name="158552796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552796">Kenny Lau (Feb 14 2019 at 18:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">I</span> <span class="n">J</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">=</span> <span class="n">J</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">h</span>
+
+<span class="n">def</span> <span class="n">what</span> <span class="o">:</span> <span class="n">I</span><span class="bp">.</span><span class="n">quotient</span> <span class="err">≃</span><span class="n">r</span> <span class="n">J</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="err">$</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">what</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">I</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">J</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">subst</span> <span class="n">h</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
+
+<a name="158552859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158552859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158552859">Johan Commelin (Feb 14 2019 at 18:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What's going on here?</p>
+
+<a name="158553013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158553013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158553013">Chris Hughes (Feb 14 2019 at 18:41)</a>:</h4>
+<p>But that last one would be <code>rfl</code> if you used <code>lift</code></p>
+
+<a name="158553464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158553464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158553464">Johan Commelin (Feb 14 2019 at 18:47)</a>:</h4>
+<p>Sure, but Kenny's definition of <code>what</code> is way shorter.</p>
+
+<a name="158554271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158554271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158554271">Kenny Lau (Feb 14 2019 at 18:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">I</span> <span class="n">J</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">=</span> <span class="n">J</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">h</span>
+
+<span class="n">def</span> <span class="n">what</span> <span class="o">:</span> <span class="n">I</span><span class="bp">.</span><span class="n">quotient</span> <span class="err">≃</span><span class="n">r</span> <span class="n">J</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">J</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span> <span class="n">hr</span><span class="o">,</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">eq_zero_iff_mem</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hr</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">I</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span> <span class="n">hr</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">eq_zero_iff_mem</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hr</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on&#39;</span> <span class="n">x</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on&#39;</span> <span class="n">x</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">hom</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">what</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">I</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">J</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="158554400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158554400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158554400">Reid Barton (Feb 14 2019 at 18:58)</a>:</h4>
+<p>You're never actually stuck when you have <code>eq.rec_on</code> in terms, it's just that you need to do this generalize/cases/refl dance any time you want to manipulate them. It's awkward to do this in the middle of a proof, so effectively you have to prove a lemma (like Kenny's <code>example</code>).</p>
+
+<a name="158554429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eq.rec_on/near/158554429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20347eqrecon.html#158554429">Reid Barton (Feb 14 2019 at 18:58)</a>:</h4>
+<p>It's conceivable one could automate this with a tactic</p>
+
+
+{% endraw %}
