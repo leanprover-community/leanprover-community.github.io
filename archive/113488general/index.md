@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [solve_by_elim](75082solvebyelim.html) (92 messages, latest: Feb 14 2019 at 00:38)
+
 * [Lean 3.4.2](37206Lean342.html) (121 messages, latest: Feb 13 2019 at 23:59)
 
 * [3.4.1 branch](74787341branch.html) (5 messages, latest: Feb 13 2019 at 22:56)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (15 messages, latest: Feb 13 2019 at 17:26)
 
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
-
-* [solve_by_elim](75082solvebyelim.html) (90 messages, latest: Feb 13 2019 at 14:38)
 
 * [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
 

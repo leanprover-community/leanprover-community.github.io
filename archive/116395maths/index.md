@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [free module](95273freemodule.html) (19 messages, latest: Feb 13 2019 at 23:53)
+* [free module](95273freemodule.html) (22 messages, latest: Feb 14 2019 at 00:03)
 
 * [finitely generated (sub)module](01813finitelygeneratedsubmodule.html) (1 message, latest: Feb 13 2019 at 23:45)
 
