@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [3.4.1 branch](74787341branch.html) (7 messages, latest: Feb 14 2019 at 16:49)
+* [unification hints](21856unificationhints.html) (3 messages, latest: Feb 14 2019 at 17:51)
+
+* [3.4.1 branch](74787341branch.html) (9 messages, latest: Feb 14 2019 at 17:43)
 
 * [context within match expression](90550contextwithinmatchexpression.html) (5 messages, latest: Feb 14 2019 at 15:16)
 
 * [nested data types](88499nesteddatatypes.html) (25 messages, latest: Feb 14 2019 at 11:12)
-
-* [unification hints](21856unificationhints.html) (1 message, latest: Feb 14 2019 at 08:36)
 
 * [Lean 3.4.2](37206Lean342.html) (123 messages, latest: Feb 14 2019 at 07:53)
 
