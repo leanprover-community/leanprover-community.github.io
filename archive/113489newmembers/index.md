@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (154 messages, latest: Feb 15 2019 at 02:15)
+
 * [Cryptic errors](09628Crypticerrors.html) (23 messages, latest: Feb 13 2019 at 01:08)
 
 * [Variable locality](27048Variablelocality.html) (5 messages, latest: Feb 11 2019 at 19:10)
@@ -315,8 +317,6 @@ permalink: archive/113489newmembers/index.html
 * [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html) (2 messages, latest: Oct 17 2018 at 18:35)
 
 * [Writing rationals](89394Writingrationals.html) (9 messages, latest: Oct 17 2018 at 17:03)
-
-* [(no topic)](79918notopic.html) (149 messages, latest: Oct 16 2018 at 23:47)
 
 * [Define a finite set](88248Defineafiniteset.html) (168 messages, latest: Oct 16 2018 at 22:12)
 

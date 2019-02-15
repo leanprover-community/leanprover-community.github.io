@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#717 field_hom](70410717fieldhom.html) (4 messages, latest: Feb 14 2019 at 21:40)
+* [#726 operator norm [wip]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
 
-* [#726 operator norm [wip]](01971726operatornormwip.html) (8 messages, latest: Feb 14 2019 at 21:29)
+* [#717 field_hom](70410717fieldhom.html) (4 messages, latest: Feb 14 2019 at 21:40)
 
 * [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (46 messages, latest: Feb 12 2019 at 14:51)
 

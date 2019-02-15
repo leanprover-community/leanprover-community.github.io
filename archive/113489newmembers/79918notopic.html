@@ -784,5 +784,93 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/135938425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#135938425">Kenny Lau (Oct 16 2018 at 23:47)</a>:</h4>
 <p><code>import algebra.group_power</code></p>
 
+<a name="158582769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158582769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158582769">Paula Neeley (Feb 15 2019 at 02:00)</a>:</h4>
+<p>Hey guys,<br>
+First timer, so please be nice :)<br>
+I'm aiming to prove the example at the bottom of the long code snippet. I made the lemmas "foo" and "bar" to help. My theorem "bar" worked to prove the inductive step, but I don't understand the output that Lean gives me when I try to prove this lemma "bar" itself. The base case gives me the output:</p>
+<div class="codehilite"><pre><span></span>2 goals
+case list.nil
+α : Type u_1,
+s : list α,
+a : α
+⊢ length (s ++ [a]) = length (s ++ nil) + 1
+</pre></div>
+
+
+<p>Specifically, I am unsure what the [a] here means and how to work with it. Any insights would be appreciated.</p>
+<div class="codehilite"><pre><span></span>section
+open list
+
+variable {α : Type*}
+variables s t : list α
+variable a : α
+
+theorem length_nil : length (@nil α) = 0 := rfl
+
+theorem foo (t : list α) : t ++ nil = t :=
+begin
+induction t with a t ih,
+{refl},
+rw [cons_append, ih],
+end
+
+theorem bar : length (s ++ a :: t) = length (s ++ t) + 1 :=
+begin
+induction t with a t ih,
+sorry
+end
+
+#check foo
+#check nil_append
+#check cons_append
+#check length_cons
+#check length_nil
+
+#eval [1, 2, 3] ++ [4, 5]
+#eval length [1, 2, 3, 4, 5]
+
+end
+
+/-
+Prove the following.
+-/
+
+section
+open list
+
+variable {α : Type*}
+variables s t : list α
+variable a : α
+
+example : length (s ++ t) = length s + length t :=
+begin
+induction t with a t ih,
+{rw [length_nil, foo], refl},
+rw [length_cons, bar, ih], refl,
+end
+
+end
+</pre></div>
+
+<a name="158583275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158583275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158583275">Simon Hudon (Feb 15 2019 at 02:12)</a>:</h4>
+<p><code>[a]</code> is the same as <code>a :: nil</code> (it's a special notation)</p>
+
+<a name="158583362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158583362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158583362">Simon Hudon (Feb 15 2019 at 02:14)</a>:</h4>
+<p>You should consider doing your induction on <code>s</code> instead of <code>t</code>. The reason is that <code>++</code> is defined by recursion on <code>s</code> : <code>x :: xs ++ ys = x :: (xs ++ ys)</code></p>
+
+<a name="158583389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158583389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158583389">Simon Hudon (Feb 15 2019 at 02:15)</a>:</h4>
+<p>Also: welcome to Zulip Paula!</p>
+
+<a name="158583402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158583402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158583402">Paula Neeley (Feb 15 2019 at 02:15)</a>:</h4>
+<blockquote>
+<p>You should consider doing your induction on <code>s</code> instead of <code>t</code>. The reason is that <code>++</code> is defined by recursion on <code>s</code> : <code>x :: xs ++ ys = x :: (xs ++ ys)</code></p>
+</blockquote>
+<p>Oh ok, I will try that! Thank you for your help!</p>
+
 
 {% endraw %}
