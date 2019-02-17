@@ -171,5 +171,70 @@ permalink: archive/113488general/48906whyisquotanaxiom.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/152463123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#152463123">Mario Carneiro (Dec 24 2018 at 09:54)</a>:</h4>
 <p>if you want to convince yourself, make a copy of <code>set.ext</code> as an actual axiom, and then derive all that and check that you didn't use propext or quot.sound in <code>#print axioms</code></p>
 
+<a name="158661072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661072">Kevin Buzzard (Feb 15 2019 at 23:58)</a>:</h4>
+<p>I now understand this quotient stuff better. I always understand stuff better with an example, and whilst equivalence classes of continuous non-archimedean valuations on a topological ring might not be the example best suited to everyone, working a lot on this example now I'm back on the perfectoid project has made me see the big picture much better. </p>
+<p>Here's something I don't understand going back to the conversation above though. I can see why <code>lift f _ (mk r x) = f x</code> isn't going to be proved by <code>rfl</code> in my set-up above (quotients as equivalence classes), but now I don't understand why it can be proved with <code>rfl</code> if we use Lean's inbuilt quotient. If <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients">TPIL</a> is to believed, the whole <code>quot</code> set-up in core is just made by writing down a load of axioms. How can <code>rfl</code> prove the computation law for <code>quot</code>?</p>
+
+<a name="158661224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661224">Mario Carneiro (Feb 16 2019 at 00:00)</a>:</h4>
+<p>because it's an axiom</p>
+
+<a name="158661233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661233">Mario Carneiro (Feb 16 2019 at 00:00)</a>:</h4>
+<p>it's literally baked into lean that this happens</p>
+
+<a name="158661259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661259">Kevin Buzzard (Feb 16 2019 at 00:01)</a>:</h4>
+<p>I don't see the axiom in TPIL</p>
+
+<a name="158661265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661265">Mario Carneiro (Feb 16 2019 at 00:01)</a>:</h4>
+<p>that's why <code>quot</code> has special magic powers you can't achieve even with isomorphic constructions</p>
+
+<a name="158661276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661276">Kevin Buzzard (Feb 16 2019 at 00:01)</a>:</h4>
+<p>but this gives me an idea -- why don't I make the computation law I want to be true by <code>rfl</code> an axiom?</p>
+
+<a name="158661327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661327">Kevin Buzzard (Feb 16 2019 at 00:02)</a>:</h4>
+<p>I can prove it after all, so it's true, so it's safe to make it an axiom, and then I can prove it with <code>rfl</code>?</p>
+
+<a name="158661337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661337">Mario Carneiro (Feb 16 2019 at 00:02)</a>:</h4>
+<p>not necessarily</p>
+
+<a name="158661349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661349">Mario Carneiro (Feb 16 2019 at 00:02)</a>:</h4>
+<p>just because it's true doesn't mean it's a good reduction rule - you've seen that with <code>simp</code></p>
+
+<a name="158661391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661391">Mario Carneiro (Feb 16 2019 at 00:03)</a>:</h4>
+<p>and I mean axiom in the conventional sense of "a thing that lets you prove things you couldn't before", not the lean sense of "a constant with no computation rules that is called <code>axiom</code> or <code>constant</code>"</p>
+
+<a name="158661405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661405">Kevin Buzzard (Feb 16 2019 at 00:03)</a>:</h4>
+<p>Oh. You mean "it's in the C++ code"?</p>
+
+<a name="158661412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661412">Mario Carneiro (Feb 16 2019 at 00:03)</a>:</h4>
+<p>basically</p>
+
+<a name="158661529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158661529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158661529">Mario Carneiro (Feb 16 2019 at 00:05)</a>:</h4>
+<p>one of the things I want to experiment with in the fork is user computation rules, which would allow you to install your own computation rules just like you can add your own axioms</p>
+
+<a name="158677391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158677391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158677391">Johan Commelin (Feb 16 2019 at 05:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> But in our case of a "fake" quotient, I guess it would be a <em>good reduction rule</em>. Is that true?</p>
+
+<a name="158682659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158682659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158682659">Mario Carneiro (Feb 16 2019 at 07:26)</a>:</h4>
+<p>It's hard to say. Part of the problem with having computation rules on a type that's not a constant (like <code>quot</code>) is that there are <em>already</em> computation rules, if not very useful ones, and adding a reduction rule on top of that can cause failure of confluence</p>
+
+<a name="158682669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20quot%20an%20axiom%3F/near/158682669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48906whyisquotanaxiom.html#158682669">Mario Carneiro (Feb 16 2019 at 07:27)</a>:</h4>
+<p>For a structure, that will be things like a projection on a structure instance computing to the value</p>
+
 
 {% endraw %}

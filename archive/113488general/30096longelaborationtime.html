@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/30096longelaborationtime.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/30096longelaborationtime.html">long elaboration time</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158715673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20elaboration%20time/near/158715673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30096longelaborationtime.html#158715673">Kenny Lau (Feb 16 2019 at 22:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">free_abelian_group</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">free_ring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">free_abelian_group</span> <span class="err">$</span> <span class="n">list</span> <span class="n">α</span>
+
+<span class="kn">namespace</span> <span class="n">free_ring</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">free_ring</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="bp">..</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">add_comm_group</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">ring</span> <span class="o">(</span><span class="n">free_ring</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L2</span><span class="o">,</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L1</span><span class="o">,</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">of</span> <span class="err">$</span> <span class="n">L1</span> <span class="bp">++</span> <span class="n">L2</span><span class="o">)</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">of</span> <span class="o">[],</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">z</span> <span class="n">rfl</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">L3</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">of</span><span class="o">,</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">of</span><span class="o">],</span>
+      <span class="n">refine</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">L2</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">3</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">of</span> <span class="o">},</span>
+        <span class="n">refine</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">x</span> <span class="n">rfl</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+        <span class="o">{</span> <span class="n">intros</span> <span class="n">L1</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">3</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">of</span> <span class="o">},</span> <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">append_assoc</span> <span class="o">},</span>
+        <span class="o">{</span> <span class="n">intros</span> <span class="n">L1</span> <span class="n">ih</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">3</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">neg</span> <span class="o">},</span> <span class="n">rw</span> <span class="n">ih</span> <span class="o">},</span>
+        <span class="o">{</span> <span class="n">intros</span> <span class="n">x1</span> <span class="n">x2</span> <span class="n">ih1</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">3</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">add</span> <span class="o">},</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ih1</span><span class="o">,</span> <span class="n">ih2</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">L2</span> <span class="n">ih</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">4</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">neg</span> <span class="o">},</span> <span class="n">rw</span> <span class="n">ih</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">y1</span> <span class="n">y2</span> <span class="n">ih1</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">4</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">add</span> <span class="o">},</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ih1</span><span class="o">,</span> <span class="n">ih2</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">L3</span> <span class="n">ih</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">3</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">neg</span> <span class="o">},</span> <span class="n">rw</span> <span class="n">ih</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">z1</span> <span class="n">z2</span> <span class="n">ih1</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">iterate</span> <span class="mi">2</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">add</span> <span class="o">},</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ih1</span><span class="o">,</span> <span class="n">ih2</span><span class="o">],</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lift</span><span class="bp">.</span><span class="n">add</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">free_ring</span><span class="bp">.</span><span class="n">add_comm_group</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">free_ring</span>
+</pre></div>
+
+<a name="158715682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20elaboration%20time/near/158715682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30096longelaborationtime.html#158715682">Kenny Lau (Feb 16 2019 at 22:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Could you help me debug the long elaboration time?</p>
+
+<a name="158715932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20elaboration%20time/near/158715932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30096longelaborationtime.html#158715932">Kenny Lau (Feb 16 2019 at 22:49)</a>:</h4>
+<p>Isolating a <code>semigroup</code> instance seems to speed things up</p>
+
+
+{% endraw %}

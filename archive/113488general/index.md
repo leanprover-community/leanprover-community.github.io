@@ -10,15 +10,45 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["correct" free semigroup](57076correctfreesemigroup.html) (20 messages, latest: Feb 17 2019 at 12:14)
+
+* [has_coe_to_fun instance of mv_polynomial](96781hascoetofuninstanceofmvpolynomial.html) (14 messages, latest: Feb 17 2019 at 10:15)
+
+* [bug with $ in equation compiler](46903bugwithinequationcompiler.html) (2 messages, latest: Feb 17 2019 at 10:11)
+
+* [(ultra)product](52859ultraproduct.html) (29 messages, latest: Feb 17 2019 at 09:28)
+
+* [fillter types?](77191filltertypes.html) (2 messages, latest: Feb 17 2019 at 08:33)
+
+* [long elaboration time](30096longelaborationtime.html) (3 messages, latest: Feb 16 2019 at 22:49)
+
+* [AFP](94264AFP.html) (100 messages, latest: Feb 16 2019 at 22:06)
+
+* [why is quot an axiom?](48906whyisquotanaxiom.html) (29 messages, latest: Feb 16 2019 at 07:27)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (166 messages, latest: Feb 15 2019 at 22:24)
+
+* [type class inference issues](65508typeclassinferenceissues.html) (3 messages, latest: Feb 15 2019 at 22:08)
+
+* [duplicate goals](25938duplicategoals.html) (17 messages, latest: Feb 15 2019 at 15:04)
+
+* [unification hints](21856unificationhints.html) (23 messages, latest: Feb 15 2019 at 14:48)
+
+* [ITP class](03812ITPclass.html) (2 messages, latest: Feb 15 2019 at 13:20)
+
+* [abelian failure](77173abelianfailure.html) (7 messages, latest: Feb 15 2019 at 11:51)
+
+* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (40 messages, latest: Feb 15 2019 at 11:04)
+
+* [having existential statements](79952havingexistentialstatements.html) (47 messages, latest: Feb 15 2019 at 10:37)
+
+* [feature request: conv perm](19130featurerequestconvperm.html) (22 messages, latest: Feb 15 2019 at 08:43)
+
+* [`lean --server` on a remote machine?](65584leanserveronaremotemachine.html) (4 messages, latest: Feb 15 2019 at 07:13)
+
 * [3.4.1 branch](74787341branch.html) (10 messages, latest: Feb 15 2019 at 03:50)
 
-* [`lean --server` on a remote machine?](65584leanserveronaremotemachine.html) (2 messages, latest: Feb 15 2019 at 03:49)
-
-* [having existential statements](79952havingexistentialstatements.html) (10 messages, latest: Feb 14 2019 at 22:38)
-
 * [eq.rec_on](20347eqrecon.html) (29 messages, latest: Feb 14 2019 at 19:03)
-
-* [unification hints](21856unificationhints.html) (3 messages, latest: Feb 14 2019 at 17:51)
 
 * [context within match expression](90550contextwithinmatchexpression.html) (5 messages, latest: Feb 14 2019 at 15:16)
 
@@ -28,13 +58,9 @@ permalink: archive/113488general/index.html
 
 * [solve_by_elim](75082solvebyelim.html) (93 messages, latest: Feb 14 2019 at 05:55)
 
-* [AFP](94264AFP.html) (94 messages, latest: Feb 13 2019 at 20:58)
-
 * [global have](75446globalhave.html) (23 messages, latest: Feb 13 2019 at 17:40)
 
 * [VScode extension](56578VScodeextension.html) (338 messages, latest: Feb 13 2019 at 17:33)
-
-* [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (15 messages, latest: Feb 13 2019 at 17:26)
 
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
 
@@ -61,8 +87,6 @@ permalink: archive/113488general/index.html
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
 * [Lean in the wild](43625Leaninthewild.html) (38 messages, latest: Feb 12 2019 at 13:28)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (165 messages, latest: Feb 12 2019 at 13:23)
 
 * [lt_of_le_of_ne{,'}](56278ltofleofne.html) (15 messages, latest: Feb 12 2019 at 13:16)
 
@@ -100,11 +124,9 @@ permalink: archive/113488general/index.html
 
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
 
-* [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (6 messages, latest: Feb 09 2019 at 00:09)
+* [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (20 messages, latest: Feb 09 2019 at 00:09)
 
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (17 messages, latest: Feb 08 2019 at 23:56)
-
-* [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (14 messages, latest: Feb 08 2019 at 23:54)
 
 * [programming in lean](20507programminginlean.html) (1 message, latest: Feb 08 2019 at 22:45)
 
@@ -373,8 +395,6 @@ permalink: archive/113488general/index.html
 * [olean viewer](82562oleanviewer.html) (25 messages, latest: Dec 24 2018 at 20:12)
 
 * [bug in lean imports](64324buginleanimports.html) (1 message, latest: Dec 24 2018 at 14:22)
-
-* [why is quot an axiom?](48906whyisquotanaxiom.html) (13 messages, latest: Dec 24 2018 at 09:54)
 
 * [exists data](67899existsdata.html) (4 messages, latest: Dec 24 2018 at 06:23)
 

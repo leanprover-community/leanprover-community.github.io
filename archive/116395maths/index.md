@@ -10,11 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
+
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2690 messages, latest: Feb 15 2019 at 20:35)
+
 * [free module](95273freemodule.html) (468 messages, latest: Feb 14 2019 at 17:16)
 
 * [kernels of quotient maps](93780kernelsofquotientmaps.html) (41 messages, latest: Feb 14 2019 at 14:21)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2772 messages, latest: Feb 14 2019 at 11:58)
 
 * [base change for modules](88002basechangeformodules.html) (2 messages, latest: Feb 14 2019 at 05:39)
 
@@ -24,7 +26,7 @@ permalink: archive/116395maths/index.html
 
 * [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
 
-* [bundling functions](72781bundlingfunctions.html) (3 messages, latest: Feb 12 2019 at 14:47)
+* [bundling functions](72781bundlingfunctions.html) (94 messages, latest: Feb 12 2019 at 14:47)
 
 * [ring modulo maximal](79786ringmodulomaximal.html) (1 message, latest: Feb 12 2019 at 10:00)
 
@@ -35,8 +37,6 @@ permalink: archive/116395maths/index.html
 * [duplicate is_group_hom](90791duplicateisgrouphom.html) (2 messages, latest: Feb 11 2019 at 11:50)
 
 * [quotient classes](98632quotientclasses.html) (10 messages, latest: Feb 08 2019 at 21:26)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (90 messages, latest: Feb 07 2019 at 13:59)
 
 * [floor_ring](74194floorring.html) (54 messages, latest: Feb 07 2019 at 12:06)
 

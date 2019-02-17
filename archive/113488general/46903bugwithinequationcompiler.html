@@ -1,0 +1,41 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/46903bugwithinequationcompiler.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/46903bugwithinequationcompiler.html">bug with $ in equation compiler</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158737310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20%24%20in%20equation%20compiler/near/158737310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46903bugwithinequationcompiler.html#158737310">Kenny Lau (Feb 17 2019 at 10:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">B</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="mi">0</span>
+<span class="n">def</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">A</span> <span class="err">$</span> <span class="n">B</span> <span class="mi">0</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>type mismatch at application
+  x + A
+term
+  A
+has type
+  ℕ → ℕ
+but is expected to have type
+  ℕ
+Additional information:
+c:\XXX.lean:4:17: context: switched to simple application elaboration procedure because failed to use expected type to elaborate it, error message
+  too many arguments
+</pre></div>
+
+<a name="158737390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20%24%20in%20equation%20compiler/near/158737390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46903bugwithinequationcompiler.html#158737390">Mario Carneiro (Feb 17 2019 at 10:11)</a>:</h4>
+<p>Since <code>$</code> has ridiculously low precedence, this is interpreted as <code>(x + A) (B 0)</code></p>
+
+
+{% endraw %}

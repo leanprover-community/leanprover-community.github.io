@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/45060728continuationpassingmonad.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html">#728 continuation passing monad</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158592333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592333">Simon Hudon (Feb 15 2019 at 05:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="110045">@Sean Leather</span>, any thoughts about this monad?</p>
+
+<a name="158592393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592393">Mario Carneiro (Feb 15 2019 at 05:53)</a>:</h4>
+<p>It's an interesting idea, and obviously you managed to get it to typecheck so there's that</p>
+
+<a name="158592416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592416">Mario Carneiro (Feb 15 2019 at 05:54)</a>:</h4>
+<p>Isn't there a simplified version of this when you just want a "result" monad where you can return early (like exceptions but it's the expected result)</p>
+
+<a name="158592450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592450">Mario Carneiro (Feb 15 2019 at 05:54)</a>:</h4>
+<p>Although I think the <code>option</code> monad has the wrong behavior for short circuiting escape unless you are in a lazy context</p>
+
+<a name="158592471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592471">Simon Hudon (Feb 15 2019 at 05:56)</a>:</h4>
+<p>Why is <code>option</code> wrong for that?</p>
+
+<a name="158592520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592520">Simon Hudon (Feb 15 2019 at 05:56)</a>:</h4>
+<p>By the way, continuation passing is fairly standard and can't be replaced by a sum type. It allows you to have multiple targets for gotos</p>
+
+<a name="158592533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592533">Simon Hudon (Feb 15 2019 at 05:57)</a>:</h4>
+<p>Consider this example: <a href="https://github.com/cipher1024/call-cc/blob/master/src/call_cc.lean" target="_blank" title="https://github.com/cipher1024/call-cc/blob/master/src/call_cc.lean">https://github.com/cipher1024/call-cc/blob/master/src/call_cc.lean</a>. With it, I use continuation passing to verify the correctness of Duff's device</p>
+
+<a name="158592580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592580">Mario Carneiro (Feb 15 2019 at 05:58)</a>:</h4>
+<p>For example, if you define a function <code>list A -&gt; bool</code> that checks if any element satisfies a predicate <code>P : A -&gt; bool</code>, you would like to short circuit on success but you still have to pop the call stack back to the start before you can return</p>
+
+<a name="158592593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592593">Simon Hudon (Feb 15 2019 at 05:59)</a>:</h4>
+<p>Right, you could do that with continuation passing</p>
+
+<a name="158592661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592661">Mario Carneiro (Feb 15 2019 at 06:01)</a>:</h4>
+<p>I'm a little wary of <code>call_cc</code> since this has often been pointed to as one of the more confusing features of scheme to reason about, but maybe having laws will help</p>
+
+<a name="158592706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592706">Mario Carneiro (Feb 15 2019 at 06:02)</a>:</h4>
+<p><a href="http://okmij.org/ftp/continuations/against-callcc.html" target="_blank" title="http://okmij.org/ftp/continuations/against-callcc.html">http://okmij.org/ftp/continuations/against-callcc.html</a></p>
+
+<a name="158592797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23728%20continuation%20passing%20monad/near/158592797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/45060728continuationpassingmonad.html#158592797">Simon Hudon (Feb 15 2019 at 06:05)</a>:</h4>
+<p>If you can avoid it, it's good to avoid it, just like gotos (actually, they're a bit more expressive than forward jumps). If you're going to use it, use the laws</p>
+
+
+{% endraw %}

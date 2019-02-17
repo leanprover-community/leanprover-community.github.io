@@ -136,5 +136,117 @@ permalink: archive/113488general/51350Newstructuresbreakingdefinitionalequality.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158459545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158459545">Mario Carneiro (Feb 13 2019 at 17:26)</a>:</h4>
 <p>it's actually pretty hard to get instances to work out since you almost always end up doing an unpacking and rebuilding step that would require eta for structures to undo</p>
 
+<a name="158605429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605429">Chris Hughes (Feb 15 2019 at 10:41)</a>:</h4>
+<blockquote>
+<p>I'm not sure why this is essential. Mostly we only need that projections work out to defeq, not the instances themselves</p>
+</blockquote>
+<p>This is why it's essential. There are more functions defined on a class than just it's projections</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">a&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">A</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">.</span><span class="n">a</span> <span class="n">α</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">n</span> <span class="o">:</span> <span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">@</span><span class="n">a&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">a&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">-- doesn&#39;t work</span>
+</pre></div>
+
+<a name="158605787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605787">Mario Carneiro (Feb 15 2019 at 10:49)</a>:</h4>
+<p>it does work by defeq though</p>
+
+<a name="158605794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605794">Mario Carneiro (Feb 15 2019 at 10:49)</a>:</h4>
+<p>i.e. just <code>h</code> proves this</p>
+
+<a name="158605869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605869">Chris Hughes (Feb 15 2019 at 10:51)</a>:</h4>
+<p>Yeah, but that's not always convenient.</p>
+
+<a name="158605937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605937">Mario Carneiro (Feb 15 2019 at 10:52)</a>:</h4>
+<p>I'm not sure there is any good solution unless we unpack and repack the argument in <code>B.to_A</code></p>
+
+<a name="158605966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605966">Chris Hughes (Feb 15 2019 at 10:52)</a>:</h4>
+<p>Like old structures?</p>
+
+<a name="158605972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605972">Mario Carneiro (Feb 15 2019 at 10:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">B</span><span class="bp">.</span><span class="n">to_A&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span><span class="bp">..</span><span class="n">B</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">n</span> <span class="o">:</span> <span class="n">B</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">@</span><span class="n">a&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">B</span><span class="bp">.</span><span class="n">to_A&#39;</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">a&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">C</span><span class="bp">.</span><span class="n">to_A</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">h</span>
+</pre></div>
+
+<a name="158605994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158605994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158605994">Mario Carneiro (Feb 15 2019 at 10:53)</a>:</h4>
+<p>old structures have to do this because they don't have a field for it</p>
+
+<a name="158606002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606002">Mario Carneiro (Feb 15 2019 at 10:53)</a>:</h4>
+<p>so it really is a pack/unpack</p>
+
+<a name="158606007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606007">Mario Carneiro (Feb 15 2019 at 10:53)</a>:</h4>
+<p>here it's an entirely superfluous pack/unpack</p>
+
+<a name="158606088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606088">Chris Hughes (Feb 15 2019 at 10:55)</a>:</h4>
+<p>Does this mean it is impossible to do classes that extend each other in complex ways using new structures. Something like <code>monoid</code>, <code>comm_monoid</code>, <code>group</code>, <code>comm_group</code> seems difficult to do with new structures without this issue.</p>
+
+<a name="158606194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606194">Mario Carneiro (Feb 15 2019 at 10:57)</a>:</h4>
+<p>no, it just means that functions with dependencies like this will be difficult to work with</p>
+
+<a name="158606248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606248">Chris Hughes (Feb 15 2019 at 10:58)</a>:</h4>
+<p>But that's quite a lot of functions though right?</p>
+
+<a name="158606253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606253">Mario Carneiro (Feb 15 2019 at 10:58)</a>:</h4>
+<p>I don't think so...</p>
+
+<a name="158606269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606269">Chris Hughes (Feb 15 2019 at 10:58)</a>:</h4>
+<p>Isn't it more or less any function on a monoid other than <code>mul</code></p>
+
+<a name="158606274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606274">Mario Carneiro (Feb 15 2019 at 10:59)</a>:</h4>
+<p>Functions are almost always defined in terms of projections out of the structure instance</p>
+
+<a name="158606283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606283">Mario Carneiro (Feb 15 2019 at 10:59)</a>:</h4>
+<p>including <code>a'</code> in the example</p>
+
+<a name="158606290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606290">Mario Carneiro (Feb 15 2019 at 10:59)</a>:</h4>
+<p>so the rule is that these need to be defeq</p>
+
+<a name="158606296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606296">Chris Hughes (Feb 15 2019 at 10:59)</a>:</h4>
+<p>If you want to never use <code>rw</code></p>
+
+<a name="158606347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606347">Mario Carneiro (Feb 15 2019 at 11:00)</a>:</h4>
+<p>you can have rw take a variable for this argument</p>
+
+<a name="158606366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606366">Mario Carneiro (Feb 15 2019 at 11:01)</a>:</h4>
+<p>Alternatively, structure eta</p>
+
+<a name="158606440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606440">Kevin Buzzard (Feb 15 2019 at 11:02)</a>:</h4>
+<p>I think that my model of a "generic class" is something like a perfectoid space, and Mario's might be something very different.</p>
+
+<a name="158606444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606444">Chris Hughes (Feb 15 2019 at 11:02)</a>:</h4>
+<p>Here's what I had to change to the proof that ED -&gt; PID to <code>principal := λ S, @is_principal.mk _ (id _) _</code>.</p>
+
+<a name="158606448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606448">Chris Hughes (Feb 15 2019 at 11:02)</a>:</h4>
+<p>Otherwise it uses a non defeq <code>comm_ring</code> instance</p>
+
+<a name="158606536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20structures%20breaking%20definitional%20equality/near/158606536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51350Newstructuresbreakingdefinitionalequality.html#158606536">Chris Hughes (Feb 15 2019 at 11:04)</a>:</h4>
+<p>It happens enough to be very annoying.</p>
+
 
 {% endraw %}

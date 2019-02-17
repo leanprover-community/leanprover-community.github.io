@@ -1,0 +1,141 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/25938duplicategoals.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html">duplicate goals</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158608755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158608755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158608755">Johan Commelin (Feb 15 2019 at 11:52)</a>:</h4>
+<p>Is there a tactic that merges identical subgoals?</p>
+
+<a name="158608776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158608776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158608776">Johan Commelin (Feb 15 2019 at 11:53)</a>:</h4>
+<p>I'm doing a <code>blah; blah; rw foobar; blah</code> and because the <code>rw</code> acts on multiple goals it creates a whole bunch of subgoals that are identical.</p>
+
+<a name="158609045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158609045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158609045">Mario Carneiro (Feb 15 2019 at 11:59)</a>:</h4>
+<p>no, but that sounds like a good exercise</p>
+
+<a name="158609053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158609053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158609053">Johan Commelin (Feb 15 2019 at 11:59)</a>:</h4>
+<p>For me?</p>
+
+<a name="158609238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158609238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158609238">Mario Carneiro (Feb 15 2019 at 12:03)</a>:</h4>
+<p>it's not much harder than <code>assumption</code>, you just unify all the goals together that have matching types</p>
+
+<a name="158609325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158609325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158609325">Johan Commelin (Feb 15 2019 at 12:05)</a>:</h4>
+<p>I'll see what I can do (-;</p>
+
+<a name="158617924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158617924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158617924">Johan Commelin (Feb 15 2019 at 14:33)</a>:</h4>
+<p>This is what I have so far</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">assumption</span>
+
+<span class="c1">-- Copied from all_goals_core</span>
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals_core</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>        <span class="n">ac</span> <span class="o">:=</span> <span class="n">set_goals</span> <span class="n">ac</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">g</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span> <span class="n">ac</span> <span class="o">:=</span>
+  <span class="n">mcond</span> <span class="bp">_</span> <span class="o">(</span><span class="n">merge_goals_core</span> <span class="n">gs</span> <span class="n">ac</span><span class="o">)</span> <span class="err">$</span>
+    <span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">g</span><span class="o">,</span>
+       <span class="bp">_</span>
+       <span class="n">new_gs</span> <span class="err">←</span> <span class="bp">_</span><span class="o">,</span>
+       <span class="n">all_goals_core</span> <span class="n">gs</span> <span class="o">(</span><span class="n">ac</span> <span class="bp">++</span> <span class="n">new_gs</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">merge_goals_core</span> <span class="n">gs</span> <span class="o">[]</span>
+
+<span class="kn">namespace</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">merge_goals</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="158617937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158617937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158617937">Johan Commelin (Feb 15 2019 at 14:33)</a>:</h4>
+<p>Can any of the tactic-writing experts give me a hint on how to continue?</p>
+
+<a name="158618026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618026">Johan Commelin (Feb 15 2019 at 14:34)</a>:</h4>
+<p>Aah, wait, the <code>mcond</code> is coming to early.</p>
+
+<a name="158618046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618046">Johan Commelin (Feb 15 2019 at 14:35)</a>:</h4>
+<p>I should first infer the type of <code>g</code></p>
+
+<a name="158618087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618087">Johan Commelin (Feb 15 2019 at 14:35)</a>:</h4>
+<p>And then I want to check if there is a <code>g_old ∈ gs</code> that also has type <code>t ← infer_type g</code></p>
+
+<a name="158618104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618104">Johan Commelin (Feb 15 2019 at 14:36)</a>:</h4>
+<p>If so, I want to say that a proof of <code>g_old</code> is also a proof of <code>g</code>.</p>
+
+<a name="158618149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618149">Johan Commelin (Feb 15 2019 at 14:36)</a>:</h4>
+<p>How do I do that?</p>
+
+<a name="158618325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618325">Kenny Lau (Feb 15 2019 at 14:38)</a>:</h4>
+<p>might <code>tactic.unify</code> help?</p>
+
+<a name="158618363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158618363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158618363">Johan Commelin (Feb 15 2019 at 14:39)</a>:</h4>
+<p>Ah, interesting, let me try...</p>
+
+<a name="158620321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158620321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158620321">Johan Commelin (Feb 15 2019 at 15:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">map_unify</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>        <span class="o">:=</span> <span class="n">fail</span> <span class="o">()</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="bp">::</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">unify</span> <span class="n">g</span> <span class="n">x</span> <span class="bp">&lt;|&gt;</span> <span class="n">map_unify</span> <span class="n">xs</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals_core</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>        <span class="n">ac</span> <span class="o">:=</span> <span class="n">set_goals</span> <span class="n">ac</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">g</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span> <span class="n">ac</span> <span class="o">:=</span> <span class="o">(</span><span class="n">map_unify</span> <span class="n">g</span> <span class="n">ac</span> <span class="bp">&gt;&gt;</span> <span class="n">merge_goals_core</span> <span class="n">gs</span> <span class="n">ac</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">merge_goals_core</span> <span class="n">gs</span> <span class="o">(</span><span class="n">ac</span> <span class="bp">++</span> <span class="o">[</span><span class="n">g</span><span class="o">])</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">merge_goals_core</span> <span class="n">gs</span> <span class="o">[]</span>
+
+<span class="kn">namespace</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">merge_goals</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">merge_goals</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">((</span><span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span><span class="o">))</span> <span class="bp">∧</span>
+  <span class="o">(((</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">true</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">split</span><span class="bp">;</span> <span class="n">split</span><span class="o">,</span>
+  <span class="n">merge_goals</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">trivial</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_comm</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="158620360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/duplicate%20goals/near/158620360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25938duplicategoals.html#158620360">Johan Commelin (Feb 15 2019 at 15:04)</a>:</h4>
+<p>I guess <code>map_unify</code> can be inlined. But I don't know which runes to use (-;</p>
+
+
+{% endraw %}

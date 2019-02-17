@@ -1,0 +1,76 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/31466elaboratorbug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html">elaborator bug</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="157828946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157828946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157828946">Kenny Lau (Feb 08 2019 at 01:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span> <span class="n">data</span><span class="bp">.</span><span class="n">quot</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">namespace</span> <span class="n">category_theory</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">initial_object</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">(</span><span class="n">of_carrier</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">carrier</span> <span class="err">⟶</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">eq_of_carrier</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">f</span> <span class="o">:</span> <span class="n">carrier</span> <span class="err">⟶</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">of_carrier</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">category_theory</span>
+</pre></div>
+
+<a name="157828948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157828948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157828948">Kenny Lau (Feb 08 2019 at 01:38)</a>:</h4>
+<p>error: <code>invalid reference to undefined universe level parameter 'v'</code></p>
+
+<a name="157831771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157831771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157831771">Reid Barton (Feb 08 2019 at 02:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Yeah, this is the usual known elaborator bug which means you need to instead write</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+</pre></div>
+
+<a name="157834297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834297">Scott Morrison (Feb 08 2019 at 04:05)</a>:</h4>
+<p>Is it really a bug? I thought it was an intentional decision to not make use of <code>variables</code> if doing so required fixing an otherwise unspecified universe.</p>
+
+<a name="157834355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834355">Scott Morrison (Feb 08 2019 at 04:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="202815">@Sam Jessup</span>, I've made a new "topic" for your question --- you're more likely to get useful answers if you keep different conversations separate.</p>
+
+<a name="157834358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834358">Reid Barton (Feb 08 2019 at 04:07)</a>:</h4>
+<p>If that was the issue you'd get a different error</p>
+
+<a name="157834366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834366">Scott Morrison (Feb 08 2019 at 04:07)</a>:</h4>
+<p>You should ask Kenny Lau to tell you what he's already done from Atiyah-MacDonald; there might be some significant overlap.</p>
+
+<a name="157834422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834422">Scott Morrison (Feb 08 2019 at 04:08)</a>:</h4>
+<p>I'm confused. What is the bug?</p>
+
+<a name="157834510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834510">Reid Barton (Feb 08 2019 at 04:11)</a>:</h4>
+<p>The bug is that the elaborator produces an expression referring to <code>v</code> without including <code>v</code> among the universe parameters of the declaration</p>
+
+<a name="157834563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834563">Scott Morrison (Feb 08 2019 at 04:12)</a>:</h4>
+<p>Oh! I see. I had never understood this issue properly.</p>
+
+<a name="157834578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/elaborator%20bug/near/157834578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31466elaboratorbug.html#157834578">Reid Barton (Feb 08 2019 at 04:13)</a>:</h4>
+<p>similar I think to <a href="https://github.com/leanprover/lean/issues/395" target="_blank" title="https://github.com/leanprover/lean/issues/395">https://github.com/leanprover/lean/issues/395</a>, but evidently different</p>
+
+
+{% endraw %}

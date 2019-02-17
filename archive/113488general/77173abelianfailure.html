@@ -1,0 +1,57 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/77173abelianfailure.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html">abelian failure</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158605755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158605755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158605755">Johan Commelin (Feb 15 2019 at 10:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">abel</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">b</span> <span class="n">d</span> <span class="n">a</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span> <span class="c1">-- abel failed to simplify</span>
+
+<span class="kn">lemma</span> <span class="n">bar</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">b</span> <span class="n">d</span> <span class="n">a</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span>
+  <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mul_left_comm</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158608310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608310">Johan Commelin (Feb 15 2019 at 11:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you know what I'm doing wrong here?</p>
+
+<a name="158608503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608503">Mario Carneiro (Feb 15 2019 at 11:47)</a>:</h4>
+<p>I think <code>abel</code> was never implemented on multiplicative groups</p>
+
+<a name="158608583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608583">Kenny Lau (Feb 15 2019 at 11:49)</a>:</h4>
+<p>aren't they the same as additive groups? [insert mathematician's rant]</p>
+
+<a name="158608659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608659">Johan Commelin (Feb 15 2019 at 11:50)</a>:</h4>
+<p><code>transfer to_additive; abel</code></p>
+
+<a name="158608663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608663">Mario Carneiro (Feb 15 2019 at 11:50)</a>:</h4>
+<p>I think the intent was to use <code>additive</code> to do the translation, and I never got around to it</p>
+
+<a name="158608697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abelian%20failure/near/158608697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77173abelianfailure.html#158608697">Mario Carneiro (Feb 15 2019 at 11:51)</a>:</h4>
+<p>But that better not actually be inverse in a field or I will be annoyed</p>
+
+
+{% endraw %}

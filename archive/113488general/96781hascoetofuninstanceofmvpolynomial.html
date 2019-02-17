@@ -1,0 +1,92 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/96781hascoetofuninstanceofmvpolynomial.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html">has_coe_to_fun instance of mv_polynomial</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158736260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736260">AHan (Feb 17 2019 at 09:34)</a>:</h4>
+<p>Although <code>finsupp</code> has the instance <code>has_coe_to_fun</code>, I don't understand why lean cannot infer that <code>mv_polynomial</code> also has the instance. </p>
+<p>For example, in the following code, Unlike <code>lemma three</code>, there is a type error in <code>lemma one</code>, which says that "expected a function at <code>p</code>...", and I have to write it as <code>lemma two</code> instead. </p>
+<p>How can I fix this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">multivariate_polynomial</span>
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">one</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">p</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">p</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">two</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">p</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">p</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span>
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">three</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158736266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736266">Kenny Lau (Feb 17 2019 at 09:34)</a>:</h4>
+<p>because <code>mv_polynomial</code> isn't <code>@[reducible]</code></p>
+
+<a name="158736267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736267">Kenny Lau (Feb 17 2019 at 09:35)</a>:</h4>
+<p>so the instances don't transfer</p>
+
+<a name="158736286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736286">Mario Carneiro (Feb 17 2019 at 09:35)</a>:</h4>
+<p>by which kenny means not that you should add <code>@[reducible]</code>, but you should copy the instances</p>
+
+<a name="158736428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736428">AHan (Feb 17 2019 at 09:39)</a>:</h4>
+<p>Ahh... I added <code>@[reducibility]</code> instead... <br>
+<span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Adding the attribute <code>@[reducible]</code> did work, but why should I copy the instances instead of adding the attribute?</p>
+
+<a name="158736970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158736970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158736970">Mario Carneiro (Feb 17 2019 at 09:56)</a>:</h4>
+<p>because one of the purposes of type synonyms is to isolate different kinds of typeclasses on the same type. In fact this is one such example: the <code>coe_fn</code> instance on <code>finsupp</code> makes sense as applying the finitely supported function on an argument, but the <code>coe_fn</code> instance we would expect of <code>mv_polynomial</code> is treating the polynomial as a function on the base ring, i.e. <code>eval</code>. The actual <code>coe_fn</code> instance inherited from <code>finsupp</code> is the <code>coeff</code> function</p>
+
+<a name="158737385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737385">AHan (Feb 17 2019 at 10:11)</a>:</h4>
+<p>Then if I don't add the attribute <code>@[reducible ]</code>, some lemmas like <code>finsupp.support_zero</code> won't be simplified under the type of <code>mv_polynomial</code><br>
+I have to copy the lemma and prove it again instead. How can I fix this kind of problem?</p>
+
+<a name="158737439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737439">Mario Carneiro (Feb 17 2019 at 10:12)</a>:</h4>
+<p>that's a feature not a bug</p>
+
+<a name="158737446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737446">Mario Carneiro (Feb 17 2019 at 10:13)</a>:</h4>
+<p>you don't need to reprove it, but you do need to restate it</p>
+
+<a name="158737449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737449">Mario Carneiro (Feb 17 2019 at 10:13)</a>:</h4>
+<p>and this makes you think about how your new interpretation of the type affects the meaning of the theorems</p>
+
+<a name="158737451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737451">Mario Carneiro (Feb 17 2019 at 10:13)</a>:</h4>
+<p>some of them are no longer applicable, some new theorems may appear</p>
+
+<a name="158737495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737495">AHan (Feb 17 2019 at 10:14)</a>:</h4>
+<p>Sorry, I don't mean it's a bug, I'm just thinking of if there's anyway to avoid to restate those lemmas.</p>
+
+<a name="158737509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737509">AHan (Feb 17 2019 at 10:15)</a>:</h4>
+<p>OK, I understand! Thanks a lot for explanations!</p>
+
+<a name="158737514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20instance%20of%20mv_polynomial/near/158737514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96781hascoetofuninstanceofmvpolynomial.html#158737514">Mario Carneiro (Feb 17 2019 at 10:15)</a>:</h4>
+<p>You can also try using the original theorems in the new context but YMMV</p>
+
+
+{% endraw %}

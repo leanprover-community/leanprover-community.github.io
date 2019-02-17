@@ -10,9 +10,13 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#726 operator norm [wip]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
+* [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (35 messages, latest: Feb 17 2019 at 11:58)
 
-* [#717 field_hom](70410717fieldhom.html) (4 messages, latest: Feb 14 2019 at 21:40)
+* [#717 field_hom](70410717fieldhom.html) (8 messages, latest: Feb 16 2019 at 20:51)
+
+* [#726 operator norm [wip]](01971726operatornormwip.html) (12 messages, latest: Feb 15 2019 at 09:14)
+
+* [#728 continuation passing monad](45060728continuationpassingmonad.html) (12 messages, latest: Feb 15 2019 at 06:05)
 
 * [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (46 messages, latest: Feb 12 2019 at 14:51)
 

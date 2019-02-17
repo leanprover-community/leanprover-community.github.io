@@ -12065,433 +12065,6 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158028754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158028754">Johan Commelin (Feb 11 2019 at 13:08)</a>:</h4>
 <p>Nah, it was completely frozen</p>
 
-<a name="158099293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099293">Johan Commelin (Feb 12 2019 at 07:59)</a>:</h4>
-<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> If you are interested, would you mind looking into why we can not use <code>quotient_group.map _ _ id _</code> in the following definition: <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L583" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L583">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L583</a><br>
-Currently we are using <code>quotient_group.lift</code> but this is a bit more roundabout then necessary I would say. Any attempt to use <code>quotient_group.map</code> results in deterministic timeouts or even frozen operating systems...</p>
-
-<a name="158099355"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099355">Mario Carneiro (Feb 12 2019 at 08:00)</a>:</h4>
-<p>how much of that file do I need?</p>
-
-<a name="158099483"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099483">Mario Carneiro (Feb 12 2019 at 08:02)</a>:</h4>
-<p>which <code>quotient</code> is here: <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L427" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L427">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuations.lean#L427</a></p>
-
-<a name="158099603"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099603">Johan Commelin (Feb 12 2019 at 08:04)</a>:</h4>
-<p>That's <code>quotient_group.quotient</code></p>
-
-<a name="158099672"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099672">Mario Carneiro (Feb 12 2019 at 08:06)</a>:</h4>
-<p>the first thing I would try is <code>change quotient _ -&gt; quotient _</code> before the refine</p>
-
-<a name="158099686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158099686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158099686">Johan Commelin (Feb 12 2019 at 08:06)</a>:</h4>
-<p>I think I already tried that at some point...</p>
-
-<a name="158100717"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100717">Mario Carneiro (Feb 12 2019 at 08:29)</a>:</h4>
-<p>minimized:</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">quotient_group</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
-
-<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
-
-<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
-<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">is_group_hom</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="o">(</span><span class="n">multiplicative</span> <span class="o">(</span><span class="n">R</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℤ</span><span class="o">))))</span>
-</pre></div>
-
-<a name="158100736"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100736">Mario Carneiro (Feb 12 2019 at 08:29)</a>:</h4>
-<p>short term, you can replace the proof with <code>is_group_hom.id</code></p>
-
-<a name="158100799"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100799">Mario Carneiro (Feb 12 2019 at 08:30)</a>:</h4>
-<p>i.e. <code>refine @quotient_group.map _ _ _ _ _ _ _ _ id is_group_hom.id _,</code></p>
-
-<a name="158100905"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100905">Johan Commelin (Feb 12 2019 at 08:32)</a>:</h4>
-<p>Ouch... thanks for minimizing it! I tried but got stuck (both my hardware and my brainware)...</p>
-
-<a name="158100908"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100908">Mario Carneiro (Feb 12 2019 at 08:32)</a>:</h4>
-<p>oh shit, <code>discrete_field.has_decidable_eq</code> is an instance in core</p>
-
-<a name="158100914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100914">Mario Carneiro (Feb 12 2019 at 08:33)</a>:</h4>
-<p>that's not good at all</p>
-
-<a name="158100919"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100919">Johan Commelin (Feb 12 2019 at 08:33)</a>:</h4>
-<p>Fork! Fork! Fork!</p>
-
-<a name="158100929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100929">Johan Commelin (Feb 12 2019 at 08:33)</a>:</h4>
-<p>But is that the reason for your MWE failing?</p>
-
-<a name="158100933"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100933">Mario Carneiro (Feb 12 2019 at 08:33)</a>:</h4>
-<p>it's probably not the culprit, but it's responsible for a lot of wheel-spinning</p>
-
-<a name="158100977"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100977">Johan Commelin (Feb 12 2019 at 08:34)</a>:</h4>
-<p>Because that MWE looks very innocent. It's bit of a bad omen that Lean can't find that instance.</p>
-
-<a name="158100979"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100979">Kevin Buzzard (Feb 12 2019 at 08:34)</a>:</h4>
-<p>Just make an instance of <code>has_undecidable_eq</code> with higher priority</p>
-
-<a name="158100991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100991">Mario Carneiro (Feb 12 2019 at 08:34)</a>:</h4>
-<p>especially since the instance for <code>prop_decidable</code> is at the end of the list and you use it all the time</p>
-
-<a name="158100993"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158100993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158100993">Mario Carneiro (Feb 12 2019 at 08:34)</a>:</h4>
-<p>you might want to consider dropping the <code>priority 0</code></p>
-
-<a name="158101012"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101012">Johan Commelin (Feb 12 2019 at 08:35)</a>:</h4>
-<p>I wouldn't mind a Lean feature</p>
-<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="bp">-</span><span class="kn">instance</span><span class="o">]</span> <span class="n">foobar</span> <span class="c1">-- removes an instance locally</span>
-</pre></div>
-
-<a name="158101025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101025">Johan Commelin (Feb 12 2019 at 08:35)</a>:</h4>
-<blockquote>
-<p>you might want to consider dropping the <code>priority 0</code></p>
-</blockquote>
-<p>That usually causes other breakage, doesn't it? I can try though.</p>
-
-<a name="158101031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101031">Kevin Buzzard (Feb 12 2019 at 08:35)</a>:</h4>
-<p>Can one edit the database of instances somehow?</p>
-
-<a name="158101076"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101076">Kevin Buzzard (Feb 12 2019 at 08:36)</a>:</h4>
-<p>I mean, other than by adding to it?</p>
-
-<a name="158101087"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101087">Mario Carneiro (Feb 12 2019 at 08:36)</a>:</h4>
-<p>nope, at least not global instances</p>
-
-<a name="158101095"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101095">Mario Carneiro (Feb 12 2019 at 08:36)</a>:</h4>
-<p>the worry is that it makes import order matter</p>
-
-<a name="158101101"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101101">Johan Commelin (Feb 12 2019 at 08:36)</a>:</h4>
-<p>So far, no breakage in this file, if I drop the <code>prio</code></p>
-
-<a name="158101131"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101131">Mario Carneiro (Feb 12 2019 at 08:37)</a>:</h4>
-<p>it does seem to improve the search, but it's still overflowing</p>
-
-<a name="158101180"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101180">Johan Commelin (Feb 12 2019 at 08:38)</a>:</h4>
-<p>Yeah, it doesn't solve the MWE</p>
-
-<a name="158101338"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101338">Mario Carneiro (Feb 12 2019 at 08:41)</a>:</h4>
-<p>oh, this is interesting:</p>
-<div class="codehilite"><pre><span></span>[class_instances] (1) ?x_60 : @is_group_hom (multiplicative (R →₀ ℤ)) (multiplicative (R →₀ ℤ))
-  (@multiplicative.group (R →₀ ℤ)
-     (@finsupp.add_group R ℤ (λ (a b : R), classical.prop_decidable (a = b))
-        (λ (a b : ℤ), classical.prop_decidable (a = b))
-        (@add_comm_group.to_add_group ℤ
-           (@ring.to_add_comm_group ℤ
-              (@domain.to_ring ℤ
-                 (@to_domain ℤ
-                    (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
-                       (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
-                          int.decidable_linear_ordered_comm_ring))))))))
-  (@multiplicative.group (R →₀ ℤ)
-     (@finsupp.add_group R ℤ (λ (a b : R), classical.prop_decidable (a = b))
-        (λ (a b : ℤ), classical.prop_decidable (a = b))
-        (@add_comm_group.to_add_group ℤ
-           (@ring.to_add_comm_group ℤ
-              (@domain.to_ring ℤ
-                 (@to_domain ℤ
-                    (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
-                       (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
-                          int.decidable_linear_ordered_comm_ring))))))))
-  (λ (x : multiplicative (R →₀ ℤ)), x) := @is_group_hom.id ?x_283 ?x_284
-failed is_def_eq
-</pre></div>
-
-<a name="158101386"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101386">Mario Carneiro (Feb 12 2019 at 08:42)</a>:</h4>
-<p>it found the right answer and passed it over</p>
-
-<a name="158101438"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101438">Mario Carneiro (Feb 12 2019 at 08:43)</a>:</h4>
-<p>I think it's because <code>id</code> has been unfolded at this point, but it's not reducible</p>
-
-<a name="158101439"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101439">Johan Commelin (Feb 12 2019 at 08:43)</a>:</h4>
-<p>Your use of "interesting" is… interesting…</p>
-
-<a name="158101517"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101517">Mario Carneiro (Feb 12 2019 at 08:45)</a>:</h4>
-<p>looks like <code>is_group_hom.comp</code> is the culprit</p>
-
-<a name="158101543"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101543">Mario Carneiro (Feb 12 2019 at 08:45)</a>:</h4>
-<p>this should not be an instance, it is applied in stupid ways</p>
-
-<a name="158101599"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101599">Johan Commelin (Feb 12 2019 at 08:46)</a>:</h4>
-<p>But if it is not an instance then it causes breakage... in stupid ways</p>
-
-<a name="158101613"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101613">Mario Carneiro (Feb 12 2019 at 08:46)</a>:</h4>
-<p>I think <code>group_hom</code> should be a thing sooner rather than later</p>
-
-<a name="158101618"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101618">Johan Commelin (Feb 12 2019 at 08:46)</a>:</h4>
-<p>I'll be slamming my keyboard 10 times a day: "Come on Lean, you're composing two group homs... of course that's a group hom"</p>
-
-<a name="158101623"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101623">Mario Carneiro (Feb 12 2019 at 08:46)</a>:</h4>
-<p>the evidence continues to mount in favor of bundled functions</p>
-
-<a name="158101624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101624">Johan Commelin (Feb 12 2019 at 08:46)</a>:</h4>
-<p>I think bundling is cool<br>
-(And I don't know what I'm talking about <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span>)</p>
-
-<a name="158101641"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101641">Kenny Lau (Feb 12 2019 at 08:47)</a>:</h4>
-<p>nonononono it has nothing to do with <code>is_group_hom.comp</code></p>
-
-<a name="158101655"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101655">Kenny Lau (Feb 12 2019 at 08:47)</a>:</h4>
-<div class="codehilite"><pre><span></span>[class_instances] (0) ?x_0 : @is_group_hom (multiplicative (ℤ →₀ ℤ)) (multiplicative (ℤ →₀ ℤ))
-  (@multiplicative.group (ℤ →₀ ℤ)
-     (@finsupp.add_group ℤ ℤ (λ (a b : ℤ), int.decidable_eq a b) (λ (a b : ℤ), int.decidable_eq a b)
-        (@add_comm_group.to_add_group ℤ
-           (@ring.to_add_comm_group ℤ
-              (@domain.to_ring ℤ
-                 (@to_domain ℤ
-                    (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
-                       (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
-                          int.decidable_linear_ordered_comm_ring))))))))
-  (@multiplicative.group (ℤ →₀ ℤ)
-     (@finsupp.add_group ℤ ℤ (λ (a b : ℤ), int.decidable_eq a b) (λ (a b : ℤ), int.decidable_eq a b)
-        (@add_comm_group.to_add_group ℤ
-           (@ring.to_add_comm_group ℤ
-              (@domain.to_ring ℤ
-                 (@to_domain ℤ
-                    (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
-                       (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
-                          int.decidable_linear_ordered_comm_ring))))))))
-  (λ (x : multiplicative (ℤ →₀ ℤ)), x) := @is_group_hom.id ?x_44 ?x_45
-failed is_def_eq
-</pre></div>
-
-<a name="158101699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101699">Kenny Lau (Feb 12 2019 at 08:48)</a>:</h4>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
-
-<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
-<span class="kn">example</span> <span class="o">:</span> <span class="n">is_group_hom</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">multiplicative</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
-</pre></div>
-
-<a name="158101701"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101701">Mario Carneiro (Feb 12 2019 at 08:48)</a>:</h4>
-<p><code>comp</code> is reducible, if you try to unify <code>id</code> with <code>f o g</code> you get <code>f = \lam x, x</code> and <code>g = id</code></p>
-
-<a name="158101702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101702">Kenny Lau (Feb 12 2019 at 08:48)</a>:</h4>
-<p>but still yes for bundling</p>
-
-<a name="158101715"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101715">Mario Carneiro (Feb 12 2019 at 08:48)</a>:</h4>
-<p>it turned a perfectly normal first order problem into a higher order problem</p>
-
-<a name="158101738"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101738">Mario Carneiro (Feb 12 2019 at 08:49)</a>:</h4>
-<p>we could have an instance for <code>is_group_hom (\lam x, x)</code> which would also solve this problem but that's not the point</p>
-
-<a name="158101746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101746">Mario Carneiro (Feb 12 2019 at 08:49)</a>:</h4>
-<p>type class searches with explicit lambdas is never a good idea</p>
-
-<a name="158101800"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101800">Kenny Lau (Feb 12 2019 at 08:50)</a>:</h4>
-<p>so do we support bundling?</p>
-
-<a name="158101816"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101816">Mario Carneiro (Feb 12 2019 at 08:50)</a>:</h4>
-<p>it worked for linear maps, I think it will work just as well if not better for group theory</p>
-
-<a name="158101818"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101818">Johan Commelin (Feb 12 2019 at 08:50)</a>:</h4>
-<p>That's going to be a major refactor...</p>
-
-<a name="158101820"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101820">Mario Carneiro (Feb 12 2019 at 08:50)</a>:</h4>
-<p>yep</p>
-
-<a name="158101830"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101830">Johan Commelin (Feb 12 2019 at 08:51)</a>:</h4>
-<p>And let's do <code>ring_hom</code> at the same time</p>
-
-<a name="158101846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101846">Johan Commelin (Feb 12 2019 at 08:51)</a>:</h4>
-<p>This is also moving "hands-on" mathlib closer to "categorical" mathlib</p>
-
-<a name="158101850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101850">Johan Commelin (Feb 12 2019 at 08:51)</a>:</h4>
-<p>I think that's a good thing.</p>
-
-<a name="158101860"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101860">Mario Carneiro (Feb 12 2019 at 08:51)</a>:</h4>
-<p>the solution to higher order problems is to make them first order problems</p>
-
-<a name="158101862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101862">Johan Commelin (Feb 12 2019 at 08:51)</a>:</h4>
-<p>Aah, and <code>continuous</code> can finally be <code>continuous</code>, instead of secretly meaning <code>is_continous</code>...</p>
-
-<a name="158101916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101916">Johan Commelin (Feb 12 2019 at 08:52)</a>:</h4>
-<p>But previously we could mix <code>[is_group_hom f]</code> with <code>injective f</code>... will that kind of things become nastier after this refactor?</p>
-
-<a name="158101924"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101924">Mario Carneiro (Feb 12 2019 at 08:52)</a>:</h4>
-<p>that becomes <code>injective f</code></p>
-
-<a name="158101926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101926">Patrick Massot (Feb 12 2019 at 08:52)</a>:</h4>
-<p>Does it mean we'll have unification hints all over the place?</p>
-
-<a name="158101930"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101930">Mario Carneiro (Feb 12 2019 at 08:52)</a>:</h4>
-<p>no</p>
-
-<a name="158101947"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101947">Patrick Massot (Feb 12 2019 at 08:53)</a>:</h4>
-<p>This would be for bundled structures but not bundled maps?</p>
-
-<a name="158101949"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101949">Mario Carneiro (Feb 12 2019 at 08:53)</a>:</h4>
-<p>A lot of type class searches will go away though</p>
-
-<a name="158101955"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101955">Mario Carneiro (Feb 12 2019 at 08:53)</a>:</h4>
-<p>no, the other way around</p>
-
-<a name="158101961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158101961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158101961">Mario Carneiro (Feb 12 2019 at 08:53)</a>:</h4>
-<p>maps bundled, structures unbundled</p>
-
-<a name="158102008"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102008">Patrick Massot (Feb 12 2019 at 08:54)</a>:</h4>
-<p>I meant unification hints would be for bundled structures</p>
-
-<a name="158102025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102025">Mario Carneiro (Feb 12 2019 at 08:54)</a>:</h4>
-<p>right... it's a good question if there are any applications for unification hints as a consequence of bundling structures</p>
-
-<a name="158102033"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102033">Mario Carneiro (Feb 12 2019 at 08:55)</a>:</h4>
-<p>I guess the analogue is "guess the linear map whose function part is <code>id</code>"</p>
-
-<a name="158102050"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102050">Patrick Massot (Feb 12 2019 at 08:55)</a>:</h4>
-<p>exactly</p>
-
-<a name="158102053"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102053">Patrick Massot (Feb 12 2019 at 08:55)</a>:</h4>
-<p>this is what I understood in Amsterdam anyway</p>
-
-<a name="158102057"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102057">Patrick Massot (Feb 12 2019 at 08:55)</a>:</h4>
-<p>and we can still ask Assia or Cyril, they would be delighted to help</p>
-
-<a name="158102060"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102060">Mario Carneiro (Feb 12 2019 at 08:55)</a>:</h4>
-<p>but that's not nearly as common a problem as "guess the group whose type is <code>int</code>"</p>
-
-<a name="158102114"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102114">Mario Carneiro (Feb 12 2019 at 08:56)</a>:</h4>
-<p>because here we will usually be specifying the linear maps directly rather than talking about lambdas</p>
-
-<a name="158102153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102153">Johan Commelin (Feb 12 2019 at 08:57)</a>:</h4>
-<p>I guess it would mean that we can still write <code>id</code>, instead of writing <code>group_hom.id</code></p>
-
-<a name="158102220"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102220">Mario Carneiro (Feb 12 2019 at 08:58)</a>:</h4>
-<p>you may be able to, depends on how well the disambiguation goes</p>
-
-<a name="158102235"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102235">Mario Carneiro (Feb 12 2019 at 08:58)</a>:</h4>
-<p>I would be inclined to protect <code>group_hom.id</code> and just say that</p>
-
-<a name="158102240"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102240">Mario Carneiro (Feb 12 2019 at 08:58)</a>:</h4>
-<p>or maybe use a local notation for it</p>
-
-<a name="158102251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102251">Johan Commelin (Feb 12 2019 at 08:59)</a>:</h4>
-<p>Meh, ain't that ugly?</p>
-
-<a name="158102266"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102266">Johan Commelin (Feb 12 2019 at 08:59)</a>:</h4>
-<p>Well... we'll see.</p>
-
-<a name="158102270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102270">Johan Commelin (Feb 12 2019 at 08:59)</a>:</h4>
-<p>I wouldn't mind trying uni-hints</p>
-
-<a name="158102273"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102273">Mario Carneiro (Feb 12 2019 at 08:59)</a>:</h4>
-<p>it is, but having <code>id</code> overloaded usually just means you can't use either one</p>
-
-<a name="158102355"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102355">Mario Carneiro (Feb 12 2019 at 09:00)</a>:</h4>
-<p>like when I typed <code>quotient</code> in your proof it complained about the overload, I had to write <code>quotient_group.quotient</code> (or <code>_root_.quotient</code> if I wanted the other one)</p>
-
-<a name="158102394"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102394">Mario Carneiro (Feb 12 2019 at 09:01)</a>:</h4>
-<p>In a lot of cases you can circumvent this with projection notation</p>
-
-<a name="158102409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158102409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158102409">Mario Carneiro (Feb 12 2019 at 09:01)</a>:</h4>
-<p>like <code>ideal.quotient</code> means you can write <code>I.quotient</code> where <code>I : ideal A</code></p>
-
-<a name="158117674"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117674">Kenny Lau (Feb 12 2019 at 13:38)</a>:</h4>
-<p>ok so what do we want to bundle?</p>
-
-<a name="158117707"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117707">Kenny Lau (Feb 12 2019 at 13:38)</a>:</h4>
-<p>can we come up with an explicit list?</p>
-
-<a name="158117727"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117727">Johan Commelin (Feb 12 2019 at 13:38)</a>:</h4>
-<p>all morphisms between algebraic structures</p>
-
-<a name="158117746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117746">Kenny Lau (Feb 12 2019 at 13:39)</a>:</h4>
-<p>that's not an explicit list</p>
-
-<a name="158117750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117750">Johan Commelin (Feb 12 2019 at 13:39)</a>:</h4>
-<p>whether we also want to touch topology, I don't know. Let's wait to hear the opinion of <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
-
-<a name="158117758"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117758">Kenny Lau (Feb 12 2019 at 13:39)</a>:</h4>
-<p>should I test it on <code>is_field_hom</code>?</p>
-
-<a name="158117769"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117769">Johan Commelin (Feb 12 2019 at 13:39)</a>:</h4>
-<p><code>is_{,add_}group_hom</code>, <code>is_ring_hom</code></p>
-
-<a name="158117833"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158117833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158117833">Johan Commelin (Feb 12 2019 at 13:40)</a>:</h4>
-<p><code>is_{,add_}monoid_hom</code>, similar for <code>semigroup</code>s</p>
-
 <a name="158514768"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158514768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158514768">Johan Commelin (Feb 14 2019 at 09:21)</a>:</h4>
 <p>This is failing</p>
@@ -12749,6 +12322,64 @@ failed is_def_eq
 <a name="158523534"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158523534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158523534">Johan Commelin (Feb 14 2019 at 11:58)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Voila: <a href="https://github.com/leanprover/mathlib/issues/724" target="_blank" title="https://github.com/leanprover/mathlib/issues/724">#724</a></p>
+
+<a name="158615675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158615675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158615675">Johan Commelin (Feb 15 2019 at 13:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">val_ring_equiv_of_is_equiv</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">valuation_ring</span> <span class="err">≃</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">valuation_ring</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">subtype_congr</span> <span class="o">(</span><span class="n">valfield_equiv_valfield_of_eq_supp</span> <span class="n">h</span><span class="bp">.</span><span class="n">supp_eq</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="k">show</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="bp">_</span> <span class="bp">↔</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">erw</span> <span class="o">[</span><span class="err">←</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">on_valuation_field</span><span class="bp">.</span><span class="n">map_one</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">on_valuation_field_is_equiv</span><span class="o">],</span>
+  <span class="n">convert</span> <span class="n">iff</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">map_one</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">instance</span> <span class="n">xyzzy</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">v₁</span><span class="bp">.</span><span class="n">is_equiv</span> <span class="n">v₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">val_ring_equiv_of_is_equiv</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">valfield_equiv_valfield_of_eq_supp</span> <span class="n">h</span><span class="bp">.</span><span class="n">supp_eq</span> <span class="o">:</span>
+      <span class="n">v₁</span><span class="bp">.</span><span class="n">valuation_field</span> <span class="bp">→</span> <span class="n">v₂</span><span class="bp">.</span><span class="n">valuation_field</span><span class="o">)),</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="n">all_goals</span> <span class="o">{</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val_injective</span><span class="o">,</span>
+    <span class="n">assumption</span> <span class="bp">&lt;|&gt;</span> <span class="n">apply_assumption</span><span class="o">,</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158615711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158615711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158615711">Johan Commelin (Feb 15 2019 at 13:58)</a>:</h4>
+<p>I will probably get frowned at for that last proof... It ought to be generalised.</p>
+
+<a name="158615729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158615729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158615729">Johan Commelin (Feb 15 2019 at 13:59)</a>:</h4>
+<p>Anyway, this proves Wedhorn 1.27 (iii) =&gt; (ii)b</p>
+
+<a name="158637984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158637984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158637984">Kevin Buzzard (Feb 15 2019 at 18:40)</a>:</h4>
+<p>You're not old enough to remember <code>xyzzy</code>!</p>
+
+<a name="158637994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158637994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158637994">Johan Commelin (Feb 15 2019 at 18:40)</a>:</h4>
+<p>Haha... parts of me are very old.</p>
+
+<a name="158638348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158638348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158638348">Johan Commelin (Feb 15 2019 at 18:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span> So there is this "fake" quotient <code>Spv R</code> that is morally the set of equivalence classes of valuations on <code>R</code>. It isn't a Lean-quotient because of universe issues. We can manually define <code>mk</code> and <code>lift</code> etc, and prove the quotient-axioms. Now here is a question... do you think there is any value in making <code>out</code> computable?</p>
+
+<a name="158638466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158638466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158638466">Johan Commelin (Feb 15 2019 at 18:47)</a>:</h4>
+<p>Given an equivalence class, I can write an algorithm that "canonically" builds a valuation that represents this class.</p>
+
+<a name="158638578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158638578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158638578">Johan Commelin (Feb 15 2019 at 18:48)</a>:</h4>
+<p>Does this matter, if the computation-rule isn't going to be defeq anyway?</p>
+
+<a name="158647172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/158647172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#158647172">Kevin Buzzard (Feb 15 2019 at 20:35)</a>:</h4>
+<p>One key observation is that the canonical element you construct is computable! So we can just define quotient.lift by evaluating at this element and it will be computable as well. This is in contrast to my construction of general quotients using equivalence classes</p>
 
 
 {% endraw %}

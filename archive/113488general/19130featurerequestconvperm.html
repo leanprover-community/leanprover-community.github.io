@@ -1,0 +1,113 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/19130featurerequestconvperm.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html">feature request: conv perm</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158597507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597507">Johan Commelin (Feb 15 2019 at 08:01)</a>:</h4>
+<p>How hard is it to write a tactic that works like this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- goal is ⇑v ↑(x.snd) * ⇑v (y.fst) * ((⇑v ((y.snd).val))⁻¹ * (⇑v ((x.snd).val))⁻¹) ≤⇑v (y.fst) * (⇑v ((y.snd).val))⁻¹</span>
+<span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span>
+<span class="c1">-- goal is ⇑v ↑(x.snd) * ⇑v (y.fst) * ((⇑v ((y.snd).val))⁻¹ * (⇑v ((x.snd).val))⁻¹)</span>
+  <span class="n">perm</span> <span class="s2">&quot;(1 * 4) * (2 * 3)&quot;</span><span class="o">,</span>
+<span class="c1">-- goal is (⇑v ↑(x.snd) * (⇑v ((x.snd).val))⁻¹)) * (⇑v (y.fst) * (⇑v ((y.snd).val))⁻¹)</span>
+<span class="o">},</span>
+<span class="c1">-- goal is (⇑v ↑(x.snd) * (⇑v ((x.snd).val))⁻¹)) * (⇑v (y.fst) * (⇑v ((y.snd).val))⁻¹) ≤⇑v (y.fst) * (⇑v ((y.snd).val))⁻¹</span>
+<span class="n">apply</span> <span class="n">mul_le_mul_left</span><span class="o">,</span>
+<span class="c1">-- etc</span>
+</pre></div>
+
+<a name="158597563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597563">Johan Commelin (Feb 15 2019 at 08:02)</a>:</h4>
+<p>Some sort of permutation tactic would be very helpful, I feel.</p>
+
+<a name="158597682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597682">Johan Commelin (Feb 15 2019 at 08:03)</a>:</h4>
+<p>The problem with <code>rw show what_I_have = what_I_want</code> is that you run into type class issues with writing that down. In the <code>rw show</code> doesn't have all the typing context that the <code>perm</code> tactic would have.</p>
+
+<a name="158597910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597910">Mario Carneiro (Feb 15 2019 at 08:08)</a>:</h4>
+<p>I think the given syntax is underdetermined, if you say there's only three things what if there are multiple ways to split it up into three parts? Also I think we can do without the quotes</p>
+
+<a name="158597934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597934">Johan Commelin (Feb 15 2019 at 08:09)</a>:</h4>
+<p>I haven't thought hard about the syntax...</p>
+
+<a name="158597995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158597995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158597995">Mario Carneiro (Feb 15 2019 at 08:10)</a>:</h4>
+<p>what about something more like <code>perm a * b * (c * d) =&gt; (a * d) * (b * c)</code>?</p>
+
+<a name="158598004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598004">Mario Carneiro (Feb 15 2019 at 08:10)</a>:</h4>
+<p>where the thing on the left is a pattern that binds the names on the right</p>
+
+<a name="158598275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598275">Johan Commelin (Feb 15 2019 at 08:17)</a>:</h4>
+<p>It would be more verbose, but I why it's needed</p>
+
+<a name="158598781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598781">Mario Carneiro (Feb 15 2019 at 08:29)</a>:</h4>
+<p>we could do it your way but I'm worried about lack of transparency. Indexes are generally bad at explaining what is being referred to</p>
+
+<a name="158598838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598838">Mario Carneiro (Feb 15 2019 at 08:30)</a>:</h4>
+<p>Also there are more complicated examples like <code>perm a * b + c * d =&gt; d * c + a * b</code> where it's less obvious what the atoms of the permutation are</p>
+
+<a name="158598855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598855">Johan Commelin (Feb 15 2019 at 08:31)</a>:</h4>
+<p>Yes, so yours is better!</p>
+
+<a name="158598862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598862">Johan Commelin (Feb 15 2019 at 08:31)</a>:</h4>
+<p>How hard is it to actually write such a tactic?</p>
+
+<a name="158598867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598867">Mario Carneiro (Feb 15 2019 at 08:31)</a>:</h4>
+<p>good question. Would it match subterms or just the whole target?</p>
+
+<a name="158598960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598960">Johan Commelin (Feb 15 2019 at 08:33)</a>:</h4>
+<p>Hmmm, matching subterms is probably better in the long run, right?</p>
+
+<a name="158598967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158598967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158598967">Johan Commelin (Feb 15 2019 at 08:33)</a>:</h4>
+<p>It would also avoid the <code>conv</code> part.</p>
+
+<a name="158599119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599119">Mario Carneiro (Feb 15 2019 at 08:36)</a>:</h4>
+<p>it will be easier to use but possibly also harder to control, like <code>rw</code></p>
+
+<a name="158599213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599213">Johan Commelin (Feb 15 2019 at 08:38)</a>:</h4>
+<p>I see. But maybe we can use <code>_</code>s to guide Lean to the right subterm?</p>
+
+<a name="158599309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599309">Mario Carneiro (Feb 15 2019 at 08:40)</a>:</h4>
+<p>That goes into my plans for more elaborate conv patterns</p>
+
+<a name="158599335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599335">Mario Carneiro (Feb 15 2019 at 08:41)</a>:</h4>
+<p>Stuff like <code>conv x in (foo (x + _))</code> to focus on the first summand of the argument to foo</p>
+
+<a name="158599351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599351">Mario Carneiro (Feb 15 2019 at 08:41)</a>:</h4>
+<p>assuming <code>foo ...</code> is a subterm of the goal</p>
+
+<a name="158599427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599427">Johan Commelin (Feb 15 2019 at 08:43)</a>:</h4>
+<p>If <code>conv</code> becomes more powerful, that'd be great! And then there is no problem with <code>perm</code> matching on the whole goal.</p>
+
+<a name="158599430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/feature%20request%3A%20conv%20perm/near/158599430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19130featurerequestconvperm.html#158599430">Johan Commelin (Feb 15 2019 at 08:43)</a>:</h4>
+<p>Seperation of concerns, I guess?</p>
+
+
+{% endraw %}

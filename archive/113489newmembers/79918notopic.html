@@ -872,5 +872,38 @@ end
 </blockquote>
 <p>Oh ok, I will try that! Thank you for your help!</p>
 
+<a name="158598928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/158598928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#158598928">Kenny Lau (Feb 15 2019 at 08:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">list</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span>
+<span class="kn">variable</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span>
+
+<span class="kn">theorem</span> <span class="n">length_nil</span> <span class="o">:</span> <span class="n">length</span> <span class="o">(</span><span class="bp">@</span><span class="n">nil</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">append_nil&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="n">t</span> <span class="bp">++</span> <span class="n">nil</span> <span class="bp">=</span> <span class="n">t</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">hd</span><span class="bp">::</span><span class="n">tl</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">((</span><span class="bp">::</span><span class="o">)</span><span class="n">hd</span><span class="o">)</span> <span class="o">(</span><span class="n">append_nil</span> <span class="n">tl</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">length_append&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="n">length</span> <span class="o">(</span><span class="n">s</span> <span class="bp">++</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">length</span> <span class="n">s</span> <span class="bp">+</span> <span class="n">length</span> <span class="n">t</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="n">t</span> <span class="o">:=</span> <span class="o">(</span><span class="n">zero_add</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">hd</span><span class="bp">::</span><span class="n">tl</span><span class="o">)</span> <span class="n">t</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">length_cons</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_add</span><span class="o">,</span> <span class="err">←</span> <span class="n">length_append&#39;</span> <span class="n">tl</span> <span class="n">t</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="kn">theorem</span> <span class="n">length_append_cons</span> <span class="o">:</span> <span class="n">length</span> <span class="o">(</span><span class="n">s</span> <span class="bp">++</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">length</span> <span class="o">(</span><span class="n">s</span> <span class="bp">++</span> <span class="n">t</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">length_append&#39;</span><span class="o">,</span> <span class="n">length_append&#39;</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">append_nil&#39;</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">nil_append</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">cons_append</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">length_cons</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">length_nil</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">]</span> <span class="bp">++</span> <span class="o">[</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">length</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span>
+
+<span class="kn">end</span> <span class="n">list</span>
+</pre></div>
+
 
 {% endraw %}

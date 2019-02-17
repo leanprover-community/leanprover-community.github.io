@@ -85,16 +85,8 @@ This is what I would call the free module on a set, right?</p>
 
 <span class="n">def</span> <span class="n">lself</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">R</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="n">M</span><span class="o">)</span> <span class="err">≃ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="n">M</span> <span class="o">:=</span>
 <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="mi">1</span><span class="o">,</span>
-  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span>
-  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
-    <span class="n">add</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">add_smul</span><span class="o">,</span>
-    <span class="n">smul</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">symmetry</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">smul_smul</span> <span class="o">},</span>
-  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span>
-    <span class="n">ext</span> <span class="n">r</span><span class="o">,</span>
-    <span class="n">convert</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">smul</span> <span class="n">r</span> <span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
-    <span class="n">change</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">),</span>
-    <span class="n">rw</span> <span class="n">mul_one</span>
-  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="bp">.</span><span class="n">smul_right</span> <span class="n">m</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="k">by</span> <span class="n">ext</span> <span class="n">r</span><span class="bp">;</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">smul</span> <span class="n">r</span> <span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
   <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">one_smul</span> <span class="bp">_</span> <span class="n">m</span><span class="o">,</span>
   <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
   <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
@@ -373,7 +365,7 @@ This is what I would call the free module on a set, right?</p>
 
 <a name="158511385"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158511385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158511385">Kevin Buzzard (Feb 14 2019 at 08:19)</a>:</h4>
-<p>Reid is using the universal surjection</p>
+<p>Reid is using the universal surjection [EDIT: this is not quite true -- I resolve this issue about 30 posts down]</p>
 
 <a name="158511389"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20module/near/158511389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95273freemodule.html#158511389">Kevin Buzzard (Feb 14 2019 at 08:19)</a>:</h4>

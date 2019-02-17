@@ -1,0 +1,153 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/52859ultraproduct.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html">(ultra)product</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158712925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158712925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158712925">Kenny Lau (Feb 16 2019 at 21:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">bigly_equal</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="o">{</span><span class="n">n</span> <span class="bp">|</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">b</span> <span class="n">n</span><span class="o">}</span> <span class="err">∈</span> <span class="n">f</span><span class="bp">.</span><span class="n">sets</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">eq_self_iff_true</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ab</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">eq_comm</span><span class="o">],</span>
+  <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">ab</span> <span class="n">bc</span><span class="o">,</span> <span class="k">by</span> <span class="n">filter_upwards</span> <span class="o">[</span><span class="n">ab</span><span class="o">,</span> <span class="n">bc</span><span class="o">]</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">hn1</span> <span class="n">hn2</span><span class="o">,</span> <span class="n">hn1</span><span class="bp">.</span><span class="n">trans</span> <span class="n">hn2</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">something</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="err">$</span> <span class="n">bigly_equal</span> <span class="n">β</span> <span class="n">f</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">add_semigroup</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">add_semigroup</span> <span class="o">(</span><span class="n">something</span> <span class="n">β</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on₂&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">b</span> <span class="n">n</span> <span class="o">:</span> <span class="n">something</span> <span class="n">β</span> <span class="n">f</span><span class="o">))</span> <span class="err">$</span>
+    <span class="bp">λ</span> <span class="n">a₁</span> <span class="n">a₂</span> <span class="n">b₁</span> <span class="n">b₂</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound&#39;</span> <span class="err">$</span> <span class="k">show</span> <span class="bp">_</span> <span class="err">∈</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">filter_upwards</span> <span class="o">[</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">]</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">hi1</span> <span class="n">hi2</span><span class="o">,</span> <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="bp">_</span> <span class="n">hi1</span><span class="o">)</span> <span class="n">hi2</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₃&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound&#39;</span> <span class="err">$</span>
+    <span class="k">show</span> <span class="o">{</span><span class="n">n</span> <span class="bp">|</span> <span class="bp">_+_+_</span> <span class="bp">=</span> <span class="bp">_+</span><span class="o">(</span><span class="bp">_+_</span><span class="o">)}</span> <span class="err">∈</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">eq_self_iff_true</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="o">}</span>
+</pre></div>
+
+<a name="158712931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158712931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158712931">Kenny Lau (Feb 16 2019 at 21:24)</a>:</h4>
+<p>might this be useful / worth it to add to mathlib?</p>
+
+<a name="158712933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158712933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158712933">Kenny Lau (Feb 16 2019 at 21:24)</a>:</h4>
+<p>(credits for parts of the code go to <span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span>)</p>
+
+<a name="158713622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713622">Abhimanyu Pallavi Sudhir (Feb 16 2019 at 21:43)</a>:</h4>
+<p>Oh, is that useful on its own accord (besides just for defining the hyperreals)?</p>
+
+<a name="158713631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713631">Kenny Lau (Feb 16 2019 at 21:43)</a>:</h4>
+<p>yes, it's the ultraproduct in model theory</p>
+
+<a name="158713680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713680">Abhimanyu Pallavi Sudhir (Feb 16 2019 at 21:44)</a>:</h4>
+<p>Btw, I thought you didn't like tactics.</p>
+
+<a name="158713690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713690">Kevin Buzzard (Feb 16 2019 at 21:44)</a>:</h4>
+<p>Can one formalise Los' theorem in Lean? It says something like a first order statement that's true in the factors is true in the ultraproduct</p>
+
+<a name="158713705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713705">Kevin Buzzard (Feb 16 2019 at 21:45)</a>:</h4>
+<p>Maybe it says something stronger -- maybe something is true in the ultraproduct iff it's true in a "big" set of the factors. The problem is that IIRC it's only true for certain kinds of statements.</p>
+
+<a name="158713758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713758">Kenny Lau (Feb 16 2019 at 21:46)</a>:</h4>
+<p>who said I didn't like tactic?</p>
+
+<a name="158713761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713761">Kenny Lau (Feb 16 2019 at 21:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> that would require... formalizing first order statements</p>
+
+<a name="158713771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713771">Kenny Lau (Feb 16 2019 at 21:47)</a>:</h4>
+<p>I love <code>filter_upwards</code> btw, shoutout to <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span></p>
+
+<a name="158713819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713819">Kevin Buzzard (Feb 16 2019 at 21:48)</a>:</h4>
+<p>Oh here we go -- <a href="https://en.wikipedia.org/wiki/Ultraproduct#.C5.81o.C5.9B.27_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Ultraproduct#.C5.81o.C5.9B.27_theorem">https://en.wikipedia.org/wiki/Ultraproduct#.C5.81o.C5.9B.27_theorem</a>, it's mentioned in the wikipedia page on ultraproducts. Yeah, something's true in the ultraproduct iff it's true in a big set of factors.</p>
+
+<a name="158713846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713846">Kevin Buzzard (Feb 16 2019 at 21:49)</a>:</h4>
+<p>Oh that's interesting, it mentions the "transfer principle" <a href="https://en.wikipedia.org/wiki/Transfer_principle" target="_blank" title="https://en.wikipedia.org/wiki/Transfer_principle">https://en.wikipedia.org/wiki/Transfer_principle</a> . Is this related to rewriting isomorphisms of rings?</p>
+
+<a name="158713925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713925">Kenny Lau (Feb 16 2019 at 21:51)</a>:</h4>
+<blockquote>
+<p>One of the first examples was the Lefschetz principle, which states that any sentence in the first-order language of fields that is true for the complex numbers is also true for any algebraically closed field of characteristic 0.</p>
+</blockquote>
+
+<a name="158713927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158713927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158713927">Kenny Lau (Feb 16 2019 at 21:51)</a>:</h4>
+<p>i.e. no</p>
+
+<a name="158714075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158714075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158714075">Kevin Buzzard (Feb 16 2019 at 21:55)</a>:</h4>
+<p>But we have this issue in Lean that any "reasonable mathematical statement" about rings is true for R iff it's true for any ring isomorphic to R, and the problem with formalising this is that the computer scientists can't seem to formalise the notion of "reasonable mathematical statement". E.g. the predicate "I am equal to R" is not such a statement.</p>
+
+<a name="158714129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158714129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158714129">Kevin Buzzard (Feb 16 2019 at 21:56)</a>:</h4>
+<p>So the underlying issue is the same -- we want to move statements from one structure to another but we can only move certain statements.</p>
+
+<a name="158715384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158715384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158715384">Chris Hughes (Feb 16 2019 at 22:32)</a>:</h4>
+<p>If I define cycle shape on finite permutations as a <code>multiset nat</code>, computably over an arbitrary fintype without a linear order assumption, is it "obvious" that conjugate permutations have the same cycle type, since conjugation is an isomorphism?</p>
+
+<a name="158719293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158719293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158719293">Kevin Buzzard (Feb 17 2019 at 00:35)</a>:</h4>
+<p>This is in the wrong thread. If you know that the map from permutations to cycle shapes factors through partitions (via the map sending a permutation to its orbits) and if you know that isomorphic partitions have the same cycle shape then it follows, because the conjugating element h maps orbits for g to orbits for hgh^-1</p>
+
+<a name="158720392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158720392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158720392">Chris Hughes (Feb 17 2019 at 01:08)</a>:</h4>
+<p>I know the proof, but does it count as obvious?</p>
+
+<a name="158734544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158734544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158734544">Kevin Buzzard (Feb 17 2019 at 08:41)</a>:</h4>
+<p>This is in the wrong thread. Can you fix it? One could imagine the category of pairs consisting of a finite set and a partition of that set into non-empty subsets. One would have to say what the morphisms were. One could say they were isomorphisms. Your construction of a multiset of nats is mathematically sensible, a notion which I do not know how to define in Lean. Because it is mathematically sensible it is constant on isomorphism classes. This is obvious to me but apparently not to Lean.</p>
+
+<a name="158734548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158734548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158734548">Kevin Buzzard (Feb 17 2019 at 08:41)</a>:</h4>
+<p>It's a transfer problem. At the minute we have to prove these ourselves</p>
+
+<a name="158734554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158734554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158734554">Kevin Buzzard (Feb 17 2019 at 08:42)</a>:</h4>
+<p>Maybe this isn't in the wrong thread after all</p>
+
+<a name="158735543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735543">Kevin Buzzard (Feb 17 2019 at 09:13)</a>:</h4>
+<p>Abhi's original motivation for hyperreals was that they might give another approach to calculus, but if for every single first order lemma he has to explicitly prove that it's true in the reals iff it's true in the hyperreals then it will be slow going</p>
+
+<a name="158735671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735671">Kevin Buzzard (Feb 17 2019 at 09:17)</a>:</h4>
+<p>One has to be really careful here. For example the hyperreals will be a ring so Lean will have access to a map from the integers into that ring, but you're not allowed to use that map in your theorems because it can't be made from the first order theory of reals alone</p>
+
+<a name="158735719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735719">Kevin Buzzard (Feb 17 2019 at 09:18)</a>:</h4>
+<p>So you can't ask the question "does there exist something bigger than every nat?" which is true in one and false in the other</p>
+
+<a name="158735789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735789">Kenny Lau (Feb 17 2019 at 09:20)</a>:</h4>
+<p>so my point stands, one would need to formalize first order logic</p>
+
+<a name="158735986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735986">Kevin Buzzard (Feb 17 2019 at 09:27)</a>:</h4>
+<p>Right</p>
+
+<a name="158735993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28ultra%29product/near/158735993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52859ultraproduct.html#158735993">Kevin Buzzard (Feb 17 2019 at 09:28)</a>:</h4>
+<p>It's a special case of the notion of being mathematically sensible</p>
+
+
+{% endraw %}

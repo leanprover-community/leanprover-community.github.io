@@ -23,5 +23,91 @@ permalink: archive/113488general/21856unificationhints.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158549046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158549046">Johan Commelin (Feb 14 2019 at 17:51)</a>:</h4>
 <p>Too bad... I really liked the notation (-;</p>
 
+<a name="158607025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158607025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158607025">Joseph Corneli (Feb 15 2019 at 11:15)</a>:</h4>
+<p>Is there a canonical example of unification hints being used in Lean that someone can point to?</p>
+
+<a name="158607080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158607080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158607080">Mario Carneiro (Feb 15 2019 at 11:16)</a>:</h4>
+<p>Cyril and Assia had a demonstration at Lean Together, I wonder if that file is available somewhere</p>
+
+<a name="158607093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158607093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158607093">Mario Carneiro (Feb 15 2019 at 11:17)</a>:</h4>
+<p>It's never been used in lean core or mathlib outside one example in <code>init.core</code></p>
+
+<a name="158612898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158612898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158612898">Joseph Corneli (Feb 15 2019 at 13:13)</a>:</h4>
+<p>I emailed them to ask about the file!</p>
+
+<a name="158612979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158612979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158612979">Cyril Cohen (Feb 15 2019 at 13:14)</a>:</h4>
+<p>Hi! Both the Coq demo and the Lean equivalent are available on <a href="https://lean-forward.github.io/lean-together/2019/" target="_blank" title="https://lean-forward.github.io/lean-together/2019/">https://lean-forward.github.io/lean-together/2019/</a></p>
+
+<a name="158613068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158613068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158613068">Cyril Cohen (Feb 15 2019 at 13:16)</a>:</h4>
+<p>Assia Mahboubi: unification hints (in Coq) <a href="https://lean-forward.github.io/lean-together/2019/slides/coq_cs_demo.v" target="_blank" title="https://lean-forward.github.io/lean-together/2019/slides/coq_cs_demo.v">https://lean-forward.github.io/lean-together/2019/slides/coq_cs_demo.v</a><br>
+Cyril Cohen: unification hints (in Lean) <a href="https://lean-forward.github.io/lean-together/2019/slides/demo_structures.lean" target="_blank" title="https://lean-forward.github.io/lean-together/2019/slides/demo_structures.lean">https://lean-forward.github.io/lean-together/2019/slides/demo_structures.lean</a></p>
+
+<a name="158613326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158613326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158613326">Cyril Cohen (Feb 15 2019 at 13:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> </p>
+<blockquote>
+<p>Can we use unification hints to make sure that we can just write <code>ℤ</code> if we want to view the integers as an object of the category <code>CommRing</code>?</p>
+</blockquote>
+<p>We, in mathcomp, usually explicitly wrap them e.g. <code>[CommRing  of ℤ]</code> to denote the canonical structure associated to a carrier. In Coq there is no way to automate this further to my knowledge. But maybe in Lean you could use some special kind of coercion. Indeed, since coercions are fused with the typeclass system, you could make a coercion from <code>Type</code> that finds the structure  and packages it with the type to give you the structure as a result.</p>
+
+<a name="158613483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158613483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158613483">Joseph Corneli (Feb 15 2019 at 13:23)</a>:</h4>
+<p>thanks!</p>
+
+<a name="158613615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158613615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158613615">Johan Commelin (Feb 15 2019 at 13:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110193">@Cyril Cohen</span> I don't follow... you want a coercion from <code>Type</code> to <code>CommRing</code>? But then it has to turn every type into a commutative ring...</p>
+
+<a name="158614041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158614041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158614041">Cyril Cohen (Feb 15 2019 at 13:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> only when the inference succeeds in finding a <code>CommRing</code> typeclass on the argument. I'm not sure it works, I'm just guessing it might, given how coercions are implemented in lean.</p>
+
+<a name="158614207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158614207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158614207">Cyril Cohen (Feb 15 2019 at 13:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> on second thought, I do not think it is possible ... sorry for the false hopes...</p>
+
+<a name="158614275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158614275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158614275">Johan Commelin (Feb 15 2019 at 13:36)</a>:</h4>
+<p>No problem...</p>
+
+<a name="158616977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158616977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158616977">Chris Hughes (Feb 15 2019 at 14:18)</a>:</h4>
+<p>How does the <code>coe</code> from <code>Prop</code> to <code>bool</code> work? That's a partial coercion.</p>
+
+<a name="158617505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158617505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158617505">Kenny Lau (Feb 15 2019 at 14:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> which files did you import?</p>
+
+<a name="158617735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158617735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158617735">Chris Hughes (Feb 15 2019 at 14:30)</a>:</h4>
+<p>I'm afk, but I think it's in core. It only works on decidable props.</p>
+
+<a name="158617772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158617772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158617772">Kenny Lau (Feb 15 2019 at 14:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">to_bool</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">decidable</span> <span class="n">p</span><span class="o">],</span> <span class="n">bool</span>
+</pre></div>
+
+<a name="158617804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158617804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158617804">Chris Hughes (Feb 15 2019 at 14:31)</a>:</h4>
+<p>But I don't have to write <code>to_bool</code></p>
+
+<a name="158617817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158617817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158617817">Kenny Lau (Feb 15 2019 at 14:31)</a>:</h4>
+<p>interesting</p>
+
+<a name="158618974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158618974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158618974">Andrew Ashworth (Feb 15 2019 at 14:47)</a>:</h4>
+<p>bool to Prop is a special case handled in the C++ code, iirc</p>
+
+<a name="158619078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20hints/near/158619078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21856unificationhints.html#158619078">Andrew Ashworth (Feb 15 2019 at 14:48)</a>:</h4>
+<p>this will change in some way in lean 4, but I don't remember where I read that</p>
+
 
 {% endraw %}
