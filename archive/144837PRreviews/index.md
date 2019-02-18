@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#735 free magma, semigroup, monoid](85793735freemagmasemigroupmonoid.html) (128 messages, latest: Feb 18 2019 at 17:19)
+
 * [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (35 messages, latest: Feb 17 2019 at 11:58)
 
 * [#717 field_hom](70410717fieldhom.html) (8 messages, latest: Feb 16 2019 at 20:51)

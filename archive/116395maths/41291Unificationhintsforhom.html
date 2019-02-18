@@ -1,0 +1,65 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/41291Unificationhintsforhom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/41291Unificationhintsforhom.html">Unification hints for hom</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158757717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unification%20hints%20for%20hom/near/158757717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41291Unificationhintsforhom.html#158757717">Chris Hughes (Feb 17 2019 at 20:21)</a>:</h4>
+<p>Can we use unification hints for bundled homs? This is my best attempt, but it doesn't work</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+<span class="n">def</span> <span class="n">is_ring_hom&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">structure</span> <span class="n">ring_hom</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_hom</span> <span class="o">:</span> <span class="n">is_ring_hom&#39;</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">ring_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">f</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">is_monoid_hom&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">structure</span> <span class="n">add_monoid_hom</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_hom</span> <span class="o">:</span> <span class="n">is_monoid_hom&#39;</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">I2</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">add_monoid_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">f</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">unify</span><span class="o">]</span> <span class="n">def</span> <span class="n">ring_hom_to_add_monoid_hom</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">add_monoid_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">unification_hint</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pattern</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="err">≟</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">constraints</span> <span class="o">:=</span> <span class="o">[</span><span class="n">g</span> <span class="err">≟</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">sorry</span><span class="bp">⟩</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">add_group_hom_add</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">add_monoid_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_hom</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_group_hom_add</span>
+</pre></div>
+
+<a name="158759302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unification%20hints%20for%20hom/near/158759302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41291Unificationhintsforhom.html#158759302">Kenny Lau (Feb 17 2019 at 21:12)</a>:</h4>
+<p>where can I learn about unification hints?</p>
+
+<a name="158759312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unification%20hints%20for%20hom/near/158759312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41291Unificationhintsforhom.html#158759312">Kevin Buzzard (Feb 17 2019 at 21:12)</a>:</h4>
+<p>Cyril and Assia talked about them in Amsterdam and their notes are available on the thread IIRC</p>
+
+<a name="158759389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unification%20hints%20for%20hom/near/158759389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41291Unificationhintsforhom.html#158759389">Kevin Buzzard (Feb 17 2019 at 21:15)</a>:</h4>
+<p>There's this:</p>
+<p><a href="#narrow/stream/179818-Lean-Together.202019/topic/Unification.20hints.20paper" title="#narrow/stream/179818-Lean-Together.202019/topic/Unification.20hints.20paper">https://leanprover.zulipchat.com/#narrow/stream/179818-Lean-Together.202019/topic/Unification.20hints.20paper</a></p>
+<p>but that wasn't what I was remembering. Someone put links to a lot of the pdfs used in the talks but I can't find it right now</p>
+
+
+{% endraw %}

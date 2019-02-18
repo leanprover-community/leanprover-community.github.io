@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Unification hints for hom](41291Unificationhintsforhom.html) (4 messages, latest: Feb 17 2019 at 21:15)
+
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2690 messages, latest: Feb 15 2019 at 20:35)

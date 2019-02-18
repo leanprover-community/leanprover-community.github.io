@@ -10,13 +10,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["correct" free semigroup](57076correctfreesemigroup.html) (20 messages, latest: Feb 17 2019 at 12:14)
+* [monad on arbitrary categories](45155monadonarbitrarycategories.html) (34 messages, latest: Feb 18 2019 at 17:52)
+
+* [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (88 messages, latest: Feb 18 2019 at 16:34)
+
+* [Type u vs Type*](08717TypeuvsType.html) (3 messages, latest: Feb 18 2019 at 01:41)
+
+* [traversable](50204traversable.html) (8 messages, latest: Feb 18 2019 at 01:32)
+
+* [(ultra)product](52859ultraproduct.html) (31 messages, latest: Feb 17 2019 at 15:29)
+
+* ["correct" free semigroup](57076correctfreesemigroup.html) (67 messages, latest: Feb 17 2019 at 13:53)
 
 * [has_coe_to_fun instance of mv_polynomial](96781hascoetofuninstanceofmvpolynomial.html) (14 messages, latest: Feb 17 2019 at 10:15)
 
 * [bug with $ in equation compiler](46903bugwithinequationcompiler.html) (2 messages, latest: Feb 17 2019 at 10:11)
-
-* [(ultra)product](52859ultraproduct.html) (29 messages, latest: Feb 17 2019 at 09:28)
 
 * [fillter types?](77191filltertypes.html) (2 messages, latest: Feb 17 2019 at 08:33)
 
