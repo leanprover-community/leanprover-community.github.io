@@ -10,9 +10,15 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#735 free magma, semigroup, monoid](85793735freemagmasemigroupmonoid.html) (128 messages, latest: Feb 18 2019 at 17:19)
+* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (43 messages, latest: Feb 24 2019 at 19:32)
 
-* [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (35 messages, latest: Feb 17 2019 at 11:58)
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (13 messages, latest: Feb 24 2019 at 13:44)
+
+* [#749](02120749.html) (2 messages, latest: Feb 23 2019 at 06:12)
+
+* [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (36 messages, latest: Feb 21 2019 at 19:06)
+
+* [#735 free magma, semigroup, monoid](85793735freemagmasemigroupmonoid.html) (138 messages, latest: Feb 21 2019 at 15:20)
 
 * [#717 field_hom](70410717fieldhom.html) (8 messages, latest: Feb 16 2019 at 20:51)
 

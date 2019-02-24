@@ -1,0 +1,123 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/33471Betterwaytoaddwellfoundedinstance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html">Better way to add well-founded instance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159269628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269628">AHan (Feb 24 2019 at 09:49)</a>:</h4>
+<p>Is there any better way to add a well-founded instance ?<br>
+I wanted to prove some lemmas by <code>linear order</code>, <code>monomial order</code> (defined as below) and <code>&lt;</code> is well-founded</p>
+<p>(<code>lean class is_monomial_order (α : Type*) [has_add α] (r : α → α → Prop) :=
+(monomial_order : ∀ a b : α, r a b → ∀ c : α, r (c + a) (c + b))</code>)</p>
+<p>So something like :</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">is_monomial_order</span> <span class="n">α</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>  <span class="o">(</span><span class="n">wf</span> <span class="o">:</span> <span class="n">well_founded</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">))</span>
+</pre></div>
+
+
+<p>It's a bit annoying that every time I wanted to use those lemmas I have to explicitly add the well-founded proof</p>
+<p>I've tried instance <code>is_well_order</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">is_monomial_order</span> <span class="n">α</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>  <span class="o">[</span><span class="n">is_well_order</span>  <span class="n">α</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">]</span>
+</pre></div>
+
+
+<p>And after realizing <code>is_well_order</code> implies <code>linear_order</code>, I tried the following two ways, but neither of them looks good...</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">)</span> <span class="o">[</span><span class="n">is_well_order</span>  <span class="n">α</span> <span class="n">r</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">linear_order</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">linear_order_of_STO&#39;</span> <span class="n">r</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">mo</span> <span class="o">:</span> <span class="n">is_monomial_order</span> <span class="n">α</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">)</span> <span class="o">[</span><span class="n">is_well_order</span>  <span class="n">α</span> <span class="n">r</span><span class="o">]</span> <span class="o">[</span><span class="n">mo</span> <span class="o">:</span> <span class="n">is_monomial_order</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">∨</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">)]</span>
+</pre></div>
+
+<a name="159269758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269758">Kenny Lau (Feb 24 2019 at 09:52)</a>:</h4>
+<p>how is your <code>has_add</code> being supplied to your monomial order?</p>
+
+<a name="159269766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269766">Kenny Lau (Feb 24 2019 at 09:53)</a>:</h4>
+<p>as in, how does <code>variables {α : Type*} [linear_order α] [is_monomial_order α (≤)]  [is_well_order  α ((&lt;) : α → α → Prop) ]</code> even type check?</p>
+
+<a name="159269770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269770">AHan (Feb 24 2019 at 09:53)</a>:</h4>
+<p>Ah sorry actually those <code>α</code> should be <code>α →₀ β</code> as I am operating on <code>finsupp</code><br>
+my bad...</p>
+
+<a name="159269814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269814">Kenny Lau (Feb 24 2019 at 09:54)</a>:</h4>
+<p>and what instances are on <code>\b</code>?</p>
+
+<a name="159269866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269866">Kenny Lau (Feb 24 2019 at 09:56)</a>:</h4>
+<p>I mean, the only canonically ordered monoids that are well-founded seem to be the limit ordinals, which we don't really care about other than the first one (i.e. <code>nat</code>), so I don't know what you're trying to achieve</p>
+
+<a name="159269870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269870">AHan (Feb 24 2019 at 09:56)</a>:</h4>
+<p>I defined a class <br>
+<code>lean class decidable_canonically_ordered_monoid (α : Type*) extends canonically_ordered_monoid α, decidable_linear_ordered_cancel_comm_monoid α </code></p>
+<p><code>\b</code> is of the instance <code>decidable_canonically_ordered_monoid </code></p>
+
+<a name="159269873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269873">Kenny Lau (Feb 24 2019 at 09:56)</a>:</h4>
+<p>I fail to see how <code>\a \to\_0 \b</code> can have a well order</p>
+
+<a name="159269994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159269994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159269994">AHan (Feb 24 2019 at 10:00)</a>:</h4>
+<p>or maybe just consider <code>\b</code> as <code>nat</code>  would be better, sorry for confusing.<br>
+I'm just trying to prove something on monomials</p>
+
+<a name="159270058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270058">AHan (Feb 24 2019 at 10:02)</a>:</h4>
+<p>according to wikipedia<br>
+"In the case of finitely many variables, well-ordering of a monomial order is equivalent to the conjunction of the following two conditions:</p>
+<div class="codehilite"><pre><span></span>The order is a total order.
+If u is any monomial then 1 ≤ u .&quot;
+</pre></div>
+
+
+<p>And I'm trying to prove this, so the well order of <code>α →₀ β</code> is actually the well order of monomials</p>
+
+<a name="159270072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270072">Kenny Lau (Feb 24 2019 at 10:03)</a>:</h4>
+<p>but it will not satisfy <code>∀ a b : α, r a b → ∀ c : α, r (c + a) (c + b)</code></p>
+
+<a name="159270075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270075">Kenny Lau (Feb 24 2019 at 10:03)</a>:</h4>
+<p>what is "the" well order of <code>\a \to\_o \b</code>?</p>
+
+<a name="159270197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270197">AHan (Feb 24 2019 at 10:06)</a>:</h4>
+<p>Why won't it satisfy the relation?<br>
+For example Lexicographic order on monomials</p>
+
+<a name="159270212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270212">Kenny Lau (Feb 24 2019 at 10:07)</a>:</h4>
+<p>never mind, I was wrong</p>
+
+<a name="159270256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270256">Kenny Lau (Feb 24 2019 at 10:08)</a>:</h4>
+<p>I suppose you can define a new structure <code>well_order</code> that extends <code>linear_order</code></p>
+
+<a name="159270313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270313">Mario Carneiro (Feb 24 2019 at 10:10)</a>:</h4>
+<p>monomials are well founded, but they are not well ordered because the order is not total</p>
+
+<a name="159270315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270315">Mario Carneiro (Feb 24 2019 at 10:11)</a>:</h4>
+<p>it's basically the same as asserting that the &lt; order on multiset is well founded</p>
+
+<a name="159270383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Better%20way%20to%20add%20well-founded%20instance/near/159270383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33471Betterwaytoaddwellfoundedinstance.html#159270383">AHan (Feb 24 2019 at 10:13)</a>:</h4>
+<p>yes, so I am trying to prove it either with <br>
+"well-founded + linear order + monomial order" or with "well-order + monomial order"</p>
+
+
+{% endraw %}

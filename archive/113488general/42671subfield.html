@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/42671subfield.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html">subfield</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158993140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158993140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158993140">Kenny Lau (Feb 20 2019 at 17:03)</a>:</h4>
+<p>So the current definition of subfield is:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_subfield</span> <span class="kn">extends</span> <span class="n">is_subring</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">inv_mem</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">F</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+
+<p>which is clearly wrong, as this requires the inverse of 0 to be inside the set.<br>
+However, if one fixes it, then a subfield would no longer be a field, because one would not have a computable inverse:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">subset</span><span class="bp">.</span><span class="n">field</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="n">field</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">subtype_instance</span>
+</pre></div>
+
+<a name="158993144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158993144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158993144">Kenny Lau (Feb 20 2019 at 17:03)</a>:</h4>
+<p>Question: what to do?</p>
+
+<a name="158993892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158993892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158993892">Kenny Lau (Feb 20 2019 at 17:15)</a>:</h4>
+<p>I think the solution to this nonsense is to define a structure <code>field'</code> where <code>0⁻¹ = 0</code></p>
+
+<a name="158994063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158994063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158994063">Johan Commelin (Feb 20 2019 at 17:17)</a>:</h4>
+<p>Maybe something like <code>\for a b, a * b = 1, a \in S \to b \in S</code></p>
+
+<a name="158994131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158994131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158994131">Kenny Lau (Feb 20 2019 at 17:18)</a>:</h4>
+<p>this won't solve the problem that a subfield won't be a field</p>
+
+<a name="158994203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subfield/near/158994203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42671subfield.html#158994203">Chris Hughes (Feb 20 2019 at 17:19)</a>:</h4>
+<p>It will be a field it just won't be a <code>field</code></p>
+
+
+{% endraw %}

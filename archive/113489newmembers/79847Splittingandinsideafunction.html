@@ -1,0 +1,316 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/79847Splittingandinsideafunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html">Splitting "and" inside a function.</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159157743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159157743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159157743">Calle Sönne (Feb 22 2019 at 13:53)</a>:</h4>
+<p>I have following code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ratio_test</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">abs</span> <span class="o">((</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">/</span><span class="o">(</span><span class="n">a</span> <span class="n">n</span><span class="o">)))</span> <span class="n">L</span><span class="o">)</span>  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="n">a</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span><span class="n">sub_zero</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="n">lt_sub</span><span class="o">,</span> <span class="err">←</span><span class="n">div_lt_div_right</span> <span class="n">two_pos</span><span class="o">,</span> <span class="n">zero_div</span><span class="o">]</span> <span class="n">at</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="o">((</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="n">h₂</span> <span class="k">with</span> <span class="n">N</span> <span class="n">H</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">abs_sub_lt_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Tactic state:</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">,</span>
+<span class="n">L</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">n</span><span class="bp">|</span> <span class="o">)</span> <span class="n">L</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">,</span>
+<span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+<span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">n</span><span class="bp">|</span> <span class="bp">-</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">L</span> <span class="bp">-</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">n</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span>
+<span class="err">⊢</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="n">a</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>Is it possible for me to split the "and" inside hypothesis H?</p>
+
+<a name="159157812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159157812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159157812">Mario Carneiro (Feb 22 2019 at 13:54)</a>:</h4>
+<p><code>cases H</code></p>
+
+<a name="159157873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159157873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159157873">Calle Sönne (Feb 22 2019 at 13:55)</a>:</h4>
+<p>I tried doing that, it gives me error:<br>
+cases tactic failed, it is not applicable to the given hypothesis</p>
+
+<a name="159157874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159157874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159157874">Mario Carneiro (Feb 22 2019 at 13:55)</a>:</h4>
+<p>oh wait, I didn't see the forall. You can first rewrite with <code>imp_and_distrib</code> and <code>forall_and_distrib</code></p>
+
+<a name="159158122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159158122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159158122">Calle Sönne (Feb 22 2019 at 13:58)</a>:</h4>
+<p>Thank you :)</p>
+
+<a name="159158840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159158840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159158840">Patrick Massot (Feb 22 2019 at 14:10)</a>:</h4>
+<p>Calle, let me emphasize the natural number subtraction discussion: what you had to endure was the result of Lean not yet having enough tactics to fight natural number subtraction hell. One day Lean will catch up with the rest of the world in this area, and it will disappear. In the mean time you shouldn't think everything is hopeless. Your <code>have h₂ : (1 - L) / 2 &gt; 0, rwa [←sub_zero (1:ℝ), lt_sub, ←div_lt_div_right two_pos, zero_div] at h₁,</code> is unneeded suffering. There is no nat subtraction in this statement, you can safely replace this proof with <code>linarith</code></p>
+
+<a name="159158879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159158879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159158879">Patrick Massot (Feb 22 2019 at 14:10)</a>:</h4>
+<p><code>have h₂ : (1 - L) / 2 &gt; 0, by linarith,</code></p>
+
+<a name="159158884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159158884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159158884">Calle Sönne (Feb 22 2019 at 14:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ratio_test</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">abs</span> <span class="o">((</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">/</span><span class="o">(</span><span class="n">a</span> <span class="n">n</span><span class="o">)))</span> <span class="n">L</span><span class="o">)</span>  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="n">a</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span><span class="n">sub_zero</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="n">lt_sub</span><span class="o">,</span> <span class="err">←</span><span class="n">div_lt_div_right</span> <span class="n">two_pos</span><span class="o">,</span> <span class="n">zero_div</span><span class="o">]</span> <span class="n">at</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="o">((</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="n">h₂</span> <span class="k">with</span> <span class="n">N</span> <span class="n">H</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">abs_sub_lt_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">imp_and_distrib</span><span class="o">,</span> <span class="n">forall_and_distrib</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span> <span class="n">cases</span> <span class="n">H</span> <span class="k">with</span> <span class="n">Ha</span> <span class="n">Hb</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">lt_sub</span><span class="o">,</span> <span class="n">add_div</span><span class="o">]</span> <span class="n">at</span> <span class="n">Ha</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Tactic state:</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">,</span>
+<span class="n">L</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">n</span><span class="bp">|</span> <span class="o">)</span> <span class="n">L</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">,</span>
+<span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+<span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">Hb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">L</span> <span class="bp">-</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+<span class="n">Ha</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">a</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">a</span> <span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">L</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span><span class="bp">⁻¹</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">L</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">M1P1</span><span class="bp">.</span><span class="n">is_limit</span> <span class="n">a</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>I would like to do some simple rewrites on Ha, add_assoc and add_comm. I want to get (L + 1)/2 on RHS. From what I've understood rw doesnt work inside a forall statement, and in this case simp/simp only [add_assoc] at Ha does nothing. How do I proceed?</p>
+
+<a name="159159024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159024">Calle Sönne (Feb 22 2019 at 14:13)</a>:</h4>
+<p>Thank you Patrick! I always seem forget the existence of linarith.</p>
+
+<a name="159159053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159053">Patrick Massot (Feb 22 2019 at 14:13)</a>:</h4>
+<p>The easy way here is to wait until you specialize <code>Ha</code></p>
+
+<a name="159159267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159267">Patrick Massot (Feb 22 2019 at 14:16)</a>:</h4>
+<p>But if you really want it, you can</p>
+<div class="codehilite"><pre><span></span>  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">z</span><span class="o">,</span> <span class="n">z</span> <span class="bp">-</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span><span class="bp">+</span><span class="n">L</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">intro</span> <span class="n">z</span> <span class="bp">;</span> <span class="n">split</span> <span class="bp">;</span> <span class="n">intro</span> <span class="bp">;</span> <span class="n">linarith</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="n">at</span> <span class="n">Ha</span><span class="o">,</span>
+</pre></div>
+
+<a name="159159383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159383">Patrick Massot (Feb 22 2019 at 14:18)</a>:</h4>
+<p>except you shouldn't call it <code>h</code> because you already have an <code>h</code> in your context...</p>
+
+<a name="159159438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159438">Patrick Massot (Feb 22 2019 at 14:20)</a>:</h4>
+<p>For very short one-shots like this, you have the option to write something like:</p>
+<div class="codehilite"><pre><span></span><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="k">show</span> <span class="bp">∀</span> <span class="n">z</span><span class="o">,</span> <span class="n">z</span> <span class="bp">-</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">L</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span><span class="bp">+</span><span class="n">L</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">,</span>
+             <span class="k">by</span> <span class="n">intro</span> <span class="n">z</span> <span class="bp">;</span> <span class="n">split</span> <span class="bp">;</span> <span class="n">intro</span> <span class="bp">;</span> <span class="n">linarith</span><span class="o">]</span> <span class="n">at</span> <span class="n">Ha</span><span class="o">,</span>
+</pre></div>
+
+
+<p>that won't clutter your context at any time</p>
+
+<a name="159159553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159159553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159159553">Calle Sönne (Feb 22 2019 at 14:22)</a>:</h4>
+<p>thats perfect! Was already getting annoyed at the hypothesis being in the way :)</p>
+
+<a name="159161463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159161463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159161463">Patrick Massot (Feb 22 2019 at 14:51)</a>:</h4>
+<p>By the way <span class="user-mention" data-user-id="132603">@Calle Sönne</span> your statement of <code>ratio_test</code> does not hold</p>
+
+<a name="159161479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159161479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159161479">Patrick Massot (Feb 22 2019 at 14:51)</a>:</h4>
+<p>It's a good exercise to look for a counter-example</p>
+
+<a name="159164045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164045">Patrick Massot (Feb 22 2019 at 15:27)</a>:</h4>
+<p>Once you'll have fixed the statement, my next advice will by to first state: <code>theorem ratio_test_aux (a : ℕ → ℝ) (L : ℝ) (hL : L &lt; 1)  (INSERT MISSING ASSUMPTION HERE)   (h : ∀ n, abs ((a (n+1))/(a n)) ≤ L) : M1P1.is_limit a 0</code>. You'll probably also want to state <code>theorem sandwich_zero (a b : ℕ → ℝ)  (hb : is_limit b 0)   (hab : ∀ n, abs (a n) ≤ b n) : is_limit a 0</code>. This way you'll be able to keep low complexity proofs</p>
+
+<a name="159164427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164427">Calle Sönne (Feb 22 2019 at 15:32)</a>:</h4>
+<p>Yes :) I noticed after a while that I needed: <code>lean (h₂ : ∀ (n : ℕ), (a n) ≠ 0) </code> or where you hinting at something else?</p>
+
+<a name="159164528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164528">Patrick Massot (Feb 22 2019 at 15:32)</a>:</h4>
+<p>Did you find the counter-example without this assumption? (this is not an exam, I'm asking because there is an important Lean lesson to learn here, and it's better if you can figure it out for yourself)</p>
+
+<a name="159164858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164858">Calle Sönne (Feb 22 2019 at 15:37)</a>:</h4>
+<p>I did not find a counterexample, I just noticed that after a while I needed this assumption to proceed. I am not sure about the counter-example... If the assumption wasn't true then the sequence <code> λ n, abs ((a (n+1))/(a n))</code> is undefined right?</p>
+
+<a name="159164881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164881">Patrick Massot (Feb 22 2019 at 15:37)</a>:</h4>
+<p>Lean doesn't let you write anything undefined</p>
+
+<a name="159164951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164951">Patrick Massot (Feb 22 2019 at 15:38)</a>:</h4>
+<p>That's a very important point</p>
+
+<a name="159164971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159164971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159164971">Mario Carneiro (Feb 22 2019 at 15:38)</a>:</h4>
+<p>hint: what if every other value is 0?</p>
+
+<a name="159165027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165027">Patrick Massot (Feb 22 2019 at 15:39)</a>:</h4>
+<p>Mario: Calle is not there yet, still needs to figure out what happens in Lean if there is <em>some</em> zero value</p>
+
+<a name="159165077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165077">Calle Sönne (Feb 22 2019 at 15:40)</a>:</h4>
+<p>yes</p>
+
+<a name="159165563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165563">Calle Sönne (Feb 22 2019 at 15:46)</a>:</h4>
+<p>I found that the inverse for zero is zero in field.lean, and it was proved using <code> discrete_field.inv_zero α </code></p>
+
+<a name="159165592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165592">Calle Sönne (Feb 22 2019 at 15:47)</a>:</h4>
+<p>discrete_field... thats just a finite field?</p>
+
+<a name="159165625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165625">Patrick Massot (Feb 22 2019 at 15:47)</a>:</h4>
+<p>no, discrete_field means field</p>
+
+<a name="159165629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165629">Calle Sönne (Feb 22 2019 at 15:47)</a>:</h4>
+<p>oh</p>
+
+<a name="159165637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165637">Calle Sönne (Feb 22 2019 at 15:47)</a>:</h4>
+<p>I saw now that its by definition?</p>
+
+<a name="159165652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165652">Patrick Massot (Feb 22 2019 at 15:47)</a>:</h4>
+<p>you don't want to know why it's called discrete_field</p>
+
+<a name="159165703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165703">Patrick Massot (Feb 22 2019 at 15:48)</a>:</h4>
+<p>Ok, so <code>x/0</code> is defined to be zero.</p>
+
+<a name="159165725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165725">Patrick Massot (Feb 22 2019 at 15:48)</a>:</h4>
+<p>That's good to know</p>
+
+<a name="159165734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165734">Calle Sönne (Feb 22 2019 at 15:48)</a>:</h4>
+<p>but now I want to know of course... <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="159165753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165753">Patrick Massot (Feb 22 2019 at 15:48)</a>:</h4>
+<p>You can now progress to Mario's hint</p>
+
+<a name="159165762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165762">Calle Sönne (Feb 22 2019 at 15:48)</a>:</h4>
+<p>but wait why define it to be zero?</p>
+
+<a name="159165773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165773">Calle Sönne (Feb 22 2019 at 15:49)</a>:</h4>
+<p>to not break lean if someone (like me) does something stupid?</p>
+
+<a name="159165806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165806">Patrick Massot (Feb 22 2019 at 15:49)</a>:</h4>
+<p>There are two parts: first it has to be defined to be something, because all functions are total in type theory</p>
+
+<a name="159165841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165841">Patrick Massot (Feb 22 2019 at 15:49)</a>:</h4>
+<p>then you get to choose the value for <code>a/0</code>. If you choose zero then some algebraic manipulations are valid in every case</p>
+
+<a name="159165901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165901">Patrick Massot (Feb 22 2019 at 15:50)</a>:</h4>
+<p>like (a+b)/c = a/c + b /c</p>
+
+<a name="159165944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165944">Calle Sönne (Feb 22 2019 at 15:50)</a>:</h4>
+<p>ah, makes (kind of) sense</p>
+
+<a name="159165959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165959">Patrick Massot (Feb 22 2019 at 15:50)</a>:</h4>
+<p>so you get a bonus: there is no proof to give when you apply  (a+b)/c = a/c + b /c</p>
+
+<a name="159165993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159165993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159165993">Patrick Massot (Feb 22 2019 at 15:51)</a>:</h4>
+<p>but of course Lean will ask for a non-vanishing proof if you want to use (a*b)/b = a</p>
+
+<a name="159166008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159166008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159166008">Patrick Massot (Feb 22 2019 at 15:51)</a>:</h4>
+<p>because that one needs non-vanishing b</p>
+
+<a name="159166387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159166387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159166387">Calle Sönne (Feb 22 2019 at 15:55)</a>:</h4>
+<p>I have noticed the absence of <code>`b != 0 </code> in some lemmas where I thought it should be before, so this is the reason.</p>
+
+<a name="159167049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167049">Mario Carneiro (Feb 22 2019 at 16:02)</a>:</h4>
+<p>So one way to strengthen your theorem is to only assume that a is <em>eventually</em> nonzero, or <em>eventually</em> with ratio less than L</p>
+
+<a name="159167114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167114">Patrick Massot (Feb 22 2019 at 16:03)</a>:</h4>
+<p>Mario, there is no eventually L</p>
+
+<a name="159167179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167179">Patrick Massot (Feb 22 2019 at 16:04)</a>:</h4>
+<p>At least not in the original statement which assumes <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">a_{n+1}/a_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"></span></span></span></span></span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> <em>converges</em> to L</p>
+
+<a name="159167216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167216">Patrick Massot (Feb 22 2019 at 16:04)</a>:</h4>
+<p>But then I suggested introducing the intermediate statement you're thinking of</p>
+
+<a name="159167442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167442">Calle Sönne (Feb 22 2019 at 16:07)</a>:</h4>
+<p>I was thinking about that as well, but then one might as well make the "eventually" non-zero into a new sequence and apply the theorem. Then I have proved a theorem saying that if a sequence a (n + k) converges for some fixed k, then a n converges.</p>
+
+<a name="159167565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167565">Patrick Massot (Feb 22 2019 at 16:08)</a>:</h4>
+<p>Yes, we've seen that limit_start_irrevelant lemma, that's a good one. You still need (I think) my other two intermediate statements</p>
+
+<a name="159167792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167792">Calle Sönne (Feb 22 2019 at 16:11)</a>:</h4>
+<p>Wait... two? I thought the first one was just mine but adding the missing assumption?</p>
+
+<a name="159167835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167835">Patrick Massot (Feb 22 2019 at 16:11)</a>:</h4>
+<blockquote>
+<p>Once you'll have fixed the statement, my next advice will by to first state: <code>theorem ratio_test_aux (a : ℕ → ℝ) (L : ℝ) (hL : L &lt; 1)  (INSERT MISSING ASSUMPTION HERE)   (h : ∀ n, abs ((a (n+1))/(a n)) ≤ L) : M1P1.is_limit a 0</code>. You'll probably also want to state <code>theorem sandwich_zero (a b : ℕ → ℝ)  (hb : is_limit b 0)   (hab : ∀ n, abs (a n) ≤ b n) : is_limit a 0</code>. This way you'll be able to keep low complexity proofs</p>
+</blockquote>
+
+<a name="159167934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167934">Patrick Massot (Feb 22 2019 at 16:12)</a>:</h4>
+<p>I can see I haven't been consistent with using the M1P1 namespace. I meant M1P1.is_limit everywhere</p>
+
+<a name="159167942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159167942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159167942">Patrick Massot (Feb 22 2019 at 16:12)</a>:</h4>
+<p>But you should probably open that namespace</p>
+
+<a name="159168374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168374">Calle Sönne (Feb 22 2019 at 16:18)</a>:</h4>
+<p>Okay, so you should generally try to split theorems into auxillary lemmas even though they may not be that useful?</p>
+
+<a name="159168384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168384">Calle Sönne (Feb 22 2019 at 16:18)</a>:</h4>
+<p>To reduce complexity</p>
+
+<a name="159168442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168442">Patrick Massot (Feb 22 2019 at 16:19)</a>:</h4>
+<p>Sometimes it helps. And in this case I'm not even sure it's not useful</p>
+
+<a name="159168462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168462">Patrick Massot (Feb 22 2019 at 16:19)</a>:</h4>
+<p>both those intermediate lemmas are fairly useful</p>
+
+<a name="159168536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168536">Calle Sönne (Feb 22 2019 at 16:20)</a>:</h4>
+<p>I see that the second one is useful</p>
+
+<a name="159168596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Splitting%20%22and%22%20inside%20a%20function./near/159168596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79847Splittingandinsideafunction.html#159168596">Calle Sönne (Feb 22 2019 at 16:21)</a>:</h4>
+<p>Okay now I see that the first can be useful as well</p>
+
+
+{% endraw %}

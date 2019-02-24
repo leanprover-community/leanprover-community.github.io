@@ -1,0 +1,165 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/83755flexibleindices.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html">flexible indices</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158961615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158961615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158961615">Johan Commelin (Feb 20 2019 at 09:45)</a>:</h4>
+<p>I'm fooling around with sequences of groups. Here is an extract of some code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">subgroup</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">groups</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor_category</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">function</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">v₃</span> <span class="n">u</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span> <span class="c1">-- declare the `v`&#39;s first; see `category_theory.category` for an explanation</span>
+
+<span class="kn">namespace</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">set</span> <span class="n">instances</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="n">def</span> <span class="n">sequence</span> <span class="o">:=</span> <span class="bp">ℤ</span> <span class="err">⥤</span> <span class="n">C</span>
+
+<span class="kn">namespace</span> <span class="n">sequence</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">sequence</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">functor</span><span class="bp">.</span><span class="n">category</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">sequence</span> <span class="n">C</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">delta</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">{</span><span class="n">j</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">X</span><span class="bp">.</span><span class="n">obj</span> <span class="n">i</span> <span class="err">⟶</span> <span class="n">X</span><span class="bp">.</span><span class="n">obj</span> <span class="n">j</span> <span class="o">:=</span>
+<span class="n">X</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">auto_param_eq</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h</span><span class="o">,</span> <span class="n">tidy</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158961623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158961623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158961623">Johan Commelin (Feb 20 2019 at 09:45)</a>:</h4>
+<p>What I am after is a nice definition of <code>delta</code></p>
+
+<a name="158961714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158961714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158961714">Johan Commelin (Feb 20 2019 at 09:47)</a>:</h4>
+<p>It is the map <code>X.obj i \hom X.obj (i+1)</code> but I want to use unification to replace <code>i</code> with <code>(i-1+1)</code> when necessary.</p>
+
+<a name="158961922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158961922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158961922">Johan Commelin (Feb 20 2019 at 09:51)</a>:</h4>
+<p>Currently this fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">X</span><span class="bp">.</span><span class="n">delta</span> <span class="o">(</span><span class="n">i</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">≫</span> <span class="n">X</span><span class="bp">.</span><span class="n">delta</span> <span class="n">i</span>
+</pre></div>
+
+<a name="158961939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158961939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158961939">Johan Commelin (Feb 20 2019 at 09:51)</a>:</h4>
+<p>Because the second <code>X.delta</code> should be <code>X.delta (i-1+1)</code>, which is ugly.</p>
+
+<a name="158962397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158962397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158962397">Johan Commelin (Feb 20 2019 at 09:59)</a>:</h4>
+<p>My goal is to make things like this typecheck:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">sequence</span> <span class="n">Group</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">is_complex</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">range</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="o">(</span><span class="n">i</span><span class="bp">-</span><span class="mi">1</span><span class="o">))</span> <span class="err">⊆</span> <span class="n">ker</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+<a name="158962468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158962468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158962468">Kenny Lau (Feb 20 2019 at 10:00)</a>:</h4>
+<p>(never mind)</p>
+
+<a name="158962609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158962609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158962609">Kenny Lau (Feb 20 2019 at 10:03)</a>:</h4>
+<p>also your code doesn't work because <code>category_theory.instances.groups</code> doesn't exist</p>
+
+<a name="158964464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158964464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158964464">Johan Commelin (Feb 20 2019 at 10:38)</a>:</h4>
+<p>Yes, I know. It exists on my machine. It's a pity it doesn't yet exist in mathlib.</p>
+
+<a name="158965848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158965848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158965848">Johan Commelin (Feb 20 2019 at 11:04)</a>:</h4>
+<p>Here is <code>category_theory/instances/groups.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Copyright (c) 2018 Johan Commelin. All rights reserved.</span>
+<span class="cm">Released under Apache 2.0 license as described in the file LICENSE.</span>
+<span class="cm">Authors: Johan Commelin</span>
+
+<span class="cm">Introduce Group -- the category of groups.</span>
+
+<span class="cm">Currently only the basic setup.</span>
+<span class="cm">Copied from monoids.lean.</span>
+<span class="cm">-/</span>
+
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">concrete_category</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">fully_faithful</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">adjunction</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="kn">namespace</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span>
+
+<span class="c">/-</span><span class="cm">- The category of groups and group morphisms. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">Group</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">bundled</span> <span class="n">group</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">Group</span><span class="o">)</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">G</span><span class="bp">.</span><span class="n">str</span>
+
+<span class="kn">instance</span> <span class="n">concrete_is_group_hom</span> <span class="o">:</span>
+  <span class="n">concrete_category</span> <span class="bp">@</span><span class="n">is_group_hom</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="k">by</span> <span class="n">introsI</span> <span class="n">α</span> <span class="n">ia</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">introsI</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">ia</span> <span class="n">ib</span> <span class="n">ic</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">Group_hom_is_group_hom</span> <span class="o">{</span><span class="n">G₁</span> <span class="n">G₂</span> <span class="o">:</span> <span class="n">Group</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G₁</span> <span class="err">⟶</span> <span class="n">G₂</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_group_hom</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G₁</span> <span class="bp">→</span> <span class="n">G₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">Group</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">punit</span><span class="o">,</span> <span class="n">str</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">}</span><span class="bp">⟩</span>
+
+<span class="c">/-</span><span class="cm">- The category of commutative groups and group morphisms. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">CommGroup</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">bundled</span> <span class="n">comm_group</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">CommGroup</span><span class="o">)</span> <span class="o">:</span> <span class="n">comm_group</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">str</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">is_comm_group_hom</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">is_group_hom</span> <span class="n">f</span>
+
+<span class="kn">instance</span> <span class="n">concrete_is_comm_group_hom</span> <span class="o">:</span> <span class="n">concrete_category</span> <span class="bp">@</span><span class="n">is_comm_group_hom</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="k">by</span> <span class="n">introsI</span> <span class="n">α</span> <span class="n">ia</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">introsI</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">ia</span> <span class="n">ib</span> <span class="n">ic</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">CommGroup_hom_is_comm_group_hom</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommGroup</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_comm_group_hom</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="kn">namespace</span> <span class="n">CommGroup</span>
+<span class="c">/-</span><span class="cm">- The forgetful functor from commutative groups to groups. -/</span>
+<span class="n">def</span> <span class="n">forget_to_Group</span> <span class="o">:</span> <span class="n">CommGroup</span> <span class="err">⥤</span> <span class="n">Group</span> <span class="o">:=</span>
+<span class="n">concrete_functor</span>
+  <span class="o">(</span><span class="k">by</span> <span class="n">intros</span> <span class="bp">_</span> <span class="n">c</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">{</span> <span class="bp">..</span><span class="n">c</span> <span class="o">})</span>
+  <span class="o">(</span><span class="k">by</span> <span class="n">introsI</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span> <span class="n">i</span><span class="bp">;</span>  <span class="n">exact</span> <span class="o">{</span> <span class="bp">..</span><span class="n">i</span> <span class="o">})</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">faithful</span> <span class="o">(</span><span class="n">forget_to_Group</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">CommGroup</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">punit</span><span class="o">,</span> <span class="n">str</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span> <span class="o">}</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="n">CommGroup</span>
+
+<span class="kn">end</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span>
+</pre></div>
+
+<a name="158969754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158969754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158969754">Kevin Buzzard (Feb 20 2019 at 12:23)</a>:</h4>
+<p>What's the story as to why it's not in mathlib? My MSc student was going to use categories for doing schemes but we decided it wasn't a good idea because categories seemed to be happening too slowly</p>
+
+<a name="158981420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158981420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158981420">Johan Commelin (Feb 20 2019 at 14:51)</a>:</h4>
+<p>The story is that nobody copied the file about the category of monoids and did a search-replace <code>s/monoid/group/</code>. That's all.</p>
+
+
+{% endraw %}

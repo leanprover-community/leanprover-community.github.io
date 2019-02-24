@@ -1,0 +1,391 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/89469Dependenthell.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html">Dependent hell</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158830062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830062">Sebastien Gouezel (Feb 18 2019 at 21:27)</a>:</h4>
+<p>I realize I don't know what to do with dependent types, even the most basic things. Some context: I am building inductively a sequence of more and more complicated metric spaces. In this construction, the metric at each step is constructed from the metric at the previous step, but I am not able to convince Lean of this. I have minimized my problem in the following example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">aux</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">space</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">metric</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">space</span><span class="o">)</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">aux</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="bp">;</span> <span class="n">exact</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">k</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">E</span> <span class="o">:</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">my_def</span><span class="o">],</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">:(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span><span class="o">,</span> <span class="bp">∀</span><span class="n">z</span><span class="o">:</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">,</span>
+    <span class="n">dist</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dist</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">))</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Here, <code>aux</code> is a structure containing a Type and a metric structure on it, and <code>my_def</code> constructs inductively new metric spaces, by taking the product of the previous one with <code>X n</code>, so that <code>my_def X (n.succ) = prod (my_def X n) (X n.succ)</code>, with the same metric. Of course, I only have equality of types, so if I want to express that the distances are the same I need to use a cast. But then I don't know how to prove that the distances are the same, while this is precisely what the definition of <code>my_def</code> does. Probably I miss the good keywords, or a pointer to the relevant chapter in TPIL (or to some part of the library where this game is played). Any idea?</p>
+
+<a name="158830678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830678">Chris Hughes (Feb 18 2019 at 21:39)</a>:</h4>
+<p>If you can make <code>my_def X (n.succ) = prod (my_def X n) (X n.succ)</code> definitional, then you won't need cast.</p>
+
+<a name="158830741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830741">Reid Barton (Feb 18 2019 at 21:40)</a>:</h4>
+<p>I don't understand how it's not definitional already</p>
+
+<a name="158830747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830747">Rob Lewis (Feb 18 2019 at 21:40)</a>:</h4>
+<p>It is actually definitional.</p>
+
+<a name="158830752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830752">Reid Barton (Feb 18 2019 at 21:40)</a>:</h4>
+<p>you can prove <code>E</code> by <code>begin dsimp [my_def], refl end</code> but not by <code>rfl</code></p>
+
+<a name="158830755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830755">Rob Lewis (Feb 18 2019 at 21:40)</a>:</h4>
+<p>You can replace the <code>simp [my_def]</code> with <code>unfold my_def</code>.</p>
+
+<a name="158830768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830768">Rob Lewis (Feb 18 2019 at 21:41)</a>:</h4>
+<p>And you don't need the <code>cast E</code>s.</p>
+
+<a name="158830851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830851">Chris Hughes (Feb 18 2019 at 21:42)</a>:</h4>
+<p>But isn't this space just <code>Π i : fin n, X n</code>?</p>
+
+<a name="158830860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830860">Kevin Buzzard (Feb 18 2019 at 21:43)</a>:</h4>
+<p>fin (n+1) but yes</p>
+
+<a name="158830898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830898">Sebastien Gouezel (Feb 18 2019 at 21:43)</a>:</h4>
+<p>Yes, of course, it is just <code>Π i : fin n, X n</code> in this simple example, but in my real use-case, it is something much more complicated.</p>
+
+<a name="158830958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830958">Kenny Lau (Feb 18 2019 at 21:44)</a>:</h4>
+<p>oh man, inductive-recursive types</p>
+
+<a name="158830965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158830965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158830965">Kenny Lau (Feb 18 2019 at 21:44)</a>:</h4>
+<p>probably just recurse on a sigma type</p>
+
+<a name="158831000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831000">Chris Hughes (Feb 18 2019 at 21:45)</a>:</h4>
+<p>I had this problem with splitting fields. The other thing you can do is define the Type and all the definitions you need to prove everything else in one definition</p>
+
+<a name="158831013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831013">Chris Hughes (Feb 18 2019 at 21:45)</a>:</h4>
+<p>This is the type of my definition of splitting fields.</p>
+<div class="codehilite"><pre><span></span><span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">nat_degree</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">n</span><span class="o">),</span> <span class="k">by</span> <span class="n">exactI</span> <span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">[</span><span class="k">by</span> <span class="n">exactI</span> <span class="n">is_field_hom</span> <span class="n">i</span><span class="o">],</span> <span class="o">(</span><span class="k">by</span> <span class="n">exactI</span> <span class="n">splits</span> <span class="n">i</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="158831094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831094">Chris Hughes (Feb 18 2019 at 21:47)</a>:</h4>
+<p>Unfortunately this did give me universe issues defining the map from a splitting field, so I still had to make sure the equation lemmas were definitional, and define the map by unfolding the definition.</p>
+
+<a name="158831181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831181">Sebastien Gouezel (Feb 18 2019 at 21:49)</a>:</h4>
+<p>Isn't my definition one single definition? I mean, I only define one function <code>my_def</code>. Or does the fact that it is structure-valued mean that I have two intertwined definitions?</p>
+
+<a name="158831243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831243">Sebastien Gouezel (Feb 18 2019 at 21:50)</a>:</h4>
+<blockquote>
+<p>probably just recurse on a sigma type</p>
+</blockquote>
+<p>Could you elaborate a little bit, please?</p>
+
+<a name="158831248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831248">Chris Hughes (Feb 18 2019 at 21:50)</a>:</h4>
+<p>I'm saying define the space and every property you need about the space together.</p>
+
+<a name="158831260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831260">Chris Hughes (Feb 18 2019 at 21:50)</a>:</h4>
+<p>Or at least enough properties to deduce everything else.</p>
+
+<a name="158831476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831476">Chris Hughes (Feb 18 2019 at 21:55)</a>:</h4>
+<p>With a load of nested Sigmas.</p>
+
+<a name="158831539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831539">Reid Barton (Feb 18 2019 at 21:56)</a>:</h4>
+<p>It works better if you don't use the equation compiler</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">aux</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">prod</span> <span class="n">a</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">a</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="n">a</span><span class="bp">.</span><span class="n">metric</span><span class="bp">;</span> <span class="n">apply_instance</span> <span class="o">})</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">k</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">E</span> <span class="o">:</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">:(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span><span class="o">,</span> <span class="bp">∀</span><span class="n">z</span><span class="o">:</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">,</span>
+    <span class="n">dist</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dist</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">))</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158831543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831543">Reid Barton (Feb 18 2019 at 21:56)</a>:</h4>
+<p>I think I also ran into this here: <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/disk_sphere.lean#L11" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/disk_sphere.lean#L11">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/disk_sphere.lean#L11</a></p>
+
+<a name="158831550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831550">Reid Barton (Feb 18 2019 at 21:56)</a>:</h4>
+<p>I don't understand why it matters</p>
+
+<a name="158831899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831899">Reid Barton (Feb 18 2019 at 22:03)</a>:</h4>
+<p>Apparently the equation compiler uses something called <code>nat.brec_on</code></p>
+
+<a name="158831908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831908">Chris Hughes (Feb 18 2019 at 22:03)</a>:</h4>
+<p><code>nat.brec_on</code> usually produces definition stuff.</p>
+
+<a name="158831919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158831919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158831919">Sebastien Gouezel (Feb 18 2019 at 22:03)</a>:</h4>
+<p>Amazing. And it also works in my real use case!</p>
+
+<a name="158833905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158833905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158833905">Kevin Buzzard (Feb 18 2019 at 22:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">f</span><span class="bp">._</span><span class="n">main</span> <span class="c1">-- nat.brec_on stuff</span>
+</pre></div>
+
+
+<p>Simple use case with equation compiler still giving me <code>rfl</code> proofs.</p>
+
+<a name="158833916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158833916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158833916">Kevin Buzzard (Feb 18 2019 at 22:37)</a>:</h4>
+<p>So what's the difference in Sebastien's case?</p>
+
+<a name="158834169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158834169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158834169">Kevin Buzzard (Feb 18 2019 at 22:42)</a>:</h4>
+<p>But indeed, replacing <code>my_def</code> in Reid's code with</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">aux</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="bp">;</span> <span class="n">apply_instance</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>breaks the <code>rfl</code> proof of <code>E</code></p>
+
+<a name="158834289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158834289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158834289">Kevin Buzzard (Feb 18 2019 at 22:45)</a>:</h4>
+<p>Complete code in case anyone wants to fiddle</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">structure</span> <span class="n">aux</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">space</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">metric</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">space</span><span class="o">)</span>
+
+<span class="c1">-- use nat.rec instead and things are better</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">aux</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="bp">;</span> <span class="n">apply_instance</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">k</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">E</span> <span class="o">:</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- fails</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">:(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span><span class="o">,</span> <span class="bp">∀</span><span class="n">z</span><span class="o">:</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">,</span>
+    <span class="n">dist</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dist</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">))</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158834362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158834362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158834362">Kevin Buzzard (Feb 18 2019 at 22:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">structure</span> <span class="n">aux</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">space</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">metric</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">space</span><span class="o">)</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">aux</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">space</span> <span class="o">:=</span> <span class="n">prod</span> <span class="n">a</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span>
+    <span class="n">metric</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">a</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="n">a</span><span class="bp">.</span><span class="n">metric</span><span class="bp">;</span> <span class="n">apply_instance</span> <span class="o">})</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">k</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">metric</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">E</span> <span class="o">:</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- works</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">:(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">space</span><span class="o">,</span> <span class="bp">∀</span><span class="n">z</span><span class="o">:</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">,</span>
+    <span class="n">dist</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dist</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="n">z</span><span class="o">))</span> <span class="o">(</span><span class="n">cast</span> <span class="n">E</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="158840102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840102">Mario Carneiro (Feb 19 2019 at 00:51)</a>:</h4>
+<p>why is <code>my_def</code> <code>noncomputable</code>?</p>
+
+<a name="158840164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840164">Reid Barton (Feb 19 2019 at 00:53)</a>:</h4>
+<p>because the product metric involves doing something with reals</p>
+
+<a name="158840502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840502">Mario Carneiro (Feb 19 2019 at 01:02)</a>:</h4>
+<p>I think the <code>noncomputable</code> marker has something to do with why it doesn't compute. Minimized:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">X</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">my_def</span> <span class="n">X</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">my_def</span> <span class="n">X</span> <span class="n">n</span> <span class="bp">×</span> <span class="n">X</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="158840513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840513">Mario Carneiro (Feb 19 2019 at 01:03)</a>:</h4>
+<p>If you use <code>my_def._main</code> in place of <code>my_def</code>, it works</p>
+
+<a name="158840556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840556">Mario Carneiro (Feb 19 2019 at 01:04)</a>:</h4>
+<p>even though these are defined to be the same</p>
+
+<a name="158840575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840575">Mario Carneiro (Feb 19 2019 at 01:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Is it possible to define the type before putting the metric space structure on it?</p>
+
+<a name="158840583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840583">Mario Carneiro (Feb 19 2019 at 01:06)</a>:</h4>
+<p>In the case of <code>my_def</code> at least, the <code>space</code> component does not depend on the <code>metric</code> component so they can be defined in that order rather than as a sigma</p>
+
+<a name="158840697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840697">Mario Carneiro (Feb 19 2019 at 01:08)</a>:</h4>
+<p>hm, even <code>my_def X n = my_def._main X n := rfl</code> fails</p>
+
+<a name="158840864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840864">Mario Carneiro (Feb 19 2019 at 01:12)</a>:</h4>
+<p>Aha, <code>whnf `(my_def X n)</code> returns <code>my_def X n</code> without unfolding anything</p>
+
+<a name="158840866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158840866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158840866">Mario Carneiro (Feb 19 2019 at 01:12)</a>:</h4>
+<p>I think lean thinks <code>my_def</code> is some kind of irreducible</p>
+
+<a name="158857401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158857401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158857401">Sebastien Gouezel (Feb 19 2019 at 08:24)</a>:</h4>
+<p>In my real use case, the definition is noncomputable because it doesn't work without it :) With the equation compiler, I get the complain </p>
+<div class="codehilite"><pre><span></span>equation compiler failed to generate bytecode for &#39;auxi._main&#39;
+nested exception message:
+code generation failed, VM does not have code for &#39;classical.indefinite_description&#39;
+</pre></div>
+
+
+<p>So I need to add <code>noncomputable</code> (even though I am already in a <code>noncomputable theory</code>). With the <code>nat.rec_on</code> version, however, I do not need to add it.</p>
+
+<a name="158857424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158857424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158857424">Sebastien Gouezel (Feb 19 2019 at 08:25)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110050">@Sebastien Gouezel</span> Is it possible to define the type before putting the metric space structure on it?</p>
+</blockquote>
+<p>This would solve all my problems, sure, but this is not possible in my real use case: the definition of the type at step <code>n+1</code> depends on the metric at step <code>n</code>.</p>
+
+<a name="158857484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158857484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158857484">Kenny Lau (Feb 19 2019 at 08:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> what is this mysterious use case?</p>
+
+<a name="158857773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158857773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158857773">Sebastien Gouezel (Feb 19 2019 at 08:32)</a>:</h4>
+<p>There is an optimal way to glue two metric spaces together, to minimize their Hausdorff distance in the coupling. I have a sequence of metric spaces <code>X n</code>, and I want to build a metric space in which each <code>X n</code> is glued to <code>X (n+1)</code> in the optimal way. Start from <code>Y 0 = X 0</code>. Then glue optimally <code>X 1</code> to <code>X 0</code>, to get <code>Y 1</code> (with an isometrically embedded copy of <code>X 1</code>). Then glue the optimal coupling of <code>X 1</code> and <code>X 2</code> to <code>Y 1</code> along the space <code>X 1</code> that they both contain. This gives you a space <code>Y 2</code> (with an isometrically embedded copy of <code>X 2</code>). Go on like this to get <code>Y 3</code>, <code>Y 4</code> and so on. Note that each <code>Y n</code> is isometrically embedded in each <code>Y (n+1)</code>. Then take the inductive limit of the <code>Y n</code>, and you get the desired space.</p>
+<p>All this is useful to show that the space of all nonempty compact metric spaces (a well behaved metric space, called the Gromov Hausdorff space), is complete: the <code>X n</code> will be a Cauchy sequence in the Gromov Hausdorff space, and I am constructing its limit.</p>
+
+<a name="158858090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858090">Mario Carneiro (Feb 19 2019 at 08:38)</a>:</h4>
+<p>Is the gluing a disjoint union or a nondisjoint union or something in between?</p>
+
+<a name="158858211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858211">Sebastien Gouezel (Feb 19 2019 at 08:41)</a>:</h4>
+<p>Something in between, and non-explicit: an optimal predistance is constructed on the disjoint union to minimize the Hausdorff distance functional, by applying Arzela-Ascoli to show that a minimizer exists. It satisfies all properties of a distance, except that different points can be at zero distance. Then quotient by the natural equivalence relation "being at zero distance" to get the desired metric space. This is highly noncomputable...</p>
+
+<a name="158858276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858276">Mario Carneiro (Feb 19 2019 at 08:42)</a>:</h4>
+<p>So the short story is it's a quotient of a disjoint union of <code>X 0</code> and <code>X 1</code></p>
+
+<a name="158858295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858295">Kenny Lau (Feb 19 2019 at 08:43)</a>:</h4>
+<p>actually I bet you can make it "computable"</p>
+
+<a name="158858304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858304">Mario Carneiro (Feb 19 2019 at 08:43)</a>:</h4>
+<p>I'm not sure if this is better, but you could start with the disjoint union, and construct the equivalence relation and the metric space together in your recursion</p>
+
+<a name="158858348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858348">Mario Carneiro (Feb 19 2019 at 08:44)</a>:</h4>
+<p>that way the type itself is set up beforehand</p>
+
+<a name="158858360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858360">Mario Carneiro (Feb 19 2019 at 08:44)</a>:</h4>
+<p>Alternatively, maybe we should get into pseudometrics?</p>
+
+<a name="158858391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858391">Mario Carneiro (Feb 19 2019 at 08:45)</a>:</h4>
+<p>it occurs to me that we have a lot of natural pseudometric spaces</p>
+
+<a name="158858602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158858602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158858602">Sebastien Gouezel (Feb 19 2019 at 08:49)</a>:</h4>
+<p>I could definitely do everything with premetric spaces. By the way, they are already in mathlib, see <code>topology/metric_space/premetric/</code>. But Reid's trick to avoid the equation compiler and use <code>nat.rec_on</code> works perfectly for me, so I am back on track!</p>
+
+<a name="158879036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158879036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158879036">Patrick Massot (Feb 19 2019 at 12:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> I have two pieces of advice for you: first you could go to <a href="https://lean-forward.github.io/lean-together/2019/#videos" target="_blank" title="https://lean-forward.github.io/lean-together/2019/#videos">https://lean-forward.github.io/lean-together/2019/#videos</a> and watch Reid's talk in Amsterdam. But my main advice is you should walk for 30 meters and talk to <span class="user-mention" data-user-id="110172">@Assia Mahboubi</span>  about your problem, and then report back here.</p>
+
+<a name="158886625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20hell/near/158886625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89469Dependenthell.html#158886625">Sebastien Gouezel (Feb 19 2019 at 14:44)</a>:</h4>
+<p>Are you sure Assia is spending her holidays in the same ski resort? :) But I don't have any problem left, thanks to Reid!</p>
+
+
+{% endraw %}

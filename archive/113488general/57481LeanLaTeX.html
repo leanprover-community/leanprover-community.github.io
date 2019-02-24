@@ -775,5 +775,46 @@ Basic definitions
 </blockquote>
 <p><span class="user-mention" data-user-id="143402">@matt rice</span> I tried it in <a href="http://pat.perso.ens-lyon.org/math114/cours1.html" target="_blank" title="http://pat.perso.ens-lyon.org/math114/cours1.html">http://pat.perso.ens-lyon.org/math114/cours1.html</a> and I agree it looks pretty nice. Here I also used other templates of <code>lean-format</code> to get inlined tactic state. This is part of lecture notes I'm writing for my logic and proof course. The source is at <a href="http://pat.perso.ens-lyon.org/math114/source.html" target="_blank" title="http://pat.perso.ens-lyon.org/math114/source.html">http://pat.perso.ens-lyon.org/math114/source.html</a> for people who want to see how Markdown and LaTeX are handled.</p>
 
+<a name="159197767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159197767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159197767">Patrick Massot (Feb 22 2019 at 22:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I have a new iteration for you: <a href="http://pat.perso.ens-lyon.org/M1P1/" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/">http://pat.perso.ens-lyon.org/M1P1/</a> is your sandwich file, rendered in "no lean proof" mode, only tactic state. It also uses the new tactic state tampering feature, see the <a href="http://pat.perso.ens-lyon.org/M1P1/format.toml" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/format.toml">config file used for this render</a> (beware my Firefox needs to be explicitly told to use UTF8 when opening that file)</p>
+
+<a name="159197974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159197974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159197974">Patrick Massot (Feb 22 2019 at 22:42)</a>:</h4>
+<p>I guess it's clearer if I post the config file here:</p>
+<div class="codehilite"><pre><span></span>templates = &quot;templates&quot;
+js = [&quot;lean_tufte.js&quot;]
+css = [&quot;tufte.css&quot;, &quot;et-book.css&quot;, &quot;with_tufte.css&quot;]
+assets = [&quot;et-book&quot;, &quot;tufte.css&quot;, &quot;et-book.css&quot;]
+outdir = &quot;M1P1&quot;
+only = [&quot;sandwich.lean&quot;]
+tactic_state_filters = [
+  [&#39;is_limit ([^ ]+) ([^ ]+)&#39;, &#39;\1ₙ tends to \2&#39;],
+  [&#39;ℕ → ℝ&#39;, &#39;ℝ-valued sequence&#39;],
+  [&#39;([a-z]) n([ ,\n])&#39;, &#39;\1ₙ\2&#39;],
+  [&#39;no goals&#39;, &#39;Current goal completed!&#39;],
+]
+</pre></div>
+
+<a name="159198031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159198031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159198031">Patrick Massot (Feb 22 2019 at 22:43)</a>:</h4>
+<p>Of course this kind of regex tampering is very brittle, but we won't be able to do much more before Lean 4's customizable pretty printer <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span></p>
+
+<a name="159214605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159214605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159214605">Johan Commelin (Feb 23 2019 at 05:20)</a>:</h4>
+<p>Wow! That looks very slick. Congratulations!</p>
+
+<a name="159214661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159214661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159214661">Johan Commelin (Feb 23 2019 at 05:22)</a>:</h4>
+<p>One little point of feedback. You have joined together the lines in the html output. I agree that this is a good move. But the result is that you have two grey boxes next to each other (1 end-of-line, 1 start-of-line) that have the same resulting tactic state. I think it would be even better if you could merge these boxes into one box.</p>
+
+<a name="159220479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159220479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159220479">Patrick Massot (Feb 23 2019 at 08:34)</a>:</h4>
+<p>Of course one problem is that, in more complicated proofs, those two boxes could lead to different states (in case of subproofs). We would need more examples of formatted proofs actually. Then we'll be able to decide whether something smarter should be done.</p>
+
+<a name="159220683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159220683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159220683">Patrick Massot (Feb 23 2019 at 08:40)</a>:</h4>
+<p>I'd like to also point out that everyone can play with this tool. Modifying CSS and template files doesn't even require any python knowledge</p>
+
 
 {% endraw %}

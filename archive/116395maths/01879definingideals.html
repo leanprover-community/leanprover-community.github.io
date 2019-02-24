@@ -1,0 +1,189 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/01879definingideals.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html">defining ideals</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159049737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159049737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159049737">Johan Commelin (Feb 21 2019 at 08:32)</a>:</h4>
+<p>I've got a definition <code>valuation.supp v : ideal R</code> (and a proof that it is a prime ideal). There is also <code>Spv R</code> which is defined as</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">Spv</span> <span class="o">:=</span> <span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Valuation</span> <span class="n">R</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Now I can define <code>Spv.supp ineq : ideal R</code> as having <code>carrier := {r | r ≤[v] 0}</code>. I would then like to conclude that this is an ideal (and even prime) by saying that this is the same carrier as that of <code>valuation.supp v</code> where <code>v</code> is any valuation that I can <code>choose</code> out of the <code>∃ (v : ....)</code> in the definition of <code>Spv</code>.</p>
+<p>I think we currently don't really have an interface for this, is that right? So the cheapest way is to just reprove the properties <code>zero</code>, <code>add</code>, and <code>smul</code>. Or is there something I missed?</p>
+
+<a name="159049830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159049830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159049830">Mario Carneiro (Feb 21 2019 at 08:34)</a>:</h4>
+<p>IIRC, the reason <code>Spv</code> looks like that is to build a quotient over something that's hard to quotient</p>
+
+<a name="159049848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159049848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159049848">Mario Carneiro (Feb 21 2019 at 08:35)</a>:</h4>
+<p>so it should have the lemmas of a quotient, in this case <code>quotient.ind</code></p>
+
+<a name="159050143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050143">Mario Carneiro (Feb 21 2019 at 08:41)</a>:</h4>
+<p>Oh wait, you are defining a function <code>Spv -&gt; ideal R</code>. That's a quotient lift</p>
+
+<a name="159050266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050266">Mario Carneiro (Feb 21 2019 at 08:43)</a>:</h4>
+<p>You lift the function <code>valuation.supp : valuation R -&gt; ideal R</code>, and prove that two valuations give the same ideal using <code>ideal.ext</code></p>
+
+<a name="159050414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050414">Johan Commelin (Feb 21 2019 at 08:46)</a>:</h4>
+<p>Yes, but I need <code>supp</code> before I can define the "canonical" <code>lift</code>.</p>
+
+<a name="159050450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050450">Johan Commelin (Feb 21 2019 at 08:47)</a>:</h4>
+<p>In general, I think it makes sense that there is some sort of buddy to <code>ideal.ext</code> that allows you to prove that a set is an ideal if it is the same as the carrier of an existing ideal.</p>
+
+<a name="159050512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050512">Mario Carneiro (Feb 21 2019 at 08:48)</a>:</h4>
+<p>One way you can construct this ideal is by taking the intersection of all ideals for various choices of <code>v</code></p>
+
+<a name="159050520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050520">Mario Carneiro (Feb 21 2019 at 08:48)</a>:</h4>
+<p>Or you can use <code>span</code></p>
+
+<a name="159050631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159050631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159050631">Mario Carneiro (Feb 21 2019 at 08:50)</a>:</h4>
+<blockquote>
+<p>prove that a set is an ideal if it is the same as the carrier of an existing ideal</p>
+</blockquote>
+<p>You don't "prove that a set is an ideal". You construct an ideal with the same carrier as the set. But if you do that, then you will notice that the new ideal is equal to the ideal you started with, so it was a pointless endeavor, unless you care about defeq</p>
+
+<a name="159051326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159051326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159051326">Kevin Buzzard (Feb 21 2019 at 09:04)</a>:</h4>
+<p>Johan, my thoughts on this are that we need to make a completely new file <code>valuation_class.lean</code> containing the API for an equivalence class of valuations, and writing all of the definitions for quotients for this class, and I know how to do this. We should do all of this first before even thinking about <code>Spv</code>. I would do it but I'm travelling right now, I'm preaching the gospel in Portugal at an undergraduate computer science conference.</p>
+
+<a name="159051349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159051349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159051349">Kevin Buzzard (Feb 21 2019 at 09:05)</a>:</h4>
+<p>But this new definition and its API are the next thing to do in the perfectoid project</p>
+
+<a name="159051595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159051595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159051595">Kevin Buzzard (Feb 21 2019 at 09:10)</a>:</h4>
+<p>Look at <code>finset.lean</code>. This is a weird definition, at first glance. No user ever wants to prove anything about finsets by starting with the line <code>unfold finset</code> -- it would be a disaster. You just use all the definitions in the 1700 line API and never even think about how a finset is actually implemented internally. We have to do just the same thing with equivalence classes of valuations first before we can get anywhere. Our internal implementation is as an inequality but we have to make it so that the user never has to think about this or even know this. Then we'll be ready for Spv</p>
+
+<a name="159053778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159053778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159053778">Johan Commelin (Feb 21 2019 at 09:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Yes, I agree. I'm slowly moving towards that goal.</p>
+
+<a name="159054002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054002">Kevin Buzzard (Feb 21 2019 at 09:57)</a>:</h4>
+<p>So I think the answer to your question is that we need to write the analogues of quotient.lift and quotient.out etc etc and then use these general tools to define the functions you want. At least I think that's the answer</p>
+
+<a name="159054099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054099">Johan Commelin (Feb 21 2019 at 09:58)</a>:</h4>
+<p>Ok, so one question: what is the definition of <code>valuation_class</code>? Is it an honest Lean quotient (with the disadvantage that it lives an a universe that is to big). And then afterwards, we build an equiv with <code>Spv</code> that lives in the right universe but is a fake quotient.</p>
+
+<a name="159054102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054102">Johan Commelin (Feb 21 2019 at 09:58)</a>:</h4>
+<p>Or do you have something else in mind?</p>
+
+<a name="159054192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054192">Kevin Buzzard (Feb 21 2019 at 10:00)</a>:</h4>
+<p>The definition is that it's an inequality coming from a valuation</p>
+
+<a name="159054200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054200">Kevin Buzzard (Feb 21 2019 at 10:00)</a>:</h4>
+<p>But the point is that the user never finds that out</p>
+
+<a name="159054220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054220">Kevin Buzzard (Feb 21 2019 at 10:01)</a>:</h4>
+<p>And by "the user" I mean "the person writing Spv.lean"</p>
+
+<a name="159054254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054254">Kevin Buzzard (Feb 21 2019 at 10:01)</a>:</h4>
+<p>I'm talking about the definition of a valuation class</p>
+
+<a name="159054304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054304">Kevin Buzzard (Feb 21 2019 at 10:02)</a>:</h4>
+<p><code>val_class</code> or wherever we want to call it</p>
+
+<a name="159054322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054322">Kevin Buzzard (Feb 21 2019 at 10:02)</a>:</h4>
+<p>We don't use quotients at all</p>
+
+<a name="159054341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054341">Johan Commelin (Feb 21 2019 at 10:03)</a>:</h4>
+<p>Ok, I'm confused. I know you are busy. But could you give me about 4 lines of Lean code.<br>
+The definition of <code>val_class R</code>, and the definition of <code>Spv R</code>.</p>
+
+<a name="159054351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054351">Kevin Buzzard (Feb 21 2019 at 10:03)</a>:</h4>
+<p>But we write all the API for quotients ourselves</p>
+
+<a name="159054359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054359">Kevin Buzzard (Feb 21 2019 at 10:03)</a>:</h4>
+<p>I'm on a phone</p>
+
+<a name="159054368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054368">Kevin Buzzard (Feb 21 2019 at 10:03)</a>:</h4>
+<p>But I'll try</p>
+
+<a name="159054518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054518">Kevin Buzzard (Feb 21 2019 at 10:06)</a>:</h4>
+<p>A term of type valclass R is a relation ineq plus a proof that there exists a valuation taking values in a group in the same universe as R such that blah</p>
+
+<a name="159054557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054557">Kevin Buzzard (Feb 21 2019 at 10:06)</a>:</h4>
+<p>The mk function takes a valuation taking values in any universe and gives a term of type valclass</p>
+
+<a name="159054560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054560">Johan Commelin (Feb 21 2019 at 10:06)</a>:</h4>
+<p>Sure</p>
+
+<a name="159054576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054576">Kevin Buzzard (Feb 21 2019 at 10:07)</a>:</h4>
+<p>Because we want the user to not know what's going on</p>
+
+<a name="159054578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054578">Johan Commelin (Feb 21 2019 at 10:07)</a>:</h4>
+<p>And what is <code>Spv R</code>? (Because currently it has exactly the definition you just gave.)</p>
+
+<a name="159054692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054692">Kevin Buzzard (Feb 21 2019 at 10:09)</a>:</h4>
+<p>Oh so it is.</p>
+
+<a name="159054718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054718">Kevin Buzzard (Feb 21 2019 at 10:09)</a>:</h4>
+<p>Bit it has more structure</p>
+
+<a name="159054725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054725">Kevin Buzzard (Feb 21 2019 at 10:09)</a>:</h4>
+<p>It has a topology etc</p>
+
+<a name="159054777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054777">Kevin Buzzard (Feb 21 2019 at 10:10)</a>:</h4>
+<p>So it might be a different thing</p>
+
+<a name="159054810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159054810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159054810">Johan Commelin (Feb 21 2019 at 10:11)</a>:</h4>
+<p>Yeah, but we can bolt on the topology afterwards... that's just a type class instance</p>
+
+<a name="159074659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159074659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159074659">Kevin Buzzard (Feb 21 2019 at 15:07)</a>:</h4>
+<p>Is that the right way to think about it? I'm not sure</p>
+
+<a name="159075130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159075130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159075130">Kevin Buzzard (Feb 21 2019 at 15:14)</a>:</h4>
+<p>I guess I was envisaging defining Spv R to be the type of equivalence classes of valuations on R, and putting the topology on Spv R. Maybe that's insane? I don't know. We have option X and with_zero X right?</p>
+
+<a name="159075381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159075381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159075381">Kevin Buzzard (Feb 21 2019 at 15:17)</a>:</h4>
+<p>If you want to make Spv the inequalities (which is what we have now) then you will want to look at all the functions with prefix quot and make versions of them all in the Spv namespace. Then you'll have an answer to the ideal question</p>
+
+<a name="159075503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/defining%20ideals/near/159075503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01879definingideals.html#159075503">Kevin Buzzard (Feb 21 2019 at 15:18)</a>:</h4>
+<p>But I was envisaging making them all part of the val_class namespace and then building Spv with its topology on top</p>
+
+
+{% endraw %}

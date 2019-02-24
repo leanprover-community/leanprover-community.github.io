@@ -10,7 +10,27 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [learning path](65214learningpath.html) (11 messages, latest: Feb 17 2019 at 05:39)
+* [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (8 messages, latest: Feb 24 2019 at 16:54)
+
+* [reversing `\neq`](11734reversingneq.html) (3 messages, latest: Feb 24 2019 at 08:03)
+
+* [help finding a lemma](30422helpfindingalemma.html) (48 messages, latest: Feb 24 2019 at 04:53)
+
+* [noob question(s)](52075noobquestions.html) (174 messages, latest: Feb 24 2019 at 01:01)
+
+* [learning path](65214learningpath.html) (48 messages, latest: Feb 23 2019 at 22:48)
+
+* [Tools for beta reduction](61922Toolsforbetareduction.html) (13 messages, latest: Feb 23 2019 at 15:11)
+
+* ["factoring" functions](75707factoringfunctions.html) (45 messages, latest: Feb 23 2019 at 06:11)
+
+* [le and ge not equivalent?](23007leandgenotequivalent.html) (8 messages, latest: Feb 22 2019 at 22:17)
+
+* [Splitting "and" inside a function.](79847Splittingandinsideafunction.html) (61 messages, latest: Feb 22 2019 at 16:21)
+
+* [le_sub_iff_add_le error](21041lesubiffaddleerror.html) (14 messages, latest: Feb 22 2019 at 11:18)
+
+* [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (8 messages, latest: Feb 19 2019 at 19:26)
 
 * [writing tactics - quickstart info](88788writingtacticsquickstartinfo.html) (7 messages, latest: Feb 15 2019 at 11:13)
 
@@ -59,8 +79,6 @@ permalink: archive/113489newmembers/index.html
 * [VS Code terminal popping up](71171VSCodeterminalpoppingup.html) (13 messages, latest: Jan 23 2019 at 22:03)
 
 * [contrapos_final without tactics?](70241contraposfinalwithouttactics.html) (7 messages, latest: Jan 23 2019 at 17:13)
-
-* [noob question(s)](52075noobquestions.html) (147 messages, latest: Jan 23 2019 at 00:37)
 
 * [lagrange theorem](10902lagrangetheorem.html) (4 messages, latest: Jan 22 2019 at 08:08)
 

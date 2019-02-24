@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html">Unexpected type error in equality proposition</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159255865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159255865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159255865">Kevin Sullivan (Feb 24 2019 at 02:28)</a>:</h4>
+<p>set_option pp.all true<br>
+#reduce eq.refl 0 <br>
+#reduce eq.refl (1-1)<br>
+#check  (eq.refl 0) = (eq.refl 0)               -- this works<br>
+#check  (eq.refl 0) = (eq.refl (1-1))       -- type error!&gt;?&lt;!</p>
+<p>Why&gt;</p>
+
+<a name="159259178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159259178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159259178">Andrew Ashworth (Feb 24 2019 at 04:15)</a>:</h4>
+<p>this also works: <code>#check (eq.refl (0)) = (eq.refl ((1 - 1):ℕ))</code></p>
+
+<a name="159259220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159259220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159259220">Andrew Ashworth (Feb 24 2019 at 04:16)</a>:</h4>
+<p>Unfortunately I don't know why it needs a type ascription</p>
+
+<a name="159267578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159267578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159267578">Kevin Buzzard (Feb 24 2019 at 08:43)</a>:</h4>
+<p>Is it because Lean doesn't know what that zero is? It's just <code>has_zero.zero</code> until you tell it that it's nat's zero</p>
+
+<a name="159281431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159281431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159281431">Kevin Sullivan (Feb 24 2019 at 16:13)</a>:</h4>
+<p>Or that it doesn't know what that (1-1) is? The preceding lines seem to indicate that all the terms really are equal, so this result is a bit mystifying.</p>
+
+<a name="159282646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159282646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159282646">Mario Carneiro (Feb 24 2019 at 16:50)</a>:</h4>
+<p>It's an elaborator order problem, as usual. For <code>eq.refl a = eq.refl b</code> to typecheck, <code>a</code> and <code>b</code> must be defeq. These both work:</p>
+<div class="codehilite"><pre><span></span>#check (eq.refl 0) = (eq.refl 0)
+#check (eq.refl (1-1)) = (eq.refl (1-1))
+</pre></div>
+
+
+<p>because lean knows that (0:A) == 0 definitionally and similarly for (1-1:A) == (1-1:A). In particular, it doesn't need to know that <code>A = nat</code> for this to work. Now having successfully elaborated the term, it knows that the statement is <code>(eq.refl (0:?m)) = (eq.refl 0)</code>, and so since there is a numeral with unknown type, lean does its late <code>nat</code> defaulting, setting <code>?m = nat</code>, inferring the typeclass args, and you get what you see in the pp.all.</p>
+<p>In the case <code> (eq.refl 0) = (eq.refl (1-1))</code>, it doesn't work out so well. Lean tries to check <code>(0:A) =?= 1-1</code>, and this fails, because in an arbitrary type with subtraction and 0 and 1 this doesn't necessarily hold by definition. So it fails right here, and never gets to the nat fallback.</p>
+
+<a name="159282705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159282705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159282705">Mario Carneiro (Feb 24 2019 at 16:52)</a>:</h4>
+<p>The moral of the story: don't trust nat defaulting. It's a convenience so that <code>#eval 1 + 1</code> does what you expect. You should really think of these terms as having unknown type.</p>
+
+<a name="159282721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20type%20error%20in%20equality%20proposition/near/159282721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17933Unexpectedtypeerrorinequalityproposition.html#159282721">Kenny Lau (Feb 24 2019 at 16:54)</a>:</h4>
+<p>I think the correct answer is, what on earth are you doing with <code>(eq.refl 0) = (eq.refl (1-1))</code></p>
+
+
+{% endraw %}

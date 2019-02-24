@@ -1,0 +1,198 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html">#748 asymptotics and the Fréchet derivative</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159119844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159119844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159119844">Kenny Lau (Feb 22 2019 at 01:06)</a>:</h4>
+<p>Congratulations and thanks to <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> for the beginning of o-analysis and proving the chain rule, and most importantly introducing mathlib to <strong>derivatives</strong> for the first time.</p>
+
+<a name="159120628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159120628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159120628">Jeremy Avigad (Feb 22 2019 at 01:22)</a>:</h4>
+<p>Thanks for noticing. I am inordinately proud of the proof of the chain rule: <a href="https://github.com/avigad/mathlib/blob/fderiv/src/analysis/normed_space/deriv.lean#L154-L178" target="_blank" title="https://github.com/avigad/mathlib/blob/fderiv/src/analysis/normed_space/deriv.lean#L154-L178">https://github.com/avigad/mathlib/blob/fderiv/src/analysis/normed_space/deriv.lean#L154-L178</a>. It is at least as readable as the proof I found on Stack exchange: <a href="https://math.stackexchange.com/questions/2216797/frechet-derivative-chain-rule" target="_blank" title="https://math.stackexchange.com/questions/2216797/frechet-derivative-chain-rule">https://math.stackexchange.com/questions/2216797/frechet-derivative-chain-rule</a>. (And the result is stronger, because it allows restriction to a subset of the ambient space.)</p>
+
+<a name="159123655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159123655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159123655">Jeremy Avigad (Feb 22 2019 at 02:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110064">@Kenny Lau</span> Thanks for the careful review. I'll make all the changes you suggested over the weekend. I only responded now to the ones I don't understand or disagreed with.</p>
+
+<a name="159162488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159162488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159162488">Jeremy Avigad (Feb 22 2019 at 15:04)</a>:</h4>
+<p>Oops, I am having github issues. I tried a few responses yesterday as a "report", but realized this morning that I didn't click the right button to "submit" it yesterday. Anyhow, I woke up this morning thinking of all the things I should do differently. So maybe wait until the next round of revisions.</p>
+<p>Mario, the only comment I disagreed with substantially  is changing the definition of <code>has_fderiv_at</code>. The whole point is that it should be definitionally a special case of the more general theorems, so that we can apply exactly the same theorems whether we are using <code>has_fderiv_at</code> or <code>has_fderiv_at_within</code>. In fact, I dropped by <code>at</code> and <code>at_within</code> from the theorem names for that reason.</p>
+
+<a name="159162742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159162742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159162742">Mario Carneiro (Feb 22 2019 at 15:08)</a>:</h4>
+<p>you can't have the same theorems in any case, the restatement part is important</p>
+
+<a name="159162752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159162752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159162752">Mario Carneiro (Feb 22 2019 at 15:08)</a>:</h4>
+<p>if there are two definitions then you need to state all the theorems that you care about twice</p>
+
+<a name="159162811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159162811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159162811">Mario Carneiro (Feb 22 2019 at 15:09)</a>:</h4>
+<p>Even with your definition, where <code>has_deriv_at</code> is a special case of <code>has_deriv_at_within</code>, there should be a theorem that says <code>has_deriv_at id (const 1)</code>, not something starting <code>has_deriv_at_within</code></p>
+
+<a name="159162911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159162911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159162911">Mario Carneiro (Feb 22 2019 at 15:11)</a>:</h4>
+<p>The Coq development actually uses a common generalization of <code>has_deriv_at</code> and <code>has_deriv_at_within</code>, where you have an argument for the filter <code>F</code> (presumably <code>F &lt;= nhds 0</code> but you will not need that for many theorems)</p>
+
+<a name="159163591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159163591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159163591">Jeremy Avigad (Feb 22 2019 at 15:21)</a>:</h4>
+<p>I am not convinced. The theorem <code>has_fderiv_id</code> as it is currently stated can be applied to both the <code>at</code> and <code>at_within</code> versions in tactic mode. The only shortcoming is that in proof term mode you have to add <code>univ</code> or <code>_</code> as a parameter if you want the unrelativized version. An alternative is to make the set parameter implicit. In practice, I think it can usually be inferred from context.</p>
+<p>Do you really think it pays to have two versions of every theorem, the only difference being that one has a parameter instantiated to <code>univ</code>? I'll do it if you want, but it feels like have two versions of every theorem about multiplication, one where a multiplicand is instantiated to <code>2</code>. I'd like to think of <code>at</code> as light notation for a global <code>at_within</code>, not a totally different concept. </p>
+<p>Isabelle's library uses the a general filter in the definition, but most of the theorems are specific to <code>at</code> and <code>at_within</code>.  But that doesn't help, since it leads to the same dilemma: either you give the filter explicitly every time, or make it implicit.</p>
+
+<a name="159163803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159163803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159163803">Mario Carneiro (Feb 22 2019 at 15:24)</a>:</h4>
+<p>syntactic matching is important. If you don't want two versions of the theorems, you shouldn't define <code>has_deriv_at</code> at all</p>
+
+<a name="159163819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159163819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159163819">Mario Carneiro (Feb 22 2019 at 15:24)</a>:</h4>
+<p>If you think people will use it, though, then you have to put in the legwork for it</p>
+
+<a name="159163882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159163882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159163882">Mario Carneiro (Feb 22 2019 at 15:25)</a>:</h4>
+<p>For the most part, the restatements are very easy to prove, it's just an instantiation so it's a one liner</p>
+
+<a name="159164016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164016">Mario Carneiro (Feb 22 2019 at 15:26)</a>:</h4>
+<p>But they form the API for the library. I'm worried that defining <code>has_deriv_at</code> in terms of <code>has_deriv_at_within</code> will make <code>within univ</code> stuff appear when manipulating derivative goals for things that have nothing to do with partial functions or restrictions</p>
+
+<a name="159164160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164160">Mario Carneiro (Feb 22 2019 at 15:28)</a>:</h4>
+<p>The way the filter helps in this case is that you can define <code>has_deriv_at</code> in terms of <code>has_deriv_at_filter</code> and it will be definitionally what you want it to be. Whereas defining <code>has_deriv_at</code> in terms of <code>has_deriv_at_within</code> defines it in terms of the <code>nhds_within 0 set.univ</code> filter, which is not <code>nhds 0</code></p>
+
+<a name="159164393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164393">Mario Carneiro (Feb 22 2019 at 15:31)</a>:</h4>
+<p>In fact, you could probably generalize all the theorems you have proven thus far for <code>has_deriv_at_within</code> to <code>has_deriv_at_filter</code> and nothing would change. I don't think you've done anything "interesting" with the set restrictions yet, except in the chain rule where you take an image; but you can comap the filter and get the same effect, I think</p>
+
+<a name="159164669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164669">Jeremy Avigad (Feb 22 2019 at 15:34)</a>:</h4>
+<p>I am going to follow your suggestion of making the <code>littleo</code> definition the official definition of <code>has_deriv</code>. Since you insist, I'll make two versions of every theorem, one an instantiation of the other. I don't think there is any danger of the <code>univ</code> appearing unexpectedly: if you unfold to <code>littleo</code>, most <code>littleo</code> calculations work uniformly across settings. If you are really planning to get your hands dirty, you'll probably need to do all kinds of manipulations and rewriting anyhow, and rewriting with <code>at_within_univ</code> won't make a difference. I'll provide all the glue to unpack <code>has_deriv_at</code> directly to the <code>nhds</code> filter versions if that is needed.</p>
+
+<a name="159164757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164757">Mario Carneiro (Feb 22 2019 at 15:35)</a>:</h4>
+<p>You should push this to a mathlib branch, I will see if I can make a case for some of this stuff</p>
+
+<a name="159164860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164860">Mario Carneiro (Feb 22 2019 at 15:37)</a>:</h4>
+<p>The main reason I think the littleo definition will be better is to avoid the division. We don't know that <code>x != x0</code> so manipulating that part requires some case splitting</p>
+
+<a name="159164901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159164901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159164901">Mario Carneiro (Feb 22 2019 at 15:37)</a>:</h4>
+<p>I'm assuming that the littleo library has all the theorems we need. If it doesn't then obviously that should be addressed anyway</p>
+
+<a name="159234623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159234623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159234623">Jeremy Avigad (Feb 23 2019 at 16:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I just updated the PR, with all the changes you and Kenny asked for.<br>
+<span class="user-mention" data-user-id="110064">@Kenny Lau</span> A nicer proof of the continuity property using asymptotics is here:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/817d195e371bdd87d24882b4f05f55de25ff91ce/src/analysis/normed_space/deriv.lean#L153-L167" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/817d195e371bdd87d24882b4f05f55de25ff91ce/src/analysis/normed_space/deriv.lean#L153-L167">https://github.com/leanprover-community/mathlib/blob/817d195e371bdd87d24882b4f05f55de25ff91ce/src/analysis/normed_space/deriv.lean#L153-L167</a></p>
+
+<a name="159234638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159234638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159234638">Kenny Lau (Feb 23 2019 at 16:03)</a>:</h4>
+<p>nice!</p>
+
+<a name="159246033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159246033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159246033">Patrick Massot (Feb 23 2019 at 21:17)</a>:</h4>
+<p>I'm really happy to see derivatives coming to mathlib, but I'm a bit sad to see that we don't use Cyril's nice setup to compute with little-o and big-O. For instance the chain rule proof is really ugly compared to what we saw in Amsterdam.</p>
+
+<a name="159246081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159246081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159246081">Patrick Massot (Feb 23 2019 at 21:18)</a>:</h4>
+<p>With Cyrille's setup and Lean's calc blocks we could have a proof that reads the same as a paper proof (at least after getting Lean 4's parser).</p>
+
+<a name="159258486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159258486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159258486">Mario Carneiro (Feb 24 2019 at 03:52)</a>:</h4>
+<p>Are you sure? When you say it's ugly do you mean the proof is more cumbersome than it needs to be, or it doesn't use enough notations?</p>
+<p>I know that Jeremy and I both have some serious reservations about using Cyril's trick for turning predicates like big-O into equations. (I like the definition of the predicate, but not the thing with the hidden witness.) I'm worried that it will cause more magic breakage issues for people who don't see that the witnesses are changing behind their back, and also I don't even know if lean can support notations like this in the first place. It definitely goes against lean's convention of implicit and explicit arguments based on what is inferrable.</p>
+<p>In short, I don't think using trickery to get a nice looking statement is worth the damage it does when people inevitably have to peek behind the curtain and find the system fighting them.</p>
+<p>If on the other hand you mean that the proof is unnecessarily complicated, then I would like to fix that. I think Cyril's proof is good not because of the notations but because all the pieces fit together nicely. It's possible that some of the <code>=/</code> steps or something caused some additional rewrites that would be explicit in lean land, but I think it can be brought down to a similar size as Cyril's proof regardless. I think Jeremy wrote the proof in a deliberately verbose style so that you can see how the proof goes, and I don't see anything untoward.</p>
+
+<a name="159269611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159269611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159269611">Patrick Massot (Feb 24 2019 at 09:48)</a>:</h4>
+<p>There is a small notation part. But as I wrote, it seems we need the Lean 4 parser to have the same notation that have in Coq (actually I hope we could have even better). But this is not the core issue. Cyril's trick allows to compute with little-o, as we do in the real world. He can write <code>[o_F e of f] + [o_F e of g] =o_F e</code> and this is a true addition. I can't see how you could do that with predicates.</p>
+
+<a name="159269685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159269685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159269685">Patrick Massot (Feb 24 2019 at 09:50)</a>:</h4>
+<p>The proof we want is really a computation, it should be on nice <code>calc</code></p>
+
+<a name="159270199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159270199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159270199">Mario Carneiro (Feb 24 2019 at 10:06)</a>:</h4>
+<blockquote>
+<p><code>[o_F e of f] + [o_F e of g] =o_F e</code></p>
+</blockquote>
+<p>It's not obvious to me what this means, so if this is the notation that is so much better I'm less than enthused</p>
+
+<a name="159270211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159270211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159270211">Mario Carneiro (Feb 24 2019 at 10:07)</a>:</h4>
+<p>Predicates are easy to understand if you use them consistently and don't have too many variations</p>
+
+<a name="159270255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159270255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159270255">Mario Carneiro (Feb 24 2019 at 10:08)</a>:</h4>
+<p>Rewriting with functions is not nice, so I'm not sold on <code>calc</code>ing this proof</p>
+
+<a name="159286886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159286886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159286886">Patrick Massot (Feb 24 2019 at 18:53)</a>:</h4>
+<p>The notation is not so great, but it clearly says <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>o</mi><mo>(</mo><mi>e</mi><mo>)</mo><mo>+</mo><mi>o</mi><mo>(</mo><mi>e</mi><mo>)</mo><mo>=</mo><mi>o</mi><mo>(</mo><mi>e</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">o(e) + o(e) = o(e)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">o</span><span class="mopen">(</span><span class="mord mathit">e</span><span class="mclose">)</span><span class="mbin">+</span><span class="mord mathit">o</span><span class="mopen">(</span><span class="mord mathit">e</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit">o</span><span class="mopen">(</span><span class="mord mathit">e</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="159286903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159286903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159286903">Patrick Massot (Feb 24 2019 at 18:53)</a>:</h4>
+<p>The fact that rewriting with function is not nice is part of the problem, not part of the solution. We need better tools, not changing a nice math proof because the tools are not good enough</p>
+
+<a name="159286907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159286907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159286907">Patrick Massot (Feb 24 2019 at 18:54)</a>:</h4>
+<p>The math proof is a computation, not a collection of predicates</p>
+
+<a name="159287906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159287906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159287906">Mario Carneiro (Feb 24 2019 at 19:19)</a>:</h4>
+<p>I'm surprised you are so hardline on this but are okay with <code>tendsto</code></p>
+
+<a name="159287960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159287960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159287960">Patrick Massot (Feb 24 2019 at 19:20)</a>:</h4>
+<p>What tendsto?</p>
+
+<a name="159287962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159287962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159287962">Patrick Massot (Feb 24 2019 at 19:20)</a>:</h4>
+<p>Who talked about tendsto?</p>
+
+<a name="159287963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159287963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159287963">Mario Carneiro (Feb 24 2019 at 19:20)</a>:</h4>
+<p>mathematicians pretend <code>lim f = x</code> is an equality all the time</p>
+
+<a name="159287976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159287976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159287976">Mario Carneiro (Feb 24 2019 at 19:21)</a>:</h4>
+<p>but I think trying to mimic the notation here does more harm than good</p>
+
+<a name="159288025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288025">Mario Carneiro (Feb 24 2019 at 19:22)</a>:</h4>
+<p>a big O statement is not an equality</p>
+
+<a name="159288122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288122">Patrick Massot (Feb 24 2019 at 19:25)</a>:</h4>
+<p>Algebraic manipulations of big O and little o are very powerful ways of computing limits</p>
+
+<a name="159288171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288171">Mario Carneiro (Feb 24 2019 at 19:26)</a>:</h4>
+<p>Sure, but they have analogues in relations too, and with the right setup it won't even be a longer proof</p>
+
+<a name="159288182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288182">Mario Carneiro (Feb 24 2019 at 19:27)</a>:</h4>
+<p>the relations are more general and more honest to what is literally meant</p>
+
+<a name="159288230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288230">Patrick Massot (Feb 24 2019 at 19:28)</a>:</h4>
+<p>I'm pretty sure the proofs will get exponentially longer</p>
+
+<a name="159288355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288355">Mario Carneiro (Feb 24 2019 at 19:32)</a>:</h4>
+<p>That sounds like a concrete claim... let's find out</p>
+
+
+{% endraw %}

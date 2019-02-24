@@ -908,5 +908,116 @@ I'm seeing a wierd error in an inductive type: <code>invalid occurrence of recur
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/156653719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#156653719">Mario Carneiro (Jan 23 2019 at 00:37)</a>:</h4>
 <p>For this, you should decide whether you prefer to write the empty context as <code>0</code> or <code>[]</code>, and write a simp lemma like <code>0 = []</code> if you want to get rid of the 0 everywhere. In this case you should also make sure that all your other simp lemmas use the "preferred form" of this element on the LHS</p>
 
+<a name="159247553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159247553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159247553">Wojciech Nawrocki (Feb 23 2019 at 22:04)</a>:</h4>
+<p>What's the closest thing to the <code>ring</code> tactic when what I have is not a commutative semiring, e.g. just a monoid? Say my theorems are provable simply by repeated application of monoid or group laws, what tactic could I use?</p>
+
+<a name="159247675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159247675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159247675">Kevin Buzzard (Feb 23 2019 at 22:08)</a>:</h4>
+<p>If it's abelian then <code>abel</code> might work, and if it's not then you're best going with <code>simp</code> I think</p>
+
+<a name="159247686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159247686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159247686">Kevin Buzzard (Feb 23 2019 at 22:09)</a>:</h4>
+<p>You might have to write <code>simp [mul_assoc]</code> maybe, I can't remember if mul_assoc is a simp lemma</p>
+
+<a name="159247850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159247850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159247850">Wojciech Nawrocki (Feb 23 2019 at 22:15)</a>:</h4>
+<p><code>abel</code> worked :) thanks. And no, <code>mul_assoc</code> doesn't seem to be a simp lemma.</p>
+
+<a name="159250591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159250591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159250591">Wojciech Nawrocki (Feb 23 2019 at 23:41)</a>:</h4>
+<p>Say I would like to work with a particular module which uses a variable <code>v</code> instantiated over a concrete <code>v</code>. For example, a file <code>foo.lean</code> could first declare <code>variable {v: Type}</code> and then use <code>v</code> in all definitions/lemmas in the file. I would like to import everything in <code>foo</code> instantiated with e.g. <code>nat</code> for <code>v</code>. This would be equivalent to partially applying everything in the file to <code>nat</code>. Is such a thing possible without manually redefining everything?</p>
+
+<a name="159250640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159250640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159250640">Andrew Ashworth (Feb 23 2019 at 23:42)</a>:</h4>
+<p>You could write a tactic to do it</p>
+
+<a name="159250642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159250642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159250642">Andrew Ashworth (Feb 23 2019 at 23:43)</a>:</h4>
+<p>But, why?</p>
+
+<a name="159250779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159250779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159250779">Wojciech Nawrocki (Feb 23 2019 at 23:47)</a>:</h4>
+<p>I would like to do this in order to:<br>
+a) Avoid type class search by giving it the right instance from the start.<br>
+b) Make inference work. I found that making one of my modules more generic (I changed it from using a particular semiring to being generic over arbitrary semirings) broke inference in a lot of places where I use this module because it no longer knows which semiring to pick and I don't want to specify it everywhere manually.<br>
+For a more concrete example which is close to what I'm doing, say I define a list <code>inductive slist {α: Type} [semiring α]: Type</code> which is a list the elements of which are also elements of a semiring and then derive a bunch of theorems about the behaviour of such a list under some transformations. I would then like to use all of these theorems only with a particular choice of <code>α</code>, even though the <code>slist</code> file/module is generic.</p>
+
+<a name="159251390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159251390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159251390">Kevin Buzzard (Feb 24 2019 at 00:06)</a>:</h4>
+<p>But if you're using <code>{alpha  : Type}</code> correctly, then Lean should be able to infer what alpha is from subsequent terms, so you don't need to change it to nat, Lean will just guess it for you and do it itself. Have I missed the point?</p>
+
+<a name="159251642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159251642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159251642">Andrew Ashworth (Feb 24 2019 at 00:15)</a>:</h4>
+<p>"no longer knows which semiring to pick" this sounds fishy</p>
+
+<a name="159251765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159251765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159251765">Kevin Buzzard (Feb 24 2019 at 00:18)</a>:</h4>
+<p>The <code>{}</code> brackets aren't type class search, they are dealt with using unification.</p>
+
+<a name="159251957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159251957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159251957">Wojciech Nawrocki (Feb 24 2019 at 00:23)</a>:</h4>
+<p>You're right, Lean can still unify it and find the class instance - I was perhaps a bit rash there when figuring out what's going on. However, tactic state updates that used to take about 300ms when I was working over a concrete object now take several seconds, making it somewhat painful to work interactively. I was hoping that reinstantiating all the lemmas over the concrete objects again would alleviate this.</p>
+
+<a name="159252010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252010">Kevin Buzzard (Feb 24 2019 at 00:24)</a>:</h4>
+<p>Again, if you're talking about <code>{}</code>s then this isn't to do with classes, it's something else.</p>
+
+<a name="159252015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252015">Kevin Buzzard (Feb 24 2019 at 00:24)</a>:</h4>
+<p>But I agree that sometimes things get slow, and it can sometimes be quite difficult to find out why.</p>
+
+<a name="159252030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252030">Wojciech Nawrocki (Feb 24 2019 at 00:25)</a>:</h4>
+<p>I'm talking about both - the <code>{alpha}</code> variable being unified and <code>[semiring alpha]</code> which needs a class instance.</p>
+
+<a name="159252032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252032">Kevin Buzzard (Feb 24 2019 at 00:25)</a>:</h4>
+<p>Aah yes, that is a class instance. Sorry.</p>
+
+<a name="159252038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252038">Kevin Buzzard (Feb 24 2019 at 00:25)</a>:</h4>
+<p>Does it help to actually put the type class instances explicitly into Lean at the top of the file?</p>
+
+<a name="159252086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252086">Kevin Buzzard (Feb 24 2019 at 00:26)</a>:</h4>
+<p>e.g. you were working with a random alpha assumed to be a semiring, and now you're working with nat, so you could put <code>instance : semiring nat := by apply_instance</code> at the top of the file. However that instance should already be there so I can't imagine it will help :-/</p>
+
+<a name="159252098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252098">Kevin Buzzard (Feb 24 2019 at 00:27)</a>:</h4>
+<p>oh this can't be the problem. Unless your actual instances are hard to find.</p>
+
+<a name="159252205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252205">Wojciech Nawrocki (Feb 24 2019 at 00:30)</a>:</h4>
+<p>I couldn't say for sure without benchmarking, but I would guess that the two implicit arguments I added to <em>everything</em> makes it appreciably more difficult to carry out elaboration.</p>
+
+<a name="159252209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252209">Kevin Buzzard (Feb 24 2019 at 00:30)</a>:</h4>
+<p>I'm afraid you'll have to speak to a computer scientist about this one :-)</p>
+
+<a name="159252211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252211">Kevin Buzzard (Feb 24 2019 at 00:31)</a>:</h4>
+<p>In maths, everything runs instantly.</p>
+
+<a name="159252220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252220">Kevin Buzzard (Feb 24 2019 at 00:31)</a>:</h4>
+<p>You should consider moving to the Platonic universe.</p>
+
+<a name="159252221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252221">Kevin Buzzard (Feb 24 2019 at 00:31)</a>:</h4>
+<p>We don't have engineering troubles there.</p>
+
+<a name="159252992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159252992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159252992">Wojciech Nawrocki (Feb 24 2019 at 00:55)</a>:</h4>
+<p>Oh okay, I ran into the problem that made me think unification fails again. In fact, I believe it could eventually succeed, but currently <code>simp *</code> takes so long it times out, while it would work fine before I added the implicit parameters to one of my modules.</p>
+
+<a name="159253178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159253178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159253178">Kevin Buzzard (Feb 24 2019 at 01:00)</a>:</h4>
+<p>If you want to try to speed things up yourself, you could take a look at what simp was doing before and after by putting logging on.</p>
+
+<a name="159253197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159253197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159253197">Kevin Buzzard (Feb 24 2019 at 01:01)</a>:</h4>
+<p><code>set_option trace.simplify.rewrite true</code> is what you need to see what simp is doing.</p>
+
 
 {% endraw %}

@@ -10,6 +10,18 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [finite sums](86088finitesums.html) (119 messages, latest: Feb 24 2019 at 15:21)
+
+* [type theory for mathematicians](76813typetheoryformathematicians.html) (28 messages, latest: Feb 22 2019 at 01:16)
+
+* [defining ideals](01879definingideals.html) (41 messages, latest: Feb 21 2019 at 15:18)
+
+* [metric space competion](38847metricspacecompetion.html) (6 messages, latest: Feb 21 2019 at 08:24)
+
+* [flexible indices](83755flexibleindices.html) (12 messages, latest: Feb 20 2019 at 14:51)
+
+* [Teaching with Lean](76352TeachingwithLean.html) (13 messages, latest: Feb 19 2019 at 07:45)
+
 * [Unification hints for hom](41291Unificationhintsforhom.html) (4 messages, latest: Feb 17 2019 at 21:15)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
@@ -23,8 +35,6 @@ permalink: archive/116395maths/index.html
 * [base change for modules](88002basechangeformodules.html) (2 messages, latest: Feb 14 2019 at 05:39)
 
 * [finitely generated (sub)module](01813finitelygeneratedsubmodule.html) (1 message, latest: Feb 13 2019 at 23:45)
-
-* [Teaching with Lean](76352TeachingwithLean.html) (10 messages, latest: Feb 13 2019 at 16:42)
 
 * [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
 

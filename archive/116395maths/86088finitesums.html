@@ -1,0 +1,723 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/86088finitesums.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html">finite sums</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158874324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874324">Kevin Buzzard (Feb 19 2019 at 11:35)</a>:</h4>
+<p>The 1st years at Imperial are doing infinite sums in their analysis class. To do infinite sums, one has to be able to have a robust API for finite sums. Here are three possibilities:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">definition</span> <span class="n">my_sum_to_n</span> <span class="o">(</span><span class="n">summand</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">my_sum_to_n</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">summand</span> <span class="n">n</span>
+
+<span class="kn">definition</span> <span class="n">my_sum_to_n&#39;</span> <span class="o">(</span><span class="n">summand</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">((</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="n">summand</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span>
+
+<span class="kn">definition</span> <span class="n">my_sum_to_n&#39;&#39;</span> <span class="o">(</span><span class="n">summand</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">summand</span>
+</pre></div>
+
+
+<p>You can see them in action here:</p>
+<p><a href="https://github.com/kckennylau/Lean/blob/master/proofs_by_induction.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/proofs_by_induction.lean">https://github.com/kckennylau/Lean/blob/master/proofs_by_induction.lean</a></p>
+<p>What is the "idiomatic" way to do this? <span class="user-mention" data-user-id="110044">@Chris Hughes</span> have you worked with this stuff a lot? Note that first two (but not the third) work with <code>add_monoid</code> but I am only interested in <code>R</code> being the real or complex numbers right now.</p>
+
+<a name="158874726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874726">Chris Hughes (Feb 19 2019 at 11:43)</a>:</h4>
+<p>I use <code>(range n).sum</code> but I don't like it. I think a better interface needs to be made. <code>(range n).sum</code> definitely gives you the best range of lemmas though.</p>
+
+<a name="158874730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874730">Kevin Buzzard (Feb 19 2019 at 11:43)</a>:</h4>
+<p>Ooh, I also want to sum from a to b, not just from 0 to n-1. Did we have all this conversation once before, ages ago?</p>
+
+<a name="158874746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874746">Kevin Buzzard (Feb 19 2019 at 11:44)</a>:</h4>
+<p>finset or list?</p>
+
+<a name="158874812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874812">Kevin Buzzard (Feb 19 2019 at 11:45)</a>:</h4>
+<p>Are statements such as <code>sum_to_n f N = sum_to_n (\lam x, f(N-1-x)) N</code> in the library?</p>
+
+<a name="158874903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874903">Chris Hughes (Feb 19 2019 at 11:47)</a>:</h4>
+<p>I don't think so. Scott's made a start on this though</p>
+
+<a name="158874919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874919">Kevin Buzzard (Feb 19 2019 at 11:47)</a>:</h4>
+<p>Does "a better interface" mean "make a completely new file somewhere in mathlib called something like <code>finite_sum.lean</code> and define a new function <code>sum_range f a b</code> or something, and prove basic things about it?</p>
+
+<a name="158874981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158874981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158874981">Kevin Buzzard (Feb 19 2019 at 11:48)</a>:</h4>
+<p>Oh I remember Mario's suggestion that <code>sum_range f a b</code> should sum f(x) from x=a to x=a+b-1</p>
+
+<a name="158875001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875001">Kevin Buzzard (Feb 19 2019 at 11:48)</a>:</h4>
+<p>But is this not yet implemented?</p>
+
+<a name="158875098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875098">Chris Hughes (Feb 19 2019 at 11:50)</a>:</h4>
+<p>No. It means use finset.sum, but have a bunch of lemmas specific to sums over intervals as well, and maybe some nice notation.</p>
+
+<a name="158875130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875130">Kevin Buzzard (Feb 19 2019 at 11:51)</a>:</h4>
+<p>Do we have the function sending a,b to the finset {a,a+1,...,a+b-1}?</p>
+
+<a name="158875177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875177">Chris Hughes (Feb 19 2019 at 11:52)</a>:</h4>
+<p>I think so, it's got Ico in its name I think.</p>
+
+<a name="158875191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875191">Kevin Buzzard (Feb 19 2019 at 11:53)</a>:</h4>
+<p>Many thanks. It's got nothing but Ico in its name, apparently.</p>
+
+<a name="158875266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875266">Kevin Buzzard (Feb 19 2019 at 11:54)</a>:</h4>
+<p>Interval-closed-open</p>
+
+<a name="158875276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875276">Kevin Buzzard (Feb 19 2019 at 11:54)</a>:</h4>
+<p>and there's <code>list.Ico</code>, <code>multiset.Ico</code> and <code>finset.Ico</code></p>
+
+<a name="158875378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875378">Kevin Buzzard (Feb 19 2019 at 11:56)</a>:</h4>
+<p>Apparently we opted for <code>Ico n m = {n, n+1, ... , m-1}</code></p>
+
+<a name="158875605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875605">Kevin Buzzard (Feb 19 2019 at 12:00)</a>:</h4>
+<p>Lines 1654 onwards in finset.lean contain a bunch of stuff. But where are the recursors?</p>
+
+<a name="158875630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875630">Kevin Buzzard (Feb 19 2019 at 12:00)</a>:</h4>
+<p>How do I prove that | sum_{i=a}^b f(i) | &lt;= sum_{i=a}^b |f(i)| ??</p>
+
+<a name="158875660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875660">Kevin Buzzard (Feb 19 2019 at 12:01)</a>:</h4>
+<p>(triangle inequality for finite sums)</p>
+
+<a name="158875666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875666">Kevin Buzzard (Feb 19 2019 at 12:01)</a>:</h4>
+<p>Oh -- this is a general finset thing, not a sum from a to b thing.</p>
+
+<a name="158875673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158875673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158875673">Kevin Buzzard (Feb 19 2019 at 12:01)</a>:</h4>
+<p>So I need to find the right recursor for finsets...</p>
+
+<a name="158876206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158876206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158876206">Kevin Buzzard (Feb 19 2019 at 12:11)</a>:</h4>
+<p>Why is <code>finset.induction</code> tagged <code>@[recursor 6]</code>?</p>
+
+<a name="158876938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158876938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158876938">Chris Hughes (Feb 19 2019 at 12:23)</a>:</h4>
+<p>I think it must already be there</p>
+
+<a name="158877052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877052">Kevin Buzzard (Feb 19 2019 at 12:24)</a>:</h4>
+<p>I think all of M1P1 must already be there :-)</p>
+
+<a name="158877413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877413">Kevin Buzzard (Feb 19 2019 at 12:30)</a>:</h4>
+<p>If I was summing from 0 to n-1 I could do induction on n and use the fact that finset (n +1) = finset n union {n}. But for a general finset I'm going to have to choose a random element. Maybe that's just life.</p>
+
+<a name="158877901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877901">Kevin Buzzard (Feb 19 2019 at 12:38)</a>:</h4>
+<p>Oh I see, I just use <code>finset.induction</code> I think.</p>
+
+<a name="158877927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877927">Kenny Lau (Feb 19 2019 at 12:39)</a>:</h4>
+<p>is finset a traversable monad?</p>
+
+<a name="158877983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877983">Kevin Buzzard (Feb 19 2019 at 12:40)</a>:</h4>
+<p>I don't know what any of that means, but can you explain to me why I might care?</p>
+
+<a name="158877994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158877994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158877994">Kevin Buzzard (Feb 19 2019 at 12:40)</a>:</h4>
+<p>[I'm open to the idea that I might care]</p>
+
+<a name="158879273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158879273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158879273">Patrick Massot (Feb 19 2019 at 13:03)</a>:</h4>
+<p>We already had this discussion many times. All those problems have been solved in Coq, and I made a tiny start at porting the solution at <a href="https://github.com/PatrickMassot/bigop" target="_blank" title="https://github.com/PatrickMassot/bigop">https://github.com/PatrickMassot/bigop</a>. But nobody is willing to help because people on this chat think they know better than people who have thought about this for 30 years and formalized the 4 color theorem and Feit-Thompson.</p>
+
+<a name="158879585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158879585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158879585">Kenny Lau (Feb 19 2019 at 13:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">field</span> <span class="err">&#39;</span><span class="n">bind&#39;</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">bind</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">β</span><span class="o">],</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span>
+</pre></div>
+
+<a name="158879592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158879592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158879592">Kenny Lau (Feb 19 2019 at 13:07)</a>:</h4>
+<p>that's the answer to my question</p>
+
+<a name="158879653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158879653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158879653">Kenny Lau (Feb 19 2019 at 13:08)</a>:</h4>
+<p>I should build a "real" finset</p>
+
+<a name="158887022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158887022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158887022">Kevin Buzzard (Feb 19 2019 at 14:48)</a>:</h4>
+<blockquote>
+<p>We already had this discussion many times. </p>
+</blockquote>
+<p>Aah yes that's right -- I somehow fail to unify these finite set questions with the big operators work, and I even have a copy the Coq paper lying around on my desk somewhere.</p>
+
+<a name="158888660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158888660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158888660">Kenny Lau (Feb 19 2019 at 15:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L₁</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L₂</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">L</span> <span class="n">x</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">H12</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">H12</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="n">H12</span> <span class="n">H23</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">H12</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H23</span> <span class="n">x</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span>
+
+<span class="n">def</span> <span class="n">finset</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">quotient</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">finset</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mem</span> <span class="n">α</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">s</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="err">⟦</span><span class="n">L</span><span class="err">⟧</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_mk</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">α</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="n">x</span> <span class="err">⟦</span><span class="n">L</span><span class="err">⟧</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">L</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">H</span> <span class="n">L₂</span> <span class="n">H2</span><span class="o">,</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="n">H2</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">H</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">extensionality</span><span class="o">]</span> <span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">H</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mem_mk</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="n">mem_mk</span><span class="o">])</span> <span class="n">H</span>
+
+<span class="kn">lemma</span> <span class="n">ext_iff</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="n">H</span> <span class="bp">▸</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">[]</span><span class="err">⟧</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">not_mem_empty</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∉</span> <span class="o">(</span><span class="n">empty</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">mem_mk</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span>
+
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="err">⟧</span>
+
+<span class="n">def</span> <span class="n">union</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="err">⟦</span><span class="n">L₁</span> <span class="bp">++</span> <span class="n">L₂</span><span class="err">⟧</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="n">L₄</span> <span class="n">H13</span> <span class="n">H24</span><span class="o">,</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">,</span> <span class="n">H13</span> <span class="n">x</span><span class="o">,</span> <span class="n">H24</span> <span class="n">x</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_union</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">union</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">change</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⟦</span><span class="bp">_</span><span class="err">⟧</span> <span class="bp">↔</span> <span class="bp">_;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_mk</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">]</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">prebind</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="n">L</span><span class="bp">.</span><span class="n">foldr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">union</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="n">empty</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">prebind_cons</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">tl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">prebind</span> <span class="n">f</span> <span class="o">(</span><span class="n">hd</span> <span class="bp">::</span> <span class="n">tl</span><span class="o">)</span> <span class="bp">=</span> <span class="n">union</span> <span class="o">(</span><span class="n">f</span> <span class="n">hd</span><span class="o">)</span> <span class="o">(</span><span class="n">prebind</span> <span class="n">f</span> <span class="n">tl</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_prebind</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">y</span> <span class="err">∈</span> <span class="n">prebind</span> <span class="n">f</span> <span class="n">L</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span><span class="o">,</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">L</span> <span class="o">(</span><span class="n">iff_of_false</span> <span class="o">(</span><span class="n">not_mem_empty</span> <span class="n">y</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">H</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">prebind_cons</span><span class="o">,</span> <span class="n">mem_union</span><span class="o">,</span> <span class="n">ih</span><span class="o">]</span><span class="bp">;</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_cons_iff</span><span class="o">,</span> <span class="n">or_and_distrib_right</span><span class="o">,</span> <span class="n">exists_or_distrib</span><span class="o">,</span> <span class="n">exists_eq_left</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">finset</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pure</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[</span><span class="n">x</span><span class="o">],</span>
+  <span class="n">bind</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">s</span> <span class="n">f</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">s</span> <span class="o">(</span><span class="n">prebind</span> <span class="n">f</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">ext</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_prebind</span><span class="o">,</span> <span class="n">exists_prop</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">finset</span>
+</pre></div>
+
+<a name="158888667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158888667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158888667">Kenny Lau (Feb 19 2019 at 15:07)</a>:</h4>
+<p>done, the real finset is a monad</p>
+
+<a name="158890056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158890056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158890056">Johan Commelin (Feb 19 2019 at 15:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> I agree that it is frustrating that we are having this discussion multiple times, and that we are reinventing the wheel. I haven't thought about this problem (finite sums) myself. I wouldn't mind if this could be turned into a student project; but I fear that there is not enough mathematical meat in it. At the moment I don't have much contact with the CS department here in Freiburg. It's something on my todo list. Maybe they would think that an bachelor thesis titled "Algorithms and data types for manipulating finite sums and proving identities between them" is interesting...</p>
+
+<a name="158890080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158890080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158890080">Johan Commelin (Feb 19 2019 at 15:25)</a>:</h4>
+<p>I would like to get better at recruiting people for library development.</p>
+
+<a name="158919577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158919577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158919577">Kenny Lau (Feb 19 2019 at 21:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L₁</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L₂</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">L</span> <span class="n">x</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">H12</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">H12</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="n">H12</span> <span class="n">H23</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">H12</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H23</span> <span class="n">x</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span>
+
+<span class="n">def</span> <span class="n">finset</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">quotient</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">finset</span>
+
+<span class="n">run_cmd</span> <span class="n">mk_simp_attr</span> <span class="s2">&quot;finset&quot;</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mem</span> <span class="n">α</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">s</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="err">⟦</span><span class="n">L</span><span class="err">⟧</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_mk</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">α</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="n">x</span> <span class="err">⟦</span><span class="n">L</span><span class="err">⟧</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">L</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">H</span> <span class="n">L₂</span> <span class="n">H2</span><span class="o">,</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="n">H2</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">H</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">extensionality</span><span class="o">]</span> <span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">H</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mem_mk</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="n">mem_mk</span><span class="o">])</span> <span class="n">H</span>
+
+<span class="kn">lemma</span> <span class="n">ext_iff</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="n">H</span> <span class="bp">▸</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">[]</span><span class="err">⟧</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">not_mem_empty</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∉</span> <span class="o">(</span><span class="n">empty</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">mem_mk</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span>
+
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⟦</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="err">⟧</span>
+
+<span class="n">def</span> <span class="n">union</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="err">⟦</span><span class="n">L₁</span> <span class="bp">++</span> <span class="n">L₂</span><span class="err">⟧</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="n">L₄</span> <span class="n">H13</span> <span class="n">H24</span><span class="o">,</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">,</span> <span class="n">H13</span> <span class="n">x</span><span class="o">,</span> <span class="n">H24</span> <span class="n">x</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_union</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">union</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂</span> <span class="n">s</span> <span class="n">t</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">change</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⟦</span><span class="bp">_</span><span class="err">⟧</span> <span class="bp">↔</span> <span class="bp">_;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_append</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span>
+
+<span class="kn">section</span> <span class="n">prebind</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">prebind</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="n">L</span><span class="bp">.</span><span class="n">foldr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">union</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="n">empty</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">prebind_cons</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">tl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">prebind</span> <span class="n">f</span> <span class="o">(</span><span class="n">hd</span> <span class="bp">::</span> <span class="n">tl</span><span class="o">)</span> <span class="bp">=</span> <span class="n">union</span> <span class="o">(</span><span class="n">f</span> <span class="n">hd</span><span class="o">)</span> <span class="o">(</span><span class="n">prebind</span> <span class="n">f</span> <span class="n">tl</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_prebind</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">y</span> <span class="err">∈</span> <span class="n">prebind</span> <span class="n">f</span> <span class="n">L</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">L</span><span class="o">,</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">L</span> <span class="o">(</span><span class="n">iff_of_false</span> <span class="o">(</span><span class="n">not_mem_empty</span> <span class="n">y</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">H</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">prebind_cons</span><span class="o">,</span> <span class="n">mem_union</span><span class="o">,</span> <span class="n">ih</span><span class="o">]</span><span class="bp">;</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_cons_iff</span><span class="o">,</span> <span class="n">or_and_distrib_right</span><span class="o">,</span> <span class="n">exists_or_distrib</span><span class="o">,</span> <span class="n">exists_eq_left</span><span class="o">]</span>
+
+<span class="kn">end</span> <span class="n">prebind</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">finset</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pure</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[</span><span class="n">x</span><span class="o">],</span>
+  <span class="n">bind</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">s</span> <span class="n">f</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">s</span> <span class="o">(</span><span class="n">prebind</span> <span class="n">f</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L₁</span> <span class="n">L₂</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">ext</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_pure</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">(</span><span class="n">pure</span> <span class="n">y</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">mem_mk</span><span class="bp">.</span><span class="n">trans</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_singleton</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_bind</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">y</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">&gt;&gt;=</span> <span class="n">f</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="k">show</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">prebind</span> <span class="n">f</span> <span class="n">L</span> <span class="bp">↔</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_map</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">s</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">&gt;&gt;=</span> <span class="n">pure</span> <span class="err">∘</span> <span class="n">f</span> <span class="bp">↔</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">function</span><span class="bp">.</span><span class="n">comp_apply</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">finset</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_seq</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="bp">&lt;*&gt;</span> <span class="n">s</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">φ</span> <span class="err">∈</span> <span class="n">f</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">f</span> <span class="bp">&gt;&gt;=</span> <span class="o">(</span><span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="k">with</span> <span class="n">finset</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">is_lawful_monad</span> <span class="n">finset</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pure_bind</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span> <span class="n">f</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">,</span> <span class="n">exists_eq_left</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span><span class="o">,</span>
+  <span class="n">bind_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">s</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exists_prop</span><span class="o">,</span> <span class="n">exists_and_distrib_left</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+      <span class="n">exists_and_distrib_right</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">and_assoc</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span><span class="bp">;</span> <span class="n">rw</span> <span class="n">exists_swap</span><span class="o">,</span>
+  <span class="n">id_map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">s</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">id</span><span class="o">,</span> <span class="n">exists_prop</span><span class="o">,</span> <span class="n">exists_eq_right&#39;</span><span class="o">]</span> <span class="k">with</span> <span class="n">finset</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">finset</span>
+</pre></div>
+
+<a name="158919579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158919579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158919579">Kenny Lau (Feb 19 2019 at 21:14)</a>:</h4>
+<p>it's a lawful monad!</p>
+
+<a name="158919770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158919770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158919770">Kevin Buzzard (Feb 19 2019 at 21:17)</a>:</h4>
+<p>Yeah but who is going to rewrite the 1700-line file finset.lean? What advantage does your approach have over the one in mathlib? Do you understand <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> and <span class="user-mention" data-user-id="110026">@Simon Hudon</span> 's approach via qpf's? Is it the same as yours or something else again?</p>
+
+<a name="158919853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158919853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158919853">Kenny Lau (Feb 19 2019 at 21:18)</a>:</h4>
+<p>well I've been told that the current finset in mathlib is faster in terms of computation</p>
+
+<a name="158919855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158919855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158919855">Kenny Lau (Feb 19 2019 at 21:18)</a>:</h4>
+<p>so it'll probably stay</p>
+
+<a name="158921034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158921034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158921034">Scott Morrison (Feb 19 2019 at 21:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, I disagree with your characterisation </p>
+<blockquote>
+<p>because people on this chat think they know better than people who have thought about this for 30 year</p>
+</blockquote>
+
+<a name="158921107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158921107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158921107">Scott Morrison (Feb 19 2019 at 21:35)</a>:</h4>
+<p>I wanted a quick an dirty solution for reindexing sums by shifting right and left, and had no where near the time available to properly do a big operators library, so I did just that. There are now usable lemmas specifically for using <code>finset.sum</code> with <code>Ico</code>, and of course this is not meant to be a replacement for a good general solution later.</p>
+
+<a name="158921371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158921371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158921371">Scott Morrison (Feb 19 2019 at 21:39)</a>:</h4>
+<p>Further, and I suspect Mario will agree here, I don't think it's obvious that Coq's bigop library should be ported verbatim. We started a discussion about this earlier, and one example that came up was not understanding why they wanted to carry around both a domain for the sum, and a predicate selecting out some subset of that domain. To my eye that seems unnecessarily painful, and we should just change the domain to a subset when we want to do so. I couldn't find any explanation of this design decision in their paper, and as far as I can remember no one either justified it here, or wanted to talk about comparing the alternatives. As it didn't seem like there was much enthusiasm for discussion, I moved on to other things.</p>
+
+<a name="158928020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928020">Mario Carneiro (Feb 19 2019 at 23:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> The QPF stuff isn't presenting a new way to do <code>finset</code>s, it's just providing a way to use <code>finset</code> inside other inductive types, which is something we currently can't do</p>
+
+<a name="158928301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928301">Mario Carneiro (Feb 19 2019 at 23:06)</a>:</h4>
+<p>The difference between Kenny's finsets and mathlib finsets is that Kenny's is a quotient over the multiplicity of an element, while mathlib's is a restriction on multisets so that they have multiplicity 0 or 1 in each element. Computationally it's worse than mathlib's finsets, but mathlib's finsets are already completely impractical and not how you should store finite sets of things anyway for computational purposes. The <code>ordset</code> type was intended to be more computational, and provides O(log n) operations for most things rather than linear time for everything</p>
+
+<a name="158928336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928336">Kenny Lau (Feb 19 2019 at 23:07)</a>:</h4>
+<p>and my finsets don't need decidable_eq to be a monad :P</p>
+
+<a name="158928356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928356">Mario Carneiro (Feb 19 2019 at 23:07)</a>:</h4>
+<p>One thing that Kenny's finsets doesn't support that mathlib's finsets do is <code>card</code></p>
+
+<a name="158928420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928420">Mario Carneiro (Feb 19 2019 at 23:08)</a>:</h4>
+<p>but Kenny's finsets support <code>insert</code> and <code>union</code> without decidable_eq, which is nice</p>
+
+<a name="158928446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928446">Kenny Lau (Feb 19 2019 at 23:08)</a>:</h4>
+<p>déjà vu</p>
+
+<a name="158928450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928450">Mario Carneiro (Feb 19 2019 at 23:08)</a>:</h4>
+<p><code>inter</code> can't be done without decidable eq though</p>
+
+<a name="158928625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928625">Kenny Lau (Feb 19 2019 at 23:10)</a>:</h4>
+<p>what's the best™ way to do finsets?</p>
+
+<a name="158928642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928642">Kenny Lau (Feb 19 2019 at 23:11)</a>:</h4>
+<p>I recall ZF having 5 inequivalent definitions of finite?</p>
+
+<a name="158928741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928741">Mario Carneiro (Feb 19 2019 at 23:12)</a>:</h4>
+<p>metamath has 8 (<a href="http://us2.metamath.org/mpeuni/mmtheorems83.html#mm8285s" target="_blank" title="http://us2.metamath.org/mpeuni/mmtheorems83.html#mm8285s">http://us2.metamath.org/mpeuni/mmtheorems83.html#mm8285s</a>)</p>
+
+<a name="158928961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158928961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158928961">Kenny Lau (Feb 19 2019 at 23:15)</a>:</h4>
+<p>also why isn't <code>multiset</code> a monad?</p>
+
+<a name="158929031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158929031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158929031">Kenny Lau (Feb 19 2019 at 23:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">multiset</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pure</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">::</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">multiset</span><span class="bp">.</span><span class="n">map</span><span class="o">,</span>
+  <span class="n">bind</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">multiset</span><span class="bp">.</span><span class="n">bind</span> <span class="o">}</span>
+</pre></div>
+
+<a name="158929037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158929037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158929037">Mario Carneiro (Feb 19 2019 at 23:16)</a>:</h4>
+<p>good question</p>
+
+<a name="158929043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158929043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158929043">Mario Carneiro (Feb 19 2019 at 23:16)</a>:</h4>
+<p>is it lawful? I think it is</p>
+
+<a name="158929081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158929081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158929081">Kenny Lau (Feb 19 2019 at 23:17)</a>:</h4>
+<p>'course it's lawful, it's even commutative!</p>
+
+<a name="158929092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/158929092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#158929092">Kenny Lau (Feb 19 2019 at 23:17)</a>:</h4>
+<p>it's the free commutative monoid over a type</p>
+
+<a name="159012290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159012290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159012290">Patrick Massot (Feb 20 2019 at 20:36)</a>:</h4>
+<blockquote>
+<p>Further, and I suspect Mario will agree here, I don't think it's obvious that Coq's bigop library should be ported verbatim.</p>
+</blockquote>
+<p>Of course we cannot port it verbatim. For instance we lack proper support for custom induction principle. We also lack SSReflect's powerful apply tactic. So we need to either first code more powerful tactics (which probably needs Lean 4) or write longer proofs (as I started to do).</p>
+<blockquote>
+<p>We started a discussion about this earlier, and one example that came up was not understanding why they wanted to carry around both a domain for the sum, and a predicate selecting out some subset of that domain. To my eye that seems unnecessarily painful, and we should just change the domain to a subset when we want to do so. I couldn't find any explanation of this design decision in their paper, and as far as I can remember no one either justified it here, or wanted to talk about comparing the alternatives. As it didn't seem like there was much enthusiasm for discussion, I moved on to other things.</p>
+</blockquote>
+<p>I'm not sure I understand what you mean here. Of course we want to be able to sum on various stuff, including using a predicate. Are you denying this happens in maths? There are several examples in the Coq bigop paper. Of course you can put the burden on the user, but this is not my understanding of what is library building. Let's take the simplest example. Say we have a sum indexed by integers, and we want to separate this into two sums: the sum over even integers in the summation range and the sum over odd integers, because you'll then do different manipulation depending on parity of the index. How would you like the interface to look like? Should is look like maths, where you get <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo>∑</mo><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi></mrow></msub><msub><mi>u</mi><mi>i</mi></msub><mo>=</mo><msub><mo>∑</mo><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi><mo separator="true">;</mo><mi>i</mi><mtext> even</mtext></mrow></msub><msub><mi>u</mi><mi>i</mi></msub><mo>+</mo><msub><mo>∑</mo><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi><mo separator="true">;</mo><mi>i</mi><mtext> odd</mtext></mrow></msub><msub><mi>u</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{1 \le i \le n } u_i = \sum_{1 \le i \le n ; i \text{ even}} u_i + \sum_{1 \le i \le n ;i \text{ odd}  } u_i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.185818em;vertical-align:-0.43581800000000004em;"></span><span class="base"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">i</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.39488900000000005em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">=</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">i</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">n</span><span class="mpunct mtight">;</span><span class="mord mathit mtight">i</span><span class="mord text mtight"><span class="mord mathrm mtight"> even</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mbin">+</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.18639799999999984em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">i</span><span class="mrel mtight">≤</span><span class="mord mathit mtight">n</span><span class="mpunct mtight">;</span><span class="mord mathit mtight">i</span><span class="mord text mtight"><span class="mord mathrm mtight"> odd</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> after writing something like <code>rw [bigop.split_using_predicate is_even, bigop.predicate_iff odd_iff_not_even</code> or do you want to first prove lemmas about lists until it looks like a concatenation of lists etc? I really think the work should go into the library, and then the user enjoys. Note that the user doesn't need to see anything complicated until needed: you can define notation that do not mention the predicate when you don't need it (this is what bigop is doing, and what I've done right from the beginning).</p>
+
+<a name="159040117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159040117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159040117">Mario Carneiro (Feb 21 2019 at 04:32)</a>:</h4>
+<p>If you are doing something with complicated sums like these, I think the best option is to use finsets. They are much more compositional</p>
+
+<a name="159047888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047888">Patrick Massot (Feb 21 2019 at 07:54)</a>:</h4>
+<p>finsets are unordered, hence they cannot be used for a general library.</p>
+
+<a name="159047900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047900">Mario Carneiro (Feb 21 2019 at 07:55)</a>:</h4>
+<p>huh? That equation you gave doesn't even hold unless you can reorder the elements</p>
+
+<a name="159047911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047911">Patrick Massot (Feb 21 2019 at 07:55)</a>:</h4>
+<p>What is the part of "general"  that you don't understand?</p>
+
+<a name="159047954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047954">Mario Carneiro (Feb 21 2019 at 07:56)</a>:</h4>
+<p>The part where finsets are already pretty general</p>
+
+<a name="159047955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047955">Patrick Massot (Feb 21 2019 at 07:56)</a>:</h4>
+<p>bigop is a a general library, it handles all use case in a unified way</p>
+
+<a name="159047972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047972">Patrick Massot (Feb 21 2019 at 07:57)</a>:</h4>
+<p>Assuming commutativity is extremely restrictive, it's not "pretty general"</p>
+
+<a name="159047991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159047991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159047991">Mario Carneiro (Feb 21 2019 at 07:57)</a>:</h4>
+<p>I'm saying that if it's not commutative, you have other options but that partition theorem isn't true</p>
+
+<a name="159048041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048041">Mario Carneiro (Feb 21 2019 at 07:58)</a>:</h4>
+<p>Can we assume associativity?</p>
+
+<a name="159048042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048042">Patrick Massot (Feb 21 2019 at 07:58)</a>:</h4>
+<p>Of course there are lemmas with assumptions, is that what you are trying to teach here?</p>
+
+<a name="159048045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048045">Mario Carneiro (Feb 21 2019 at 07:58)</a>:</h4>
+<p>At some point you are just folding over the free magma</p>
+
+<a name="159048050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048050">Patrick Massot (Feb 21 2019 at 07:58)</a>:</h4>
+<p>We don't have to assume associativity for all lemmas, although many of them will</p>
+
+<a name="159048071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048071">Patrick Massot (Feb 21 2019 at 07:59)</a>:</h4>
+<p>I honestly don't understand how you can promote both semi-rings and big operations indexed by finite sets</p>
+
+<a name="159048128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048128">Mario Carneiro (Feb 21 2019 at 08:00)</a>:</h4>
+<p>We have <code>list.sum</code> already</p>
+
+<a name="159048132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048132">Mario Carneiro (Feb 21 2019 at 08:00)</a>:</h4>
+<p>I'm not seeing what we are missing</p>
+
+<a name="159048164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048164">Mario Carneiro (Feb 21 2019 at 08:01)</a>:</h4>
+<p>We have an extensive collection of lemmas about ordered lists - that's <code>list</code></p>
+
+<a name="159048172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048172">Patrick Massot (Feb 21 2019 at 08:01)</a>:</h4>
+<p><code>list.sum</code> is tied to addition, right?</p>
+
+<a name="159048177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048177">Mario Carneiro (Feb 21 2019 at 08:01)</a>:</h4>
+<p>or <code>list.prod</code>, or <code>list.foldr</code></p>
+
+<a name="159048289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048289">Patrick Massot (Feb 21 2019 at 08:03)</a>:</h4>
+<p>and <code>list.prod</code> is tied to multiplication, so you are still missing a general purpose library</p>
+
+<a name="159048316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048316">Patrick Massot (Feb 21 2019 at 08:03)</a>:</h4>
+<p>Of course <code>list.foldr</code> will be used in the implementation, but it doesn't give you the lemmas</p>
+
+<a name="159048328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048328">Mario Carneiro (Feb 21 2019 at 08:03)</a>:</h4>
+<p>Sure it does</p>
+
+<a name="159048345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048345">Mario Carneiro (Feb 21 2019 at 08:03)</a>:</h4>
+<p>you can prove lemmas about <code>list.foldr</code></p>
+
+<a name="159048391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048391">Mario Carneiro (Feb 21 2019 at 08:04)</a>:</h4>
+<p>under appropriate assumptions about the function</p>
+
+<a name="159048398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048398">Patrick Massot (Feb 21 2019 at 08:04)</a>:</h4>
+<p>And then you are finally writing a bigop library!</p>
+
+<a name="159048402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048402">Patrick Massot (Feb 21 2019 at 08:04)</a>:</h4>
+<p>assuming you also setup good notations</p>
+
+<a name="159048409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048409">Mario Carneiro (Feb 21 2019 at 08:04)</a>:</h4>
+<p>It's hard to make a notation for a function with four explicit parameters</p>
+
+<a name="159048416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048416">Patrick Massot (Feb 21 2019 at 08:05)</a>:</h4>
+<p>And, in order to do that you can save time by having a look at what other did.</p>
+
+<a name="159048424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048424">Patrick Massot (Feb 21 2019 at 08:05)</a>:</h4>
+<p>That's why you need several notations</p>
+
+<a name="159048434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048434">Patrick Massot (Feb 21 2019 at 08:05)</a>:</h4>
+<p>as in <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L28-L69" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L28-L69">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L28-L69</a></p>
+
+<a name="159048480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048480">Mario Carneiro (Feb 21 2019 at 08:06)</a>:</h4>
+<p>If I am specializing to <code>+</code>, that's already a function</p>
+
+<a name="159048494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048494">Mario Carneiro (Feb 21 2019 at 08:06)</a>:</h4>
+<p>Using the same function for all of these doesn't make anything easier</p>
+
+<a name="159048496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048496">Patrick Massot (Feb 21 2019 at 08:06)</a>:</h4>
+<p>The trick is that those notations are used by users, but all lemmas are proved once, in the most general setting</p>
+
+<a name="159048515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048515">Patrick Massot (Feb 21 2019 at 08:07)</a>:</h4>
+<p>Of course it does make everything easier, that's what math is about: prove general results and gets many special cases for free</p>
+
+<a name="159048517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048517">Mario Carneiro (Feb 21 2019 at 08:07)</a>:</h4>
+<p>Yeah but we've already done that</p>
+
+<a name="159048522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048522">Patrick Massot (Feb 21 2019 at 08:07)</a>:</h4>
+<p>Where?</p>
+
+<a name="159048541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048541">Mario Carneiro (Feb 21 2019 at 08:07)</a>:</h4>
+<p>Finset has loads of theorems, multiset has loads of theorems, list has loads of theorems, all in maximum generality for the statement</p>
+
+<a name="159048621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048621">Patrick Massot (Feb 21 2019 at 08:09)</a>:</h4>
+<p>Seriously Mario, did you open that <a href="https://github.com/math-comp/math-comp/blob/master/mathcomp/ssreflect/bigop.v" target="_blank" title="https://github.com/math-comp/math-comp/blob/master/mathcomp/ssreflect/bigop.v">https://github.com/math-comp/math-comp/blob/master/mathcomp/ssreflect/bigop.v</a> or are you waiting for the next time one of your papers will be rejected because you pay no attention to what the rest of the world is doing?</p>
+
+<a name="159048687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048687">Johan Commelin (Feb 21 2019 at 08:11)</a>:</h4>
+<p>That is &gt;200 lines of introducing notation. Wow!</p>
+
+<a name="159048753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048753">Patrick Massot (Feb 21 2019 at 08:12)</a>:</h4>
+<p>Yes, those guys are pretty serious about building user interfaces</p>
+
+<a name="159048759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048759">Johan Commelin (Feb 21 2019 at 08:12)</a>:</h4>
+<p>Patrick, do you know if that file was written by hand?</p>
+
+<a name="159048775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048775">Mario Carneiro (Feb 21 2019 at 08:12)</a>:</h4>
+<p>certainly it was</p>
+
+<a name="159048776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048776">Johan Commelin (Feb 21 2019 at 08:12)</a>:</h4>
+<p>Parts of it look so regular that you would think one might want to generate it</p>
+
+<a name="159048787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048787">Mario Carneiro (Feb 21 2019 at 08:13)</a>:</h4>
+<p>the answer to that question is no 90% of the time</p>
+
+<a name="159048847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048847">Patrick Massot (Feb 21 2019 at 08:14)</a>:</h4>
+<p>Remember this is part of the project that proved Feit-Thompson. It's the same game that we play, except that it scales. So, yes, they are pretty rigorous and regular</p>
+
+<a name="159048875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159048875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159048875">Patrick Massot (Feb 21 2019 at 08:15)</a>:</h4>
+<p>I need to go, but I hope you'll think seriously about all that</p>
+
+<a name="159052949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159052949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159052949">Chris Hughes (Feb 21 2019 at 09:36)</a>:</h4>
+<p>I'm with Patrick here. <code>list.prod</code> doesn't have anywhere near the number of lemmas of <code>finset.prod</code>.</p>
+
+<a name="159053603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159053603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159053603">Mario Carneiro (Feb 21 2019 at 09:49)</a>:</h4>
+<p>Are there a lot of analogous theorems? I guess the noncommutative story is much simpler since most of the lemmas don't hold</p>
+
+<a name="159054367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159054367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159054367">Mario Carneiro (Feb 21 2019 at 10:03)</a>:</h4>
+<ul>
+<li><code>finset.prod_empty</code> -&gt; <code>list.prod_nil</code></li>
+<li><code>finset.prod_insert</code> -&gt; <code>list.prod_cons</code></li>
+<li><code>finset.prod_singleton</code> -&gt; TODO, but provable by simp</li>
+<li><code>finset.prod_const_one</code> -&gt; TODO: <code>list.prod_repeat_one : list.prod (list.repeat 1 n) = 1</code></li>
+<li><code>finset.prod_image</code> -&gt; unnecessary</li>
+<li><code>finset.prod_congr</code> -&gt; unnecessary</li>
+<li><code>finset.prod_union_inter</code> -&gt; inapplicable</li>
+<li><code>finset.prod_union</code> -&gt; <code>list.prod_append</code></li>
+<li><code>finset.prod_sdiff</code> -&gt; inapplicable</li>
+<li><code>finset.prod_bind</code> -&gt; <code>list.prod_join</code>, TODO?</li>
+<li><code>finset.prod_product</code> -&gt; TODO</li>
+<li><code>finset.prod_sigma</code> -&gt; TODO</li>
+<li><code>finset.prod_image'</code> -&gt; ?</li>
+<li><code>finset.prod_mul_distrib</code> -&gt; inapplicable</li>
+<li><code>finset.prod_comm</code> -&gt; inapplicable</li>
+<li><code>finset.prod_hom</code> -&gt; TODO</li>
+<li><code>finset.prod_hom_rel</code> -&gt; TODO</li>
+<li><code>finset.prod_subset</code> -&gt; not sure how to state</li>
+<li><code>finset.prod_eq_single</code> -&gt; not sure how to state</li>
+<li><code>finset.prod_attach</code> -&gt; unnecessary</li>
+<li><code>finset.prod_bij</code> -&gt; inapplicable</li>
+</ul>
+<p>The inapplicable ones only apply in a commutative setting, where I assume the <code>finset</code> notion works better. For some of the others, it may be better to have a version of <code>fold</code> that takes a binary operation and a function, similar to Patrick's <code>apply_bigop</code> but without the predicate</p>
+
+<a name="159142952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159142952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159142952">Scott Morrison (Feb 22 2019 at 09:41)</a>:</h4>
+<blockquote>
+<p>Of course we want to be able to sum on various stuff, including using a predicate. Are you denying this happens in maths?</p>
+</blockquote>
+<p>Of course not...</p>
+<p>I just don't understand why a big operations interface needs to know separately about some domain, and some predicate on it, when you could just use <code>.filter</code> (on whatever sort of object is representing the domain).</p>
+
+<a name="159143126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159143126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159143126">Mario Carneiro (Feb 22 2019 at 09:43)</a>:</h4>
+<p>I would say something similar about the similarities between <code>sum_(i \in l) a_i</code> and <code>sum_(i=m..n) a_i</code>. One is literally a special case of the other, so compositionality suggests to factor the definition</p>
+
+<a name="159158657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159158657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159158657">Patrick Massot (Feb 22 2019 at 14:07)</a>:</h4>
+<p>Again, Scott and Mario: of course the implementation uses filter and factor the definition of <code>sum_(i \in l) a_i</code> and <code>sum_(i=m..n) a_i</code>. But the user interface needs to do its job and  hide all that.</p>
+
+<a name="159252707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159252707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159252707">Kevin Buzzard (Feb 24 2019 at 00:47)</a>:</h4>
+<p>I think that what might be happening here is similar to this whole "R is Noetherian and S is isomorphic to R so S is Noetherian" thing.</p>
+<p>Patrick -- we have to remember that Mario is not actually a mathematician. We might see sums broken up into sums over even and odd indices quite a lot (or maybe much more complex things, like breaking sums over modules into sums over isomorphism classes or whatever), but maybe he just never really does. He knows that everything can be done with filter and fold and doesn't really see the problem. I run into issues when doing things like undergraduate analysis and think "isn't it annoying that this isn't there and I have to use filter and fold", but nobody actually writes the code which should be there because the mathematicians haven't got around to it and the computer scientists don't really seem to know what we want. It's all well and good saying "we want what's in Coq" but somehow in practice what we actually want is the tools necessary to do what we're trying to do right now this instant. I have become convinced that Mario isn't just being obstructive/lazy when he doesn't write me my tactic which will rewrite sensible mathematical statements along isomorphisms of rings, he just can't really see why it's necessary because I've not yet come up with the killer example. I think it's the same here. We occasionally say "we want to do this" and it is pointed out to us that this is actually possible and would in fact be easy if we had some CS training, but we want something else. Maybe we haven't formalised exactly what we want.</p>
+
+<a name="159258079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159258079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159258079">Mario Carneiro (Feb 24 2019 at 03:39)</a>:</h4>
+<p>In metamath I had to do several sums over unusual sets; for example a sum over group elements breaks into a sum over conjugacy classes or cosets, or into sets of size two. Then there are mobius sums, over the divisors of a number, that commute with regular sums in interesting ways. I handled all of these by essentially the same method, which like finset sum. (It was a sum over a general abelian group, so in some ways it's more general than the lean version because it's not as much of a pain to switch between multiplicative and additive.)</p>
+<p>To prove stuff about partitioning a group sum, the proof obligation says that you have an indexed family of finsets which is disjoint (this is a definition on families of sets/finsets that says <code>\all (i j : I) (z : A), z \in f i -&gt; z \in f j -&gt; i = j</code>), then the sum breaks into a two dimensional sum indexed over I and then summing the finsets in f.</p>
+
+<a name="159274620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159274620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159274620">Chris Hughes (Feb 24 2019 at 12:36)</a>:</h4>
+<p>There's a danger in hiding the fact that it's based on <code>finset.sum</code> in the sense that you lose the interface and theorems you had for <code>finset</code>, or at least make it less obvious that they apply. Take <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></msubsup><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>j</mi></msubsup><msub><mi>a</mi><mi>k</mi></msub><msub><mi>b</mi><mrow><mi>j</mi><mo>−</mo><mi>k</mi></mrow></msub><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></msubsup><msub><mi>a</mi><mi>k</mi></msub><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mi>k</mi></mrow><mi>n</mi></msubsup><msub><mi>b</mi><mrow><mi>j</mi><mo>−</mo><mi>k</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sum_{j=0}^{n} \sum_{k=0}^j a_k b_{j-k} = \sum_{k=0}^{n} a_k \sum_{j=k}^n b_{j-k}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.964564em;"></span><span class="strut bottom" style="height:1.400382em;vertical-align:-0.43581800000000004em;"></span><span class="base"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"></span></span></span></span></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.964564em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">0</span></span></span></span><span style="top:-3.2029000000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">−</span><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mrel">=</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mbin mtight">−</span><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span></span></span></span>. This is hard to prove without using without using lemmas about finsets (and is stated without proof in any textbook). There are probably a few lemmas missing about intervals, but you still very much need the finset ones.</p>
+
+<a name="159279566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159279566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159279566">Kevin Buzzard (Feb 24 2019 at 15:18)</a>:</h4>
+<p>I always justify this in lectures by saying that it's the sum over 0 &lt;= k &lt;= j &lt;= n</p>
+
+<a name="159279693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20sums/near/159279693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86088finitesums.html#159279693">Chris Hughes (Feb 24 2019 at 15:21)</a>:</h4>
+<p>Exactly. That's the lean proof. But you have to use lemmas about sums over finsets for that. You don't want the finset to be hidden.</p>
+
+
+{% endraw %}

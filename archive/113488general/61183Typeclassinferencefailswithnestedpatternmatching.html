@@ -1,0 +1,96 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html">Typeclass inference fails with nested pattern matching</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158945966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158945966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158945966">Seul Baek (Feb 20 2019 at 04:49)</a>:</h4>
+<p>Lean has no problems with</p>
+<div class="codehilite"><pre><span></span>def foo : nat → unit
+| 0 := ()
+| (k+1) :=
+  if (0 &lt; k)
+  then ()
+  else ()
+</pre></div>
+
+
+<p>But if I change the first match case </p>
+<div class="codehilite"><pre><span></span>def bar : nat → unit
+| 0 :=
+  match 0 with
+  | _ := ()
+  end
+| (k+1) :=
+  if (0 &lt; k)
+  then ()
+  else ()
+</pre></div>
+
+
+<p>Then Lean suddenly can't decide <code>0 &lt; k</code>. But if you swap the match case order</p>
+<div class="codehilite"><pre><span></span>def baz : nat → unit
+| (k+1) :=
+  if (0 &lt; k)
+  then ()
+  else ()
+| 0 :=
+  match 0 with
+  | _ := ()
+  end
+</pre></div>
+
+
+<p>Then it works again. Apparently Lean doesn't like nested pattern matching, but it's a bit strange that this should affect typeclass inference or be sensitive to the match case order. Any thoughts on what's going on here?</p>
+
+<a name="158946699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158946699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158946699">Mario Carneiro (Feb 20 2019 at 05:04)</a>:</h4>
+<p>I think the main problem there is that the type of <code>0</code> in the match is not known</p>
+
+<a name="158946864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158946864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158946864">Seul Baek (Feb 20 2019 at 05:08)</a>:</h4>
+<p>If I modify <code>bar</code> to</p>
+<div class="codehilite"><pre><span></span>def bar&#39; : nat → unit
+| (k+2) :=
+  match k with
+  | _ := ()
+  end
+| (k+1) :=
+  if (0 &lt; k)
+  then ()
+  else ()
+| _ := ()
+</pre></div>
+
+
+<p>The problem still persists, so I think it's likely something else</p>
+
+<a name="158947045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158947045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158947045">Mario Carneiro (Feb 20 2019 at 05:13)</a>:</h4>
+<p>It's some race condition, I think. I've got it down to this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">baz</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">match</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="k">with</span> <span class="bp">_</span> <span class="o">:=</span> <span class="o">()</span> <span class="kn">end</span>
+<span class="bp">|</span> <span class="o">((</span><span class="n">k</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">@</span><span class="n">ite</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">))</span> <span class="o">(</span><span class="bp">_</span><span class="o">)</span> <span class="n">unit</span> <span class="o">()</span> <span class="o">()</span>
+</pre></div>
+
+<a name="158947093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158947093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158947093">Mario Carneiro (Feb 20 2019 at 05:14)</a>:</h4>
+<p>filling any of the underscores makes it work</p>
+
+<a name="158947757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20inference%20fails%20with%20nested%20pattern%20matching/near/158947757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61183Typeclassinferencefailswithnestedpatternmatching.html#158947757">Seul Baek (Feb 20 2019 at 05:31)</a>:</h4>
+<p>Thanks. I guess the rule of thumb is to supply more explicit type information whenever something like this happens</p>
+
+
+{% endraw %}

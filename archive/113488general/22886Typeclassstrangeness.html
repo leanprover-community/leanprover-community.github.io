@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/22886Typeclassstrangeness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22886Typeclassstrangeness.html">Typeclass strangeness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159241177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20strangeness/near/159241177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22886Typeclassstrangeness.html#159241177">Neil Strickland (Feb 23 2019 at 19:01)</a>:</h4>
+<p>Can anyone suggest how to fix this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">lattice</span>
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">order_bot</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">order_top</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">bounded_lattice</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span>
+   <span class="n">top</span>          <span class="o">:=</span> <span class="n">order_top</span><span class="bp">.</span><span class="n">top</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">bot</span>          <span class="o">:=</span> <span class="n">order_bot</span><span class="bp">.</span><span class="n">bot</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">le_top</span>       <span class="o">:=</span> <span class="bp">@</span><span class="n">order_top</span><span class="bp">.</span><span class="n">le_top</span> <span class="n">α</span> <span class="bp">_</span><span class="o">,</span>
+   <span class="n">bot_le</span>       <span class="o">:=</span> <span class="bp">@</span><span class="n">order_bot</span><span class="bp">.</span><span class="n">bot_le</span> <span class="n">α</span> <span class="bp">_</span><span class="o">,</span>
+   <span class="bp">..</span> <span class="o">(</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lattice_of_decidable_linear_order</span><span class="o">)</span>
+  <span class="o">}</span>
+</pre></div>
+
+
+<p>The definitions of <code>le_top</code> and <code>bot_le</code> are rejected, with rather complex error messages.  The problem seems to be that Lean is pushing around order relations through some complicated pattern of typeclass inferences involving <code>lattice</code>, <code>partial_order</code>, <code>preorder</code>, <code>order_top</code> and so on, and it has decided that <code>@order_top.le_top α _</code> refers to a different order relation than the one that is needed for the <code>le_top</code> field, although in fact there is only one order relation on <code>α</code> that could possibly be relevant.  I have not been able to work out what to do about that.</p>
+<p>I only care immediately about the case <code>α = with_bot (with_top (fin n))</code>, but it seems best to do the general thing.</p>
+
+<a name="159241245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20strangeness/near/159241245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22886Typeclassstrangeness.html#159241245">Kenny Lau (Feb 23 2019 at 19:02)</a>:</h4>
+<p>The order in <code>[decidable_linear_order \a]</code> and the order in <code>[order_bot \a]</code> and the order in <code>[order_top \a]</code> are not the same</p>
+
+<a name="159242204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20strangeness/near/159242204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22886Typeclassstrangeness.html#159242204">Neil Strickland (Feb 23 2019 at 19:25)</a>:</h4>
+<p>OK, I see that I was confused: the <code>order_bot</code> instance is not dependent on the <code>decidable_linear_order</code> instance and contains its own order relation that is completely independent of the previous one.  So I'm not sure what's the best thing to do about that.  One could define a <code>bounded_decidable_linear_order</code> class extending  <code>decidable_linear_order</code>, and then define an instance to convert one of those to a <code>bounded_distrib_lattice</code>.  But this seems to be asking for diamond problems, and I am sure that other people know better than me how to think about that.</p>
+
+<a name="159243625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Typeclass%20strangeness/near/159243625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22886Typeclassstrangeness.html#159243625">Sebastien Gouezel (Feb 23 2019 at 20:05)</a>:</h4>
+<p>I think <code>order_bot</code> should be modified, to be an additional property of a given <code>preorder</code> instead of containing an order by itself. Then the current theorems about <code>order_bot</code> would have a slightly more complicated statement since they would need two assumptions <code>[preorder α] [order_bot α]</code>, but on the other hand it would be much more convenient to define new properties of orders.</p>
+
+
+{% endraw %}

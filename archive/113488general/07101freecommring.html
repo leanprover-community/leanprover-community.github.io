@@ -1,0 +1,274 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/07101freecommring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html">free_comm_ring</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159267753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159267753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159267753">Kenny Lau (Feb 24 2019 at 08:49)</a>:</h4>
+<p>(This thread is a continuation of <a href="#narrow/stream/144837-PR-reviews" title="#narrow/stream/144837-PR-reviews">https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews</a>)<br>
+So I built the free commutative ring over a type <code>A</code>, which corresponds to the multivariate polynomials with variables indexed by <code>A</code> and coefficients in <code>\Z</code>. There are some differences between <code>free_comm_ring A</code> and <code>mv_polynomial A \Z</code>:<br>
+1. you don't need <code>A</code> to have decidable equality for <code>free_comm_ring A</code> to be a ring, but you do need it for <code>mv_polynomial A \Z</code> to be a ring.<br>
+2. the coefficients of <code>free_comm_ring</code> are in <code>\Z</code>, so it is a special case of <code>mv_polynomial</code> (<code>polynomial</code> is also a special case and we also allow it in mathlib).<br>
+3. <code>free_comm_ring</code> might have faster elaboration speed than <code>mv_polynomial</code>, and it might be caused by the fact that there are less typeclass searches, since it doesn't need either <code>decidable_eq</code> or a ring instance for the coefficients.</p>
+
+<a name="159267799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159267799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159267799">Kenny Lau (Feb 24 2019 at 08:50)</a>:</h4>
+<p>Should we put <code>free_comm_ring</code> in mathlib?</p>
+
+<a name="159267805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159267805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159267805">Kenny Lau (Feb 24 2019 at 08:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
+
+<a name="159268686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159268686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159268686">Mario Carneiro (Feb 24 2019 at 09:20)</a>:</h4>
+<p>no ring instance for the coefficients?</p>
+
+<a name="159268701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159268701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159268701">Mario Carneiro (Feb 24 2019 at 09:21)</a>:</h4>
+<p>I agree that <code>mv_polynomial</code> should have decidable_eq removed, but this isn't the only way to achieve that</p>
+
+<a name="159268744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159268744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159268744">Mario Carneiro (Feb 24 2019 at 09:22)</a>:</h4>
+<p>I think <code>finsupp</code> should go fully classical</p>
+
+<a name="159269031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269031">Kenny Lau (Feb 24 2019 at 09:30)</a>:</h4>
+<p>I mean, <code>free_comm_ring</code> doesn't have a sense of "coefficients" at all</p>
+
+<a name="159269041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269041">Kenny Lau (Feb 24 2019 at 09:31)</a>:</h4>
+<p>so it doesn't need to search for a ring instance of the "coefficients"</p>
+
+<a name="159269871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269871">Mario Carneiro (Feb 24 2019 at 09:56)</a>:</h4>
+<p>you claimed that <code>free_comm_ring</code> is equivalent to <code>mv_polynomial</code>. That means it has all the structure of polynomials. Where is it?</p>
+
+<a name="159269875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269875">Kenny Lau (Feb 24 2019 at 09:56)</a>:</h4>
+<p>I never claimed that.</p>
+
+<a name="159269883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269883">Kenny Lau (Feb 24 2019 at 09:57)</a>:</h4>
+<p>I said <code>free_comm_ring \a</code> is isomorphic to <code>mv_polynomial \a \Z</code></p>
+
+<a name="159269926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269926">Mario Carneiro (Feb 24 2019 at 09:58)</a>:</h4>
+<p>So how does <code>mv_polynomial A B</code> relate to a free construction?</p>
+
+<a name="159269931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269931">Kenny Lau (Feb 24 2019 at 09:58)</a>:</h4>
+<p>I don't see the relevance of that question</p>
+
+<a name="159269940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269940">Kenny Lau (Feb 24 2019 at 09:59)</a>:</h4>
+<p>but <code>mv_polynomial A B</code> is the free <code>B</code>-algebra generated by <code>A</code></p>
+
+<a name="159269945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269945">Mario Carneiro (Feb 24 2019 at 09:59)</a>:</h4>
+<p>okay, so let's do that</p>
+
+<a name="159269950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269950">Mario Carneiro (Feb 24 2019 at 10:00)</a>:</h4>
+<p>I guess that generalizes to all the other free constructions too</p>
+
+<a name="159269995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269995">Kenny Lau (Feb 24 2019 at 10:00)</a>:</h4>
+<p>my construction only works for coefficients in Z</p>
+
+<a name="159269999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159269999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159269999">Mario Carneiro (Feb 24 2019 at 10:00)</a>:</h4>
+<p>like ring expressions with constants taken from a ring, or free group expressions with constants in a group</p>
+
+<a name="159270001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270001">Mario Carneiro (Feb 24 2019 at 10:00)</a>:</h4>
+<p>and indeterminates from an arbitrary type</p>
+
+<a name="159270012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270012">Kenny Lau (Feb 24 2019 at 10:01)</a>:</h4>
+<p>I don't understand</p>
+
+<a name="159270013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270013">Kenny Lau (Feb 24 2019 at 10:01)</a>:</h4>
+<p>what's your new plan?</p>
+
+<a name="159270045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270045">Kenny Lau (Feb 24 2019 at 10:02)</a>:</h4>
+<p>you want to replace <code>mv_polynomial</code> entirely?</p>
+
+<a name="159270057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270057">Mario Carneiro (Feb 24 2019 at 10:02)</a>:</h4>
+<p>I thought that was your plan</p>
+
+<a name="159270059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270059">Kenny Lau (Feb 24 2019 at 10:02)</a>:</h4>
+<p>no that wasn't my plan</p>
+
+<a name="159270060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270060">Kenny Lau (Feb 24 2019 at 10:02)</a>:</h4>
+<p>my plan is to keep <code>mv_polynomial</code>, and add <code>free_comm_ring</code></p>
+
+<a name="159270074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270074">Mario Carneiro (Feb 24 2019 at 10:03)</a>:</h4>
+<p>As you pointed out, we already have <code>mv_polynomial \a \Z</code>. It just needs a few less typeclass args</p>
+
+<a name="159270078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270078">Kenny Lau (Feb 24 2019 at 10:03)</a>:</h4>
+<p>we also have <code>mv_polynomial unit R</code> but <code>polynomial</code> is still in mathlib</p>
+
+<a name="159270120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270120">Mario Carneiro (Feb 24 2019 at 10:04)</a>:</h4>
+<p>But probably your version is closer to what someone would expect if they see <code>free_comm_ring</code></p>
+
+<a name="159270140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270140">Mario Carneiro (Feb 24 2019 at 10:05)</a>:</h4>
+<p>I think it is okay to have isomorphic constructions if they represent a different way of dealing with a type, but you need to have tons of lemmas relating the two if you take this route</p>
+
+<a name="159270188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270188">Kenny Lau (Feb 24 2019 at 10:06)</a>:</h4>
+<p>it's just the free comm ring. It's what I intended it to be. It's just a coincidence that it's isomorphic to <code>mv_polynomial A \Z</code></p>
+
+<a name="159270193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270193">Kenny Lau (Feb 24 2019 at 10:06)</a>:</h4>
+<p>I don't understand why a fuss is being made over this</p>
+
+<a name="159270370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270370">Kenny Lau (Feb 24 2019 at 10:12)</a>:</h4>
+<p>seriously mv_polynomial is so damn slow I don't even want to work with them <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="159270377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270377">Kenny Lau (Feb 24 2019 at 10:13)</a>:</h4>
+<p>can I not refactor <a href="https://github.com/leanprover/mathlib/issues/754" target="_blank" title="https://github.com/leanprover/mathlib/issues/754">#754</a></p>
+
+<a name="159270378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270378">Mario Carneiro (Feb 24 2019 at 10:13)</a>:</h4>
+<p>Like I said, the decidable_eq instance on <code>finsupp</code> needs to die</p>
+
+<a name="159270382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270382">Mario Carneiro (Feb 24 2019 at 10:13)</a>:</h4>
+<p>Okay, go ahead. But the idea behind library building is that you complete the graph of relations between concepts in the library. If you have two isomorphic things there should be a theorem about that</p>
+
+<a name="159270430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270430">Kenny Lau (Feb 24 2019 at 10:14)</a>:</h4>
+<p>what do you mean by "go ahead"?</p>
+
+<a name="159270491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270491">Kenny Lau (Feb 24 2019 at 10:16)</a>:</h4>
+<p>I would have given up if I hadn't written this in terms of free_comm_ring to begin with</p>
+
+<a name="159270492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270492">Kenny Lau (Feb 24 2019 at 10:16)</a>:</h4>
+<p><code>elaboration of lift took 18.8s</code></p>
+
+<a name="159270495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270495">Kenny Lau (Feb 24 2019 at 10:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lift</span> <span class="o">:</span> <span class="n">direct_limit</span> <span class="n">G</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">haveI</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="bp">.</span><span class="n">is_ring_hom</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="o">(</span><span class="n">eval₂</span> <span class="n">coe</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">i</span><span class="o">,</span> <span class="n">G</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="k">begin</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">eval₂</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">i</span><span class="o">,</span> <span class="n">G</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">eval₂</span><span class="bp">.</span><span class="n">is_ring_hom</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">eval₂</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">i</span><span class="o">,</span> <span class="n">G</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="err">⊥</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">exact</span> <span class="o">(</span><span class="n">mem_bot</span> <span class="n">P</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">this</span> <span class="n">hx</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="o">,</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_coe</span><span class="o">,</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">mem_comap</span><span class="o">,</span> <span class="n">mem_bot</span><span class="o">],</span>
+  <span class="n">rcases</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="n">hij</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩;</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">eval₂_sub</span><span class="o">,</span> <span class="n">eval₂_X</span><span class="o">,</span> <span class="n">Hg</span><span class="o">,</span> <span class="n">eval₂_one</span><span class="o">,</span> <span class="n">eval₂_add</span><span class="o">,</span> <span class="n">eval₂_mul</span><span class="o">,</span>
+      <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">sub_self</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159270497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270497">Kenny Lau (Feb 24 2019 at 10:16)</a>:</h4>
+<p>do you see how to make it faster?</p>
+
+<a name="159270509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270509">Kenny Lau (Feb 24 2019 at 10:17)</a>:</h4>
+<p>original:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lift</span> <span class="o">:</span> <span class="n">direct_limit</span> <span class="n">G</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="o">(</span><span class="n">free_comm_ring</span><span class="bp">.</span><span class="n">lift</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">g</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="bp">_</span> <span class="bp">≤</span>
+    <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">free_comm_ring</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="err">Σ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">G</span> <span class="n">i</span><span class="o">),</span> <span class="n">g</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">snd</span><span class="o">)))</span> <span class="err">⊥</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">exact</span> <span class="o">(</span><span class="n">mem_bot</span> <span class="n">P</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">this</span> <span class="n">hx</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="o">,</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_coe</span><span class="o">,</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">mem_comap</span><span class="o">,</span> <span class="n">mem_bot</span><span class="o">],</span>
+  <span class="n">rcases</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="n">hij</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩;</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">lift_sub</span><span class="o">,</span> <span class="n">lift_of</span><span class="o">,</span> <span class="n">Hg</span><span class="o">,</span> <span class="n">lift_one</span><span class="o">,</span> <span class="n">lift_add</span><span class="o">,</span> <span class="n">lift_mul</span><span class="o">,</span>
+      <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span><span class="o">),</span> <span class="n">sub_self</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159270608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270608">Mario Carneiro (Feb 24 2019 at 10:20)</a>:</h4>
+<p>Using <code>ring_hom</code> might help here as well</p>
+
+<a name="159270618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270618">Mario Carneiro (Feb 24 2019 at 10:21)</a>:</h4>
+<p>I think that all of the issues you point out which <code>free_comm_ring</code> solves have nothing to do with the definition</p>
+
+<a name="159270733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270733">Kenny Lau (Feb 24 2019 at 10:24)</a>:</h4>
+<p>I would appreciate a diagnosis of the slow elaboration time</p>
+
+<a name="159270734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270734">Kenny Lau (Feb 24 2019 at 10:24)</a>:</h4>
+<p>Lean doesn't really have good debugging tools</p>
+
+<a name="159270750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270750">Kenny Lau (Feb 24 2019 at 10:25)</a>:</h4>
+<blockquote>
+<p>Using <code>ring_hom</code> might help here as well</p>
+</blockquote>
+<p>so you're saying, I should do a lot of refactoring just to get <a href="https://github.com/leanprover/mathlib/issues/754" target="_blank" title="https://github.com/leanprover/mathlib/issues/754">#754</a> into mathlib?</p>
+
+<a name="159270869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270869">Mario Carneiro (Feb 24 2019 at 10:29)</a>:</h4>
+<p>No, that's what I meant by "go ahead". But I don't think we should despair over <code>mv_polynomial</code></p>
+
+<a name="159270935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159270935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159270935">Kenny Lau (Feb 24 2019 at 10:30)</a>:</h4>
+<p>thanks</p>
+
+<a name="159279191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159279191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159279191">Kenny Lau (Feb 24 2019 at 15:04)</a>:</h4>
+<p>The correct way to do <code>mv_polynomial A B</code> is <code>free_comm_ring A \otimes B</code></p>
+
+<a name="159279246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159279246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159279246">Johan Commelin (Feb 24 2019 at 15:06)</a>:</h4>
+<p>Why is that the correct way? Why isn't the correct way <code>free_comm_algebra B A</code>?</p>
+
+<a name="159279386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159279386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159279386">Kenny Lau (Feb 24 2019 at 15:11)</a>:</h4>
+<p>because how are you gonna construct that</p>
+
+<a name="159279426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159279426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159279426">Kenny Lau (Feb 24 2019 at 15:12)</a>:</h4>
+<p>(the two bifunctors are isomorphic anyway)</p>
+
+<a name="159280213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159280213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159280213">Chris Hughes (Feb 24 2019 at 15:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> What would you suggest changing about <code>mv_polynomial</code> in order to make it usable?</p>
+
+<a name="159280220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159280220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159280220">Kenny Lau (Feb 24 2019 at 15:37)</a>:</h4>
+<p>I would suggest better debugging tools in Lean 4</p>
+
+<a name="159280782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159280782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159280782">Chris Hughes (Feb 24 2019 at 15:54)</a>:</h4>
+<p>Does Mario's suggestion of getting rid of any decidability assumptions, and using classical throughout help?</p>
+
+<a name="159281369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159281369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159281369">Kenny Lau (Feb 24 2019 at 16:11)</a>:</h4>
+<p>no idea</p>
+
+<a name="159288033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring/near/159288033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07101freecommring.html#159288033">Kevin Buzzard (Feb 24 2019 at 19:22)</a>:</h4>
+<p>But you could find out Kenny, by finding a situation where you have problems with polynomials and then throwing in <code>prop_decidable</code> etc and seeing if it speeds things up.</p>
+
+
+{% endraw %}

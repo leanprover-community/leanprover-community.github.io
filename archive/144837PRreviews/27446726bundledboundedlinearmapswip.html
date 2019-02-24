@@ -1,0 +1,74 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/27446726bundledboundedlinearmapswip.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html">#726 bundled bounded linear maps [wip]</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159241573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159241573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159241573">Jean Lo (Feb 23 2019 at 19:09)</a>:</h4>
+<p>Not noteworthy enough for a whole separate PR and not even sure if it's a helpful thing to have done, but I spent some time filling in the gaps in a bundled version of bounded operators.</p>
+<p>Nothing's been refactored — <code>bounded_linear_map</code> as a structure exists alongside <code>bounded_linear_maps</code> as a subspace of <code>linear_map</code>, and <code>op_norm</code> alongside <code>operator_norm</code>; most/all of the results stated for <code>bounded_linear_maps</code> over reals have just been reproduced for <code>bounded_linear_map</code> over arbitrary <code>normed_field</code>s, so in particular no breaking changes have been inflicted upon <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> 's nice fréchet derivative code.</p>
+
+<a name="159245026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159245026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159245026">Patrick Massot (Feb 23 2019 at 20:46)</a>:</h4>
+<p>It looks like there is some git issue in this PR. It seems to also contain trigonometry</p>
+
+<a name="159245084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159245084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159245084">Patrick Massot (Feb 23 2019 at 20:48)</a>:</h4>
+<p>About arbitrary normed field, does it mean Jeremy's work won't be usable for complex and p-adic spaces? It would be nice to have a theory of derivatives covering those cases as well</p>
+
+<a name="159245416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159245416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159245416">Jean Lo (Feb 23 2019 at 20:59)</a>:</h4>
+<p>ah, frick, sorry about that. There were some git issues locally and I merged with the <code>ours</code> strategy at one point, that might have messed things up. Give me a second to either fix this or open up a separate PR w/o these issues?</p>
+
+<a name="159245488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159245488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159245488">Patrick Massot (Feb 23 2019 at 21:01)</a>:</h4>
+<p>You can probably fix it and force push, the probability that it will mess up someone's repo seems low</p>
+
+<a name="159246143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159246143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159246143">Jean Lo (Feb 23 2019 at 21:22)</a>:</h4>
+<p>I have force-pushed. Things appear to be sane. Sorry for the silliness.</p>
+<p>re: arbitrary normed field: things in <code>normed_space/deriv</code> in <a href="https://github.com/leanprover/mathlib/issues/748" target="_blank" title="https://github.com/leanprover/mathlib/issues/748">#748</a> appear to always be stated for normed space over reals, but I've really not read through nearly enough of it to say anything constructive about how hard/easy it'd be to make the proofs there work in greater generality.</p>
+
+<a name="159246379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159246379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159246379">Patrick Massot (Feb 23 2019 at 21:29)</a>:</h4>
+<p>Don't worry, very few contributors to mathlib never messed up any git branch. I wrote a few comments about unneeded assumption and easy stuff to add.</p>
+
+<a name="159250118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159250118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159250118">Jean Lo (Feb 23 2019 at 23:25)</a>:</h4>
+<p>thanks! I've tossed in a commit that removes the spurious assumptions (got to love division by zero) and second one containing all the instances except for the <code>ring_theory/algebra</code> one.</p>
+<p>the <code>vector_space</code> instance was done in the trivial, verbose, there's-probably-something-simple-that-oneshots-this way — I don't know nearly enough lean &amp; I'd love to learn of a better way to state the instance if someone'd point it out.</p>
+
+<a name="159269318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159269318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159269318">Patrick Massot (Feb 24 2019 at 09:39)</a>:</h4>
+<blockquote>
+<p>removes the spurious assumptions (got to love division by zero) </p>
+</blockquote>
+<p>Yes, you need to learn to stop worrying and love division by zero <span aria-label="nuclear" class="emoji emoji-2622" role="img" title="nuclear">:nuclear:</span>. This is a three stages process. First you need to realize you couldn't <em>state</em> this thing (even the original version with extra assumptions) without division by zero. Then you get happy users of your lemma, because they get fewer proof obligations. And then, according to people who worked on large scale formalization such as the odd order theorem, if you don't have that kind of tricks, then at some point there is a phase transition and you get completely stuck.</p>
+
+<a name="159269381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159269381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159269381">Patrick Massot (Feb 24 2019 at 09:41)</a>:</h4>
+<p>About the instance, one could indeed automate this, but I don't have time for this now. This could be a nice exercise in reading the tactic tutorial and then the <code>pi_instance</code> and <code>subtype_instance</code> tactics, and then see what you can do here</p>
+
+<a name="159275227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159275227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159275227">Jean Lo (Feb 24 2019 at 12:56)</a>:</h4>
+<p>so the instance for <code>algebra k (bounded_linear_map k E E)</code> is there now, but importing <code>ring_theory.algebra</code> appears to also have done things that I don't know about and now one of the old proofs about <code>operator_norm</code> has a max-class-instance-resolution-depth error. (I tried the obvious thing of tweaking the max_depth but it either just takes longer to fail, or turns everything into deterministic timeouts.) Maybe I should go figure out which exact instance it's been failing to find, and including it by hand? What's the best practice in this case?</p>
+<p>&amp; thanks for the pointers; I'll go look at those tactics and hopefully make the instances nicer once I've done that.</p>
+
+<a name="159276733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159276733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159276733">Jean Lo (Feb 24 2019 at 13:44)</a>:</h4>
+<p>(the type class instance thing is fixed now; thanks <span class="user-mention" data-user-id="110064">@Kenny Lau</span> )</p>
+
+<a name="159276735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23726%20bundled%20bounded%20linear%20maps%20%5Bwip%5D/near/159276735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/27446726bundledboundedlinearmapswip.html#159276735">Kenny Lau (Feb 24 2019 at 13:44)</a>:</h4>
+<p>no problem</p>
+
+
+{% endraw %}

@@ -46,5 +46,35 @@ permalink: archive/113488general/50204traversable.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158767906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158767906">Simon Hudon (Feb 18 2019 at 01:32)</a>:</h4>
 <p>Oh, wait, no, that's more complex than I thought. I'm not sure</p>
 
+<a name="158883458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158883458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158883458">Reid Barton (Feb 19 2019 at 14:06)</a>:</h4>
+<p>Probably not. One thinig you can do with <code>traversable T</code> is write a function <code>T a -&gt; list a</code> which lists "all the <code>a</code>s in a <code>T a</code> in order". I think this function is also supposed to be natural in <code>a</code>.<br>
+Now "all the <code>a</code>s in a <code>T a</code>" may not really have a meaning a priori, but still it seems unlikely that you could write a sensible instance for something like the free group or free commutative monoid or any structure where the relations involve duplicating, dropping, or reordering variables.</p>
+
+<a name="158883597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158883597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158883597">Reid Barton (Feb 19 2019 at 14:08)</a>:</h4>
+<p>Maybe you could define a <code>traversable_up_to_order</code> class which only quantifies over commutative monads, and then it could have instances which are types formed by a quotient which reorders <code>a</code>s, etc. This stuff grew out of Haskell, which doesn't have quotient types, so variants like this haven't been explored as far as I know.</p>
+
+<a name="158883904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158883904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158883904">Simon Hudon (Feb 19 2019 at 14:12)</a>:</h4>
+<p>For a group you probably need idempotency too ... and probably more now that I think of it. Some sort of cancellation</p>
+
+<a name="158883939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158883939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158883939">Simon Hudon (Feb 19 2019 at 14:12)</a>:</h4>
+<p>Thanks for the name <code>traversable_up_to_order</code>. I've been thinking about adding this class</p>
+
+<a name="158884134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158884134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158884134">Reid Barton (Feb 19 2019 at 14:15)</a>:</h4>
+<p>Yes, for <code>free_group</code>, you would need a monad where you can undo effects, and that doesn't sound like the kind of thing there would be many examples of.</p>
+
+<a name="158898091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158898091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158898091">Simon Hudon (Feb 19 2019 at 17:07)</a>:</h4>
+<p>Actually, that might be an opportunity for a sort of undo / redo design pattern</p>
+
+<a name="158947254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/traversable/near/158947254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50204traversable.html#158947254">Nicholas Scheel (Feb 20 2019 at 05:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I think you just need a commutative applicative, where <code>f &lt;$&gt; fa &lt;*&gt; fb = flip f &lt;$&gt; fb &lt;*&gt; fa</code> ... <code>option</code> is a good example of an applicative functor that supports that, plus the writer monad (over a commutative monoid) ... similarly, applicative validation[1] over a commutative monoid will be a commutative applicative – of course, it would be slightly ironic to traverse a free commutative monoid into another free commutative monoid, but it would work <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span> </p>
+<p>[1] <a href="https://pursuit.purescript.org/packages/purescript-validation/4.2.0/docs/Data.Validation.Semigroup" target="_blank" title="https://pursuit.purescript.org/packages/purescript-validation/4.2.0/docs/Data.Validation.Semigroup">https://pursuit.purescript.org/packages/purescript-validation/4.2.0/docs/Data.Validation.Semigroup</a></p>
+
 
 {% endraw %}

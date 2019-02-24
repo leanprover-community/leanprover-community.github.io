@@ -1,0 +1,100 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/10729failingtounfoldaninductivedefinition.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html">failing to unfold an inductive definition</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159248463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248463">Scott Morrison (Feb 23 2019 at 22:35)</a>:</h4>
+<p>I'm trying to prove</p>
+<div class="codehilite"><pre><span></span>import data.list.basic
+
+variable (α : Type)
+variable [decidable_eq α]
+
+open list
+
+@[simp] theorem count_bag_inter {a : α} :
+  ∀ {l₁ l₂ : list α}, count a (l₁.bag_inter l₂) = min (count a l₁) (count a l₂)
+| []        l₂ := by simp
+| l₁        [] := by simp
+| (h :: l₁) l₂ :=
+begin
+  dsimp [list.bag_inter], -- succeeds but does nothing?
+  sorry
+end
+</pre></div>
+
+
+<p>but can't seem to get access to the interesting inductive case of the definition of <code>list.bag_inter</code>. What am I meant to be doing here?</p>
+
+<a name="159248471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248471">Scott Morrison (Feb 23 2019 at 22:35)</a>:</h4>
+<p>For reference, <code>list.bag_inter</code> is defined as</p>
+<div class="codehilite"><pre><span></span>protected def bag_inter {α} [decidable_eq α] : list α → list α → list α
+| []      _   := []
+| _       []  := []
+| (a::l₁) l₂  := if a ∈ l₂ then a :: bag_inter l₁ (l₂.erase a) else bag_inter l₁ l₂
+</pre></div>
+
+
+<p>in core.</p>
+
+<a name="159248832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248832">Kevin Buzzard (Feb 23 2019 at 22:44)</a>:</h4>
+<p>What do I import to get count?</p>
+
+<a name="159248833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248833">Kevin Buzzard (Feb 23 2019 at 22:44)</a>:</h4>
+<p>Oh -- maybe I have to open something? List?</p>
+
+<a name="159248849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248849">Kevin Buzzard (Feb 23 2019 at 22:45)</a>:</h4>
+<p>I can't get your code to run :-(</p>
+
+<a name="159248904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248904">Scott Morrison (Feb 23 2019 at 22:46)</a>:</h4>
+<p>Sorry, MWE almost there.</p>
+
+<a name="159248920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159248920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159248920">Scott Morrison (Feb 23 2019 at 22:47)</a>:</h4>
+<p>Okay, I've updated the code above to include imports and variables.</p>
+
+<a name="159249090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249090">Kevin Buzzard (Feb 23 2019 at 22:52)</a>:</h4>
+<p><code>#print prefix list.bag_inter</code> reminds us that Lean still does the nil/cons case split on l2 in the a::l1 case when defining bag_inter</p>
+
+<a name="159249102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249102">Kevin Buzzard (Feb 23 2019 at 22:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">l₂</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">bag_inter</span><span class="o">],</span> <span class="c1">-- now does something</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159249160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249160">Kevin Buzzard (Feb 23 2019 at 22:55)</a>:</h4>
+<p>[PS I'm sorry, I'm so rubbish if I can't get the code to run. I know lots of people can do this sort of question in their heads but I can't. I was missing the decidable equality]</p>
+
+<a name="159249161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249161">Scott Morrison (Feb 23 2019 at 22:55)</a>:</h4>
+<p>ah, cool. Thanks! I didn't know about <code>#print prefix</code>.</p>
+
+<a name="159249208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249208">Kevin Buzzard (Feb 23 2019 at 22:56)</a>:</h4>
+<p><code>dsimp [list.bag_inter]</code> I think attempts to simplify using the equation lemmas for <code>list.bag_inter</code>. I used to think it was just magic, but Lean does not do magic. To see the equation lemmas I always use <code>#print prefix</code>.</p>
+
+<a name="159249219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20unfold%20an%20inductive%20definition/near/159249219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10729failingtounfoldaninductivedefinition.html#159249219">Kevin Buzzard (Feb 23 2019 at 22:57)</a>:</h4>
+<p>And when you start looking at equation lemmas you learn random stuff like "even though you defined your function using three cases, Lean internally compiled it up as four cases"</p>
+
+
+{% endraw %}

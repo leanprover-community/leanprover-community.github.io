@@ -10,13 +10,75 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (13 messages, latest: Feb 24 2019 at 21:08)
+
+* [free_comm_ring](07101freecommring.html) (57 messages, latest: Feb 24 2019 at 19:22)
+
+* [Better way to add well-founded instance](33471Betterwaytoaddwellfoundedinstance.html) (18 messages, latest: Feb 24 2019 at 10:13)
+
+* [failing to unfold an inductive definition](10729failingtounfoldaninductivedefinition.html) (13 messages, latest: Feb 23 2019 at 22:57)
+
+* [Typeclass strangeness](22886Typeclassstrangeness.html) (4 messages, latest: Feb 23 2019 at 20:05)
+
+* [the most pointless construction](65585themostpointlessconstruction.html) (101 messages, latest: Feb 23 2019 at 18:11)
+
+* [namespace](55694namespace.html) (26 messages, latest: Feb 23 2019 at 15:14)
+
+* [field'](81516field.html) (2 messages, latest: Feb 23 2019 at 10:32)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (173 messages, latest: Feb 23 2019 at 08:40)
+
+* [Field of 4 elements](89387Fieldof4elements.html) (37 messages, latest: Feb 23 2019 at 01:11)
+
+* [debugging](54061debugging.html) (7 messages, latest: Feb 23 2019 at 00:07)
+
+* [List all tactics](14977Listalltactics.html) (8 messages, latest: Feb 22 2019 at 19:51)
+
+* [lean community fork](45880leancommunityfork.html) (14 messages, latest: Feb 22 2019 at 15:22)
+
+* [set.mono_image](91990setmonoimage.html) (2 messages, latest: Feb 22 2019 at 14:54)
+
+* [algebraic normalizer](53438algebraicnormalizer.html) (4 messages, latest: Feb 22 2019 at 00:35)
+
+* [Well-founded induction](99060Wellfoundedinduction.html) (3 messages, latest: Feb 22 2019 at 00:29)
+
+* [Iterate over the environment](93505Iterateovertheenvironment.html) (4 messages, latest: Feb 22 2019 at 00:22)
+
+* [Changing the monad](94544Changingthemonad.html) (7 messages, latest: Feb 21 2019 at 23:23)
+
+* [multiset.lean](45734multisetlean.html) (6 messages, latest: Feb 21 2019 at 19:21)
+
+* [VScode extension](56578VScodeextension.html) (340 messages, latest: Feb 21 2019 at 15:29)
+
+* [conflicting imports](40287conflictingimports.html) (6 messages, latest: Feb 21 2019 at 10:25)
+
+* [bounded exists](43426boundedexists.html) (5 messages, latest: Feb 21 2019 at 08:10)
+
+* [subfield](42671subfield.html) (6 messages, latest: Feb 20 2019 at 17:19)
+
+* [AFP](94264AFP.html) (104 messages, latest: Feb 20 2019 at 16:30)
+
+* [app_builder failed](45709appbuilderfailed.html) (9 messages, latest: Feb 20 2019 at 09:14)
+
+* [Typeclass inference fails with nested pattern matching](61183Typeclassinferencefailswithnestedpatternmatching.html) (6 messages, latest: Feb 20 2019 at 05:31)
+
+* [traversable](50204traversable.html) (15 messages, latest: Feb 20 2019 at 05:18)
+
+* [Dependent hell](89469Dependenthell.html) (56 messages, latest: Feb 19 2019 at 14:44)
+
+* [nested data types](88499nesteddatatypes.html) (26 messages, latest: Feb 19 2019 at 12:23)
+
+* [Why is this computable?](57464Whyisthiscomputable.html) (24 messages, latest: Feb 19 2019 at 08:40)
+
+* [Extra instance makes exact_dec_trivial fail](27649Extrainstancemakesexactdectrivialfail.html) (14 messages, latest: Feb 19 2019 at 00:43)
+
+* [monad for Sort?](20766monadforSort.html) (9 messages, latest: Feb 18 2019 at 23:32)
+
 * [monad on arbitrary categories](45155monadonarbitrarycategories.html) (34 messages, latest: Feb 18 2019 at 17:52)
 
 * [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (88 messages, latest: Feb 18 2019 at 16:34)
 
 * [Type u vs Type*](08717TypeuvsType.html) (3 messages, latest: Feb 18 2019 at 01:41)
-
-* [traversable](50204traversable.html) (8 messages, latest: Feb 18 2019 at 01:32)
 
 * [(ultra)product](52859ultraproduct.html) (31 messages, latest: Feb 17 2019 at 15:29)
 
@@ -30,11 +92,7 @@ permalink: archive/113488general/index.html
 
 * [long elaboration time](30096longelaborationtime.html) (3 messages, latest: Feb 16 2019 at 22:49)
 
-* [AFP](94264AFP.html) (100 messages, latest: Feb 16 2019 at 22:06)
-
 * [why is quot an axiom?](48906whyisquotanaxiom.html) (29 messages, latest: Feb 16 2019 at 07:27)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (166 messages, latest: Feb 15 2019 at 22:24)
 
 * [type class inference issues](65508typeclassinferenceissues.html) (3 messages, latest: Feb 15 2019 at 22:08)
 
@@ -60,15 +118,11 @@ permalink: archive/113488general/index.html
 
 * [context within match expression](90550contextwithinmatchexpression.html) (5 messages, latest: Feb 14 2019 at 15:16)
 
-* [nested data types](88499nesteddatatypes.html) (25 messages, latest: Feb 14 2019 at 11:12)
-
 * [Lean 3.4.2](37206Lean342.html) (123 messages, latest: Feb 14 2019 at 07:53)
 
 * [solve_by_elim](75082solvebyelim.html) (93 messages, latest: Feb 14 2019 at 05:55)
 
 * [global have](75446globalhave.html) (23 messages, latest: Feb 13 2019 at 17:40)
-
-* [VScode extension](56578VScodeextension.html) (338 messages, latest: Feb 13 2019 at 17:33)
 
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
 
@@ -113,8 +167,6 @@ permalink: archive/113488general/index.html
 * [Strassen's algorithm with int and znum](94329Strassensalgorithmwithintandznum.html) (29 messages, latest: Feb 11 2019 at 07:06)
 
 * [Proving false vs double negation](80362Provingfalsevsdoublenegation.html) (26 messages, latest: Feb 11 2019 at 02:51)
-
-* [lean community fork](45880leancommunityfork.html) (11 messages, latest: Feb 11 2019 at 00:03)
 
 * [structure bug?](20911structurebug.html) (15 messages, latest: Feb 10 2019 at 21:25)
 
@@ -1741,8 +1793,6 @@ permalink: archive/113488general/index.html
 * [auto derive has_to_string](71245autoderivehastostring.html) (10 messages, latest: Jul 21 2018 at 21:10)
 
 * [option.rec.elim](27671optionrecelim.html) (41 messages, latest: Jul 21 2018 at 17:00)
-
-* [namespace](55694namespace.html) (23 messages, latest: Jul 21 2018 at 12:21)
 
 * [Inferring setoid instances](40085Inferringsetoidinstances.html) (54 messages, latest: Jul 20 2018 at 18:19)
 

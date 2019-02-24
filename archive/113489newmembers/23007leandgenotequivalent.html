@@ -1,0 +1,67 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/23007leandgenotequivalent.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html">le and ge not equivalent?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159190984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159190984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159190984">Calle Sönne (Feb 22 2019 at 21:07)</a>:</h4>
+<p>Code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">L</span><span class="o">):</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">le_iff_eq_or_lt</span> <span class="n">at</span> <span class="n">h₁</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">le_iff_eq_or_lt</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Tactic state:</p>
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
+  ?m_3 ≤ ?m_4
+state:
+L : ℝ,
+h : L ≥ 0,
+h₁ : 0 = L ∨ 0 &lt; L
+⊢ L &lt; 0
+</pre></div>
+
+
+<p>why is this happening? In my code where this originally happened I had just proved L ≥ 0 in a have statement, switching it to 0 ≤ L gave no errors as if they were the same.</p>
+
+<a name="159191078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191078">Calle Sönne (Feb 22 2019 at 21:08)</a>:</h4>
+<p>but the test lemma seems to imply they are different?</p>
+
+<a name="159191097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191097">Chris Hughes (Feb 22 2019 at 21:08)</a>:</h4>
+<p><code>rw</code> requires syntactic equality, whereas <code>have</code> only requires definitional equality. For <code>rw</code> to work they have to look the same more or less.</p>
+
+<a name="159191270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191270">Calle Sönne (Feb 22 2019 at 21:11)</a>:</h4>
+<p>Does simp also require syntactic equality? I switched rw into simp in code above,  and it also gives an error.</p>
+
+<a name="159191282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191282">Calle Sönne (Feb 22 2019 at 21:11)</a>:</h4>
+<p>so I assume yes</p>
+
+<a name="159191609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191609">Patrick Massot (Feb 22 2019 at 21:15)</a>:</h4>
+<p>It would be easier to help if you could provide a true lemma that you'd like to prove</p>
+
+<a name="159191896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159191896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159191896">Chris Hughes (Feb 22 2019 at 21:19)</a>:</h4>
+<p>Anyway, always use <code>le</code></p>
+
+<a name="159196221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/le%20and%20ge%20not%20equivalent%3F/near/159196221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23007leandgenotequivalent.html#159196221">Kevin Buzzard (Feb 22 2019 at 22:17)</a>:</h4>
+<p>Yes, rewrites are a great example of where definitional equality isn't good enough. I see this a lot in my code now, I don't know why. I have to use <code>show</code> to change my goal to something definitionally equal and then the <code>rw</code> works</p>
+
+
+{% endraw %}

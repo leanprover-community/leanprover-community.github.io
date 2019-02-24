@@ -1,0 +1,133 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/27649Extrainstancemakesexactdectrivialfail.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html">Extra instance makes exact_dec_trivial fail</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="158824337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158824337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158824337">Seul Baek (Feb 18 2019 at 19:47)</a>:</h4>
+<p>Here's a simple proof by <code>exact_dec_trivial</code> :</p>
+<div class="codehilite"><pre><span></span>import data.list.basic
+
+def foo (n : nat) : Prop := n = 0
+
+instance : decidable_pred foo :=
+begin intro n, simp [foo], apply_instance end
+
+example : ∀ n ∈ [0], foo n :=
+by tactic.exact_dec_trivial
+</pre></div>
+
+
+<p>The proof succeeds because the instance <code>decidable_forall_mem {p : α → Prop} [decidable_pred p] (l : list α) : decidable (∀ x ∈ l, p x)</code> is available. Although not necessary, having an extra instance of this type does not affect the proof:</p>
+<div class="codehilite"><pre><span></span>import data.list.basic
+
+def foo (n : nat) : Prop := n = 0
+
+instance : decidable_pred foo :=
+begin intro n, simp [foo], apply_instance end
+
+instance bar {α} {p : α → Prop} [decidable_pred p]
+  (l : list α) : decidable (∀ x ∈ l, p x) :=
+decidable_of_iff _ list.all_iff_forall_prop
+
+example : ∀ n ∈ [0], foo n :=
+by tactic.exact_dec_trivial
+</pre></div>
+
+
+<p>But if you add a slightly different instance of the same type:</p>
+<div class="codehilite"><pre><span></span>import data.list.basic
+
+def foo (n : nat) : Prop := n = 0
+
+instance : decidable_pred foo :=
+begin intro n, simp [foo], apply_instance end
+
+instance baz {α} {p : α → Prop} [decidable_pred p]
+  (l : list α) : decidable (∀ x ∈ l, p x) :=
+begin
+  cases l, apply decidable.is_true, intros x h, cases h,
+  rw list.forall_mem_cons, apply and.decidable,
+end
+
+example : ∀ n ∈ [0], foo n :=
+by tactic.exact_dec_trivial
+</pre></div>
+
+
+<p>Then <code>exact_dec_trivial</code> doesn't work anymore. What's the difference between <code>bar</code> and <code>baz</code> that causes this?</p>
+
+<a name="158824901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158824901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158824901">Simon Hudon (Feb 18 2019 at 19:55)</a>:</h4>
+<p>If you set the option <code>pp.proofs</code> to true and <code>#print baz</code>, you're going to see a proof term. Part of it is:</p>
+<div class="codehilite"><pre><span></span><span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">baz</span><span class="bp">._</span><span class="n">proof_2</span> <span class="n">l_hd</span> <span class="n">l_tl</span><span class="o">)</span> <span class="n">and</span><span class="bp">.</span><span class="n">decidable</span>
+</pre></div>
+
+
+<p>I'm wondering if, with <code>baz._proof_2</code> being opaque, <code>eq.mpr</code> can't unfold it to do recursion on it.</p>
+
+<a name="158824908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158824908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158824908">Simon Hudon (Feb 18 2019 at 19:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ?</p>
+
+<a name="158825098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158825098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158825098">Simon Hudon (Feb 18 2019 at 19:58)</a>:</h4>
+<p>Actually, now that I look more closely at <code>baz._proof_2</code>, I see that it refers to <code>propext</code> which is an axiom it cannot use for computation.</p>
+
+<a name="158826822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158826822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158826822">Kenny Lau (Feb 18 2019 at 20:28)</a>:</h4>
+<p>don't use tactics for definitions...</p>
+
+<a name="158826859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158826859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158826859">Kenny Lau (Feb 18 2019 at 20:29)</a>:</h4>
+<p>I think there's a similar issue with functions defined via <code>nat.strong_rec_on</code> that the kernel/VM cannot unfold proofs</p>
+
+<a name="158839522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839522">Mario Carneiro (Feb 19 2019 at 00:37)</a>:</h4>
+<p>Never use <code>rw</code> or <code>cast</code> to construct <code>decidable</code> instances</p>
+
+<a name="158839538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839538">Mario Carneiro (Feb 19 2019 at 00:37)</a>:</h4>
+<p>use <code>decidable_of_iff</code> instead (you can then prove the iff statement however you want)</p>
+
+<a name="158839585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839585">Mario Carneiro (Feb 19 2019 at 00:38)</a>:</h4>
+<p>This is important because <code>decidable_of_iff</code> does not use <code>cast</code> to get from one type to another, it pattern matches on one and uses the iff statement to get to the other</p>
+
+<a name="158839595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839595">Mario Carneiro (Feb 19 2019 at 00:39)</a>:</h4>
+<p>If you use <code>rw</code>, it will cast across <code>propext</code> and the resulting term will get stuck in reduction, even when it should be provable</p>
+
+<a name="158839657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839657">Moses Schönfinkel (Feb 19 2019 at 00:40)</a>:</h4>
+<p>This should be pinned or some such, these are impossible to debug for me. The last advice I got wrt. looking into <code>#reduce</code> was to put a breakpoint in C++ code :-/.</p>
+
+<a name="158839762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839762">Mario Carneiro (Feb 19 2019 at 00:42)</a>:</h4>
+<p>here's the important part of the example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="bp">@</span><span class="n">baz</span> <span class="bp">_</span> <span class="n">foo</span> <span class="bp">_</span> <span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+<span class="c1">-- @eq.rec Type (decidable (0 = 0 ∧ ∀ (x : ℕ), false → x = 0)) (λ (_x : Type), _x)</span>
+<span class="c1">--   (@is_true (0 = 0 ∧ ∀ (x : ℕ), false → x = 0) _)</span>
+<span class="c1">--   (decidable (∀ (x : ℕ), x = 0 ∨ false → x = 0))</span>
+<span class="c1">--   (propext _)</span>
+</pre></div>
+
+<a name="158839773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839773">Mario Carneiro (Feb 19 2019 at 00:43)</a>:</h4>
+<p>it's stuck on a reduction of <code>propext</code></p>
+
+<a name="158839783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Extra%20instance%20makes%20exact_dec_trivial%20fail/near/158839783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27649Extrainstancemakesexactdectrivialfail.html#158839783">Mario Carneiro (Feb 19 2019 at 00:43)</a>:</h4>
+<p>(example slightly unelided for clarity)</p>
+
+
+{% endraw %}

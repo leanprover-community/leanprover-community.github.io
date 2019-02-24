@@ -1,0 +1,43 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/94544Changingthemonad.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html">Changing the monad</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159111373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159111373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159111373">Koundinya Vajjha (Feb 21 2019 at 22:34)</a>:</h4>
+<p>I have a term<code>ns : list name</code>, and a function <code>foo : name -&gt; tactic string</code>. What I want is a term of type <code>list (list string)</code>. Naturally, I want to use some sort of <code>map</code> to apply foo to every element of <code>ns</code>, but that gives me the wrong type. What do I do to get rid of the <code>tactic</code> monad?</p>
+
+<a name="159113131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159113131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159113131">Kevin Buzzard (Feb 21 2019 at 23:01)</a>:</h4>
+<p>Isn't it in general impossible to get out of a monad?</p>
+
+<a name="159113200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159113200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159113200">Kevin Buzzard (Feb 21 2019 at 23:02)</a>:</h4>
+<p>The tactic could fail; then there's no possibility for getting out</p>
+
+<a name="159114235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159114235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159114235">Chris Hughes (Feb 21 2019 at 23:21)</a>:</h4>
+<p><code>list.mmap</code> might help. You'll end up with a <code>tactic (list (list string))</code></p>
+
+<a name="159114350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159114350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159114350">Koundinya Vajjha (Feb 21 2019 at 23:23)</a>:</h4>
+<p>Yes I guess so. I figured it out - at any rate. Thanks!</p>
+
+<a name="159114358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159114358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159114358">Koundinya Vajjha (Feb 21 2019 at 23:23)</a>:</h4>
+<p>I thought that this was what the monad transformers were about.</p>
+
+<a name="159114368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Changing%20the%20monad/near/159114368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94544Changingthemonad.html#159114368">Koundinya Vajjha (Feb 21 2019 at 23:23)</a>:</h4>
+<p>But maybe they are different.</p>
+
+
+{% endraw %}

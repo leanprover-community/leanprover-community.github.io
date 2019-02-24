@@ -1,0 +1,86 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/14977Listalltactics.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html">List all tactics</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159078820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159078820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159078820">Neil Strickland (Feb 21 2019 at 15:54)</a>:</h4>
+<p>Here is a baby attempt to list all known tactics:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">trace_decl_name</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:=</span>
+ <span class="n">do</span> <span class="o">(</span><span class="k">if</span> <span class="o">(</span><span class="n">name</span><span class="bp">.</span><span class="n">is_prefix_of</span> <span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">d</span><span class="bp">.</span><span class="n">type</span> <span class="bp">=</span> <span class="bp">`</span><span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">))</span>
+       <span class="k">then</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="o">)</span> <span class="k">else</span> <span class="n">x</span><span class="o">),</span><span class="n">x</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+ <span class="n">do</span> <span class="n">env</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">get_env</span><span class="o">,</span>
+ <span class="n">env</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="n">return</span> <span class="n">unit</span><span class="bp">.</span><span class="n">star</span><span class="o">)</span> <span class="n">trace_decl_name</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foo</span>
+</pre></div>
+
+
+<p>1. For me, this reliably causes Lean to crash.  <br>
+2. Before crashing, it does roughly the right thing, listing the names of many tactics.  However, it only prints things that have type <code>tactic unit</code>, whereas it should probably print things with types like <code>A → B → ... → X → (tactic Z)</code> or more general pi-types that eventually produce tactics.  Is there a standard predicate on <code>expr</code> to detect this?<br>
+3. Can I access the docstrings for tactics in this framework?<br>
+4. Is there anything else obviously wrong with this approach?</p>
+
+<a name="159081593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159081593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159081593">Reid Barton (Feb 21 2019 at 16:24)</a>:</h4>
+<p>When you say "crashes", do you mean with a stack overflow, or another kind of crash?</p>
+
+<a name="159083695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159083695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159083695">Neil Strickland (Feb 21 2019 at 16:45)</a>:</h4>
+<p>I mean that VS Code tells me "Lean: Server has stopped with error code 3221225725".  With an earlier version of <code>foo</code>, there was evidence that Lean had got stuck in an infinite loop, processing one element of the environment repeatedly; so that may have led to a stack overflow, but I did not see any explicit message to that effect.</p>
+
+<a name="159084720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159084720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159084720">Bryan Gin-ge Chen (Feb 21 2019 at 16:57)</a>:</h4>
+<p>Apparently 3221225725 = 0xc00000fd which is indeed <a href="https://www.google.com/search?q=0xC00000FD+site:stackoverflow.com" target="_blank" title="https://www.google.com/search?q=0xC00000FD+site:stackoverflow.com">the code for a stack overflow</a>.</p>
+
+<a name="159099657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159099657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159099657">Koundinya Vajjha (Feb 21 2019 at 19:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span>  I've been working on something similar for the past few weeks. Maybe this can be of some help: <br>
+<a href="https://github.com/formalabstracts/formalabstracts/tree/master/src/tactic" target="_blank" title="https://github.com/formalabstracts/formalabstracts/tree/master/src/tactic">https://github.com/formalabstracts/formalabstracts/tree/master/src/tactic</a></p>
+<p>For (4), you can use <code>doc_string</code> to retreive the docstring of an arbitrary declaration.</p>
+
+<a name="159104140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159104140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159104140">Neil Strickland (Feb 21 2019 at 21:03)</a>:</h4>
+<p>Thanks, I'll have a look at that.</p>
+
+<a name="159184579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159184579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159184579">Floris van Doorn (Feb 22 2019 at 19:34)</a>:</h4>
+<p>For (2), you probably want something like</p>
+<div class="codehilite"><pre><span></span>namespace expr
+meta def codomain {elab : bool} : expr elab → expr elab
+| (pi n bi a b) := codomain b
+| a             := a
+end expr
+</pre></div>
+
+
+<p>and then check whether <code>d.type.codomain.get_app_fn</code> is equal to <code>`(tactic)</code></p>
+
+<a name="159185786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20all%20tactics/near/159185786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14977Listalltactics.html#159185786">Floris van Doorn (Feb 22 2019 at 19:51)</a>:</h4>
+<p>To address (1), this works for me:</p>
+<div class="codehilite"><pre><span></span>meta def trace_decl_name (d : declaration) (l : list name) : list name :=
+if name.is_prefix_of `tactic.interactive d.to_name ∧ d.type.codomain.get_app_fn.const_name = `tactic
+then l.cons d.to_name else l
+
+meta def foo : tactic unit :=
+ do env ← tactic.get_env,
+ tactic.trace $ env.fold [] trace_decl_name
+
+run_cmd foo
+</pre></div>
+
+
+{% endraw %}
