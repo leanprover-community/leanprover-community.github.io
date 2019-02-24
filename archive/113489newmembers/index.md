@@ -42,7 +42,7 @@ permalink: archive/113489newmembers/index.html
 
 * [universal properties for topology](31979universalpropertiesfortopology.html) (19 messages, latest: Feb 11 2019 at 00:53)
 
-* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (13 messages, latest: Feb 10 2019 at 21:44)
+* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (20 messages, latest: Feb 10 2019 at 21:44)
 
 * [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (37 messages, latest: Feb 09 2019 at 23:35)
 
@@ -54,7 +54,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Coinduction](02528Coinduction.html) (18 messages, latest: Feb 08 2019 at 13:09)
 
-* [elaborator bug](31466elaboratorbug.html) (11 messages, latest: Feb 08 2019 at 04:13)
+* [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
 
 * [hiding from prelude](75961hidingfromprelude.html) (6 messages, latest: Feb 07 2019 at 04:22)
 

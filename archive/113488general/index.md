@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (13 messages, latest: Feb 24 2019 at 21:08)
+* [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (14 messages, latest: Feb 24 2019 at 21:30)
 
 * [free_comm_ring](07101freecommring.html) (57 messages, latest: Feb 24 2019 at 19:22)
 
@@ -184,9 +184,11 @@ permalink: archive/113488general/index.html
 
 * [has_one but expected has_zero](35926hasonebutexpectedhaszero.html) (12 messages, latest: Feb 09 2019 at 01:13)
 
-* [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (20 messages, latest: Feb 09 2019 at 00:09)
+* [simp tactic fails resulting in weird coercions](27925simptacticfailsresultinginweirdcoercions.html) (6 messages, latest: Feb 09 2019 at 00:09)
 
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (17 messages, latest: Feb 08 2019 at 23:56)
+
+* [simp tactic fails resulting in wierd coercions](90069simptacticfailsresultinginwierdcoercions.html) (14 messages, latest: Feb 08 2019 at 23:54)
 
 * [programming in lean](20507programminginlean.html) (1 message, latest: Feb 08 2019 at 22:45)
 

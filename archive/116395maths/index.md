@@ -26,7 +26,7 @@ permalink: archive/116395maths/index.html
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2690 messages, latest: Feb 15 2019 at 20:35)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2781 messages, latest: Feb 15 2019 at 20:35)
 
 * [free module](95273freemodule.html) (468 messages, latest: Feb 14 2019 at 17:16)
 
@@ -38,7 +38,7 @@ permalink: archive/116395maths/index.html
 
 * [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
 
-* [bundling functions](72781bundlingfunctions.html) (94 messages, latest: Feb 12 2019 at 14:47)
+* [bundling functions](72781bundlingfunctions.html) (3 messages, latest: Feb 12 2019 at 14:47)
 
 * [ring modulo maximal](79786ringmodulomaximal.html) (1 message, latest: Feb 12 2019 at 10:00)
 

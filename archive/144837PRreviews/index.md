@@ -12,7 +12,7 @@ permalink: archive/144837PRreviews/index.html
 
 * [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (43 messages, latest: Feb 24 2019 at 19:32)
 
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (13 messages, latest: Feb 24 2019 at 13:44)
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (16 messages, latest: Feb 24 2019 at 13:44)
 
 * [#749](02120749.html) (2 messages, latest: Feb 23 2019 at 06:12)
 
@@ -22,9 +22,9 @@ permalink: archive/144837PRreviews/index.html
 
 * [#717 field_hom](70410717fieldhom.html) (8 messages, latest: Feb 16 2019 at 20:51)
 
-* [#726 operator norm [wip]](01971726operatornormwip.html) (12 messages, latest: Feb 15 2019 at 09:14)
-
 * [#728 continuation passing monad](45060728continuationpassingmonad.html) (12 messages, latest: Feb 15 2019 at 06:05)
+
+* [#726 operator norm [wip]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
 
 * [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (46 messages, latest: Feb 12 2019 at 14:51)
 
