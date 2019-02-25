@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["correct" free semigroup](57076correctfreesemigroup.html) (68 messages, latest: Feb 25 2019 at 04:44)
+* ["correct" free semigroup](57076correctfreesemigroup.html) (69 messages, latest: Feb 25 2019 at 07:09)
 
 * [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (14 messages, latest: Feb 24 2019 at 21:30)
 
