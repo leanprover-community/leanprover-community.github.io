@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [infer_instance'](52816inferinstance.html) (1 message, latest: Feb 25 2019 at 10:26)
+
 * ["correct" free semigroup](57076correctfreesemigroup.html) (69 messages, latest: Feb 25 2019 at 07:09)
 
 * [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (14 messages, latest: Feb 24 2019 at 21:30)

@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/44814rewritingatspecificpart.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html">rewriting at specific part</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159326775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20at%20specific%20part/near/159326775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html#159326775">Calle Sönne (Feb 25 2019 at 10:21)</a>:</h4>
+<p>I have following goal:<br>
+<code> r * ↑b ^ n * ↑b &lt; ↑b + ↑⌊r * ↑b ^ n⌋ * ↑b </code> I want to rewrite to <code> r * ↑b ^ n * ↑b &lt; 1*↑b + ↑⌊r * ↑b ^ n⌋ * ↑b </code><br>
+How do I do that? Using rw will rewrite all the b:s.<br>
+End goal is <code> r * ↑b ^ n * ↑b &lt; (1 + ↑⌊r * ↑b ^ n⌋) * ↑b </code>.</p>
+
+<a name="159327054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20at%20specific%20part/near/159327054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html#159327054">Johan Commelin (Feb 25 2019 at 10:27)</a>:</h4>
+<p>Either you use some form of <code>conv { to_rhs, congr, skip, rw },</code> or you write<br>
+<code>suffices : whatever_you_want,</code> and hope that <code>simp</code> can prove your goal starting from <code>whatever_you_want</code>.</p>
+
+<a name="159327620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20at%20specific%20part/near/159327620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html#159327620">Kevin Buzzard (Feb 25 2019 at 10:36)</a>:</h4>
+<p>See what happens if you write <code>suffices : (end_goal), simpa using this</code> [or <code>simp [this]</code>]</p>
+
+<a name="159327719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20at%20specific%20part/near/159327719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html#159327719">Calle Sönne (Feb 25 2019 at 10:38)</a>:</h4>
+<p>Thank you! simp failed, but it was easy to prove with rw</p>
+
+<a name="159328357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20at%20specific%20part/near/159328357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44814rewritingatspecificpart.html#159328357">Kevin Buzzard (Feb 25 2019 at 10:50)</a>:</h4>
+<p>I suspect <code>convert</code> would also have been useful. <code>suffices : blah, convert this</code>, then pick up the pieces</p>
+
+
+{% endraw %}
