@@ -1,0 +1,65 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/75507coercion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html">coercion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159364575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159364575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159364575">Calle Sönne (Feb 25 2019 at 19:27)</a>:</h4>
+<p>Is there anyway to make lean display what type of coercion it is in the parser? Right now I'm working on a problem where there are coercions from int to the ring, from nat to the ring and from nat to int to the ring. It gets quite confusing when everything is displayed with jus \u.</p>
+
+<a name="159364709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159364709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159364709">Patrick Massot (Feb 25 2019 at 19:29)</a>:</h4>
+<p><code>set_option pp.all true</code> certainly does the job, but there may be less radical options</p>
+
+<a name="159364718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159364718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159364718">Kenny Lau (Feb 25 2019 at 19:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="mi">2</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">):</span><span class="bp">ℤ</span><span class="o">)</span> <span class="c1">-- coe 2 : int</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="mi">2</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">):</span><span class="bp">ℤ</span><span class="o">)</span> <span class="c1">-- @coe nat int (@coe_to_lift nat int (@coe_base nat int int.has_coe)) 2 : int</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="mi">2</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">):</span><span class="bp">ℤ</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"> @coe.{1 1} nat int (@coe_to_lift.{1 1} nat int (@coe_base.{1 1} nat int int.has_coe))</span>
+<span class="cm">  (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)) :</span>
+<span class="cm">  int -/</span>
+</pre></div>
+
+<a name="159365387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159365387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159365387">Calle Sönne (Feb 25 2019 at 19:38)</a>:</h4>
+<p>pp.imlicit true seems to expand most things except coercions for me:</p>
+<div class="codehilite"><pre><span></span><span class="err">⌊</span><span class="bp">@</span><span class="n">fract</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="n">r</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="err">⌋</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="bp">=</span>
+    <span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">ℕ</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_add_comm_monoid</span> <span class="bp">ℤ</span> <span class="n">int</span><span class="bp">.</span><span class="n">semiring</span><span class="o">)</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">@</span><span class="n">digit</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="n">b</span> <span class="n">r</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)),</span>
+</pre></div>
+
+<a name="159365447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159365447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159365447">Kenny Lau (Feb 25 2019 at 19:39)</a>:</h4>
+<p>the options are cumulative</p>
+
+<a name="159365466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159365466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159365466">Kenny Lau (Feb 25 2019 at 19:39)</a>:</h4>
+<p>in particular, the second one is the result of both <code>pp.notation false</code> and <code>pp.implicit true</code></p>
+
+<a name="159365467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159365467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159365467">Calle Sönne (Feb 25 2019 at 19:39)</a>:</h4>
+<p>oh</p>
+
+<a name="159365569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coercion/near/159365569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75507coercion.html#159365569">Calle Sönne (Feb 25 2019 at 19:40)</a>:</h4>
+<p>This is great, thanks :)</p>
+
+
+{% endraw %}
