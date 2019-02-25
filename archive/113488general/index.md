@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (1 message, latest: Feb 25 2019 at 14:55)
+
 * [infer_instance'](52816inferinstance.html) (1 message, latest: Feb 25 2019 at 10:26)
 
 * ["correct" free semigroup](57076correctfreesemigroup.html) (69 messages, latest: Feb 25 2019 at 07:09)
