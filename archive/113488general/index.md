@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (3 messages, latest: Feb 25 2019 at 15:26)
+* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (4 messages, latest: Feb 25 2019 at 16:38)
 
 * [lean community fork](45880leancommunityfork.html) (17 messages, latest: Feb 25 2019 at 15:23)
 
