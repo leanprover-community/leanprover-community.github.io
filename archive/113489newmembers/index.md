@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (175 messages, latest: Feb 24 2019 at 23:55)
+
 * [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (8 messages, latest: Feb 24 2019 at 16:54)
 
 * [reversing `\neq`](11734reversingneq.html) (3 messages, latest: Feb 24 2019 at 08:03)
 
 * [help finding a lemma](30422helpfindingalemma.html) (48 messages, latest: Feb 24 2019 at 04:53)
-
-* [noob question(s)](52075noobquestions.html) (174 messages, latest: Feb 24 2019 at 01:01)
 
 * [learning path](65214learningpath.html) (48 messages, latest: Feb 23 2019 at 22:48)
 
