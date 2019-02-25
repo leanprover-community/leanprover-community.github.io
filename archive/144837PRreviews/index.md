@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (43 messages, latest: Feb 24 2019 at 19:32)
+* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (49 messages, latest: Feb 25 2019 at 02:57)
 
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (16 messages, latest: Feb 24 2019 at 13:44)
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (18 messages, latest: Feb 25 2019 at 02:45)
 
 * [#749](02120749.html) (2 messages, latest: Feb 23 2019 at 06:12)
 

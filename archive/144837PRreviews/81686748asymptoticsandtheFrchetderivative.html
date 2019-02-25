@@ -194,5 +194,58 @@ permalink: archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.htm
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159288355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159288355">Mario Carneiro (Feb 24 2019 at 19:32)</a>:</h4>
 <p>That sounds like a concrete claim... let's find out</p>
 
+<a name="159308499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308499">Mario Carneiro (Feb 25 2019 at 02:49)</a>:</h4>
+<p>The chain rule now:</p>
+<div class="codehilite"><pre><span></span><span class="bp">⟨</span><span class="n">hg</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">comp</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">eq₁</span> <span class="o">:=</span> <span class="o">(</span><span class="n">hg</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">is_bigo_comp</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans_is_littleo</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">eq₂</span> <span class="o">:=</span> <span class="o">((</span><span class="n">hg</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="n">comp</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">mono</span> <span class="n">le_comap_map</span><span class="o">)</span><span class="bp">.</span><span class="n">trans_is_bigo</span> <span class="n">hf</span><span class="bp">.</span><span class="n">is_bigo_sub</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">eq₂</span><span class="bp">.</span><span class="n">tri</span> <span class="o">(</span><span class="n">eq₁</span><span class="bp">.</span><span class="n">congr_left</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x&#39;</span><span class="o">,</span> <span class="bp">_</span><span class="o">)),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="n">g&#39;</span> <span class="o">(</span><span class="bp">_-_</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g&#39;</span> <span class="bp">_</span> <span class="bp">-</span> <span class="n">g&#39;</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="n">hg</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">to_linear_map</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">map_sub</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">]</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>Coq:</p>
+<div class="codehilite"><pre><span></span><span class="kn">Proof</span><span class="o">.</span>
+<span class="k">move</span><span class="o">=&gt;</span> <span class="n">df</span> <span class="n">dg</span><span class="o">;</span> <span class="k">split</span><span class="o">;</span> <span class="kr">first</span> <span class="kp">by</span> <span class="k">move</span><span class="o">=&gt;</span> <span class="o">?;</span> <span class="k">apply</span><span class="o">:</span> <span class="n">continuous_comp</span><span class="o">.</span>
+<span class="k">apply</span><span class="o">:</span> <span class="n">eqaddoEx</span> <span class="o">=&gt;</span> <span class="n">y</span><span class="o">;</span> <span class="k">rewrite</span> <span class="n">diff_locallyx</span><span class="o">//</span> <span class="o">-</span><span class="n">addrA</span> <span class="n">diff_locallyxC</span><span class="o">//</span> <span class="n">linearD</span><span class="o">.</span>
+<span class="k">rewrite</span> <span class="n">addrA</span> <span class="o">-</span><span class="n">addrA</span><span class="o">;</span> <span class="k">congr</span> <span class="o">(_</span> <span class="o">+</span> <span class="o">_</span> <span class="o">+</span> <span class="o">_).</span>
+<span class="k">rewrite</span> <span class="n">diff_eqO</span> <span class="o">//</span> <span class="o">[</span><span class="k">&#39;</span><span class="n">d</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="o">_]</span><span class="n">diff_eqO</span> <span class="o">//.</span>
+<span class="kp">by</span> <span class="k">rewrite</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span><span class="n">eqoO</span> <span class="n">addOx</span> <span class="n">compOo_eqox</span> <span class="n">compoO_eqox</span> <span class="n">addox</span><span class="o">.</span>
+<span class="kn">Qed</span><span class="o">.</span>
+</pre></div>
+
+
+<p>Just about the same size!</p>
+
+<a name="159308555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308555">Mario Carneiro (Feb 25 2019 at 02:51)</a>:</h4>
+<p>also just as unreadable, but I guess that's fair game for comparing to coq</p>
+
+<a name="159308565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308565">Jeremy Avigad (Feb 25 2019 at 02:51)</a>:</h4>
+<p>I have mixed feelings about Cyril et al.'s approach. On the one hand, it is nice that the calculations look like calculations. On the other hand, the inner workings are somewhat baroque and unintuitive, and require a parser hack. I personally find it easier to work with straightforward notation and concepts. And it is not clear to me that being able to do arbitrary calculational substitutions is a big win with asymptotic calculations, or that it will make the calculations that much shorter or any easier.<br>
+Anyhow, the current asymptotics file is just a start. When we start doing more serious calculations, we will have a better sense of what we want, and it would be great if someone wants to implement and try out the calculational trick.</p>
+
+<a name="159308679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308679">Mario Carneiro (Feb 25 2019 at 02:54)</a>:</h4>
+<p>One thing that I needed for the above version of the chain rule was rules like </p>
+<div class="codehilite"><pre><span></span>is_littleo (\lam x, f1 x - f2 x) g l -&gt;
+is_littleo (\lam x, f2 x - f3 x) g l -&gt;
+is_littleo (\lam x, f1 x - f3 x) g l
+</pre></div>
+
+
+<p>which are substituting for transitivity of equality. We could have a four-argument version of little o to say <code>f1 = f2 + o(g)</code> but it seems like it works just as well with an explicit subtraction... as long as it doesn't get unfolded by simp or something</p>
+
+<a name="159308698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308698">Jeremy Avigad (Feb 25 2019 at 02:55)</a>:</h4>
+<p>P.S. Please don't golf the proof of the chain rule in the actual file! As they say, size isn't everything. I think there is a lot of merit in having readable proofs, especially if it makes them easier to maintain. For example, I went out of my way to restate the main hypotheses instead of in-lining <code>hf.right</code> and <code>hg.right</code>, because that it what an ordinary textbook would do, and because they proof is inscrutable without that.</p>
+
+<a name="159308771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23748%20asymptotics%20and%20the%20Fr%C3%A9chet%20derivative/near/159308771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/81686748asymptoticsandtheFrchetderivative.html#159308771">Jeremy Avigad (Feb 25 2019 at 02:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Yes, I thought of that. I agree, it is not a big win over using the explicit subtraction.</p>
+
 
 {% endraw %}
