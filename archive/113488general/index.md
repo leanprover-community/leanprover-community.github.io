@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (4 messages, latest: Feb 25 2019 at 16:38)
+* [lean community fork](45880leancommunityfork.html) (18 messages, latest: Feb 25 2019 at 17:02)
 
-* [lean community fork](45880leancommunityfork.html) (17 messages, latest: Feb 25 2019 at 15:23)
+* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (4 messages, latest: Feb 25 2019 at 16:38)
 
 * [infer_instance'](52816inferinstance.html) (1 message, latest: Feb 25 2019 at 10:26)
 
