@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["correct" free semigroup](57076correctfreesemigroup.html) (68 messages, latest: Feb 25 2019 at 04:44)
+
 * [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (14 messages, latest: Feb 24 2019 at 21:30)
 
 * [free_comm_ring](07101freecommring.html) (57 messages, latest: Feb 24 2019 at 19:22)
@@ -81,8 +83,6 @@ permalink: archive/113488general/index.html
 * [Type u vs Type*](08717TypeuvsType.html) (3 messages, latest: Feb 18 2019 at 01:41)
 
 * [(ultra)product](52859ultraproduct.html) (31 messages, latest: Feb 17 2019 at 15:29)
-
-* ["correct" free semigroup](57076correctfreesemigroup.html) (67 messages, latest: Feb 17 2019 at 13:53)
 
 * [has_coe_to_fun instance of mv_polynomial](96781hascoetofuninstanceofmvpolynomial.html) (14 messages, latest: Feb 17 2019 at 10:15)
 
