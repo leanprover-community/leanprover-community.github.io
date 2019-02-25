@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (1 message, latest: Feb 25 2019 at 14:55)
+* [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (3 messages, latest: Feb 25 2019 at 15:26)
+
+* [lean community fork](45880leancommunityfork.html) (17 messages, latest: Feb 25 2019 at 15:23)
 
 * [infer_instance'](52816inferinstance.html) (1 message, latest: Feb 25 2019 at 10:26)
 
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [debugging](54061debugging.html) (7 messages, latest: Feb 23 2019 at 00:07)
 
 * [List all tactics](14977Listalltactics.html) (8 messages, latest: Feb 22 2019 at 19:51)
-
-* [lean community fork](45880leancommunityfork.html) (14 messages, latest: Feb 22 2019 at 15:22)
 
 * [set.mono_image](91990setmonoimage.html) (2 messages, latest: Feb 22 2019 at 14:54)
 

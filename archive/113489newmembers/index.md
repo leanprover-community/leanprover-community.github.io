@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtract equation lemma](39387subtractequationlemma.html) (6 messages, latest: Feb 25 2019 at 14:44)
+* [subtract equation lemma](39387subtractequationlemma.html) (7 messages, latest: Feb 25 2019 at 15:01)
 
 * [rewriting at specific part](44814rewritingatspecificpart.html) (6 messages, latest: Feb 25 2019 at 11:34)
 
