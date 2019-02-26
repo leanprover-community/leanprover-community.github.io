@@ -161,5 +161,278 @@ permalink: archive/116395maths/83755flexibleindices.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/158981420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#158981420">Johan Commelin (Feb 20 2019 at 14:51)</a>:</h4>
 <p>The story is that nobody copied the file about the category of monoids and did a search-replace <code>s/monoid/group/</code>. That's all.</p>
 
+<a name="159419211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419211">Johan Commelin (Feb 26 2019 at 12:13)</a>:</h4>
+<blockquote>
+<p>My goal is to make things like this typecheck:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">sequence</span> <span class="n">Group</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">is_complex</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">range</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="o">(</span><span class="n">i</span><span class="bp">-</span><span class="mi">1</span><span class="o">))</span> <span class="err">⊆</span> <span class="n">ker</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>Does anyone have an idea how to make this work?<br>
+I think writing <code>A.delta (i-1+1)</code> is very very ugly.</p>
+
+<a name="159419271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419271">Mario Carneiro (Feb 26 2019 at 12:14)</a>:</h4>
+<p>Why not use +1 instead of -1?</p>
+
+<a name="159419274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419274">Mario Carneiro (Feb 26 2019 at 12:14)</a>:</h4>
+<p>it's over all integers</p>
+
+<a name="159419303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419303">Mario Carneiro (Feb 26 2019 at 12:15)</a>:</h4>
+<p>Another way to flexify the indices for dependent types is to have an equality argument <code>i+1 = j</code> and have <code>i</code> on the left and <code>j</code> on the right</p>
+
+<a name="159419310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419310">Johan Commelin (Feb 26 2019 at 12:15)</a>:</h4>
+<p>But can we make it transparent?</p>
+
+<a name="159419322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419322">Mario Carneiro (Feb 26 2019 at 12:15)</a>:</h4>
+<p>don't know what you intend to do with this</p>
+
+<a name="159419372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419372">Johan Commelin (Feb 26 2019 at 12:16)</a>:</h4>
+<blockquote>
+<p>Why not use +1 instead of -1?</p>
+</blockquote>
+<p>I could do that here. But I think this issue will show up elsewhere as soon as we start looking in a broader range of indices.</p>
+
+<a name="159419382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419382">Johan Commelin (Feb 26 2019 at 12:16)</a>:</h4>
+<blockquote>
+<p>don't know what you intend to do with this<br>
+For starters we could try to prove the snake lemma (-;</p>
+</blockquote>
+
+<a name="159419406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419406">Mario Carneiro (Feb 26 2019 at 12:17)</a>:</h4>
+<p>More generally, you want an inductive family describing the allowable index combinations</p>
+
+<a name="159419419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419419">Mario Carneiro (Feb 26 2019 at 12:17)</a>:</h4>
+<p>In this case it is just <code>inductive next : nat -&gt; nat -&gt; Prop | mk (i) : next i (i+1)</code></p>
+
+<a name="159419477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419477">Johan Commelin (Feb 26 2019 at 12:18)</a>:</h4>
+<p>Hmm, how do I use <code>next</code>?</p>
+
+<a name="159419493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419493">Johan Commelin (Feb 26 2019 at 12:18)</a>:</h4>
+<p>Should I put that in my definition of <code>delta</code>?</p>
+
+<a name="159419498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419498">Mario Carneiro (Feb 26 2019 at 12:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_complex</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">next</span> <span class="n">i</span> <span class="n">j</span> <span class="bp">-&gt;</span> <span class="n">range</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">i</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">ker</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
+
+<a name="159419514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419514">Mario Carneiro (Feb 26 2019 at 12:19)</a>:</h4>
+<p>or are you looking somewhere else?</p>
+
+<a name="159419714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419714">Johan Commelin (Feb 26 2019 at 12:22)</a>:</h4>
+<p>Aah, ok</p>
+
+<a name="159419729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419729">Johan Commelin (Feb 26 2019 at 12:23)</a>:</h4>
+<p>But that means I have 3 explicit arguments. So I can't just write <code>A.delta i</code></p>
+
+<a name="159419801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419801">Johan Commelin (Feb 26 2019 at 12:24)</a>:</h4>
+<p>I would like to tell Lean: "If unification knows what <code>j</code> should be, use that. Otherwise, default to <code>(i+1)</code>."</p>
+
+<a name="159419810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419810">Mario Carneiro (Feb 26 2019 at 12:24)</a>:</h4>
+<p>Yeah, I think so... it's just like with categories, you want the objects to be there before the morphisms, rather than extracting objects as the dom/cod of morphisms</p>
+
+<a name="159419828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419828">Johan Commelin (Feb 26 2019 at 12:25)</a>:</h4>
+<p>And after that I say to Lean: "Hey, 95% of the time you can prove <code>next i j</code> by <code>mk i</code>. Otherwise, simplify the expression for <code>j</code> before doing that."</p>
+
+<a name="159419841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419841">Johan Commelin (Feb 26 2019 at 12:25)</a>:</h4>
+<p>And so in 99% of the cases I can get away with just writing <code>A.delta i</code>. And in 1% of the cases I might to actually work on the proof obligation...</p>
+
+<a name="159419885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419885">Johan Commelin (Feb 26 2019 at 12:26)</a>:</h4>
+<p>If something like that can work, that would be cool.</p>
+
+<a name="159419903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419903">Mario Carneiro (Feb 26 2019 at 12:26)</a>:</h4>
+<p>So <code>is_complex</code> is actually talking about three objects....</p>
+
+<a name="159419940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419940">Mario Carneiro (Feb 26 2019 at 12:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_complex</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{{</span><span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}}</span> <span class="o">(</span><span class="n">n1</span><span class="o">:</span> <span class="n">next</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">n2</span> <span class="o">:</span> <span class="n">next</span> <span class="n">j</span> <span class="n">k</span><span class="o">),</span> <span class="n">range</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">n1</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">ker</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">delta</span> <span class="n">n2</span><span class="o">)</span>
+</pre></div>
+
+<a name="159419955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419955">Kenny Lau (Feb 26 2019 at 12:27)</a>:</h4>
+<p>what is {{}}?</p>
+
+<a name="159419998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159419998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159419998">Mario Carneiro (Feb 26 2019 at 12:28)</a>:</h4>
+<p>half implicit, too lazy to unicode</p>
+
+<a name="159420001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420001">Mario Carneiro (Feb 26 2019 at 12:28)</a>:</h4>
+<p>I think it is working ascii notation though</p>
+
+<a name="159420002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420002">Kenny Lau (Feb 26 2019 at 12:28)</a>:</h4>
+<p>what is half implicit?</p>
+
+<a name="159420015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420015">Mario Carneiro (Feb 26 2019 at 12:28)</a>:</h4>
+<p>not applied unless you apply an argument after them</p>
+
+<a name="159420024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420024">Mario Carneiro (Feb 26 2019 at 12:29)</a>:</h4>
+<p>like in the definition of subset</p>
+
+<a name="159420029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420029">Kenny Lau (Feb 26 2019 at 12:29)</a>:</h4>
+<p>:o</p>
+
+<a name="159420237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420237">Johan Commelin (Feb 26 2019 at 12:32)</a>:</h4>
+<p>Hmm, but I think you are working on the wrong part. The definition of <code>delta</code> has to change.</p>
+
+<a name="159420250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420250">Johan Commelin (Feb 26 2019 at 12:33)</a>:</h4>
+<p><code>is_complex</code> is just an example of something that doesn't typecheck with the current definition of <code>delta</code>.</p>
+
+<a name="159420257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420257">Mario Carneiro (Feb 26 2019 at 12:33)</a>:</h4>
+<p>I did that... <code>A.delta {i j} n1</code></p>
+
+<a name="159420270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420270">Johan Commelin (Feb 26 2019 at 12:33)</a>:</h4>
+<p>Ooh, right. Ok.</p>
+
+<a name="159420279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420279">Johan Commelin (Feb 26 2019 at 12:33)</a>:</h4>
+<p>But that means I can't write <code>A.delta i</code>, can I?</p>
+
+<a name="159420284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420284">Mario Carneiro (Feb 26 2019 at 12:33)</a>:</h4>
+<p>although possibly <code>i</code> and <code>j</code> shouldn't be implicit - this will print a bit weird if <code>n1</code> is not a simple term</p>
+
+<a name="159420331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420331">Mario Carneiro (Feb 26 2019 at 12:34)</a>:</h4>
+<p>No, I'm claiming that's a bad idea</p>
+
+<a name="159420377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420377">Mario Carneiro (Feb 26 2019 at 12:35)</a>:</h4>
+<p>If you don't have the objects lying around already, you can use +1 and -1 to access next elements, but if you ever want to link two of them together you need a variable for the common object</p>
+
+<a name="159420393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420393">Mario Carneiro (Feb 26 2019 at 12:35)</a>:</h4>
+<p><code>is_complex</code> is a good example of this - <code>j</code> is mediating the connection between <code>i</code> and <code>k</code></p>
+
+<a name="159420406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420406">Mario Carneiro (Feb 26 2019 at 12:35)</a>:</h4>
+<p>I know this looks silly but it's a DTT thing</p>
+
+<a name="159420514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420514">Johan Commelin (Feb 26 2019 at 12:37)</a>:</h4>
+<p>This will be hard to explain to mathematicians...</p>
+
+<a name="159420518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420518">Johan Commelin (Feb 26 2019 at 12:37)</a>:</h4>
+<p>Why can't automation help us here?</p>
+
+<a name="159420577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420577">Mario Carneiro (Feb 26 2019 at 12:38)</a>:</h4>
+<p>because DTT doesn't like it when you try to prove defeqs</p>
+
+<a name="159420593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420593">Johan Commelin (Feb 26 2019 at 12:38)</a>:</h4>
+<p>If Lean figures out <code>j</code> by unification, that's cool. If it didn't: use <code>i+1</code>.</p>
+
+<a name="159420605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420605">Mario Carneiro (Feb 26 2019 at 12:38)</a>:</h4>
+<p>You want all rewriting and stuff to happen in prop land</p>
+
+<a name="159420616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420616">Mario Carneiro (Feb 26 2019 at 12:38)</a>:</h4>
+<p>but <code>delta</code> is data, so it needs a general type</p>
+
+<a name="159420639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420639">Mario Carneiro (Feb 26 2019 at 12:39)</a>:</h4>
+<p>it's not a question of figuring out the expressions, it's about making <code>i+1-1</code> defeq to <code>i</code></p>
+
+<a name="159420910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420910">Johan Commelin (Feb 26 2019 at 12:44)</a>:</h4>
+<p>Hmmm, I think that I wouldn't mind if automation could also help us with providing data, and not only proofs.</p>
+
+<a name="159420997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159420997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159420997">Patrick Massot (Feb 26 2019 at 12:46)</a>:</h4>
+<p>I don't know if automation is the right word here, but it's pretty clear that proof assistants that require using this <code>next</code> trick are not ready for use by mathematicians</p>
+
+<a name="159421008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421008">Mario Carneiro (Feb 26 2019 at 12:46)</a>:</h4>
+<p>It's about wrangling DTT issues</p>
+
+<a name="159421021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421021">Mario Carneiro (Feb 26 2019 at 12:47)</a>:</h4>
+<p>You are causing equality of integers to propagate to equality of types, which is bad</p>
+
+<a name="159421023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421023">Patrick Massot (Feb 26 2019 at 12:47)</a>:</h4>
+<p>I understand. It means we need either better wrangling tools or a better foundational framework. I'm not saying this is an easy question</p>
+
+<a name="159421032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421032">Mario Carneiro (Feb 26 2019 at 12:47)</a>:</h4>
+<p>I am in favor of both of those</p>
+
+<a name="159421079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421079">Patrick Massot (Feb 26 2019 at 12:48)</a>:</h4>
+<p>What a nice thesis topic!</p>
+
+<a name="159421127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421127">Johan Commelin (Feb 26 2019 at 12:49)</a>:</h4>
+<p>Mario, I agree with Patrick. I understand the issues. But the issues are non-mathematical, so they should be hidden. Somehow...</p>
+
+<a name="159421196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421196">Johan Commelin (Feb 26 2019 at 12:50)</a>:</h4>
+<p>In the end, DTT should be our assembly language. We want a Python on top of that.</p>
+
+<a name="159421204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421204">Patrick Massot (Feb 26 2019 at 12:50)</a>:</h4>
+<p>You already have it: the tactic language</p>
+
+<a name="159421207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421207">Mario Carneiro (Feb 26 2019 at 12:50)</a>:</h4>
+<p>DTT is a horrible assembly language</p>
+
+<a name="159421226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421226">Mario Carneiro (Feb 26 2019 at 12:51)</a>:</h4>
+<p>it's like javascript - high level ish but used for low level things</p>
+
+<a name="159421252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421252">Mario Carneiro (Feb 26 2019 at 12:51)</a>:</h4>
+<p>I know a much better proof assembly language, and it starts with M</p>
+
+<a name="159421299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421299">Johan Commelin (Feb 26 2019 at 12:52)</a>:</h4>
+<p>Sure, but is there a Python on top of your M?</p>
+
+<a name="159421315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421315">Johan Commelin (Feb 26 2019 at 12:52)</a>:</h4>
+<p>One that will let me define functors on objects and morphisms, and check that they are lawful in a completely transparent way?</p>
+
+<a name="159421629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159421629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159421629">Mario Carneiro (Feb 26 2019 at 12:58)</a>:</h4>
+<p>Proof automation is hard, and no one has a perfect solution. Lean could have the stuff you are talking about if it didn't have to fight its own foundation</p>
+
 
 {% endraw %}

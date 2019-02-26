@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [quotient_group.inc](91854quotientgroupinc.html) (181 messages, latest: Feb 26 2019 at 11:59)
+* [flexible indices](83755flexibleindices.html) (75 messages, latest: Feb 26 2019 at 12:58)
+
+* [quotient_group.inc](91854quotientgroupinc.html) (197 messages, latest: Feb 26 2019 at 12:08)
 
 * [finite sums](86088finitesums.html) (119 messages, latest: Feb 24 2019 at 15:21)
 
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [defining ideals](01879definingideals.html) (41 messages, latest: Feb 21 2019 at 15:18)
 
 * [metric space competion](38847metricspacecompetion.html) (6 messages, latest: Feb 21 2019 at 08:24)
-
-* [flexible indices](83755flexibleindices.html) (12 messages, latest: Feb 20 2019 at 14:51)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (13 messages, latest: Feb 19 2019 at 07:45)
 
