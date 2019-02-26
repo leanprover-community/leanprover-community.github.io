@@ -1,0 +1,51 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/40872goldenratiocalculation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html">golden ratio calculation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159450921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159450921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159450921">Kevin Buzzard (Feb 26 2019 at 19:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">phi</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span>
+
+<span class="kn">lemma</span> <span class="n">phi_squared</span> <span class="o">:</span> <span class="n">phi</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">phi</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">pow_two</span><span class="o">,</span>
+  <span class="k">show</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">((</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="c1">-- First goal: get rid of divisions.</span>
+  <span class="n">rw</span> <span class="n">div_mul_div</span><span class="o">,</span>
+  <span class="n">symmetry</span><span class="o">,</span> <span class="c1">-- kind of annoying that I have to stop my rewrite,</span>
+  <span class="n">rw</span> <span class="n">eq_div_iff_mul_eq</span><span class="o">,</span>
+    <span class="n">swap</span><span class="o">,</span><span class="n">norm_num</span><span class="o">,</span>
+  <span class="c1">-- Now multiplying out will remove them so use ring</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">sqrt</span> <span class="mi">5</span> <span class="bp">+</span> <span class="mi">6</span> <span class="bp">=</span> <span class="o">(</span><span class="n">sqrt</span> <span class="mi">5</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="n">sqrt</span> <span class="mi">5</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="c1">-- Now use ring as a not-quite-goal-killing tactic</span>
+    <span class="n">ring</span><span class="o">,</span> <span class="n">exact</span> <span class="n">this</span><span class="o">,</span> <span class="c1">-- is this poor coding style? Feels safe to me</span>
+  <span class="c1">-- Now get sqrt 5&#39;s together</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_mul</span><span class="o">,</span><span class="err">←</span><span class="n">pow_two</span><span class="o">],</span>
+  <span class="c1">-- ... and kill them</span>
+  <span class="n">rw</span> <span class="n">sqr_sqrt</span><span class="o">,</span>
+    <span class="n">swap</span><span class="o">,</span><span class="n">norm_num</span><span class="o">,</span>
+  <span class="c1">-- Now ring will do it.</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This came up today when talking to the UGs about some analysis. It's still a lot more painful than I'd like it to be. Am I missing any tricks which would make the argument shorter? I feel like my first instinct with all of these things is to get rid of denominators, so I can start using <code>ring</code>. Should it be? </p>
+<p>I feel like I could sometimes use a slightly beefed-up version of <code>ring</code> which starts by locating all denominators, multiplying everything up by a common denominator, introducing subgoals saying that all of them are non-zero (because they always  are in maths) and then killing the main identity with ring leaving me just the job of justifying that all the denominators are non-zero.</p>
+
+
+{% endraw %}

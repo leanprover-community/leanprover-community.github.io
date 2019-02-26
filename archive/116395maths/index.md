@@ -10,9 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localization.of](97485localizationof.html) (7 messages, latest: Feb 26 2019 at 18:59)
+* [localization.of](97485localizationof.html) (10 messages, latest: Feb 26 2019 at 19:59)
 
-* [flexible indices](83755flexibleindices.html) (102 messages, latest: Feb 26 2019 at 18:15)
+* [golden ratio calculation](40872goldenratiocalculation.html) (1 message, latest: Feb 26 2019 at 19:34)
+
+* [flexible indices](83755flexibleindices.html) (104 messages, latest: Feb 26 2019 at 19:23)
 
 * [quotient_group.inc](91854quotientgroupinc.html) (201 messages, latest: Feb 26 2019 at 16:05)
 
