@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [3.4.1 branch](74787341branch.html) (15 messages, latest: Feb 26 2019 at 01:59)
+
 * [lean community fork](45880leancommunityfork.html) (19 messages, latest: Feb 25 2019 at 20:33)
 
 * [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (4 messages, latest: Feb 25 2019 at 16:38)
@@ -115,8 +117,6 @@ permalink: archive/113488general/index.html
 * [feature request: conv perm](19130featurerequestconvperm.html) (22 messages, latest: Feb 15 2019 at 08:43)
 
 * [`lean --server` on a remote machine?](65584leanserveronaremotemachine.html) (4 messages, latest: Feb 15 2019 at 07:13)
-
-* [3.4.1 branch](74787341branch.html) (10 messages, latest: Feb 15 2019 at 03:50)
 
 * [eq.rec_on](20347eqrecon.html) (29 messages, latest: Feb 14 2019 at 19:03)
 
