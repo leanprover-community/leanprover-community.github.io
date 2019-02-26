@@ -77,5 +77,24 @@ My students will love that</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4.1%20branch/near/159390961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74787341branch.html#159390961">Scott Morrison (Feb 26 2019 at 01:59)</a>:</h4>
 <p>Okay --- one defect: things only work perfectly if everything is in the root directory.</p>
 
+<a name="159405165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4.1%20branch/near/159405165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74787341branch.html#159405165">Patrick Massot (Feb 26 2019 at 07:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> you've found <a href="https://github.com/sagemathinc/cocalc/issues/3589" target="_blank" title="https://github.com/sagemathinc/cocalc/issues/3589">https://github.com/sagemathinc/cocalc/issues/3589</a> which is the only thing that is slightly annoying with the current state of Lean in CoCalc. You can go there and ask for the current status of this issue</p>
+
+<a name="159405429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4.1%20branch/near/159405429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74787341branch.html#159405429">Patrick Massot (Feb 26 2019 at 07:47)</a>:</h4>
+<p>The workaround is pretty clear: ask students to create at the root of their project, a file <code>leanpkg.path</code> containing:</p>
+<div class="codehilite"><pre><span></span>builtin_path
+path /ext/lean/lean/mathlib/src/
+path /home/user/assignments/
+</pre></div>
+
+
+<p>The last line is the only one you may want to change. In my workflow, I put all students assignments in folders like <code>assignments/assignment1</code>, <code>assignments/assignment2</code> etc. Each folder <code>assignment$i</code> contains two files <code>resources.lean</code> containing all mathlib import, special teaching lemmas and tactics, and a file <code>assignment$i.lean</code> which starts with <code>import assignment$i.resources</code></p>
+
+<a name="159405483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/3.4.1%20branch/near/159405483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74787341branch.html#159405483">Patrick Massot (Feb 26 2019 at 07:48)</a>:</h4>
+<p>Unfortunately you cannot directly create <code>leanpkg.path</code> for your students because the root of their project is the only place you can't put a file in.</p>
+
 
 {% endraw %}
