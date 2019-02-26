@@ -25,5 +25,76 @@ permalink: archive/113488general/53104casesonwrappertype.html
 <p>Now, if I have <code>x : with_zero X</code>, and I run <code>cases x</code>,<br>
 I get two cases, <code>none</code> or <code>some x</code>. However, this means that the <code>option</code>-type is leaking through. I already have a ton of simp-lemmas and other API in the form of zero and coercions: <code>0</code> and <code>\u x</code>. Can I somehow produce cases that manifestly stay in the <code>with_zero</code> world, instead of leaking into the <code>option</code> world?</p>
 
+<a name="159413419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159413419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159413419">Johan Commelin (Feb 26 2019 at 10:21)</a>:</h4>
+<p>I'm currently cleaning up a lot of <code>with_zero</code> stuff. What is the correct thing to do here?</p>
+
+<a name="159413430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159413430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159413430">Johan Commelin (Feb 26 2019 at 10:21)</a>:</h4>
+<p>Does this mean that <code>cases x</code> if just a "bad tactic move" if <code>x : with_zero X</code>?</p>
+
+<a name="159413476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159413476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159413476">Johan Commelin (Feb 26 2019 at 10:22)</a>:</h4>
+<p>And instead people should use some lemma from an extensive API that is built to prevent this leakage?</p>
+
+<a name="159413681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159413681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159413681">Chris Hughes (Feb 26 2019 at 10:27)</a>:</h4>
+<p>Could you write a <code>with_top.cases_on</code> lemma and do <code>cases ... using with_top.cases_on</code>?</p>
+
+<a name="159413750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159413750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159413750">Johan Commelin (Feb 26 2019 at 10:28)</a>:</h4>
+<p>Hmmm, maybe that works. I will try in a moment.<br>
+It would be nice if <code>cases</code> could pick up this <code>cases_on</code> lemma by itself.</p>
+
+<a name="159414169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414169">Johan Commelin (Feb 26 2019 at 10:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">one_div_eq_inv</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span> <span class="kn">using</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">cases_on</span><span class="o">,</span> <span class="c1">-- red lines under &quot;using&quot;</span>
+  <span class="n">refl</span><span class="o">,</span>
+  <span class="k">show</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">*</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>error: <code>invalid 'begin-end' expression, ',' expected</code></p>
+
+<a name="159414172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414172">Mario Carneiro (Feb 26 2019 at 10:36)</a>:</h4>
+<p><code>cases</code> doesn't have <code>using</code></p>
+
+<a name="159414178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414178">Mario Carneiro (Feb 26 2019 at 10:36)</a>:</h4>
+<p><code>induction</code> has it though</p>
+
+<a name="159414183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414183">Mario Carneiro (Feb 26 2019 at 10:36)</a>:</h4>
+<p>it basically never works, but try it anyway</p>
+
+<a name="159414185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414185">Patrick Massot (Feb 26 2019 at 10:36)</a>:</h4>
+<p><code>induction</code> has it, but will not let you using it</p>
+
+<a name="159414191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414191">Johan Commelin (Feb 26 2019 at 10:37)</a>:</h4>
+<p>It does!</p>
+
+<a name="159414200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414200">Johan Commelin (Feb 26 2019 at 10:37)</a>:</h4>
+<p>The labels or a bit of though <code>case a</code> and <code>case a</code>. But anyway, that works.</p>
+
+<a name="159414207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414207">Johan Commelin (Feb 26 2019 at 10:37)</a>:</h4>
+<p>Too bad that you can't use <code>cases</code>. It reads more natural to me.</p>
+
+<a name="159414213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414213">Mario Carneiro (Feb 26 2019 at 10:37)</a>:</h4>
+<p>I just use <code>refine</code></p>
+
+<a name="159414412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414412">Johan Commelin (Feb 26 2019 at 10:41)</a>:</h4>
+<p>In fact, <code>induction</code> does the right thing, whereas <code>apply</code>/<code>refine</code> give me stupid goals that are false.</p>
+
 
 {% endraw %}

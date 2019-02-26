@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cases on wrapper type](53104casesonwrappertype.html) (16 messages, latest: Feb 26 2019 at 10:41)
+
 * [with_infinitesimal](75048withinfinitesimal.html) (3 messages, latest: Feb 26 2019 at 09:29)
 
 * [3.4.1 branch](74787341branch.html) (20 messages, latest: Feb 26 2019 at 09:27)
@@ -167,8 +169,6 @@ permalink: archive/113488general/index.html
 * [Lean homework in CoCalc](32681LeanhomeworkinCoCalc.html) (12 messages, latest: Feb 12 2019 at 08:09)
 
 * [lean web editor on firefox](60630leanwebeditoronfirefox.html) (3 messages, latest: Feb 11 2019 at 20:14)
-
-* [cases on wrapper type](53104casesonwrappertype.html) (1 message, latest: Feb 11 2019 at 19:03)
 
 * [missing simp lemmas?](38034missingsimplemmas.html) (10 messages, latest: Feb 11 2019 at 16:47)
 

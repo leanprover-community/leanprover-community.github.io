@@ -235,5 +235,73 @@ le_trans ((le_add_iff_nonneg_left _).2 (nat.zero_le _)) h
 
 <p>(of course <code>linarith</code> works, but the proof term is hideous)</p>
 
+<a name="159413106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159413106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159413106">Scott Morrison (Feb 26 2019 at 10:14)</a>:</h4>
+<p>Do we have <code>lemma mul_mod (a b n : ℕ) : (a * b) % n = (a % n) * (b % n) % n := sorry</code>?</p>
+
+<a name="159413157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159413157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159413157">Patrick Massot (Feb 26 2019 at 10:15)</a>:</h4>
+<p>I would look into <code>data/nat/modeq.lean</code></p>
+
+<a name="159414197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414197">Scott Morrison (Feb 26 2019 at 10:37)</a>:</h4>
+<p>Doesn't seem to be there. It seems a pain to prove, actually.</p>
+
+<a name="159414212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414212">Scott Morrison (Feb 26 2019 at 10:37)</a>:</h4>
+<p>I'd be surprised if it hasn't been needed yet</p>
+
+<a name="159414216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414216">Scott Morrison (Feb 26 2019 at 10:37)</a>:</h4>
+<p>similarly for <code>add_mod</code>.</p>
+
+<a name="159414474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414474">Mario Carneiro (Feb 26 2019 at 10:42)</a>:</h4>
+<p>It follows from some stuff about modeq</p>
+
+<a name="159414489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414489">Mario Carneiro (Feb 26 2019 at 10:43)</a>:</h4>
+<p>it is roughly <code>modeq_mul mod_modeq mod_modeq</code></p>
+
+<a name="159414510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414510">Scott Morrison (Feb 26 2019 at 10:43)</a>:</h4>
+<p>okay, I see.</p>
+
+<a name="159414526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414526">Patrick Massot (Feb 26 2019 at 10:43)</a>:</h4>
+<p>Why not descending all this to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Z/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">Z</span><span class="mord mathrm">/</span><span class="mord mathit">n</span></span></span></span>?</p>
+
+<a name="159414576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414576">Scott Morrison (Feb 26 2019 at 10:44)</a>:</h4>
+<p>modeq seems supremely painful to use ... rather than just having a new type for N/nN and Z/nZ</p>
+
+<a name="159414583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414583">Scott Morrison (Feb 26 2019 at 10:44)</a>:</h4>
+<p>has someone done N/nZ and Z/nZ?</p>
+
+<a name="159414584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414584">Patrick Massot (Feb 26 2019 at 10:44)</a>:</h4>
+<p>Prove that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi mathvariant="normal">%</mi><mi>n</mi><mo>=</mo><mi>b</mi><mi mathvariant="normal">%</mi><mi>n</mi></mrow><annotation encoding="application/x-tex"> a \% n = b \% n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="base"><span class="mord mathit">a</span><span class="mord mathrm">%</span><span class="mord mathit">n</span><span class="mrel">=</span><span class="mord mathit">b</span><span class="mord mathrm">%</span><span class="mord mathit">n</span></span></span></span> iff <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>π</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>=</mo><mi>π</mi><mo>(</mo><mi>b</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\pi(a) = \pi(b)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathit">b</span><span class="mclose">)</span></span></span></span> where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">π</span></span></span></span> goes down from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">Z</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Z/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">Z</span><span class="mord mathrm">/</span><span class="mord mathit">n</span></span></span></span></p>
+
+<a name="159414585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414585">Mario Carneiro (Feb 26 2019 at 10:44)</a>:</h4>
+<p>there is a type for Z/nZ</p>
+
+<a name="159414589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414589">Mario Carneiro (Feb 26 2019 at 10:44)</a>:</h4>
+<p>like Patrick said</p>
+
+<a name="159414590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414590">Mario Carneiro (Feb 26 2019 at 10:45)</a>:</h4>
+<p><code>zmod</code></p>
+
+<a name="159414603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414603">Mario Carneiro (Feb 26 2019 at 10:45)</a>:</h4>
+<p>That is surely proven already</p>
+
+<a name="159414657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159414657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159414657">Mario Carneiro (Feb 26 2019 at 10:46)</a>:</h4>
+<p><code>zmod.eq_iff_modeq_nat</code></p>
+
 
 {% endraw %}
