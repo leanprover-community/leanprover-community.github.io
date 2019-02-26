@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [with_infinitesimal](75048withinfinitesimal.html) (3 messages, latest: Feb 26 2019 at 09:29)
+
+* [3.4.1 branch](74787341branch.html) (20 messages, latest: Feb 26 2019 at 09:27)
+
 * [simp lemma for subtype.property](47692simplemmaforsubtypeproperty.html) (14 messages, latest: Feb 26 2019 at 08:57)
 
 * [IO changes in 3.4.2](98046IOchangesin342.html) (13 messages, latest: Feb 26 2019 at 08:00)
-
-* [3.4.1 branch](74787341branch.html) (18 messages, latest: Feb 26 2019 at 07:48)
 
 * [lean community fork](45880leancommunityfork.html) (19 messages, latest: Feb 25 2019 at 20:33)
 

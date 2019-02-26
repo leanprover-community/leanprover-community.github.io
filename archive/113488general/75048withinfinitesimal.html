@@ -1,0 +1,81 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75048withinfinitesimal.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75048withinfinitesimal.html">with_infinitesimal</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159410566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infinitesimal/near/159410566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75048withinfinitesimal.html#159410566">Kenny Lau (Feb 26 2019 at 09:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">with_infinitesimal</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">polynomial</span> <span class="n">α</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">comm_semiring</span> <span class="o">(</span><span class="n">with_infinitesimal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">polynomial</span><span class="bp">.</span><span class="n">comm_semiring</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">comm_ring</span> <span class="o">(</span><span class="n">with_infinitesimal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">polynomial</span><span class="bp">.</span><span class="n">comm_ring</span>
+
+
+<span class="kn">namespace</span> <span class="n">polynomial</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">undegree</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">inf</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span> <span class="n">coe</span>
+
+<span class="n">def</span> <span class="n">nat_undegree</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">undegree</span> <span class="n">p</span><span class="o">)</span> <span class="mi">0</span>
+
+<span class="n">def</span> <span class="n">trailing_coeff</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">p</span><span class="bp">.</span><span class="n">coeff</span> <span class="n">p</span><span class="bp">.</span><span class="n">nat_undegree</span>
+
+<span class="kn">end</span> <span class="n">polynomial</span>
+
+
+<span class="kn">namespace</span> <span class="n">with_infinitesimal</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">with_infinitesimal</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span>
+
+<span class="n">def</span> <span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">with_infinitesimal</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span>
+
+<span class="kn">end</span> <span class="n">with_infinitesimal</span>
+
+
+<span class="kn">namespace</span> <span class="n">with_infinitesimal</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">nonneg</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">with_infinitesimal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="mi">0</span> <span class="bp">≤</span> <span class="n">p</span><span class="bp">.</span><span class="n">trailing_coeff</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">linear_ordered_comm_ring</span> <span class="o">(</span><span class="n">with_infinitesimal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p</span> <span class="n">q</span><span class="o">,</span> <span class="n">nonneg</span> <span class="o">(</span><span class="n">q</span> <span class="bp">-</span> <span class="n">p</span><span class="o">),</span>
+  <span class="bp">..</span> <span class="n">with_infinitesimal</span><span class="bp">.</span><span class="n">comm_ring</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">with_infinitesimal</span>
+</pre></div>
+
+<a name="159410579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infinitesimal/near/159410579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75048withinfinitesimal.html#159410579">Kenny Lau (Feb 26 2019 at 09:29)</a>:</h4>
+<p>so I started this, and didn't want to continue; someone might want to continue</p>
+
+<a name="159410582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infinitesimal/near/159410582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75048withinfinitesimal.html#159410582">Kenny Lau (Feb 26 2019 at 09:29)</a>:</h4>
+<p>otherwise just ignore this thread</p>
+
+
+{% endraw %}

@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [quotient_group.inc](91854quotientgroupinc.html) (12 messages, latest: Feb 26 2019 at 08:57)
+* [quotient_group.inc](91854quotientgroupinc.html) (126 messages, latest: Feb 26 2019 at 09:59)
 
 * [finite sums](86088finitesums.html) (119 messages, latest: Feb 24 2019 at 15:21)
 
