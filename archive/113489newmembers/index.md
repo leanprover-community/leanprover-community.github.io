@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Newbie](04763Newbie.html) (7 messages, latest: Feb 26 2019 at 10:58)
+* [help finding a lemma](30422helpfindingalemma.html) (124 messages, latest: Feb 26 2019 at 11:57)
 
-* [help finding a lemma](30422helpfindingalemma.html) (65 messages, latest: Feb 26 2019 at 10:46)
+* [Newbie](04763Newbie.html) (7 messages, latest: Feb 26 2019 at 10:58)
 
 * [Proving r^2 >= 0](52147Provingr20.html) (6 messages, latest: Feb 26 2019 at 04:58)
 
