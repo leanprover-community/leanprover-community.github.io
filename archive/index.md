@@ -10,7 +10,7 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (1527 topics)
 
-* [maths](116395maths/index.html) (384 topics)
+* [maths](116395maths/index.html) (385 topics)
 
 * [new members](113489newmembers/index.html) (315 topics)
 

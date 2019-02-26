@@ -96,5 +96,21 @@ It would be nice if <code>cases</code> could pick up this <code>cases_on</code> 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159414412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159414412">Johan Commelin (Feb 26 2019 at 10:41)</a>:</h4>
 <p>In fact, <code>induction</code> does the right thing, whereas <code>apply</code>/<code>refine</code> give me stupid goals that are false.</p>
 
+<a name="159422415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159422415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159422415">Chris Hughes (Feb 26 2019 at 13:11)</a>:</h4>
+<p>If you revert everything that depends on the variable  you're doing cases on first, refine works. But that is a bit long.</p>
+
+<a name="159423191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159423191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159423191">Johan Commelin (Feb 26 2019 at 13:24)</a>:</h4>
+<p>I've now resorted to writing the proofs using pattern matching. I think it's quite nice that way:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">one_div</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span>
+<span class="bp">|</span> <span class="mi">0</span>       <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="bp">_</span> <span class="bp">*</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="159423250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20on%20wrapper%20type/near/159423250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53104casesonwrappertype.html#159423250">Patrick Massot (Feb 26 2019 at 13:25)</a>:</h4>
+<p>After the fight over lifts this morning, Johan has been secretly taken down and replaced by a computer scientist. I fear my time will come soon.</p>
+
 
 {% endraw %}
