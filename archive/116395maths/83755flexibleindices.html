@@ -505,5 +505,51 @@ Is that an issue that can be solved, or is this fight some intrinsic DTT issue?<
 </blockquote>
 <p>So, for <code>is_complex</code> I could do this. But for <code>is_exact_at (i : int)</code> you need to reference <code>A.obj (i-1)</code> at some point. You can't avoid the subtraction. (Unless you want to break with the indexing conventions, but that will just move the pain to the next page, where it will hit you twice as hard.)</p>
 
+<a name="159443585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159443585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159443585">Mario Carneiro (Feb 26 2019 at 18:01)</a>:</h4>
+<p>with the <code>next</code> thing, you can say <code>\ex j, next i j /\ ...</code></p>
+
+<a name="159443669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159443669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159443669">Mario Carneiro (Feb 26 2019 at 18:02)</a>:</h4>
+<p>but depending on what you want to say just plain <code>A.obj (i-1)</code> might be best</p>
+
+<a name="159443832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159443832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159443832">Johan Commelin (Feb 26 2019 at 18:05)</a>:</h4>
+<p>So what is actually the benefit of <code>next</code>? Why can't I just write a condition <code>(h : j = i+1)</code> in the definition of <code>delta</code>?</p>
+
+<a name="159443845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159443845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159443845">Mario Carneiro (Feb 26 2019 at 18:05)</a>:</h4>
+<p>you can</p>
+
+<a name="159443860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159443860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159443860">Mario Carneiro (Feb 26 2019 at 18:05)</a>:</h4>
+<p>but it generalizes to more complicated index structures</p>
+
+<a name="159444088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444088">Johan Commelin (Feb 26 2019 at 18:09)</a>:</h4>
+<p>I see...</p>
+
+<a name="159444105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444105">Mario Carneiro (Feb 26 2019 at 18:09)</a>:</h4>
+<p>I'm not saying you should necessarily use it here</p>
+
+<a name="159444253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444253">Reid Barton (Feb 26 2019 at 18:11)</a>:</h4>
+<p>Another example of this index business is (commutative / graded commutative) graded algebras</p>
+
+<a name="159444327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444327">Reid Barton (Feb 26 2019 at 18:12)</a>:</h4>
+<p>where multiplication is a family of operations <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mo>:</mo><msub><mi>A</mi><mi>i</mi></msub><mo>×</mo><msub><mi>A</mi><mi>j</mi></msub><mo>→</mo><msub><mi>A</mi><mrow><mi>i</mi><mo>+</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">m : A_i \times A_j \to A_{i+j}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord mathit">m</span><span class="mrel">:</span><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mbin">×</span><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mbin mtight">+</span><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">m</span></span></span></span> is supposed to be, say, associative, but stating that depends on the associativity of addition of indices</p>
+
+<a name="159444385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444385">Johan Commelin (Feb 26 2019 at 18:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you know how mathematicians write the predicate <code>is_complex</code>?<br>
+They just write <code>A.delta \circ A.delta = 0</code><br>
+Now, I thought I should write <code>\forall i, A.delta i \circ A.delta (i-1) = 0</code>. But you are telling me I need 3 explicit arguments... it will probably take my psyche some time to adjust.</p>
+
+<a name="159444505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/flexible%20indices/near/159444505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83755flexibleindices.html#159444505">Johan Commelin (Feb 26 2019 at 18:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Yeah, I was thinking about those a bit. (Because you can of course also do sequences as graded modules with a differential of degree 1.) I really don't know if the <code>A_i</code> should be an indexed family of types or an indexed family of subsets... We will probably need both...</p>
+
 
 {% endraw %}

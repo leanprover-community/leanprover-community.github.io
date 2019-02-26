@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help finding a lemma](30422helpfindingalemma.html) (129 messages, latest: Feb 26 2019 at 12:43)
+* [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (9 messages, latest: Feb 26 2019 at 18:19)
 
-* [Newbie](04763Newbie.html) (7 messages, latest: Feb 26 2019 at 10:58)
+* [Newbie](04763Newbie.html) (8 messages, latest: Feb 26 2019 at 18:07)
+
+* [help finding a lemma](30422helpfindingalemma.html) (129 messages, latest: Feb 26 2019 at 12:43)
 
 * [Proving r^2 >= 0](52147Provingr20.html) (6 messages, latest: Feb 26 2019 at 04:58)
 
@@ -23,8 +25,6 @@ permalink: archive/113489newmembers/index.html
 * [rewriting at specific part](44814rewritingatspecificpart.html) (6 messages, latest: Feb 25 2019 at 11:34)
 
 * [noob question(s)](52075noobquestions.html) (180 messages, latest: Feb 25 2019 at 00:43)
-
-* [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (8 messages, latest: Feb 24 2019 at 16:54)
 
 * [reversing `\neq`](11734reversingneq.html) (3 messages, latest: Feb 24 2019 at 08:03)
 
