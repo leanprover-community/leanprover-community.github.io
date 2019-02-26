@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proving r^2 >= 0](52147Provingr20.html) (1 message, latest: Feb 26 2019 at 03:42)
+* [Proving r^2 >= 0](52147Provingr20.html) (6 messages, latest: Feb 26 2019 at 04:58)
 
 * [subtract equation lemma](39387subtractequationlemma.html) (15 messages, latest: Feb 25 2019 at 21:13)
 
