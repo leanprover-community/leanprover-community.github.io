@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [IO changes in 3.4.2](98046IOchangesin342.html) (11 messages, latest: Feb 26 2019 at 07:55)
+* [simp lemma for subtype.property](47692simplemmaforsubtypeproperty.html) (14 messages, latest: Feb 26 2019 at 08:57)
+
+* [IO changes in 3.4.2](98046IOchangesin342.html) (13 messages, latest: Feb 26 2019 at 08:00)
 
 * [3.4.1 branch](74787341branch.html) (18 messages, latest: Feb 26 2019 at 07:48)
 

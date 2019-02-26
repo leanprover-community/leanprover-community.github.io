@@ -1,0 +1,83 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/47692simplemmaforsubtypeproperty.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html">simp lemma for subtype.property</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159408604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408604">Johan Commelin (Feb 26 2019 at 08:50)</a>:</h4>
+<p>Should this be a simp lemma in mathlib?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">subtype</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">val_prop</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">})</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="err">∈</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">property</span>
+</pre></div>
+
+<a name="159408650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408650">Mario Carneiro (Feb 26 2019 at 08:51)</a>:</h4>
+<p>I'm not sure if it will work right as a simp lemma, but you are welcome to try</p>
+
+<a name="159408708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408708">Kenny Lau (Feb 26 2019 at 08:52)</a>:</h4>
+<p>I would prefer this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">val_prop</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="err">↑</span><span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">property</span>
+</pre></div>
+
+<a name="159408718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408718">Mario Carneiro (Feb 26 2019 at 08:52)</a>:</h4>
+<p>I'm guessing that the unfolding of <code>x : S</code> was performed by dsimp</p>
+
+<a name="159408740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408740">Mario Carneiro (Feb 26 2019 at 08:53)</a>:</h4>
+<p>the simp lemma should be something that is in simp normal form already</p>
+
+<a name="159408742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408742">Kenny Lau (Feb 26 2019 at 08:53)</a>:</h4>
+<p>only if you do <code>dsimp *</code></p>
+
+<a name="159408753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408753">Kenny Lau (Feb 26 2019 at 08:53)</a>:</h4>
+<p>how about we include both <code>S</code> and <code>{x // x in S}</code></p>
+
+<a name="159408801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408801">Kenny Lau (Feb 26 2019 at 08:54)</a>:</h4>
+<p>is <code>x.val</code> in simp normal form or <code>\u x</code>?</p>
+
+<a name="159408810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408810">Mario Carneiro (Feb 26 2019 at 08:54)</a>:</h4>
+<p>I think they are both valid</p>
+
+<a name="159408820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408820">Kenny Lau (Feb 26 2019 at 08:54)</a>:</h4>
+<p>so we have 4 versions!</p>
+
+<a name="159408827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408827">Mario Carneiro (Feb 26 2019 at 08:54)</a>:</h4>
+<p>I don't think <code>S</code> vs <code>{x // x in S}</code> affects simp applicability</p>
+
+<a name="159408854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408854">Kenny Lau (Feb 26 2019 at 08:55)</a>:</h4>
+<p>you're right</p>
+
+<a name="159408857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408857">Kenny Lau (Feb 26 2019 at 08:55)</a>:</h4>
+<p>so 2 versions</p>
+
+<a name="159408964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20for%20subtype.property/near/159408964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47692simplemmaforsubtypeproperty.html#159408964">Johan Commelin (Feb 26 2019 at 08:57)</a>:</h4>
+<p>I've succesfully applied the current version in the perfectoid project. I'll prepare a PR that adds both versions to <code>data/subtype</code>.</p>
+
+
+{% endraw %}
