@@ -47,5 +47,21 @@ permalink: archive/116395maths/40872goldenratiocalculation.html
 <p>This came up today when talking to the UGs about some analysis. It's still a lot more painful than I'd like it to be. Am I missing any tricks which would make the argument shorter? I feel like my first instinct with all of these things is to get rid of denominators, so I can start using <code>ring</code>. Should it be? </p>
 <p>I feel like I could sometimes use a slightly beefed-up version of <code>ring</code> which starts by locating all denominators, multiplying everything up by a common denominator, introducing subgoals saying that all of them are non-zero (because they always  are in maths) and then killing the main identity with ring leaving me just the job of justifying that all the denominators are non-zero.</p>
 
+<a name="159454506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159454506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159454506">Kevin Buzzard (Feb 26 2019 at 20:17)</a>:</h4>
+<p>Thinking about this more, I realise that actually this is different from the <code>ring</code> tactic -- I could do with a <code>clear_denominator</code> tactic, which takes a goal of the form e.g. <code>a +  b/c + (d+e-f)/g = h / i</code> with variables in a field, and reduces it to goals <code>c ne 0</code>, <code>g ne 0</code>, <code>i ne 0</code> and <code>a*c*g*i + b*g*i+(d+e-f)*c*i=h*c*g</code>. That looks to me like something one could write an algorithm for. Am I being naive? It could eliminate denominators one by one. I don't care how horrible the final goal is, because in many cases I'll be able to prove it using <code>ring</code>.</p>
+
+<a name="159455256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159455256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159455256">Patrick Massot (Feb 26 2019 at 20:26)</a>:</h4>
+<p>I thought about this at some point, the difficulty is to push the multiplication through the expression, but it should be possible</p>
+
+<a name="159457603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159457603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159457603">Rob Lewis (Feb 26 2019 at 20:57)</a>:</h4>
+<p>There's a preprocessing step in <code>linarith</code> that does this for numeric denominators. If someone is interested in implementing this, maybe there's inspiration to be found there, although I can't promise it's the cleanest code.</p>
+
+<a name="159457718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159457718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159457718">Rob Lewis (Feb 26 2019 at 20:58)</a>:</h4>
+<p>IIRC, it walks through the term first to compute a coefficient that will cancel all denominators in the term. You need more than a bare coefficient though, you need some sort of tree to represent which part to distribute to which side of a product.</p>
+
 
 {% endraw %}
