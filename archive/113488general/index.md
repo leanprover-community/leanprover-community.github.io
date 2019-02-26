@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [understanding simp](11344understandingsimp.html) (3 messages, latest: Feb 26 2019 at 16:15)
+
 * [cases on wrapper type](53104casesonwrappertype.html) (24 messages, latest: Feb 26 2019 at 14:11)
 
 * [with_infinitesimal](75048withinfinitesimal.html) (3 messages, latest: Feb 26 2019 at 09:29)

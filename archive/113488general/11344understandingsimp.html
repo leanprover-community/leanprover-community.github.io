@@ -1,0 +1,32 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/11344understandingsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/11344understandingsimp.html">understanding simp</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159435015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20simp/near/159435015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11344understandingsimp.html#159435015">Johan Commelin (Feb 26 2019 at 16:05)</a>:</h4>
+<p>I'm baffled. I added</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">coe_one</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>to <code>algebra/group.lean</code> and suddenly there is breakage in <code>algebra/ordered_ring.lean</code> because <code>simp</code> is applying that lemma in the context of <code>with_top α</code>. What's going on?</p>
+
+<a name="159435727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20simp/near/159435727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11344understandingsimp.html#159435727">Johan Commelin (Feb 26 2019 at 16:14)</a>:</h4>
+<p>I thought that this simp-lemma wouldn't apply because of the <code>((1 : α) : with_zero α)</code> on the right-hand-side.</p>
+
+<a name="159435789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20simp/near/159435789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11344understandingsimp.html#159435789">Johan Commelin (Feb 26 2019 at 16:15)</a>:</h4>
+<p>Is this a bad simp-lemma, because the <code>with_zero</code> somehow gets hidden inside a <code>has_coe</code>, and then <code>with_zero</code> and <code>with_top</code> are both defined as <code>option</code>, so they turn out to be defeq, and hence the simp-lemma applies?</p>
+
+
+{% endraw %}

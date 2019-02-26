@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localization.of](97485localizationof.html) (5 messages, latest: Feb 26 2019 at 15:21)
+* [quotient_group.inc](91854quotientgroupinc.html) (201 messages, latest: Feb 26 2019 at 16:05)
 
-* [quotient_group.inc](91854quotientgroupinc.html) (199 messages, latest: Feb 26 2019 at 15:05)
+* [localization.of](97485localizationof.html) (5 messages, latest: Feb 26 2019 at 15:21)
 
 * [flexible indices](83755flexibleindices.html) (90 messages, latest: Feb 26 2019 at 14:22)
 
