@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#763 subset/inter/union for opens(X)](67832763subsetinterunionforopensX.html) (60 messages, latest: Feb 26 2019 at 17:51)
+
 * [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (52 messages, latest: Feb 26 2019 at 15:21)
 
 * [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (22 messages, latest: Feb 25 2019 at 03:51)

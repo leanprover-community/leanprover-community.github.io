@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [flexible indices](83755flexibleindices.html) (91 messages, latest: Feb 26 2019 at 17:56)
+
+* [localization.of](97485localizationof.html) (6 messages, latest: Feb 26 2019 at 17:09)
+
 * [quotient_group.inc](91854quotientgroupinc.html) (201 messages, latest: Feb 26 2019 at 16:05)
-
-* [localization.of](97485localizationof.html) (5 messages, latest: Feb 26 2019 at 15:21)
-
-* [flexible indices](83755flexibleindices.html) (90 messages, latest: Feb 26 2019 at 14:22)
 
 * [div for (comm_)group](56436divforcommgroup.html) (1 message, latest: Feb 26 2019 at 13:34)
 
