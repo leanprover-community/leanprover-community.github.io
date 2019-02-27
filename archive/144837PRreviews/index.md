@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#772 remove unnecessary assumption from card_eq_succ](14021772removeunnecessaryassumptionfromcardeqsucc.html) (1 message, latest: Feb 27 2019 at 21:49)
+
 * [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (53 messages, latest: Feb 26 2019 at 22:17)
 
 * [#763 subset/inter/union for opens(X)](67832763subsetinterunionforopensX.html) (61 messages, latest: Feb 26 2019 at 18:30)
