@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Apply composition](01467Applycomposition.html) (2 messages, latest: Feb 27 2019 at 09:46)
+
 * [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (89 messages, latest: Feb 27 2019 at 02:18)
 
 * [New record](10826Newrecord.html) (16 messages, latest: Feb 27 2019 at 00:07)

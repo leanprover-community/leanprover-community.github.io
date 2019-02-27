@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [proving pi >= 0](00138provingpi0.html) (2 messages, latest: Feb 27 2019 at 09:59)
+
+* [type mismatch](25625typemismatch.html) (32 messages, latest: Feb 27 2019 at 09:27)
+
 * [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (22 messages, latest: Feb 27 2019 at 08:38)
 
 * [modeq](47959modeq.html) (2 messages, latest: Feb 27 2019 at 02:46)
