@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Unification hints for hom](41291Unificationhintsforhom.html) (7 messages, latest: Feb 27 2019 at 16:18)
+
 * [golden ratio calculation](40872goldenratiocalculation.html) (11 messages, latest: Feb 26 2019 at 22:54)
 
 * [localization.of](97485localizationof.html) (10 messages, latest: Feb 26 2019 at 19:59)
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [metric space competion](38847metricspacecompetion.html) (6 messages, latest: Feb 21 2019 at 08:24)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (13 messages, latest: Feb 19 2019 at 07:45)
-
-* [Unification hints for hom](41291Unificationhintsforhom.html) (4 messages, latest: Feb 17 2019 at 21:15)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
 
