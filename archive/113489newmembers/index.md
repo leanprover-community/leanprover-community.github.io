@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (32 messages, latest: Feb 27 2019 at 16:51)
+* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (35 messages, latest: Feb 27 2019 at 20:34)
 
 * [proving pi >= 0](00138provingpi0.html) (13 messages, latest: Feb 27 2019 at 14:12)
 
