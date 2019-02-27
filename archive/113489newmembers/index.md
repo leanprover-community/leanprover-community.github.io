@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (6 messages, latest: Feb 27 2019 at 07:03)
+* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (22 messages, latest: Feb 27 2019 at 08:38)
 
 * [modeq](47959modeq.html) (2 messages, latest: Feb 27 2019 at 02:46)
 

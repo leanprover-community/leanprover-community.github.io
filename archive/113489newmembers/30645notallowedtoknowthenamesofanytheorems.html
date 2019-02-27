@@ -103,5 +103,95 @@ permalink: archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159487700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159487700">Patrick Massot (Feb 27 2019 at 07:03)</a>:</h4>
 <p>Remember this is based on code by Kenny</p>
 
+<a name="159490467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490467">Kevin Buzzard (Feb 27 2019 at 08:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">qux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">h₁</span> <span class="k">with</span> <span class="bp">_</span> <span class="n">h₁</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h₁</span> <span class="k">with</span> <span class="bp">_</span> <span class="n">h₁</span><span class="o">,</span>
+    <span class="n">revert</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h₁</span> <span class="k">with</span> <span class="bp">_</span> <span class="n">h₁</span><span class="o">,</span>
+    <span class="n">revert</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h₁</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Casing on the inequality is quicker than casing on <code>n</code>.</p>
+
+<a name="159490603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490603">Kenny Lau (Feb 27 2019 at 08:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">lemma</span> <span class="n">qux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">revert</span> <span class="n">n</span><span class="bp">;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact_dec_trivial</span>
+</pre></div>
+
+<a name="159490688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490688">Johan Commelin (Feb 27 2019 at 08:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Your challenge was Kenny'd.</p>
+
+<a name="159490742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490742">Kevin Buzzard (Feb 27 2019 at 08:18)</a>:</h4>
+<p>Why is the import necessary?</p>
+
+<a name="159490746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490746">Mario Carneiro (Feb 27 2019 at 08:18)</a>:</h4>
+<p>I assume that's where the decidable instance is</p>
+
+<a name="159490758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490758">Mario Carneiro (Feb 27 2019 at 08:19)</a>:</h4>
+<p>I think <code>tactic.exact_dec_trivial</code> can just be <code>exact dec_trivial</code></p>
+
+<a name="159490771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490771">Mario Carneiro (Feb 27 2019 at 08:19)</a>:</h4>
+<p>unless that counts as "the name of a theorem"</p>
+
+<a name="159490775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490775">Kevin Buzzard (Feb 27 2019 at 08:19)</a>:</h4>
+<p>Well he'd better make some improvements because my first solution is shorter than his :P</p>
+
+<a name="159490780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490780">Kevin Buzzard (Feb 27 2019 at 08:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">lemma</span> <span class="n">qux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">change</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="mi">3</span> <span class="n">at</span> <span class="n">h₁</span><span class="bp">;</span> <span class="n">linarith</span>
+
+<span class="kn">lemma</span> <span class="n">qux&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">revert</span> <span class="n">n</span><span class="bp">;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact_dec_trivial</span>
+</pre></div>
+
+<a name="159490837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490837">Kenny Lau (Feb 27 2019 at 08:20)</a>:</h4>
+<p>but mine is faster</p>
+
+<a name="159490850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490850">Kevin Buzzard (Feb 27 2019 at 08:20)</a>:</h4>
+<p>however my longer solution is faster than yours so I'm beating you all ends up ;-)</p>
+
+<a name="159490873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490873">Kevin Buzzard (Feb 27 2019 at 08:21)</a>:</h4>
+<p>Mario is right though, and now yours is the shortest</p>
+
+<a name="159490973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490973">Mario Carneiro (Feb 27 2019 at 08:23)</a>:</h4>
+<p>these proofs make me weep though, compared to just using <code>le_antisymm</code></p>
+
+<a name="159490985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159490985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159490985">Kenny Lau (Feb 27 2019 at 08:24)</a>:</h4>
+<p>you can make that a tactic!</p>
+
+<a name="159491035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159491035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159491035">Mario Carneiro (Feb 27 2019 at 08:24)</a>:</h4>
+<p><code>by exact</code></p>
+
+<a name="159491758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159491758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159491758">Patrick Massot (Feb 27 2019 at 08:38)</a>:</h4>
+<p>Again, we should have a complete <code>nat_cases</code> tactic (and <code>int_cases</code>)</p>
+
 
 {% endraw %}
