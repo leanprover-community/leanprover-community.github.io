@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (31 messages, latest: Feb 27 2019 at 15:34)
+
 * [proving pi >= 0](00138provingpi0.html) (13 messages, latest: Feb 27 2019 at 14:12)
 
 * [type mismatch](25625typemismatch.html) (36 messages, latest: Feb 27 2019 at 14:05)
-
-* [not allowed to know the names of any theorems](30645notallowedtoknowthenamesofanytheorems.html) (30 messages, latest: Feb 27 2019 at 11:10)
 
 * [modeq](47959modeq.html) (2 messages, latest: Feb 27 2019 at 02:46)
 
