@@ -10,11 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [modeq](47959modeq.html) (2 messages, latest: Feb 27 2019 at 02:46)
+
+* [Newbie](04763Newbie.html) (9 messages, latest: Feb 27 2019 at 01:50)
+
 * [learning path](65214learningpath.html) (49 messages, latest: Feb 26 2019 at 19:13)
 
 * [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (9 messages, latest: Feb 26 2019 at 18:19)
-
-* [Newbie](04763Newbie.html) (8 messages, latest: Feb 26 2019 at 18:07)
 
 * [help finding a lemma](30422helpfindingalemma.html) (129 messages, latest: Feb 26 2019 at 12:43)
 

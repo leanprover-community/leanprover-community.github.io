@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (89 messages, latest: Feb 27 2019 at 02:18)
+
+* [New record](10826Newrecord.html) (16 messages, latest: Feb 27 2019 at 00:07)
+
 * [understanding simp](11344understandingsimp.html) (3 messages, latest: Feb 26 2019 at 16:15)
 
 * [cases on wrapper type](53104casesonwrappertype.html) (24 messages, latest: Feb 26 2019 at 14:11)
@@ -93,8 +97,6 @@ permalink: archive/113488general/index.html
 * [monad for Sort?](20766monadforSort.html) (9 messages, latest: Feb 18 2019 at 23:32)
 
 * [monad on arbitrary categories](45155monadonarbitrarycategories.html) (34 messages, latest: Feb 18 2019 at 17:52)
-
-* [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (88 messages, latest: Feb 18 2019 at 16:34)
 
 * [Type u vs Type*](08717TypeuvsType.html) (3 messages, latest: Feb 18 2019 at 01:41)
 
@@ -421,8 +423,6 @@ permalink: archive/113488general/index.html
 * [Cubical HoTT Library](30056CubicalHoTTLibrary.html) (4 messages, latest: Jan 08 2019 at 04:20)
 
 * [(no topic)](79918notopic.html) (50 messages, latest: Jan 07 2019 at 17:24)
-
-* [New record](10826Newrecord.html) (15 messages, latest: Jan 05 2019 at 21:07)
 
 * [have in mathlib](58237haveinmathlib.html) (11 messages, latest: Jan 05 2019 at 12:31)
 

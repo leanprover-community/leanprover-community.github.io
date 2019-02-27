@@ -78,5 +78,33 @@ permalink: archive/116395maths/40872goldenratiocalculation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159458433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159458433">Patrick Massot (Feb 26 2019 at 21:07)</a>:</h4>
 <p>Simon, stop playing with python, we need your super powers! <span aria-label="santa" class="emoji emoji-1f385" role="img" title="santa">:santa:</span></p>
 
+<a name="159464333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159464333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159464333">Mario Carneiro (Feb 26 2019 at 22:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">phi_squared</span> <span class="o">:</span> <span class="n">phi</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">phi</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">phi</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">sub_eq_iff_eq_add&#39;</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="n">two_ne_zero</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">phi</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">phi</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">sqrt</span> <span class="mi">5</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">sub_eq_iff_eq_add&#39;</span><span class="o">],</span>
+      <span class="n">exact</span> <span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="n">two_ne_zero</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">sub_eq_zero</span><span class="o">,</span> <span class="n">this</span><span class="o">,</span> <span class="n">sqr_sqrt</span><span class="o">],</span> <span class="n">norm_num</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">eq_of_mul_eq_mul_left</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span> <span class="o">:</span> <span class="o">(</span><span class="mi">4</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">sub_eq_zero</span><span class="o">,</span> <span class="err">←</span> <span class="n">this</span><span class="o">],</span> <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159465701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159465701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159465701">Kenny Lau (Feb 26 2019 at 22:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">phi_squared</span> <span class="o">:</span> <span class="n">phi</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">phi</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">phi</span><span class="o">,</span> <span class="n">div_pow</span> <span class="o">(</span><span class="bp">_</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="n">two_ne_zero</span><span class="o">,</span> <span class="n">pow_two</span><span class="o">,</span> <span class="n">add_mul_self_eq</span><span class="o">,</span>
+  <span class="n">mul_self_sqrt</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="mi">5</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">)]</span><span class="bp">;</span> <span class="n">ring</span>
+</pre></div>
+
+<a name="159466329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/golden%20ratio%20calculation/near/159466329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40872goldenratiocalculation.html#159466329">Mario Carneiro (Feb 26 2019 at 22:54)</a>:</h4>
+<p>oh right, <code>ring</code> knows about div</p>
+
 
 {% endraw %}

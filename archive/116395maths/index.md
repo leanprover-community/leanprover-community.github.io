@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [golden ratio calculation](40872goldenratiocalculation.html) (8 messages, latest: Feb 26 2019 at 21:07)
+* [golden ratio calculation](40872goldenratiocalculation.html) (11 messages, latest: Feb 26 2019 at 22:54)
 
 * [localization.of](97485localizationof.html) (10 messages, latest: Feb 26 2019 at 19:59)
 
