@@ -1,0 +1,91 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/90684finsetcasesandnatcases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html">finset_cases and nat_cases</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159557799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159557799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159557799">Scott Morrison (Feb 27 2019 at 22:15)</a>:</h4>
+<p>I was thinking while walking the dog this morning about how to implement a <code>nat_cases</code> tactic.</p>
+<p>It seems best to do something more general first, and write a <code>finset_cases</code> tactic, so that <code>finset_cases h</code> takes a hypothesis of the form <code>h : x \mem A</code>, where <code>A</code> is an "explicitly known" <code>finset</code>, and explodes into multiple goals, one for each element of <code>A</code>.</p>
+<p>After that, I'd write a <code>nat_cases n a b</code>, which gives you a goal with the hypothesis <code>n &lt; a</code>, individual goals for each value of <code>n \mem Ico a b</code> (implemented using <code>finset_cases</code>), and another goal with <code>n \geq b</code>.</p>
+<p>Finally we'd add <code>nat_cases n</code>, which collects hypotheses which are "obviously" linear inequalities solely in <code>n</code>, and calculates the relevant lower and upper bounds <code>a</code> and <code>b</code>. Now we'll call <code>nat_cases n a b</code>, and follow up by discharging the two goals with inequalities using <code>linarith</code> (passing to <code>linarith</code> just the collected relevant hypotheses, and the new hypothesis, so it should be fast).</p>
+
+<a name="159557825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159557825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159557825">Scott Morrison (Feb 27 2019 at 22:15)</a>:</h4>
+<p>I haven't yet thought too hard about what it means for a tactic to decide that a <code>finset</code> is "explicitly known", so maybe there is a problem here.</p>
+
+<a name="159557846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159557846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159557846">Scott Morrison (Feb 27 2019 at 22:16)</a>:</h4>
+<p>Any criticisms before I get started (maybe not today), welcome!</p>
+
+<a name="159558220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558220">Kenny Lau (Feb 27 2019 at 22:20)</a>:</h4>
+<p>I think there is a tactic to determine if a formula is "closed", i.e. "explicitly known"</p>
+
+<a name="159558367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558367">Chris Hughes (Feb 27 2019 at 22:22)</a>:</h4>
+<p>Let's say you've got some horrible finset like <code>(univ : finset (perm (fin 2 -&gt; fin 2)))</code>. You have to do some clever unfolding to work out what the expression for each element is I think. Maybe if the type has a <code>has_reflect</code> instance it will be easier.</p>
+
+<a name="159558464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558464">Chris Hughes (Feb 27 2019 at 22:23)</a>:</h4>
+<p>In fact a <code>has_reflect</code> instance is probably a good definition of "explicitly known"</p>
+
+<a name="159558546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558546">Kenny Lau (Feb 27 2019 at 22:24)</a>:</h4>
+<p>bingo:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- (eval_expr α e) evaluates &#39;e&#39; IF &#39;e&#39; has type &#39;α&#39;. -/</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">eval_expr</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">reflected</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">α</span>
+</pre></div>
+
+<a name="159558554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558554">Kenny Lau (Feb 27 2019 at 22:24)</a>:</h4>
+<p>(used in <code>tactic.fin_cases</code>)</p>
+
+<a name="159558735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558735">Kenny Lau (Feb 27 2019 at 22:26)</a>:</h4>
+<p>case in point:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">true</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span> <span class="n">fin_cases</span> <span class="n">k</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid eval_expr, expression must be closed</span>
+<span class="cm">state:</span>
+<span class="cm">n : ℕ,</span>
+<span class="cm">k : fin n</span>
+<span class="cm">⊢ true</span>
+<span class="cm">-/</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159558849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159558849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159558849">Rob Lewis (Feb 27 2019 at 22:26)</a>:</h4>
+<p>Yeah, I suspect <code>eval_expr</code> on <code>finset.sort</code> will be the way to get your hands on the underlying list.</p>
+
+<a name="159559643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159559643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159559643">Rob Lewis (Feb 27 2019 at 22:30)</a>:</h4>
+<p>(Note, "closed" and "explicitly known" aren't quite synonyms. Closed means something like it has no local constants, which isn't enough to guarantee that it evaluates to a value. E.g. <code>(λ x : ℝ, if x = 0 then 0 else 1) 0</code> is a closed <code>nat</code> that won't evaluate.)</p>
+
+<a name="159559762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159559762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159559762">Kenny Lau (Feb 27 2019 at 22:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">eval_expr</span><span class="o">,</span> <span class="n">expression</span> <span class="n">must</span> <span class="n">be</span> <span class="n">closed</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="bp">_</span><span class="n">inst</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">decidable</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">k</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">ite</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">=</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="mi">0</span> <span class="mi">1</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">true</span>
+</pre></div>
+
+<a name="159559770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset_cases%20and%20nat_cases/near/159559770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90684finsetcasesandnatcases.html#159559770">Kenny Lau (Feb 27 2019 at 22:31)</a>:</h4>
+<p><code>eval_expr</code> can tell just fine</p>
+
+
+{% endraw %}

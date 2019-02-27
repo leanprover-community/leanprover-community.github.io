@@ -1,0 +1,78 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/42735alternativetoset.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html">alternative to set</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159557268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20to%20set/near/159557268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html#159557268">Kenny Lau (Feb 27 2019 at 22:07)</a>:</h4>
+<p>I noticed that the <code>set</code> tactic doesn't interact well with <code>revert</code> (because in its core it's still a <code>let</code>, and when you revert it you see a <code>let _ := _ in</code> in the goal)</p>
+<p>and I've come up with an alternative:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">cases</span> <span class="n">this</span> <span class="k">with</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">state:</span>
+<span class="cm">n : ℕ,</span>
+<span class="cm">hn : n = 2 + 2</span>
+<span class="cm">⊢ true</span>
+<span class="cm">-/</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159557419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20to%20set/near/159557419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html#159557419">Kenny Lau (Feb 27 2019 at 22:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">cases</span> <span class="n">this</span> <span class="k">with</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">n : ℕ,</span>
+<span class="cm">hn : n = 2 + 2</span>
+<span class="cm">⊢ true</span>
+<span class="cm">-/</span>
+  <span class="n">revert</span> <span class="n">n</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">⊢ ∀ (n : ℕ), n = 2 + 2 → true</span>
+<span class="cm">-/</span>
+  <span class="n">intros</span><span class="o">,</span> <span class="n">trivial</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">set</span> <span class="n">n</span> <span class="o">:=</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="k">with</span> <span class="n">hn</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">n : ℕ := 2 + 2,</span>
+<span class="cm">hn : n = 2 + 2</span>
+<span class="cm">⊢ true</span>
+<span class="cm">-/</span>
+  <span class="n">revert</span> <span class="n">n</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">⊢ let n : ℕ := 2 + 2</span>
+<span class="cm">  in n = 2 + 2 → true</span>
+<span class="cm">-/</span>
+  <span class="n">intros</span><span class="o">,</span> <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159557992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20to%20set/near/159557992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html#159557992">Scott Morrison (Feb 27 2019 at 22:17)</a>:</h4>
+<p>Can you do this with a sigma type when the goal isn't propositional?</p>
+
+<a name="159558128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20to%20set/near/159558128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html#159558128">Kenny Lau (Feb 27 2019 at 22:19)</a>:</h4>
+<p>I'd imagine not</p>
+
+<a name="159558235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20to%20set/near/159558235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42735alternativetoset.html#159558235">Rob Lewis (Feb 27 2019 at 22:20)</a>:</h4>
+<p>Your example doesn't do the same thing. Using <code>let</code> means that the new variable is definitionally equal to the term you set it to, which is sometimes useful.</p>
+
+
+{% endraw %}

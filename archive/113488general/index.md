@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [finset_cases and nat_cases](90684finsetcasesandnatcases.html) (13 messages, latest: Feb 27 2019 at 22:31)
+
+* [alternative to set](42735alternativetoset.html) (5 messages, latest: Feb 27 2019 at 22:20)
+
 * [Apply composition](01467Applycomposition.html) (2 messages, latest: Feb 27 2019 at 09:46)
 
 * [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (89 messages, latest: Feb 27 2019 at 02:18)
