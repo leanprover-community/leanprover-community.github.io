@@ -193,5 +193,33 @@ permalink: archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159491758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159491758">Patrick Massot (Feb 27 2019 at 08:38)</a>:</h4>
 <p>Again, we should have a complete <code>nat_cases</code> tactic (and <code>int_cases</code>)</p>
 
+<a name="159496126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159496126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159496126">Scott Morrison (Feb 27 2019 at 10:03)</a>:</h4>
+<p>Okay, I've added the "missing trick" to linarith, PR to follow once I've tested a bit more.</p>
+
+<a name="159496150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159496150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159496150">Scott Morrison (Feb 27 2019 at 10:03)</a>:</h4>
+<p>I'll see if I can do something with nat_cases, too.</p>
+
+<a name="159496809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159496809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159496809">Scott Morrison (Feb 27 2019 at 10:12)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/769" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/769">https://github.com/leanprover-community/mathlib/pull/769</a></p>
+
+<a name="159498502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159498502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159498502">Sebastien Gouezel (Feb 27 2019 at 10:42)</a>:</h4>
+<p>Nice! If you're in a linarith mood, I would like to know if it is easy to add to the context used by linarith the inequalities <code>lfloor x rfloor &lt;= x</code> and <code>x &lt; lfloor x rfloor + 1</code> when <code>lfloor x rfloor</code> appears in the context (or maybe I should do the exercise myself!)</p>
+
+<a name="159499038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159499038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159499038">Scott Morrison (Feb 27 2019 at 10:51)</a>:</h4>
+<p>I'd guess this isn't too bad. (One could do max and min, too.)</p>
+
+<a name="159499104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159499104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159499104">Scott Morrison (Feb 27 2019 at 10:52)</a>:</h4>
+<p>My preference would be to basically have a preprocessing step, that inspects hypotheses for these sorts of things appearing inside linear inequalities, and add all the extra lemmas. Then we could add a parsing flag to linarith to ask it to run the preprocessor (or do it by default anyway).</p>
+
+<a name="159499132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%20allowed%20to%20know%20the%20names%20of%20any%20theorems/near/159499132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30645notallowedtoknowthenamesofanytheorems.html#159499132">Scott Morrison (Feb 27 2019 at 10:53)</a>:</h4>
+<p>I'll add it to my list (I have a whole lot of students just getting started... maybe one of them will be trying it soon) :-) I'd like to think about a nice <code>nat_cases</code> first.</p>
+
 
 {% endraw %}

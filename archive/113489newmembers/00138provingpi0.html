@@ -30,5 +30,49 @@ Would someone help me with this? Thank you.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159495865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159495865">Patrick Massot (Feb 27 2019 at 09:59)</a>:</h4>
 <p><code>apply mul_nonneg ; linarith</code></p>
 
+<a name="159495960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159495960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159495960">Mii Nguyen (Feb 27 2019 at 10:00)</a>:</h4>
+<p>what is the role of  <code>linarith</code> in this case? <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
+
+<a name="159495990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159495990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159495990">Patrick Massot (Feb 27 2019 at 10:01)</a>:</h4>
+<p>The role of <code>linarith</code> is to blast away stupid equality and inequality problems</p>
+
+<a name="159496003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159496003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159496003">Patrick Massot (Feb 27 2019 at 10:01)</a>:</h4>
+<p>But you can also be explicit of course:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pi_r_sq_pos</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span><span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span><span class="o">):</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span><span class="err">^</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">pi</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">r</span><span class="err">^</span><span class="mi">2</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">pow_nonneg</span> <span class="n">H</span> <span class="mi">2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">pi</span> <span class="bp">&gt;</span>  <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">pi_pos</span><span class="o">,</span>
+<span class="n">mul_nonneg</span> <span class="err">‹</span><span class="n">r</span><span class="err">^</span><span class="mi">2</span> <span class="bp">≥</span> <span class="mi">0</span><span class="err">›</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="err">‹</span><span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">pi</span><span class="err">›</span><span class="o">)</span>
+</pre></div>
+
+<a name="159496095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159496095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159496095">Patrick Massot (Feb 27 2019 at 10:02)</a>:</h4>
+<p>But in this case, the mathlib style is to be concise (because the result is trivial and wouldn't be even stated on paper): </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pi_r_sq_pos</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span><span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span><span class="o">):</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span><span class="err">^</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">pi</span> <span class="o">:=</span>
+<span class="n">mul_nonneg</span> <span class="o">(</span><span class="n">pow_nonneg</span> <span class="n">H</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">pi_pos</span><span class="o">)</span>
+</pre></div>
+
+<a name="159497113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159497113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159497113">Mii Nguyen (Feb 27 2019 at 10:17)</a>:</h4>
+<p>Would you explain the different of  <code>‹ ›</code> and <code>( )</code>? The first is for , say,  exact argument and the second is for function? <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
+
+<a name="159497199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159497199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159497199">Mii Nguyen (Feb 27 2019 at 10:18)</a>:</h4>
+<p>I can find the informations of it in which chapter of the book?</p>
+
+<a name="159497210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159497210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159497210">Patrick Massot (Feb 27 2019 at 10:18)</a>:</h4>
+<p><a href="https://leanprover.github.io/logic_and_proof/propositional_logic_in_lean.html#additional-syntax" target="_blank" title="https://leanprover.github.io/logic_and_proof/propositional_logic_in_lean.html#additional-syntax">https://leanprover.github.io/logic_and_proof/propositional_logic_in_lean.html#additional-syntax</a></p>
+
+<a name="159497240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159497240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159497240">Mii Nguyen (Feb 27 2019 at 10:19)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
+
+<a name="159497241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20pi%20%3E%3D%200/near/159497241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00138provingpi0.html#159497241">Patrick Massot (Feb 27 2019 at 10:19)</a>:</h4>
+<p>or <a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#more-on-the-proof-language" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#more-on-the-proof-language">https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#more-on-the-proof-language</a></p>
+
 
 {% endraw %}
