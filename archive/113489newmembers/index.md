@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (184 messages, latest: Feb 28 2019 at 19:54)
+
 * [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (17 messages, latest: Feb 28 2019 at 17:33)
 
 * [PIL state monad](02358PILstatemonad.html) (19 messages, latest: Feb 28 2019 at 15:22)
@@ -39,8 +41,6 @@ permalink: archive/113489newmembers/index.html
 * [coercion](75507coercion.html) (8 messages, latest: Feb 25 2019 at 19:40)
 
 * [rewriting at specific part](44814rewritingatspecificpart.html) (6 messages, latest: Feb 25 2019 at 11:34)
-
-* [noob question(s)](52075noobquestions.html) (180 messages, latest: Feb 25 2019 at 00:43)
 
 * [reversing `\neq`](11734reversingneq.html) (3 messages, latest: Feb 24 2019 at 08:03)
 
