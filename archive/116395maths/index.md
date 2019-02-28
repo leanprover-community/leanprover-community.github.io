@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [hensel](45920hensel.html) (1 message, latest: Feb 28 2019 at 07:12)
+
 * [Unification hints for hom](41291Unificationhintsforhom.html) (7 messages, latest: Feb 27 2019 at 16:18)
 
 * [golden ratio calculation](40872goldenratiocalculation.html) (11 messages, latest: Feb 26 2019 at 22:54)
