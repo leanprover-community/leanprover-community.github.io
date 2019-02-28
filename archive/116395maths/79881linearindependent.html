@@ -356,5 +356,34 @@ Maybe this can cheer us up a bit...</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634704">Johannes Hölzl (Feb 28 2019 at 17:41)</a>:</h4>
 <p>I had more problems with the decidability instance required for finsupp</p>
 
+<a name="159636754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159636754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159636754">Johan Commelin (Feb 28 2019 at 18:09)</a>:</h4>
+<p>I couldn't apply <code>lc.total _ _</code> to an <code>l : lc</code> in theorem statements.</p>
+
+<a name="159636763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159636763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159636763">Johan Commelin (Feb 28 2019 at 18:09)</a>:</h4>
+<p>You can see the hackery in the code dump above.</p>
+
+<a name="159636798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159636798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159636798">Johan Commelin (Feb 28 2019 at 18:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- lemma lc_dual_elem (l : lc K (module.dual K V))</span>
+<span class="c1">-- (hl : ∀ (f : module.dual K V), f ∉ h.dual → l f = 0)</span>
+<span class="c1">-- (v : V) (hv : v ∈ B) :</span>
+<span class="c1">--   l (h.dual_elem v hv) = (pairing K V).to_fun</span>
+<span class="c1">--     ((lc.total K (module.dual K V)).to_fun l) v :=</span>
+<span class="c1">-- begin</span>
+<span class="c1">--   have := lc.total_apply l,</span>
+<span class="c1">--   change ((lc.total K (module.dual K V)).to_fun l) = _ at this,</span>
+<span class="c1">--   erw this, clear this,</span>
+</pre></div>
+
+<a name="159636869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159636869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159636869">Johan Commelin (Feb 28 2019 at 18:10)</a>:</h4>
+<p>I have to write <code>((lc.total K (module.dual K V)).to_fun l</code></p>
+
+<a name="159636906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159636906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159636906">Johan Commelin (Feb 28 2019 at 18:10)</a>:</h4>
+<p>And then the first 3 lines of the proof are hackery to get <code>lc.total_apply</code> working.</p>
+
 
 {% endraw %}
