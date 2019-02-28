@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [hensel](45920hensel.html) (1 message, latest: Feb 28 2019 at 07:12)
+* [matrix](88278matrix.html) (2 messages, latest: Feb 28 2019 at 08:58)
+
+* [hensel](45920hensel.html) (4 messages, latest: Feb 28 2019 at 08:46)
 
 * [Unification hints for hom](41291Unificationhintsforhom.html) (7 messages, latest: Feb 27 2019 at 16:18)
 
