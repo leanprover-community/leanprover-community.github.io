@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [a wild `nat.add` appears](31896awildnataddappears.html) (6 messages, latest: Feb 28 2019 at 11:10)
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (35 messages, latest: Feb 28 2019 at 20:51)
+
+* [a wild `nat.add` appears](31896awildnataddappears.html) (7 messages, latest: Feb 28 2019 at 20:42)
+
+* [Lean Together 2020](04583LeanTogether2020.html) (4 messages, latest: Feb 28 2019 at 20:40)
 
 * [strict monotone maps](92538strictmonotonemaps.html) (3 messages, latest: Feb 28 2019 at 08:21)
 
@@ -157,8 +161,6 @@ permalink: archive/113488general/index.html
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
 
 * [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
-
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (6 messages, latest: Feb 13 2019 at 09:01)
 
 * [vscode snippets](92603vscodesnippets.html) (26 messages, latest: Feb 13 2019 at 07:28)
 
