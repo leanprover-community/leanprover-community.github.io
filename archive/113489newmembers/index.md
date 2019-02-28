@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (12 messages, latest: Feb 28 2019 at 16:30)
+
 * [PIL state monad](02358PILstatemonad.html) (19 messages, latest: Feb 28 2019 at 15:22)
 
 * [Curry-Howard Isomorphism](78434CurryHowardIsomorphism.html) (1 message, latest: Feb 28 2019 at 06:55)
@@ -571,8 +573,6 @@ permalink: archive/113489newmembers/index.html
 * [Why does my goal change?](34322Whydoesmygoalchange.html) (4 messages, latest: Aug 04 2018 at 11:35)
 
 * [monotonicity again](40653monotonicityagain.html) (11 messages, latest: Aug 04 2018 at 11:30)
-
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (10 messages, latest: Aug 03 2018 at 11:10)
 
 * [Error message in VS Code](85867ErrormessageinVSCode.html) (2 messages, latest: Aug 02 2018 at 11:40)
 
