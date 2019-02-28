@@ -36,5 +36,28 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20wild%20%60nat.add%60%20appears/near/159604742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31896awildnataddappears.html#159604742">Kevin Buzzard (Feb 28 2019 at 11:00)</a>:</h4>
 <p>I was getting <code>nat.less_than_or_equals_to (nat.succ ...)</code>. In my case it was because <code>cases</code> was literally using the names of the constructors rather than using our nicer variants</p>
 
+<a name="159605014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20wild%20%60nat.add%60%20appears/near/159605014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31896awildnataddappears.html#159605014">Kevin Buzzard (Feb 28 2019 at 11:04)</a>:</h4>
+<p>I realise I don't understand the <code>cases</code> tactic. It comes out nicer if you do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">list</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∈</span> <span class="n">range</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">range</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">range_core</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159605401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20wild%20%60nat.add%60%20appears/near/159605401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31896awildnataddappears.html#159605401">Gabriel Ebner (Feb 28 2019 at 11:10)</a>:</h4>
+<p>This is a result of how Lean unfolds definitions.  For example <code>2</code> is syntax for <code>bit0 1</code>, which reduces to <code>nat.add 1 1</code>, which reduces to <code>nat.succ (nat.add 1 0)</code>, and so on.  Here the unfolding happens due to unification, since <code>range</code> is defined by a pattern-match on <code>succ n</code>.  So we have to find some n such that <code>succ n = 2</code>.  And now Lean starts unfolding <code>2</code> until it sees a <code>succ</code>.</p>
+
 
 {% endraw %}

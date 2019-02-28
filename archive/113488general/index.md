@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [a wild `nat.add` appears](31896awildnataddappears.html) (4 messages, latest: Feb 28 2019 at 11:00)
+* [a wild `nat.add` appears](31896awildnataddappears.html) (6 messages, latest: Feb 28 2019 at 11:10)
 
 * [strict monotone maps](92538strictmonotonemaps.html) (3 messages, latest: Feb 28 2019 at 08:21)
 
