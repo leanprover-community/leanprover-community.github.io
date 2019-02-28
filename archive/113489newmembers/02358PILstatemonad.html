@@ -27,5 +27,178 @@ permalink: archive/113489newmembers/02358PILstatemonad.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159608182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159608182">Patrick Massot (Feb 28 2019 at 11:59)</a>:</h4>
 <p>For instance, what is the part of PIL (which is indeed outdated) that you'd like to get to work?</p>
 
+<a name="159609231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609231">Patrick Massot (Feb 28 2019 at 12:17)</a>:</h4>
+<p>I just had a quick look at section 7.3 of PIL called "The state monad" and I'm confused because it doesn't seem to use anything, it builds everything from scratch. The equivalent of the example at the end using Lean core library is:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">read_x</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">return</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">read_y</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">return</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span>
+
+
+<span class="n">def</span> <span class="n">read_z</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">return</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="n">def</span> <span class="n">write_x</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">()</span>
+
+<span class="n">def</span> <span class="n">write_y</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">()</span>
+
+<span class="n">def</span> <span class="n">write_z</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">n</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">()</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">state</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">ℕ</span><span class="o">:=</span>
+<span class="n">do</span> <span class="n">write_x</span> <span class="mi">5</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="mi">7</span><span class="o">,</span>
+   <span class="n">x</span> <span class="err">←</span> <span class="n">read_x</span><span class="o">,</span>
+   <span class="n">write_z</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">z</span> <span class="err">←</span> <span class="n">read_z</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+<a name="159609341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609341">Patrick Massot (Feb 28 2019 at 12:18)</a>:</h4>
+<p>No I'm wrong, it does hide a use of the library <code>state</code> in the middle</p>
+
+<a name="159609450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609450">Patrick Massot (Feb 28 2019 at 12:20)</a>:</h4>
+<p>Hold on, I'll update my update</p>
+
+<a name="159609502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609502">Rob Lewis (Feb 28 2019 at 12:21)</a>:</h4>
+<p>For any type <code>σ</code>, <code>state σ</code> is the state monad where the state is of type <code>σ</code>. If <code>m</code> is a monad, <code>state_t σ m</code> is the monad that augments <code>m</code> with additional state. If you define <code>my_monad := state (ℕ × ℕ × ℕ)</code>, you should either make it reducible or explicitly define the monad instance (using <code>state_t.monad</code>).</p>
+
+<a name="159609618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609618">Patrick Massot (Feb 28 2019 at 12:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">registers</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">init_reg</span> <span class="o">:</span> <span class="n">registers</span> <span class="o">:=</span> <span class="n">registers</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">reg_state</span> <span class="o">:=</span> <span class="n">state</span> <span class="n">registers</span>
+
+<span class="n">def</span> <span class="n">read_x</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">read_y</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">read_z</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">write_x</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">mk</span> <span class="n">n</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">write_y</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span> <span class="n">n</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">write_z</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span>
+
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span><span class="o">:=</span>
+<span class="n">do</span> <span class="n">write_x</span> <span class="mi">5</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="mi">7</span><span class="o">,</span>
+   <span class="n">x</span> <span class="err">←</span> <span class="n">read_x</span><span class="o">,</span>
+   <span class="n">write_z</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">z</span> <span class="err">←</span> <span class="n">read_z</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="o">(</span> <span class="n">registers</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+<a name="159609694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609694">Patrick Massot (Feb 28 2019 at 12:24)</a>:</h4>
+<p>This is the updated example. Basically <code>read</code> was renamed <code>get</code> and <code>write</code> was renamed <code>put</code></p>
+
+<a name="159609739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609739">Patrick Massot (Feb 28 2019 at 12:25)</a>:</h4>
+<p>Note that you can also replace all those explicit calls to <code>register.mk</code> by the angle bracket anonymous constructor notation</p>
+
+<a name="159609859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609859">Patrick Massot (Feb 28 2019 at 12:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">registers</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">init_reg</span> <span class="o">:</span> <span class="n">registers</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">reg_state</span> <span class="o">:=</span> <span class="n">state</span> <span class="n">registers</span>
+
+<span class="n">def</span> <span class="n">read_x</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">read_y</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">read_z</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">write_x</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">,</span> <span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">write_y</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="bp">⟨</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">registers</span><span class="bp">.</span><span class="n">z</span> <span class="n">s</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">write_z</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="bp">⟨</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">,</span> <span class="n">registers</span><span class="bp">.</span><span class="n">y</span> <span class="n">s</span><span class="o">,</span> <span class="n">n</span><span class="bp">⟩</span>
+
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="bp">ℕ</span><span class="o">:=</span>
+<span class="n">do</span> <span class="n">write_x</span> <span class="mi">5</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="mi">7</span><span class="o">,</span>
+   <span class="n">x</span> <span class="err">←</span> <span class="n">read_x</span><span class="o">,</span>
+   <span class="n">write_z</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">z</span> <span class="err">←</span> <span class="n">read_z</span><span class="o">,</span>
+   <span class="n">write_y</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">),</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">read_y</span><span class="o">,</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="n">init_reg</span>
+</pre></div>
+
+<a name="159609951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159609951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159609951">cbailey (Feb 28 2019 at 12:28)</a>:</h4>
+<p>Ah, that's a huge help, thank you. I guess 'the idiomatic way of defining a monad for (s -&gt; (a x s))' is the goal. I spent a bunch of time trying to create a state_t instance and when I eventually satisfied it, I got 'state_t is not a class' which was unfortunate.</p>
+
+<a name="159610014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159610014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159610014">cbailey (Feb 28 2019 at 12:29)</a>:</h4>
+<p>The error from the renaming of 'read' and 'get' is what originally sent me down the rabbit hole.</p>
+
+<a name="159610866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159610866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159610866">Kevin Buzzard (Feb 28 2019 at 12:44)</a>:</h4>
+<p>Yes, unfortunately Programming In Lean needs a major update so that the code actually runs in Lean 3.4.2. I would imagine that PR's fixing chunks of it would be welcome! (but I can't remember where the repo is :-/ )</p>
+
+<a name="159611116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159611116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159611116">Patrick Massot (Feb 28 2019 at 12:48)</a>:</h4>
+<p>Simon and Jerery are working on it</p>
+
+<a name="159611308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159611308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159611308">cbailey (Feb 28 2019 at 12:51)</a>:</h4>
+<p>The github page for PIL 404s and it's not listed on the lean website anymore <span aria-label="working on it" class="emoji emoji-1f6e0" role="img" title="working on it">:working_on_it:</span></p>
+
 
 {% endraw %}
