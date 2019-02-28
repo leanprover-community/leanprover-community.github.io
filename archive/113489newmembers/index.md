@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [PIL state monad](02358PILstatemonad.html) (21 messages, latest: Feb 28 2019 at 21:43)
+
+* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (18 messages, latest: Feb 28 2019 at 21:03)
+
 * [noob question(s)](52075noobquestions.html) (184 messages, latest: Feb 28 2019 at 19:54)
-
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (17 messages, latest: Feb 28 2019 at 17:33)
-
-* [PIL state monad](02358PILstatemonad.html) (19 messages, latest: Feb 28 2019 at 15:22)
 
 * [Curry-Howard Isomorphism](78434CurryHowardIsomorphism.html) (1 message, latest: Feb 28 2019 at 06:55)
 

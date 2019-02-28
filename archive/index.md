@@ -22,5 +22,7 @@ permalink: archive/index.html
 
 * [concrete semantics](187724concretesemantics/index.html) (1 topic)
 
+* [Lean for teaching](187764Leanforteaching/index.html) (1 topic)
+
 
 {% include archive_update.html %}

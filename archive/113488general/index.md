@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (35 messages, latest: Feb 28 2019 at 20:51)
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (39 messages, latest: Feb 28 2019 at 21:08)
+
+* [Lean Together 2020](04583LeanTogether2020.html) (5 messages, latest: Feb 28 2019 at 21:05)
 
 * [a wild `nat.add` appears](31896awildnataddappears.html) (7 messages, latest: Feb 28 2019 at 20:42)
-
-* [Lean Together 2020](04583LeanTogether2020.html) (4 messages, latest: Feb 28 2019 at 20:40)
 
 * [strict monotone maps](92538strictmonotonemaps.html) (3 messages, latest: Feb 28 2019 at 08:21)
 
