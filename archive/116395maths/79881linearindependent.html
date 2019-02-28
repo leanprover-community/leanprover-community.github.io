@@ -46,5 +46,258 @@ This part of the API seems to do lots of abstract stuff, but I'm missing this do
 <p>I'm feeling really miserable today. People have said that it is a sobering thought that Lean does not know complex analysis. Well, as far as I know Lean also doesn't know anything about finite-dimensional vector spaces. And that's quite depressing.<br>
 I've tried to prove that V and its dual have the same dimension, and I get stuck in a maze of complicated definitions that don't fit in my brain-RAM. It probably means that I haven't understood the API for linear maps and modules... I'm not sure if that says something about me, or about the API.</p>
 
+<a name="159623030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623030">Mario Carneiro (Feb 28 2019 at 15:24)</a>:</h4>
+<p>Do we have the dual vector space?</p>
+
+<a name="159623171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623171">Patrick Massot (Feb 28 2019 at 15:26)</a>:</h4>
+<p>If we have linear maps and the instance saying that a field is a vector space over itself then we have duals, right?</p>
+
+<a name="159623219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623219">Mario Carneiro (Feb 28 2019 at 15:27)</a>:</h4>
+<p>right. I'm trying to reconstruct the proof Johan is talking about</p>
+
+<a name="159623313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623313">Mario Carneiro (Feb 28 2019 at 15:28)</a>:</h4>
+<p>what's the basis for the dual space?</p>
+
+<a name="159623329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623329">Patrick Massot (Feb 28 2019 at 15:28)</a>:</h4>
+<p>I agree that the status of linear algebra in mathlib is much more depressing than the status of complex analysis. But we need to make choices, we can't work on everything at the same time</p>
+
+<a name="159623346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623346">Patrick Massot (Feb 28 2019 at 15:28)</a>:</h4>
+<p>If you have a basis for the original space then you get the dual basis</p>
+
+<a name="159623347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623347">Mario Carneiro (Feb 28 2019 at 15:28)</a>:</h4>
+<p>do you have to invent an inner product to define the dual basis</p>
+
+<a name="159623352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623352">Patrick Massot (Feb 28 2019 at 15:28)</a>:</h4>
+<p>no</p>
+
+<a name="159623408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623408">Patrick Massot (Feb 28 2019 at 15:29)</a>:</h4>
+<p>If the basis is (e_1, ..., e_n) then the dual basis is defined by l_i(e_j) = 1 if i =j, 0 otherwise</p>
+
+<a name="159623427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623427">Patrick Massot (Feb 28 2019 at 15:29)</a>:</h4>
+<p>You need to know that a linear map can be specified by specifying it on a basis</p>
+
+<a name="159623489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623489">Mario Carneiro (Feb 28 2019 at 15:30)</a>:</h4>
+<p>okay. We have that though</p>
+
+<a name="159623503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623503">Mario Carneiro (Feb 28 2019 at 15:30)</a>:</h4>
+<p>I think it's called <code>constr</code></p>
+
+<a name="159623527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623527">Mario Carneiro (Feb 28 2019 at 15:30)</a>:</h4>
+<p>But this isn't always a basis, right? in infinite dimensions it breaks down</p>
+
+<a name="159623582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623582">Patrick Massot (Feb 28 2019 at 15:31)</a>:</h4>
+<p>You don't talk about basis in infinite dimension, this would be a bad idea</p>
+
+<a name="159623595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623595">Mario Carneiro (Feb 28 2019 at 15:31)</a>:</h4>
+<p>So we have a <code>dual_basis</code> function that takes any basis and makes a lin ind set in the dual space</p>
+
+<a name="159623632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623632">Mario Carneiro (Feb 28 2019 at 15:31)</a>:</h4>
+<p>and if the original space is f.d then it's also a basis</p>
+
+<a name="159623681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623681">Patrick Massot (Feb 28 2019 at 15:32)</a>:</h4>
+<p>yes</p>
+
+<a name="159623791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623791">Patrick Massot (Feb 28 2019 at 15:33)</a>:</h4>
+<p>In infinite dimensions the dual tends to be bigger than the original space</p>
+
+<a name="159623804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623804">Mario Carneiro (Feb 28 2019 at 15:33)</a>:</h4>
+<p>oh right, I just remembered that I had plans to redo <code>linear_independent</code> because it uses sets instead of families</p>
+
+<a name="159623823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623823">Patrick Massot (Feb 28 2019 at 15:33)</a>:</h4>
+<p>ooh</p>
+
+<a name="159623884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623884">Patrick Massot (Feb 28 2019 at 15:34)</a>:</h4>
+<p>That would be nice</p>
+
+<a name="159623916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623916">Mario Carneiro (Feb 28 2019 at 15:34)</a>:</h4>
+<p>it's a lot more natural for everything except zorn's lemma</p>
+
+<a name="159623931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623931">Mario Carneiro (Feb 28 2019 at 15:34)</a>:</h4>
+<p>but that's just one proof</p>
+
+<a name="159623996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159623996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159623996">Patrick Massot (Feb 28 2019 at 15:35)</a>:</h4>
+<p>Let's do more elementary maths since Jeremy opened the way with calculus. But not too elementary, I just spend one hour teaching how to "prove" the equivalence of five definitions of "convex polygon", I will never ever try to Lean that "proof"</p>
+
+<a name="159624107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159624107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159624107">Patrick Massot (Feb 28 2019 at 15:36)</a>:</h4>
+<p>I makes me think we need a Johannes countdown topic. I think we are getting dangerously close, and we still don't have integrals</p>
+
+<a name="159626245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159626245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159626245">Johan Commelin (Feb 28 2019 at 15:57)</a>:</h4>
+<p>Sorry, I was away for a while, because someone entered my office. Now I need to catch a train, so I will just dump the contents of my depression in this chat:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"></span>
+<span class="cm">Copyright (c) 2019 Johan Commelin. All rights reserved.</span>
+<span class="cm">Released under Apache 2.0 license as described in the file LICENSE.</span>
+<span class="cm">Authors: Johan Commelin</span>
+<span class="cm">-/</span>
+
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">dimension</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">tensor_product</span>
+<span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">ordinal</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">module</span><span class="bp">.</span><span class="n">dual</span> <span class="o">:=</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="n">R</span>
+
+<span class="kn">open</span> <span class="n">module</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">dual</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">delta</span> <span class="n">dual</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="o">(</span><span class="n">dual</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">delta</span> <span class="n">dual</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="kn">eval</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">dual</span> <span class="n">R</span> <span class="o">(</span><span class="n">dual</span> <span class="n">R</span> <span class="n">M</span><span class="o">))</span> <span class="o">:=</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="bp">.</span><span class="n">flip</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span><span class="o">}</span>
+<span class="n">def</span> <span class="n">pairing</span> <span class="o">:</span> <span class="o">(</span><span class="n">dual</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="bp">→</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">R</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="n">R</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span> <span class="n">f</span> <span class="n">m</span>
+
+<span class="kn">end</span>
+
+<span class="kn">namespace</span> <span class="n">is_basis</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">K</span> <span class="n">V</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_basis</span> <span class="n">K</span> <span class="n">B</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">h</span>
+<span class="kn">open</span> <span class="n">vector_space</span> <span class="n">module</span> <span class="n">submodule</span> <span class="n">linear_map</span> <span class="n">cardinal</span>
+
+<span class="n">def</span> <span class="n">dual</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">module</span><span class="bp">.</span><span class="n">dual</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">K</span><span class="o">]</span> <span class="n">K</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">f</span> <span class="n">v</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">w</span> <span class="err">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">w</span> <span class="bp">≠</span> <span class="n">v</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">w</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">dual_elem</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">module</span><span class="bp">.</span><span class="n">dual</span> <span class="n">K</span> <span class="n">V</span> <span class="o">:=</span>
+<span class="n">h</span><span class="bp">.</span><span class="n">constr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">w</span><span class="o">,</span> <span class="k">if</span> <span class="n">w</span> <span class="bp">=</span> <span class="n">v</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="kn">lemma</span> <span class="n">dual_elem_mem</span> <span class="o">(</span><span class="n">v</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual_elem</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="o">[</span><span class="n">v</span><span class="o">,</span><span class="n">H</span><span class="o">],</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">erw</span> <span class="o">[</span><span class="n">constr_basis</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span> <span class="bp">*</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">mem_dual_iff</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">module</span><span class="bp">.</span><span class="n">dual</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="err">∈</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual_elem</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">H</span><span class="bp">;</span> <span class="n">rcases</span> <span class="n">H</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">hv</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">use</span> <span class="o">[</span><span class="n">v</span><span class="o">,</span><span class="n">hv</span><span class="o">],</span>
+    <span class="n">apply</span> <span class="n">h</span><span class="bp">.</span><span class="n">ext</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">w</span> <span class="n">hw</span><span class="o">,</span>
+    <span class="n">erw</span> <span class="o">[</span><span class="n">constr_basis</span> <span class="bp">_</span> <span class="n">hw</span><span class="o">],</span>
+    <span class="n">split_ifs</span> <span class="k">with</span> <span class="n">hwv</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="n">hwv</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">w</span> <span class="n">hw</span> <span class="n">hwv</span><span class="o">,</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">H</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual_elem_mem</span> <span class="n">v</span> <span class="n">hv</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">dual_elem_eq_repr</span> <span class="o">(</span><span class="n">v</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">pairing</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">dual_elem</span> <span class="n">v</span><span class="o">)</span> <span class="n">w</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">.</span><span class="n">repr</span> <span class="n">w</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="bp">_</span>
+
+<span class="n">def</span> <span class="n">to_dual</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">K</span><span class="o">]</span> <span class="n">module</span><span class="bp">.</span><span class="n">dual</span> <span class="n">K</span> <span class="n">V</span> <span class="o">:=</span>
+<span class="n">h</span><span class="bp">.</span><span class="n">constr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">dual_elem</span> <span class="n">v</span>
+
+<span class="kn">lemma</span> <span class="n">to_dual_ker</span> <span class="o">:</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_dual</span><span class="bp">.</span><span class="n">ker</span> <span class="bp">=</span> <span class="err">⊥</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">v</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mem_ker</span><span class="o">,</span> <span class="n">mem_bot</span><span class="o">],</span>
+    <span class="n">intro</span> <span class="n">hv</span><span class="o">,</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">mem_bot</span><span class="o">,</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="c1">-- lemma lc_dual_elem (l : lc K (module.dual K V))</span>
+<span class="c1">-- (hl : ∀ (f : module.dual K V), f ∉ h.dual → l f = 0)</span>
+<span class="c1">-- (v : V) (hv : v ∈ B) :</span>
+<span class="c1">--   l (h.dual_elem v hv) = (pairing K V).to_fun</span>
+<span class="c1">--     ((lc.total K (module.dual K V)).to_fun l) v :=</span>
+<span class="c1">-- begin</span>
+<span class="c1">--   have := lc.total_apply l,</span>
+<span class="c1">--   change ((lc.total K (module.dual K V)).to_fun l) = _ at this,</span>
+<span class="c1">--   erw this, clear this,</span>
+<span class="c1">--   erw finsupp.apply_sum,</span>
+<span class="c1">--   revert hl,</span>
+<span class="c1">--   apply finsupp.induction l,</span>
+<span class="c1">--   { intro hl,</span>
+<span class="c1">--     rw [finsupp.zero_apply, finsupp.sum_zero_index],</span>
+<span class="c1">--     symmetry,</span>
+<span class="c1">--     apply zero_apply v, },</span>
+<span class="c1">--   { intros f k l&#39; _ _ IH hl&#39;,</span>
+<span class="c1">--     rw [finsupp.add_apply, IH, finsupp.sum_add_index,</span>
+<span class="c1">--         finsupp.sum_single_index],</span>
+<span class="c1">--     { congr&#39; 1,</span>
+<span class="c1">--       by_cases H : f ∈ h.dual,</span>
+<span class="c1">--         { rw [finsupp.single_apply, smul_apply],</span>
+<span class="c1">--           split_ifs with hf,</span>
+<span class="c1">--           { rw [hf, dual_elem, constr_basis _ hv], simp, },</span>
+<span class="c1">--           sorry },</span>
+<span class="c1">--         {  }</span>
+<span class="c1">--        } } }</span>
+<span class="c1">-- end</span>
+
+<span class="kn">lemma</span> <span class="n">dual_is_basis</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_basis</span> <span class="n">K</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">hfin</span> <span class="o">:</span> <span class="n">dim</span> <span class="n">K</span> <span class="n">V</span> <span class="bp">&lt;</span> <span class="n">omega</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_basis</span> <span class="n">K</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">dual</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="c1">-- { rw [linear_independent_iff],</span>
+  <span class="c1">--   intros l hl H,</span>
+  <span class="c1">--   ext f,</span>
+  <span class="c1">--   by_cases hf : f ∈ h.dual,</span>
+  <span class="c1">--   { rw lc.total_apply at H,</span>
+  <span class="c1">--     rw mem_dual_iff at hf,</span>
+  <span class="c1">--     rcases hf with ⟨v, hv, hf⟩,</span>
+  <span class="c1">--     rw hf,</span>
+  <span class="c1">--     sorry },</span>
+  <span class="c1">--   { rw [lc.mem_supported&#39;] at hl,</span>
+  <span class="c1">--     apply hl f hf, } },</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+
+      <span class="n">sorry</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">is_basis</span>
+
+<span class="kn">lemma</span> <span class="n">eval_ker</span> <span class="o">:</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">K</span> <span class="n">V</span><span class="o">)</span><span class="bp">.</span><span class="n">ker</span> <span class="bp">=</span> <span class="err">⊥</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mem_ker</span><span class="o">,</span> <span class="n">mem_bot</span><span class="o">],</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">mem_bot</span><span class="o">,</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}

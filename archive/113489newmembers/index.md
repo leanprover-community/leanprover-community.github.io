@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [PIL state monad](02358PILstatemonad.html) (17 messages, latest: Feb 28 2019 at 12:51)
+* [PIL state monad](02358PILstatemonad.html) (19 messages, latest: Feb 28 2019 at 15:22)
 
 * [Curry-Howard Isomorphism](78434CurryHowardIsomorphism.html) (1 message, latest: Feb 28 2019 at 06:55)
 
