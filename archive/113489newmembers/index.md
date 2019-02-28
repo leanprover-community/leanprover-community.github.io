@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (12 messages, latest: Feb 28 2019 at 16:30)
+* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (17 messages, latest: Feb 28 2019 at 17:33)
 
 * [PIL state monad](02358PILstatemonad.html) (19 messages, latest: Feb 28 2019 at 15:22)
 

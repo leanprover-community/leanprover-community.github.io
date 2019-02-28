@@ -316,5 +316,45 @@ Maybe this can cheer us up a bit...</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159630333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159630333">Mario Carneiro (Feb 28 2019 at 16:44)</a>:</h4>
 <p>BTW I think that XKCD is a great example of why decidability matters in mathematics</p>
 
+<a name="159632123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159632123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159632123">Kevin Buzzard (Feb 28 2019 at 17:07)</a>:</h4>
+<p>Differentiation is a science, integration is an art.</p>
+
+<a name="159634187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634187">Johannes Hölzl (Feb 28 2019 at 17:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> I'm currently preparing a push for the vector space structure of the function space and for finsupp: <a href="https://github.com/johoelzl/mathlib/commits/master" target="_blank" title="https://github.com/johoelzl/mathlib/commits/master">https://github.com/johoelzl/mathlib/commits/master</a> (specially <a href="https://github.com/johoelzl/mathlib/commit/c83c049126030c524cf63e70273635b5d9f26476" target="_blank" title="https://github.com/johoelzl/mathlib/commit/c83c049126030c524cf63e70273635b5d9f26476">https://github.com/johoelzl/mathlib/commit/c83c049126030c524cf63e70273635b5d9f26476</a> and <a href="https://github.com/johoelzl/mathlib/commit/592e3c7a2dfbd5826919b4605559d35d4d75938f" target="_blank" title="https://github.com/johoelzl/mathlib/commit/592e3c7a2dfbd5826919b4605559d35d4d75938f">https://github.com/johoelzl/mathlib/commit/592e3c7a2dfbd5826919b4605559d35d4d75938f</a>)</p>
+
+<a name="159634277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634277">Johannes Hölzl (Feb 28 2019 at 17:34)</a>:</h4>
+<p>I don't know if any of this material might help for your proof</p>
+
+<a name="159634457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634457">Johannes Hölzl (Feb 28 2019 at 17:37)</a>:</h4>
+<p>Instead of defining <code>is_basis.dual</code> directly, it might be easier to use the image of <code>dual_elem</code></p>
+
+<a name="159634522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634522">Johan Commelin (Feb 28 2019 at 17:38)</a>:</h4>
+<p>Hmm, I don't think that's where the problems are... the <code>iff</code> that I prove afterwards let's you move between the two.</p>
+
+<a name="159634523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634523">Johannes Hölzl (Feb 28 2019 at 17:38)</a>:</h4>
+<p>Ah, that's what <code>mem_dual</code> is for</p>
+
+<a name="159634572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634572">Johan Commelin (Feb 28 2019 at 17:39)</a>:</h4>
+<p>It's just that I'm running into many type class errors because it doesn't know how to coerce a linear map into a function. And then I manually add <code>.to_fun</code> and it typechecks, but then all sorts of <code>rw</code> and <code>simp</code> don't trigger. And it's just a pain.</p>
+
+<a name="159634646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634646">Johan Commelin (Feb 28 2019 at 17:40)</a>:</h4>
+<p>It also made me a bit worried about if bundling + coercions is a good idea...</p>
+
+<a name="159634670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634670">Johannes Hölzl (Feb 28 2019 at 17:40)</a>:</h4>
+<p>the coercion into functions worked quiet well for me</p>
+
+<a name="159634704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent/near/159634704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79881linearindependent.html#159634704">Johannes Hölzl (Feb 28 2019 at 17:41)</a>:</h4>
+<p>I had more problems with the decidability instance required for finsupp</p>
+
 
 {% endraw %}
