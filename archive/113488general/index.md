@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [popular tactics](67631populartactics.html) (2 messages, latest: Mar 01 2019 at 19:52)
+* [popular tactics](67631populartactics.html) (7 messages, latest: Mar 01 2019 at 20:13)
 
 * [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
 

@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Unification hints for hom](41291Unificationhintsforhom.html) (10 messages, latest: Mar 01 2019 at 21:00)
+
+* [ring confusion](48581ringconfusion.html) (7 messages, latest: Mar 01 2019 at 20:53)
+
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (94 messages, latest: Mar 01 2019 at 15:51)
-
-* [Unification hints for hom](41291Unificationhintsforhom.html) (8 messages, latest: Mar 01 2019 at 14:41)
-
-* [ring confusion](48581ringconfusion.html) (3 messages, latest: Mar 01 2019 at 13:05)
 
 * [linear_independent](79881linearindependent.html) (53 messages, latest: Feb 28 2019 at 18:10)
 
