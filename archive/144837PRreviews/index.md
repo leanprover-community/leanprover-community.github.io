@@ -10,7 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#774 Chinese Remainder Theorem](32752774ChineseRemainderTheorem.html) (39 messages, latest: Mar 01 2019 at 09:52)
+* [#773 Prime Avoidance](57708773PrimeAvoidance.html) (1 message, latest: Mar 01 2019 at 10:01)
+
+* [#774 Chinese Remainder Theorem](32752774ChineseRemainderTheorem.html) (40 messages, latest: Mar 01 2019 at 10:00)
 
 * [#775](33191775.html) (6 messages, latest: Feb 28 2019 at 15:18)
 
