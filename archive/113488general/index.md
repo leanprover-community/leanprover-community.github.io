@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
+
 * [normalise subtype.val and coe](33650normalisesubtypevalandcoe.html) (3 messages, latest: Mar 01 2019 at 09:55)
 
 * [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (3 messages, latest: Mar 01 2019 at 07:26)
@@ -289,8 +291,6 @@ permalink: archive/113488general/index.html
 * [Dependent types](51149Dependenttypes.html) (12 messages, latest: Jan 31 2019 at 20:09)
 
 * [IMPORTANT NOTICE: github and mathlib](47634IMPORTANTNOTICEgithubandmathlib.html) (78 messages, latest: Jan 31 2019 at 19:36)
-
-* [stats](32112stats.html) (12 messages, latest: Jan 31 2019 at 19:22)
 
 * [documentation view](40246documentationview.html) (26 messages, latest: Jan 31 2019 at 11:46)
 

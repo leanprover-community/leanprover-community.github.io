@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Unification hints for hom](41291Unificationhintsforhom.html) (8 messages, latest: Mar 01 2019 at 14:41)
+
 * [ring confusion](48581ringconfusion.html) (3 messages, latest: Mar 01 2019 at 13:05)
 
 * [linear_independent](79881linearindependent.html) (53 messages, latest: Feb 28 2019 at 18:10)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [hensel](45920hensel.html) (5 messages, latest: Feb 28 2019 at 15:06)
 
 * [matrix](88278matrix.html) (2 messages, latest: Feb 28 2019 at 08:58)
-
-* [Unification hints for hom](41291Unificationhintsforhom.html) (7 messages, latest: Feb 27 2019 at 16:18)
 
 * [golden ratio calculation](40872goldenratiocalculation.html) (11 messages, latest: Feb 26 2019 at 22:54)
 

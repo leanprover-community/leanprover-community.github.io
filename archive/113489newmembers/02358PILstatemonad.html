@@ -246,5 +246,16 @@ permalink: archive/113489newmembers/02358PILstatemonad.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159704392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159704392">Rob Lewis (Mar 01 2019 at 11:46)</a>:</h4>
 <p>Yes, <code>#reduce</code> means kernel normalization. Chars (and thus strings) include proofs of inequalities over <code>nat</code>, reducing them produces huge proof terms. You should use <code>#eval</code> instead (and you'll need to make a <code>has_repr</code> instance for <code>registers</code>).</p>
 
+<a name="159720169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159720169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159720169">cbailey (Mar 01 2019 at 14:55)</a>:</h4>
+<p>I see, thank you. Is that because of the field on character structs showing that their value is in the correct character id range? I still had quite a struggle getting it to work; I had to import <a href="http://system.io" target="_blank" title="http://system.io">system.io</a> and define a reader from id (string × registers) to io unit to finally get #eval to display it properly. </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rho</span> <span class="o">:</span> <span class="o">(</span><span class="n">string</span> <span class="bp">×</span> <span class="n">registers</span><span class="o">)</span> <span class="bp">→</span> <span class="n">io</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">put_str</span> <span class="o">(</span><span class="n">repr</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">reg_reader</span> <span class="o">:=</span> <span class="n">reader_t</span><span class="bp">.</span><span class="n">mk</span> <span class="n">rho</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">reg_reader</span><span class="bp">.</span><span class="n">run</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="n">init_reg</span><span class="o">))</span>
+</pre></div>
+
 
 {% endraw %}
