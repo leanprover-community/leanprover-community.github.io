@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ring confusion](48581ringconfusion.html) (1 message, latest: Mar 01 2019 at 12:19)
+* [ring confusion](48581ringconfusion.html) (3 messages, latest: Mar 01 2019 at 13:05)
 
 * [linear_independent](79881linearindependent.html) (53 messages, latest: Feb 28 2019 at 18:10)
 
