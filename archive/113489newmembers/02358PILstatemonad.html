@@ -220,5 +220,31 @@ permalink: archive/113489newmembers/02358PILstatemonad.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159687305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159687305">cbailey (Mar 01 2019 at 08:17)</a>:</h4>
 <p><span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span>  <a href="https://github.com/avigad/programming_in_lean/pull/1#issue-257237337" target="_blank" title="https://github.com/avigad/programming_in_lean/pull/1#issue-257237337">https://github.com/avigad/programming_in_lean/pull/1#issue-257237337</a></p>
 
+<a name="159700829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159700829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159700829">cbailey (Mar 01 2019 at 11:02)</a>:</h4>
+<p>Sorry to resurrect this, but is there any particular reason why the registers example fails to evaluate when nat is replaced with string or char? Reduced example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">registers</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">init_reg</span> <span class="o">:</span> <span class="n">registers</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="s2">&quot;a&quot;</span><span class="o">,</span> <span class="s2">&quot;b&quot;</span><span class="o">,</span> <span class="s2">&quot;c&quot;</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">reg_state</span> <span class="o">:=</span> <span class="n">state</span> <span class="n">registers</span>
+
+<span class="n">def</span> <span class="n">read_x</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">string</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">string</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">read_x</span><span class="o">,</span>
+       <span class="n">return</span> <span class="n">s</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="n">init_reg</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">excessive memory consumption detected at &#39;replace&#39; (potential solution: increase memory consumption threshold)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="159704392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159704392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159704392">Rob Lewis (Mar 01 2019 at 11:46)</a>:</h4>
+<p>Yes, <code>#reduce</code> means kernel normalization. Chars (and thus strings) include proofs of inequalities over <code>nat</code>, reducing them produces huge proof terms. You should use <code>#eval</code> instead (and you'll need to make a <code>has_repr</code> instance for <code>registers</code>).</p>
+
 
 {% endraw %}
