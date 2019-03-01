@@ -1,0 +1,41 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75556deterministictimeoutwithidealquotientmk.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75556deterministictimeoutwithidealquotientmk.html">deterministic timeout with ideal.quotient.mk</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159684489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20timeout%20with%20ideal.quotient.mk/near/159684489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75556deterministictimeoutwithidealquotientmk.html#159684489">Aditya Agarwal (Mar 01 2019 at 07:20)</a>:</h4>
+<p>I am getting a deterministic timeout when I try to state <code>ideal.quotient.mk (ideal.span (singleton (C r))) p = 0</code> in the context of an integral domain. <br>
+<span class="user-mention" data-user-id="110087">@Scott Morrison</span> has constructed a minimal example here : <a href="https://github.com/chocolatier/theoremproving/blob/master/src/timeout-mwe.lean" target="_blank" title="https://github.com/chocolatier/theoremproving/blob/master/src/timeout-mwe.lean">https://github.com/chocolatier/theoremproving/blob/master/src/timeout-mwe.lean</a> , And done some debugging work. </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">timeout</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">singleton</span> <span class="o">(</span><span class="n">C</span> <span class="n">r</span><span class="o">)))</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>times out, but  replacing <code>integral_domain α</code>with <code>comm_ring α</code>makes it work. Setting <code>trace.class_instances true</code> shows that the type class resolution is going crazy in the integral domain case.</p>
+<p>Specifically, it is trying to find an instance of <code>has_zero</code> but it gets stuck in the path that searches for <code>@no_zero_divisors.to_has_zero</code>, and never tries any other branch. </p>
+<p>I'm not sure why this is happening or how to fix it.</p>
+
+<a name="159684512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20timeout%20with%20ideal.quotient.mk/near/159684512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75556deterministictimeoutwithidealquotientmk.html#159684512">Mario Carneiro (Mar 01 2019 at 07:21)</a>:</h4>
+<p>did you try increasing the instance depth?</p>
+
+<a name="159684740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20timeout%20with%20ideal.quotient.mk/near/159684740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75556deterministictimeoutwithidealquotientmk.html#159684740">Aditya Agarwal (Mar 01 2019 at 07:26)</a>:</h4>
+<p>I've tried </p>
+<div class="codehilite"><pre><span></span>set_option class.instance_max_depth 1000000
+</pre></div>
+
+
+<p>but it still times out.</p>
+
+
+{% endraw %}
