@@ -257,5 +257,33 @@ permalink: archive/113489newmembers/02358PILstatemonad.html
 <span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">reg_reader</span><span class="bp">.</span><span class="n">run</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="n">init_reg</span><span class="o">))</span>
 </pre></div>
 
+<a name="159723456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159723456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159723456">Rob Lewis (Mar 01 2019 at 15:33)</a>:</h4>
+<p>Yes, that's why. If you reduce <code>char.val a</code>, you're asking Lean to normalize a proof that <code>97 &lt; 55296</code>, which is approximately 55200 nested applications.</p>
+
+<a name="159723567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/PIL%20state%20monad/near/159723567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02358PILstatemonad.html#159723567">Rob Lewis (Mar 01 2019 at 15:34)</a>:</h4>
+<p>There's definitely no need to touch io. In this case, there's an annoying hiccup with <code>id</code> not reducing, but it's not bad.</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">registers</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">registers</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">r</span><span class="o">,</span> <span class="s2">&quot;⟨&quot;</span> <span class="bp">++</span> <span class="n">r</span><span class="bp">.</span><span class="n">x</span> <span class="bp">++</span> <span class="s2">&quot;, &quot;</span> <span class="bp">++</span> <span class="n">r</span><span class="bp">.</span><span class="n">y</span> <span class="bp">++</span> <span class="s2">&quot;, &quot;</span> <span class="bp">++</span> <span class="n">r</span><span class="bp">.</span><span class="n">z</span> <span class="bp">++</span> <span class="s2">&quot;⟩&quot;</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_repr</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="o">(</span><span class="n">id</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">init_reg</span> <span class="o">:</span> <span class="n">registers</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="s2">&quot;a&quot;</span><span class="o">,</span> <span class="s2">&quot;b&quot;</span><span class="o">,</span> <span class="s2">&quot;c&quot;</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">reg_state</span> <span class="o">:=</span> <span class="n">state</span> <span class="n">registers</span>
+
+<span class="n">def</span> <span class="n">read_x</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">string</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">registers</span><span class="bp">.</span><span class="n">x</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">reg_state</span> <span class="n">string</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">read_x</span><span class="o">,</span>
+       <span class="n">return</span> <span class="n">s</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foo</span><span class="bp">.</span><span class="n">run</span> <span class="n">init_reg</span>
+</pre></div>
+
 
 {% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (94 messages, latest: Mar 01 2019 at 15:51)
+
 * [Unification hints for hom](41291Unificationhintsforhom.html) (8 messages, latest: Mar 01 2019 at 14:41)
 
 * [ring confusion](48581ringconfusion.html) (3 messages, latest: Mar 01 2019 at 13:05)
@@ -39,8 +41,6 @@ permalink: archive/116395maths/index.html
 * [metric space competion](38847metricspacecompetion.html) (6 messages, latest: Feb 21 2019 at 08:24)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (13 messages, latest: Feb 19 2019 at 07:45)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (93 messages, latest: Feb 16 2019 at 21:43)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2781 messages, latest: Feb 15 2019 at 20:35)
 
