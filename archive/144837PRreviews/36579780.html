@@ -15,5 +15,81 @@ permalink: archive/144837PRreviews/36579780.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159701839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159701839">Johan Commelin (Mar 01 2019 at 11:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Does it make sense to summarise in mathematical terms what is in this PR? It is really massive, and that makes it hard to review. I think we were just getting used to the idea of bite-sized PRs <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
 
+<a name="159705797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159705797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159705797">Johannes Hölzl (Mar 01 2019 at 12:03)</a>:</h4>
+<p>Yes, I also prefer smaller sides PRs. But many things are just some small additions and I didn't want to flood the PRs with 20 PRs</p>
+
+<a name="159705876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159705876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159705876">Johannes Hölzl (Mar 01 2019 at 12:04)</a>:</h4>
+<p>The description is intended to be in mathematical terms. What is hard to understand/interpret?</p>
+
+<a name="159705928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159705928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159705928">Johan Commelin (Mar 01 2019 at 12:05)</a>:</h4>
+<p>Well, I would say that the big picture is hard to understand. You say that this came up in Ellenberg--Gijswijt. But maybe you can elaborate a bit.</p>
+
+<a name="159706211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159706211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159706211">Johannes Hölzl (Mar 01 2019 at 12:08)</a>:</h4>
+<p>The big picture is that we need multivariate polynomials and finsupp functions, mostly over a finite range type. This adds a lot of various stuff in this direction. As I understand the central stuff is actually in <code>field_theory.mv_polynomial</code> which tells us that a function <code>F^n -&gt; F</code> (where <code>F</code> is a finite field) can be represented as a multivariate polynomial. Where the degree can be restricted.</p>
+
+<a name="159708679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708679">Johan Commelin (Mar 01 2019 at 12:43)</a>:</h4>
+<p>Ok, so I guess <a href="https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R123" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R123">https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R123</a> is the meat of this proof.</p>
+
+<a name="159708795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708795">Johan Commelin (Mar 01 2019 at 12:44)</a>:</h4>
+<p>So, here is a naive question. I feel like this proof is becoming less readable and more complicated because of all the cardinals and <code>quotient.sound</code>s flying around. For finite dimensional vector spaces this shouldn't be necessary...</p>
+
+<a name="159708853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708853">Johan Commelin (Mar 01 2019 at 12:45)</a>:</h4>
+<p>Especially the last couple of steps: <a href="https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R136" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R136">https://github.com/leanprover-community/mathlib/pull/780/files#diff-8b5ff57d0f7dff3e4622c6ea1ac6a461R136</a> ought to be really straightforward.</p>
+
+<a name="159708855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708855">Johannes Hölzl (Mar 01 2019 at 12:45)</a>:</h4>
+<p>Its not necessary, but writing the intermediate state is easier with writing down the types or sets and not as finset / finstype</p>
+
+<a name="159708875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708875">Johan Commelin (Mar 01 2019 at 12:45)</a>:</h4>
+<p>Hmmm, ok. It's a pity because it is obfuscating the ideas.</p>
+
+<a name="159708932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708932">Johannes Hölzl (Mar 01 2019 at 12:46)</a>:</h4>
+<p>how would your proof look like?</p>
+
+<a name="159708966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159708966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159708966">Johannes Hölzl (Mar 01 2019 at 12:47)</a>:</h4>
+<p>we can add a separate lemma to replace <code>quotient.sound</code>, but I think working with cardinals is easier than with <code>finset</code> (at least in this case)</p>
+
+<a name="159709370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709370">Johan Commelin (Mar 01 2019 at 12:52)</a>:</h4>
+<p>You see... I never work with cardinals... that's why I find this obfuscated (-;</p>
+
+<a name="159709402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709402">Johan Commelin (Mar 01 2019 at 12:53)</a>:</h4>
+<p>The structure of my proof would be the same. But I would be using the fact that two fintypes have the same cardinality if there is an equivalence between them.</p>
+
+<a name="159709418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709418">Johan Commelin (Mar 01 2019 at 12:53)</a>:</h4>
+<p>That's also what you are using, but you wrap it in a <code>quotient.sound</code>.</p>
+
+<a name="159709506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709506">Johan Commelin (Mar 01 2019 at 12:54)</a>:</h4>
+<p>As a mathematician I would never expect to see those words in that proof. It feels a bit as if some sort of API about cardinals is leaking through.</p>
+
+<a name="159709554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709554">Johan Commelin (Mar 01 2019 at 12:54)</a>:</h4>
+<p>I guess if there was a wrapper function <code>cardinal.eq_of_equiv</code> around <code>quotient.sound</code> then it would already feel less intimidating to me.</p>
+
+<a name="159709590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709590">Johan Commelin (Mar 01 2019 at 12:55)</a>:</h4>
+<p>Anyway, I'm fussing about nothing. Unless this is part of the code of the Ellenberg-Gijswijt project that you intend to show to other mathematicians.</p>
+
+<a name="159709599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709599">Johan Commelin (Mar 01 2019 at 12:55)</a>:</h4>
+<p>Then it should really get some polishing.</p>
+
+<a name="159709704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23780/near/159709704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/36579780.html#159709704">Johan Commelin (Mar 01 2019 at 12:56)</a>:</h4>
+<p>Oh, by the way: I should also congratulate you with finishing all this stuff. Because there is quite some non-trivial things in this PR. <span aria-label="thumbs up" class="emoji emoji-1f44d" role="img" title="thumbs up">:thumbs_up:</span> <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span></p>
+
 
 {% endraw %}
