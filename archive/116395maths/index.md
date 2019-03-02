@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ring confusion](48581ringconfusion.html) (9 messages, latest: Mar 01 2019 at 21:07)
+* [Unification hints for hom](41291Unificationhintsforhom.html) (12 messages, latest: Mar 02 2019 at 10:09)
 
-* [Unification hints for hom](41291Unificationhintsforhom.html) (11 messages, latest: Mar 01 2019 at 21:02)
+* [ring confusion](48581ringconfusion.html) (9 messages, latest: Mar 01 2019 at 21:07)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (94 messages, latest: Mar 01 2019 at 15:51)
 
