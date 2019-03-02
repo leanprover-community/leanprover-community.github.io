@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2782 messages, latest: Mar 02 2019 at 17:54)
+
 * [one_iff_ker_inv](52996oneiffkerinv.html) (2 messages, latest: Mar 02 2019 at 14:08)
 
 * [ring hom -> unit group hom?](39696ringhomunitgrouphom.html) (13 messages, latest: Mar 02 2019 at 13:30)
@@ -45,8 +47,6 @@ permalink: archive/116395maths/index.html
 * [metric space competion](38847metricspacecompetion.html) (6 messages, latest: Feb 21 2019 at 08:24)
 
 * [Teaching with Lean](76352TeachingwithLean.html) (13 messages, latest: Feb 19 2019 at 07:45)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2781 messages, latest: Feb 15 2019 at 20:35)
 
 * [free module](95273freemodule.html) (468 messages, latest: Feb 14 2019 at 17:16)
 
