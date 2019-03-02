@@ -1111,5 +1111,40 @@ For a more concrete example which is close to what I'm doing, say I define a lis
 
 <p>?</p>
 
+<a name="159798929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159798929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159798929">Wojciech Nawrocki (Mar 02 2019 at 14:09)</a>:</h4>
+<p>The problem is that I couldn't redefine <code>add_one</code> like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">add_one&#39;</span><span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">foo</span>
+<span class="c">/-</span><span class="cm"> induction tactic failed, recursor &#39;is_foo.dcases_on&#39; can only eliminate into Prop -/</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Id</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Id</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">hf&#39;</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="o">(</span><span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">hf&#39;</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>And in general any definition which tries to extract an inner <code>foo_fn</code> out of an <code>is_foo</code> constructor will fail, but I need to do that sometimes in order to transform the <code>foo_fn</code>. So far the <code>inductive foo': foo_fn -&gt; Type</code> definition seems to work well though.</p>
+
+<a name="159799119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159799119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159799119">Kevin Buzzard (Mar 02 2019 at 14:15)</a>:</h4>
+<p>Aah I see; the recursor for <code>is_foo</code> only eliminates into <code>Prop</code>. Yeah you need an expert, not a mathematician :-)</p>
+
+<a name="159799673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159799673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159799673">Chris Hughes (Mar 02 2019 at 14:26)</a>:</h4>
+<p>The reason this isn't possible in general, is that by proof irrelevance <code>is_foo.Id = is_foo.rec _</code> if the proofs have the same type, so I cannot define functions that treat these two cases differently.</p>
+<p>Since both cases are equal in your function, you can write</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">add_one&#39;</span><span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">foo</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Id</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hf&#39;</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="o">(</span><span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">hf&#39;</span><span class="o">))</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="159799742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159799742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159799742">Chris Hughes (Mar 02 2019 at 14:28)</a>:</h4>
+<p>Usually this form is preferred however</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">add_one&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">:=</span>
+ <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Id</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hf&#39;</span><span class="o">,</span> <span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="o">(</span><span class="n">is_foo</span><span class="bp">.</span><span class="n">Rec</span> <span class="n">hf&#39;</span><span class="o">))</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="159799766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159799766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159799766">Chris Hughes (Mar 02 2019 at 14:30)</a>:</h4>
+<p>The second <code>add_one'</code> will definitionally reduce in a nice way when applied to an argument <code>f : foo</code>, wherease the first definition will only reduce when applied to an argument of the form <code>⟨f, h⟩ : foo</code>. This makes the first definition harder to work with in proofs.</p>
+
 
 {% endraw %}

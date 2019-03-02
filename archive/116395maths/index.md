@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [one_iff_ker_inv](52996oneiffkerinv.html) (2 messages, latest: Mar 02 2019 at 14:08)
+
 * [ring hom -> unit group hom?](39696ringhomunitgrouphom.html) (13 messages, latest: Mar 02 2019 at 13:30)
 
 * [Unification hints for hom](41291Unificationhintsforhom.html) (12 messages, latest: Mar 02 2019 at 10:09)
