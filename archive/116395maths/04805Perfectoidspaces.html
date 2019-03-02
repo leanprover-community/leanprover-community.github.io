@@ -12812,5 +12812,310 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159807884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159807884">Johan Commelin (Mar 02 2019 at 17:54)</a>:</h4>
 <p>Ok, getting back to this stuff with equality and equiv's. Suppose I have a type <code>X</code> and a function <code>f : X → Type u</code>. And suppose I have two terms <code>x y : X</code>, and a proof <code>h : x = y</code>. Do I understand correctly that it is now evil to apply <code>congr_arg f h</code> to conclude that <code>f x = f y</code>?</p>
 
+<a name="159808130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808130">Mario Carneiro (Mar 02 2019 at 18:01)</a>:</h4>
+<p>better question: what do you intend to do with this equality?</p>
+
+<a name="159808136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808136">Johan Commelin (Mar 02 2019 at 18:01)</a>:</h4>
+<p>For the moment I think I would mostly don't do anything and just be comforted by it</p>
+
+<a name="159808178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808178">Mario Carneiro (Mar 02 2019 at 18:02)</a>:</h4>
+<p>there are lots of ways to express "equality of types", and <code>=</code> is rarely the right one</p>
+
+<a name="159808183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808183">Mario Carneiro (Mar 02 2019 at 18:02)</a>:</h4>
+<p>the answer depends on what <code>f</code> is</p>
+
+<a name="159808269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808269">Kevin Buzzard (Mar 02 2019 at 18:05)</a>:</h4>
+<p>Which other ones can you <code>rw</code> with?</p>
+
+<a name="159808314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808314">Kevin Buzzard (Mar 02 2019 at 18:06)</a>:</h4>
+<p>Did you see the local ring question? Prove that if R is a local ring and S is isomorphic to R then S is a local ring.</p>
+
+<a name="159808373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808373">Kevin Buzzard (Mar 02 2019 at 18:08)</a>:</h4>
+<p>Proof: the lattice of ideals for R and S are isomorphic.</p>
+
+<a name="159808396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808396">Johan Commelin (Mar 02 2019 at 18:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Suppose I have <code>f : Y → X</code>. Then I would really like the fibre of a point in <code>x</code> to be <em>unique</em>. So if <code>x = y</code>, then they have the same fibre.</p>
+
+<a name="159808399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808399">Mario Carneiro (Mar 02 2019 at 18:10)</a>:</h4>
+<p>I'm working on it <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="159808581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808581">Kenny Lau (Mar 02 2019 at 18:14)</a>:</h4>
+<blockquote>
+<p>Proof: the lattice of ideals for R and S are isomorphic.</p>
+</blockquote>
+<p>Proof: the non-units are closed under addition</p>
+
+<a name="159808606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808606">Kevin Buzzard (Mar 02 2019 at 18:15)</a>:</h4>
+<p>You still have to write some code. And when you've done that, prove that R is Cohen-Macauley iff S is.</p>
+
+<a name="159808607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808607">Kevin Buzzard (Mar 02 2019 at 18:15)</a>:</h4>
+<p>Then you have to write lots of code.</p>
+
+<a name="159808609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808609">Kevin Buzzard (Mar 02 2019 at 18:15)</a>:</h4>
+<p>But no mathematician even understands what to write.</p>
+
+<a name="159808655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808655">Kevin Buzzard (Mar 02 2019 at 18:16)</a>:</h4>
+<p>Hence automation should be doing it.</p>
+
+<a name="159808657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808657">Kenny Lau (Mar 02 2019 at 18:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> is a local ring a) a ring that has a unique maximal ideal, or b) a ring with an ideal such that the ideal is the unique maximal ideal?</p>
+
+<a name="159808659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808659">Kevin Buzzard (Mar 02 2019 at 18:16)</a>:</h4>
+<p>I think (a)</p>
+
+<a name="159808661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808661">Kevin Buzzard (Mar 02 2019 at 18:16)</a>:</h4>
+<p>but of course I also think (b)</p>
+
+<a name="159808663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808663">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>But when these things matter, things are usually (a)ish</p>
+
+<a name="159808668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808668">Kenny Lau (Mar 02 2019 at 18:17)</a>:</h4>
+<p>is Q_p a local field?</p>
+
+<a name="159808671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808671">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>sure</p>
+
+<a name="159808672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808672">Kenny Lau (Mar 02 2019 at 18:17)</a>:</h4>
+<p>or is the local field (Q_p, Z_p, pZ_p, F_p)?</p>
+
+<a name="159808674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808674">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>sure</p>
+
+<a name="159808675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808675">Kenny Lau (Mar 02 2019 at 18:17)</a>:</h4>
+<p>mathematicians are strange</p>
+
+<a name="159808676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808676">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>let me think</p>
+
+<a name="159808677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808677">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>I can give you a better answer</p>
+
+<a name="159808680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808680">Kevin Buzzard (Mar 02 2019 at 18:17)</a>:</h4>
+<p>A local field comes equipped with an equivalence class of norms</p>
+
+<a name="159808726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808726">Kevin Buzzard (Mar 02 2019 at 18:18)</a>:</h4>
+<p>and I can work out all the other stuff you wrote from the norm</p>
+
+<a name="159808728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808728">Johan Commelin (Mar 02 2019 at 18:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What about my example? Fibres of a function. And suppose that the fibres are vector spaces. Will <code>f^{-1} x</code> and <code>f^{-1} y</code> be the same vector space if <code>x = y</code>?</p>
+
+<a name="159808729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808729">Kevin Buzzard (Mar 02 2019 at 18:19)</a>:</h4>
+<p>Is x defeq to y?</p>
+
+<a name="159808737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808737">Johan Commelin (Mar 02 2019 at 18:19)</a>:</h4>
+<p>Nope</p>
+
+<a name="159808738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808738">Kenny Lau (Mar 02 2019 at 18:19)</a>:</h4>
+<p>and there's also a theorem that you can recover the norm from the algebra</p>
+
+<a name="159808742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808742">Kenny Lau (Mar 02 2019 at 18:19)</a>:</h4>
+<p>so are we just going to omit the norm?</p>
+
+<a name="159808748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808748">Kevin Buzzard (Mar 02 2019 at 18:19)</a>:</h4>
+<p>It is not true for a general normed field that you can recover the norm from the algebra</p>
+
+<a name="159808751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808751">Mario Carneiro (Mar 02 2019 at 18:19)</a>:</h4>
+<p>Alright you guys are being impatient so I'll just show you what I have in mind:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">relator</span><span class="bp">.</span><span class="n">bi_unique</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">relator</span>
+<span class="kn">lemma</span> <span class="n">rel_exists_unique_of_total</span> <span class="o">[</span><span class="n">bi_total</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">bi_unique</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">R</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">p</span><span class="o">,</span> <span class="bp">∃!</span> <span class="n">i</span><span class="o">,</span> <span class="n">p</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">q</span><span class="o">,</span> <span class="bp">∃!</span> <span class="n">i</span><span class="o">,</span> <span class="n">q</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">p</span> <span class="n">q</span> <span class="n">h</span><span class="o">,</span> <span class="n">rel_exists_of_total</span> <span class="n">R</span> <span class="err">$</span>
+  <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">r</span><span class="o">,</span> <span class="n">rel_and</span> <span class="o">(</span><span class="n">h</span> <span class="n">r</span><span class="o">)</span> <span class="err">$</span> <span class="n">rel_forall_of_total</span> <span class="n">R</span> <span class="err">$</span>
+    <span class="bp">λ</span> <span class="n">c</span> <span class="n">d</span> <span class="n">s</span><span class="o">,</span> <span class="n">rel_imp</span> <span class="o">(</span><span class="n">h</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">rel_eq</span> <span class="n">R</span> <span class="n">s</span> <span class="n">r</span><span class="o">)</span>
+<span class="kn">end</span> <span class="n">relator</span>
+
+<span class="kn">namespace</span> <span class="n">equiv</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">rel</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">symm_rel</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">rel</span> <span class="n">b</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">f</span><span class="bp">.</span><span class="n">symm_apply_eq</span><span class="bp">.</span><span class="n">trans</span> <span class="n">eq_comm</span>
+
+<span class="kn">open</span> <span class="n">relator</span>
+<span class="kn">theorem</span> <span class="n">rel_left_unique</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">left_unique</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₂</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">rintro</span> <span class="bp">⟨⟩;</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">bijective</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span>
+
+<span class="kn">theorem</span> <span class="n">rel_right_unique</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">right_unique</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">rintro</span> <span class="bp">⟨⟩</span> <span class="bp">⟨⟩;</span> <span class="n">refl</span>
+
+<span class="kn">instance</span> <span class="n">rel_bi_unique</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">bi_unique</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">f</span><span class="bp">.</span><span class="n">rel_left_unique</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel_right_unique</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">rel_left_total</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">left_total</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="n">rel_right_total</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">right_total</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">bijective</span><span class="bp">.</span><span class="mi">2</span>
+<span class="kn">instance</span> <span class="n">rel_bi_total</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">bi_total</span> <span class="n">f</span><span class="bp">.</span><span class="n">rel</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">split</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="kn">end</span> <span class="n">equiv</span>
+
+<span class="kn">namespace</span> <span class="n">ring_equiv</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">apply_inverse_apply</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">e</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">e</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">inverse_apply_apply</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">e</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">inverse_apply_apply</span> <span class="n">x</span>
+
+<span class="n">def</span> <span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="n">ideal_comap</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">e</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">I</span><span class="o">,</span>
+  <span class="n">zero</span>  <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">e</span><span class="o">],</span>
+  <span class="n">add</span>   <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">e</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">I</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">smul</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">e</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">I</span><span class="bp">.</span><span class="n">smul_mem</span> <span class="bp">_</span> <span class="n">h</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mem_ideal_comap</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span><span class="o">}</span> <span class="o">:</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">ideal_comap</span> <span class="n">e</span> <span class="n">I</span> <span class="bp">↔</span> <span class="n">e</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">I</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">ideal_comap_top</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">ideal_comap</span> <span class="n">e</span> <span class="err">⊤</span> <span class="bp">=</span> <span class="err">⊤</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="n">def</span> <span class="n">ideal_congr</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">ideal</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">ideal</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">ideal_comap</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">e</span><span class="bp">.</span><span class="n">ideal_comap</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">I</span><span class="o">,</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">I</span><span class="o">,</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">ideal_congr_apply</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">ideal_congr</span> <span class="n">e</span> <span class="n">I</span> <span class="bp">=</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">ideal_comap</span> <span class="n">I</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">ideal_congr_symm_apply</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">r</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">ideal_congr</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="n">I</span> <span class="bp">=</span> <span class="n">e</span><span class="bp">.</span><span class="n">ideal_comap</span> <span class="n">I</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">end</span> <span class="n">ring_equiv</span>
+
+<span class="kn">namespace</span> <span class="n">relator</span>
+
+<span class="kn">theorem</span> <span class="n">rel_ideal_top</span>
+  <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="err">≃</span><span class="n">r</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">⊤</span> <span class="err">⊤</span> <span class="o">:=</span>
+<span class="n">ring_equiv</span><span class="bp">.</span><span class="n">ideal_comap_top</span> <span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">rel_lt_ideal</span>
+  <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="err">≃</span><span class="n">r</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span> <span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">I</span> <span class="n">J</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">_=_</span><span class="o">)</span> <span class="n">I&#39;</span> <span class="n">J&#39;</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">_=_</span><span class="o">),</span> <span class="k">by</span> <span class="n">substs</span> <span class="n">h</span> <span class="n">h&#39;</span><span class="bp">;</span> <span class="n">exact</span> <span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">rel_is_maximal</span>
+  <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="err">≃</span><span class="n">r</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">⇒</span> <span class="n">iff</span><span class="o">)</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">is_maximal</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">is_maximal</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">I</span> <span class="n">J</span> <span class="n">h</span><span class="o">,</span> <span class="n">rel_and</span>
+  <span class="o">(</span><span class="n">rel_not</span> <span class="err">$</span> <span class="n">rel_eq</span> <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="n">h</span> <span class="err">$</span> <span class="n">rel_ideal_top</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">rel_forall_of_total</span> <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">$</span>
+    <span class="bp">λ</span> <span class="n">I&#39;</span> <span class="n">J&#39;</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">rel_imp</span>
+      <span class="o">(</span><span class="n">rel_lt_ideal</span> <span class="n">f</span> <span class="n">h</span> <span class="n">h&#39;</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">rel_eq</span> <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="n">h&#39;</span> <span class="o">(</span><span class="n">ring_equiv</span><span class="bp">.</span><span class="n">ideal_comap_top</span> <span class="bp">_</span><span class="o">)))</span>
+
+<span class="kn">end</span> <span class="n">relator</span>
+
+<span class="kn">theorem</span> <span class="n">is_local_ring_congr</span>
+  <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="err">≃</span><span class="n">r</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_local_ring</span> <span class="n">R</span> <span class="bp">↔</span> <span class="n">is_local_ring</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="n">relator</span><span class="bp">.</span><span class="n">rel_exists_unique_of_total</span> <span class="n">f</span><span class="bp">.</span><span class="n">ideal_congr</span><span class="bp">.</span><span class="n">rel</span> <span class="err">$</span>
+<span class="bp">λ</span> <span class="n">I</span> <span class="n">J</span><span class="o">,</span> <span class="n">relator</span><span class="bp">.</span><span class="n">rel_is_maximal</span> <span class="n">f</span>
+</pre></div>
+
+<a name="159808795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808795">Kevin Buzzard (Mar 02 2019 at 18:20)</a>:</h4>
+<p>and I'm trying to do it properly</p>
+
+<a name="159808815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808815">Kevin Buzzard (Mar 02 2019 at 18:20)</a>:</h4>
+<p>Johan what do you mean by this fibre? Is it of type <code>set Y</code> or <code>subtype Y</code>?</p>
+
+<a name="159808834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808834">Mario Carneiro (Mar 02 2019 at 18:21)</a>:</h4>
+<p>There are definitely a lot of missing theorems for this kind of proof</p>
+
+<a name="159808837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808837">Kenny Lau (Mar 02 2019 at 18:21)</a>:</h4>
+<p>the fibre is the stalk of the blah blah blah</p>
+
+<a name="159808875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808875">Johan Commelin (Mar 02 2019 at 18:22)</a>:</h4>
+<p>I was thinking <code>subtype</code></p>
+
+<a name="159808880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808880">Kevin Buzzard (Mar 02 2019 at 18:22)</a>:</h4>
+<p>but the last theorem looks pretty cool</p>
+
+<a name="159808881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808881">Mario Carneiro (Mar 02 2019 at 18:22)</a>:</h4>
+<p>but this is what you want to do for transferring across isomorphisms in the general case</p>
+
+<a name="159808883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808883">Kenny Lau (Mar 02 2019 at 18:22)</a>:</h4>
+<p>sure, for every scenario one can transfer across isomorphisms</p>
+
+<a name="159808891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808891">Kenny Lau (Mar 02 2019 at 18:22)</a>:</h4>
+<p>but can one transfer across isomorphisms for every scenario?</p>
+
+<a name="159808898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808898">Mario Carneiro (Mar 02 2019 at 18:22)</a>:</h4>
+<p>You should look in particular at how <code>rel_is_maximal</code> is being proven</p>
+
+<a name="159808908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808908">Kenny Lau (Mar 02 2019 at 18:23)</a>:</h4>
+<p>what is <code>⇒</code>?</p>
+
+<a name="159808909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808909">Mario Carneiro (Mar 02 2019 at 18:23)</a>:</h4>
+<p><code>is_maximal</code> is some complicated proposition, but there are simple theorems you can apply in every case</p>
+
+<a name="159808911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808911">Kevin Buzzard (Mar 02 2019 at 18:23)</a>:</h4>
+<p>I am alone and not at work (very rare indeed) and I'm writing perfectoid stuff so I'd like to go back to that now but rest assured I will be back later to look at this code. I just want to keep working until my family return.</p>
+
+<a name="159808958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159808958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159808958">Mario Carneiro (Mar 02 2019 at 18:24)</a>:</h4>
+<p><code>⇒</code> is the relation lifting for functions: <code>(R ⇒ S) f g</code> says that if the inputs to f and g are related by R then the outputs are related by S</p>
+
+<a name="159809020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159809020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159809020">Mario Carneiro (Mar 02 2019 at 18:26)</a>:</h4>
+<p>The notation isn't essential, you could just say that</p>
+
 
 {% endraw %}
