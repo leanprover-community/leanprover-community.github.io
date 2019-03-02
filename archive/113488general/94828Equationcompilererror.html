@@ -1,0 +1,55 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/94828Equationcompilererror.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html">Equation compiler error</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159818340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818340">Seul Baek (Mar 02 2019 at 22:39)</a>:</h4>
+<div class="codehilite"><pre><span></span>def foo : bool → nat → unit
+| tt 0     := ()
+| tt m     := ()
+| ff 0     := ()
+| ff (m+1) := foo ff m
+</pre></div>
+
+
+<p>For some reason Lean thinks the second case is unnecessary and gives an equation compiler error. If I remove the case, however, it correctly reports that I'm missing the case <code>foo tt (nat.succ _)</code>. I wonder what's going on here?</p>
+
+<a name="159818407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818407">Kenny Lau (Mar 02 2019 at 22:41)</a>:</h4>
+<p><code>equation compiler error, equation #2 has not been used in the compilation (possible solution: delete equation)</code></p>
+
+<a name="159818411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818411">Kenny Lau (Mar 02 2019 at 22:42)</a>:</h4>
+<p>(lawyer mode) they didn't say delete equation 2 :P</p>
+
+<a name="159818452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818452">Kevin Buzzard (Mar 02 2019 at 22:42)</a>:</h4>
+<p>rofl</p>
+
+<a name="159818453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818453">Kenny Lau (Mar 02 2019 at 22:42)</a>:</h4>
+<p>(lawyer mode) I deleted equation 1 and it worked, so the error message isn't lying</p>
+
+<a name="159818459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equation%20compiler%20error/near/159818459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94828Equationcompilererror.html#159818459">Chris Hughes (Mar 02 2019 at 22:42)</a>:</h4>
+<p>I think it was used</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="n">m</span>     <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">(</span><span class="n">m</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">ff</span> <span class="n">m</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foo</span> <span class="n">tt</span> <span class="mi">1</span>
+</pre></div>
+
+
+{% endraw %}

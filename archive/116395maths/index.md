@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [mv_polynomial](40519mvpolynomial.html) (4 messages, latest: Mar 02 2019 at 20:55)
+* [mv_polynomial](40519mvpolynomial.html) (9 messages, latest: Mar 02 2019 at 22:36)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2831 messages, latest: Mar 02 2019 at 18:26)
 

@@ -10,6 +10,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [history](44883history.html) (16 messages, latest: Mar 02 2019 at 22:54)
+
+* [Equation compiler error](94828Equationcompilererror.html) (6 messages, latest: Mar 02 2019 at 22:42)
+
+* [finset_cases and nat_cases](90684finsetcasesandnatcases.html) (15 messages, latest: Mar 02 2019 at 22:34)
+
 * [popular tactics](67631populartactics.html) (9 messages, latest: Mar 01 2019 at 22:25)
 
 * [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
@@ -29,8 +35,6 @@ permalink: archive/113488general/index.html
 * [Slow copying  VScode on Mac](30257SlowcopyingVScodeonMac.html) (2 messages, latest: Feb 28 2019 at 05:30)
 
 * [union over a finset](63024unionoverafinset.html) (4 messages, latest: Feb 28 2019 at 00:42)
-
-* [finset_cases and nat_cases](90684finsetcasesandnatcases.html) (13 messages, latest: Feb 27 2019 at 22:31)
 
 * [alternative to set](42735alternativetoset.html) (5 messages, latest: Feb 27 2019 at 22:20)
 
