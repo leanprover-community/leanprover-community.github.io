@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [ring hom -> unit group hom?](39696ringhomunitgrouphom.html) (13 messages, latest: Mar 02 2019 at 13:30)
+
 * [Unification hints for hom](41291Unificationhintsforhom.html) (12 messages, latest: Mar 02 2019 at 10:09)
 
 * [ring confusion](48581ringconfusion.html) (9 messages, latest: Mar 01 2019 at 21:07)
