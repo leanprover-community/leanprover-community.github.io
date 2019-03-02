@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (191 messages, latest: Mar 02 2019 at 14:30)
+* [noob question(s)](52075noobquestions.html) (192 messages, latest: Mar 02 2019 at 15:12)
 
 * [PIL state monad](02358PILstatemonad.html) (29 messages, latest: Mar 01 2019 at 16:08)
 
