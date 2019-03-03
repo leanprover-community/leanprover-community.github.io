@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [seeking lemma about an archimedean thing](25320seekinglemmaaboutanarchimedeanthing.html) (1 message, latest: Mar 03 2019 at 00:24)
+
 * [noob question(s)](52075noobquestions.html) (192 messages, latest: Mar 02 2019 at 15:12)
 
 * [PIL state monad](02358PILstatemonad.html) (29 messages, latest: Mar 01 2019 at 16:08)
