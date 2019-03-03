@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (174 messages, latest: Mar 03 2019 at 19:44)
+
 * [history](44883history.html) (29 messages, latest: Mar 03 2019 at 14:29)
 
 * [unexpected local in quotation expression](98796unexpectedlocalinquotationexpression.html) (7 messages, latest: Mar 03 2019 at 03:09)
@@ -81,8 +83,6 @@ permalink: archive/113488general/index.html
 * [namespace](55694namespace.html) (26 messages, latest: Feb 23 2019 at 15:14)
 
 * [field'](81516field.html) (2 messages, latest: Feb 23 2019 at 10:32)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (173 messages, latest: Feb 23 2019 at 08:40)
 
 * [Field of 4 elements](89387Fieldof4elements.html) (37 messages, latest: Feb 23 2019 at 01:11)
 
