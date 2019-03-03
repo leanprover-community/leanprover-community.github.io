@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [lost algebraic facts](42350lostalgebraicfacts.html) (1 message, latest: Mar 03 2019 at 16:59)
+* [lost algebraic facts](42350lostalgebraicfacts.html) (5 messages, latest: Mar 03 2019 at 17:13)
 
 * [mysterious monoid.one](09211mysteriousmonoidone.html) (6 messages, latest: Mar 03 2019 at 16:24)
 
