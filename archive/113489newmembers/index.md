@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (193 messages, latest: Mar 03 2019 at 21:57)
+
+* [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (33 messages, latest: Mar 03 2019 at 21:09)
+
 * [seeking lemma about an archimedean thing](25320seekinglemmaaboutanarchimedeanthing.html) (6 messages, latest: Mar 03 2019 at 14:43)
-
-* [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (32 messages, latest: Mar 03 2019 at 12:04)
-
-* [noob question(s)](52075noobquestions.html) (192 messages, latest: Mar 02 2019 at 15:12)
 
 * [PIL state monad](02358PILstatemonad.html) (29 messages, latest: Mar 01 2019 at 16:08)
 
