@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [history](44883history.html) (16 messages, latest: Mar 02 2019 at 22:54)
+* [unexpected local in quotation expression](98796unexpectedlocalinquotationexpression.html) (6 messages, latest: Mar 02 2019 at 23:37)
+
+* [history](44883history.html) (28 messages, latest: Mar 02 2019 at 23:11)
 
 * [Equation compiler error](94828Equationcompilererror.html) (6 messages, latest: Mar 02 2019 at 22:42)
 

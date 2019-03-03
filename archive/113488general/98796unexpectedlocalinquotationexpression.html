@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/98796unexpectedlocalinquotationexpression.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html">unexpected local in quotation expression</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159819517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159819517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159819517">Scott Morrison (Mar 02 2019 at 23:14)</a>:</h4>
+<p>Simple <code>expr</code> question: how do I turn a nat into an expression?</p>
+
+<a name="159819523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159819523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159819523">Scott Morrison (Mar 02 2019 at 23:14)</a>:</h4>
+<p>I'm writing a tactic, I have an explicit <code>nat</code> argument, and I want to <code>assertv</code> some lemma, applied to that particular nat.</p>
+
+<a name="159819524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159819524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159819524">Scott Morrison (Mar 02 2019 at 23:14)</a>:</h4>
+<p>e.g. if <code>n : expr</code>, and <code>a : nat</code>, I tried writing <code>to_expr `(trichotomy %%n a)</code>, but I get a "unexpected local in quotation expression" error at the <code>a</code>.</p>
+
+<a name="159819525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159819525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159819525">Scott Morrison (Mar 02 2019 at 23:14)</a>:</h4>
+<p>Curiously, the only search result for that error is that line in the source code.</p>
+
+<a name="159819846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159819846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159819846">Chris Hughes (Mar 02 2019 at 23:25)</a>:</h4>
+<p>This works for me.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">):</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="bp">`</span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">add</span> <span class="err">%%</span><span class="n">e</span> <span class="err">%%</span><span class="bp">`</span><span class="o">(</span><span class="n">n</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="o">(</span><span class="n">f</span> <span class="mi">5</span> <span class="bp">`</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">g</span>
+</pre></div>
+
+<a name="159820243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20local%20in%20quotation%20expression/near/159820243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98796unexpectedlocalinquotationexpression.html#159820243">Scott Morrison (Mar 02 2019 at 23:37)</a>:</h4>
+<p>Thanks!</p>
+
+
+{% endraw %}
