@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [mysterious monoid.one](09211mysteriousmonoidone.html) (2 messages, latest: Mar 03 2019 at 15:59)
+* [lost algebraic facts](42350lostalgebraicfacts.html) (1 message, latest: Mar 03 2019 at 16:59)
+
+* [mysterious monoid.one](09211mysteriousmonoidone.html) (6 messages, latest: Mar 03 2019 at 16:24)
 
 * [mv_polynomial](40519mvpolynomial.html) (9 messages, latest: Mar 02 2019 at 22:36)
 
