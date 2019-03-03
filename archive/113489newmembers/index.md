@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (1 message, latest: Mar 03 2019 at 02:53)
+* [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (2 messages, latest: Mar 03 2019 at 04:25)
 
 * [seeking lemma about an archimedean thing](25320seekinglemmaaboutanarchimedeanthing.html) (1 message, latest: Mar 03 2019 at 00:24)
 
