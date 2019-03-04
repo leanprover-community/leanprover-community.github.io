@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [product metric space](66706productmetricspace.html) (11 messages, latest: Mar 04 2019 at 17:56)
+* [product metric space](66706productmetricspace.html) (15 messages, latest: Mar 04 2019 at 18:08)
 
 * [Lipschitz stuff](68419Lipschitzstuff.html) (6 messages, latest: Mar 04 2019 at 15:54)
 
