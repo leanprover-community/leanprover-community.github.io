@@ -19,5 +19,18 @@ permalink: archive/116395maths/49805uniformsplit.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159860022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159860022">Patrick Massot (Mar 03 2019 at 18:51)</a>:</h4>
 <p>I'm afraid it wont' be possible to help without checking out the branch and try to make it compile</p>
 
+<a name="159906971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159906971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159906971">Johannes Hölzl (Mar 04 2019 at 11:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="210574">@Patrick Massot</span> I think a problem is the <code>has_coe α (completion α) </code> instance for uniform space completions. At last comparing the type class searches for the old and new version it looks like it diverges at this point.</p>
+<p>I don't know how the completion mechanism works exactly. But we have transitivity rules. Maybe this means the type class mechanism will try to find a compitions of <code>α -&gt; (completion α) -&gt; (completion (completion α) ) -&gt; ...</code>. I think we need to remove this completion. I guess we should remove this coercion.</p>
+
+<a name="159907012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907012">Patrick Massot (Mar 04 2019 at 11:59)</a>:</h4>
+<p>Thank you very much for investigating</p>
+
+<a name="159907021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907021">Patrick Massot (Mar 04 2019 at 11:59)</a>:</h4>
+<p>I managed to fix the build by providing an explicit instance term. But I shows once again that the type class mechanism is very brittle</p>
+
 
 {% endraw %}
