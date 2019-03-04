@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why sometime no no_confusion?](56392Whysometimenonoconfusion.html) (1 message, latest: Mar 04 2019 at 19:52)
+* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (24 messages, latest: Mar 04 2019 at 20:45)
+
+* [Why sometime no no_confusion?](56392Whysometimenonoconfusion.html) (6 messages, latest: Mar 04 2019 at 20:14)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (14 messages, latest: Mar 04 2019 at 17:49)
 
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [seeking lemma about an archimedean thing](25320seekinglemmaaboutanarchimedeanthing.html) (6 messages, latest: Mar 03 2019 at 14:43)
 
 * [PIL state monad](02358PILstatemonad.html) (29 messages, latest: Mar 01 2019 at 16:08)
-
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (19 messages, latest: Mar 01 2019 at 09:20)
 
 * [Curry-Howard Isomorphism](78434CurryHowardIsomorphism.html) (1 message, latest: Feb 28 2019 at 06:55)
 
