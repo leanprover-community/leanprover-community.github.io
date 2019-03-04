@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (54 messages, latest: Mar 04 2019 at 13:49)
+
 * [#611 limits shapes](32914611limitsshapes.html) (2 messages, latest: Mar 01 2019 at 22:16)
 
 * [#780](36579780.html) (20 messages, latest: Mar 01 2019 at 12:56)
@@ -23,8 +25,6 @@ permalink: archive/144837PRreviews/index.html
 * [#705](15680705.html) (2 messages, latest: Feb 28 2019 at 08:30)
 
 * [#772 remove unnecessary assumption from card_eq_succ](14021772removeunnecessaryassumptionfromcardeqsucc.html) (4 messages, latest: Feb 27 2019 at 22:02)
-
-* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (53 messages, latest: Feb 26 2019 at 22:17)
 
 * [#763 subset/inter/union for opens(X)](67832763subsetinterunionforopensX.html) (61 messages, latest: Feb 26 2019 at 18:30)
 

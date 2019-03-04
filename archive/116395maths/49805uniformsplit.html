@@ -92,5 +92,89 @@ permalink: archive/116395maths/49805uniformsplit.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159910434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159910434">Patrick Massot (Mar 04 2019 at 12:53)</a>:</h4>
 <p>Anyway, I intend to redo this completion stuff from scratch, following Bourbaki. So we can keep the coercion for now, and I'll try to avoid it when I'll do the Bourbaki completion</p>
 
+<a name="159911085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159911085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159911085">Sebastien Gouezel (Mar 04 2019 at 13:02)</a>:</h4>
+<p>What is your motivation to redo completion from scratch? Are there some facts that are not yet proved, and that a different approach would make much easier to prove?</p>
+
+<a name="159911571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159911571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159911571">Patrick Massot (Mar 04 2019 at 13:10)</a>:</h4>
+<p>With the current construction, it's complicated to do the Hausdorff completion in two stages : first get something separated and then complete. Because the current construction quotients the space of <em>all</em> Cauchy filters to make it separated. If you start with something separated and take the space of <em>all</em> Cauchy filters then you loose separation, and you still need to quotient. So the map you get is a composition of three maps instead of two.</p>
+
+<a name="159911640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159911640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159911640">Patrick Massot (Mar 04 2019 at 13:11)</a>:</h4>
+<p>This is crucial for ring completion because extending the multiplication requires to first get a separated ring</p>
+
+<a name="159911745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159911745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159911745">Patrick Massot (Mar 04 2019 at 13:13)</a>:</h4>
+<p>I don't know where Johannes got this idea, but what Bourbaki does is to consider the space of <em>minimal</em> Cauchy filters. This way you get a complete Hausdorff space in one shot. I don't intend to delete the separate construction of the uniform structure on the space of all Cauchy filters, but it wouldn't be used in the construction of the Hausdorff completion anymore</p>
+
+<a name="159911966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159911966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159911966">Sebastien Gouezel (Mar 04 2019 at 13:16)</a>:</h4>
+<p>OK, I understand this would certainly be more elegant and more efficient. But haven't all the desired properties already been established in the current framework? I mean, once the construction is done, one just needs to use the API and one can forget about the construction -- unless you want some things to be defeq while they are not currently, maybe?</p>
+
+<a name="159912162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912162">Patrick Massot (Mar 04 2019 at 13:18)</a>:</h4>
+<p>Ok, I fixed the type class issue with my latest commit. I completed the isolation of completions by a further file split.</p>
+
+<a name="159912401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912401">Patrick Massot (Mar 04 2019 at 13:21)</a>:</h4>
+<p>Sébastien, I do have a branch where ring completions actually work in full generality (it's not in mathlib yet), but it's really a hack, and I fear this will bite us at some point. See <a href="#narrow/stream/116395-maths/topic/Ring.20completion" title="#narrow/stream/116395-maths/topic/Ring.20completion">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring.20completion</a> for details</p>
+
+<a name="159912647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912647">Sebastien Gouezel (Mar 04 2019 at 13:24)</a>:</h4>
+<p>OK, I just noticed that in mathlib the ring completion is only done for separated rings currently. And to push this to nonseparated rings you run into trouble, right?</p>
+
+<a name="159912657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912657">Patrick Massot (Mar 04 2019 at 13:24)</a>:</h4>
+<p>yes</p>
+
+<a name="159912704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912704">Patrick Massot (Mar 04 2019 at 13:25)</a>:</h4>
+<p>I don't know any way to extend multiplication to the completion if the ring is not separated.</p>
+
+<a name="159912785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912785">Patrick Massot (Mar 04 2019 at 13:26)</a>:</h4>
+<p>What Bourbaki does to handle non separated ring is to first make them separated, and then take the (separated) completion of the separated ring.</p>
+
+<a name="159912967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912967">Patrick Massot (Mar 04 2019 at 13:28)</a>:</h4>
+<p>One important point is to understand that the subcategory of complete (but not necessarily separated) uniform space is <em>not</em> a nice subcategory. Because you cannot extend by uniform continuity if the target space is not separated</p>
+
+<a name="159912983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159912983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159912983">Patrick Massot (Mar 04 2019 at 13:29)</a>:</h4>
+<p>Anyway, I think this reorganization was needed even without redoing completions. I hope it's ready for merge now. It's really painful to do this kind of work, but I hope it will pay in the long run</p>
+
+<a name="159913017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159913017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159913017">Sebastien Gouezel (Mar 04 2019 at 13:29)</a>:</h4>
+<p>So you will have in any case to prove the first step: go from the nonseparated case to the separated one. For the second step, you could either use the elegant approach of Bourbaki, or use the current formalization, right?</p>
+
+<a name="159913686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159913686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159913686">Patrick Massot (Mar 04 2019 at 13:38)</a>:</h4>
+<p>The first step is in <a href="https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/uniform_space/separation.lean#L98" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/uniform_space/separation.lean#L98">https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/uniform_space/separation.lean#L98</a>.  Using the current formalization for the second step is what is currently in my <a href="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120" target="_blank" title="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120">https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R120</a> branch. But it leads to <a href="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R1728" target="_blank" title="https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R1728">https://github.com/PatrickMassot/mathlib/commit/6dbdbbfe5304e85d95784f18d9a978ab129a84c8#diff-f7d0385aaa9b17579cee0f2af9cc9135R1728</a></p>
+
+<a name="159913798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159913798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159913798">Patrick Massot (Mar 04 2019 at 13:39)</a>:</h4>
+<p>In all cases type theory will never let use have definitional equality between the two steps process and the one step process</p>
+
+<a name="159914628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159914628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159914628">Sebastien Gouezel (Mar 04 2019 at 13:50)</a>:</h4>
+<p>Now I am completely confused. Aren't <code>hcompletion</code> and <code>completion</code> canonically isomorphic, but not defeq?</p>
+
+<a name="159914843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159914843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159914843">Patrick Massot (Mar 04 2019 at 13:53)</a>:</h4>
+<p>they are</p>
+
+<a name="159914986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159914986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159914986">Sebastien Gouezel (Mar 04 2019 at 13:55)</a>:</h4>
+<p>Then you could pull the ring structure from <code>hcompletion</code> to <code>completion</code>, and say that if <code>\alpha</code> is a topological ring then <code>completion \alpha</code> is a topological ring, and this gives you an API with only one step, not mentioning <code>hcompletion</code> at all?</p>
+
+<a name="159915134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159915134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159915134">Patrick Massot (Mar 04 2019 at 13:57)</a>:</h4>
+<p>This is exactly the strategy that made me think we need to be able to pull back topological ring structures under uniform space isomorphisms. But, for some reason, this seems to be a non-trivial operation in type theory. So doing the direct construction (following Bourbaki) seems simpler</p>
+
+<a name="159915222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159915222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159915222">Patrick Massot (Mar 04 2019 at 13:58)</a>:</h4>
+<p>I can already do everything as in my old <code>completions_reloaded</code> branch. I'm trying to do it better</p>
+
 
 {% endraw %}
