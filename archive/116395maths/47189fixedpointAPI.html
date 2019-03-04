@@ -1,0 +1,96 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/47189fixedpointAPI.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html">fixed point API</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159956411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159956411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159956411">Patrick Massot (Mar 04 2019 at 22:17)</a>:</h4>
+<p>Building on Sébastien's <a href="https://github.com/leanprover-community/mathlib/pull/788" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/788">https://github.com/leanprover-community/mathlib/pull/788</a> I propose an API for the Banach fixed point theorem that would look like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">metric</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">open</span> <span class="n">metric</span> <span class="n">filter</span>
+<span class="n">def</span> <span class="n">fixed_point</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">lim</span> <span class="o">(</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span><span class="err">^</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="err">$</span> <span class="n">default</span> <span class="n">α</span><span class="o">)</span> <span class="n">at_top</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">fixed_point_fixed</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">fixed_point</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fixed_point</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">x₀</span> <span class="o">:=</span> <span class="n">default</span> <span class="n">α</span> <span class="k">in</span>
+<span class="k">have</span> <span class="n">cauchy_seq</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span><span class="err">^</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="n">x₀</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">cauchy_seq_of_le_geometric</span> <span class="n">K</span> <span class="o">(</span><span class="n">dist</span> <span class="n">x₀</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₀</span><span class="o">))</span> <span class="n">hK</span> <span class="o">(</span><span class="bp">λ</span><span class="n">n</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">iterate_succ</span> <span class="n">f</span> <span class="n">n</span> <span class="n">x₀</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="o">(</span><span class="n">hf</span><span class="bp">.</span><span class="n">iterate</span> <span class="n">n</span><span class="o">)</span> <span class="n">x₀</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₀</span><span class="o">)</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">cauchy_seq_tendsto_of_complete</span> <span class="n">this</span> <span class="k">in</span>
+<span class="k">have</span> <span class="n">fxx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">fixed_point_of_tendsto_iterate</span> <span class="o">(</span><span class="n">hf</span><span class="bp">.</span><span class="n">to_uniform_continuous</span><span class="bp">.</span><span class="n">continuous</span><span class="bp">.</span><span class="n">tendsto</span> <span class="n">x</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">x₀</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">fixed_point</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">tendsto_nhds_unique</span> <span class="n">filter</span><span class="bp">.</span><span class="n">at_top_ne_bot</span> <span class="n">hx</span> <span class="o">(</span><span class="n">lim_spec</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">fxx</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">fixed_point_spec</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">fixed_point</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">lipschitz_with</span><span class="bp">.</span><span class="n">fixed_point_unique_of_contraction</span> <span class="n">hK</span> <span class="n">hf</span> <span class="n">h</span> <span class="o">(</span><span class="n">fixed_point_fixed</span> <span class="n">hK</span> <span class="n">hf</span><span class="o">),</span>
+      <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">fixed_point_fixed</span> <span class="n">hK</span> <span class="n">hf</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="n">metric</span>
+</pre></div>
+
+
+<p>What do you think? Do you have nicer names? Nicer proofs? An even better API?</p>
+
+<a name="159958356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159958356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159958356">Patrick Massot (Mar 04 2019 at 22:45)</a>:</h4>
+<p>Sample use (which motivated this API):</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">open</span> <span class="n">metric</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">banach_space</span> <span class="n">ℝ</span> <span class="n">E</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">lipschitz_with_translate</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hu</span> <span class="o">:</span> <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">hu</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">x&#39;</span><span class="o">,</span>
+<span class="k">calc</span> <span class="n">dist</span> <span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x&#39;</span><span class="o">)</span> <span class="bp">≤</span> <span class="err">∥</span><span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x&#39;</span><span class="o">)</span><span class="err">∥</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">dist_eq_norm</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="err">∥</span><span class="n">u</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">u</span> <span class="n">x&#39;</span><span class="err">∥</span>        <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">...</span> <span class="bp">=</span>  <span class="n">dist</span> <span class="o">(</span><span class="n">u</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span> <span class="n">x&#39;</span><span class="o">)</span>  <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">dist_eq_norm</span>
+<span class="bp">...</span> <span class="bp">≤</span> <span class="n">K</span><span class="bp">*</span><span class="n">dist</span> <span class="n">x</span> <span class="n">x&#39;</span>         <span class="o">:</span> <span class="n">hu</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span> <span class="bp">_⟩</span>
+
+<span class="c">/-</span><span class="cm">- The inverse of `id - u` -/</span>
+<span class="n">def</span> <span class="n">lipschitz_global_inverse</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">fixed_point</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">end</span>
+
+
+<span class="kn">namespace</span> <span class="n">lipschitz_global_inverse</span>
+<span class="kn">open</span> <span class="n">function</span> <span class="n">lipschitz_with</span> <span class="n">classical</span> <span class="n">metric</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">banach_space</span> <span class="n">ℝ</span> <span class="n">E</span><span class="o">]</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hu</span> <span class="o">:</span> <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="n">u</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">hK</span> <span class="n">hu</span>
+
+<span class="kn">lemma</span> <span class="n">is_inverse</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">inverse</span> <span class="o">(</span><span class="n">id</span> <span class="bp">-</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">lipschitz_global_inverse</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">inverse_iff</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">w</span> <span class="o">:=</span> <span class="n">fixed_point</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">z</span><span class="o">),</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">u</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">w</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">fixed_point_spec</span> <span class="n">hK</span> <span class="o">(</span><span class="n">lipschitz_with_translate</span> <span class="n">hu</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">w</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">u</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">split</span> <span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">eq_sub_of_add_eq</span>  <span class="o">(</span><span class="n">this</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">h</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span> <span class="n">exact</span> <span class="n">this</span><span class="bp">.</span><span class="n">symm</span> <span class="o">}</span>
+<span class="kn">end</span>
+<span class="kn">end</span> <span class="n">lipschitz_global_inverse</span>
+</pre></div>
+
+<a name="159958838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159958838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159958838">Chris Hughes (Mar 04 2019 at 22:52)</a>:</h4>
+<p><code>fixed_point_spec</code> should be called either <code>fixed_point_unique</code> or <code>apply_eq_self_iff_eq_fixed_point</code></p>
+
+
+{% endraw %}
