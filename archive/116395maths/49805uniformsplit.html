@@ -32,5 +32,65 @@ permalink: archive/116395maths/49805uniformsplit.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907021">Patrick Massot (Mar 04 2019 at 11:59)</a>:</h4>
 <p>I managed to fix the build by providing an explicit instance term. But I shows once again that the type class mechanism is very brittle</p>
 
+<a name="159907246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907246">Patrick Massot (Mar 04 2019 at 12:03)</a>:</h4>
+<p>I added <a href="https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/bounded_continuous_function.lean#L263" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/bounded_continuous_function.lean#L263">https://github.com/leanprover-community/mathlib/blob/uniform_split/src/topology/bounded_continuous_function.lean#L263</a></p>
+
+<a name="159907255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907255">Mario Carneiro (Mar 04 2019 at 12:03)</a>:</h4>
+<p>it's like the option coe</p>
+
+<a name="159907292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907292">Patrick Massot (Mar 04 2019 at 12:04)</a>:</h4>
+<p>It's not a pretty line. But if it allows to keep <code>has_coe α (completion α)</code> it's fine</p>
+
+<a name="159907401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907401">Mario Carneiro (Mar 04 2019 at 12:05)</a>:</h4>
+<p>you need to inhabit <code>has_coe_t A (completion A)</code> instead of <code>has_coe A (completion A)</code></p>
+
+<a name="159907474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907474">Mario Carneiro (Mar 04 2019 at 12:06)</a>:</h4>
+<p>This will prevent it from being used more than once</p>
+
+<a name="159907494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907494">Patrick Massot (Mar 04 2019 at 12:07)</a>:</h4>
+<p>Nice trick!</p>
+
+<a name="159907500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907500">Kevin Buzzard (Mar 04 2019 at 12:07)</a>:</h4>
+<p>That's an interesting comment!</p>
+
+<a name="159907508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907508">Patrick Massot (Mar 04 2019 at 12:07)</a>:</h4>
+<p>Lunch is calling, please don't hesitate to review <a href="https://github.com/leanprover-community/mathlib/pull/787" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/787">https://github.com/leanprover-community/mathlib/pull/787</a></p>
+
+<a name="159907573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907573">Patrick Massot (Mar 04 2019 at 12:08)</a>:</h4>
+<p>I think this is a much more useful cleanup than the basic topology one, because the current organization is really crazy (and I'm talking about mess I very much contributed to create)</p>
+
+<a name="159907583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907583">Kevin Buzzard (Mar 04 2019 at 12:09)</a>:</h4>
+<p>Patrick -- are you sure you even want a coercion? Kenny had a coercion from R to R[1/S] and IIRC did not even name the function, and all that happened was that Johan and I got frustrated that this completely fundamental map did not have a name. We both seemed very happy to apply the map explicitly when we needed it.</p>
+
+<a name="159907601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907601">Kevin Buzzard (Mar 04 2019 at 12:09)</a>:</h4>
+<p>In the end the map was named <code>of</code> and it is not hard to write two letters.</p>
+
+<a name="159907687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907687">Johan Commelin (Mar 04 2019 at 12:10)</a>:</h4>
+<p>We now have both</p>
+
+<a name="159907688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159907688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159907688">Johannes Hölzl (Mar 04 2019 at 12:10)</a>:</h4>
+<p>It looks like <code>has_coe_t</code> is not enough. I think it is only activated once, but then the type class search explodes. I'm in favor of removing this coercion.</p>
+
+<a name="159910375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159910375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159910375">Patrick Massot (Mar 04 2019 at 12:52)</a>:</h4>
+<p>it seems crazy to me to remove this coercion, especially since it's only current cost is one line in the middle of a proof</p>
+
+<a name="159910434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform%20split/near/159910434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49805uniformsplit.html#159910434">Patrick Massot (Mar 04 2019 at 12:53)</a>:</h4>
+<p>Anyway, I intend to redo this completion stuff from scratch, following Bourbaki. So we can keep the coercion for now, and I'll try to avoid it when I'll do the Bourbaki completion</p>
+
 
 {% endraw %}
