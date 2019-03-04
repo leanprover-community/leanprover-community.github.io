@@ -1,0 +1,98 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html">rw div insufficient for defining equation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159916352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159916352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159916352">Plam (Mar 04 2019 at 14:12)</a>:</h4>
+<p>Hi!</p>
+<p>I'm working my way through theorem proving in Lean and have hit a bit of a snag.</p>
+<p>In section 8.4 we define div via well-founded recursion (I have called it div'). Then we are told that we can prove the defining equation of div as follows</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">div&#39;</span><span class="o">]</span>
+</pre></div>
+
+
+<p>but when I attempt this, I get an unsolved goal. Specifically,</p>
+<div class="codehilite"><pre><span></span>well_founded.fix lt_wf div&#39;.F x y = ite (0 &lt; y ∧ y ≤ x) (1 + well_founded.fix lt_wf div&#39;.F (x - y) y) 0
+</pre></div>
+
+
+<p>Is this because my version of div' lacks something div has? Something has changed in Lean since that was written? I've done something wrong?</p>
+<p>Thanks for any guidance</p>
+<p>(By the way, #eval doesn't work in the super fast way described in the book for me. #eval fib 100 doesn't work, never mind #eval fib 10000. Seems unlikely they're related, but thought it worth mentioning!)</p>
+
+<a name="159916913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159916913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159916913">Patrick Massot (Mar 04 2019 at 14:20)</a>:</h4>
+<p>Could you post a complete example? If I simply type in a Lean file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">div</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+    <span class="k">have</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+    <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div</span><span class="o">]</span>
+</pre></div>
+
+
+<p>then everything works as advertised</p>
+
+<a name="159917218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159917218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159917218">Plam (Mar 04 2019 at 14:24)</a>:</h4>
+<p>That's good to know! Trying it out with my definition using the equation compiler like that works, but it doesn't work using well_founded.fix directly.</p>
+<p>Here's the example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">div_rec_lemma&#39;</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span>
+
+<span class="n">def</span> <span class="n">div&#39;</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x₁</span><span class="o">,</span> <span class="n">x₁</span> <span class="bp">&lt;</span> <span class="n">x</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">div_rec_lemma&#39;</span> <span class="n">h</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="k">else</span>
+  <span class="n">zero</span>
+
+<span class="n">def</span> <span class="n">div&#39;</span> <span class="o">:=</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="n">lt_wf</span> <span class="n">div&#39;</span><span class="bp">.</span><span class="n">F</span>
+
+<span class="n">def</span> <span class="n">div&#39;&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+    <span class="k">have</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+    <span class="n">div&#39;&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="mi">0</span>
+
+<span class="c1">-- Fails!:</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div&#39;</span><span class="o">]</span>
+
+<span class="c1">-- Works!:</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div&#39;&#39;</span><span class="o">]</span>
+</pre></div>
+
+<a name="159918358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159918358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159918358">Patrick Massot (Mar 04 2019 at 14:39)</a>:</h4>
+<p>I'm not an expert at well founded recursion, but I think you could try reading <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+
+
+{% endraw %}
