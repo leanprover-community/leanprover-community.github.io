@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [group_equiv](50231groupequiv.html) (2 messages, latest: Mar 04 2019 at 14:16)
+* [group_equiv](50231groupequiv.html) (5 messages, latest: Mar 04 2019 at 16:51)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (191 messages, latest: Mar 03 2019 at 21:25)
 
