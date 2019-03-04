@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (4 messages, latest: Mar 04 2019 at 14:39)
+* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (5 messages, latest: Mar 04 2019 at 15:44)
 
 * [noob question(s)](52075noobquestions.html) (200 messages, latest: Mar 04 2019 at 07:52)
 
