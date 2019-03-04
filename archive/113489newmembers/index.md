@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (196 messages, latest: Mar 03 2019 at 23:56)
+* [noob question(s)](52075noobquestions.html) (197 messages, latest: Mar 04 2019 at 02:48)
 
 * [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (33 messages, latest: Mar 03 2019 at 21:09)
 
