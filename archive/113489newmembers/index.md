@@ -10,11 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (18 messages, latest: Mar 04 2019 at 21:59)
+
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (1 message, latest: Mar 04 2019 at 21:31)
+
 * [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (24 messages, latest: Mar 04 2019 at 20:45)
 
 * [Why sometime no no_confusion?](56392Whysometimenonoconfusion.html) (6 messages, latest: Mar 04 2019 at 20:14)
-
-* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (14 messages, latest: Mar 04 2019 at 17:49)
 
 * [noob question(s)](52075noobquestions.html) (200 messages, latest: Mar 04 2019 at 07:52)
 

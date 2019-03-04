@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2833 messages, latest: Mar 04 2019 at 21:47)
+
+* [inverse](30749inverse.html) (11 messages, latest: Mar 04 2019 at 21:45)
+
 * [nonempty](95771nonempty.html) (6 messages, latest: Mar 04 2019 at 20:54)
 
 * [product metric space](66706productmetricspace.html) (15 messages, latest: Mar 04 2019 at 18:08)
@@ -23,8 +27,6 @@ permalink: archive/116395maths/index.html
 * [mysterious monoid.one](09211mysteriousmonoidone.html) (6 messages, latest: Mar 03 2019 at 16:24)
 
 * [mv_polynomial](40519mvpolynomial.html) (9 messages, latest: Mar 02 2019 at 22:36)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2831 messages, latest: Mar 02 2019 at 18:26)
 
 * [one_iff_ker_inv](52996oneiffkerinv.html) (2 messages, latest: Mar 02 2019 at 14:08)
 

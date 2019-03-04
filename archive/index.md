@@ -10,9 +10,9 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (1543 topics)
 
-* [maths](116395maths/index.html) (400 topics)
+* [maths](116395maths/index.html) (401 topics)
 
-* [new members](113489newmembers/index.html) (325 topics)
+* [new members](113489newmembers/index.html) (326 topics)
 
 * [PR reviews](144837PRreviews/index.html) (99 topics)
 
@@ -22,7 +22,7 @@ permalink: archive/index.html
 
 * [concrete semantics](187724concretesemantics/index.html) (3 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (1 topic)
+* [Lean for teaching](187764Leanforteaching/index.html) (2 topics)
 
 
 {% include archive_update.html %}

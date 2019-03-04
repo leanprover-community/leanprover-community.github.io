@@ -168,5 +168,51 @@ permalink: archive/113489newmembers/31557rwdivinsufficientfordefiningequation.ht
 
 <p>Note that add has been defined (and infixed as +) locally</p>
 
+<a name="159951392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159951392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159951392">Scott Morrison (Mar 04 2019 at 21:15)</a>:</h4>
+<p>Plam, you should post a minimal working example, i.e. with everything need for someone to run it locally.</p>
+
+<a name="159953649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159953649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159953649">Plam (Mar 04 2019 at 21:43)</a>:</h4>
+<p>Gotcha! Sorry for being slow on the uptake on that</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">add</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span> <span class="bp">+</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">add</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">add</span>
+
+<span class="kn">theorem</span> <span class="n">add_zero</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">zero_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">zero_add</span> <span class="n">n</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">succ_add_succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">succ_add_succ</span> <span class="n">m</span> <span class="n">n</span><span class="o">]</span>
+
+<span class="n">mutual</span> <span class="kn">theorem</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">add_assoc</span>
+<span class="k">with</span> <span class="n">add_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">zero_add</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">succ_add_succ</span> <span class="n">m</span> <span class="n">n</span><span class="o">]}</span>
+<span class="k">with</span> <span class="n">add_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span> <span class="n">n</span> <span class="n">p</span> <span class="mi">1</span><span class="o">,</span> <span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span> <span class="o">]</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="159954570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159954570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159954570">Kevin Buzzard (Mar 04 2019 at 21:54)</a>:</h4>
+<p>You can easily prove add_assoc by itself without intertwining it with add_comm. add_assoc doesn't need any commutativity hypotheses.</p>
+
+<a name="159954882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159954882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159954882">Kevin Buzzard (Mar 04 2019 at 21:59)</a>:</h4>
+<p>What is your actual question? Proving associativity by induction on p and then proving commutativity afterwards is the standard way of doing it. Are you specifically trying to do it in a complicated way and then trying to get the equation compiler to sort it all out, or are you just wanting to prove it?</p>
+
 
 {% endraw %}
