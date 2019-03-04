@@ -1,0 +1,118 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/66706productmetricspace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html">product metric space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159933571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159933571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159933571">Patrick Massot (Mar 04 2019 at 17:45)</a>:</h4>
+<p>Does anyone understand why the following fails (both the uncommented line and the commented one):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">ι</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">α</span> <span class="n">i</span><span class="o">)]</span>
+
+<span class="kn">example</span> <span class="o">:</span>
+  <span class="err">⨅</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ε</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">),</span> <span class="n">principal</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span><span class="bp">×</span><span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="bp">|</span> <span class="n">dist</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">}</span> <span class="bp">=</span> <span class="err">⨅</span> <span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">,</span> <span class="n">filter</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span><span class="bp">×</span><span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">),</span> <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span> <span class="n">uniformity</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="c1">-- The next line type-checks but then `apply this` fails</span>
+  <span class="c1">--have := @le_antisymm (filter $ (Π i, α i)×(Π i, α i)) (@filter.partial_order ((Π i, α i)×(Π i, α i))),</span>
+
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="159933738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159933738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159933738">Patrick Massot (Mar 04 2019 at 17:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I guess you are the expert here. I'm trying to relate product metric space to product topology and uniform structure.</p>
+
+<a name="159933836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159933836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159933836">Johannes Hölzl (Mar 04 2019 at 17:48)</a>:</h4>
+<p>I guess you need to add parenthesis around ⨅</p>
+
+<a name="159934050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934050">Patrick Massot (Mar 04 2019 at 17:51)</a>:</h4>
+<p>More precisely, I already have:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">open</span> <span class="n">filter</span> <span class="n">lattice</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">U</span> <span class="o">:</span> <span class="bp">Π</span><span class="n">i</span><span class="o">,</span> <span class="n">uniform_space</span> <span class="o">(</span><span class="n">α</span> <span class="n">i</span><span class="o">)]</span>
+<span class="n">include</span> <span class="n">U</span>
+
+<span class="kn">instance</span> <span class="k">Pi</span><span class="bp">.</span><span class="n">uniform_space</span> <span class="o">:</span> <span class="n">uniform_space</span> <span class="o">(</span><span class="bp">Π</span><span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="err">⨆</span><span class="n">i</span><span class="o">,</span> <span class="n">uniform_space</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="n">i</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">pi</span><span class="bp">.</span><span class="n">uniformity</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">uniformity</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">=</span>  <span class="err">⨅</span> <span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">,</span> <span class="n">filter</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span> <span class="n">uniformity</span> <span class="o">:=</span>
+<span class="n">supr_uniformity</span>
+
+<span class="kn">lemma</span> <span class="n">pi</span><span class="bp">.</span><span class="n">uniform_continuous_proj</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">)</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">α</span> <span class="n">i</span><span class="o">),</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">uniform_continuous_iff</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">le_supr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="n">uniform_space</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">α</span> <span class="n">i</span><span class="o">),</span> <span class="n">a</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="n">j</span><span class="o">))</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">pi</span><span class="bp">.</span><span class="n">uniform_space_topology</span> <span class="o">:</span>
+  <span class="o">(</span><span class="k">Pi</span><span class="bp">.</span><span class="n">uniform_space</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">=</span> <span class="k">Pi</span><span class="bp">.</span><span class="n">topological_space</span> <span class="o">:=</span>
+<span class="n">to_topological_space_supr</span>
+
+<span class="kn">instance</span> <span class="n">pi</span><span class="bp">.</span><span class="n">complete</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">complete_space</span> <span class="o">(</span><span class="n">α</span> <span class="n">i</span><span class="o">)]</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="n">i</span><span class="o">,</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="o">:</span> <span class="bp">Π</span><span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">nhds</span> <span class="n">x</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">key</span> <span class="o">:</span> <span class="n">cauchy</span> <span class="o">(</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">α</span> <span class="n">i</span><span class="o">),</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="n">f</span><span class="o">),</span>
+      <span class="k">from</span> <span class="n">cauchy_map</span> <span class="o">(</span><span class="n">pi</span><span class="bp">.</span><span class="n">uniform_continuous_proj</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="n">hf</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">(</span><span class="n">cauchy_iff_exists_le_nhds</span> <span class="err">$</span> <span class="n">map_ne_bot</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">key</span> <span class="o">},</span>
+  <span class="n">choose</span> <span class="n">x</span> <span class="n">hx</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="n">nhds</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="err">⨅</span><span class="n">i</span><span class="o">,</span> <span class="n">comap</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">nhds</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">))),</span>
+        <span class="k">by</span> <span class="n">rw</span> <span class="n">pi</span><span class="bp">.</span><span class="n">uniform_space_topology</span> <span class="bp">;</span> <span class="n">exact</span> <span class="n">nhds_pi</span><span class="o">,</span>
+      <span class="n">le_infi_iff</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">hx</span> <span class="n">i</span><span class="o">),</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>although I know Johannes will not like this instance so it  should be a def (because in case iota is not finite this is not necessarily the uniform structure you are interested in). Still, I'd like these lemmas to prove that a (finite) product of complete metric spaces is complete.</p>
+
+<a name="159934079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934079">Chris Hughes (Mar 04 2019 at 17:51)</a>:</h4>
+<p><code>apply this</code> fails because <code>this</code> is an equality, and the goal is <code>le</code>? If I get rid of <code>apply_le_antisymm</code> it works</p>
+
+<a name="159934153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934153">Patrick Massot (Mar 04 2019 at 17:52)</a>:</h4>
+<p>Doh! Adding parenthesis works indeed!</p>
+
+<a name="159934160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934160">Patrick Massot (Mar 04 2019 at 17:52)</a>:</h4>
+<p>I wonder how Lean could parse the version without parenthesis</p>
+
+<a name="159934192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934192">Chris Hughes (Mar 04 2019 at 17:53)</a>:</h4>
+<p>It didn't parse for me. It couldn't find a has_Inf instance for <code>Sort </code></p>
+
+<a name="159934277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934277">Patrick Massot (Mar 04 2019 at 17:54)</a>:</h4>
+<p>Now I need to think about actually proving this (but Johannes or Sébastien or anyone else is very welcome to do it while I take care of the laundry)</p>
+
+<a name="159934341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934341">Chris Hughes (Mar 04 2019 at 17:55)</a>:</h4>
+<p>It parses if I make it a lemma. Prop is a complete lattice I guess.</p>
+
+<a name="159934447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20metric%20space/near/159934447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66706productmetricspace.html#159934447">Patrick Massot (Mar 04 2019 at 17:56)</a>:</h4>
+<p>Ooohh... It was indeed a lemma in my file</p>
+
+
+{% endraw %}
