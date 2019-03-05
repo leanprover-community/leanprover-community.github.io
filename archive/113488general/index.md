@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [library_search](97355librarysearch.html) (10 messages, latest: Mar 05 2019 at 16:12)
+
 * [lift (f \circ of) = f](49724liftfcircoff.html) (1 message, latest: Mar 05 2019 at 13:38)
 
 * [equiv identifying sets](99972equividentifyingsets.html) (2 messages, latest: Mar 05 2019 at 13:15)
-
-* [library_search](97355librarysearch.html) (9 messages, latest: Mar 05 2019 at 12:19)
 
 * [representing math structures](94437representingmathstructures.html) (2 messages, latest: Mar 05 2019 at 12:07)
 

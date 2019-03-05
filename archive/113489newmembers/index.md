@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (205 messages, latest: Mar 05 2019 at 15:41)
+* [noob question(s)](52075noobquestions.html) (206 messages, latest: Mar 05 2019 at 16:04)
 
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (6 messages, latest: Mar 05 2019 at 15:23)
 
