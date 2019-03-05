@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (54 messages, latest: Mar 04 2019 at 13:49)
+* [#748 asymptotics and the Fréchet derivative](81686748asymptoticsandtheFrchetderivative.html) (55 messages, latest: Mar 05 2019 at 02:35)
 
 * [#611 limits shapes](32914611limitsshapes.html) (2 messages, latest: Mar 01 2019 at 22:16)
 

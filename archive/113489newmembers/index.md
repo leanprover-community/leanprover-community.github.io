@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (201 messages, latest: Mar 05 2019 at 02:35)
+
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (1 message, latest: Mar 04 2019 at 21:31)
@@ -17,8 +19,6 @@ permalink: archive/113489newmembers/index.html
 * [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (24 messages, latest: Mar 04 2019 at 20:45)
 
 * [Why sometime no no_confusion?](56392Whysometimenonoconfusion.html) (6 messages, latest: Mar 04 2019 at 20:14)
-
-* [noob question(s)](52075noobquestions.html) (200 messages, latest: Mar 04 2019 at 07:52)
 
 * [lexicographic ordering on tuples](02167lexicographicorderingontuples.html) (33 messages, latest: Mar 03 2019 at 21:09)
 

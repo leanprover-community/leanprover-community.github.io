@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (9 messages, latest: Mar 05 2019 at 02:34)
+
 * [group_equiv](50231groupequiv.html) (5 messages, latest: Mar 04 2019 at 16:51)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (191 messages, latest: Mar 03 2019 at 21:25)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
 
 * [normalise subtype.val and coe](33650normalisesubtypevalandcoe.html) (3 messages, latest: Mar 01 2019 at 09:55)
-
-* [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (3 messages, latest: Mar 01 2019 at 07:26)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (39 messages, latest: Feb 28 2019 at 21:08)
 
