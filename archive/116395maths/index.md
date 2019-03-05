@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [out_param again](10601outparamagain.html) (8 messages, latest: Mar 05 2019 at 09:44)
+
+* [galois theory / splitting fields](31775galoistheorysplittingfields.html) (12 messages, latest: Mar 05 2019 at 09:22)
+
 * [fixed point API](47189fixedpointAPI.html) (7 messages, latest: Mar 05 2019 at 08:59)
 
 * [localization](95274localization.html) (3 messages, latest: Mar 05 2019 at 08:59)

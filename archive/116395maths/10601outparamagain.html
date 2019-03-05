@@ -1,0 +1,61 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/10601outparamagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html">out_param again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159988343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159988343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159988343">Patrick Massot (Mar 05 2019 at 09:26)</a>:</h4>
+<p>There are things I understand better after one year of Lean. But out_param is not among those.  At <a href="https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3" target="_blank" title="https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3">https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3</a> does anyone know how to make Lean happy on line 105, without using the commented line 106? This is a standalone file that works with current mathlib</p>
+
+<a name="159988711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159988711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159988711">Sebastien Gouezel (Mar 05 2019 at 09:32)</a>:</h4>
+<p>Are you going after the inverse function theorem?</p>
+
+<a name="159988806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159988806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159988806">Kevin Buzzard (Mar 05 2019 at 09:34)</a>:</h4>
+<p>I'm on <code>commit 05449a061744f8142bfc5396184e33ef19b08b82</code> from under a week ago and it doesn't compile for me -- do I need to update mathlib?</p>
+
+<a name="159988862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159988862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159988862">Kevin Buzzard (Mar 05 2019 at 09:36)</a>:</h4>
+<p>fixed with a <code>sorry</code>. What does <code>id - u</code> mean?</p>
+
+<a name="159988895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159988895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159988895">Johan Commelin (Mar 05 2019 at 09:36)</a>:</h4>
+<p>Probably... the topology of the <code>topology/</code> directory changed a bit.</p>
+
+<a name="159989041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159989041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159989041">Kevin Buzzard (Mar 05 2019 at 09:38)</a>:</h4>
+<p>Patrick's error without the <code>@</code> is</p>
+<div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
+⊢ out_param (Type ?)
+</pre></div>
+
+
+<p>and his function with the <code>out_param</code>s is</p>
+<div class="codehilite"><pre><span></span>lipschitz_global_inverse :
+  Π {α : out_param (Type u_3)} [_inst_1 : out_param (normed_field α)] {E : Type u_4} [B : banach_space α E],
+    (E → E) → E → E
+</pre></div>
+
+<a name="159989111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159989111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159989111">Kevin Buzzard (Mar 05 2019 at 09:40)</a>:</h4>
+<p>So you promised Lean that alpha would be inferred using unification, but it couldn't do it.</p>
+
+<a name="159989431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/159989431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#159989431">Kevin Buzzard (Mar 05 2019 at 09:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_field</span> <span class="n">α</span><span class="o">]</span>
+</pre></div>
+
+
+<p>So you have <code>u : E -&gt; E</code>, and you want Lean to spot <code>banach_space α E</code> using type class inference and then realise that clearly you want <code>α</code> in that missing first slot.</p>
+
+
+{% endraw %}

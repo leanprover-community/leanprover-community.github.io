@@ -1,0 +1,106 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/54219letIetc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html">letI etc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159987835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/159987835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#159987835">Kevin Buzzard (Mar 05 2019 at 09:17)</a>:</h4>
+<p>Q) Why does <code>refl</code> fail to finish the proof of <code>Spv.refl</code> in the code below? </p>
+<p>I am about to write a bunch of API for a type <code>Spv</code> and I am going to have to get the hang of <code>letI</code>, <code>exactI</code> etc. I feel like my understanding of type class inference is now better than it was, and that I could do with a clearer picture of what is going on. Here's some documented minimised fully working code. Writing it has made me understand stuff better but I don't see why <code>refl</code> fails below.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounded_lattice</span> <span class="c1">-- for with_bot</span>
+
+<span class="n">universes</span> <span class="n">u₀</span> <span class="n">u₁</span>
+
+<span class="c1">-- what I need from with_bot</span>
+<span class="kn">example</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">with_bot</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="n">R</span> <span class="bp">→</span> <span class="n">with_bot</span> <span class="err">Γ</span>
+
+<span class="kn">definition</span> <span class="n">Spv</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="err">Γ</span><span class="o">],</span>
+ <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="k">with</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span> <span class="n">v0</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="c1">-- hΓ : partial_order Γ</span>
+  <span class="c1">-- but presumably type class inference doesn&#39;t know this yet.</span>
+  <span class="n">letI</span> <span class="o">:=</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span>
+  <span class="c1">-- now it does</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="c1">-- v0 r : with_bot Γ</span>
+  <span class="c1">-- ⊢ v0 r ≤ v0 r, and this ≤ is coming direct from hΓ and the</span>
+  <span class="c1">-- instance in the example above.</span>
+
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  refl, -- fails!</span>
+
+<span class="cm">  invalid apply tactic, failed to unify</span>
+<span class="cm">  v0 r ≤ v0 r</span>
+<span class="cm">with</span>
+<span class="cm">  ∀ [_inst_1 : preorder ?m_1] (a : ?m_1), a ≤ a</span>
+<span class="cm">  -/</span>
+  <span class="n">exact</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+
+<span class="c1">-- version without with_bot</span>
+
+<span class="n">def</span> <span class="n">valuation&#39;</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="n">R</span> <span class="bp">→</span> <span class="err">Γ</span>
+
+<span class="kn">definition</span> <span class="n">Spv&#39;</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="err">Γ</span><span class="o">],</span>
+ <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation&#39;</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">Spv&#39;</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv&#39;</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="k">with</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span> <span class="n">v0</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="c1">-- Don&#39;t even need letI</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span> <span class="c1">-- refl must now have worked</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>So there are two variants of a reflexivity proof. Let me talk through the code.</p>
+<p>In the definition of Spv there is an inequality <code>v r ≤ v s</code> which, to make sense, relies on finding a preorder on <code>with_bot Γ</code>. The <code>by exactI</code> must be doing this. But it seems to me that what must be happening in practice is that the term generated by the definition of <code>Spv</code> must be plugging the partial order on <code>with_bot  Γ</code> directly in, rather than saying "oh, we will deal with this using type class inference". Maybe this is how fully elaborated terms always work -- this is just dawning on me now as I write, I guess.</p>
+<p>So in practice I am going to be writing a bunch of <code>letI := hΓ</code>'s in my code I think. In the proof of <code>Spv.refl</code>, I do this.</p>
+<p>But why does <code>refl</code> fail to finish the proof of Spv.refl? </p>
+<p>Type class inference isn't finding the pre-order on <code>with_bot Γ</code>, even though I thought I inserted the partial order on <code>Γ</code> as early as I could.</p>
+
+<a name="159987938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/159987938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#159987938">Kevin Buzzard (Mar 05 2019 at 09:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="k">with</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span> <span class="n">v0</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">exactI</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p><code>exactI</code> also works. What does <code>exactI</code> do? I understand <code>letI</code> and <code>haveI</code>.</p>
+
+<a name="159988510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/159988510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#159988510">Kevin Buzzard (Mar 05 2019 at 09:29)</a>:</h4>
+<p>Independent issue:</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="n">refl</span><span class="o">]</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">refl</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid binary relation declaration, relation &#39;reflexive&#39; must have two explicit parameters</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>??</p>
+
+
+{% endraw %}
