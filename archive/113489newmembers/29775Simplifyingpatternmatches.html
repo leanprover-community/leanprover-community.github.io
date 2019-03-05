@@ -161,5 +161,156 @@ permalink: archive/113489newmembers/29775Simplifyingpatternmatches.html
 <p>BTW, on the being able to use <code>exp</code> in the simplifier, I believe this is because of magical trickery on the part of the equation compiler: "The example above shows that [some defining equations] hold definitionally [...].<br>
 The equation compiler tries to ensure that this holds whenever possible, as is the case with straightforward structural induction. In other situations, however, reductions hold only propositionally, which is to say, they are equational theorems that must be applied explicitly. The equation compiler generates such theorems internally. They are not meant to be used directly by the user; rather, the simp and rewrite tactics are configured to use them when necessary."</p>
 
+<a name="160022025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022025">Kevin Buzzard (Mar 05 2019 at 17:27)</a>:</h4>
+<p>This is hellish to work with because Lean already has an instance of <code>has_add nat</code></p>
+
+<a name="160022417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022417">Kevin Buzzard (Mar 05 2019 at 17:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mult</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+</pre></div>
+
+
+<p>I think the <code>(n + 1)</code> is Lean's add, and the <code>mult n + m</code> is your add. This is madness!</p>
+
+<a name="160022480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022480">Kevin Buzzard (Mar 05 2019 at 17:32)</a>:</h4>
+<p>I think I would recommend rolling your own nat.</p>
+
+<a name="160022666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022666">Plam (Mar 05 2019 at 17:34)</a>:</h4>
+<p>OK. Happy to avoid rolling my own nat, but just to check: if there weren't already duplicate definitions floating around, using <code>pattern</code> on add would let me pattern match in that way?</p>
+
+<a name="160022812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022812">Kevin Buzzard (Mar 05 2019 at 17:36)</a>:</h4>
+<p>The equation compiler wants to use Lean's inductive definition of nat. So it wants you to define things for zero and succ. If there weren't duplicate definitions then yes you can use <code>pattern</code> to make the equation compiler look nicer.</p>
+
+<a name="160022825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160022825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160022825">Kevin Buzzard (Mar 05 2019 at 17:36)</a>:</h4>
+<p>But for your failed proof it's really hard to make any progress</p>
+
+<a name="160023058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023058">Kevin Buzzard (Mar 05 2019 at 17:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span>
+</pre></div>
+
+
+<p>Insert that after your definition of <code>exp</code>.</p>
+
+<a name="160023078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023078">Kevin Buzzard (Mar 05 2019 at 17:39)</a>:</h4>
+<p>There you can see the secret equations which Lean will use when you write <code>simp only [exp]</code>.</p>
+
+<a name="160023194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023194">Kevin Buzzard (Mar 05 2019 at 17:40)</a>:</h4>
+<p>But <code>rw hidden.exp.equations._eqn_2</code> fails, because it is looking for <code>exp m (n + 1) = m*exp m n</code> where that <code>+</code> is, I believe, Lean's <code>+</code> on nat.</p>
+
+<a name="160023258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023258">Kevin Buzzard (Mar 05 2019 at 17:41)</a>:</h4>
+<p>Oh no I'm wrong</p>
+
+<a name="160023325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023325">Kevin Buzzard (Mar 05 2019 at 17:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span>
+</pre></div>
+
+<a name="160023338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023338">Kevin Buzzard (Mar 05 2019 at 17:42)</a>:</h4>
+<p><code>hidden.exp.equations._eqn_2</code> is using your add.</p>
+
+<a name="160023525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023525">Kevin Buzzard (Mar 05 2019 at 17:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="c1">-- goal (n + 1)^1 = n + 1</span>
+  <span class="k">show</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">has_add</span> <span class="n">n</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_one</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">has_add</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_one</span><span class="o">))</span>
+    <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_2</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="c1">-- progress!</span>
+  <span class="n">sorry</span>
+  <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="160023591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023591">Plam (Mar 05 2019 at 17:46)</a>:</h4>
+<p>It even doesn't work with lots of renaming:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">my_add</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">my_add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">precedence</span> <span class="bp">`&amp;`</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="kn">infix</span> <span class="bp">`&amp;`</span> <span class="o">:=</span> <span class="n">my_add</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">my_add</span>
+
+<span class="n">def</span> <span class="n">mult</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">n</span> <span class="bp">&amp;</span> <span class="n">m</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`*`</span> <span class="o">:=</span> <span class="n">mult</span>
+
+<span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span><span class="err">^</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">exp</span>
+
+<span class="kn">theorem</span> <span class="n">mult_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exp</span><span class="o">,</span> <span class="n">mult_one</span><span class="o">]</span>
+  <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="160023592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023592">Kevin Buzzard (Mar 05 2019 at 17:46)</a>:</h4>
+<p>I managed to convert the goal into <code>(n + 1)*(n + 1)^0 = n + 1</code>.</p>
+
+<a name="160023608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023608">Plam (Mar 05 2019 at 17:46)</a>:</h4>
+<p>Oh, cool! Lemme have a look</p>
+
+<a name="160023783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023783">Kevin Buzzard (Mar 05 2019 at 17:49)</a>:</h4>
+<p><code>instance : has_add ℕ := ⟨add⟩</code>. This is not using Lean correctly, really. Lean already has an instance of <code>has_add nat</code> and you've defined a second one. Now you don't really know which one Lean will use. The problem is that nat has a bunch of structure and you are attempting to over-ride parts of that structure, but you have not done it cleverly enough to over-ride Lean's underlying trust that you're using structures and instances sensibly. This might be possible, but you'll probably have to talk to a computer scientist about how to make it work. By far the easiest fix is to roll your own nat, it seems to me.</p>
+
+<a name="160023933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160023933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160023933">Plam (Mar 05 2019 at 17:51)</a>:</h4>
+<p>Good to know. I hadn't got to the sections on type classes yet -- thought there might be clever ways not to have them be unique in Lean. Still curious why my version above with <code>&amp;</code> doesn't work!</p>
+
+<a name="160024218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024218">Kevin Buzzard (Mar 05 2019 at 17:55)</a>:</h4>
+<p>Your simp fails because this already fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_2</span> <span class="o">(</span><span class="n">n</span><span class="bp">&amp;</span><span class="mi">1</span><span class="o">)</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="160024359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024359">Kevin Buzzard (Mar 05 2019 at 17:57)</a>:</h4>
+<p>I think.</p>
+
 
 {% endraw %}
