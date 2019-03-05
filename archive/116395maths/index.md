@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [out_param again](10601outparamagain.html) (8 messages, latest: Mar 05 2019 at 09:44)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2850 messages, latest: Mar 05 2019 at 10:54)
+
+* [out_param again](10601outparamagain.html) (10 messages, latest: Mar 05 2019 at 10:03)
 
 * [galois theory / splitting fields](31775galoistheorysplittingfields.html) (12 messages, latest: Mar 05 2019 at 09:22)
 
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [localization](95274localization.html) (3 messages, latest: Mar 05 2019 at 08:59)
 
 * [Lipschitz stuff](68419Lipschitzstuff.html) (8 messages, latest: Mar 05 2019 at 08:29)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2839 messages, latest: Mar 05 2019 at 00:27)
 
 * [inverse](30749inverse.html) (12 messages, latest: Mar 05 2019 at 00:22)
 

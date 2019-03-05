@@ -13175,5 +13175,67 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159965155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159965155">Mario Carneiro (Mar 05 2019 at 00:27)</a>:</h4>
 <p>I suggest using a local notation for <code>r ≤[v] s </code></p>
 
+<a name="159992017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159992017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159992017">Kevin Buzzard (Mar 05 2019 at 10:29)</a>:</h4>
+<p>So now here's one approach:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">Spv</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">],</span>
+ <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+
+<span class="kn">definition</span> <span class="n">out_</span><span class="err">Γ</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">linear_ordered_comm_group</span> <span class="o">(</span><span class="n">out_</span><span class="err">Γ</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">out</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="o">(</span><span class="n">out_</span><span class="err">Γ</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>And another approach is to write a bunch of code which, given an inequality (for that is what a term of type <code>Spv R</code> actually is), actually construct a valuation on R. I am pretty sure that this is possible,  given the work we have already done. However I currently don't understand if it is worth doing this. It would involve extending the inequality on R to an inequality on a certain field and then constructing Gamma using the units of that field. If I wrote all this code, and it would not be hard to write given what we have, we would end up with a computable definition, I think.</p>
+<p>Should I write this code?</p>
+
+<a name="159992300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159992300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159992300">Patrick Massot (Mar 05 2019 at 10:34)</a>:</h4>
+<p>What would we do with this computable definition?</p>
+
+<a name="159992317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159992317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159992317">Kevin Buzzard (Mar 05 2019 at 10:34)</a>:</h4>
+<p>I don't understand the point of computability. But I know it can be written now.</p>
+
+<a name="159992353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159992353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159992353">Kevin Buzzard (Mar 05 2019 at 10:35)</a>:</h4>
+<p>I'm just writing a roadmap in valuation_spectrum.lean and then I'm going to push and take a break for a few days to do work admin.</p>
+
+<a name="159992984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159992984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159992984">Kevin Buzzard (Mar 05 2019 at 10:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I just realised that I don't know the type of <code>Spv.lift</code>. For every Gamma I have <code>mk: valuation R Gamma -&gt; Spv R</code>. I have <code>equiv: valuation R Gamma1 -&gt; valuation R Gamma2 -&gt; Prop</code>. What function am I trying to descend here? A function on valuation R Gamma? Then I don't need the full force of equiv -- I only need it for when Gamma1 = Gamma2. Does that sound right?</p>
+
+<a name="159993046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993046">Kevin Buzzard (Mar 05 2019 at 10:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_equiv</span> <span class="o">(</span><span class="n">v₁</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ₁</span><span class="o">)</span> <span class="o">(</span><span class="n">v₂</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ₂</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span> <span class="n">v₁</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₁</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">v₂</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v₂</span> <span class="n">s</span>
+</pre></div>
+
+<a name="159993061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993061">Kevin Buzzard (Mar 05 2019 at 10:48)</a>:</h4>
+<p><code>definition mk (v : valuation R Γ) : Spv R := ...</code></p>
+
+<a name="159993109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993109">Kevin Buzzard (Mar 05 2019 at 10:50)</a>:</h4>
+<p>Should my lift be descending functions defined on a big sigma type? If so, which universes should my Gammas live in? Completely general ones?</p>
+
+<a name="159993239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993239">Kevin Buzzard (Mar 05 2019 at 10:51)</a>:</h4>
+<p>This sounds right to me. In the ZFC lying version of this story, the "equivalence class" has arbitrarily large Gamma's in.</p>
+
+<a name="159993370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993370">Kevin Buzzard (Mar 05 2019 at 10:54)</a>:</h4>
+<p>Is it Ok for <code>Spv.out</code> to be a pi type <code>Spv.out : Pi (v : Spv R), valuation R (value_group v)</code>? Here <code>value_group v</code> will be in the same universe as <code>R</code> (but will depend on <code>v</code>).</p>
+
+<a name="159993417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993417">Kevin Buzzard (Mar 05 2019 at 10:54)</a>:</h4>
+<p>I had not realised these subtleties until now.</p>
+
 
 {% endraw %}
