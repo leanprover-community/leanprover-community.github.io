@@ -92,5 +92,31 @@ permalink: archive/116395maths/47189fixedpointAPI.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159958838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159958838">Chris Hughes (Mar 04 2019 at 22:52)</a>:</h4>
 <p><code>fixed_point_spec</code> should be called either <code>fixed_point_unique</code> or <code>apply_eq_self_iff_eq_fixed_point</code></p>
 
+<a name="159985995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159985995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159985995">Sebastien Gouezel (Mar 05 2019 at 08:44)</a>:</h4>
+<p>You should define <code>fixed_point</code> in a more general setting, removing all the type classes except <code>nonempty α</code> and choosing a fixed point if there is one and something arbitrary otherwise (using <code>epsilon</code>). This definition will be useful in many different settings!</p>
+
+<a name="159986038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159986038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159986038">Patrick Massot (Mar 05 2019 at 08:45)</a>:</h4>
+<p>I was also thinking this in my bed last night. I'll try it</p>
+
+<a name="159986790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159986790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159986790">Patrick Massot (Mar 05 2019 at 08:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">open</span><span class="w"> </span><span class="n">classical</span><span class="w"></span>
+<span class="n">variables</span><span class="w"> </span><span class="p">{</span><span class="err">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nc">Type</span><span class="o">*</span><span class="p">}</span><span class="w"> </span><span class="p">[</span><span class="n">nonempty</span><span class="w"> </span><span class="err">α</span><span class="p">]</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">fixed_point</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">α</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="err">α</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">α</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="p">(</span><span class="err">λ</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">fixed_point_spec</span><span class="w"> </span><span class="p">{</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">α</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="err">α</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">α</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">fixed_point</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fixed_point</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span><span class="w"></span>
+<span class="n">epsilon_spec</span><span class="w"> </span><span class="err">⟨</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="err">⟩</span><span class="w"></span>
+</pre></div>
+
+
+<p>Done</p>
+
+<a name="159986831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixed%20point%20API/near/159986831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47189fixedpointAPI.html#159986831">Patrick Massot (Mar 05 2019 at 08:59)</a>:</h4>
+<p>And it works even better in the application to Banach fixed point</p>
+
 
 {% endraw %}

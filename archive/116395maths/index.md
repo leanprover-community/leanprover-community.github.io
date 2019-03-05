@@ -10,17 +10,19 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [fixed point API](47189fixedpointAPI.html) (7 messages, latest: Mar 05 2019 at 08:59)
+
+* [localization](95274localization.html) (3 messages, latest: Mar 05 2019 at 08:59)
+
+* [Lipschitz stuff](68419Lipschitzstuff.html) (8 messages, latest: Mar 05 2019 at 08:29)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2839 messages, latest: Mar 05 2019 at 00:27)
 
 * [inverse](30749inverse.html) (12 messages, latest: Mar 05 2019 at 00:22)
 
 * [nonempty](95771nonempty.html) (7 messages, latest: Mar 04 2019 at 23:48)
 
-* [fixed point API](47189fixedpointAPI.html) (3 messages, latest: Mar 04 2019 at 22:52)
-
 * [product metric space](66706productmetricspace.html) (15 messages, latest: Mar 04 2019 at 18:08)
-
-* [Lipschitz stuff](68419Lipschitzstuff.html) (6 messages, latest: Mar 04 2019 at 15:54)
 
 * [uniform split](49805uniformsplit.html) (43 messages, latest: Mar 04 2019 at 14:10)
 
