@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (52 messages, latest: Mar 05 2019 at 06:56)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (54 messages, latest: Mar 05 2019 at 07:49)
 
 * [noob question(s)](52075noobquestions.html) (201 messages, latest: Mar 05 2019 at 02:35)
 
