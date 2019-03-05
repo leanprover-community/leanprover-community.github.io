@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [representing math structures](94437representingmathstructures.html) (1 message, latest: Mar 05 2019 at 06:49)
+
 * [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (9 messages, latest: Mar 05 2019 at 02:34)
 
 * [group_equiv](50231groupequiv.html) (5 messages, latest: Mar 04 2019 at 16:51)
