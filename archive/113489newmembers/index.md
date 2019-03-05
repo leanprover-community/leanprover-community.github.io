@@ -10,15 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (3 messages, latest: Mar 05 2019 at 14:58)
+* [noob question(s)](52075noobquestions.html) (205 messages, latest: Mar 05 2019 at 15:41)
 
-* [noob question(s)](52075noobquestions.html) (202 messages, latest: Mar 05 2019 at 14:51)
+* [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (6 messages, latest: Mar 05 2019 at 15:23)
+
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (2 messages, latest: Mar 05 2019 at 15:04)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (54 messages, latest: Mar 05 2019 at 07:49)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
-
-* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (1 message, latest: Mar 04 2019 at 21:31)
 
 * [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (24 messages, latest: Mar 04 2019 at 20:45)
 

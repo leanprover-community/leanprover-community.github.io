@@ -69,5 +69,25 @@ permalink: archive/116395maths/30749inverse.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inverse/near/159964864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30749inverse.html#159964864">Mario Carneiro (Mar 05 2019 at 00:22)</a>:</h4>
 <p>lgtm</p>
 
+<a name="160014206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inverse/near/160014206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30749inverse.html#160014206">matt rice (Mar 05 2019 at 15:54)</a>:</h4>
+<p>thought i would throw this up here, in case something like it was wanted as well, haven't much looked at mathlib/mathlib style yet though apologies</p>
+<div class="codehilite"><pre><span></span>def inverse_comp {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fog : function.inverse g f)
+: (∀ a, (g ∘ f) a = a) ∧ (∀ b, (f ∘ g) b = b) :=
+  ⟨λ a, fog.left a, λ b, fog.right b⟩
+
+def inverse_comp_id {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fog : function.inverse g f)
+: (g ∘ f = id) ∧ (f ∘ g = id)
+:= ⟨funext (λ a&#39;,
+           show (g ∘ f) a&#39; = id a&#39;,
+             from calc (g ∘ f) a&#39; = a&#39;    : by rw (inverse_comp f g fog).left a&#39;
+                              ... = id a&#39; : by refl),
+    funext (assume b&#39;,
+            show (f ∘ g) b&#39; = id b&#39;,
+              from calc (f ∘ g) b&#39; = b&#39;    : by rw (inverse_comp f g fog).right b&#39;
+                               ... = id b&#39; : by refl)
+   ⟩
+</pre></div>
+
 
 {% endraw %}

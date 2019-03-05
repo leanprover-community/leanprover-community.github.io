@@ -80,5 +80,86 @@ permalink: archive/113489newmembers/29775Simplifyingpatternmatches.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160009515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160009515">Plam (Mar 05 2019 at 14:58)</a>:</h4>
 <p>Hm. I thought using <code>simp only</code> would avoid those lemmas being used. Is that not the case?</p>
 
+<a name="160010782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160010782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160010782">Wojciech Nawrocki (Mar 05 2019 at 15:12)</a>:</h4>
+<p>By default, <code>simp</code> will try to simplify the goal using all available lemmas marked with <code>@[simp]</code>. <code>simp only [h1, h2, ..]</code> will not use any of those, but only the lemmas <code>h1, h2, ..</code> that you provide. However, <code>exp</code> does not seem to be a simplification lemma, as those are usually of the form <code>complicated_expression = simplified_expression</code> (the ordering matters - the left side should be the more complicated one). In your case, <code>exp</code> is the definition of exponentiation and I'm not sure if <code>simp</code> can use that. You could try using <code>unfold exp</code> to expand the definition of <code>exp</code>. <em>EDIT</em>: Oh, it seems it can use that, fair enough. Still, you will need to provide more lemmas so that the whole expression can be simplified, as just <code>exp</code> is not enough. Marking some lemmas with <code>@[simp]</code> is the preferred way of doing this.</p>
+
+<a name="160011456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160011456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160011456">Plam (Mar 05 2019 at 15:21)</a>:</h4>
+<p>Thanks for the guidance! Yep, <code>exp</code> is not enough. What I'm confused about is what I need to add to <code>add</code> to make it behave like the Lean add when simplifying. In particular, changing <code>exp</code> to pattern match on <code>(nat.succ n) rather than </code>(n + 1)` makes the two cases behave the same.</p>
+<p>(In both below proofs I am using  <code>simp only</code>)</p>
+<p>Here is a working proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">add</span><span class="bp">⟩</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">add</span>
+
+<span class="n">def</span> <span class="n">mult</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`*`</span> <span class="o">:=</span> <span class="n">mult</span>
+
+<span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span><span class="err">^</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">exp</span>
+
+<span class="kn">theorem</span> <span class="n">mult_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exp</span><span class="o">,</span> <span class="n">mult_one</span><span class="o">]</span>
+  <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+
+<p>Here is a failed proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">add</span><span class="bp">⟩</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">add</span>
+
+<span class="n">def</span> <span class="n">mult</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`*`</span> <span class="o">:=</span> <span class="n">mult</span>
+
+<span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span><span class="err">^</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">exp</span>
+
+<span class="kn">theorem</span> <span class="n">mult_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">exp</span><span class="o">,</span> <span class="n">mult_one</span><span class="o">]</span>
+  <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+
+<p>The only difference is defining the inductive case of <code>exp</code> on <code>(nat.succ n)</code> vs <code>(n + 1)</code></p>
+
+<a name="160011631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160011631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160011631">Plam (Mar 05 2019 at 15:23)</a>:</h4>
+<p>BTW, on the being able to use <code>exp</code> in the simplifier, I believe this is because of magical trickery on the part of the equation compiler: "The example above shows that [some defining equations] hold definitionally [...].<br>
+The equation compiler tries to ensure that this holds whenever possible, as is the case with straightforward structural induction. In other situations, however, reductions hold only propositionally, which is to say, they are equational theorems that must be applied explicitly. The equation compiler generates such theorems internally. They are not meant to be used directly by the user; rather, the simp and rewrite tactics are configured to use them when necessary."</p>
+
 
 {% endraw %}
