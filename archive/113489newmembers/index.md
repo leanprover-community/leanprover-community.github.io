@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (19 messages, latest: Mar 04 2019 at 22:00)
+* [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (1 message, latest: Mar 04 2019 at 21:31)
 
