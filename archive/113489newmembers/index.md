@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (54 messages, latest: Mar 05 2019 at 07:49)
+* [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (3 messages, latest: Mar 05 2019 at 14:58)
 
-* [noob question(s)](52075noobquestions.html) (201 messages, latest: Mar 05 2019 at 02:35)
+* [noob question(s)](52075noobquestions.html) (202 messages, latest: Mar 05 2019 at 14:51)
+
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (54 messages, latest: Mar 05 2019 at 07:49)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 
