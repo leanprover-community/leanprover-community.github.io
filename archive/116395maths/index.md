@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2839 messages, latest: Mar 05 2019 at 00:27)
+
+* [inverse](30749inverse.html) (12 messages, latest: Mar 05 2019 at 00:22)
+
 * [nonempty](95771nonempty.html) (7 messages, latest: Mar 04 2019 at 23:48)
 
 * [fixed point API](47189fixedpointAPI.html) (3 messages, latest: Mar 04 2019 at 22:52)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2836 messages, latest: Mar 04 2019 at 22:13)
-
-* [inverse](30749inverse.html) (11 messages, latest: Mar 04 2019 at 21:45)
 
 * [product metric space](66706productmetricspace.html) (15 messages, latest: Mar 04 2019 at 18:08)
 
