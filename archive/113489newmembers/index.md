@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (26 messages, latest: Mar 05 2019 at 17:57)
+* [noob question(s)](52075noobquestions.html) (208 messages, latest: Mar 05 2019 at 18:58)
 
-* [noob question(s)](52075noobquestions.html) (207 messages, latest: Mar 05 2019 at 17:52)
+* [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (36 messages, latest: Mar 05 2019 at 18:40)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (2 messages, latest: Mar 05 2019 at 15:04)
 

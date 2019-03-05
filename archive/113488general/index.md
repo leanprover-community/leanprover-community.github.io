@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [letI etc](54219letIetc.html) (4 messages, latest: Mar 05 2019 at 17:56)
+* [letI etc](54219letIetc.html) (10 messages, latest: Mar 05 2019 at 18:45)
+
+* [equiv identifying sets](99972equividentifyingsets.html) (4 messages, latest: Mar 05 2019 at 18:19)
 
 * [library_search](97355librarysearch.html) (11 messages, latest: Mar 05 2019 at 17:37)
 
 * [lift (f \circ of) = f](49724liftfcircoff.html) (1 message, latest: Mar 05 2019 at 13:38)
-
-* [equiv identifying sets](99972equividentifyingsets.html) (2 messages, latest: Mar 05 2019 at 13:15)
 
 * [representing math structures](94437representingmathstructures.html) (2 messages, latest: Mar 05 2019 at 12:07)
 

@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2889 messages, latest: Mar 05 2019 at 17:11)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2891 messages, latest: Mar 05 2019 at 18:39)
+
+* [local rings](44943localrings.html) (1 message, latest: Mar 05 2019 at 18:08)
 
 * [inverse](30749inverse.html) (13 messages, latest: Mar 05 2019 at 15:54)
 

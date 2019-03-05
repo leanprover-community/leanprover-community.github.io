@@ -1236,5 +1236,33 @@ I get it when trying to apply <code>rw [sesh_tp.dual_end_recv]</code> where <cod
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/160024039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#160024039">Kevin Buzzard (Mar 05 2019 at 17:52)</a>:</h4>
 <p><code>rw</code> is what it is. If you want more you can try lots of tricks, e.g. <code>erw</code> or <code>simp only</code> or using <code>conv</code> mode -- we have lots of workarounds :-)  But this is dependent type theory, random rewriting can create terms which are not type correct and Lean pulls the plug when this happens.</p>
 
+<a name="160029879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/160029879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#160029879">Plam (Mar 05 2019 at 18:58)</a>:</h4>
+<p>Is there a way to make use of the fact that pattern matches in a theorem have the same structure as in a definition? In particular, that given a catchall pattern match later in the theorem, it can't be the case that the thing being matched against matches one of the earlier pattern matches?</p>
+<p>Concretely, when proving <code>simp_const_eq</code> below, I want to match on <code>plus (const a) (const b)</code>, <code>times (const a) (const b)</code> and then a catchall. Is this possible, or do I just need some extra cases that I can rfl my way through? </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">aexpr</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">const</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">aexpr</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">aexpr</span>
+<span class="bp">|</span> <span class="n">plus</span> <span class="o">:</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="n">aexpr</span>
+<span class="bp">|</span> <span class="n">times</span> <span class="o">:</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="n">aexpr</span>
+
+<span class="kn">open</span> <span class="n">aexpr</span>
+
+<span class="n">def</span> <span class="n">aeval</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">const</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">plus</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">aeval</span> <span class="n">e₁</span> <span class="bp">+</span> <span class="n">aeval</span> <span class="n">e₂</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">times</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">aeval</span> <span class="n">e₁</span> <span class="bp">*</span> <span class="n">aeval</span> <span class="n">e₂</span>
+
+<span class="n">def</span> <span class="n">simp_const</span> <span class="o">:</span> <span class="n">aexpr</span> <span class="bp">→</span> <span class="n">aexpr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">const</span> <span class="n">n₁</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="n">n₂</span><span class="o">))</span> <span class="o">:=</span> <span class="n">const</span> <span class="o">(</span><span class="n">n₁</span> <span class="bp">+</span> <span class="n">n₂</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">times</span> <span class="o">(</span><span class="n">const</span> <span class="n">n₁</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="n">n₂</span><span class="o">))</span> <span class="o">:=</span> <span class="n">const</span> <span class="o">(</span><span class="n">n₁</span> <span class="bp">*</span> <span class="n">n₂</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">e</span>
+
+<span class="kn">theorem</span> <span class="n">simp_const_eq</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">e</span> <span class="o">:</span> <span class="n">aexpr</span><span class="o">,</span> <span class="n">aeval</span> <span class="n">v</span> <span class="o">(</span><span class="n">simp_const</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">aeval</span> <span class="n">v</span> <span class="n">e</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
 
 {% endraw %}

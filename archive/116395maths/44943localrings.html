@@ -1,0 +1,35 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/44943localrings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/44943localrings.html">local rings</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160025227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/local%20rings/near/160025227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44943localrings.html#160025227">Johan Commelin (Mar 05 2019 at 18:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Is there a reason why you are not using the type class system for <code>is_local_ring</code> here?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nonunits_ideal</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_local_ring</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">nonunits</span> <span class="n">α</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">zero_mem_nonunits</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="bp">.</span><span class="n">zero_ne_one</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">rcases</span> <span class="n">id</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">M</span><span class="o">,</span> <span class="n">mM</span><span class="o">,</span> <span class="n">hM</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">nonunits</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">M</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">exists_le_maximal</span> <span class="bp">_</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">mN</span><span class="o">,</span> <span class="n">hN</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">cases</span> <span class="n">hM</span> <span class="n">N</span> <span class="n">mN</span><span class="o">,</span>
+        <span class="n">rwa</span> <span class="o">[</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="o">,</span> <span class="n">singleton_subset_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">hN</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">exact</span> <span class="n">mt</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_singleton_eq_top</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hx</span> <span class="o">}</span> <span class="o">},</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">coe_subset_nonunits</span> <span class="n">mM</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">M</span><span class="bp">.</span><span class="n">add_mem</span> <span class="o">(</span><span class="n">this</span> <span class="bp">_</span> <span class="n">hx</span><span class="o">)</span> <span class="o">(</span><span class="n">this</span> <span class="bp">_</span> <span class="n">hy</span><span class="o">))</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">x</span><span class="o">,</span> <span class="n">mul_mem_nonunits_right</span> <span class="o">}</span>
+</pre></div>
+
+
+{% endraw %}

@@ -312,5 +312,107 @@ The equation compiler tries to ensure that this holds whenever possible, as is t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024359">Kevin Buzzard (Mar 05 2019 at 17:57)</a>:</h4>
 <p>I think.</p>
 
+<a name="160024660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024660">Plam (Mar 05 2019 at 18:00)</a>:</h4>
+<p>Hm. Looks like I maybe misunderstood pattern matching -- it's not picking apart the exponent in terms of <code>&amp;</code> like I'd expected. This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">exp_one_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="err">^</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="bp">&amp;</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_2</span> <span class="o">(</span><span class="n">n</span><span class="bp">&amp;</span><span class="o">(</span><span class="mi">0</span><span class="bp">&amp;</span><span class="mi">1</span><span class="o">))</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">exp</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mult_one</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="160024703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024703">Kevin Buzzard (Mar 05 2019 at 18:01)</a>:</h4>
+<p>I think that what <code>simp only [exp]</code> does under the hood is that it thinks "OK so I have these two equation lemmas, let's try and get one of them to work. Let's take a look at what we have here". Your equation lemmas tell us what <code>m^0</code> and what <code>m^(n&amp;1)</code> evaluate to. But Lean sees <code>m^1</code>, so it thinks "OK, so what is this 1? OK so I know it's a nat, so it's either 0 or succ of something. Aah, in fact I know what 1 is, it's succ 0, so this is great, hopefully there's an equation lemma mentioning <code>m^(nat.succ n)</code>...aww crap, the user has done something really weird with making <code>&amp;</code> a pattern and I am completely confused. Why didn't he use normal pattern matching with 0 and succ like the equation compiler does by default? I give up"</p>
+
+<a name="160024808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024808">Kevin Buzzard (Mar 05 2019 at 18:02)</a>:</h4>
+<p>The equation compiler knows that nats are built using 0 and succ, but you have managed to persuade the equation compiler to build something using 0 and <code>&amp;</code>, and then its inbuilt algorithms in <code>simp</code> get confused.</p>
+
+<a name="160024839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160024839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160024839">Kevin Buzzard (Mar 05 2019 at 18:03)</a>:</h4>
+<p>All of this can be fixed if you roll your own nat, because then the equation compiler will be expecting what you will give it by default.</p>
+
+<a name="160025228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160025228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160025228">Plam (Mar 05 2019 at 18:08)</a>:</h4>
+<p>Doesn't your model predict that if I defined my own nats and then define a my_add and a pattern for them and then defined exp in terms of that pattern, it would still get confused? And if that's true, why doesn't it get confused when I define exp in terms of _normal_ (+), which is, after all, a pattern?</p>
+
+<a name="160026303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160026303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160026303">Kevin Buzzard (Mar 05 2019 at 18:21)</a>:</h4>
+<p>My understanding is certainly partially confused yes, but I know for sure that if you define your own nat then it works like a dream, because I wrote that blog post I cited earlier, and it's not working for you, and you're definitely doing something unexpected because you have made the equation compiler generate unhelpful lemmas as opposed to helpful ones.</p>
+
+<a name="160026573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160026573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160026573">Plam (Mar 05 2019 at 18:24)</a>:</h4>
+<p>Gotcha. I guess the lesson is to steer clear of stomping on the builtins. Thanks for the help btw!</p>
+
+<a name="160026648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160026648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160026648">Kevin Buzzard (Mar 05 2019 at 18:25)</a>:</h4>
+<p>Your patterns managed to get the equation compiler to generate some funky equation lemmas, and that seemed to be your downfall.</p>
+
+<a name="160027369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160027369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160027369">Kevin Buzzard (Mar 05 2019 at 18:33)</a>:</h4>
+<p>So looking back, at least some of what I'm saying makes some sense. I should say that I have no idea how the equation compiler works and I've never looked at the Lean source code. But when you defined <code>exp</code> using (nat.succ) you get the right equation lemmas:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">add</span><span class="bp">⟩</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">add</span>
+
+<span class="n">def</span> <span class="n">mult</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`*`</span> <span class="o">:=</span> <span class="n">mult</span>
+
+<span class="n">def</span> <span class="n">exp</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">hidden.exp.equations._eqn_1 : ∀ (m : ℕ), exp m 0 = 1</span>
+<span class="cm">hidden.exp.equations._eqn_2 : ∀ (m n : ℕ), exp m (nat.succ n) = m*exp m n</span>
+<span class="cm">-/</span>
+
+
+<span class="n">def</span> <span class="n">exp&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">exp&#39;</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp&#39;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">hidden.exp&#39;.equations._eqn_1 : ∀ (m : ℕ), exp&#39; m 0 = 1</span>
+<span class="cm">hidden.exp&#39;.equations._eqn_2 : ∀ (m n : ℕ), exp&#39; m (n + 1) = m*exp&#39; m n</span>
+<span class="cm">-/</span>
+
+<span class="c1">-- and what is that `n + 1` exactly?</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">hidden</span><span class="bp">.</span><span class="n">exp&#39;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">hidden.exp&#39;.equations._eqn_1 : ∀ (m : nat), @eq nat (exp&#39; m 0) 1</span>
+<span class="cm">hidden.exp&#39;.equations._eqn_2 : ∀ (m n : nat), @eq nat (exp&#39; m (@has_add.add nat hidden.has_add n 1)) (mult m (exp&#39; m n))</span>
+<span class="cm">-/</span>
+
+<span class="c1">-- it&#39;s `hidden.add n 1`</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+
+<p>Using your hidden add as a pattern you can over-ride the choice Lean wants to make, and it seems that the upshot is that you get equation lemmas which the simplifier can't use, for some reason I do not fully understand because I do not really know how the simplifier works other than the fact that I know <code>simp [exp]</code> tries to use the equation lemmas.</p>
+
+<a name="160028163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160028163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160028163">Plam (Mar 05 2019 at 18:40)</a>:</h4>
+<p>Fiddling with this is in the <code>&amp;</code> case I suspect the issue could be desugaring of numerals. Maybe <code>1</code> gets converted straight to <code>nat.succ n</code> and so never goes through <code>my_add</code>. Not sure though</p>
+
 
 {% endraw %}

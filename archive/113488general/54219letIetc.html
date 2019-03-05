@@ -107,5 +107,71 @@ permalink: archive/113488general/54219letIetc.html
 <p>Do you know about <code>resetI</code>? <code>resetI</code> means "make everything in the context available for type class resolution". Of course things "to the left of the colon" were already available, so the point is to add things bound by a lambda, or by <code>rcases</code>, etc.--in particular your <code>hΓ</code>, I'm guessing.<br>
 <code>exactI</code> is <code>resetI</code> followed by <code>exact</code>.</p>
 
+<a name="160025024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160025024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160025024">Kevin Buzzard (Mar 05 2019 at 18:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounded_lattice</span> <span class="c1">-- for with_bot</span>
+
+<span class="n">universes</span> <span class="n">u₀</span> <span class="n">u₁</span>
+
+<span class="c1">-- what I need from with_bot</span>
+<span class="kn">example</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">with_bot</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">partial_order</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="n">R</span> <span class="bp">→</span> <span class="n">with_bot</span> <span class="err">Γ</span>
+
+<span class="kn">definition</span> <span class="n">Spv</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">ineq</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="o">{</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="err">Γ</span><span class="o">],</span>
+ <span class="k">by</span> <span class="n">exactI</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">v</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">ineq</span> <span class="n">r</span> <span class="n">s</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">Spv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">Spv</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="k">with</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span> <span class="n">v0</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">resetI</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">with_bot</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span>
+  <span class="n">resetI</span><span class="o">,</span>
+  <span class="k">show</span> <span class="o">(</span><span class="n">v0</span> <span class="n">r</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="err">Γ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">v0</span> <span class="n">r</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span> <span class="c1">-- fails</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  invalid apply tactic, failed to unify</span>
+<span class="cm">  v0 r ≤ v0 r</span>
+<span class="cm">with</span>
+<span class="cm">  ∀ [_inst_1 : preorder ?m_1] (a : ?m_1), a ≤ a</span>
+<span class="cm">state:</span>
+<span class="cm">R : Type u₀,</span>
+<span class="cm">v : Spv R,</span>
+<span class="cm">r : R,</span>
+<span class="cm">Γ : Type u₀,</span>
+<span class="cm">hΓ : partial_order Γ,</span>
+<span class="cm">v0 : valuation R Γ,</span>
+<span class="cm">h : ∀ (r s : R), v0 r ≤ v0 s ↔ v.val r s,</span>
+<span class="cm">_inst : preorder (with_bot Γ) := partial_order.to_preorder (with_bot Γ)</span>
+<span class="cm">⊢ v0 r ≤ v0 r</span>
+<span class="cm">  -/</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160025595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160025595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160025595">Kevin Buzzard (Mar 05 2019 at 18:13)</a>:</h4>
+<p>It just seems to be an issue with <code>refl</code>. <code>exact le_refl _</code> works fine.</p>
+
+<a name="160028328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160028328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160028328">Mario Carneiro (Mar 05 2019 at 18:42)</a>:</h4>
+<p>The issue with <code>attribute [refl] Spv.refl</code> is that the type of <code>Spv.refl</code> isn't asserting reflexivity of anything, it's proving <code>reflexive bla</code>. Lean is expecting a proof of <code>my_rel bla x x</code></p>
+
+<a name="160028461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160028461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160028461">Mario Carneiro (Mar 05 2019 at 18:43)</a>:</h4>
+<p>I think if you just unfold <code>reflexive</code> in the statement lean will accept it... but then the relation you are proving reflexive is <code>subtype.val</code> which is a bit weird</p>
+
+<a name="160028596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160028596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160028596">Mario Carneiro (Mar 05 2019 at 18:44)</a>:</h4>
+<p>You should probably hide the implementation details of <code>Spv</code> by using something other than <code>.1</code> to extract the relation from an Spv</p>
+
+<a name="160028717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/letI%20etc/near/160028717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54219letIetc.html#160028717">Mario Carneiro (Mar 05 2019 at 18:45)</a>:</h4>
+<p>like define <code>Spv.rel : Spv R -&gt; R -&gt; R -&gt; Prop := subtype.val</code> and then you can prove <code>Spv.refl : Spv.rel v x x</code> and mark it <code>@[refl]</code></p>
+
 
 {% endraw %}
