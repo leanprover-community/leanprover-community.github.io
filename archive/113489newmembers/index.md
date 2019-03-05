@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (47 messages, latest: Mar 05 2019 at 04:25)
+
 * [noob question(s)](52075noobquestions.html) (201 messages, latest: Mar 05 2019 at 02:35)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
@@ -83,8 +85,6 @@ permalink: archive/113489newmembers/index.html
 * [type class inference sadness](84569typeclassinferencesadness.html) (36 messages, latest: Feb 08 2019 at 23:30)
 
 * [Raymond](37083Raymond.html) (25 messages, latest: Feb 08 2019 at 20:26)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (46 messages, latest: Feb 08 2019 at 15:20)
 
 * [Coinduction](02528Coinduction.html) (18 messages, latest: Feb 08 2019 at 13:09)
 
