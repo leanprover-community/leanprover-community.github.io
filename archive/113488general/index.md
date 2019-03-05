@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linarith failure](87044linarithfailure.html) (8 messages, latest: Mar 05 2019 at 19:58)
+
 * [letI etc](54219letIetc.html) (10 messages, latest: Mar 05 2019 at 18:45)
 
 * [equiv identifying sets](99972equividentifyingsets.html) (4 messages, latest: Mar 05 2019 at 18:19)

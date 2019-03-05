@@ -414,5 +414,18 @@ The equation compiler tries to ensure that this holds whenever possible, as is t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160028163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160028163">Plam (Mar 05 2019 at 18:40)</a>:</h4>
 <p>Fiddling with this is in the <code>&amp;</code> case I suspect the issue could be desugaring of numerals. Maybe <code>1</code> gets converted straight to <code>nat.succ n</code> and so never goes through <code>my_add</code>. Not sure though</p>
 
+<a name="160032112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160032112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160032112">Kevin Buzzard (Mar 05 2019 at 19:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">numerals</span> <span class="n">false</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">1</span> <span class="c1">-- has_one.one ℕ : ℕ</span>
+<span class="kn">definition</span> <span class="n">X</span> <span class="o">:</span> <span class="n">has_one</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">X</span> <span class="c1">-- nat.has_one</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_one</span> <span class="c1">-- one := nat.succ nat.zero</span>
+</pre></div>
+
+<a name="160033479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20pattern%20matches/near/160033479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29775Simplifyingpatternmatches.html#160033479">Kevin Buzzard (Mar 05 2019 at 19:41)</a>:</h4>
+<p>1 is indeed succ zero</p>
+
 
 {% endraw %}
