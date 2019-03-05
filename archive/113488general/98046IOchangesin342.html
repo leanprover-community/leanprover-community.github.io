@@ -66,5 +66,29 @@ permalink: archive/113488general/98046IOchangesin342.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159406144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159406144">Simon Winwood (Feb 26 2019 at 08:00)</a>:</h4>
 <p>thanks for replying so quickly btw</p>
 
+<a name="160035030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160035030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160035030">Joe Hendrix (Mar 05 2019 at 20:00)</a>:</h4>
+<p>I work with Simon.  It sounds like we're definitely not able to upgrade to Lean 3.4.2 until we find a way to send binary data from another process into Lean.  We could do tricks like base64 encode the data, but for now I think we'll just stay with Lean 3.4.1 until Lean 4 is out with a C FFI.</p>
+
+<a name="160035763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160035763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160035763">Mario Carneiro (Mar 05 2019 at 20:08)</a>:</h4>
+<p>What's the issue? I have written a lean program that reads binary data, so I think it's at least possible to get the behavior you want</p>
+
+<a name="160037086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160037086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160037086">Mario Carneiro (Mar 05 2019 at 20:26)</a>:</h4>
+<p>here's a small demo:</p>
+<div class="codehilite"><pre><span></span>$ printf &quot;%b&quot; &#39;\xca\xfe\xba\xbe&#39; &gt; test.bin
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span>
+  <span class="n">h</span> <span class="err">←</span> <span class="n">io</span><span class="bp">.</span><span class="n">mk_file_handle</span> <span class="s2">&quot;test.bin&quot;</span> <span class="n">io</span><span class="bp">.</span><span class="n">mode</span><span class="bp">.</span><span class="n">read</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="bp">⟨</span><span class="mi">4</span><span class="o">,</span> <span class="n">c</span><span class="bp">⟩</span> <span class="err">←</span> <span class="n">io</span><span class="bp">.</span><span class="n">fs</span><span class="bp">.</span><span class="n">read</span> <span class="n">h</span> <span class="mi">4</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="o">(</span><span class="n">to_string</span> <span class="err">$</span> <span class="n">char</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">array</span><span class="bp">.</span><span class="n">to_list</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">return</span> <span class="o">())</span>
+  <span class="c1">-- [202, 254, 186, 190]</span>
+</pre></div>
+
 
 {% endraw %}

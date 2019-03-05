@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [linarith failure](87044linarithfailure.html) (8 messages, latest: Mar 05 2019 at 19:58)
+* [IO changes in 3.4.2](98046IOchangesin342.html) (16 messages, latest: Mar 05 2019 at 20:26)
+
+* [linarith failure](87044linarithfailure.html) (10 messages, latest: Mar 05 2019 at 20:23)
 
 * [letI etc](54219letIetc.html) (10 messages, latest: Mar 05 2019 at 18:45)
 
@@ -71,8 +73,6 @@ permalink: archive/113488general/index.html
 * [3.4.1 branch](74787341branch.html) (20 messages, latest: Feb 26 2019 at 09:27)
 
 * [simp lemma for subtype.property](47692simplemmaforsubtypeproperty.html) (14 messages, latest: Feb 26 2019 at 08:57)
-
-* [IO changes in 3.4.2](98046IOchangesin342.html) (13 messages, latest: Feb 26 2019 at 08:00)
 
 * [lean community fork](45880leancommunityfork.html) (19 messages, latest: Feb 25 2019 at 20:33)
 
