@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2850 messages, latest: Mar 05 2019 at 10:54)
+* [galois theory / splitting fields](31775galoistheorysplittingfields.html) (13 messages, latest: Mar 05 2019 at 11:25)
+
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2851 messages, latest: Mar 05 2019 at 11:16)
 
 * [out_param again](10601outparamagain.html) (10 messages, latest: Mar 05 2019 at 10:03)
-
-* [galois theory / splitting fields](31775galoistheorysplittingfields.html) (12 messages, latest: Mar 05 2019 at 09:22)
 
 * [fixed point API](47189fixedpointAPI.html) (7 messages, latest: Mar 05 2019 at 08:59)
 

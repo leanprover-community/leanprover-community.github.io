@@ -13237,5 +13237,23 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159993417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159993417">Kevin Buzzard (Mar 05 2019 at 10:54)</a>:</h4>
 <p>I had not realised these subtleties until now.</p>
 
+<a name="159994621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/159994621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#159994621">Kevin Buzzard (Mar 05 2019 at 11:16)</a>:</h4>
+<p>I've just run through this and it looks right to me. Using what we have I believe we can define a continuity predicate on <code>valuation R Gamma</code> in such a way that if <code>v1 : valuation R Gamma1</code> and <code>v2 : valuation R Gamma2</code> are equivalent then one is continuous iff the other one is. This should be the input to <code>Spv.lift</code> in order to descend continuity to <code>Spv R</code>.</p>
+<p>In summary then,</p>
+<div class="codehilite"><pre><span></span>R : Type u, Γ : Type u0, Γ1 : Type u1, Γ2 : Type u2
+Spv R : Type u
+
+Spv.mk  (v : valuation R Γ) : Spv R
+
+value_group {R : Type u} : Spv R -&gt; Type u -- same universe
+
+Spv.out : Pi (v : Spv(R)), valuation R (value_group v)
+
+Spv.lift : ∀ (f : Σ Γ, valuation R Γ → X),
+  (∀ v1 v2 : Σ Γ, valuation R Γ, is_equiv v1.2 v2.2)
+  → Spv R → X
+</pre></div>
+
 
 {% endraw %}
