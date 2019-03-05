@@ -1,0 +1,72 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/97355librarysearch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html">library_search</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="159997569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997569">Scott Morrison (Mar 05 2019 at 12:13)</a>:</h4>
+<p>... a present coming soon:</p>
+<p>Here's a randomly chosen short mathlib proof:</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+⟨b, (nat.div_mul_cancel h).symm⟩
+</pre></div>
+
+
+<p>Now, let's try</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+by library_search
+</pre></div>
+
+
+<p>wait a few seconds, and observe the trace message <code>div_dvd_of_dvd h</code>, which is interesting I guess, but not that awesome.</p>
+<p>However:</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+by library_search [-div_dvd_of_dvd]
+</pre></div>
+
+
+<p>gives <code>dvd.intro b (nat.div_mul_cancel h)</code>.</p>
+<p>There were no hints here, just scraping all the imported declarations, and doing a neither-depth-nor-breadth-first search of the tree of applications of lemmas to the goal.</p>
+
+<a name="159997676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997676">Scott Morrison (Mar 05 2019 at 12:15)</a>:</h4>
+<p>Now, this is pretty sensitive to how much you have imported! With just <code>data.nat.prime</code> imported, this example takes a second or so, but with everything-and-the-kitchen-sink imported it spirals out to 40s, which is obviously unacceptable. But I've barely started optimising / trimming the search tree, so it's possible this will still improve a lot.</p>
+
+<a name="159997754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997754">Scott Morrison (Mar 05 2019 at 12:16)</a>:</h4>
+<p>Other examples are much less sensitive to the amount imported.  For example I can find the proof of <code>example {a b c : ℕ} (h₁ : a ∣ c) (h₂ : a ∣ b + c) : a ∣ b</code> in about 1s with small imports, and 2s with lots of imports.</p>
+
+<a name="159997826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997826">Scott Morrison (Mar 05 2019 at 12:17)</a>:</h4>
+<p>(That proof is <code>(nat.dvd_add_iff_left h₁).mpr h₂</code>)</p>
+
+<a name="159997879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997879">Patrick Massot (Mar 05 2019 at 12:18)</a>:</h4>
+<p>It's very promising!</p>
+
+<a name="159997891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997891">Patrick Massot (Mar 05 2019 at 12:18)</a>:</h4>
+<p>It's very exciting to see you are back to tactic writing!</p>
+
+<a name="159997917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997917">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>Attempting to prepare examples for my students was getting discouraging. Also they are already upset about not being able to find lemmas. :-)</p>
+
+<a name="159997958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997958">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>Also -- thanks to Simon and Keeley for help at key points, and Johan's constant encouragement. :-)</p>
+
+<a name="159997967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997967">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>But there's still some work to get this polished, it's a mess at the moment!</p>
+
+
+{% endraw %}
