@@ -10,7 +10,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Scott's course](09945Scottscourse.html) (13 messages, latest: Mar 05 2019 at 18:24)
+* [Scott's course](09945Scottscourse.html) (17 messages, latest: Mar 05 2019 at 21:51)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 04 2019 at 21:40)
 

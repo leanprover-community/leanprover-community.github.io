@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [IO changes in 3.4.2](98046IOchangesin342.html) (16 messages, latest: Mar 05 2019 at 20:26)
+* [linarith failure](87044linarithfailure.html) (12 messages, latest: Mar 05 2019 at 21:53)
 
-* [linarith failure](87044linarithfailure.html) (10 messages, latest: Mar 05 2019 at 20:23)
+* [IO changes in 3.4.2](98046IOchangesin342.html) (17 messages, latest: Mar 05 2019 at 21:02)
 
 * [letI etc](54219letIetc.html) (10 messages, latest: Mar 05 2019 at 18:45)
 
