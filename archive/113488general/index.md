@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (16 messages, latest: Mar 06 2019 at 09:48)
+* [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (33 messages, latest: Mar 06 2019 at 10:33)
 
 * [beta reduction?](91817betareduction.html) (4 messages, latest: Mar 06 2019 at 05:43)
 

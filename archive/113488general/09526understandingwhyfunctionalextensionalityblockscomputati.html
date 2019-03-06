@@ -76,5 +76,103 @@ permalink: archive/113488general/09526understandingwhyfunctionalextensionalitybl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160081356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160081356">Peter Hoffmann (Mar 06 2019 at 09:48)</a>:</h4>
 <p>Intermediate explanation would be nice.</p>
 
+<a name="160082318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160082318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160082318">Chris Hughes (Mar 06 2019 at 10:05)</a>:</h4>
+<p>More or less, it's because the iota reduction rules mean recursors reduce when applied to a constructor. In this case the recursor is <code>eq.rec</code> and the constructor is <code>eq.refl</code>. But the equality proof wasn't constructed with <code>eq.refl</code>, and moreover cannot be constructed with <code>eq.refl</code>, so it cannot reduce.</p>
+
+<a name="160082501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160082501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160082501">Chris Hughes (Mar 06 2019 at 10:08)</a>:</h4>
+<p>If it did reduce, the resulting expression might not even type check.</p>
+
+<a name="160082840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160082840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160082840">Moses Schönfinkel (Mar 06 2019 at 10:14)</a>:</h4>
+<p>But this only speak to consequences of the way the reduction is defined in Lean. I think Peter's asking why they're set up in such a way (to which I can only provides an answer that goes full circle, because it avoids issues with functional extensionality).</p>
+
+<a name="160083081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083081">Andrew Ashworth (Mar 06 2019 at 10:18)</a>:</h4>
+<p>I don't quite follow</p>
+
+<a name="160083097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083097">Andrew Ashworth (Mar 06 2019 at 10:18)</a>:</h4>
+<p>Why is it set up this way? It's because extensionality breaks strong normalization of terms</p>
+
+<a name="160083131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083131">Andrew Ashworth (Mar 06 2019 at 10:19)</a>:</h4>
+<p>You can make goofy terms that will cause the type checking to never terminate, if I remember correctly</p>
+
+<a name="160083211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083211">Moses Schönfinkel (Mar 06 2019 at 10:20)</a>:</h4>
+<p>An example of one such term is what I thought Peter was looking for :).</p>
+
+<a name="160083237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083237">Peter Hoffmann (Mar 06 2019 at 10:20)</a>:</h4>
+<p>I mean, it would be nice to have a precise definition of "computational content", and a proof that functional extensionality breaks this.</p>
+
+<a name="160083289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083289">Peter Hoffmann (Mar 06 2019 at 10:21)</a>:</h4>
+<p>I mean, "computational content" is a very abstract thing. Goes beyond how lean works.</p>
+
+<a name="160083373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083373">Peter Hoffmann (Mar 06 2019 at 10:23)</a>:</h4>
+<p>But this is getting to a bit meta level, with what language is one supposed to prove such a thing.</p>
+
+<a name="160083483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083483">Andrew Ashworth (Mar 06 2019 at 10:24)</a>:</h4>
+<p>computational content: anything that isn't a proposition</p>
+
+<a name="160083506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083506">Andrew Ashworth (Mar 06 2019 at 10:25)</a>:</h4>
+<p>proof that functional extensionality breaks this: exactly 11.3 in theorem proving in lean :(</p>
+
+<a name="160083600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083600">Andrew Ashworth (Mar 06 2019 at 10:26)</a>:</h4>
+<p>just take it on faith</p>
+
+<a name="160083623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083623">Andrew Ashworth (Mar 06 2019 at 10:27)</a>:</h4>
+<p>unless you want to spend time learning the lambda calculus reduction rules and working out some examples</p>
+
+<a name="160083627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083627">Chris Hughes (Mar 06 2019 at 10:27)</a>:</h4>
+<p>Here's an example from a thread a while ago </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_refl</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">=</span> <span class="o">(</span><span class="n">true</span> <span class="bp">∨</span> <span class="n">false</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">propext</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">does_not_reduce_to_zero</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">_</span> <span class="n">not_refl</span> <span class="err">$</span>
+<span class="mi">0</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">does_not_reduce_to_zero</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">proofs</span> <span class="n">true</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">does_not_reduce_to_zero</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">does_not_reduce_to_zero</span>
+</pre></div>
+
+<a name="160083872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083872">Chris Hughes (Mar 06 2019 at 10:31)</a>:</h4>
+<p>Here's a better example</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">S</span> <span class="o">:</span> <span class="n">multiset</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">T</span> <span class="o">:</span> <span class="n">multiset</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="o">[</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">S_eq_T</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">T</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+
+<span class="n">def</span> <span class="n">X</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">multiset</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">m</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">n</span> <span class="o">:</span> <span class="n">X</span> <span class="n">S</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">n&#39;</span> <span class="o">:</span> <span class="n">X</span> <span class="n">T</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">S_eq_T</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">n&#39;</span>
+</pre></div>
+
+<a name="160083991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20why%20functional%20extensionality%20blocks%20computati/near/160083991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09526understandingwhyfunctionalextensionalityblockscomputati.html#160083991">Chris Hughes (Mar 06 2019 at 10:33)</a>:</h4>
+<p>If the <code>eq.rec</code> in the definition of <code>n'</code> cannot reduce, because <code>n</code> has type <code>X S</code>, which is not definitionally equal to <code>X T</code>, so it would no longer type check after reduction.</p>
+
 
 {% endraw %}
