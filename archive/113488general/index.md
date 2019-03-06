@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (40 messages, latest: Mar 06 2019 at 00:24)
+
 * [linarith failure](87044linarithfailure.html) (12 messages, latest: Mar 05 2019 at 21:53)
 
 * [IO changes in 3.4.2](98046IOchangesin342.html) (17 messages, latest: Mar 05 2019 at 21:02)
@@ -43,8 +45,6 @@ permalink: archive/113488general/index.html
 * [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
 
 * [normalise subtype.val and coe](33650normalisesubtypevalandcoe.html) (3 messages, latest: Mar 01 2019 at 09:55)
-
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (39 messages, latest: Feb 28 2019 at 21:08)
 
 * [Lean Together 2020](04583LeanTogether2020.html) (5 messages, latest: Feb 28 2019 at 21:05)
 

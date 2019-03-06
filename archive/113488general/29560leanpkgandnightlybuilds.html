@@ -190,5 +190,29 @@ $
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159652340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159652340">Patrick Massot (Feb 28 2019 at 21:08)</a>:</h4>
 <p>I guess we cannot avoid that anyway. Even on a very quiet day, we can still run <code>leanpkg upgrade</code> while Travis is compiling mathlib</p>
 
+<a name="160054742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160054742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160054742">Kevin Buzzard (Mar 06 2019 at 00:24)</a>:</h4>
+<p>OK so within the perfectoid project (which has mathlib as a dependency) I changed directory into _target/deps/mathlib, typed <code>git pull</code> on the master branch, removed all old .olean files, and then typed <code>update-mathlib</code>, and a bunch of <code>.olean</code> files have appeared, but <code>git branch</code> within this local copy of mathlib says I'm on master and I am not sure I am; does <code>update-mathlib</code> basically corrupt the git repo? Or have I not used it correctly?</p>
+<div class="codehilite"><pre><span></span>$ git log
+commit 1ec0a1f49db97d45e8666a3bf33217ff79ca1d87
+Author: Rob Lewis &lt;rob.y.lewis@gmail.com&gt;
+Date:   Tue Mar 5 21:55:19 2019 +0100
+
+    fix(tactic/linarith): correctly parse 0*0
+
+...
+</pre></div>
+
+
+<p>(Rob's edit to <code>linarith,lean</code> made today, but</p>
+<div class="codehilite"><pre><span></span>$ ls -l src/tactic/linarith.*
+-rw-rw-r-- 1 buzzard buzzard  31433 Feb 12 21:46 src/tactic/linarith.lean
+-rw-rw-r-- 1 buzzard buzzard 847248 Feb 21 22:02 src/tactic/linarith.olean
+</pre></div>
+
+
+<p>So the log says that <code>linarith.lean</code> changed on 5th March, but the file itself has not changed (and I checked, Rob's edits from today are not there). </p>
+<p>Is this situation OK? What exactly is my <code>toml</code> file supposed to say at this point?</p>
+
 
 {% endraw %}
