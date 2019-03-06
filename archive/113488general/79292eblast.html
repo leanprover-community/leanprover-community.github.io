@@ -1,0 +1,89 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/79292eblast.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html">eblast</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160122443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/160122443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#160122443">Jesse Michael Han (Mar 06 2019 at 18:44)</a>:</h4>
+<p>I was quite amused to learn that <code>eblast</code> could do essentially all of last week's homework assignment for Jeremy's ITP course (I think <code>finish</code> is, for all practical purposes, stronger, and indeed suffices to replace all calls to <code>eblast</code> below, but I think this is neat demonstration of how far the out-of-the-box SMT tools can get you): </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">lattice</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span>
+
+<span class="n">class</span> <span class="n">lattice&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_inf</span> <span class="n">α</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_sup</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">inf_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inf_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊓</span> <span class="o">(</span><span class="n">y</span> <span class="err">⊓</span> <span class="n">z</span><span class="o">))</span>
+<span class="o">(</span><span class="n">sup_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="err">⊔</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sup_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span> <span class="err">⊔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊔</span> <span class="o">(</span><span class="n">y</span> <span class="err">⊔</span> <span class="n">z</span><span class="o">))</span>
+<span class="o">(</span><span class="n">inf_absorb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊓</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sup_absorb</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">⊔</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">lattice&#39;</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">ematch</span><span class="o">]</span>
+  <span class="n">inf_comm</span> <span class="n">inf_assoc</span> <span class="n">sup_comm</span> <span class="n">sup_assoc</span> <span class="n">inf_absorb</span> <span class="n">sup_absorb</span>
+
+<span class="c1">-- inside the namespace, you can refer to the axioms without a prefix</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lattice&#39;</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c1">-- the footnote on Wikipedia tells you how to prove this!</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">sup_idem</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span> <span class="c1">-- :^)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">inf_idem</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">le</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_le</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">lattice&#39;</span><span class="bp">.</span><span class="n">le</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">lemma</span> <span class="n">le_unfold</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_refl</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">le_def</span><span class="o">,</span> <span class="n">inf_idem</span><span class="o">]</span>
+
+<span class="c1">-- you can use `rw le_def at *` to unfold the definition everywhere</span>
+
+<span class="c1">-- Wikipedia also tells you how to prove this one:</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_def&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span><span class="n">split</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_trans</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_antisymm</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_sup_left</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_sup_right</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">sup_le</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">inf_le_left</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">inf_le_right</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">le_inf</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="err">⊓</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">lattice&#39;</span>
+</pre></div>
+
+
+{% endraw %}
