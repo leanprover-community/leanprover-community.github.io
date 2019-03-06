@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (20 messages, latest: Mar 06 2019 at 05:55)
+* [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (31 messages, latest: Mar 06 2019 at 06:53)
 
 * [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
 
