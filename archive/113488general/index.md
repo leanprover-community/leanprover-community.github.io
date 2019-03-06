@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (16 messages, latest: Mar 06 2019 at 09:48)
+
 * [beta reduction?](91817betareduction.html) (4 messages, latest: Mar 06 2019 at 05:43)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (40 messages, latest: Mar 06 2019 at 00:24)

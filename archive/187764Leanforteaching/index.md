@@ -10,7 +10,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Papers](32460Papers.html) (1 message, latest: Mar 06 2019 at 06:57)
+* [Papers](32460Papers.html) (3 messages, latest: Mar 06 2019 at 09:57)
 
 * [Scott's course](09945Scottscourse.html) (37 messages, latest: Mar 05 2019 at 23:08)
 
