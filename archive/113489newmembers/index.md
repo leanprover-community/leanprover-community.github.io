@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (20 messages, latest: Mar 06 2019 at 05:55)
+
 * [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (55 messages, latest: Mar 05 2019 at 23:08)
@@ -69,8 +71,6 @@ permalink: archive/113489newmembers/index.html
 * [Splitting "and" inside a function.](79847Splittingandinsideafunction.html) (61 messages, latest: Feb 22 2019 at 16:21)
 
 * [le_sub_iff_add_le error](21041lesubiffaddleerror.html) (14 messages, latest: Feb 22 2019 at 11:18)
-
-* [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (8 messages, latest: Feb 19 2019 at 19:26)
 
 * [writing tactics - quickstart info](88788writingtacticsquickstartinfo.html) (7 messages, latest: Feb 15 2019 at 11:13)
 
