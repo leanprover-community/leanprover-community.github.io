@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (1 message, latest: Mar 06 2019 at 15:52)
+
 * [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (33 messages, latest: Mar 06 2019 at 10:33)
 
 * [beta reduction?](91817betareduction.html) (4 messages, latest: Mar 06 2019 at 05:43)
