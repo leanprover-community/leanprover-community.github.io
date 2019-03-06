@@ -10,13 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
+
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (55 messages, latest: Mar 05 2019 at 23:08)
+
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (38 messages, latest: Mar 05 2019 at 19:41)
 
 * [noob question(s)](52075noobquestions.html) (208 messages, latest: Mar 05 2019 at 18:58)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (2 messages, latest: Mar 05 2019 at 15:04)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (54 messages, latest: Mar 05 2019 at 07:49)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 

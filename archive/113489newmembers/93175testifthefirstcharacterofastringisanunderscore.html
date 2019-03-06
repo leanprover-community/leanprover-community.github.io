@@ -1,0 +1,99 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html">test if the first character of a string is an underscore?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160050472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050472">Scott Morrison (Mar 05 2019 at 23:17)</a>:</h4>
+<p>I need to filter a big list of <code>name</code>s, discarding all those whose last component starts with an underscore.</p>
+
+<a name="160050488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050488">Scott Morrison (Mar 05 2019 at 23:17)</a>:</h4>
+<p>(Throw out all the auto-generated lemmas from the pattern matcher, etc.)</p>
+
+<a name="160050496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050496">Scott Morrison (Mar 05 2019 at 23:17)</a>:</h4>
+<p>I can use <code>(to_string n.components.ilast).to_list.head ≠ '_'</code>, but apparently on the scale I'm working this is slow.</p>
+
+<a name="160050499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050499">Simon Hudon (Mar 05 2019 at 23:17)</a>:</h4>
+<p>That sounds like something that should exist in <code>tactic.basic</code></p>
+
+<a name="160050587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050587">Simon Hudon (Mar 05 2019 at 23:18)</a>:</h4>
+<p>A better way of getting the last component is <code>(name.update_prefix </code>_ n).to_string`</p>
+
+<a name="160050615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050615">Mario Carneiro (Mar 05 2019 at 23:19)</a>:</h4>
+<p><code>name.is_internal</code>?</p>
+
+<a name="160050753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050753">Scott Morrison (Mar 05 2019 at 23:21)</a>:</h4>
+<p>I guess I need to read the C++ to find out what <code>name.is_internal</code> actually does. :-)</p>
+
+<a name="160050754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050754">Scott Morrison (Mar 05 2019 at 23:21)</a>:</h4>
+<p>I'll experiment, instead.</p>
+
+<a name="160050776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050776">Mario Carneiro (Mar 05 2019 at 23:21)</a>:</h4>
+<p>I think it's exactly what you said</p>
+
+<a name="160050781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050781">Scott Morrison (Mar 05 2019 at 23:21)</a>:</h4>
+<p>Great.</p>
+
+<a name="160050835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050835">Scott Morrison (Mar 05 2019 at 23:22)</a>:</h4>
+<p>Any tricks for throwing out all private names? Currently I just do <code>n.components.head ≠ "_private"</code></p>
+
+<a name="160050856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050856">Mario Carneiro (Mar 05 2019 at 23:22)</a>:</h4>
+<p>you should probably not go via <code>components</code> like that</p>
+
+<a name="160050893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050893">Scott Morrison (Mar 05 2019 at 23:23)</a>:</h4>
+<p>Ok. I'll write my own <code>name.is_private</code> by pattern matching?</p>
+
+<a name="160050914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050914">Mario Carneiro (Mar 05 2019 at 23:24)</a>:</h4>
+<p>You could define a function for <code>n.components.head</code> and then check that it equals <code>"_private"</code></p>
+
+<a name="160050987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160050987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160050987">Scott Morrison (Mar 05 2019 at 23:24)</a>:</h4>
+<p>What should the function for <code>n.components.head</code> be called?</p>
+
+<a name="160051014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051014">Simon Hudon (Mar 05 2019 at 23:25)</a>:</h4>
+<p><code>head</code></p>
+
+<a name="160051232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051232">Scott Morrison (Mar 05 2019 at 23:28)</a>:</h4>
+<p>What is <code>name.mk_numeral</code>, anyway?</p>
+
+<a name="160051503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051503">Mario Carneiro (Mar 05 2019 at 23:32)</a>:</h4>
+<p>it's an internal thing, you won't see it except in unique names for variables I think</p>
+
+<a name="160051620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051620">Scott Morrison (Mar 05 2019 at 23:34)</a>:</h4>
+<p>Are names like <code>cases_on</code> and <code>inj_arrow</code> going to count as internal names?</p>
+
+<a name="160051643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051643">Mario Carneiro (Mar 05 2019 at 23:34)</a>:</h4>
+<p>no, I think it's literally what you said</p>
+
+<a name="160051652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/test%20if%20the%20first%20character%20of%20a%20string%20is%20an%20underscore%3F/near/160051652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93175testifthefirstcharacterofastringisanunderscore.html#160051652">Mario Carneiro (Mar 05 2019 at 23:34)</a>:</h4>
+<p>it just checks for an initial underscore</p>
+
+
+{% endraw %}
