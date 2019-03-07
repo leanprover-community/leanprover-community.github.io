@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [uncurry](83833uncurry.html) (2 messages, latest: Mar 07 2019 at 04:59)
+
 * [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (31 messages, latest: Mar 06 2019 at 06:53)
 
 * [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
