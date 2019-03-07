@@ -10,13 +10,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [continuous functions commute with limits v filters](14632continuousfunctionscommutewithlimitsvfilters.html) (15 messages, latest: Mar 07 2019 at 11:51)
+
+* [out_param again](10601outparamagain.html) (15 messages, latest: Mar 07 2019 at 11:50)
+
 * [local rings](44943localrings.html) (5 messages, latest: Mar 07 2019 at 08:51)
 
 * [galois theory / splitting fields](31775galoistheorysplittingfields.html) (14 messages, latest: Mar 07 2019 at 08:50)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2902 messages, latest: Mar 06 2019 at 13:37)
-
-* [out_param again](10601outparamagain.html) (13 messages, latest: Mar 06 2019 at 01:16)
 
 * [inverse](30749inverse.html) (13 messages, latest: Mar 05 2019 at 15:54)
 

@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (6 messages, latest: Mar 07 2019 at 10:51)
+* [power series](15161powerseries.html) (12 messages, latest: Mar 07 2019 at 11:08)
 
 * [eblast](79292eblast.html) (6 messages, latest: Mar 07 2019 at 00:14)
 
