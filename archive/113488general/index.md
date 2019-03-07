@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [missing instances?](06530missinginstances.html) (12 messages, latest: Mar 07 2019 at 15:57)
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (4 messages, latest: Mar 07 2019 at 18:03)
 
-* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (2 messages, latest: Mar 07 2019 at 15:19)
+* [missing instances?](06530missinginstances.html) (12 messages, latest: Mar 07 2019 at 15:57)
 
 * [power series](15161powerseries.html) (12 messages, latest: Mar 07 2019 at 11:08)
 
