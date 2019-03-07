@@ -120,5 +120,130 @@ permalink: archive/116395maths/10601outparamagain.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210027">Mario Carneiro (Mar 07 2019 at 15:59)</a>:</h4>
 <p>module doesn't work like that anymore</p>
 
+<a name="160210166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210166">Mario Carneiro (Mar 07 2019 at 16:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">inhabited_vector_space</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">k</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>this is a bad idea</p>
+
+<a name="160210224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210224">Mario Carneiro (Mar 07 2019 at 16:01)</a>:</h4>
+<p>you don't even need all this stuff about k but it's going to make typeclass search get lost</p>
+
+<a name="160210374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210374">Mario Carneiro (Mar 07 2019 at 16:02)</a>:</h4>
+<p>this should just say that an <code>add_comm_group</code> is inhabited... and it should be a local instance</p>
+
+<a name="160210387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210387">Patrick Massot (Mar 07 2019 at 16:02)</a>:</h4>
+<p>Thanks! The instance was trying to avoid the generic has_zero implies inhabited</p>
+
+<a name="160210421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210421">Patrick Massot (Mar 07 2019 at 16:03)</a>:</h4>
+<p>But not using add_comm_group was really stupid indeed</p>
+
+<a name="160210541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210541">Mario Carneiro (Mar 07 2019 at 16:04)</a>:</h4>
+<p>why do you even need this? Is it something about <code>inv_fun_on</code> or something?</p>
+
+<a name="160210745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210745">Mario Carneiro (Mar 07 2019 at 16:06)</a>:</h4>
+<p>In your definition of <code>fixed_point</code> you use <code>nonempty</code>, but for the properties you use <code>inhabited</code>. This seems reverse of what I would expect</p>
+
+<a name="160210754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210754">Patrick Massot (Mar 07 2019 at 16:06)</a>:</h4>
+<p><a href="https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3#file-out_param_hell-lean-L48" target="_blank" title="https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3#file-out_param_hell-lean-L48">https://gist.github.com/PatrickMassot/3c40ee89b1f0329432060e257c7e7cf3#file-out_param_hell-lean-L48</a></p>
+
+<a name="160210771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210771">Patrick Massot (Mar 07 2019 at 16:06)</a>:</h4>
+<p>oh you found it</p>
+
+<a name="160210795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210795">Mario Carneiro (Mar 07 2019 at 16:06)</a>:</h4>
+<p>If you are okay with using <code>nonempty</code> for <code>fixed_point</code> (and going classical), then you should use <code>nonempty</code> for the properties too</p>
+
+<a name="160210810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160210810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160210810">Patrick Massot (Mar 07 2019 at 16:07)</a>:</h4>
+<p>I must admit I used nonempty and inhabited interchangeably</p>
+
+<a name="160211443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160211443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160211443">Patrick Massot (Mar 07 2019 at 16:12)</a>:</h4>
+<p>So should I replace all by inhabited by nonempty?</p>
+
+<a name="160211477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160211477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160211477">Patrick Massot (Mar 07 2019 at 16:12)</a>:</h4>
+<p>I tried removing all out_param, but Lean still does not find my base field</p>
+
+<a name="160212624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160212624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160212624">Mario Carneiro (Mar 07 2019 at 16:22)</a>:</h4>
+<p>Lean won't find the base field unless you include it in your functions, like a normal type</p>
+
+<a name="160212820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160212820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160212820">Patrick Massot (Mar 07 2019 at 16:24)</a>:</h4>
+<p>Why is that?</p>
+
+<a name="160212854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160212854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160212854">Patrick Massot (Mar 07 2019 at 16:25)</a>:</h4>
+<p>Is Lean missing something fundamental here?</p>
+
+<a name="160212981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160212981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160212981">Mario Carneiro (Mar 07 2019 at 16:26)</a>:</h4>
+<p>concretely, that means alpha should be explicit in <code>lipschitz_with_translate</code> and <code>lipschitz_global_inverse</code></p>
+
+<a name="160213029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160213029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160213029">Mario Carneiro (Mar 07 2019 at 16:27)</a>:</h4>
+<p>Lean can't infer alpha, it appears nowhere in the theorem</p>
+
+<a name="160213196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160213196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160213196">Patrick Massot (Mar 07 2019 at 16:28)</a>:</h4>
+<p>It appears in the instance for E</p>
+
+<a name="160213783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160213783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160213783">Mario Carneiro (Mar 07 2019 at 16:34)</a>:</h4>
+<p>instances don't get pulled in unless the types are</p>
+
+<a name="160214282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214282">Mario Carneiro (Mar 07 2019 at 16:39)</a>:</h4>
+<p>Consider the point of application of your definition, <code>lipschitz_global_inverse u</code>. Lean knows <code>u : E -&gt; E</code>, and knows the result has type <code>E -&gt; E</code>, but nothing else tells it what <code>α</code> could be</p>
+
+<a name="160214437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214437">Mario Carneiro (Mar 07 2019 at 16:40)</a>:</h4>
+<p>lean knows that <code>E</code> is a banach space over the local <code>α</code>, but doesn't know if this should be the same <code>α</code> that is used in the theorem</p>
+
+<a name="160214608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214608">Mario Carneiro (Mar 07 2019 at 16:42)</a>:</h4>
+<p>long story short, this is just standard explicitness rules. Usually types appear as dependencies in further arguments, so they are usually implicit. In this case alpha is never used, so it has to be explicit</p>
+
+<a name="160214636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214636">Patrick Massot (Mar 07 2019 at 16:42)</a>:</h4>
+<p>This instance is pulled in, but it's not enough</p>
+
+<a name="160214649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214649">Patrick Massot (Mar 07 2019 at 16:42)</a>:</h4>
+<p>But I understand this is hopeless</p>
+
+<a name="160214655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214655">Mario Carneiro (Mar 07 2019 at 16:43)</a>:</h4>
+<p>it gets pulled in the theorem but not in the use</p>
+
+<a name="160214887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160214887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160214887">Mario Carneiro (Mar 07 2019 at 16:45)</a>:</h4>
+<p>This is the effect of the <code>out_param</code>. Before, with <code>out_param</code>, this could be inferred because you have an order like <code>u</code> known -&gt; <code>E</code> known -&gt; <code>B : banach_space ? E</code> searched to determine <code>α</code> -&gt; <code>α</code> known. Now you have  <code>u</code> known -&gt; <code>E</code> known -&gt; no typeclass search because <code>α</code> unknown -&gt; fail</p>
+
+<a name="160215079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160215079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160215079">Mario Carneiro (Mar 07 2019 at 16:46)</a>:</h4>
+<p>Or are you going to promise to me that a banach space will never have two scalar fields?</p>
+
+<a name="160215257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160215257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160215257">Mario Carneiro (Mar 07 2019 at 16:47)</a>:</h4>
+<p>I will remind you that this is why we don't use out_param here anymore</p>
+
+<a name="160215648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/out_param%20again/near/160215648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10601outparamagain.html#160215648">Patrick Massot (Mar 07 2019 at 16:51)</a>:</h4>
+<p>I certainly want complex banach spaces to be also real banach spaces</p>
+
 
 {% endraw %}
