@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/49679NewtonPicard.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html">Newton Picard</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160236265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Newton%20Picard/near/160236265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html#160236265">Jeremy Avigad (Mar 07 2019 at 20:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="210574">@Patrick Massot</span> <span class="user-mention" data-user-id="130980">@Jan-David Salchow</span> I moved this from the <em>out_param again</em> thread. Newton-Picard looks great! It would be nice to have it in mathlib.</p>
+<p>I agree with Patrick that before moving it to mathlib, we should think about whether the basic notions look the way we want them to. For example, <code>pos_real</code> belongs in <code>real</code> with <code>nnreal</code> and <code>ennreal</code>, and should probably be named <code>preal</code>, to match <code>pnat</code>(in the <code>data</code> folder). For another thing, I wonder whether it will later cause problems to have <code>moreover</code> be a token.</p>
+<p>I don't have any recommendation as to how to use <code>deriv</code> as a function or partial function. I tend to be conservative and wait until I have an application before adding something to the library. So, for example, my tendency would be to keep using <code>has_fderiv</code> and <code>has_deriv</code> until there is a good reason not to (for example, because they don't work well with calculations). And then that application will help us figure out what we want.</p>
+<p>I do have some ideas as to how to make calculations with partial functions more palatable, and I am hoping to experiment with that soon. </p>
+<p>Jan-David, is there a specific reason that Newton-Picard requires defining the space of differentiable maps? Or were you just experimenting with the definition?</p>
+
+<a name="160236888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Newton%20Picard/near/160236888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html#160236888">Patrick Massot (Mar 07 2019 at 20:57)</a>:</h4>
+<p>I think what Jan-David wrote uses only the derivative of f at 0. The right-inverse assumptions are morally about the second derivative of f at zero, but the second derivative actually doesn't appear. This is a really technical stuff, relevant in situations where we actually don't want to try to handle more derivative. Jeremy, in the situation Jan-David has in mind, the equation f = 0 is a non-linear Cauchy-Riemann equation, on spaces of maps between manifolds, with some Sobolev regularity. This explain while this theorem looks a bit strange</p>
+
+<a name="160237000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Newton%20Picard/near/160237000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html#160237000">Patrick Massot (Mar 07 2019 at 20:58)</a>:</h4>
+<p>But I can totally understand why he introduced differentiable maps. This is really the first move you want after defining <code>has_deriv</code></p>
+
+<a name="160237050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Newton%20Picard/near/160237050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html#160237050">Jan-David Salchow (Mar 07 2019 at 20:59)</a>:</h4>
+<p>I mainly introduce differentiable maps in this way, because it worked nicely for the operator norm</p>
+
+<a name="160237073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Newton%20Picard/near/160237073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49679NewtonPicard.html#160237073">Patrick Massot (Mar 07 2019 at 20:59)</a>:</h4>
+<p>I think the mean value inequality is a much better test for this. Here we really need a differentiable function. It would also need some stuff specific to dimension 1 (the mean value theorem).</p>
+
+
+{% endraw %}

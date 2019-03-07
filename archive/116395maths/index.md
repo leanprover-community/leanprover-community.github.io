@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Newton Picard](49679NewtonPicard.html) (5 messages, latest: Mar 07 2019 at 20:59)
+
 * [out_param again](10601outparamagain.html) (52 messages, latest: Mar 07 2019 at 16:51)
 
 * [continuous functions commute with limits v filters](14632continuousfunctionscommutewithlimitsvfilters.html) (19 messages, latest: Mar 07 2019 at 12:59)
