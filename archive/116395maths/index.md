@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [continuous functions commute with limits v filters](14632continuousfunctionscommutewithlimitsvfilters.html) (19 messages, latest: Mar 07 2019 at 12:59)
+* [out_param again](10601outparamagain.html) (18 messages, latest: Mar 07 2019 at 13:14)
 
-* [out_param again](10601outparamagain.html) (16 messages, latest: Mar 07 2019 at 12:35)
+* [continuous functions commute with limits v filters](14632continuousfunctionscommutewithlimitsvfilters.html) (19 messages, latest: Mar 07 2019 at 12:59)
 
 * [local rings](44943localrings.html) (5 messages, latest: Mar 07 2019 at 08:51)
 
