@@ -89,5 +89,15 @@ permalink: archive/113488general/79292eblast.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/160133384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#160133384">Patrick Massot (Mar 06 2019 at 20:52)</a>:</h4>
 <p>I would really love to understand better what finish is doing. Do you understand this?</p>
 
+<a name="160150187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/160150187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#160150187">Jesse Michael Han (Mar 06 2019 at 23:12)</a>:</h4>
+<p>The person to ask is really <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>, but from what I can tell from looking at the source, it is essentially <code>eblast</code> (where <code>ematch</code> is iterated only up to 20 times,  each time followed by <code>cc</code>) wrapped with preprocessing and a tableaux prover.</p>
+<p>The preprocessor negates the goal and normalizes the hypotheses by calling <code>simp</code> and pushing negations inwards. It also splits conjunctions and cases on existentials.</p>
+<p>The final step is <code>auto.done</code>, which first tries <code>contradiction</code> (if your goal is provable using just classical propositional logic then after the preprocessing, this should close it). Otherwise, it essentially runs <code>eblast</code>, which heuristically instantiates <code>ematch</code> lemmas, hoping that enough is in context for <code>cc</code> to close the goal.</p>
+
+<a name="160150889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/160150889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#160150889">Jesse Michael Han (Mar 06 2019 at 23:23)</a>:</h4>
+<p>(also, <code>finish</code> only parses a list of <code>simp</code> lemmas, while <code>[smt] eblast_using</code> will parse a list of <code>texpr</code>s).</p>
+
 
 {% endraw %}
