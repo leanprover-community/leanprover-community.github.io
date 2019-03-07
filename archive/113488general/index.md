@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [missing instances?](06530missinginstances.html) (12 messages, latest: Mar 07 2019 at 15:57)
+
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (2 messages, latest: Mar 07 2019 at 15:19)
+
 * [power series](15161powerseries.html) (12 messages, latest: Mar 07 2019 at 11:08)
 
 * [eblast](79292eblast.html) (6 messages, latest: Mar 07 2019 at 00:14)
@@ -19,8 +23,6 @@ permalink: archive/113488general/index.html
 * [summer research in London for female UG mathematicians](21757summerresearchinLondonforfemaleUGmathematicians.html) (1 message, latest: Mar 06 2019 at 20:15)
 
 * [Exemplar proofs](88888Exemplarproofs.html) (13 messages, latest: Mar 06 2019 at 16:50)
-
-* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (1 message, latest: Mar 06 2019 at 15:52)
 
 * [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (33 messages, latest: Mar 06 2019 at 10:33)
 

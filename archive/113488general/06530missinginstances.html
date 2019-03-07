@@ -1,0 +1,74 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/06530missinginstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html">missing instances?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160208983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160208983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160208983">Johan Commelin (Mar 07 2019 at 15:47)</a>:</h4>
+<p>Lean failed to find instances for <code>functor finset</code> and <code>has_seq finset</code>... But both shouldn't really be a problem right?<br>
+(I have no clue at all what <code>has_seq</code> is... so therefore I think <code>finset</code> ought to have such an instance <span aria-label="see no evil" class="emoji emoji-1f648" role="img" title="see no evil">:see_no_evil:</span> <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span> <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span>)</p>
+
+<a name="160209201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209201">Johan Commelin (Mar 07 2019 at 15:50)</a>:</h4>
+<p>I want to take the pairwise product of all elements in two finsets. And a long time ago someone on Zulip suggested that ought to be written like this:</p>
+<div class="codehilite"><pre><span></span><span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">T₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">T₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But that code doesn't typecheck for finsets...</p>
+
+<a name="160209428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209428">Mario Carneiro (Mar 07 2019 at 15:52)</a>:</h4>
+<p><code>finset</code> has a monad instance, but it requires <code>decidable_eq</code> of the base type</p>
+
+<a name="160209484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209484">Johan Commelin (Mar 07 2019 at 15:53)</a>:</h4>
+<p>Aah, I see. That's not an issue.</p>
+
+<a name="160209514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209514">Mario Carneiro (Mar 07 2019 at 15:53)</a>:</h4>
+<p>wait, actually as a monad it would need decidable_eq on all base types</p>
+
+<a name="160209531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209531">Mario Carneiro (Mar 07 2019 at 15:53)</a>:</h4>
+<p>which might explain why it isn't defined</p>
+
+<a name="160209620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209620">Johan Commelin (Mar 07 2019 at 15:54)</a>:</h4>
+<p>Hmm.. I already had</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+<p>at the top of my file...</p>
+
+<a name="160209648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209648">Mario Carneiro (Mar 07 2019 at 15:55)</a>:</h4>
+<p>No, I mean the instance was probably not declared because it's classical</p>
+
+<a name="160209659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209659">Mario Carneiro (Mar 07 2019 at 15:55)</a>:</h4>
+<p><code>monad</code> doesn't let you define bind and return on only some types</p>
+
+<a name="160209758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209758">Johan Commelin (Mar 07 2019 at 15:56)</a>:</h4>
+<p>I see... so I need to dig up the monad-def and locally make it an instance?</p>
+
+<a name="160209863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209863">Johan Commelin (Mar 07 2019 at 15:57)</a>:</h4>
+<p>Or is it not even defined as a regular definition?</p>
+
+<a name="160209865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209865">Mario Carneiro (Mar 07 2019 at 15:57)</a>:</h4>
+<p>you probably have to define it yourself, it's not hard - <code>instance : monad finset := {pure := finset.singleton, bind := finset.bind}</code></p>
+
+
+{% endraw %}
