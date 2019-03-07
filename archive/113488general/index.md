@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [power series](15161powerseries.html) (6 messages, latest: Mar 07 2019 at 10:51)
+
 * [eblast](79292eblast.html) (6 messages, latest: Mar 07 2019 at 00:14)
 
 * [bilinear maps](97496bilinearmaps.html) (4 messages, latest: Mar 06 2019 at 22:56)

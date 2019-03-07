@@ -1,0 +1,53 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/15161powerseries.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html">power series</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160184228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160184228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160184228">Kenny Lau (Mar 07 2019 at 10:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">power_series</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">power_series</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">n</span><span class="o">,</span> <span class="n">x</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">y</span> <span class="n">n</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="o">(</span><span class="n">power_series</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">n</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="err">$</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">i</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="160184233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160184233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160184233">Kenny Lau (Mar 07 2019 at 10:06)</a>:</h4>
+<p>Does anyone want to develop power series?</p>
+
+<a name="160184269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160184269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160184269">Patrick Massot (Mar 07 2019 at 10:07)</a>:</h4>
+<p>you</p>
+
+<a name="160186910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160186910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160186910">Scott Morrison (Mar 07 2019 at 10:49)</a>:</h4>
+<p>I wonder if we should invest some effort into listing new directions like this, perhaps with some commentary on difficulty and expected hurdles, and perhaps even with some suggestions about design, for the sake of new people coming to Lean (including students).</p>
+
+<a name="160187055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160187055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160187055">Scott Morrison (Mar 07 2019 at 10:51)</a>:</h4>
+<p>Particularly, some developments involve hard design decisions, and some don't so much. It would be good if the Kenny's of the world can focus their attention on the hard stuff, and we have a more explicit mechanism to hand out "straightforward" projects to relative beginners.</p>
+
+<a name="160187058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/power%20series/near/160187058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15161powerseries.html#160187058">Scott Morrison (Mar 07 2019 at 10:51)</a>:</h4>
+<p>But maybe this is solving a problem that doesn't exist.</p>
+
+
+{% endraw %}
