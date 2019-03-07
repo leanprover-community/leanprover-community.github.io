@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#802 two lemmas about powers of elements](28260802twolemmasaboutpowersofelements.html) (1 message, latest: Mar 07 2019 at 21:59)
+
 * [#797 count and bag_inter](82226797countandbaginter.html) (3 messages, latest: Mar 07 2019 at 15:12)
 
 * [#781 fraction_map](78935781fractionmap.html) (4 messages, latest: Mar 05 2019 at 15:54)

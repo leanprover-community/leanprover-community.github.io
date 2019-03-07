@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Newton Picard](49679NewtonPicard.html) (5 messages, latest: Mar 07 2019 at 20:59)
+* [Newton Picard](49679NewtonPicard.html) (11 messages, latest: Mar 07 2019 at 21:06)
 
 * [out_param again](10601outparamagain.html) (52 messages, latest: Mar 07 2019 at 16:51)
 

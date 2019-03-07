@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Leanpkg Windows weirdness](67234LeanpkgWindowsweirdness.html) (1 message, latest: Mar 07 2019 at 21:51)
+
 * [Transparent has_mem instance](85602Transparenthasmeminstance.html) (4 messages, latest: Mar 07 2019 at 18:03)
 
 * [missing instances?](06530missinginstances.html) (12 messages, latest: Mar 07 2019 at 15:57)
