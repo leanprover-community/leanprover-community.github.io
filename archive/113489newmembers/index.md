@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (40 messages, latest: Mar 08 2019 at 04:26)
+* [Induction](51886Induction.html) (42 messages, latest: Mar 08 2019 at 07:06)
 
 * [Prove types unequal](53213Provetypesunequal.html) (6 messages, latest: Mar 07 2019 at 15:16)
 

@@ -70,5 +70,57 @@ permalink: archive/113488general/06530missinginstances.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160209865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160209865">Mario Carneiro (Mar 07 2019 at 15:57)</a>:</h4>
 <p>you probably have to define it yourself, it's not hard - <code>instance : monad finset := {pure := finset.singleton, bind := finset.bind}</code></p>
 
+<a name="160269709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269709">Johan Commelin (Mar 08 2019 at 07:34)</a>:</h4>
+<p>Ok, so now I have the assumption <code>ht : t ∈ has_mul.mul &lt;$&gt; T₁ &lt;*&gt; T₂</code>. And <code>T₁</code> and <code>T₂</code> are two finsets. How do I turn <code>ht</code> into a <code>t₁ ∈ T₁</code> and <code>t₂ ∈ T₂</code> + hypotheses?</p>
+
+<a name="160269730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269730">Johan Commelin (Mar 08 2019 at 07:35)</a>:</h4>
+<p>I tried <code>rcases ht</code> but <code>rcases tactic failed: ht : quot.lift is not an inductive datatype</code>.</p>
+
+<a name="160269743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269743">Johan Commelin (Mar 08 2019 at 07:35)</a>:</h4>
+<p>Does this mean that I should not be using <code>finset</code>s?</p>
+
+<a name="160269822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269822">Mario Carneiro (Mar 08 2019 at 07:37)</a>:</h4>
+<p>there are some lemmas to prove about what these mean</p>
+
+<a name="160269830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269830">Mario Carneiro (Mar 08 2019 at 07:37)</a>:</h4>
+<p>it might be easier to just <code>finset.image</code> and <code>finset.prod</code> instead of this</p>
+
+<a name="160269881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160269881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160269881">Johan Commelin (Mar 08 2019 at 07:38)</a>:</h4>
+<p>Ok, let me try that</p>
+
+<a name="160270118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160270118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160270118">Johan Commelin (Mar 08 2019 at 07:44)</a>:</h4>
+<p>Hmmm, so what are the options I can use:</p>
+<ul>
+<li><code>T : finset A</code></li>
+<li><code>T : set A</code> + <code>[fintype T]</code></li>
+<li><code>T : set A</code> + <code>h : set.finite T</code></li>
+<li><code>[fintype T]</code> + <code>ι : T → A</code></li>
+<li>...<br>
+I guess it is not obvious which one should be chosen, right?</li>
+</ul>
+
+<a name="160270204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160270204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160270204">Johan Commelin (Mar 08 2019 at 07:46)</a>:</h4>
+<p>In the end I need to talk about <code>{ t₁ * t₂ | t₁ ∈ T₁, t₂ ∈ T₂ }</code>. Which choice has the best API for that?</p>
+
+<a name="160270526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160270526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160270526">Mario Carneiro (Mar 08 2019 at 07:55)</a>:</h4>
+<p>I think <code>finset.prod.image</code> has the most lemmas, if you care about finiteness (you can also just use a set and forget about finite)</p>
+
+<a name="160270595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160270595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160270595">Johan Commelin (Mar 08 2019 at 07:56)</a>:</h4>
+<p>But <code>prod</code> is taking the product over the whole finset.</p>
+
+<a name="160270607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20instances%3F/near/160270607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06530missinginstances.html#160270607">Johan Commelin (Mar 08 2019 at 07:57)</a>:</h4>
+<p>I guess I'll just stick with <code>set</code>s</p>
+
 
 {% endraw %}
