@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (2 messages, latest: Mar 08 2019 at 13:33)
+
 * [Induction](51886Induction.html) (42 messages, latest: Mar 08 2019 at 07:06)
 
 * [Prove types unequal](53213Provetypesunequal.html) (6 messages, latest: Mar 07 2019 at 15:16)
