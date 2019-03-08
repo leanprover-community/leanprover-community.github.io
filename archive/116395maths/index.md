@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Subspaces and opens](20034Subspacesandopens.html) (13 messages, latest: Mar 08 2019 at 18:56)
+* [Convexity](98186Convexity.html) (22 messages, latest: Mar 08 2019 at 19:34)
 
-* [Convexity](98186Convexity.html) (11 messages, latest: Mar 08 2019 at 18:45)
+* [Subspaces and opens](20034Subspacesandopens.html) (14 messages, latest: Mar 08 2019 at 19:02)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (147 messages, latest: Mar 08 2019 at 18:15)
 
