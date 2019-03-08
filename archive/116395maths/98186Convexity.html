@@ -99,5 +99,91 @@ permalink: archive/116395maths/98186Convexity.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160318122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160318122">Patrick Massot (Mar 08 2019 at 19:34)</a>:</h4>
 <p>The Isabelle file is really large. I like the way they state that distance to a fixed point is convex instead of hiding it inside the proof of convexity of balls like I did.</p>
 
+<a name="160321761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160321761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160321761">Alexander Bentkamp (Mar 08 2019 at 20:16)</a>:</h4>
+<blockquote>
+<p>By the way, it means that you should find a way to make sure your proofs of different conditions for convexity also prove the corresponding descriptions of segments. It only means you should state them as conditions about being in a segment, and then transfer to convexity condition. </p>
+</blockquote>
+<p>I am not sure what you mean here. Do you just mean that I should prove that my definition is eqivalent to how you defined convexity?</p>
+
+<a name="160321928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160321928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160321928">Mario Carneiro (Mar 08 2019 at 20:18)</a>:</h4>
+<p>re: <code>re</code> and <code>im</code> linearity, I don't think this exact statement is there but it's a direct application of lemmas that should be there (i.e. <code>re (x + y) = re x + re y</code>, <code>re (r * x) = r * re x</code>)</p>
+
+<a name="160322184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160322184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160322184">Alexander Bentkamp (Mar 08 2019 at 20:21)</a>:</h4>
+<p>Yes, but I also needed to instantiate C as a R-vector space and then show that (c • x).re = c • <a href="http://x.re" target="_blank" title="http://x.re">x.re</a>. That's around 30 lines that should probably be put into complex/basic.lean at some point.</p>
+
+<a name="160322779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160322779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160322779">Mario Carneiro (Mar 08 2019 at 20:29)</a>:</h4>
+<p>Oh, I expected these to be in there but they were missing:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">smul_re</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">r</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">lemma</span> <span class="n">smul_im</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">r</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+
+<p>The stuff about having C as an R vector space and instantiating coe and re as linear functions should go somewhere else, maybe somewhere in ring_theory?</p>
+
+<a name="160322911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160322911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160322911">Mario Carneiro (Mar 08 2019 at 20:31)</a>:</h4>
+<p>I'm pretty sure we have a method for obtaining a vector space from a ring hom (coe), so that part should be easy, and the linearity conditions should should all be defeq to existing lemmas</p>
+
+<a name="160322937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160322937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160322937">Alexander Bentkamp (Mar 08 2019 at 20:31)</a>:</h4>
+<p>Oh, then I probably did it the hard way...</p>
+
+<a name="160323054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323054">Alexander Bentkamp (Mar 08 2019 at 20:33)</a>:</h4>
+<p>How would that work exactly?</p>
+
+<a name="160323149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323149">Mario Carneiro (Mar 08 2019 at 20:34)</a>:</h4>
+<p>You can define an instance of <code>vector_space E F</code> given a field hom <code>f : E -&gt; F</code> where you define the smul as <code>a \bu x = f a * x</code></p>
+
+<a name="160323151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323151">Alexander Bentkamp (Mar 08 2019 at 20:34)</a>:</h4>
+<p>This is how I did it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">ℝ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">c</span><span class="o">,</span> <span class="err">↑</span><span class="n">r</span> <span class="bp">*</span> <span class="n">c</span><span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">vector_space</span> <span class="n">ℝ</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="o">{</span>
+ <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mul_add</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+ <span class="n">add_smul</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">unfold</span> <span class="n">has_scalar</span><span class="bp">.</span><span class="n">smul</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">of_real_add</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="n">add_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+ <span class="n">mul_smul</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">has_scalar</span><span class="bp">.</span><span class="n">smul</span><span class="o">,</span>
+    <span class="k">assume</span> <span class="n">r</span> <span class="n">s</span> <span class="n">c</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">of_real_mul</span> <span class="n">r</span> <span class="n">s</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="kn">end</span><span class="o">,</span>
+ <span class="n">one_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">one_mul</span> <span class="bp">_</span><span class="o">,</span>
+ <span class="n">zero_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">zero_mul</span> <span class="bp">_</span><span class="o">,</span>
+ <span class="n">smul_zero</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mul_zero</span> <span class="bp">_</span><span class="o">,</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>What you wrote sounds much easier than that.</p>
+
+<a name="160323196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323196">Mario Carneiro (Mar 08 2019 at 20:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> will know the state of this - I've seen various versions of it float by the chat but I'm not sure what's made it into mathlib</p>
+
+<a name="160323320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323320">Kenny Lau (Mar 08 2019 at 20:36)</a>:</h4>
+<p>there should be something in ring_theory/algebra.lean</p>
+
+<a name="160323432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323432">Mario Carneiro (Mar 08 2019 at 20:38)</a>:</h4>
+<p>yes, <code>algebra.of_ring_hom</code> looks like it will work, although you have to get the module part out and upgrade it to a vector_space</p>
+
+<a name="160323465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Convexity/near/160323465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98186Convexity.html#160323465">Mario Carneiro (Mar 08 2019 at 20:38)</a>:</h4>
+<p>But I guess it's not a bad thing knowing that actually C is a R-algebra rather than just a module</p>
+
 
 {% endraw %}
