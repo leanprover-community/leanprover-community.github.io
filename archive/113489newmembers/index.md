@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (40 messages, latest: Mar 08 2019 at 04:26)
+
 * [Prove types unequal](53213Provetypesunequal.html) (6 messages, latest: Mar 07 2019 at 15:16)
 
 * [uncurry](83833uncurry.html) (4 messages, latest: Mar 07 2019 at 05:05)
@@ -163,8 +165,6 @@ permalink: archive/113489newmembers/index.html
 * [unsafe casts in meta land?](74045unsafecastsinmetaland.html) (5 messages, latest: Jan 04 2019 at 05:22)
 
 * [induction: "argument 2 not a variable"](82169inductionargument2notavariable.html) (10 messages, latest: Jan 04 2019 at 03:42)
-
-* [Induction](51886Induction.html) (39 messages, latest: Jan 03 2019 at 22:24)
 
 * [Instance affects other sections](82236Instanceaffectsothersections.html) (21 messages, latest: Jan 01 2019 at 18:22)
 
