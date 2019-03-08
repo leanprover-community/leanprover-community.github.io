@@ -10,9 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [uniformity](11415uniformity.html) (2 messages, latest: Mar 08 2019 at 14:42)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (142 messages, latest: Mar 08 2019 at 17:57)
 
-* [Convexity](98186Convexity.html) (2 messages, latest: Mar 08 2019 at 13:39)
+* [Convexity](98186Convexity.html) (3 messages, latest: Mar 08 2019 at 17:48)
+
+* [Subspaces and opens](20034Subspacesandopens.html) (6 messages, latest: Mar 08 2019 at 17:39)
+
+* [uniformity](11415uniformity.html) (2 messages, latest: Mar 08 2019 at 14:42)
 
 * [G-modules](59534Gmodules.html) (5 messages, latest: Mar 08 2019 at 12:05)
 
@@ -143,8 +147,6 @@ permalink: archive/116395maths/index.html
 * [adding positive reals](35794addingpositivereals.html) (64 messages, latest: Jan 28 2019 at 13:34)
 
 * [power series](15161powerseries.html) (17 messages, latest: Jan 26 2019 at 18:16)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (119 messages, latest: Jan 26 2019 at 15:13)
 
 * [algebraic closure construction](91939algebraicclosureconstruction.html) (12 messages, latest: Jan 24 2019 at 18:19)
 
