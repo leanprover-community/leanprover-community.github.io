@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (142 messages, latest: Mar 08 2019 at 17:57)
+* [Subspaces and opens](20034Subspacesandopens.html) (13 messages, latest: Mar 08 2019 at 18:56)
 
-* [Convexity](98186Convexity.html) (3 messages, latest: Mar 08 2019 at 17:48)
+* [Convexity](98186Convexity.html) (11 messages, latest: Mar 08 2019 at 18:45)
 
-* [Subspaces and opens](20034Subspacesandopens.html) (6 messages, latest: Mar 08 2019 at 17:39)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (147 messages, latest: Mar 08 2019 at 18:15)
 
 * [uniformity](11415uniformity.html) (2 messages, latest: Mar 08 2019 at 14:42)
 

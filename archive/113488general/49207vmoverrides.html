@@ -33,5 +33,13 @@ My proposal for VM overrides is to use typeclasses or similar to give a pseudo-b
 
 <p>The VM will use the given <code>to_native</code> and <code>from_native</code> functions to convert between the formats. This means that if you define some operation on floats but you forget to give the VM override, then it won't completely break the VM because the VM can convert between the native and nonnative versions of the data as necessary.</p>
 
+<a name="160310542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160310542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160310542">Mario Carneiro (Mar 08 2019 at 18:00)</a>:</h4>
+<p>It shouldn't be possible to forget to give the VM override once the basics are set up. In particular, all core operations that reference the overridden type (of which there are O(1) of them) must be overridden. In your example that means all the <code>float</code> constructors and <code>float.rec</code>. In practice I would instead define a separate inductive type <code>inductive IEEE_float := ...</code> like you are envisioning, and then <code>structure float := (to_IEEE: IEEE_float)</code> is a newtype that gets overridden. Now you only need a few overrides: <code>to_IEEE</code> is overriden to <code>from_native</code>, <code>mk</code> is overridden to <code>to_native</code>, and <code>float.rec</code> is overridden to a function that uses <code>from_native</code>.</p>
+
+<a name="160310593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160310593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160310593">Mario Carneiro (Mar 08 2019 at 18:01)</a>:</h4>
+<p>Could you elaborate on the stack mismanagement errors? It is possible that we need to hint to lean that the type itself is being overridden (and it's also good documentation), but I didn't think this would be necessary.</p>
+
 
 {% endraw %}

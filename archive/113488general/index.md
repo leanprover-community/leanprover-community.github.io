@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (42 messages, latest: Mar 08 2019 at 17:28)
+* [vm overrides](49207vmoverrides.html) (3 messages, latest: Mar 08 2019 at 18:01)
 
-* [vm overrides](49207vmoverrides.html) (1 message, latest: Mar 08 2019 at 14:21)
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (42 messages, latest: Mar 08 2019 at 17:28)
 
 * [missing instances?](06530missinginstances.html) (29 messages, latest: Mar 08 2019 at 09:35)
 
