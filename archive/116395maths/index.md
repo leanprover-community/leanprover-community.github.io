@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Convexity](98186Convexity.html) (35 messages, latest: Mar 08 2019 at 20:38)
+* [Convexity](98186Convexity.html) (38 messages, latest: Mar 08 2019 at 21:14)
 
 * [Subspaces and opens](20034Subspacesandopens.html) (14 messages, latest: Mar 08 2019 at 19:02)
 
