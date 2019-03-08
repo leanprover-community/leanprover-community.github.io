@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [uniformity](11415uniformity.html) (2 messages, latest: Mar 08 2019 at 14:42)
+
 * [Convexity](98186Convexity.html) (2 messages, latest: Mar 08 2019 at 13:39)
 
 * [G-modules](59534Gmodules.html) (5 messages, latest: Mar 08 2019 at 12:05)
 
 * [out_param again](10601outparamagain.html) (53 messages, latest: Mar 08 2019 at 09:28)
-
-* [uniformity](11415uniformity.html) (1 message, latest: Mar 08 2019 at 09:24)
 
 * [Newton Picard](49679NewtonPicard.html) (11 messages, latest: Mar 07 2019 at 21:06)
 

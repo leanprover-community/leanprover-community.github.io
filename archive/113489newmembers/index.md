@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (2 messages, latest: Mar 08 2019 at 13:33)
+* ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (3 messages, latest: Mar 08 2019 at 14:36)
 
 * [Induction](51886Induction.html) (42 messages, latest: Mar 08 2019 at 07:06)
 

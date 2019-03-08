@@ -1,0 +1,37 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/49207vmoverrides.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html">vm overrides</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160292995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160292995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160292995">Edward Ayers (Mar 08 2019 at 14:21)</a>:</h4>
+<p>I was thinking about VM overrides a little this week. I hacked around with the Lean source code a little and I got the VM to swap out vm_declarations  when one attaches a <code>vm_override</code> attribute to a declaration. <br>
+<a href="https://github.com/EdAyers/lean/tree/vm_override" target="_blank" title="https://github.com/EdAyers/lean/tree/vm_override">https://github.com/EdAyers/lean/tree/vm_override</a><br>
+The branch is not usable and crashes lean all of the time, it's just an experiment. <br>
+The conclusions of my experiment are:</p>
+<p>I get stack mismanagement errors if the VM overridden type has a different size to the original type. So just swapping out declarations isn't good enough. The VM needs to keep a registry of what is overridden.<br>
+My proposal for VM overrides is to use typeclasses or similar to give a pseudo-bijection between the original data and the override data:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">float</span> <span class="o">:=</span> <span class="bp">...</span><span class="n">IEEE</span> <span class="kn">definition</span> <span class="n">of</span> <span class="n">float</span> <span class="n">goes</span> <span class="n">here</span>
+
+<span class="n">meta</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_vm_override</span> <span class="n">float</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="o">:=</span>  <span class="bp">⟨</span><span class="n">to_native</span><span class="o">,</span> <span class="n">from_native</span><span class="bp">⟩</span>
+
+  <span class="c1">-- now the VM is aware that all floats should be converted to native.floats.</span>
+
+  <span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+  <span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">float</span> <span class="o">:=</span>   <span class="bp">...</span> <span class="n">IEEE</span> <span class="kn">definition</span>
+  <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">float</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">add</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>The VM will use the given <code>to_native</code> and <code>from_native</code> functions to convert between the formats. This means that if you define some operation on floats but you forget to give the VM override, then it won't completely break the VM because the VM can convert between the native and nonnative versions of the data as necessary.</p>
+
+
+{% endraw %}
