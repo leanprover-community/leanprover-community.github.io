@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (41 messages, latest: Mar 08 2019 at 15:10)
+
 * [vm overrides](49207vmoverrides.html) (1 message, latest: Mar 08 2019 at 14:21)
 
 * [missing instances?](06530missinginstances.html) (29 messages, latest: Mar 08 2019 at 09:35)
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [understanding why functional extensionality blocks computati](09526understandingwhyfunctionalextensionalityblockscomputati.html) (33 messages, latest: Mar 06 2019 at 10:33)
 
 * [beta reduction?](91817betareduction.html) (4 messages, latest: Mar 06 2019 at 05:43)
-
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (40 messages, latest: Mar 06 2019 at 00:24)
 
 * [linarith failure](87044linarithfailure.html) (12 messages, latest: Mar 05 2019 at 21:53)
 
