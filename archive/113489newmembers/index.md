@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (90 messages, latest: Mar 09 2019 at 08:15)
+* [Induction](51886Induction.html) (93 messages, latest: Mar 09 2019 at 18:53)
 
 * ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (5 messages, latest: Mar 08 2019 at 18:07)
 

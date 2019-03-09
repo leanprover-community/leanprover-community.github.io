@@ -66,5 +66,43 @@ My proposal for VM overrides is to use typeclasses or similar to give a pseudo-b
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160369968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160369968">Edward Ayers (Mar 09 2019 at 14:36)</a>:</h4>
 <p>I'll get back to you with details of VM stack errors. Most likely a function of my misprogramming than with Lean.</p>
 
+<a name="160378607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160378607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160378607">Mario Carneiro (Mar 09 2019 at 18:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="121918">@Edward Ayers</span>  Here's how you override the core functions:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span>
+
+<span class="kn">inductive</span> <span class="n">IEEE_float</span> <span class="o">:=</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="c1">-- plus other defininitions</span>
+
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">IEEE_float</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">of_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span>
+
+<span class="c1">-- No vm implementation needed</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">IEEE_float</span> <span class="bp">→</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">)</span> <span class="o">:</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="n">H</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_IEEE</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">]</span> <span class="c1">-- optional?</span>
+<span class="kn">structure</span> <span class="n">float</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span><span class="o">)</span>
+
+<span class="c1">-- Override the core functions</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">rec</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">rec</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">of_IEEE</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">mk</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span> <span class="bp">-</span> <span class="bp">&gt;</span> <span class="n">float</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">mk</span> <span class="n">y</span><span class="o">),</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="c1">-- No error because the equation compiler defines this function in terms of</span>
+<span class="c1">-- float.rec and float.mk</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">neg</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span>  <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">,</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">neg</span> <span class="n">x</span>
+
+<span class="c1">-- This does not error because only composed of vm_overridden functions.</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">double</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="n">x</span> <span class="o">,</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">x</span>
+</pre></div>
+
 
 {% endraw %}
