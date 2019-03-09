@@ -528,5 +528,88 @@ type expected at<br>
 term has type<br>
   pre_term</p>
 
+<a name="160355540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355540">Mario Carneiro (Mar 09 2019 at 07:24)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="n">y</span>
+</pre></div>
+
+
+</blockquote>
+<p>you are getting a type error because of the <code>y</code> at the end</p>
+
+<a name="160355670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355670">Mario Carneiro (Mar 09 2019 at 07:28)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">∧</span> <span class="n">sub_is_def</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="k">then</span> <span class="o">(</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>Here you don't want to have the <code>if</code> at all. You have already defined the domain of definition of <code>sub</code>, so here you can just do the easy thing - </p>
+<div class="codehilite"><pre><span></span>| (pre_term.app P Q) x N := pre_term.app (sub P x N) (sub Q x N)
+</pre></div>
+
+<a name="160355685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355685">Mario Carneiro (Mar 09 2019 at 07:29)</a>:</h4>
+<p>Alternatively, you can have <code>sub</code> itself be a (partial) functional relation rather than a recursive function</p>
+
+<a name="160355693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355693">Mario Carneiro (Mar 09 2019 at 07:29)</a>:</h4>
+<p>that is, define <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>[</mo><mi>x</mi><mo>:</mo><mo>=</mo><mi>N</mi><mo>]</mo><mo>=</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P[x:=N]=Q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">[</span><span class="mord mathit">x</span><span class="mrel">:</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mclose">]</span><span class="mrel">=</span><span class="mord mathit">Q</span></span></span></span> as an inductive predicate on four arguments</p>
+
+<a name="160355886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355886">Mario Carneiro (Mar 09 2019 at 07:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">is_subst</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">var_same</span> <span class="o">(</span><span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="n">N</span>
+<span class="bp">|</span> <span class="n">var_diff</span> <span class="o">(</span><span class="n">y</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">{</span><span class="n">P</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="n">P&#39;</span> <span class="n">Q&#39;</span><span class="o">}</span> <span class="o">:</span> <span class="n">is_subst</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">P&#39;</span> <span class="bp">→</span> <span class="n">is_subst</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="n">Q&#39;</span>  <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">P</span><span class="bp">.</span><span class="n">app</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">P&#39;</span><span class="bp">.</span><span class="n">app</span> <span class="n">Q&#39;</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">abs_same</span> <span class="o">(</span><span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">x</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">x</span> <span class="n">P</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">abs_diff_nel</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">P</span> <span class="n">N</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">FV</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">abs_diff</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">P</span> <span class="n">N</span> <span class="n">P&#39;</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∉</span> <span class="n">FV</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">is_subst</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">P&#39;</span> <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P&#39;</span><span class="o">)</span>
+</pre></div>
+
+<a name="160355900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355900">Patrick Thomas (Mar 09 2019 at 07:35)</a>:</h4>
+<p>Are you saying that whether <code>P x N</code> and <code>Q x N</code> are defined is already somehow part of the definition of <code>sub</code>?</p>
+
+<a name="160355960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355960">Mario Carneiro (Mar 09 2019 at 07:36)</a>:</h4>
+<p>I suspect that it will be easier to work with the relation "the substitution of N for x in P is Q" rather than the conjunction of "the substitution is defined" and "the substitution is Q"</p>
+
+<a name="160356021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356021">Patrick Thomas (Mar 09 2019 at 07:38)</a>:</h4>
+<p>I have been attempting to follow how the book I am going through does it, so that I can prove the theorems in the same manner. I want to improve the readability of the book for myself and others.</p>
+
+<a name="160356081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356081">Patrick Thomas (Mar 09 2019 at 07:40)</a>:</h4>
+<p>It's a little circular. Reading the book to learn about the theory behind Lean, and using Lean to learn the book.</p>
+
+<a name="160356150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356150">Patrick Thomas (Mar 09 2019 at 07:42)</a>:</h4>
+<p>In this instance I am formalizing the result of this question: <a href="https://math.stackexchange.com/questions/3109334/formal-definition-of-substitution-being-defined-in-type-free-lambda-calculus?noredirect=1&amp;lq=1" target="_blank" title="https://math.stackexchange.com/questions/3109334/formal-definition-of-substitution-being-defined-in-type-free-lambda-calculus?noredirect=1&amp;lq=1">https://math.stackexchange.com/questions/3109334/formal-definition-of-substitution-being-defined-in-type-free-lambda-calculus?noredirect=1&amp;lq=1</a></p>
+
+<a name="160356479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356479">Patrick Thomas (Mar 09 2019 at 07:53)</a>:</h4>
+<p>In the case of</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+</pre></div>
+
+
+<p>what will happen if I pass a pre_term for <code>P</code> or <code>Q</code> to the function for which the substitution is not defined?</p>
+
+<a name="160356646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356646">Mario Carneiro (Mar 09 2019 at 07:58)</a>:</h4>
+<p>you get garbage</p>
+
+<a name="160356659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356659">Mario Carneiro (Mar 09 2019 at 07:59)</a>:</h4>
+<p>but you get garbage no matter what with the "total function" / "domain of definition" approach</p>
+
+<a name="160356664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160356664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160356664">Mario Carneiro (Mar 09 2019 at 07:59)</a>:</h4>
+<p>The four place relation avoids this</p>
+
 
 {% endraw %}
