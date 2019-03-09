@@ -41,5 +41,30 @@ My proposal for VM overrides is to use typeclasses or similar to give a pseudo-b
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160310593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160310593">Mario Carneiro (Mar 08 2019 at 18:01)</a>:</h4>
 <p>Could you elaborate on the stack mismanagement errors? It is possible that we need to hint to lean that the type itself is being overridden (and it's also good documentation), but I didn't think this would be necessary.</p>
 
+<a name="160369925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160369925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160369925">Edward Ayers (Mar 09 2019 at 14:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Is this the kind of thing you have in mind?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">IEEE_float</span> <span class="o">:=</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="c1">-- plus other defininitions</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">]</span>
+<span class="kn">structure</span> <span class="n">float</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span> <span class="bp">-</span> <span class="bp">&gt;</span> <span class="n">float</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">mk</span> <span class="n">y</span><span class="o">),</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="c1">-- Errors because no VM override attribute</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">neg</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span>  <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">,</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">neg</span> <span class="n">x</span>
+
+<span class="c1">-- This does not error because only composed of vm_overridden functions.</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">double</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="n">x</span> <span class="o">,</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">x</span>
+</pre></div>
+
+<a name="160369968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160369968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160369968">Edward Ayers (Mar 09 2019 at 14:36)</a>:</h4>
+<p>I'll get back to you with details of VM stack errors. Most likely a function of my misprogramming than with Lean.</p>
+
 
 {% endraw %}
