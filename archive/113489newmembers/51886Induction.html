@@ -387,5 +387,146 @@ Did I do this wrong?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352815">Mario Carneiro (Mar 09 2019 at 05:57)</a>:</h4>
 <p>In inductive predicates like the above, it's a bit nicer to have separate constructors for the true and false cases, but for recursive functions we usually use <code>if</code></p>
 
+<a name="160353287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353287">Patrick Thomas (Mar 09 2019 at 06:13)</a>:</h4>
+<p>For this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I get:<br>
+failed to synthesize type class instance for<br>
+sub : pre_term → var → pre_term → pre_term,<br>
+y x : var,<br>
+N : pre_term<br>
+⊢ decidable (pre_term.var x = pre_term.var y)</p>
+
+<a name="160353493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353493">Mario Carneiro (Mar 09 2019 at 06:20)</a>:</h4>
+<p>you can say <code>if x = y then ...</code></p>
+
+<a name="160353540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353540">Patrick Thomas (Mar 09 2019 at 06:21)</a>:</h4>
+<p>I see. I still get the same error.</p>
+
+<a name="160353603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353603">Mario Carneiro (Mar 09 2019 at 06:23)</a>:</h4>
+<p>What is <code>var</code>?</p>
+
+<a name="160353647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353647">Patrick Thomas (Mar 09 2019 at 06:24)</a>:</h4>
+<p><code>inductive var : Type</code></p>
+
+<a name="160353648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353648">Mario Carneiro (Mar 09 2019 at 06:24)</a>:</h4>
+<p>there are no vars?</p>
+
+<a name="160353655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353655">Patrick Thomas (Mar 09 2019 at 06:24)</a>:</h4>
+<p>I'm not sure what you mean?</p>
+
+<a name="160353663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353663">Mario Carneiro (Mar 09 2019 at 06:25)</a>:</h4>
+<p>that declaration means <code>var</code> is empty</p>
+
+<a name="160353673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353673">Mario Carneiro (Mar 09 2019 at 06:25)</a>:</h4>
+<p>you can put <code>@[derive decidable_eq]</code> to automatically derive a decidable instance for <code>var</code></p>
+
+<a name="160353722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353722">Patrick Thomas (Mar 09 2019 at 06:26)</a>:</h4>
+<p>Oh. Should I have defined <code>var</code> differently?</p>
+
+<a name="160353727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353727">Mario Carneiro (Mar 09 2019 at 06:26)</a>:</h4>
+<p>what do you want it to be? One reasonable choice is <code>def var := nat</code></p>
+
+<a name="160353784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353784">Patrick Thomas (Mar 09 2019 at 06:28)</a>:</h4>
+<p>I'm not sure. What would make the most sense for the lambda calculus? Maybe a character or a string?</p>
+
+<a name="160353785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353785">Mario Carneiro (Mar 09 2019 at 06:28)</a>:</h4>
+<p>that works too</p>
+
+<a name="160353795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353795">Mario Carneiro (Mar 09 2019 at 06:29)</a>:</h4>
+<p>But you have to be careful with how you handle bound variable renaming if you don't use de bruijn indices</p>
+
+<a name="160353800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353800">Mario Carneiro (Mar 09 2019 at 06:29)</a>:</h4>
+<p>for example, <code>subst</code> can either rename variables, or it can be partial</p>
+
+<a name="160353866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353866">Mario Carneiro (Mar 09 2019 at 06:31)</a>:</h4>
+<p>having it be a char seems like a bad idea because if the set of variables is finite then weird things happen</p>
+
+<a name="160353867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353867">Patrick Thomas (Mar 09 2019 at 06:31)</a>:</h4>
+<p>I think it is partial in the book I am following for this. That is, it only defines substitution if it is capture avoiding.</p>
+
+<a name="160353920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353920">Mario Carneiro (Mar 09 2019 at 06:32)</a>:</h4>
+<p>if your book uses explicit names then <code>string</code> works</p>
+
+<a name="160353922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353922">Mario Carneiro (Mar 09 2019 at 06:32)</a>:</h4>
+<p>but you will need to prove a renaming lemma at some point, which will require you to know that <code>var</code> is infinite</p>
+
+<a name="160353941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160353941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160353941">Patrick Thomas (Mar 09 2019 at 06:33)</a>:</h4>
+<p>Ah. yes.</p>
+
+<a name="160354120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160354120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160354120">Patrick Thomas (Mar 09 2019 at 06:39)</a>:</h4>
+<p>I changed to <code>def var := string</code>.<br>
+If I have:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>Then I get:<br>
+type mismatch at application<br>
+  ite (x = y) N y<br>
+term<br>
+  y<br>
+has type<br>
+  var<br>
+but is expected to have type<br>
+  pre_term<br>
+If I go back to</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Then I still get:<br>
+failed to synthesize type class instance for<br>
+sub : pre_term → var → pre_term → pre_term,<br>
+y x : var,<br>
+N : pre_term<br>
+⊢ decidable (pre_term.var x = pre_term.var y)</p>
+
+<a name="160354192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160354192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160354192">Patrick Thomas (Mar 09 2019 at 06:41)</a>:</h4>
+<p>I see. I still needed <code>@[derive decidable_eq]</code>.</p>
+
+<a name="160354739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160354739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160354739">Patrick Thomas (Mar 09 2019 at 06:59)</a>:</h4>
+<p>Hmm. I'm not sure how the case where substitution is not defined is going to work in this definition. It seems there has to be an <code>else</code> for each <code>if, then</code> and for</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I get<br>
+type expected at<br>
+  pre_term.app (sub P x N) (sub Q x N)<br>
+term has type<br>
+  pre_term</p>
+
 
 {% endraw %}
