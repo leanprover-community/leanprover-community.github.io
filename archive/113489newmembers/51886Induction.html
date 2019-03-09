@@ -363,5 +363,29 @@ Did I do this wrong?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160350668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160350668">Mario Carneiro (Mar 09 2019 at 04:52)</a>:</h4>
 <p>The definition of an inductive specification in lean requires that all constructors for the inductive type <code>T</code> have the form <code>A1 -&gt; A2 -&gt; ... -&gt; T</code> where each <code>A</code> that mentions <code>T</code> has the form <code>B1 -&gt; B2 -&gt; ... T</code> (ignoring indexes). In other words, the only places the type <code>T</code> is allowed to appear is on the far right hand side (the constructor should produce an element of type <code>T</code>), and on the right of the left hand side (the constructors may take arguments of type <code>T</code> or arguments that are functions producing <code>T</code>). This is called "strict positivity". <code>T</code> is not allowed to appear anywhere else, so <code>mk : (T -&gt; A) -&gt; T</code> is not allowed, nor is <code>mk : ((T -&gt; A) -&gt; A) -&gt; T</code> or <code>foo T -&gt; T</code> or <code>A /\ (T \/ B) -&gt; T</code>. The last two cases are called nested inductive types, and lean can sometimes compile them to primitive inductive types, but they aren't built in.</p>
 
+<a name="160351703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160351703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160351703">Patrick Thomas (Mar 09 2019 at 05:20)</a>:</h4>
+<p>I think I sort of understand. Thank you.</p>
+
+<a name="160352615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352615">Patrick Thomas (Mar 09 2019 at 05:50)</a>:</h4>
+<p>Is it possible to have conditions in the constructors for inductively defined functions? For example, how would one define the lambda substitution <code>x [ y := N ]</code>, which depends on whether <code>x = y</code> or <code>x != y</code>?</p>
+
+<a name="160352684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352684">Mario Carneiro (Mar 09 2019 at 05:52)</a>:</h4>
+<p>you can use <code>if</code></p>
+
+<a name="160352753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352753">Patrick Thomas (Mar 09 2019 at 05:55)</a>:</h4>
+<p>Is there a description of using <code>if</code> in the doc?</p>
+
+<a name="160352800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352800">Mario Carneiro (Mar 09 2019 at 05:56)</a>:</h4>
+<p><code>if p then a else b</code> returns <code>a</code> if <code>p</code> is true and <code>b</code> if false</p>
+
+<a name="160352815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160352815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160352815">Mario Carneiro (Mar 09 2019 at 05:57)</a>:</h4>
+<p>In inductive predicates like the above, it's a bit nicer to have separate constructors for the true and false cases, but for recursive functions we usually use <code>if</code></p>
+
 
 {% endraw %}
