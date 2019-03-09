@@ -1,0 +1,103 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/15871avoidinguniverseissues.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html">avoiding universe issues</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160382908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160382908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160382908">Kevin Buzzard (Mar 09 2019 at 20:41)</a>:</h4>
+<p>I was about to jump in with the following definitions:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">presheaf_of_complete_topological_rings</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">},</span> <span class="n">T</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="c1">-- note v</span>
+<span class="o">[</span><span class="n">some</span> <span class="n">more</span> <span class="n">stuff</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">preadic_space</span> <span class="c1">-- a category</span>
+<span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf_of_complete_topological_rings</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">[</span><span class="n">loads</span> <span class="n">more</span> <span class="n">stuff</span><span class="o">]</span>
+</pre></div>
+
+
+<p>But both of these definitions are "bad", right? In the sense that Mario told me to expect universe problems with structures like this, where I introduce new universes in structure fields.</p>
+<p>So I looked back at my schemes definition and indeed I have</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">presheaf_of_types</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">},</span> <span class="n">T</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="c1">-- note u</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>but I do also have</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">scheme</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">O_X</span> <span class="o">:</span> <span class="n">presheaf_of_rings</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>Is this then a "bad" definition of scheme? Should it be <code>scheme α</code>?</p>
+<p>And is this why category theory is difficult? This is what causes universe problems?</p>
+<p>Should one really define the category of schemes in a universe u?</p>
+<p>I don't really understand why introducing new universe variables in fields is a bad idea. Is it sometimes Ok to do it?</p>
+
+<a name="160382959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160382959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160382959">Kevin Buzzard (Mar 09 2019 at 20:42)</a>:</h4>
+<p>Here's a better question. If I can <em>avoid</em> the pre-adic space definition above, and instead do <code>preadic_space X</code>, is that preferable? [and if so, why?]</p>
+
+<a name="160383049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383049">Mario Carneiro (Mar 09 2019 at 20:45)</a>:</h4>
+<p>If you use a structure with an "internal" universe variable like this, you should expect to need to specify that universe as in <code>presheaf_of_complete_topological_rings.{u v}</code>. This is what happens with <code>category</code></p>
+
+<a name="160383052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383052">Mario Carneiro (Mar 09 2019 at 20:45)</a>:</h4>
+<p>As for whether it's required, that depends on your application</p>
+
+<a name="160383196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383196">Mario Carneiro (Mar 09 2019 at 20:49)</a>:</h4>
+<p>I have a lot of difficulty with category theory in part because it's so heavy on definitions and light on applications. I use the applications to judge the definitions</p>
+
+<a name="160383327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383327">Kevin Buzzard (Mar 09 2019 at 20:52)</a>:</h4>
+<p>What will happen when someone wants to do stacks and we need 2-categories to formalise the definition?</p>
+
+<a name="160383342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383342">Mario Carneiro (Mar 09 2019 at 20:53)</a>:</h4>
+<p>I guess we get 2-categories</p>
+
+<a name="160383343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383343">Kevin Buzzard (Mar 09 2019 at 20:53)</a>:</h4>
+<p>But will there be new kinds of problems?</p>
+
+<a name="160383346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383346">Mario Carneiro (Mar 09 2019 at 20:53)</a>:</h4>
+<p>yes</p>
+
+<a name="160383348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383348">Kevin Buzzard (Mar 09 2019 at 20:53)</a>:</h4>
+<p>cool</p>
+
+<a name="160383349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383349">Kevin Buzzard (Mar 09 2019 at 20:53)</a>:</h4>
+<p>something to look forward to</p>
+
+<a name="160383351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383351">Mario Carneiro (Mar 09 2019 at 20:53)</a>:</h4>
+<p>the biggest one is probably that we will have to do all of category theory again</p>
+
+<a name="160383396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383396">Mario Carneiro (Mar 09 2019 at 20:54)</a>:</h4>
+<p>and there really isn't a good way to unify these</p>
+
+<a name="160383423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoiding%20universe%20issues/near/160383423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15871avoidinguniverseissues.html#160383423">Mario Carneiro (Mar 09 2019 at 20:55)</a>:</h4>
+<p>Probably it's best to just do this stuff on a by-need basis because there's no end of generalization</p>
+
+
+{% endraw %}

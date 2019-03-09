@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [avoiding universe issues](15871avoidinguniverseissues.html) (14 messages, latest: Mar 09 2019 at 20:55)
+
 * [vm overrides](49207vmoverrides.html) (6 messages, latest: Mar 09 2019 at 18:40)
 
 * [if-then-else & simp](92673ifthenelsesimp.html) (10 messages, latest: Mar 09 2019 at 07:38)
