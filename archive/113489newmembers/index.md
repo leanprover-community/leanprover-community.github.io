@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
+
 * [Induction](51886Induction.html) (93 messages, latest: Mar 09 2019 at 18:53)
 
 * ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (5 messages, latest: Mar 08 2019 at 18:07)

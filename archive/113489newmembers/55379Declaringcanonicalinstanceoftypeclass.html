@@ -1,0 +1,147 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html">Declaring canonical instance of typeclass?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160384086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384086">cbailey (Mar 09 2019 at 21:14)</a>:</h4>
+<p>If I have a typeclass with a funciton f : A -&gt; B , and for any argument type A it will have at most one instance declared, is there a way to mark it so that I don't have to annotate the return type at the call site? As an artificial example:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- class provides one function f mapping α to some representation</span>
+<span class="n">class</span> <span class="n">to_representable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_repr</span> <span class="n">β</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">nat_to_string</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="s2">&quot;I am a nat&quot;</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">int_to_list</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">[</span><span class="n">z</span><span class="o">])</span>
+
+<span class="c1">-- These will be the only instances of this typeclass for nat and int respectively</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">nat_to_string</span> <span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">int_to_list</span> <span class="bp">⟩</span>
+
+<span class="kn">open</span> <span class="n">to_representable</span>
+
+<span class="c1">-- Have to call like this, explicitly passing β</span>
+<span class="n">def</span> <span class="n">with_type1</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">string</span> <span class="o">(</span><span class="mi">999</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">with_type2</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+
+<span class="c1">-- Want to be able to call like this</span>
+<span class="n">def</span> <span class="n">without_type1</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">999</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="c1">-- type mnismatch application...</span>
+<span class="n">def</span> <span class="n">without_type2</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+</pre></div>
+
+<a name="160384116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384116">Kevin Buzzard (Mar 09 2019 at 21:15)</a>:</h4>
+<p>Well we were just talking about the dangers of this in another thread, but you could move beta into the class as a field I guess</p>
+
+<a name="160384457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384457">Mario Carneiro (Mar 09 2019 at 21:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- class provides one function f mapping α to some representation</span>
+<span class="n">class</span> <span class="n">to_representable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">r</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">to_representable</span><span class="bp">.</span><span class="n">f</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">to_representable</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">α</span> <span class="bp">→</span> <span class="n">to_representable</span><span class="bp">.</span><span class="n">β</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">to_representable</span><span class="bp">.</span><span class="n">to_fun</span>
+
+<span class="n">def</span> <span class="n">nat_to_string</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="s2">&quot;I am a nat&quot;</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">int_to_list</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">[</span><span class="n">z</span><span class="o">])</span>
+
+<span class="c1">-- These will be the only instances of this typeclass for nat and int respectively</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">nat_to_string</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">int_to_list</span><span class="bp">⟩</span>
+
+<span class="kn">open</span> <span class="n">to_representable</span>
+
+<span class="c1">-- Want to be able to call like this</span>
+<span class="n">def</span> <span class="n">without_type1</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">999</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">without_type2</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+</pre></div>
+
+<a name="160384540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384540">Mario Carneiro (Mar 09 2019 at 21:26)</a>:</h4>
+<p>alternatively, with <code>out_param</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- class provides one function f mapping α to some representation</span>
+<span class="n">class</span> <span class="n">to_representable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">out_param</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="o">(</span><span class="n">has_repr</span> <span class="n">β</span><span class="o">)]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">to_representable</span><span class="bp">.</span><span class="n">f</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">has_repr</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">to_representable</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">to_representable</span><span class="bp">.</span><span class="n">to_fun</span>
+
+<span class="n">def</span> <span class="n">nat_to_string</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="s2">&quot;I am a nat&quot;</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">int_to_list</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">[</span><span class="n">z</span><span class="o">])</span>
+
+<span class="c1">-- These will be the only instances of this typeclass for nat and int respectively</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℕ</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">nat_to_string</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">to_representable</span> <span class="bp">ℤ</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int_to_list</span><span class="bp">⟩</span>
+
+<span class="kn">open</span> <span class="n">to_representable</span>
+
+<span class="c1">-- Want to be able to call like this</span>
+<span class="n">def</span> <span class="n">without_type1</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">999</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">without_type2</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+</pre></div>
+
+<a name="160384601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384601">cbailey (Mar 09 2019 at 21:28)</a>:</h4>
+<p>I was just about to ask what the syntax was to shoehorn the typeclass constraint in there. This is perfect.</p>
+
+<a name="160384605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384605">cbailey (Mar 09 2019 at 21:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You mean the danger for the consumers of the API?</p>
+
+<a name="160384608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384608">Mario Carneiro (Mar 09 2019 at 21:28)</a>:</h4>
+<p>I cheated a bit in the first version, because everything is in <code>Type 0</code></p>
+
+<a name="160384616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384616">Mario Carneiro (Mar 09 2019 at 21:29)</a>:</h4>
+<p>when you allow for universes the free universe argument for beta can cause problems</p>
+
+<a name="160384683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384683">Mario Carneiro (Mar 09 2019 at 21:30)</a>:</h4>
+<p>but at least with the stuff in the example, everything works without incident if you put universes in as in</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="n">class</span> <span class="n">to_representable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">r</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+</pre></div>
+
+<a name="160384697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384697">cbailey (Mar 09 2019 at 21:31)</a>:</h4>
+<p>I'll keep that in mind. What exactly is out_param? I've seen it here and there, but searching the lean repo wasn't terribly enlightening.</p>
+
+<a name="160384708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384708">Mario Carneiro (Mar 09 2019 at 21:31)</a>:</h4>
+<p>searching the chat will have better results</p>
+
+<a name="160384757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384757">cbailey (Mar 09 2019 at 21:32)</a>:</h4>
+<p>Word.</p>
+
+<a name="160384958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384958">Kevin Buzzard (Mar 09 2019 at 21:39)</a>:</h4>
+<p><a href="https://gitter.im/leanprover_public/Lobby?at=5a6e31685a9ebe4f75e77351" target="_blank" title="https://gitter.im/leanprover_public/Lobby?at=5a6e31685a9ebe4f75e77351">https://gitter.im/leanprover_public/Lobby?at=5a6e31685a9ebe4f75e77351</a></p>
+
+<a name="160384966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160384966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160384966">Kevin Buzzard (Mar 09 2019 at 21:39)</a>:</h4>
+<p>searching the old chat has the best results :-)</p>
+
+<a name="160385363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160385363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160385363">cbailey (Mar 09 2019 at 21:51)</a>:</h4>
+<p>Oh, nice. I didn't even know there was an old chat.</p>
+
+<a name="160385367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160385367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160385367">Kevin Buzzard (Mar 09 2019 at 21:52)</a>:</h4>
+<p>please don't post anything there :-)</p>
+
+<a name="160385412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declaring%20canonical%20instance%20of%20typeclass%3F/near/160385412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55379Declaringcanonicalinstanceoftypeclass.html#160385412">Kevin Buzzard (Mar 09 2019 at 21:52)</a>:</h4>
+<p>we all got bored of going back once a month saying "we're now at the new chat"</p>
+
+
+{% endraw %}
