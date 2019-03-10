@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [add_group.closure $ monoid_closure](40231addgroupclosuremonoidclosure.html) (2 messages, latest: Mar 10 2019 at 14:58)
+* [add_group.closure $ monoid_closure](40231addgroupclosuremonoidclosure.html) (3 messages, latest: Mar 10 2019 at 16:08)
 
 * [multiplicative annoyance](29801multiplicativeannoyance.html) (6 messages, latest: Mar 09 2019 at 23:41)
 
