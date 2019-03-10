@@ -104,5 +104,23 @@ My proposal for VM overrides is to use typeclasses or similar to give a pseudo-b
 <span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">double</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="n">x</span> <span class="o">,</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">x</span>
 </pre></div>
 
+<a name="160419723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160419723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160419723">Edward Ayers (Mar 10 2019 at 15:07)</a>:</h4>
+<p>I get a <code>only attribute [class] accepted for structures</code> error for adding <code>vm_override</code> attribute to <code>float</code>. Should I turn off in C++ or is it there for a reason?</p>
+
+<a name="160419879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160419879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160419879">Mario Carneiro (Mar 10 2019 at 15:11)</a>:</h4>
+<p>I would guess that there is no good reason for the restriction</p>
+
+<a name="160420018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160420018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160420018">Mario Carneiro (Mar 10 2019 at 15:15)</a>:</h4>
+<p>But I can't replicate the error. This works, for example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">norm</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">T</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+</pre></div>
+
+<a name="160420081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160420081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160420081">Mario Carneiro (Mar 10 2019 at 15:17)</a>:</h4>
+<p>but actually, like I say in the comment I'm not sure that it is required to vm_override the type itself, since the type is erased. (It might make good documentation but I don't see how the VM would make use of the info.)</p>
+
 
 {% endraw %}
