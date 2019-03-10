@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using functions as proofs](67501Usingfunctionsasproofs.html) (9 messages, latest: Mar 10 2019 at 22:36)
+
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (3 messages, latest: Mar 10 2019 at 05:21)
 
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)

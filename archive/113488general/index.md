@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [squeeze_simp](20539squeezesimp.html) (64 messages, latest: Mar 10 2019 at 22:27)
+
 * [vm overrides](49207vmoverrides.html) (13 messages, latest: Mar 10 2019 at 18:22)
 
 * [Stricklandization of biproduct](35919Stricklandizationofbiproduct.html) (10 messages, latest: Mar 10 2019 at 00:34)
@@ -1109,8 +1111,6 @@ permalink: archive/113488general/index.html
 * [tutorial](22229tutorial.html) (407 messages, latest: Oct 09 2018 at 16:48)
 
 * [tokens](40789tokens.html) (38 messages, latest: Oct 08 2018 at 18:08)
-
-* [squeeze_simp](20539squeezesimp.html) (61 messages, latest: Oct 08 2018 at 17:36)
 
 * [uses of choice](19425usesofchoice.html) (52 messages, latest: Oct 08 2018 at 16:50)
 

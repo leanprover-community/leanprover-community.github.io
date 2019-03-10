@@ -261,5 +261,45 @@ permalink: archive/113488general/20539squeezesimp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/135417980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20539squeezesimp.html#135417980">Mario Carneiro (Oct 08 2018 at 17:36)</a>:</h4>
 <p>Ooh, this is nice. Can we just get a generic hook for writing things from lean?</p>
 
+<a name="160435221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/160435221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20539squeezesimp.html#160435221">Sebastien Gouezel (Mar 10 2019 at 22:17)</a>:</h4>
+<p>I got a strange <code>squeeze_simp</code> behavior, where the trace output does not has the same effect as the original one. The example is as follows (in a complete lattice):</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Inf_sup_Inf</span> <span class="o">:</span> <span class="n">Inf</span> <span class="n">s</span> <span class="err">⊔</span> <span class="n">Inf</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">Inf</span> <span class="o">((</span><span class="bp">λ</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="err">⊔</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="err">&#39;&#39;</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">s</span> <span class="n">t</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">squeeze_simp</span><span class="o">,</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>After <code>squeeze_simp</code>, the goal is</p>
+<div class="codehilite"><pre><span></span><span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="n">x</span> <span class="n">x_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x_1</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">x_1</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">Inf</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">Inf</span> <span class="n">t</span> <span class="bp">≤</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>But if I copy the trace formula (hey, I never noticed that it looks like real math:) given by <code>squeeze_simp</code>, i.e.,</p>
+<div class="codehilite"><pre><span></span><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">and_imp</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_prod</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">le_Inf_iff</span><span class="o">,</span>
+               <span class="n">exists_imp_distrib</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">sup_le_iff</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">exists</span><span class="o">],</span>
+</pre></div>
+
+
+<p>then I get the double goal</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="n">x</span> <span class="n">x_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x_1</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">x_1</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">Inf</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="bp">∧</span>
+    <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="n">x</span> <span class="n">x_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">x_1</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">⊔</span> <span class="n">x_1</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">Inf</span> <span class="n">t</span> <span class="bp">≤</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>Any idea for the reason of this behavior?</p>
+
+<a name="160435278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/160435278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20539squeezesimp.html#160435278">Simon Hudon (Mar 10 2019 at 22:19)</a>:</h4>
+<p>Can you open an issue and put up a MWE? I'll look into it.</p>
+
+<a name="160435569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/160435569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20539squeezesimp.html#160435569">Sebastien Gouezel (Mar 10 2019 at 22:27)</a>:</h4>
+<p>Done.</p>
+
 
 {% endraw %}

@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/67501Usingfunctionsasproofs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html">Using functions as proofs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160435423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435423">Thomas Scholz (Mar 10 2019 at 22:23)</a>:</h4>
+<p>I have defined the following function <code>swap</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">swap</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">×</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span> <span class="bp">×</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">fun</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Because of propositions-as-types, I thought this would, at the same time, be a proof of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∧</mo><mi>B</mi><mspace width="0.277778em"></mspace><mo>⟹</mo><mspace width="0.277778em"></mspace><mi>B</mi><mo>∧</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">A\land B\implies B\land A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.70733em;vertical-align:-0.024em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">∧</span><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟹</span></span><span class="mord mathit"><span class="mspace thickspace"></span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span><span class="mbin">∧</span><span class="mord mathit">A</span></span></span></span>.<br>
+But apparently I can't use the function <code>swap</code> as a proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constants</span> <span class="n">C</span> <span class="n">D</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="n">def</span> <span class="n">swap_thm</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">∧</span> <span class="n">D</span> <span class="bp">→</span> <span class="n">D</span> <span class="bp">∧</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="k">fun</span> <span class="n">y</span><span class="o">,</span> <span class="n">swap</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>So how can I make this work?<br>
+Or do I have to define proofs and functions separately, even if they are essentially the same?</p>
+
+<a name="160435720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435720">Mario Carneiro (Mar 10 2019 at 22:30)</a>:</h4>
+<p>You should use <code>Sort</code> instead of <code>Type</code> if you want it to apply in both contexts. But this still won't work, because <code>prod</code> is not the same constant as <code>and</code>, although they have parallel definitions.</p>
+
+<a name="160435813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435813">Mario Carneiro (Mar 10 2019 at 22:32)</a>:</h4>
+<p>In lean they are separate because if <code>prod</code> had the type <code>Sort u -&gt; Sort v -&gt; Sort (max u v)</code> (so that it could also work on proofs) then the generated recursor would be weaker. (Actually maybe not in this case, I'm not positive; <code>and</code> is a subsingleton eliminator which complicates things.)</p>
+
+<a name="160435898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435898">Kevin Buzzard (Mar 10 2019 at 22:34)</a>:</h4>
+<p>You can copy your definition of the swap function and get a proof of the theorem :-)</p>
+
+<a name="160435902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435902">Kevin Buzzard (Mar 10 2019 at 22:34)</a>:</h4>
+<p>Actually maybe even that won't work</p>
+
+<a name="160435914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435914">Mario Carneiro (Mar 10 2019 at 22:35)</a>:</h4>
+<p>you would have to use the angle brackets, but then I think it would work</p>
+
+<a name="160435917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435917">Kevin Buzzard (Mar 10 2019 at 22:35)</a>:</h4>
+<p>You need \&lt; pointy brackets</p>
+
+<a name="160435935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435935">Kevin Buzzard (Mar 10 2019 at 22:35)</a>:</h4>
+<p>The constructor for prod has a different notation</p>
+
+<a name="160435983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20functions%20as%20proofs/near/160435983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67501Usingfunctionsasproofs.html#160435983">Kevin Buzzard (Mar 10 2019 at 22:36)</a>:</h4>
+<p>However maybe pointy brackets work for the swap proof?</p>
+
+
+{% endraw %}
