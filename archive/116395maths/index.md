@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (1 message, latest: Mar 10 2019 at 19:51)
+
+* [inverse](30749inverse.html) (14 messages, latest: Mar 10 2019 at 19:11)
+
 * [add_group.closure $ monoid_closure](40231addgroupclosuremonoidclosure.html) (8 messages, latest: Mar 10 2019 at 18:01)
 
 * [multiplicative annoyance](29801multiplicativeannoyance.html) (6 messages, latest: Mar 09 2019 at 23:41)
@@ -37,8 +41,6 @@ permalink: archive/116395maths/index.html
 * [galois theory / splitting fields](31775galoistheorysplittingfields.html) (14 messages, latest: Mar 07 2019 at 08:50)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2902 messages, latest: Mar 06 2019 at 13:37)
-
-* [inverse](30749inverse.html) (13 messages, latest: Mar 05 2019 at 15:54)
 
 * [fixed point API](47189fixedpointAPI.html) (7 messages, latest: Mar 05 2019 at 08:59)
 
