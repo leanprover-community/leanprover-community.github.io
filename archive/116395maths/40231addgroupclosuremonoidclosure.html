@@ -53,5 +53,26 @@ permalink: archive/116395maths/40231addgroupclosuremonoidclosure.html
 <span class="cm">-/</span>
 </pre></div>
 
+<a name="160425632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160425632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160425632">Kevin Buzzard (Mar 10 2019 at 18:00)</a>:</h4>
+<p>End of my proof:</p>
+<div class="codehilite"><pre><span></span>    <span class="c">/-</span><span class="cm"> state:</span>
+<span class="cm">    Ha : a ∈ add_group.closure (monoid.closure T),</span>
+<span class="cm">    Hb : b ∈ add_group.closure (monoid.closure T)</span>
+<span class="cm">    ⊢ a * b ∈ add_group.closure (monoid.closure T)</span>
+<span class="cm">    -/</span>
+    <span class="n">haveI</span> <span class="o">:</span> <span class="n">is_subring</span> <span class="o">(</span><span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">T</span><span class="o">))</span> <span class="o">:=</span> <span class="n">ring</span><span class="bp">.</span><span class="n">is_subring</span><span class="o">,</span>
+    <span class="c1">-- exact ring.is_subring.mul_mem Ha Hb, -- fails</span>
+    <span class="c">/-</span><span class="cm"> error is:</span>
+<span class="cm">    invalid field notation, function &#39;is_submonoid.mul_mem&#39;</span>
+<span class="cm">    does not have explicit argument with type (is_submonoid ...)</span>
+<span class="cm">    -/</span>
+    <span class="n">exact</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">Ha</span> <span class="n">Hb</span><span class="o">,</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="160425645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160425645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160425645">Kevin Buzzard (Mar 10 2019 at 18:01)</a>:</h4>
+<p>This is just some weirdness with structure fields, and is_subring extending is_submonoid I guess, but I don't really understand what's going on.</p>
+
 
 {% endraw %}
