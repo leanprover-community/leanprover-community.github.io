@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (3 messages, latest: Mar 10 2019 at 05:21)
+
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
 
 * [Induction](51886Induction.html) (93 messages, latest: Mar 09 2019 at 18:53)
@@ -29,8 +31,6 @@ permalink: archive/113489newmembers/index.html
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (38 messages, latest: Mar 05 2019 at 19:41)
 
 * [noob question(s)](52075noobquestions.html) (208 messages, latest: Mar 05 2019 at 18:58)
-
-* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (2 messages, latest: Mar 05 2019 at 15:04)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 

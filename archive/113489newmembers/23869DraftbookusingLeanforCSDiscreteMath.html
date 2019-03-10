@@ -36,5 +36,26 @@ a) altImplication should have implicit P Q<br>
 In 3.11.<br>
 a) It could be perhaps instructive to show that exists can be built from forall and by extension, show dependent pairs / Sigmas, as I believe I saw Pi being mentioned somewhere.</p>
 
+<a name="160400257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Draft%20book%20using%20Lean%20for%20CS%20Discrete%20Math/near/160400257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23869DraftbookusingLeanforCSDiscreteMath.html#160400257">Kevin Sullivan (Mar 10 2019 at 05:21)</a>:</h4>
+<blockquote>
+<p>I finally had the time to go over 3. Observations are for the most part just nitpicks.<br>
+In 3.4.(6) is missing?<br>
+a) Formalization of <code>false'</code> is simply <code>inductive false' : Prop</code>, then I guess <code>example : false' ↔ false := iff.intro (λcontra : false', contra.cases_on _) (λcontra : false, contra.cases_on _)</code> is pertinent there. <br>
+In 3.5.6<br>
+a) <code>example : true' ↔ true := iff.intro (λh : true', true.intro) (λh : true, true'.intro)</code> could be handy here<br>
+In 3.6.3.2.<br>
+a) I may have missed some previous occurences but it appears that here is the first time you curry a function (<code>sumOfSqaures</code>) - this "works" in combination with my previous comment 2.4.5/b<br>
+In 3.7.4.<br>
+a) Hahah, there really appears to be no mp in core Lean;  I guess function application is enough :).  Anyway, in your example you provide two interpretations, written in different styles. You "missed" my absolute favourite ones, once again have to do with currying: <code>def arrow_elim' { P Q : Prop } (pimpq: P -&gt; Q) : (P -&gt; Q) := pimpq</code>- note that the parens around the return (P -&gt; Q) are redundant, but under this particular interpretation, it's clear that this thing is really just identity, so then this follows: <code>def arrow_elim'' { P Q : Prop } : forall (pimpq : P -&gt; Q), forall p : P, Q := id</code> where the proof itself is just id! (Lean can figure out that this is the identity for (P -&gt; Q), or you could even be explicit and say <code>:= @id (P -&gt; Q)</code>. Furthermore, might be worth noting this is basically Haskell's <code>($) :: (a -&gt; b) -&gt; a -&gt; b</code>, which Lean has too, but I believe it's some baked-in syntax in Lean because of... reasons. (You can't do <code>#check ($)</code> in Lean).<br>
+In 3.7.5.<br>
+a) I would help with <code>todo: give better example</code> but I am not sure what exactly youre trying to demonstrate here :P<br>
+In 3.10.4.7.<br>
+a) altImplication should have implicit P Q<br>
+In 3.11.<br>
+a) It could be perhaps instructive to show that exists can be built from forall and by extension, show dependent pairs / Sigmas, as I believe I saw Pi being mentioned somewhere.</p>
+</blockquote>
+<p>These are terrific comments. Thank you very much. I'm tied up with another project but will come back to this in a few days. Very much appreciated. Thanks, again. More soon enough. -Kevin</p>
+
 
 {% endraw %}
