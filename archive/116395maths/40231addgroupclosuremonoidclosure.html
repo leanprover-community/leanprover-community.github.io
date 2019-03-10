@@ -23,5 +23,35 @@ permalink: archive/116395maths/40231addgroupclosuremonoidclosure.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160421808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160421808">Kevin Buzzard (Mar 10 2019 at 16:08)</a>:</h4>
 <p>Why are these things called <code>closure</code> when <code>span</code> is so much shorter? Is it a coincidence that <code>submodule.span</code> is defined non-inductively as the intersection of all the submodules containing the set, whereas these closure operations are defined inductively?</p>
 
+<a name="160423507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160423507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160423507">Kevin Buzzard (Mar 10 2019 at 17:00)</a>:</h4>
+<blockquote>
+<p>I think the second one is the definition of <code>ring.closure</code></p>
+</blockquote>
+<p>That's a really useful comment, because the hardest part of the argument can be proved by the mul_mem field of the instance saying <code>ring.closure</code> is a subring.</p>
+
+<a name="160425350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160425350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160425350">Kevin Buzzard (Mar 10 2019 at 17:53)</a>:</h4>
+<p>[from mathlib]</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">ring</span>
+
+<span class="bp">...</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">is_subring</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>The instance ends up being called <code>ring.is_subring</code> :-/</p>
+
+<a name="160425353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_group.closure%20%24%20monoid_closure/near/160425353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40231addgroupclosuremonoidclosure.html#160425353">Kevin Buzzard (Mar 10 2019 at 17:53)</a>:</h4>
+<p>Curioser and curioser:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">ring</span><span class="bp">.</span><span class="n">is_subring</span><span class="bp">.</span><span class="n">mul_mem</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">is_submonoid.mul_mem :</span>
+<span class="cm">  ∀ {a b : ?M_1}, a ∈ ring.closure ?M_3 → b ∈ ring.closure ?M_3 → a * b ∈ ring.closure ?M_3</span>
+<span class="cm">-/</span>
+</pre></div>
+
 
 {% endraw %}
