@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lost in translation](41961lostintranslation.html) (23 messages, latest: Mar 11 2019 at 22:25)
+
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (22 messages, latest: Mar 11 2019 at 21:15)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (48 messages, latest: Mar 11 2019 at 16:18)
