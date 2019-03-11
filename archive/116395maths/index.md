@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (1 message, latest: Mar 11 2019 at 12:15)
+* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (6 messages, latest: Mar 11 2019 at 13:51)
 
 * [continuity and nhds](98423continuityandnhds.html) (3 messages, latest: Mar 11 2019 at 11:58)
 
