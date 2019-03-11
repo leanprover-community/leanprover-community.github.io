@@ -12,7 +12,7 @@ permalink: archive/index.html
 
 * [maths](116395maths/index.html) (419 topics)
 
-* [new members](113489newmembers/index.html) (333 topics)
+* [new members](113489newmembers/index.html) (334 topics)
 
 * [PR reviews](144837PRreviews/index.html) (105 topics)
 

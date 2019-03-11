@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Easy way to lift the entire structure?](47470Easywaytolifttheentirestructure.html) (2 messages, latest: Mar 11 2019 at 20:25)
+
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (59 messages, latest: Mar 11 2019 at 17:34)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
