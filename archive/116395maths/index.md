@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [continuity and nhds](98423continuityandnhds.html) (3 messages, latest: Mar 11 2019 at 11:58)
+
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (1 message, latest: Mar 10 2019 at 19:51)
 
 * [inverse](30749inverse.html) (14 messages, latest: Mar 10 2019 at 19:11)
