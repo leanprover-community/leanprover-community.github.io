@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (5 messages, latest: Mar 11 2019 at 14:44)
+
+* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (43 messages, latest: Mar 11 2019 at 14:21)
+
 * [achievement unlocked](78015achievementunlocked.html) (1 message, latest: Mar 11 2019 at 12:09)
 
 * [squeeze_simp](20539squeezesimp.html) (66 messages, latest: Mar 10 2019 at 23:35)
@@ -21,8 +25,6 @@ permalink: archive/113488general/index.html
 * [avoiding universe issues](15871avoidinguniverseissues.html) (14 messages, latest: Mar 09 2019 at 20:55)
 
 * [if-then-else & simp](92673ifthenelsesimp.html) (10 messages, latest: Mar 09 2019 at 07:38)
-
-* [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (42 messages, latest: Mar 08 2019 at 17:28)
 
 * [missing instances?](06530missinginstances.html) (29 messages, latest: Mar 08 2019 at 09:35)
 

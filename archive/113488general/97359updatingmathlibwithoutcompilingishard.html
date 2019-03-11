@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/97359updatingmathlibwithoutcompilingishard.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html">updating mathlib without compiling is hard</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160483552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20mathlib%20without%20compiling%20is%20hard/near/160483552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html#160483552">Kevin Buzzard (Mar 11 2019 at 14:33)</a>:</h4>
+<p>I have a project with a dependency on mathlib. I want Patrick's lovely <code>has_mem (set ℝ) (filter ℝ)</code>, which is in a recent mathlib. So I go to my project, type <code>leanpkg upgrade</code> and I find that mathlib is now back at Feb 23rd. </p>
+<p>So I go into <code>_target/deps/mathlib</code>, checkout master, pull, look at the latest commit, edit my leanpkg.toml to point to this commit, then type <code>update-mathlib</code> and it says "no nightly archive found".</p>
+<p>Now I don't know what to do.  I know that it will be much better when someone who can build the infrastructure builds the infrastructure but I just want to get something working quickly now, and I'm sure this should be possible with a bit of hacking around.</p>
+<p>How do I painlessly figure out the most recent commit that will make <code>update-mathlib</code> work? And once I've figured it out, which of (a) manually editing my toml so that it points to this mathlib commit and (b) manually switching to the correct commit in _target/deps/mathlib do I need to do, in order to get update-mathlib to work?</p>
+<p>I just want the most recent commit for which I don't have to compile mathlib.</p>
+
+<a name="160484025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20mathlib%20without%20compiling%20is%20hard/near/160484025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html#160484025">Kevin Buzzard (Mar 11 2019 at 14:39)</a>:</h4>
+<p>Oh! <code>update-mathlib</code> now works! So was I just unlucky somehow? I coincidentally pulled very quickly after a commit or something?</p>
+
+<a name="160484101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20mathlib%20without%20compiling%20is%20hard/near/160484101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html#160484101">Chris Hughes (Mar 11 2019 at 14:39)</a>:</h4>
+<p>There was a commit very recently, so that may be the case.</p>
+
+<a name="160484428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20mathlib%20without%20compiling%20is%20hard/near/160484428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html#160484428">Patrick Massot (Mar 11 2019 at 14:43)</a>:</h4>
+<p>Indeed the latest nighly is 14 minutes old The answer to the question was: go to <a href="https://github.com/leanprover-community/mathlib-nightly/releases" target="_blank" title="https://github.com/leanprover-community/mathlib-nightly/releases">https://github.com/leanprover-community/mathlib-nightly/releases</a>, get the commit hash, modify the leanpkg.toml of your project, and run upodate-mathlib</p>
+
+<a name="160484495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20mathlib%20without%20compiling%20is%20hard/near/160484495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97359updatingmathlibwithoutcompilingishard.html#160484495">Patrick Massot (Mar 11 2019 at 14:44)</a>:</h4>
+<p>Hopefully this answer will soon become unneeded</p>
+
+
+{% endraw %}

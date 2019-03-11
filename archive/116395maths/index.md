@@ -10,11 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (6 messages, latest: Mar 11 2019 at 13:51)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2903 messages, latest: Mar 11 2019 at 14:57)
+
+* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (11 messages, latest: Mar 11 2019 at 14:44)
+
+* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (8 messages, latest: Mar 11 2019 at 14:35)
 
 * [continuity and nhds](98423continuityandnhds.html) (3 messages, latest: Mar 11 2019 at 11:58)
-
-* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (1 message, latest: Mar 10 2019 at 19:51)
 
 * [inverse](30749inverse.html) (14 messages, latest: Mar 10 2019 at 19:11)
 
@@ -43,8 +45,6 @@ permalink: archive/116395maths/index.html
 * [local rings](44943localrings.html) (5 messages, latest: Mar 07 2019 at 08:51)
 
 * [galois theory / splitting fields](31775galoistheorysplittingfields.html) (14 messages, latest: Mar 07 2019 at 08:50)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2902 messages, latest: Mar 06 2019 at 13:37)
 
 * [fixed point API](47189fixedpointAPI.html) (7 messages, latest: Mar 05 2019 at 08:59)
 
