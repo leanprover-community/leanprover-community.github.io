@@ -304,5 +304,40 @@ This is my code </p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/160049911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#160049911">Nguyen Duc Hoan (Mar 05 2019 at 23:08)</a>:</h4>
 <p>Yes, that is what I want. Thank you! <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
 
+<a name="160493300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/160493300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#160493300">Nguyen Duc Hoan (Mar 11 2019 at 16:22)</a>:</h4>
+<p>Hello again, I defined the sphere S^n in Lean. I used the theorem <code>mem_sphere_Sn</code> to define what is member of sphere S^n, and the theorem <code>sym_sphere_Sn</code> to define if <code>x ∈ sphere_Sn</code> then <code>(-x) ∈ sphere_Sn</code>. However, I got some problems with these theorems. Could you please help me?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">nat</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sum_of_square_coeff</span> <span class="o">{</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span>
+<span class="n">sum</span> <span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sphere_Sn</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span><span class="bp">|</span> <span class="n">sum_of_square_coeff</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">}</span>
+
+<span class="kn">variable</span> <span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span>
+
+<span class="kn">theorem</span> <span class="n">mem_sphere_Sn</span> <span class="o">:</span>  <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">sum_of_square_coeff</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">sym_sphere_Sn</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="err">∈</span>  <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="o">:=</span><span class="n">sorry</span>
+</pre></div>
+
+<a name="160493971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/160493971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#160493971">Rob Lewis (Mar 11 2019 at 16:30)</a>:</h4>
+<p>There are a few issues. Luckily they're easy to fix. Instead of writing <code>∀ x ∈ sphere_Sn n ↔ (sum_of_square_coeff x = 1)</code>, you should write <code>∀ x, x ∈ sphere_Sn n ↔ (sum_of_square_coeff x = 1)</code>. (You could also move the <code>x</code> to the left of the <code>:</code>.) Also, with the imports you have, Lean doesn't know what <code>-x</code> means. You need to include something from mathlib that adds the right instance. <code>import algebra.pi_instances</code> will work.</p>
+
+<a name="160494066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/160494066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#160494066">Rob Lewis (Mar 11 2019 at 16:31)</a>:</h4>
+<p>Your first theorem has a very easy proof.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mem_sphere_Sn</span> <span class="o">:</span>  <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">sphere_Sn</span> <span class="n">n</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">sum_of_square_coeff</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>The second one will take you slightly more work.</p>
+
 
 {% endraw %}

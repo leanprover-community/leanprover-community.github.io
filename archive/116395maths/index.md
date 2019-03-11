@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [subring diamond](57559subringdiamond.html) (1 message, latest: Mar 11 2019 at 15:44)
+* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
 
-* [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (17 messages, latest: Mar 11 2019 at 15:43)
+* [subring diamond](57559subringdiamond.html) (1 message, latest: Mar 11 2019 at 15:44)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2925 messages, latest: Mar 11 2019 at 15:19)
 

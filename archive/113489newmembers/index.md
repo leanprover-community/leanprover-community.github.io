@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (58 messages, latest: Mar 11 2019 at 16:31)
+
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
 
 * [Using functions as proofs](67501Usingfunctionsasproofs.html) (9 messages, latest: Mar 10 2019 at 22:36)
@@ -27,8 +29,6 @@ permalink: archive/113489newmembers/index.html
 * [tactic style proofs to term style proofs](86824tacticstyleproofstotermstyleproofs.html) (31 messages, latest: Mar 06 2019 at 06:53)
 
 * [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (55 messages, latest: Mar 05 2019 at 23:08)
 
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (38 messages, latest: Mar 05 2019 at 19:41)
 
