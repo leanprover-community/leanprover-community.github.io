@@ -36,5 +36,20 @@ is_subring S ---- subset.ring ----------&gt; ring S
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subring%20diamond/near/160521681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/57559subringdiamond.html#160521681">Mario Carneiro (Mar 11 2019 at 21:57)</a>:</h4>
 <p>What is subset.comm_ring? If it extends subset.ring then this should work out</p>
 
+<a name="160555946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subring%20diamond/near/160555946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/57559subringdiamond.html#160555946">Johan Commelin (Mar 12 2019 at 09:44)</a>:</h4>
+<p>This is really confusing</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subring</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">S</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">subset</span><span class="bp">.</span><span class="n">ring</span> <span class="n">R</span> <span class="bp">_</span> <span class="n">S</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subring</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">S</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">subset</span><span class="bp">.</span><span class="n">ring</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>If you replace the first <code>rfl</code> with <code>_</code> you will see that the <code>pp.all</code> output is identical to what you get in the second example.</p>
+
 
 {% endraw %}

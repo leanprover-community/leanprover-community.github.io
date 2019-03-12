@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [subring diamond](57559subringdiamond.html) (4 messages, latest: Mar 11 2019 at 21:57)
+* [subring diamond](57559subringdiamond.html) (5 messages, latest: Mar 12 2019 at 09:44)
 
 * [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
 
