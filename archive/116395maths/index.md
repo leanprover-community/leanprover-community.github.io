@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2926 messages, latest: Mar 12 2019 at 17:52)
+
 * [filter bases](55413filterbases.html) (29 messages, latest: Mar 12 2019 at 15:53)
 
 * [uniformity](11415uniformity.html) (5 messages, latest: Mar 12 2019 at 14:40)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [subring diamond](57559subringdiamond.html) (23 messages, latest: Mar 12 2019 at 12:16)
 
 * [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2925 messages, latest: Mar 11 2019 at 15:19)
 
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (8 messages, latest: Mar 11 2019 at 14:35)
 
