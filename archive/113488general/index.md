@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [random parser facts](60512randomparserfacts.html) (8 messages, latest: Mar 12 2019 at 01:00)
+
 * [trivial group / trivial module](48697trivialgrouptrivialmodule.html) (13 messages, latest: Mar 11 2019 at 23:22)
 
 * [lost in translation](41961lostintranslation.html) (23 messages, latest: Mar 11 2019 at 22:25)
