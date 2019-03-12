@@ -1,0 +1,65 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/32947dependentfunctiontypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html">dependent function types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160542502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542502">Patrick Thomas (Mar 12 2019 at 04:33)</a>:</h4>
+<p>Hi,</p>
+<p>I am trying to understand the description of dependent function types as given in <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#dependent-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#dependent-types">Section 2.8 of Theorem Proving in Lean</a>. I think I follow up to the end of this paragraph:</p>
+<p>"It is clear that cons α should have type α → list α → list α. But what type should cons have? A first guess might be Type → α → list α → list α, but, on reflection, this does not make sense: the α in this expression does not refer to anything, whereas it should refer to the argument of type Type. In other words, assuming α : Type is the first argument to the function, the type of the next two elements are α and list α. These types vary depending on the first argument, α."</p>
+<p>My next guess for the type of cons might be something like λ α : Type, α → list α → list α. Is this what is being done, but with Π instead of λ? The next paragraph seems to make it more complicated than that:</p>
+<p>"This is an instance of a Pi type, or dependent function type. Given α : Type and β : α → Type, think of β as a family of types over α, that is, a type β a for each a : α. In that case, the type Π x : α, β x denotes the type of functions f with the property that, for each a : α, f a is an element of β a. In other words, the type of the value returned by f depends on its input."</p>
+<p>Can I just set <code>α</code> to <code>Type</code> to get what I expected from this? Is this essentially what has been done in the code block later on:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">constant</span> <span class="n">list</span>   <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+
+<span class="kn">constant</span> <span class="n">cons</span>   <span class="o">:</span> <span class="bp">Π</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>As an aside, why does list have the type that is given here?</p>
+<p>If I replace Type with ℕ in the quoted paragraph then I get:</p>
+<p>"Given α : ℕ and β : ℕ → Type, think of β as a family of types over ℕ, that is, a type β a for each a : ℕ. In that case, the type Π x : ℕ, β x denotes the type of functions f with the property that, for each a : ℕ, f a is an element of β a. In other words, the type of the value returned by f depends on its input."</p>
+<p>This seems to be hinting at what might be needed for the type of functions operating on lists of arbitrary lengths, if β : ℕ → &lt;a type involving list ℕ&gt;?</p>
+<p>In summary, why is the description of Π types more complicated than I expected? Is it something along the lines of the example of lists of an arbitrary length?</p>
+
+<a name="160542679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542679">Mario Carneiro (Mar 12 2019 at 04:38)</a>:</h4>
+<blockquote>
+<p>My next guess for the type of cons might be something like λ α : Type, α → list α → list α. Is this what is being done, but with Π instead of λ? The next paragraph seems to make it more complicated than that:</p>
+</blockquote>
+<p>It's a good guess, but the problem is that <code> λ α : Type, α → list α → list α</code> is not a type. It is a function that takes a type and returns a type. That is, <code>(λ α : Type, α → list α → list α) : Type -&gt; Type</code></p>
+
+<a name="160542700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542700">Mario Carneiro (Mar 12 2019 at 04:39)</a>:</h4>
+<p>So this function acts something like <code>list</code>, which also has this same type (let's ignore universes for now). You can't write <code>x : list</code> because <code>list</code> is not a type. <code>x : list A</code> makes sense if <code>A</code> is a type</p>
+
+<a name="160542793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542793">Mario Carneiro (Mar 12 2019 at 04:41)</a>:</h4>
+<blockquote>
+<p>If I replace Type with ℕ in the quoted paragraph then I get:</p>
+<p>"Given α : ℕ and β : ℕ → Type, think of β as a family of types over ℕ, that is, a type β a for each a : ℕ. In that case, the type Π x : ℕ, β x denotes the type of functions f with the property that, for each a : ℕ, f a is an element of β a. In other words, the type of the value returned by f depends on its input."</p>
+</blockquote>
+<p>Your replacement was inconsistent. You replaced α with ℕ  in most places, not Type with ℕ. Generally you can't treat <code>Type</code> and <code>ℕ</code> the same because <code>Type</code> is a universe and <code>ℕ</code> is not. That is, the elements of Type have elements but the elements of nat don't. If <code>A : Type</code> then<code>x : A</code> makes sense, but if <code>3 : ℕ</code> then <code>x : 3</code> doesn't make sense</p>
+
+<a name="160542922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542922">Patrick Thomas (Mar 12 2019 at 04:44)</a>:</h4>
+<p>Oops. I think I meant:<br>
+"This is an instance of a Pi type, or dependent function type. Given ℕ : Type and β : ℕ → Type, think of β as a family of types over ℕ, that is, a type β a for each a : ℕ. In that case, the type Π x : ℕ, β x denotes the type of functions f with the property that, for each a : ℕ, f a is an element of β a. In other words, the type of the value returned by f depends on its input."</p>
+
+<a name="160542998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dependent%20function%20types/near/160542998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32947dependentfunctiontypes.html#160542998">Patrick Thomas (Mar 12 2019 at 04:47)</a>:</h4>
+<p>I guess my question is then, why is the type of a dependent function not Π x : Type, β x?</p>
+
+
+{% endraw %}
