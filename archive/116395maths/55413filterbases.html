@@ -1,0 +1,162 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/55413filterbases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html">filter bases</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160579909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160579909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160579909">Patrick Massot (Mar 12 2019 at 15:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Bourbaki is always using filter bases everywhere, and it's been puzzling me forever that this seems to be nowhere in mathlib. In particular I can't find:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span>
+<span class="kn">open</span> <span class="n">filter</span> <span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">generate_of_base</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">inhabited</span> <span class="n">ι</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">s</span> <span class="n">k</span> <span class="err">⊆</span> <span class="n">s</span> <span class="n">i</span> <span class="err">∩</span> <span class="n">s</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">):</span> <span class="n">U</span> <span class="err">∈</span> <span class="n">generate</span> <span class="o">(</span><span class="n">range</span> <span class="n">s</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span> <span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">induction</span> <span class="n">h</span> <span class="k">with</span> <span class="n">U</span> <span class="n">U_in</span> <span class="n">U</span> <span class="n">V</span> <span class="n">U_gen</span> <span class="n">UV</span> <span class="n">U_union</span> <span class="n">U</span> <span class="n">V</span> <span class="n">U_gen</span> <span class="n">V_gen</span> <span class="n">U_union</span> <span class="n">V_union</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rcases</span> <span class="n">U_in</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">use</span> <span class="n">i</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">use</span> <span class="n">default</span> <span class="n">ι</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">univ_mem_sets</span> <span class="o">:</span> <span class="n">univ</span> <span class="err">∈</span> <span class="n">principal</span> <span class="o">(</span><span class="n">s</span> <span class="err">$</span> <span class="n">default</span> <span class="n">ι</span><span class="o">))},</span>
+    <span class="o">{</span> <span class="n">cases</span> <span class="n">U_union</span> <span class="k">with</span> <span class="n">i</span> <span class="n">Ui</span><span class="o">,</span>
+      <span class="n">use</span> <span class="n">i</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">Ui</span> <span class="n">UV</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">cases</span> <span class="n">U_union</span> <span class="k">with</span> <span class="n">i</span> <span class="n">Ui</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">V_union</span> <span class="k">with</span> <span class="n">j</span> <span class="n">Vj</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">H</span> <span class="n">i</span> <span class="n">j</span> <span class="k">with</span> <span class="n">k</span> <span class="n">k_sub</span><span class="o">,</span>
+      <span class="n">use</span> <span class="n">k</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">subset_inter_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">k_sub</span> <span class="k">with</span> <span class="n">ki</span> <span class="n">kj</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">subset_inter_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">ki</span> <span class="n">Ui</span><span class="o">,</span> <span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">kj</span> <span class="n">Vj</span><span class="bp">⟩</span> <span class="o">}},</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">i</span> <span class="n">Ui</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">generate_sets</span><span class="bp">.</span><span class="n">superset</span> <span class="o">(</span><span class="n">generate_sets</span><span class="bp">.</span><span class="n">basic</span> <span class="err">$</span> <span class="n">mem_range_self</span> <span class="n">i</span><span class="o">)</span> <span class="n">Ui</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>What is the story here? Do you have a better way?</p>
+
+<a name="160580055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580055">Patrick Massot (Mar 12 2019 at 15:27)</a>:</h4>
+<p>I know this is a fake tactic mode proof, but I don't dare writing the proof term...</p>
+
+<a name="160580058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580058">Johannes Hölzl (Mar 12 2019 at 15:27)</a>:</h4>
+<p>I usually reduce it to the infimum.</p>
+
+<a name="160580153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580153">Johannes Hölzl (Mar 12 2019 at 15:28)</a>:</h4>
+<p>So <code>nhds</code> is not defined using a generating set, but as a infimum of <code>principal</code> filters. The advantage is that for the infimum very generic rules exist</p>
+
+<a name="160580170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580170">Patrick Massot (Mar 12 2019 at 15:28)</a>:</h4>
+<p>I can also prove that, under the same assumption, <code>generate (range s) = ⨅ i, principal (s i)</code>. But what do you gain from expressing it as the RHS?</p>
+
+<a name="160580218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580218">Patrick Massot (Mar 12 2019 at 15:29)</a>:</h4>
+<p>I think the problem is that <code>⨅ i, principal (s i)</code> is not very nice in general</p>
+
+<a name="160580223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580223">Johannes Hölzl (Mar 12 2019 at 15:29)</a>:</h4>
+<p>often <code>s</code> is not only indexed by one value, but many values. this fits nicely with <code>infi</code>.</p>
+
+<a name="160580232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580232">Patrick Massot (Mar 12 2019 at 15:29)</a>:</h4>
+<p>You need to take intersections of finite subsets</p>
+
+<a name="160580296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580296">Johannes Hölzl (Mar 12 2019 at 15:30)</a>:</h4>
+<p>it is not nice if you directly work on sets, instead of on filters.</p>
+
+<a name="160580330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580330">Johannes Hölzl (Mar 12 2019 at 15:30)</a>:</h4>
+<p>Of course, it is often hard to use filters in their full generality but when we can they are very powerful.</p>
+
+<a name="160580382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580382">Patrick Massot (Mar 12 2019 at 15:31)</a>:</h4>
+<p>I still don't understand why the condition <code>H : ∀ i j, ∃ k, s k ⊆ s i ∩ s j</code> appears nowhere. Whatever the language, things will always be simpler under this assumption, right?</p>
+
+<a name="160580399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580399">Patrick Massot (Mar 12 2019 at 15:31)</a>:</h4>
+<p>This is a <code>directed</code> something assumption</p>
+
+<a name="160580469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580469">Johannes Hölzl (Mar 12 2019 at 15:32)</a>:</h4>
+<p>Everybody here wants to have more category theory, but nobody is using the complete lattices structure on the filters. But you can see the <code>infi</code> as a nice behaving limit of filters. And many operations commute _somehow_ with infi.</p>
+
+<a name="160580494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580494">Patrick Massot (Mar 12 2019 at 15:32)</a>:</h4>
+<p><code>principal</code> doesn't commute nicely</p>
+
+<a name="160580496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580496">Johannes Hölzl (Mar 12 2019 at 15:33)</a>:</h4>
+<p>What you proved is essentially <code>mem_infi</code></p>
+
+<a name="160580528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580528">Johannes Hölzl (Mar 12 2019 at 15:33)</a>:</h4>
+<p><code>tendsto</code> and <code>principal</code> and <code>infi</code> work very nicely together!</p>
+
+<a name="160580604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580604">Patrick Massot (Mar 12 2019 at 15:34)</a>:</h4>
+<p><code>⨅ i, principal (s i)</code> is <em>not</em> <code>principal (⨅ i, s i)</code>, right?</p>
+
+<a name="160580612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580612">Johannes Hölzl (Mar 12 2019 at 15:34)</a>:</h4>
+<p>Look at these rules: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L1205" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L1205">https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L1205</a></p>
+
+<a name="160580620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580620">Johannes Hölzl (Mar 12 2019 at 15:34)</a>:</h4>
+<p>Look ma no <code>directed</code> proof necessary :-)</p>
+
+<a name="160580657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580657">Johannes Hölzl (Mar 12 2019 at 15:35)</a>:</h4>
+<p>Ah sorry, I didn't mean <code>prinicpal</code> and <code>infi</code> are commuting. But <code>tendsto</code> and <code>infi</code> are nice behaving</p>
+
+<a name="160580725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580725">Patrick Massot (Mar 12 2019 at 15:35)</a>:</h4>
+<p>But the story of filter bases and sub-bases is precisely the story of <code>⨅ i, principal (s i)</code> vs <code>generate (range s)</code></p>
+
+<a name="160580879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160580879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160580879">Johannes Hölzl (Mar 12 2019 at 15:37)</a>:</h4>
+<p>Yes, but <code>generate</code> only allows me to construct a filter from sets. While <code>⨅</code> allows me to constructa filter from other filters (hence including sets)</p>
+
+<a name="160581006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581006">Johannes Hölzl (Mar 12 2019 at 15:39)</a>:</h4>
+<p>Many statements are actually filter inclusion statements. Often they are not seen to be obvious filter inclusions, but when they are then we can use the powerful complete lattice structure.</p>
+
+<a name="160581105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581105">Johannes Hölzl (Mar 12 2019 at 15:40)</a>:</h4>
+<p>An example is: <a href="https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-2f853d294b8568321089942e42ccd7b1L1411" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-2f853d294b8568321089942e42ccd7b1L1411">https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-2f853d294b8568321089942e42ccd7b1L1411</a><br>
+Here the <code>directed</code> proof is completely unnecessary</p>
+
+<a name="160581217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581217">Johannes Hölzl (Mar 12 2019 at 15:42)</a>:</h4>
+<p>Or this change:<br>
+<a href="https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-11d4223aa3461ef9e12d2f034e79d0f1R375" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-11d4223aa3461ef9e12d2f034e79d0f1R375">https://github.com/leanprover-community/mathlib/commit/a4afa904f2e902e34764ff69ec5baf31ad56525a#diff-11d4223aa3461ef9e12d2f034e79d0f1R375</a><br>
+Here the same proof which was done before <code>set</code>-wise is now done on filters and their order structure (even when the final goal is to reduce a filer statement to a set statement)</p>
+
+<a name="160581280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581280">Johannes Hölzl (Mar 12 2019 at 15:42)</a>:</h4>
+<p>What I want to say: <code>generate</code> is much more limited than using <code>infi</code>. With <code>infi</code> we get nice compositional behaviour, and especially for the reduction of <code>tendsto</code> statements it can be very powerful.</p>
+
+<a name="160581434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581434">Johannes Hölzl (Mar 12 2019 at 15:44)</a>:</h4>
+<p>We can reduce <code>generate</code> to <code>infi</code> but not the other way round</p>
+
+<a name="160581464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160581464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160581464">Johannes Hölzl (Mar 12 2019 at 15:45)</a>:</h4>
+<p>We can define <code>infi</code> using <code>generate</code>, but then we lose the compositional behaviour</p>
+
+<a name="160582263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20bases/near/160582263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55413filterbases.html#160582263">Patrick Massot (Mar 12 2019 at 15:53)</a>:</h4>
+<p>Thanks, I'll try to keep all that in mind</p>
+
+
+{% endraw %}
