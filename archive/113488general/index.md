@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [can't synthesize instance?](68216cantsynthesizeinstance.html) (11 messages, latest: Mar 12 2019 at 20:58)
+
 * [lost in translation](41961lostintranslation.html) (32 messages, latest: Mar 12 2019 at 15:02)
 
 * [deep recursion](79225deeprecursion.html) (5 messages, latest: Mar 12 2019 at 14:18)
