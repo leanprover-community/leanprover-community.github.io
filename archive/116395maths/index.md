@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [uniformity](11415uniformity.html) (3 messages, latest: Mar 12 2019 at 11:23)
+
 * [subring diamond](57559subringdiamond.html) (5 messages, latest: Mar 12 2019 at 09:44)
 
 * [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
@@ -33,8 +35,6 @@ permalink: archive/116395maths/index.html
 * [Subspaces and opens](20034Subspacesandopens.html) (14 messages, latest: Mar 08 2019 at 19:02)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (147 messages, latest: Mar 08 2019 at 18:15)
-
-* [uniformity](11415uniformity.html) (2 messages, latest: Mar 08 2019 at 14:42)
 
 * [G-modules](59534Gmodules.html) (5 messages, latest: Mar 08 2019 at 12:05)
 
