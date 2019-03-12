@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using functions as proofs](67501Usingfunctionsasproofs.html) (10 messages, latest: Mar 11 2019 at 23:04)
+
 * [Easy way to lift the entire structure?](47470Easywaytolifttheentirestructure.html) (2 messages, latest: Mar 11 2019 at 20:25)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (59 messages, latest: Mar 11 2019 at 17:34)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
-
-* [Using functions as proofs](67501Usingfunctionsasproofs.html) (9 messages, latest: Mar 10 2019 at 22:36)
 
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
 
