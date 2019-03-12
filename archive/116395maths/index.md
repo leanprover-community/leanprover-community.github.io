@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [subring diamond](57559subringdiamond.html) (23 messages, latest: Mar 12 2019 at 12:16)
+* [uniformity](11415uniformity.html) (5 messages, latest: Mar 12 2019 at 14:40)
 
-* [uniformity](11415uniformity.html) (3 messages, latest: Mar 12 2019 at 11:23)
+* [subring diamond](57559subringdiamond.html) (23 messages, latest: Mar 12 2019 at 12:16)
 
 * [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
 

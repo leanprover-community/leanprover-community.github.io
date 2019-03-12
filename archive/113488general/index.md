@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deep recursion](79225deeprecursion.html) (3 messages, latest: Mar 12 2019 at 13:15)
+* [lost in translation](41961lostintranslation.html) (30 messages, latest: Mar 12 2019 at 14:58)
+
+* [deep recursion](79225deeprecursion.html) (5 messages, latest: Mar 12 2019 at 14:18)
 
 * [detecting hypotheses introduced by the equation compiler?](09329detectinghypothesesintroducedbytheequationcompiler.html) (3 messages, latest: Mar 12 2019 at 10:48)
 
 * [random parser facts](60512randomparserfacts.html) (20 messages, latest: Mar 12 2019 at 01:15)
 
 * [trivial group / trivial module](48697trivialgrouptrivialmodule.html) (13 messages, latest: Mar 11 2019 at 23:22)
-
-* [lost in translation](41961lostintranslation.html) (23 messages, latest: Mar 11 2019 at 22:25)
 
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (22 messages, latest: Mar 11 2019 at 21:15)
 
