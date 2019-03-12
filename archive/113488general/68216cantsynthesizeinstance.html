@@ -55,5 +55,121 @@ permalink: archive/113488general/68216cantsynthesizeinstance.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160609971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160609971">Kevin Buzzard (Mar 12 2019 at 20:58)</a>:</h4>
 <p>Can you post a MWE?</p>
 
+<a name="160613008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613008">dagit (Mar 12 2019 at 21:35)</a>:</h4>
+<p>Sorry, I was gone at a meeting.</p>
+
+<a name="160613025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613025">dagit (Mar 12 2019 at 21:35)</a>:</h4>
+<p>I've tried to make a minimal example but so far I've failed on that front.</p>
+
+<a name="160613150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613150">dagit (Mar 12 2019 at 21:36)</a>:</h4>
+<p>The class is defined like this:</p>
+<div class="codehilite"><pre><span></span>universes u v w
+
+namespace sexpr
+
+class is_atom (α : Type _) :=
+(to_char_buffer : α → char_buffer)
+(read {m} [char_reader string m] (n:ℕ) : m α)
+
+end sexpr
+</pre></div>
+
+<a name="160613206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613206">dagit (Mar 12 2019 at 21:37)</a>:</h4>
+<p>And there is a function like this:<br>
+<code>def repr {α:Type} [h : is_atom α] : sexpr α -&gt; string := render buffer.to_string</code></p>
+
+<a name="160613231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613231">dagit (Mar 12 2019 at 21:37)</a>:</h4>
+<p>And it's when I try to use that <code>repr</code> function that lean fails to synthesize the instance</p>
+
+<a name="160613660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613660">Simon Hudon (Mar 12 2019 at 21:43)</a>:</h4>
+<p>What's the type of <code>render</code>?</p>
+
+<a name="160613849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160613849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160613849">dagit (Mar 12 2019 at 21:45)</a>:</h4>
+<p>The type of render is a bit involved, here is a link to tha code: <a href="https://github.com/GaloisInc/reopt-vcg/blob/master/lean/deps/sexpr/src/galois/sexpr.lean#L51" target="_blank" title="https://github.com/GaloisInc/reopt-vcg/blob/master/lean/deps/sexpr/src/galois/sexpr.lean#L51">https://github.com/GaloisInc/reopt-vcg/blob/master/lean/deps/sexpr/src/galois/sexpr.lean#L51</a></p>
+
+<a name="160614114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614114">Kevin Buzzard (Mar 12 2019 at 21:48)</a>:</h4>
+<p>I guess it all looks OK to my inexpert eyes. So you have some explicit type alpha and some explicit instance <code>is_atom alpha</code>. Does <code>example : is_atom alpha := by apply_instance</code> work? </p>
+<p>Independent of this, I have never seen <code>Type _</code> before. Does it change anything if you change it to <code>Type*</code>?</p>
+
+<a name="160614119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614119">Simon Hudon (Mar 12 2019 at 21:48)</a>:</h4>
+<p>try:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">repr</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_atom</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">sexpr</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">string</span> <span class="o">:=</span> <span class="n">render</span> <span class="n">buffer</span><span class="bp">.</span><span class="n">to_string</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>I think having an argument to force a choice for argument <code>α</code> might help with type class resolution</p>
+
+<a name="160614152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614152">dagit (Mar 12 2019 at 21:49)</a>:</h4>
+<p>Kevin, that <code>example</code> also fails to find the instance. I was trying something like that earlier today.</p>
+
+<a name="160614159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614159">dagit (Mar 12 2019 at 21:49)</a>:</h4>
+<p>I'll try that Simon and get back to you.</p>
+
+<a name="160614165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614165">Simon Hudon (Mar 12 2019 at 21:50)</a>:</h4>
+<p><span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="160614230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614230">dagit (Mar 12 2019 at 21:50)</a>:</h4>
+<p>Hmm...same error message. I'll try what Kevin ask about with <code>Type*</code></p>
+
+<a name="160614288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614288">dagit (Mar 12 2019 at 21:51)</a>:</h4>
+<p>Wait, what is the syntax you wanted me to try? I don't think <code>Type*</code> is valid.</p>
+
+<a name="160614359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614359">dagit (Mar 12 2019 at 21:52)</a>:</h4>
+<p>Removing the <code>_</code> so that it's just <code>Type</code> doesn't resolve the issue either.</p>
+
+<a name="160614409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614409">Kevin Buzzard (Mar 12 2019 at 21:54)</a>:</h4>
+<p>I didn't know <code>(alpha : Type _)</code> was valid syntax. I am pretty sure <code>(alpha : Type*)</code> is. You're using Lean 3.4 right?</p>
+
+<a name="160614458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614458">Kevin Buzzard (Mar 12 2019 at 21:54)</a>:</h4>
+<p>If <code>by apply_instance</code> can't find the instance then this is a step in the right direction.</p>
+
+<a name="160614469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614469">Kevin Buzzard (Mar 12 2019 at 21:54)</a>:</h4>
+<p>That's just asking type class inference to look up the instance.</p>
+
+<a name="160614479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614479">dagit (Mar 12 2019 at 21:54)</a>:</h4>
+<p>3.4.1 to be precise</p>
+
+<a name="160614484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614484">Kevin Buzzard (Mar 12 2019 at 21:54)</a>:</h4>
+<p>That should be fine.</p>
+
+<a name="160614527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614527">dagit (Mar 12 2019 at 21:55)</a>:</h4>
+<p>oh, <code>Type*</code> without a space makes a difference?</p>
+
+<a name="160614538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614538">Patrick Massot (Mar 12 2019 at 21:55)</a>:</h4>
+<p>yes</p>
+
+<a name="160614612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614612">dagit (Mar 12 2019 at 21:56)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : is_atom sexp.atom := nat_expr.atom_is_atom
+[class_instances] trying next solution, current solution has metavars
+</pre></div>
+
+<a name="160614638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20synthesize%20instance%3F/near/160614638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68216cantsynthesizeinstance.html#160614638">dagit (Mar 12 2019 at 21:57)</a>:</h4>
+<p>Is there a way to learn more about the metavar?</p>
+
 
 {% endraw %}
