@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [maximal elements](32903maximalelements.html) (11 messages, latest: Mar 13 2019 at 15:58)
+* [can't synthesize instance?](68216cantsynthesizeinstance.html) (43 messages, latest: Mar 13 2019 at 16:57)
+
+* [auto links to github](61729autolinkstogithub.html) (3 messages, latest: Mar 13 2019 at 16:15)
+
+* [maximal elements](32903maximalelements.html) (19 messages, latest: Mar 13 2019 at 16:06)
 
 * [random parser facts](60512randomparserfacts.html) (49 messages, latest: Mar 13 2019 at 11:31)
 
 * [Pattern match interfering with calc](12888Patternmatchinterferingwithcalc.html) (1 message, latest: Mar 13 2019 at 03:15)
-
-* [can't synthesize instance?](68216cantsynthesizeinstance.html) (42 messages, latest: Mar 12 2019 at 22:17)
 
 * [lost in translation](41961lostintranslation.html) (32 messages, latest: Mar 12 2019 at 15:02)
 
