@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (9 messages, latest: Mar 13 2019 at 11:57)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2962 messages, latest: Mar 13 2019 at 08:04)
 
 * [filter bases](55413filterbases.html) (29 messages, latest: Mar 12 2019 at 15:53)

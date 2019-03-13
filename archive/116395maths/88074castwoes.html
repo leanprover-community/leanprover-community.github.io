@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/88074castwoes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html">cast woes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160656265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656265">Johan Commelin (Mar 13 2019 at 11:52)</a>:</h4>
+<p>It's quite humiliating, but how do I kill:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">p</span><span class="bp">.</span><span class="n">prime</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="160656373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656373">Kenny Lau (Mar 13 2019 at 11:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">p</span><span class="bp">.</span><span class="n">prime</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="bp">_</span> <span class="bp">&lt;</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_lt</span><span class="o">]</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span><span class="bp">.</span><span class="n">gt_one</span><span class="bp">;</span> <span class="n">assumption</span>
+</pre></div>
+
+<a name="160656379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656379">Mario Carneiro (Mar 13 2019 at 11:54)</a>:</h4>
+<p><code>pp.gt_one</code>?</p>
+
+<a name="160656397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656397">Kenny Lau (Mar 13 2019 at 11:55)</a>:</h4>
+<p>why is <code>[p.prime]</code> an instance though</p>
+
+<a name="160656399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656399">Johan Commelin (Mar 13 2019 at 11:55)</a>:</h4>
+<p>We really need a <code>cast</code> tactic.</p>
+
+<a name="160656404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656404">Kenny Lau (Mar 13 2019 at 11:55)</a>:</h4>
+<p>and also why does <code>data.nat.prime</code> use ge and gt <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="160656475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656475">Johan Commelin (Mar 13 2019 at 11:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Thanks</p>
+
+<a name="160656504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656504">Mario Carneiro (Mar 13 2019 at 11:57)</a>:</h4>
+<p>I guess it's a bit more natural to read <code>prime.gt_one</code>? not a strong argument</p>
+
+<a name="160656525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656525">Mario Carneiro (Mar 13 2019 at 11:57)</a>:</h4>
+<p>you can make them all le and lt if you want</p>
+
+
+{% endraw %}
