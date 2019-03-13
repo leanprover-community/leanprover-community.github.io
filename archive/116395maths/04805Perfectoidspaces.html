@@ -13671,5 +13671,16 @@ Are there other reasons why this approach might be a bad idea? Or is this the ri
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/160605020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#160605020">Johan Commelin (Mar 12 2019 at 20:04)</a>:</h4>
 <p>It does mean that we have to port lots of things back and forth between Z_p the subtype and Z_p the subset.</p>
 
+<a name="160629358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/160629358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#160629358">Mario Carneiro (Mar 13 2019 at 02:21)</a>:</h4>
+<p>I think you are right. You should make A0 a type and pull it out of the structure</p>
+
+<a name="160629439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/160629439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#160629439">Mario Carneiro (Mar 13 2019 at 02:23)</a>:</h4>
+<blockquote>
+<p>Won't it mean that every single one of those proofs you've been working on will get much messier because you'll constantly be having to apply some function from the small ring to the big one, moving subgroups of the small one to subgroups on the big one, open sets in the small one to open sets in the big one, and so on?</p>
+</blockquote>
+<p>That function is already there even with sets. You want to talk about A0 as a ring so you needed <code>subset.ring</code>, which I'm guessing is why we had that diamond discussion yesterday. Here the ring structure is previously imposed, and you use <code>comap</code> to transfer stuff instead of <code>subtype.val</code></p>
+
 
 {% endraw %}
