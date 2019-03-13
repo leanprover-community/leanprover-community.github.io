@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Pattern match interfering with calc](12888Patternmatchinterferingwithcalc.html) (1 message, latest: Mar 13 2019 at 03:15)
+
 * [can't synthesize instance?](68216cantsynthesizeinstance.html) (42 messages, latest: Mar 12 2019 at 22:17)
 
 * [lost in translation](41961lostintranslation.html) (32 messages, latest: Mar 12 2019 at 15:02)

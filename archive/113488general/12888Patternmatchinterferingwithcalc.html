@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/12888Patternmatchinterferingwithcalc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/12888Patternmatchinterferingwithcalc.html">Pattern match interfering with calc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160631409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pattern%20match%20interfering%20with%20calc/near/160631409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12888Patternmatchinterferingwithcalc.html#160631409">Seul Baek (Mar 13 2019 at 03:15)</a>:</h4>
+<p>I'm currently working with equality elimination, and I frequently use patterns like <code>(eq::l)</code> when equality constraints are encoded as lists. I found that this interferes with the <code>calc</code> enviroment in weird ways.  Here's the minimal example I found so far: </p>
+<div class="codehilite"><pre><span></span>lemma foo : ∀ x : list unit, unit
+| []      := ()
+| (eq::_) :=
+  begin
+    have h0 : 0 = 0 :=
+    (calc 0
+        = 0 : rfl
+    ... = 0 : rfl)
+  end
+
+invalid occurrence of field notation
+state:
+foo : list unit → unit,
+eq : unit,
+_x : list unit
+⊢ unit
+</pre></div>
+
+
+<p>The problem here seems to be that Lean isn't taking <code>eq</code> in the pattern as an arbitrary term of type <code>unit</code>, but as the actual <code>eq : Π {α : Sort u_1}, α → α → Prop</code> (the problem goes away when I rename it to something like <code>x</code>).  But this is strange since if Lean considered <code>eq</code> to be the latter, it would usually give a typechecking error and inform you that this <code>eq</code> cannot occur in a list of units. That's precisely what it does when there is, say, a <code>tt</code> in its place.</p>
+
+
+{% endraw %}
