@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [random parser facts](60512randomparserfacts.html) (47 messages, latest: Mar 13 2019 at 09:53)
+
 * [Pattern match interfering with calc](12888Patternmatchinterferingwithcalc.html) (1 message, latest: Mar 13 2019 at 03:15)
 
 * [can't synthesize instance?](68216cantsynthesizeinstance.html) (42 messages, latest: Mar 12 2019 at 22:17)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [deep recursion](79225deeprecursion.html) (5 messages, latest: Mar 12 2019 at 14:18)
 
 * [detecting hypotheses introduced by the equation compiler?](09329detectinghypothesesintroducedbytheequationcompiler.html) (3 messages, latest: Mar 12 2019 at 10:48)
-
-* [random parser facts](60512randomparserfacts.html) (20 messages, latest: Mar 12 2019 at 01:15)
 
 * [trivial group / trivial module](48697trivialgrouptrivialmodule.html) (13 messages, latest: Mar 11 2019 at 23:22)
 
