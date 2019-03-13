@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [not(p<->not p)](93307notpnotp.html) (2 messages, latest: Mar 13 2019 at 18:31)
+* [not(p<->not p)](93307notpnotp.html) (4 messages, latest: Mar 13 2019 at 20:19)
 
 * [dependent function types](32947dependentfunctiontypes.html) (19 messages, latest: Mar 13 2019 at 06:27)
 
