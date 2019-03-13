@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* ['repeat' tactic vs 'apply' x n](29899repeattacticvsapplyxn.html) (15 messages, latest: Mar 13 2019 at 21:57)
+* ['repeat' tactic vs 'apply' x n](29899repeattacticvsapplyxn.html) (19 messages, latest: Mar 13 2019 at 22:30)
 
 * [not(p<->not p)](93307notpnotp.html) (4 messages, latest: Mar 13 2019 at 20:19)
 
