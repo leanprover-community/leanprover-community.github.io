@@ -1,0 +1,120 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/29899repeattacticvsapplyxn.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html">'repeat' tactic vs 'apply' x n</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160729787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160729787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160729787">cbailey (Mar 13 2019 at 21:41)</a>:</h4>
+<p>Why do these two examples exhibit different behavior (iterative application of a tactic vs repeat)? The definitions of repeat and repeat_aux don't seem to suggest they would do anything different.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">6</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 1 + 6</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 6</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">base</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">6</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">},</span> <span class="c1">-- 5 &lt; 1</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160730056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730056">Sebastien Gouezel (Mar 13 2019 at 21:44)</a>:</h4>
+<p>What happens if you <code>apply nat.lt_add_left</code> once more in the first example?</p>
+
+<a name="160730289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730289">Patrick Massot (Mar 13 2019 at 21:47)</a>:</h4>
+<p>I think you think <code>repeat</code> means <code>iterate 2</code></p>
+
+<a name="160730290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730290">cbailey (Mar 13 2019 at 21:47)</a>:</h4>
+<p>Well that explains that.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">6</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span> <span class="c1">-- 5 &lt; 1 + 6</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span> <span class="c1">-- 5 &lt; 6</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span> <span class="c1">-- 5 &lt; 3</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span> <span class="c1">-- 5 &lt; 1</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160730344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730344">Kevin Buzzard (Mar 13 2019 at 21:48)</a>:</h4>
+<p>Lean's definition of 6 is 3 + 3</p>
+
+<a name="160730370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730370">Kevin Buzzard (Mar 13 2019 at 21:48)</a>:</h4>
+<p>numerals are defined by binary: 7 := 3 + 3 + 1 and 8 := 4 + 4 etc etc</p>
+
+<a name="160730453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730453">Kevin Buzzard (Mar 13 2019 at 21:50)</a>:</h4>
+<p><code>set_option pp.numerals false</code>.</p>
+
+<a name="160730535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730535">cbailey (Mar 13 2019 at 21:50)</a>:</h4>
+<p>Ah okay. I didn't know it used a binary representation internally but that makes sense. Thank you.</p>
+
+<a name="160730536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730536">Kevin Buzzard (Mar 13 2019 at 21:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bit0</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">s</span>  <span class="o">:</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span>  <span class="o">:</span> <span class="n">α</span><span class="o">)</span>                 <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">a</span>
+<span class="n">def</span> <span class="n">bit1</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">s₁</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">s₂</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bit0</span> <span class="n">a</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>This is what Lean uses when it sees numeric characters.</p>
+
+<a name="160730563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730563">Kevin Buzzard (Mar 13 2019 at 21:51)</a>:</h4>
+<p>Obviously nat is represented as succ (succ (succ ...))) -- that's the definition.</p>
+
+<a name="160730576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730576">Kevin Buzzard (Mar 13 2019 at 21:51)</a>:</h4>
+<p>It's the digits <code>[0-9]+</code> that get turned into binary.</p>
+
+<a name="160730849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730849">Kevin Buzzard (Mar 13 2019 at 21:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">+</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">6</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">unfold</span> <span class="n">bit1</span> <span class="bp">&lt;|&gt;</span> <span class="n">unfold</span> <span class="n">bit0</span><span class="o">},</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">add_assoc</span><span class="o">},</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 7</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 6</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 5</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 4</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 3</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 2</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 5 &lt; 1</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160730884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730884">Kevin Buzzard (Mar 13 2019 at 21:55)</a>:</h4>
+<p>or more precisely, <code>⊢ 1 + (1 + (1 + (1 + 1))) &lt; 1 + (1 + (1 + (1 + (1 + (1 + 1)))))</code> etc</p>
+
+<a name="160730961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160730961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160730961">Kevin Buzzard (Mar 13 2019 at 21:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">+</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">6</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">unfold</span> <span class="n">bit1</span> <span class="bp">&lt;|&gt;</span> <span class="n">unfold</span> <span class="n">bit0</span><span class="o">},</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="err">←</span><span class="n">add_assoc</span><span class="o">},</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_left</span><span class="o">,</span>  <span class="c1">-- 1 + 1 + 1 + 1 + 1 &lt; 1</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160731019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27repeat%27%20tactic%20vs%20%27apply%27%20x%20n/near/160731019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29899repeattacticvsapplyxn.html#160731019">Kevin Buzzard (Mar 13 2019 at 21:57)</a>:</h4>
+<p>The actual behaviour of the code depends exactly on how the numerals are being stored. I am messing around with them with the unfolding code and can get repeat {apply nat.lt_add_left} to display different behaviour.</p>
+
+
+{% endraw %}

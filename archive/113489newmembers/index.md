@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* ['repeat' tactic vs 'apply' x n](29899repeattacticvsapplyxn.html) (15 messages, latest: Mar 13 2019 at 21:57)
+
 * [not(p<->not p)](93307notpnotp.html) (4 messages, latest: Mar 13 2019 at 20:19)
 
 * [dependent function types](32947dependentfunctiontypes.html) (19 messages, latest: Mar 13 2019 at 06:27)

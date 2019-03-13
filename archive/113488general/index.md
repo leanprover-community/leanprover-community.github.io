@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [can't synthesize instance?](68216cantsynthesizeinstance.html) (45 messages, latest: Mar 13 2019 at 20:48)
+* [can't synthesize instance?](68216cantsynthesizeinstance.html) (46 messages, latest: Mar 13 2019 at 21:01)
 
 * [is_well_order](45771iswellorder.html) (9 messages, latest: Mar 13 2019 at 18:58)
 
