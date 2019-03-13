@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [is_well_order](45771iswellorder.html) (9 messages, latest: Mar 13 2019 at 18:58)
+
 * [maximal elements](32903maximalelements.html) (20 messages, latest: Mar 13 2019 at 17:31)
 
 * [can't synthesize instance?](68216cantsynthesizeinstance.html) (44 messages, latest: Mar 13 2019 at 17:02)

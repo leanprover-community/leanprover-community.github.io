@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [not(p<->not p)](93307notpnotp.html) (2 messages, latest: Mar 13 2019 at 18:31)
+
 * [dependent function types](32947dependentfunctiontypes.html) (19 messages, latest: Mar 13 2019 at 06:27)
 
 * [the prime factorization of `n`](99327theprimefactorizationofn.html) (4 messages, latest: Mar 12 2019 at 04:20)
