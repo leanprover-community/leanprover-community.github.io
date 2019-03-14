@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [happy pi day!](89755happypiday.html) (40 messages, latest: Mar 14 2019 at 14:57)
+* [happy pi day!](89755happypiday.html) (79 messages, latest: Mar 14 2019 at 15:58)
 
-* [better home for inv_eq_zero?](32279betterhomeforinveqzero.html) (3 messages, latest: Mar 14 2019 at 14:24)
+* [better home for inv_eq_zero?](32279betterhomeforinveqzero.html) (5 messages, latest: Mar 14 2019 at 15:21)
 
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (50 messages, latest: Mar 14 2019 at 09:08)
 
