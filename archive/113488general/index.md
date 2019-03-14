@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (23 messages, latest: Mar 14 2019 at 08:57)
+
 * [PSA for mathlib contributors](49083PSAformathlibcontributors.html) (5 messages, latest: Mar 14 2019 at 07:46)
 
 * [can't synthesize instance?](68216cantsynthesizeinstance.html) (46 messages, latest: Mar 13 2019 at 21:01)
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [detecting hypotheses introduced by the equation compiler?](09329detectinghypothesesintroducedbytheequationcompiler.html) (3 messages, latest: Mar 12 2019 at 10:48)
 
 * [trivial group / trivial module](48697trivialgrouptrivialmodule.html) (13 messages, latest: Mar 11 2019 at 23:22)
-
-* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (22 messages, latest: Mar 11 2019 at 21:15)
 
 * [`leanpkg` and nightly builds](29560leanpkgandnightlybuilds.html) (48 messages, latest: Mar 11 2019 at 16:18)
 

@@ -148,5 +148,116 @@ show false, from h3 h4
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758530">Johan Commelin (Mar 14 2019 at 07:48)</a>:</h4>
 <p>One thing that <code>tidy</code> could optimise is recognising that it is proving the same goal twice. I've started work on a <code>dedup-goals</code> tactic... but I got weird buggy behaviour. See the <code>merge-goals</code> branch.</p>
 
+<a name="160759096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759096">Kevin Buzzard (Mar 14 2019 at 08:01)</a>:</h4>
+<p>Let me just show you Johan's proof of not(p iff not p) in tactic mode</p>
+
+<a name="160759321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759321">Kevin Buzzard (Mar 14 2019 at 08:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">help_me</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="c1">-- &lt;- put your cursor here and look at the tactic state</span>
+  <span class="c1">-- the key lemma</span>
+  <span class="k">have</span> <span class="n">hnp</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span>
+  <span class="c1">-- two goals now, the one we had and the new one we just set ourselves</span>
+  <span class="o">{</span> <span class="c1">-- back down to one goal, we&#39;ll leave the other one until after we finished the {}</span>
+    <span class="n">intro</span> <span class="n">hP</span><span class="o">,</span> <span class="c1">-- &lt;- put your cursor here and see what we have, and what we want</span>
+    <span class="k">have</span> <span class="n">hnP</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">sorry</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160759323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759323">Kevin Buzzard (Mar 14 2019 at 08:05)</a>:</h4>
+<p>I'm in the middle of writing a tactic mode proof of the question which started this thread.</p>
+
+<a name="160759402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759402">Kevin Buzzard (Mar 14 2019 at 08:06)</a>:</h4>
+<p>Assuming you're using VS Code, cut and paste that code into VS Code and put your cursor at the points I suggest, and then move it up and down with the up/down arrow keys. Crucially, make sure you have the right "lean messages" window open as well.-- get it with Ctrl-Shift-Enter</p>
+
+<a name="160759423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759423">Kevin Buzzard (Mar 14 2019 at 08:07)</a>:</h4>
+<p><a href="/user_uploads/3121/EnDMCYIcfjSszDu6T5Lt_Om9/tactic_mode.png" target="_blank" title="tactic_mode.png">tactic_mode.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/EnDMCYIcfjSszDu6T5Lt_Om9/tactic_mode.png" target="_blank" title="tactic_mode.png"><img src="/user_uploads/3121/EnDMCYIcfjSszDu6T5Lt_Om9/tactic_mode.png"></a></div>
+
+<a name="160759428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759428">Kevin Buzzard (Mar 14 2019 at 08:07)</a>:</h4>
+<p>If you are a beginner then I think that the way tactic mode holds your hand is really helpful.</p>
+
+<a name="160759488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759488">Kevin Buzzard (Mar 14 2019 at 08:08)</a>:</h4>
+<p>If you can get things set up so they look like the above, and you start moving your cursor up and down, you will see the tactic state and the goal changing on the right, and this set-up greatly clarifies, for me at least, exactly what you can assume and what you are supposed to be proving at any point.</p>
+
+<a name="160759498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759498">Patrick Massot (Mar 14 2019 at 08:08)</a>:</h4>
+<p>To be fair, one should say the term mode analogue of Kevin's template is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">help_me</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="bp">⟨</span><span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hnp</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span> <span class="k">from</span>
+    <span class="k">assume</span> <span class="n">hP</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hnP</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>putting the cursor on the underline also tells you what is the state and what Lean wants. But I still agree with Kevin that it's much easier in tactic mode</p>
+
+<a name="160759512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759512">Kevin Buzzard (Mar 14 2019 at 08:09)</a>:</h4>
+<p>Yeah, Patrick is exactly right, but this very important trick with <code>_</code> is not as far as I remember, stressed in TPIL</p>
+
+<a name="160759514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759514">Kevin Buzzard (Mar 14 2019 at 08:09)</a>:</h4>
+<p>It was extremely helpful for me when I started to learn term mode properly</p>
+
+<a name="160759584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759584">Kevin Buzzard (Mar 14 2019 at 08:10)</a>:</h4>
+<p>but with tactic mode the entire tactic state and goal are there, the moment you have understood the difference between the two windows both unfortunately called "Lean Messages", which I just used to open randomly</p>
+
+<a name="160759597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759597">Kevin Buzzard (Mar 14 2019 at 08:11)</a>:</h4>
+<p>One is ctrl-shift-enter, one is ctrl-alt-shift-enter, they both look indistinguishable, and one is helpful in tactic mode and the other isn't.</p>
+
+<a name="160759688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759688">Kevin Buzzard (Mar 14 2019 at 08:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">help_me</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="c1">-- &lt;- put your cursor here and look at the tactic state</span>
+  <span class="c1">-- the key lemma</span>
+  <span class="k">have</span> <span class="n">hnP</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span>
+  <span class="c1">-- two goals now, the one we had and the new one we just set ourselves</span>
+  <span class="o">{</span> <span class="c1">-- back down to one goal, we&#39;ll leave the other one until after we finished the {}</span>
+    <span class="n">intro</span> <span class="n">hP</span><span class="o">,</span> <span class="c1">-- &lt;- put your cursor here and see what we have, and what we want</span>
+    <span class="k">have</span> <span class="n">hnP</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">,</span>
+    <span class="c1">-- after each &quot;have&quot; open some {}s to keep the number of goals down to 1</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">h1</span> <span class="n">hP</span>
+    <span class="o">},</span>
+    <span class="n">exact</span> <span class="n">hnP</span> <span class="n">hP</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="k">have</span> <span class="n">hP</span> <span class="o">:</span> <span class="n">P</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h2</span> <span class="n">hnP</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="n">exact</span> <span class="n">hnP</span> <span class="n">hP</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160759748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759748">Manikhanta Teja (Mar 14 2019 at 08:14)</a>:</h4>
+<p>I'll start with simple proofs.  This looks a lot better. Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="160759749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759749">Kevin Buzzard (Mar 14 2019 at 08:14)</a>:</h4>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html">http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html</a></p>
+<p>This is some very shoddy notes</p>
+
+<a name="160759758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160759758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160759758">Kevin Buzzard (Mar 14 2019 at 08:14)</a>:</h4>
+<p>It's what I tell my students to look at. I will rewrite them properly this summer, but it pushes tactic mode from the start.</p>
+
 
 {% endraw %}
