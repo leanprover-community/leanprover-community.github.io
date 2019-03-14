@@ -27,5 +27,50 @@ permalink: archive/113489newmembers/93307notpnotp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160723756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160723756">Kevin Buzzard (Mar 13 2019 at 20:19)</a>:</h4>
 <p><span class="user-mention" data-user-id="212008">@Manikhanta Teja</span> this comes up every few months. It's an exercise in Theorem Proving In Lean. Searching for a solution in this forum might work. It's a great exercise :-)</p>
 
+<a name="160744220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160744220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160744220">Manikhanta Teja (Mar 14 2019 at 01:47)</a>:</h4>
+<p>I couldnt find it. But i tried doing it.</p>
+<div class="codehilite"><pre><span></span>variable p : Prop
+example : ¬(p &lt;-&gt; ¬p) :=
+assume h1 : (p &lt;-&gt; ¬p),
+show false, from
+(assume h2 : p,
+have h3 : not p, from iff.elim_left h1 h2,
+have h4 : p, from iff.elim_right h1 h3,
+show false, from h3 h4
+)
+</pre></div>
+
+
+<p>I get this error</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  (λ (this : false), this)
+    (λ (h2 : p),
+       have h3 : ¬p, from iff.elim_left h1 h2,
+       have h4 : p, from iff.elim_right h1 h3,
+       show false, from h3 h4)
+term
+  λ (h2 : p), have h3 : ¬p, from iff.elim_left h1 h2, have h4 : p, from iff.elim_right h1 h3, show false, from h3 h4
+has type
+  p → false
+but is expected to have type
+  false
+</pre></div>
+
+
+<p>but if I do this, it works. </p>
+<div class="codehilite"><pre><span></span>variable p : Prop
+variable h2 : p
+example : ¬(p &lt;-&gt; ¬p) :=
+assume h1 : (p &lt;-&gt; ¬p),
+show false, from
+have h3 : not p, from iff.elim_left h1 h2,
+have h4 : p, from iff.elim_right h1 h3,
+show false, from h3 h4
+</pre></div>
+
+
+<p>How do i do this without using another variable h2</p>
+
 
 {% endraw %}
