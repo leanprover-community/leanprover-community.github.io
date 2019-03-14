@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [multiset question](66288multisetquestion.html) (5 messages, latest: Mar 14 2019 at 18:59)
+
 * [excluded middle from dne](47017excludedmiddlefromdne.html) (17 messages, latest: Mar 14 2019 at 09:20)
 
 * [not(p<->not p)](93307notpnotp.html) (34 messages, latest: Mar 14 2019 at 09:09)
