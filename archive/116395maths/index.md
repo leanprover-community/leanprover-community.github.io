@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (7 messages, latest: Mar 14 2019 at 20:53)
+* [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (14 messages, latest: Mar 14 2019 at 21:22)
 
 * [cast woes](88074castwoes.html) (64 messages, latest: Mar 14 2019 at 08:50)
 
