@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#819 card finite fields](64086819cardfinitefields.html) (2 messages, latest: Mar 14 2019 at 17:43)
+
 * [#801 hyperreals](71708801hyperreals.html) (1 message, latest: Mar 09 2019 at 09:57)
 
 * [#800](84604800.html) (7 messages, latest: Mar 08 2019 at 14:20)
