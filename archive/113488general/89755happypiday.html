@@ -402,5 +402,199 @@ permalink: archive/113488general/89755happypiday.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160795738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160795738">Kevin Buzzard (Mar 14 2019 at 16:07)</a>:</h4>
 <p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> there's an example of basic manipulations with sqrt(5)</p>
 
+<a name="160811617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811617">Floris van Doorn (Mar 14 2019 at 19:06)</a>:</h4>
+<div class="codehilite"><pre><span></span>import analysis.exponential
+
+namespace real
+variable (x : ℝ)
+
+lemma sqrt_le_left {x y : ℝ} (hy : 0 ≤ y) : sqrt x ≤ y ↔ x ≤ y ^ 2 :=
+begin
+  rw [mul_self_le_mul_self_iff (sqrt_nonneg _) hy, pow_two],
+  cases le_total 0 x with hx hx,
+  { rw [mul_self_sqrt hx] },
+  { have h1 : 0 ≤ y * y := mul_nonneg hy hy,
+    have h2 : x ≤ y * y := le_trans hx h1,
+    simp [sqrt_eq_zero_of_nonpos, hx, h1, h2] }
+end
+
+lemma le_sqrt {x y : ℝ} (hx : 0 ≤ x) (hy : 0 ≤ y) : x ≤ sqrt y ↔ x ^ 2 ≤ y :=
+by rw [mul_self_le_mul_self_iff hx (sqrt_nonneg _), pow_two, mul_self_sqrt hy]
+
+lemma div_lt_self {x y : ℝ} (hx : x &gt; 0) (hy : y &gt; 1) : x / y &lt; x :=
+by simpa using div_lt_div&#39; (le_refl x) hy hx zero_lt_one
+
+lemma cos_square : cos x ^ 2 = (1 + cos (2 * x)) / 2 :=
+by simp [cos_two_mul, mul_div_cancel_left, two_ne_zero]
+
+lemma sin_square : sin x ^ 2 = 1 - cos x ^ 2 :=
+by { rw [←sin_pow_two_add_cos_pow_two x], simp }
+
+lemma cos_square_pi_div_four : cos (pi / 4) ^ 2 = 1 / 2 :=
+by { have : 2 * (pi / 4) = pi / 2, ring, simp [cos_square, this] }
+
+lemma cos_pi_div_four : cos (pi / 4) = sqrt (1 / 2) :=
+begin
+  symmetry, rw [sqrt_eq_iff_sqr_eq, cos_square_pi_div_four], norm_num,
+  apply le_of_lt, apply cos_pos_of_neg_pi_div_two_lt_of_lt_pi_div_two,
+  { transitivity (0 : ℝ), rw neg_lt_zero, apply pi_div_two_pos,
+    exact div_pos pi_pos (by norm_num) },
+  apply div_lt_div&#39; (le_refl pi) _ pi_pos _,
+  norm_num, norm_num
+end
+
+/- why is division_ring.inv_inj in the file &quot;field&quot;?-/
+lemma cos_square_pi_div_eight : cos (pi / 8) ^ 2 = 1 / 2 + sqrt (1 / 8) :=
+begin
+  have h1 : 2 * (pi / 8) = pi / 4, ring,
+  have h2 : sqrt 4 = 2, rw [sqrt_eq_iff_sqr_eq]; norm_num,
+  have h3 : 2 * sqrt 2 ≠ 0, norm_num,
+  have h4 : sqrt 8 ≠ 0, norm_num,
+  simp [cos_square, h1, cos_pi_div_four],
+  rw [←div_add_div_same], simp [div_eq_mul_inv, (mul_inv&#39; _ _).symm, division_ring.inv_inj, h3, h4],
+  transitivity sqrt 4 * sqrt 2, rw [h2],
+  rw [←sqrt_mul]; norm_num
+end
+
+lemma cos_pi_div_eight : cos (pi / 8) = sqrt (1 / 2 + sqrt (1 / 8)) :=
+begin
+  symmetry, rw [sqrt_eq_iff_sqr_eq, cos_square_pi_div_eight],
+  apply add_nonneg, norm_num, apply sqrt_nonneg,
+  apply le_of_lt, apply cos_pos_of_neg_pi_div_two_lt_of_lt_pi_div_two,
+  { transitivity (0 : ℝ), rw neg_lt_zero, apply pi_div_two_pos,
+    exact div_pos pi_pos (by norm_num) },
+  apply div_lt_div&#39; (le_refl pi) _ pi_pos _,
+  norm_num, norm_num
+end
+
+lemma sin_square_pi_div_eight : sin (pi / 8) ^ 2 = 1 / 2 - sqrt (1 / 8) :=
+by { simp [sin_square, cos_square_pi_div_eight], rw [←add_assoc], congr&#39; 1, norm_num }
+
+lemma sin_pi_div_eight : sin (pi / 8) = sqrt (1 / 2 - sqrt (1 / 8)) :=
+begin
+  symmetry, rw [sqrt_eq_iff_sqr_eq, sin_square_pi_div_eight],
+  { rw [sub_nonneg, sqrt_le_left], norm_num, norm_num },
+  apply le_of_lt, apply sin_pos_of_pos_of_lt_pi,
+  { exact div_pos pi_pos (by norm_num) },
+  exact div_lt_self pi_pos (by norm_num)
+end
+
+lemma sin_lt {x : ℝ} (h : 0 &lt; x) : sin x &lt; x :=
+begin
+  cases le_or_gt x 1 with h&#39; h&#39;,
+  { have hx : abs x = x := abs_of_nonneg (le_of_lt h),
+    have : abs x ≤ 1, rwa [hx],
+    have := sin_bound this, rw [abs_le] at this,
+    have := this.2, rw [sub_le_iff_le_add&#39;, hx] at this,
+    apply lt_of_le_of_lt this, rw [sub_add], apply lt_of_lt_of_le _ (le_of_eq (sub_zero x)),
+    apply sub_lt_sub_left, rw sub_pos, apply mul_lt_mul&#39;,
+    { rw [pow_succ x 3], refine le_trans _ (le_of_eq (one_mul _)),
+      rw mul_le_mul_right, exact h&#39;, apply pow_pos h },
+    norm_num, norm_num, apply pow_pos h },
+  exact lt_of_le_of_lt (sin_le_one x) h&#39;
+end
+
+lemma pt_gt_three : pi &gt; 3 :=
+begin
+  have : pi &gt; sin (pi / 8) * 8,
+  { apply mul_lt_of_lt_div, norm_num, apply sin_lt, apply div_pos pi_pos, norm_num },
+  apply lt_of_le_of_lt _ this, rw [sin_pi_div_eight],
+  apply le_mul_of_div_le, norm_num,
+  rw [le_sqrt, le_sub_iff_add_le, ←le_sub_iff_add_le&#39;, sqrt_le_left],
+  norm_num, norm_num, norm_num,
+  rw [sub_nonneg, sqrt_le_left], norm_num, norm_num
+end
+
+end real
+</pre></div>
+
+<a name="160811887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811887">Kevin Buzzard (Mar 14 2019 at 19:08)</a>:</h4>
+<p>This doesn't compile for me</p>
+
+<a name="160811892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811892">Kevin Buzzard (Mar 14 2019 at 19:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>solve1 tactic failed, focused goal has not been solved
+state:
+⊢ pi / 8 ≤ 1
+</pre></div>
+
+<a name="160811899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811899">Kevin Buzzard (Mar 14 2019 at 19:08)</a>:</h4>
+<p>We need pi &lt;= 8</p>
+
+<a name="160811969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811969">Kevin Buzzard (Mar 14 2019 at 19:09)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma pt_gt_three : pi &gt; 3 :=
+begin
+  have : pi &gt; sin (pi / 8) * 8,
+  { apply mul_lt_of_lt_div, norm_num, apply sin_lt, apply div_pos pi_pos, norm_num,
+  -- ⊢ pi / 8 ≤ 1
+    sorry
+  },
+  apply lt_of_le_of_lt _ this, rw [sin_pi_div_eight],
+  apply le_mul_of_div_le, norm_num,
+  rw [le_sqrt, le_sub_iff_add_le, ←le_sub_iff_add_le&#39;, sqrt_le_left],
+  norm_num, norm_num, norm_num,
+  rw [sub_nonneg, sqrt_le_left], norm_num, norm_num
+end
+</pre></div>
+
+<a name="160811971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160811971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160811971">Floris van Doorn (Mar 14 2019 at 19:09)</a>:</h4>
+<p>oops, I missed that. One minute</p>
+
+<a name="160812122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160812122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160812122">Floris van Doorn (Mar 14 2019 at 19:11)</a>:</h4>
+<p>I updated the previous post, it should compile now.</p>
+
+<a name="160812143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160812143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160812143">Reid Barton (Mar 14 2019 at 19:11)</a>:</h4>
+<p>You can also prove <code>sin x &lt; x</code> for all <code>x &gt; 0</code> by handling the case <code>x &gt; 1</code> by <code>sin x &lt;= 1 &lt; x</code></p>
+
+<a name="160812469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160812469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160812469">Floris van Doorn (Mar 14 2019 at 19:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> That is indeed the nicer solution. I was planning to do that, but I was a bit too eager to post it here and forgot :)</p>
+
+<a name="160812540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160812540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160812540">Floris van Doorn (Mar 14 2019 at 19:15)</a>:</h4>
+<p>I updated the code once more.</p>
+
+<a name="160813974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160813974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160813974">Kevin Buzzard (Mar 14 2019 at 19:29)</a>:</h4>
+<p>This should all go in <code>pi.lean</code>, right?</p>
+
+<a name="160814047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160814047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160814047">Kevin Buzzard (Mar 14 2019 at 19:30)</a>:</h4>
+<p>So now we can prove that floor(pi) = 3</p>
+
+<a name="160814068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160814068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160814068">Kevin Buzzard (Mar 14 2019 at 19:30)</a>:</h4>
+<p>So the next question is whether we can prove digit 10 pi 0 = 1</p>
+
+<a name="160814132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160814132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160814132">Kevin Buzzard (Mar 14 2019 at 19:31)</a>:</h4>
+<p>ie floor(pi*10)%10=1</p>
+
+<a name="160814182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160814182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160814182">Johan Commelin (Mar 14 2019 at 19:31)</a>:</h4>
+<blockquote>
+<p>This should all go in <code>pi.lean</code>, right?</p>
+</blockquote>
+<p>Isn't that about pi types <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span> <span aria-label="cake" class="emoji emoji-1f370" role="img" title="cake">:cake:</span></p>
+
+<a name="160814815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160814815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160814815">Floris van Doorn (Mar 14 2019 at 19:37)</a>:</h4>
+<p>Computing <code>sin(pi/16)</code> we can conclude that <code>pi &gt; 3.1</code>, computing <code>sin(pi/64)</code> we can conclude that <code>pi&gt;3.14</code>. Using the other side of <code>sin_bound</code> we can probably also get upper bounds.</p>
+
+<a name="160815604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160815604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160815604">Kevin Buzzard (Mar 14 2019 at 19:45)</a>:</h4>
+<p>Can you get to 32 trillion by the end of pi day?</p>
+
+<a name="160816007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160816007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160816007">Floris van Doorn (Mar 14 2019 at 19:49)</a>:</h4>
+<p>probably not</p>
+
 
 {% endraw %}
