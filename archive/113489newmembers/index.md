@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [not(p<->not p)](93307notpnotp.html) (10 messages, latest: Mar 14 2019 at 04:50)
+* [excluded middle from dne](47017excludedmiddlefromdne.html) (13 messages, latest: Mar 14 2019 at 07:59)
+
+* [not(p<->not p)](93307notpnotp.html) (16 messages, latest: Mar 14 2019 at 07:48)
 
 * ['repeat' tactic vs 'apply' x n](29899repeattacticvsapplyxn.html) (19 messages, latest: Mar 13 2019 at 22:30)
 

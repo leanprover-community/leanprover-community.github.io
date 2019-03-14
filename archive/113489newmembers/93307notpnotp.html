@@ -95,5 +95,58 @@ show false, from h3 h4
 <span class="bp">λ</span> <span class="n">P</span> <span class="n">h</span><span class="o">,</span> <span class="k">let</span> <span class="n">p</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span> <span class="o">(</span><span class="n">iff</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">h</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span> <span class="n">h₁</span> <span class="n">h₁</span><span class="o">)</span> <span class="k">in</span> <span class="n">iff</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span> <span class="n">p</span> <span class="n">p</span>
 </pre></div>
 
+<a name="160757040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160757040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160757040">Kevin Buzzard (Mar 14 2019 at 07:11)</a>:</h4>
+<blockquote>
+<p>I thought for sure there was a worked solution somewhere in the chat history.</p>
+</blockquote>
+<p>For sure there is, but I guess it might be hard to search for it.</p>
+
+<a name="160758354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758354">Johan Commelin (Mar 14 2019 at 07:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">tidy</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">apply_assumption&#39;</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">apply_assumption</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">help_me</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tidy</span><span class="err">?</span>
+
+<span class="c">/-</span><span class="cm"> `tidy` says -/</span>
+  <span class="n">intros</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">apply_assumption&#39;</span><span class="o">,</span>
+  <span class="n">work_on_goal</span> <span class="mi">0</span> <span class="o">{</span>
+    <span class="n">apply_assumption&#39;</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">solve_by_elim</span> <span class="o">},</span>
+  <span class="n">apply_assumption&#39;</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">solve_by_elim</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">help_me</span>
+
+<span class="kn">theorem</span> <span class="n">help_me</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="bp">¬</span><span class="o">(</span><span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span>
+  <span class="n">id</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+       <span class="n">iff</span><span class="bp">.</span><span class="n">dcases_on</span> <span class="n">a</span>
+         <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a_mp</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">a_mpr</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">P</span><span class="o">),</span>
+            <span class="n">a_mp</span> <span class="o">(</span><span class="n">a_mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">P</span><span class="o">),</span> <span class="n">a_mp</span> <span class="n">a</span> <span class="n">a</span><span class="o">)))</span> <span class="o">(</span><span class="n">a_mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">P</span><span class="o">),</span> <span class="n">a_mp</span> <span class="n">a</span> <span class="n">a</span><span class="o">)))))</span>
+</pre></div>
+
+<a name="160758441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758441">Scott Morrison (Mar 14 2019 at 07:46)</a>:</h4>
+<p>I really need to finish <code>back</code>, so it can be installed as a standard part of <code>tidy</code>, so you don't need that pesky first line. :-)</p>
+
+<a name="160758459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758459">Scott Morrison (Mar 14 2019 at 07:46)</a>:</h4>
+<p>Of course, <code>library_search</code> promptly says:  <code>λ (a : Prop), (iff_not_self a).mp</code>. :-)</p>
+
+<a name="160758483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758483">Manikhanta Teja (Mar 14 2019 at 07:47)</a>:</h4>
+<p>I got it. Thanks ;)</p>
+
+<a name="160758530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/not%28p%3C-%3Enot%20p%29/near/160758530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93307notpnotp.html#160758530">Johan Commelin (Mar 14 2019 at 07:48)</a>:</h4>
+<p>One thing that <code>tidy</code> could optimise is recognising that it is proving the same goal twice. I've started work on a <code>dedup-goals</code> tactic... but I got weird buggy behaviour. See the <code>merge-goals</code> branch.</p>
+
 
 {% endraw %}

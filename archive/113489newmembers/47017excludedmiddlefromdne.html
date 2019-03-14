@@ -1,0 +1,98 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/47017excludedmiddlefromdne.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html">excluded middle from dne</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160757904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160757904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160757904">Manikhanta Teja (Mar 14 2019 at 07:34)</a>:</h4>
+<p>I'm trying to prove  A \/ not A using double negation elimination,</p>
+<div class="codehilite"><pre><span></span>open classical
+variable A : Prop
+theorem dne ( h: not ( not A )) : A :=
+by_contradiction
+    (assume h1 : not A,
+        show false, from h h1)
+example : A ∨ ¬ A :=
+have h1 : not ( not ( A ∨ not A), from
+    assume hA : A,
+    have h2 : A ∨ ¬ A, from or.inl hA,
+    assume h3 : ¬ (A ∨ ¬ A),
+    show false, from h3 h2
+show A ∨ ¬ A,from dne (A ∨ not A) h1
+</pre></div>
+
+
+<p>I'm getting these errors</p>
+<div class="codehilite"><pre><span></span>em.lean:8:34: error
+invalid expression
+em.lean:13:0: error
+invalid &#39;have&#39; declaration, &#39;,&#39; expected
+</pre></div>
+
+
+<p>I dont knwo whats wrong with this.  Is this the right way to do this?</p>
+
+<a name="160758099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758099">Patrick Massot (Mar 14 2019 at 07:39)</a>:</h4>
+<p>You should start with ensuring parentheses are balanced</p>
+
+<a name="160758338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758338">Manikhanta Teja (Mar 14 2019 at 07:44)</a>:</h4>
+<p>Sorry. Balanced it but no change. i think i didnt prove this <br>
+<code> have h1 : not ( not ( A ∨ not A), from</code></p>
+
+<a name="160758659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758659">Kevin Buzzard (Mar 14 2019 at 07:51)</a>:</h4>
+<p>I have been using this software for a while now and I still look at code like this and find it incomprehensible. I know all this have, assume, from stuff is supposed to make it feel closer to English or whatever but for me it turns the code into spaghetti. <span class="user-mention" data-user-id="212008">@Manikhanta Teja</span> have you tried using tactic mode and more structured code with <code>{}</code> in?</p>
+
+<a name="160758821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758821">Kevin Buzzard (Mar 14 2019 at 07:55)</a>:</h4>
+<p>What does <code>assume</code> even do? How can I just randomly assume A in the middle of a proof of <code>not ( not ( A ∨ not A))</code>?</p>
+
+<a name="160758887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758887">Kevin Buzzard (Mar 14 2019 at 07:56)</a>:</h4>
+<p>Whilst I am not an expert in this horrible mode, I conjecture that if you're trying to prove things, you can't just write random assumptions like <code>assume hA : A</code> in the middle of a proof.</p>
+
+<a name="160758917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758917">Manikhanta Teja (Mar 14 2019 at 07:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'm trying to understand how this working. I'm still a beginner. I'm sorry.</p>
+
+<a name="160758969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758969">Kevin Buzzard (Mar 14 2019 at 07:58)</a>:</h4>
+<p>Are you reading TPIL?</p>
+
+<a name="160758970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758970">Kevin Buzzard (Mar 14 2019 at 07:58)</a>:</h4>
+<p>They start with this horrible mode</p>
+
+<a name="160758978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758978">Kevin Buzzard (Mar 14 2019 at 07:58)</a>:</h4>
+<p>I would probably have given up Lean there and then were it not for the fact that I had read a Coq tutorial that went straight into tactic mode</p>
+
+<a name="160758992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758992">Manikhanta Teja (Mar 14 2019 at 07:59)</a>:</h4>
+<p>Yeah i started with TPIL.</p>
+
+<a name="160758993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758993">Kevin Buzzard (Mar 14 2019 at 07:59)</a>:</h4>
+<p>I teach a lot of beginners how to use Lean, and for a question like this I would <em>always</em> start with the following template:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160758999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160758999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160758999">Kevin Buzzard (Mar 14 2019 at 07:59)</a>:</h4>
+<p>Here is a crazy suggestion: just stop what you're doing, go straight to chapter 5, and read a bit about doing basic logic in tactic mode.</p>
+
+
+{% endraw %}
