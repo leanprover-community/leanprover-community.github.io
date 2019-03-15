@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [maximal elements](32903maximalelements.html) (22 messages, latest: Mar 15 2019 at 16:27)
+
 * [happy pi day!](89755happypiday.html) (360 messages, latest: Mar 15 2019 at 15:28)
 
 * [lexicographic_preorder](86821lexicographicpreorder.html) (6 messages, latest: Mar 15 2019 at 11:30)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [can't synthesize instance?](68216cantsynthesizeinstance.html) (46 messages, latest: Mar 13 2019 at 21:01)
 
 * [is_well_order](45771iswellorder.html) (9 messages, latest: Mar 13 2019 at 18:58)
-
-* [maximal elements](32903maximalelements.html) (20 messages, latest: Mar 13 2019 at 17:31)
 
 * [auto links to github](61729autolinkstogithub.html) (3 messages, latest: Mar 13 2019 at 16:15)
 
