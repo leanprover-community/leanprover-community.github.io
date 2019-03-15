@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Playing with GL(V)](04011PlayingwithGLV.html) (12 messages, latest: Mar 15 2019 at 11:58)
+* [(no topic)](79918notopic.html) (162 messages, latest: Mar 15 2019 at 12:30)
+
+* [Playing with GL(V)](04011PlayingwithGLV.html) (36 messages, latest: Mar 15 2019 at 12:29)
 
 * [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (3 messages, latest: Mar 15 2019 at 09:59)
 
@@ -105,8 +107,6 @@ permalink: archive/113489newmembers/index.html
 * [le_sub_iff_add_le error](21041lesubiffaddleerror.html) (14 messages, latest: Feb 22 2019 at 11:18)
 
 * [writing tactics - quickstart info](88788writingtacticsquickstartinfo.html) (7 messages, latest: Feb 15 2019 at 11:13)
-
-* [(no topic)](79918notopic.html) (155 messages, latest: Feb 15 2019 at 08:32)
 
 * [Cryptic errors](09628Crypticerrors.html) (23 messages, latest: Feb 13 2019 at 01:08)
 

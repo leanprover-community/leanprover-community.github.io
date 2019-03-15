@@ -905,5 +905,86 @@ end
 <span class="kn">end</span> <span class="n">list</span>
 </pre></div>
 
+<a name="160868091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160868091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160868091">Robert Spencer (Mar 15 2019 at 12:00)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="160868727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160868727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160868727">Tony Wang (Mar 15 2019 at 12:11)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="160869044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160869044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160869044">Tony Wang (Mar 15 2019 at 12:17)</a>:</h4>
+<p>Hello - I was just wondering for the bit where I have <code>rw succ_a_plus_b_equals_a_plus_succ_b</code> below, surely there's a better way to use the definition of <code>add</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+
+<span class="kn">open</span> <span class="n">xnat</span>
+
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">notation</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">succ_a_plus_b_equals_a_plus_succ_b</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">succ</span><span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">succ</span><span class="o">(</span><span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">add</span>
+
+<span class="kn">theorem</span> <span class="n">succ_is_succ_zero_add</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">zero</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">induction</span> <span class="n">a</span> <span class="k">with</span> <span class="n">k</span> <span class="n">Hk</span><span class="o">,</span>
+    <span class="o">{</span>
+        <span class="n">unfold</span> <span class="n">add</span>
+    <span class="o">},</span>
+    <span class="o">{</span>
+        <span class="n">rw</span> <span class="n">Hk</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">succ_a_plus_b_equals_a_plus_succ_b</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">Hk</span>
+    <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160869148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160869148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160869148">Tony Wang (Mar 15 2019 at 12:18)</a>:</h4>
+<p>Nvm I found it: <code>rw ←add</code> seems to work!</p>
+
+<a name="160869187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160869187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160869187">Calle Sönne (Mar 15 2019 at 12:19)</a>:</h4>
+<p>I have the following code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">digit</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">floor</span><span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="bp">-</span> <span class="n">floor</span><span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span><span class="bp">*</span><span class="n">b</span>
+
+<span class="kn">lemma</span> <span class="n">digit_mul_base</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">digit</span> <span class="n">b</span> <span class="o">(</span><span class="n">r</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rwa</span> <span class="o">[</span><span class="n">digit</span><span class="o">,</span> <span class="n">digit</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">],</span> <span class="n">conv</span>
+  <span class="k">begin</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_pow</span><span class="o">,</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="err">←</span><span class="n">pow_succ</span> <span class="n">b</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)],</span>
+  <span class="kn">end</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This gives me an error with following tactic state:</p>
+<div class="codehilite"><pre><span></span><span class="n">rewrite</span> <span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">did</span> <span class="n">not</span> <span class="n">find</span> <span class="kn">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="n">pattern</span> <span class="k">in</span> <span class="n">the</span> <span class="n">target</span> <span class="n">expression</span>
+  <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">linear_ordered_ring</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">floor_ring</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="err">⊢</span> <span class="err">⌊</span><span class="n">r</span> <span class="bp">*</span> <span class="err">↑</span><span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span><span class="err">⌋</span> <span class="bp">-</span> <span class="err">⌊</span><span class="n">r</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="n">n</span><span class="err">⌋</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="bp">=</span> <span class="err">?</span><span class="n">m_1</span>
+</pre></div>
+
+
+<p>I cant seem to find the error, any help would be appreciated</p>
+
+<a name="160869679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160869679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160869679">Tony Wang (Mar 15 2019 at 12:27)</a>:</h4>
+<p>If I unfold a definition with more than one part, is it possible to specify which part I want to unfold?</p>
+
+<a name="160869914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/160869914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#160869914">Mario Carneiro (Mar 15 2019 at 12:30)</a>:</h4>
+<p>you can use <code>conv</code> to focus on a subterm</p>
+
 
 {% endraw %}
