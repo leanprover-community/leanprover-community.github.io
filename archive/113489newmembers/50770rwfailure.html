@@ -1,0 +1,88 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/50770rwfailure.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html">rw failure</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160904675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160904675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160904675">Kevin Buzzard (Mar 15 2019 at 19:14)</a>:</h4>
+<p>[changed thread title]. <span class="user-mention" data-user-id="132603">@Calle Sönne</span> </p>
+<p>One <code>b * b ^ (n + 1)</code> is</p>
+<div class="codehilite"><pre><span></span>    @has_mul.mul.{0} nat (@semigroup.to_has_mul.{0} nat (@monoid.to_semigroup.{0} nat nat.monoid)) b
+    (@has_pow.pow.{0 0} nat nat (@monoid.has_pow.{0} nat nat.monoid) b
+       (@has_add.add.{0} nat nat.has_add n (@has_one.one.{0} nat nat.has_one)))
+</pre></div>
+
+
+<p>and the other is</p>
+<div class="codehilite"><pre><span></span>     (@has_mul.mul.{0} nat nat.has_mul b
+                   (@has_pow.pow.{0 0} nat nat nat.has_pow b
+                      (@has_add.add.{0} nat nat.has_add n (@has_one.one.{0} nat nat.has_one)))))))
+</pre></div>
+
+
+<p>and these are apparently not defeq.</p>
+
+<a name="160904926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160904926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160904926">Kevin Buzzard (Mar 15 2019 at 19:17)</a>:</h4>
+<p><code>example : @monoid.has_pow.{0} nat nat.monoid = nat.has_pow := rfl -- fails</code></p>
+<p>There's the problem. You have two different powers.</p>
+
+<a name="160905588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905588">Kevin Buzzard (Mar 15 2019 at 19:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">has_pow</span><span class="bp">.</span><span class="n">pow</span> <span class="bp">ℕ</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="bp">@</span><span class="n">monoid</span><span class="bp">.</span><span class="n">has_pow</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">monoid</span><span class="o">)</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="err">^</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">b</span> <span class="k">with</span> <span class="n">c</span> <span class="n">Hc</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_pow</span><span class="bp">.</span><span class="n">pow</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">Hc</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="c1">-- *boggle*</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">digit_mul_base</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">digit</span> <span class="n">b</span> <span class="o">(</span><span class="n">r</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rwa</span> <span class="o">[</span><span class="n">digit</span><span class="o">,</span> <span class="n">digit</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">],</span> <span class="n">conv</span>
+  <span class="k">begin</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_pow</span><span class="o">,</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">test</span><span class="o">,</span> <span class="c1">-- no visible effect ;-)</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">pow_succ</span> <span class="n">b</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="c1">-- works now ;-)</span>
+  <span class="kn">end</span><span class="o">,</span>
+</pre></div>
+
+<a name="160905621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905621">Kevin Buzzard (Mar 15 2019 at 19:24)</a>:</h4>
+<p>So there's a crappy fix, but actually someone with some sense should hopefully come along at some point and tell us what we should be doing. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> ?</p>
+
+<a name="160905675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905675">Chris Hughes (Mar 15 2019 at 19:25)</a>:</h4>
+<p>There's a lemma <code>nat.pow_eq_pow</code> I think.</p>
+
+<a name="160905709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905709">Kevin Buzzard (Mar 15 2019 at 19:26)</a>:</h4>
+<p>Thanks. <span class="user-mention" data-user-id="132603">@Calle Sönne</span> rewrite that instead of <code>test</code>.</p>
+
+<a name="160905766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905766">Chris Hughes (Mar 15 2019 at 19:26)</a>:</h4>
+<p>It's also a crappy fix</p>
+
+<a name="160905793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905793">Kevin Buzzard (Mar 15 2019 at 19:26)</a>:</h4>
+<p>yes but at least we're going in the right direction. Why did it happen? Something to do with the casts no doubt.</p>
+
+<a name="160905809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160905809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160905809">Kevin Buzzard (Mar 15 2019 at 19:26)</a>:</h4>
+<p>We can add this one to Rob Lewis' list of cast issues ;-)</p>
+
+<a name="160906309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20failure/near/160906309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50770rwfailure.html#160906309">Chris Hughes (Mar 15 2019 at 19:32)</a>:</h4>
+<p>The better solution is actually to use <code>nat.pow_succ</code> on closer inspection.</p>
+
+
+{% endraw %}
