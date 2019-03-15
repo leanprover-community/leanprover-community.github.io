@@ -10,15 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Playing with GL(V)](04011PlayingwithGLV.html) (3 messages, latest: Mar 15 2019 at 08:59)
+* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (3 messages, latest: Mar 15 2019 at 09:59)
 
-* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (1 message, latest: Mar 15 2019 at 06:10)
+* [Playing with GL(V)](04011PlayingwithGLV.html) (9 messages, latest: Mar 15 2019 at 09:25)
+
+* [multiset question](66288multisetquestion.html) (9 messages, latest: Mar 15 2019 at 09:20)
 
 * [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (4 messages, latest: Mar 15 2019 at 04:39)
 
 * [excluded middle from dne](47017excludedmiddlefromdne.html) (24 messages, latest: Mar 15 2019 at 00:21)
-
-* [multiset question](66288multisetquestion.html) (7 messages, latest: Mar 14 2019 at 19:09)
 
 * [not(p<->not p)](93307notpnotp.html) (34 messages, latest: Mar 14 2019 at 09:09)
 

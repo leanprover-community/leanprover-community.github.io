@@ -58,5 +58,35 @@ inferred
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857460">Johan Commelin (Mar 15 2019 at 08:59)</a>:</h4>
 <p>However, would it make sense to introduce a scalar multiplication? <code>f • v</code>?</p>
 
+<a name="160857790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857790">Robert Spencer (Mar 15 2019 at 09:05)</a>:</h4>
+<p>Ah, yes.  That's better looking.  Something along the lines of</p>
+<div class="codehilite"><pre><span></span><span class="kn">infix</span> <span class="bp">`</span><span class="err">•</span><span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">GL</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">c</span><span class="o">),</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>(I know I'm probably butchering best practices/naming conventions, but humour me).</p>
+<p>Ok, I am satisfied for the aesthetic.   Still got the <code>ring.to_monoid</code> problem.</p>
+
+<a name="160857930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857930">Mario Carneiro (Mar 15 2019 at 09:07)</a>:</h4>
+<p>what? this isn't a scalar product at all</p>
+
+<a name="160857981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857981">Mario Carneiro (Mar 15 2019 at 09:08)</a>:</h4>
+<p>and vector spaces already have a notion of scalar product that conflicts with this</p>
+
+<a name="160858141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160858141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160858141">Mario Carneiro (Mar 15 2019 at 09:11)</a>:</h4>
+<p>eh, lean is on the fritz, can't test. Does <code>#check (f.val : V-&gt; V) x</code> work?</p>
+
+<a name="160858776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160858776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160858776">Robert Spencer (Mar 15 2019 at 09:25)</a>:</h4>
+<p>Well since field elements inject into <code>GL(V)</code> it more extends rather than conflicts, doen't it?</p>
+
+<a name="160858790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160858790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160858790">Robert Spencer (Mar 15 2019 at 09:25)</a>:</h4>
+<p>Unfortunately <code>(f.val : V -&gt; V) v</code> falls over in the same way</p>
+
 
 {% endraw %}

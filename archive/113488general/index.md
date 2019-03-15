@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [happy pi day!](89755happypiday.html) (230 messages, latest: Mar 15 2019 at 08:57)
+* [happy pi day!](89755happypiday.html) (242 messages, latest: Mar 15 2019 at 09:58)
+
+* [lexicographic_preorder](86821lexicographicpreorder.html) (4 messages, latest: Mar 15 2019 at 09:42)
 
 * [multiparameter derive?](04363multiparameterderive.html) (2 messages, latest: Mar 15 2019 at 03:56)
 
