@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (3 messages, latest: Mar 15 2019 at 09:59)
+* [Playing with GL(V)](04011PlayingwithGLV.html) (12 messages, latest: Mar 15 2019 at 11:58)
 
-* [Playing with GL(V)](04011PlayingwithGLV.html) (9 messages, latest: Mar 15 2019 at 09:25)
+* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (3 messages, latest: Mar 15 2019 at 09:59)
 
 * [multiset question](66288multisetquestion.html) (9 messages, latest: Mar 15 2019 at 09:20)
 

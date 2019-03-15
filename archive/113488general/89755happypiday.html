@@ -1409,5 +1409,386 @@ It doesn't require login</p>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
+<a name="160864945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160864945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160864945">Kenny Lau (Mar 15 2019 at 11:05)</a>:</h4>
+<p>semi-brute-forced the (locally) smallest certs:</p>
+<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">99</span><span class="o">/</span><span class="mi">70</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">874</span><span class="o">/</span><span class="mi">473</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">1940</span><span class="o">/</span><span class="mi">989</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">1447</span><span class="o">/</span><span class="mi">727</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;OUTPUT:</span>
+<span class="sd">1.9903694533443939</span>
+<span class="sd">1.9903707035225453</span>
+<span class="sd">1.9903708019895043</span>
+<span class="sd">1.9903711590704518</span>
+<span class="sd">1.9903713892709767</span>
+<span class="sd">1.990371484375</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+<a name="160864955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160864955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160864955">Kenny Lau (Mar 15 2019 at 11:05)</a>:</h4>
+<p>fitness = sum of all the numerators and denominators</p>
+
+<a name="160865170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865170">Kenny Lau (Mar 15 2019 at 11:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">sqrt_two_add_series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span> <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">;</span> <span class="n">n</span><span class="o">-=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="o">%</span><span class="n">a</span><span class="p">,</span><span class="n">a</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">approx</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span><span class="n">hi</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">denom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hi</span><span class="o">*</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">gcd</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">denom</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">num</span><span class="o">/</span><span class="n">denom</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">num</span><span class="p">,</span><span class="n">denom</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">N</span><span class="o">=</span><span class="mi">5000</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="p">[[</span><span class="n">L</span><span class="p">]</span> <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="n">approx</span><span class="p">(</span><span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="n">sqrt_two_add_series</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="n">denom</span> <span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">denom</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span>
+        <span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">denom</span> <span class="ow">in</span> <span class="n">approx</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span><span class="n">hi</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">num</span><span class="o">+</span><span class="n">denom</span><span class="o">+</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">7000</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">num</span><span class="p">,</span><span class="n">denom</span><span class="p">)]</span> <span class="o">+</span> <span class="n">L</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">new</span>
+
+<span class="n">min_size</span> <span class="o">=</span> <span class="mi">7000</span>
+<span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="n">denom</span> <span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">denom</span> <span class="ow">in</span> <span class="n">L</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+        <span class="n">min_size</span> <span class="o">=</span> <span class="n">size</span>
+</pre></div>
+
+<a name="160865355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865355">Kenny Lau (Mar 15 2019 at 11:12)</a>:</h4>
+<p>however the bottleneck is actually proving:</p>
+<div class="codehilite"><pre><span></span>sqrt_two_add_series (1447 / 727) 0 ≤ 2 - (157 / 50 / 2 ^ (4 + 1)) ^ 2
+</pre></div>
+
+<a name="160865362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865362">Kenny Lau (Mar 15 2019 at 11:12)</a>:</h4>
+<p>we didn't certify the right hand side</p>
+
+<a name="160865395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865395">Kevin Buzzard (Mar 15 2019 at 11:13)</a>:</h4>
+<blockquote>
+<p>I think a Chinese mathematician 1000 years ago used 3•2^n-gons to estimate pi up to 7 digits?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> do you think it's feasible to get up to 7 digits in Lean?</p>
+
+<a name="160865410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865410">Kenny Lau (Mar 15 2019 at 11:13)</a>:</h4>
+<p>yes</p>
+
+<a name="160865968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160865968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160865968">Kenny Lau (Mar 15 2019 at 11:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> how would you prove <code>⊢ 1447 / 727 ≤ 2 - (157 / 50 / 2 ^ (4 + 1)) ^ 2</code>?</p>
+
+<a name="160866082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866082">Kevin Buzzard (Mar 15 2019 at 11:24)</a>:</h4>
+<p>Are these rationals or reals?</p>
+
+<a name="160866091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866091">Mario Carneiro (Mar 15 2019 at 11:24)</a>:</h4>
+<p>There was a fifth cert in my version that floris omitted</p>
+
+<a name="160866094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866094">Kevin Buzzard (Mar 15 2019 at 11:24)</a>:</h4>
+<p>I mean, I guess they're reals. Would it make life easier if they were rationals?</p>
+
+<a name="160866115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866115">Mario Carneiro (Mar 15 2019 at 11:25)</a>:</h4>
+<p>you want to insert an intermediate: <code>1447 / 727 ≤ 2 - a^2</code> and <code>a &lt;= 157 / 50 / 2 ^ (4 + 1)</code></p>
+
+<a name="160866196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866196">Mario Carneiro (Mar 15 2019 at 11:26)</a>:</h4>
+<p>good work on the cert optimization tho</p>
+
+<a name="160866203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866203">Kenny Lau (Mar 15 2019 at 11:26)</a>:</h4>
+<blockquote>
+<p>I mean, I guess they're reals. Would it make life easier if they were rationals?</p>
+</blockquote>
+<p>no, you almost never want to use the decidable instance</p>
+
+<a name="160866209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866209">Kenny Lau (Mar 15 2019 at 11:26)</a>:</h4>
+<blockquote>
+<p>you want to insert an intermediate: <code>1447 / 727 ≤ 2 - a^2</code> and <code>a &lt;= 157 / 50 / 2 ^ (4 + 1)</code></p>
+</blockquote>
+<p>ok lemme work on it</p>
+
+<a name="160866225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866225">Kevin Buzzard (Mar 15 2019 at 11:27)</a>:</h4>
+<p>a=0 works great</p>
+
+<a name="160866337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866337">Mario Carneiro (Mar 15 2019 at 11:29)</a>:</h4>
+<p>wait what? Something must be wrong then</p>
+
+<a name="160866390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866390">Mario Carneiro (Mar 15 2019 at 11:30)</a>:</h4>
+<p>oh, <code>a &gt;= 157 / 50 / 2 ^ (4 + 1)</code></p>
+
+<a name="160866405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866405">Mario Carneiro (Mar 15 2019 at 11:30)</a>:</h4>
+<p>like I mentioned before, sign headaches are real here</p>
+
+<a name="160866437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866437">Kevin Buzzard (Mar 15 2019 at 11:31)</a>:</h4>
+<p><code>246/2507</code></p>
+
+<a name="160866520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866520">Kevin Buzzard (Mar 15 2019 at 11:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
+
+<a name="160866543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866543">Kenny Lau (Mar 15 2019 at 11:33)</a>:</h4>
+<p>(157/50/2^5 = 157/1600 which works better, but actually this is not the intermediate we want)</p>
+
+<a name="160866567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866567">Kenny Lau (Mar 15 2019 at 11:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pi_gt_314</span> <span class="o">:</span> <span class="n">pi</span> <span class="bp">&gt;</span> <span class="mi">3</span><span class="bp">.</span><span class="mi">14</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">lt_of_le_of_lt</span> <span class="bp">_</span> <span class="o">(</span><span class="n">pi_gt_sqrt_two_add_series</span> <span class="mi">4</span><span class="o">),</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">le_mul_of_div_le</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span> <span class="n">apply</span> <span class="n">le_sqrt_of_sqr_le</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">le_sub</span><span class="o">],</span>
+  <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">sqrt_two_add_series_step_up</span> <span class="o">(</span><span class="mi">99</span><span class="bp">/</span><span class="mi">70</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">))</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">sqrt_two_add_series_step_up</span> <span class="o">(</span><span class="mi">874</span><span class="bp">/</span><span class="mi">473</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">))</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">sqrt_two_add_series_step_up</span> <span class="o">(</span><span class="mi">1940</span><span class="bp">/</span><span class="mi">989</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">))</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">sqrt_two_add_series_step_up</span> <span class="o">(</span><span class="mi">1447</span><span class="bp">/</span><span class="mi">727</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">))</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1447</span> <span class="bp">/</span> <span class="mi">727</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">141</span> <span class="bp">/</span> <span class="mi">14644</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">sub_le_sub_iff_left</span><span class="o">,</span> <span class="n">norm_num</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160866581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866581">Kenny Lau (Mar 15 2019 at 11:34)</a>:</h4>
+<p>this is 2 seconds faster on my computer (6s vs 8s)</p>
+
+<a name="160866662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866662">Kenny Lau (Mar 15 2019 at 11:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you see how to make this faster?</p>
+<div class="codehilite"><pre><span></span>⊢ (157 / 50 / 2 ^ (4 + 1)) ^ 2 ≤ 141 / 14644
+</pre></div>
+
+<a name="160866672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866672">Mario Carneiro (Mar 15 2019 at 11:35)</a>:</h4>
+<p>same trick</p>
+
+<a name="160866676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866676">Mario Carneiro (Mar 15 2019 at 11:35)</a>:</h4>
+<p>prove <code>a^2 &lt;= bla</code> and <code>bla &lt;= a</code></p>
+
+<a name="160866768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866768">Mario Carneiro (Mar 15 2019 at 11:37)</a>:</h4>
+<p>By the way, the actual optimization criterion is the number of theorem applications in the norm_num proofs, although this is crazy hard to predict</p>
+
+<a name="160866849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866849">Kenny Lau (Mar 15 2019 at 11:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> but like <code>bla</code> would just be <code>141/14644</code></p>
+
+<a name="160866850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866850">Kenny Lau (Mar 15 2019 at 11:39)</a>:</h4>
+<p>I already optimized this</p>
+
+<a name="160866864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866864">Mario Carneiro (Mar 15 2019 at 11:39)</a>:</h4>
+<p>no, you are optimizing <code>a</code></p>
+
+<a name="160866921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866921">Mario Carneiro (Mar 15 2019 at 11:40)</a>:</h4>
+<p><code>157 / 50 / 2 ^ (4 + 1) &lt;= magic</code> and <code>magic^2 &lt;= 141/14644</code></p>
+
+<a name="160866929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866929">Kenny Lau (Mar 15 2019 at 11:40)</a>:</h4>
+<p>the magic would just be <code>157/50/2^5</code> which is <code>157/1600</code></p>
+
+<a name="160866938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866938">Kenny Lau (Mar 15 2019 at 11:40)</a>:</h4>
+<p>I already reached the limit I think</p>
+
+<a name="160866970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866970">Kenny Lau (Mar 15 2019 at 11:41)</a>:</h4>
+<p>confirmed</p>
+
+<a name="160866977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866977">Kevin Buzzard (Mar 15 2019 at 11:41)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="160866981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160866981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160866981">Mario Carneiro (Mar 15 2019 at 11:41)</a>:</h4>
+<p>yeah okay then it's just a lot of working out</p>
+
+<a name="160867051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867051">Mario Carneiro (Mar 15 2019 at 11:42)</a>:</h4>
+<p>If this is really expensive compared to the other steps, you could try making <code>141/14644</code> a bit larger and see if you can compensate with the others</p>
+
+<a name="160867117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867117">Kevin Buzzard (Mar 15 2019 at 11:44)</a>:</h4>
+<p>Is clearing denominators expensive? There's a theorem which says you can do that</p>
+
+<a name="160867124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867124">Mario Carneiro (Mar 15 2019 at 11:44)</a>:</h4>
+<p>Also I'm not sure but it might help to prepare the division cancellation steps since all of the magic numbers are fractions</p>
+
+<a name="160867126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867126">Mario Carneiro (Mar 15 2019 at 11:44)</a>:</h4>
+<p>yeah that</p>
+
+<a name="160867131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867131">Kenny Lau (Mar 15 2019 at 11:44)</a>:</h4>
+<p>what does that mean?</p>
+
+<a name="160867163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867163">Mario Carneiro (Mar 15 2019 at 11:45)</a>:</h4>
+<p>meaning your intermediate theorems, the ones that you stick the magic numbers into, have side goals that talk only about multiplication and addition of natural numbers</p>
+
+<a name="160867247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867247">Kenny Lau (Mar 15 2019 at 11:46)</a>:</h4>
+<p>what goal in particular?</p>
+
+<a name="160867271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867271">Mario Carneiro (Mar 15 2019 at 11:47)</a>:</h4>
+<p>uh, I'm not sure what the exact form of the theorems being applied are</p>
+
+<a name="160867286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867286">Mario Carneiro (Mar 15 2019 at 11:47)</a>:</h4>
+<p>but you can have the magic numbers be <code>\u a / \u b</code> instead of a real fraction</p>
+
+<a name="160867382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867382">Kenny Lau (Mar 15 2019 at 11:49)</a>:</h4>
+<p>bottlenecks:</p>
+<div class="codehilite"><pre><span></span>⊢ 2 + 0 ≤ (99 / 70) ^ 2
+⊢ 2 + 99 / 70 ≤ (874 / 473) ^ 2
+⊢ 2 + 874 / 473 ≤ (1940 / 989) ^ 2
+⊢ 2 + 1940 / 989 ≤ (1447 / 727) ^ 2
+⊢ 1447 / 727 ≤ 2 - 141 / 14644
+⊢ (157 / 50 / 2 ^ (4 + 1)) ^ 2 ≤ 141 / 14644
+</pre></div>
+
+<a name="160867394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867394">Mario Carneiro (Mar 15 2019 at 11:49)</a>:</h4>
+<p>and then the side goals are things like <code>a^2 * d &lt;= (c + 2 d) * b^2</code> instead of <code>(a/b)^2 &lt;= c/d + 2</code></p>
+
+<a name="160867408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867408">Kenny Lau (Mar 15 2019 at 11:49)</a>:</h4>
+<p>why would this be faster?</p>
+
+<a name="160867483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867483">Mario Carneiro (Mar 15 2019 at 11:50)</a>:</h4>
+<p>Depending on how norm_num unfolds the things, it might work out larger intermediates than necessary</p>
+
+<a name="160867496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867496">Kenny Lau (Mar 15 2019 at 11:50)</a>:</h4>
+<p>hmm</p>
+
+<a name="160867546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867546">Mario Carneiro (Mar 15 2019 at 11:51)</a>:</h4>
+<p>In theory, norm_num should be doing the right thing, and so this won't actually gain much</p>
+
+<a name="160867563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867563">Mario Carneiro (Mar 15 2019 at 11:51)</a>:</h4>
+<p>You might consider looking at the proof to profile it</p>
+
+<a name="160867617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867617">Mario Carneiro (Mar 15 2019 at 11:52)</a>:</h4>
+<p>(split off the <code>norm_num</code> subproofs to lemmas)</p>
+
+<a name="160867728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867728">Kenny Lau (Mar 15 2019 at 11:54)</a>:</h4>
+<p>the bottlenecks are essentially uncertifiable right?</p>
+
+<a name="160867740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867740">Mario Carneiro (Mar 15 2019 at 11:54)</a>:</h4>
+<p>Well, at some point you actually have to prove a tight bound</p>
+
+<a name="160867744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867744">Kevin Buzzard (Mar 15 2019 at 11:54)</a>:</h4>
+<p>Kenny how do you time how long a command takes?</p>
+
+<a name="160867782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867782">Mario Carneiro (Mar 15 2019 at 11:55)</a>:</h4>
+<p>Generally speaking, the difficulty of the proof (size of the numbers) is inversely proportional to the size of the gap</p>
+
+<a name="160867800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867800">Mario Carneiro (Mar 15 2019 at 11:55)</a>:</h4>
+<p>and we have placed 5 intermediate points in the original gap</p>
+
+<a name="160867809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867809">Mario Carneiro (Mar 15 2019 at 11:55)</a>:</h4>
+<p>so if we shift the points around a bit we can equalize the load</p>
+
+<a name="160867810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867810">Kenny Lau (Mar 15 2019 at 11:55)</a>:</h4>
+<p>for <code>⊢ 2 + 99 / 70 ≤ (874 / 473) ^ 2</code>, the largest number norm_num produces in the proof is <code>361313348</code></p>
+
+<a name="160867862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867862">Mario Carneiro (Mar 15 2019 at 11:56)</a>:</h4>
+<p>that sounds about right, for those numbers</p>
+
+<a name="160867864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867864">Kenny Lau (Mar 15 2019 at 11:56)</a>:</h4>
+<div class="codehilite"><pre><span></span>(norm_num.subst_into_div (763876 / 473) 473 (874 * (874 / 473)) 473 (763876 / 223729)
+                       (norm_num.div_eq_div_helper (763876 / 473) 473 763876 223729 361313348
+                          (norm_num.subst_into_prod (763876 / 473) 223729 (763876 / 473) 223729 361313348
+                             (norm_num.subst_into_div 763876 473 763876 473 (763876 / 473)
+                                (norm_num.div_eq_div_helper 763876 473 763876 473 361313348
+                                   (norm_num.subst_into_prod 763876 473 763876 473 361313348 (eq.refl 763876)
+                                      (eq.refl 473)
+                                      (norm_num.mul_bit1_helper 763876 236 180274736 361313348
+                                         (norm_num.mul_bit0_helper 763876 118 90137368
+</pre></div>
+
+<a name="160867873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867873">Mario Carneiro (Mar 15 2019 at 11:56)</a>:</h4>
+<p>it should be 874^2 * 70</p>
+
+<a name="160867886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867886">Kenny Lau (Mar 15 2019 at 11:56)</a>:</h4>
+<p>well it isn't</p>
+
+<a name="160867887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867887">Kevin Buzzard (Mar 15 2019 at 11:56)</a>:</h4>
+<p>It's something times 473</p>
+
+<a name="160867903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867903">Kevin Buzzard (Mar 15 2019 at 11:57)</a>:</h4>
+<p>it's 874^2 * 473</p>
+
+<a name="160867908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867908">Kenny Lau (Mar 15 2019 at 11:57)</a>:</h4>
+<p>wat</p>
+
+<a name="160867912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867912">Kenny Lau (Mar 15 2019 at 11:57)</a>:</h4>
+<p>how did that number get there</p>
+
+<a name="160867978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867978">Mario Carneiro (Mar 15 2019 at 11:58)</a>:</h4>
+<p>I should note this is the one part of <code>norm_num</code> I didn't write</p>
+
+<a name="160867989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160867989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160867989">Mario Carneiro (Mar 15 2019 at 11:58)</a>:</h4>
+<p>I offload + - * / to leo's impl</p>
+
+<a name="160868044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160868044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160868044">Mario Carneiro (Mar 15 2019 at 11:59)</a>:</h4>
+<p>but it's not like there are that many ways to write a (correct) arithmetic prover</p>
+
 
 {% endraw %}
