@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (3 messages, latest: Mar 15 2019 at 03:54)
+* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (4 messages, latest: Mar 15 2019 at 04:39)
 
 * [excluded middle from dne](47017excludedmiddlefromdne.html) (24 messages, latest: Mar 15 2019 at 00:21)
 

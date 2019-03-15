@@ -1078,5 +1078,160 @@ What's going on is that I proved that</p>
 
 <p>then I'm ready to plug them in my Lean code now.</p>
 
+<a name="160845319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160845319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160845319">Mario Carneiro (Mar 15 2019 at 04:02)</a>:</h4>
+<p>Okay, here are the values for the lower bound:</p>
+<div class="codehilite"><pre><span></span>{a1 -&gt; 577/408, a2 -&gt; 619/335, a3 -&gt; 2144/1093, a4 -&gt; 2687/1350, a5 -&gt; 89/907}
+</pre></div>
+
+<a name="160845382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160845382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160845382">Floris van Doorn (Mar 15 2019 at 04:04)</a>:</h4>
+<p>it works!</p>
+
+<a name="160845471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160845471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160845471">Floris van Doorn (Mar 15 2019 at 04:07)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma pi_gt_314 : pi &gt; 3.14 :=
+begin
+  refine lt_of_le_of_lt _ (pi_gt_sqrt_two_add_series 4),
+  rw [mul_comm],
+  apply le_mul_of_div_le, norm_num, apply le_sqrt_of_sqr_le,
+  rw [le_sub],
+  refine le_trans (sqrt_two_add_series_step_up (577/408) (by norm_num) (by norm_num)) _,
+  refine le_trans (sqrt_two_add_series_step_up (619/335) (by norm_num) (by norm_num)) _,
+  refine le_trans (sqrt_two_add_series_step_up (2144/1093) (by norm_num) (by norm_num)) _,
+  refine le_trans (sqrt_two_add_series_step_up (2687/1350) (by norm_num) (by norm_num)) _,
+  rw [sqrt_two_add_series_zero],
+  norm_num
+end
+</pre></div>
+
+<a name="160845882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160845882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160845882">Floris van Doorn (Mar 15 2019 at 04:19)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma pi_lt_315 : pi &lt; 3.15 :=
+begin
+  refine lt_of_lt_of_le (pi_lt_sqrt_two_add_series 4) _,
+  apply add_le_of_le_sub_right, rw [mul_comm], apply mul_le_of_le_div, apply pow_pos, norm_num,
+  rw [sqrt_le_left, sub_le], swap, norm_num,
+  refine le_trans _ (sqrt_two_add_series_step_down (41/29) (by norm_num)),
+  refine le_trans _ (sqrt_two_add_series_step_down (194/105) (by norm_num)),
+  refine le_trans _ (sqrt_two_add_series_step_down (13513/6889) (by norm_num)),
+  refine le_trans _ (sqrt_two_add_series_step_down (2271/1141) (by norm_num)),
+  norm_num
+end
+</pre></div>
+
+<a name="160846001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846001">Floris van Doorn (Mar 15 2019 at 04:22)</a>:</h4>
+<p>The compiling proofs can now be found here: <a href="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean" target="_blank" title="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean">https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean</a></p>
+<p>They do each take ~5 seconds to compile. Maybe we can find smaller certificates (I found mine in a very naive way).</p>
+
+<a name="160846008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846008">Mario Carneiro (Mar 15 2019 at 04:23)</a>:</h4>
+<p>I do want to figure out a general mechanism for optimizing all the certificates simultaneously; right now I'm optimizing them one by one and tweaking the results</p>
+
+<a name="160846017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846017">Johan Commelin (Mar 15 2019 at 04:23)</a>:</h4>
+<p>Can't a tactic do that for you?</p>
+
+<a name="160846025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846025">Johan Commelin (Mar 15 2019 at 04:23)</a>:</h4>
+<p>This must be a well-known idea in ITP, right?</p>
+
+<a name="160846026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846026">Mario Carneiro (Mar 15 2019 at 04:23)</a>:</h4>
+<p>yes and no; this is stuff that should not be re-run every time</p>
+
+<a name="160846027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846027">Floris van Doorn (Mar 15 2019 at 04:23)</a>:</h4>
+<p>Yes, I'm just using Mathematica's <code>Rationalize</code> myself, until <code>Rationalize</code> finds a rational number which is on the correct side of the number I'm approximating</p>
+
+<a name="160846084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846084">Johan Commelin (Mar 15 2019 at 04:24)</a>:</h4>
+<p>The tactic could trace its result</p>
+
+<a name="160846087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846087">Mario Carneiro (Mar 15 2019 at 04:24)</a>:</h4>
+<p>me too (you can ask for a number in a range with <code>Rationalize[(a+b)/2,(a-b)/2]</code>)</p>
+
+<a name="160846111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846111">Floris van Doorn (Mar 15 2019 at 04:25)</a>:</h4>
+<p>oh yes, good point</p>
+
+<a name="160846160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846160">Mario Carneiro (Mar 15 2019 at 04:26)</a>:</h4>
+<p>there isn't much point doing this in lean, unless lean gets as good at numbers as a CAS</p>
+
+<a name="160846188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846188">Mario Carneiro (Mar 15 2019 at 04:27)</a>:</h4>
+<p>this is really the sort of thing CASs are designed for: unverified computation / symbolic manipulation</p>
+
+<a name="160846192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846192">Mario Carneiro (Mar 15 2019 at 04:27)</a>:</h4>
+<p>If I was to do this sort of thing a lot I would want to automate some parts of it</p>
+
+<a name="160846462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846462">Johan Commelin (Mar 15 2019 at 04:34)</a>:</h4>
+<p>So we need a Sage bridge...</p>
+
+<a name="160846630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846630">Mario Carneiro (Mar 15 2019 at 04:38)</a>:</h4>
+<p>sure, that would do it</p>
+
+<a name="160846641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846641">Mario Carneiro (Mar 15 2019 at 04:39)</a>:</h4>
+<p>or code extraction</p>
+
+<a name="160846647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160846647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160846647">Mario Carneiro (Mar 15 2019 at 04:39)</a>:</h4>
+<p>in this case, it's just pure computation, although it's nice having mathematica with builtin functions like <code>Rationalize</code> so we don't have to write it on the spot</p>
+
+<a name="160847116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847116">Johan Commelin (Mar 15 2019 at 04:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you think <code>meta</code> code could at some point be just as fast a proper CAS? I don't see why we shouldn't strive for world domination there as well...</p>
+
+<a name="160847119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847119">Mario Carneiro (Mar 15 2019 at 04:52)</a>:</h4>
+<p>sure, we just need more efficiency</p>
+
+<a name="160847125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847125">Johan Commelin (Mar 15 2019 at 04:52)</a>:</h4>
+<p>Is there hope that <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span> will bring this efficiency?</p>
+
+<a name="160847127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847127">Mario Carneiro (Mar 15 2019 at 04:52)</a>:</h4>
+<p>I've used lean plenty for this kind of thing, and it's a big bottleneck</p>
+
+<a name="160847139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847139">Mario Carneiro (Mar 15 2019 at 04:53)</a>:</h4>
+<p>Yes, there is hope... I'm not putting all my eggs in that basket though</p>
+
+<a name="160847144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847144">Johan Commelin (Mar 15 2019 at 04:53)</a>:</h4>
+<p>You haven't even put all your ITP eggs in Leans basket...</p>
+
+<a name="160847192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847192">Mario Carneiro (Mar 15 2019 at 04:54)</a>:</h4>
+<p>I don't believe in world dominion</p>
+
+<a name="160847216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847216">Mario Carneiro (Mar 15 2019 at 04:55)</a>:</h4>
+<p>it's not a healthy mindset. Better to support open communication and interaction between systems, because there will always be people that prefer another language</p>
+
+<a name="160847260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847260">Johan Commelin (Mar 15 2019 at 04:56)</a>:</h4>
+<p>It also means you have to support <code>n^2</code> communications...</p>
+
+<a name="160847269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847269">Mario Carneiro (Mar 15 2019 at 04:57)</a>:</h4>
+<p>the common answer to that is "not if it's a star graph", i.e. world domination</p>
+
+<a name="160847272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847272">Mario Carneiro (Mar 15 2019 at 04:57)</a>:</h4>
+<p>but other sparse graphs work too</p>
+
+<a name="160847275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160847275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160847275">Mario Carneiro (Mar 15 2019 at 04:57)</a>:</h4>
+<p>right now it's just an almost completely disconnected graph</p>
+
 
 {% endraw %}
