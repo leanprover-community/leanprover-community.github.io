@@ -1827,5 +1827,232 @@ It doesn't require login</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160875081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160875081">Floris van Doorn (Mar 15 2019 at 13:39)</a>:</h4>
 <p>It's definitely possible to get better approximations, but the compilation time will just be bigger for that. So I don't think we want the tightest bounds in mathlib. But soon I'll PR the first 3 digits of pi to mathlib.</p>
 
+<a name="160878448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160878448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160878448">Mario Carneiro (Mar 15 2019 at 14:16)</a>:</h4>
+<p>what is the profiler result? Is it <code>norm_num</code> or the kernel taking up the time?</p>
+
+<a name="160879130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879130">Floris van Doorn (Mar 15 2019 at 14:22)</a>:</h4>
+<p>Not sure how to read the output, here it is for <code>pi_gt_31415</code>:</p>
+<div class="codehilite"><pre><span></span>elaboration of pi_gt_31415 took 11.9s
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>elaboration: tactic execution took 8.56s
+num. allocated objects:  8023
+num. allocated closures: 9813
+num. allocated big nums: 96
+ 8560ms   100.0%   tactic.step
+ 8560ms   100.0%   scope_trace
+ 8560ms   100.0%   tactic.istep
+ 8560ms   100.0%   _interaction._lambda_2
+ 8560ms   100.0%   tactic.istep._lambda_1
+ 5972ms    69.8%   tactic.refine
+ 5945ms    69.5%   tactic.to_expr
+ 2583ms    30.2%   interaction_monad.orelse&#39;
+ 2580ms    30.1%   tactic.seq
+ 1641ms    19.2%   interaction_monad_orelse
+ 1621ms    18.9%   tactic.interactive.norm_num1
+ 1620ms    18.9%   tactic.replace_at._lambda_4
+ 1620ms    18.9%   tactic.alternative._lambda_3
+ 1620ms    18.9%   tactic.replace_at
+ 1615ms    18.9%   interaction_monad.monad._lambda_9
+ 1614ms    18.9%   tactic.ext_simplify_core
+ 1614ms    18.9%   norm_num.derive
+ 1607ms    18.8%   tactic.repeat
+ 1607ms    18.8%   _private.3096317357.repeat_aux._main._lambda_1
+ 1607ms    18.8%   tactic.all_goals
+ 1607ms    18.8%   _private.3321893233.all_goals_core._main._lambda_2
+ 1607ms    18.8%   tactic.try_core
+ 1607ms    18.8%   all_goals_core
+ 1607ms    18.8%   repeat_aux
+ 1548ms    18.1%   norm_num.derive._main._lambda_3
+ 1364ms    15.9%   tactic.norm_num
+  959ms    11.2%   tactic.interactive.simp_core
+  937ms    10.9%   tactic.join_user_simp_lemmas
+  937ms    10.9%   tactic.mk_simp_set_core
+  937ms    10.9%   simp_lemmas.mk_default
+  937ms    10.9%   tactic.mk_simp_set
+[...]
+</pre></div>
+
+<a name="160879322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879322">Floris van Doorn (Mar 15 2019 at 14:24)</a>:</h4>
+<p>So most of the tactic time is in <code>refine</code>, so building the proof term(?). But there is also 3-4 seconds of time which is not used to execute tactics. Is that just to type-check the final proof?</p>
+
+<a name="160879891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879891">Mario Carneiro (Mar 15 2019 at 14:30)</a>:</h4>
+<p>I think you missed out on some part... there should be a line for kernel typechecking</p>
+
+<a name="160879927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879927">Mario Carneiro (Mar 15 2019 at 14:30)</a>:</h4>
+<p>it's next to the <code>elaboration of foo took n s</code> line</p>
+
+<a name="160879935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879935">Floris van Doorn (Mar 15 2019 at 14:30)</a>:</h4>
+<p>Yeah, I thought so too. I cannot find it anywhere in my Lean messages</p>
+
+<a name="160879964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160879964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160879964">Mario Carneiro (Mar 15 2019 at 14:31)</a>:</h4>
+<p>maybe that just means it was below the threshold</p>
+
+<a name="160880015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880015">Mario Carneiro (Mar 15 2019 at 14:31)</a>:</h4>
+<p>but damn that's a lot of <code>to_expr</code></p>
+
+<a name="160880092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880092">Mario Carneiro (Mar 15 2019 at 14:32)</a>:</h4>
+<p>and <code>istep</code> too... the tactic overhead is significant</p>
+
+<a name="160880134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880134">Floris van Doorn (Mar 15 2019 at 14:32)</a>:</h4>
+<p>Oh no, I know what is going on: all the <code>tactic.refine</code> are the nested <code>norm_num</code>s</p>
+
+<a name="160880210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880210">Mario Carneiro (Mar 15 2019 at 14:33)</a>:</h4>
+<p>The way you read this is to look for nodes that come just before a percentage drop</p>
+
+<a name="160880221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880221">Floris van Doorn (Mar 15 2019 at 14:33)</a>:</h4>
+<p>When we execute </p>
+<div class="codehilite"><pre><span></span>refine sqrt_two_add_series_step_up (11482/8119)  (by norm_num) (by norm_num) _,
+</pre></div>
+
+
+<p>the inner <code>norm_num</code> reports that the inner <code>norm_num</code> takes up almost a second:</p>
+<div class="codehilite"><pre><span></span>713ms    98.5%   norm_num.derive
+</pre></div>
+
+
+<p>but for the outer tactic block, this is all part of the <code>refine</code> tactic.</p>
+
+<a name="160880285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880285">Mario Carneiro (Mar 15 2019 at 14:34)</a>:</h4>
+<p><code>refine</code> is quick, it is just calling another tactic that is slow</p>
+
+<a name="160880325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880325">Floris van Doorn (Mar 15 2019 at 14:34)</a>:</h4>
+<p>ok, sure. But the <code>to_expr</code> just calls the nested <code>norm_num</code> tactics, right?</p>
+
+<a name="160880377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880377">Mario Carneiro (Mar 15 2019 at 14:35)</a>:</h4>
+<p>yes, but that should show up in the total profile</p>
+
+<a name="160880415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880415">Mario Carneiro (Mar 15 2019 at 14:35)</a>:</h4>
+<div class="codehilite"><pre><span></span>1614ms    18.9%   norm_num.derive
+1607ms    18.8%   tactic.repeat
+...
+</pre></div>
+
+<a name="160880515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880515">Mario Carneiro (Mar 15 2019 at 14:36)</a>:</h4>
+<p>compared to <code>8560ms</code> for all the tactics, that's not as large a fraction as I would have hoped</p>
+
+<a name="160880594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880594">Floris van Doorn (Mar 15 2019 at 14:37)</a>:</h4>
+<blockquote>
+<p>Mario Carneiro: yes, but that should show up in the total profile</p>
+</blockquote>
+<p>I don't think it does. The sum of the times spend in <code>norm_num.derive</code> in the <em>nested</em> <code>by norm_num</code> tactics is much larger than the reported time on <code>norm_num.derive</code> when I hover over the <code>end</code> of the tactic block</p>
+
+<a name="160880727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880727">Floris van Doorn (Mar 15 2019 at 14:38)</a>:</h4>
+<p>If I add everything up, about <code>5.3s</code> is spend in <code>norm_num.derive</code></p>
+
+<a name="160880764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160880764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160880764">Floris van Doorn (Mar 15 2019 at 14:39)</a>:</h4>
+<p>A bit more actually, but between <code>5s</code> and <code>6s</code>.</p>
+
+<a name="160881160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881160">Mario Carneiro (Mar 15 2019 at 14:44)</a>:</h4>
+<p>It's surprising how inconclusive this test is, but it looks like the outer block does in fact reflect slow downs caused by inner blocks</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">sleep</span> <span class="mi">10000</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="k">begin</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">sleep</span> <span class="mi">10000</span><span class="o">,</span>
+    <span class="n">trivial</span>
+  <span class="kn">end</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160881194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881194">Mario Carneiro (Mar 15 2019 at 14:44)</a>:</h4>
+<p>either the profiler is way off, or <code>sleep</code> is not very accurate</p>
+
+<a name="160881375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881375">Mario Carneiro (Mar 15 2019 at 14:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">elaboration</span><span class="o">:</span> <span class="n">tactic</span> <span class="n">compilation</span> <span class="n">took</span> <span class="mi">17</span><span class="bp">.</span><span class="mi">8</span><span class="n">ms</span>
+<span class="n">test</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span> <span class="n">information</span> <span class="n">tactic</span> <span class="n">profile</span> <span class="n">data</span>
+<span class="n">elaboration</span><span class="o">:</span> <span class="n">tactic</span> <span class="n">execution</span> <span class="n">took</span> <span class="mi">14</span><span class="bp">.</span><span class="mi">4</span><span class="n">s</span>
+<span class="n">num</span><span class="bp">.</span> <span class="n">allocated</span> <span class="n">objects</span><span class="o">:</span>  <span class="mi">15</span>
+<span class="n">num</span><span class="bp">.</span> <span class="n">allocated</span> <span class="n">closures</span><span class="o">:</span> <span class="mi">46</span>
+<span class="mi">14404</span><span class="n">ms</span>   <span class="mi">100</span><span class="bp">.</span><span class="mi">0</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">istep</span>
+<span class="mi">14404</span><span class="n">ms</span>   <span class="mi">100</span><span class="bp">.</span><span class="mi">0</span><span class="err">%</span>   <span class="bp">_</span><span class="n">interaction</span><span class="bp">._</span><span class="n">lambda_2</span>
+<span class="mi">14404</span><span class="n">ms</span>   <span class="mi">100</span><span class="bp">.</span><span class="mi">0</span><span class="err">%</span>   <span class="n">scope_trace</span>
+<span class="mi">14404</span><span class="n">ms</span>   <span class="mi">100</span><span class="bp">.</span><span class="mi">0</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">istep</span><span class="bp">._</span><span class="n">lambda_1</span>
+<span class="mi">14404</span><span class="n">ms</span>   <span class="mi">100</span><span class="bp">.</span><span class="mi">0</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">step</span>
+ <span class="mi">7470</span><span class="n">ms</span>    <span class="mi">51</span><span class="bp">.</span><span class="mi">9</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">to_expr</span>
+ <span class="mi">7470</span><span class="n">ms</span>    <span class="mi">51</span><span class="bp">.</span><span class="mi">9</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">refine</span>
+ <span class="mi">6934</span><span class="n">ms</span>    <span class="mi">48</span><span class="bp">.</span><span class="mi">1</span><span class="err">%</span>   <span class="n">tactic</span><span class="bp">.</span><span class="n">sleep</span>
+</pre></div>
+
+<a name="160881408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881408">Floris van Doorn (Mar 15 2019 at 14:46)</a>:</h4>
+<p>That seems pretty conclusive to me... The bottom <code>end</code> reports 1.7s spend at <code>sleep</code> and 5.2s at <code>refine</code>, the top <code>end</code> reports <code>5.2s</code> spend at <code>sleep</code>. But yeah, those numbers are not very close to 2000 and 4000...</p>
+
+<a name="160881470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881470">Floris van Doorn (Mar 15 2019 at 14:47)</a>:</h4>
+<p>(for future reference: the sleep numbers in Mario's post were originally 2000 and 4000)</p>
+
+<a name="160881474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881474">Mario Carneiro (Mar 15 2019 at 14:47)</a>:</h4>
+<p>even when I crank the numbers up they are still not so close</p>
+
+<a name="160881478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881478">Mario Carneiro (Mar 15 2019 at 14:47)</a>:</h4>
+<p>I think the units must be off</p>
+
+<a name="160881554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881554">Floris van Doorn (Mar 15 2019 at 14:48)</a>:</h4>
+<p>yeah, there must be something off with <code>sleep</code>. But it's clear that the inner <code>sleep</code> time <em>only</em> counts towards <code>refine</code>, not towards <code>sleep</code>.</p>
+
+<a name="160881633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881633">Mario Carneiro (Mar 15 2019 at 14:49)</a>:</h4>
+<p>yeah. To make it even more obvious:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">sleep</span> <span class="mi">2000</span><span class="o">,</span>
+    <span class="n">trivial</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="k">begin</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">sleep</span> <span class="mi">2000</span><span class="o">,</span>
+    <span class="n">trivial</span>
+  <span class="kn">end</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>elaboration: tactic execution took 2.8s
+num. allocated objects:  21
+num. allocated closures: 52
+ 2798ms   100.0%   tactic.to_expr
+ 2798ms   100.0%   tactic.istep
+ 2798ms   100.0%   _interaction._lambda_2
+ 2798ms   100.0%   scope_trace
+ 2798ms   100.0%   tactic.istep._lambda_1
+ 2798ms   100.0%   tactic.step
+ 1429ms    51.1%   tactic.interactive.have._lambda_1
+ 1369ms    48.9%   tactic.refine
+</pre></div>
+
+<a name="160881932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881932">Mario Carneiro (Mar 15 2019 at 14:52)</a>:</h4>
+<p>There is an easy solution to this for your situation though: don't use nested tactics, use a <code>refine</code> with more underscores and kill the subgoals with <code>norm_num</code> in the main tactic block</p>
+
 
 {% endraw %}
