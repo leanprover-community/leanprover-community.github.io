@@ -2054,5 +2054,50 @@ num. allocated closures: 52
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160881932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160881932">Mario Carneiro (Mar 15 2019 at 14:52)</a>:</h4>
 <p>There is an easy solution to this for your situation though: don't use nested tactics, use a <code>refine</code> with more underscores and kill the subgoals with <code>norm_num</code> in the main tactic block</p>
 
+<a name="160882613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160882613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160882613">Floris van Doorn (Mar 15 2019 at 15:00)</a>:</h4>
+<p>If I do that, we see that indeed most of the time is spend at <code>norm_num</code>:</p>
+<div class="codehilite"><pre><span></span>elaboration: tactic execution took 7.48s
+num. allocated objects:  29602
+num. allocated closures: 30223
+num. allocated big nums: 322
+ 7482ms   100.0%   tactic.istep._lambda_1
+ 7482ms   100.0%   _interaction._lambda_2
+ 7482ms   100.0%   tactic.istep
+ 7482ms   100.0%   tactic.step
+ 7482ms   100.0%   scope_trace
+ 7442ms    99.5%   interaction_monad.orelse&#39;
+ 7439ms    99.4%   tactic.seq
+ 7420ms    99.2%   interaction_monad.monad._lambda_9
+ 7388ms    98.7%   tactic.all_goals
+ 7388ms    98.7%   _private.3321893233.all_goals_core._main._lambda_2
+ 7388ms    98.7%   all_goals_core
+ 6640ms    88.7%   interaction_monad_orelse
+ 6619ms    88.5%   tactic.replace_at._lambda_4
+ 6619ms    88.5%   tactic.replace_at
+ 6619ms    88.5%   tactic.alternative._lambda_3
+ 6619ms    88.5%   tactic.interactive.norm_num1
+ 6563ms    87.7%   norm_num.derive
+ 6563ms    87.7%   tactic.ext_simplify_core
+ 6499ms    86.9%   norm_num.derive._main._lambda_3
+ 5696ms    76.1%   tactic.norm_num
+ 2613ms    34.9%   norm_num.eval_ineq
+ 2608ms    34.9%   norm_num.prove_lt
+ 1357ms    18.1%   _private.3096317357.repeat_aux._main._lambda_1
+[...]
+</pre></div>
+
+<a name="160882828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160882828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160882828">Floris van Doorn (Mar 15 2019 at 15:02)</a>:</h4>
+<p>Interestingly, there is a drop after <code>all_goals_core</code> (I'm now accumulating all the inequalities as goals, and killing them all with <code>all_goals {norm_num}</code> at the end)</p>
+
+<a name="160883136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160883136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160883136">Floris van Doorn (Mar 15 2019 at 15:06)</a>:</h4>
+<p>oh, in the other proof (<code>pi_lt_31416</code>) the drop-offs from <code>100%</code> to <code>90%</code> are at very different tactics. So maybe that is just noise/semi-randomness.</p>
+
+<a name="160885072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160885072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160885072">Floris van Doorn (Mar 15 2019 at 15:28)</a>:</h4>
+<p>Since people requested it, I also computed the first 7 digits of <code>pi</code> at the bottom of <a href="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean" target="_blank" title="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean">https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean</a></p>
+
 
 {% endraw %}
