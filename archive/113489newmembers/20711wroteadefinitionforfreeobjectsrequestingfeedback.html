@@ -1,0 +1,45 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html">wrote a definition for free objects, requesting feedback</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160850160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/wrote%20a%20definition%20for%20free%20objects%2C%20requesting%20feedback/near/160850160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html#160850160">drocta (Mar 15 2019 at 06:10)</a>:</h4>
+<p>I tried to write a definition of free objects in a category over a type, and what I wrote type-checks, but I'm not certain it does the right thing, and if it does, I suspect there is a cleaner/better way to write it, but I don't know how.<br>
+My code does not yet conform to the mathlib library style conventions.<br>
+Would anyone be willing to look over my code to evaluate whether it does the right thing, and whether there are substantially better ways I could organize it?</p>
+<div class="codehilite"><pre><span></span>import category_theory.category
+import category_theory.concrete_category
+
+open category_theory
+
+section
+
+universes u_1 u_2
+
+-- typical example for c is a typeclass, like topological_space , with hom being something like continuous.
+variables (c : Type u_1 -&gt; Type u_2) (hom : (Pi {alpha beta : Type u_1}, c alpha -&gt; c beta -&gt; (alpha -&gt; beta) -&gt; Prop))
+variable my_concrete_category : concrete_category @hom
+
+def is_free_over (X : bundled c) (generators_of_X : Type u_1 ) (i : generators_of_X -&gt; (@forget c @hom my_concrete_category).obj X) : Prop :=
+  forall (Y : bundled c) (f : generators_of_X -&gt; ((@forget c @hom my_concrete_category).obj Y)),
+    ∃! (g : has_hom.hom X Y), f = ((@forget c @hom my_concrete_category).map g) ∘ i
+
+#check is_free_over
+
+end
+</pre></div>
+
+
+<p>Thank you</p>
+
+
+{% endraw %}
