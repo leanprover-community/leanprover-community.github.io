@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [multiparameter derive?](04363multiparameterderive.html) (1 message, latest: Mar 14 2019 at 20:06)
+* [happy pi day!](89755happypiday.html) (120 messages, latest: Mar 14 2019 at 23:59)
 
-* [happy pi day!](89755happypiday.html) (113 messages, latest: Mar 14 2019 at 19:49)
+* [rewrite fails](58322rewritefails.html) (3 messages, latest: Mar 14 2019 at 23:30)
+
+* [multiparameter derive?](04363multiparameterderive.html) (1 message, latest: Mar 14 2019 at 20:06)
 
 * [better home for inv_eq_zero?](32279betterhomeforinveqzero.html) (5 messages, latest: Mar 14 2019 at 15:21)
 

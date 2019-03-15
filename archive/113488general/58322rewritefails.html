@@ -1,0 +1,53 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58322rewritefails.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58322rewritefails.html">rewrite fails</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160832043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20fails/near/160832043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58322rewritefails.html#160832043">Kevin Buzzard (Mar 14 2019 at 23:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">archimedean</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">ordered</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_linear_ordered_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">floor_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">orderable_topology</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+
+<span class="n">def</span> <span class="n">digit</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="mi">37</span>
+
+<span class="kn">theorem</span> <span class="n">expansion_tendsto</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="n">i</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">i</span><span class="o">)</span> <span class="bp">/</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span><span class="o">))</span>
+    <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="o">(</span><span class="n">fract</span> <span class="n">r</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- rw tendsto_orderable, -- why does this fail?</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  invalid rewrite tactic, failed to synthesize type class instance</span>
+<span class="cm">  -/</span>
+  <span class="n">apply</span> <span class="n">tendsto_orderable</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="c1">-- works fine, now 3 goals</span>
+    <span class="n">swap</span><span class="o">,</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- type class inference deals with two</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Why does the rewrite fail?</p>
+
+<a name="160832044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20fails/near/160832044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58322rewritefails.html#160832044">Kevin Buzzard (Mar 14 2019 at 23:17)</a>:</h4>
+<p>Type class inference can find all the relevant instances.</p>
+
+<a name="160832749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20fails/near/160832749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58322rewritefails.html#160832749">Chris Hughes (Mar 14 2019 at 23:30)</a>:</h4>
+<p>I don't know why, but sometimes <code>rw @tendsto_orderable \b _ _ _ _</code> works</p>
+
+
+{% endraw %}
