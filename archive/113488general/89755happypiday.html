@@ -1011,5 +1011,72 @@ What's going on is that I proved that</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160842360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160842360">Floris van Doorn (Mar 15 2019 at 02:51)</a>:</h4>
 <p>(updated the file on Github)</p>
 
+<a name="160843441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843441">Floris van Doorn (Mar 15 2019 at 03:17)</a>:</h4>
+<p>are you working on the certificates <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ? Otherwise I'll start on it now.</p>
+
+<a name="160843488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843488">Mario Carneiro (Mar 15 2019 at 03:18)</a>:</h4>
+<p>I have this so far, for the lower bound:</p>
+<div class="codehilite"><pre><span></span>{32 a5 &gt;= 157/50, 2 - a5^2 &gt;= a4, a4^2 &gt;= 2 + a3, a3^2 &gt;= 2 + a2,  a2^2 &gt;= 2 + a1, a1^2 &gt;= 2}
+</pre></div>
+
+<a name="160843818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843818">Mario Carneiro (Mar 15 2019 at 03:26)</a>:</h4>
+<p>Oh, I didn't expect this would work:</p>
+<div class="codehilite"><pre><span></span>{a1 -&gt; 2, a2 -&gt; 2, a3 -&gt; 2, a4 -&gt; -(2687/1350), a5 -&gt; 21/214}
+</pre></div>
+
+<a name="160843835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843835">Mario Carneiro (Mar 15 2019 at 03:27)</a>:</h4>
+<p>the last few (first few? my numbering is weird) are exactly 2, which works out nicely with the algebra. You probably want to special case that since it makes everything easy for going to higher values</p>
+
+<a name="160843845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843845">Floris van Doorn (Mar 15 2019 at 03:27)</a>:</h4>
+<p>I'm still a bit confused what your variables <code>a1</code>-<code>a5</code> correspond to.</p>
+
+<a name="160843894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843894">Mario Carneiro (Mar 15 2019 at 03:28)</a>:</h4>
+<p>Here's the abstract argument:</p>
+<div class="codehilite"><pre><span></span>pi &gt;= 2^5 Sqrt[2 - f[0, 4]] &gt;= 2^5 a5 &gt;= 157/50
+2 - a5^2 &gt;= a4 &gt;= f[a3, 1] &gt;= f[a2, 2] &gt;= f[a1, 3] &gt;= f[0, 4]
+</pre></div>
+
+<a name="160843895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843895">Mario Carneiro (Mar 15 2019 at 03:28)</a>:</h4>
+<p>where <code>f</code> is your series function</p>
+
+<a name="160843969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843969">Mario Carneiro (Mar 15 2019 at 03:31)</a>:</h4>
+<p>Note that there are no side conditions on this proof, because <code>a4^2 &gt;= 2 + a3</code> implies <code>a4 &gt;= Sqrt[2 + a3]</code> regardless of whether <code>a4</code> is positive</p>
+
+<a name="160843973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160843973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160843973">Mario Carneiro (Mar 15 2019 at 03:31)</a>:</h4>
+<p>for the upper bound I think there will be side conditions</p>
+
+<a name="160844182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160844182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160844182">Floris van Doorn (Mar 15 2019 at 03:37)</a>:</h4>
+<blockquote>
+<p><code>a4^2 &gt;= 2 + a3</code> implies <code>a4 &gt;= Sqrt[2 + a3]</code></p>
+</blockquote>
+<p>uhm... no: <code>(-10) ^ 2 &gt;= 2 + 0</code> but not <code>-10 &gt;= sqrt(2 + 0)</code>.</p>
+
+<a name="160844191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160844191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160844191">Floris van Doorn (Mar 15 2019 at 03:37)</a>:</h4>
+<p>For the upper bound there won't be side conditions, I indeed realized that a couple of minutes ago.</p>
+
+<a name="160844547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160844547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160844547">Mario Carneiro (Mar 15 2019 at 03:45)</a>:</h4>
+<p>Oh boy, I keep getting myself confused here. You are right, each of the a's must be positive, and I messed up a sign somewhere so my cert doesn't work</p>
+
+<a name="160844626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160844626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160844626">Floris van Doorn (Mar 15 2019 at 03:46)</a>:</h4>
+<p>The signs are pretty confusing indeed. But if you give me the certificate for the inequalities</p>
+<div class="codehilite"><pre><span></span>f[a4, 0] &gt;= f[a3, 1] &gt;= f[a2, 2] &gt;= f[a1, 3] &gt;= f[0, 4]
+</pre></div>
+
+
+<p>then I'm ready to plug them in my Lean code now.</p>
+
 
 {% endraw %}

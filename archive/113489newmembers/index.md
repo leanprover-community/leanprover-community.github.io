@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (3 messages, latest: Mar 15 2019 at 03:54)
+
 * [excluded middle from dne](47017excludedmiddlefromdne.html) (24 messages, latest: Mar 15 2019 at 00:21)
 
 * [multiset question](66288multisetquestion.html) (7 messages, latest: Mar 14 2019 at 19:09)
