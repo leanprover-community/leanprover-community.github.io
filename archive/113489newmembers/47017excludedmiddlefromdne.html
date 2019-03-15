@@ -113,5 +113,76 @@ invalid &#39;have&#39; declaration, &#39;,&#39; expected
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160763347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160763347">Kevin Buzzard (Mar 14 2019 at 09:20)</a>:</h4>
 <p>So that answers the question of why the original code didn't compile -- the <code>assume ha : A</code> looks invalid because it would only work for goals of the form <code>A -&gt; &lt;something&gt;</code></p>
 
+<a name="160834476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160834476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160834476">Manikhanta Teja (Mar 15 2019 at 00:01)</a>:</h4>
+<div class="codehilite"><pre><span></span>open classical
+variable A : Prop
+theorem dne ( h: not ( not A )) : A :=
+by_contradiction
+    (assume h1 : not A,
+        show false, from h h1)
+example : A ∨ ¬ A :=
+have hN : not ( not ( A ∨ not A), from
+    (assume h1 :  ¬ (A ∨ ¬ A),
+        have h2 : ¬ A, from
+            assume h3 : A,
+            have h4 : A ∨ ¬ A, from or.inl h3,
+            show false, from h1 h4,
+        have h5 : A ∨ ¬ A, from or.inr h2,
+        show false, from h1 h5)
+show A ∨ ¬ A,from dne(A ∨ not A) hN
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>em.lean:8:34: error
+invalid expression
+em.lean:17:0: error
+invalid &#39;have&#39; declaration, &#39;,&#39; expected
+</pre></div>
+
+
+<p>This is what i was trying to do. Get  ¬¬(A ∨ ¬A) → A ∨ ¬A from dne( A \/ not A) and then apply implication elimination of  ¬¬(A ∨ ¬A) → A ∨ ¬A to get  A ∨ ¬A.<br>
+The proof for  ¬¬(A ∨ ¬A) worked</p>
+<div class="codehilite"><pre><span></span>variable A : Prop
+theorem cc : ¬ (¬ ( A ∨ ¬ A)) :=
+(assume h1 :  ¬ (A ∨ ¬ A),
+    have h2 : ¬ A, from
+        assume h3 : A,
+        have h4 : A ∨ ¬ A, from or.inl h3,
+        show false, from h1 h4,
+    have h5 : A ∨ ¬ A, from or.inr h2,
+    show false, from h1 h5)
+</pre></div>
+
+
+<p>Is there anything wrong with this<br>
+<code>show A ∨ ¬ A,from dne(A ∨ not A) hN</code></p>
+
+<a name="160834894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160834894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160834894">Kevin Buzzard (Mar 15 2019 at 00:09)</a>:</h4>
+<p>The error seems to indicate you've got the syntax wrong somewhere.</p>
+
+<a name="160834997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160834997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160834997">Chris Hughes (Mar 15 2019 at 00:11)</a>:</h4>
+<p>There's a missing comma after <code>show false, from h1 h5)</code></p>
+
+<a name="160835075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160835075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160835075">Manikhanta Teja (Mar 15 2019 at 00:13)</a>:</h4>
+<p>Still have a problem with<br>
+<code>em.lean:8:34: error
+invalid expression</code></p>
+
+<a name="160835140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160835140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160835140">Manikhanta Teja (Mar 15 2019 at 00:14)</a>:</h4>
+<p>Got it. I'm an idiot. I didn't balance the paranthesis.</p>
+
+<a name="160835451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160835451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160835451">Kevin Buzzard (Mar 15 2019 at 00:20)</a>:</h4>
+<p>If you were to use tactic mode you would have none of these problems and the errors would be far less obscure</p>
+
+<a name="160835469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/excluded%20middle%20from%20dne/near/160835469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47017excludedmiddlefromdne.html#160835469">Kevin Buzzard (Mar 15 2019 at 00:21)</a>:</h4>
+<p>Tactic mode forces you to structure your proofs properly</p>
+
 
 {% endraw %}

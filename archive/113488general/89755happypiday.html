@@ -660,5 +660,78 @@ end
 <span class="n">end</span><span class="w"></span>
 </pre></div>
 
+<a name="160834677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160834677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160834677">Chris Hughes (Mar 15 2019 at 00:05)</a>:</h4>
+<p><code>norm_num</code> just works for that last goal for me.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">((((</span><span class="mi">2</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">157</span> <span class="bp">/</span> <span class="mi">50</span> <span class="bp">/</span> <span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="mi">4</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">4</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">5</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">32</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">157</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">50</span> <span class="bp">/</span> <span class="mi">32</span> <span class="bp">=</span> <span class="mi">157</span> <span class="bp">/</span> <span class="mi">1600</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((</span><span class="mi">157</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">1600</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">24649</span> <span class="bp">/</span> <span class="mi">2560000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">24649</span> <span class="bp">/</span> <span class="mi">2560000</span> <span class="bp">=</span> <span class="mi">5095351</span><span class="bp">/</span><span class="mi">2560000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((</span><span class="mi">5095351</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span><span class="mi">2560000</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">25962601813201</span><span class="bp">/</span><span class="mi">6553600000000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="c1">-- let&#39;s try skipping steps</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((((</span><span class="mi">25962601813201</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">6553600000000</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span>
+    <span class="mi">6806775565993596917798714352237438749189222725565123913061124308255143227446400872965401873904861225601</span><span class="bp">/</span><span class="mi">3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="c1">-- worked!</span>
+  <span class="c1">-- ⊢ 2 ≤</span>
+  <span class="c1">--  6806775565993596917798714352237438749189222725565123913061124308255143227446400872965401873904861225601 /</span>
+  <span class="c1">--    3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span>
+  <span class="n">rw</span> <span class="n">le_div_iff</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">norm_num</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">norm_num</span> <span class="o">}</span>
+  <span class="c1">-- ⊢ 0 &lt; 3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="160834847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160834847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160834847">Kevin Buzzard (Mar 15 2019 at 00:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">--set_option pp.all true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">((((</span><span class="mi">2</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">157</span> <span class="bp">/</span> <span class="mi">50</span> <span class="bp">/</span> <span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="mi">4</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">4</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">5</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">32</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">157</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">50</span> <span class="bp">/</span> <span class="mi">32</span> <span class="bp">=</span> <span class="mi">157</span> <span class="bp">/</span> <span class="mi">1600</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((</span><span class="mi">157</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">1600</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">24649</span> <span class="bp">/</span> <span class="mi">2560000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">24649</span> <span class="bp">/</span> <span class="mi">2560000</span> <span class="bp">=</span> <span class="mi">5095351</span><span class="bp">/</span><span class="mi">2560000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((</span><span class="mi">5095351</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span><span class="mi">2560000</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">25962601813201</span><span class="bp">/</span><span class="mi">6553600000000</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="c1">-- let&#39;s try skipping steps</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">((((</span><span class="mi">25962601813201</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">6553600000000</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span>
+    <span class="mi">6806775565993596917798714352237438749189222725565123913061124308255143227446400872965401873904861225601</span><span class="bp">/</span><span class="mi">3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="c1">-- worked!</span>
+  <span class="c1">-- ⊢ 2 ≤</span>
+  <span class="c1">--  6806775565993596917798714352237438749189222725565123913061124308255143227446400872965401873904861225601 /</span>
+  <span class="c1">--    3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span>
+  <span class="n">rw</span> <span class="n">le_div_iff</span><span class="o">,</span>
+    <span class="n">norm_num</span><span class="o">,</span>
+  <span class="c1">-- ⊢ 0 &lt; 3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+           <span class="bp">=</span> <span class="mi">40</span> <span class="err">^</span> <span class="mi">64</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">apply</span> <span class="n">pow_pos</span><span class="o">,</span>
+  <span class="n">norm_num</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This worked for me.</p>
+
+<a name="160834852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160834852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160834852">Kevin Buzzard (Mar 15 2019 at 00:08)</a>:</h4>
+<p>Oh, I think that I upset Lean with some overflow and then failed to restart, and had problems.</p>
+
+<a name="160835429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160835429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160835429">Kevin Buzzard (Mar 15 2019 at 00:20)</a>:</h4>
+<p>Only 31999999999998 digits to go and we have the record!</p>
+
+<a name="160835991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160835991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160835991">Kenny Lau (Mar 15 2019 at 00:31)</a>:</h4>
+<p>oh boy</p>
+
 
 {% endraw %}
