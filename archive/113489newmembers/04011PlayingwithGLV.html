@@ -1,0 +1,62 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/04011PlayingwithGLV.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html">Playing with GL(V)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160857159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857159">Robert Spencer (Mar 15 2019 at 08:54)</a>:</h4>
+<p>I am fiddling around with the following code.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- Throughout let  V be a vector space.</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">ℂ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">GL</span><span class="o">(</span><span class="bp">`</span> <span class="n">a</span> <span class="bp">`</span><span class="o">)</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">general_linear_group</span> <span class="n">ℂ</span> <span class="n">a</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">GL</span><span class="o">(</span><span class="n">V</span><span class="o">)</span>
+
+<span class="kn">variable</span> <span class="n">f</span> <span class="o">:</span> <span class="n">GL</span><span class="o">(</span><span class="n">V</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="n">v</span> <span class="o">:</span> <span class="n">V</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="n">v</span>
+</pre></div>
+
+
+<p>I would expect this to tell me that <code>f v</code> has type <code>V</code>.  However, it complains that <code>f</code> is of type <code>units (V →ₗ[ℂ] V)</code> and not a function.  Fair enough, I suppose.   So I turn to the slightly more ugly <code>f.val v</code>.  This too gives an error:</p>
+<div class="codehilite"><pre><span></span>/home/.../basic.lean:17:8: error: failed to synthesize type class instance for
+V : Type,
+_inst_1 : add_comm_group V,
+_inst_2 : vector_space ℂ V,
+f : GL(V),
+v : V
+⊢ monoid (V →ₗ[ℂ] V)
+/home/.../basic.lean:17:8: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  ⁇
+inferred
+  ring.to_monoid (V →ₗ[ℂ] V)
+</pre></div>
+
+
+<p>I will admit I am now a little stumped.  What exactly is it asking me to prove here?  Is it asking for a proof that <code>(V →ₗ[ℂ] V)</code> is a ring?  Is it asking for a proof that rings are monoids?</p>
+<p>And on an aesthetic note, is there any way to remove the <code>.val</code>?  Saying "let f be a member of the general linear group.  Then f.val of v is a vector" feels clumsy.</p>
+
+<a name="160857439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857439">Johan Commelin (Mar 15 2019 at 08:58)</a>:</h4>
+<p>I agree that this is unfortunate.</p>
+
+<a name="160857460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Playing%20with%20GL%28V%29/near/160857460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04011PlayingwithGLV.html#160857460">Johan Commelin (Mar 15 2019 at 08:59)</a>:</h4>
+<p>However, would it make sense to introduce a scalar multiplication? <code>f • v</code>?</p>
+
+
+{% endraw %}
