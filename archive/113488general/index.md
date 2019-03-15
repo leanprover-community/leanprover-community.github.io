@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (53 messages, latest: Mar 15 2019 at 21:49)
+
 * [Inner product spaces](69629Innerproductspaces.html) (5 messages, latest: Mar 15 2019 at 20:54)
 
 * [multiparameter derive?](04363multiparameterderive.html) (3 messages, latest: Mar 15 2019 at 20:28)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [rewrite fails](58322rewritefails.html) (3 messages, latest: Mar 14 2019 at 23:30)
 
 * [better home for inv_eq_zero?](32279betterhomeforinveqzero.html) (5 messages, latest: Mar 14 2019 at 15:21)
-
-* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (50 messages, latest: Mar 14 2019 at 09:08)
 
 * [PSA for mathlib contributors](49083PSAformathlibcontributors.html) (5 messages, latest: Mar 14 2019 at 07:46)
 
