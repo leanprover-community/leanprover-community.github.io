@@ -800,5 +800,216 @@ lemma pi_lt_315 : pi &lt; 3.15
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840256">Mario Carneiro (Mar 15 2019 at 01:59)</a>:</h4>
 <p>fixed points of x |-&gt; x^2-2</p>
 
+<a name="160840309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840309">Kenny Lau (Mar 15 2019 at 02:00)</a>:</h4>
+<p>interesting...?</p>
+
+<a name="160840335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840335">Mario Carneiro (Mar 15 2019 at 02:01)</a>:</h4>
+<p>The first one isn't that tight: it is saying that</p>
+<div class="codehilite"><pre><span></span>   1128227574827648531222203602074520069222725565123913061124308255143227446400872965401873904861225601 /
+3402823669209384634633746074317682114560000000000000000000000000000000000000000000000000000000000000000
+&gt;=0
+</pre></div>
+
+<a name="160840340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840340">Mario Carneiro (Mar 15 2019 at 02:01)</a>:</h4>
+<p>Notice that there are like 60 digits of precision there and only 4 of them matter</p>
+
+<a name="160840392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840392">Mario Carneiro (Mar 15 2019 at 02:02)</a>:</h4>
+<p>so you can vastly simplify the calculation by precision reduction in the middle</p>
+
+<a name="160840397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840397">Kenny Lau (Mar 15 2019 at 02:02)</a>:</h4>
+<p>aha</p>
+
+<a name="160840506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840506">Mario Carneiro (Mar 15 2019 at 02:05)</a>:</h4>
+<blockquote>
+<p>π ≈ 2 ^ 7 * sqrt (2 - sqrt (2 + sqrt (2 + sqrt (2 + sqrt (2 + sqrt (2 + sqrt 2))))))</p>
+</blockquote>
+<p>Where did this come from?</p>
+
+<a name="160840554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840554">Floris van Doorn (Mar 15 2019 at 02:06)</a>:</h4>
+<p>The file I'm working on is here: <a href="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean" target="_blank" title="https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean">https://github.com/fpvandoorn/mathlib/blob/pi/src/data/real/pi.lean</a></p>
+
+<a name="160840635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840635">Kenny Lau (Mar 15 2019 at 02:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> the series sqrt(2+sqrt(2+ ... ))-/</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">sqrt_two_add_series</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sqrt</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">sqrt_two_add_series</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">pi_gt_sqrt_two_add_series</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">pi</span> <span class="bp">&gt;</span> <span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">sqrt</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">sqrt_two_add_series</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+
+<span class="kn">lemma</span> <span class="n">pi_lt_sqrt_two_add_series</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">pi</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">sqrt</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">sqrt_two_add_series</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">/</span> <span class="mi">4</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span>
+
+<span class="kn">lemma</span> <span class="n">pi_gt_314</span> <span class="o">:</span> <span class="n">pi</span> <span class="bp">&gt;</span> <span class="mi">3</span><span class="bp">.</span><span class="mi">14</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">lt_of_le_of_lt</span> <span class="bp">_</span> <span class="o">(</span><span class="n">pi_gt_sqrt_two_add_series</span> <span class="mi">4</span><span class="o">),</span>
+
+<span class="kn">lemma</span> <span class="n">pi_lt_315</span> <span class="o">:</span> <span class="n">pi</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="bp">.</span><span class="mi">15</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">lt_of_lt_of_le</span> <span class="o">(</span><span class="n">pi_lt_sqrt_two_add_series</span> <span class="mi">4</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+</pre></div>
+
+<a name="160840636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840636">Kenny Lau (Mar 15 2019 at 02:08)</a>:</h4>
+<p>extract ^</p>
+
+<a name="160840644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840644">Kenny Lau (Mar 15 2019 at 02:09)</a>:</h4>
+<p>anyway <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> remarkable work!</p>
+
+<a name="160840720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840720">Mario Carneiro (Mar 15 2019 at 02:11)</a>:</h4>
+<p>The initial starting point <code>sqrt_two_add_series 0</code> is arbitrary? What constraints does it require?</p>
+
+<a name="160840779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840779">Floris van Doorn (Mar 15 2019 at 02:12)</a>:</h4>
+<p>The first and 7th inequalities are relatively tight (it compares 2 with 2.0003 and 1.994). The other inequalities are not tight at all, the numbers on the right are all between 1 and 2.<br>
+What's going on is that I proved that</p>
+<div class="codehilite"><pre><span></span>2 ^ 5 * sqrt (2 - sqrt (2 + sqrt (2 + sqrt (2 + sqrt (2)))) &lt; π &lt; 2 ^ 5 * sqrt (2 - sqrt (2 + sqrt (2 + sqrt (2 + sqrt (2)))) + 1 / 4 ^ 4
+</pre></div>
+
+
+<p>Now we can check the bounds by replacing <code>π</code> by <code>3.14</code> and <code>3.15</code> and then moving all the square roots of the inequality to the other side. To do that, we need to check that stuff is positive (that gives all the non-tight inequalities), and the final inequality are the two tight ones.</p>
+
+<a name="160840782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840782">Mario Carneiro (Mar 15 2019 at 02:12)</a>:</h4>
+<p>If we let <code>sqrt_two_add_series a n</code> be the series starting at <code>a</code>, then my hope is to get an inequality chain based on <code>sqrt_two_add_series a (n+1) &lt;= sqrt_two_add_series b n</code> when a and b are suitably related rational numbers</p>
+
+<a name="160840870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840870">Mario Carneiro (Mar 15 2019 at 02:14)</a>:</h4>
+<p>is <code>sqrt_two_add_series a n</code> monotonic in <code>a</code>? I think it is</p>
+
+<a name="160840873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840873">Floris van Doorn (Mar 15 2019 at 02:14)</a>:</h4>
+<p>The defining equation of <code>sqrt_two_add_series</code> is</p>
+<div class="codehilite"><pre><span></span>cos (pi / 2 ^ (n+1)) = sqrt_two_add_series n / 2
+</pre></div>
+
+<a name="160840885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840885">Mario Carneiro (Mar 15 2019 at 02:14)</a>:</h4>
+<p>aha,  you inverted sin^2+cos^2 = 1</p>
+
+<a name="160840906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840906">Floris van Doorn (Mar 15 2019 at 02:15)</a>:</h4>
+<p>yes, the main equality is <code>lemma cos_square : cos x ^ 2 = 1 / 2 + cos (2 * x) / 2 </code></p>
+
+<a name="160840958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840958">Kenny Lau (Mar 15 2019 at 02:16)</a>:</h4>
+<p>how do we formalize "precision reduction"? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="160840983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840983">Mario Carneiro (Mar 15 2019 at 02:17)</a>:</h4>
+<p>blasty lean users aren't going to like the answer</p>
+
+<a name="160840984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160840984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160840984">Mario Carneiro (Mar 15 2019 at 02:17)</a>:</h4>
+<p>you give intermediate small rational numbers as certificates</p>
+
+<a name="160841028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841028">Floris van Doorn (Mar 15 2019 at 02:18)</a>:</h4>
+<p>yes,  it might be nice to let <code>sqrt_two_add_series</code> start at an arbitrary number, and yes, <code>sqrt_two_add_series a n</code> is monotone in both <code>a</code> and <code>n</code>.</p>
+
+<a name="160841054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841054">Kenny Lau (Mar 15 2019 at 02:19)</a>:</h4>
+<p>fortunately I'm not a blasty lean user</p>
+
+<a name="160841058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841058">Mario Carneiro (Mar 15 2019 at 02:19)</a>:</h4>
+<p>Is it true that <code>sqrt_two_add_series a (n+1) = sqrt_two_add_series (sqrt a + 2) n</code> or something like that?</p>
+
+<a name="160841063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841063">Mario Carneiro (Mar 15 2019 at 02:19)</a>:</h4>
+<p>sorry playing catchup</p>
+
+<a name="160841135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841135">Floris van Doorn (Mar 15 2019 at 02:21)</a>:</h4>
+<p>almost: <code>sqrt_two_add_series a (n+1) = sqrt_two_add_series (sqrt (2 + a)) n</code></p>
+
+<a name="160841151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841151">Mario Carneiro (Mar 15 2019 at 02:21)</a>:</h4>
+<p>Okay, so with monotonicity we get the desired result: if <code>2+a &lt;= b^2</code> and <code>b &gt;= 0</code> then <code>sqrt_two_add_series a (n+1) &lt;= sqrt_two_add_series b n</code></p>
+
+<a name="160841198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841198">Mario Carneiro (Mar 15 2019 at 02:22)</a>:</h4>
+<p>so now you apply this lemma 5 times, and supply 5 small rational numbers that satisfy the inequalities (check in mathematica or something)</p>
+
+<a name="160841208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841208">Mario Carneiro (Mar 15 2019 at 02:23)</a>:</h4>
+<p>and those numbers are the certificate</p>
+
+<a name="160841228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841228">Floris van Doorn (Mar 15 2019 at 02:23)</a>:</h4>
+<p>that sounds good</p>
+
+<a name="160841230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841230">Floris van Doorn (Mar 15 2019 at 02:23)</a>:</h4>
+<p>(of course I hoped for a lazier solution :) )</p>
+
+<a name="160841281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841281">Mario Carneiro (Mar 15 2019 at 02:24)</a>:</h4>
+<p>Oh the lazy solution is also possible, you can just tell lean "round to n digits at each stage"</p>
+
+<a name="160841284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841284">Mario Carneiro (Mar 15 2019 at 02:24)</a>:</h4>
+<p>and pick n so it works</p>
+
+<a name="160841300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841300">Mario Carneiro (Mar 15 2019 at 02:25)</a>:</h4>
+<p>but the really really important part is don't work out all the algebra with the original number, that causes exponential blowup</p>
+
+<a name="160841361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841361">Mario Carneiro (Mar 15 2019 at 02:26)</a>:</h4>
+<p>I really like certificate proofs, they show the added power of ITP</p>
+
+<a name="160841363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841363">Kenny Lau (Mar 15 2019 at 02:26)</a>:</h4>
+<p>didn't you write a floating point library or something?</p>
+
+<a name="160841364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841364">Mario Carneiro (Mar 15 2019 at 02:26)</a>:</h4>
+<p>you can solve NP problems in polynomial time, people! That's big news</p>
+
+<a name="160841365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841365">Kenny Lau (Mar 15 2019 at 02:26)</a>:</h4>
+<p>would that be useful?</p>
+
+<a name="160841388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841388">Mario Carneiro (Mar 15 2019 at 02:27)</a>:</h4>
+<p>this is why metamath is fast and every tactic based prover is 5 orders of magnitude slower, because certificates matter</p>
+
+<a name="160841438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841438">Kenny Lau (Mar 15 2019 at 02:28)</a>:</h4>
+<p>so we still use norm_num in each stage or something like that?</p>
+
+<a name="160841439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841439">Mario Carneiro (Mar 15 2019 at 02:28)</a>:</h4>
+<p>yes</p>
+
+<a name="160841445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841445">Kenny Lau (Mar 15 2019 at 02:28)</a>:</h4>
+<p>it's definitely the wrong time for me to try, so maybe later</p>
+
+<a name="160841446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841446">Kenny Lau (Mar 15 2019 at 02:28)</a>:</h4>
+<p>it's 2:28 AM</p>
+
+<a name="160841460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841460">Mario Carneiro (Mar 15 2019 at 02:29)</a>:</h4>
+<p>I will come up with appropriate certificates in a bit, once I understand the situation right</p>
+
+<a name="160841900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160841900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160841900">Floris van Doorn (Mar 15 2019 at 02:40)</a>:</h4>
+<p>I'm currently adding a second argument and showing the monotonicity</p>
+
+<a name="160842360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/happy%20pi%20day%21/near/160842360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89755happypiday.html#160842360">Floris van Doorn (Mar 15 2019 at 02:51)</a>:</h4>
+<p>(updated the file on Github)</p>
+
 
 {% endraw %}
