@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#749](02120749.html) (3 messages, latest: Mar 16 2019 at 11:22)
+
 * [#819 card finite fields](64086819cardfinitefields.html) (2 messages, latest: Mar 14 2019 at 17:43)
 
 * [#801 hyperreals](71708801hyperreals.html) (1 message, latest: Mar 09 2019 at 09:57)
@@ -43,8 +45,6 @@ permalink: archive/144837PRreviews/index.html
 * [#763 subset/inter/union for opens(X)](67832763subsetinterunionforopensX.html) (61 messages, latest: Feb 26 2019 at 18:30)
 
 * [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (22 messages, latest: Feb 25 2019 at 03:51)
-
-* [#749](02120749.html) (2 messages, latest: Feb 23 2019 at 06:12)
 
 * [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (36 messages, latest: Feb 21 2019 at 19:06)
 
