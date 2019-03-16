@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [should this be an instance](44787shouldthisbeaninstance.html) (2 messages, latest: Mar 16 2019 at 14:57)
+* [should this be an instance](44787shouldthisbeaninstance.html) (3 messages, latest: Mar 16 2019 at 15:43)
 
 * [simp lemmas and reducible definitions](92887simplemmasandreducibledefinitions.html) (2 messages, latest: Mar 16 2019 at 13:42)
 
