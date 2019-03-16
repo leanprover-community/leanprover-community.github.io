@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp lemmas and reducible definitions](92887simplemmasandreducibledefinitions.html) (2 messages, latest: Mar 16 2019 at 13:42)
+* [should this be an instance](44787shouldthisbeaninstance.html) (2 messages, latest: Mar 16 2019 at 14:57)
 
-* [should this be an instance](44787shouldthisbeaninstance.html) (1 message, latest: Mar 16 2019 at 13:37)
+* [simp lemmas and reducible definitions](92887simplemmasandreducibledefinitions.html) (2 messages, latest: Mar 16 2019 at 13:42)
 
 * [3.4.1 branch](74787341branch.html) (22 messages, latest: Mar 16 2019 at 10:22)
 
