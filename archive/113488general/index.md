@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Inner product spaces](69629Innerproductspaces.html) (7 messages, latest: Mar 16 2019 at 17:34)
+
 * [which namespace am I in?](12494whichnamespaceamIin.html) (19 messages, latest: Mar 16 2019 at 16:47)
 
 * [should this be an instance](44787shouldthisbeaninstance.html) (3 messages, latest: Mar 16 2019 at 15:43)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [3.4.1 branch](74787341branch.html) (22 messages, latest: Mar 16 2019 at 10:22)
 
 * [lexicographic_preorder](86821lexicographicpreorder.html) (10 messages, latest: Mar 16 2019 at 04:45)
-
-* [Inner product spaces](69629Innerproductspaces.html) (6 messages, latest: Mar 16 2019 at 02:41)
 
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (61 messages, latest: Mar 15 2019 at 22:44)
 
