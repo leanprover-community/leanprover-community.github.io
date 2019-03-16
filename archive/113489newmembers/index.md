@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [proof of P → Q → P](43329proofofPQP.html) (1 message, latest: Mar 16 2019 at 22:41)
+
 * [coe additive monoid hom](61036coeadditivemonoidhom.html) (14 messages, latest: Mar 16 2019 at 12:26)
 
 * [rw failure](50770rwfailure.html) (13 messages, latest: Mar 16 2019 at 10:03)

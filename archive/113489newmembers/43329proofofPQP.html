@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/43329proofofPQP.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html">proof of P → Q → P</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160971190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160971190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160971190">Patrick Thomas (Mar 16 2019 at 22:41)</a>:</h4>
+<p>I am attempting to prove P → Q → P from just the ideas introduced at the beginning of <a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#propositions-as-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#propositions-as-types">Section 3.1 of Theorem Proving in Lean</a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">implies</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">constant</span> <span class="n">Proof</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Type</span>
+
+<span class="kn">constant</span> <span class="n">modus_ponens</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span>
+
+<span class="kn">constant</span> <span class="n">implies_intro</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="o">(</span><span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
+
+
+<p>As an easier start, I think I can prove <code>P → P</code> as:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">implies_intro</span> <span class="n">P</span> <span class="n">P</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">Proof</span> <span class="n">P</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am not certain that this is right though. It means there is a sort of built in axiom that Proof P → Proof P?</p>
+<p>In attempting to prove P → Q → P, I have:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">implies_intro</span> <span class="n">Q</span> <span class="n">P</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">implies_intro</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">)</span>
+</pre></div>
+
+
+<p>but I am struggling to put these together.</p>
+
+
+{% endraw %}
