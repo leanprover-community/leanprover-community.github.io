@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [3.4.1 branch](74787341branch.html) (22 messages, latest: Mar 16 2019 at 10:22)
+
 * [lexicographic_preorder](86821lexicographicpreorder.html) (10 messages, latest: Mar 16 2019 at 04:45)
 
 * [Inner product spaces](69629Innerproductspaces.html) (6 messages, latest: Mar 16 2019 at 02:41)
@@ -137,8 +139,6 @@ permalink: archive/113488general/index.html
 * [cases on wrapper type](53104casesonwrappertype.html) (24 messages, latest: Feb 26 2019 at 14:11)
 
 * [with_infinitesimal](75048withinfinitesimal.html) (3 messages, latest: Feb 26 2019 at 09:29)
-
-* [3.4.1 branch](74787341branch.html) (20 messages, latest: Feb 26 2019 at 09:27)
 
 * [simp lemma for subtype.property](47692simplemmaforsubtypeproperty.html) (14 messages, latest: Feb 26 2019 at 08:57)
 

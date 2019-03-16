@@ -1,0 +1,78 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/61036coeadditivemonoidhom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html">coe additive monoid hom</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160946052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946052">Calle Sönne (Mar 16 2019 at 10:33)</a>:</h4>
+<p>I need a theorem that says that coercions from the integers into an additive monoid is an additive monoid homomorphism. I only found the corresponding theorem from the naturals however, is there any for the integers in mathlib?</p>
+
+<a name="160946115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946115">Kenny Lau (Mar 16 2019 at 10:35)</a>:</h4>
+<p>you can't coerce the integers into an additive monoid (where does -1 go to?)</p>
+
+<a name="160946119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946119">Kenny Lau (Mar 16 2019 at 10:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span>
+<span class="c1">-- int.cast_add : ∀ {α : Type u_1} [_inst_1 : add_group α] [_inst_2 : has_one α] (m n : ℤ), ↑(m + n) = ↑m + ↑n</span>
+</pre></div>
+
+<a name="160946171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946171">Calle Sönne (Mar 16 2019 at 10:36)</a>:</h4>
+<p>ah, so I should look for add_group_hom instead?</p>
+
+<a name="160946244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946244">Calle Sönne (Mar 16 2019 at 10:39)</a>:</h4>
+<p>oh wait I do need is_add_monoid_hom</p>
+
+<a name="160946313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946313">Calle Sönne (Mar 16 2019 at 10:40)</a>:</h4>
+<p>Basically I have this:</p>
+<div class="codehilite"><pre><span></span><span class="o">{</span><span class="n">b_1</span> <span class="o">:</span>
+       <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">a</span> <span class="bp">&lt;</span>
+       <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">b_1</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="err">↑</span><span class="o">(</span><span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">b_1</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">*</span> <span class="o">(</span><span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="n">b_1</span><span class="o">)</span><span class="bp">⁻¹</span><span class="o">}</span> <span class="err">∈</span>
+    <span class="n">at_top</span><span class="bp">.</span><span class="n">sets</span>
+</pre></div>
+
+
+<p>and I want to apply sum_hom to move the coercion out of the sum, but this requires that the coercion is an add_monoid_hom</p>
+
+<a name="160946324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946324">Calle Sönne (Mar 16 2019 at 10:41)</a>:</h4>
+<p>is there some other theorem that accomplishes this?</p>
+
+<a name="160946382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946382">Kenny Lau (Mar 16 2019 at 10:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">instance</span> <span class="n">asdf</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_add_monoid_hom</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="160946441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946441">Calle Sönne (Mar 16 2019 at 10:44)</a>:</h4>
+<p>wait now Im confused, how does this work?</p>
+
+<a name="160946458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946458">Kenny Lau (Mar 16 2019 at 10:45)</a>:</h4>
+<p>this tells Lean that int.cast is an add_monoid_hom</p>
+
+<a name="160946579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946579">Calle Sönne (Mar 16 2019 at 10:48)</a>:</h4>
+<p>I was just confused for a second since you said integers cant be mapped into an additive monoid, but I missed that you mapped them into a group.</p>
+
+<a name="160946581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/coe%20additive%20monoid%20hom/near/160946581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61036coeadditivemonoidhom.html#160946581">Calle Sönne (Mar 16 2019 at 10:48)</a>:</h4>
+<p>Thank you by the way</p>
+
+
+{% endraw %}

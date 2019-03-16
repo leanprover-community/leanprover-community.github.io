@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
+* [coe additive monoid hom](61036coeadditivemonoidhom.html) (12 messages, latest: Mar 16 2019 at 10:48)
 
-* [rw failure](50770rwfailure.html) (10 messages, latest: Mar 15 2019 at 19:32)
+* [rw failure](50770rwfailure.html) (13 messages, latest: Mar 16 2019 at 10:03)
+
+* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
 
 * [(no topic)](79918notopic.html) (162 messages, latest: Mar 15 2019 at 12:30)
 
