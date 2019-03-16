@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#825 (semi)modules and linear_map](01350825semimodulesandlinearmap.html) (5 messages, latest: Mar 16 2019 at 18:58)
+
 * [#749](02120749.html) (5 messages, latest: Mar 16 2019 at 12:28)
 
 * [#819 card finite fields](64086819cardfinitefields.html) (2 messages, latest: Mar 14 2019 at 17:43)
