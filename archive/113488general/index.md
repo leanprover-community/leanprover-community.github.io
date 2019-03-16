@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (61 messages, latest: Mar 15 2019 at 22:44)
+* [Inner product spaces](69629Innerproductspaces.html) (6 messages, latest: Mar 16 2019 at 02:41)
 
-* [Inner product spaces](69629Innerproductspaces.html) (5 messages, latest: Mar 15 2019 at 20:54)
+* [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (61 messages, latest: Mar 15 2019 at 22:44)
 
 * [multiparameter derive?](04363multiparameterderive.html) (3 messages, latest: Mar 15 2019 at 20:28)
 

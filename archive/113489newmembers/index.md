@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
+
 * [rw failure](50770rwfailure.html) (10 messages, latest: Mar 15 2019 at 19:32)
 
 * [(no topic)](79918notopic.html) (162 messages, latest: Mar 15 2019 at 12:30)
 
 * [Playing with GL(V)](04011PlayingwithGLV.html) (36 messages, latest: Mar 15 2019 at 12:29)
-
-* [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (3 messages, latest: Mar 15 2019 at 09:59)
 
 * [multiset question](66288multisetquestion.html) (9 messages, latest: Mar 15 2019 at 09:20)
 

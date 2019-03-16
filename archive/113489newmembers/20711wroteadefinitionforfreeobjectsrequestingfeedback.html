@@ -53,5 +53,29 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/wrote%20a%20definition%20for%20free%20objects%2C%20requesting%20feedback/near/160860826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html#160860826">Johan Commelin (Mar 15 2019 at 09:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="118229">@drocta</span> I find this code quite hard to parse... you don't seem to be opposed to unicode, since you use <code>∃</code> and <code>∘</code>. So why don't you use <code>u₁ u₂</code> and <code>Type u₁ → Type u₂</code> and  <code>X ⟶ Y</code> to make things more readable?</p>
 
+<a name="160929201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/wrote%20a%20definition%20for%20free%20objects%2C%20requesting%20feedback/near/160929201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html#160929201">drocta (Mar 16 2019 at 02:13)</a>:</h4>
+<p>Thank you for your feedback! (have edited the previous comment to include the syntax highlighting)<br>
+I had been trying to avoid using unicode characters, but I kind of gave in for the exists-unique and the composition because I didn't see anything that would let me say something like <code>exists! (g : blah) , bluh</code> , and because I didn't remember the ascii way of saying function composition.<br>
+But, I suppose I may as well give in and use the long arrow for the morphism types.<br>
+Would using it for the short arrows and the subscripts improve the clarity all that much?</p>
+<p>I had wanted to use <code>forget</code> without specifying the implicit parameters, or at least to define a version with them filled in before the place that I currently use forget, but when I change the definition to be like that ( :</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_free_over</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">bundled</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">generators_of_X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span> <span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">generators_of_X</span> <span class="bp">-&gt;</span> <span class="n">forget</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+  <span class="k">forall</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">bundled</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">generators_of_X</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="n">forget</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Y</span><span class="o">)),</span>
+    <span class="bp">∃!</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">),</span> <span class="n">f</span> <span class="bp">=</span> <span class="o">(</span><span class="n">forget</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span><span class="o">)</span> <span class="err">∘</span> <span class="n">i</span>
+</pre></div>
+
+
+<p>)<br>
+It no longer type-checks, and I'm not really sure why.<br>
+Which is unfortunate, as I feel that that would make it much nicer to read. Though, I guess in that case it doesn't refer to the concrete category <code>my_concrete_category</code> anywhere so it makes some sense to me that it doesn't work.</p>
+<p>I have to admit that I don't really understand how the type classes work.<br>
+Is there a better way to refer to <code>(X : objects_of_my_concrete_category)</code> which would make the forget calls work without having to specify their implicit arguments?</p>
+<p>Thank you again!</p>
+
+<a name="160929888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/wrote%20a%20definition%20for%20free%20objects%2C%20requesting%20feedback/near/160929888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestingfeedback.html#160929888">Johan Commelin (Mar 16 2019 at 02:32)</a>:</h4>
+<p>I'm not sure why it would fail... I agree that this is sometimes annoying...</p>
+
 
 {% endraw %}
