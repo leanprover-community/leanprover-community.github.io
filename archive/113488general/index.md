@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lexicographic_preorder](86821lexicographicpreorder.html) (10 messages, latest: Mar 16 2019 at 04:45)
+
 * [Inner product spaces](69629Innerproductspaces.html) (6 messages, latest: Mar 16 2019 at 02:41)
 
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (61 messages, latest: Mar 15 2019 at 22:44)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [maximal elements](32903maximalelements.html) (35 messages, latest: Mar 15 2019 at 20:02)
 
 * [happy pi day!](89755happypiday.html) (360 messages, latest: Mar 15 2019 at 15:28)
-
-* [lexicographic_preorder](86821lexicographicpreorder.html) (6 messages, latest: Mar 15 2019 at 11:30)
 
 * [rewrite fails](58322rewritefails.html) (3 messages, latest: Mar 14 2019 at 23:30)
 
