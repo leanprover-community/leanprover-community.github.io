@@ -48,5 +48,36 @@ permalink: archive/113488general/06474userattributemkcache.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993657">Scott Morrison (Mar 17 2019 at 10:40)</a>:</h4>
 <p>and in any case, <strong>no</strong>, <code>mk_cache</code> cannot call <code>get_cache</code> (unless your goal is SIGBUS).</p>
 
+<a name="160998301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998301">Simon Hudon (Mar 17 2019 at 13:12)</a>:</h4>
+<p>Interesting. I didn't know the last bit.</p>
+
+<a name="160998407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998407">Simon Hudon (Mar 17 2019 at 13:15)</a>:</h4>
+<p>I haven't confirmed it but I believe this works on cache invalidation logic. Every time you add the attribute, you invalidate the cache. Then, when you call <code>get_cache</code>, you rebuild the cache. The idea is that you can add the attribute on a few lemmas and if you don't query the cache in between, it should fairly fast. After that, you can use the cache many time. The first time is going to be the most expensive but after that, every invocation will be very fast.</p>
+
+<a name="160998466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998466">Simon Hudon (Mar 17 2019 at 13:16)</a>:</h4>
+<p>And I suspect that not building the cache incrementally is done to make the cache more reliable: <code>mk_cache</code> expresses a simple relation between the set of declaration that has the attribute and what the cache should be. If you make it incremental it's much harder to use</p>
+
+<a name="160998475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998475">Simon Hudon (Mar 17 2019 at 13:17)</a>:</h4>
+<p>And very easy to get it wrong</p>
+
+<a name="160998602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998602">Simon Hudon (Mar 17 2019 at 13:20)</a>:</h4>
+<p>The slowest thing you can do from that perspective (which I do not think is any slower than not having a cache) is have a long sequence where you set an attribute, then query the cache, then set an attribute and so on. If you want to make those faster, you can do as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo1</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo2</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo3</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo4</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo5</span> <span class="bp">...</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">my_attribute</span><span class="o">]</span> <span class="n">foo1</span> <span class="n">foo2</span> <span class="n">foo3</span> <span class="n">foo4</span> <span class="n">foo5</span>
+</pre></div>
+
+
+<p>I don't think it will be much of a gain unless you have a lot of  lemmas that don't depend on each other through your tactic.</p>
+
 
 {% endraw %}
