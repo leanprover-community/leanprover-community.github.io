@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [definition of is_mul_hom](48491definitionofismulhom.html) (10 messages, latest: Mar 17 2019 at 17:42)
+* [finite fourier transform](91288finitefouriertransform.html) (15 messages, latest: Mar 17 2019 at 18:52)
+
+* [definition of is_mul_hom](48491definitionofismulhom.html) (11 messages, latest: Mar 17 2019 at 18:07)
 
 * [Lean vs dependent type theory](68766Leanvsdependenttypetheory.html) (14 messages, latest: Mar 17 2019 at 17:18)
 
