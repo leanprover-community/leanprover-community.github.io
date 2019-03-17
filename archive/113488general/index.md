@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [maximal elements](32903maximalelements.html) (38 messages, latest: Mar 17 2019 at 12:31)
+
 * [out_param](72553outparam.html) (6 messages, latest: Mar 17 2019 at 11:40)
 
 * [user_attribute, mk_cache](06474userattributemkcache.html) (9 messages, latest: Mar 17 2019 at 10:40)
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [updating mathlib without compiling is hard](97359updatingmathlibwithoutcompilingishard.html) (61 messages, latest: Mar 15 2019 at 22:44)
 
 * [multiparameter derive?](04363multiparameterderive.html) (3 messages, latest: Mar 15 2019 at 20:28)
-
-* [maximal elements](32903maximalelements.html) (35 messages, latest: Mar 15 2019 at 20:02)
 
 * [happy pi day!](89755happypiday.html) (360 messages, latest: Mar 15 2019 at 15:28)
 
