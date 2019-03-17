@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp lemma?](38661simplemma.html) (3 messages, latest: Mar 16 2019 at 23:06)
+* [simp lemma?](38661simplemma.html) (5 messages, latest: Mar 17 2019 at 03:10)
 
 * [simp lemmas and reducible definitions](92887simplemmasandreducibledefinitions.html) (4 messages, latest: Mar 16 2019 at 22:00)
 
