@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/06474userattributemkcache.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html">user_attribute, mk_cache</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="160992849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992849">Scott Morrison (Mar 17 2019 at 10:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, is there any chance you could quickly explain how <code>user_attribute X Y</code> works?</p>
+<p>I'm struggling to work out what's going on in attribute caching. In particular, in <code>cache_cfg</code>, the <code>mk_cache</code> field is meant to be a <code>list name -&gt; tactic X</code>. When is this function invoked? What is the list of names passed to it?</p>
+
+<a name="160992861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992861">Scott Morrison (Mar 17 2019 at 10:13)</a>:</h4>
+<p>It seems that the type <code>X</code> is some global cache object associated with the attribute, and the type <code>Y</code> is a "decorator" on every name that has been tagged with the attribute, that you can recover using <code>attr.get_param name</code>, which is a <code>tactic Y</code>.</p>
+
+<a name="160992901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992901">Scott Morrison (Mar 17 2019 at 10:14)</a>:</h4>
+<p>But how do you interact with the <code>X</code>?</p>
+
+<a name="160993432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993432">Scott Morrison (Mar 17 2019 at 10:33)</a>:</h4>
+<p>... Okay, I think I understand.</p>
+
+<a name="160993474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993474">Scott Morrison (Mar 17 2019 at 10:34)</a>:</h4>
+<p>the function in <code>mk_cache</code> is called some subset of the times that <code>attr.get_cache</code> is called.</p>
+
+<a name="160993484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993484">Scott Morrison (Mar 17 2019 at 10:35)</a>:</h4>
+<p>Certainly if <code>attr.get_cache</code> hasn't been called before, <code>mk_cache</code> runs. If any declarations have had the attribute added since the last call to <code>attr.get_cache</code>, <code>mk_cache</code> runs.</p>
+
+<a name="160993487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993487">Scott Morrison (Mar 17 2019 at 10:35)</a>:</h4>
+<p>When nothing has changed since the last call to <code>attr.get_cache</code>, <code>mk_cache</code> may or may not run...! I'm guessing this nondeterministic behaviour might be a race condition.</p>
+
+<a name="160993601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993601">Scott Morrison (Mar 17 2019 at 10:39)</a>:</h4>
+<p>This seems.... not very useful. :-) In particular, when you add the attribute to a new declaration, there's no way to update the old value of the cache, because <code>mk_cache</code> ... oh, can <code>mk_cache</code> call <code>get_cache</code>? But still, it seems there's no way to know which declarations have newly received the attribute since the last call to <code>mk_cache</code>, as <code>mk_cache</code> is just passed the entire list of names, so you're still having to look at all the names that carry the attribute.</p>
+
+<a name="160993657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993657">Scott Morrison (Mar 17 2019 at 10:40)</a>:</h4>
+<p>and in any case, <strong>no</strong>, <code>mk_cache</code> cannot call <code>get_cache</code> (unless your goal is SIGBUS).</p>
+
+
+{% endraw %}
