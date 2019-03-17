@@ -78,5 +78,13 @@ permalink: archive/113488general/48491definitionofismulhom.html
 <p>In <a href="https://github.com/leanprover-community/mathlib/issues/789" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/789">#789</a> Chris encouraged me to define <code>mul_equiv</code> for two types with <code>has_mul</code> as a bijection which preserved <code>*</code>. I want <code>le_equiv</code> and I was going to use <code>monotone</code> but this needs a preorder, rather than just a <code>has_le</code>.</p>
 <p>What is the best idea here? Can I weaken the definition of <code>monotone</code> to only demand <code>has_le</code>? Should I not define <code>le_equiv</code> and instead stick to <code>preorder_equiv</code>?</p>
 
+<a name="161005085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20is_mul_hom/near/161005085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html#161005085">Patrick Massot (Mar 17 2019 at 16:26)</a>:</h4>
+<p>I think you should PR a modification of <code>monotone</code> which assumes only <code>has_le</code></p>
+
+<a name="161005140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20is_mul_hom/near/161005140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html#161005140">Patrick Massot (Mar 17 2019 at 16:28)</a>:</h4>
+<p>In your def <code>is_mul_hom</code> I don't see any reason to have implicit <code>x</code> and <code>y</code>. Make them explicit and your problem in map_equiv will disappear (using <code>hom := λ a b, units.ext $ h.hom _ _</code>)</p>
+
 
 {% endraw %}
