@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bounds](43084bounds.html) (43 messages, latest: Mar 17 2019 at 17:11)
+
 * [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (14 messages, latest: Mar 14 2019 at 21:22)
 
 * [cast woes](88074castwoes.html) (64 messages, latest: Mar 14 2019 at 08:50)
@@ -303,8 +305,6 @@ permalink: archive/116395maths/index.html
 * [should this be dec_trivial?](38132shouldthisbedectrivial.html) (19 messages, latest: Nov 18 2018 at 16:01)
 
 * [decidability](12456decidability.html) (49 messages, latest: Nov 17 2018 at 23:59)
-
-* [bounds](43084bounds.html) (41 messages, latest: Nov 17 2018 at 14:49)
 
 * [characterisation of reals](50225characterisationofreals.html) (1 message, latest: Nov 17 2018 at 08:32)
 

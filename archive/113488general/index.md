@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean vs dependent type theory](68766Leanvsdependenttypetheory.html) (8 messages, latest: Mar 17 2019 at 16:28)
+* [definition of is_mul_hom](48491definitionofismulhom.html) (10 messages, latest: Mar 17 2019 at 17:42)
 
-* [definition of is_mul_hom](48491definitionofismulhom.html) (5 messages, latest: Mar 17 2019 at 16:28)
+* [Lean vs dependent type theory](68766Leanvsdependenttypetheory.html) (14 messages, latest: Mar 17 2019 at 17:18)
 
 * [user_attribute, mk_cache](06474userattributemkcache.html) (14 messages, latest: Mar 17 2019 at 13:20)
 
