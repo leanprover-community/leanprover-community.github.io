@@ -1,0 +1,82 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/48491definitionofismulhom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html">definition of is_mul_hom</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161001985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20is_mul_hom/near/161001985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html#161001985">Kevin Buzzard (Mar 17 2019 at 15:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="n">def</span> <span class="n">is_mul_hom</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="c1">-- Should this be {x y} or (x y) or ⦃x y⦄?</span>
+<span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">},</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span>
+
+<span class="kn">structure</span> <span class="n">mul_equiv</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_mul_hom</span> <span class="n">to_fun</span><span class="o">)</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="err">≃</span><span class="bp">*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="o">:=</span> <span class="n">mul_equiv</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">namespace</span> <span class="n">mul_equiv</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="n">def</span> <span class="n">symm</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n₁</span> <span class="n">n₂</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective_of_left_inverse</span> <span class="n">h</span><span class="bp">.</span><span class="n">left_inv</span> <span class="k">begin</span>
+   <span class="n">rw</span> <span class="n">h</span><span class="bp">.</span><span class="n">hom</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span><span class="o">],</span> <span class="kn">end</span>
+  <span class="bp">..</span><span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">one</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">h</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">h</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">h</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">mul_one</span> <span class="o">(</span><span class="n">h</span> <span class="mi">1</span><span class="o">),</span> <span class="err">←</span><span class="n">h</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="mi">1</span><span class="o">,</span> <span class="err">←</span><span class="n">hom</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span>
+
+<span class="kn">instance</span> <span class="n">is_monoid_hom</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_monoid_hom</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="n">mul_equiv</span><span class="bp">.</span><span class="n">one</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="n">h</span><span class="bp">.</span><span class="n">hom</span><span class="o">,</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">hom</span> <span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">units</span>
+
+<span class="n">def</span> <span class="n">map_equiv</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">units</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">map</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">map</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">u</span><span class="o">,</span> <span class="n">ext</span> <span class="err">$</span> <span class="n">h</span><span class="bp">.</span><span class="n">left_inv</span> <span class="n">u</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">u</span><span class="o">,</span> <span class="n">ext</span> <span class="err">$</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span> <span class="n">u</span><span class="o">,</span>
+<span class="c1">--  hom := λ a b, units.ext $ h.hom} -- fails</span>
+<span class="c1">--  hom := λ a b, units.ext $ by exact h.hom} -- fails</span>
+  <span class="n">hom</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">units</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="k">by</span> <span class="k">have</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">hom</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">X</span><span class="o">}</span> <span class="c1">-- works</span>
+
+<span class="kn">end</span> <span class="n">mul_equiv</span>
+</pre></div>
+
+
+<p>In the perfectoid project we have a bunch of groups, rings, linearly ordered commutative monoids etc which are canonically isomorphic, so I've been trying to extend <code>equiv</code> to more general situations (see <a href="https://github.com/leanprover-community/mathlib/issues/789" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/789">#789</a>). Why am I having trouble with the last line here?</p>
+
+<a name="161002130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20is_mul_hom/near/161002130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html#161002130">Kevin Buzzard (Mar 17 2019 at 15:09)</a>:</h4>
+<p>Could it be the case that the <code>hom</code> field in the structure might need different brackets to the def? I should get this right now because I want to build a bunch of equivs on top of this.</p>
+
+<a name="161002635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20is_mul_hom/near/161002635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48491definitionofismulhom.html#161002635">Kevin Buzzard (Mar 17 2019 at 15:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">monotone</span>
+<span class="c1">-- monotone : Π {α : Type u_1} {β : Type u_2} [_inst_1 : preorder α] [_inst_2 : preorder β],</span>
+<span class="c1">--   (α → β) → Prop</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">monotone</span>
+<span class="c1">-- ∀ ⦃a b : α⦄, a ≤ b → f a ≤ f b</span>
+</pre></div>
+
+
+<p>In <a href="https://github.com/leanprover-community/mathlib/issues/789" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/789">#789</a> Chris encouraged me to define <code>mul_equiv</code> for two types with <code>has_mul</code> as a bijection which preserved <code>*</code>. I want <code>le_equiv</code> and I was going to use <code>monotone</code> but this needs a preorder, rather than just a <code>has_le</code>.</p>
+<p>What is the best idea here? Can I weaken the definition of <code>monotone</code> to only demand <code>has_le</code>? Should I not define <code>le_equiv</code> and instead stick to <code>preorder_equiv</code>?</p>
+
+
+{% endraw %}

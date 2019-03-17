@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean vs dependent type theory](68766Leanvsdependenttypetheory.html) (4 messages, latest: Mar 17 2019 at 16:00)
+
+* [definition of is_mul_hom](48491definitionofismulhom.html) (3 messages, latest: Mar 17 2019 at 15:22)
+
 * [user_attribute, mk_cache](06474userattributemkcache.html) (14 messages, latest: Mar 17 2019 at 13:20)
 
 * [maximal elements](32903maximalelements.html) (38 messages, latest: Mar 17 2019 at 12:31)

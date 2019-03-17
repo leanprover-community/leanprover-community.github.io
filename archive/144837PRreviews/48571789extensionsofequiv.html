@@ -1,0 +1,53 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/48571789extensionsofequiv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html">#789 extensions of equiv</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161002728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161002728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161002728">Kevin Buzzard (Mar 17 2019 at 15:25)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/definition.20of.20is_mul_hom" title="#narrow/stream/113488-general/topic/definition.20of.20is_mul_hom">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition.20of.20is_mul_hom</a></p>
+<p>Maybe this is a better place for this conversation.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">order</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">Y</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">le_equiv</span> <span class="kn">extends</span> <span class="n">X</span> <span class="err">≃</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:</span> <span class="n">monotone</span> <span class="n">to_fun</span><span class="o">}</span>
+</pre></div>
+
+
+<p>This fails because <code>monotone</code> expects a preorder. Should I just not use monotone and write out its definition explicitly? <code>monotone</code> uses <code>{{ }}</code> brackets. If I write it myself then this is an opportunity to change them -- should I?</p>
+
+<a name="161002775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161002775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161002775">Kevin Buzzard (Mar 17 2019 at 15:26)</a>:</h4>
+<p>Actually, I probably want <code>x1 &lt;= x2 iff f x1 &lt;= f x2</code> in the definition of le_equiv</p>
+
+<a name="161003317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161003317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161003317">Kevin Buzzard (Mar 17 2019 at 15:40)</a>:</h4>
+<p>Should there be a coercion to X -&gt; Y, or should the user have to explicitly invoke it with <code>add_equiv.to_equiv</code>?</p>
+
+<a name="161003763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161003763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161003763">Kevin Buzzard (Mar 17 2019 at 15:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">linear_ordered_comm_group_equiv</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="n">Y</span><span class="o">]</span>
+   <span class="kn">extends</span> <span class="n">le_equiv</span> <span class="n">X</span> <span class="n">Y</span><span class="o">,</span> <span class="n">mul_equiv</span> <span class="n">X</span> <span class="n">Y</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid &#39;structure&#39; header, field &#39;to_equiv&#39; from &#39;mul_equiv&#39; has already been declared</span>
+<span class="cm">-/</span>
+
+<span class="c1">-- aargh</span>
+</pre></div>
+
+
+<p>Should I extend one (say le_equiv) and then add the axiom for the other one, and then define a projection onto the other one?</p>
+
+
+{% endraw %}

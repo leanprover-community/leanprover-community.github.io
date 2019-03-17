@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#789 extensions of equiv](48571789extensionsofequiv.html) (4 messages, latest: Mar 17 2019 at 15:53)
+
 * [#825 (semi)modules and linear_map](01350825semimodulesandlinearmap.html) (5 messages, latest: Mar 16 2019 at 18:58)
 
 * [#749](02120749.html) (5 messages, latest: Mar 16 2019 at 12:28)
