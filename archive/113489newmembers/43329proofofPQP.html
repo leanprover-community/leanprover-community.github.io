@@ -42,5 +42,154 @@ permalink: archive/113489newmembers/43329proofofPQP.html
 
 <p>but I am struggling to put these together.</p>
 
+<a name="160972298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972298">Kevin Buzzard (Mar 16 2019 at 23:14)</a>:</h4>
+<p>So you are intentionally not conflating <code>Proof P</code> with <code>P</code>?</p>
+
+<a name="160972321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972321">Patrick Thomas (Mar 16 2019 at 23:15)</a>:</h4>
+<p>Yes.</p>
+
+<a name="160972322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972322">Kevin Buzzard (Mar 16 2019 at 23:15)</a>:</h4>
+<p>A function <code>Proof P -&gt; Proof P</code> would be <code>id</code></p>
+
+<a name="160972406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972406">Kevin Buzzard (Mar 16 2019 at 23:17)</a>:</h4>
+<p>I am not an expert in this sort of nonsense, but I would imagine that you have to be extremely careful to distinguish between the <code>-&gt;</code> arrow and the <code>implies</code> arrow if you are doing it like this.</p>
+
+<a name="160972458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972458">Kenny Lau (Mar 16 2019 at 23:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">prelude</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="kt">Prop</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">Sort</span> <span class="mi">0</span>
+<span class="kn">notation</span> <span class="n">f</span> <span class="bp">`</span> <span class="err">$</span> <span class="bp">`</span><span class="o">:</span><span class="mi">1</span> <span class="n">a</span><span class="o">:</span><span class="mi">0</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">a</span>
+
+<span class="kn">constant</span> <span class="n">implies</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">constant</span> <span class="n">Proof</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Type</span>
+
+<span class="kn">constant</span> <span class="n">modus_ponens</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">},</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span>
+
+<span class="kn">constant</span> <span class="n">implies_intro</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">},</span> <span class="o">(</span><span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">implies_intro</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">implies_intro</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="160972755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972755">Patrick Thomas (Mar 16 2019 at 23:26)</a>:</h4>
+<p>Thank you. I don't think I'm familiar with <code>prelude</code>, <code>notation</code> and <code>noncomputable</code>.</p>
+
+<a name="160972834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972834">Kenny Lau (Mar 16 2019 at 23:29)</a>:</h4>
+<p>just ignore those things</p>
+
+<a name="160972840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972840">Patrick Thomas (Mar 16 2019 at 23:29)</a>:</h4>
+<p>Can it be done without them?</p>
+
+<a name="160972913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972913">Kenny Lau (Mar 16 2019 at 23:31)</a>:</h4>
+<p>I mean, what is your current code?</p>
+
+<a name="160972917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972917">Kenny Lau (Mar 16 2019 at 23:31)</a>:</h4>
+<p>because what you wrote at the beginning doesn't compile</p>
+
+<a name="160972919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972919">Kenny Lau (Mar 16 2019 at 23:31)</a>:</h4>
+<p>it complains that there is already a definition of "implies"</p>
+
+<a name="160972982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972982">Patrick Thomas (Mar 16 2019 at 23:33)</a>:</h4>
+<p>I have what I posted wrapped in a namespace.</p>
+
+<a name="160972987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160972987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160972987">Patrick Thomas (Mar 16 2019 at 23:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">section_3_1</span>
+<span class="kn">constant</span> <span class="n">implies</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">constant</span> <span class="n">Proof</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Type</span>
+
+<span class="kn">constant</span> <span class="n">modus_ponens</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span>
+
+<span class="kn">constant</span> <span class="n">implies_intro</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="o">(</span><span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="kn">end</span> <span class="n">section_3_1</span>
+</pre></div>
+
+<a name="160973036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973036">Kenny Lau (Mar 16 2019 at 23:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">section_3_1</span>
+<span class="kn">constant</span> <span class="n">implies</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">constant</span> <span class="n">Proof</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Type</span>
+
+<span class="kn">constant</span> <span class="n">modus_ponens</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">},</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span>
+
+<span class="kn">constant</span> <span class="n">implies_intro</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">},</span> <span class="o">(</span><span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">implies_intro</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">implies_intro</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">hp</span>
+<span class="kn">end</span> <span class="n">section_3_1</span>
+</pre></div>
+
+<a name="160973056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973056">Patrick Thomas (Mar 16 2019 at 23:35)</a>:</h4>
+<p>What do the dollar signs denote?</p>
+
+<a name="160973131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973131">Kenny Lau (Mar 16 2019 at 23:37)</a>:</h4>
+<p>it denotes a bracket to the right</p>
+
+<a name="160973174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973174">Kenny Lau (Mar 16 2019 at 23:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">implies_intro</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">implies_intro</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">hp</span><span class="o">))</span>
+</pre></div>
+
+<a name="160973176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973176">Kenny Lau (Mar 16 2019 at 23:38)</a>:</h4>
+<p>is equivalent</p>
+
+<a name="160973321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973321">Patrick Thomas (Mar 16 2019 at 23:43)</a>:</h4>
+<p>Sorry, if you don't mind, what would it look like without the implicit arguments?</p>
+
+<a name="160973383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973383">Kenny Lau (Mar 16 2019 at 23:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">section_3_1</span>
+<span class="kn">constant</span> <span class="n">implies</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">constant</span> <span class="n">Proof</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Type</span>
+
+<span class="kn">constant</span> <span class="n">modus_ponens</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span>
+
+<span class="kn">constant</span> <span class="n">implies_intro</span> <span class="o">:</span>
+    <span class="bp">Π</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="o">(</span><span class="n">Proof</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">Proof</span> <span class="o">(</span><span class="n">implies</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">implies_intro</span> <span class="n">P</span> <span class="o">(</span><span class="n">implies</span> <span class="n">Q</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">implies_intro</span> <span class="n">Q</span> <span class="n">P</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">hp</span><span class="o">))</span>
+<span class="kn">end</span> <span class="n">section_3_1</span>
+</pre></div>
+
+<a name="160973469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20P%20%E2%86%92%20Q%20%E2%86%92%20P/near/160973469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43329proofofPQP.html#160973469">Patrick Thomas (Mar 16 2019 at 23:47)</a>:</h4>
+<p>Thank you!</p>
+
 
 {% endraw %}
