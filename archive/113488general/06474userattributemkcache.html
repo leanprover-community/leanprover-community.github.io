@@ -150,5 +150,13 @@ run_cmd example_attribute.get_cache &gt;&gt;= trace
 run_cmd example_attribute.get_cache &gt;&gt;= trace
 </pre></div>
 
+<a name="161014830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014830">Scott Morrison (Mar 17 2019 at 21:04)</a>:</h4>
+<p>In any case... The reason I'm currently interested in this is my <code>library_search</code> tactic, which requires looking over ever declaration in the library. It actually seems to be (incredibly?) fast already, but I was hoping to see if I could use attribute caching to make it even faster. My idea had been to make an auxiliary attribute "has_been_indexed", or something, and to progressively update the map of "lemmas arranged by head symbols" I need every time someone runs <code>library_search</code>. But for this is help, we'd need to be able to reuse previous map, and just add to it the all the lemmas which have been added to the environment since the last call to <code>library_search</code>. That isn't possible, it seems. Given that I'd expect there to be a new declaration roughly every time <code>library_search</code> is called, the cache wouldn't be hit often: only ever for multiple invocations of <code>library_search</code> within the same proof block.</p>
+
+<a name="161014836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014836">Scott Morrison (Mar 17 2019 at 21:04)</a>:</h4>
+<p>In any case, this isn't a roadblock. It looks like <code>library_search</code> may be fast enough to be usable.</p>
+
 
 {% endraw %}
