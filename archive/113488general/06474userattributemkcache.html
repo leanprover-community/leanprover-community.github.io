@@ -83,5 +83,72 @@ permalink: archive/113488general/06474userattributemkcache.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012233">Koundinya Vajjha (Mar 17 2019 at 19:51)</a>:</h4>
 <p>I would wager to guess that <code>mk_cache</code> is run as soon as the tagged declaration is parsed.</p>
 
+<a name="161012824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012824">Koundinya Vajjha (Mar 17 2019 at 20:09)</a>:</h4>
+<p>I was more interested in the following scenario: If I have two declarations in two files which do not import each other, both marked with the user attribute, is there any way that running <code>get_cache</code> in one file will also include the cached declaration in the other file?</p>
+
+<a name="161012828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012828">Koundinya Vajjha (Mar 17 2019 at 20:09)</a>:</h4>
+<p>Or do I have to have a master file which imports both files? And the cache has to be recomputed in that file?</p>
+
+<a name="161014541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014541">Scott Morrison (Mar 17 2019 at 20:57)</a>:</h4>
+<blockquote>
+<p>Or do I have to have a master file which imports both files? And the cache has to be recomputed in that file?</p>
+</blockquote>
+<p>I'm pretty certain you need a master file, and the cache will be recomputed there. Anything else would require global mutable state in the environment, and that seems unlikely.</p>
+
+<a name="161014597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014597">Scott Morrison (Mar 17 2019 at 20:58)</a>:</h4>
+<p>The fact that there is a race condition is and the computation of the cache is nondeterministic it pretty easy to verify. Run the following in VSCode, and read the trace messages:</p>
+<div class="codehilite"><pre><span></span>-- open native
+open tactic
+
+@[user_attribute]
+meta def example_attribute : user_attribute unit unit := {
+  name := `example,
+  descr := &quot;An example attribute&quot;,
+  cache_cfg :=
+   { mk_cache := λ ls, (do trace format!&quot;names: {ls}&quot;),
+     dependencies := [] },
+  after_set := some $ λ name priority persistent, (do trace format!&quot;set {name}&quot;),
+  before_unset := some $ λ name persistent, (do trace format!&quot;unset {name}&quot;)
+}
+
+def f := 3
+def g := 4
+
+section
+local attribute [example] f
+local attribute [-example] f
+local attribute [example] f
+end -- Notice no &quot;unset&quot; at the end of the section?
+
+section
+run_cmd success_if_fail (example_attribute.get_param `f &gt;&gt;= trace)
+
+local attribute [example] f
+run_cmd example_attribute.get_param `f &gt;&gt;= trace
+end
+
+set_option trace.user_attributes_cache true
+attribute [example] f
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+-- it seems non-deterministic whether this next line finds a cached value
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+attribute [example] g
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+attribute [example] g
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+</pre></div>
+
 
 {% endraw %}
