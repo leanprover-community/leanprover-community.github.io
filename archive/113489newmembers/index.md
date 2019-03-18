@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (217 messages, latest: Mar 18 2019 at 13:05)
+* [noob question(s)](52075noobquestions.html) (218 messages, latest: Mar 18 2019 at 14:01)
 
 * [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (9 messages, latest: Mar 18 2019 at 08:29)
 
