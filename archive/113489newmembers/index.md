@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (9 messages, latest: Mar 18 2019 at 08:29)
+* [noob question(s)](52075noobquestions.html) (214 messages, latest: Mar 18 2019 at 12:41)
 
-* [noob question(s)](52075noobquestions.html) (212 messages, latest: Mar 18 2019 at 07:34)
+* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (9 messages, latest: Mar 18 2019 at 08:29)
 
 * [proof of P → Q → P](43329proofofPQP.html) (22 messages, latest: Mar 16 2019 at 23:47)
 

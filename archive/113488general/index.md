@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Logipedia](09519Logipedia.html) (4 messages, latest: Mar 18 2019 at 12:17)
+
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (5 messages, latest: Mar 18 2019 at 12:01)
+
 * [simp lemma?](38661simplemma.html) (9 messages, latest: Mar 18 2019 at 02:09)
 
 * [finite fourier transform](91288finitefouriertransform.html) (19 messages, latest: Mar 18 2019 at 00:13)
@@ -83,8 +87,6 @@ permalink: archive/113488general/index.html
 * [missing instances?](06530missinginstances.html) (29 messages, latest: Mar 08 2019 at 09:35)
 
 * [Leanpkg Windows weirdness](67234LeanpkgWindowsweirdness.html) (1 message, latest: Mar 07 2019 at 21:51)
-
-* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (4 messages, latest: Mar 07 2019 at 18:03)
 
 * [power series](15161powerseries.html) (12 messages, latest: Mar 07 2019 at 11:08)
 
