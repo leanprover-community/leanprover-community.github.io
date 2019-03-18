@@ -33,5 +33,31 @@ variables [has_one (Type u)](A: matrix n n α)(b: matrix n 1 α)</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declare%20column%20vector%20in%20Lean/near/160846644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33289DeclarecolumnvectorinLean.html#160846644">Nguyen Thi Nhung (Mar 15 2019 at 04:39)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>.  Following your suggestions, I did it. Thank you.</p>
 
+<a name="161030526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Declare%20column%20vector%20in%20Lean/near/161030526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33289DeclarecolumnvectorinLean.html#161030526">Nguyen Thi Nhung (Mar 18 2019 at 04:38)</a>:</h4>
+<p>Hi,<br>
+I am formalizing Cramer rule, but it still has error (as I include in the following). How can I solve it? Thanh you.</p>
+<div class="codehilite"><pre><span></span>import ring_theory.determinant algebra.field
+open matrix
+open units
+
+universe v
+variables (n:ℕ)(α : Type v)[field α]
+
+theorem Cramer_rule{A: matrix (fin n)(fin n) α }{x : matrix (fin n) (fin 1) α}{b : matrix (fin n) (fin 1) α}
+(h1: A.mul x = b)(h2: det(A) ≠ 0) : x = (λ t, det(λ i j, if j = t then b i 1 else A i j)/ det(A)) := sorry
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>type mismatch at application
+  ite (j = t) (b i 1)
+term
+  b i 1
+has type
+  α
+but is expected to have type
+  fin 1 → α
+</pre></div>
+
 
 {% endraw %}
