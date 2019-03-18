@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp messes up names](75715simpmessesupnames.html) (7 messages, latest: Mar 18 2019 at 22:53)
+
 * [is_group_hom field name](81265isgrouphomfieldname.html) (2 messages, latest: Mar 18 2019 at 21:22)
 
 * [Logipedia](09519Logipedia.html) (6 messages, latest: Mar 18 2019 at 21:19)

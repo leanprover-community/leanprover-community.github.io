@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75715simpmessesupnames.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html">simp messes up names</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161100629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161100629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161100629">Patrick Massot (Mar 18 2019 at 22:05)</a>:</h4>
+<p>In </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_exists</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span> <span class="mi">0</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The goal after the simp line is <code>∀ (x : ℕ), ¬P x</code>, whereas I'm expecting <code>∀ (n : ℕ), ¬P n</code>. Is there any way to prevent simp from messing up names like this? In a more complicated proof it becomes very confusing for students</p>
+
+<a name="161100728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161100728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161100728">Patrick Massot (Mar 18 2019 at 22:06)</a>:</h4>
+<p>I'm blaming <code>simp</code> but <code>rw</code> does the same</p>
+
+<a name="161100906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161100906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161100906">Patrick Massot (Mar 18 2019 at 22:09)</a>:</h4>
+<p>Is it possible to write a tactic that fixes the names after invoking <code>simp only [not_exists]</code> or <code>simp only [not_forall]</code>? It looks non trivial because the structure of the <code>expr</code> is not the same, but it still sounds feasible by de Bruijn indices gurus.</p>
+
+<a name="161101124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161101124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161101124">Simon Hudon (Mar 18 2019 at 22:12)</a>:</h4>
+<p>I think <code>simp</code> and <code>rw</code> use the same names used in the lemma. In your situation, there seems to be a different obviously correct behavior but if you look at a lemma like <code>(∀ a, _) ∧ (∀ b, _) ↔ (∀ c, _) ∨ (∀ d, _) ∨ (∀ e, _)</code>, it's not obvious what names to use after rewrite</p>
+
+<a name="161101266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161101266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161101266">Patrick Massot (Mar 18 2019 at 22:14)</a>:</h4>
+<p>I understand why there is no good general solution. I'm looking for a solution specific to these <code>not_*</code> lemmas (including <code>not_le</code> and <code>not_lt</code>) where a tactic both calls <code>simp only</code> and fixes names</p>
+
+<a name="161102125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161102125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161102125">Simon Hudon (Mar 18 2019 at 22:27)</a>:</h4>
+<p>Now that I think of it, I may have an idea on how to do it in general. I'm not overly enthusiastic about doing it for specific lemmas because when the wheels fall off, people get even more confused.</p>
+
+<a name="161103805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161103805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161103805">Kevin Buzzard (Mar 18 2019 at 22:53)</a>:</h4>
+<p>I guess you could always teach the students that <code>∀ (x : ℕ), ¬P x</code> and <code>∀ (n : ℕ), ¬P n</code> are syntactically equal...</p>
+
+
+{% endraw %}
