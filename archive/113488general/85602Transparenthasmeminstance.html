@@ -44,5 +44,41 @@ Is that because removing it causes some breakage?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161084821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161084821">Johan Commelin (Mar 18 2019 at 18:44)</a>:</h4>
 <p>Aah, so this is not made "transparent" by some coercion.</p>
 
+<a name="161088208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088208">Patrick Massot (Mar 18 2019 at 19:25)</a>:</h4>
+<p>I'm not sure which <code>.sets</code> you are talking about. In the statement of the lemma, it's clearly needed. The notation <code>⋃</code> is not a generic one like <code>∈</code> or <code>≤</code>, it specifically means <code>set.Union</code>. So the binded expression must be a set, a filter is not good enough. In the <code>show</code> at beginning of the proof, the situation is different. Here we are indeed fighting the rigidity of <code>rw</code>, which really work on the syntactic level: a transparent instance of a defeq quantity is not good enough. This problem is almost hidden in this change because I changed almost all definition and statements to use this <code>has_mem</code> instance, so almost everything is syntactically what we want. This is why it was crucial to make the replacement everywhere at once. The only exceptions arise in statements like the one we pointed out where we really want to talk about the sets of a filter, and not talk about something belonging to these sets.</p>
+
+<a name="161088217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088217">Patrick Massot (Mar 18 2019 at 19:25)</a>:</h4>
+<p>Does it make sense?</p>
+
+<a name="161088339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088339">Johan Commelin (Mar 18 2019 at 19:27)</a>:</h4>
+<p>I think it makes sense. I find that <code>erw</code> can often succeed when <code>rw</code> fails.</p>
+
+<a name="161088351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088351">Johan Commelin (Mar 18 2019 at 19:27)</a>:</h4>
+<p>Also, would a coercion help to get rid of the <code>.sets</code> in the statement?</p>
+
+<a name="161088359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088359">Patrick Massot (Mar 18 2019 at 19:27)</a>:</h4>
+<p>I never used <code>erw</code></p>
+
+<a name="161088439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088439">Johan Commelin (Mar 18 2019 at 19:28)</a>:</h4>
+<p>Because statements like these will introduce <code>.sets</code> and then it doesn't compose nicely with all the statements where you did remove the <code>.sets</code></p>
+
+<a name="161088451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088451">Patrick Massot (Mar 18 2019 at 19:28)</a>:</h4>
+<p>Coercions rarely help in delicate situations. We are already happy when they work in situations that look straightforward</p>
+
+<a name="161088461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088461">Johan Commelin (Mar 18 2019 at 19:28)</a>:</h4>
+<p>Hmm... never mind. A coe wouldn't solve that.</p>
+
+<a name="161088500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Transparent%20has_mem%20instance/near/161088500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85602Transparenthasmeminstance.html#161088500">Johan Commelin (Mar 18 2019 at 19:29)</a>:</h4>
+<p>Ok... my confusion is cleared up. Thanks!</p>
+
 
 {% endraw %}

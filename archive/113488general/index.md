@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (8 messages, latest: Mar 18 2019 at 18:44)
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (17 messages, latest: Mar 18 2019 at 19:29)
 
 * [Logipedia](09519Logipedia.html) (4 messages, latest: Mar 18 2019 at 12:17)
 
