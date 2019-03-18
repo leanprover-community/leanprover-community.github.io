@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (5 messages, latest: Mar 18 2019 at 04:38)
+* [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (7 messages, latest: Mar 18 2019 at 05:22)
 
 * [noob question(s)](52075noobquestions.html) (209 messages, latest: Mar 18 2019 at 01:48)
 
