@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (17 messages, latest: Mar 18 2019 at 19:29)
+* [Logipedia](09519Logipedia.html) (5 messages, latest: Mar 18 2019 at 20:13)
 
-* [Logipedia](09519Logipedia.html) (4 messages, latest: Mar 18 2019 at 12:17)
+* [Transparent has_mem instance](85602Transparenthasmeminstance.html) (17 messages, latest: Mar 18 2019 at 19:29)
 
 * [simp lemma?](38661simplemma.html) (9 messages, latest: Mar 18 2019 at 02:09)
 
