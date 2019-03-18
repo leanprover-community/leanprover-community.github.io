@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (209 messages, latest: Mar 18 2019 at 01:48)
+
 * [proof of P → Q → P](43329proofofPQP.html) (22 messages, latest: Mar 16 2019 at 23:47)
 
 * [coe additive monoid hom](61036coeadditivemonoidhom.html) (14 messages, latest: Mar 16 2019 at 12:26)
@@ -59,8 +61,6 @@ permalink: archive/113489newmembers/index.html
 * [test if the first character of a string is an underscore?](93175testifthefirstcharacterofastringisanunderscore.html) (21 messages, latest: Mar 05 2019 at 23:34)
 
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (38 messages, latest: Mar 05 2019 at 19:41)
-
-* [noob question(s)](52075noobquestions.html) (208 messages, latest: Mar 05 2019 at 18:58)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
 
