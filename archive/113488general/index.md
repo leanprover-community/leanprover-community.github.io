@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp messes up names](75715simpmessesupnames.html) (7 messages, latest: Mar 18 2019 at 22:53)
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (18 messages, latest: Mar 18 2019 at 23:59)
+
+* [simp messes up names](75715simpmessesupnames.html) (11 messages, latest: Mar 18 2019 at 23:45)
 
 * [is_group_hom field name](81265isgrouphomfieldname.html) (2 messages, latest: Mar 18 2019 at 21:22)
 

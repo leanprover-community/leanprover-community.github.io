@@ -1,0 +1,108 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/81401setupupdatemathlibsh.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html">setup-update-mathlib.sh</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161106953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161106953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161106953">Scott Morrison (Mar 18 2019 at 23:42)</a>:</h4>
+<p>Is there any documentation for <code>setup-update-mathlib.sh</code>? I ran it, but I'm not quite sure what to expect when I then run <code>update-mathlib</code>. Reading the code, I can see that it is for running in projects that have a dependency on <code>mathlib</code>. However, when I ran <code>update-mathlib</code> in a project with <code>leanpkg.toml</code> file:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;ITP-2019&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;nightly-2019-01-13&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, branch = &quot;master&quot;, rev = &quot;f46f0a6719da61ff7daaa24b5cc1ec02bfb88ff3&quot;}
+</pre></div>
+
+
+<p>I just get the output </p>
+<div class="codehilite"><pre><span></span>$ update-mathlib
+Querying GitHub...
+Error: no nightly archive found
+</pre></div>
+
+
+<p>Presumably I'm doing something wrong, and my <code>leanpkg.toml</code> is not "how it's meant to be".</p>
+
+<a name="161106983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161106983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161106983">Scott Morrison (Mar 18 2019 at 23:42)</a>:</h4>
+<p>Should I change the <code>lean_version = ...</code> line? Should I remove the <code>branch = "master"</code> key in the dependencies section?</p>
+
+<a name="161107091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107091">Simon Hudon (Mar 18 2019 at 23:44)</a>:</h4>
+<p>select 3.4.2 as your lean version and do <code>leanpkg upgrade</code> first</p>
+
+<a name="161107106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107106">Scott Morrison (Mar 18 2019 at 23:44)</a>:</h4>
+<p>Should I remove the <code>branch="master"</code> key then?</p>
+
+<a name="161107199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107199">Simon Hudon (Mar 18 2019 at 23:46)</a>:</h4>
+<p>Yes, I believe so</p>
+
+<a name="161107233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107233">Mario Carneiro (Mar 18 2019 at 23:47)</a>:</h4>
+<p>I want to second this request for documentation. I don't like running scripts when I don't understand what they do, especially if they change my configuration data</p>
+
+<a name="161107313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107313">Mario Carneiro (Mar 18 2019 at 23:48)</a>:</h4>
+<p>Also I'm not talking about how to use the script, that's usually easy. I'm talking about what it is attempting to do specifically, what it looks for, and so on, so I can predict when and why it will fail</p>
+
+<a name="161107543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107543">Scott Morrison (Mar 18 2019 at 23:53)</a>:</h4>
+<p>Also --- is there hope to have <code>leanpkg upgrade</code> call <code>update-mathlib</code>?</p>
+
+<a name="161107618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107618">Simon Hudon (Mar 18 2019 at 23:54)</a>:</h4>
+<p>I'll get on the documentation. As for <code>leanpkg</code>, it's in the work. I was under the impression it wasn't wanted so I didn't put a high priority on it. I'll get back to it</p>
+
+<a name="161107669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107669">Scott Morrison (Mar 18 2019 at 23:55)</a>:</h4>
+<p>Thanks, <span class="user-mention" data-user-id="110026">@Simon Hudon</span>. I really appreciate this infrastructure work, and don't want to load too much stuff on your plate -- I could try writing some docs too (sometimes it's helpful if someone who doesn't actually understand stuff writes them :-)</p>
+
+<a name="161107730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107730">Scott Morrison (Mar 18 2019 at 23:56)</a>:</h4>
+<p>The other question about infrastructure I had is --- what are the prospects for downloading cached olean files when switching branches inside mathlib?</p>
+
+<a name="161107740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107740">Scott Morrison (Mar 18 2019 at 23:56)</a>:</h4>
+<p>This is still the killer for me.</p>
+
+<a name="161107751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107751">Kevin Buzzard (Mar 18 2019 at 23:56)</a>:</h4>
+<p>Me too, but I couldn't really envisage a solution.</p>
+
+<a name="161107755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107755">Kevin Buzzard (Mar 18 2019 at 23:56)</a>:</h4>
+<p>if I'm editing algebra.group then I know I'm in for a certain amount of pain anyway</p>
+
+<a name="161107861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107861">Scott Morrison (Mar 18 2019 at 23:58)</a>:</h4>
+<p>From memory the two proposed solutions had just been:<br>
+1) every time we switch branches, stash away all the olean files, and pull out the stashed olean files for the other branch (if any have previously been stashed).<br>
+2) do everything mediated via <a href="https://github.com/mozilla/sccache" target="_blank" title="https://github.com/mozilla/sccache">sccache</a>.</p>
+
+<a name="161107880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107880">Simon Hudon (Mar 18 2019 at 23:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I would really appreciate your perspective on that. If you have time to do it, I'll fix any oversight or mistake</p>
+
+<a name="161107886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107886">Scott Morrison (Mar 18 2019 at 23:59)</a>:</h4>
+<p>For 1, I think the problem was just that timestamps weren't working, and the deployed oleans weren't being used??</p>
+
+<a name="161107895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161107895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161107895">Scott Morrison (Mar 18 2019 at 23:59)</a>:</h4>
+<p>For 2, I never understood enough to know what the obstacles were.</p>
+
+
+{% endraw %}
