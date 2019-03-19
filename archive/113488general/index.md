@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cerw](13234cerw.html) (29 messages, latest: Mar 19 2019 at 01:20)
+
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (23 messages, latest: Mar 19 2019 at 00:04)
 
 * [simp messes up names](75715simpmessesupnames.html) (11 messages, latest: Mar 18 2019 at 23:45)
@@ -859,8 +861,6 @@ permalink: archive/113488general/index.html
 * [tfae bug](14623tfaebug.html) (56 messages, latest: Nov 19 2018 at 21:52)
 
 * [poor man's hint database](85855poormanshintdatabase.html) (14 messages, latest: Nov 19 2018 at 09:22)
-
-* [cerw](13234cerw.html) (19 messages, latest: Nov 19 2018 at 08:24)
 
 * [online leanprover](19268onlineleanprover.html) (39 messages, latest: Nov 18 2018 at 19:48)
 
