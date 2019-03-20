@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (39 messages, latest: Mar 20 2019 at 20:14)
+* [calculate with mod](09163calculatewithmod.html) (6 messages, latest: Mar 20 2019 at 21:42)
+
+* [Lean in the wild](43625Leaninthewild.html) (43 messages, latest: Mar 20 2019 at 21:25)
 
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (18 messages, latest: Mar 20 2019 at 20:09)
 
 * [elan is broken?](09085elanisbroken.html) (37 messages, latest: Mar 20 2019 at 18:29)
-
-* [calculate with mod](09163calculatewithmod.html) (4 messages, latest: Mar 20 2019 at 15:25)
 
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (1 message, latest: Mar 20 2019 at 12:12)
 
