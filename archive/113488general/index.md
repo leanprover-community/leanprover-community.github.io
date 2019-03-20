@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tauto weaker than expected](48042tautoweakerthanexpected.html) (16 messages, latest: Mar 20 2019 at 19:58)
+* [Lean in the wild](43625Leaninthewild.html) (39 messages, latest: Mar 20 2019 at 20:14)
+
+* [tauto weaker than expected](48042tautoweakerthanexpected.html) (18 messages, latest: Mar 20 2019 at 20:09)
 
 * [elan is broken?](09085elanisbroken.html) (37 messages, latest: Mar 20 2019 at 18:29)
 
@@ -319,8 +321,6 @@ permalink: archive/113488general/index.html
 * [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
-
-* [Lean in the wild](43625Leaninthewild.html) (38 messages, latest: Feb 12 2019 at 13:28)
 
 * [lt_of_le_of_ne{,'}](56278ltofleofne.html) (15 messages, latest: Feb 12 2019 at 13:16)
 
