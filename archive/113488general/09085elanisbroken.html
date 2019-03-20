@@ -1,0 +1,80 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/09085elanisbroken.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html">elan is broken?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161229444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20is%20broken%3F/near/161229444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html#161229444">Scott Morrison (Mar 20 2019 at 09:38)</a>:</h4>
+<p>Trying to fix the elan installation in the VS Code extension, I've discovered that elan itself is currently not working. Lo:</p>
+<div class="codehilite"><pre><span></span>$ curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh
+info: downloading installer
+
+Welcome to Lean!
+
+This will download and install Elan, a tool for managing different Lean
+versions used in packages you create or download. It will also install a
+default version of Lean and its package manager, leanpkg, for editing files not
+belonging to any package.
+
+It will add the leanpkg, lean, and elan commands to Elan&#39;s bin directory,
+located at:
+
+  /Users/scott/.elan/bin
+
+This path will then be added to your PATH environment variable by modifying the
+profile files located at:
+
+  /Users/scott/.profile
+  /Users/scott/.bash_profile
+
+You can uninstall at any time with elan self uninstall and these changes will
+be reverted.
+
+Current installation options:
+
+     default toolchain: stable
+  modify PATH variable: yes
+
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+
+
+info: syncing channel updates for &#39;stable&#39;
+info: latest update on stable, lean version v3.4.2&amp;quot;,&amp;quot;user_id&amp;quot;:null}}
+info: downloading component &#39;lean&#39;
+Error(Download(HttpStatus(404)), State { next_error: None, backtrace: None })
+error: could not download nonexistent lean version `stable`
+info: caused by: could not download file from &#39;https://github.com/leanprover/lean/releases/tag/v3.4.2&amp;quot;,&amp;quot;user_id&amp;quot;:null%7D%7D&#39; to &#39;/Users/scott/.elan/tmp/5dut6cfxwij0ymb0_file&#39;
+info: caused by: http request returned an unsuccessful status code: 404
+</pre></div>
+
+
+<p>Any ideas, <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>?</p>
+
+<a name="161229461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20is%20broken%3F/near/161229461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html#161229461">Scott Morrison (Mar 20 2019 at 09:39)</a>:</h4>
+<p>Could anyone else (on OSX or otherwise) let me know if they are seeing similar behaviour?</p>
+
+<a name="161230322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20is%20broken%3F/near/161230322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html#161230322">Sebastian Ullrich (Mar 20 2019 at 09:51)</a>:</h4>
+<p>Hmm, parsing Github HTML to retrieve the latest release might not be the most stable solution in retrospect</p>
+
+<a name="161230760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20is%20broken%3F/near/161230760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html#161230760">Keeley Hoek (Mar 20 2019 at 09:58)</a>:</h4>
+<p>I have a 2-line fix which uses the github api pull requested :)</p>
+
+<a name="161230772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20is%20broken%3F/near/161230772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09085elanisbroken.html#161230772">Keeley Hoek (Mar 20 2019 at 09:59)</a>:</h4>
+<p>(Who needs a JSON parser anyway ;) )</p>
+
+
+{% endraw %}
