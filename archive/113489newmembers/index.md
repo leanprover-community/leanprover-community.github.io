@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Getting started ?](18953Gettingstarted.html) (3 messages, latest: Mar 20 2019 at 19:54)
+
 * [Cast weirdness](76608Castweirdness.html) (7 messages, latest: Mar 20 2019 at 11:52)
 
 * [How to install Lean](30889HowtoinstallLean.html) (62 messages, latest: Mar 20 2019 at 09:09)

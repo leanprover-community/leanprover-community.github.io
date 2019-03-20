@@ -92,5 +92,41 @@ permalink: archive/113488general/48042tautoweakerthanexpected.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161277815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161277815">Simon Hudon (Mar 20 2019 at 18:33)</a>:</h4>
 <p><code>tauto</code> is under-develop as far as constructive reasoning is concerned. Maybe I should remove the option</p>
 
+<a name="161283192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161283192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161283192">Kevin Buzzard (Mar 20 2019 at 19:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">tidy</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">big_bertha</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">finish</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">misc_tauto_a</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tidy</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">misc_tauto_a</span>
+<span class="c1">-- all of them</span>
+</pre></div>
+
+
+<p>I don't know if axioms are an issue for Neil.</p>
+
+<a name="161283395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161283395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161283395">Simon Hudon (Mar 20 2019 at 19:36)</a>:</h4>
+<p>I understand. What I'm saying is that the proof procedure is different if you don't have access to excluded middle. When you do have access to it, <code>tauto</code> applies it more than is necessary</p>
+
+<a name="161283691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161283691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161283691">Jesse Michael Han (Mar 20 2019 at 19:40)</a>:</h4>
+<p><code>finish</code> invokes classical logic during its preprocessing step, but as Kevin observed, after enough splitting <code>cc</code> will close the goal (and <code>tidy</code> automates the <code>split</code>ting and <code>intro</code>-ing):</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">tidy</span><span class="o">]</span><span class="n">meta</span> <span class="n">def</span> <span class="n">not_as_big_bertha</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">cc</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">misc_tauto_a</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tidy</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">misc_tauto_a</span>
+<span class="c1">-- propext</span>
+</pre></div>
+
+<a name="161285283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161285283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161285283">Simon Hudon (Mar 20 2019 at 19:58)</a>:</h4>
+<p>is it fast?</p>
+
 
 {% endraw %}
