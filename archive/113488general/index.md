@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [calculate with mod](09163calculatewithmod.html) (4 messages, latest: Mar 20 2019 at 15:25)
+
 * [elan is broken?](09085elanisbroken.html) (35 messages, latest: Mar 20 2019 at 14:52)
 
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (4 messages, latest: Mar 20 2019 at 13:30)
