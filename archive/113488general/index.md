@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tauto weaker than expected](48042tautoweakerthanexpected.html) (4 messages, latest: Mar 20 2019 at 13:30)
+* [elan is broken?](09085elanisbroken.html) (35 messages, latest: Mar 20 2019 at 14:52)
 
-* [elan is broken?](09085elanisbroken.html) (23 messages, latest: Mar 20 2019 at 12:14)
+* [tauto weaker than expected](48042tautoweakerthanexpected.html) (4 messages, latest: Mar 20 2019 at 13:30)
 
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (1 message, latest: Mar 20 2019 at 12:12)
 
