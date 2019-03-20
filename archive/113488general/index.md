@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [calculate with mod](09163calculatewithmod.html) (6 messages, latest: Mar 20 2019 at 21:42)
+* [equiv_of_functor](65727equivoffunctor.html) (1 message, latest: Mar 20 2019 at 22:51)
 
-* [Lean in the wild](43625Leaninthewild.html) (43 messages, latest: Mar 20 2019 at 21:25)
+* [Lean in the wild](43625Leaninthewild.html) (48 messages, latest: Mar 20 2019 at 22:38)
 
-* [tauto weaker than expected](48042tautoweakerthanexpected.html) (18 messages, latest: Mar 20 2019 at 20:09)
+* [tauto weaker than expected](48042tautoweakerthanexpected.html) (20 messages, latest: Mar 20 2019 at 22:34)
+
+* [calculate with mod](09163calculatewithmod.html) (8 messages, latest: Mar 20 2019 at 22:04)
 
 * [elan is broken?](09085elanisbroken.html) (37 messages, latest: Mar 20 2019 at 18:29)
 
