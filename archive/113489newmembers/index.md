@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to install Lean](30889HowtoinstallLean.html) (42 messages, latest: Mar 20 2019 at 07:58)
+
 * [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (11 messages, latest: Mar 19 2019 at 08:25)
 
 * [noob question(s)](52075noobquestions.html) (220 messages, latest: Mar 18 2019 at 16:21)
@@ -277,8 +279,6 @@ permalink: archive/113489newmembers/index.html
 * [Multiple uses of existsi](74219Multipleusesofexistsi.html) (7 messages, latest: Nov 21 2018 at 00:21)
 
 * [finset semilattice_sup_bot](47161finsetsemilatticesupbot.html) (3 messages, latest: Nov 20 2018 at 17:40)
-
-* [How to install Lean](30889HowtoinstallLean.html) (2 messages, latest: Nov 20 2018 at 03:49)
 
 * [Strong induction in lean](28866Stronginductioninlean.html) (5 messages, latest: Nov 19 2018 at 18:45)
 
