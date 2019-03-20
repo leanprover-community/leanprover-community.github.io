@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [elan is broken?](09085elanisbroken.html) (16 messages, latest: Mar 20 2019 at 11:56)
+* [elan is broken?](09085elanisbroken.html) (23 messages, latest: Mar 20 2019 at 12:14)
+
+* [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (1 message, latest: Mar 20 2019 at 12:12)
 
 * [How to install Lean](30889HowtoinstallLean.html) (3 messages, latest: Mar 20 2019 at 09:09)
 
