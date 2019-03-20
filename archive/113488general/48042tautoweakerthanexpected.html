@@ -1,0 +1,53 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/48042tautoweakerthanexpected.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html">tauto weaker than expected</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161245981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161245981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161245981">Neil Strickland (Mar 20 2019 at 13:19)</a>:</h4>
+<p>I was surprised to find that <code>tauto</code> could not manage the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">misc_tauto_a</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">h_p_to_pq</span> <span class="n">hp</span><span class="o">,(</span><span class="n">h_p_to_pq</span><span class="bp">.</span><span class="n">mp</span> <span class="n">hp</span><span class="o">)</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">h_p_to_q</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">hp</span><span class="o">,</span><span class="bp">⟨</span><span class="n">hp</span><span class="o">,</span><span class="n">h_p_to_q</span> <span class="n">hp</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">hpq</span><span class="o">,</span><span class="n">hpq</span><span class="bp">.</span><span class="n">left</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+
+<p>Is there some straightforward rule about the kind of things that <code>tauto</code> can or cannot do?</p>
+
+<a name="161246472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161246472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161246472">Kevin Buzzard (Mar 20 2019 at 13:25)</a>:</h4>
+<p><code>cc</code>, <code>finish</code> and <code>simp</code> can't do it either (unless I messed up)</p>
+
+<a name="161246763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161246763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161246763">Kevin Buzzard (Mar 20 2019 at 13:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">lemma</span> <span class="n">misc_tauto_a</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span><span class="bp">;</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">q</span><span class="o">),</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">tauto</span><span class="o">},</span>
+  <span class="c">/-</span><span class="cm"> one goal lives on!</span>
+<span class="cm">  p q : Prop,</span>
+<span class="cm">  h : p,</span>
+<span class="cm">  h_1 : ¬q</span>
+<span class="cm">  ⊢ p ↔ p ∧ q ↔ p → q</span>
+<span class="cm">  -/</span>
+  <span class="n">cc</span><span class="o">,</span> <span class="c1">-- does all of them</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161246842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tauto%20weaker%20than%20expected/near/161246842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48042tautoweakerthanexpected.html#161246842">Kevin Buzzard (Mar 20 2019 at 13:30)</a>:</h4>
+<p>Once you split into cases, both <code>cc</code> and <code>finish</code> do everything.</p>
+
+
+{% endraw %}
