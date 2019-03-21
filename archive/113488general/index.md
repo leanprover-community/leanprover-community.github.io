@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (50 messages, latest: Mar 21 2019 at 20:15)
+
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
 
 * [elan is broken?](09085elanisbroken.html) (38 messages, latest: Mar 21 2019 at 12:22)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [a tactic to induce a crash?](12742atactictoinduceacrash.html) (13 messages, latest: Mar 21 2019 at 07:21)
 
 * [equiv_of_functor](65727equivoffunctor.html) (5 messages, latest: Mar 21 2019 at 00:46)
-
-* [Lean in the wild](43625Leaninthewild.html) (49 messages, latest: Mar 20 2019 at 23:24)
 
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (20 messages, latest: Mar 20 2019 at 22:34)
 
