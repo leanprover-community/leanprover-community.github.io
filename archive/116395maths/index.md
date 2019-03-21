@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (1 message, latest: Mar 21 2019 at 09:48)
+
 * [algebra structure on `lc`](14028algebrastructureonlc.html) (1 message, latest: Mar 21 2019 at 07:29)
 
 * [bounds](43084bounds.html) (43 messages, latest: Mar 17 2019 at 17:11)
