@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cerw](13234cerw.html) (58 messages, latest: Mar 21 2019 at 11:53)
+
 * [finsetology](24852finsetology.html) (2 messages, latest: Mar 21 2019 at 10:41)
 
 * [a tactic to induce a crash?](12742atactictoinduceacrash.html) (13 messages, latest: Mar 21 2019 at 07:21)
@@ -35,8 +37,6 @@ permalink: archive/113488general/index.html
 * [preorder.comap](07618preordercomap.html) (4 messages, latest: Mar 20 2019 at 00:31)
 
 * [is_group_hom field name](81265isgrouphomfieldname.html) (3 messages, latest: Mar 19 2019 at 14:20)
-
-* [cerw](13234cerw.html) (38 messages, latest: Mar 19 2019 at 10:34)
 
 * [linux scheduler](40080linuxscheduler.html) (9 messages, latest: Mar 19 2019 at 09:31)
 
