@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to install Lean](30889HowtoinstallLean.html) (63 messages, latest: Mar 21 2019 at 05:30)
+* [How to install Lean](30889HowtoinstallLean.html) (64 messages, latest: Mar 21 2019 at 06:44)
 
 * [Getting started ?](18953Gettingstarted.html) (6 messages, latest: Mar 20 2019 at 20:05)
 
