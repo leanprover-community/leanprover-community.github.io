@@ -1,0 +1,76 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/12742atactictoinduceacrash.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html">a tactic to induce a crash?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161317597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317597">Scott Morrison (Mar 21 2019 at 05:17)</a>:</h4>
+<p>I recently wanted to induce crashes in the Lean server, to test interactions with VS Code. I wrote the following tactic that causes the server the crash. If anyone else would find it useful:</p>
+<div class="codehilite"><pre><span></span>@[user_attribute]
+meta def sigbus_attribute : user_attribute unit unit := {
+  name := `sigbus,
+  descr := &quot;An attribute to help generate SIGBUS crashes, for debugging IDE interactions.&quot;,
+  cache_cfg :=
+   { mk_cache := λ ls, sigbus_attribute.get_cache,
+     dependencies := [] }
+}
+
+meta def sigbus : tactic unit := sigbus_attribute.get_cache
+
+-- run_cmd sigbus
+</pre></div>
+
+<a name="161317655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317655">Scott Morrison (Mar 21 2019 at 05:18)</a>:</h4>
+<p>(Actually --- does mathlib even want this?)</p>
+
+<a name="161317781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317781">Mario Carneiro (Mar 21 2019 at 05:21)</a>:</h4>
+<p>what?</p>
+
+<a name="161317783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317783">Mario Carneiro (Mar 21 2019 at 05:21)</a>:</h4>
+<p>is this a bug in lean, or a documented API?</p>
+
+<a name="161317829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317829">Mario Carneiro (Mar 21 2019 at 05:22)</a>:</h4>
+<p>I don't see what's supposed to cause the crash</p>
+
+<a name="161317846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317846">Scott Morrison (Mar 21 2019 at 05:22)</a>:</h4>
+<p>Sorry. :-) Maybe this is dumb. It's an "inevitable" bug --- we call the attribute cache, which calls itself ad infinitum, causing a crash.</p>
+
+<a name="161317862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317862">Mario Carneiro (Mar 21 2019 at 05:23)</a>:</h4>
+<p>why would that cause a crash? That sounds like a stack overflow or something</p>
+
+<a name="161317863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317863">Scott Morrison (Mar 21 2019 at 05:23)</a>:</h4>
+<p>It was just the first reproducible crash I could think of.</p>
+
+<a name="161317868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317868">Mario Carneiro (Mar 21 2019 at 05:23)</a>:</h4>
+<p>and it should certainly not take the server down</p>
+
+<a name="161317921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317921">Mario Carneiro (Mar 21 2019 at 05:24)</a>:</h4>
+<p>it's a bit worrisome that lean has a plethora of bug conditions ready for exploitation</p>
+
+<a name="161317924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317924">Scott Morrison (Mar 21 2019 at 05:24)</a>:</h4>
+<p>Ok. maybe this is just a random bug that will never be fixed, then. I found it useful while fixing elan installation from VS Code today. :-)</p>
+
+<a name="161317960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20tactic%20to%20induce%20a%20crash%3F/near/161317960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12742atactictoinduceacrash.html#161317960">Scott Morrison (Mar 21 2019 at 05:25)</a>:</h4>
+<p>There are certainly some parser related crashes still around, although I haven't found a reproducible one in a while. Something in structure parser is wonky, I think.</p>
+
+
+{% endraw %}

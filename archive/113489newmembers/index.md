@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to install Lean](30889HowtoinstallLean.html) (63 messages, latest: Mar 21 2019 at 05:30)
+
 * [Getting started ?](18953Gettingstarted.html) (6 messages, latest: Mar 20 2019 at 20:05)
 
 * [Cast weirdness](76608Castweirdness.html) (7 messages, latest: Mar 20 2019 at 11:52)
-
-* [How to install Lean](30889HowtoinstallLean.html) (62 messages, latest: Mar 20 2019 at 09:09)
 
 * [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (11 messages, latest: Mar 19 2019 at 08:25)
 
