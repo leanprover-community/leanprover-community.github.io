@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [equiv_of_functor](65727equivoffunctor.html) (4 messages, latest: Mar 20 2019 at 23:58)
+* [equiv_of_functor](65727equivoffunctor.html) (5 messages, latest: Mar 21 2019 at 00:46)
 
 * [Lean in the wild](43625Leaninthewild.html) (49 messages, latest: Mar 20 2019 at 23:24)
 
