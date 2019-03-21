@@ -36,5 +36,24 @@ permalink: archive/113488general/65727equivoffunctor.html
 
 <p>and is <code>T.equiv</code> in mathlib in some form? Any way of making alpha into a groupoid such that f becomes a functor makes f send isomorphisms to equivs. Or something.</p>
 
+<a name="161302938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_of_functor/near/161302938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65727equivoffunctor.html#161302938">Kevin Buzzard (Mar 20 2019 at 23:56)</a>:</h4>
+<p>Oh I've just found another one, in <code>localization.lean</code></p>
+
+<a name="161303009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_of_functor/near/161303009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65727equivoffunctor.html#161303009">Kevin Buzzard (Mar 20 2019 at 23:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">map</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">fraction_ring</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">fraction_ring</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="n">localization</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mem_non_zero_divisors_iff_ne_zero</span><span class="o">,</span> <span class="err">←</span> <span class="n">map_zero</span> <span class="n">f</span><span class="o">,</span> <span class="n">ne</span><span class="bp">.</span><span class="n">def</span><span class="o">,</span> <span class="n">hf</span><span class="bp">.</span><span class="n">eq_iff</span><span class="o">]</span><span class="bp">;</span>
+    <span class="n">exact</span> <span class="n">mem_non_zero_divisors_iff_ne_zero</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>An injective ring map <code>f : A -&gt; B</code> gives us a map <code>fraction_ring A → fraction_ring B</code>. I need that if <code>f</code> is an equiv then so is <code>map f _</code>. The natural way of proving it is to prove <code>map.id</code> and <code>map.comp</code></p>
+
+<a name="161303015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_of_functor/near/161303015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65727equivoffunctor.html#161303015">Kevin Buzzard (Mar 20 2019 at 23:58)</a>:</h4>
+<p>and then invoke some general fact about equivs</p>
+
 
 {% endraw %}

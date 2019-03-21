@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [equiv_of_functor](65727equivoffunctor.html) (1 message, latest: Mar 20 2019 at 22:51)
+* [equiv_of_functor](65727equivoffunctor.html) (4 messages, latest: Mar 20 2019 at 23:58)
 
-* [Lean in the wild](43625Leaninthewild.html) (48 messages, latest: Mar 20 2019 at 22:38)
+* [Lean in the wild](43625Leaninthewild.html) (49 messages, latest: Mar 20 2019 at 23:24)
 
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (20 messages, latest: Mar 20 2019 at 22:34)
 
