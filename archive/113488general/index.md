@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
+
+* [elan is broken?](09085elanisbroken.html) (38 messages, latest: Mar 21 2019 at 12:22)
+
 * [cerw](13234cerw.html) (58 messages, latest: Mar 21 2019 at 11:53)
 
 * [finsetology](24852finsetology.html) (2 messages, latest: Mar 21 2019 at 10:41)
@@ -23,10 +27,6 @@ permalink: archive/113488general/index.html
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (20 messages, latest: Mar 20 2019 at 22:34)
 
 * [calculate with mod](09163calculatewithmod.html) (8 messages, latest: Mar 20 2019 at 22:04)
-
-* [elan is broken?](09085elanisbroken.html) (37 messages, latest: Mar 20 2019 at 18:29)
-
-* [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (1 message, latest: Mar 20 2019 at 12:12)
 
 * [How to install Lean](30889HowtoinstallLean.html) (3 messages, latest: Mar 20 2019 at 09:09)
 

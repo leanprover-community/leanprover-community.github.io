@@ -111,5 +111,89 @@ permalink: archive/144837PRreviews/48571789extensionsofequiv.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161338247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161338247">Mario Carneiro (Mar 21 2019 at 11:59)</a>:</h4>
 <p>old style structures are appropriate for "pushout" type constructions where you are gluing along certain fields of the structure</p>
 
+<a name="161338541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161338541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161338541">Mario Carneiro (Mar 21 2019 at 12:03)</a>:</h4>
+<p>I'm unclear on why we need <code>add_equiv</code> and such, do you have an example use or is this just filling out the library?</p>
+
+<a name="161338642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161338642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161338642">Mario Carneiro (Mar 21 2019 at 12:05)</a>:</h4>
+<p>ideally I would like to just stick to the "mathematically relevant" equivs like <code>group_equiv</code> and <code>ring_equiv</code></p>
+
+<a name="161340732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340732">Kevin Buzzard (Mar 21 2019 at 12:36)</a>:</h4>
+<p>The history of the PR was that I wanted <code>group_equiv</code> for the perfectoid project, so I wrote <code>group_equiv</code> and <code>monoid_equiv</code>, and then Chris pointed out that <code>monoid_equiv</code> was suboptimal in the sense that demanding that the bijection be a morphism of monoids was too strong; one only needs to demand that it's a morphism of has_muls, and then because it's a bijection (in fact one only uses surjectivity) one can deduce that it sends 1 to 1, which is part of the definition of a morphism of monoids. Chris then suggested using mul_equiv instead, and just defining monoid_equiv to be mul_equiv.</p>
+
+<a name="161340797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340797">Kevin Buzzard (Mar 21 2019 at 12:37)</a>:</h4>
+<p>I myself don't care whether mul_equiv is there or not; I need group_equiv in practice so I think there is an argument which says it should be there. I am happy to be instructed on this matter.</p>
+
+<a name="161340888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340888">Mario Carneiro (Mar 21 2019 at 12:38)</a>:</h4>
+<p>Are you saying that in <code>monoid_equiv</code> you don't need that <code>f 1 = 1</code>?</p>
+
+<a name="161340906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340906">Kevin Buzzard (Mar 21 2019 at 12:38)</a>:</h4>
+<p>Yes</p>
+
+<a name="161340921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340921">Mario Carneiro (Mar 21 2019 at 12:38)</a>:</h4>
+<p>how does that reasoning go?</p>
+
+<a name="161340925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340925">Kevin Buzzard (Mar 21 2019 at 12:38)</a>:</h4>
+<p>It follows from bijectivity and the fact that multiplication is preserved</p>
+
+<a name="161340936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340936">Kevin Buzzard (Mar 21 2019 at 12:38)</a>:</h4>
+<p>The proof is in the PR ;-)</p>
+
+<a name="161340961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340961">Kevin Buzzard (Mar 21 2019 at 12:39)</a>:</h4>
+<p>1 is the unique left and right identity in a monoid</p>
+
+<a name="161340964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340964">Mario Carneiro (Mar 21 2019 at 12:39)</a>:</h4>
+<p>oh, two-sided identities are unique</p>
+
+<a name="161340968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161340968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161340968">Kevin Buzzard (Mar 21 2019 at 12:39)</a>:</h4>
+<p>right</p>
+
+<a name="161341033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341033">Kevin Buzzard (Mar 21 2019 at 12:40)</a>:</h4>
+<p>So that made Chris more inclined to make mul_equiv.</p>
+
+<a name="161341046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341046">Mario Carneiro (Mar 21 2019 at 12:40)</a>:</h4>
+<p>So you can define <code>monoid_equiv</code> as just preserving mul, and <code>group_equiv</code> extends <code>monoid_equiv</code></p>
+
+<a name="161341053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341053">Kevin Buzzard (Mar 21 2019 at 12:40)</a>:</h4>
+<p>right</p>
+
+<a name="161341064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341064">Kevin Buzzard (Mar 21 2019 at 12:40)</a>:</h4>
+<p>so this is cute -- I think that's what Chris liked</p>
+
+<a name="161341069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341069">Kevin Buzzard (Mar 21 2019 at 12:40)</a>:</h4>
+<p>In fact this was another issue</p>
+
+<a name="161341103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341103">Kevin Buzzard (Mar 21 2019 at 12:41)</a>:</h4>
+<p>I didn't know whether to define group_equiv to extend monoid_equiv or just to <em>equal</em> monoid_equiv</p>
+
+<a name="161341123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341123">Mario Carneiro (Mar 21 2019 at 12:41)</a>:</h4>
+<p>I think <code>vector_space</code> is an extension</p>
+
+<a name="161341124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341124">Kevin Buzzard (Mar 21 2019 at 12:41)</a>:</h4>
+<p>IIRC the proofs of things like symmetry were different depending on the two choices</p>
+
+<a name="161341148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23789%20extensions%20of%20equiv/near/161341148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/48571789extensionsofequiv.html#161341148">Mario Carneiro (Mar 21 2019 at 12:41)</a>:</h4>
+<p>and that's the same kind of thing</p>
+
 
 {% endraw %}
