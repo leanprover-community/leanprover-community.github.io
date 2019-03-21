@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to install Lean](30889HowtoinstallLean.html) (67 messages, latest: Mar 21 2019 at 14:35)
+* [How to install Lean](30889HowtoinstallLean.html) (68 messages, latest: Mar 21 2019 at 16:32)
+
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (60 messages, latest: Mar 21 2019 at 16:10)
 
 * [Getting started ?](18953Gettingstarted.html) (6 messages, latest: Mar 20 2019 at 20:05)
 
@@ -47,8 +49,6 @@ permalink: archive/113489newmembers/index.html
 * [Using functions as proofs](67501Usingfunctionsasproofs.html) (10 messages, latest: Mar 11 2019 at 23:04)
 
 * [Easy way to lift the entire structure?](47470Easywaytolifttheentirestructure.html) (2 messages, latest: Mar 11 2019 at 20:25)
-
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (59 messages, latest: Mar 11 2019 at 17:34)
 
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
 
