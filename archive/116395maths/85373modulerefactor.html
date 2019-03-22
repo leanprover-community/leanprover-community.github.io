@@ -49,5 +49,61 @@ permalink: archive/116395maths/85373modulerefactor.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161418040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161418040">Kevin Buzzard (Mar 22 2019 at 03:55)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> what is your opinion?</p>
 
+<a name="161428132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428132">Sebastien Gouezel (Mar 22 2019 at 08:07)</a>:</h4>
+<p>I remember someone (Mario or Kenny?) saying that unbundled stuff should not be classes, but I am probably wrong as <code>is_group_hom</code> is a class currently.</p>
+
+<a name="161428213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428213">Mario Carneiro (Mar 22 2019 at 08:09)</a>:</h4>
+<p>the fact that <code>is_group_hom</code> is a class currently entails some things like having to write <code>simp [is_group_hom.map_add f]</code> in order to work with the rewrite rules, but my recommended solution is actually to just forget about <code>is_group_hom</code> entirely rather than make it not a class</p>
+
+<a name="161428281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428281">Johan Commelin (Mar 22 2019 at 08:10)</a>:</h4>
+<p>How am I supposed to do mathematics <em>and</em> forget about <code>is_group_hom</code>? <span aria-label="grimacing" class="emoji emoji-1f62c" role="img" title="grimacing">:grimacing:</span></p>
+
+<a name="161428335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428335">Mario Carneiro (Mar 22 2019 at 08:11)</a>:</h4>
+<p>use <code>group_hom</code> instead</p>
+
+<a name="161428586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428586">Johan Commelin (Mar 22 2019 at 08:16)</a>:</h4>
+<p>Does that exist in mathlib?</p>
+
+<a name="161428592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428592">Johan Commelin (Mar 22 2019 at 08:16)</a>:</h4>
+<p>Chris raised some issues that weren't resolved as far as I know</p>
+
+<a name="161428693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428693">Sebastien Gouezel (Mar 22 2019 at 08:18)</a>:</h4>
+<p>In the same way, should we avoid <code>is_linear_map</code> and use <code>linear_map</code> instead?</p>
+
+<a name="161428778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428778">Johan Commelin (Mar 22 2019 at 08:20)</a>:</h4>
+<p>That is what I've been doing so far.</p>
+
+<a name="161428789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428789">Johan Commelin (Mar 22 2019 at 08:20)</a>:</h4>
+<p>But when you use <code>f : alg_hom</code> you get a lot of ugly <code>f.to_linear_map</code>s in your code</p>
+
+<a name="161428794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428794">Mario Carneiro (Mar 22 2019 at 08:20)</a>:</h4>
+<p>for <code>linear_map</code>, yes that's the recommendation. For <code>group_hom</code>, it doesn't exist yet but I think chris was working on it</p>
+
+<a name="161428800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428800">Johan Commelin (Mar 22 2019 at 08:20)</a>:</h4>
+<p>I think <span class="user-mention" data-user-id="110044">@Chris Hughes</span> hoped to solve that with unification hints. But so far, no luck</p>
+
+<a name="161428831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428831">Mario Carneiro (Mar 22 2019 at 08:21)</a>:</h4>
+<p>I'm not up to date on the issues with coercions between different augmented-function types</p>
+
+<a name="161428884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428884">Mario Carneiro (Mar 22 2019 at 08:22)</a>:</h4>
+<p>but I would hope that <code>coe</code> would suffice in most cases</p>
+
+<a name="161428910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module%20refactor/near/161428910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85373modulerefactor.html#161428910">Mario Carneiro (Mar 22 2019 at 08:23)</a>:</h4>
+<p>I don't think there is a need for unification hints in this area</p>
+
 
 {% endraw %}
