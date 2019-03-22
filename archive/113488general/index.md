@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cerw](13234cerw.html) (60 messages, latest: Mar 22 2019 at 05:53)
+
 * [string munging](94061stringmunging.html) (3 messages, latest: Mar 22 2019 at 03:40)
 
 * [Lean in the wild](43625Leaninthewild.html) (50 messages, latest: Mar 21 2019 at 20:15)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
 
 * [elan is broken?](09085elanisbroken.html) (38 messages, latest: Mar 21 2019 at 12:22)
-
-* [cerw](13234cerw.html) (58 messages, latest: Mar 21 2019 at 11:53)
 
 * [finsetology](24852finsetology.html) (2 messages, latest: Mar 21 2019 at 10:41)
 
