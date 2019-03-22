@@ -1,0 +1,117 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/59094oriffor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html">or_iff_or</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161442255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161442255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161442255">Kevin Buzzard (Mar 22 2019 at 12:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> can you use your magic to tell me whether</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">c</span> <span class="bp">∨</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">hab</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">hab</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">ha</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="n">h1</span><span class="bp">.</span><span class="mi">1</span> <span class="n">ha</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hb</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="n">h2</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hb</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">hcd</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">hcd</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hc</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="n">h1</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hc</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hd</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="n">h2</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hd</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>is already in mathlib? Are we yet in a position where I can find this out for myself? Note that I secretly find writing proofs of these things rather satisfying, so no hurry ;-)</p>
+
+<a name="161442478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161442478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161442478">Mario Carneiro (Mar 22 2019 at 12:17)</a>:</h4>
+<p>hint: it's a congr lemma</p>
+
+<a name="161443285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161443285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161443285">Sebastien Gouezel (Mar 22 2019 at 12:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">c</span> <span class="bp">∨</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span>
+<span class="c1">-- exact or_congr h1 h2</span>
+</pre></div>
+
+<a name="161443429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161443429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161443429">Sebastien Gouezel (Mar 22 2019 at 12:32)</a>:</h4>
+<p>By the way, <code>library_search</code> does not work well for me when I work in advanced files (too much theorems in the environment, I guess, leading to timeouts). But I have created a file <code>search.lean</code> importing only basic stuff, in which I launch <code>library_search</code> when I need it. And it is super-efficient. Thanks <span class="user-mention" data-user-id="110524">@Scott Morrison</span> !</p>
+
+<a name="161443720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161443720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161443720">Kevin Buzzard (Mar 22 2019 at 12:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">or_iff_or</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">c</span> <span class="bp">∨</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Aww. The by hand version is far more fun :-)</p>
+
+<a name="161444079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444079">Kevin Buzzard (Mar 22 2019 at 12:42)</a>:</h4>
+<blockquote>
+<p>hint: it's a congr lemma</p>
+</blockquote>
+<p>I see. So I was looking in the wrong place. What does <code>congr</code> mean? </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ball_congr</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="n">h</span> <span class="bp">↔</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="n">h</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>This seems to say that bounded forall "distributes over iff" (can one even say that?) Does "congr" means "it distributes over iff"</p>
+
+<a name="161444099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444099">Patrick Massot (Mar 22 2019 at 12:43)</a>:</h4>
+<blockquote>
+<p>By the way, <code>library_search</code> does not work well for me when I work in advanced files (too much theorems in the environment, I guess, leading to timeouts). But I have created a file <code>search.lean</code> importing only basic stuff, in which I launch <code>library_search</code> when I need it. And it is super-efficient. Thanks <span class="user-mention silent" data-user-id="110524">Scott Morrison</span> !</p>
+</blockquote>
+<p>The next step is to improve the VScode extension to get a shortcut open a small window where you can type the statement and hit "search" to launch <code>library_search</code> on your <code>search.lean</code>. Who wants to learn TypeScript?</p>
+
+<a name="161444107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444107">Kevin Buzzard (Mar 22 2019 at 12:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> can you share <code>search.lean</code> as a gist? Or just post it here?</p>
+
+<a name="161444190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444190">Patrick Massot (Mar 22 2019 at 12:44)</a>:</h4>
+<p><code>foo_congr</code> means that if <code>x = y</code> then <code>foo x = foo y</code> or some variation on that.</p>
+
+<a name="161444312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444312">Kevin Buzzard (Mar 22 2019 at 12:46)</a>:</h4>
+<p>For predicates it seems to me that if <code>foo (P iff Q)</code> then <code>foo P iff foo Q</code> which seems to be a bit different.</p>
+
+<a name="161444323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444323">Kevin Buzzard (Mar 22 2019 at 12:46)</a>:</h4>
+<p>Do I just have to close my eyes a bit and squint?</p>
+
+<a name="161444368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444368">Sebastien Gouezel (Mar 22 2019 at 12:47)</a>:</h4>
+<p>It's just an empty file in which I import only what should be relevant for the search (and I keep changing the imports depending on what I want). So no interest in posting it. What you really need to do is merge <a href="https://github.com/leanprover-community/mathlib/issues/839" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/839">#839</a> in your local copy of mathlib (or merge it in mathlib if you are an admin, to bring it to everyone :).</p>
+
+<a name="161444583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444583">Kevin Buzzard (Mar 22 2019 at 12:50)</a>:</h4>
+<p>Oh I see, you change the imports to suit.</p>
+
+<a name="161444604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444604">Kevin Buzzard (Mar 22 2019 at 12:51)</a>:</h4>
+<p>Are these proofs mathlib-ready or can they be golfed more?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">order</span>
+
+<span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">lt_map_of_le_map</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">he</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hle</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">he</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">he</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">he</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">he</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">lt_iff_le_not_le</span><span class="o">,</span> <span class="n">hle</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">hle</span> <span class="n">y</span> <span class="n">x</span><span class="o">,</span> <span class="n">lt_iff_le_not_le</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">le_map_iff_lt_map</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">he</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">he</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">he</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">he</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">he</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">equiv</span><span class="bp">.</span><span class="n">lt_map_of_le_map</span> <span class="n">he</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">hlt</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">le_iff_eq_or_lt</span><span class="o">,</span> <span class="n">le_iff_eq_or_lt</span><span class="o">]</span><span class="bp">;</span>
+  <span class="n">exact</span> <span class="n">or_congr</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span> <span class="o">(</span><span class="n">hlt</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="161444620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444620">Kevin Buzzard (Mar 22 2019 at 12:51)</a>:</h4>
+<p>I need these sorts of things to break up medium sized proofs in the perfectoid project into several smaller proofs. I am actively working on learning how to make my proofs shorter. Perhaps I'm asking the wrong question -- the question is "is this proof maintainable" and the answer is probably yes by this point.</p>
+
+<a name="161444970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161444970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161444970">Kevin Buzzard (Mar 22 2019 at 12:56)</a>:</h4>
+<p>I am dealing with preorders at the minute, and <code>le_equiv</code> and <code>lt_equiv</code> are not the same thing, but this is the relationship between them.</p>
+
+
+{% endraw %}
