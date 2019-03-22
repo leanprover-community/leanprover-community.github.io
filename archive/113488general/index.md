@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [init.algebra.classes](59885initalgebraclasses.html) (7 messages, latest: Mar 22 2019 at 14:15)
+
+* [linux scheduler](40080linuxscheduler.html) (10 messages, latest: Mar 22 2019 at 14:05)
+
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (6 messages, latest: Mar 22 2019 at 13:24)
 
 * [or_iff_or](59094oriffor.html) (17 messages, latest: Mar 22 2019 at 13:20)
@@ -43,8 +47,6 @@ permalink: archive/113488general/index.html
 * [preorder.comap](07618preordercomap.html) (4 messages, latest: Mar 20 2019 at 00:31)
 
 * [is_group_hom field name](81265isgrouphomfieldname.html) (3 messages, latest: Mar 19 2019 at 14:20)
-
-* [linux scheduler](40080linuxscheduler.html) (9 messages, latest: Mar 19 2019 at 09:31)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (23 messages, latest: Mar 19 2019 at 00:04)
 
