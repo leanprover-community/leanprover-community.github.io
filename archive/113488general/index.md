@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (4 messages, latest: Mar 22 2019 at 10:29)
+
 * [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
 
 * [string munging](94061stringmunging.html) (3 messages, latest: Mar 22 2019 at 03:40)
