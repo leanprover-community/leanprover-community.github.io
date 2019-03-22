@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [module refactor](85373modulerefactor.html) (2 messages, latest: Mar 21 2019 at 18:33)
+* [module refactor](85373modulerefactor.html) (3 messages, latest: Mar 22 2019 at 00:35)
 
 * [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (5 messages, latest: Mar 21 2019 at 14:58)
 
