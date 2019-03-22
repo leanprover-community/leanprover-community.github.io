@@ -429,5 +429,30 @@ This is my code</p>
 <span class="err">⊢</span> <span class="n">sum_of_square_coeff</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span>
 </pre></div>
 
+<a name="161478915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/161478915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#161478915">Johan Commelin (Mar 22 2019 at 20:00)</a>:</h4>
+<p>I don't think you want the <code>@[simp]</code> in front of your <code>def</code>. Unless you always want <code>simp</code> to unfold that definition. In that case you don't have to pass it to <code>simpa</code> in the <code>theorem</code>.</p>
+
+<a name="161481397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/161481397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#161481397">Kevin Buzzard (Mar 22 2019 at 20:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">infinite_sum</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">nat</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sum_of_square_coeff</span> <span class="o">{</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span>
+<span class="n">sum</span> <span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="o">)</span>
+
+
+<span class="kn">theorem</span> <span class="n">sum_of_square_coeff_neg_x</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">sum_of_square_coeff</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">sum_of_square_coeff</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">sum_of_square_coeff</span><span class="o">]</span>
+</pre></div>
+
+<a name="161482328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Borsuk%20Ulam%20theorem/near/161482328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56506BorsukUlamtheorem.html#161482328">Kevin Buzzard (Mar 22 2019 at 20:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="119054">@Nguyen Duc Hoan</span> What you wrote also works. Are you sure you are understanding Lean correctly? If there is no error then everything has worked. Whatever Lean "says" just depends on where you put the cursor.</p>
+
 
 {% endraw %}

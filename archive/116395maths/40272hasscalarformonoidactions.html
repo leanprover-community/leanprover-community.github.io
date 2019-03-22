@@ -38,5 +38,49 @@ permalink: archive/116395maths/40272hasscalarformonoidactions.html
 <p>I introduce notation for monoid/group actions, and refactor <code>sylow.lean</code> which is the only place where group actions are used.<br>
 It seems to work quite nicely in the two files that I edited. However... for some reason that I really don't understand, it is now no longer possible to coerce from <code>units int</code> to an arbitrary ring. And this is causing breakage in <code>determinant.lean</code>. I have no clue why this coercion is affected...</p>
 
+<a name="161482320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482320">Johan Commelin (Mar 22 2019 at 20:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110064">@Kenny Lau</span> Do you have a clue what is the cause of the breakage?</p>
+
+<a name="161482360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482360">Chris Hughes (Mar 22 2019 at 20:46)</a>:</h4>
+<p>No, but I have had the same problem with code I wrote affecting that coercion.</p>
+
+<a name="161482390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482390">Johan Commelin (Mar 22 2019 at 20:47)</a>:</h4>
+<p>Was it related code?</p>
+
+<a name="161482482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482482">Johan Commelin (Mar 22 2019 at 20:48)</a>:</h4>
+<p>It would be sad if we have to make that coercion explicit... Otoh, it isn't too much trouble to make <code>determinant.lean</code> a bit less fragile.</p>
+
+<a name="161482505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482505">Chris Hughes (Mar 22 2019 at 20:48)</a>:</h4>
+<p>I just ended up import <code>group_theory/subgroup</code> or something into that file, which broke it.</p>
+
+<a name="161482549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482549">Chris Hughes (Mar 22 2019 at 20:49)</a>:</h4>
+<p>Is <code>algebra/module</code> the only thing that has changed that is imported by <code>determinant</code>?</p>
+
+<a name="161482588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482588">Johan Commelin (Mar 22 2019 at 20:49)</a>:</h4>
+<p>I think so. <code>algebra.module</code> now imports <code>group_action</code> because of the notation.</p>
+
+<a name="161482667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482667">Johan Commelin (Mar 22 2019 at 20:50)</a>:</h4>
+<p>I could put that notation in a separate file... but I was planning on making <code>module</code> extend <code>monoid_action</code> by definition... so that would only be a temporary fix.</p>
+
+<a name="161482687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482687">Chris Hughes (Mar 22 2019 at 20:50)</a>:</h4>
+<p>You could dump it in <code>algebra/group</code>. It's not really a long term fix.</p>
+
+<a name="161482740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161482740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161482740">Johan Commelin (Mar 22 2019 at 20:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you know how to make these thing play nice together?</p>
+
+<a name="161483010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_scalar%20for%20monoid%20actions/near/161483010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40272hasscalarformonoidactions.html#161483010">Chris Hughes (Mar 22 2019 at 20:55)</a>:</h4>
+<p>FYI the <code>coe</code> that breaks is from <code>units int</code> to a ring.</p>
+
 
 {% endraw %}
