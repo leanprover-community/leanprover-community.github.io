@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (19 messages, latest: Mar 22 2019 at 21:08)
+* [module refactor](85373modulerefactor.html) (29 messages, latest: Mar 22 2019 at 22:36)
+
+* [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (20 messages, latest: Mar 22 2019 at 22:23)
 
 * [Product spaces](81377Productspaces.html) (1 message, latest: Mar 22 2019 at 20:48)
 
 * [int.one_nonneg](98240intonenonneg.html) (19 messages, latest: Mar 22 2019 at 15:08)
-
-* [module refactor](85373modulerefactor.html) (28 messages, latest: Mar 22 2019 at 11:23)
 
 * [algebra structure on `lc`](14028algebrastructureonlc.html) (1 message, latest: Mar 21 2019 at 07:29)
 
