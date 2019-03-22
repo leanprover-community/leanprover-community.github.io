@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [hello!](40822hello.html) (4 messages, latest: Mar 22 2019 at 10:57)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (68 messages, latest: Mar 22 2019 at 19:22)
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (67 messages, latest: Mar 21 2019 at 18:08)
+* [hello!](40822hello.html) (4 messages, latest: Mar 22 2019 at 10:57)
 
 * [How to install Lean](30889HowtoinstallLean.html) (68 messages, latest: Mar 21 2019 at 16:32)
 
