@@ -124,5 +124,26 @@ permalink: archive/113488general/59094oriffor.html
 </blockquote>
 <p><a href="https://github.com/leanprover-community/mathlib/issues/839" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/839">#839</a> seems to have some travis problem.</p>
 
+<a name="161470281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161470281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161470281">Kevin Buzzard (Mar 22 2019 at 18:04)</a>:</h4>
+<p>Here's another one:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="n">b</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">hb</span> <span class="n">a</span><span class="o">,</span> <span class="n">hb</span> <span class="err">$</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">ha</span> <span class="n">b</span><span class="o">,</span> <span class="k">begin</span> <span class="n">rcases</span> <span class="n">h</span> <span class="n">b</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="n">ha</span> <span class="n">a</span> <span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I am working in a project with mathlib as a dependency and merging the PR locally won't be much fun (sometimes my coauthors update mathlib so I'd lose local changes). I need this one because I have quite a complicated <code>iff</code> goal and the moment I <code>split</code> it I seem to have lost the chance to ever put the pieces together again. Rewriting this example will enable me to apply <code>forall_congr</code> and make progress. I want library_search! I guess I could run a second VS Code session with a patched mathlib project open -- or can one even do this within one VS Code session?</p>
+
+<a name="161471670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161471670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161471670">Sebastien Gouezel (Mar 22 2019 at 18:23)</a>:</h4>
+<p>No luck with <code>library_search</code> on this one. Add it to the library?</p>
+
+<a name="161471792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or_iff_or/near/161471792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59094oriffor.html#161471792">Sebastien Gouezel (Mar 22 2019 at 18:25)</a>:</h4>
+<p>It looks similar to <code>forall_range_iff</code>, if you add it to the library they should probably be close.</p>
+
 
 {% endraw %}
