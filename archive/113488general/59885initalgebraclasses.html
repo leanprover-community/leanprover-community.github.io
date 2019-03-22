@@ -40,5 +40,41 @@ It is used almost nowhere as far as I can see. It seems to be a sort of start of
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161451044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161451044">Johan Commelin (Mar 22 2019 at 14:15)</a>:</h4>
 <p>Aaah, I just found: <a href="#narrow/stream/113488-general/topic/is_left_id.20rw.20mystery" title="#narrow/stream/113488-general/topic/is_left_id.20rw.20mystery">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id.20rw.20mystery</a></p>
 
+<a name="161457565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161457565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161457565">Simon Hudon (Mar 22 2019 at 15:28)</a>:</h4>
+<p>I have also found those classes useful for rewriting modulo associativity and commutativity</p>
+
+<a name="161457668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161457668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161457668">Simon Hudon (Mar 22 2019 at 15:28)</a>:</h4>
+<p>It is not flexible enough to cover associativity of composition in category theory though</p>
+
+<a name="161457982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161457982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161457982">Johan Commelin (Mar 22 2019 at 15:32)</a>:</h4>
+<p>I guess one could try to write smarter tactics to get around the higher order unification problem. If <code>smart_rw</code> sees that you want to rewrite using a lemma tagged with <code>algebra</code>, then it looks in the goal to find terms that are "tagged" with <code>binop</code> (I'm making this up right now) and will try to plug those terms into the right slot of the rw-lemma.</p>
+
+<a name="161459525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459525">Simon Hudon (Mar 22 2019 at 15:50)</a>:</h4>
+<p>The issue is not when you use an associativity lemma to rewrite. The issue is when you have an expression like <code>f ≫ g ≫ h ≫ i</code> and a lemma that could rewrite <code>g ≫ h</code> into something else</p>
+
+<a name="161459564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459564">Johan Commelin (Mar 22 2019 at 15:51)</a>:</h4>
+<p>Like <code>is_left_id</code>?</p>
+
+<a name="161459667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459667">Simon Hudon (Mar 22 2019 at 15:52)</a>:</h4>
+<p>No</p>
+
+<a name="161459693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459693">Simon Hudon (Mar 22 2019 at 15:52)</a>:</h4>
+<p>You need to rely on associativity but indirectly</p>
+
+<a name="161459722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459722">Johan Commelin (Mar 22 2019 at 15:53)</a>:</h4>
+<p>Ok, in the thread that I linked to above, Patrick was already having issues with <code>is_left_id</code></p>
+
+<a name="161459752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/init.algebra.classes/near/161459752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59885initalgebraclasses.html#161459752">Simon Hudon (Mar 22 2019 at 15:53)</a>:</h4>
+<p>Ah ok, I didn't see that</p>
+
 
 {% endraw %}
