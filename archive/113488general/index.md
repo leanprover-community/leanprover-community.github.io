@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [or_iff_or](59094oriffor.html) (16 messages, latest: Mar 22 2019 at 12:56)
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (6 messages, latest: Mar 22 2019 at 13:24)
 
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (4 messages, latest: Mar 22 2019 at 10:29)
+* [or_iff_or](59094oriffor.html) (17 messages, latest: Mar 22 2019 at 13:20)
 
 * [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
 
