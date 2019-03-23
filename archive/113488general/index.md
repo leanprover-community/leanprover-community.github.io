@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (2 messages, latest: Mar 23 2019 at 16:04)
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (3 messages, latest: Mar 23 2019 at 17:41)
+
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (7 messages, latest: Mar 23 2019 at 17:22)
 
 * [linux scheduler](40080linuxscheduler.html) (16 messages, latest: Mar 23 2019 at 11:28)
 
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [or_iff_or](59094oriffor.html) (41 messages, latest: Mar 22 2019 at 21:19)
 
 * [init.algebra.classes](59885initalgebraclasses.html) (16 messages, latest: Mar 22 2019 at 15:53)
-
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (6 messages, latest: Mar 22 2019 at 13:24)
 
 * [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
 
