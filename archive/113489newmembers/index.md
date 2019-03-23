@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (71 messages, latest: Mar 22 2019 at 20:46)
+* [simp and nats](31075simpandnats.html) (13 messages, latest: Mar 22 2019 at 23:25)
 
-* [simp and nats](31075simpandnats.html) (9 messages, latest: Mar 22 2019 at 20:41)
+* [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (71 messages, latest: Mar 22 2019 at 20:46)
 
 * [hello!](40822hello.html) (4 messages, latest: Mar 22 2019 at 10:57)
 
