@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (3 messages, latest: Mar 23 2019 at 17:41)
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (14 messages, latest: Mar 23 2019 at 18:59)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (7 messages, latest: Mar 23 2019 at 17:22)
 

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (221 messages, latest: Mar 23 2019 at 18:30)
+
 * [simp and nats](31075simpandnats.html) (15 messages, latest: Mar 23 2019 at 09:21)
 
 * [hello! (dual spaces)](75852hellodualspaces.html) (2 messages, latest: Mar 23 2019 at 00:26)
@@ -25,8 +27,6 @@ permalink: archive/113489newmembers/index.html
 * [Cast weirdness](76608Castweirdness.html) (7 messages, latest: Mar 20 2019 at 11:52)
 
 * [Declare column vector in Lean](33289DeclarecolumnvectorinLean.html) (11 messages, latest: Mar 19 2019 at 08:25)
-
-* [noob question(s)](52075noobquestions.html) (220 messages, latest: Mar 18 2019 at 16:21)
 
 * [proof of P → Q → P](43329proofofPQP.html) (22 messages, latest: Mar 16 2019 at 23:47)
 
