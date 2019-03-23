@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [module refactor](85373modulerefactor.html) (29 messages, latest: Mar 22 2019 at 22:36)
+* [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (21 messages, latest: Mar 23 2019 at 07:15)
 
-* [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (20 messages, latest: Mar 22 2019 at 22:23)
+* [module refactor](85373modulerefactor.html) (29 messages, latest: Mar 22 2019 at 22:36)
 
 * [Product spaces](81377Productspaces.html) (1 message, latest: Mar 22 2019 at 20:48)
 
