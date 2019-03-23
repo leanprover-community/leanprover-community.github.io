@@ -10,17 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [string munging](94061stringmunging.html) (4 messages, latest: Mar 23 2019 at 01:19)
+
+* [linux scheduler](40080linuxscheduler.html) (11 messages, latest: Mar 23 2019 at 01:17)
+
 * [or_iff_or](59094oriffor.html) (41 messages, latest: Mar 22 2019 at 21:19)
 
 * [init.algebra.classes](59885initalgebraclasses.html) (16 messages, latest: Mar 22 2019 at 15:53)
 
-* [linux scheduler](40080linuxscheduler.html) (10 messages, latest: Mar 22 2019 at 14:05)
-
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (6 messages, latest: Mar 22 2019 at 13:24)
 
 * [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
-
-* [string munging](94061stringmunging.html) (3 messages, latest: Mar 22 2019 at 03:40)
 
 * [Lean in the wild](43625Leaninthewild.html) (50 messages, latest: Mar 21 2019 at 20:15)
 
