@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [string munging](94061stringmunging.html) (4 messages, latest: Mar 23 2019 at 01:19)
+* [linux scheduler](40080linuxscheduler.html) (12 messages, latest: Mar 23 2019 at 09:19)
 
-* [linux scheduler](40080linuxscheduler.html) (11 messages, latest: Mar 23 2019 at 01:17)
+* [string munging](94061stringmunging.html) (4 messages, latest: Mar 23 2019 at 01:19)
 
 * [or_iff_or](59094oriffor.html) (41 messages, latest: Mar 22 2019 at 21:19)
 

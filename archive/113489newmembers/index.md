@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [simp and nats](31075simpandnats.html) (14 messages, latest: Mar 23 2019 at 04:04)
+* [simp and nats](31075simpandnats.html) (15 messages, latest: Mar 23 2019 at 09:21)
 
 * [hello! (dual spaces)](75852hellodualspaces.html) (2 messages, latest: Mar 23 2019 at 00:26)
 
