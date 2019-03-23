@@ -19,5 +19,62 @@ permalink: archive/113488general/25844optionmapcomp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161542429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161542429">Sebastian Ullrich (Mar 23 2019 at 20:59)</a>:</h4>
 <p>Yes, it's <code>comp_map</code> (of class <code>is_lawful_functor</code>)</p>
 
+<a name="161546436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546436">Kevin Buzzard (Mar 23 2019 at 22:51)</a>:</h4>
+<p>Can I get this cheaply?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">with_zero</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">option</span> <span class="n">α</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">with_zero</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">monad</span>
+
+<span class="kn">namespace</span> <span class="n">with_zero</span>
+
+<span class="n">def</span> <span class="n">map</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span>
+
+<span class="kn">lemma</span> <span class="n">map_id</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">map</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">map_id</span>
+
+<span class="kn">lemma</span> <span class="n">map_comp</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="n">r</span> <span class="bp">=</span> <span class="o">(</span><span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span><span class="o">)</span> <span class="o">((</span><span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">is_lawful_functor</span><span class="bp">.</span><span class="n">comp_map</span> <span class="n">f</span> <span class="n">g</span> <span class="n">r</span> <span class="c1">-- error involving &lt;$&gt;</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">  type mismatch, term</span>
+<span class="cm">    comp_map ?m_7 ?m_8 ?m_9</span>
+<span class="cm">  has type</span>
+<span class="cm">    (?m_6 ∘ ?m_7) &lt;$&gt; ?m_8 = ?m_6 &lt;$&gt; ?m_7 &lt;$&gt; ?m_8</span>
+<span class="cm">  but is expected to have type</span>
+<span class="cm">    map (g ∘ f) r = map g (map f r)</span>
+<span class="cm">-/</span>
+
+<span class="kn">end</span> <span class="n">with_zero</span>
+</pre></div>
+
+
+<p>I have never had to deal with <code>&lt;$&gt;</code> before.</p>
+
+<a name="161546612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546612">Chris Hughes (Mar 23 2019 at 22:57)</a>:</h4>
+<p>Have you proved it's a lawful monad?</p>
+
+<a name="161546613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546613">Kevin Buzzard (Mar 23 2019 at 22:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">map</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">functor</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>This fixes it.</p>
+
+<a name="161546658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546658">Kevin Buzzard (Mar 23 2019 at 22:58)</a>:</h4>
+<p>I've proved it's a functor:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">functor</span> <span class="n">with_zero</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="161546659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546659">Kevin Buzzard (Mar 23 2019 at 22:58)</a>:</h4>
+<p>Or at least, someone did...</p>
+
+<a name="161546669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161546669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161546669">Chris Hughes (Mar 23 2019 at 22:59)</a>:</h4>
+<p>Don't you need to prove it's a lawful functor?</p>
+
 
 {% endraw %}
