@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (1 message, latest: Mar 23 2019 at 15:38)
+
 * [linux scheduler](40080linuxscheduler.html) (16 messages, latest: Mar 23 2019 at 11:28)
 
 * [string munging](94061stringmunging.html) (4 messages, latest: Mar 23 2019 at 01:19)
