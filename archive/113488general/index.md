@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [option.map_comp](25844optionmapcomp.html) (2 messages, latest: Mar 23 2019 at 20:59)
+
+* [VScode extension](56578VScodeextension.html) (342 messages, latest: Mar 23 2019 at 20:48)
+
 * [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (19 messages, latest: Mar 23 2019 at 19:29)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (7 messages, latest: Mar 23 2019 at 17:22)
@@ -245,8 +249,6 @@ permalink: archive/113488general/index.html
 * [Changing the monad](94544Changingthemonad.html) (7 messages, latest: Feb 21 2019 at 23:23)
 
 * [multiset.lean](45734multisetlean.html) (6 messages, latest: Feb 21 2019 at 19:21)
-
-* [VScode extension](56578VScodeextension.html) (340 messages, latest: Feb 21 2019 at 15:29)
 
 * [conflicting imports](40287conflictingimports.html) (6 messages, latest: Feb 21 2019 at 10:25)
 
