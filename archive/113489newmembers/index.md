@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [hello! (dual spaces)](75852hellodualspaces.html) (2 messages, latest: Mar 23 2019 at 00:26)
+* [simp and nats](31075simpandnats.html) (14 messages, latest: Mar 23 2019 at 04:04)
 
-* [simp and nats](31075simpandnats.html) (13 messages, latest: Mar 22 2019 at 23:25)
+* [hello! (dual spaces)](75852hellodualspaces.html) (2 messages, latest: Mar 23 2019 at 00:26)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (71 messages, latest: Mar 22 2019 at 20:46)
 
