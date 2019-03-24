@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (21 messages, latest: Mar 24 2019 at 16:56)
+* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (24 messages, latest: Mar 24 2019 at 17:44)
 
 * [#789 extensions of equiv](48571789extensionsofequiv.html) (34 messages, latest: Mar 21 2019 at 12:41)
 

@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/63008Efficientmodularfibonacci.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html">Efficient modular fibonacci</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161587248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161587248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161587248">Neil Strickland (Mar 24 2019 at 17:03)</a>:</h4>
+<p>I want to prove that the 44th Fibonacci number is divisible by 89.  I wrote:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">FP_step</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="mi">89</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">FP</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">FP_step</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">F</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">F</span> <span class="mi">44</span>
+
+<span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>The <code>#eval</code> gives 0 with no visible delay.  If I try to prove <code>L</code> by <code>rfl</code> then I get a deterministic timeout, which I find surprising; I am only asking for 44 additions and 44 reductions mod 89 of numbers that are &lt; 2 * 89, which does not seem too bad even in Peano-world.  It also seems that <code>norm_num</code> is not useful here (unless there is some non-obvious way to invoke it).   Am I misunderstanding something about the count of operations?  Is there something different that I should be doing?</p>
+
+<a name="161587766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161587766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161587766">Chris Hughes (Mar 24 2019 at 17:16)</a>:</h4>
+<p>This works. Takes a little while though.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">F</span> <span class="n">FP</span> <span class="n">FP_step</span><span class="bp">;</span> <span class="n">norm_num</span>
+</pre></div>
+
+<a name="161588037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161588037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161588037">Neil Strickland (Mar 24 2019 at 17:23)</a>:</h4>
+<p>Thanks, that's much better.</p>
+
+
+{% endraw %}
