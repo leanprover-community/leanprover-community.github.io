@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [option.map_comp](25844optionmapcomp.html) (16 messages, latest: Mar 24 2019 at 08:43)
+* [universe weirdness](74726universeweirdness.html) (6 messages, latest: Mar 24 2019 at 09:32)
+
+* [option.map_comp](25844optionmapcomp.html) (41 messages, latest: Mar 24 2019 at 09:30)
 
 * [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (8 messages, latest: Mar 24 2019 at 07:40)
 

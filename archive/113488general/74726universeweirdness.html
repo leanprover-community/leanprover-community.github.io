@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/74726universeweirdness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html">universe weirdness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161568131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568131">Kevin Buzzard (Mar 24 2019 at 09:21)</a>:</h4>
+<p>I define a function twice using two different methods and the resulting definitions have slightly different types. </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">with_zero</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">option</span> <span class="n">α</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">with_zero</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">monad</span>
+
+<span class="n">def</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">functor</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span>
+<span class="n">def</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_zero</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span>
+<span class="c1">-- with_zero.map : Π {α β : Type u_1}, (α → β) → with_zero α → with_zero β</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">with_zero</span><span class="bp">.</span><span class="n">map&#39;</span>
+<span class="c1">-- with_zero.map&#39; : Π {α : Type u_1} {β : Type u_2}, (α → β) → with_zero α → with_zero β</span>
+</pre></div>
+
+
+<p>In the <code>map</code> version, the universes of alpha and beta have magically become the same.</p>
+
+<a name="161568292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568292">Mario Carneiro (Mar 24 2019 at 09:25)</a>:</h4>
+<p>When you use <code>Type*</code>, that's basically a universe metavariable <code>Type ?u</code>. It gets unified in the definition</p>
+
+<a name="161568427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568427">Kevin Buzzard (Mar 24 2019 at 09:28)</a>:</h4>
+<p>I had never understood that before.</p>
+
+<a name="161568571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568571">Mario Carneiro (Mar 24 2019 at 09:31)</a>:</h4>
+<p>if you use <code>Type u</code> and <code>Type v</code> you will get an error on the first one</p>
+
+<a name="161568619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568619">Mario Carneiro (Mar 24 2019 at 09:32)</a>:</h4>
+<p>this is why <code>Type*</code> is not used in core, in favor of explicit universes</p>
+
+<a name="161568623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20weirdness/near/161568623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74726universeweirdness.html#161568623">Mario Carneiro (Mar 24 2019 at 09:32)</a>:</h4>
+<p>It's a bit more explicit but I think being able to almost completely forget about universes is more worthwhile</p>
+
+
+{% endraw %}

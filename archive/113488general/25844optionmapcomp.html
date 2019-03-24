@@ -152,5 +152,121 @@ permalink: archive/113488general/25844optionmapcomp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161566835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161566835">Kevin Buzzard (Mar 24 2019 at 08:43)</a>:</h4>
 <p>Is that what I'm supposed to do?</p>
 
+<a name="161567589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161567589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161567589">Kevin Buzzard (Mar 24 2019 at 09:05)</a>:</h4>
+<p>aargh functor is rubbish</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">functor</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">map</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_const</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">map</span> <span class="err">∘</span> <span class="n">const</span> <span class="n">β</span><span class="o">)</span>
+</pre></div>
+
+
+<p><code>functor.map</code> will only eat <code>f : alpha -&gt; beta</code> if alpha and beta live in the same universe :-(</p>
+
+<a name="161567597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161567597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161567597">Kevin Buzzard (Mar 24 2019 at 09:05)</a>:</h4>
+<p>I don't think this is general enough for me after all</p>
+
+<a name="161567857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161567857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161567857">Kevin Buzzard (Mar 24 2019 at 09:13)</a>:</h4>
+<p>So I'm back to the start.</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span>
+
+<span class="n">def</span> <span class="n">option</span><span class="bp">.</span><span class="n">map_comp</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">option</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">option</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Is this in Lean or mathlib somewhere?</p>
+
+<a name="161568259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568259">Mario Carneiro (Mar 24 2019 at 09:24)</a>:</h4>
+<p>I don't think it is, it should be in <code>data.option.basic</code></p>
+
+<a name="161568285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568285">Kevin Buzzard (Mar 24 2019 at 09:25)</a>:</h4>
+<p>You can't prove it using lawful functors, or at least I can't, because then the universes have to be the same.</p>
+
+<a name="161568297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568297">Mario Carneiro (Mar 24 2019 at 09:25)</a>:</h4>
+<p>This is a known limitation of <code>functor</code></p>
+
+<a name="161568343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568343">Mario Carneiro (Mar 24 2019 at 09:26)</a>:</h4>
+<p>this is why many monads have <code>map</code> functions separate from the notation</p>
+
+<a name="161568345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568345">Kevin Buzzard (Mar 24 2019 at 09:26)</a>:</h4>
+<p>You want this sort of thing to construct an equiv of monoids (with_zero G) from an equiv of groups (G)</p>
+
+<a name="161568359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568359">Mario Carneiro (Mar 24 2019 at 09:26)</a>:</h4>
+<p>I guess it's just a semigroup equiv?</p>
+
+<a name="161568381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568381">Kevin Buzzard (Mar 24 2019 at 09:27)</a>:</h4>
+<p>A semigroup equiv of monoids is a monoid equiv, if I've understood this statement correctly</p>
+
+<a name="161568389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568389">Mario Carneiro (Mar 24 2019 at 09:27)</a>:</h4>
+<p><code>with_zero</code> makes a semigroup into a monoid</p>
+
+<a name="161568440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568440">Kevin Buzzard (Mar 24 2019 at 09:28)</a>:</h4>
+<p>Aah I see. Yes.</p>
+
+<a name="161568441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568441">Mario Carneiro (Mar 24 2019 at 09:28)</a>:</h4>
+<p>so the congr theorem should turn semigroup equivs into monoid equivs</p>
+
+<a name="161568443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568443">Kevin Buzzard (Mar 24 2019 at 09:28)</a>:</h4>
+<p>Right.</p>
+
+<a name="161568446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568446">Kevin Buzzard (Mar 24 2019 at 09:28)</a>:</h4>
+<p>Oh this is more congr?</p>
+
+<a name="161568448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568448">Mario Carneiro (Mar 24 2019 at 09:28)</a>:</h4>
+<p>yeah, if you squint</p>
+
+<a name="161568453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568453">Kevin Buzzard (Mar 24 2019 at 09:28)</a>:</h4>
+<p>I'm learning to squint at congr.</p>
+
+<a name="161568462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568462">Mario Carneiro (Mar 24 2019 at 09:29)</a>:</h4>
+<p><code>G ~= H -&gt; with_zero G ~= with_zero H</code></p>
+
+<a name="161568468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568468">Kevin Buzzard (Mar 24 2019 at 09:29)</a>:</h4>
+<p>yes, that's a congr alright.</p>
+
+<a name="161568473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568473">Kevin Buzzard (Mar 24 2019 at 09:29)</a>:</h4>
+<p>So what's the function called?</p>
+
+<a name="161568477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568477">Mario Carneiro (Mar 24 2019 at 09:29)</a>:</h4>
+<p><code>with_zero_congr</code>?</p>
+
+<a name="161568478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568478">Kevin Buzzard (Mar 24 2019 at 09:29)</a>:</h4>
+<p>I don't think I'll tell you what I was going to call it.</p>
+
+<a name="161568482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568482">Mario Carneiro (Mar 24 2019 at 09:29)</a>:</h4>
+<p>or maybe something with projection notation</p>
+
+<a name="161568540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568540">Kevin Buzzard (Mar 24 2019 at 09:30)</a>:</h4>
+<p>semigroup_equiv.with_zero_congr?</p>
+
+<a name="161568542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568542">Mario Carneiro (Mar 24 2019 at 09:30)</a>:</h4>
+<p><code>semigroup_equiv.with_zero_congr</code> doesn't buy much</p>
+
 
 {% endraw %}
