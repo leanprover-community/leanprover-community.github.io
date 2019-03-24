@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [equiv.surjective](70429equivsurjective.html) (5 messages, latest: Mar 24 2019 at 11:48)
+
+* [partial_order (with_bot X) is so unrflly](71836partialorderwithbotXissounrflly.html) (5 messages, latest: Mar 24 2019 at 11:06)
+
 * [universe weirdness](74726universeweirdness.html) (6 messages, latest: Mar 24 2019 at 09:32)
 
 * [option.map_comp](25844optionmapcomp.html) (41 messages, latest: Mar 24 2019 at 09:30)

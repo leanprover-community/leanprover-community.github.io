@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71836partialorderwithbotXissounrflly.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html">partial_order (with_bot X) is so unrflly</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161572349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial_order%20%28with_bot%20X%29%20is%20so%20unrflly/near/161572349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html#161572349">Kevin Buzzard (Mar 24 2019 at 11:00)</a>:</h4>
+<p>From <code>order.bounded_lattice</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">partial_order</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span>          <span class="o">:=</span> <span class="bp">λ</span> <span class="n">o₁</span> <span class="n">o₂</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">o₁</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">o₂</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">,</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>This definition of <code>le</code> on <code>with_bot alpha</code> means that stuff like <code>a &lt;= b iff some a &lt;= some b</code> is not proved by iff.rfl. If this proof had been done with pattern matching would this not have made life easier? Oh -- can one not pattern match in a structure field? Lean is complaining that my <code>set_of</code> is broken -- it thinks <code>{ ... | ...</code> is a set.</p>
+
+<a name="161572424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial_order%20%28with_bot%20X%29%20is%20so%20unrflly/near/161572424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html#161572424">Mario Carneiro (Mar 24 2019 at 11:02)</a>:</h4>
+<p>it is defined that way so that you don't have to deal with pattern matching on option all the time</p>
+
+<a name="161572504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial_order%20%28with_bot%20X%29%20is%20so%20unrflly/near/161572504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html#161572504">Kevin Buzzard (Mar 24 2019 at 11:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounded_lattice</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">meh</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">o₁</span> <span class="n">o₂</span><span class="o">,</span> <span class="k">match</span> <span class="o">(</span><span class="n">o₁</span><span class="o">,</span> <span class="n">o₂</span><span class="o">)</span> <span class="k">with</span>
+         <span class="bp">|</span> <span class="o">(</span><span class="n">none</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">true</span>
+         <span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">x</span><span class="o">,</span> <span class="n">none</span><span class="o">)</span> <span class="o">:=</span> <span class="n">false</span>
+         <span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">x</span><span class="o">,</span> <span class="n">some</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span>
+         <span class="kn">end</span><span class="o">,</span>
+<span class="c1">--:= λ o₁ o₂ : option α, ∀ a ∈ o₁, ∃ b ∈ o₂, a ≤ b,</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+</pre></div>
+
+<a name="161572526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial_order%20%28with_bot%20X%29%20is%20so%20unrflly/near/161572526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html#161572526">Kevin Buzzard (Mar 24 2019 at 11:05)</a>:</h4>
+<p>But instead I'm having to deal with other things.</p>
+
+<a name="161572585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial_order%20%28with_bot%20X%29%20is%20so%20unrflly/near/161572585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71836partialorderwithbotXissounrflly.html#161572585">Kevin Buzzard (Mar 24 2019 at 11:06)</a>:</h4>
+<p>like having to use <code>change</code> then <code>rw</code> a lot</p>
+
+
+{% endraw %}
