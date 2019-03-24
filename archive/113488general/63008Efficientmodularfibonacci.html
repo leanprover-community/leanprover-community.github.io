@@ -248,5 +248,44 @@ permalink: archive/113488general/63008Efficientmodularfibonacci.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592814">Mario Carneiro (Mar 24 2019 at 19:22)</a>:</h4>
 <p>it's possible to reduce the succ's but it's going to generate 44 add-one's anyway so I didn't bother</p>
 
+<a name="161594525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594525">Neil Strickland (Mar 24 2019 at 20:07)</a>:</h4>
+<p>Thanks, that's interesting.  I see roughly how it works but will need to digest a bit further.</p>
+
+<a name="161594767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594767">Kevin Buzzard (Mar 24 2019 at 20:13)</a>:</h4>
+<p>I guess <code>replace := ...</code> is shorthand for <code>replace this := ...</code>which means "replace the hypothesis <code>this</code> with a new hypothesis also called <code>this</code>.</p>
+
+<a name="161594829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594829">Kevin Buzzard (Mar 24 2019 at 20:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">this</span> <span class="o">:</span> <span class="n">FP</span> <span class="mi">0</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">iterate</span> <span class="mi">5</span> <span class="o">{</span> <span class="n">replace</span> <span class="n">this</span> <span class="o">:=</span> <span class="n">FP_succ</span> <span class="n">this</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span> <span class="o">},</span>
+  <span class="c1">-- this : FP (nat.succ (nat.succ (nat.succ (nat.succ 1)))) = (5, 8)</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161594837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594837">Kevin Buzzard (Mar 24 2019 at 20:14)</a>:</h4>
+<p>A hypothesis without a name defaults to <code>this</code> and Mario is abusing this a bit :-)</p>
+
+<a name="161594859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594859">Kevin Buzzard (Mar 24 2019 at 20:15)</a>:</h4>
+<p>But <code>replace</code> is essential to the method because we don't have the machinery to make 44 names without going into meta land (as far as I know)</p>
+
+<a name="161594936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161594936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161594936">Kevin Buzzard (Mar 24 2019 at 20:17)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">FP</span> <span class="mi">0</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">iterate</span> <span class="mi">44</span> <span class="o">{</span> <span class="k">have</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">FP_succ</span> <span class="n">H</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but you end up with 44 hypotheses all called <code>H</code>. The reason it works is that Lean uses the most recently generated one at each stage.</p>
+
 
 {% endraw %}
