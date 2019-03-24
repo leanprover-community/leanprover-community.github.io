@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (3 messages, latest: Mar 24 2019 at 17:23)
+* [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (22 messages, latest: Mar 24 2019 at 18:59)
 
 * [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (9 messages, latest: Mar 24 2019 at 16:53)
 

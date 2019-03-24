@@ -43,5 +43,122 @@ permalink: archive/113488general/63008Efficientmodularfibonacci.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161588037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161588037">Neil Strickland (Mar 24 2019 at 17:23)</a>:</h4>
 <p>Thanks, that's much better.</p>
 
+<a name="161589681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161589681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161589681">Kevin Buzzard (Mar 24 2019 at 18:03)</a>:</h4>
+<p>Related: <a href="https://github.com/kbuzzard/lean-squares-in-fibonacci" target="_blank" title="https://github.com/kbuzzard/lean-squares-in-fibonacci">https://github.com/kbuzzard/lean-squares-in-fibonacci</a></p>
+
+<a name="161589693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161589693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161589693">Kevin Buzzard (Mar 24 2019 at 18:03)</a>:</h4>
+<p>Unfinished proof that the largest square in the Fibonacci sequence is 144.</p>
+
+<a name="161589913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161589913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161589913">Kevin Buzzard (Mar 24 2019 at 18:08)</a>:</h4>
+<blockquote>
+<p>The <code>#eval</code> gives 0 with no visible delay.</p>
+</blockquote>
+<p>Of course it's <code>#reduce</code> that is the problem...</p>
+
+<a name="161589993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161589993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161589993">Kevin Buzzard (Mar 24 2019 at 18:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">FP_step</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="mi">89</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">FP</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">FP_step</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">F</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span>
+
+<span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">F</span> <span class="n">FP</span> <span class="n">FP_step</span><span class="o">,</span>
+  <span class="c1">-- worth putting your cursor here and inspecting the goal</span>
+  <span class="n">norm_num</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="161589999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161589999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161589999">Kevin Buzzard (Mar 24 2019 at 18:11)</a>:</h4>
+<p>How do you switch those <code>...</code>'s off again?</p>
+
+<a name="161590008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161590008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161590008">Kevin Buzzard (Mar 24 2019 at 18:11)</a>:</h4>
+<p>I think it's a <code>set_option</code></p>
+
+<a name="161590227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161590227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161590227">Kevin Buzzard (Mar 24 2019 at 18:17)</a>:</h4>
+<p>Still some left:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">FP_step</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="mi">89</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">FP</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">FP_step</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">F</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">FP</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">max_depth</span> <span class="mi">10000</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">max_steps</span> <span class="mi">10000</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">indent</span> <span class="mi">0</span>
+
+
+<span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">F</span> <span class="n">FP</span> <span class="n">FP_step</span><span class="o">,</span>
+  <span class="c1">-- worth putting your cursor here and inspecting the goal</span>
+  <span class="n">norm_num</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="161590300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161590300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161590300">Kevin Buzzard (Mar 24 2019 at 18:19)</a>:</h4>
+<p>That looks to me like a few more than 44 additions...</p>
+
+<a name="161590504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161590504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161590504">Chris Hughes (Mar 24 2019 at 18:24)</a>:</h4>
+<p>I guess it's not evaluating it in a sensible order. After unfolding, you probably end up with <code>F 10</code> a lot of times.</p>
+
+<a name="161590610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161590610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161590610">Chris Hughes (Mar 24 2019 at 18:27)</a>:</h4>
+<p>I wonder what the fastest proof is, or how to solve this with bigger numbers.</p>
+
+<a name="161591364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591364">Mario Carneiro (Mar 24 2019 at 18:47)</a>:</h4>
+<p>You can solve it in linear time if you craft appropriate lemmas</p>
+
+<a name="161591379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591379">Mario Carneiro (Mar 24 2019 at 18:48)</a>:</h4>
+<p>that's how <code>norm_num</code> itself works, of course</p>
+
+<a name="161591576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591576">Kevin Buzzard (Mar 24 2019 at 18:52)</a>:</h4>
+<p>The fastest proof is to do it by pure thought ;-)</p>
+
+<a name="161591581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591581">Kevin Buzzard (Mar 24 2019 at 18:52)</a>:</h4>
+<p>But if you want a computational proof, just work out F n mod 89 for the first 45 naturals</p>
+
+<a name="161591670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591670">Mario Carneiro (Mar 24 2019 at 18:55)</a>:</h4>
+<p>isn't that what he's doing?</p>
+
+<a name="161591743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591743">Kevin Buzzard (Mar 24 2019 at 18:57)</a>:</h4>
+<p>It didn't look like it from the prettyprinter output.</p>
+
+<a name="161591749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591749">Chris Hughes (Mar 24 2019 at 18:57)</a>:</h4>
+<p><code>F 44 = F 42 + (F 42 + F 41)</code>, so you end up computing <code>F 42 </code>twice, and it get worse the smaller you get.</p>
+
+<a name="161591750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591750">Kevin Buzzard (Mar 24 2019 at 18:57)</a>:</h4>
+<p>^^^</p>
+
+<a name="161591810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591810">Mario Carneiro (Mar 24 2019 at 18:59)</a>:</h4>
+<p>but that's not how it was defined... I don't think this has exponential blowup</p>
+
 
 {% endraw %}
