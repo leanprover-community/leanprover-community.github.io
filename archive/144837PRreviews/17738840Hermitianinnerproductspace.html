@@ -19,5 +19,72 @@ permalink: archive/144837PRreviews/17738840Hermitianinnerproductspace.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161582650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161582650">Patrick Massot (Mar 24 2019 at 14:54)</a>:</h4>
 <p>But I think the main issue is coercion hell. As usual, it means Lean doesn't accept that real numbers are complex numbers. But, even worse, we want to manipulate as real numbers some complex numbers that happen to be real. So I have questions for everybody. Easy one: shouldn't we have <code>instance : has_scalar ℝ α := ⟨λ s x, (s : ℂ)•x⟩</code>? Harder one: what about <code>instance : has_le ℂ := ⟨λ x y, x.re ≤ y.re⟩</code>. This is clearly heretic, but the idea is that it would allow to write inequalities between complex numbers that are provably real, but not syntactically so, like what you get when you expand <code>| |y|^2 • x - (x ₀ y) • y|^2</code> (the weird <code>₀</code> is Andreas notation for a Hermitian inner product). At the end we would get to <code>|x ₀ y| ≤ |x|*|y|</code> as complex numbers, and notice everything is real to get to the inequality among real numbers. Is it too crazy?</p>
 
+<a name="161583249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583249">Mario Carneiro (Mar 24 2019 at 15:11)</a>:</h4>
+<blockquote>
+<p>complex numbers that are provably real</p>
+</blockquote>
+<p>Do you have an example? In most cases I would suggest defining a function that makes this a syntactic real</p>
+
+<a name="161583316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583316">Kevin Buzzard (Mar 24 2019 at 15:13)</a>:</h4>
+<p>In real life one might prove that a complex number was real by checking that it was equal to its own complex conjugate, for example <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>z</mi><mo>−</mo><mover accent="true"><mrow><mi>z</mi></mrow><mo stretchy="true">‾</mo></mover><msup><mo>)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(z-\overline{z})^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.04398em;">z</span><span class="mbin">−</span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.63056em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.04398em;">z</span></span></span><span style="top:-3.55056em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span></span></span></span>.</p>
+
+<a name="161583322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583322">Mario Carneiro (Mar 24 2019 at 15:13)</a>:</h4>
+<p>That's just <code>(2*z.im)^2</code></p>
+
+<a name="161583368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583368">Kevin Buzzard (Mar 24 2019 at 15:14)</a>:</h4>
+<p>up to signs, yes.</p>
+
+<a name="161583371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583371">Kevin Buzzard (Mar 24 2019 at 15:14)</a>:</h4>
+<p>But it's not is it, it's the complex number version of that</p>
+
+<a name="161583376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583376">Mario Carneiro (Mar 24 2019 at 15:14)</a>:</h4>
+<p>I contend that for any "provably real" complex there is a "syntactically real" analogue that you can use instead</p>
+
+<a name="161583385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583385">Kevin Buzzard (Mar 24 2019 at 15:15)</a>:</h4>
+<p>Sure.</p>
+
+<a name="161583389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583389">Kevin Buzzard (Mar 24 2019 at 15:15)</a>:</h4>
+<p>And it might be vastly more inconvenient to do so :-)</p>
+
+<a name="161583394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583394">Mario Carneiro (Mar 24 2019 at 15:15)</a>:</h4>
+<p>worst case you just stick a <code>.re</code> on the end</p>
+
+<a name="161583396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161583396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161583396">Kevin Buzzard (Mar 24 2019 at 15:15)</a>:</h4>
+<p>Fair comment.</p>
+
+<a name="161584315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584315">Patrick Massot (Mar 24 2019 at 15:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Yes I have an example, and I discussed it above.</p>
+
+<a name="161584324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584324">Mario Carneiro (Mar 24 2019 at 15:41)</a>:</h4>
+<p>I'm not sure about the types of the things you wrote</p>
+
+<a name="161584487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584487">Kevin Buzzard (Mar 24 2019 at 15:45)</a>:</h4>
+<p>I think x and y are both elements of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">C</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{C}^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.68889em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span>.</p>
+
+<a name="161584490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584490">Patrick Massot (Mar 24 2019 at 15:45)</a>:</h4>
+<p>Andreas was proving Cauchy-Schwarz in a Hermitian context. So <code>x</code> and <code>y</code> have a type endowed with a Hermitian product. This product is complex valued, but the product of a vector with itself is actually real, and defined to be the its normed squared. Then the main computation is to expand <code>| |y|^2 • x - (x ₀ y) • y|^2</code>. where <code>₀</code> is the Hermitian product (don't ask my why) and <code>| .|</code> is the associated norm. It expands to  <code>|y|^2 * (a^2 -b^2)</code> where <code>b le a</code> is what we want (and <code>a</code> and <code>b</code> are nonneg)</p>
+
+<a name="161584540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584540">Patrick Massot (Mar 24 2019 at 15:46)</a>:</h4>
+<p>I'm not saying the complex <code>has_le</code> idea is brillant, it's ony the crazy stuff that came to my mind because this sounds to me like the crazy things computer scientists would do to avoid issues comping solely from DTT</p>
+
+<a name="161584602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161584602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161584602">Patrick Massot (Mar 24 2019 at 15:48)</a>:</h4>
+<p>Mario, it's been a while since you last took a beginner's proof and divide its length by 50. I think this is a good opportunity to reassert your reputation: <a href="https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178">https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178</a>.</p>
+
 
 {% endraw %}

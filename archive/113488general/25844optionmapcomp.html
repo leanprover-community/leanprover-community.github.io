@@ -268,5 +268,27 @@ permalink: archive/113488general/25844optionmapcomp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161568542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161568542">Mario Carneiro (Mar 24 2019 at 09:30)</a>:</h4>
 <p><code>semigroup_equiv.with_zero_congr</code> doesn't buy much</p>
 
+<a name="161583906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161583906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161583906">Kevin Buzzard (Mar 24 2019 at 15:29)</a>:</h4>
+<p>Ohohoh I just sat down to code this and noticed that it is from groups to monoids -- the group law is <code>*</code>, so this extra zero isn't the monoid identity. Maybe it's from monoids to monoids.</p>
+
+<a name="161584173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.map_comp/near/161584173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25844optionmapcomp.html#161584173">Kevin Buzzard (Mar 24 2019 at 15:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">to_with_zero_monoid_equiv</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">monoid_equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">monoid_equiv</span> <span class="o">(</span><span class="n">with_zero</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">with_zero</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">with_zero</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span> <span class="n">cases</span> <span class="n">x</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span> <span class="k">show</span> <span class="n">some</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">some</span> <span class="bp">_</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">left_inv</span> <span class="n">x</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span> <span class="n">cases</span> <span class="n">x</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span> <span class="k">show</span> <span class="n">some</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">some</span> <span class="bp">_</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span> <span class="n">x</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">mul_hom</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">begin</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">y</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="k">show</span> <span class="n">some</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">some</span> <span class="bp">_</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">mul_hom</span> <span class="n">x</span> <span class="n">y</span><span class="o">}</span>
+  <span class="kn">end</span><span class="o">}</span>
+</pre></div>
+
+
+<p>My plan for the proof of <code>left_inv</code> was to use <code>with_zero.map_comp</code> and <code>with_zero.map_id</code> but there's barely any point.</p>
+
 
 {% endraw %}

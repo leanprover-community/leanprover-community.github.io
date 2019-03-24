@@ -1,0 +1,60 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/68787toolchainproblem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html">toolchain problem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161582861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161582861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161582861">Kevin Buzzard (Mar 24 2019 at 15:00)</a>:</h4>
+<p>I had to get off a computer quick so I exited VS Code and saved everything. Later on it turned out I'd edited a file in core Lean, more precisely, in <code>~/.elan/toolchains/3.4.2/</code>. I noticed when I typed <code>lean --make</code> in a project and it started compiling stuff in the toolchains directory :-/ I figured the safest thing to do would just to be to remove that directory completely and re-install. But I can't persuade elan to re-install 3.4.2. </p>
+<div class="codehilite"><pre><span></span>$ elan toolchain install 3.4.2
+
+  3.4.2 unchanged - (toolchain not installed)
+
+$ elan toolchain uninstall 3.4.2
+info: no toolchain installed for &#39;3.4.2&#39;
+
+$ elan toolchain list
+stable
+nightly-2018-04-20
+nightly-2018-06-21
+3.3.0
+3.4.1
+</pre></div>
+
+
+<p><code>elan update</code> doesn't download it either.</p>
+
+<a name="161582886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161582886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161582886">Kevin Buzzard (Mar 24 2019 at 15:01)</a>:</h4>
+<p>Firing up VS Code with a 3.4.2 project gives me <code>Server has stopped with error code 1.</code> and debug output <code>error : toolchain '3.4.2' is not installed</code></p>
+
+<a name="161582954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161582954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161582954">Patrick Massot (Mar 24 2019 at 15:03)</a>:</h4>
+<p>What about <code>rm -rf .elan</code> and start again?</p>
+
+<a name="161582961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161582961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161582961">Kevin Buzzard (Mar 24 2019 at 15:03)</a>:</h4>
+<p>good idea!</p>
+
+<a name="161583026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161583026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161583026">Patrick Massot (Mar 24 2019 at 15:05)</a>:</h4>
+<p>a less violent thing to try would be to also get rid of 3.4.2 in <code>update-hashes</code></p>
+
+<a name="161583028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161583028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161583028">Kevin Buzzard (Mar 24 2019 at 15:05)</a>:</h4>
+<p>Yeah, that did it. Thanks.</p>
+
+<a name="161583083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/toolchain%20problem/near/161583083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68787toolchainproblem.html#161583083">Kevin Buzzard (Mar 24 2019 at 15:06)</a>:</h4>
+<p>That was the thing I was missing. Of cousre I shouldn't have deleted the directory -- I just assumed that deleting the directory and then firing up VS Code would fix it. Now I've had a good look at the elan commands and I realise that actually all the tools I needed were available via elan commands.</p>
+
+
+{% endraw %}
