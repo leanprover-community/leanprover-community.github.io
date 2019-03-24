@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [option.map_comp](25844optionmapcomp.html) (16 messages, latest: Mar 24 2019 at 08:43)
+
 * [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (8 messages, latest: Mar 24 2019 at 07:40)
 
 * [Proof approach guidance?](17300Proofapproachguidance.html) (14 messages, latest: Mar 24 2019 at 05:57)
-
-* [option.map_comp](25844optionmapcomp.html) (14 messages, latest: Mar 23 2019 at 23:18)
 
 * [VScode extension](56578VScodeextension.html) (342 messages, latest: Mar 23 2019 at 20:48)
 
