@@ -1,0 +1,43 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/78398projectionnotationwith.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/78398projectionnotationwith.html">projection notation with {}</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161592719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/projection%20notation%20with%20%7B%7D/near/161592719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78398projectionnotationwith.html#161592719">Kevin Buzzard (Mar 24 2019 at 19:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- imagine this is in core so I can&#39;t change the {} choice</span>
+<span class="kn">structure</span> <span class="n">bar</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="c1">-- This is my cool structure</span>
+<span class="kn">structure</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="c1">-- This is my cool map from my structure to the core one</span>
+<span class="n">def</span> <span class="n">foo</span><span class="bp">.</span><span class="n">to_bar</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bar</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- So now, given a term of type `foo α` I can make a term of type `bar α`</span>
+<span class="c1">-- and hence deduce `P x` for all `x : ℕ</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="mi">3</span> <span class="o">:=</span>
+<span class="c1">--f.to_bar.h -- type mismatch</span>
+<span class="c1">--f.to_bar.h 3 -- function expected</span>
+<span class="c1">-- @(f.to_bar.h) 3 -- syntax error</span>
+<span class="n">bar</span><span class="bp">.</span><span class="n">h</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_bar</span> <span class="c1">-- works</span>
+</pre></div>
+
+
+<p>Do I have to give up on projection notation in situations like this, or is there a clever way to insert the @? I couldn't figure it out.</p>
+
+
+{% endraw %}

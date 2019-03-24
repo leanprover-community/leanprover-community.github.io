@@ -160,5 +160,93 @@ permalink: archive/113488general/63008Efficientmodularfibonacci.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591810">Mario Carneiro (Mar 24 2019 at 18:59)</a>:</h4>
 <p>but that's not how it was defined... I don't think this has exponential blowup</p>
 
+<a name="161591941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591941">Kevin Buzzard (Mar 24 2019 at 19:02)</a>:</h4>
+<p>My 16 year old son says that he once saw some way of defining Fibonacci numbers in a functional language which didn't suffer from this blow-up.</p>
+
+<a name="161591963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161591963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161591963">Kevin Buzzard (Mar 24 2019 at 19:03)</a>:</h4>
+<p>You're right though, this isn't like what Chris says, this looks like a more sensible implementation.</p>
+
+<a name="161592036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592036">Kevin Buzzard (Mar 24 2019 at 19:04)</a>:</h4>
+<p>The point somehow seems to be that each time you iterate, the term gets about 1.5 times as complicated</p>
+
+<a name="161592038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592038">Kevin Buzzard (Mar 24 2019 at 19:04)</a>:</h4>
+<p>and Lean never simplifies anything until the end</p>
+
+<a name="161592049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592049">Mario Carneiro (Mar 24 2019 at 19:05)</a>:</h4>
+<p>I have a solution but I'm waiting on lean to compile to test it -_-</p>
+
+<a name="161592064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592064">Kevin Buzzard (Mar 24 2019 at 19:05)</a>:</h4>
+<p><code>F 8</code> looks like this:</p>
+<div class="codehilite"><pre><span></span>⊢ (((((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89 +
+   ((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89) %
+  89 +
+  (((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89 +
+   (((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89 +
+    ((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89) %
+   89) %
+  89) %
+89,
+((((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89 +
+   (((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89 +
+    ((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89) %
+   89) %
+  89 +
+  ((((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89 +
+    ((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89) %
+   89 +
+   (((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89 +
+    (((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89 +
+     ((1 + (0 + 1) % 89) % 89 + ((0 + 1) % 89 + (1 + (0 + 1) % 89) % 89) % 89) % 89) %
+    89) %
+   89) %
+  89) %
+89).fst
+</pre></div>
+
+<a name="161592117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592117">Kevin Buzzard (Mar 24 2019 at 19:06)</a>:</h4>
+<p><code>FP 8</code> looks like a mess because <code>FP 7</code> is a mess and Lean doesn't tidy it up before making <code>FP 8</code></p>
+
+<a name="161592138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592138">Chris Hughes (Mar 24 2019 at 19:07)</a>:</h4>
+<p>So it is only ever adding <code>0 and 1</code>. 1.5 times bigger each time is about right for the really bad implementation given that the golden ratio is ~1.6.</p>
+
+<a name="161592148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592148">Kevin Buzzard (Mar 24 2019 at 19:07)</a>:</h4>
+<p>Right, each term is about 1.6 times bigger than the one before in terms of e.g. number of additions mentioned in the term.</p>
+
+<a name="161592226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592226">Kevin Buzzard (Mar 24 2019 at 19:09)</a>:</h4>
+<p>Similarly for the number of <code>% 89</code>'s. If a mentions X of them and b mentions Y, then (a+b)%89 mentions X+Y+1, and this is growing like Fibonacci</p>
+
+<a name="161592306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592306">Mario Carneiro (Mar 24 2019 at 19:10)</a>:</h4>
+<p>this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">FP_succ</span> <span class="o">{</span><span class="n">n</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">FP</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">))</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="mi">89</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">FP</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">h2</span><span class="o">,</span> <span class="n">FP</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="kn">lemma</span> <span class="n">L</span> <span class="o">:</span> <span class="n">F</span> <span class="mi">44</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">FP</span> <span class="mi">0</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">iterate</span> <span class="mi">44</span> <span class="o">{</span> <span class="n">replace</span> <span class="o">:=</span> <span class="n">FP_succ</span> <span class="n">this</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="n">this</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161592760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592760">Kevin Buzzard (Mar 24 2019 at 19:21)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">iterate</span> <span class="mi">44</span> <span class="o">{</span> <span class="n">replace</span> <span class="o">:=</span> <span class="n">FP_succ</span> <span class="n">this</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span> <span class="o">},</span> <span class="c1">-- put your cursor here for some goal fun</span>
+</pre></div>
+
+<a name="161592814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Efficient%20modular%20fibonacci/near/161592814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63008Efficientmodularfibonacci.html#161592814">Mario Carneiro (Mar 24 2019 at 19:22)</a>:</h4>
+<p>it's possible to reduce the succ's but it's going to generate 44 add-one's anyway so I didn't bother</p>
+
 
 {% endraw %}
