@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (9 messages, latest: Mar 24 2019 at 16:53)
+
 * [option.map_comp](25844optionmapcomp.html) (43 messages, latest: Mar 24 2019 at 15:36)
 
 * [toolchain problem](68787toolchainproblem.html) (7 messages, latest: Mar 24 2019 at 15:06)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [partial_order (with_bot X) is so unrflly](71836partialorderwithbotXissounrflly.html) (5 messages, latest: Mar 24 2019 at 11:06)
 
 * [universe weirdness](74726universeweirdness.html) (6 messages, latest: Mar 24 2019 at 09:32)
-
-* [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (8 messages, latest: Mar 24 2019 at 07:40)
 
 * [Proof approach guidance?](17300Proofapproachguidance.html) (14 messages, latest: Mar 24 2019 at 05:57)
 
