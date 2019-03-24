@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proof approach guidance?](17300Proofapproachguidance.html) (4 messages, latest: Mar 24 2019 at 04:58)
+
 * [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (4 messages, latest: Mar 24 2019 at 00:42)
 
 * [option.map_comp](25844optionmapcomp.html) (14 messages, latest: Mar 23 2019 at 23:18)
