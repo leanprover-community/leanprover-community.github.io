@@ -1,0 +1,23 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/17738840Hermitianinnerproductspace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html">#840 Hermitian inner product space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161582649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161582649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161582649">Patrick Massot (Mar 24 2019 at 14:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="120943">@Andreas Swerdlow</span>  I've had a look at the monster proof  <a href="https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178">https://github.com/leanprover-community/mathlib/pull/840/files#diff-e6ff10e7bca7fd8be5b2ccd5c176a6c7R178</a>. I think it's partly due to ordering issues (there are not enough stupid lemmas coming first, like <code>herm_norm_eq_zero_iff</code>, <code>herm_norm_smul</code> etc.). There are also useless things, like the very first line which does nothing, or non-efficient, like the case disjunction on <code>y</code> which should read <code>classical, by_cases hy : y = 0</code>. Then you probably want to avoid all division, since they will get in the way of <code>ring</code> or <code>abel</code>. It means the fundamental fact should be <code>0 ≤ | |y|^2 • x - (x ₀ y) • y|^2</code>. You'll get a <code>|y|^2</code> in front of what you want, but there is ample support in <code>ordered_ring.lean</code>(both in core lib and mathlib) to get rid of this and the square at the very end.</p>
+
+<a name="161582650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23840%20Hermitian%20inner%20product%20space/near/161582650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17738840Hermitianinnerproductspace.html#161582650">Patrick Massot (Mar 24 2019 at 14:54)</a>:</h4>
+<p>But I think the main issue is coercion hell. As usual, it means Lean doesn't accept that real numbers are complex numbers. But, even worse, we want to manipulate as real numbers some complex numbers that happen to be real. So I have questions for everybody. Easy one: shouldn't we have <code>instance : has_scalar ℝ α := ⟨λ s x, (s : ℂ)•x⟩</code>? Harder one: what about <code>instance : has_le ℂ := ⟨λ x y, x.re ≤ y.re⟩</code>. This is clearly heretic, but the idea is that it would allow to write inequalities between complex numbers that are provably real, but not syntactically so, like what you get when you expand <code>| |y|^2 • x - (x ₀ y) • y|^2</code> (the weird <code>₀</code> is Andreas notation for a Hermitian inner product). At the end we would get to <code>|x ₀ y| ≤ |x|*|y|</code> as complex numbers, and notice everything is real to get to the inequality among real numbers. Is it too crazy?</p>
+
+
+{% endraw %}

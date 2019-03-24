@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (21 messages, latest: Mar 24 2019 at 14:29)
+
 * [equiv.surjective](70429equivsurjective.html) (5 messages, latest: Mar 24 2019 at 11:48)
 
 * [partial_order (with_bot X) is so unrflly](71836partialorderwithbotXissounrflly.html) (5 messages, latest: Mar 24 2019 at 11:06)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [Proof approach guidance?](17300Proofapproachguidance.html) (14 messages, latest: Mar 24 2019 at 05:57)
 
 * [VScode extension](56578VScodeextension.html) (342 messages, latest: Mar 23 2019 at 20:48)
-
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (19 messages, latest: Mar 23 2019 at 19:29)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (7 messages, latest: Mar 23 2019 at 17:22)
 
