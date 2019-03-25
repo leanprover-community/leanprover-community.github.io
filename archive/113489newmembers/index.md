@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [constants and variables](92810constantsandvariables.html) (3 messages, latest: Mar 25 2019 at 02:57)
+* [constants and variables](92810constantsandvariables.html) (28 messages, latest: Mar 25 2019 at 03:49)
 
-* [noob question(s)](52075noobquestions.html) (221 messages, latest: Mar 23 2019 at 18:30)
+* [noob question(s)](52075noobquestions.html) (222 messages, latest: Mar 25 2019 at 03:36)
 
 * [simp and nats](31075simpandnats.html) (15 messages, latest: Mar 23 2019 at 09:21)
 

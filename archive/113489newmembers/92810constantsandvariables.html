@@ -23,5 +23,114 @@ permalink: archive/113489newmembers/92810constantsandvariables.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610384">Kenny Lau (Mar 25 2019 at 02:57)</a>:</h4>
 <p>so for example <code>classical.choice</code> is a constant</p>
 
+<a name="161610518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610518">Patrick Thomas (Mar 25 2019 at 03:00)</a>:</h4>
+<p>"forall" as an assumed hypothesis in all the following theorems?</p>
+
+<a name="161610586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610586">Patrick Thomas (Mar 25 2019 at 03:02)</a>:</h4>
+<p>I guess I'm not certain how that differs from an axiom.</p>
+
+<a name="161610687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610687">Kenny Lau (Mar 25 2019 at 03:05)</a>:</h4>
+<p>I have struggled explaining it before, but I guess I'll still try</p>
+
+<a name="161610741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610741">Mario Carneiro (Mar 25 2019 at 03:06)</a>:</h4>
+<p><code>constant</code> never goes out of scope, it's as permanent as a <code>def</code></p>
+
+<a name="161610745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610745">Kenny Lau (Mar 25 2019 at 03:06)</a>:</h4>
+<p><code>def f : nat -&gt; nat := fun x, x+1</code> is the same as:</p>
+<div class="codehilite"><pre><span></span>variable (n : nat)
+def f : nat := n + 1
+</pre></div>
+
+<a name="161610767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610767">Kenny Lau (Mar 25 2019 at 03:07)</a>:</h4>
+<p>but if you do:</p>
+<div class="codehilite"><pre><span></span>constant n : nat
+def g : nat := n + 1
+</pre></div>
+
+
+<p>then you're declaring a constant <code>n</code> and <code>g</code> is now a natural number, not a function</p>
+
+<a name="161610770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610770">Kenny Lau (Mar 25 2019 at 03:07)</a>:</h4>
+<p><code>f 3</code> evaluates to <code>4</code> while <code>g 3</code> is a type mismatch because the type of <code>g</code> is <code>nat</code></p>
+
+<a name="161610817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610817">Mario Carneiro (Mar 25 2019 at 03:08)</a>:</h4>
+<p><code>f (f n)</code> works but <code>g (g n)</code> doesn't make sense</p>
+
+<a name="161610821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610821">Kenny Lau (Mar 25 2019 at 03:08)</a>:</h4>
+<p><code>g n</code> doesn't make sense to start with?</p>
+
+<a name="161610835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610835">Mario Carneiro (Mar 25 2019 at 03:09)</a>:</h4>
+<p>My point being that there is no analog of <code>f (f n)</code> for <code>g</code></p>
+
+<a name="161610838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161610838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161610838">Mario Carneiro (Mar 25 2019 at 03:09)</a>:</h4>
+<p>you can't substitute for a constant</p>
+
+<a name="161611159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611159">Patrick Thomas (Mar 25 2019 at 03:16)</a>:</h4>
+<p>So it is like constants and variables in C? I.e. const float pi = 3.14, versus int x = 0. pi can never take a different value, but x can?</p>
+
+<a name="161611231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611231">Kenny Lau (Mar 25 2019 at 03:18)</a>:</h4>
+<p>well Lean is a functional programming language like Haskell, unlike the more conventional programming languages (C, Java, Python) which are imperative languages</p>
+
+<a name="161611244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611244">Kenny Lau (Mar 25 2019 at 03:18)</a>:</h4>
+<p>but Lean <code>constant</code> would be C <code>const</code> with a "secret" value</p>
+
+<a name="161611246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611246">Kenny Lau (Mar 25 2019 at 03:18)</a>:</h4>
+<p>where <code>variable</code> is just the input to functions</p>
+
+<a name="161611706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611706">Patrick Thomas (Mar 25 2019 at 03:28)</a>:</h4>
+<p>I think I kind of see. I started reading a tutorial on Haskell earlier this week. Does it have something similar that I will run across?</p>
+
+<a name="161611797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161611797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161611797">Kenny Lau (Mar 25 2019 at 03:30)</a>:</h4>
+<p>I don't know Haskell but I don't think so</p>
+
+<a name="161612040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612040">Patrick Thomas (Mar 25 2019 at 03:37)</a>:</h4>
+<p>Is a variable the same as a variable in the lambda calculus?</p>
+
+<a name="161612090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612090">Kenny Lau (Mar 25 2019 at 03:38)</a>:</h4>
+<p>yes</p>
+
+<a name="161612111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612111">Patrick Thomas (Mar 25 2019 at 03:39)</a>:</h4>
+<p>Ah. I have not gotten to the typed lambda calculus yet. Will I see constants there?</p>
+
+<a name="161612181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612181">Mario Carneiro (Mar 25 2019 at 03:41)</a>:</h4>
+<p>Constants are like Haskell compiler intrinsic functions</p>
+
+<a name="161612226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612226">Mario Carneiro (Mar 25 2019 at 03:42)</a>:</h4>
+<p>they are functions, you can see that they have been declared as such, but you can't see the definition</p>
+
+<a name="161612313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612313">Mario Carneiro (Mar 25 2019 at 03:45)</a>:</h4>
+<p>Haskell doesn't really have an equivalent to the <code>variables</code> command. Scopes are handled differently in Haskell - you can think of the whole program as being in a single shared scopes where all your definitions are like <code>let</code> bindings. Lean is not like that - there are no variable scopes that span multiple definitions</p>
+
+<a name="161612451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612451">Patrick Thomas (Mar 25 2019 at 03:48)</a>:</h4>
+<p>I guess I haven't gotten that far yet.</p>
+
+<a name="161612473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/constants%20and%20variables/near/161612473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92810constantsandvariables.html#161612473">Patrick Thomas (Mar 25 2019 at 03:49)</a>:</h4>
+<p>Are constants the same as the "term constants" mentioned here: <a href="https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus" target="_blank" title="https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus">https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus</a></p>
+
 
 {% endraw %}
