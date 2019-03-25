@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (23 messages, latest: Mar 25 2019 at 05:35)
+
 * [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (57 messages, latest: Mar 25 2019 at 01:40)
 
 * [projection notation with {}](78398projectionnotationwith.html) (1 message, latest: Mar 24 2019 at 19:20)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [option.map_comp](25844optionmapcomp.html) (43 messages, latest: Mar 24 2019 at 15:36)
 
 * [toolchain problem](68787toolchainproblem.html) (7 messages, latest: Mar 24 2019 at 15:06)
-
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (21 messages, latest: Mar 24 2019 at 14:29)
 
 * [equiv.surjective](70429equivsurjective.html) (5 messages, latest: Mar 24 2019 at 11:48)
 
