@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (8 messages, latest: Mar 25 2019 at 22:05)
+
 * [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)
 
 * [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [universe weirdness](74726universeweirdness.html) (6 messages, latest: Mar 24 2019 at 09:32)
 
 * [Proof approach guidance?](17300Proofapproachguidance.html) (14 messages, latest: Mar 24 2019 at 05:57)
-
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (7 messages, latest: Mar 23 2019 at 17:22)
 
 * [string munging](94061stringmunging.html) (4 messages, latest: Mar 23 2019 at 01:19)
 

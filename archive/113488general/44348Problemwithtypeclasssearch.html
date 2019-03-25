@@ -41,5 +41,10 @@ permalink: archive/113488general/44348Problemwithtypeclasssearch.html
 <p>The idea is to have a parser for the log produced by Lean when searching for type class instances. All it currently does is to outpute the computed instances until a <code>mark ff</code> instance is looked up. This was the essential information I needed. </p>
 <p>But I'm sure it can be used to analyse other problems too</p>
 
+<a name="161692440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161692440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161692440">Johannes Hölzl (Mar 25 2019 at 22:05)</a>:</h4>
+<p>Hm, this problem seams to be even worse: <code>is_add_monoid_hom (coe : ℤ → ℤ)</code> does not terminate. Now <code>is_ring_hom (coe : ℤ → ℤ)</code> doesn't work due to some unification problems. But <code> is_ring_hom.is_semiring_hom</code> <code>is_semiring_hom.is_add_monoid_hom</code> is looking for a <code>ring</code> instance and then for the <code>is_ring_hom</code> instance. The <code>is_ring_hom</code> instance is not found, hence it starts to enumerate all the ways to construct <code>ring</code> for <code>int</code>. </p>
+<p>Maybe a solution would be to annotate <code>class</code> constants with a attribute, saying that there should be no backtracking, i.e. there should be only one canonical instance.</p>
+
 
 {% endraw %}
