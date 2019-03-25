@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/41517nameforandquestionaboutcomputationalprinciple.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/41517nameforandquestionaboutcomputationalprinciple.html">name for, and question about, computational principle</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161647802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/name%20for%2C%20and%20question%20about%2C%20computational%20principle/near/161647802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41517nameforandquestionaboutcomputationalprinciple.html#161647802">Kevin Buzzard (Mar 25 2019 at 14:22)</a>:</h4>
+<p>In <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients">section 11.4 of TPIL</a> they talk about quotients. The computational principle is introduced with its <code>rfl</code> proof. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm</span> <span class="o">:</span> <span class="n">quot</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="n">r</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>The theorem is given the unilluminating name of <code>thm</code>. I'm rolling my own quotient structure. Does this theorem have a canonical name? Furthermore, I realise that I also want a variant for my structure where f is Prop-valued and the theorem states</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm&#39;</span> <span class="o">:</span> <span class="n">quot</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="n">r</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">f</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>Does this theorem have a canonical name?</p>
+<hr>
+<p>The question is this: In <a href="https://leanprover.github.io/reference/expressions.html#computation" target="_blank" title="https://leanprover.github.io/reference/expressions.html#computation">section 3.7 of the reference manual</a> they define abstract definitional equality, and then mention (right near the end) that Lean's procedure is "more conservative". But in the formal definition of definitional equality this computational principle for <code>quot</code> is never mentioned. So it seems to me that Lean's procedure is less conservative in this instance.</p>
+
+<a name="161648170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/name%20for%2C%20and%20question%20about%2C%20computational%20principle/near/161648170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41517nameforandquestionaboutcomputationalprinciple.html#161648170">Chris Hughes (Mar 25 2019 at 14:26)</a>:</h4>
+<p>I think it might be called <code>quot.lift_beta</code></p>
+
+<a name="161648821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/name%20for%2C%20and%20question%20about%2C%20computational%20principle/near/161648821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41517nameforandquestionaboutcomputationalprinciple.html#161648821">Kevin Buzzard (Mar 25 2019 at 14:32)</a>:</h4>
+<p>Oh indeed! I just looked in core lean and lo and behold it's not called <code>thm</code> after all :-) So should we call ours <code>lift_beta</code>? Johan called it <code>lift_eq</code> which I thought sounded much better.</p>
+
+
+{% endraw %}
