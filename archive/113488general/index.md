@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linux scheduler](40080linuxscheduler.html) (22 messages, latest: Mar 25 2019 at 18:42)
+
 * [VScode extension](56578VScodeextension.html) (349 messages, latest: Mar 25 2019 at 15:13)
 
 * [name for, and question about, computational principle](41517nameforandquestionaboutcomputationalprinciple.html) (3 messages, latest: Mar 25 2019 at 14:32)
-
-* [linux scheduler](40080linuxscheduler.html) (20 messages, latest: Mar 25 2019 at 08:50)
 
 * [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (28 messages, latest: Mar 25 2019 at 08:33)
 
