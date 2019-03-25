@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)
+
 * [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
 
 * [finsetology](24852finsetology.html) (3 messages, latest: Mar 25 2019 at 19:02)
@@ -73,8 +75,6 @@ permalink: archive/113488general/index.html
 * [is_group_hom field name](81265isgrouphomfieldname.html) (3 messages, latest: Mar 19 2019 at 14:20)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (23 messages, latest: Mar 19 2019 at 00:04)
-
-* [simp messes up names](75715simpmessesupnames.html) (11 messages, latest: Mar 18 2019 at 23:45)
 
 * [Logipedia](09519Logipedia.html) (6 messages, latest: Mar 18 2019 at 21:19)
 

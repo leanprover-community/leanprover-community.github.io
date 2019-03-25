@@ -66,5 +66,37 @@ permalink: archive/113488general/75715simpmessesupnames.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161107132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161107132">Mario Carneiro (Mar 18 2019 at 23:45)</a>:</h4>
 <p>(incidentally, Metamath has great support for this - since the variables are named the same in the original lemma, they get renamed in tandem when you apply the theorem)</p>
 
+<a name="161684747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161684747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161684747">Patrick Massot (Mar 25 2019 at 20:33)</a>:</h4>
+<p>Since nobody else seemed interested, I wrote a tactic doing that at <a href="https://gist.github.com/PatrickMassot/58b2c3e557e7010db0fb8ab5057dfd47" target="_blank" title="https://gist.github.com/PatrickMassot/58b2c3e557e7010db0fb8ab5057dfd47">https://gist.github.com/PatrickMassot/58b2c3e557e7010db0fb8ab5057dfd47</a> (you can put that file in mathlib or any project using it). Remember the goal is to push negations through quantifiers and logical connective <em>without</em> renaming variables. This tactic is based on <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> 's <code>finish</code> code, and help from Simon who told me about eta-reduction messing up with my <code>Exists</code>. The two test cases at the end show the tactic in action. The first one goes from</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">¬∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">¬∃</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">p</span>
+<span class="err">⊢</span> <span class="bp">¬∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">p</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">p</span> <span class="bp">≤</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>The second transforms</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬∀</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span>
+</pre></div>
+
+
+<p>into</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">∧</span> <span class="n">ε</span> <span class="bp">≤</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span>
+</pre></div>
+
+
+<p>(I used integers instead of real numbers to avoid importing real numbers)</p>
+
+<a name="161684860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20messes%20up%20names/near/161684860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75715simpmessesupnames.html#161684860">Patrick Massot (Mar 25 2019 at 20:34)</a>:</h4>
+<p>I'm inordinately proud of this tactic. I think it's really relevant to teaching, but actually I also think it should be in mathlib</p>
+
 
 {% endraw %}
