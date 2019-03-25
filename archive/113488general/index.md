@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (55 messages, latest: Mar 25 2019 at 00:43)
+* [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (57 messages, latest: Mar 25 2019 at 01:40)
 
 * [projection notation with {}](78398projectionnotationwith.html) (1 message, latest: Mar 24 2019 at 19:20)
 
