@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [is_ring_hom.ker](29215isringhomker.html) (1 message, latest: Mar 25 2019 at 12:55)
+* [is_ring_hom.ker](29215isringhomker.html) (15 messages, latest: Mar 25 2019 at 13:08)
 
 * [products of linear combinations](13131productsoflinearcombinations.html) (20 messages, latest: Mar 25 2019 at 10:23)
 
