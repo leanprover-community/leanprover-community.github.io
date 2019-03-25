@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
+
+* [finsetology](24852finsetology.html) (3 messages, latest: Mar 25 2019 at 19:02)
+
 * [linux scheduler](40080linuxscheduler.html) (22 messages, latest: Mar 25 2019 at 18:42)
 
 * [VScode extension](56578VScodeextension.html) (349 messages, latest: Mar 25 2019 at 15:13)
@@ -19,8 +23,6 @@ permalink: archive/113488general/index.html
 * [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (28 messages, latest: Mar 25 2019 at 08:33)
 
 * [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (57 messages, latest: Mar 25 2019 at 01:40)
-
-* [projection notation with {}](78398projectionnotationwith.html) (1 message, latest: Mar 24 2019 at 19:20)
 
 * [Do I need classical logic for this proof?](46394DoIneedclassicallogicforthisproof.html) (9 messages, latest: Mar 24 2019 at 16:53)
 
@@ -51,8 +53,6 @@ permalink: archive/113488general/index.html
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
 
 * [elan is broken?](09085elanisbroken.html) (38 messages, latest: Mar 21 2019 at 12:22)
-
-* [finsetology](24852finsetology.html) (2 messages, latest: Mar 21 2019 at 10:41)
 
 * [a tactic to induce a crash?](12742atactictoinduceacrash.html) (13 messages, latest: Mar 21 2019 at 07:21)
 
