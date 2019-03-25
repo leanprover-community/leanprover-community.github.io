@@ -108,5 +108,21 @@ What is the purpose of such classes. Do they only exist for reasons of terminolo
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161620544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161620544">Johan Commelin (Mar 25 2019 at 07:31)</a>:</h4>
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Are there CS reasons for having these type classes? Do they help type class search, or do they hamper it?</p>
 
+<a name="161623207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623207">Sebastian Ullrich (Mar 25 2019 at 08:28)</a>:</h4>
+<p>The usual downside of such trivial classes is that implicit coercion only works in one direction: If you have an <code>is_monoid_action</code> on a group, it's not automatically an <code>is_group_action</code>. You have to explicitly declare an instance for that. That may not be an issue, but if it is, <code>is_group_action</code> could be defined as an <code>abbreviation</code> (i.e. reducible) so that type class search treats it as equivalent to <code>is_monoid_action</code>.</p>
+
+<a name="161623213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623213">Sebastian Ullrich (Mar 25 2019 at 08:28)</a>:</h4>
+<p>I don't see any upsides other than terminology</p>
+
+<a name="161623445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623445">Johan Commelin (Mar 25 2019 at 08:33)</a>:</h4>
+<p>Ok, I could imagine that you would shortcut some type class searches this way...</p>
+
+<a name="161623460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623460">Johan Commelin (Mar 25 2019 at 08:33)</a>:</h4>
+<p>But I think that the downside you mention is enough reason to do away with this class.</p>
+
 
 {% endraw %}

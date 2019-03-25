@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [int.one_nonneg](98240intonenonneg.html) (21 messages, latest: Mar 25 2019 at 06:54)
+* [products of linear combinations](13131productsoflinearcombinations.html) (4 messages, latest: Mar 25 2019 at 08:57)
 
-* [products of linear combinations](13131productsoflinearcombinations.html) (1 message, latest: Mar 23 2019 at 19:29)
+* [int.one_nonneg](98240intonenonneg.html) (21 messages, latest: Mar 25 2019 at 06:54)
 
 * [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (36 messages, latest: Mar 23 2019 at 14:17)
 
