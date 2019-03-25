@@ -50,5 +50,49 @@ What is the right place in mathlib for these facts? Should I start a new file? (
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161628122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161628122">Johan Commelin (Mar 25 2019 at 09:55)</a>:</h4>
 <p>So if you have a monoid in <code>R</code>-modules...</p>
 
+<a name="161629050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629050">Scott Morrison (Mar 25 2019 at 10:10)</a>:</h4>
+<p>I'm confused, sorry, why does <code>lc R A</code> need that <code>A</code> is an <code>R</code>-module? I thought it was just formal <code>R</code>-linear combinations of terms in <code>A</code>.</p>
+
+<a name="161629243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629243">Johan Commelin (Mar 25 2019 at 10:13)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L18" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L18">https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L18</a></p>
+
+<a name="161629303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629303">Johan Commelin (Mar 25 2019 at 10:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I guess there is a <em>lot</em> of linear algebra that can be generalised.</p>
+
+<a name="161629374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629374">Scott Morrison (Mar 25 2019 at 10:15)</a>:</h4>
+<p>I guess I've never looked at <code>lc</code> before... :-)</p>
+
+<a name="161629567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629567">Scott Morrison (Mar 25 2019 at 10:18)</a>:</h4>
+<p>That's so weird that they put <code>[add_comm_group β] [module α β]</code> in the requirements for <code>lc</code>, right from the beginning.</p>
+
+<a name="161629717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629717">Scott Morrison (Mar 25 2019 at 10:20)</a>:</h4>
+<p>It's like <code>lc</code> doesn't mean "formal linear combinations", which is what I'd always assumed, but "not-yet -added-up linear expressions in a module"</p>
+
+<a name="161629734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629734">Johan Commelin (Mar 25 2019 at 10:20)</a>:</h4>
+<p>Yup...</p>
+
+<a name="161629739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629739">Scott Morrison (Mar 25 2019 at 10:20)</a>:</h4>
+<p>.... ugh?</p>
+
+<a name="161629744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629744">Johan Commelin (Mar 25 2019 at 10:20)</a>:</h4>
+<p>I guess this might be the first time you need the assumption: <a href="https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L142" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L142">https://github.com/leanprover-community/mathlib/blob/b39d6d8a502edfb5adb3026c256c82bea526328b/src/linear_algebra/linear_combination.lean#L142</a></p>
+
+<a name="161629874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629874">Scott Morrison (Mar 25 2019 at 10:23)</a>:</h4>
+<p>but then much of the rest of the file doesn't need such strong assumptions again</p>
+
+<a name="161629880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20linear%20combinations/near/161629880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13131productsoflinearcombinations.html#161629880">Johan Commelin (Mar 25 2019 at 10:23)</a>:</h4>
+<p>I'm willing to invest time in refactoring the algebraic hierarchy... but it will need to be streamlined. Currently PR's are opened faster than they are merged.</p>
+
 
 {% endraw %}
