@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [int.one_nonneg](98240intonenonneg.html) (20 messages, latest: Mar 25 2019 at 02:29)
+
 * [products of linear combinations](13131productsoflinearcombinations.html) (1 message, latest: Mar 23 2019 at 19:29)
 
 * [has_scalar for monoid actions](40272hasscalarformonoidactions.html) (36 messages, latest: Mar 23 2019 at 14:17)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [module refactor](85373modulerefactor.html) (29 messages, latest: Mar 22 2019 at 22:36)
 
 * [Product spaces](81377Productspaces.html) (1 message, latest: Mar 22 2019 at 20:48)
-
-* [int.one_nonneg](98240intonenonneg.html) (19 messages, latest: Mar 22 2019 at 15:08)
 
 * [algebra structure on `lc`](14028algebrastructureonlc.html) (1 message, latest: Mar 21 2019 at 07:29)
 
