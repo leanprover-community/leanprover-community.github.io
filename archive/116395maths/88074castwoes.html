@@ -377,5 +377,130 @@ permalink: archive/116395maths/88074castwoes.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160761559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160761559">Rob Lewis (Mar 14 2019 at 08:50)</a>:</h4>
 <p>We'll come back and talk about a formal spec once Paul-Nicolas has made some more progress, but these examples help a lot for the moment.</p>
 
+<a name="161748819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161748819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161748819">Patrick Massot (Mar 26 2019 at 10:36)</a>:</h4>
+<p>One more data point about casts and stupid arithmetic goal. This afternoon I want students to prove that if <code>f : ℝ → ℝ</code> sequentially tends to <code>y₀</code> at <code>x₀</code> then it tends to <code>y₀</code> en <code>x₀</code>. I almost gave on this idea, although this is the perfect illustration for the current chapter (negation of quantified statements). I ended writing in the assignment Lean file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">limite_inv_succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">ε</span>
+
+<span class="kn">axiom</span> <span class="n">inv_succ_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>because I couldn't see a way to prove them without devoting a whole lecture to casts and coes.</p>
+
+<a name="161749221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161749221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161749221">Neil Strickland (Mar 26 2019 at 10:42)</a>:</h4>
+<p>I've been doing some basic undergraduate exercises.  I think that this one is a good test case for the cast infrastructure:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"></span>
+<span class="cm"> We are asked to pass judgement on the following &quot;definition&quot; :</span>
+
+<span class="cm">  k : ℝ → ℤ sends x ∈ ℝ to the closest integer.</span>
+
+<span class="cm"> We define precisely what it means for n to be the closest</span>
+<span class="cm"> integer to x : we should have | x - m | &gt; | x - n | for any</span>
+<span class="cm"> integer m ≠ n.  We then show that if m ∈ ℤ, there is no</span>
+<span class="cm"> closest integer to m + 1/2.  From this we deduce that there</span>
+<span class="cm"> is no function k with the expected properties.</span>
+
+<span class="cm"> This is much harder work than you might think.  A lot of the</span>
+<span class="cm"> problem is caused by the cast maps ℤ → ℚ → ℝ</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+ <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≠</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">&gt;</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">n</span> <span class="o">)</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> Even basic identities like 1/2 - 1 = -1/2 cannot easily be</span>
+<span class="cm"> proved directly in ℝ, because there are no general algorithms</span>
+<span class="cm"> for exact calculation in ℝ.  We need to work in ℚ and then</span>
+<span class="cm"> apply the cast map.</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">half_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">/</span> <span class="mi">2</span>
+<span class="n">def</span> <span class="n">neg_half_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="bp">-</span> <span class="n">half_Q</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">half_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">half_Q</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">neg_half_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">neg_half_Q</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> Here is a small identity that could in principle be proved</span>
+<span class="cm"> by a long string of applications of the commutative ring axioms.</span>
+<span class="cm"> The &quot;ring&quot; tactic automates the process of finding this string.</span>
+
+<span class="cm"> For reasons that I do not fully understand, the ring tactic</span>
+<span class="cm"> seems to work more reliably if we do it in a separate lemma</span>
+<span class="cm"> so that the terms are just free variables.  We can then</span>
+<span class="cm"> substitute values for this variables as an extra step.  In</span>
+<span class="cm"> particular, we will substitute h = 1/2, and then give a</span>
+<span class="cm"> separate argument that the final term 2 * h - 1 is zero.</span>
+<span class="cm">-/</span>
+<span class="kn">lemma</span> <span class="n">misc_identity</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">h</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+ <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">h</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">h</span><span class="o">)</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">ring</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> We now prove that there is no closest integer to m + 1/2.</span>
+<span class="cm"> The obvious approach would be to focus attention on the</span>
+<span class="cm"> candidates n = m and n = m + 1, but it turns out that that</span>
+<span class="cm"> creates more work than necessary.  It is more efficient to</span>
+<span class="cm"> prove that for all n, the integer k = 2 m + 1 - n is different</span>
+<span class="cm"> from n and lies at the same distance from m + 1/2, so</span>
+<span class="cm"> n does not have the required property.</span>
+<span class="cm">-/</span>
+<span class="kn">lemma</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">¬</span> <span class="o">(</span><span class="n">is_closest_integer</span> <span class="n">n</span> <span class="o">((</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h0</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_Q</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span>
+ <span class="n">by_cases</span> <span class="n">e0</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+ <span class="o">{</span><span class="c1">-- In this block we consider the possibility that k = n, and</span>
+  <span class="c1">-- show that it is impossible.</span>
+  <span class="n">exfalso</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">at</span> <span class="n">e0</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">e1</span> <span class="o">:=</span> <span class="k">calc</span>
+   <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">e0</span><span class="o">]</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">e2</span> <span class="o">:=</span> <span class="k">calc</span>
+   <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="mi">1</span> <span class="mi">2</span> <span class="o">:</span> <span class="n">rfl</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">))</span> <span class="mi">2</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="n">x</span> <span class="mi">2</span><span class="o">)</span> <span class="n">e1</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mul_mod_right</span> <span class="mi">2</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">dec_trivial</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="n">e2</span><span class="o">,</span>
+ <span class="o">},{</span>
+  <span class="k">let</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">h0</span> <span class="n">k</span> <span class="n">e0</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">u_R</span> <span class="o">:=</span> <span class="n">x_R</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v_R</span> <span class="o">:=</span> <span class="n">x_R</span> <span class="bp">-</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="n">v_R</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">u_R</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+   <span class="n">dsimp</span><span class="o">[</span><span class="n">u_R</span><span class="o">,</span><span class="n">v_R</span><span class="o">,</span><span class="n">x_R</span><span class="o">,</span><span class="n">k</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_bit0</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_neg</span><span class="o">],</span>
+   <span class="n">exact</span> <span class="n">misc_identity</span> <span class="o">(</span><span class="err">↑</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="err">↑</span> <span class="n">n</span><span class="o">)</span> <span class="n">half_R</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_Q</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="o">(((</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">half_Q</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+   <span class="n">dsimp</span><span class="o">[</span><span class="n">half_R</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_bit0</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_neg</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">h4</span><span class="o">,</span><span class="n">h3</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">],</span>
+  <span class="n">rw</span><span class="o">[</span><span class="n">h5</span><span class="o">,</span><span class="n">add_zero</span><span class="o">]</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">abs</span> <span class="n">v_R</span> <span class="bp">=</span> <span class="n">abs</span> <span class="n">u_R</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">h2</span><span class="o">,</span><span class="n">abs_neg</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">h1</span> <span class="n">h6</span><span class="o">,</span>
+ <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">k_does_not_exist</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span><span class="n">k_spec</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">,</span>
+ <span class="n">exact</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">k_spec</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161749440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161749440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161749440">Sebastien Gouezel (Mar 26 2019 at 10:46)</a>:</h4>
+<p>Instead of <code>1/(n+1)</code>, you can use <code>((1:R)/2)^n</code> (and the fact that this sequence tends to <code>0</code>, which should already be there). No need to cast with this one.</p>
+
 
 {% endraw %}

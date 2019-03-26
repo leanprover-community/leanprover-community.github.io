@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (67 messages, latest: Mar 26 2019 at 10:46)
+
 * [finsupp.to_module](73180finsupptomodule.html) (1 message, latest: Mar 26 2019 at 08:12)
 
 * [is_ring_hom.ker](29215isringhomker.html) (15 messages, latest: Mar 25 2019 at 13:08)
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [bounds](43084bounds.html) (43 messages, latest: Mar 17 2019 at 17:11)
 
 * [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (14 messages, latest: Mar 14 2019 at 21:22)
-
-* [cast woes](88074castwoes.html) (64 messages, latest: Mar 14 2019 at 08:50)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2962 messages, latest: Mar 13 2019 at 08:04)
 
