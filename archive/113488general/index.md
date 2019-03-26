@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (3 messages, latest: Mar 26 2019 at 05:50)
+
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (8 messages, latest: Mar 25 2019 at 22:05)
 
 * [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)

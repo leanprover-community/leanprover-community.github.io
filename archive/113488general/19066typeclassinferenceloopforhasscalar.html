@@ -1,0 +1,36 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/19066typeclassinferenceloopforhasscalar.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html">typeclass inference loop for `has_scalar`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161732151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161732151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161732151">Scott Morrison (Mar 26 2019 at 05:04)</a>:</h4>
+<p>I think this MWE exhibits a problem in the design of <code>algebra/module.lean</code>, but I'm not quite sure what's going on yet:</p>
+<div class="codehilite"><pre><span></span>import algebra.module
+import data.real.basic
+
+def X : Type := sorry
+instance ring_X : ring X := sorry
+
+set_option trace.class_instances true
+example : has_scalar ℝ X := infer_instance -- times out
+</pre></div>
+
+<a name="161732896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161732896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161732896">Scott Morrison (Mar 26 2019 at 05:22)</a>:</h4>
+<p>(oops, initial example over-minimised... fixed now)</p>
+
+<a name="161734019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734019">Scott Morrison (Mar 26 2019 at 05:50)</a>:</h4>
+<p>I've been staring at the <code>trace</code> output, but having trouble identifying where the problem could be.</p>
+
+
+{% endraw %}
