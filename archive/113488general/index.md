@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (10 messages, latest: Mar 26 2019 at 06:51)
+* [VScode go to next error](21959VScodegotonexterror.html) (1 message, latest: Mar 26 2019 at 07:44)
 
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (8 messages, latest: Mar 25 2019 at 22:05)
+* [VScode extension](56578VScodeextension.html) (350 messages, latest: Mar 26 2019 at 07:33)
+
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (9 messages, latest: Mar 26 2019 at 07:14)
+
+* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (12 messages, latest: Mar 26 2019 at 07:11)
 
 * [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)
 
@@ -21,8 +25,6 @@ permalink: archive/113488general/index.html
 * [finsetology](24852finsetology.html) (3 messages, latest: Mar 25 2019 at 19:02)
 
 * [linux scheduler](40080linuxscheduler.html) (22 messages, latest: Mar 25 2019 at 18:42)
-
-* [VScode extension](56578VScodeextension.html) (349 messages, latest: Mar 25 2019 at 15:13)
 
 * [name for, and question about, computational principle](41517nameforandquestionaboutcomputationalprinciple.html) (3 messages, latest: Mar 25 2019 at 14:32)
 
