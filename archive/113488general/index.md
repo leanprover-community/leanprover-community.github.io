@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Trouble feeding instances](22872Troublefeedinginstances.html) (6 messages, latest: Mar 26 2019 at 19:59)
+* [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (12 messages, latest: Mar 26 2019 at 20:09)
 
-* [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (9 messages, latest: Mar 26 2019 at 19:59)
+* [Trouble feeding instances](22872Troublefeedinginstances.html) (7 messages, latest: Mar 26 2019 at 20:00)
 
 * [VScode go to next error](21959VScodegotonexterror.html) (15 messages, latest: Mar 26 2019 at 13:40)
 
