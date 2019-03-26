@@ -1,0 +1,114 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/67655766.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html">#766</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161719001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719001">Scott Morrison (Mar 26 2019 at 00:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, could you explain the logic in <code>auth_github</code> in <code>cache-olean.sh</code>? It seems the <code>github.oauthtoken</code> will only ever be looked at if we've failed to find a user and password?</p>
+
+<a name="161719005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719005">Scott Morrison (Mar 26 2019 at 00:36)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/766/files#diff-dbd7f4184984f905b3e1ed514ca280ccR20" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/766/files#diff-dbd7f4184984f905b3e1ed514ca280ccR20">https://github.com/leanprover-community/mathlib/pull/766/files#diff-dbd7f4184984f905b3e1ed514ca280ccR20</a></p>
+
+<a name="161719354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719354">Scott Morrison (Mar 26 2019 at 00:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> --- also, what access is needed by the OAuth token, if <code>cache-olean.sh</code> is using that to talk to github?</p>
+
+<a name="161719412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719412">Scott Morrison (Mar 26 2019 at 00:44)</a>:</h4>
+<p>Ah, regarding the logic, I see what's going on, and will tweak it so an error is only printed if _neither_ a password _nor_ an OAuth token are found</p>
+
+<a name="161719418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719418">Simon Hudon (Mar 26 2019 at 00:44)</a>:</h4>
+<p>That sounds good.</p>
+
+<a name="161719437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719437">Simon Hudon (Mar 26 2019 at 00:45)</a>:</h4>
+<p>I don't think you actually need any permission with the token</p>
+
+<a name="161719655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719655">Scott Morrison (Mar 26 2019 at 00:49)</a>:</h4>
+<p>ok!</p>
+
+<a name="161719713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719713">Scott Morrison (Mar 26 2019 at 00:50)</a>:</h4>
+<p>I just pushed a commit to this PR that improved the error handling.</p>
+
+<a name="161719720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719720">Scott Morrison (Mar 26 2019 at 00:50)</a>:</h4>
+<p>I will test the permisson on the token an update.</p>
+
+<a name="161719813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719813">Simon Hudon (Mar 26 2019 at 00:52)</a>:</h4>
+<p><span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span>  thanks</p>
+
+<a name="161719818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719818">Scott Morrison (Mar 26 2019 at 00:52)</a>:</h4>
+<p>looks good with no scopes</p>
+
+<a name="161719821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719821">Scott Morrison (Mar 26 2019 at 00:52)</a>:</h4>
+<p>So -- now whenever I <code>git checkout master</code>, I get the following:</p>
+
+<a name="161719833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719833">Scott Morrison (Mar 26 2019 at 00:53)</a>:</h4>
+<div class="codehilite"><pre><span></span>idaeus:mathlib scott$ git checkout master
+Switched to branch &#39;master&#39;
+Your branch is up to date with &#39;origin/master&#39;.
+Trying to fetch cached olean
+Querying GitHub...
+Error: no nightly archive found
+no cache found
+</pre></div>
+
+<a name="161719845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719845">Scott Morrison (Mar 26 2019 at 00:53)</a>:</h4>
+<p>how do I convince it to just use the <code>olean</code> files on hand?</p>
+
+<a name="161719959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161719959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161719959">Simon Hudon (Mar 26 2019 at 00:56)</a>:</h4>
+<p>What do you mean by "on hand"?</p>
+
+<a name="161720105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720105">Scott Morrison (Mar 26 2019 at 00:58)</a>:</h4>
+<p>I've run <code>leanpkg build</code>, so they are all sitting around</p>
+
+<a name="161720116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720116">Scott Morrison (Mar 26 2019 at 00:58)</a>:</h4>
+<p>or is this not the intended use?</p>
+
+<a name="161720141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720141">Simon Hudon (Mar 26 2019 at 00:59)</a>:</h4>
+<p>They're not discarded. If no cache is found, they will still be lying around and you default to using them.</p>
+
+<a name="161720148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720148">Scott Morrison (Mar 26 2019 at 00:59)</a>:</h4>
+<p>On the other hand, when I <code>git checkout olean-cache</code>, I see:</p>
+<div class="codehilite"><pre><span></span>idaeus:mathlib scott$ git checkout olean-cache
+Switched to branch &#39;olean-cache&#39;
+Your branch is up to date with &#39;origin/olean-cache&#39;.
+Trying to fetch cached olean
+</pre></div>
+
+
+<p>but then nothing more.</p>
+
+<a name="161720151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720151">Scott Morrison (Mar 26 2019 at 00:59)</a>:</h4>
+<p>What does that indicate?</p>
+
+<a name="161720160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23766/near/161720160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/67655766.html#161720160">Scott Morrison (Mar 26 2019 at 00:59)</a>:</h4>
+<p>Presumably there should be a "success!" message somewhere?</p>
+
+
+{% endraw %}
