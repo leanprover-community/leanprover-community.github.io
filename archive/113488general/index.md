@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode go to next error](21959VScodegotonexterror.html) (6 messages, latest: Mar 26 2019 at 12:54)
+
 * [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (30 messages, latest: Mar 26 2019 at 11:53)
 
 * [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (16 messages, latest: Mar 26 2019 at 08:40)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (11 messages, latest: Mar 26 2019 at 08:23)
-
-* [VScode go to next error](21959VScodegotonexterror.html) (1 message, latest: Mar 26 2019 at 07:44)
 
 * [VScode extension](56578VScodeextension.html) (350 messages, latest: Mar 26 2019 at 07:33)
 

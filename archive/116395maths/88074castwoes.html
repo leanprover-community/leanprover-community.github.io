@@ -502,5 +502,33 @@ permalink: archive/116395maths/88074castwoes.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161749440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161749440">Sebastien Gouezel (Mar 26 2019 at 10:46)</a>:</h4>
 <p>Instead of <code>1/(n+1)</code>, you can use <code>((1:R)/2)^n</code> (and the fact that this sequence tends to <code>0</code>, which should already be there). No need to cast with this one.</p>
 
+<a name="161754183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161754183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161754183">Kevin Buzzard (Mar 26 2019 at 12:03)</a>:</h4>
+<blockquote>
+<p>Even basic identities like 1/2 - 1 = -1/2 cannot easily be<br>
+ proved directly in ℝ, because there are no general algorithms<br>
+ for exact calculation in ℝ.  We need to work in ℚ and then<br>
+ apply the cast map.</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="161754483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161754483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161754483">Kevin Buzzard (Mar 26 2019 at 12:07)</a>:</h4>
+<blockquote>
+<p>For reasons that I do not fully understand, the ring tactic<br>
+ seems to work more reliably if we do it in a separate lemma<br>
+ so that the terms are just free variables.  We can then<br>
+ substitute values for this variables as an extra step.  In<br>
+ particular, we will substitute h = 1/2, and then give a<br>
+ separate argument that the final term 2 * h - 1 is zero.</p>
+</blockquote>
+<p><code>ring</code> can sometimes be a bit ropey when division is involved. One could probably beef it up by putting in a "clear denominators" step.</p>
+
 
 {% endraw %}
