@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp messes up names](75715simpmessesupnames.html) (14 messages, latest: Mar 26 2019 at 21:15)
+
 * [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (12 messages, latest: Mar 26 2019 at 20:09)
 
 * [Trouble feeding instances](22872Troublefeedinginstances.html) (7 messages, latest: Mar 26 2019 at 20:00)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (11 messages, latest: Mar 26 2019 at 08:23)
 
 * [VScode extension](56578VScodeextension.html) (350 messages, latest: Mar 26 2019 at 07:33)
-
-* [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)
 
 * [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
 
