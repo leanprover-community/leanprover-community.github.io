@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (16 messages, latest: Mar 26 2019 at 08:40)
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (30 messages, latest: Mar 26 2019 at 11:53)
 
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (29 messages, latest: Mar 26 2019 at 08:31)
+* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (16 messages, latest: Mar 26 2019 at 08:40)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (11 messages, latest: Mar 26 2019 at 08:23)
 
