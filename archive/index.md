@@ -8,13 +8,13 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (1623 topics)
+* [general](113488general/index.html) (1625 topics)
 
 * [maths](116395maths/index.html) (430 topics)
 
 * [new members](113489newmembers/index.html) (352 topics)
 
-* [PR reviews](144837PRreviews/index.html) (111 topics)
+* [PR reviews](144837PRreviews/index.html) (112 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 

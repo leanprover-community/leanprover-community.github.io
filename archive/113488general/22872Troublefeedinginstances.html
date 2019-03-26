@@ -1,0 +1,45 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/22872Troublefeedinginstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html">Trouble feeding instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161797024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797024">Abhimanyu Pallavi Sudhir (Mar 26 2019 at 19:53)</a>:</h4>
+<p>In <code>order.filter.filter_product</code>, I'm trying to write: </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">of_div</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">is_ultrafilter</span> <span class="n">φ</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">of</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">@</span><span class="n">division_ring_has_div</span> <span class="n">β</span><span class="bp">*</span> <span class="o">(</span><span class="n">filter_product</span><span class="bp">.</span><span class="n">division_ring</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">filter_product</span><span class="bp">.</span><span class="n">division_ring</span> <span class="n">U</span><span class="o">))</span><span class="bp">.</span><span class="n">div</span>
+   <span class="o">(</span><span class="n">of</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">of</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="161797152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797152">Abhimanyu Pallavi Sudhir (Mar 26 2019 at 19:54)</a>:</h4>
+<p>(to try and bypass the problem of <code>U</code> not being an instance)</p>
+
+<a name="161797167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797167">Abhimanyu Pallavi Sudhir (Mar 26 2019 at 19:54)</a>:</h4>
+<p>But Lean gives weird errors: </p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">field</span> <span class="kn">notation</span><span class="o">,</span> <span class="n">function</span> <span class="err">&#39;</span><span class="n">has_div</span><span class="bp">.</span><span class="n">div&#39;</span> <span class="n">does</span> <span class="n">not</span> <span class="k">have</span> <span class="n">explicit</span> <span class="n">argument</span> <span class="k">with</span> <span class="n">type</span> <span class="o">(</span><span class="n">has_div</span> <span class="bp">...</span><span class="o">)</span>
+</pre></div>
+
+<a name="161797214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797214">Abhimanyu Pallavi Sudhir (Mar 26 2019 at 19:55)</a>:</h4>
+<p>Which doesn't seem to make sense, as trying to access a field <code>has_div</code> out of <code>has_div.div</code> is certainly <em>not</em> what I'm doing.</p>
+
+<a name="161797367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797367">Chris Hughes (Mar 26 2019 at 19:57)</a>:</h4>
+<p>In order to use the dot notation, you need the <code>has_div</code> argument to <code>has_div.div</code> to be explicit.</p>
+
+<a name="161797562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trouble%20feeding%20instances/near/161797562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22872Troublefeedinginstances.html#161797562">Abhimanyu Pallavi Sudhir (Mar 26 2019 at 19:59)</a>:</h4>
+<p>Oh, right -- of course.</p>
+
+
+{% endraw %}
