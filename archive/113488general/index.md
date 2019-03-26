@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (16 messages, latest: Mar 26 2019 at 08:40)
+
+* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (29 messages, latest: Mar 26 2019 at 08:31)
+
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (11 messages, latest: Mar 26 2019 at 08:23)
+
 * [VScode go to next error](21959VScodegotonexterror.html) (1 message, latest: Mar 26 2019 at 07:44)
 
 * [VScode extension](56578VScodeextension.html) (350 messages, latest: Mar 26 2019 at 07:33)
-
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (9 messages, latest: Mar 26 2019 at 07:14)
-
-* [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (12 messages, latest: Mar 26 2019 at 07:11)
 
 * [simp messes up names](75715simpmessesupnames.html) (13 messages, latest: Mar 25 2019 at 20:34)
 
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [linux scheduler](40080linuxscheduler.html) (22 messages, latest: Mar 25 2019 at 18:42)
 
 * [name for, and question about, computational principle](41517nameforandquestionaboutcomputationalprinciple.html) (3 messages, latest: Mar 25 2019 at 14:32)
-
-* [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (28 messages, latest: Mar 25 2019 at 08:33)
 
 * [Efficient modular fibonacci](63008Efficientmodularfibonacci.html) (57 messages, latest: Mar 25 2019 at 01:40)
 

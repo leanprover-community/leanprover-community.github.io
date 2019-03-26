@@ -73,5 +73,23 @@ example : has_scalar ℝ X := infer_instance -- times out
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161737269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161737269">Johan Commelin (Mar 26 2019 at 07:11)</a>:</h4>
 <p>We will only become more dependent on type class search the deeper down we get in higher maths</p>
 
+<a name="161741097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161741097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161741097">Kevin Buzzard (Mar 26 2019 at 08:33)</a>:</h4>
+<p>Is this a current workaround: in complicated situations, the user can just supply the instances they want lean to find in some cases? This is what I have been doing to avoid having to change the default instance depth search. I know that the Lean 3 instance search needs some guidance sometimes, but because in practice I know what the answer is, it's not hard to guide Lean the right direction. </p>
+<p>Or is there a fundamental problem which this approach will not deal with?</p>
+<p>In my experience, timeouts are almost always because of "user error" in the sense that I ask Lean to fill in an instance which it cannot be reasonably expected to do (eg because it's not there)</p>
+
+<a name="161741280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161741280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161741280">Johan Commelin (Mar 26 2019 at 08:36)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/71b680fec8dfd4a47e06b7b686e9c3839b4937f9/src/Huber_ring/localization.lean#L328" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/71b680fec8dfd4a47e06b7b686e9c3839b4937f9/src/Huber_ring/localization.lean#L328">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/71b680fec8dfd4a47e06b7b686e9c3839b4937f9/src/Huber_ring/localization.lean#L328</a></p>
+
+<a name="161741314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161741314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161741314">Johan Commelin (Mar 26 2019 at 08:37)</a>:</h4>
+<p>That bound isn't tight, but I think <code>120</code> is an under bound.</p>
+
+<a name="161741465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161741465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161741465">Johannes Hölzl (Mar 26 2019 at 08:40)</a>:</h4>
+<p>the search depth is a very limited parameter. If you have something like <code>module A i1 i2 _</code>, now the instance search already found <code>i1</code> and <code>i2</code>, and is now looking at the <code>_</code>. Let's assume the <code>i1</code> and <code>i2</code> are already large terms. Now we have a lot of choice points in <code>i1</code> and <code>i2</code>. Remember that choice points are possible further choice, even if there is no further successful choice. With this the "instance depth search" (which is not about term depth, but backtracking depth) needs to be already quiet high, even if we didn't start the search for <code>_</code> yet.</p>
+
 
 {% endraw %}
