@@ -32,5 +32,38 @@ example : has_scalar ℝ X := infer_instance -- times out
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734019">Scott Morrison (Mar 26 2019 at 05:50)</a>:</h4>
 <p>I've been staring at the <code>trace</code> output, but having trouble identifying where the problem could be.</p>
 
+<a name="161734476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734476">Scott Morrison (Mar 26 2019 at 06:02)</a>:</h4>
+<p>Oh "dear". This is the same problem <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> identified at <a href="https://github.com/johoelzl/tc-log-parser/blob/master/problem.md" target="_blank" title="https://github.com/johoelzl/tc-log-parser/blob/master/problem.md">https://github.com/johoelzl/tc-log-parser/blob/master/problem.md</a></p>
+
+<a name="161734500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734500">Scott Morrison (Mar 26 2019 at 06:03)</a>:</h4>
+<div class="codehilite"><pre><span></span>semimodule.to_has_scalar : Π (α : Type u) (β : Type v) [_inst_1 : semiring α] [_inst_2 : add_comm_monoid β] [c : semimodule α β],
+  has_scalar α β
+</pre></div>
+
+
+<p>is maybe the problem. <code>semimodule ℝ X</code> is going to fail, but it's going to try solving for it over and over again with different values of <code>_inst_1</code> and <code>_inst_2</code>?</p>
+
+<a name="161734502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734502">Scott Morrison (Mar 26 2019 at 06:03)</a>:</h4>
+<p>Do we have a work-around?</p>
+
+<a name="161734505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161734505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161734505">Scott Morrison (Mar 26 2019 at 06:03)</a>:</h4>
+<p>This seems bad. :-(</p>
+
+<a name="161736352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161736352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161736352">Mario Carneiro (Mar 26 2019 at 06:48)</a>:</h4>
+<p>wait, so is the search supposed to succeed?</p>
+
+<a name="161736380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161736380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161736380">Johannes Hölzl (Mar 26 2019 at 06:50)</a>:</h4>
+<p>Not this specific setting. But it may happen that in a similar instance search such a problem occurs. Then it doesn't terminate, or takes a long time.</p>
+
+<a name="161736442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20loop%20for%20%60has_scalar%60/near/161736442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19066typeclassinferenceloopforhasscalar.html#161736442">Johannes Hölzl (Mar 26 2019 at 06:51)</a>:</h4>
+<p>Let's say we want to prove <code>C t s</code>, and one of the instances is <code>I : semiring R x -&gt; ... -&gt; C x y</code> and another one is <code>J : C t x</code>. If the semiring instance is looked up first we fail. If we are lucky then <code>J</code> is tried first.</p>
+
 
 {% endraw %}
