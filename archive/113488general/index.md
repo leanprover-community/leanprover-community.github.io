@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (13 messages, latest: Mar 27 2019 at 04:45)
+
 * [too many semicolons](88356toomanysemicolons.html) (8 messages, latest: Mar 27 2019 at 01:46)
 
 * [simp messes up names](75715simpmessesupnames.html) (14 messages, latest: Mar 26 2019 at 21:15)
-
-* [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (12 messages, latest: Mar 26 2019 at 20:09)
 
 * [Trouble feeding instances](22872Troublefeedinginstances.html) (7 messages, latest: Mar 26 2019 at 20:00)
 
