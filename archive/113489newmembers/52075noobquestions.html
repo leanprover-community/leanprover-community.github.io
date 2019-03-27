@@ -1343,5 +1343,43 @@ What am I missing?</p>
 
 <p>Having never worked with <code>heq</code>, I'm not sure if this is provable? Clearly both sides are the same expression, but one has been passed through <code>eq.mpr</code> to cast its type. If it's provable, what would be a good tactic/term to solve it? <em>EDIT</em>: It's probably worth noting that it has been casted to the wrong type, i.e. RHS has the same type as LHS before the cast, but a different one after. Can I undo <code>eq.mpr</code> in here somehow?</p>
 
+<a name="161819590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161819590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161819590">Wojciech Nawrocki (Mar 27 2019 at 01:25)</a>:</h4>
+<p>Ah <code>h_generalize</code> did it. I would still be interested in hearing if there's a more automated way of doing it.</p>
+
+<a name="161819890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161819890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161819890">Jesse Michael Han (Mar 27 2019 at 01:30)</a>:</h4>
+<p><code>cc</code> can sometimes handle heqs of casts which are close to being definitional equalities</p>
+
+<a name="161819901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161819901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161819901">Jesse Michael Han (Mar 27 2019 at 01:30)</a>:</h4>
+<p>however, it works better when <code>eq.mpr</code>s are hidden beneath <code>cast</code>s</p>
+
+<a name="161820139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161820139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161820139">Wojciech Nawrocki (Mar 27 2019 at 01:35)</a>:</h4>
+<p>What's the difference between <code>cast</code> and <code>eq.mpr</code>?</p>
+
+<a name="161820220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161820220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161820220">Kenny Lau (Mar 27 2019 at 01:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">cast</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">},</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="n">a</span> <span class="n">h</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">},</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="bp">_</span> <span class="n">h₂</span>
+</pre></div>
+
+<a name="161820396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161820396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161820396">Wojciech Nawrocki (Mar 27 2019 at 01:40)</a>:</h4>
+<p>Oh, it's just reversed? Okay then :)</p>
+
+<a name="161820412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/161820412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#161820412">Kenny Lau (Mar 27 2019 at 01:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">},</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">},</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span>
+</pre></div>
+
 
 {% endraw %}
