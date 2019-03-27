@@ -154,5 +154,81 @@ permalink: archive/113488general/44348Problemwithtypeclasssearch.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161903595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161903595">Chris Hughes (Mar 27 2019 at 21:50)</a>:</h4>
 <p>We should make a Lean 4 todo list.</p>
 
+<a name="161905685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161905685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161905685">Kevin Buzzard (Mar 27 2019 at 22:23)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : has_one ℕ := @with_top.has_one ?x_1 ?x_2 ?x_3
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := @with_bot.has_one ?x_4 ?x_5
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := @with_zero.has_one ?x_6 ?x_7
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := @with_one.has_one ?x_8
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := @units.has_one ?x_9 ?x_10
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := unsigned.has_one
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := @fin.has_one ?x_11
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := int.has_one
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_one ℕ := nat.has_one
+</pre></div>
+
+
+<p>Which one should Lean have tried first, to find a one for nat? <code>with_zero.has_one</code> or <code>nat.has_one</code>?</p>
+
+<a name="161905782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161905782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161905782">Kevin Buzzard (Mar 27 2019 at 22:24)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : has_to_format tactic_state := int.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := @with_top.has_to_format ?x_1 ?x_2
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := @with_bot.has_to_format ?x_3 ?x_4
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := tactic.rcases_patt.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := tactic.rcases_patt_inverted.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := @array.has_to_format ?x_5 ?x_6 ?x_7
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := subsingleton_info.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := fun_info.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := param_info.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := occurrences.has_to_format
+failed is_def_eq
+[class_instances] (0) ?x_0 : has_to_format tactic_state := tactic_state.has_to_format
+</pre></div>
+
+
+<p>rofl</p>
+
+<a name="161905805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161905805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161905805">Kevin Buzzard (Mar 27 2019 at 22:25)</a>:</h4>
+<p><code>with_top</code> very popular I see.</p>
+
+<a name="161905935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161905935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161905935">Kevin Buzzard (Mar 27 2019 at 22:28)</a>:</h4>
+<p>All from the output of</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="161906005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161906005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161906005">Johannes Hölzl (Mar 27 2019 at 22:28)</a>:</h4>
+<p>The instances added last get checked first. But this is usually not a problem, unification fails fast in these cases. The problem is if they match and the instance search runs in the wrong direction...</p>
+
+<a name="161906035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161906035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161906035">Kevin Buzzard (Mar 27 2019 at 22:29)</a>:</h4>
+<p>Aah I see.</p>
+
 
 {% endraw %}
