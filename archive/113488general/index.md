@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [too many semicolons](88356toomanysemicolons.html) (32 messages, latest: Mar 27 2019 at 08:55)
+* [too many semicolons](88356toomanysemicolons.html) (48 messages, latest: Mar 27 2019 at 09:59)
 
 * [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (13 messages, latest: Mar 27 2019 at 04:45)
 
