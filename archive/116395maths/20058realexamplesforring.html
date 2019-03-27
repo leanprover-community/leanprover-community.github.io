@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/20058realexamplesforring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html">real examples for ring?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161876155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161876155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161876155">Joseph Corneli (Mar 27 2019 at 16:24)</a>:</h4>
+<p>The first two examples here are successful but not very interesting; the third fails.  Could someone suggest a more interesting working example to illustrate <code>ring</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">2</span> <span class="bp">→</span> <span class="mi">2</span><span class="bp">+</span><span class="n">x</span><span class="bp">=</span><span class="n">x</span><span class="bp">+</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span> <span class="kn">end</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">2</span> <span class="bp">→</span> <span class="mi">2</span><span class="bp">*</span><span class="n">x</span><span class="bp">=</span><span class="n">x</span><span class="bp">*</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span> <span class="kn">end</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">2</span> <span class="bp">→</span> <span class="mi">2</span><span class="bp">+</span><span class="n">x</span><span class="bp">=</span><span class="n">x</span><span class="bp">*</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span> <span class="kn">end</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="161876384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161876384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161876384">Johan Commelin (Mar 27 2019 at 16:27)</a>:</h4>
+<p><code>ring</code> is good at expanding parentheses. So take <code>(x + y)*(3+x^2+y)</code>, and put the expanded version on the RHS. Then <code>ring</code> can prove you did it right.</p>
+
+<a name="161876483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161876483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161876483">Joseph Corneli (Mar 27 2019 at 16:28)</a>:</h4>
+<p>thanks</p>
+
+<a name="161876487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161876487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161876487">Chris Hughes (Mar 27 2019 at 16:28)</a>:</h4>
+<p>I think <code>ring</code> just doesn't use hypotheses.<br>
+A more interesting example is</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="err">^</span> <span class="mi">3</span> <span class="bp">=</span> <span class="n">x</span><span class="err">^</span><span class="mi">3</span> <span class="bp">-</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="err">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">y</span><span class="err">^</span><span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+<a name="161877351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161877351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161877351">Mario Carneiro (Mar 27 2019 at 16:38)</a>:</h4>
+<p>Something less obvious using a combination of <code>ring</code> and substitution:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">2</span> <span class="bp">→</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">y</span><span class="bp">*</span><span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="n">x</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span><span class="bp">+</span><span class="n">x</span><span class="bp">*</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rintro</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">ring</span>
+</pre></div>
+
+<a name="161877837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20examples%20for%20ring%3F/near/161877837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20058realexamplesforring.html#161877837">Chris Hughes (Mar 27 2019 at 16:44)</a>:</h4>
+<p><code>rintro rfl</code> <span aria-label="rolling eyes" class="emoji emoji-1f644" role="img" title="rolling eyes">:rolling_eyes:</span></p>
+
+
+{% endraw %}
