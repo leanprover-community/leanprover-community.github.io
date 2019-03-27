@@ -215,5 +215,87 @@ The relevant code in the context is:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836735">Johan Commelin (Mar 27 2019 at 07:58)</a>:</h4>
 <p>The problem goes away if we make the family <code>f</code> explicit.</p>
 
+<a name="161836804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836804">Johan Commelin (Mar 27 2019 at 08:00)</a>:</h4>
+<p>Huh, no... that's not enough</p>
+
+<a name="161836806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836806">Johan Commelin (Mar 27 2019 at 08:00)</a>:</h4>
+<p>I don't understand Lean.</p>
+
+<a name="161836833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836833">Johan Commelin (Mar 27 2019 at 08:01)</a>:</h4>
+<p>It needs both <code>I</code> and <code>f</code> explicitly!</p>
+
+<a name="161836835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836835">Johan Commelin (Mar 27 2019 at 08:01)</a>:</h4>
+<p>But <code>I</code> can trivially be inferred from <code>f</code>.</p>
+
+<a name="161836949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161836949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161836949">Mario Carneiro (Mar 27 2019 at 08:03)</a>:</h4>
+<p>did you try putting a type ascription on <code>pi.semimodule</code>? The <code>..foo</code> position of a term doesn't get any expected type assistance</p>
+
+<a name="161837030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837030">Johan Commelin (Mar 27 2019 at 08:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">I</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">semimodule</span>     <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">semiring</span> <span class="n">α</span><span class="o">}</span>       <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_monoid</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">semimodule</span> <span class="n">α</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span>     <span class="o">:</span> <span class="n">semimodule</span> <span class="n">α</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_smul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">zero_smul</span> <span class="n">α</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">pi</span><span class="bp">.</span><span class="n">mul_action_add</span> <span class="bp">_</span> <span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">I</span> <span class="n">f</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">module</span>         <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">α</span><span class="o">}</span>           <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span>  <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">module</span> <span class="n">α</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span>         <span class="o">:</span> <span class="n">module</span> <span class="n">α</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>       <span class="o">:=</span> <span class="o">{</span><span class="bp">..</span><span class="n">pi</span><span class="bp">.</span><span class="n">semimodule</span> <span class="n">I</span> <span class="n">f</span> <span class="n">α</span><span class="o">}</span>
+</pre></div>
+
+<a name="161837041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837041">Johan Commelin (Mar 27 2019 at 08:04)</a>:</h4>
+<p>That's what I have now</p>
+
+<a name="161837065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837065">Mario Carneiro (Mar 27 2019 at 08:04)</a>:</h4>
+<p><code>..(pi.mul_action_add _ : bla bla)</code></p>
+
+<a name="161837067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837067">Johan Commelin (Mar 27 2019 at 08:04)</a>:</h4>
+<p>But if I tell Lean <code>f</code>, it should be able to figure out <code>I</code>, shouldn't it?</p>
+
+<a name="161837071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837071">Johan Commelin (Mar 27 2019 at 08:04)</a>:</h4>
+<p>Because <code>f : I → _</code></p>
+
+<a name="161837073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837073">Mario Carneiro (Mar 27 2019 at 08:05)</a>:</h4>
+<p>I have no idea what the issue is</p>
+
+<a name="161837085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837085">Mario Carneiro (Mar 27 2019 at 08:05)</a>:</h4>
+<p>it could be an order of operations thing</p>
+
+<a name="161837108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837108">Johan Commelin (Mar 27 2019 at 08:05)</a>:</h4>
+<p>Is my current version okay? Or is it better to write <code>@pi.semimodule I f α _ _ _</code>?</p>
+
+<a name="161837110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837110">Johan Commelin (Mar 27 2019 at 08:05)</a>:</h4>
+<p>And leave the variables implicit</p>
+
+<a name="161837116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837116">Kevin Buzzard (Mar 27 2019 at 08:05)</a>:</h4>
+<p>Sebastian once showed us how to switch on debugging so you can see exactly what the unifier is doing, if anyone really cares.</p>
+
+<a name="161837156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837156">Mario Carneiro (Mar 27 2019 at 08:06)</a>:</h4>
+<p>if it works, the current version is fine</p>
+
+<a name="161837170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161837170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161837170">Johan Commelin (Mar 27 2019 at 08:06)</a>:</h4>
+<p>Let's see what Travis says</p>
+
+<a name="161838691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23850%20mul_action/near/161838691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83628850mulaction.html#161838691">Kevin Buzzard (Mar 27 2019 at 08:38)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/unification/near/156841375" title="#narrow/stream/113488-general/topic/unification/near/156841375">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156841375</a> is what happens if you ask Sebastian this sort of question -- he just inspects what the unifier is doing and then can tell you why your original type mismatch occurred. The set_options he used are a few posts later. I've seen Kenny using them at Xena.</p>
+
 
 {% endraw %}
