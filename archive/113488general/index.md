@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
+* [VScode extension](56578VScodeextension.html) (359 messages, latest: Mar 27 2019 at 19:58)
 
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (13 messages, latest: Mar 27 2019 at 11:47)
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (14 messages, latest: Mar 27 2019 at 19:56)
+
+* [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
 
 * [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (13 messages, latest: Mar 27 2019 at 04:45)
 
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [What is the purpose of `group_action` and `module`](63896Whatisthepurposeofgroupactionandmodule.html) (30 messages, latest: Mar 26 2019 at 11:53)
 
 * [typeclass inference loop for `has_scalar`](19066typeclassinferenceloopforhasscalar.html) (16 messages, latest: Mar 26 2019 at 08:40)
-
-* [VScode extension](56578VScodeextension.html) (350 messages, latest: Mar 26 2019 at 07:33)
 
 * [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
 
