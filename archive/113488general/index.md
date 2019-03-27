@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode extension](56578VScodeextension.html) (359 messages, latest: Mar 27 2019 at 19:58)
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (26 messages, latest: Mar 27 2019 at 20:59)
 
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (14 messages, latest: Mar 27 2019 at 19:56)
+* [VScode extension](56578VScodeextension.html) (364 messages, latest: Mar 27 2019 at 20:04)
 
 * [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
 

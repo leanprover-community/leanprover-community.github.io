@@ -81,5 +81,74 @@ permalink: archive/113488general/44348Problemwithtypeclasssearch.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161894979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161894979">Kevin Buzzard (Mar 27 2019 at 19:56)</a>:</h4>
 <p>So today will be remembered as the day that the age old question of why Lean times out when failing to coerce from int to nat is solved! <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> this trips up beginner mathematicians and is hard for them to debug. I think Johannes has found a fundamental issue which needs some serious thought.</p>
 
+<a name="161895570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895570">Kevin Buzzard (Mar 27 2019 at 20:03)</a>:</h4>
+<p>So what Rob is saying, I think, is that in <code>data.int.basic</code> in mathlib, one of the lines here</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span> <span class="n">cast</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_neg</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm">- Canonical homomorphism from the integers to any ring(-like) structure `α` -/</span>
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">cast</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">-</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="kn">instance</span> <span class="n">cast_coe</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>should be changed: the <em>order</em> of the variables should be changed.</p>
+
+<a name="161895583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895583">Johannes Hölzl (Mar 27 2019 at 20:03)</a>:</h4>
+<p>Yes</p>
+
+<a name="161895711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895711">Johan Commelin (Mar 27 2019 at 20:05)</a>:</h4>
+<p>That seems like an easy PR <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="161895757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895757">Johan Commelin (Mar 27 2019 at 20:05)</a>:</h4>
+<p>Could even do that from the Github editor (-;</p>
+
+<a name="161895819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895819">Johannes Hölzl (Mar 27 2019 at 20:06)</a>:</h4>
+<p>Another thing we need to change is actually Lean 3. We could fork Lean 3 and remove the ability to backtrack in Lean 3 and see what breaks in mathlib. This would make the type class search much easier.</p>
+
+<a name="161895885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895885">Johan Commelin (Mar 27 2019 at 20:07)</a>:</h4>
+<p>Who is keeping track of all the benefits of forking?</p>
+
+<a name="161895892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895892">Johan Commelin (Mar 27 2019 at 20:07)</a>:</h4>
+<p>There was a thread about this somewhere, right?</p>
+
+<a name="161895908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895908">Kevin Buzzard (Mar 27 2019 at 20:07)</a>:</h4>
+<p>This is an edit to mathlib we're talking about here</p>
+
+<a name="161895967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161895967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161895967">Kevin Buzzard (Mar 27 2019 at 20:08)</a>:</h4>
+<p>Oh I see, Johannes is suggesting changing the C++ code?</p>
+
+<a name="161896211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161896211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161896211">Rob Lewis (Mar 27 2019 at 20:11)</a>:</h4>
+<p>The edit to mathlib should happen. And it seems worthwhile to experiment with a different type class search in a forked Lean. I would not want to port mathlib to this forked Lean 3, at least not without more knowledge of the Lean 4 type class mechanism.</p>
+
+<a name="161899676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161899676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161899676">Kevin Buzzard (Mar 27 2019 at 20:55)</a>:</h4>
+<p>Results of a completely unscientific test; on this desktop, it took just under 15 minutes to compile mathlib HEAD, and then with the variable line in <code>data/int/basic.lean</code> changed to</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">[</span><span class="n">has_neg</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span>
+</pre></div>
+
+
+<p>(100% reversal) it took just under 14 minutes.</p>
+
+<a name="161899966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem%20with%20type%20class%20search/near/161899966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44348Problemwithtypeclasssearch.html#161899966">Kevin Buzzard (Mar 27 2019 at 20:59)</a>:</h4>
+<p>and <code>example : has_coe ℤ ℕ := by apply_instance</code> now fails instantly! I have never seen that before!</p>
+
 
 {% endraw %}
