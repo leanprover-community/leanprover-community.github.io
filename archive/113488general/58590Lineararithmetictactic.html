@@ -1,0 +1,74 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58590Lineararithmetictactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html">Linear arithmetic tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161972761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161972761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161972761">Rob Dockins (Mar 28 2019 at 17:10)</a>:</h4>
+<p>I'm trying to do some basic proofs/programming involving an abstract syntax for a language that requires some mutual inductive types and indirect recursion.  In order to work with these effectively, I need to use well-founded recursion.  As a consequence, I really need a tactic for discharging some pretty straightforward theorems of linear arithmetic that arise from reasoning about <code>sizeof</code>-based measure functions.</p>
+<p>Up until now, I've been using <code>tactic.linarith</code> from mathlib.  However, when including mathlib in my project, I run into persistent problems with lean reporting <code>excessive memory usage</code> errors and the flycheck emacs mode crapping out and disabling itself, and making the editor rather unresponsive.  It's unpredictable, but I typically get less than an hour's worth of work done before I have to shutdown my emacs and restart, which is intensely annoying.  I haven't found a feasible workaround yet.  Running <code>leanpkg build</code> from the command line seems to help for a time, but the problem eventually resurfaces for reasons I don't understand.</p>
+<p>So, the questions: is there an alternate linear arithmetic tactic I can use that has a smaller footprint than mathlib? Do other people experience similar problems to the ones I'm describing? How do you deal with them?</p>
+
+<a name="161973116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973116">Simon Hudon (Mar 28 2019 at 17:14)</a>:</h4>
+<p>Hi Rob! Right now, every contribution that I know of goes into mathlib. The good news is that there is now a nightly build of mathlib that you can fetch using a script called <code>update-mathlib</code> which you can get by following the instructions here: <a href="https://github.com/leanprover-community/mathlib#obtaining-binaries" target="_blank" title="https://github.com/leanprover-community/mathlib#obtaining-binaries">https://github.com/leanprover-community/mathlib#obtaining-binaries</a></p>
+
+<a name="161973183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973183">Simon Hudon (Mar 28 2019 at 17:14)</a>:</h4>
+<p>It is still a new feature of mathlib so please let us know if you find any issue or if there's a better way it could function.</p>
+
+<a name="161973414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973414">Simon Hudon (Mar 28 2019 at 17:17)</a>:</h4>
+<p>Also, a tactic like Coq's <code>omega</code> (also called <code>omega</code>) is in the process of being merged to mathlib so you might be happier with it than with <code>linarith</code>.</p>
+
+<a name="161973426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973426">Rob Lewis (Mar 28 2019 at 17:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I'm not sure that's related. <code>leanpkg build</code> will achieve everything that <code>update-mathlib</code> does (except saving time). If it doesn't fix this issue then <code>update-mathlib</code> won't help.</p>
+
+<a name="161973572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973572">Rob Lewis (Mar 28 2019 at 17:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="201488">@Rob Dockins</span> can you tell if the problem is <code>linarith</code>-specific, or do you think it's more general to <code>mathlib</code>? Just having <code>mathlib</code> loaded/importing files from there shouldn't cause memory issues. If that's what's happening then there's something odd with your setup.</p>
+
+<a name="161973622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973622">Simon Hudon (Mar 28 2019 at 17:20)</a>:</h4>
+<p>That is a common issue that building too much of mathlib because of a new import will cause emacs to misbehave. After calling <code>leanpkg build</code>, the issue might resurface if you import a module that hasn't been compiled yet.</p>
+
+<a name="161973792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973792">Rob Dockins (Mar 28 2019 at 17:21)</a>:</h4>
+<p>It's really hard to tell, honestly.  I get the impression that it is more related to lean going off and doing background recompiles and such, rather than being related to the tactic itself, but that's just a guess...</p>
+
+<a name="161973906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973906">Rob Dockins (Mar 28 2019 at 17:23)</a>:</h4>
+<p>So, <code>leanpkg build</code> doesn't just build the entire mathlib tree?  Would using the binaries as you suggested prevent recompilation?</p>
+
+<a name="161973953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161973953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161973953">Rob Lewis (Mar 28 2019 at 17:23)</a>:</h4>
+<p>Ah. I haven't used emacs for Lean in a long time, so I'm not sure of the details there. Rather than restarting emacs, you should be able to restart the Lean server, which could at least make debugging smoother.</p>
+
+<a name="161974032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161974032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161974032">Rob Lewis (Mar 28 2019 at 17:24)</a>:</h4>
+<p>Running <code>lean --make</code> in the root directory should build all of mathlib, if you don't want to fetch the prebuilt binaries.</p>
+
+<a name="161974098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161974098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161974098">Simon Hudon (Mar 28 2019 at 17:25)</a>:</h4>
+<p><code>leanpkg build</code> will only build as much of mathlib as you import in your project.</p>
+
+<a name="161974129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161974129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161974129">Rob Dockins (Mar 28 2019 at 17:26)</a>:</h4>
+<p>Unfortunately, restarting lean doesn't seem to help for long, it will pretty much immediately go back to doing whatever it was doing before and run out of memory again.  And once emacs gets into it's weird state, it's very hard to get it to clean itself up again.</p>
+<p>OK, I'll try to build it all first, see if that helps.</p>
+
+<a name="161974622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Linear%20arithmetic%20tactic/near/161974622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58590Lineararithmetictactic.html#161974622">Johan Commelin (Mar 28 2019 at 17:30)</a>:</h4>
+<p>We've recently started using <code>update-mathlib</code> on our project, and it saves us a lot of headaches and wasted time.</p>
+
+
+{% endraw %}

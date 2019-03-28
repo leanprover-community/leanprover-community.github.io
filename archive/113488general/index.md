@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [folding problems problem](25177foldingproblemsproblem.html) (18 messages, latest: Mar 28 2019 at 17:52)
+
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (14 messages, latest: Mar 28 2019 at 17:30)
+
 * ["let" destroys tags](47286letdestroystags.html) (16 messages, latest: Mar 28 2019 at 16:18)
 
 * [Sharkovsky's Theorem](54052SharkovskysTheorem.html) (4 messages, latest: Mar 28 2019 at 15:25)
-
-* [folding problems problem](25177foldingproblemsproblem.html) (17 messages, latest: Mar 28 2019 at 15:03)
 
 * [ITP paper](28646ITPpaper.html) (17 messages, latest: Mar 28 2019 at 12:44)
 
