@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP paper](28646ITPpaper.html) (20 messages, latest: Mar 28 2019 at 21:47)
+* [libgmp dependency](88411libgmpdependency.html) (7 messages, latest: Mar 28 2019 at 22:52)
 
-* [libgmp dependency](88411libgmpdependency.html) (5 messages, latest: Mar 28 2019 at 21:40)
+* [ITP paper](28646ITPpaper.html) (20 messages, latest: Mar 28 2019 at 21:47)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (22 messages, latest: Mar 28 2019 at 21:35)
 

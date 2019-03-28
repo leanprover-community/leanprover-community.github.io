@@ -1,0 +1,28 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/38353Fixanarbitraryx.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html">"Fix an arbitrary x."</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161997499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/161997499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#161997499">Thomas Scholz (Mar 28 2019 at 22:12)</a>:</h4>
+<p>In mathematics it is common to fix an arbitrary value of some type, and then for a while using it. For example, in model theory one might say "fix an arbitrary signature <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>" and then define the notions structure, substructure, homomorphism or something like that. Being precise, these are now parametrized notions, so for example one does not have defined the concept "structure" but rather that of an "<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>-structure" (but, using abuse of language, one often drops the prefix "<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>-"). If one would not have said "fix an arbitrary signature <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>" at the beginning of the section, one would have to say "let L be a signature" at the beginning of each definition (structure, substructure, homomorphism).</p>
+<p>Now I am interested in what possibilities there are in Lean to "fix an arbitrary value" and what the differences are between them. For the example I described, I assume it would suffice to open a section <code>basic_notions_model_theory</code> or something and say <code>variable L : signature</code> at the beginning, right? But then the value <code>L</code> is not really fixed, but gets lambda-abstracted in each definition (structure, substructure, homomorphism) separately. Mhm, in this case I guess this would be okay. But I think that sometimes in mathematics one really needs to <em>fix</em> a value, so that in each definition/theorem in the section, it really denotes the same thing. How does one do this in Lean? Can it be done with <code>parameter</code> or something like that? And what is the exact effect of <code>parameter</code>? Does it also in particular lambda-abstract the variable to each definition/theorem in the section? What, then, is the difference to <code>variable</code>?</p>
+
+<a name="161997758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/161997758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#161997758">Mario Carneiro (Mar 28 2019 at 22:16)</a>:</h4>
+<p>In principle, this is the purpose of <code>parameter</code>. It has the same effect as <code>variable</code>, but everything in the section automatically gets the variable and all references to other theorems in the section will fill in those arguments automatically so that it looks like the theorems don't even take arguments for them</p>
+
+<a name="161998115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/161998115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#161998115">Mario Carneiro (Mar 28 2019 at 22:21)</a>:</h4>
+<p>In practice lean implements this with some parser trickery, and the abstraction leaks in a few places. For the most part mathlib doesn't use <code>parameter</code>, although it's not banned</p>
+
+
+{% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (3 messages, latest: Mar 28 2019 at 22:21)
+
 * [noob question(s)](52075noobquestions.html) (245 messages, latest: Mar 28 2019 at 05:56)
 
 * [writing and applying axioms](55629writingandapplyingaxioms.html) (3 messages, latest: Mar 26 2019 at 23:00)
