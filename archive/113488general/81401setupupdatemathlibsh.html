@@ -124,5 +124,60 @@ Error: no nightly archive found
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161108204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161108204">Simon Hudon (Mar 19 2019 at 00:04)</a>:</h4>
 <p>That's true. 1) might end up easier to use</p>
 
+<a name="161989597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161989597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161989597">Bryan Gin-ge Chen (Mar 28 2019 at 20:26)</a>:</h4>
+<p>I'm having trouble with <code>update-mathlib</code>:</p>
+<div class="codehilite"><pre><span></span>Traceback (most recent call last):
+  File &quot;/Users/chb/.mathlib/bin/update-mathlib&quot;, line 21, in auth_github
+    return Github(config.get(&#39;github&#39;, &#39;user&#39;), config.get(&#39;github&#39;, &#39;password&#39;))
+  File &quot;/Users/chb/Library/Python/3.7/lib/python/site-packages/git/config.py&quot;, line 79, in assure_data_present
+    return func(self, *args, **kwargs)
+  File &quot;/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/configparser.py&quot;, line 780, in get
+    d = self._unify_values(section, vars)
+  File &quot;/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/configparser.py&quot;, line 1146, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: &#39;github&#39;
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/Users/chb/.mathlib/bin/update-mathlib&quot;, line 63, in &lt;module&gt;
+    g = auth_github()
+  File &quot;/Users/chb/.mathlib/bin/update-mathlib&quot;, line 22, in auth_github
+    except configparser.NoOptionError:
+NameError: name &#39;configparser&#39; is not defined
+</pre></div>
+
+
+<p>Am I supposed to have my github username and password stored in my git config somehow?</p>
+
+<a name="161989660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161989660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161989660">Simon Hudon (Mar 28 2019 at 20:27)</a>:</h4>
+<p>It would help but it's not supposed to fail if it's not there. Let me just have a look</p>
+
+<a name="161989711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161989711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161989711">Bryan Gin-ge Chen (Mar 28 2019 at 20:28)</a>:</h4>
+<p>Right now I authenticate using an SSH key which is stored in the macOS keychain.</p>
+
+<a name="161990065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161990065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161990065">Simon Hudon (Mar 28 2019 at 20:32)</a>:</h4>
+<p>Can you try again?</p>
+
+<a name="161990321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161990321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161990321">Bryan Gin-ge Chen (Mar 28 2019 at 20:35)</a>:</h4>
+<div class="codehilite"><pre><span></span>  File &quot;/Users/chb/.mathlib/bin/update-mathlib&quot;, line 24
+    continue
+    ^
+SyntaxError: &#39;continue&#39; not properly in loop
+</pre></div>
+
+<a name="161992211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161992211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161992211">Scott Morrison (Mar 28 2019 at 20:59)</a>:</h4>
+<p>Oh ---- I'd thought I'd updated this code, but it turns out it is repeated across <code>update-mathlib.py</code> and <code>cache-olean.py</code>, and only the second was updated.</p>
+
+<a name="161992226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/161992226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#161992226">Scott Morrison (Mar 28 2019 at 20:59)</a>:</h4>
+<p>We should factor that out into a module, and import it in both files.</p>
+
 
 {% endraw %}

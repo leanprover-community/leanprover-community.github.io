@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (15 messages, latest: Mar 28 2019 at 19:51)
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (30 messages, latest: Mar 28 2019 at 20:59)
+
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (16 messages, latest: Mar 28 2019 at 20:02)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (34 messages, latest: Mar 28 2019 at 19:46)
 
@@ -95,8 +97,6 @@ permalink: archive/113488general/index.html
 * [preorder.comap](07618preordercomap.html) (4 messages, latest: Mar 20 2019 at 00:31)
 
 * [is_group_hom field name](81265isgrouphomfieldname.html) (3 messages, latest: Mar 19 2019 at 14:20)
-
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (23 messages, latest: Mar 19 2019 at 00:04)
 
 * [Logipedia](09519Logipedia.html) (6 messages, latest: Mar 18 2019 at 21:19)
 
