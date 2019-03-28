@@ -10,15 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [folding problems problem](25177foldingproblemsproblem.html) (16 messages, latest: Mar 28 2019 at 14:56)
+* ["let" destroys tags](47286letdestroystags.html) (15 messages, latest: Mar 28 2019 at 15:59)
+
+* [Sharkovsky's Theorem](54052SharkovskysTheorem.html) (4 messages, latest: Mar 28 2019 at 15:25)
+
+* [folding problems problem](25177foldingproblemsproblem.html) (17 messages, latest: Mar 28 2019 at 15:03)
 
 * [ITP paper](28646ITPpaper.html) (17 messages, latest: Mar 28 2019 at 12:44)
 
 * [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 
 * [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
-
-* ["let" destroys tags](47286letdestroystags.html) (4 messages, latest: Mar 28 2019 at 08:34)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (33 messages, latest: Mar 27 2019 at 22:29)
 
