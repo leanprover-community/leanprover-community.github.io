@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (30 messages, latest: Mar 28 2019 at 20:59)
+* [ITP paper](28646ITPpaper.html) (20 messages, latest: Mar 28 2019 at 21:47)
 
-* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (16 messages, latest: Mar 28 2019 at 20:02)
+* [libgmp dependency](88411libgmpdependency.html) (5 messages, latest: Mar 28 2019 at 21:40)
+
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (22 messages, latest: Mar 28 2019 at 21:35)
+
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (32 messages, latest: Mar 28 2019 at 21:00)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (34 messages, latest: Mar 28 2019 at 19:46)
 
@@ -21,8 +25,6 @@ permalink: archive/113488general/index.html
 * ["let" destroys tags](47286letdestroystags.html) (16 messages, latest: Mar 28 2019 at 16:18)
 
 * [Sharkovsky's Theorem](54052SharkovskysTheorem.html) (4 messages, latest: Mar 28 2019 at 15:25)
-
-* [ITP paper](28646ITPpaper.html) (17 messages, latest: Mar 28 2019 at 12:44)
 
 * [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 
@@ -1383,8 +1385,6 @@ permalink: archive/113488general/index.html
 * [excessive memory](16265excessivememory.html) (36 messages, latest: Sep 26 2018 at 22:25)
 
 * [import directories](30873importdirectories.html) (5 messages, latest: Sep 26 2018 at 17:47)
-
-* [libgmp dependency](88411libgmpdependency.html) (3 messages, latest: Sep 26 2018 at 15:58)
 
 * [quotients](67981quotients.html) (107 messages, latest: Sep 26 2018 at 11:20)
 
