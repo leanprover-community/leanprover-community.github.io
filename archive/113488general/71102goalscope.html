@@ -1,0 +1,33 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71102goalscope.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71102goalscope.html">goal scope</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="161933031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/goal%20scope/near/161933031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71102goalscope.html#161933031">Johan Commelin (Mar 28 2019 at 08:36)</a>:</h4>
+<p>Can a tactic escape the focused goals? I am trying to write a <code>defer</code> tactic. Intended use should be something like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="bp">⟨</span><span class="k">by</span> <span class="n">defer</span> <span class="n">k</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_lt_one</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161933045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/goal%20scope/near/161933045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71102goalscope.html#161933045">Johan Commelin (Mar 28 2019 at 08:37)</a>:</h4>
+<p>The idea would be that <code>by defer k</code> adds a goal <code>k : ℕ</code> to the main goal, and uses that to instantiate the existential.</p>
+
+<a name="161933055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/goal%20scope/near/161933055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71102goalscope.html#161933055">Johan Commelin (Mar 28 2019 at 08:38)</a>:</h4>
+<p>But because it's written inside the <code>⟨by defer k, _⟩</code>, it can't see the main goal.</p>
+
+
+{% endraw %}

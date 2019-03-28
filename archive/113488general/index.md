@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [goal scope](71102goalscope.html) (3 messages, latest: Mar 28 2019 at 08:38)
+
+* ["let" destroys tags](47286letdestroystags.html) (4 messages, latest: Mar 28 2019 at 08:34)
+
 * [folding problems problem](25177foldingproblemsproblem.html) (7 messages, latest: Mar 28 2019 at 02:24)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (33 messages, latest: Mar 27 2019 at 22:29)
