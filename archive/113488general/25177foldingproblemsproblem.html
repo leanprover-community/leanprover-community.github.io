@@ -75,5 +75,33 @@ Things should look something like this:</p>
   995441 8957341 98107053 bad_output
 </pre></div>
 
+<a name="161958328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161958328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161958328">Kevin Buzzard (Mar 28 2019 at 14:36)</a>:</h4>
+<p>Maybe the issue is simply that the file is producing too much debugging output.</p>
+
+<a name="161959044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959044">Kevin Buzzard (Mar 28 2019 at 14:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="n">def</span> <span class="n">XYZ</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Here's a better example perhaps. This code compiles quickly with no errors. It produces 14 pieces of debugging output when you click on "def". Folding them up is really hard. This doesn't crash VS Code this time, you just can't fold them.</p>
+
+<a name="161959176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959176">Kevin Buzzard (Mar 28 2019 at 14:45)</a>:</h4>
+<p>It's not impossible though -- I've just done it, although there is a huge amount of whitespace in between some of them.</p>
+
+<a name="161959202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959202">Gabriel Ebner (Mar 28 2019 at 14:45)</a>:</h4>
+<p>The earlier problem also has only 16 error messages, apparently one of these error message is almost 100 megabytes though...</p>
+
+<a name="161960295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161960295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161960295">Gabriel Ebner (Mar 28 2019 at 14:56)</a>:</h4>
+<p>I have put in a small <a href="https://github.com/leanprover/vscode-lean/commit/89bd3dc771b2e734d8cfab04ba46cf97c72608bd" target="_blank" title="https://github.com/leanprover/vscode-lean/commit/89bd3dc771b2e734d8cfab04ba46cf97c72608bd">workaround</a>.  The vscode extension now only displays the first <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mn>1</mn><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{13}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathrm">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mord mathrm mtight">3</span></span></span></span></span></span></span></span></span></span></span></span> messages, and for each message only the first <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mn>1</mn><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{18}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathrm">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mord mathrm mtight">8</span></span></span></span></span></span></span></span></span></span></span></span> characters.  This should hopefully be enough error messages for everybody.</p>
+
 
 {% endraw %}
