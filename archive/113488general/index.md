@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [goal scope](71102goalscope.html) (3 messages, latest: Mar 28 2019 at 08:38)
+* [ITP paper](28646ITPpaper.html) (2 messages, latest: Mar 28 2019 at 09:57)
+
+* [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
 
 * ["let" destroys tags](47286letdestroystags.html) (4 messages, latest: Mar 28 2019 at 08:34)
 
