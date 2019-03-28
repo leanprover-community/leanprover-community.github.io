@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [folding problems problem](25177foldingproblemsproblem.html) (18 messages, latest: Mar 28 2019 at 17:52)
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (15 messages, latest: Mar 28 2019 at 19:51)
 
-* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (14 messages, latest: Mar 28 2019 at 17:30)
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (34 messages, latest: Mar 28 2019 at 19:46)
+
+* [folding problems problem](25177foldingproblemsproblem.html) (18 messages, latest: Mar 28 2019 at 17:52)
 
 * ["let" destroys tags](47286letdestroystags.html) (16 messages, latest: Mar 28 2019 at 16:18)
 
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 
 * [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
-
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (33 messages, latest: Mar 27 2019 at 22:29)
 
 * [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
 
