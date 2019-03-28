@@ -10,17 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [folding problems problem](25177foldingproblemsproblem.html) (9 messages, latest: Mar 28 2019 at 11:35)
+
+* [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
+
 * [ITP paper](28646ITPpaper.html) (11 messages, latest: Mar 28 2019 at 10:55)
 
 * [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
 
 * ["let" destroys tags](47286letdestroystags.html) (4 messages, latest: Mar 28 2019 at 08:34)
 
-* [folding problems problem](25177foldingproblemsproblem.html) (7 messages, latest: Mar 28 2019 at 02:24)
-
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (33 messages, latest: Mar 27 2019 at 22:29)
-
-* [VScode extension](56578VScodeextension.html) (368 messages, latest: Mar 27 2019 at 21:43)
 
 * [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
 
