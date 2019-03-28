@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [folding problems problem](25177foldingproblemsproblem.html) (3 messages, latest: Mar 27 2019 at 22:50)
+* [folding problems problem](25177foldingproblemsproblem.html) (6 messages, latest: Mar 28 2019 at 01:39)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (33 messages, latest: Mar 27 2019 at 22:29)
 
