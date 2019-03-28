@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP paper](28646ITPpaper.html) (17 messages, latest: Mar 28 2019 at 12:44)
+* [folding problems problem](25177foldingproblemsproblem.html) (11 messages, latest: Mar 28 2019 at 13:59)
 
-* [folding problems problem](25177foldingproblemsproblem.html) (9 messages, latest: Mar 28 2019 at 11:35)
+* [ITP paper](28646ITPpaper.html) (17 messages, latest: Mar 28 2019 at 12:44)
 
 * [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 

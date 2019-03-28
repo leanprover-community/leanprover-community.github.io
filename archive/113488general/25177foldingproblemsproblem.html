@@ -62,5 +62,18 @@ Things should look something like this:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161943566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161943566">Gabriel Ebner (Mar 28 2019 at 11:35)</a>:</h4>
 <p>Hmm, this is not good at all.  vscode is unresponsive even if I don't have the problems tab open.</p>
 
+<a name="161954442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161954442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161954442">Bryan Gin-ge Chen (Mar 28 2019 at 13:58)</a>:</h4>
+<p>Yeah, I can freeze up VS code by hovering over errors in this file as well. Performance profile looks like this:<br>
+<a href="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png" target="_blank" title="Screenshot-2019-03-28-09.26.06.png">Screenshot-2019-03-28-09.26.06.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png" target="_blank" title="Screenshot-2019-03-28-09.26.06.png"><img src="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png"></a></div><p>The output from the lean server for this file seems to be absurdly large. Maybe we should be truncating it?</p>
+
+<a name="161954607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161954607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161954607">Bryan Gin-ge Chen (Mar 28 2019 at 13:59)</a>:</h4>
+<p>running <code>lean bad.lean &amp;&gt; bad_output</code> from the command line yields (after some waiting) a 98 MB file:</p>
+<div class="codehilite"><pre><span></span>$ wc bad_output
+  995441 8957341 98107053 bad_output
+</pre></div>
+
 
 {% endraw %}
