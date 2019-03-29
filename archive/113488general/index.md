@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (25 messages, latest: Mar 29 2019 at 00:46)
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
 
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (43 messages, latest: Mar 29 2019 at 00:45)
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (46 messages, latest: Mar 29 2019 at 01:09)
 
 * [ITP paper](28646ITPpaper.html) (21 messages, latest: Mar 28 2019 at 23:29)
 
