@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search has been merged](13909librarysearchhasbeenmerged.html) (2 messages, latest: Mar 29 2019 at 03:37)
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (49 messages, latest: Mar 29 2019 at 07:57)
 
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (48 messages, latest: Mar 29 2019 at 02:56)
+* [library_search has been merged](13909librarysearchhasbeenmerged.html) (3 messages, latest: Mar 29 2019 at 07:20)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
 
