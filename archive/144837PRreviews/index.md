@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (24 messages, latest: Mar 29 2019 at 11:51)
+
 * [#766 cache-olean](84759766cacheolean.html) (21 messages, latest: Mar 28 2019 at 09:53)
 
 * [#850 mul_action](83628850mulaction.html) (58 messages, latest: Mar 28 2019 at 06:43)
@@ -57,8 +59,6 @@ permalink: archive/144837PRreviews/index.html
 * [#772 remove unnecessary assumption from card_eq_succ](14021772removeunnecessaryassumptionfromcardeqsucc.html) (4 messages, latest: Feb 27 2019 at 22:02)
 
 * [#763 subset/inter/union for opens(X)](67832763subsetinterunionforopensX.html) (61 messages, latest: Feb 26 2019 at 18:30)
-
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (22 messages, latest: Feb 25 2019 at 03:51)
 
 * [#734 free_ring and free_comm_ring](00706734freeringandfreecommring.html) (36 messages, latest: Feb 21 2019 at 19:06)
 

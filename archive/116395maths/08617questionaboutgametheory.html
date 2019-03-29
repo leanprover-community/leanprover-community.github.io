@@ -430,5 +430,72 @@ relation.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162035880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162035880">Kevin Buzzard (Mar 29 2019 at 11:00)</a>:</h4>
 <p>The winner of a game is defined recursively. Why can't I implement this all in Lean? Is it too wacky to be an inductive type?</p>
 
+<a name="162037774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162037774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162037774">Scott Morrison (Mar 29 2019 at 11:28)</a>:</h4>
+<p>It seems pretty reasonable. Lean compiles the inductive type a bit strangely. Defining addition requires some work to prove well-foundedness, but doesn't seem impossible.</p>
+
+<a name="162037798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162037798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162037798">Scott Morrison (Mar 29 2019 at 11:29)</a>:</h4>
+<div class="codehilite"><pre><span></span>inductive game : Type
+| intro : Π L R : list game, game
+
+def game.L : game → list game
+| (game.intro L R) := L
+def game.R : game → list game
+| (game.intro L R) := R
+
+instance : has_neg game :=
+{ neg := λ G, game.intro G.R G.L }
+
+-- fails with well-foundedness errors:
+def add : game → game → game
+| G₁@(game.intro L₁ R₁) G₂@(game.intro L₂ R₂) :=
+  game.intro
+    (L₁.map(λ G, add G G₂) ++ L₂.map(λ G, add G₁ G))
+    (R₁.map(λ G, add G G₂) ++ R₂.map(λ G, add G₁ G))
+</pre></div>
+
+<a name="162038136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162038136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162038136">Scott Morrison (Mar 29 2019 at 11:35)</a>:</h4>
+<p>I think we'd want to define <code>list.map_mem</code>, to get the <code>sizeof</code> inequalities. Something like:</p>
+<div class="codehilite"><pre><span></span>def list.map_mem {α β : Type} : Π (L : list α) (f : Π a : α, a ∈ L → β), list β
+| [] f := []
+| L@(h :: t) f := f h (by simp) :: (list.map_mem t (λ a h, f a (or.inr h)))
+
+def add : game → game → game
+| G₁@(game.intro L₁ R₁) G₂@(game.intro L₂ R₂) :=
+  game.intro
+    (L₁.map_mem(λ G h, add G G₂) ++ L₂.map_mem(λ G h, add G₁ G))
+    (R₁.map_mem(λ G h, add G G₂) ++ R₂.map_mem(λ G h, add G₁ G))
+</pre></div>
+
+
+<p>so now at the recursive site we have <code>h : G ∈ L₁</code>, etc.</p>
+
+<a name="162038143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162038143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162038143">Scott Morrison (Mar 29 2019 at 11:35)</a>:</h4>
+<p>(This still doesn't work.)</p>
+
+<a name="162038859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162038859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162038859">Chris Hughes (Mar 29 2019 at 11:47)</a>:</h4>
+<p>Ages ago I was playing around with this and wrote this file. <a href="https://github.com/ChrisHughes24/leanstuff/blob/master/game.lean" target="_blank" title="https://github.com/ChrisHughes24/leanstuff/blob/master/game.lean">https://github.com/ChrisHughes24/leanstuff/blob/master/game.lean</a> I did define what it means for a position to be winning, and there's an unfinished proof of the winning strategy for the game discussed in this video <a href="https://www.youtube.com/watch?v=9KABcmczPdg" target="_blank" title="https://www.youtube.com/watch?v=9KABcmczPdg">https://www.youtube.com/watch?v=9KABcmczPdg</a> I also started to define noughts and crosses.</p>
+<div class="youtube-video message_inline_image"><a data-id="9KABcmczPdg" href="https://www.youtube.com/watch?v=9KABcmczPdg" target="_blank" title="https://www.youtube.com/watch?v=9KABcmczPdg"><img src="https://i.ytimg.com/vi/9KABcmczPdg/default.jpg"></a></div>
+
+<a name="162039415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162039415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162039415">Scott Morrison (Mar 29 2019 at 11:57)</a>:</h4>
+<p>Here's where I got to: <a href="https://gist.github.com/semorrison/8d9d72be5b89bc57c02a7c0f1e32a5ed" target="_blank" title="https://gist.github.com/semorrison/8d9d72be5b89bc57c02a7c0f1e32a5ed">https://gist.github.com/semorrison/8d9d72be5b89bc57c02a7c0f1e32a5ed</a></p>
+
+<a name="162039427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162039427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162039427">Johan Commelin (Mar 29 2019 at 11:57)</a>:</h4>
+<p>Awww, no syntax highlighting. I can't parse Lean without it <span aria-label="confounded" class="emoji emoji-1f616" role="img" title="confounded">:confounded:</span></p>
+
+<a name="162039479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162039479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162039479">Scott Morrison (Mar 29 2019 at 11:58)</a>:</h4>
+<p>I successfully defined addition of games using the definition above, and a very hackish tactic to proving monotonicity of the recursion.</p>
+
+<a name="162039568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162039568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162039568">Scott Morrison (Mar 29 2019 at 11:59)</a>:</h4>
+<p>Presumably a generic version of <code>lemma game.sizeof_mem (L : list game) (G : game) (h : G ∈ L) : game.sizeof G &lt; sizeof L :=</code> is already available somewhere?</p>
+
 
 {% endraw %}
