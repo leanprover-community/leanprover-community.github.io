@@ -497,5 +497,40 @@ def add : game → game → game
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162039568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162039568">Scott Morrison (Mar 29 2019 at 11:59)</a>:</h4>
 <p>Presumably a generic version of <code>lemma game.sizeof_mem (L : list game) (G : game) (h : G ∈ L) : game.sizeof G &lt; sizeof L :=</code> is already available somewhere?</p>
 
+<a name="162067308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162067308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162067308">Mario Carneiro (Mar 29 2019 at 17:36)</a>:</h4>
+<blockquote>
+<p>Seems to me that </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">game</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">L</span> <span class="n">R</span> <span class="o">:</span> <span class="n">set</span> <span class="n">game</span><span class="o">,</span> <span class="n">game</span>
+</pre></div>
+
+
+</blockquote>
+<p>It's in theory possible to have this inductive with <code>finset</code>. With <code>set</code> it's inconsistent:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">function</span>
+
+<span class="kn">constant</span> <span class="n">game</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="o">:</span> <span class="n">set</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">game</span>
+<span class="kn">constant</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">g</span><span class="o">,</span> <span class="n">C</span> <span class="n">g</span>
+<span class="kn">axiom</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec_eq</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">))</span> <span class="o">(</span><span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="n">H</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="n">H</span> <span class="n">L</span> <span class="n">R</span>
+
+<span class="n">def</span> <span class="n">game</span><span class="bp">.</span><span class="n">right</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">game</span> <span class="o">:=</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">R</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="o">(</span><span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">)</span><span class="bp">.</span><span class="n">right</span> <span class="bp">=</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec_eq</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">cantor_injective</span> <span class="n">game</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="err">∅</span><span class="o">)</span> <span class="err">$</span>
+<span class="bp">λ</span> <span class="n">R</span> <span class="n">R&#39;</span> <span class="n">e</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="err">∅</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span>
+  <span class="o">(</span><span class="n">congr_arg</span> <span class="n">game</span><span class="bp">.</span><span class="n">right</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="err">∅</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="162068098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/question%20about%20game%20theory/near/162068098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/08617questionaboutgametheory.html#162068098">Kevin Buzzard (Mar 29 2019 at 17:44)</a>:</h4>
+<p>Hmm. <code>game</code> is a proper class, so Cantor's diagonal argument does not apply.</p>
+
 
 {% endraw %}

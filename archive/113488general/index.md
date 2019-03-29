@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Style](98834Style.html) (8 messages, latest: Mar 29 2019 at 17:57)
+
 * [Lean in the wild](43625Leaninthewild.html) (67 messages, latest: Mar 29 2019 at 16:46)
 
 * [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
-
-* [Style](98834Style.html) (7 messages, latest: Mar 29 2019 at 16:29)
 
 * [ITP paper](28646ITPpaper.html) (23 messages, latest: Mar 29 2019 at 16:01)
 
