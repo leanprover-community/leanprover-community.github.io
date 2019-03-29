@@ -10,13 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Style](98834Style.html) (6 messages, latest: Mar 29 2019 at 13:55)
+
+* [Lean in the wild](43625Leaninthewild.html) (57 messages, latest: Mar 29 2019 at 13:50)
+
+* [ITP paper](28646ITPpaper.html) (22 messages, latest: Mar 29 2019 at 13:38)
+
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (59 messages, latest: Mar 29 2019 at 12:50)
 
 * [library_search has been merged](13909librarysearchhasbeenmerged.html) (3 messages, latest: Mar 29 2019 at 07:20)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
-
-* [ITP paper](28646ITPpaper.html) (21 messages, latest: Mar 28 2019 at 23:29)
 
 * [libgmp dependency](88411libgmpdependency.html) (8 messages, latest: Mar 28 2019 at 23:06)
 
@@ -77,8 +81,6 @@ permalink: archive/113488general/index.html
 * [init.algebra.classes](59885initalgebraclasses.html) (16 messages, latest: Mar 22 2019 at 15:53)
 
 * [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
-
-* [Lean in the wild](43625Leaninthewild.html) (50 messages, latest: Mar 21 2019 at 20:15)
 
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
 

@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [I*M=M for R-modules](99658IMMforRmodules.html) (10 messages, latest: Mar 29 2019 at 12:55)
+* [I*M=M for R-modules](99658IMMforRmodules.html) (46 messages, latest: Mar 29 2019 at 13:59)
 
 * [nats >= 0](33954nats0.html) (4 messages, latest: Mar 29 2019 at 01:34)
 
