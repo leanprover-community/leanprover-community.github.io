@@ -1,0 +1,68 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/16519largevssmallelimination.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html">large vs small elimination</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162083803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162083803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162083803">Reid Barton (Mar 29 2019 at 21:05)</a>:</h4>
+<p>For each inductive type or structure Lean has to decide whether to generate large or small eliminators (eliminating to a type in an arbitrary universe, or only to a proposition). As I understand it, the algorithm is something like this.</p>
+<ul>
+<li>If the target universe of the inductive type is a Type (<code>Sort u</code> for <code>u &gt;= 1</code>), then always generate a large eliminator.</li>
+<li>If the target universe is <code>Prop</code>, then only generate a large eliminator if there's at most one constructor and all of its fields are <code>Prop</code>s.</li>
+</ul>
+<p>However, with universe polymorphism, the target universe might be <code>Prop</code> for some values of the universe parameters but not others. Currently Lean just rejects such definitions. That means you cannot define a structure like</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">structure</span> <span class="n">a</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>You have to use a target universe of <code>Sort (max u 1)</code> or similar. This causes some minor issues in <a href="https://github.com/leanprover-community/mathlib/issues/824" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/824">#824</a> where we want to replace <code>Type</code> by <code>Sort</code> in category theory.</p>
+<p>Would it be possible/sound for Lean to instead do the following?</p>
+<ul>
+<li>Solve for the universe variable substitutions which cause the target universe to become <code>Prop = Sort 0</code>, if possible. (This can be done in a simple syntax-directed way: <code>max u v = 0</code> iff <code>u = 0</code> and <code>v = 0</code>; <code>imax u v = 0</code> iff <code>v = 0</code>; <code>u+1</code> is never 0; etc.)</li>
+<li>If there are such substitutions, then apply them before doing the large eliminator check for <code>Prop</code>s.</li>
+</ul>
+<p>In the example, a large eliminator would be generated for <code>a</code>, because when the target universe is <code>Prop</code>, the field <code>f</code> is also a <code>Prop</code>.</p>
+<p>Are there other reasons that Lean needs to know whether or not the target universe is a <code>Prop</code>?</p>
+
+<a name="162086079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086079">Mario Carneiro (Mar 29 2019 at 21:42)</a>:</h4>
+<p>This would obviously require a modification to lean's kernel, but I can confirm soundness against the paper proof.</p>
+
+<a name="162086113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086113">Mario Carneiro (Mar 29 2019 at 21:43)</a>:</h4>
+<p>I think lean will accept inductive types in <code>Sort u</code> under some circumstances; there are weird consequences in general, but it should be fine for large eliminating inductives</p>
+
+<a name="162086209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086209">Mario Carneiro (Mar 29 2019 at 21:45)</a>:</h4>
+<p>In particular, lean seems to have no trouble with the structure you gave, if you use an inductive instead:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="162086231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086231">Reid Barton (Mar 29 2019 at 21:45)</a>:</h4>
+<p>Oh interesting</p>
+
+<a name="162086337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086337">Reid Barton (Mar 29 2019 at 21:47)</a>:</h4>
+<p>It only generates a small eliminator, though</p>
+
+<a name="162086517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086517">Mario Carneiro (Mar 29 2019 at 21:50)</a>:</h4>
+<p>ah yes, that's the weird consequence</p>
+
+<a name="162086552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/large%20vs%20small%20elimination/near/162086552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16519largevssmallelimination.html#162086552">Mario Carneiro (Mar 29 2019 at 21:51)</a>:</h4>
+<p>that's why the <code>structure</code> won't work, of course</p>
+
+
+{% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [large vs small elimination](16519largevssmallelimination.html) (8 messages, latest: Mar 29 2019 at 21:51)
+
 * [too many semicolons](88356toomanysemicolons.html) (56 messages, latest: Mar 29 2019 at 20:53)
 
 * [Lean in the wild](43625Leaninthewild.html) (70 messages, latest: Mar 29 2019 at 19:13)

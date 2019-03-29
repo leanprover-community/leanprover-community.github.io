@@ -310,5 +310,29 @@ We may want to check the docs again as well.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162057601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162057601">Johan Commelin (Mar 29 2019 at 15:48)</a>:</h4>
 <p>But yes, there are pretty solid ideas for (short) exact sequences.</p>
 
+<a name="162085727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162085727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162085727">snowbunting (Mar 29 2019 at 21:36)</a>:</h4>
+<p>Hi, guys. Me again. Slowly Lean starts to be fun to use, and I'd have some follow-up questions...</p>
+<p>So <code>I•N</code> for <code>[comm_ring R]</code>, <code>I: ideal R</code> and <code>N: submodule R M</code> works fine, now I thought I could also define <code>r•N</code> for <code>r: R</code> (which seems not to be defined, is it?)</p>
+<p>so my attempt was: </p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">has_scalar_from_ring</span><span class="o">:</span> <span class="n">has_scalar</span> <span class="n">R</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span>
+        <span class="bp">⟨λ</span> <span class="n">r</span> <span class="n">N</span><span class="o">,</span> <span class="n">N</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">r</span><span class="err">•</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>(following the def. of <code>I•N</code>) but I think it would be better, to define it as <code>r•N := (r) • N</code> and use the definition of ideals, which already exists. Moreover, the most basic fact, I need is that a module is zero iff every element is zero:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">submodule_mul_scalar_is_zero</span> <span class="o">(</span><span class="n">N</span><span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span><span class="o">:</span><span class="n">R</span><span class="o">):</span>
+    <span class="n">r</span><span class="err">•</span><span class="n">N</span><span class="bp">=</span><span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">))</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="n">M</span><span class="o">),</span> <span class="n">n</span><span class="err">∈</span><span class="n">N</span> <span class="bp">→</span> <span class="n">r</span><span class="err">•</span><span class="n">n</span><span class="bp">=</span><span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">M</span><span class="o">))</span>
+</pre></div>
+
+
+<p>which I don't understand how that would work.</p>
+<p>Therefore I have two questions:</p>
+<ul>
+<li>How do I construct concrete objects like the ideal (r), a polynomial ring R[X] or some other very concrete construction?</li>
+<li>is there something in the <code>has_zero</code> or so, that would imply the statement above? Or how would I try to prove that <code>r•N</code> or <code>I•N</code> is zero?</li>
+</ul>
+<p>Thank you once more for helping me!</p>
+
 
 {% endraw %}
