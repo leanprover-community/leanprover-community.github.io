@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [question about game theory](08617questionaboutgametheory.html) (102 messages, latest: Mar 29 2019 at 17:44)
+* [question about game theory](08617questionaboutgametheory.html) (106 messages, latest: Mar 29 2019 at 18:12)
 
 * [proving less than](99944provinglessthan.html) (6 messages, latest: Mar 28 2019 at 03:47)
 
