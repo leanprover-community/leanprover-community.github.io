@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (96 messages, latest: Mar 29 2019 at 20:29)
+
 * [question about game theory](08617questionaboutgametheory.html) (106 messages, latest: Mar 29 2019 at 18:12)
 
 * [proving less than](99944provinglessthan.html) (6 messages, latest: Mar 28 2019 at 03:47)
@@ -105,8 +107,6 @@ permalink: archive/116395maths/index.html
 * [Unification hints for hom](41291Unificationhintsforhom.html) (12 messages, latest: Mar 02 2019 at 10:09)
 
 * [ring confusion](48581ringconfusion.html) (9 messages, latest: Mar 01 2019 at 21:07)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (94 messages, latest: Mar 01 2019 at 15:51)
 
 * [linear_independent](79881linearindependent.html) (53 messages, latest: Feb 28 2019 at 18:10)
 

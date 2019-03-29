@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [too many semicolons](88356toomanysemicolons.html) (56 messages, latest: Mar 29 2019 at 20:53)
+
 * [Lean in the wild](43625Leaninthewild.html) (70 messages, latest: Mar 29 2019 at 19:13)
 
 * [Style](98834Style.html) (14 messages, latest: Mar 29 2019 at 19:02)
@@ -37,8 +39,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 
 * [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
-
-* [too many semicolons](88356toomanysemicolons.html) (55 messages, latest: Mar 27 2019 at 11:52)
 
 * [silly bug in division_ring_has_div](07988sillybugindivisionringhasdiv.html) (13 messages, latest: Mar 27 2019 at 04:45)
 
