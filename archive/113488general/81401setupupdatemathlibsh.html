@@ -215,5 +215,51 @@ Traceback (most recent call last):
 NameError: name &#39;configparser&#39; is not defined
 </pre></div>
 
+<a name="162004847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162004847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162004847">Simon Hudon (Mar 29 2019 at 00:06)</a>:</h4>
+<p>I'm hoping this time I tested it properly</p>
+
+<a name="162005016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005016">Bryan Gin-ge Chen (Mar 29 2019 at 00:09)</a>:</h4>
+<p>OK, this seems like progress:</p>
+<div class="codehilite"><pre><span></span>No github section found in &#39;git config&#39;
+Querying GitHub...
+Error: no nightly archive found
+</pre></div>
+
+<a name="162005098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005098">Simon Hudon (Mar 29 2019 at 00:10)</a>:</h4>
+<p>ok good</p>
+
+<a name="162005108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005108">Simon Hudon (Mar 29 2019 at 00:10)</a>:</h4>
+<p>Now try <code>leanpkg upgrade</code> it will give you the latest version in the <code>lean-3.4.2</code> branch which always has a nightly associated</p>
+
+<a name="162005110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005110">Simon Hudon (Mar 29 2019 at 00:10)</a>:</h4>
+<p>Then <code>update-mathlib</code></p>
+
+<a name="162005921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005921">Bryan Gin-ge Chen (Mar 29 2019 at 00:26)</a>:</h4>
+<p>OK, I think it's finally working! Thanks!</p>
+<p>What's recommended for <code>lean_version</code> <code>leanpkg.toml</code> now? I've been using <code>nightly</code> there, which at least gets <code>leanpkg upgrade</code> to pull the latest commit of mathlib, though it also gives me this warning every time:</p>
+<div class="codehilite"><pre><span></span>WARNING: Lean version mismatch: installed version is nightly-2019-01-13, but package requires nightly
+</pre></div>
+
+
+<p>When I use <code>3.4.2</code> as the version string, <code>leanpkg upgrade</code> used to pull a really old commit, though it looks like now it's just a few days old.</p>
+
+<a name="162005943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162005943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162005943">Bryan Gin-ge Chen (Mar 29 2019 at 00:27)</a>:</h4>
+<p>I think things happened to work for me just now because the latest nightly at <code>mathlib-nightly</code> just came out with the same tag as the most recent commit to mathlib.</p>
+
+<a name="162006527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162006527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162006527">Simon Hudon (Mar 29 2019 at 00:40)</a>:</h4>
+<p>Travis updates the <code>lean-3.4.2</code> branch every time it uploads a nightly build so <code>lean_version = 3.4.2</code> is the recommended setting.</p>
+
+<a name="162006762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setup-update-mathlib.sh/near/162006762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81401setupupdatemathlibsh.html#162006762">Bryan Gin-ge Chen (Mar 29 2019 at 00:45)</a>:</h4>
+<p>Does it usually take a while? The <code>lean-3.4.2</code> branch is currently pointing to commit <code>291a4f3</code> which is <code>nightly-2019-03-25</code>.</p>
+
 
 {% endraw %}

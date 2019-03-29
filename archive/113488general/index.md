@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (34 messages, latest: Mar 28 2019 at 23:47)
+* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (25 messages, latest: Mar 29 2019 at 00:46)
+
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (43 messages, latest: Mar 29 2019 at 00:45)
 
 * [ITP paper](28646ITPpaper.html) (21 messages, latest: Mar 28 2019 at 23:29)
-
-* [Linear arithmetic tactic](58590Lineararithmetictactic.html) (24 messages, latest: Mar 28 2019 at 23:27)
 
 * [libgmp dependency](88411libgmpdependency.html) (8 messages, latest: Mar 28 2019 at 23:06)
 
