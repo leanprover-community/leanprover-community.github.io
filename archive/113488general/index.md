@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (65 messages, latest: Mar 29 2019 at 15:43)
+* [Lean in the wild](43625Leaninthewild.html) (67 messages, latest: Mar 29 2019 at 16:46)
 
-* [Style](98834Style.html) (6 messages, latest: Mar 29 2019 at 13:55)
+* [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
 
-* [ITP paper](28646ITPpaper.html) (22 messages, latest: Mar 29 2019 at 13:38)
+* [Style](98834Style.html) (7 messages, latest: Mar 29 2019 at 16:29)
+
+* [ITP paper](28646ITPpaper.html) (23 messages, latest: Mar 29 2019 at 16:01)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (59 messages, latest: Mar 29 2019 at 12:50)
 
