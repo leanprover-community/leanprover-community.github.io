@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [I*M=M for R-modules](99658IMMforRmodules.html) (10 messages, latest: Mar 29 2019 at 12:55)
+
 * [nats >= 0](33954nats0.html) (4 messages, latest: Mar 29 2019 at 01:34)
 
 * ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (3 messages, latest: Mar 28 2019 at 22:21)

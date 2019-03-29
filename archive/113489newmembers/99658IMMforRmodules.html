@@ -1,0 +1,82 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/99658IMMforRmodules.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html">I*M=M for R-modules</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162042579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042579">snowbunting (Mar 29 2019 at 12:44)</a>:</h4>
+<p>Hi, I hope I am at the right place here, I got redirected from Stackoverflow...</p>
+<p>So I am trying to learn Lean and I am trying to figure out how one would create a new R-module <code>I*M = {i*m | i in I, m in M}</code> from an ideal I and an R-module M.</p>
+<p>So my attempt was to define first a map ideal_mult that would create a new R-module and then figure out how to asign a nice notation for it.</p>
+<div class="codehilite"><pre><span></span>import ring_theory.ideals
+import algebra.module
+
+universes u v
+variables {R : Type u} {M : Type v}
+variables [comm_ring R] [add_comm_group M] [module R M]
+variables (I: ideal R)
+
+def ideal_mult (I: ideal R) (M: Type v)
+        [add_comm_group M] [module R M]: Type v
+        :=
+    sorry
+
+#check ideal_mult I M
+</pre></div>
+
+
+<p>How could I define this, so that I could for example state a hypothesis like <code>(h: I*M = M)</code>?</p>
+<p>Thank you for the help!</p>
+
+<a name="162042634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042634">Johan Commelin (Mar 29 2019 at 12:45)</a>:</h4>
+<p>Welcome! Wouldn't you rather get a <code>submodule R M</code>?</p>
+
+<a name="162042747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042747">Johan Commelin (Mar 29 2019 at 12:47)</a>:</h4>
+<p>There is currently a PR going on that is very much related to these things... so the code in mathlib might change</p>
+
+<a name="162042848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042848">Johan Commelin (Mar 29 2019 at 12:48)</a>:</h4>
+<p>In fact, we already have what you want</p>
+
+<a name="162042862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042862">snowbunting (Mar 29 2019 at 12:48)</a>:</h4>
+<p>Probably</p>
+<p>I mean <code>IM</code> is definitely a submodule of <code>M</code>.</p>
+<p>You do? how is it called?</p>
+
+<a name="162042886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162042886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162042886">Johan Commelin (Mar 29 2019 at 12:49)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/ideal_operations.lean#L556" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/ideal_operations.lean#L556">https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/ideal_operations.lean#L556</a></p>
+
+<a name="162043014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162043014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162043014">Johan Commelin (Mar 29 2019 at 12:51)</a>:</h4>
+<p>That's what you want, right?</p>
+
+<a name="162043043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162043043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162043043">Johan Commelin (Mar 29 2019 at 12:51)</a>:</h4>
+<p>Your hypothesis would become <code>I \bu M = \top</code></p>
+
+<a name="162043389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162043389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162043389">snowbunting (Mar 29 2019 at 12:54)</a>:</h4>
+<p>hmm, would you mind helping me getting started?<br>
+<code>#check I • M</code> gives "has_scalar (ideal R) (Type u)"<br>
+and<br>
+<code>#check semimodule I M</code> gives <code>semiring ↑I</code><br>
+as left-to-show</p>
+
+<a name="162043434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%2AM%3DM%20for%20R-modules/near/162043434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99658IMMforRmodules.html#162043434">Johan Commelin (Mar 29 2019 at 12:55)</a>:</h4>
+<p>Did you import <code>ideal_operations</code>?</p>
+
+
+{% endraw %}
