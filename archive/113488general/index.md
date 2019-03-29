@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Style](98834Style.html) (6 messages, latest: Mar 29 2019 at 13:55)
+* [Lean in the wild](43625Leaninthewild.html) (59 messages, latest: Mar 29 2019 at 14:40)
 
-* [Lean in the wild](43625Leaninthewild.html) (57 messages, latest: Mar 29 2019 at 13:50)
+* [Style](98834Style.html) (6 messages, latest: Mar 29 2019 at 13:55)
 
 * [ITP paper](28646ITPpaper.html) (22 messages, latest: Mar 29 2019 at 13:38)
 
