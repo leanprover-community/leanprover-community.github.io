@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#820 lexicographic orders](43215820lexicographicorders.html) (8 messages, latest: Mar 30 2019 at 00:27)
+
 * [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (25 messages, latest: Mar 29 2019 at 13:14)
 
 * [#766 cache-olean](84759766cacheolean.html) (21 messages, latest: Mar 28 2019 at 09:53)
