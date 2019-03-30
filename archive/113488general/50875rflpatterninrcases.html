@@ -77,5 +77,27 @@ permalink: archive/113488general/50875rflpatterninrcases.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162108185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162108185">Mario Carneiro (Mar 30 2019 at 06:44)</a>:</h4>
 <p>Do you have a simple example of <code>subst</code> failure?</p>
 
+<a name="162112502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112502">Scott Morrison (Mar 30 2019 at 09:01)</a>:</h4>
+<p>There are two ways that I know of that <code>subst</code> can "fail".<br>
+1) is just that you need to <code>dsimp</code> the hypothesis first<br>
+2) is a bit more complicated: <code>subst</code> is meant to not mind whether you give it <code>x = t</code> or <code>t = x</code>, but I can dig up some examples where it fails, but sticking in a <code>.symm</code> would make it work.</p>
+
+<a name="162112515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112515">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>Typical examples of 1) are having a hypothesis <code>h : (a,b).1 = (c,d).1</code>.</p>
+
+<a name="162112550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112550">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>So you have to write <code>dsimp at h, subst h</code>, to get the desired effect. (And this prevents using <code>rfl</code> in <code>rcases</code>.)</p>
+
+<a name="162112552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112552">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>In fact, I managed to write a proof that ran into this issue in three separate places in the same proof.</p>
+
+<a name="162112567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112567">Scott Morrison (Mar 30 2019 at 09:03)</a>:</h4>
+<p>e.g. <a href="https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36">https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36</a></p>
+
 
 {% endraw %}

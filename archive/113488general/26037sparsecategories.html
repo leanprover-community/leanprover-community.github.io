@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/26037sparsecategories.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html">sparse categories</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162112631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162112631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162112631">Scott Morrison (Mar 30 2019 at 09:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="111080">@Floris van Doorn</span>, I was experimenting with sparse categories (I think they are an excellent idea), but ran into this pesky issue:</p>
+<div class="codehilite"><pre><span></span>import category_theory.category
+
+universes u v
+
+namespace category_theory
+
+variables {C : Type u} [category_struct.{v} C]
+
+instance sparse_category [∀ X Y : C, subsingleton (X ⟶ Y)] : category.{v} C := { }
+
+lemma foo [∀ X Y : C, subsingleton (X ⟶ Y)] (X Y : C) (f : X ⟶ Y) : 𝟙 X ≫ f = f :=
+begin
+  simp,
+end
+
+end category_theory
+</pre></div>
+
+
+<p>For some reason the <code>simp</code> fails, and can't apply the simp lemma <code>category.id_comp</code>. I can't work out what's going on here. Any ideas??</p>
+
+
+{% endraw %}

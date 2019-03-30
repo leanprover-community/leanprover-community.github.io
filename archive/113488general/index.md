@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (12 messages, latest: Mar 30 2019 at 06:44)
+* [sparse categories](26037sparsecategories.html) (1 message, latest: Mar 30 2019 at 09:05)
+
+* [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (17 messages, latest: Mar 30 2019 at 09:03)
 
 * [order instances on empty, unit, bool?](52436orderinstancesonemptyunitbool.html) (2 messages, latest: Mar 30 2019 at 06:42)
 

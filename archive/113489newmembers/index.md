@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [I*M=M for R-modules](99658IMMforRmodules.html) (65 messages, latest: Mar 29 2019 at 21:36)
+* [I*M=M for R-modules](99658IMMforRmodules.html) (71 messages, latest: Mar 30 2019 at 09:57)
 
 * [noob question(s)](52075noobquestions.html) (248 messages, latest: Mar 29 2019 at 18:16)
 
