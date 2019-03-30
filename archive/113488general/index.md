@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sparse categories](26037sparsecategories.html) (1 message, latest: Mar 30 2019 at 09:05)
+* [sparse categories](26037sparsecategories.html) (9 messages, latest: Mar 30 2019 at 10:35)
 
 * [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (17 messages, latest: Mar 30 2019 at 09:03)
 

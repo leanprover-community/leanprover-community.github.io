@@ -35,5 +35,80 @@ end category_theory
 
 <p>For some reason the <code>simp</code> fails, and can't apply the simp lemma <code>category.id_comp</code>. I can't work out what's going on here. Any ideas??</p>
 
+<a name="162114498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162114498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162114498">Kevin Buzzard (Mar 30 2019 at 10:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">,</span> <span class="n">subsingleton</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)]</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="mi">𝟙</span> <span class="n">X</span> <span class="err">≫</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">category</span><span class="bp">.</span><span class="n">id_comp</span> <span class="bp">_</span> <span class="n">f</span><span class="o">,</span> <span class="c1">-- goals accomplished!</span>
+<span class="kn">end</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">kernel failed to type check declaration &#39;foo&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator</span>
+<span class="cm">elaborated type:</span>
+<span class="cm">  ∀ {C : Type u} [_inst_1 : category_struct C] [_inst_2 : ∀ (X Y : C), subsingleton (X ⟶ Y)] (X Y : C)</span>
+<span class="cm">  (f : X ⟶ Y), 𝟙 X ≫ f = f</span>
+<span class="cm">elaborated value:</span>
+<span class="cm">  λ {C : Type u} [_inst_1 : category_struct C] [_inst_2 : ∀ (X Y : C), subsingleton (X ⟶ Y)] (X Y : C)</span>
+<span class="cm">  (f : X ⟶ Y), category.id_comp C f</span>
+<span class="cm">nested exception message:</span>
+<span class="cm">invalid reference to undefined universe level parameter &#39;v&#39;</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="162114502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162114502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162114502">Kevin Buzzard (Mar 30 2019 at 10:00)</a>:</h4>
+<p>It's a universe issue?</p>
+
+<a name="162114642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162114642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162114642">Kevin Buzzard (Mar 30 2019 at 10:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">universes</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">,</span> <span class="n">subsingleton</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)]</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="mi">𝟙</span> <span class="n">X</span> <span class="err">≫</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">category</span><span class="bp">.</span><span class="n">id_comp&#39;</span> <span class="bp">_</span> <span class="n">f</span><span class="o">,</span> <span class="c1">-- goals accomplished!</span>
+<span class="kn">end</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">kernel failed to type check declaration &#39;foo&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator</span>
+<span class="cm">elaborated type:</span>
+<span class="cm">  ∀ {C : Type u} [_inst_1 : category_struct.{v u} C]</span>
+<span class="cm">  [_inst_2 : ∀ (X Y : C), subsingleton.{v+1} (has_hom.hom.{v u} X Y)] (X Y : C) (f : has_hom.hom.{v u} X Y),</span>
+<span class="cm">    eq.{v+1} (category_struct.comp.{v u} (category_struct.id.{v u} X) f) f</span>
+<span class="cm">elaborated value:</span>
+<span class="cm">  λ {C : Type u} [_inst_1 : category_struct.{v u} C]</span>
+<span class="cm">  [_inst_2 : ∀ (X Y : C), subsingleton.{v+1} (has_hom.hom.{v u} X Y)] (X Y : C) (f : has_hom.hom.{v u} X Y),</span>
+<span class="cm">    category.id_comp&#39;.{v u} C f</span>
+<span class="cm">nested exception message:</span>
+<span class="cm">invalid reference to undefined universe level parameter &#39;v&#39;</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="162115170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162115170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162115170">Scott Morrison (Mar 30 2019 at 10:20)</a>:</h4>
+<p>ah... that looks like it could be the problem!</p>
+
+<a name="162115377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162115377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162115377">Scott Morrison (Mar 30 2019 at 10:27)</a>:</h4>
+<p>Hmm... it's a problem, but apparently not the problem! </p>
+<div class="codehilite"><pre><span></span>lemma foo [∀ X Y : C, subsingleton.{v} (X ⟶ Y)] (X Y : C) (f : X ⟶ Y) : 𝟙 X ≫ f = f :=
+begin
+  refine category.id_comp&#39; _ f, -- goals accomplished!
+end
+</pre></div>
+
+
+<p>works, but you still can't prove that lemma by <code>simp</code>.</p>
+
+<a name="162115621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162115621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162115621">Scott Morrison (Mar 30 2019 at 10:34)</a>:</h4>
+<p>hmm, okay. For some reason that I don't understand <code>simp</code> can't cope with synthesising category instances via <code>instance sparse_category [∀ X Y : C, subsingleton (X ⟶ Y)] : category.{v} C := { }</code>.</p>
+
+<a name="162115638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162115638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162115638">Scott Morrison (Mar 30 2019 at 10:35)</a>:</h4>
+<p>The workaround is just to have this be a <code>def</code> instead, and you just use it to build the instance once and for all, rather than looking up the subsingleton instances at each use.</p>
+
+<a name="162115640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sparse%20categories/near/162115640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26037sparsecategories.html#162115640">Scott Morrison (Mar 30 2019 at 10:35)</a>:</h4>
+<p>(That's probably the more sensible use anyway.)</p>
+
 
 {% endraw %}
