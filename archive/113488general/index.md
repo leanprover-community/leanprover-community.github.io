@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (4 messages, latest: Mar 30 2019 at 03:46)
+
 * [large vs small elimination](16519largevssmallelimination.html) (8 messages, latest: Mar 29 2019 at 21:51)
 
 * [too many semicolons](88356toomanysemicolons.html) (56 messages, latest: Mar 29 2019 at 20:53)

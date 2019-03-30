@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/50875rflpatterninrcases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html">`rfl` pattern in `rcases`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162101744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162101744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162101744">Scott Morrison (Mar 30 2019 at 03:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, how would you feel about the <code>rfl</code> pattern in <code>rcases</code> trying to <code>dsimp</code> before <code>subst</code>ing? I often find myself unable to use the <code>rfl</code> trick, because it needs to be <code>dsimp</code>ed before <code>subst</code> would accept it.</p>
+
+<a name="162101775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162101775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162101775">Scott Morrison (Mar 30 2019 at 03:33)</a>:</h4>
+<p>Options would be:<br>
+1a) in <code>rcases</code>, always run <code>dsimp</code> on <code>rfl</code> parameters before calling <code>subst</code><br>
+1b) in <code>rcases</code>, try <code>subst</code>, and if it fails call <code>dsimp</code> and try again<br>
+2ab) create <code>subst'</code>, with similar choices</p>
+
+<a name="162102079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102079">Scott Morrison (Mar 30 2019 at 03:42)</a>:</h4>
+<p>1a would just mean</p>
+<div class="codehilite"><pre><span></span>with rcases.continue : listΠ (rcases_patt × expr) → tactic goals
+| [] := get_goals
+| ((rcases_patt.many ids, e) :: l) := do
+  gs ← rcases_core ids e,
+  list.join &lt;$&gt; gs.mmap (λ g, set_goals [g] &gt;&gt; rcases.continue l)
+| ((rcases_patt.one `rfl, e) :: l) := do
+  (t, e) ← get_local_and_type e,
+  (s, _) ← mk_simp_set ff [] [],
+  try ((s.dsimplify [] t) &gt;&gt;= λ t, change_core t (some e)),
+  get_local `rfl &gt;&gt;= subst,
+  rcases.continue l
+-- If the pattern is any other name, we already bound the name in the
+-- top-level `cases` tactic, so there is no more work to do for it.
+| (_ :: l) := rcases.continue l
+</pre></div>
+
+<a name="162102219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102219">Kenny Lau (Mar 30 2019 at 03:46)</a>:</h4>
+<p><code>dsimp only</code></p>
+
+
+{% endraw %}
