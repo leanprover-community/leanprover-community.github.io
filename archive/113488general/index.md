@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [order instances on empty, unit, bool?](52436orderinstancesonemptyunitbool.html) (1 message, latest: Mar 30 2019 at 05:59)
+
+* [Problem with type class search](44348Problemwithtypeclasssearch.html) (35 messages, latest: Mar 30 2019 at 05:39)
+
 * [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (7 messages, latest: Mar 30 2019 at 04:35)
 
 * [large vs small elimination](16519largevssmallelimination.html) (8 messages, latest: Mar 29 2019 at 21:51)
@@ -31,8 +35,6 @@ permalink: archive/113488general/index.html
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
 
 * [libgmp dependency](88411libgmpdependency.html) (8 messages, latest: Mar 28 2019 at 23:06)
-
-* [Problem with type class search](44348Problemwithtypeclasssearch.html) (34 messages, latest: Mar 28 2019 at 19:46)
 
 * [folding problems problem](25177foldingproblemsproblem.html) (18 messages, latest: Mar 28 2019 at 17:52)
 
