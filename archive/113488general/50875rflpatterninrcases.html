@@ -57,5 +57,25 @@ permalink: archive/113488general/50875rflpatterninrcases.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162103871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162103871">Johan Commelin (Mar 30 2019 at 04:35)</a>:</h4>
 <p>Hmmm: What happens if you <code>dsimp</code> the <code>rfl</code> pattern, but not the other assumptions/goal? Does that bring the risk that the <code>subst</code> still fails (or fails to do the expected thing)?</p>
 
+<a name="162107050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107050">Mario Carneiro (Mar 30 2019 at 06:10)</a>:</h4>
+<p>There are two methods: you can either use <code>⟨⟩</code> or <code>rfl</code> to case on an equality. <code>rfl</code> uses <code>subst</code> and <code>⟨⟩</code> uses <code>cases</code>, and they work in different circumstances. This wasn't entirely intentional, but I hesitate to try to make one of them play both functions now</p>
+
+<a name="162107171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107171">Johan Commelin (Mar 30 2019 at 06:15)</a>:</h4>
+<p>I do think that it is maybe hard to guess what <code>\&lt;&gt;</code> does, if you don't know it. It might be a bit surprising...</p>
+
+<a name="162107728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107728">Scott Morrison (Mar 30 2019 at 06:31)</a>:</h4>
+<p>Yes, I know those two methods. But often neither works, and I'm proposing to make <code>rfl</code> work a little bit harder.</p>
+
+<a name="162108138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162108138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162108138">Mario Carneiro (Mar 30 2019 at 06:43)</a>:</h4>
+<p>I think <code>subst'</code> is the best plan. The biggest issue is that <code>subst</code> has an overly restrictive validity check</p>
+
+<a name="162108185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162108185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162108185">Mario Carneiro (Mar 30 2019 at 06:44)</a>:</h4>
+<p>Do you have a simple example of <code>subst</code> failure?</p>
+
 
 {% endraw %}

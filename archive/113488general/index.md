@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [order instances on empty, unit, bool?](52436orderinstancesonemptyunitbool.html) (1 message, latest: Mar 30 2019 at 05:59)
+* [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (12 messages, latest: Mar 30 2019 at 06:44)
+
+* [order instances on empty, unit, bool?](52436orderinstancesonemptyunitbool.html) (2 messages, latest: Mar 30 2019 at 06:42)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (35 messages, latest: Mar 30 2019 at 05:39)
-
-* [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (7 messages, latest: Mar 30 2019 at 04:35)
 
 * [large vs small elimination](16519largevssmallelimination.html) (8 messages, latest: Mar 29 2019 at 21:51)
 
