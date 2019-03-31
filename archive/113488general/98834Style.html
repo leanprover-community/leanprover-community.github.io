@@ -137,5 +137,116 @@ permalink: archive/113488general/98834Style.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162075061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162075061">Patrick Massot (Mar 29 2019 at 19:02)</a>:</h4>
 <p>Who wants to update the style guide to record all that?</p>
 
+<a name="162163941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162163941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162163941">snowbunting (Mar 31 2019 at 08:28)</a>:</h4>
+<p>What are the thoughts in the Lean community about multiple synonym/names for a certain theorem? Are there any strategies on how to do that or do people have concerns against doing that?</p>
+<p>For example, I was looking for something like "submodule.le_zero" and I wouldn't want to have to dig into lattices and their \bot element, just to get that.</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">submodule</span>
+        <span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+        <span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+        <span class="kn">lemma</span> <span class="n">le_zero</span> <span class="o">(</span><span class="n">N</span><span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">):</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">N</span> <span class="o">:=</span>
+                <span class="n">lattice</span><span class="bp">.</span><span class="n">bot_le</span>
+<span class="kn">end</span> <span class="kn">namespace</span>
+</pre></div>
+
+
+<p>Same goes with theorems that have very common names - again from my first "exercise" - e.g. I would want to find Nakayama's lemma preferable formulated in about 5 equivalent ways as something like <code>nakayama</code>, <code>nakayama_rephrased_1</code>, <code>nakayama_rephrased_2</code> or something along those lines, certainly not <code>exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul</code>.</p>
+
+<a name="162164543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164543">Mario Carneiro (Mar 31 2019 at 08:46)</a>:</h4>
+<p>The <code>le_zero</code> example is not recommended because that's not how we write the zero submodule</p>
+
+<a name="162164552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164552">Jan-David Salchow (Mar 31 2019 at 08:46)</a>:</h4>
+<p>I also have the feeling that the mathlib conventions deserve some updating on this issue. This is not only about finding statements, but also about readability of proofs.</p>
+
+<a name="162164563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164563">Mario Carneiro (Mar 31 2019 at 08:47)</a>:</h4>
+<p>It is important to stick to a single expression consistently because that's the common language for all the simp lemmas and such</p>
+
+<a name="162164564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164564">Jan-David Salchow (Mar 31 2019 at 08:47)</a>:</h4>
+<p>Introducing new constants shouldn't be the solution though</p>
+
+<a name="162164565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164565">Jan-David Salchow (Mar 31 2019 at 08:47)</a>:</h4>
+<p>Can we alias stuff?</p>
+
+<a name="162164569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164569">Mario Carneiro (Mar 31 2019 at 08:47)</a>:</h4>
+<p>There is an <code>alias</code> command for exactly that, but it is not much used</p>
+
+<a name="162164616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164616">Jan-David Salchow (Mar 31 2019 at 08:48)</a>:</h4>
+<p>Is it documented somewhere?</p>
+
+<a name="162164617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164617">Mario Carneiro (Mar 31 2019 at 08:48)</a>:</h4>
+<p>There are probably less than 10 restated theorems in mathlib</p>
+
+<a name="162164619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164619">Mario Carneiro (Mar 31 2019 at 08:48)</a>:</h4>
+<p>and they are mostly because I thought that core had a dumb name for something</p>
+
+<a name="162164632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164632">Mario Carneiro (Mar 31 2019 at 08:49)</a>:</h4>
+<p>I agree that famous theorems should use famous names, especially if the symbol reading name is unenlightening or very long</p>
+
+<a name="162164675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164675">Mario Carneiro (Mar 31 2019 at 08:50)</a>:</h4>
+<p>The convention for restatements would be to use postfix <code>'</code> or <code>\1</code>, <code>\2</code> etc</p>
+
+<a name="162164681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164681">Jan-David Salchow (Mar 31 2019 at 08:50)</a>:</h4>
+<p>There are also boundary cases, e.g. Johannes asked me to rename homogeneous to norm_smul in <a href="https://github.com/leanprover-community/mathlib/pull/680#discussion_r253305420" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/680#discussion_r253305420">https://github.com/leanprover-community/mathlib/pull/680#discussion_r253305420</a></p>
+
+<a name="162164683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164683">Jan-David Salchow (Mar 31 2019 at 08:50)</a>:</h4>
+<p>I'm not claiming that homogeneous is the best name ever, but it would be nicer in some proofs</p>
+
+<a name="162164689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164689">Jan-David Salchow (Mar 31 2019 at 08:51)</a>:</h4>
+<p>So an alias might really do the trick ...</p>
+
+<a name="162164700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164700">Mario Carneiro (Mar 31 2019 at 08:51)</a>:</h4>
+<p>If it is some kind of f(g x) = g (f x) statement I would definitely prefer the symbol reading name</p>
+
+<a name="162164751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164751">Mario Carneiro (Mar 31 2019 at 08:52)</a>:</h4>
+<p>If it is <code>\ex x, foo x /\ \all y, bar x &lt;= f x + g y</code> then I would prefer a more informative name</p>
+
+<a name="162164808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164808">Jan-David Salchow (Mar 31 2019 at 08:54)</a>:</h4>
+<p>How about the Cauchy Schwarz inequality?</p>
+
+<a name="162164811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164811">Mario Carneiro (Mar 31 2019 at 08:55)</a>:</h4>
+<p>I could see a case for either, but I'd err on the side of symbol reading name</p>
+
+<a name="162164821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164821">Jan-David Salchow (Mar 31 2019 at 08:55)</a>:</h4>
+<p>Is there a reason not to define an alias?</p>
+
+<a name="162164824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164824">Mario Carneiro (Mar 31 2019 at 08:55)</a>:</h4>
+<p>the problem is that these theorems often have a few forms, and if they are algebraic manipulation lemmas then it's easier to get at them by the symbol reading name</p>
+
+<a name="162164878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164878">Mario Carneiro (Mar 31 2019 at 08:57)</a>:</h4>
+<p>The <code>alias</code> command still leaves some to be desired. I would like it if it was possible to have forwarding links, i.e. you type in <code>cauchy_s...</code> in autocomplete and <code>norm_mul_le</code> pops up (with an indication that it is redirecting from <code>cauchy_schwarz</code>)</p>
+
+<a name="162164883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164883">Jan-David Salchow (Mar 31 2019 at 08:58)</a>:</h4>
+<p>I see your point for finding statements</p>
+
+<a name="162164927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164927">Jan-David Salchow (Mar 31 2019 at 08:58)</a>:</h4>
+<p>But in a proof I'd prefer an informative name</p>
+
+<a name="162164937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164937">Mario Carneiro (Mar 31 2019 at 08:59)</a>:</h4>
+<p>I suppose you could also do it the other way around, seeing as the main reason for the symbol reading names is searchability</p>
+
 
 {% endraw %}

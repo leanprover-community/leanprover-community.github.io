@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Style](98834Style.html) (39 messages, latest: Mar 31 2019 at 08:59)
+
 * [sparse categories](26037sparsecategories.html) (9 messages, latest: Mar 30 2019 at 10:35)
 
 * [`rfl` pattern in `rcases`](50875rflpatterninrcases.html) (17 messages, latest: Mar 30 2019 at 09:03)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [too many semicolons](88356toomanysemicolons.html) (56 messages, latest: Mar 29 2019 at 20:53)
 
 * [Lean in the wild](43625Leaninthewild.html) (70 messages, latest: Mar 29 2019 at 19:13)
-
-* [Style](98834Style.html) (14 messages, latest: Mar 29 2019 at 19:02)
 
 * [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
 
