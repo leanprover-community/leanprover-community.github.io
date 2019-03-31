@@ -30,5 +30,37 @@ permalink: archive/113489newmembers/38353Fixanarbitraryx.html
 <p>Are there cases where <code>parameter</code> must be used, where <code>variable</code> is not enough (to satisfy the particular purpose)?</p>
 <p>Would you more recommend using <code>parameter</code> or using <code>variable</code>?</p>
 
+<a name="162165336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/162165336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#162165336">Kevin Buzzard (Mar 31 2019 at 09:10)</a>:</h4>
+<p>Parameter is essentially never used in mathlib; variable is used in essentially every file</p>
+
+<a name="162165516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/162165516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#162165516">Rob Lewis (Mar 31 2019 at 09:17)</a>:</h4>
+<p><code>parameter</code> corresponds more closely to "fix an arbitrary x." For the duration of the section, the parameter really is fixed, you can't change it. Lean tries to treat it like a constant. (Although, as Mario says, the abstraction leaks.) I believe it's used in the p-adic numbers files at some point to fix a <code>p</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameter</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="c1">-- f : ℕ</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">2</span> <span class="c1">-- error</span>
+<span class="kn">end</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="c1">-- f : ℕ → ℕ</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">2</span> <span class="c1">-- 2</span>
+
+<span class="kn">section</span>
+<span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span> <span class="c1">--g : ℕ → ℕ</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">g</span> <span class="mi">2</span> <span class="c1">-- 2</span>
+<span class="kn">end</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span> <span class="c1">-- g : ℕ → ℕ</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">g</span> <span class="mi">2</span> <span class="c1">-- 2</span>
+</pre></div>
+
+<a name="162165525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Fix%20an%20arbitrary%20x.%22/near/162165525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38353Fixanarbitraryx.html#162165525">Rob Lewis (Mar 31 2019 at 09:17)</a>:</h4>
+<p>It doesn't change the logic at all. All uses of <code>parameter</code> could be replaced by <code>variable</code>, and all uses of <code>variable</code> could also be eliminated.</p>
+
 
 {% endraw %}

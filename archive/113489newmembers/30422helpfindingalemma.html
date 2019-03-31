@@ -630,5 +630,66 @@ Let's do Cauchy first...</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/159420832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#159420832">Patrick Massot (Feb 26 2019 at 12:43)</a>:</h4>
 <p>Also I had a non-optimal start because I didn't realize how far they were from being able to understand proofs (I hadn't seen a first year student for seven years, and even back then I was teaching stuff that did not require very precise reasonning)</p>
 
+<a name="162165893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162165893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162165893">Scott Morrison (Mar 31 2019 at 09:28)</a>:</h4>
+<p>Does</p>
+<div class="codehilite"><pre><span></span>def split_on {α : Type u} [decidable_eq α] (a : α) : list α → list (list α)
+</pre></div>
+
+
+<p>already exist in mathlib?</p>
+
+<a name="162165896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162165896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162165896">Scott Morrison (Mar 31 2019 at 09:28)</a>:</h4>
+<p>What about</p>
+<div class="codehilite"><pre><span></span>def factor {m : Type u → Type v} [monad m] {α : Type u} : list (m α) → m (list α)
+| []          := return []
+| (a :: rest) := do a ← a, rest ← factor rest, return $ (a :: rest)
+</pre></div>
+
+<a name="162165987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162165987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162165987">Scott Morrison (Mar 31 2019 at 09:31)</a>:</h4>
+<p>and finally</p>
+<div class="codehilite"><pre><span></span>def min {α : Type u} (l : list α) [has_lt α] [@decidable_rel α has_lt.lt] : option α := ...
+</pre></div>
+
+<a name="162166434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166434">Mario Carneiro (Mar 31 2019 at 09:45)</a>:</h4>
+<ul>
+<li><code>split_on</code>: I think not, but you haven't given the definition.</li>
+<li><code>factor</code>: This is <code>traverse</code> from the traversable library, as well as <code>monad.sequence</code> in core. </li>
+<li><code>min</code>: Not this particular function, but you can build it with <code>fold</code> easily enough. Also I would probably have assumed an <code>le</code> not an <code>lt</code> if it were there</li>
+</ul>
+
+<a name="162166628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166628">Scott Morrison (Mar 31 2019 at 09:51)</a>:</h4>
+<p>Do we want <code>min</code> and <code>max</code> (with <code>le</code>, I agree) in mathlib? Or should I just stick it at the point of use (needed for a tactic).</p>
+
+<a name="162166681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166681">Scott Morrison (Mar 31 2019 at 09:52)</a>:</h4>
+<p><code>split_on</code> was defined as</p>
+<div class="codehilite"><pre><span></span>def split_on_aux {α : Type u} [decidable_eq α] (a : α) : list α → list α → list (list α)
+| [] l       := [l.reverse]
+| (h :: t) l := if h = a then
+                  l.reverse :: (split_on_aux t [])
+                else
+                  split_on_aux t (h :: l)
+
+def split_on {α : Type u} [decidable_eq α] (a : α) : list α → list (list α)
+| l := split_on_aux a l []
+</pre></div>
+
+<a name="162166682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166682">Mario Carneiro (Mar 31 2019 at 09:52)</a>:</h4>
+<p>I think <code>foldl1</code> would be good, and you could get <code>min</code> and <code>max</code> and variations easily from that</p>
+
+<a name="162166693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166693">Scott Morrison (Mar 31 2019 at 09:53)</a>:</h4>
+<p>With a few basic properties, can <code>split_on</code> go in the library?</p>
+
+<a name="162166709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166709">Scott Morrison (Mar 31 2019 at 09:54)</a>:</h4>
+<p>Sorry, what did you have in mind as <code>foldl1</code>?</p>
+
 
 {% endraw %}

@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Notation dependent pair](18544Notationdependentpair.html) (5 messages, latest: Mar 31 2019 at 00:03)
+* [help finding a lemma](30422helpfindingalemma.html) (138 messages, latest: Mar 31 2019 at 09:54)
 
-* ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (4 messages, latest: Mar 30 2019 at 23:49)
+* ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (7 messages, latest: Mar 31 2019 at 09:17)
+
+* [Notation dependent pair](18544Notationdependentpair.html) (5 messages, latest: Mar 31 2019 at 00:03)
 
 * [I*M=M for R-modules](99658IMMforRmodules.html) (90 messages, latest: Mar 30 2019 at 23:35)
 
@@ -113,8 +115,6 @@ permalink: archive/113489newmembers/index.html
 * [Newbie](04763Newbie.html) (9 messages, latest: Feb 27 2019 at 01:50)
 
 * [Unexpected type error in equality proposition](17933Unexpectedtypeerrorinequalityproposition.html) (9 messages, latest: Feb 26 2019 at 18:19)
-
-* [help finding a lemma](30422helpfindingalemma.html) (129 messages, latest: Feb 26 2019 at 12:43)
 
 * [Proving r^2 >= 0](52147Provingr20.html) (6 messages, latest: Feb 26 2019 at 04:58)
 

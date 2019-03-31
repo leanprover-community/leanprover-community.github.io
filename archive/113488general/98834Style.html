@@ -248,5 +248,113 @@ permalink: archive/113488general/98834Style.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164937">Mario Carneiro (Mar 31 2019 at 08:59)</a>:</h4>
 <p>I suppose you could also do it the other way around, seeing as the main reason for the symbol reading names is searchability</p>
 
+<a name="162164991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164991">snowbunting (Mar 31 2019 at 09:00)</a>:</h4>
+<p>So how would that <code>alias</code> work? I see</p>
+<div class="codehilite"><pre><span></span>/ -- doc string - /
+alias my_theorem ← alias1 alias2 ...
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span>alias A_iff_B ↔ B_of_A A_of_B
+</pre></div>
+
+
+<p>in the comments, but <code>alias submodule.le_zero ← lattice.bot_le</code> does not work.</p>
+<p>What is the bad thing of doing</p>
+<div class="codehilite"><pre><span></span>lemma le_zerro: ... :=
+        lattice.bot_le
+</pre></div>
+
+<a name="162164992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162164992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162164992">Mario Carneiro (Mar 31 2019 at 09:00)</a>:</h4>
+<p>you have to import the tactic, I don't think it's in the default set</p>
+
+<a name="162165011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165011">Mario Carneiro (Mar 31 2019 at 09:01)</a>:</h4>
+<p>The tactic does basically the same thing as that, except it also gives it a nice docstring and attributes and stuff</p>
+
+<a name="162165064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165064">Mario Carneiro (Mar 31 2019 at 09:02)</a>:</h4>
+<p><code>alias</code> is a good way to document your intent about it too (otherwise people might just remove it to eliminate duplication)</p>
+
+<a name="162165069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165069">Mario Carneiro (Mar 31 2019 at 09:02)</a>:</h4>
+<p>Of course, <code>alias</code> is only for exact duplicates. If you want to change the statement it's not an alias</p>
+
+<a name="162165077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165077">Mario Carneiro (Mar 31 2019 at 09:03)</a>:</h4>
+<p>so <code>le_zero</code> isn't an example</p>
+
+<a name="162165192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165192">snowbunting (Mar 31 2019 at 09:06)</a>:</h4>
+<p>would you mind pointing me to a minimal working example? Also didn't see any documentation about docstrings yet, is there any tutorial/document where to read that stuff?</p>
+<p>Yes it is not, but since I could replace my <code>submodule.le_zero</code> in the proof with <code>lattice.bot_le</code>, it would be functionally an alias, wouldn't it? (I mean I only did write the lemma because I needed this fact in the proof and couldn't find it)</p>
+
+<a name="162165271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165271">Mario Carneiro (Mar 31 2019 at 09:09)</a>:</h4>
+<p>Just try it and see, it's not a particularly complicated tactic</p>
+
+<a name="162165349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165349">Mario Carneiro (Mar 31 2019 at 09:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="kn">alias</span>
+
+<span class="kn">section</span> <span class="kn">end</span>
+
+<span class="kn">alias</span> <span class="n">add_comm</span> <span class="err">←</span> <span class="n">plus_comm</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">plus_comm</span> <span class="c1">-- mouse over this, the docstring is &quot;**Alias** of `add_comm`&quot;</span>
+<span class="c1">-- @[alias]</span>
+<span class="c1">-- theorem plus_comm : ∀ {α : Type u} [_inst_1 : add_comm_semigroup α] (a b : α), a + b = b + a :=</span>
+<span class="c1">-- add_comm</span>
+</pre></div>
+
+<a name="162165396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165396">Mario Carneiro (Mar 31 2019 at 09:12)</a>:</h4>
+<p>By the way, that theorem would be called <code>zero_le</code> not <code>le_zero</code> anyway</p>
+
+<a name="162165397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165397">Mario Carneiro (Mar 31 2019 at 09:13)</a>:</h4>
+<p>and that already exists and might even apply if you can prove submodules have the right structure</p>
+
+<a name="162165454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165454">Mario Carneiro (Mar 31 2019 at 09:14)</a>:</h4>
+<p>but like I said, I strongly recommend against adding that theorem, because it will make you want to use <code>0</code> for the zero submodule, and you will be frustrated six more times for lack of other theorems talking about this submodule</p>
+
+<a name="162165456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162165456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162165456">Mario Carneiro (Mar 31 2019 at 09:14)</a>:</h4>
+<p>because it's uniformly called <code>bot</code> in the library</p>
+
+<a name="162166292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166292">snowbunting (Mar 31 2019 at 09:41)</a>:</h4>
+<p>thank you!</p>
+<p>I'm not going to make any pull request to the library, I am merely trying to figure out how things work, so the example here is rather a theoretical one. But I think it is good to know the options available for giving nicer, shorter notations to things, as this seems to be im my opinion quite important for the usability.</p>
+<p>I agree with you that I should use <code>\bot</code> to match the library style, and also that I messed up the name there (I had first "ge_zero", then I changed the sign later).</p>
+
+<a name="162166355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166355">Scott Morrison (Mar 31 2019 at 09:43)</a>:</h4>
+<p>Naming things is hard. It took me a long time to get over the fact that <code>mathlib</code> people were telling me the property that functors have is called <code>map_comp</code>, rather than <code>functoriality</code>.</p>
+
+<a name="162166357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166357">Scott Morrison (Mar 31 2019 at 09:43)</a>:</h4>
+<p>I have grudgingly accepted their point, I think. :-)</p>
+
+<a name="162166479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166479">snowbunting (Mar 31 2019 at 09:46)</a>:</h4>
+<p>absolutely, and it makes sense for searching when you can type something like <code>eq_of...</code> and it gives you all the options, so I generally like the naming style.</p>
+
+<a name="162166539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166539">Mario Carneiro (Mar 31 2019 at 09:48)</a>:</h4>
+<p>By the way, I've tried this kind of naming in the past. In the long term, you get confused by your own naming system, because it is difficult to name everything consistently this way and you have to look a lot more up</p>
+
+<a name="162166545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166545">Mario Carneiro (Mar 31 2019 at 09:48)</a>:</h4>
+<p>you end up with ad hoc extensions to the naming system all over the place and it becomes a mess</p>
+
+<a name="162166561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Style/near/162166561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98834Style.html#162166561">Mario Carneiro (Mar 31 2019 at 09:50)</a>:</h4>
+<p>there just isn't enough creativity in the mathematical lexicon to name all the thousands of piddly lemmas that demand names</p>
+
 
 {% endraw %}
