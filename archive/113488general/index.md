@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (374 messages, latest: Mar 31 2019 at 14:57)
+
 * [libgmp dependency](88411libgmpdependency.html) (15 messages, latest: Mar 31 2019 at 12:44)
 
 * [Style](98834Style.html) (59 messages, latest: Mar 31 2019 at 09:50)
@@ -43,8 +45,6 @@ permalink: archive/113488general/index.html
 * ["let" destroys tags](47286letdestroystags.html) (16 messages, latest: Mar 28 2019 at 16:18)
 
 * [Sharkovsky's Theorem](54052SharkovskysTheorem.html) (4 messages, latest: Mar 28 2019 at 15:25)
-
-* [VScode extension](56578VScodeextension.html) (371 messages, latest: Mar 28 2019 at 11:27)
 
 * [goal scope](71102goalscope.html) (5 messages, latest: Mar 28 2019 at 09:47)
 
