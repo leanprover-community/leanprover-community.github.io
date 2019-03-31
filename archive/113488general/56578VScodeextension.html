@@ -1729,5 +1729,17 @@ In emacs-lean you have a little window/line on which you can always see the type
 
 <p>Is there a way to assign a keyboard shortcut to a particular hole command?</p>
 
+<a name="162180740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/162180740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#162180740">Wojciech Nawrocki (Mar 31 2019 at 16:01)</a>:</h4>
+<p>This is almost perfect! Now if only there was a way to specify which argument to split on - for example in <code>nat -&gt; nat -&gt; nat</code> it seems to always just split on the first (and I can't always write a nested match statement since it breaks unification)</p>
+
+<a name="162181135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/162181135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#162181135">Wojciech Nawrocki (Mar 31 2019 at 16:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> apparently these are currently <a href="https://github.com/leanprover/vscode-lean/blob/master/src/holes.ts#L87" target="_blank" title="https://github.com/leanprover/vscode-lean/blob/master/src/holes.ts#L87">implemented as code actions</a>, where the arguments to the Lean server command are contextual on the position in the file etc. Key-bound commands, on the other hand, seem to be <a href="https://github.com/leanprover/vscode-lean/blob/3ad49464b54cc1df06fe24f0ffc213e55a7c4af2/package.json#L162" target="_blank" title="https://github.com/leanprover/vscode-lean/blob/3ad49464b54cc1df06fe24f0ffc213e55a7c4af2/package.json#L162">unaware of the context</a>. But i'm sure there is some way to pass the context there - <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> ? :)</p>
+
+<a name="162181435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/162181435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#162181435">Bryan Gin-ge Chen (Mar 31 2019 at 16:19)</a>:</h4>
+<p>Hmm, it might be possible by passing args to <a href="https://code.visualstudio.com/docs/editor/refactoring#_keybindings-for-code-actions" target="_blank" title="https://code.visualstudio.com/docs/editor/refactoring#_keybindings-for-code-actions"><code>editor.action.codeAction</code></a> but I haven't figured out what this would look like for the hole commands...</p>
+
 
 {% endraw %}

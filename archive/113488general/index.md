@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode extension](56578VScodeextension.html) (379 messages, latest: Mar 31 2019 at 15:51)
+* [ITP paper](28646ITPpaper.html) (26 messages, latest: Mar 31 2019 at 16:34)
+
+* [VScode extension](56578VScodeextension.html) (382 messages, latest: Mar 31 2019 at 16:19)
 
 * [libgmp dependency](88411libgmpdependency.html) (15 messages, latest: Mar 31 2019 at 12:44)
 
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (70 messages, latest: Mar 29 2019 at 19:13)
 
 * [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
-
-* [ITP paper](28646ITPpaper.html) (23 messages, latest: Mar 29 2019 at 16:01)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (59 messages, latest: Mar 29 2019 at 12:50)
 
