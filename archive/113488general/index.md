@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [libgmp dependency](88411libgmpdependency.html) (9 messages, latest: Mar 31 2019 at 10:59)
+
 * [Style](98834Style.html) (59 messages, latest: Mar 31 2019 at 09:50)
 
 * [sparse categories](26037sparsecategories.html) (9 messages, latest: Mar 30 2019 at 10:35)
@@ -35,8 +37,6 @@ permalink: archive/113488general/index.html
 * [library_search has been merged](13909librarysearchhasbeenmerged.html) (3 messages, latest: Mar 29 2019 at 07:20)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
-
-* [libgmp dependency](88411libgmpdependency.html) (8 messages, latest: Mar 28 2019 at 23:06)
 
 * [folding problems problem](25177foldingproblemsproblem.html) (18 messages, latest: Mar 28 2019 at 17:52)
 

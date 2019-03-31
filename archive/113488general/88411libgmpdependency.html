@@ -46,5 +46,18 @@ permalink: archive/113488general/88411libgmpdependency.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162001005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162001005">Scott Morrison (Mar 28 2019 at 23:06)</a>:</h4>
 <p>(this is of course fixable with <code>brew install gmp</code>, but the point is to avoid this if possible)</p>
 
+<a name="162169142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162169142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162169142">Keeley Hoek (Mar 31 2019 at 10:59)</a>:</h4>
+<p>I have not taken the time to try to fully understand the build system, not have I every used CMake for anything, so I can't point exactly to where the distinction between the operating systems is made given default settings, but I did try mac build (on your machine scott) forcing the static option on. However, I get a whole bunch of ""</p>
+<div class="codehilite"><pre><span></span>ld: library not found for -lcrt0.o
+clang: error: linker command failed with exit code 1
+</pre></div>
+
+
+<p>which looked like a solvable problem (the crt0 has to by lying around somewhere!, I though). But alas, there is this:<br>
+<a href="https://stackoverflow.com/questions/3801011/ld-library-not-found-for-lcrt0-o-on-osx-10-6-with-gcc-clang-static-flag" target="_blank" title="https://stackoverflow.com/questions/3801011/ld-library-not-found-for-lcrt0-o-on-osx-10-6-with-gcc-clang-static-flag">https://stackoverflow.com/questions/3801011/ld-library-not-found-for-lcrt0-o-on-osx-10-6-with-gcc-clang-static-flag</a><br>
+Apparently, apple refuses to provide statically linked <code>libSystem.dylib</code>, so you'd have to build it yourself...</p>
+<p>This is all to say that you can't just be lazy and pass <code>-static</code> and compile with gcc or clang to fix the problem.</p>
+
 
 {% endraw %}

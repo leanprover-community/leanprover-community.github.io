@@ -691,5 +691,99 @@ def split_on {α : Type u} [decidable_eq α] (a : α) : list α → list (list �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166709">Scott Morrison (Mar 31 2019 at 09:54)</a>:</h4>
 <p>Sorry, what did you have in mind as <code>foldl1</code>?</p>
 
+<a name="162166984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162166984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162166984">Mario Carneiro (Mar 31 2019 at 10:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">foldl1</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">some</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">f</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">foldr1</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">list</span><span class="bp">.</span><span class="n">foldr1</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">a</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="162167129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167129">Scott Morrison (Mar 31 2019 at 10:04)</a>:</h4>
+<p>Great. Why that name, though?</p>
+
+<a name="162167130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167130">Mario Carneiro (Mar 31 2019 at 10:04)</a>:</h4>
+<p>I think it's the haskell name</p>
+
+<a name="162167131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167131">Mario Carneiro (Mar 31 2019 at 10:04)</a>:</h4>
+<p>it means "fold at least one"</p>
+
+<a name="162167152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167152">Mario Carneiro (Mar 31 2019 at 10:05)</a>:</h4>
+<p>Here's how you can do <code>split_on</code> without the list postprocessing:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">split_on_aux</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="n">f</span>       <span class="o">:=</span> <span class="o">[</span><span class="n">f</span> <span class="o">[]]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span> <span class="bp">::</span> <span class="n">t</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">a</span> <span class="k">then</span> <span class="n">f</span> <span class="o">[]</span> <span class="bp">::</span> <span class="n">split_on_aux</span> <span class="n">t</span> <span class="n">id</span>
+  <span class="k">else</span> <span class="n">split_on_aux</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">h</span> <span class="bp">::</span> <span class="n">l</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">split_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">split_on_aux</span> <span class="n">a</span> <span class="n">l</span> <span class="n">id</span>
+</pre></div>
+
+<a name="162167213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167213">Scott Morrison (Mar 31 2019 at 10:07)</a>:</h4>
+<p>ta!</p>
+
+<a name="162167273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167273">Mario Carneiro (Mar 31 2019 at 10:09)</a>:</h4>
+<p>It would also be nice to have the inverse operation (<code>splice</code>? <code>riffle</code>?) and prove inverse</p>
+
+<a name="162167521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167521">Scott Morrison (Mar 31 2019 at 10:17)</a>:</h4>
+<p>working on it :-)</p>
+
+<a name="162167532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167532">Scott Morrison (Mar 31 2019 at 10:17)</a>:</h4>
+<p>we already have <code>intersperse</code> in core for the inverse</p>
+
+<a name="162167537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167537">Scott Morrison (Mar 31 2019 at 10:17)</a>:</h4>
+<p>it's only a one sided inverse</p>
+
+<a name="162167663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167663">Scott Morrison (Mar 31 2019 at 10:20)</a>:</h4>
+<p>sorry, it's <code>intercalate</code>.</p>
+
+<a name="162167664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167664">Scott Morrison (Mar 31 2019 at 10:20)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma split_on_spec {α : Type u} [decidable_eq α] (a : α) (as : list α) :
+  list.intercalate [a] (as.split_on a) = as := sorry
+</pre></div>
+
+<a name="162167817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167817">Mario Carneiro (Mar 31 2019 at 10:25)</a>:</h4>
+<p>The inverse also holds in the other direction if you assume the intercalants have no <code>a</code></p>
+
+<a name="162167820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167820">Mario Carneiro (Mar 31 2019 at 10:25)</a>:</h4>
+<p>I guess there is also a <code>split_on</code> that splits with a list argument</p>
+
+<a name="162167865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167865">Mario Carneiro (Mar 31 2019 at 10:26)</a>:</h4>
+<p>although it's more complicated and should probably be a separate function</p>
+
+<a name="162167869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162167869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162167869">Mario Carneiro (Mar 31 2019 at 10:26)</a>:</h4>
+<p>or even a list predicate? ok I'll stop now</p>
+
+<a name="162168494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162168494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162168494">Scott Morrison (Mar 31 2019 at 10:42)</a>:</h4>
+<p>Yeah, proving the spec doesn't seem the easiest thing in the world, in any case.</p>
+
+<a name="162168497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162168497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162168497">Scott Morrison (Mar 31 2019 at 10:42)</a>:</h4>
+<p>Can I PR the def separately? I really only need it for tactics at the moment. :-)</p>
+
 
 {% endraw %}
