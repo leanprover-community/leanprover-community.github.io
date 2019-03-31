@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP paper](28646ITPpaper.html) (26 messages, latest: Mar 31 2019 at 16:34)
+* [mathlib is broken](03807mathlibisbroken.html) (30 messages, latest: Mar 31 2019 at 17:20)
+
+* [ITP paper](28646ITPpaper.html) (27 messages, latest: Mar 31 2019 at 17:15)
 
 * [VScode extension](56578VScodeextension.html) (382 messages, latest: Mar 31 2019 at 16:19)
 
@@ -575,8 +577,6 @@ permalink: archive/113488general/index.html
 * [Nantes talk video](42445Nantestalkvideo.html) (11 messages, latest: Jan 18 2019 at 18:08)
 
 * [leanpkg](35331leanpkg.html) (143 messages, latest: Jan 18 2019 at 15:54)
-
-* [mathlib is broken](03807mathlibisbroken.html) (29 messages, latest: Jan 18 2019 at 15:25)
 
 * [singleton / unique](36954singletonunique.html) (98 messages, latest: Jan 18 2019 at 10:26)
 
