@@ -10,13 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [I*M=M for R-modules](99658IMMforRmodules.html) (88 messages, latest: Mar 30 2019 at 13:03)
+* [Notation dependent pair](18544Notationdependentpair.html) (4 messages, latest: Mar 30 2019 at 23:58)
+
+* ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (4 messages, latest: Mar 30 2019 at 23:49)
+
+* [I*M=M for R-modules](99658IMMforRmodules.html) (90 messages, latest: Mar 30 2019 at 23:35)
 
 * [noob question(s)](52075noobquestions.html) (248 messages, latest: Mar 29 2019 at 18:16)
 
 * [nats >= 0](33954nats0.html) (4 messages, latest: Mar 29 2019 at 01:34)
-
-* ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (3 messages, latest: Mar 28 2019 at 22:21)
 
 * [writing and applying axioms](55629writingandapplyingaxioms.html) (3 messages, latest: Mar 26 2019 at 23:00)
 
