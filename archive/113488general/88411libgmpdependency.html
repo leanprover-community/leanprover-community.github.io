@@ -59,5 +59,32 @@ clang: error: linker command failed with exit code 1
 Apparently, apple refuses to provide statically linked <code>libSystem.dylib</code>, so you'd have to build it yourself...</p>
 <p>This is all to say that you can't just be lazy and pass <code>-static</code> and compile with gcc or clang to fix the problem.</p>
 
+<a name="162169208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162169208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162169208">Keeley Hoek (Mar 31 2019 at 11:00)</a>:</h4>
+<p>On the other hand, I manually patched out the references to the dynamic library <code>libgmp.dylib</code> in the generated CMakeFiles and compiled, and everything worked fine... Here's a link to the zip for macos that was built:</p>
+
+<a name="162169299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162169299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162169299">Keeley Hoek (Mar 31 2019 at 11:04)</a>:</h4>
+<p><a href="https://github.com/khoek/klean/releases/download/macos-static/lean-3.4.2-darwin.zip" target="_blank" title="https://github.com/khoek/klean/releases/download/macos-static/lean-3.4.2-darwin.zip">https://github.com/khoek/klean/releases/download/macos-static/lean-3.4.2-darwin.zip</a></p>
+<p>I'd be really good to know if it works (i.e. doesn't need libgmp.dylib)---I'm pretty sure it doesn't but I don't actually have a mac.<br>
+(If this works, it's obviously unsatisfactory, but it's proof the build system could probably be fixed/improved easily by someone who understood it.)</p>
+
+<a name="162169351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162169351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162169351">Keeley Hoek (Mar 31 2019 at 11:05)</a>:</h4>
+<p>On the other hand, I'm pretty sure the dynamic loader would look in the directory where the executable is for missing shared libraries, so if <code>elan</code> just popped a copy of <code>libgmp.10.dylib</code> in the <code>bin</code> directory of an extracted release I think we'd be okay too?</p>
+
+<a name="162170001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162170001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162170001">Scott Morrison (Mar 31 2019 at 11:23)</a>:</h4>
+<p>re: the last point, <code>cp /usr/local/opt/gmp/lib/libgmp.10.dylib /Users/scott/.elan/bin/</code> doesn't help</p>
+
+<a name="162170123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libgmp%20dependency/near/162170123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88411libgmpdependency.html#162170123">Scott Morrison (Mar 31 2019 at 11:26)</a>:</h4>
+<p>and yes, your statically linked binary really works, (when normal lean doesn't, complaining</p>
+<div class="codehilite"><pre><span></span>dyld: Library not loaded: /usr/local/opt/gmp/lib/libgmp.10.dylib
+  Referenced from: /Users/scott/.elan/toolchains/stable/bin/lean
+  Reason: image not found
+Abort trap: 6
+</pre></div>
+
 
 {% endraw %}
