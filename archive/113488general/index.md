@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [implicit argument agony](39101implicitargumentagony.html) (6 messages, latest: Apr 01 2019 at 09:59)
+* [int.induction_on](76899intinductionon.html) (25 messages, latest: Apr 01 2019 at 10:27)
 
-* [int.induction_on](76899intinductionon.html) (24 messages, latest: Apr 01 2019 at 08:35)
+* [implicit argument agony](39101implicitargumentagony.html) (6 messages, latest: Apr 01 2019 at 09:59)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (14 messages, latest: Apr 01 2019 at 08:30)
 
