@@ -70,5 +70,87 @@ permalink: archive/113488general/76899intinductionon.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212767">Johan Commelin (Apr 01 2019 at 06:28)</a>:</h4>
 <p>Hmm, that isn't the optimal form, I guess</p>
 
+<a name="162215119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215119">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:20)</a>:</h4>
+<p>By the way, should I use Pi's instead of foralls? I.e.</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">int</span>
+
+<span class="n">def</span> <span class="n">bidir_rec_on</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="mi">0</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">),</span> <span class="n">C</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="mi">0</span><span class="o">),</span> <span class="n">C</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">k</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H0</span> <span class="n">Hs</span> <span class="n">Hp</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="n">H0</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">ih</span><span class="o">,</span> <span class="n">Hs</span> <span class="n">m</span> <span class="o">(</span><span class="n">of_nat_ge_zero</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ih</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe&#39;</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_zero</span><span class="o">,</span> <span class="n">neg_zero</span><span class="o">]</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">Hp</span> <span class="mi">0</span> <span class="o">(</span><span class="n">le_refl</span> <span class="bp">_</span><span class="o">)</span> <span class="n">H0</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">ih</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe&#39;</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe</span><span class="o">]</span> <span class="n">at</span> <span class="n">ih</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">Hp</span> <span class="bp">_</span> <span class="o">(</span><span class="n">neg_nonpos_of_nonneg</span> <span class="err">$</span> <span class="n">of_nat_ge_zero</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ih</span><span class="o">))</span>
+
+<span class="kn">end</span> <span class="n">int</span>
+</pre></div>
+
+
+<p>Because this works:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">bidir_rec_on</span> <span class="n">z</span> <span class="mi">1</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">fk</span><span class="o">,</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">fk</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">fk</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">fk</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">induction_on&#39;</span> <span class="n">z</span> <span class="mi">1</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">fk</span><span class="o">,</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">fk</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">fk</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">fk</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Gives<br>
+<code>failed to generate bytecode for 'test' code generation failed, VM does not have code for 'int.induction_on''</code></p>
+
+<a name="162215395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215395">Chris Hughes (Apr 01 2019 at 07:25)</a>:</h4>
+<p>Is that because of using <code>Sort</code> instead of <code>Sort*</code>?</p>
+
+<a name="162215453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215453">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:26)</a>:</h4>
+<p>No, I've changed both to <code>Sort*</code></p>
+
+<a name="162215471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215471">Mario Carneiro (Apr 01 2019 at 07:26)</a>:</h4>
+<p>did you use <code>def</code> instead of <code>theorem</code>?</p>
+
+<a name="162215478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215478">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:26)</a>:</h4>
+<p>Ah yes.</p>
+
+<a name="162215482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215482">Mario Carneiro (Apr 01 2019 at 07:26)</a>:</h4>
+<p>pi vs forall is purely cosmetic</p>
+
+<a name="162215505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215505">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:27)</a>:</h4>
+<p>So I guess this should always be a <code>def</code>?</p>
+
+<a name="162215511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215511">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:27)</a>:</h4>
+<p>(so it can generate both proofs and functions)</p>
+
+<a name="162215513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215513">Mario Carneiro (Apr 01 2019 at 07:27)</a>:</h4>
+<p>the result lives in <code>Sort*</code>, so it could be data</p>
+
+<a name="162215704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215704">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:30)</a>:</h4>
+<p>?? But making it a <code>theorem</code> has the bytecode generation error. Even with <code>Sort*</code>.</p>
+
+<a name="162215751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215751">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:31)</a>:</h4>
+<p>You can run <code>reduce</code> on it, but not <code>eval</code>.</p>
+
+<a name="162215900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162215900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162215900">Kevin Buzzard (Apr 01 2019 at 07:34)</a>:</h4>
+<p>Lean does not keep the bytecode for theorems.</p>
+
+<a name="162216986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162216986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162216986">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 07:56)</a>:</h4>
+<p>(deleted)</p>
+
 
 {% endraw %}

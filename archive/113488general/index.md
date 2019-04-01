@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mathlib is broken](03807mathlibisbroken.html) (33 messages, latest: Apr 01 2019 at 06:59)
+* [int.induction_on](76899intinductionon.html) (23 messages, latest: Apr 01 2019 at 07:56)
 
-* [int.induction_on](76899intinductionon.html) (10 messages, latest: Apr 01 2019 at 06:28)
+* [mathlib is broken](03807mathlibisbroken.html) (38 messages, latest: Apr 01 2019 at 07:04)
 
 * [VScode extension](56578VScodeextension.html) (385 messages, latest: Apr 01 2019 at 06:00)
 
