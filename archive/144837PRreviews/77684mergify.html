@@ -1,0 +1,149 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/77684mergify.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html">mergify</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162262596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162262596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162262596">Simon Hudon (Apr 01 2019 at 18:00)</a>:</h4>
+<p>Have you used it before? I'm writing a configuration file now. I can show it here for comments</p>
+
+<a name="162263473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162263473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162263473">Simon Hudon (Apr 01 2019 at 18:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="nt">pull_request_rules</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">automatic merge on CI success and review</span>
+    <span class="nt">conditions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">status-success=continuous-integration/travis-ci/pr</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;#approved-reviews-by&gt;=1&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;#review-requested=0&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;#changes-requested-reviews-by=0&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">base=master</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">label=[&#39;ready-to-merge&#39;]</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">delete_head_branch</span>
+      <span class="p p-Indicator">-</span> <span class="nt">merge</span><span class="p">:</span>
+        <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">squash</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">remove outdated reviews</span>
+    <span class="nt">conditions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">status-success=continuous-integration/travis-ci/pr</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;#approved-reviews-by&gt;=2&quot;</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">dismiss_reviews</span><span class="p">:</span>
+        <span class="nt">approved</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+      <span class="p p-Indicator">-</span> <span class="nt">remove</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ready-to-merge&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+
+<a name="162263837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162263837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162263837">Chris Hughes (Apr 01 2019 at 18:13)</a>:</h4>
+<p>I'm testing it out on my fork. Can't seem to get it to work. My config file look like</p>
+<div class="codehilite"><pre><span></span><span class="nt">pull_request_rules</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">automatic merge with strict</span>
+    <span class="nt">conditions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">status-success=continuous-integration/travis-ci/pr</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">status-success=continuous-integration/travis-ci/push</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">base=master</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="nt">merge</span><span class="p">:</span>
+        <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">squash</span>
+        <span class="nt">strict</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+
+<a name="162264165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162264165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162264165">Simon Hudon (Apr 01 2019 at 18:16)</a>:</h4>
+<p>What does <code>strict</code> mean?</p>
+
+<a name="162264502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162264502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162264502">Chris Hughes (Apr 01 2019 at 18:19)</a>:</h4>
+<p><a href="https://doc.mergify.io/strict-workflow.html" target="_blank" title="https://doc.mergify.io/strict-workflow.html">https://doc.mergify.io/strict-workflow.html</a></p>
+
+<a name="162264794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162264794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162264794">Simon Hudon (Apr 01 2019 at 18:21)</a>:</h4>
+<p>That's probably best if we automate merges</p>
+
+<a name="162264921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162264921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162264921">Chris Hughes (Apr 01 2019 at 18:22)</a>:</h4>
+<p>I set those rules, but it still just merged straight away before Travis passed.</p>
+
+<a name="162265295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265295">Simon Hudon (Apr 01 2019 at 18:25)</a>:</h4>
+<p>Both the PR build and the push build?</p>
+
+<a name="162265466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265466">Chris Hughes (Apr 01 2019 at 18:27)</a>:</h4>
+<p>Exactly those rules.</p>
+
+<a name="162265508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265508">Simon Hudon (Apr 01 2019 at 18:27)</a>:</h4>
+<p>I mean, did neither build terminate before the merge?</p>
+
+<a name="162265657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265657">Chris Hughes (Apr 01 2019 at 18:28)</a>:</h4>
+<p>Neither build terminated</p>
+
+<a name="162265708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265708">Chris Hughes (Apr 01 2019 at 18:29)</a>:</h4>
+<p><a href="/user_uploads/3121/3jxc9guBBmUP7BVMvcZyYgnm/Screenshot-2019-04-01-at-19.28.42.png" target="_blank" title="Screenshot-2019-04-01-at-19.28.42.png">Screenshot-2019-04-01-at-19.28.42.png</a> Only one box is ticked, but it says success.</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/3jxc9guBBmUP7BVMvcZyYgnm/Screenshot-2019-04-01-at-19.28.42.png" target="_blank" title="Screenshot-2019-04-01-at-19.28.42.png"><img src="/user_uploads/3121/3jxc9guBBmUP7BVMvcZyYgnm/Screenshot-2019-04-01-at-19.28.42.png"></a></div>
+
+<a name="162265830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265830">Simon Hudon (Apr 01 2019 at 18:30)</a>:</h4>
+<p>Is the list of condition a disjunction or a conjunction?</p>
+
+<a name="162265841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162265841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162265841">Simon Hudon (Apr 01 2019 at 18:30)</a>:</h4>
+<p>Try removing the last condition</p>
+
+<a name="162266334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266334">Chris Hughes (Apr 01 2019 at 18:34)</a>:</h4>
+<p>Now it doesn't tell me anything.</p>
+
+<a name="162266534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266534">Simon Hudon (Apr 01 2019 at 18:36)</a>:</h4>
+<p>That's frustrating</p>
+
+<a name="162266544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266544">Simon Hudon (Apr 01 2019 at 18:36)</a>:</h4>
+<p>Can I let you look into it?</p>
+
+<a name="162266547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266547">Chris Hughes (Apr 01 2019 at 18:36)</a>:</h4>
+<p>But travis has also stopped.</p>
+
+<a name="162266603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266603">Chris Hughes (Apr 01 2019 at 18:37)</a>:</h4>
+<p>I'll have a go at sorting it out.</p>
+
+<a name="162266743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266743">Simon Hudon (Apr 01 2019 at 18:38)</a>:</h4>
+<p>Thanks! Let me know if you need something</p>
+
+<a name="162266910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162266910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162266910">Johan Commelin (Apr 01 2019 at 18:40)</a>:</h4>
+<p>If this works, it seems like a really good idea!</p>
+
+<a name="162267238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162267238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162267238">Simon Hudon (Apr 01 2019 at 18:44)</a>:</h4>
+<p>Yes! That could make things simpler. We could merge a branch by clicking "update branch" and adding the label "ready-to-merge". We have to remember to get back to them if they fail to merge though and we can't do more than one PR at a time with this approach</p>
+
+<a name="162267455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162267455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162267455">Chris Hughes (Apr 01 2019 at 18:46)</a>:</h4>
+<p>What does <code>status-success=continuous-integration/travis-ci/push</code> mean if <code>status-success</code> is an array of strings? Will it fail if the array contains more than just that one string?</p>
+
+<a name="162268364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162268364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162268364">Chris Hughes (Apr 01 2019 at 18:56)</a>:</h4>
+<p>I know what's going on. "merge" means merge straight away with no further user input. We definitely don't want that. I never clicked "merge" on this PR <a href="https://github.com/ChrisHughes24/mathlib/pull/16" target="_blank" title="https://github.com/ChrisHughes24/mathlib/pull/16">https://github.com/ChrisHughes24/mathlib/pull/16</a></p>
+<p>I don't think you can set it up to have a "merge when ready" button. You could do some hack, where you add a label to instigate a merge or something like that.</p>
+
+<a name="162268625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/mergify/near/162268625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/77684mergify.html#162268625">Simon Hudon (Apr 01 2019 at 19:00)</a>:</h4>
+<p>I would put that in condition</p>
+
+
+{% endraw %}
