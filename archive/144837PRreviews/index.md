@@ -10,6 +10,10 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#822 first three digits of π](19784822firstthreedigitsof.html) (1 message, latest: Apr 01 2019 at 06:57)
+
+* [#819 card finite fields](64086819cardfinitefields.html) (3 messages, latest: Apr 01 2019 at 06:56)
+
 * [#820 lexicographic orders](43215820lexicographicorders.html) (15 messages, latest: Mar 31 2019 at 23:47)
 
 * [#766 cache-olean](84759766cacheolean.html) (35 messages, latest: Mar 31 2019 at 23:37)
@@ -29,8 +33,6 @@ permalink: archive/144837PRreviews/index.html
 * [#825 (semi)modules and linear_map](01350825semimodulesandlinearmap.html) (5 messages, latest: Mar 16 2019 at 18:58)
 
 * [#749](02120749.html) (5 messages, latest: Mar 16 2019 at 12:28)
-
-* [#819 card finite fields](64086819cardfinitefields.html) (2 messages, latest: Mar 14 2019 at 17:43)
 
 * [#801 hyperreals](71708801hyperreals.html) (1 message, latest: Mar 09 2019 at 09:57)
 

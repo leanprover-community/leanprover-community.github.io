@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode extension](56578VScodeextension.html) (383 messages, latest: Apr 01 2019 at 05:57)
+* [mathlib is broken](03807mathlibisbroken.html) (33 messages, latest: Apr 01 2019 at 06:59)
+
+* [int.induction_on](76899intinductionon.html) (10 messages, latest: Apr 01 2019 at 06:28)
+
+* [VScode extension](56578VScodeextension.html) (385 messages, latest: Apr 01 2019 at 06:00)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (12 messages, latest: Apr 01 2019 at 02:16)
-
-* [mathlib is broken](03807mathlibisbroken.html) (31 messages, latest: Mar 31 2019 at 19:35)
 
 * [ITP paper](28646ITPpaper.html) (27 messages, latest: Mar 31 2019 at 17:15)
 
@@ -2725,8 +2727,6 @@ permalink: archive/113488general/index.html
 * [is_group_hom.range_subgroup](83805isgrouphomrangesubgroup.html) (1 message, latest: Apr 19 2018 at 12:54)
 
 * [solve each goal in "by" mode](72857solveeachgoalinbymode.html) (11 messages, latest: Apr 19 2018 at 12:29)
-
-* [int.induction_on](76899intinductionon.html) (3 messages, latest: Apr 19 2018 at 11:35)
 
 * [Better Implication](24896BetterImplication.html) (30 messages, latest: Apr 19 2018 at 06:26)
 

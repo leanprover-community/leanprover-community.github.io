@@ -23,5 +23,52 @@ permalink: archive/113488general/76899intinductionon.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/125301401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#125301401">Kenny Lau (Apr 19 2018 at 11:35)</a>:</h4>
 <p>lol</p>
 
+<a name="162212452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212452">Abhimanyu Pallavi Sudhir (Apr 01 2019 at 06:19)</a>:</h4>
+<p>I found this a while back and forgot to bring it up: <code>int.induction_on</code> (in <code>data.int.basic</code>) has overtly restrictive hypotheses -- it says <br>
+<code>∀ {p : ℤ → Prop} (i : ℤ), p 0 → (∀ i, p i → p (i + 1)) → (∀ i, p i → p (i - 1)) → p i</code> while <br>
+<code>∀ {p : ℤ → Sort} (i : ℤ), p 0 → (∀ i ≥ 0, p i → p (i + 1)) → (∀ i ≤ 0, p i → p (i - 1)) → p i</code> is sufficient, which can be proven quite easily:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">int</span>
+
+<span class="kn">theorem</span> <span class="n">induction_on&#39;</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">Sort</span><span class="o">}</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">P</span> <span class="mi">0</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">k</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">,</span> <span class="n">P</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">k</span> <span class="bp">≤</span> <span class="mi">0</span><span class="o">,</span> <span class="n">P</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">k</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H0</span> <span class="n">Hs</span> <span class="n">Hp</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="n">H0</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">ih</span><span class="o">,</span> <span class="n">Hs</span> <span class="n">m</span> <span class="o">(</span><span class="n">of_nat_ge_zero</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ih</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe&#39;</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_zero</span><span class="o">,</span> <span class="n">neg_zero</span><span class="o">]</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">Hp</span> <span class="mi">0</span> <span class="o">(</span><span class="n">le_refl</span> <span class="bp">_</span><span class="o">)</span> <span class="n">H0</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">ih</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe&#39;</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">neg_succ_of_nat_coe</span><span class="o">]</span> <span class="n">at</span> <span class="n">ih</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">Hp</span> <span class="bp">_</span> <span class="o">(</span><span class="n">neg_nonpos_of_nonneg</span> <span class="err">$</span> <span class="n">of_nat_ge_zero</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ih</span><span class="o">))</span>
+
+<span class="kn">end</span> <span class="n">int</span>
+</pre></div>
+
+
+<p>I guess I should PR this, but there are probably a hundred places where the old theorem is used. Should I make this <code>induction_on'</code> a separate theorem and prove the existing <code>induction_on</code> as a special case?</p>
+
+<a name="162212579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212579">Johan Commelin (Apr 01 2019 at 06:22)</a>:</h4>
+<p>I've wished for your version a couple times</p>
+
+<a name="162212581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212581">Johan Commelin (Apr 01 2019 at 06:22)</a>:</h4>
+<p>Never got round to PRing it</p>
+
+<a name="162212592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212592">Mario Carneiro (Apr 01 2019 at 06:23)</a>:</h4>
+<p>BTW <code>Sort</code> is the same as <code>Prop</code>. I think you mean <code>Sort*</code></p>
+
+<a name="162212608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212608">Mario Carneiro (Apr 01 2019 at 06:23)</a>:</h4>
+<p>I very much doubt the old version is used in a hundred places. Probably 2 or 3</p>
+
+<a name="162212675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212675">Johan Commelin (Apr 01 2019 at 06:25)</a>:</h4>
+<p>There is also the version where you assume <code>\for i, i &gt; 0 → (p i → p -i)</code></p>
+
+<a name="162212767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.induction_on/near/162212767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76899intinductionon.html#162212767">Johan Commelin (Apr 01 2019 at 06:28)</a>:</h4>
+<p>Hmm, that isn't the optimal form, I guess</p>
+
 
 {% endraw %}
