@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [implicit argument agony](39101implicitargumentagony.html) (4 messages, latest: Apr 01 2019 at 08:53)
+* [implicit argument agony](39101implicitargumentagony.html) (6 messages, latest: Apr 01 2019 at 09:59)
 
 * [int.induction_on](76899intinductionon.html) (24 messages, latest: Apr 01 2019 at 08:35)
 
