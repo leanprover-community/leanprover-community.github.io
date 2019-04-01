@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (255 messages, latest: Mar 31 2019 at 18:41)
+* [help finding a lemma](30422helpfindingalemma.html) (168 messages, latest: Mar 31 2019 at 23:54)
 
-* [help finding a lemma](30422helpfindingalemma.html) (158 messages, latest: Mar 31 2019 at 12:07)
+* [noob question(s)](52075noobquestions.html) (255 messages, latest: Mar 31 2019 at 18:41)
 
 * ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (7 messages, latest: Mar 31 2019 at 09:17)
 

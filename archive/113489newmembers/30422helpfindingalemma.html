@@ -793,5 +793,45 @@ def split_on {α : Type u} [decidable_eq α] (a : α) : list α → list (list �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162171486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162171486">Mario Carneiro (Mar 31 2019 at 12:07)</a>:</h4>
 <p><code>data.list.defs</code></p>
 
+<a name="162197645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197645">Scott Morrison (Mar 31 2019 at 23:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I'm curious now --- why do you think the version of <code>split_on_aux</code> that passes a function around it better than the list postprocessing version? Is it really more efficient than call <code>list.reverse</code>? The VM still needs to evaluate all the functions you've stacked up.</p>
+
+<a name="162197658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197658">Scott Morrison (Mar 31 2019 at 23:41)</a>:</h4>
+<p>I'm asking because proving properties seems (likely to be?) easier with the post-processing version.</p>
+
+<a name="162197661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197661">Mario Carneiro (Mar 31 2019 at 23:41)</a>:</h4>
+<p>they are both linear time. It's hard to say</p>
+
+<a name="162197712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197712">Mario Carneiro (Mar 31 2019 at 23:42)</a>:</h4>
+<p>You can also use <code>dlist</code> instead of a <code>list -&gt; list</code> accumulator, which amounts to the same thing but has some additional constraints that are relevant for the proof</p>
+
+<a name="162197772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197772">Scott Morrison (Mar 31 2019 at 23:44)</a>:</h4>
+<p>I see. For the sake of proofs the easiest implementation is more like: "find the position <code>n</code> of the first <code>a</code>, if there is one, then return <code>(take n) :: split_on (drop (n+1))</code>.</p>
+
+<a name="162197775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197775">Scott Morrison (Mar 31 2019 at 23:44)</a>:</h4>
+<p>That's also linear time, I think, although obviously with a worse constant.</p>
+
+<a name="162197793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197793">Mario Carneiro (Mar 31 2019 at 23:45)</a>:</h4>
+<p>I would avoid an implementation like that because of the index manipulation</p>
+
+<a name="162197794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197794">Mario Carneiro (Mar 31 2019 at 23:45)</a>:</h4>
+<p>(for proving things)</p>
+
+<a name="162197841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162197841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162197841">Scott Morrison (Mar 31 2019 at 23:46)</a>:</h4>
+<p>interesting, okay. In any case, I'm not planning on proving anything here; but I was considering offering it to a student.</p>
+
+<a name="162198103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/162198103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#162198103">Mario Carneiro (Mar 31 2019 at 23:54)</a>:</h4>
+<p>you want to do this proof by induction on the list; you should assume in the proof that the function has the form <code>\lam r, l ++ r</code> for some <code>l</code>, and then use append assoc and stuff to proceed to the subcase in the inductive hypothesis</p>
+
 
 {% endraw %}

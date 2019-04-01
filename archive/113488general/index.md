@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (9 messages, latest: Mar 31 2019 at 23:38)
+
 * [mathlib is broken](03807mathlibisbroken.html) (31 messages, latest: Mar 31 2019 at 19:35)
 
 * [ITP paper](28646ITPpaper.html) (27 messages, latest: Mar 31 2019 at 17:15)
