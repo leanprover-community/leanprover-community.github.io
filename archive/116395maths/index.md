@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (40 messages, latest: Apr 01 2019 at 12:07)
+* [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (43 messages, latest: Apr 01 2019 at 14:15)
 
 * [condensed sets](68787condensedsets.html) (1 message, latest: Mar 30 2019 at 23:38)
 

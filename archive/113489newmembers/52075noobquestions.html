@@ -1508,5 +1508,68 @@ Edit 2: I'm thinking about too many things at once and writing unclearly, sorry.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162186774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162186774">Wojciech Nawrocki (Mar 31 2019 at 18:41)</a>:</h4>
 <p>Different question - in every goal I have a hypothesis of the form <code>h : hE' = Foo Γₑ' hΓ_1 N E_1 a</code>, where <code>Foo</code> is that goal's case. I would like to solve each goal by applying that goal/case's constructor, but with different arguments. Can I somehow "extract" which constructor was used for the case and reuse it to solve the goal without quoting expressions and all that?</p>
 
+<a name="162242088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162242088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162242088">Wojciech Nawrocki (Apr 01 2019 at 14:09)</a>:</h4>
+<p>How can I debug a <code>(deterministic) timeout</code> when Lean tries to prove well-foundedness of a recursion given my custom tactic?</p>
+
+<a name="162242434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162242434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162242434">Wojciech Nawrocki (Apr 01 2019 at 14:13)</a>:</h4>
+<p>Oh actually I also get a "failed to prove well-foundedness" with the state:</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="n">hE&#39;</span> <span class="bp">=</span> <span class="n">EAppLeft</span> <span class="err">Γₑ&#39;</span> <span class="n">h</span><span class="err">Γ</span><span class="bp">_</span><span class="mi">1</span> <span class="n">N</span> <span class="n">E_1</span> <span class="n">a</span><span class="o">,</span>
+<span class="err">Γ</span> <span class="o">:</span> <span class="kn">context</span> <span class="n">γ</span><span class="o">,</span>
+<span class="n">M</span> <span class="o">:</span> <span class="n">term</span> <span class="err">Γ</span> <span class="n">A&#39;&#39;</span>
+<span class="err">⊢</span> <span class="n">eval_ctx</span><span class="bp">.</span><span class="n">sizeof</span>
+      <span class="o">(((</span><span class="bp">⟨</span><span class="n">γ</span><span class="o">,</span>
+          <span class="bp">⟨</span><span class="err">Γₑ</span><span class="o">,</span>
+           <span class="bp">⟨</span><span class="err">Γ₁</span><span class="o">,</span>
+            <span class="bp">⟨</span><span class="n">A&#39;&#39;</span><span class="o">,</span>
+             <span class="bp">⟨</span><span class="n">A&#39;</span><span class="o">,</span>
+              <span class="bp">⟨</span><span class="n">A_1</span><span class="err">⊸</span><span class="n">A</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">E</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hE</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">E_1</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="err">Γₑ</span> <span class="bp">+</span> <span class="err">Γ₁</span><span class="o">,</span> <span class="bp">_⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+      <span class="o">(((((((((</span><span class="bp">⟨</span><span class="n">γ</span><span class="o">,</span>
+                <span class="bp">⟨</span><span class="err">Γₑ</span><span class="o">,</span>
+                 <span class="bp">⟨</span><span class="err">Γ₁</span><span class="o">,</span>
+                  <span class="bp">⟨</span><span class="n">A&#39;&#39;</span><span class="o">,</span>
+                   <span class="bp">⟨</span><span class="n">A&#39;</span><span class="o">,</span>
+                    <span class="bp">⟨</span><span class="n">A_1</span><span class="err">⊸</span><span class="n">A</span><span class="o">,</span>
+                     <span class="bp">⟨</span><span class="n">E</span><span class="o">,</span>
+                      <span class="bp">⟨</span><span class="n">hE</span><span class="o">,</span>
+                       <span class="bp">⟨</span><span class="n">E_1</span><span class="o">,</span>
+                        <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span>
+                         <span class="bp">⟨</span><span class="err">Γₑ</span> <span class="bp">+</span> <span class="err">Γ₁</span><span class="o">,</span>
+                          <span class="bp">_⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+      <span class="n">a</span> <span class="bp">&lt;</span>
+    <span class="n">eval_ctx</span><span class="bp">.</span><span class="n">sizeof</span>
+      <span class="o">(((</span><span class="bp">⟨</span><span class="n">γ</span><span class="o">,</span>
+          <span class="bp">⟨</span><span class="err">Γₑ</span><span class="o">,</span>
+           <span class="bp">⟨</span><span class="err">Γₑ&#39;</span><span class="o">,</span>
+            <span class="bp">⟨</span><span class="n">A&#39;&#39;</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">A&#39;</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">E</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hE</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">E&#39;</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hE&#39;</span><span class="o">,</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="bp">⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+      <span class="o">(((((((((</span><span class="bp">⟨</span><span class="n">γ</span><span class="o">,</span>
+                <span class="bp">⟨</span><span class="err">Γₑ</span><span class="o">,</span>
+                 <span class="bp">⟨</span><span class="err">Γₑ&#39;</span><span class="o">,</span>
+                  <span class="bp">⟨</span><span class="n">A&#39;&#39;</span><span class="o">,</span>
+                   <span class="bp">⟨</span><span class="n">A&#39;</span><span class="o">,</span>
+                    <span class="bp">⟨</span><span class="n">A</span><span class="o">,</span>
+                     <span class="bp">⟨</span><span class="n">E</span><span class="o">,</span>
+                      <span class="bp">⟨</span><span class="n">hE</span><span class="o">,</span>
+                       <span class="bp">⟨</span><span class="n">E&#39;</span><span class="o">,</span>
+                        <span class="bp">⟨</span><span class="n">hE&#39;</span><span class="o">,</span> <span class="bp">⟨</span><span class="err">Γ</span><span class="o">,</span> <span class="n">h</span><span class="err">Γ</span><span class="bp">⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+      <span class="n">hE&#39;</span>
+</pre></div>
+
+
+<p>Since <code>h: hE' = EAppLeft ... a</code> is in the context, why can't Lean just rewrite it using that and then show that <code>sizeof a &lt; sizeof EAppLeft .. a</code>?</p>
+
+<a name="162245368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162245368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162245368">Andrew Ashworth (Apr 01 2019 at 14:47)</a>:</h4>
+<p>this error log is pretty hard to understand just by looking at it</p>
+
+<a name="162245470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162245470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162245470">Andrew Ashworth (Apr 01 2019 at 14:48)</a>:</h4>
+<p>what always gets linked when these things come up: TPIL and <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+
+<a name="162246128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162246128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162246128">Andrew Ashworth (Apr 01 2019 at 14:55)</a>:</h4>
+<p>what is not mentioned in the mathlib doc is what I usually do when I don't want to stare at a bunch of errors: prove my relation is well-founded by hand <code>well_founded r</code> and directly use <code>well_founded.fix</code></p>
+
 
 {% endraw %}

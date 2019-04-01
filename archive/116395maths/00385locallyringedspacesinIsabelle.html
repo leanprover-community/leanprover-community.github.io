@@ -178,5 +178,19 @@ permalink: archive/116395maths/00385locallyringedspacesinIsabelle.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces%20in%20Isabelle/near/162231891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00385locallyringedspacesinIsabelle.html#162231891">Chris Hughes (Apr 01 2019 at 12:07)</a>:</h4>
 <p>Is there a distinction between propositions that quantify over types and those that don't in Isabelle? For example, could I define something like <code>{x : α // Π {β : Type}, P β x}</code></p>
 
+<a name="162241350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces%20in%20Isabelle/near/162241350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00385locallyringedspacesinIsabelle.html#162241350">Sebastien Gouezel (Apr 01 2019 at 14:00)</a>:</h4>
+<p>No, you can't define this. </p>
+<p>And to come back to the initial question, having a ring depending in an open set (i.e., a type depending on a term) is not possible in Isabelle. The usual solution is to work in a big type, and to define disjoint subsets of this big type, depending on the open set, say <code>R U</code>. Together with maps on the big type that you could call <code>add</code> and <code>mult</code>, that would satisfy all the ring axioms when applied to elements in <code>R U</code>, for any <code>U</code>. In other words, you are imitating ZFC, inside one fixed type, and then everything becomes possible. </p>
+<p>The main drawback of this approach is that you don't have genuine types depending on <code>U</code>, so you can't use typeclasses and all the nice already existing theory of rings defined using type classes. You need to reconstruct everything in parallel. This means that you will have two versions of rings in Isabelle, one with typeclasses, and one for subsets of a given type.</p>
+
+<a name="162241732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces%20in%20Isabelle/near/162241732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00385locallyringedspacesinIsabelle.html#162241732">Kevin Buzzard (Apr 01 2019 at 14:05)</a>:</h4>
+<p>And if I want to do tensor products of presheaves of rings?</p>
+
+<a name="162242709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces%20in%20Isabelle/near/162242709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00385locallyringedspacesinIsabelle.html#162242709">Chris Hughes (Apr 01 2019 at 14:15)</a>:</h4>
+<p>Just to be clear, Can I define this as a set rather than a subtype? <code>{x : α | ∀ {β : Type}, P β x}</code></p>
+
 
 {% endraw %}
