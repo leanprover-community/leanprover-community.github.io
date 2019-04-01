@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (43 messages, latest: Apr 01 2019 at 14:15)
+* [continuity of 1/x on (0,1]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
+
+* [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (46 messages, latest: Apr 01 2019 at 16:29)
 
 * [condensed sets](68787condensedsets.html) (1 message, latest: Mar 30 2019 at 23:38)
 

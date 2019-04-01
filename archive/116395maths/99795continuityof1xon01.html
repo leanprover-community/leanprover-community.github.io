@@ -1,0 +1,101 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/99795continuityof1xon01.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html">continuity of 1/x on (0,1]</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162254805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162254805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162254805">Joseph Corneli (Apr 01 2019 at 16:29)</a>:</h4>
+<p>I've just noticed the new (<a href="https://github.com/leanprover-community/mathlib/commit/f5d73bdd1376304f9ac6b5c06cbe89d7162c22ba#diff-e5b26efbb6ead9f50b4cfd7c0b04a07f" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/f5d73bdd1376304f9ac6b5c06cbe89d7162c22ba#diff-e5b26efbb6ead9f50b4cfd7c0b04a07f">since December</a>) definitions that give variations on continuity.</p>
+<p>I was able to prove continuity of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span></span></span></span> on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">1</span><span class="mclose">]</span></span></span></span> without much trouble.  Proving continuity of  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">1/x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit">x</span></span></span></span> on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">(0,1]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">1</span><span class="mclose">]</span></span></span></span> seems to require some more serious machinery and I'm stuck.  Could someone offer me some advice on the second unfinished proof below?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="c1">-- Give a handle on the set [0,1] ⊂ ℝ</span>
+<span class="n">def</span> <span class="n">unit_interval</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Icc</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="mi">1</span><span class="o">)</span>
+<span class="c1">-- Define an identity function on the subtype corresponding to this set</span>
+<span class="n">def</span> <span class="n">restricted_id</span> <span class="o">:=</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="n">unit_interval</span>
+
+<span class="c1">-- show that restricted_id is continuous</span>
+<span class="kn">lemma</span> <span class="n">cont_restricted_id</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">restricted_id</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_subtype_val</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">a</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="c1">-- main idea: &quot;getting the value of the subtype&quot; unifies with &quot;restricted_id&quot;</span>
+
+<span class="c1">-- now show that the identity function (on ℝ) is continuous on the unit interval</span>
+<span class="kn">lemma</span> <span class="n">continuous_on_unit_interval_id</span> <span class="o">:</span> <span class="n">continuous_on</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="n">unit_interval</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">continuous_on_iff_continuous_restrict</span><span class="o">],</span>
+<span class="n">exact</span> <span class="n">cont_restricted_id</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- This breaks for 1/x, obviously.</span>
+<span class="c1">-- First of all, we can&#39;t just use subtype.val, since that won&#39;t unify.</span>
+<span class="c1">-- To get some hope that it will go through, let&#39;s start over with the interval (0,1].</span>
+<span class="n">def</span> <span class="n">ounit_interval</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Ioc</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">restricted_inv</span> <span class="o">:=</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="mi">1</span><span class="bp">/</span><span class="n">x</span><span class="o">)</span> <span class="n">ounit_interval</span>
+
+<span class="kn">lemma</span> <span class="n">cont_restricted_inv</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">restricted_inv</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">restricted_inv</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162255163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255163">Kevin Buzzard (Apr 01 2019 at 16:33)</a>:</h4>
+<p>I guess that one would not expect a general library function in the topological spaces library to help you out here. This is a specific question about real numbers. It would not surprise me if the answer to your question was somewhere in the real number library. I don't think the result follows from general topological principles.</p>
+
+<a name="162255282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255282">Kevin Buzzard (Apr 01 2019 at 16:34)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/f5d73bdd1376304f9ac6b5c06cbe89d7162c22ba/src/topology/instances/real.lean#L148" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/f5d73bdd1376304f9ac6b5c06cbe89d7162c22ba/src/topology/instances/real.lean#L148">https://github.com/leanprover-community/mathlib/blob/f5d73bdd1376304f9ac6b5c06cbe89d7162c22ba/src/topology/instances/real.lean#L148</a></p>
+
+<a name="162255343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255343">Chris Hughes (Apr 01 2019 at 16:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">cont_restricted_inv</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">restricted_inv</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">restricted_inv</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_div_eq_inv</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">continuous_inv</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">ne_of_lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162255351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255351">Kevin Buzzard (Apr 01 2019 at 16:35)</a>:</h4>
+<p>The guts of it is I guess here: <code>real.uniform_continuous_inv</code></p>
+
+<a name="162255485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255485">Chris Hughes (Apr 01 2019 at 16:37)</a>:</h4>
+<p><code>real.uniform_continuous_inv</code> won't help, because it isn't uniform continuous on that interval.</p>
+
+<a name="162255521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255521">Kevin Buzzard (Apr 01 2019 at 16:37)</a>:</h4>
+<p>Right. But you use <code>real.continuous_inv</code> and if you trace it back the proof of that uses <code>real.uniform_continuous_inv</code></p>
+
+<a name="162255607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255607">Kevin Buzzard (Apr 01 2019 at 16:38)</a>:</h4>
+<p>via <code>tendsto_inv</code></p>
+
+<a name="162255638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255638">Kevin Buzzard (Apr 01 2019 at 16:38)</a>:</h4>
+<p>This is why Joe will find it difficult proving this result just by thinking about topology.</p>
+
+<a name="162255987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%201/x%20on%20%280%2C1%5D/near/162255987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99795continuityof1xon01.html#162255987">Joseph Corneli (Apr 01 2019 at 16:42)</a>:</h4>
+<p>Thanks for the sample proof Chris. Kevin, thanks for the narrative as well, however I am now a bit baffled by the logic.</p>
+
+
+{% endraw %}
