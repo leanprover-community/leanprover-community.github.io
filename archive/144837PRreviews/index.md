@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#822 first three digits of π](19784822firstthreedigitsof.html) (15 messages, latest: Apr 01 2019 at 10:31)
+* [#822 first three digits of π](19784822firstthreedigitsof.html) (31 messages, latest: Apr 01 2019 at 15:57)
 
 * [#819 card finite fields](64086819cardfinitefields.html) (3 messages, latest: Apr 01 2019 at 06:56)
 
