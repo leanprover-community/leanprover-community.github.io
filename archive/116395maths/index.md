@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (38 messages, latest: Apr 01 2019 at 11:22)
+
 * [condensed sets](68787condensedsets.html) (1 message, latest: Mar 30 2019 at 23:38)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (96 messages, latest: Mar 29 2019 at 20:29)
