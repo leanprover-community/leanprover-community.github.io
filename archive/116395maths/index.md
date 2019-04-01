@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [matrix](88278matrix.html) (5 messages, latest: Apr 01 2019 at 19:09)
+
 * [continuity of 1/x on (0,1]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
 
 * [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (46 messages, latest: Apr 01 2019 at 16:29)
@@ -117,8 +119,6 @@ permalink: archive/116395maths/index.html
 * [linear_independent](79881linearindependent.html) (53 messages, latest: Feb 28 2019 at 18:10)
 
 * [hensel](45920hensel.html) (5 messages, latest: Feb 28 2019 at 15:06)
-
-* [matrix](88278matrix.html) (2 messages, latest: Feb 28 2019 at 08:58)
 
 * [golden ratio calculation](40872goldenratiocalculation.html) (11 messages, latest: Feb 26 2019 at 22:54)
 
