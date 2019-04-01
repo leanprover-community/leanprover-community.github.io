@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [int.induction_on](76899intinductionon.html) (23 messages, latest: Apr 01 2019 at 07:56)
+* [implicit argument agony](39101implicitargumentagony.html) (4 messages, latest: Apr 01 2019 at 08:53)
+
+* [int.induction_on](76899intinductionon.html) (24 messages, latest: Apr 01 2019 at 08:35)
+
+* [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (14 messages, latest: Apr 01 2019 at 08:30)
 
 * [mathlib is broken](03807mathlibisbroken.html) (38 messages, latest: Apr 01 2019 at 07:04)
 
 * [VScode extension](56578VScodeextension.html) (385 messages, latest: Apr 01 2019 at 06:00)
-
-* [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (12 messages, latest: Apr 01 2019 at 02:16)
 
 * [ITP paper](28646ITPpaper.html) (27 messages, latest: Mar 31 2019 at 17:15)
 

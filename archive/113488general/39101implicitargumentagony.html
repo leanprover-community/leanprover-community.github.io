@@ -1,0 +1,57 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/39101implicitargumentagony.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/39101implicitargumentagony.html">implicit argument agony</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162219393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20argument%20agony/near/162219393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39101implicitargumentagony.html#162219393">Scott Morrison (Apr 01 2019 at 08:41)</a>:</h4>
+<p>I would like to write</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma map_id (F : (C × D) ⥤ E) (X : C) (Y : D) :
+  F.map (𝟙 X, 𝟙 Y) = 𝟙 (F.obj (X, Y)) :=
+F.map_id (X, Y)
+</pre></div>
+
+
+<p>(complete context <a href="https://gist.github.com/semorrison/38e89f527d444fd6af24cc7fb0a2f63a" target="_blank" title="https://gist.github.com/semorrison/38e89f527d444fd6af24cc7fb0a2f63a">here</a>), but I get an error message</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  prod.mk (𝟙 X)
+term
+  𝟙 X
+has type
+  X ⟶ X
+but is expected to have type
+  ?m_1.fst ⟶ ?m_1.fstLean
+</pre></div>
+
+
+<p>and so have to write the rather unpleasant</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma map_id (F : (C × D) ⥤ E) (X : C) (Y : D) :
+  @category_theory.functor.map _ _ _ _ F (X, Y) (X, Y) (𝟙 X, 𝟙 Y) = 𝟙 (F.obj (X, Y)) :=
+F.map_id (X, Y)
+</pre></div>
+
+
+<p>Anyone have ideas to help the elaborator along, here?</p>
+
+<a name="162219471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20argument%20agony/near/162219471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39101implicitargumentagony.html#162219471">Kenny Lau (Apr 01 2019 at 08:43)</a>:</h4>
+<p><code>(term : type)</code></p>
+
+<a name="162219853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20argument%20agony/near/162219853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39101implicitargumentagony.html#162219853">Scott Morrison (Apr 01 2019 at 08:50)</a>:</h4>
+<p>I've tried that, but can't get anything to work. Did you have a specific suggestion?</p>
+
+<a name="162220031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20argument%20agony/near/162220031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39101implicitargumentagony.html#162220031">Kenny Lau (Apr 01 2019 at 08:53)</a>:</h4>
+<p>no, sorry</p>
+
+
+{% endraw %}
