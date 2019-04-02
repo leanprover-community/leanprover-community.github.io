@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (386 messages, latest: Apr 02 2019 at 19:39)
+
 * [transfer between isomorphic types](89154transferbetweenisomorphictypes.html) (26 messages, latest: Apr 02 2019 at 18:51)
 
 * [cerw](13234cerw.html) (66 messages, latest: Apr 02 2019 at 18:04)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [implicit argument agony](39101implicitargumentagony.html) (6 messages, latest: Apr 01 2019 at 09:59)
 
 * [mathlib is broken](03807mathlibisbroken.html) (38 messages, latest: Apr 01 2019 at 07:04)
-
-* [VScode extension](56578VScodeextension.html) (385 messages, latest: Apr 01 2019 at 06:00)
 
 * [ITP paper](28646ITPpaper.html) (27 messages, latest: Mar 31 2019 at 17:15)
 
