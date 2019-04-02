@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (14 messages, latest: Apr 02 2019 at 16:19)
+* [noob question(s)](52075noobquestions.html) (298 messages, latest: Apr 02 2019 at 17:59)
 
-* [noob question(s)](52075noobquestions.html) (296 messages, latest: Apr 02 2019 at 14:56)
+* [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (15 messages, latest: Apr 02 2019 at 17:48)
 
 * [locally disabling instances](21606locallydisablinginstances.html) (5 messages, latest: Apr 02 2019 at 12:12)
 

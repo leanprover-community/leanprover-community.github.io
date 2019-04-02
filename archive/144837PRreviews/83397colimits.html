@@ -238,5 +238,54 @@ so as to make the operations (addition etc.) "computable".</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353032">Reid Barton (Apr 02 2019 at 16:55)</a>:</h4>
 <p>Yes, I suggest making <code>CommRing.mk_ob</code>, etc., which also helps Lean understand what category it's supposed to produce an object of--I'm not  confident <code>mk_ob</code> would work in most cases without a type ascription</p>
 
+<a name="162353820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353820">Johan Commelin (Apr 02 2019 at 17:03)</a>:</h4>
+<p>Can we replace <code>bundled</code> and <code>concrete_category</code> with some <code>meta</code> stuff that rolls all these categories for us?</p>
+
+<a name="162353898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353898">Reid Barton (Apr 02 2019 at 17:04)</a>:</h4>
+<p>Why?</p>
+
+<a name="162353909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353909">Johan Commelin (Apr 02 2019 at 17:04)</a>:</h4>
+<p>It could also create a bunch of forgetful functors corresponding to classes that extend each other.</p>
+
+<a name="162353929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353929">Johan Commelin (Apr 02 2019 at 17:04)</a>:</h4>
+<p>Because then we will have <code>Ring.mk_ob</code> and <code>Group.mk_ob</code> etc...</p>
+
+<a name="162353960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353960">Johan Commelin (Apr 02 2019 at 17:05)</a>:</h4>
+<p>You can generate better code if you use some <code>meta</code> stuff.</p>
+
+<a name="162353987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353987">Johan Commelin (Apr 02 2019 at 17:05)</a>:</h4>
+<p>Or am I dreaming?</p>
+
+<a name="162355170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355170">Johan Commelin (Apr 02 2019 at 17:18)</a>:</h4>
+<p>Sadly something like this doesn't work either</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">rings</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">categorify</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="n">X</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">unify</span><span class="o">]</span> <span class="n">def</span> <span class="n">mk_Ring</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Ring</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">unification_hint</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pattern</span> <span class="o">:=</span> <span class="n">categorify</span> <span class="n">R</span> <span class="err">≟</span> <span class="n">X</span><span class="bp">.</span><span class="n">α</span><span class="o">,</span>
+  <span class="n">constraints</span> <span class="o">:=</span> <span class="o">[</span><span class="n">X</span> <span class="err">≟</span> <span class="n">mk_ob</span> <span class="n">R</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+<a name="162355187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355187">Reid Barton (Apr 02 2019 at 17:19)</a>:</h4>
+<p>I think that is trying to solve a problem we don't have yet. It's not hard to write such things by hand for now.</p>
+
+<a name="162355643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355643">Johan Commelin (Apr 02 2019 at 17:24)</a>:</h4>
+<p>Yeah, that's true.</p>
+
 
 {% endraw %}
