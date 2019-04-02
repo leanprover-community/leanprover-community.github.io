@@ -10,11 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (3 messages, latest: Apr 02 2019 at 00:54)
+
+* [help finding a lemma](30422helpfindingalemma.html) (169 messages, latest: Apr 02 2019 at 00:44)
+
 * [universe levels](11613universelevels.html) (12 messages, latest: Apr 01 2019 at 16:18)
 
 * [noob question(s)](52075noobquestions.html) (263 messages, latest: Apr 01 2019 at 15:04)
-
-* [help finding a lemma](30422helpfindingalemma.html) (168 messages, latest: Mar 31 2019 at 23:54)
 
 * ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (7 messages, latest: Mar 31 2019 at 09:17)
 
