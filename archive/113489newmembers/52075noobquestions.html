@@ -1707,5 +1707,45 @@ And if I don't want to force two variables to be both for example <code>Type 2</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162317229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162317229">Kevin Buzzard (Apr 02 2019 at 09:29)</a>:</h4>
 <p>u is a natural number, but it's not a Lean natural number, it's a universe variable, which is treated differently; it's part of the core language or something.</p>
 
+<a name="162342248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162342248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162342248">snowbunting (Apr 02 2019 at 14:53)</a>:</h4>
+<blockquote>
+<p>And then <code>[\for i, add_group G]</code></p>
+</blockquote>
+<p>This works great together with <code>variable</code>, but how would I now include that into a class? This does not seem to be working:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="n">class</span> <span class="n">chain</span> <span class="o">(</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">group</span> <span class="o">(</span><span class="n">i</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">):</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">diff</span> <span class="o">{</span><span class="n">i</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">}:</span> <span class="o">(</span><span class="n">group</span> <span class="n">i</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">group</span> <span class="o">(</span><span class="n">i</span><span class="bp">-</span><span class="mi">1</span><span class="o">)))</span>
+    <span class="o">[</span><span class="n">x</span><span class="o">:</span> <span class="bp">∀</span><span class="n">i</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">group</span> <span class="n">i</span><span class="o">)]</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">C</span><span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">chain</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span><span class="o">:</span> <span class="n">chain</span><span class="bp">.</span><span class="n">group</span> <span class="n">C</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">chain</span><span class="bp">.</span><span class="n">group</span> <span class="n">C</span> <span class="mi">1</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">chain</span><span class="bp">.</span><span class="n">diff</span> <span class="n">g</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">h</span>    <span class="c1">-- has_add (chain.group C 1)</span>
+</pre></div>
+
+<a name="162342427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162342427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162342427">Johan Commelin (Apr 02 2019 at 14:54)</a>:</h4>
+<p>Put it with <code>()</code> in the class. Then aftwerwards state:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">foo</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">C</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">C</span><span class="bp">.</span><span class="n">x</span> <span class="n">i</span>
+</pre></div>
+
+<a name="162342450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162342450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162342450">Johan Commelin (Apr 02 2019 at 14:54)</a>:</h4>
+<p>Modulo mistakes</p>
+
+<a name="162342638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162342638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162342638">Johan Commelin (Apr 02 2019 at 14:56)</a>:</h4>
+<p>Also, you might be interested in <code>category_theory/</code></p>
+
+<a name="162342654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162342654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162342654">snowbunting (Apr 02 2019 at 14:56)</a>:</h4>
+<p>Of course, I should have remembered <code>instance</code>, used that before, thank you!</p>
+
 
 {% endraw %}
