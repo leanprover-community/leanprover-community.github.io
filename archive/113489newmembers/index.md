@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help finding a lemma](30422helpfindingalemma.html) (172 messages, latest: Apr 02 2019 at 02:59)
+* [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
 
 * [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (3 messages, latest: Apr 02 2019 at 00:54)
 
