@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [locally disabling instances](21606locallydisablinginstances.html) (7 messages, latest: Apr 02 2019 at 22:06)
+
+* [noob question(s)](52075noobquestions.html) (301 messages, latest: Apr 02 2019 at 22:05)
+
 * [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (16 messages, latest: Apr 02 2019 at 18:40)
-
-* [noob question(s)](52075noobquestions.html) (300 messages, latest: Apr 02 2019 at 18:01)
-
-* [locally disabling instances](21606locallydisablinginstances.html) (5 messages, latest: Apr 02 2019 at 12:12)
 
 * [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
 
