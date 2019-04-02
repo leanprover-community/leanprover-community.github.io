@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [transfer between isomorphic types](89154transferbetweenisomorphictypes.html) (26 messages, latest: Apr 02 2019 at 18:51)
+
+* [cerw](13234cerw.html) (66 messages, latest: Apr 02 2019 at 18:04)
+
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (15 messages, latest: Apr 01 2019 at 15:47)
 
 * [int.induction_on](76899intinductionon.html) (25 messages, latest: Apr 01 2019 at 10:27)
@@ -97,8 +101,6 @@ permalink: archive/113488general/index.html
 * [or_iff_or](59094oriffor.html) (41 messages, latest: Mar 22 2019 at 21:19)
 
 * [init.algebra.classes](59885initalgebraclasses.html) (16 messages, latest: Mar 22 2019 at 15:53)
-
-* [cerw](13234cerw.html) (65 messages, latest: Mar 22 2019 at 06:57)
 
 * [ELAN IS BROKEN (AND FIXED)](02002ELANISBROKENANDFIXED.html) (2 messages, latest: Mar 21 2019 at 12:24)
 

@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [colimits](83397colimits.html) (60 messages, latest: Apr 02 2019 at 17:24)
+* [mergify](77684mergify.html) (209 messages, latest: Apr 02 2019 at 18:58)
 
-* [mergify](77684mergify.html) (186 messages, latest: Apr 02 2019 at 16:36)
+* [colimits](83397colimits.html) (60 messages, latest: Apr 02 2019 at 17:24)
 
 * [#822 first three digits of π](19784822firstthreedigitsof.html) (47 messages, latest: Apr 01 2019 at 17:09)
 
