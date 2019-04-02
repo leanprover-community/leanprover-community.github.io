@@ -184,5 +184,59 @@ so as to make the operations (addition etc.) "computable".</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162307031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162307031">Kevin Buzzard (Apr 02 2019 at 06:23)</a>:</h4>
 <p>In practice I have an actual bunch of rings in the sense that they're types <code>X i</code> with <code>[ring X i]</code> and I want to take their actual direct limit and prove it's a ring and have access to the universal property, all by magic.</p>
 
+<a name="162351925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162351925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162351925">Reid Barton (Apr 02 2019 at 16:40)</a>:</h4>
+<p>I think the simplest/Lean-iest way to do these in general is: First, construct the colimit of an arbitrary diagram of (say) rings, as the quotient of an inductive type by an inductive proposition. Then check that when the input diagram is filtered, the object we built also has the following properties:</p>
+<ul>
+<li>Every element of the underlying inductive type is in the image of the map from one of the rings of the diagram.</li>
+<li>Every pair of elements of the original rings which become equal in the colimit (after forming the quotient) already become equal at some point in the diagram.</li>
+</ul>
+<p>Both of these are easy inductions: the point is that each constructor of the inductive type and the inductive proposition is built from only finitely many smaller terms, so we can pass to a point in the diagram where the statement we are proving holds for all of them.</p>
+<p>Once we check these two properties, then we can conclude by a general lemma that the colimit is isomorphic to the "disjoint union mod identifying elements with their images" construction, or that the colimit is preserved by the forgetful functor to sets, or whatever exact statement of that we want.</p>
+
+<a name="162352063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352063">Johan Commelin (Apr 02 2019 at 16:42)</a>:</h4>
+<p>And can we provide easy glue with unbundled (say) rings? So that if you have <code>X : I → Type</code> and <code>[\for i, ring (X i)]</code>, you can easily build a diagram in <code>Ring</code>?</p>
+
+<a name="162352089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352089">Johan Commelin (Apr 02 2019 at 16:43)</a>:</h4>
+<p>Because otherwise we have a nice and abstract machine, but it becomes a pain to use in the rest of mathlib</p>
+
+<a name="162352094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352094">Reid Barton (Apr 02 2019 at 16:43)</a>:</h4>
+<p>I think you just do it?</p>
+
+<a name="162352176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352176">Johan Commelin (Apr 02 2019 at 16:44)</a>:</h4>
+<p>It shouldn't take more than half a line... and we want this for all bundled categories, I guess.</p>
+
+<a name="162352205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352205">Johan Commelin (Apr 02 2019 at 16:44)</a>:</h4>
+<p>And we want it for indexed families, but also for single objects, and maybe other thingies?</p>
+
+<a name="162352625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352625">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p><code>mk_ob</code> makes a type with a ring instance into an object of <code>Ring</code></p>
+
+<a name="162352660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352660">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p>for a functor, obviously you'd have to provide all the fields: action on objects, action on morphisms, identity and composition laws; so it would be a little longer</p>
+
+<a name="162352678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352678">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p>Ideally, you would be in a situation where you already have a functor</p>
+
+<a name="162352734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352734">Johan Commelin (Apr 02 2019 at 16:51)</a>:</h4>
+<p>Yeah, but in the rest of mathlib you aren't in that ideal situation.</p>
+
+<a name="162352835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352835">Johan Commelin (Apr 02 2019 at 16:52)</a>:</h4>
+<p>So <code>mk_ob</code> is good. We'll need similar things for the categories that are quasi-bundled. (Like <code>CommRing</code>, which doesn't use the machinery, even though it is an obvious candidate.)</p>
+
+<a name="162353032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353032">Reid Barton (Apr 02 2019 at 16:55)</a>:</h4>
+<p>Yes, I suggest making <code>CommRing.mk_ob</code>, etc., which also helps Lean understand what category it's supposed to produce an object of--I'm not  confident <code>mk_ob</code> would work in most cases without a type ascription</p>
+
 
 {% endraw %}

@@ -43,5 +43,37 @@ permalink: archive/113489newmembers/43977gettingthedefiningequationofarecursor.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162306158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162306158">Kevin Buzzard (Apr 02 2019 at 06:01)</a>:</h4>
 <p>Every time a new type is created using <code>inductive</code> or <code>structure</code> or <code>class</code> the constructors and recursor are added to the theory as new constants or axioms or whatever you want to call them. They have no definitions. Everything else gets defined in terms of these.</p>
 
+<a name="162349317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349317">Patrick Thomas (Apr 02 2019 at 16:07)</a>:</h4>
+<p>So there is no defining equation like <code>recA×B(C,g,(a,b)) :≡ g(a)(b)</code> as given in the linked text? How do we determine how to use them?</p>
+
+<a name="162349409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349409">Kevin Buzzard (Apr 02 2019 at 16:08)</a>:</h4>
+<p>That's iota reduction, which is true by definition.</p>
+
+<a name="162349660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349660">Kevin Buzzard (Apr 02 2019 at 16:11)</a>:</h4>
+<p>Lean cannot even tell the difference between the two sides in some sense, but prefers the right hand side to the left hand side. A tactic like <code>dsimp</code> would apply all reductions Lean can think of. A list of the reductions Lean knows is in <a href="https://leanprover.github.io/reference/expressions.html#computation" target="_blank" title="https://leanprover.github.io/reference/expressions.html#computation">section 3.7 of the reference manual</a>. What is your background? I hope I'm not patronising you -- I don't mean to. I didn't know this stuff at all a year or so ago, so I just assume nobody else knows it ;-)</p>
+
+<a name="162349743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349743">Kevin Buzzard (Apr 02 2019 at 16:12)</a>:</h4>
+<p>I guess iota reduction is the only "move" that Lean can make faced with a recursor, because it can't unfold the definition, because there is no definition.</p>
+
+<a name="162349755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349755">Patrick Thomas (Apr 02 2019 at 16:13)</a>:</h4>
+<p>Nope, this is new to me, I appreciate it.</p>
+
+<a name="162349870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162349870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162349870">Kevin Buzzard (Apr 02 2019 at 16:14)</a>:</h4>
+<p>I feel guilty about all this. About six months ago I spent quite a lot of time trying to figure out what was going on here -- what was true by definition and what was true for other reasons (e.g. a+b=b+a is true because of a theorem, not by definition). I got it all straight in my head and then made a note to write some good teaching materials but I never made those teaching materials.</p>
+
+<a name="162350086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162350086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162350086">Patrick Thomas (Apr 02 2019 at 16:17)</a>:</h4>
+<p>No worries. Thank you for the link to that section of the reference manual. I think that will help.</p>
+
+<a name="162350205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20the%20defining%20equation%20of%20a%20recursor/near/162350205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43977gettingthedefiningequationofarecursor.html#162350205">Kevin Buzzard (Apr 02 2019 at 16:19)</a>:</h4>
+<p>I can never find it because the title is "computation" -- I had not realised that this is what a computer scientist means when they talk about computation! They mean changing terms into other terms, apparently. The Lean tactic <code>change</code> (and <code>show</code>, a synonym) changes the goal to anything which is definitionally equivalent to the goal; it's a useful tactic if you want to experiment with definitional equality.</p>
+
 
 {% endraw %}
