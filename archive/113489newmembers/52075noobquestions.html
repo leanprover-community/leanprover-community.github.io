@@ -1583,5 +1583,129 @@ Edit 2: I'm thinking about too many things at once and writing unclearly, sorry.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162247040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162247040">Andrew Ashworth (Apr 01 2019 at 15:04)</a>:</h4>
 <p>the definitions are sorta almost the same if you squint</p>
 
+<a name="162316155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316155">snowbunting (Apr 02 2019 at 09:12)</a>:</h4>
+<p>What would be the correct way to define a function from ℤ to (abelian) groups? (i.e. having indexed groups G_1, G_2, ...)</p>
+<p>I don't think that this here is working as it should.  This would be a constant function, wouldn't it?</p>
+<div class="codehilite"><pre><span></span>universes u
+variables {α: Type u}
+def my_indexes_groups (i:ℤ) := add_group α
+#check my_indexes_groups 3
+</pre></div>
+
+
+<p>Thx :)</p>
+
+<a name="162316216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316216">Johan Commelin (Apr 02 2019 at 09:12)</a>:</h4>
+<p>No, because then all groups have the same cardinality</p>
+
+<a name="162316224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316224">Kevin Buzzard (Apr 02 2019 at 09:12)</a>:</h4>
+<p>You define a function from Z to <code>Type</code></p>
+
+<a name="162316234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316234">Johan Commelin (Apr 02 2019 at 09:12)</a>:</h4>
+<p>What you do is <code>G : Z → Type</code></p>
+
+<a name="162316254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316254">Johan Commelin (Apr 02 2019 at 09:13)</a>:</h4>
+<p>And then <code>[\for i, add_group G i]</code></p>
+
+<a name="162316274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316274">Kevin Buzzard (Apr 02 2019 at 09:13)</a>:</h4>
+<p>And then you define another function from Z to the structure of a group on the image of the first function :-)</p>
+
+<a name="162316367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316367">Kevin Buzzard (Apr 02 2019 at 09:14)</a>:</h4>
+<p>And you also note that Lean's definition of <code>add_group</code> doesn't require commutativity so if you're doing exact sequences you might want to use add_comm_group</p>
+
+<a name="162316397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316397">Kevin Buzzard (Apr 02 2019 at 09:15)</a>:</h4>
+<p>Johan and I are both interested in seeing exact sequences in Lean by the way, we're both mathematicians</p>
+
+<a name="162316483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316483">Kevin Buzzard (Apr 02 2019 at 09:16)</a>:</h4>
+<p>The way to think about groups in Lean is that they are two things. First you have G, a <em>type</em></p>
+
+<a name="162316499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316499">Kevin Buzzard (Apr 02 2019 at 09:16)</a>:</h4>
+<p>And then you have another thing h, a term of type [group G]</p>
+
+<a name="162316522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316522">Kevin Buzzard (Apr 02 2019 at 09:17)</a>:</h4>
+<p>And it's h that has all the data of the multiplication and the axioms</p>
+
+<a name="162316532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316532">Kevin Buzzard (Apr 02 2019 at 09:17)</a>:</h4>
+<p>But amazingly you never have to mention h at all when you're working with groups</p>
+
+<a name="162316589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316589">Kevin Buzzard (Apr 02 2019 at 09:18)</a>:</h4>
+<p>Because whenever Lean needs this data it gets it from G using something called type class inference</p>
+
+<a name="162316617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316617">Kevin Buzzard (Apr 02 2019 at 09:18)</a>:</h4>
+<p>You try to do a group thing on G like multiplying two elements together</p>
+
+<a name="162316655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316655">snowbunting (Apr 02 2019 at 09:19)</a>:</h4>
+<p>ok that works indeed! Maybe it would be actually ask to ask what the difference between <code>Type</code> and <code>Type u</code> is, although it feels super dumb...</p>
+
+<a name="162316675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316675">Kevin Buzzard (Apr 02 2019 at 09:19)</a>:</h4>
+<p>And Lean says "what's this multiplication they're talking about? Does my big list of type class stuff contain anything which mentions a multiplication on G? And then it looks and it finds h and says "ok I'll just use that stuff"</p>
+
+<a name="162316719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316719">Kevin Buzzard (Apr 02 2019 at 09:20)</a>:</h4>
+<p>Type is Type 0</p>
+
+<a name="162316729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316729">Kevin Buzzard (Apr 02 2019 at 09:20)</a>:</h4>
+<p>In type theory everything has to have a type</p>
+
+<a name="162316736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316736">Kevin Buzzard (Apr 02 2019 at 09:20)</a>:</h4>
+<p>So unfortunately Type has to have a type</p>
+
+<a name="162316742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316742">Kevin Buzzard (Apr 02 2019 at 09:20)</a>:</h4>
+<p>Which is Type 1</p>
+
+<a name="162316743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316743">Kevin Buzzard (Apr 02 2019 at 09:20)</a>:</h4>
+<p>You get the picture</p>
+
+<a name="162316760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316760">Kevin Buzzard (Apr 02 2019 at 09:21)</a>:</h4>
+<p>Type u is a random universe somewhere up in the hierarchy</p>
+
+<a name="162316792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316792">Kevin Buzzard (Apr 02 2019 at 09:21)</a>:</h4>
+<p>It's best practice to make functions and constructions take inputs from arbitrary universes in type theory</p>
+
+<a name="162316875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316875">Kevin Buzzard (Apr 02 2019 at 09:22)</a>:</h4>
+<p>You should do a map from Z to <code>Type u</code> really</p>
+
+<a name="162316906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162316906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162316906">Kevin Buzzard (Apr 02 2019 at 09:23)</a>:</h4>
+<p>People might also write <code>Type*</code> -- this is the same thing, it just saves you having to name u</p>
+
+<a name="162317141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162317141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162317141">snowbunting (Apr 02 2019 at 09:28)</a>:</h4>
+<p>ok so <code>u</code> really is just a number, like <code>Type u</code> one of <code>Type 0</code>, <code>Type 1</code>,  ...<br>
+And if I don't want to force two variables to be both for example <code>Type 2</code> simultaneously, then I should use <code>Type u</code> and <code>Type v</code> in the definition, right?</p>
+<p>And if I would write <code>def xxx (a: Type*) (b: Type*): Type* := sorry</code> then there is no constrains if they have the same type or not, is there?</p>
+<p>Thx :)</p>
+
+<a name="162317205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162317205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162317205">Kevin Buzzard (Apr 02 2019 at 09:28)</a>:</h4>
+<p>That's right.</p>
+
+<a name="162317229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162317229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162317229">Kevin Buzzard (Apr 02 2019 at 09:29)</a>:</h4>
+<p>u is a natural number, but it's not a Lean natural number, it's a universe variable, which is treated differently; it's part of the core language or something.</p>
+
 
 {% endraw %}
