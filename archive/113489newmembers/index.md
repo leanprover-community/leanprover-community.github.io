@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
+* [locally disabling instances](21606locallydisablinginstances.html) (1 message, latest: Apr 02 2019 at 04:07)
 
-* [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (3 messages, latest: Apr 02 2019 at 00:54)
+* [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (4 messages, latest: Apr 02 2019 at 04:02)
+
+* [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
 
 * [universe levels](11613universelevels.html) (12 messages, latest: Apr 01 2019 at 16:18)
 
