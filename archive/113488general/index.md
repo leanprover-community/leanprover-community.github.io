@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [emacs feature request: lean+org integration](02896emacsfeaturerequestleanorgintegration.html) (1 message, latest: Apr 03 2019 at 10:59)
+
+* [linux scheduler](40080linuxscheduler.html) (23 messages, latest: Apr 03 2019 at 10:53)
+
 * [tactic-block-local caching](46742tacticblocklocalcaching.html) (2 messages, latest: Apr 03 2019 at 09:56)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (36 messages, latest: Apr 03 2019 at 00:41)
@@ -77,8 +81,6 @@ permalink: archive/113488general/index.html
 * [projection notation with {}](78398projectionnotationwith.html) (2 messages, latest: Mar 25 2019 at 19:19)
 
 * [finsetology](24852finsetology.html) (3 messages, latest: Mar 25 2019 at 19:02)
-
-* [linux scheduler](40080linuxscheduler.html) (22 messages, latest: Mar 25 2019 at 18:42)
 
 * [name for, and question about, computational principle](41517nameforandquestionaboutcomputationalprinciple.html) (3 messages, latest: Mar 25 2019 at 14:32)
 
