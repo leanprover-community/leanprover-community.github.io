@@ -10,13 +10,13 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [mergify](77684mergify.html) (286 messages, latest: Apr 03 2019 at 11:59)
+
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (5 messages, latest: Apr 03 2019 at 09:49)
 
 * [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (10 messages, latest: Apr 03 2019 at 06:32)
 
 * [colimits](83397colimits.html) (64 messages, latest: Apr 03 2019 at 00:36)
-
-* [mergify](77684mergify.html) (284 messages, latest: Apr 02 2019 at 20:10)
 
 * [#822 first three digits of π](19784822firstthreedigitsof.html) (47 messages, latest: Apr 01 2019 at 17:09)
 

@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [emacs feature request: lean+org integration](02896emacsfeaturerequestleanorgintegration.html) (1 message, latest: Apr 03 2019 at 10:59)
+* [linux scheduler](40080linuxscheduler.html) (27 messages, latest: Apr 03 2019 at 11:22)
 
-* [linux scheduler](40080linuxscheduler.html) (23 messages, latest: Apr 03 2019 at 10:53)
+* [emacs feature request: lean+org integration](02896emacsfeaturerequestleanorgintegration.html) (1 message, latest: Apr 03 2019 at 10:59)
 
 * [tactic-block-local caching](46742tacticblocklocalcaching.html) (2 messages, latest: Apr 03 2019 at 09:56)
 
