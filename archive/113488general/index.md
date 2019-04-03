@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Indexing Zulip](45931IndexingZulip.html) (85 messages, latest: Apr 03 2019 at 17:44)
+
 * [PSA: PR assignment](30810PSAPRassignment.html) (1 message, latest: Apr 03 2019 at 16:12)
 
 * [linux scheduler](40080linuxscheduler.html) (27 messages, latest: Apr 03 2019 at 11:22)
@@ -487,8 +489,6 @@ permalink: archive/113488general/index.html
 * [How long should lines be?](30511Howlongshouldlinesbe.html) (13 messages, latest: Feb 04 2019 at 18:39)
 
 * [dot notation confusion](91816dotnotationconfusion.html) (38 messages, latest: Feb 04 2019 at 17:11)
-
-* [Indexing Zulip](45931IndexingZulip.html) (81 messages, latest: Feb 04 2019 at 13:32)
 
 * [A Counting Argument](57356ACountingArgument.html) (30 messages, latest: Feb 04 2019 at 01:29)
 
