@@ -303,5 +303,65 @@ so as to make the operations (addition etc.) "computable".</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162387298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162387298">Scott Morrison (Apr 03 2019 at 00:36)</a>:</h4>
 <p>It would be nice if his construction of the colimit more obviously did so "as the quotient of an inductive type by an inductive proposition".</p>
 
+<a name="162422774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422774">Scott Morrison (Apr 03 2019 at 12:08)</a>:</h4>
+<p>Okay, I just followed <span class="user-mention" data-user-id="110032">@Reid Barton</span>'s suggestions for implementing colimits (just the first half of the recipe, nothing about filtered colimits and disjoint unions yet), and did the special case of monoids.</p>
+
+<a name="162422928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422928">Scott Morrison (Apr 03 2019 at 12:10)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean">https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean</a></p>
+
+<a name="162422937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422937">Scott Morrison (Apr 03 2019 at 12:10)</a>:</h4>
+<p>I was very carefully to never ever think about monoids, however.</p>
+
+<a name="162422983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422983">Scott Morrison (Apr 03 2019 at 12:11)</a>:</h4>
+<p>I claim that you could pipe <code>#print monoid</code> into a python script that would produce that file.</p>
+
+<a name="162423014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423014">Scott Morrison (Apr 03 2019 at 12:11)</a>:</h4>
+<p>And if you piped <code>#print comm_ring</code> into the same script you'd end up with <code>has_colimits CommRing</code>.</p>
+
+<a name="162423072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423072">Scott Morrison (Apr 03 2019 at 12:12)</a>:</h4>
+<p>(Well, ... maybe that's slightly optimistic. But pretty close!)</p>
+
+<a name="162423102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423102">Scott Morrison (Apr 03 2019 at 12:13)</a>:</h4>
+<p>The proofs could be compressed a lot with some automation. (And that each such compression would make the python script for other algebraic structures easier to implement.)</p>
+
+<a name="162423139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423139">Scott Morrison (Apr 03 2019 at 12:13)</a>:</h4>
+<p>It was all very pleasantly "downhill". You just do the obvious thing at every step.</p>
+
+<a name="162423411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423411">Scott Morrison (Apr 03 2019 at 12:17)</a>:</h4>
+<p>On the other hand, the construction you get is absolutely awful. It looks nothing like a free monoid.</p>
+
+<a name="162423851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423851">Johan Commelin (Apr 03 2019 at 12:23)</a>:</h4>
+<p>This is cool.</p>
+
+<a name="162423855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423855">Johan Commelin (Apr 03 2019 at 12:23)</a>:</h4>
+<p>Is the next step to build the python script?</p>
+
+<a name="162423903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423903">Johan Commelin (Apr 03 2019 at 12:24)</a>:</h4>
+<p>Or are you going for tactics directly?</p>
+
+<a name="162423932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423932">Johan Commelin (Apr 03 2019 at 12:24)</a>:</h4>
+<p>I expressed a related sentiment/dream yesterday:</p>
+<blockquote>
+<p>Can we replace <code>bundled</code> and <code>concrete_category</code> with some <code>meta</code> stuff that rolls all these categories for us?</p>
+</blockquote>
+<p><a href="#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820" title="#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820">https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820</a></p>
+
+<a name="162424633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162424633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162424633">Scott Morrison (Apr 03 2019 at 12:34)</a>:</h4>
+<p>I think the next step if to wait until Reid has a chance to say if this is what he had in mind! If it is, then some tactics to cleanup, then attempting to do another example by hand, then ... asking Keeley if he knows a trick for defining new inductive types in commands. :-)</p>
+
 
 {% endraw %}
