@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search has been merged](13909librarysearchhasbeenmerged.html) (5 messages, latest: Apr 03 2019 at 19:59)
+* [Indexing Zulip](45931IndexingZulip.html) (88 messages, latest: Apr 03 2019 at 20:20)
 
-* [Indexing Zulip](45931IndexingZulip.html) (85 messages, latest: Apr 03 2019 at 17:44)
+* [library_search has been merged](13909librarysearchhasbeenmerged.html) (7 messages, latest: Apr 03 2019 at 20:20)
 
 * [PSA: PR assignment](30810PSAPRassignment.html) (1 message, latest: Apr 03 2019 at 16:12)
 
