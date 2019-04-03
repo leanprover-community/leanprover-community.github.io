@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [equivs of mathematical objects](30087equivsofmathematicalobjects.html) (15 messages, latest: Apr 03 2019 at 20:57)
+* [equivs of mathematical objects](30087equivsofmathematicalobjects.html) (19 messages, latest: Apr 03 2019 at 21:20)
 
 * [matrix](88278matrix.html) (11 messages, latest: Apr 03 2019 at 19:22)
 
