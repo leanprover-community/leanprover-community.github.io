@@ -10,11 +10,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [mergify](77684mergify.html) (299 messages, latest: Apr 03 2019 at 13:59)
+
+* [colimits](83397colimits.html) (79 messages, latest: Apr 03 2019 at 13:15)
+
 * [#881 dual vector spaces](62653881dualvectorspaces.html) (1 message, latest: Apr 03 2019 at 12:39)
-
-* [mergify](77684mergify.html) (293 messages, latest: Apr 03 2019 at 12:39)
-
-* [colimits](83397colimits.html) (78 messages, latest: Apr 03 2019 at 12:34)
 
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (5 messages, latest: Apr 03 2019 at 09:49)
 
