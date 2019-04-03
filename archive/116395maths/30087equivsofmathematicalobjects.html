@@ -1,0 +1,67 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/30087equivsofmathematicalobjects.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html">equivs of mathematical objects</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162458412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162458412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162458412">Kevin Buzzard (Apr 03 2019 at 19:01)</a>:</h4>
+<p>So part of the raison d'etre of the perfectoid project is to define a very complex mathematical object to see how Lean will handle it. Lean is handling it very well, but here is something which has come out in the wash.</p>
+<p>Mathematicians are very good at treating "canonically isomorphic" (whatever that means) objects as equal. This unlocks all the things we can do with equality, for example reflexivity, symmetry and transitivity, plus the ability to rewrite. In Lean we don't have that luxury, and every time I find objects in the background of the theory of perfectoid spaces which mathematicians are treating in this way I've been making an extension of <code>equiv</code>. So far we have <code>mul_equiv</code> (the bijection respects <code>*</code> on objects in the <code>has_mul</code> class) with notation <code>≃*</code>, <code>add_equiv</code> with notation <code>≃+</code> (these are in mathlib), and then <code>group_equiv</code> and <code>monoid_equiv</code> (which are literally defined to be <code>mul_equiv</code>!). Mathlib also has <code>ring_equiv</code> <code>≃ᵣ</code> and <code>homeomorph</code> <code>≃ₜ</code>. In the perfectoid repo we needed equivs of totally ordered monoids so I introduced <code>le_equiv</code> <code>≃≤</code> and its extension <code>≃≤*</code> (or <code>≃*≤</code>, I can't even remember what I called it).</p>
+<p>Today I realised that I needed equivs of topological spaces equipped with a presheaf of types, topological spaces equipped with a presheaf of rings, and topological spaces equipped with a presheaf of topological rings. </p>
+<p>My notation does not scale.</p>
+<p>Does anyone have any suggestions? Or am I really going to go with <code>presheaf_of_topological_rings_equiv</code>? This is not some artificial problem. A perfectoid space is a topological space with a sheaf of topological rings and some extra structure too, which is locally equiv to a structure coming from a perfectoid ring. The notion of isomorphism of complex objects is central to the definition.</p>
+
+<a name="162460785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162460785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162460785">Scott Morrison (Apr 03 2019 at 19:27)</a>:</h4>
+<p>_If_ you're willing to work with bundled objects, you know that merely defining a <code>category</code> instance gives you <code>\iso</code> as "one <code>equiv</code> to rule them all"?</p>
+
+<a name="162460877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162460877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162460877">Scott Morrison (Apr 03 2019 at 19:28)</a>:</h4>
+<p>One can easily prove in <code>Type</code> that "equiv is equiv to iso" and in <code>Ring</code> that "≃ᵣ is equiv to iso", and so on.</p>
+
+<a name="162460937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162460937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162460937">Scott Morrison (Apr 03 2019 at 19:29)</a>:</h4>
+<p>It would also have the benefit of making transport easier to do, because it won't need struts for every different type of equiv someone dreams up.</p>
+
+<a name="162460967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162460967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162460967">Scott Morrison (Apr 03 2019 at 19:29)</a>:</h4>
+<p>(The short answer: this is what category theory was invented for.)</p>
+
+<a name="162461938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162461938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162461938">Kevin Buzzard (Apr 03 2019 at 19:40)</a>:</h4>
+<p>Did you say "if I am willing to go through the pain of constantly having to specify my universes everywhere then category theory solves this"? Or is this viewpoint too pessimistic? We are about to make design decisions about this so we could even try both.</p>
+
+<a name="162462370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162462370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162462370">Kevin Buzzard (Apr 03 2019 at 19:46)</a>:</h4>
+<p>Of course I could go rogue and just stick to <code>Type</code>! I think one model of ZFC is plenty for most mathematicians. I've never seen a perfectoid space which doesn't live in <code>Type</code>.</p>
+
+<a name="162462774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162462774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162462774">Reid Barton (Apr 03 2019 at 19:51)</a>:</h4>
+<p>You shouldn't need to specify your universes much more than usual. You'd write for example <code>(G : Group.{u})</code> rather than <code>(g : Type u) [group g]</code>--either way you have a <code>u</code>.</p>
+
+<a name="162462875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162462875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162462875">Patrick Massot (Apr 03 2019 at 19:52)</a>:</h4>
+<p>Scott, I would love to be able to use category theory in this project. I don't quite understand why, but there seems to be a deep reason why it never works out. For instance, Johan spent months trying to do sheaves using the category theory part of mathlib, and gave up.</p>
+
+<a name="162462886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162462886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162462886">Reid Barton (Apr 03 2019 at 19:52)</a>:</h4>
+<p>You can also just use <code>Type</code> which is actually what I did in homotopy theory, since I didn't want to bother transporting the reals into every universe.</p>
+
+<a name="162462918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162462918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162462918">Patrick Massot (Apr 03 2019 at 19:52)</a>:</h4>
+<p>Reid, we don't write <code>u</code>, we write <code>Type*</code> everywhere</p>
+
+<a name="162463125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equivs%20of%20mathematical%20objects/near/162463125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30087equivsofmathematicalobjects.html#162463125">Reid Barton (Apr 03 2019 at 19:55)</a>:</h4>
+<p>You could also use local notation to hide the universe variables of categories you use a lot, this is another thing I did in the homotopy theory library (<code>local notation Top := Top.{0}</code>, I think you should be able to put a universe variable there as well).</p>
+
+
+{% endraw %}

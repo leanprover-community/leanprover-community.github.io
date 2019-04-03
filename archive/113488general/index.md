@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [library_search has been merged](13909librarysearchhasbeenmerged.html) (5 messages, latest: Apr 03 2019 at 19:59)
+
 * [Indexing Zulip](45931IndexingZulip.html) (85 messages, latest: Apr 03 2019 at 17:44)
 
 * [PSA: PR assignment](30810PSAPRassignment.html) (1 message, latest: Apr 03 2019 at 16:12)
@@ -57,8 +59,6 @@ permalink: archive/113488general/index.html
 * [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (59 messages, latest: Mar 29 2019 at 12:50)
-
-* [library_search has been merged](13909librarysearchhasbeenmerged.html) (3 messages, latest: Mar 29 2019 at 07:20)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
 
