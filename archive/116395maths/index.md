@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [nat.cast_coe](45907natcastcoe.html) (3 messages, latest: Apr 03 2019 at 18:52)
+
 * [matrix](88278matrix.html) (5 messages, latest: Apr 01 2019 at 19:09)
 
 * [continuity of 1/x on (0,1]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
