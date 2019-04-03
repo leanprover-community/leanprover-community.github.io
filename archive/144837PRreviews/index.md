@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (3 messages, latest: Apr 03 2019 at 01:29)
+
 * [colimits](83397colimits.html) (64 messages, latest: Apr 03 2019 at 00:36)
 
 * [mergify](77684mergify.html) (284 messages, latest: Apr 02 2019 at 20:10)
