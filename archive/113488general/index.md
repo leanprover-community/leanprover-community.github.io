@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic-block-local caching](46742tacticblocklocalcaching.html) (2 messages, latest: Apr 03 2019 at 09:56)
+
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (36 messages, latest: Apr 03 2019 at 00:41)
 
 * [VScode extension](56578VScodeextension.html) (394 messages, latest: Apr 02 2019 at 22:42)
