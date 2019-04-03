@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (4 messages, latest: Apr 03 2019 at 04:56)
+* [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (10 messages, latest: Apr 03 2019 at 06:32)
 
 * [colimits](83397colimits.html) (64 messages, latest: Apr 03 2019 at 00:36)
 
