@@ -12,9 +12,9 @@ permalink: archive/index.html
 
 * [maths](116395maths/index.html) (437 topics)
 
-* [new members](113489newmembers/index.html) (360 topics)
+* [new members](113489newmembers/index.html) (361 topics)
 
-* [PR reviews](144837PRreviews/index.html) (120 topics)
+* [PR reviews](144837PRreviews/index.html) (121 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 

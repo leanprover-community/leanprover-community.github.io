@@ -1,0 +1,75 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/79789closingacase.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html">closing a case</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162432149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162432149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162432149">Joseph Corneli (Apr 03 2019 at 14:04)</a>:</h4>
+<p>Would you please help me understand why the case does not close, and what to do here instead?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="n">def</span> <span class="n">punctured_line</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Iio</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">))</span> <span class="err">∪</span> <span class="o">(</span><span class="n">Ioi</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">))</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">punctured_inv</span> <span class="o">:=</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="mi">1</span><span class="bp">/</span><span class="n">x</span><span class="o">)</span> <span class="n">punctured_line</span>
+
+<span class="kn">lemma</span> <span class="n">punctured_reals_are_nonzero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">subtype</span> <span class="n">punctured_line</span><span class="o">),</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">a2</span> <span class="o">:=</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>                         <span class="c1">-- (a.property)</span>
+<span class="n">cases</span> <span class="n">a2</span> <span class="k">with</span> <span class="n">l</span> <span class="n">r</span><span class="o">,</span>                     <span class="c1">-- we can decompose the property using cases</span>
+<span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">mem_Iio</span><span class="bp">.</span><span class="n">mp</span> <span class="n">l</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">ne_of_lt</span> <span class="n">h</span><span class="o">,</span>  <span class="c1">-- This is the relevant fact</span>
+<span class="n">exact</span> <span class="n">h1</span><span class="o">,</span>                              <span class="c1">-- *** But I can&#39;t close the case here</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162432691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162432691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162432691">Joseph Corneli (Apr 03 2019 at 14:10)</a>:</h4>
+<p>I also can't close it with <code>sorry</code>; trying tells me that a function is expected.  But what function would that be?</p>
+<div class="codehilite"><pre><span></span>infer type failed, function expected at
+  (let a2 : punctured_line (a.val) := a.property in a.val ≠ 0) (or.inl l)
+term
+  let a2 : punctured_line (a.val) := _
+  in a.val ≠ 0
+has type
+  Prop
+state:
+2 goals
+a : subtype punctured_line,
+l : a.val ∈ Iio 0,
+h : a.val &lt; 0,
+h1 : a.val ≠ 0
+⊢ (let a2 : punctured_line (a.val) := a.property in a.val ≠ 0) (or.inl l)
+
+case or.inr
+a : subtype punctured_line,
+r : a.val ∈ Ioi 0
+⊢ (let a2 : punctured_line (a.val) := a.property in a.val ≠ 0) (or.inr r)
+</pre></div>
+
+<a name="162433593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162433593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162433593">Sebastien Gouezel (Apr 03 2019 at 14:19)</a>:</h4>
+<p>Why do you use <code>cases a2</code> instead of <code>cases a.2</code>?</p>
+
+<a name="162434208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162434208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162434208">Joseph Corneli (Apr 03 2019 at 14:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> ah, I thought that was just shorthand</p>
+
+<a name="162434295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162434295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162434295">Joseph Corneli (Apr 03 2019 at 14:26)</a>:</h4>
+<p>Thanks! I guess the lesson here is that "shorthand" isn't likely to be a good idea.</p>
+
+<a name="162434436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/closing%20a%20case/near/162434436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79789closingacase.html#162434436">Sebastien Gouezel (Apr 03 2019 at 14:27)</a>:</h4>
+<p>Shorthands are equivalent in <code>exact ...</code> (as everything is expanded by the kernel), but otherwise it can lead to different behavior.</p>
+
+
+{% endraw %}
