@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (66 messages, latest: Apr 04 2019 at 11:59)
+* [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (4 messages, latest: Apr 04 2019 at 12:31)
 
-* [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (3 messages, latest: Apr 04 2019 at 11:59)
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (70 messages, latest: Apr 04 2019 at 12:27)
 
-* [Indexing Zulip](45931IndexingZulip.html) (91 messages, latest: Apr 04 2019 at 11:45)
+* [Indexing Zulip](45931IndexingZulip.html) (92 messages, latest: Apr 04 2019 at 12:25)
 
 * [universes in structures](78272universesinstructures.html) (44 messages, latest: Apr 04 2019 at 07:49)
 
