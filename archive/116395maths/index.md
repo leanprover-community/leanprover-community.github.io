@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induced preorder](53248inducedpreorder.html) (2 messages, latest: Apr 04 2019 at 21:31)
+* [induced preorder](53248inducedpreorder.html) (3 messages, latest: Apr 04 2019 at 22:50)
 
 * [type class instance synthesis](12824typeclassinstancesynthesis.html) (22 messages, latest: Apr 04 2019 at 11:48)
 
