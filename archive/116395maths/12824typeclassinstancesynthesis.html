@@ -1,0 +1,156 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/12824typeclassinstancesynthesis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html">type class instance synthesis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162514939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162514939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162514939">Joseph Corneli (Apr 04 2019 at 11:23)</a>:</h4>
+<p>Can anyone comment on what's reasonable to expect from type class instance synthesis? This question might be to broad for a definitive answer, but here are some illustrative examples, for which I can be more specific.</p>
+<p>1. Lean can infer that a subinterval of the reals is a topological space<br>
+2. ... but it can't infer that 1/x is defined for x in a given subset of the reals<br>
+(1) Why and (2) why not?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="n">def</span> <span class="n">two_interval_set</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Icc</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="c1">-- we get topological_space for free</span>
+<span class="kn">theorem</span> <span class="n">continuous_id_on_tworeal&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="err">↥</span><span class="n">two_interval_set</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">exact</span> <span class="n">continuous_id</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- but we don&#39;t get has_div or has_one</span>
+<span class="kn">theorem</span> <span class="n">continuous_1_over_x</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">}</span> <span class="o">),</span> <span class="mi">1</span><span class="bp">/</span><span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">refine</span> <span class="n">continuous_subtype_mk</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">continuous_mul</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_const</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous_inv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162515001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515001">Joseph Corneli (Apr 04 2019 at 11:24)</a>:</h4>
+<p>Error for the second theorem:</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+x : ↥{r : ℝ | r ≠ 0}
+⊢ has_div ↥{r : ℝ | r ≠ 0}
+failed to synthesize type class instance for
+x : ↥{r : ℝ | r ≠ 0}
+⊢ has_one ↥{r : ℝ | r ≠ 0}
+</pre></div>
+
+<a name="162515129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515129">Johan Commelin (Apr 04 2019 at 11:26)</a>:</h4>
+<p>The problem is that Lean doesn't know what to do with the <code>1/x</code>.</p>
+
+<a name="162515147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515147">Johan Commelin (Apr 04 2019 at 11:26)</a>:</h4>
+<p>If you tell it to view <code>1</code> and/or <code>x</code> as a real number, then you might have more luck.</p>
+
+<a name="162515154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515154">Johan Commelin (Apr 04 2019 at 11:27)</a>:</h4>
+<p>In particular, it doesn't know how to figure out the codomain of your function (let alone a topology on the codomain).</p>
+
+<a name="162515174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515174">Johan Commelin (Apr 04 2019 at 11:27)</a>:</h4>
+<p>Try writing <code>(1 : ℝ)</code> or <code>(x : ℝ)</code>.</p>
+
+<a name="162515187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515187">Joseph Corneli (Apr 04 2019 at 11:27)</a>:</h4>
+<p>OK, interesting... that got past the initial error.</p>
+
+<a name="162515296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515296">Joseph Corneli (Apr 04 2019 at 11:29)</a>:</h4>
+<p>Viz., this proof works.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">continuous_1_over_x&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">}</span> <span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span><span class="bp">/</span><span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">refine</span> <span class="n">continuous_mul</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_const</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous_inv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162515402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515402">Johan Commelin (Apr 04 2019 at 11:30)</a>:</h4>
+<p>That surpises me. I didn't expect the <code>mul const _</code></p>
+
+<a name="162515416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515416">Johan Commelin (Apr 04 2019 at 11:30)</a>:</h4>
+<p>I'd expect something like <code>continuous.comp continuous_inv continuous_subtype_val</code></p>
+
+<a name="162515840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515840">Joseph Corneli (Apr 04 2019 at 11:37)</a>:</h4>
+<p>Maybe this is more natural.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">continuous_1_over_x&#39;&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">}</span> <span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span><span class="bp">/</span><span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_div_eq_inv</span><span class="o">],</span>
+<span class="n">refine</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous_inv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162515970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162515970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162515970">Johan Commelin (Apr 04 2019 at 11:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="122022">@Joseph Corneli</span>  I guess you know about the version in the library?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous_inv&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">:{</span><span class="n">r</span><span class="o">:</span><span class="n">ℝ</span> <span class="bp">//</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">},</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">continuous_iff_continuous_at</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="k">assume</span> <span class="bp">⟨</span><span class="n">r</span><span class="o">,</span> <span class="n">hr</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="o">(</span><span class="n">continuous_iff_continuous_at</span><span class="bp">.</span><span class="n">mp</span> <span class="n">continuous_subtype_val</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">real</span><span class="bp">.</span><span class="n">tendsto_inv</span> <span class="n">hr</span><span class="o">)</span>
+</pre></div>
+
+<a name="162516115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516115">Joseph Corneli (Apr 04 2019 at 11:41)</a>:</h4>
+<p>I suspect I did see it at one point, yes!  It's interesting that writing <code>a.val⁻¹</code> escapes the problem of defining the codomain.</p>
+
+<a name="162516178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516178">Johan Commelin (Apr 04 2019 at 11:42)</a>:</h4>
+<p>That is because Lean knows exactly where <code>a.val</code> lives.</p>
+
+<a name="162516199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516199">Joseph Corneli (Apr 04 2019 at 11:42)</a>:</h4>
+<p>But why doesn't it know where <code>x</code> lives, in my example?</p>
+
+<a name="162516202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516202">Johan Commelin (Apr 04 2019 at 11:42)</a>:</h4>
+<p>It also knows exactly where your <code>x</code> lives, but it lives in a space on which division has not been defined.</p>
+
+<a name="162516235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516235">Johan Commelin (Apr 04 2019 at 11:43)</a>:</h4>
+<p>Writing <code>(x : ℝ)</code> means that Lean will silently turn your <code>x</code> into <code>x.val</code>.</p>
+
+<a name="162516303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516303">Johan Commelin (Apr 04 2019 at 11:44)</a>:</h4>
+<p>Similarly, <code>1</code> can live in any type with a <code>has_one</code> instance. But if you write <code>(1 : ℝ)</code> it figures out which Type you want <code>1</code> to live in.</p>
+
+<a name="162516336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516336">Johan Commelin (Apr 04 2019 at 11:44)</a>:</h4>
+<p>You could of course define a topology on <code>units ℝ</code>, and prove that inversion is continuous there.</p>
+
+<a name="162516357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516357">Johan Commelin (Apr 04 2019 at 11:45)</a>:</h4>
+<p>That's a different theorem from the one you just proved.</p>
+
+<a name="162516540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516540">Joseph Corneli (Apr 04 2019 at 11:47)</a>:</h4>
+<p>OK, I think the key take-away for me is that <code>x</code> and <code>x.val</code> are different, which I <em>might</em> have picked up on from some of the other examples I was looking at, but didn't.  Thanks!</p>
+
+<a name="162516671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/type%20class%20instance%20synthesis/near/162516671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12824typeclassinstancesynthesis.html#162516671">Johan Commelin (Apr 04 2019 at 11:48)</a>:</h4>
+<p>One lives in the subtype, the other in the ambient type.</p>
+
+
+{% endraw %}

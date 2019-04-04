@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [type class instance synthesis](12824typeclassinstancesynthesis.html) (22 messages, latest: Apr 04 2019 at 11:48)
+
 * [algebraic number](63524algebraicnumber.html) (3 messages, latest: Apr 04 2019 at 09:16)
 
 * [equivs of mathematical objects](30087equivsofmathematicalobjects.html) (66 messages, latest: Apr 04 2019 at 08:00)

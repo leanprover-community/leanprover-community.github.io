@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (66 messages, latest: Apr 04 2019 at 11:59)
+
+* [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (3 messages, latest: Apr 04 2019 at 11:59)
+
+* [Indexing Zulip](45931IndexingZulip.html) (91 messages, latest: Apr 04 2019 at 11:45)
+
 * [universes in structures](78272universesinstructures.html) (44 messages, latest: Apr 04 2019 at 07:49)
-
-* [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (2 messages, latest: Apr 04 2019 at 06:31)
-
-* [Indexing Zulip](45931IndexingZulip.html) (90 messages, latest: Apr 03 2019 at 22:44)
 
 * [library_search has been merged](13909librarysearchhasbeenmerged.html) (7 messages, latest: Apr 03 2019 at 20:20)
 
@@ -61,8 +63,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (70 messages, latest: Mar 29 2019 at 19:13)
 
 * [Fabius function](04993Fabiusfunction.html) (2 messages, latest: Mar 29 2019 at 16:45)
-
-* [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (59 messages, latest: Mar 29 2019 at 12:50)
 
 * [Linear arithmetic tactic](58590Lineararithmetictactic.html) (26 messages, latest: Mar 29 2019 at 01:40)
 
