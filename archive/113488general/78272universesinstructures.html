@@ -468,5 +468,159 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162561504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162561504">Kevin Buzzard (Apr 04 2019 at 19:47)</a>:</h4>
 <p>Conversely, could I use this to make a bundled version of presheaves of types easier to implement? I think what I have that Scott doesn't have is that I am allowed to change my base with morphisms</p>
 
+<a name="162562808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162562808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162562808">Mario Carneiro (Apr 04 2019 at 20:02)</a>:</h4>
+<p>I'm working on a more complete working-out of the proposal</p>
+
+<a name="162562869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162562869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162562869">Mario Carneiro (Apr 04 2019 at 20:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">γ</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">comap</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span> <span class="n">hf</span> <span class="bp">_</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
+
+<span class="kn">theorem</span> <span class="n">comap_id</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">comap</span> <span class="n">id</span> <span class="n">continuous_id</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="n">ext</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">comap_comp</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">}</span> <span class="o">{</span><span class="n">hg</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">g</span><span class="o">}</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">comap</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hf</span><span class="bp">.</span><span class="n">comp</span> <span class="n">hg</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">comap</span> <span class="bp">_</span> <span class="n">hf</span> <span class="o">(</span><span class="n">comap</span> <span class="bp">_</span> <span class="n">hg</span> <span class="n">U</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ext</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">comap_mono</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">≤</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">U</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="n">hf</span> <span class="bp">≤</span> <span class="n">V</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="n">hf</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">h</span> <span class="n">hx</span>
+
+<span class="kn">end</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span>
+
+
+
+<span class="kn">structure</span> <span class="n">f_map</span> <span class="o">(</span><span class="err">𝒢</span> <span class="o">:</span> <span class="n">presheaf_of_typesU</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">ℱ</span> <span class="o">:</span> <span class="n">presheaf_of_typesU</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ρ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">Y</span><span class="o">,</span> <span class="err">𝒢</span><span class="bp">.</span><span class="n">F</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">V</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="n">hf</span><span class="o">))</span>
+<span class="o">(</span><span class="n">nat</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">hUV</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">≤</span> <span class="n">U</span><span class="o">,</span>
+  <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝒢</span><span class="bp">.</span><span class="n">F</span> <span class="n">U</span><span class="o">,</span> <span class="n">ρ</span> <span class="n">V</span> <span class="o">(</span><span class="err">𝒢</span><span class="bp">.</span><span class="n">res</span> <span class="n">hUV</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">res</span> <span class="o">(</span><span class="n">comap_mono</span> <span class="n">hUV</span><span class="o">)</span> <span class="o">(</span><span class="n">ρ</span> <span class="n">U</span> <span class="n">x</span><span class="o">))</span>
+</pre></div>
+
+<a name="162563753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162563753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162563753">Kevin Buzzard (Apr 04 2019 at 20:12)</a>:</h4>
+<p>It seems to me that the only thing category theory can offer me here is free proofs of refl symm and trans given comp_id and comp_assoc</p>
+
+<a name="162563783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162563783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162563783">Kevin Buzzard (Apr 04 2019 at 20:13)</a>:</h4>
+<p>I don't see the benefit of using it here.</p>
+
+<a name="162563913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162563913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162563913">Johan Commelin (Apr 04 2019 at 20:14)</a>:</h4>
+<p>I think Scott also allows you to change the base space.</p>
+
+<a name="162564014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162564014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162564014">Johan Commelin (Apr 04 2019 at 20:15)</a>:</h4>
+<p>In fact, <code>opens X \func Type u</code> is defeq to your definition (modulo iota for records).</p>
+
+<a name="162564037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162564037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162564037">Johan Commelin (Apr 04 2019 at 20:15)</a>:</h4>
+<p>So I think it also doesn't hurt to use the category lib</p>
+
+<a name="162564128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162564128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162564128">Johan Commelin (Apr 04 2019 at 20:16)</a>:</h4>
+<p>I found it incredibly hard to construct a certain adjunction using the category lib. I don't think that would become any easier by avoiding the category lib.</p>
+
+<a name="162564133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162564133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162564133">Kevin Buzzard (Apr 04 2019 at 20:16)</a>:</h4>
+<p>Remark : I think you can prove refl symm and trans for equiv using only comp_assoc and id_comp -- you don't seem to need comp_id</p>
+
+<a name="162564319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162564319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162564319">Kevin Buzzard (Apr 04 2019 at 20:18)</a>:</h4>
+<p>The thing I took from Scott's comments were that I could define an equiv as a morphism with a two sided inverse instead of having to write down what I mean by an isomorphism</p>
+
+<a name="162565784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162565784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162565784">Scott Morrison (Apr 04 2019 at 20:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, sorry, I haven't caught up everything here --- but your first comment:</p>
+<blockquote>
+<p>My understanding is that Scott has done something less general than what I need. I need the notion of an equiv of pairs (X,F), i.e. two possibly distinct topological spaces equipped with presheaves.</p>
+</blockquote>
+<p>is exactly wrong. Did you look at my definition?</p>
+
+<a name="162565944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162565944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162565944">Scott Morrison (Apr 04 2019 at 20:36)</a>:</h4>
+<p>A morphism is exactly:</p>
+<div class="codehilite"><pre><span></span>structure Presheaf_hom (F G : Presheaf.{v} C) :=
+(f : F.X ⟶ G.X)
+(c : G.𝒪 ⟹ ((opens.map f).op ⋙ F.𝒪))
+</pre></div>
+
+
+<p>i.e. a pair, a continuous map, changing the topological space, along with a map from the presheaf on the target space to the pushforward of the presheaf on the source space.</p>
+
+<a name="162566012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566012">Scott Morrison (Apr 04 2019 at 20:37)</a>:</h4>
+<p>I then define a category structure on these, so you get the notion of an equivalence of pairs simply by writing <code>\iso</code>.</p>
+
+<a name="162566232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566232">Scott Morrison (Apr 04 2019 at 20:39)</a>:</h4>
+<p>Sorry if I sound a bit grumpy, but as far as I can tell what you guys have been talking about needing since I went to bed last night is exactly what I PR'd.</p>
+
+<a name="162566325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566325">Scott Morrison (Apr 04 2019 at 20:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s</p>
+<div class="codehilite"><pre><span></span>structure f_map (𝒢 : presheaf_of_typesU Y) (ℱ : presheaf_of_typesU X) :=
+(f : X → Y)
+(hf : continuous f)
+(ρ : ∀ V : opens Y, 𝒢.F V → ℱ.F (V.comap f hf))
+(nat : ∀ U V : opens Y, ∀ hUV : V ≤ U,
+  ∀ x : 𝒢.F U, ρ V (𝒢.res hUV x) = ℱ.res (comap_mono hUV) (ρ U x))
+</pre></div>
+
+
+<p>is exactly a long winded way of saying my <code>Presheaf_hom</code>, and _less_ general, since it restricts to presheaves valued in <code>Type</code>, rather than an arbitrary category.</p>
+
+<a name="162566382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566382">Scott Morrison (Apr 04 2019 at 20:41)</a>:</h4>
+<p>Please tell me if I'm missing something.</p>
+
+<a name="162566536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566536">Mario Carneiro (Apr 04 2019 at 20:42)</a>:</h4>
+<p>Here's a completed revision of Kevin's file: <a href="https://gist.github.com/digama0/9bfe808e7e51fecc001d8ac8976db19c" target="_blank" title="https://gist.github.com/digama0/9bfe808e7e51fecc001d8ac8976db19c">https://gist.github.com/digama0/9bfe808e7e51fecc001d8ac8976db19c</a></p>
+
+<a name="162566598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566598">Scott Morrison (Apr 04 2019 at 20:43)</a>:</h4>
+<p>Grah!!!</p>
+
+<a name="162566615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566615">Mario Carneiro (Apr 04 2019 at 20:43)</a>:</h4>
+<p>Where is <code>opens.map</code>?</p>
+
+<a name="162566695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566695">Scott Morrison (Apr 04 2019 at 20:44)</a>:</h4>
+<p>Where it's been for months, in <code>category_theory/instances/topological_spaces.lean</code>.</p>
+
+<a name="162566698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566698">Mario Carneiro (Apr 04 2019 at 20:44)</a>:</h4>
+<p>I can definitely believe that these are the same issues that come up in the categorical formulation</p>
+
+<a name="162566774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566774">Mario Carneiro (Apr 04 2019 at 20:45)</a>:</h4>
+<p>For the record, I'm just making epsilon improvements to Kevin's proposal, not a complete rewrite. I haven't looked in detail at the stuff in this area, I'm just talking about how to deal with dependent types</p>
+
+<a name="162566889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162566889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162566889">Scott Morrison (Apr 04 2019 at 20:46)</a>:</h4>
+<p>Okay... but as far as I can tell it's all done in my PR from last night. (Which was just a tidy up of a file I showed people months ago....)</p>
+
+<a name="162567743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162567743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162567743">Mario Carneiro (Apr 04 2019 at 20:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, I'm inclined to believe that Scott has already done all the hard work of these definitions in the category theory lib, and handled the dependencies right because they have been an issue from day one. As for friction of using category theory here: <code>opens</code> is already a category (it was designed to be one), and <code>Type</code> is a category. So those shouldn't cause a problem. You shouldn't have to deal with universe issues since you only care about <code>Type u</code> which has homs in the same universe. Unfolding these morphisms into continuous functions and such is probably going to be a little bit of boilerplate; hopefully this doesn't come up too often, especially if you care about the global structure more than individual morphisms. So I say try Scott's proposal for presheaves and see what happens.</p>
+
+<a name="162567871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162567871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162567871">Mario Carneiro (Apr 04 2019 at 20:56)</a>:</h4>
+<p>I will be very happy if we see a real use of the category theory lib outside of category theory</p>
+
+<a name="162568177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162568177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162568177">Kevin Buzzard (Apr 04 2019 at 20:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>  I can't read the category theory code easily -- I did look at it, but all this whiskering stuff etc and the completely new language and notation basically means that I have to sit down and study it more carefully than I had time to (I was on a train when I saw your message and about to get off; I'd spent the journey finishing my own code and wasn't connected to the internet) and then when I got it I had family stuff. I'll try to get to it this evening but basically, due to my lack of experience, the code looked mostly incomprehensible to me. I'm sure I can change this. </p>
+<p>The work I did has basically taught me what needs to be done to define an equiv of these objects. I had to deal with heqs, although they turned out painless, and some proofs really had me scratching my head for a while, but I got through them all in the end. Once I have wrestled through all the foreign notation, which I will have to do at some stage, I'll be able to make some kind of judgement as to what this category theory stuff is buying me.</p>
+
 
 {% endraw %}
