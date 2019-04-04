@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [universes in structures](78272universesinstructures.html) (44 messages, latest: Apr 04 2019 at 07:49)
+
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (2 messages, latest: Apr 04 2019 at 06:31)
 
 * [Indexing Zulip](45931IndexingZulip.html) (90 messages, latest: Apr 03 2019 at 22:44)
