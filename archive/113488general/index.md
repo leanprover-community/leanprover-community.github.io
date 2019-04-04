@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [group_equiv](50231groupequiv.html) (19 messages, latest: Apr 04 2019 at 16:50)
+* [group_equiv](50231groupequiv.html) (21 messages, latest: Apr 04 2019 at 17:57)
 
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (5 messages, latest: Apr 04 2019 at 14:48)
 
