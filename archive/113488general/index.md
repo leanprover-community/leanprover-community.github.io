@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [group_equiv](50231groupequiv.html) (12 messages, latest: Apr 04 2019 at 15:52)
+
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (5 messages, latest: Apr 04 2019 at 14:48)
 
 * [universes in structures](78272universesinstructures.html) (61 messages, latest: Apr 04 2019 at 14:38)
@@ -241,8 +243,6 @@ permalink: archive/113488general/index.html
 * [representing math structures](94437representingmathstructures.html) (2 messages, latest: Mar 05 2019 at 12:07)
 
 * [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (9 messages, latest: Mar 05 2019 at 02:34)
-
-* [group_equiv](50231groupequiv.html) (5 messages, latest: Mar 04 2019 at 16:51)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (191 messages, latest: Mar 03 2019 at 21:25)
 
