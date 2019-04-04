@@ -622,5 +622,199 @@ but is expected to have type
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>  I can't read the category theory code easily -- I did look at it, but all this whiskering stuff etc and the completely new language and notation basically means that I have to sit down and study it more carefully than I had time to (I was on a train when I saw your message and about to get off; I'd spent the journey finishing my own code and wasn't connected to the internet) and then when I got it I had family stuff. I'll try to get to it this evening but basically, due to my lack of experience, the code looked mostly incomprehensible to me. I'm sure I can change this. </p>
 <p>The work I did has basically taught me what needs to be done to define an equiv of these objects. I had to deal with heqs, although they turned out painless, and some proofs really had me scratching my head for a while, but I got through them all in the end. Once I have wrestled through all the foreign notation, which I will have to do at some stage, I'll be able to make some kind of judgement as to what this category theory stuff is buying me.</p>
 
+<a name="162568394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162568394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162568394">Kevin Buzzard (Apr 04 2019 at 21:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">id&#39;</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">F</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">res</span> <span class="n">h</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">id</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>That's a crazy use of <code>h</code> :-) I hadn't really internalised that trick until now.</p>
+
+<a name="162568432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162568432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162568432">Kevin Buzzard (Apr 04 2019 at 21:01)</a>:</h4>
+<p>Lean infers it must be a proof of U \sub U</p>
+
+<a name="162568588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162568588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162568588">Kevin Buzzard (Apr 04 2019 at 21:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pushforward</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">[</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">ℱ</span> <span class="o">:</span> <span class="n">presheaf_of_typesU</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">presheaf_of_typesU</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V</span><span class="o">,</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">F</span> <span class="bp">⟨</span><span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">V</span><span class="o">,</span> <span class="n">hf</span> <span class="bp">_</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">res</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">hUV</span><span class="o">,</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">res</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="n">hx</span><span class="o">,</span> <span class="n">hUV</span> <span class="n">hx</span><span class="o">),</span>
+  <span class="n">id</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">id</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">comp</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span> <span class="n">W</span> <span class="n">hUV</span> <span class="n">hVW</span><span class="o">,</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Any reason why you didn't use <code>opens.comap</code> in the definition of <code>F</code>?</p>
+
+<a name="162568889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162568889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162568889">Kevin Buzzard (Apr 04 2019 at 21:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="n">f_map</span> <span class="err">𝒢</span> <span class="n">ℱ</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">α</span><span class="bp">.</span><span class="n">f</span> <span class="bp">=</span> <span class="n">β</span><span class="bp">.</span><span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hρ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">V</span> <span class="n">x</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">ρ</span> <span class="n">V</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">res</span> <span class="o">(</span><span class="n">le_of_eq</span> <span class="o">(</span><span class="k">by</span> <span class="n">congr&#39;</span><span class="o">))</span> <span class="o">(</span><span class="n">β</span><span class="bp">.</span><span class="n">ρ</span> <span class="n">V</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>You have a <code>heq</code>-free <code>ext</code>! Probably very wise :-)</p>
+
+<a name="162569135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569135">Scott Morrison (Apr 04 2019 at 21:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  --- stop reading Mario's version, and start reading mine. :-) You'll see the same tricks being used, because Mario showed them to me when I wrote my version last year.</p>
+
+<a name="162569233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569233">Scott Morrison (Apr 04 2019 at 21:10)</a>:</h4>
+<p>And you'll see I do use <code>opens.map</code> (which is the already-in-mathlib synonym for the <code>opens.comap</code> you've been using) in the definition of the pushforward.</p>
+
+<a name="162569247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569247">Kevin Buzzard (Apr 04 2019 at 21:10)</a>:</h4>
+<p>I want to read Mario's first because it's much easier for me :-) I'll read yours next!</p>
+
+<a name="162569503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569503">Mario Carneiro (Apr 04 2019 at 21:13)</a>:</h4>
+<p>oops, I missed that one</p>
+
+<a name="162569614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569614">Patrick Massot (Apr 04 2019 at 21:14)</a>:</h4>
+<p>I would love to use the category theory Scott, Reid and Johan worked on. But I totally understand Kevin's reaction. Clearly the code is frightening. I hope one day I'll learn to read it</p>
+
+<a name="162569699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569699">Kevin Buzzard (Apr 04 2019 at 21:15)</a>:</h4>
+<p>My proof of equiv.refl was much worse than Mario's because I had not yet proved id_comp -- I only realised I needed it when I was proving equiv.trans :-)</p>
+
+<a name="162569777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569777">Kevin Buzzard (Apr 04 2019 at 21:16)</a>:</h4>
+<p>OK so I just read all of Mario's code and the main thing I learnt was that the heq can be avoided.</p>
+
+<a name="162569790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162569790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162569790">Kevin Buzzard (Apr 04 2019 at 21:16)</a>:</h4>
+<p>Ok now to brave Scott's :-/</p>
+
+<a name="162570342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570342">Kevin Buzzard (Apr 04 2019 at 21:22)</a>:</h4>
+<p>After 2 minutes I have decided that I cannot possibly read Scott's code unless I read it in Lean, but I thankfully now understand git well enough nowadays to pull his PR branch and compile it. Back in 15 minutes.</p>
+
+<a name="162570619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570619">Kevin Buzzard (Apr 04 2019 at 21:25)</a>:</h4>
+<p>Until then, Scott let me give you some idea what I think when I look at your code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">Presheaf</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">})</span>
+<span class="o">(</span><span class="err">𝒪</span> <span class="o">:</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span><span class="err">ᵒᵖ</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">Presheaf_hom</span> <span class="o">(</span><span class="n">F</span> <span class="n">G</span> <span class="o">:</span> <span class="n">Presheaf</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="bp">.</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">G</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="err">𝒪</span> <span class="err">⟹</span> <span class="o">((</span><span class="n">opens</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">op</span> <span class="err">⋙</span> <span class="n">F</span><span class="bp">.</span><span class="err">𝒪</span><span class="o">))</span>
+</pre></div>
+
+
+<p>I think "What is <code>⥤</code>, I guess it must be a functor, what is that insane arrow <code>⟶</code>, I have no idea, what is <code> ⟹</code>, what is <code>⋙</code>. That's why I can't just sit down and read your code. But you have made it amply clear that now is the time to start finding out.</p>
+
+<a name="162570705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570705">Scott Morrison (Apr 04 2019 at 21:26)</a>:</h4>
+<p>Oh dear. I'm sorry, I had no idea you didn't even know the arrows. :-) Sorry.</p>
+
+<a name="162570767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570767">Scott Morrison (Apr 04 2019 at 21:27)</a>:</h4>
+<p>The insane arrow <code>⟶</code> is just the "morphism in a category" arrow. Think of it just like the usual arrow in <code>Type</code>, but on steroids.</p>
+
+<a name="162570833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570833">Scott Morrison (Apr 04 2019 at 21:28)</a>:</h4>
+<p>(In fact, you can use the "insane" arrow in place of the normal arrow, for types. This will pull in the category instance on <code>Type</code>, and be definitionally equal to the normal arrow.)</p>
+
+<a name="162570841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570841">Scott Morrison (Apr 04 2019 at 21:28)</a>:</h4>
+<p><code>⥤</code> is the functor arrow</p>
+
+<a name="162570850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570850">Scott Morrison (Apr 04 2019 at 21:28)</a>:</h4>
+<p><code>⟹</code> is the natural transformation arrow.</p>
+
+<a name="162570892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570892">Scott Morrison (Apr 04 2019 at 21:29)</a>:</h4>
+<p><code>≫</code> is composition of morphisms (so if <code>f : X \hom Y</code>, and <code>g : Y \hom Z</code>, you can write <code>f ≫ g</code> to get a <code>X \hom Z</code>)</p>
+
+<a name="162570910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570910">Scott Morrison (Apr 04 2019 at 21:29)</a>:</h4>
+<p><code>⋙</code> is composition of functors.</p>
+
+<a name="162570975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570975">Scott Morrison (Apr 04 2019 at 21:30)</a>:</h4>
+<p>and finally, in the definition of composition of <code>Presheaf_hom</code>,  (and in <code>ext</code>),</p>
+
+<a name="162570981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162570981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162570981">Scott Morrison (Apr 04 2019 at 21:30)</a>:</h4>
+<p><code>⊟</code> is "vertical composition of natural transformations"</p>
+
+<a name="162571128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571128">Scott Morrison (Apr 04 2019 at 21:32)</a>:</h4>
+<p>Finally, the last piece of notation is the one you've been asking about: <code>≅</code>, which gives you all the different notations of equivalence, all with uniform notation. :-)</p>
+
+<a name="162571144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571144">Mario Carneiro (Apr 04 2019 at 21:32)</a>:</h4>
+<p>and <code>.op</code>?</p>
+
+<a name="162571252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571252">Scott Morrison (Apr 04 2019 at 21:34)</a>:</h4>
+<p>As an example, we have</p>
+<div class="codehilite"><pre><span></span>/-- `opens.map f` gives the functor from open sets in Y to open set in X,
+    given by taking preimages under f. -/
+def map
+  {X Y : Top.{u}} (f : X ⟶ Y) : opens Y ⥤ opens X :=
+{ obj := λ U, ⟨ f.val ⁻¹&#39; U, f.property _ U.property ⟩,
+  map := λ U V i, ⟨ ⟨ λ a b, i.down.down b ⟩ ⟩ }.
+
+def map_iso {X Y : Top.{u}} (f g : X ⟶ Y) (h : f = g) : map f ≅ map g := ...
+</pre></div>
+
+
+<p>In the last line there is an appearance of <code>≅</code>. Lean looks at this, realises that both <code>map f</code> and <code>map g</code> are functors from <code>opens Y</code> to <code>opens X</code>, successfully realises there are category structures on both of these, whose morphisms are natural transformations, so <code>≅</code> must mean an isomorphism in that category, i.e., a natural isomorphism. (No special notation or special cases for <code>functor_equiv</code>!)</p>
+
+<a name="162571322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571322">Scott Morrison (Apr 04 2019 at 21:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, unfortunately there are several <code>op</code>s, and it's still too confusing. This <code>.op</code> is applied as field notation to a functor, so it must be <code>functor.op</code>, which takes a <code>F : C \func D</code> and spits out a functor <code>C^\op \func D^\op</code>.</p>
+
+<a name="162571334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571334">Mario Carneiro (Apr 04 2019 at 21:35)</a>:</h4>
+<p>I guess this isn't going to give you a generic function from <code>A ≅ B</code> to the plain equiv <code>A ~= B</code>?</p>
+
+<a name="162571431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571431">Mario Carneiro (Apr 04 2019 at 21:36)</a>:</h4>
+<p>what's the <code>.down.down</code> in the definition of <code>opens.map</code> for?</p>
+
+<a name="162571983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162571983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162571983">Scott Morrison (Apr 04 2019 at 21:44)</a>:</h4>
+<p>We can possibly fix that <code>.down.down</code> now, actually. We used to not be able to define categories with morphisms in <code>Prop</code>.</p>
+
+<a name="162572029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572029">Scott Morrison (Apr 04 2019 at 21:44)</a>:</h4>
+<p>This was recently fixed.</p>
+
+<a name="162572053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572053">Patrick Massot (Apr 04 2019 at 21:44)</a>:</h4>
+<p>I find it strange that I used to think I knew what was a sheaf but never needed to learn "vertical composition of natural transformations"</p>
+
+<a name="162572066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572066">Scott Morrison (Apr 04 2019 at 21:45)</a>:</h4>
+<p>So the definition of <code>hom</code> in <code>opens X</code> is <code>ulift (plift X &lt;= Y)</code></p>
+
+<a name="162572103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572103">Scott Morrison (Apr 04 2019 at 21:45)</a>:</h4>
+<p>Okay, but if you don't learn the definition of "vertical composition of natural transformations" you will spend the rest of your life checking more naturality squares than you need to. :-)</p>
+
+<a name="162572159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572159">Patrick Massot (Apr 04 2019 at 21:46)</a>:</h4>
+<p>Who checks naturality squares anyway?</p>
+
+<a name="162572160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572160">Scott Morrison (Apr 04 2019 at 21:46)</a>:</h4>
+<p>...</p>
+
+<a name="162572162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572162">Scott Morrison (Apr 04 2019 at 21:46)</a>:</h4>
+<p>mostly <code>tidy</code>, to be honest.</p>
+
+<a name="162572171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162572171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162572171">Scott Morrison (Apr 04 2019 at 21:46)</a>:</h4>
+<p>It exists precisely because I don't check naturality squares either.</p>
+
 
 {% endraw %}
