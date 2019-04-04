@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [algebraic number](63524algebraicnumber.html) (1 message, latest: Apr 04 2019 at 08:59)
+
 * [closing a case](79789closingacase.html) (6 messages, latest: Apr 03 2019 at 14:27)
 
 * [locally disabling instances](21606locallydisablinginstances.html) (7 messages, latest: Apr 02 2019 at 22:06)
