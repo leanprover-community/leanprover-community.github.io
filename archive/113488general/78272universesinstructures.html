@@ -204,5 +204,72 @@ permalink: archive/113488general/78272universesinstructures.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162502530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162502530">Kevin Buzzard (Apr 04 2019 at 07:49)</a>:</h4>
 <p>I guess one final observation is that I have now coded up presheaves of types twice (once for schemes, once for this), Ramon coded it up for Schemes Reloaded, Johan did it, probably Scott did it, and somehow it's still not in mathlib. Maybe it's time someone PR'ed it...</p>
 
+<a name="162523639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523639">Scott Morrison (Apr 04 2019 at 13:17)</a>:</h4>
+<p>Ok, per request, I PR'd <a href="https://github.com/leanprover-community/mathlib/pull/886" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/886">one version of (bundled) presheaves</a>. The definition is I hope inarguably the correct one. :-)</p>
+
+<a name="162523657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523657">Scott Morrison (Apr 04 2019 at 13:17)</a>:</h4>
+<p>The essential definitions are:</p>
+<div class="codehilite"><pre><span></span>structure Presheaf :=
+(X : Top.{v})
+(𝒪 : (opens X)ᵒᵖ ⥤ C)
+
+structure Presheaf_hom (F G : Presheaf.{v} C) :=
+(f : F.X ⟶ G.X)
+(c : G.𝒪 ⟹ ((opens.map f).op ⋙ F.𝒪))
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>instance category_of_presheaves : category (Presheaf.{v} C) :=
+{ hom := Presheaf_hom,
+  ... }
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>def functor.map_presheaf (F : C ⥤ D) : Presheaf.{v} C ⥤ Presheaf.{v} D := ...
+</pre></div>
+
+<a name="162523746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523746">Scott Morrison (Apr 04 2019 at 13:18)</a>:</h4>
+<p>There are still some things I'm unhappy with --- some places I need to use <code>erw</code>, where <code>simp</code> should suffice.</p>
+
+<a name="162523780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523780">Johan Commelin (Apr 04 2019 at 13:19)</a>:</h4>
+<p>Scott, I think what we are probably also interested in is the category of presheaves on a space <code>X</code>.</p>
+
+<a name="162523794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523794">Johan Commelin (Apr 04 2019 at 13:19)</a>:</h4>
+<p>I.e. unbundled presheaves on bundled spaces.</p>
+
+<a name="162523806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523806">Johan Commelin (Apr 04 2019 at 13:19)</a>:</h4>
+<p>Of course this is just a functor category...</p>
+
+<a name="162523824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162523824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162523824">Johan Commelin (Apr 04 2019 at 13:19)</a>:</h4>
+<p>But we might want some specialised coercions/simp lemmas</p>
+
+<a name="162524028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162524028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162524028">Scott Morrison (Apr 04 2019 at 13:21)</a>:</h4>
+<p>Hmm... so what do you want besides <code>def presheaf (X : Top) := (opens X)^op \func C</code>?</p>
+
+<a name="162524137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162524137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162524137">Johan Commelin (Apr 04 2019 at 13:22)</a>:</h4>
+<p>The push-forward functor should be easily accessible</p>
+
+<a name="162524210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162524210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162524210">Johan Commelin (Apr 04 2019 at 13:23)</a>:</h4>
+<p>And maybe for terms of type <code>presheaf</code> we can actually make <code>F.obj</code> a coercion?</p>
+
+<a name="162524225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162524225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162524225">Johan Commelin (Apr 04 2019 at 13:23)</a>:</h4>
+<p>I didn't experiment with it though</p>
+
+<a name="162524268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162524268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162524268">Johan Commelin (Apr 04 2019 at 13:24)</a>:</h4>
+<p>Need to run to catch a train</p>
+
 
 {% endraw %}
