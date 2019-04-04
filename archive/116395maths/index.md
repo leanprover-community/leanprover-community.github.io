@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [algebraic number](63524algebraicnumber.html) (3 messages, latest: Apr 04 2019 at 09:16)
+
 * [equivs of mathematical objects](30087equivsofmathematicalobjects.html) (66 messages, latest: Apr 04 2019 at 08:00)
 
 * [matrix](88278matrix.html) (11 messages, latest: Apr 03 2019 at 19:22)
