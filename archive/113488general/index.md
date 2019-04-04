@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [group_equiv](50231groupequiv.html) (21 messages, latest: Apr 04 2019 at 17:57)
+* [universes in structures](78272universesinstructures.html) (72 messages, latest: Apr 04 2019 at 18:59)
+
+* [group_equiv](50231groupequiv.html) (24 messages, latest: Apr 04 2019 at 18:24)
 
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (5 messages, latest: Apr 04 2019 at 14:48)
-
-* [universes in structures](78272universesinstructures.html) (61 messages, latest: Apr 04 2019 at 14:38)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (70 messages, latest: Apr 04 2019 at 12:27)
 
