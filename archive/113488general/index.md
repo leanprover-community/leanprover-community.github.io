@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Monotonic connectives](02104Monotonicconnectives.html) (5 messages, latest: Apr 04 2019 at 23:59)
+* [Monotonic connectives](02104Monotonicconnectives.html) (11 messages, latest: Apr 05 2019 at 00:18)
 
 * [universes in structures](78272universesinstructures.html) (180 messages, latest: Apr 04 2019 at 23:48)
 
