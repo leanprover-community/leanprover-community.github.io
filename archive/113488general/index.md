@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [old_structure_cmd](71747oldstructurecmd.html) (2 messages, latest: Apr 05 2019 at 17:50)
+* [old_structure_cmd](71747oldstructurecmd.html) (11 messages, latest: Apr 05 2019 at 18:24)
 
 * [universes in structures](78272universesinstructures.html) (209 messages, latest: Apr 05 2019 at 17:05)
 

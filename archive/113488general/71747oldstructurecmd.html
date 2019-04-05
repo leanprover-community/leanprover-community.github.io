@@ -37,5 +37,44 @@ permalink: archive/113488general/71747oldstructurecmd.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162644647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162644647">Johan Commelin (Apr 05 2019 at 17:50)</a>:</h4>
 <p>Should I use the <code>old_structure_cmd</code> or not? What are the pros and cons?</p>
 
+<a name="162646713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162646713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162646713">Mario Carneiro (Apr 05 2019 at 18:13)</a>:</h4>
+<p>I will say this: <em><code>old_structure_cmd</code> is not deprecated</em>. The name is really unfortunate, and it should be something more like <code>flat_structure</code></p>
+
+<a name="162646846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162646846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162646846">Mario Carneiro (Apr 05 2019 at 18:15)</a>:</h4>
+<p><code>old_structure_cmd</code> will lay out a structure as a bunch of fields, inlining all fields of the parent(s). It then constructs "parent coercions" (also a bad name, it's an instance not a coercion) so that you can infer parents from the children</p>
+
+<a name="162646882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162646882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162646882">Mario Carneiro (Apr 05 2019 at 18:15)</a>:</h4>
+<p>This can get expensive, especially for deep hierarchies or structures with many fields</p>
+
+<a name="162647038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647038">Mario Carneiro (Apr 05 2019 at 18:17)</a>:</h4>
+<p>The "new structure cmd" (aka the default) is to use a "nested" layout, where a structure <code>B extends A</code> contains a field <code>to_A</code> that allows access to all the fields of A. Some magic is then done so you can't tell the difference, but the parent coercions are now a lot simpler to define</p>
+
+<a name="162647173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647173">Mario Carneiro (Apr 05 2019 at 18:19)</a>:</h4>
+<p>The major downside of the new structure cmd is that you can't nest two structures with a common field, at least not if you don't want two copies of the field as data (and they can potentially be different, and bad things can happen). To avoid this, diamonds are just plain rejected. So <code>structure foo extends add_comm_group A, ring A</code> is rejected</p>
+
+<a name="162647313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647313">Mario Carneiro (Apr 05 2019 at 18:20)</a>:</h4>
+<p>For a structure without parents, I don't think it makes a difference which you use</p>
+
+<a name="162647402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647402">Johan Commelin (Apr 05 2019 at 18:21)</a>:</h4>
+<p>But my example has a parent (-;</p>
+
+<a name="162647569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647569">Johan Commelin (Apr 05 2019 at 18:23)</a>:</h4>
+<p>In the end, I want to put a category structure on both, get the induced forgetful functor, etc...<br>
+This all goes quite smoothly.<br>
+Now, what I would like is if I have an type <code>R</code> and it turns out to have instances of <code>complete_space</code> and <code>topological_ring</code> etc... that I can just write<br>
+<code>{ \alpha := R }</code> for the object of <code>CmplTopCommRing</code> and that type class inference figures out the other fields of the structure.</p>
+
+<a name="162647623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd/near/162647623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71747oldstructurecmd.html#162647623">Johan Commelin (Apr 05 2019 at 18:24)</a>:</h4>
+<p>Does that affect my choice for old/flat vs new/nested structures?</p>
+
 
 {% endraw %}
