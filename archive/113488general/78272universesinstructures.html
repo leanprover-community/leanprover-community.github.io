@@ -859,5 +859,68 @@ def map_iso {X Y : Top.{u}} (f g : X ⟶ Y) (h : f = g) : map f ≅ map g := ...
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162577249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162577249">Kevin Buzzard (Apr 04 2019 at 22:59)</a>:</h4>
 <p>One can pull back an equivalence class of valuations via a morphism of rings. You can think of an equivalence class of valuations on a commutative ring as just being a binary relation on the ring satisfying some axioms by the way</p>
 
+<a name="162577320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162577320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162577320">Kevin Buzzard (Apr 04 2019 at 23:00)</a>:</h4>
+<p>But the axioms are in the perfectoid project</p>
+
+<a name="162577482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162577482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162577482">Kevin Buzzard (Apr 04 2019 at 23:02)</a>:</h4>
+<p>I could never write that proof of <code>comp_id</code> -- it looks terrifying</p>
+
+<a name="162577627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162577627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162577627">Kevin Buzzard (Apr 04 2019 at 23:05)</a>:</h4>
+<p>Mario's<code>comp_id</code> is</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">comp_id</span> <span class="o">(</span><span class="n">fℱ</span><span class="err">𝒢</span> <span class="o">:</span> <span class="n">f_map</span> <span class="n">ℱ</span> <span class="err">𝒢</span><span class="o">)</span> <span class="o">:</span> <span class="n">comp</span> <span class="n">fℱ</span><span class="err">𝒢</span> <span class="o">(</span><span class="n">f_map</span><span class="bp">.</span><span class="n">id</span> <span class="err">𝒢</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fℱ</span><span class="err">𝒢</span> <span class="o">:=</span>
+<span class="n">f_map</span><span class="bp">.</span><span class="n">ext</span> <span class="n">rfl</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">V</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">comp</span><span class="o">,</span> <span class="n">id</span><span class="o">],</span> <span class="n">simp</span> <span class="o">[</span><span class="err">𝒢</span><span class="bp">.</span><span class="n">comp</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>basically painless</p>
+
+<a name="162577862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162577862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162577862">Kevin Buzzard (Apr 04 2019 at 23:10)</a>:</h4>
+<blockquote>
+<p>You shouldn't have to deal with universe issues since you only care about <code>Type u</code> which has homs in the same universe.</p>
+</blockquote>
+<p>Wait wait wait I'm only sticking to Type u because you told me to! I thought I was supposed to care about being maximally polymorphic!</p>
+
+<a name="162579501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579501">Mario Carneiro (Apr 04 2019 at 23:40)</a>:</h4>
+<p>I mean that the homs of the category <code>Type u</code> live in a particular universe, namely <code>Type u</code>, rather than some arbitrary other universe. So you don't have to deal with the two-variable problem that appears in general categories</p>
+
+<a name="162579531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579531">Mario Carneiro (Apr 04 2019 at 23:41)</a>:</h4>
+<p>There is no category <code>Type*</code> that spans multiple universes anyway</p>
+
+<a name="162579547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579547">Mario Carneiro (Apr 04 2019 at 23:41)</a>:</h4>
+<p>aka "<code>Type u</code> is a <code>large_category</code>"</p>
+
+<a name="162579710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579710">Kevin Buzzard (Apr 04 2019 at 23:44)</a>:</h4>
+<p>But there's some other two variable problem -- aah but maybe Scott's approach solves this correctly?</p>
+
+<a name="162579824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579824">Scott Morrison (Apr 04 2019 at 23:46)</a>:</h4>
+<p>Okay, I will definitely need to look at <code>comp_id</code>.</p>
+
+<a name="162579838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579838">Mario Carneiro (Apr 04 2019 at 23:47)</a>:</h4>
+<p>What scott's approach will not give you is a way to talk about homs between presheaves living in different universes. There is basically no way to have a holistic view of these cross-universe homs</p>
+
+<a name="162579841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579841">Scott Morrison (Apr 04 2019 at 23:47)</a>:</h4>
+<p>I agree mine is bad. :-(</p>
+
+<a name="162579914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579914">Mario Carneiro (Apr 04 2019 at 23:48)</a>:</h4>
+<p>it's basically the same problem as why <code>functor</code> in core only has a <code>&lt;$&gt;</code> acting on functions between types in the same universe</p>
+
+<a name="162579947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579947">Mario Carneiro (Apr 04 2019 at 23:48)</a>:</h4>
+<p>You can use <code>ulift</code> to recover some universe polymorphism</p>
+
 
 {% endraw %}

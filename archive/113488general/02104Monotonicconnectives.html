@@ -1,0 +1,43 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/02104Monotonicconnectives.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html">Monotonic connectives</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162578684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Monotonic%20connectives/near/162578684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html#162578684">Seul Baek (Apr 04 2019 at 23:24)</a>:</h4>
+<p>I keep running into goals of the form <code>A → B</code>, where <code>A</code> and <code>B</code> consist entirely of monotonic connectives and quantifiers (<code>∨</code>, <code>∧</code>, <code>∀</code>, <code>∃</code>) and the implication <code>A_i → B_i</code> holds trivially for any pair <code>(A_i, B_i)</code> of corresponding subprops (e.g., <code>h : s1 → s2 ⊢ (p ∧ q ∨ s1) → (p ∧ q ∨ s2)</code>). Is there a standard way to deal with this kind of goals?</p>
+<p>Here's what I'm using right now: <a href="https://github.com/skbaek/mathlib/blob/mono_con/src/tactic/mono_con.lean" target="_blank" title="https://github.com/skbaek/mathlib/blob/mono_con/src/tactic/mono_con.lean">https://github.com/skbaek/mathlib/blob/mono_con/src/tactic/mono_con.lean</a>  It works for my needs, but I'm wondering if there is a more principled approach.</p>
+
+<a name="162579478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Monotonic%20connectives/near/162579478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html#162579478">Chris Hughes (Apr 04 2019 at 23:40)</a>:</h4>
+<p><code>tauto</code>, <code>tauto!</code>, or <code>finish</code></p>
+
+<a name="162579609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Monotonic%20connectives/near/162579609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html#162579609">Mario Carneiro (Apr 04 2019 at 23:42)</a>:</h4>
+<p>in theory <code>mono</code> should do that, but I haven't checked how well it performs</p>
+
+<a name="162580258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Monotonic%20connectives/near/162580258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html#162580258">Simon Hudon (Apr 04 2019 at 23:54)</a>:</h4>
+<p>confirmed: <code>mono</code> solves it</p>
+
+<a name="162580483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Monotonic%20connectives/near/162580483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02104Monotonicconnectives.html#162580483">Seul Baek (Apr 04 2019 at 23:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Oops, I meant cases in which the implications between subprops are <em>mostly</em> trivial, such that you want to reduce the goal into proving implications between only the non-trivial ones.  For instance, if the goal was</p>
+<div class="codehilite"><pre><span></span>example (α : Type) (p q : Prop) (r1 r2 s1 s2 : α → Prop) :
+  (∀ x : α, r1 x ∧ ∃ y : α, (p ∧ q ∨ s1 y)) →
+  (∀ x : α, r2 x ∧ ∃ y : α, (p ∧ q ∨ s2 y))
+</pre></div>
+
+
+<p>then it'd be convenient to have a tactic that reduces it to <code>r1 x → r2 x</code> and <code>s1 y → s2 y</code> for arbitrary <code>x</code> and <code>y</code>.  I don't think <code>finish</code>, <code>safe</code>, or <code>tauto</code> does it, although I may be using them incorrectly.</p>
+
+
+{% endraw %}

@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [universes in structures](78272universesinstructures.html) (167 messages, latest: Apr 04 2019 at 22:59)
+* [Monotonic connectives](02104Monotonicconnectives.html) (5 messages, latest: Apr 04 2019 at 23:59)
+
+* [universes in structures](78272universesinstructures.html) (180 messages, latest: Apr 04 2019 at 23:48)
 
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (6 messages, latest: Apr 04 2019 at 19:00)
 
