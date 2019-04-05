@@ -922,5 +922,98 @@ def map_iso {X Y : Top.{u}} (f g : X ⟶ Y) (h : f = g) : map f ≅ map g := ...
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162579947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162579947">Mario Carneiro (Apr 04 2019 at 23:48)</a>:</h4>
 <p>You can use <code>ulift</code> to recover some universe polymorphism</p>
 
+<a name="162612484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612484">Scott Morrison (Apr 05 2019 at 11:03)</a>:</h4>
+<p>Okay, <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, I have refactored quite a bit, pulling out the stuff that is about presheaves on a fixed space, and then later doing pairs (space, presheaf on it).</p>
+
+<a name="162612493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612493">Scott Morrison (Apr 05 2019 at 11:03)</a>:</h4>
+<p>The proofs are much simpler now.</p>
+
+<a name="162612523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612523">Scott Morrison (Apr 05 2019 at 11:03)</a>:</h4>
+<p>e.g. my <code>comp_id</code> and so on are so much simpler they have disappeared :-) (Once they are down to <code>ext; dsimp; simp</code> I'm happy to omit them and let <code>tidy</code> fill them in!)</p>
+
+<a name="162612527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612527">Scott Morrison (Apr 05 2019 at 11:03)</a>:</h4>
+<p>I wrote some stuff about stalks.</p>
+
+<a name="162612588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612588">Scott Morrison (Apr 05 2019 at 11:04)</a>:</h4>
+<p>And got as far as constructing <br>
+<code>def stalk_map {F G : Presheaf.{v} C} (α : F ⟶ G) (x : F.X) : stalk (α.f x) ⟶ stalk x := ...</code></p>
+
+<a name="162612613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612613">Scott Morrison (Apr 05 2019 at 11:05)</a>:</h4>
+<p>I have proved nothing about about that map, at this point, however, so I don't know whether it is usable.</p>
+
+<a name="162612746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612746">Johan Commelin (Apr 05 2019 at 11:08)</a>:</h4>
+<p>I'm not sure if I like your "hack" where you replace <code>opens X</code> with its opposite...</p>
+
+<a name="162612971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612971">Scott Morrison (Apr 05 2019 at 11:11)</a>:</h4>
+<p>I knew you wouldn't like this.</p>
+
+<a name="162612976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162612976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162612976">Scott Morrison (Apr 05 2019 at 11:11)</a>:</h4>
+<p>It just saves so so much pain, you wouldn't believe.</p>
+
+<a name="162613035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613035">Johan Commelin (Apr 05 2019 at 11:12)</a>:</h4>
+<p>That doesn't sound good</p>
+
+<a name="162613039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613039">Scott Morrison (Apr 05 2019 at 11:12)</a>:</h4>
+<p>I can rename it if you like, but I'm not going to be able to write this stuff with explicit <code>op</code>s everywhere.</p>
+
+<a name="162613047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613047">Johan Commelin (Apr 05 2019 at 11:12)</a>:</h4>
+<p>What if we want to do the etale site?</p>
+
+<a name="162613052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613052">Johan Commelin (Apr 05 2019 at 11:12)</a>:</h4>
+<p>We will need to deal with the <code>op</code>s there...</p>
+
+<a name="162613069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613069">Johan Commelin (Apr 05 2019 at 11:13)</a>:</h4>
+<p>But we can worry about that in the future.</p>
+
+<a name="162613071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613071">Scott Morrison (Apr 05 2019 at 11:13)</a>:</h4>
+<p>That sounds like a good place to deal with them. :-)</p>
+
+<a name="162613087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613087">Johan Commelin (Apr 05 2019 at 11:13)</a>:</h4>
+<p>So... let's redefine stalks using filtered colimits...</p>
+
+<a name="162613146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162613146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162613146">Johan Commelin (Apr 05 2019 at 11:14)</a>:</h4>
+<p>That means we first need a definition of filtered colimit in mathlib</p>
+
+<a name="162614563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614563">Scott Morrison (Apr 05 2019 at 11:39)</a>:</h4>
+<p>I should sleep soon, but I agree this is a good thing to do, and we're actually not that far.</p>
+
+<a name="162614566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614566">Scott Morrison (Apr 05 2019 at 11:39)</a>:</h4>
+<p>Do you want to talk about it tomorrow? I can probably find some time.</p>
+
+<a name="162614569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614569">Scott Morrison (Apr 05 2019 at 11:39)</a>:</h4>
+<p>We could even try out the new VS Code collaborative mode :-)</p>
+
+<a name="162614570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614570">Patrick Massot (Apr 05 2019 at 11:39)</a>:</h4>
+<p>Thank you very much Scott</p>
+
+<a name="162614627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614627">Johan Commelin (Apr 05 2019 at 11:40)</a>:</h4>
+<p>I'm not sure if I have time tomorrow... maybe...</p>
+
+<a name="162614632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162614632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162614632">Scott Morrison (Apr 05 2019 at 11:40)</a>:</h4>
+<p>I'm doing presheaves with preorders on the stalks right now. :-)</p>
+
 
 {% endraw %}
