@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [universes in structures](78272universesinstructures.html) (208 messages, latest: Apr 05 2019 at 15:44)
+
 * [cerw](13234cerw.html) (67 messages, latest: Apr 05 2019 at 14:50)
 
 * [group_equiv](50231groupequiv.html) (28 messages, latest: Apr 05 2019 at 14:45)
-
-* [universes in structures](78272universesinstructures.html) (206 messages, latest: Apr 05 2019 at 12:35)
 
 * [Flypitch](73316Flypitch.html) (3 messages, latest: Apr 05 2019 at 03:22)
 
