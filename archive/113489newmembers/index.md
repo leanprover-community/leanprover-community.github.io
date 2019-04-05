@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [fundamental theorem of algebra](61287fundamentaltheoremofalgebra.html) (3 messages, latest: Apr 05 2019 at 10:56)
+
 * [Installing mathlib](63351Installingmathlib.html) (51 messages, latest: Apr 05 2019 at 08:34)
 
 * [{a} a](88059aa.html) (12 messages, latest: Apr 05 2019 at 05:23)
