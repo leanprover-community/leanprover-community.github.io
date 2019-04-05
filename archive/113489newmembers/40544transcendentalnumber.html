@@ -49,5 +49,26 @@ I fixed it by</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/transcendental%20number/near/162508683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40544transcendentalnumber.html#162508683">Kenny Lau (Apr 04 2019 at 09:36)</a>:</h4>
 <p>of course this definition is still defective... the number should be an explicit argument</p>
 
+<a name="162636605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/transcendental%20number/near/162636605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40544transcendentalnumber.html#162636605">Floris van Doorn (Apr 05 2019 at 16:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="138627">@Mii Nguyen</span> That last definition is not at all what you want. If you <code>#print</code> it, you will see that what you defined is</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_transcendental_number</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">},</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">},</span> <span class="n">polynomial</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">p</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">is_root</span> <span class="n">p</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>You want the following:</p>
+<div class="codehilite"><pre><span></span>def is_transcendental_number (x : ℝ) : Prop := ∀(p : polynomial ℤ), p ≠ 0 → ¬ eval₂ int.cast x p = 0
+</pre></div>
+
+
+<p>If you want, you can abbreviate this to</p>
+<div class="codehilite"><pre><span></span>def is_transcendental_number (x : ℝ) : Prop := ∀(p ≠ 0), ¬ eval₂ int.cast x p = 0
+</pre></div>
+
+<a name="162636791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/transcendental%20number/near/162636791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40544transcendentalnumber.html#162636791">Floris van Doorn (Apr 05 2019 at 16:13)</a>:</h4>
+<p>The problem with your definition is that you didn't have a name to the hypothesis <code>(p ≠ 0)</code>. You should write <code>(h : p ≠ 0)</code> or <code>p ≠ 0 → ...</code>. The syntax you used is notation for "for all <code>p</code> not equal to <code>0</code>" so this is a new <code>p</code> different from the previous one.</p>
+
 
 {% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [transcendental number](40544transcendentalnumber.html) (10 messages, latest: Apr 05 2019 at 16:13)
+
 * [fundamental theorem of algebra](61287fundamentaltheoremofalgebra.html) (6 messages, latest: Apr 05 2019 at 11:06)
 
 * [Installing mathlib](63351Installingmathlib.html) (51 messages, latest: Apr 05 2019 at 08:34)
@@ -17,8 +19,6 @@ permalink: archive/113489newmembers/index.html
 * [{a} a](88059aa.html) (12 messages, latest: Apr 05 2019 at 05:23)
 
 * [Zmod37 tutorial](59577Zmod37tutorial.html) (6 messages, latest: Apr 04 2019 at 19:01)
-
-* [transcendental number](40544transcendentalnumber.html) (8 messages, latest: Apr 04 2019 at 09:36)
 
 * [algebraic number](63524algebraicnumber.html) (1 message, latest: Apr 04 2019 at 08:59)
 
