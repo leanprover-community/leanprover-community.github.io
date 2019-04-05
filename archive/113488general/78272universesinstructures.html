@@ -1042,5 +1042,49 @@ def map_iso {X Y : Top.{u}} (f g : X ⟶ Y) (h : f = g) : map f ≅ map g := ...
 </blockquote>
 <p>Yes.</p>
 
+<a name="162666636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162666636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162666636">Scott Morrison (Apr 05 2019 at 22:22)</a>:</h4>
+<p>Ok, I think while walking the dog I understood what my problem with the <code>op</code>s has been, and I hope that I can restore them. The price that is I will have to define <code>opens.op_map : (opens X)^op \func (opens Y)^op</code> separately from <code>opens.map</code>, rather than just using <code>(opens.map).op</code> as I have been. This is only a few lines of duplication.</p>
+
+<a name="162666725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162666725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162666725">Kevin Buzzard (Apr 05 2019 at 22:23)</a>:</h4>
+<p>I should say that in contrast to Johan, I don't mind at all about you having reversed the arrows in <code>opens X</code> -- you could even have just defined <code>opens_op X</code>. But if you think you've figured out what's going on then great :-)</p>
+
+<a name="162666799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162666799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162666799">Scott Morrison (Apr 05 2019 at 22:24)</a>:</h4>
+<p>The underlying problem is that <code>opens.map</code> is really a 2-functor from {topological spaces}&lt;={continuous maps}&lt;={equalities} to {categories}&lt;={functors}&lt;={nat trans}, and so we have some dependent type theory hell waiting the break loose. Too many <code>op</code>s in the wrong places prevent things simplifying at the right moments.</p>
+
+<a name="162666988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162666988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162666988">Scott Morrison (Apr 05 2019 at 22:27)</a>:</h4>
+<p>Another realisation while walking the dog is that since we've generalised the category theory library to allow <code>Prop</code> valued homs, the avenue is open to using "functor extensionality" for functors into Prop-level categories. The point is that you only need to check equality on objects, and then proof irrelevance guarantees equality of morphisms. This means that the usual <code>eq.rec</code> balrog that functor extensionality rouses should not be a problem.</p>
+
+<a name="162667092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162667092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162667092">Scott Morrison (Apr 05 2019 at 22:28)</a>:</h4>
+<p>I'm not quite there with "bundled presheaves whose stalks have preorders, and whose morphisms preserve the preorders", but I think I'm pretty close. Hopefully this afternoon. :-)</p>
+
+<a name="162667149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162667149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162667149">Kevin Buzzard (Apr 05 2019 at 22:29)</a>:</h4>
+<p>Yes, I didn't know how you were going to do this. I did wonder whether doing presheaves in the funky functor way would somehow not really help, whereas with the structures Mario and I made you can just add more fields</p>
+
+<a name="162667690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162667690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162667690">Scott Morrison (Apr 05 2019 at 22:37)</a>:</h4>
+<p>I'm just doing more fields, too.</p>
+
+<a name="162668368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162668368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162668368">Kevin Buzzard (Apr 05 2019 at 22:45)</a>:</h4>
+<p>I don't know how to add more fields to the objects of a category</p>
+
+<a name="162668480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162668480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162668480">Scott Morrison (Apr 05 2019 at 22:46)</a>:</h4>
+<p>Just bundle more. A object of the new category is an object of the old category, along with some extra piece of data.</p>
+
+<a name="162668633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162668633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162668633">Kevin Buzzard (Apr 05 2019 at 22:49)</a>:</h4>
+<p>I just didn't know how easy this was to do in practice. Of course the morphisms change too etc.</p>
+
+<a name="162668652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universes%20in%20structures/near/162668652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78272universesinstructures.html#162668652">Kevin Buzzard (Apr 05 2019 at 22:49)</a>:</h4>
+<p>With structures I can see how it all would work but in this bundled setting I don't have the experience.</p>
+
 
 {% endraw %}
