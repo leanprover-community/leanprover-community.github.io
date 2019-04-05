@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [group_equiv](50231groupequiv.html) (26 messages, latest: Apr 05 2019 at 13:20)
+
 * [universes in structures](78272universesinstructures.html) (206 messages, latest: Apr 05 2019 at 12:35)
 
 * [Flypitch](73316Flypitch.html) (3 messages, latest: Apr 05 2019 at 03:22)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [Monotonic connectives](02104Monotonicconnectives.html) (12 messages, latest: Apr 05 2019 at 02:38)
 
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (6 messages, latest: Apr 04 2019 at 19:00)
-
-* [group_equiv](50231groupequiv.html) (24 messages, latest: Apr 04 2019 at 18:24)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (70 messages, latest: Apr 04 2019 at 12:27)
 
