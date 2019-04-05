@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [group_equiv](50231groupequiv.html) (29 messages, latest: Apr 05 2019 at 16:13)
+* [old_structure_cmd](71747oldstructurecmd.html) (2 messages, latest: Apr 05 2019 at 17:50)
 
-* [universes in structures](78272universesinstructures.html) (208 messages, latest: Apr 05 2019 at 15:44)
+* [universes in structures](78272universesinstructures.html) (209 messages, latest: Apr 05 2019 at 17:05)
+
+* [group_equiv](50231groupequiv.html) (29 messages, latest: Apr 05 2019 at 16:13)
 
 * [cerw](13234cerw.html) (67 messages, latest: Apr 05 2019 at 14:50)
 

@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [ordered commutative monoid](67162orderedcommutativemonoid.html) (1 message, latest: Apr 05 2019 at 17:30)
+
 * [induced preorder](53248inducedpreorder.html) (3 messages, latest: Apr 04 2019 at 22:50)
 
 * [type class instance synthesis](12824typeclassinstancesynthesis.html) (22 messages, latest: Apr 04 2019 at 11:48)
