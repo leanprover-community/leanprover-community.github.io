@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [group_equiv](50231groupequiv.html) (26 messages, latest: Apr 05 2019 at 13:20)
+* [cerw](13234cerw.html) (67 messages, latest: Apr 05 2019 at 14:50)
+
+* [group_equiv](50231groupequiv.html) (28 messages, latest: Apr 05 2019 at 14:45)
 
 * [universes in structures](78272universesinstructures.html) (206 messages, latest: Apr 05 2019 at 12:35)
 
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (394 messages, latest: Apr 02 2019 at 22:42)
 
 * [transfer between isomorphic types](89154transferbetweenisomorphictypes.html) (26 messages, latest: Apr 02 2019 at 18:51)
-
-* [cerw](13234cerw.html) (66 messages, latest: Apr 02 2019 at 18:04)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (15 messages, latest: Apr 01 2019 at 15:47)
 
