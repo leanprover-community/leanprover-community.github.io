@@ -145,5 +145,13 @@ lemma NaturalTransformations_componentwise_equal
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162713077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162713077">Johan Commelin (Apr 06 2019 at 18:15)</a>:</h4>
 <p>I think <code>better2</code> is the one that you want to have.</p>
 
+<a name="162717612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162717612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162717612">Mario Carneiro (Apr 06 2019 at 19:52)</a>:</h4>
+<p>Cases on an equality is one of the most useful things you can do in the presence of dependencies. The effect is the same as <code>subst</code>: The variable (in this case <code>y_s</code>) is removed from the context and all occurrences are replaced with <code>x_s</code>. This usually means you can make progress, because now <code>x_fs</code> and <code>y_fs</code> have the same type, so you can reasonably state and prove an equality about them</p>
+
+<a name="162717714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162717714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162717714">Mario Carneiro (Apr 06 2019 at 19:54)</a>:</h4>
+<p>What actually happened is that <code>cases</code> first reverts all dependencies, like <code>y_fs</code>, and then rewrites the goal (which is a dependent pi making reference to <code>y_s</code>) to change <code>y_s</code> to <code>x_s</code>. Then the type of <code>y_fs</code> changes at the same time as the goal changes, so it stays type correct</p>
+
 
 {% endraw %}

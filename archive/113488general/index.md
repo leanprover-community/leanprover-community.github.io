@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (50 messages, latest: Apr 06 2019 at 18:17)
+* [proving equality of structures](74349provingequalityofstructures.html) (20 messages, latest: Apr 06 2019 at 19:54)
 
-* [proving equality of structures](74349provingequalityofstructures.html) (18 messages, latest: Apr 06 2019 at 18:15)
+* [stats](32112stats.html) (16 messages, latest: Apr 06 2019 at 19:18)
+
+* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (50 messages, latest: Apr 06 2019 at 18:17)
 
 * [type mismatch](25625typemismatch.html) (2 messages, latest: Apr 06 2019 at 05:50)
 
@@ -269,8 +271,6 @@ permalink: archive/113488general/index.html
 * [finset_cases and nat_cases](90684finsetcasesandnatcases.html) (15 messages, latest: Mar 02 2019 at 22:34)
 
 * [popular tactics](67631populartactics.html) (9 messages, latest: Mar 01 2019 at 22:25)
-
-* [stats](32112stats.html) (14 messages, latest: Mar 01 2019 at 14:32)
 
 * [normalise subtype.val and coe](33650normalisesubtypevalandcoe.html) (3 messages, latest: Mar 01 2019 at 09:55)
 
