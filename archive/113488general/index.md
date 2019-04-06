@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [proving equality of structures](74349provingequalityofstructures.html) (20 messages, latest: Apr 06 2019 at 19:54)
+* [stats](32112stats.html) (21 messages, latest: Apr 06 2019 at 20:50)
 
-* [stats](32112stats.html) (16 messages, latest: Apr 06 2019 at 19:18)
+* [proving equality of structures](74349provingequalityofstructures.html) (20 messages, latest: Apr 06 2019 at 19:54)
 
 * [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (50 messages, latest: Apr 06 2019 at 18:17)
 
