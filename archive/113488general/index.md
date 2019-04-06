@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (1 message, latest: Apr 06 2019 at 05:56)
+* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (6 messages, latest: Apr 06 2019 at 06:37)
 
 * [type mismatch](25625typemismatch.html) (2 messages, latest: Apr 06 2019 at 05:50)
 
