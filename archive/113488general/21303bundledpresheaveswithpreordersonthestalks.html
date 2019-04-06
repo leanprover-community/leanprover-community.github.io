@@ -41,5 +41,33 @@ permalink: archive/113488general/21303bundledpresheaveswithpreordersonthestalks.
 5) generalise "stalks with preorders" to "stalks with structure"<br>
 6) once we have a <code>has_colimits CommRing</code> instance, everything is already set up to compute stalks in <code>CommRing</code> (or for that matter in <code>TopCommRing</code>)</p>
 
+<a name="162691103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162691103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162691103">Kevin Buzzard (Apr 06 2019 at 08:16)</a>:</h4>
+<p>Presumably the <code>has_colimits CommRing</code> instance will give us the universal property as well?</p>
+
+<a name="162691182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162691182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162691182">Kevin Buzzard (Apr 06 2019 at 08:18)</a>:</h4>
+<p>I know that <span class="user-mention" data-user-id="132858">@Ramon Fernandez Mir</span> made the construction of a general colimit of comm rings (as a quotient of the poly ring over Z in variables corresponding to the disjoint union of the rings) late last year but I can't find it in his schemes repo :-/</p>
+
+<a name="162691792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162691792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162691792">Scott Morrison (Apr 06 2019 at 08:37)</a>:</h4>
+<p>Yes, <code>has_colimits</code> packages the universal property.</p>
+
+<a name="162692160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162692160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162692160">Kevin Buzzard (Apr 06 2019 at 08:49)</a>:</h4>
+<p>Actually here's a potential problem. I need to define a preorder on the colimit. In this case (the stalk of a sheaf on a top space) the colimit is actually a direct limit. I would <em>imagine</em> that the universal property is a statement about defining ring homs from the colimit to other rings. But this is not what we have; I want to define a morphism of types from the stalk to some other type (I want to define a valuation on the stalk, and I'll get the preorder from the valuation). The underlying type of a direct limit of commutative rings is equal to the direct limit of the underlying types, so I can use the universal property of direct limits of types to get my function. However it is not true that the underlying type of an arbitrary colimit of commutative rings is equal to the colimit of the underlying types (consider a coproduct of two rings; the underlying type of the coproduct isn't the disjoint union of the two underlying types).</p>
+
+<a name="162692298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162692298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162692298">Scott Morrison (Apr 06 2019 at 08:53)</a>:</h4>
+<p>Yes. :-)</p>
+
+<a name="162692301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162692301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162692301">Johan Commelin (Apr 06 2019 at 08:53)</a>:</h4>
+<p>Luckily Reid pushed some stuff about filtered limits to a branch...</p>
+
+<a name="162692347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162692347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162692347">Johan Commelin (Apr 06 2019 at 08:54)</a>:</h4>
+<p>Once that code is accessible (either in mathlib, or in the perfectoid project) we only need to show that the forgetful functor from <code>CommRing</code> to <code>Type</code> preserves filtered colimits</p>
+
 
 {% endraw %}
