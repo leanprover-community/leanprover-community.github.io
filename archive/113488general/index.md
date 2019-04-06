@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass inference problems for `has_colimits`](85778typeclassinferenceproblemsforhascolimits.html) (6 messages, latest: Apr 06 2019 at 02:39)
+* [typeclass inference problems for `has_colimits`](85778typeclassinferenceproblemsforhascolimits.html) (9 messages, latest: Apr 06 2019 at 03:10)
 
 * [universes in structures](78272universesinstructures.html) (222 messages, latest: Apr 06 2019 at 02:34)
 

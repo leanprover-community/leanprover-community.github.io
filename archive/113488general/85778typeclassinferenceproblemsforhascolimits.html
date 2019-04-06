@@ -45,5 +45,18 @@ x : ↥(F.X)
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20problems%20for%20%60has_colimits%60/near/162679102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85778typeclassinferenceproblemsforhascolimits.html#162679102">Scott Morrison (Apr 06 2019 at 02:39)</a>:</h4>
 <p>Or maybe I'm doing something dumb.</p>
 
+<a name="162680400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20problems%20for%20%60has_colimits%60/near/162680400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85778typeclassinferenceproblemsforhascolimits.html#162680400">Reid Barton (Apr 06 2019 at 03:09)</a>:</h4>
+<p>Yeah I've seen errors like this before. It seems that the <code>@[class] def has_colimits :=</code> a Pi-type doesn't actually totally work, even though it seems to mostly work. It takes some slightly complicated setup for it to stop working and I never got to the bottom of it.<br>
+I think we just need to change each of the classes to be a structure</p>
+
+<a name="162680479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20problems%20for%20%60has_colimits%60/near/162680479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85778typeclassinferenceproblemsforhascolimits.html#162680479">Reid Barton (Apr 06 2019 at 03:10)</a>:</h4>
+<p>with instances that specialize <code>has_colimits</code> -&gt; <code>has_colimits_of_shape</code> -&gt; <code>has_colimit</code></p>
+
+<a name="162680485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inference%20problems%20for%20%60has_colimits%60/near/162680485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85778typeclassinferenceproblemsforhascolimits.html#162680485">Reid Barton (Apr 06 2019 at 03:10)</a>:</h4>
+<p>and you won't be able to go back the other way from <code>Pi J, has_colimits_of_shape J</code> to <code>has_colimits</code> automatically, but that probably doesn't really matter in practice</p>
+
 
 {% endraw %}
