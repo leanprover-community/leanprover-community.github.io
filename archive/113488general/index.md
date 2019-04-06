@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (1 message, latest: Apr 06 2019 at 05:56)
+
+* [type mismatch](25625typemismatch.html) (2 messages, latest: Apr 06 2019 at 05:50)
+
 * [typeclass inference problems for `has_colimits`](85778typeclassinferenceproblemsforhascolimits.html) (10 messages, latest: Apr 06 2019 at 04:34)
 
 * [universes in structures](78272universesinstructures.html) (222 messages, latest: Apr 06 2019 at 02:34)
