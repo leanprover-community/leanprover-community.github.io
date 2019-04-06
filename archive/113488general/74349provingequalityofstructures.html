@@ -91,5 +91,59 @@ lemma NaturalTransformations_componentwise_equal
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126679010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126679010">Scott Morrison (May 17 2018 at 03:51)</a>:</h4>
 <p>Yes, that proof works too.</p>
 
+<a name="162712910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162712910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162712910">Kevin Buzzard (Apr 06 2019 at 18:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> thanks for refactoring my unbundled presheaves of types code; whilst you no longer reduce the length of what I write by a factor of 10, you still input some new ideas which I can learn from. Here's something I picked up. I am interested in proving equalities of structures, i.e. writing extensionality lemmas (I'm adding to an old thread, I thought it might be a way of making things more coherent). I had thought that Lean generated lemmas which did these things for me. But I learnt from your refactor that Lean does not always generate the best ones. Here's a concrete example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">structure</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">fs</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span><span class="o">)</span> <span class="c1">-- this is a subsingleton but not a prop</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">s</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">fs</span> <span class="bp">==</span> <span class="n">y</span><span class="bp">.</span><span class="n">fs</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">foo</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span> <span class="c1">-- auto-generated lemmas FTW</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hs</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+
+<span class="c1">-- but hf is not needed!</span>
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext_better1</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">fs</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">ft</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">t</span><span class="o">):</span>
+<span class="n">foo</span><span class="bp">.</span><span class="n">mk</span> <span class="n">s</span> <span class="n">fs</span> <span class="bp">=</span> <span class="n">foo</span><span class="bp">.</span><span class="n">mk</span> <span class="n">t</span> <span class="n">ft</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">congr</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hs</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext_better2</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">s</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hs</span><span class="o">,</span> <span class="c1">-- what does this even do?</span>
+  <span class="n">congr</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Lean basically generated the first proof automatically. But the heq can be avoided. There are two ways of avoiding it, both of which I demonstrate here. The first is a direct application of <code>congr</code>. The second does cases on an equality! What is going on there? I don't understand what happens. Hypothesis <code>hs</code> changes from</p>
+<div class="codehilite"><pre><span></span>hs : {s := x_s, fs := x_fs}.s = {s := y_s, fs := y_fs}.s
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span>hs : {s := x_s, fs := x_fs}.s = {s := x_s, fs := y_fs}.s
+</pre></div>
+
+
+<p>One of those structures doesn't even look type correct to to me. Oh -- wait -- the <em>type</em> of <code>y_fs</code> changes! So it is type correct! The cases is doing something magic. What is going on?</p>
+<p>Side question: which ext lemma is the best one to prove? The one with the structures or the one with the components? Or should one prove both?</p>
+
+<a name="162713077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162713077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162713077">Johan Commelin (Apr 06 2019 at 18:15)</a>:</h4>
+<p>I think <code>better2</code> is the one that you want to have.</p>
+
 
 {% endraw %}

@@ -184,5 +184,53 @@ permalink: archive/113488general/21303bundledpresheaveswithpreordersonthestalks.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712346">Kevin Buzzard (Apr 06 2019 at 17:59)</a>:</h4>
 <p>exactly. If Scott has got things working with the arrows baked the wrong way round, it provides a natural starting point for trying to figure out what the hell is going on.</p>
 
+<a name="162712400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712400">Kevin Buzzard (Apr 06 2019 at 18:00)</a>:</h4>
+<p>It could just be a case of Lean not unfolding something.</p>
+
+<a name="162712403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712403">Reid Barton (Apr 06 2019 at 18:00)</a>:</h4>
+<p>somehow it works with <code>opens_op X</code> but not with <code>(opens X)\op</code></p>
+
+<a name="162712430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712430">Reid Barton (Apr 06 2019 at 18:01)</a>:</h4>
+<p>I'm guessing it's an instance of a recurring annoyance for category theory, where we have simp lemmas like <code>f &gt;&gt; 1 X = f</code> which <code>simp</code> is fond of not applying</p>
+
+<a name="162712491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712491">Reid Barton (Apr 06 2019 at 18:02)</a>:</h4>
+<p>because under the hood the simp lemma says <code>comp Y X X f (1 X) = f</code>, but maybe the implicit object arguments in an occurrence of <code>f &gt;&gt; 1 X</code> are not syntactically <code>X</code>, but only something defeq to <code>X</code></p>
+
+<a name="162712675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712675">Reid Barton (Apr 06 2019 at 18:06)</a>:</h4>
+<p>For example, one of the implicit <code>X</code>s might be <code>(functor.id C).obj X</code></p>
+
+<a name="162712694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712694">Johan Commelin (Apr 06 2019 at 18:07)</a>:</h4>
+<p>But that ought to be <code>simp</code>ed away as well, right?</p>
+
+<a name="162712759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712759">Reid Barton (Apr 06 2019 at 18:08)</a>:</h4>
+<p>Well it can't be <code>simp</code>ed because it is in a position where the type of something else depends on it. It can be <code>dsimp</code>ed though. That's why we end up with <code>simp, dsimp, simp</code> stuff</p>
+
+<a name="162712796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712796">Reid Barton (Apr 06 2019 at 18:09)</a>:</h4>
+<p>but if we didn't have the <code>simp</code> lemma for <code>(functor.id C).obj X</code>, we'd be stuck. So hopefully we are just missing some similar <code>simp</code> lemma for opposite stuff.</p>
+
+<a name="162712816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712816">Reid Barton (Apr 06 2019 at 18:09)</a>:</h4>
+<p>It seems like a difficult problem to solve in general though because you are relying on <code>dsimp</code> to be able to put objects into a consistent normal form, but, in general, the objects of your category could be anything</p>
+
+<a name="162712962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162712962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162712962">Johan Commelin (Apr 06 2019 at 18:12)</a>:</h4>
+<p>Which means we need something that is smarter than "try to normalise LHS and RHS and hope that we win". I guess this is where <code>rw_search</code> might become a real hero (-;</p>
+
+<a name="162713173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162713173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162713173">Reid Barton (Apr 06 2019 at 18:17)</a>:</h4>
+<p>Well, I think all we really need here is for <code>simp</code> to match repeated variables in the lemma it is trying to apply using definitional equality, rather than syntactic equality</p>
+
+<a name="162713181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20presheaves%20with%20preorders%20on%20the%20stalks/near/162713181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21303bundledpresheaveswithpreordersonthestalks.html#162713181">Reid Barton (Apr 06 2019 at 18:17)</a>:</h4>
+<p>maybe there's even an option to do that already?</p>
+
 
 {% endraw %}

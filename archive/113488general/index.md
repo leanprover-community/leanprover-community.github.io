@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (38 messages, latest: Apr 06 2019 at 17:59)
+* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (50 messages, latest: Apr 06 2019 at 18:17)
+
+* [proving equality of structures](74349provingequalityofstructures.html) (18 messages, latest: Apr 06 2019 at 18:15)
 
 * [type mismatch](25625typemismatch.html) (2 messages, latest: Apr 06 2019 at 05:50)
 
@@ -2495,8 +2497,6 @@ permalink: archive/113488general/index.html
 * [universe shadows a local universe](70152universeshadowsalocaluniverse.html) (44 messages, latest: May 17 2018 at 11:01)
 
 * [metatheory libraries/frameworks](11952metatheorylibrariesframeworks.html) (26 messages, latest: May 17 2018 at 06:35)
-
-* [proving equality of structures](74349provingequalityofstructures.html) (16 messages, latest: May 17 2018 at 03:51)
 
 * [adding to someone else's PR](89510addingtosomeoneelsesPR.html) (15 messages, latest: May 16 2018 at 23:35)
 
