@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ordered commutative monoid](67162orderedcommutativemonoid.html) (1 message, latest: Apr 05 2019 at 17:30)
+* [ordered commutative monoid](67162orderedcommutativemonoid.html) (5 messages, latest: Apr 06 2019 at 14:56)
 
 * [induced preorder](53248inducedpreorder.html) (3 messages, latest: Apr 04 2019 at 22:50)
 
