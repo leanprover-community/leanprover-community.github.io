@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [qpf and type class instances](08315qpfandtypeclassinstances.html) (1 message, latest: Apr 07 2019 at 12:20)
+* [qpf and type class instances](08315qpfandtypeclassinstances.html) (9 messages, latest: Apr 07 2019 at 15:13)
 
 * [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (54 messages, latest: Apr 07 2019 at 03:53)
 
