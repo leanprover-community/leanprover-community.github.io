@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/08315qpfandtypeclassinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08315qpfandtypeclassinstances.html">qpf and type class instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162752781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/qpf%20and%20type%20class%20instances/near/162752781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08315qpfandtypeclassinstances.html#162752781">matt rice (Apr 07 2019 at 12:20)</a>:</h4>
+<p>checking out qpf's I built a few things, but i'm not sure how to deal with typeclasses<br>
+I managed to invoke repr, but couldn't figure out if there is a way to build an instance has_repr alt,<br>
+if anyone has any ideas</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fix</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">equations</span> <span class="n">data</span><span class="bp">.</span><span class="n">fix</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">data</span> <span class="n">alt</span>
+<span class="bp">|</span> <span class="n">l</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">alt</span>
+<span class="bp">|</span> <span class="n">r</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">alt</span>
+
+<span class="n">def</span> <span class="n">alt</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">from_l</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">from_r</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">it</span> <span class="o">:</span> <span class="bp">@</span><span class="n">alt</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">γ</span>
+<span class="o">:=</span> <span class="n">it</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">from_l</span><span class="o">)</span> <span class="o">(</span><span class="n">from_r</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">alt</span><span class="bp">.</span><span class="n">repr</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">lrepr</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">rrepr</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="bp">@</span><span class="n">alt</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">it</span><span class="o">,</span> <span class="n">it</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="s2">&quot;alt.l &quot;</span> <span class="bp">++</span> <span class="n">repr</span> <span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="s2">&quot;alt.r &quot;</span> <span class="bp">++</span> <span class="n">repr</span> <span class="n">r</span><span class="o">))</span>
+
+<span class="c">/-</span><span class="cm"> Don&#39;t know how to synthesize placeholder content</span>
+<span class="cm"> or type class instances if i try to add type class instances like above. -/</span>
+<span class="c1">-- instance repr : has_repr alt := ⟨alt.repr⟩</span>
+
+<span class="n">def</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">[</span><span class="n">alt</span><span class="bp">.</span><span class="n">l</span> <span class="s2">&quot;foo&quot;</span><span class="o">,</span> <span class="n">alt</span><span class="bp">.</span><span class="n">r</span> <span class="mi">0</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">z</span> <span class="o">:</span> <span class="bp">@</span><span class="n">alt</span> <span class="n">string</span> <span class="n">string</span> <span class="o">:=</span> <span class="n">alt</span><span class="bp">.</span><span class="n">l</span> <span class="s2">&quot;foo&quot;</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">alt</span><span class="bp">.</span><span class="n">repr</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">z</span><span class="bp">.</span><span class="n">rec</span> <span class="n">repr</span> <span class="n">repr</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">alt</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">alt</span><span class="bp">.</span><span class="n">l</span> <span class="o">(</span><span class="n">string</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">alt</span><span class="bp">.</span><span class="n">r</span><span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span> <span class="n">x</span>
+</pre></div>
+
+
+{% endraw %}
