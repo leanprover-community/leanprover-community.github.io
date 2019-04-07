@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (54 messages, latest: Apr 07 2019 at 03:53)
+
 * [stats](32112stats.html) (21 messages, latest: Apr 06 2019 at 20:50)
 
 * [proving equality of structures](74349provingequalityofstructures.html) (20 messages, latest: Apr 06 2019 at 19:54)
-
-* [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (50 messages, latest: Apr 06 2019 at 18:17)
 
 * [type mismatch](25625typemismatch.html) (2 messages, latest: Apr 06 2019 at 05:50)
 
