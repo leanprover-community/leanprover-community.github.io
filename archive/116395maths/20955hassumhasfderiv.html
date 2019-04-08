@@ -112,5 +112,39 @@ I have no clue what this means, but it seems to be a good idea if we want to uni
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162824443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162824443">Patrick Massot (Apr 08 2019 at 14:59)</a>:</h4>
 <p>Also, about the local equiv and Mario's question, you should really really discuss this with <span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> . She is aware of this specific question, and is a real dependent type theorist. This is a crucial question, and setting it up correctly is <em>crucial</em>.</p>
 
+<a name="162824907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162824907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162824907">Sebastien Gouezel (Apr 08 2019 at 15:04)</a>:</h4>
+<blockquote>
+<p>I'm not an analytic geometer at all. But I would still like to know it if is a serious option to formalise manifolds as locally ringed spaces.</p>
+</blockquote>
+<p>Smooth manifolds can indeed be described as locally ringed space on which the ring is a ring of smooth functions on an open subset of R^n, say. But I don't know if there are such theorems for other kinds of structures (notably <code>(G,X)</code> structures, see <a href="https://en.wikipedia.org/wiki/(G,X)-manifold" target="_blank" title="https://en.wikipedia.org/wiki/(G,X)-manifold">https://en.wikipedia.org/wiki/(G,X)-manifold</a> if you are not used to this notion), for which the groupoid description is the right one. And with the groupoid you can also go for any intermediate smoothness you like, or for manifolds with boundary, and so on. I am convinced this is precisely the right level of generality.</p>
+
+<a name="162825035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162825035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162825035">Patrick Massot (Apr 08 2019 at 15:06)</a>:</h4>
+<p>I forgot this question. I agree with Sébastien. And I add that nobody is serious about this ringed space approach. I've never seen anyone seriously develop even the very beginning of the story from this point of view. Some pretend to do that, but either prove nothing or first prove this definition is equivalent to the usual one, and then use the usual one</p>
+
+<a name="162825987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162825987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162825987">Sebastien Gouezel (Apr 08 2019 at 15:16)</a>:</h4>
+<blockquote>
+<p>Sébastien, why are you putting an a priori topology on  a manifold? You know you are planning pain for your future self building the tangent bundle, right?</p>
+</blockquote>
+<p>Think of the other option, where you start from an atlas and define the topology from it. Then there is absolutely no way that the topology coming from the atlas on M x N would be the defeq to the product topology. To avoid diamonds, it means that you would have to play the same trick as in the definition of metric space, embedding a topology in the definition of manifold and a proof of compatibility. </p>
+<p>Another issue is that I want to consider several manifold structures on a manifold, say a C^1 structure and a compatible C^\infty structure. But I want them to share the same topology. Having an a priori given topology looks likes a good solution, and helps defining the manifold structure by requiring that all the charts are local homeomorphisms.</p>
+<p>But I agree I will need a constructor, taking a family of local charts for which the change of coordinates are in my groupoid, and deducing a topology and a manifold structure from it. That's one of the infinitely many things that have to be done :)</p>
+
+<a name="162826383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162826383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162826383">Sebastien Gouezel (Apr 08 2019 at 15:20)</a>:</h4>
+<blockquote>
+<p>Also, about the local equiv and Mario's question, you should really really discuss this with <span class="user-mention silent" data-user-id="110172">Assia Mahboubi</span> . She is aware of this specific question, and is a real dependent type theorist. This is a crucial question, and setting it up correctly is <em>crucial</em>.</p>
+</blockquote>
+<p>Yes, getting this right is crucial, and it is a good idea that I should discuss this with Assia. I am completely ready to throw away what I've done until now and start over again (and I am pretty sure I will have to do it). But to get a good feeling of the difficulties I want to push this at least up to the definition of the tangent bundle (with automatically inherited smoothness) and differentials.</p>
+
+<a name="162826714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162826714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162826714">Sebastien Gouezel (Apr 08 2019 at 15:24)</a>:</h4>
+<blockquote>
+<p>why don't you use a relational interface for it, like <code>roption</code>?</p>
+</blockquote>
+<p>I went this way because I don't see the advantages that other options would have (compared to using genuine functions and just remembering the source). But I am completely open to suggestions. I just need to walk this road long enough to see what goes well and what does not go so well.</p>
+
 
 {% endraw %}
