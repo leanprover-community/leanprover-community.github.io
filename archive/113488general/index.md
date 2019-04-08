@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [char is_upper / to_upper etc](04191charisuppertoupperetc.html) (2 messages, latest: Apr 08 2019 at 19:03)
+
 * [on add_decl](13534onadddecl.html) (63 messages, latest: Apr 08 2019 at 17:41)
 
 * [update-mathlib, and branches](09943updatemathlibandbranches.html) (34 messages, latest: Apr 08 2019 at 15:54)
