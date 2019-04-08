@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [on add_decl](13534onadddecl.html) (46 messages, latest: Apr 08 2019 at 12:57)
+* [on add_decl](13534onadddecl.html) (57 messages, latest: Apr 08 2019 at 13:18)
+
+* [VSCode expanding folders](03538VSCodeexpandingfolders.html) (15 messages, latest: Apr 08 2019 at 13:16)
 
 * [update-mathlib, and branches](09943updatemathlibandbranches.html) (30 messages, latest: Apr 08 2019 at 06:20)
 
@@ -485,8 +487,6 @@ permalink: archive/113488general/index.html
 * [programming in lean](20507programminginlean.html) (1 message, latest: Feb 08 2019 at 22:45)
 
 * [eq.rec goal](53122eqrecgoal.html) (231 messages, latest: Feb 08 2019 at 21:56)
-
-* [VSCode expanding folders](03538VSCodeexpandingfolders.html) (11 messages, latest: Feb 08 2019 at 20:32)
 
 * [Custom attributes](40291Customattributes.html) (6 messages, latest: Feb 08 2019 at 18:59)
 
