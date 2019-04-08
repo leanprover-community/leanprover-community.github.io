@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (97 messages, latest: Apr 08 2019 at 07:27)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (100 messages, latest: Apr 08 2019 at 11:48)
 
 * [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)
 
