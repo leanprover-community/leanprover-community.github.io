@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [on add_decl](13534onadddecl.html) (46 messages, latest: Apr 08 2019 at 12:57)
+
 * [update-mathlib, and branches](09943updatemathlibandbranches.html) (30 messages, latest: Apr 08 2019 at 06:20)
 
 * [appveyor?](13238appveyor.html) (3 messages, latest: Apr 08 2019 at 00:12)

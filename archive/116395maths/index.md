@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [presheaves](99031presheaves.html) (1 message, latest: Apr 08 2019 at 12:18)
+
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (100 messages, latest: Apr 08 2019 at 11:48)
 
 * [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)

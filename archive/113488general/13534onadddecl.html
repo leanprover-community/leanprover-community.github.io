@@ -1,0 +1,231 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/13534onadddecl.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html">on add_decl</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162810480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162810480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162810480">Johan Commelin (Apr 08 2019 at 12:04)</a>:</h4>
+<p>I am trying to understand how <code>to_additive</code> works. This led me to <code>add_decl</code>. I'm confused about the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_new_decl</span> <span class="o">(</span><span class="n">src_name</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">env</span> <span class="err">←</span>    <span class="n">get_env</span><span class="o">,</span>
+   <span class="n">decl</span> <span class="err">←</span>   <span class="n">env</span><span class="bp">.</span><span class="n">get</span> <span class="n">src_name</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">decl</span> <span class="o">:=</span> <span class="n">decl</span><span class="bp">.</span><span class="n">update_name</span> <span class="err">$</span> <span class="bp">`</span><span class="n">xyzzyquux</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">decl</span> <span class="o">:=</span> <span class="n">decl</span><span class="bp">.</span><span class="n">update_type</span> <span class="err">$</span> <span class="n">decl</span><span class="bp">.</span><span class="n">type</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">decl</span> <span class="o">:=</span> <span class="n">decl</span><span class="bp">.</span><span class="n">update_value</span> <span class="err">$</span> <span class="n">decl</span><span class="bp">.</span><span class="n">value</span><span class="o">,</span>
+   <span class="n">add_decl</span> <span class="n">decl</span>
+
+<span class="n">run_cmd</span> <span class="n">my_new_decl</span> <span class="bp">`</span><span class="n">has_mul</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">xyzzyquux</span>
+<span class="c1">-- constant xyzzyquux : Type u → Type u</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">has_mul</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">@[class, to_additive name.mk_string &quot;has_add&quot; name.anonymous]</span>
+<span class="cm">structure has_mul : Type u → Type u</span>
+<span class="cm">fields:</span>
+<span class="cm">has_mul.mul : Π {α : Type u} [c : has_mul α], α → α → α</span>
+<span class="cm">-/</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="162810507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162810507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162810507">Johan Commelin (Apr 08 2019 at 12:04)</a>:</h4>
+<p>Why doesn't <code>#print xyzzyquux</code> give me a <code>structure</code> with fields?</p>
+
+<a name="162811354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811354">Chris Hughes (Apr 08 2019 at 12:17)</a>:</h4>
+<p>If you look at the constructors to <code>declaration</code>, <code>inductive</code> is not an option. <code>has_add</code> is a constant. I guess you probably want <code>tactic.add_inductive</code></p>
+
+<a name="162811706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811706">Johan Commelin (Apr 08 2019 at 12:22)</a>:</h4>
+<p>Aha, let me take a look at that.</p>
+
+<a name="162811798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811798">Johan Commelin (Apr 08 2019 at 12:24)</a>:</h4>
+<p>But how is <code>to_additive</code> doing this? I thought I had drilled down to the bottom when I hit <code>add_decl</code>. Did I miss a branch?</p>
+
+<a name="162811864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811864">Chris Hughes (Apr 08 2019 at 12:25)</a>:</h4>
+<p>I don't think <code>to_additive</code> makes any new structures</p>
+
+<a name="162811935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811935">Mario Carneiro (Apr 08 2019 at 12:26)</a>:</h4>
+<p>the lean metaprogramming stuff is not good at creating inductives</p>
+
+<a name="162811962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811962">Mario Carneiro (Apr 08 2019 at 12:26)</a>:</h4>
+<p>there is a patch in the fork</p>
+
+<a name="162811997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162811997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162811997">Mario Carneiro (Apr 08 2019 at 12:27)</a>:</h4>
+<p>but on stock lean, you have to do a whole bunch of <code>to_additive</code> things around each new structure</p>
+
+<a name="162812233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812233">Mario Carneiro (Apr 08 2019 at 12:30)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/group.lean#L636-L645" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/group.lean#L636-L645">https://github.com/leanprover-community/mathlib/blob/master/src/algebra/group.lean#L636-L645</a></p>
+
+<a name="162812316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812316">Johan Commelin (Apr 08 2019 at 12:31)</a>:</h4>
+<p>Ok, so the fork has happened...</p>
+
+<a name="162812327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812327">Johan Commelin (Apr 08 2019 at 12:31)</a>:</h4>
+<p>But nobody is using it?</p>
+
+<a name="162812772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812772">Mario Carneiro (Apr 08 2019 at 12:36)</a>:</h4>
+<p>right now it's just accumulating fixes</p>
+
+<a name="162812792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812792">Johan Commelin (Apr 08 2019 at 12:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Add a new inductive datatype to the environment</span>
+<span class="cm">   name, universe parameters, number of parameters, type, constructors (name and type), is_meta -/</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">add_inductive</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">ls</span> <span class="o">:</span> <span class="n">list</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">name</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">is_meta</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">add_inductive</span> <span class="n">n</span> <span class="n">ls</span> <span class="n">p</span> <span class="n">ty</span> <span class="n">is</span> <span class="n">is_meta</span>
+</pre></div>
+
+
+<p>Can someone explain how to turn <code>(ls : list name)</code> into list of universe parameters?</p>
+
+<a name="162812804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812804">Johan Commelin (Apr 08 2019 at 12:37)</a>:</h4>
+<p>I want just 1 universe</p>
+
+<a name="162812806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812806">Mario Carneiro (Apr 08 2019 at 12:37)</a>:</h4>
+<p>we want to have a proper release at some point (see the tracking issue)</p>
+
+<a name="162812827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812827">Johan Commelin (Apr 08 2019 at 12:37)</a>:</h4>
+<p>And my type will be <code>Type (u + 1)</code>, for the corresponding <code>u</code></p>
+
+<a name="162812829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812829">Mario Carneiro (Apr 08 2019 at 12:37)</a>:</h4>
+<p>and if mathlib moves to the fork I'm sure development will accelerate</p>
+
+<a name="162812925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812925">Mario Carneiro (Apr 08 2019 at 12:38)</a>:</h4>
+<p>Don't use <code>add_inductive</code>. It works only for the loosest definition of "works"</p>
+
+<a name="162812950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812950">Johan Commelin (Apr 08 2019 at 12:39)</a>:</h4>
+<p>So what should I use?</p>
+
+<a name="162812953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812953">Johan Commelin (Apr 08 2019 at 12:39)</a>:</h4>
+<p>The fork?</p>
+
+<a name="162812964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162812964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162812964">Mario Carneiro (Apr 08 2019 at 12:39)</a>:</h4>
+<p>yes, that's the patch I mentioned</p>
+
+<a name="162813035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813035">Scott Morrison (Apr 08 2019 at 12:40)</a>:</h4>
+<p>Keeley has a (completely evil) trick for just emitting plain text for Lean to parse. So if you're desperate you can make inductive definitions programmatically using that. :-)</p>
+
+<a name="162813041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813041">Mario Carneiro (Apr 08 2019 at 12:40)</a>:</h4>
+<p>another workaround that works on stock lean is to produce a string that looks like an inductive declaration and parse it into the environment</p>
+
+<a name="162813052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813052">Mario Carneiro (Apr 08 2019 at 12:40)</a>:</h4>
+<p>what Scott said</p>
+
+<a name="162813106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813106">Johan Commelin (Apr 08 2019 at 12:41)</a>:</h4>
+<p>Hmmm... I will have to think about what I want to do then</p>
+
+<a name="162813119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813119">Johan Commelin (Apr 08 2019 at 12:41)</a>:</h4>
+<p>Switching a custom project to the fork should be easy, right?</p>
+
+<a name="162813136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813136">Mario Carneiro (Apr 08 2019 at 12:41)</a>:</h4>
+<p>I think so... I'm not up on elan support</p>
+
+<a name="162813215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813215">Mario Carneiro (Apr 08 2019 at 12:42)</a>:</h4>
+<p>I know Keeley and Ed have played with lean forks, they will know better</p>
+
+<a name="162813279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813279">Johan Commelin (Apr 08 2019 at 12:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Do you know what I should put in my toml?</p>
+
+<a name="162813341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813341">Scott Morrison (Apr 08 2019 at 12:44)</a>:</h4>
+<p>Where does the fork live?</p>
+
+<a name="162813364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813364">Johan Commelin (Apr 08 2019 at 12:44)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean" target="_blank" title="https://github.com/leanprover-community/lean">https://github.com/leanprover-community/lean</a></p>
+
+<a name="162813542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813542">Mario Carneiro (Apr 08 2019 at 12:47)</a>:</h4>
+<p>None of the PRs have actually been merged though, so <code>master</code> is still stock</p>
+
+<a name="162813554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813554">Mario Carneiro (Apr 08 2019 at 12:47)</a>:</h4>
+<p>someone needs to work out why all the travis builds are failing</p>
+
+<a name="162813658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813658">Scott Morrison (Apr 08 2019 at 12:48)</a>:</h4>
+<p>I think you can just write <code>lean_version = "leanprover-community/lean:BRANCH"</code> in your leanpkg.toml.</p>
+
+<a name="162813720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813720">Scott Morrison (Apr 08 2019 at 12:49)</a>:</h4>
+<p>hmm, maybe not</p>
+
+<a name="162813791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813791">Mario Carneiro (Apr 08 2019 at 12:50)</a>:</h4>
+<p>The relevant branch is <a href="https://github.com/leanprover-community/lean/pull/3" target="_blank" title="https://github.com/leanprover-community/lean/pull/3">https://github.com/leanprover-community/lean/pull/3</a></p>
+
+<a name="162813964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813964">Scott Morrison (Apr 08 2019 at 12:53)</a>:</h4>
+<p>Oh, someone needs to actually run something to make the build that elan pulls, and I've never done that.</p>
+
+<a name="162813970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162813970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162813970">Scott Morrison (Apr 08 2019 at 12:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>?</p>
+
+<a name="162814027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814027">Johan Commelin (Apr 08 2019 at 12:54)</a>:</h4>
+<p>Hmmm... I can't yet get it to work</p>
+
+<a name="162814062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814062">Keeley Hoek (Apr 08 2019 at 12:54)</a>:</h4>
+<p>This works for me: <a href="https://github.com/khoek/leancache/blob/master/leanpkg.toml" target="_blank" title="https://github.com/khoek/leancache/blob/master/leanpkg.toml">https://github.com/khoek/leancache/blob/master/leanpkg.toml</a></p>
+
+<a name="162814082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814082">Keeley Hoek (Apr 08 2019 at 12:55)</a>:</h4>
+<p>I haven't read this thread but have you guys made a release</p>
+
+<a name="162814179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814179">Johan Commelin (Apr 08 2019 at 12:56)</a>:</h4>
+<p><code>khoek/klean:3.4.7</code> ... does that refer to a branch or a release?</p>
+
+<a name="162814195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814195">Keeley Hoek (Apr 08 2019 at 12:56)</a>:</h4>
+<p>ohhh hang on, unless elan has been changed it doesn't pull from travis?</p>
+
+<a name="162814206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814206">Keeley Hoek (Apr 08 2019 at 12:57)</a>:</h4>
+<p>It pulls from <a href="https://github.com/leanprover-community/lean/releases" target="_blank" title="https://github.com/leanprover-community/lean/releases">https://github.com/leanprover-community/lean/releases</a></p>
+
+<a name="162814227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20add_decl/near/162814227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13534onadddecl.html#162814227">Keeley Hoek (Apr 08 2019 at 12:57)</a>:</h4>
+<p>Pulling from travis would be a great feature....</p>
+
+
+{% endraw %}
