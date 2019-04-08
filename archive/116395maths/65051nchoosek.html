@@ -57,5 +57,37 @@ permalink: archive/116395maths/65051nchoosek.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162778927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162778927">Mario Carneiro (Apr 07 2019 at 23:58)</a>:</h4>
 <p>all the other nat functions are in the <code>nat</code> namespace</p>
 
+<a name="162781773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162781773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162781773">Mario Carneiro (Apr 08 2019 at 01:14)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/issues/899" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/899">#899</a>. As I suspected, the total line count is more, but none of the individual theorems is very long, only about 10 lines at most, and there is more reusability for the list and multiset counterparts</p>
+
+<a name="162782206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782206">Jeremy Avigad (Apr 08 2019 at 01:26)</a>:</h4>
+<p>Nice. But I still think it is a shame that there isn't a more elegant path through <code>finset</code>. Rewriting finite combinatorics in terms of lists isn't the best way to make friends and influence others.</p>
+
+<a name="162782207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782207">Mario Carneiro (Apr 08 2019 at 01:26)</a>:</h4>
+<p>I think that the performance improvement is worth it</p>
+
+<a name="162782218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782218">Mario Carneiro (Apr 08 2019 at 01:27)</a>:</h4>
+<p>filtering all subsets is kind of a bad way to generate these lists</p>
+
+<a name="162782276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782276">Mario Carneiro (Apr 08 2019 at 01:28)</a>:</h4>
+<p>There is certainly a way to do it directly, but then you have to do a lot of reasoning about the sizes of things; here the fact that the size of it is <code>choose</code> is easy because it directly reflects the combinatoric description of how you make a list of all subsets</p>
+
+<a name="162782291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782291">Mario Carneiro (Apr 08 2019 at 01:29)</a>:</h4>
+<p>Also I prefer to avoid <code>insert</code> and such, because you are always dealing with things not being elements of other things</p>
+
+<a name="162782364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162782364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162782364">Scott Morrison (Apr 08 2019 at 01:31)</a>:</h4>
+<p>I like Mario's proof a lot; it's got that inevitable feel to it. At the same time I appreciate Jeremy's point: mathematicians are going to take some time to get used to <code>list</code> being more important than <code>finset</code>.</p>
+
+<a name="162783246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162783246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162783246">Jeremy Avigad (Apr 08 2019 at 01:57)</a>:</h4>
+<p>Mario, I don't buy the claim about "reflecting the combinatoric description". Given the recursive definition description of <code>choose</code>, the set-based argument is a one-liner: if a is an arbitrary element of a set s with n + 1 elements, then divide the (k+1)-element subsets of s into the ones that contain a, and the ones that don't. The definition of <code>subsets_len</code> via <code>subsets_len_aux</code> is clever and it makes for a nice formalization, but it distracts from the combinatorial / set-theoretic intuition. You'll never convince combinatoricists to start writing papers that way.</p>
+
 
 {% endraw %}

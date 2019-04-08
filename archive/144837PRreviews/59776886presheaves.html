@@ -71,5 +71,57 @@ permalink: archive/144837PRreviews/59776886presheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162780965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162780965">Reid Barton (Apr 08 2019 at 00:53)</a>:</h4>
 <p>but I don't know whether you're relying on the coherence conditions being satisfied definitionally</p>
 
+<a name="162782481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782481">Scott Morrison (Apr 08 2019 at 01:34)</a>:</h4>
+<p>Yes, this is exactly where all my <code>simp, dsimp, simp, dsimp, simp, dammit, erw ...</code> pains come from.</p>
+
+<a name="162782493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782493">Scott Morrison (Apr 08 2019 at 01:35)</a>:</h4>
+<p>I would really like <code>@[simp] lemma map_id_obj {X : Top.{u}} (U : opens X) : (map (𝟙 X)).obj U = U := rfl</code></p>
+
+<a name="162782496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782496">Scott Morrison (Apr 08 2019 at 01:35)</a>:</h4>
+<p>but that is just not true. If you <code>case</code> bash on <code>U</code>, it becomes true.</p>
+
+<a name="162782541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782541">Scott Morrison (Apr 08 2019 at 01:36)</a>:</h4>
+<p>In a slightly different direction, I can define </p>
+<div class="codehilite"><pre><span></span>def presheaf_of_functions_to (T : Top.{v}) : presheaf_on_space (Type v) X :=
+(opens.as_Top X).op ⋙ (yoneda.obj T)
+</pre></div>
+
+
+<p>which strikes me as very pleasant. (Here <code>def as_Top (X : Top.{u}): opens X ⥤ Top := ...</code>.)</p>
+
+<a name="162782601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782601">Scott Morrison (Apr 08 2019 at 01:38)</a>:</h4>
+<p>When I want to do presheaves of maps into a <code>TopCommRing</code>, however, I will need <br>
+<code>def not_yoneda : TopCommRing ⥤ (Topᵒᵖ ⥤ TopCommRing)</code><br>
+ What is the right level of abstraction for doing this?</p>
+
+<a name="162782662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782662">Scott Morrison (Apr 08 2019 at 01:40)</a>:</h4>
+<p>or is that just nonsense?</p>
+
+<a name="162782665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162782665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162782665">Scott Morrison (Apr 08 2019 at 01:40)</a>:</h4>
+<p>...</p>
+
+<a name="162783099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162783099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162783099">Reid Barton (Apr 08 2019 at 01:53)</a>:</h4>
+<p>I don't understand what the math is supposed to be there</p>
+
+<a name="162783109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162783109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162783109">Reid Barton (Apr 08 2019 at 01:53)</a>:</h4>
+<p>you have a target topological commutative ring, let's say R</p>
+
+<a name="162783111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162783111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162783111">Reid Barton (Apr 08 2019 at 01:53)</a>:</h4>
+<p>(the reals)</p>
+
+<a name="162783161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23886%20presheaves/near/162783161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/59776886presheaves.html#162783161">Reid Barton (Apr 08 2019 at 01:54)</a>:</h4>
+<p>then continuous maps from a topological space to R form a ring, but what topology do you want to give it?</p>
+
 
 {% endraw %}

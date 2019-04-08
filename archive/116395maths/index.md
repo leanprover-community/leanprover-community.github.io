@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [n choose k](65051nchoosek.html) (11 messages, latest: Apr 07 2019 at 23:58)
+* [n choose k](65051nchoosek.html) (19 messages, latest: Apr 08 2019 at 01:57)
 
 * [ordered commutative monoid](67162orderedcommutativemonoid.html) (5 messages, latest: Apr 06 2019 at 14:56)
 
