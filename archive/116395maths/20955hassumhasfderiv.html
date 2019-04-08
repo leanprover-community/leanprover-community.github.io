@@ -1,0 +1,116 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/20955hassumhasfderiv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html">has_sum / has_fderiv</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162821255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162821255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162821255">Sebastien Gouezel (Apr 08 2019 at 14:22)</a>:</h4>
+<p>The relevant definitions for infinite series are the following: <code>has_sum u</code> means that <code>u</code> is summable, <code>is_sum u s</code> means that <code>u</code> is summable and its sum is <code>s</code>, and <code>tsum u</code> is the sum of <code>u</code> if it is summable, and something arbitrary otherwise. It turns out to be convenient to have these three different tools. Especially in calculations, one uses <code>tsum u</code>, and to apply theorems to them one checks <code>has_sum ...</code></p>
+<p>For derivatives, one has currently <code>has_fderiv f f'</code>to say that the function <code>f</code> has the derivative <code>f'</code> (with many variations: at a point, within a set, and so on, which is I think important and handy). But I am bothered by the discrepancy in terminology: wouldn't it be better to call this <code>is_fderiv f f'</code> to be coherent with sums, and to introduce <code>has_fderiv</code> and <code>fderiv</code>? <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>, any thoughts about this?</p>
+
+<a name="162821797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162821797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162821797">Sebastien Gouezel (Apr 08 2019 at 14:29)</a>:</h4>
+<p>I am asking because I had a first go at manifolds (by the way, comments on <a href="https://github.com/sgouezel/mathlib/blob/9974cbcd20f6b4a8173d239a45d8bca0b0bd04c5/src/geometry/manifolds/basic.lean#L809" target="_blank" title="https://github.com/sgouezel/mathlib/blob/9974cbcd20f6b4a8173d239a45d8bca0b0bd04c5/src/geometry/manifolds/basic.lean#L809">https://github.com/sgouezel/mathlib/blob/9974cbcd20f6b4a8173d239a45d8bca0b0bd04c5/src/geometry/manifolds/basic.lean#L809</a> are very much welcome), and I would need to define <code>C^k</code> functions. For this, <code>fderiv</code> looks like the way to go.</p>
+
+<a name="162821998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162821998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162821998">Johan Commelin (Apr 08 2019 at 14:31)</a>:</h4>
+<p>Just for the record: <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> suggested that <code>C^k</code> functions could be defined as a coinductive type.<br>
+I have no clue what this means, but it seems to be a good idea if we want to unify proofs for <code>k &lt; infty</code> and <code>k = infty</code>.</p>
+
+<a name="162822089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822089">Mario Carneiro (Apr 08 2019 at 14:32)</a>:</h4>
+<p>you could use <code>enat</code> for the type of <code>k</code></p>
+
+<a name="162822120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822120">Sebastien Gouezel (Apr 08 2019 at 14:33)</a>:</h4>
+<p>Yes, I am planning to use <code>enat</code>.</p>
+
+<a name="162822136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822136">Mario Carneiro (Apr 08 2019 at 14:33)</a>:</h4>
+<p><code>local_equiv</code> makes me nervous. I know that this is how Isabelle does it, but I'm not sure that subtypes wouldn't be better</p>
+
+<a name="162822138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822138">Johan Commelin (Apr 08 2019 at 14:33)</a>:</h4>
+<p>Does that give access to the goodies that <code>coinductive</code> promises?</p>
+
+<a name="162822200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822200">Mario Carneiro (Apr 08 2019 at 14:34)</a>:</h4>
+<p><code>enat</code> is a coinductive type</p>
+
+<a name="162822247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822247">Mario Carneiro (Apr 08 2019 at 14:34)</a>:</h4>
+<p><code>option nat</code> is an inductive type</p>
+
+<a name="162822283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822283">Sebastien Gouezel (Apr 08 2019 at 14:35)</a>:</h4>
+<p>The difficulty with subtypes is that you need all the time to provide proofs that your point belongs to the subtype. When you start intersecting domains (which happens all the time in this business), then this becomes a big mess for rewrites.</p>
+
+<a name="162822322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822322">Mario Carneiro (Apr 08 2019 at 14:35)</a>:</h4>
+<p>why don't you use a relational interface for it, like <code>roption</code>?</p>
+
+<a name="162822349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822349">Mario Carneiro (Apr 08 2019 at 14:36)</a>:</h4>
+<p>i.e. <code>y \in f x</code> to say <code>\ex h, f &lt;x, h&gt; = y</code></p>
+
+<a name="162822482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822482">Johan Commelin (Apr 08 2019 at 14:37)</a>:</h4>
+<p>I'm not an analytic geometer at all. But I would still like to know it if is a serious option to formalise manifolds as locally ringed spaces.</p>
+
+<a name="162822508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822508">Mario Carneiro (Apr 08 2019 at 14:38)</a>:</h4>
+<p>aren't locally ringed spaces a completely different thing?</p>
+
+<a name="162822551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822551">Johan Commelin (Apr 08 2019 at 14:38)</a>:</h4>
+<p>It means we could unify some of the basic theory with alg. geometry</p>
+
+<a name="162822583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822583">Mario Carneiro (Apr 08 2019 at 14:38)</a>:</h4>
+<p>I know that manifolds are locally ringed but I doubt the converse holds</p>
+
+<a name="162822597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822597">Johan Commelin (Apr 08 2019 at 14:38)</a>:</h4>
+<p>the converse is not true</p>
+
+<a name="162822604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822604">Johan Commelin (Apr 08 2019 at 14:38)</a>:</h4>
+<p>But schemes are also LRS</p>
+
+<a name="162822614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822614">Patrick Massot (Apr 08 2019 at 14:39)</a>:</h4>
+<p>Who thought Sébastien was doing nothing, waiting for us to merge Gromov-Hausdorff?</p>
+
+<a name="162822652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822652">Patrick Massot (Apr 08 2019 at 14:39)</a>:</h4>
+<p>This is killing me because I have so much teaching, and perfectoid spaces to define</p>
+
+<a name="162822658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822658">Patrick Massot (Apr 08 2019 at 14:39)</a>:</h4>
+<p>But I'll still have a look</p>
+
+<a name="162822744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162822744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162822744">Johan Commelin (Apr 08 2019 at 14:40)</a>:</h4>
+<blockquote>
+<p>This is killing me because I have so much teaching, and perfectoid spaces to define</p>
+</blockquote>
+<p>Yes, I got very worried when I read <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>s post. I feared that we might lose your precious time for perfectoids.</p>
+
+<a name="162824350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162824350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162824350">Patrick Massot (Apr 08 2019 at 14:58)</a>:</h4>
+<p>Sébastien, why are you putting an a priori topology on  a manifold? You know you are planning pain for your future self building the tangent bundle, right?</p>
+
+<a name="162824443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162824443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162824443">Patrick Massot (Apr 08 2019 at 14:59)</a>:</h4>
+<p>Also, about the local equiv and Mario's question, you should really really discuss this with <span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> . She is aware of this specific question, and is a real dependent type theorist. This is a crucial question, and setting it up correctly is <em>crucial</em>.</p>
+
+
+{% endraw %}

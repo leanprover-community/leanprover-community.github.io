@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [has_sum / has_fderiv](20955hassumhasfderiv.html) (24 messages, latest: Apr 08 2019 at 14:59)
+
+* [add_comm_subgroup](29899addcommsubgroup.html) (1 message, latest: Apr 08 2019 at 14:25)
+
 * [presheaves](99031presheaves.html) (1 message, latest: Apr 08 2019 at 12:18)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (100 messages, latest: Apr 08 2019 at 11:48)
