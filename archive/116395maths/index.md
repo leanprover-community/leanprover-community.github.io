@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (2 messages, latest: Apr 08 2019 at 05:58)
+* [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)
 
-* [binomial coefficients](90398binomialcoefficients.html) (47 messages, latest: Apr 08 2019 at 02:35)
+* [binomial coefficients](90398binomialcoefficients.html) (58 messages, latest: Apr 08 2019 at 06:20)
 
 * [n choose k](65051nchoosek.html) (19 messages, latest: Apr 08 2019 at 01:57)
 
