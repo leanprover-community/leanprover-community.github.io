@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [n choose k](65051nchoosek.html) (11 messages, latest: Apr 07 2019 at 23:58)
+
 * [ordered commutative monoid](67162orderedcommutativemonoid.html) (5 messages, latest: Apr 06 2019 at 14:56)
 
 * [induced preorder](53248inducedpreorder.html) (3 messages, latest: Apr 04 2019 at 22:50)

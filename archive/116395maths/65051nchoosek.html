@@ -1,0 +1,61 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/65051nchoosek.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html">n choose k</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162776901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162776901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162776901">Jeremy Avigad (Apr 07 2019 at 23:00)</a>:</h4>
+<p>I wrote a proof that the cardinality of the collection of k-subsets of an n-element set is <code>choose n k</code>: <a href="https://gist.github.com/avigad/d9eef0fed9bb8b8ee4b03daafe604d53" target="_blank" title="https://gist.github.com/avigad/d9eef0fed9bb8b8ee4b03daafe604d53">https://gist.github.com/avigad/d9eef0fed9bb8b8ee4b03daafe604d53</a></p>
+<p>It seems more complicated than it should be. Can anyone do better?</p>
+
+<a name="162777139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777139">Bryan Gin-ge Chen (Apr 07 2019 at 23:07)</a>:</h4>
+<p>There's an older thread on this <a href="#narrow/stream/116395-maths/topic/binomial.20coefficients" title="#narrow/stream/116395-maths/topic/binomial.20coefficients">here</a>. I never managed to finish <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> 's suggested proof, unfortunately.</p>
+
+<a name="162777274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777274">Mario Carneiro (Apr 07 2019 at 23:11)</a>:</h4>
+<p>I think that it is worth it to do the list version of this first, as in the other thread. This gives you a useful list function in addition to proving this theorem</p>
+
+<a name="162777329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777329">Mario Carneiro (Apr 07 2019 at 23:12)</a>:</h4>
+<p>It will probably be larger in terms of LOC but there won't be any big "hotspot" theorem with a huge line count, it breaks into a bunch of 3 line lemmas</p>
+
+<a name="162777760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777760">Jeremy Avigad (Apr 07 2019 at 23:24)</a>:</h4>
+<p>It looks like you will need lots of annoying facts relating finsets and nodup lists, and finsets of finsets vs. lists of lists. You'd have to translate statements about powerset, filter, cardinality, etc. It doesn't sound like fun.</p>
+<p>It is a shame that the textbook proof is so long. All the steps are straightforward, but it is painful to have to spell them out. It's a good test case for automation.</p>
+
+<a name="162777850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777850">Mario Carneiro (Apr 07 2019 at 23:27)</a>:</h4>
+<p>Most of that work is already done</p>
+
+<a name="162777854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777854">Mario Carneiro (Apr 07 2019 at 23:27)</a>:</h4>
+<p>there are already theorems like that about nodup lists, properties of <code>list.sublists</code> and so on</p>
+
+<a name="162777880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162777880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162777880">Mario Carneiro (Apr 07 2019 at 23:28)</a>:</h4>
+<p>why is <code>choose</code> in root namespace?</p>
+
+<a name="162778038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162778038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162778038">Jeremy Avigad (Apr 07 2019 at 23:32)</a>:</h4>
+<p>I don't know. Where should it be? The name conflicts with <code>finset.choose</code>.</p>
+
+<a name="162778883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162778883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162778883">Mario Carneiro (Apr 07 2019 at 23:57)</a>:</h4>
+<p><code>nat.choose</code> of course</p>
+
+<a name="162778927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/n%20choose%20k/near/162778927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65051nchoosek.html#162778927">Mario Carneiro (Apr 07 2019 at 23:58)</a>:</h4>
+<p>all the other nat functions are in the <code>nat</code> namespace</p>
+
+
+{% endraw %}
