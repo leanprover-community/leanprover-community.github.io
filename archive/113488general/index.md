@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib, and branches](09943updatemathlibandbranches.html) (34 messages, latest: Apr 08 2019 at 15:54)
+* [on add_decl](13534onadddecl.html) (58 messages, latest: Apr 08 2019 at 16:43)
 
-* [on add_decl](13534onadddecl.html) (57 messages, latest: Apr 08 2019 at 13:18)
+* [update-mathlib, and branches](09943updatemathlibandbranches.html) (34 messages, latest: Apr 08 2019 at 15:54)
 
 * [VSCode expanding folders](03538VSCodeexpandingfolders.html) (15 messages, latest: Apr 08 2019 at 13:16)
 

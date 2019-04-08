@@ -146,5 +146,30 @@ I have no clue what this means, but it seems to be a good idea if we want to uni
 </blockquote>
 <p>I went this way because I don't see the advantages that other options would have (compared to using genuine functions and just remembering the source). But I am completely open to suggestions. I just need to walk this road long enough to see what goes well and what does not go so well.</p>
 
+<a name="162830492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162830492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162830492">Mario Carneiro (Apr 08 2019 at 16:05)</a>:</h4>
+<p>One problem with having total functions is that the functions are defined elsewhere, where the value doesn't matter. This is problematic for a few reasons: It makes equality weaker than it should be, since "irrelevant" information can make two functions unequal; it causes problems wrt inhabited types, because you may need to fill those values with something; it makes the theory less constructive (which isn't a major issue but is usually an indication that you are going against the grain of the prover). I agree that you should try it and see, though - I am a firm believer in evidence-based formalization decisions.</p>
+
+<a name="162830642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162830642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162830642">Mario Carneiro (Apr 08 2019 at 16:06)</a>:</h4>
+<p>There is some preparatory work towards using <code>roption</code> functions, as well as functional relations, for partiality in Jeremy's filter stuff, used in <code>fderiv</code></p>
+
+<a name="162831442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162831442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162831442">Reid Barton (Apr 08 2019 at 16:15)</a>:</h4>
+<p>I was going to write something similar to what Mario just said. I would expect the following issues with this approach:</p>
+<ul>
+<li>You can't use <code>continuous</code> directly, you have to introduce <code>continuous_on</code>. I'm willing to believe this issue is illusory, since you would probably want to have <code>continuous_on</code> anyways (indeed it already exists) and using subtypes would produce a lot of "subtype of subtype" overhead instead.</li>
+<li>You have too much data in a <code>local_equiv</code>, namely the values of <code>to_fun</code> and <code>inv_fun</code> outside the <code>source</code> and <code>target</code>. It seems too easy to forget to include a field like <code>eq_on_source</code> in <code>structure_groupoid</code>. (Does <code>manifold</code> need one too?) Would taking a quotient help?</li>
+<li>There are issues with the empty type: if <code>a</code> is nonempty and <code>b</code> is empty there aren't any <code>local_equiv</code>s at all between <code>a</code> and <code>b</code>, but there ought to be exactly one. As far as I can see the empty manifold isn't a <code>manifold</code> for this reason.</li>
+</ul>
+
+<a name="162831724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162831724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162831724">Reid Barton (Apr 08 2019 at 16:18)</a>:</h4>
+<p>Hmm, I guess maybe the empty manifold actually is a <code>manifold</code>, bu something still seems off</p>
+
+<a name="162833304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_sum%20/%20has_fderiv/near/162833304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20955hassumhasfderiv.html#162833304">Reid Barton (Apr 08 2019 at 16:36)</a>:</h4>
+<p>Anyways, I suggest you also try replacing <code>to_fun</code>, <code>inv_fun</code>, <code>source</code>, <code>target</code> by a pair of <code>pfun</code>s</p>
+
 
 {% endraw %}

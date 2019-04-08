@@ -1,0 +1,85 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/19943Helpwithexplicitsets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html">Help with explicit sets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162833839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162833839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162833839">Robert Spencer (Apr 08 2019 at 16:42)</a>:</h4>
+<p>I've been battling a while now with <code>set</code>s, <code>finset</code>s, <code>fintype</code>s and such forth for a while now.  I have many questions, but as way of a first one I have this.</p>
+<p>Given the following definition of a quiver:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="kn">structure</span> <span class="n">quiver</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">vertices</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">edges</span> <span class="bp">→</span> <span class="n">vertices</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">edges</span> <span class="bp">→</span> <span class="n">vertices</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I would like to define a small "toy" example so I can prove some theorems with it.  Something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">α</span> <span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">β</span> <span class="o">)</span>  <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">test_quiver</span> <span class="o">:</span> <span class="bp">@</span><span class="n">quiver</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+  <span class="o">{</span>
+    <span class="n">vertices</span> <span class="o">:=</span> <span class="o">{</span><span class="n">A</span><span class="o">,</span> <span class="n">B</span><span class="o">},</span>
+    <span class="n">edges</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span><span class="o">},</span>
+    <span class="n">s</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">A</span><span class="o">,</span>
+    <span class="n">t</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span>
+  <span class="o">}</span>
+</pre></div>
+
+
+<p>A lot about this screams sub-optimal to me: for example the <code>s</code> and <code>t</code> functions I'd prefer to define by some mapping from <code>a</code> to values (so that defining more complicated quivers is simple).  I presume there is some way to do this with inductive functions, but that is secondary.</p>
+<p>The first problem is that the above doesn't compile.</p>
+<div class="codehilite"><pre><span></span>/home/rob...ry/src/quiver.lean:40:9: error: type mismatch at field &#39;s&#39;
+  λ (e : ↥{a}), A
+has type
+  ↥{a} → α
+but is expected to have type
+  ↥{a} → ↥{A, B}
+</pre></div>
+
+
+<p>I understand the error, and I understand the problem (A is of type α and a priori has nothing to do with the set {A, B}).  My question is how to fix this?  Since I can't even find where the <code>{...}</code> notation is defined, I don't know what type <code>{A,B}</code> even is, so don't know what is missing.</p>
+
+<a name="162834048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834048">Reid Barton (Apr 08 2019 at 16:45)</a>:</h4>
+<p>You've defined "a quiver whose vertices are a subset of α and whose edges are a subset of β". Unless you really meant to do this for some reason, it would probably make things a lot easier to define</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">quiver</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">vertices</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">edges</span> <span class="bp">→</span> <span class="n">vertices</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">edges</span> <span class="bp">→</span> <span class="n">vertices</span><span class="o">)</span>
+</pre></div>
+
+<a name="162834401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834401">Robert Spencer (Apr 08 2019 at 16:50)</a>:</h4>
+<p>Ok, sure: I suppose that makes a little more sense (and coercion will convert any subsets of type  α to a type when I need to define a quiver on a subset of  α?)</p>
+
+<a name="162834421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834421">Robert Spencer (Apr 08 2019 at 16:50)</a>:</h4>
+<p>The question then changes to "how do I make a Type with exactly three named elements in it"</p>
+
+<a name="162834480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834480">Reid Barton (Apr 08 2019 at 16:51)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#enumerated-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#enumerated-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#enumerated-types</a></p>
+
+<a name="162834591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834591">Reid Barton (Apr 08 2019 at 16:53)</a>:</h4>
+<p>To answer your original question, <code>↥{A, B}</code> is the type <code>subtype {A, B}</code>. To give a value of this type you need to give a value of the underlying type <code>α</code> together with a proof that the value belongs to the subset <code>{A, B}</code>--I assume <code>by simp</code> will do it for you.</p>
+
+<a name="162834757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Help%20with%20explicit%20sets/near/162834757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/19943Helpwithexplicitsets.html#162834757">Robert Spencer (Apr 08 2019 at 16:55)</a>:</h4>
+<p>Ahhhh.   Sigh.  Obvious now.  Thank you for your time!</p>
+
+
+{% endraw %}

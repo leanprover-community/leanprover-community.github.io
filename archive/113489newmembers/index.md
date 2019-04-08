@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
+
 * [noob question(s)](52075noobquestions.html) (313 messages, latest: Apr 06 2019 at 21:10)
 
 * [Installing mathlib](63351Installingmathlib.html) (52 messages, latest: Apr 05 2019 at 17:45)
