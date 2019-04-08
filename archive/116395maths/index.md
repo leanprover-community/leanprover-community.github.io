@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [binomial coefficients](90398binomialcoefficients.html) (47 messages, latest: Apr 08 2019 at 02:35)
+
 * [n choose k](65051nchoosek.html) (19 messages, latest: Apr 08 2019 at 01:57)
 
 * [ordered commutative monoid](67162orderedcommutativemonoid.html) (5 messages, latest: Apr 06 2019 at 14:56)
@@ -339,8 +341,6 @@ permalink: archive/116395maths/index.html
 * [finsupp modules](29791finsuppmodules.html) (1 message, latest: Nov 22 2018 at 02:15)
 
 * [(-1)^i](758631i.html) (2 messages, latest: Nov 21 2018 at 19:00)
-
-* [binomial coefficients](90398binomialcoefficients.html) (41 messages, latest: Nov 19 2018 at 18:01)
 
 * [Recursors for degree inequalities](27561Recursorsfordegreeinequalities.html) (8 messages, latest: Nov 19 2018 at 09:12)
 

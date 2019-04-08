@@ -263,5 +263,29 @@ sublists_of_length_aux l n id []
 
 <p>The theorem you want is now a simple corollary</p>
 
+<a name="162783741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162783741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162783741">Mario Carneiro (Apr 08 2019 at 02:11)</a>:</h4>
+<p>What I mean by "reflecting the combinatorics": Consider how you would give the combinatoric bijection. You have a finite set, and you are making a list of all the subsets of length k; you first list all the ones that don't contain some arbitrary element a, then all the ones that do. A little reflection reveals that you don't need any of the structure of finite sets for this, so you may as well do it on lists. Now you want to define a function <code>sublists_len k l</code> such that <code>sublists_len 0 l = [[]]</code>, and <code>sublists_len (k+1) (a::l) = sublists_len (k+1) l ++ map (a::) (sublists_len k l)</code>, because we have split the problem into the size <code>k+1</code> elements in <code>l</code> and the size k elements of <code>l</code> with <code>a</code> appended. This is exactly the definition of <code>sublists_len</code> I give (with a slight optimization so that you don't have to nest maps). As a result, it's trivial to prove a statement about the length being <code>choose n k</code></p>
+
+<a name="162783794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162783794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162783794">Mario Carneiro (Apr 08 2019 at 02:12)</a>:</h4>
+<p>The proof is very combinatoric and constructive</p>
+
+<a name="162783882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162783882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162783882">Mario Carneiro (Apr 08 2019 at 02:15)</a>:</h4>
+<p>You could actually stop there, but in the interest of getting closer to your version, I also lift the list function to a function on multisets and finsets. There isn't really any added content there, it's just restating facts in the new context. There are some additional observations to be made about how the list function preserves permutations and nodups so that the constructions lift, but that is relatively simple</p>
+
+<a name="162783934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162783934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162783934">Mario Carneiro (Apr 08 2019 at 02:16)</a>:</h4>
+<p>The point I want to make is that I'm not proving a theorem, I'm constructing a function</p>
+
+<a name="162784227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162784227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162784227">Mario Carneiro (Apr 08 2019 at 02:24)</a>:</h4>
+<p>It is possible that you are getting hung up on the strange definition <code>sublists_len_aux</code>. If so I would encourage you to ignore it and look only at <code>sublists_len_zero</code>, <code>sublists_len_succ_nil</code>, and <code>sublists_len_succ_cons</code> as the equation lemmas, because that's what they are</p>
+
+<a name="162784609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binomial%20coefficients/near/162784609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90398binomialcoefficients.html#162784609">Kenny Lau (Apr 08 2019 at 02:35)</a>:</h4>
+<p>it's a simple corollary of the orbit-stabilizer theorem... :P</p>
+
 
 {% endraw %}
