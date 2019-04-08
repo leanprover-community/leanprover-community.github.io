@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [has_sum / has_fderiv](20955hassumhasfderiv.html) (34 messages, latest: Apr 08 2019 at 16:36)
+* [has_sum / has_fderiv](20955hassumhasfderiv.html) (36 messages, latest: Apr 08 2019 at 20:59)
 
 * [add_comm_subgroup](29899addcommsubgroup.html) (1 message, latest: Apr 08 2019 at 14:25)
 
