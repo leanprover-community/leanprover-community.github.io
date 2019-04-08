@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (97 messages, latest: Apr 08 2019 at 07:27)
+
 * [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)
 
 * [binomial coefficients](90398binomialcoefficients.html) (58 messages, latest: Apr 08 2019 at 06:20)
@@ -35,8 +37,6 @@ permalink: archive/116395maths/index.html
 * [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (46 messages, latest: Apr 01 2019 at 16:29)
 
 * [condensed sets](68787condensedsets.html) (1 message, latest: Mar 30 2019 at 23:38)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (96 messages, latest: Mar 29 2019 at 20:29)
 
 * [question about game theory](08617questionaboutgametheory.html) (106 messages, latest: Mar 29 2019 at 18:12)
 

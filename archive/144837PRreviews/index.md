@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#881 dual vector spaces](62653881dualvectorspaces.html) (2 messages, latest: Apr 08 2019 at 07:30)
+
 * [#886 presheaves](59776886presheaves.html) (28 messages, latest: Apr 08 2019 at 02:55)
 
 * [mergify](77684mergify.html) (343 messages, latest: Apr 07 2019 at 01:56)
@@ -17,8 +19,6 @@ permalink: archive/144837PRreviews/index.html
 * [colimits](83397colimits.html) (98 messages, latest: Apr 03 2019 at 21:41)
 
 * [#883](29799883.html) (1 message, latest: Apr 03 2019 at 14:08)
-
-* [#881 dual vector spaces](62653881dualvectorspaces.html) (1 message, latest: Apr 03 2019 at 12:39)
 
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (5 messages, latest: Apr 03 2019 at 09:49)
 
