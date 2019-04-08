@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#830 feat(analysis/normed_space/deriv): show that the differ](90873830featanalysisnormedspacederivshowthatthediffer.html) (2 messages, latest: Apr 08 2019 at 09:58)
+
 * [#881 dual vector spaces](62653881dualvectorspaces.html) (2 messages, latest: Apr 08 2019 at 07:30)
 
 * [#886 presheaves](59776886presheaves.html) (28 messages, latest: Apr 08 2019 at 02:55)
