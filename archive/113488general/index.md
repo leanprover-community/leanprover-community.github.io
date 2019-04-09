@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [is_X_hom](66519isXhom.html) (43 messages, latest: Apr 09 2019 at 07:20)
+* [is_X_hom](66519isXhom.html) (47 messages, latest: Apr 09 2019 at 08:59)
 
-* [#911 refactor group_hom](71301911refactorgrouphom.html) (5 messages, latest: Apr 09 2019 at 07:01)
+* [#911 refactor group_hom](71301911refactorgrouphom.html) (7 messages, latest: Apr 09 2019 at 08:44)
 
-* [Lean T-shirt](58924LeanTshirt.html) (5 messages, latest: Apr 09 2019 at 06:52)
+* [Lean T-shirt](58924LeanTshirt.html) (13 messages, latest: Apr 09 2019 at 08:20)
 
 * [conditionally run "check ... scripts" tasks on travis?](73118conditionallyruncheckscriptstasksontravis.html) (9 messages, latest: Apr 09 2019 at 02:49)
 
