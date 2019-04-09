@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [presheaves](99031presheaves.html) (2 messages, latest: Apr 09 2019 at 09:17)
+
+* [preorder categories](14346preordercategories.html) (1 message, latest: Apr 09 2019 at 09:04)
+
 * [has_sum / has_fderiv](20955hassumhasfderiv.html) (39 messages, latest: Apr 09 2019 at 08:44)
 
 * [has_div for groups](24102hasdivforgroups.html) (3 messages, latest: Apr 09 2019 at 01:36)
@@ -17,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [inclusions of subtype.topological_space](87391inclusionsofsubtypetopologicalspace.html) (9 messages, latest: Apr 08 2019 at 23:32)
 
 * [add_comm_subgroup](29899addcommsubgroup.html) (1 message, latest: Apr 08 2019 at 14:25)
-
-* [presheaves](99031presheaves.html) (1 message, latest: Apr 08 2019 at 12:18)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (100 messages, latest: Apr 08 2019 at 11:48)
 
