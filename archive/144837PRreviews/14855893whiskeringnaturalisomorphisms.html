@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/14855893whiskeringnaturalisomorphisms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/14855893whiskeringnaturalisomorphisms.html">#893 whiskering natural isomorphisms</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162865872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23893%20whiskering%20natural%20isomorphisms/near/162865872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/14855893whiskeringnaturalisomorphisms.html#162865872">Scott Morrison (Apr 08 2019 at 23:55)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110032">@Reid Barton</span>, how would you feel about replacing my <code>functor.map_nat_iso</code> with the following:</p>
+<div class="codehilite"><pre><span></span>def iso_whisker_left (F : C ⥤ D) {G H : D ⥤ E} (α : G ≅ H) : (F ⋙ G) ≅ (F ⋙ H) :=
+((whiskering_left C D E).obj F).map_iso α
+@[simp] lemma iso_whisker_left_hom (F : C ⥤ D) {G H : D ⥤ E} (α : G ≅ H) :
+  (iso_whisker_left F α).hom = whisker_left F α.hom :=
+rfl
+@[simp] lemma iso_whisker_left_inv (F : C ⥤ D) {G H : D ⥤ E} (α : G ≅ H) :
+  (iso_whisker_left F α).inv = whisker_left F α.inv :=
+rfl
+
+def iso_whisker_right {G H : C ⥤ D} (α : G ≅ H) (F : D ⥤ E) : (G ⋙ F) ≅ (H ⋙ F) :=
+((whiskering_right C D E).obj F).map_iso α
+@[simp] lemma iso_whisker_right_hom {G H : C ⥤ D} (α : G ≅ H) (F : D ⥤ E) :
+  (iso_whisker_right α F).hom = whisker_right α.hom F :=
+rfl
+@[simp] lemma iso_whisker_right_inv {G H : C ⥤ D} (α : G ≅ H) (F : D ⥤ E) :
+  (iso_whisker_right α F).inv = whisker_right α.inv F :=
+rfl
+</pre></div>
+
+
+<p>which I would put in the existing <code>whiskering.lean</code>.</p>
+
+<a name="162865931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23893%20whiskering%20natural%20isomorphisms/near/162865931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/14855893whiskeringnaturalisomorphisms.html#162865931">Scott Morrison (Apr 08 2019 at 23:56)</a>:</h4>
+<p>If you've got something even better that's good too. :-)</p>
+
+
+{% endraw %}

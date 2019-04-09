@@ -1,0 +1,71 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/87391inclusionsofsubtypetopologicalspace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html">inclusions of subtype.topological_space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162862762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162862762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162862762">Scott Morrison (Apr 08 2019 at 23:00)</a>:</h4>
+<p>Say I have <code>U V : set A</code>, and <code>topological_space A</code>, and <code>h : U \subseteq V</code>.<br>
+How do I get the continuity of the inclusion between the <code>subtype.topological_space</code> instances for <code>U</code> and <code>V</code>?</p>
+
+<a name="162862771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162862771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162862771">Scott Morrison (Apr 08 2019 at 23:00)</a>:</h4>
+<p>I can't find this in mathlib, but I'm not too familiar with the topology files.</p>
+
+<a name="162863271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162863271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162863271">Reid Barton (Apr 08 2019 at 23:09)</a>:</h4>
+<p>I guess use <code>embedding_subtype_val</code> and <code>embedding.continuous_iff</code> in some fashion</p>
+
+<a name="162863615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162863615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162863615">Chris Hughes (Apr 08 2019 at 23:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">constructions</span>
+
+<span class="n">def</span> <span class="n">inclusion</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">s</span><span class="o">,</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">h</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">t</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">inclusion_self</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">inclusion</span> <span class="n">h</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">inclusion_inclusion</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="n">u</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hst</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">htu</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">inclusion</span> <span class="n">htu</span> <span class="o">(</span><span class="n">inclusion</span> <span class="n">hst</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">inclusion</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">hst</span> <span class="n">htu</span><span class="o">)</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="kn">lemma</span> <span class="n">inclusion_injective</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="o">(</span><span class="n">inclusion</span> <span class="n">h</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="err">∘</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">continuous</span> <span class="o">(</span><span class="n">inclusion</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">continuous_subtype_mk</span> <span class="bp">_</span> <span class="n">continuous_subtype_val</span>
+</pre></div>
+
+<a name="162863624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162863624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162863624">Chris Hughes (Apr 08 2019 at 23:15)</a>:</h4>
+<p>Do we want the <code>inclusion</code> function in mathlib. I wrote it for something else</p>
+
+<a name="162863866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162863866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162863866">Reid Barton (Apr 08 2019 at 23:19)</a>:</h4>
+<p>Oh yeah, that's easier</p>
+
+<a name="162864303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162864303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162864303">Scott Morrison (Apr 08 2019 at 23:27)</a>:</h4>
+<p>I got it to work with <code>(embedding.continuous_iff embedding_subtype_val).2 continuous_induced_dom</code>, thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span>.</p>
+
+<a name="162864353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162864353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162864353">Scott Morrison (Apr 08 2019 at 23:28)</a>:</h4>
+<p>But yes, <span class="user-mention" data-user-id="110044">@Chris Hughes</span>, let's definitely have your version!</p>
+
+<a name="162864562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inclusions%20of%20subtype.topological_space/near/162864562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87391inclusionsofsubtypetopologicalspace.html#162864562">Scott Morrison (Apr 08 2019 at 23:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>, can you just add the last <code>example</code> to your PR, as well? That's the one I actually want, and there's not point having me write <code>continuous_subtype_mk _ continuous_subtype_val</code>. :-)</p>
+
+
+{% endraw %}

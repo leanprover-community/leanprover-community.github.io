@@ -10,11 +10,11 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (1660 topics)
 
-* [maths](116395maths/index.html) (448 topics)
+* [maths](116395maths/index.html) (449 topics)
 
 * [new members](113489newmembers/index.html) (368 topics)
 
-* [PR reviews](144837PRreviews/index.html) (124 topics)
+* [PR reviews](144837PRreviews/index.html) (125 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 
