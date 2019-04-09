@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [has_div for groups](24102hasdivforgroups.html) (3 messages, latest: Apr 09 2019 at 01:36)
+
 * [inclusions of subtype.topological_space](87391inclusionsofsubtypetopologicalspace.html) (9 messages, latest: Apr 08 2019 at 23:32)
 
 * [has_sum / has_fderiv](20955hassumhasfderiv.html) (38 messages, latest: Apr 08 2019 at 21:46)
