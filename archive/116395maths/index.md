@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Eliminating into Prop woes](75403EliminatingintoPropwoes.html) (3 messages, latest: Apr 09 2019 at 16:42)
+
+* [cast woes](88074castwoes.html) (76 messages, latest: Apr 09 2019 at 16:42)
+
 * [nat.cast_coe](45907natcastcoe.html) (5 messages, latest: Apr 09 2019 at 14:50)
 
 * [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
@@ -59,8 +63,6 @@ permalink: archive/116395maths/index.html
 * [real examples for ring?](20058realexamplesforring.html) (6 messages, latest: Mar 27 2019 at 16:44)
 
 * [finsupp.to_module](73180finsupptomodule.html) (7 messages, latest: Mar 26 2019 at 19:35)
-
-* [cast woes](88074castwoes.html) (73 messages, latest: Mar 26 2019 at 17:18)
 
 * [is_ring_hom.ker](29215isringhomker.html) (15 messages, latest: Mar 25 2019 at 13:08)
 

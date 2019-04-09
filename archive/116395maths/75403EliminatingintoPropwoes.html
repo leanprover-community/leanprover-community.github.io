@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/75403EliminatingintoPropwoes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/75403EliminatingintoPropwoes.html">Eliminating into Prop woes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162926841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Eliminating%20into%20Prop%20woes/near/162926841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75403EliminatingintoPropwoes.html#162926841">Koundinya Vajjha (Apr 09 2019 at 16:35)</a>:</h4>
+<p>I have defined the following</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">archimedean</span>
+
+<span class="n">def</span> <span class="n">pow_two_near</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">2</span><span class="err">^</span><span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">intro</span> <span class="n">h</span> <span class="bp">;</span> <span class="n">exact</span> <span class="o">(</span><span class="n">exists_nat_pow_near</span> <span class="n">h</span> <span class="n">one_lt_two</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Is there any way to get ahold of the <code>k</code> without doing this?</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">index_pow_two_near</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">pow_two_near</span> <span class="n">n</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>If I try to destruct the <code>exists</code> I get an error:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">index_pow_two_near&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">pow_two_near</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h</span><span class="o">,</span> <span class="c1">--induction tactic failed, recursor &#39;Exists.dcases_on&#39; can only eliminate into Prop</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="162927261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Eliminating%20into%20Prop%20woes/near/162927261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75403EliminatingintoPropwoes.html#162927261">Johan Commelin (Apr 09 2019 at 16:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span> Try <code>choose k hk using h</code>.</p>
+
+<a name="162927352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Eliminating%20into%20Prop%20woes/near/162927352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75403EliminatingintoPropwoes.html#162927352">Koundinya Vajjha (Apr 09 2019 at 16:42)</a>:</h4>
+<p>Thanks Johan</p>
+
+
+{% endraw %}
