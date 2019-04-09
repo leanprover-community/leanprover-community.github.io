@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [is_X_hom](66519isXhom.html) (6 messages, latest: Apr 09 2019 at 06:59)
+
+* [Lean T-shirt](58924LeanTshirt.html) (5 messages, latest: Apr 09 2019 at 06:52)
+
 * [conditionally run "check ... scripts" tasks on travis?](73118conditionallyruncheckscriptstasksontravis.html) (9 messages, latest: Apr 09 2019 at 02:49)
 
 * [char is_upper / to_upper etc](04191charisuppertoupperetc.html) (2 messages, latest: Apr 08 2019 at 19:03)
