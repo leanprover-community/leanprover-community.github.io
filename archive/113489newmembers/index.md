@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (97 messages, latest: Apr 09 2019 at 11:54)
+* [Induction](51886Induction.html) (101 messages, latest: Apr 09 2019 at 12:46)
 
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
 
