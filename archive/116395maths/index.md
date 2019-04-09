@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [nat.cast_coe](45907natcastcoe.html) (6 messages, latest: Apr 09 2019 at 18:09)
+
 * [Eliminating into Prop woes](75403EliminatingintoPropwoes.html) (3 messages, latest: Apr 09 2019 at 16:42)
 
 * [cast woes](88074castwoes.html) (76 messages, latest: Apr 09 2019 at 16:42)
-
-* [nat.cast_coe](45907natcastcoe.html) (5 messages, latest: Apr 09 2019 at 14:50)
 
 * [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
 
