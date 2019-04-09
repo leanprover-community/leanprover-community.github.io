@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (97 messages, latest: Apr 09 2019 at 11:54)
+
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
 
 * [noob question(s)](52075noobquestions.html) (313 messages, latest: Apr 06 2019 at 21:10)
@@ -95,8 +97,6 @@ permalink: archive/113489newmembers/index.html
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
 
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
-
-* [Induction](51886Induction.html) (93 messages, latest: Mar 09 2019 at 18:53)
 
 * ['⟨' and '⟩' in binder of lambda abstraction](45214andinbinderoflambdaabstraction.html) (5 messages, latest: Mar 08 2019 at 18:07)
 
