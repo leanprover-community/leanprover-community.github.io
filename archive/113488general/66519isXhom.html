@@ -35,5 +35,163 @@ permalink: archive/113488general/66519isXhom.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886231">Scott Morrison (Apr 09 2019 at 06:59)</a>:</h4>
 <p>It should probably take an argument, so for example <code>hom ring</code> would use the laws for ring homomorphisms.</p>
 
+<a name="162886290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886290">Scott Morrison (Apr 09 2019 at 07:00)</a>:</h4>
+<p>An arrow might suffice for the mode where we want to pull the homomorphism out: either <code>hom ←</code> or <code>hom ←monoid</code>.</p>
+
+<a name="162886305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886305">Johan Commelin (Apr 09 2019 at 07:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think such a tactic is a very good idea.</p>
+
+<a name="162886458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886458">Johan Commelin (Apr 09 2019 at 07:04)</a>:</h4>
+<p>Would it be hard to write such a tactic?</p>
+
+<a name="162886465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886465">Scott Morrison (Apr 09 2019 at 07:04)</a>:</h4>
+<p>Let's do it. :-)</p>
+
+<a name="162886468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886468">Scott Morrison (Apr 09 2019 at 07:04)</a>:</h4>
+<p>First of all, however, note the following:</p>
+
+<a name="162886484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886484">Scott Morrison (Apr 09 2019 at 07:05)</a>:</h4>
+<p>the category theory library gives you an easy way to make these simp lemmas work with the simplifier directly! Observe the following:</p>
+
+<a name="162886487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886487">Scott Morrison (Apr 09 2019 at 07:05)</a>:</h4>
+<div class="codehilite"><pre><span></span>@[simp] lemma map_mul {R S : Mon} (f : R ⟶ S) (x y : R) : f (x * y) = f x * f y :=
+by rw is_monoid_hom.map_mul f
+
+example {R S : Mon} (f : R ⟶ S) (x y : R) : f (x * y) = f x * f y :=
+by simp --- Lo!
+</pre></div>
+
+<a name="162886512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886512">Scott Morrison (Apr 09 2019 at 07:06)</a>:</h4>
+<p>What's going on here? In <code>(x y : R)</code>, <code>R</code> is being coerced automatically to its underlying type.</p>
+
+<a name="162886549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886549">Scott Morrison (Apr 09 2019 at 07:06)</a>:</h4>
+<p>In <code>f (x * y)</code>, the bundled ring morphism <code>f</code> is being coerced to its underlying function.</p>
+
+<a name="162886552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886552">Scott Morrison (Apr 09 2019 at 07:06)</a>:</h4>
+<p>However, because the coercion is still sitting there, <code>simp</code> has something to hang on to now!</p>
+
+<a name="162886562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886562">Johan Commelin (Apr 09 2019 at 07:07)</a>:</h4>
+<p>Yep. Bundled homs make <code>simp</code> work</p>
+
+<a name="162886570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886570">Johan Commelin (Apr 09 2019 at 07:07)</a>:</h4>
+<p>With <code>linear_map</code> and <code>alg_hom</code> this has been quite pleasant.</p>
+
+<a name="162886588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886588">Johan Commelin (Apr 09 2019 at 07:07)</a>:</h4>
+<p>The problem is that it seems to be non-trivial to make a bundled <code>ring_hom</code> also act as an <code>add_group_hom</code> and as a <code>monoid_hom</code> etc...</p>
+
+<a name="162886636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886636">Scott Morrison (Apr 09 2019 at 07:08)</a>:</h4>
+<p>But really what I hope might happen is that everyone will stop talking about explicit functions, decorated is <code>is_X_hom</code> typeclasses, and just write <code>R ⟶ S</code> (with the <code>\hom</code> arrow)... :-)</p>
+
+<a name="162886637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886637">Johan Commelin (Apr 09 2019 at 07:08)</a>:</h4>
+<p>Chris tried unification hints. That didn't work. I don't know if plain coercions would work...</p>
+
+<a name="162886664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886664">Johan Commelin (Apr 09 2019 at 07:09)</a>:</h4>
+<p>Bundling and mixing are fighting with each other...</p>
+
+<a name="162886683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886683">Scott Morrison (Apr 09 2019 at 07:09)</a>:</h4>
+<p>Can we define coercions along <code>forget.obj</code> and <code>forget.map</code>, for all the different forgetful functors?</p>
+
+<a name="162886762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886762">Scott Morrison (Apr 09 2019 at 07:11)</a>:</h4>
+<p>(if they work, they could all be generated by <code>@[derive]</code> at the moment that each <code>forget</code> is defined)</p>
+
+<a name="162886766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886766">Scott Morrison (Apr 09 2019 at 07:11)</a>:</h4>
+<p>Anyway, that's something to think about later.</p>
+
+<a name="162886769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886769">Scott Morrison (Apr 09 2019 at 07:11)</a>:</h4>
+<p>How would we write the <code>hom</code> tactic?</p>
+
+<a name="162886776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886776">Johan Commelin (Apr 09 2019 at 07:11)</a>:</h4>
+<blockquote>
+<p>Can we define coercions along <code>forget.obj</code> and <code>forget.map</code>, for all the different forgetful functors?</p>
+</blockquote>
+<p>I've been meaning to experiment with that. But haven't had the time to do so yet.</p>
+
+<a name="162886803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886803">Patrick Massot (Apr 09 2019 at 07:12)</a>:</h4>
+<p>I think you can take inspiration from <a href="https://github.com/leanprover-community/mathlib/commit/5fe470bb216e7b3fb6639d3b964c4eee36b88713" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/5fe470bb216e7b3fb6639d3b964c4eee36b88713">https://github.com/leanprover-community/mathlib/commit/5fe470bb216e7b3fb6639d3b964c4eee36b88713</a></p>
+
+<a name="162886838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886838">Patrick Massot (Apr 09 2019 at 07:12)</a>:</h4>
+<p>Which is a stuff pushing tactic</p>
+
+<a name="162886929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886929">Johan Commelin (Apr 09 2019 at 07:15)</a>:</h4>
+<p>@Scott, how hard is it to gather all symbols from the context that have an <code>is_X_hom</code> instance?</p>
+
+<a name="162886939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886939">Scott Morrison (Apr 09 2019 at 07:15)</a>:</h4>
+<p>do you mean local hypotheses that have an <code>is_X_hom</code> instance?</p>
+
+<a name="162886945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886945">Scott Morrison (Apr 09 2019 at 07:16)</a>:</h4>
+<p>or just subexpressions of the goal?</p>
+
+<a name="162886972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886972">Johan Commelin (Apr 09 2019 at 07:16)</a>:</h4>
+<p>I guess we only care about values of <code>X</code> in <code>(add_)</code> <code>{semigroup, monoid, group}</code>.</p>
+
+<a name="162886988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886988">Scott Morrison (Apr 09 2019 at 07:16)</a>:</h4>
+<p>either is doable</p>
+
+<a name="162886999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162886999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162886999">Johan Commelin (Apr 09 2019 at 07:16)</a>:</h4>
+<p>The latter. The instance might not be a local hyp.</p>
+
+<a name="162887007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887007">Johan Commelin (Apr 09 2019 at 07:16)</a>:</h4>
+<p>Maybe we need to infer it.</p>
+
+<a name="162887034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887034">Scott Morrison (Apr 09 2019 at 07:17)</a>:</h4>
+<p>No -- the instance of course we'll find by inference. I was asking about the actual function.</p>
+
+<a name="162887041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887041">Scott Morrison (Apr 09 2019 at 07:17)</a>:</h4>
+<p>By the way, the following works:</p>
+<div class="codehilite"><pre><span></span>example (R S : CommRing) (f : R ⟶ S) : is_monoid_hom (f : R → S) := by apply_instance
+</pre></div>
+
+<a name="162887101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887101">Johan Commelin (Apr 09 2019 at 07:18)</a>:</h4>
+<p>After we have that list, we can start trying to <code>erw</code> (<code>&lt;-</code>) along <code>is_X_hom.map_Y the_symbol</code> for <code>Y</code> in <code>{zero, one, add, mul, pow, smul, gpow, sub, gsmul, gpow, sum, prod}</code>.</p>
+
+<a name="162887104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887104">Scott Morrison (Apr 09 2019 at 07:18)</a>:</h4>
+<p>Yes.</p>
+
+<a name="162887128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887128">Scott Morrison (Apr 09 2019 at 07:19)</a>:</h4>
+<p>That example is an interesting combination of bundling and mixing getting along!</p>
+
+<a name="162887144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887144">Scott Morrison (Apr 09 2019 at 07:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, do you want to try out the new VS Code live share mode and write this tactic? I have ~40 minutes now.</p>
+
+<a name="162887199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162887199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162887199">Johan Commelin (Apr 09 2019 at 07:20)</a>:</h4>
+<p>Cool. Let me grab a bigger screen.</p>
+
 
 {% endraw %}
