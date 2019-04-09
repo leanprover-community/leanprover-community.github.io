@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [presheaves](99031presheaves.html) (2 messages, latest: Apr 09 2019 at 09:17)
+* [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
 
 * [preorder categories](14346preordercategories.html) (1 message, latest: Apr 09 2019 at 09:04)
 

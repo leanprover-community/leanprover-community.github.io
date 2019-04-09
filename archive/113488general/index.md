@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [is_X_hom](66519isXhom.html) (47 messages, latest: Apr 09 2019 at 08:59)
+* [is_X_hom](66519isXhom.html) (53 messages, latest: Apr 09 2019 at 10:59)
 
-* [#911 refactor group_hom](71301911refactorgrouphom.html) (7 messages, latest: Apr 09 2019 at 08:44)
+* [#911 refactor group_hom](71301911refactorgrouphom.html) (15 messages, latest: Apr 09 2019 at 10:34)
 
 * [Lean T-shirt](58924LeanTshirt.html) (13 messages, latest: Apr 09 2019 at 08:20)
 
