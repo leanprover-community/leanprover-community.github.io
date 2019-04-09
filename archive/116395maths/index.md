@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [decreasing induction](39747decreasinginduction.html) (1 message, latest: Apr 09 2019 at 19:22)
+
 * [nat.cast_coe](45907natcastcoe.html) (6 messages, latest: Apr 09 2019 at 18:09)
 
 * [Eliminating into Prop woes](75403EliminatingintoPropwoes.html) (3 messages, latest: Apr 09 2019 at 16:42)
