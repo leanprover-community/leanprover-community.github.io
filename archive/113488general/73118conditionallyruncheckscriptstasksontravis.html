@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/73118conditionallyruncheckscriptstasksontravis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html">conditionally run "check ... scripts" tasks on travis?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="162874492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874492">Scott Morrison (Apr 09 2019 at 02:39)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110026">@Simon Hudon</span>, I think the new travis tasks are slowing things down in an unfortunate way. Two of my PRs are at the moment sitting at yellow; travis has successfully checked all the proofs, but hasn't got around to spinning up the check install scripts tasks.</p>
+
+<a name="162874556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874556">Scott Morrison (Apr 09 2019 at 02:40)</a>:</h4>
+<p>Is there some way we can only initiate them if something changed in the scripts directory?</p>
+
+<a name="162874577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874577">Scott Morrison (Apr 09 2019 at 02:40)</a>:</h4>
+<p>The problem isn't that checking the install scripts is slow, but that travis is waiting to allocate a VM to check them in.</p>
+
+<a name="162874941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874941">Simon Hudon (Apr 09 2019 at 02:46)</a>:</h4>
+<p>I think there are three things we can try here.</p>
+<p>1. get Travis to not make redundant builds for PRs and pushes<br>
+2. collapse the four checks for scripts into 2 checks <br>
+3. disable those checks when the scripts don't change</p>
+
+<a name="162874955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874955">Simon Hudon (Apr 09 2019 at 02:46)</a>:</h4>
+<p>I've talked to the Travis team about 1. and the change is in the pipeline</p>
+
+<a name="162874962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874962">Simon Hudon (Apr 09 2019 at 02:46)</a>:</h4>
+<p>I can look into 2. tomorrow</p>
+
+<a name="162874970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162874970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162874970">Simon Hudon (Apr 09 2019 at 02:46)</a>:</h4>
+<p>I have no idea how to do 3. or if it's possible.</p>
+
+<a name="162875020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162875020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162875020">Scott Morrison (Apr 09 2019 at 02:48)</a>:</h4>
+<p>Great! No worries if it turns out to be too much work.</p>
+
+<a name="162875124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conditionally%20run%20%22check%20...%20scripts%22%20tasks%20on%20travis%3F/near/162875124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73118conditionallyruncheckscriptstasksontravis.html#162875124">Simon Hudon (Apr 09 2019 at 02:49)</a>:</h4>
+<p>I think 1. will make a nice difference. Also, I've noticed today that Travis' workload was pretty heavy and it wasn't allocating many VMs for mathlib</p>
+
+
+{% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [conditionally run "check ... scripts" tasks on travis?](73118conditionallyruncheckscriptstasksontravis.html) (9 messages, latest: Apr 09 2019 at 02:49)
+
 * [char is_upper / to_upper etc](04191charisuppertoupperetc.html) (2 messages, latest: Apr 08 2019 at 19:03)
 
 * [on add_decl](13534onadddecl.html) (63 messages, latest: Apr 08 2019 at 17:41)
