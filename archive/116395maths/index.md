@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [nat.cast_coe](45907natcastcoe.html) (5 messages, latest: Apr 09 2019 at 14:50)
+
 * [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
 
 * [preorder categories](14346preordercategories.html) (1 message, latest: Apr 09 2019 at 09:04)
@@ -41,8 +43,6 @@ permalink: archive/116395maths/index.html
 * [equivs of mathematical objects](30087equivsofmathematicalobjects.html) (66 messages, latest: Apr 04 2019 at 08:00)
 
 * [matrix](88278matrix.html) (11 messages, latest: Apr 03 2019 at 19:22)
-
-* [nat.cast_coe](45907natcastcoe.html) (3 messages, latest: Apr 03 2019 at 18:52)
 
 * [continuity of 1/x on (0,1]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
 
