@@ -296,5 +296,35 @@ set_option trace.eqn_compiler.elim_match true</code> lets you see what's actuall
    <span class="bp">&lt;|&gt;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
 </pre></div>
 
+<a name="163012420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012420">Joseph Corneli (Apr 10 2019 at 15:00)</a>:</h4>
+<p>That gave me this debug message:</p>
+<blockquote>
+<p>Goal is equality between the quadratic a/-quadratic part...-/ has_pow.pow.{0 0} real nat (monoid.has_pow.{0} real real.monoid) x (bit0.{0} nat nat.has_add (has_one.one.{0} nat nat.has_one))/-...--AND-/ b/-linear part...-/ x/-...--AND-/ c/-constant part-/ </p>
+</blockquote>
+<p>when applied via</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">ℝ</span><span class="o">),</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="n">b</span><span class="bp">*</span><span class="n">x</span><span class="bp">+</span><span class="n">c</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">a</span><span class="o">))</span><span class="bp">*</span> <span class="n">b</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span><span class="bp">-</span><span class="n">b</span><span class="err">^</span><span class="mi">2</span><span class="bp">/</span><span class="o">(</span><span class="mi">4</span><span class="bp">*</span><span class="n">a</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span><span class="o">,</span>
+  <span class="n">trace_goal_is_quad_eq&#39;&#39;</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163012546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012546">Simon Hudon (Apr 10 2019 at 15:01)</a>:</h4>
+<p>Is 2 supposed to be a natural number or a real number?</p>
+
+<a name="163012630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012630">Joseph Corneli (Apr 10 2019 at 15:02)</a>:</h4>
+<p>Personally I think natural is the right choice.</p>
+
+<a name="163012775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012775">Kevin Buzzard (Apr 10 2019 at 15:04)</a>:</h4>
+<p>this might not be true if a=0</p>
+
+<a name="163013004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163013004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163013004">Joseph Corneli (Apr 10 2019 at 15:06)</a>:</h4>
+<p>Oops!  Even if <code>a=1</code>, though, the parsing might still be tricky. I'll set up a variant like that and test it.</p>
+
 
 {% endraw %}
