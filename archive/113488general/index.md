@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [backticks - literals inside expr](28440backticksliteralsinsideexpr.html) (18 messages, latest: Apr 10 2019 at 11:57)
+* [backticks - literals inside expr](28440backticksliteralsinsideexpr.html) (21 messages, latest: Apr 10 2019 at 14:58)
 
 * [is_X_hom](66519isXhom.html) (54 messages, latest: Apr 09 2019 at 15:01)
 

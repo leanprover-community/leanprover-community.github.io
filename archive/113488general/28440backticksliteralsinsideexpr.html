@@ -263,5 +263,38 @@ set_option trace.eqn_compiler.elim_match true</code> lets you see what's actuall
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/162997372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#162997372">Keeley Hoek (Apr 10 2019 at 11:57)</a>:</h4>
 <p><code>aaaaaaaaaaaaaaaaaaaaaaa</code> indeed</p>
 
+<a name="163009394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163009394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163009394">Simon Hudon (Apr 10 2019 at 14:30)</a>:</h4>
+<p>Can you try:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">trace_goal_is_quad_eq&#39;&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">A</span> <span class="bp">*</span> <span class="err">%%</span><span class="n">x</span> <span class="err">^</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="bp">+</span> <span class="err">%%</span><span class="n">C</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span><span class="o">,</span>
+     <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="s2">&quot;Goal is equality between the quadratic &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">A</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;x^2 &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">C</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">}</span>
+   <span class="bp">&lt;|&gt;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+</pre></div>
+
+<a name="163012177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012177">Joseph Corneli (Apr 10 2019 at 14:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> that one gives me </p>
+<blockquote>
+<p>equation compiler failed, maximum number of steps (2048) exceeded (possible solution: use 'set_option eqn_compiler.max_steps &lt;new-threshold&gt;') (use 'set_option trace.eqn_compiler.elim_match true' for additional details)</p>
+</blockquote>
+
+<a name="163012261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/backticks%20-%20literals%20inside%20expr/near/163012261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28440backticksliteralsinsideexpr.html#163012261">Joseph Corneli (Apr 10 2019 at 14:58)</a>:</h4>
+<p>I was able to take it apart to this level:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">trace_goal_is_quad_eq&#39;&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">A</span><span class="bp">*</span><span class="err">%%</span><span class="n">Q</span> <span class="bp">+</span> <span class="err">%%</span><span class="n">B</span><span class="bp">*</span><span class="err">%%</span><span class="n">L</span> <span class="bp">+</span> <span class="err">%%</span><span class="n">C</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span><span class="o">,</span>
+     <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="s2">&quot;Goal is equality between the quadratic &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">A</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;/-quadratic part...-/ &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">Q</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;/-...--AND-/ &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">B</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;/-linear part...-/ &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">L</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;/-...--AND-/ &quot;</span>
+                     <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">C</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;/-constant part-/ &quot;</span>
+   <span class="o">}</span>
+   <span class="bp">&lt;|&gt;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+</pre></div>
+
 
 {% endraw %}
