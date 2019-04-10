@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (26 messages, latest: Apr 10 2019 at 18:37)
+
 * [#893 whiskering natural isomorphisms](14855893whiskeringnaturalisomorphisms.html) (2 messages, latest: Apr 08 2019 at 23:56)
 
 * [#904-905](05356904905.html) (3 messages, latest: Apr 08 2019 at 19:17)
@@ -37,8 +39,6 @@ permalink: archive/144837PRreviews/index.html
 * [#820 lexicographic orders](43215820lexicographicorders.html) (15 messages, latest: Mar 31 2019 at 23:47)
 
 * [#766 cache-olean](84759766cacheolean.html) (35 messages, latest: Mar 31 2019 at 23:37)
-
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (25 messages, latest: Mar 29 2019 at 13:14)
 
 * [#850 mul_action](83628850mulaction.html) (58 messages, latest: Mar 28 2019 at 06:43)
 

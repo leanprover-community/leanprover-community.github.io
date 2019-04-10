@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (4 messages, latest: Apr 10 2019 at 18:55)
+
 * [eigenvalues and eigenvectors](78426eigenvaluesandeigenvectors.html) (12 messages, latest: Apr 10 2019 at 17:37)
 
 * [decreasing induction](39747decreasinginduction.html) (1 message, latest: Apr 09 2019 at 19:22)
