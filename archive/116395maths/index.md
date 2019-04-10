@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [eigenvalues and eigenvectors](78426eigenvaluesandeigenvectors.html) (12 messages, latest: Apr 10 2019 at 17:37)
+
 * [decreasing induction](39747decreasinginduction.html) (1 message, latest: Apr 09 2019 at 19:22)
 
 * [nat.cast_coe](45907natcastcoe.html) (6 messages, latest: Apr 09 2019 at 18:09)
