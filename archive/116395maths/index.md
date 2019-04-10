@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (102 messages, latest: Apr 10 2019 at 19:55)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (105 messages, latest: Apr 10 2019 at 21:45)
 
 * [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (11 messages, latest: Apr 10 2019 at 19:24)
 
