@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (4 messages, latest: Apr 10 2019 at 18:55)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (102 messages, latest: Apr 10 2019 at 19:55)
+
+* [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (11 messages, latest: Apr 10 2019 at 19:24)
 
 * [eigenvalues and eigenvectors](78426eigenvaluesandeigenvectors.html) (12 messages, latest: Apr 10 2019 at 17:37)
 
@@ -33,8 +35,6 @@ permalink: archive/116395maths/index.html
 * [inclusions of subtype.topological_space](87391inclusionsofsubtypetopologicalspace.html) (9 messages, latest: Apr 08 2019 at 23:32)
 
 * [add_comm_subgroup](29899addcommsubgroup.html) (1 message, latest: Apr 08 2019 at 14:25)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (100 messages, latest: Apr 08 2019 at 11:48)
 
 * [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)
 

@@ -27,5 +27,51 @@ permalink: archive/116395maths/99759factoringoutaconstantfromalinearmap.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163034397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163034397">Kevin Buzzard (Apr 10 2019 at 18:55)</a>:</h4>
 <p>It's got some official name too, something like <code>left_distrib</code> or <code>right_distrib</code>, but <code>mul_add</code> is a lot easier to remember ;-)</p>
 
+<a name="163036876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163036876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163036876">Joseph Corneli (Apr 10 2019 at 19:20)</a>:</h4>
+<p>Hm... not having much success with it.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">factor_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">y</span>  <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">apply</span> <span class="n">mul_add</span><span class="o">,</span> <span class="c1">-- yay</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">factor_three</span> <span class="o">(</span><span class="n">a</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">+</span><span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">z</span>  <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">apply</span> <span class="n">mul_add</span><span class="o">},</span> <span class="c1">-- ?</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163036978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163036978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163036978">Joseph Corneli (Apr 10 2019 at 19:21)</a>:</h4>
+<blockquote>
+<p><code>tactic failed, there are unsolved goals</code><br>
+<code>state:</code><br>
+<code>a x y z : ℝ</code><br>
+<code>⊢ a * (x + y + z) = a * x + a * y + a * z</code></p>
+</blockquote>
+
+<a name="163037032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163037032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163037032">Kevin Buzzard (Apr 10 2019 at 19:21)</a>:</h4>
+<p>rewrite, don't apply</p>
+
+<a name="163037097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163037097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163037097">Kevin Buzzard (Apr 10 2019 at 19:22)</a>:</h4>
+<p>apply only works when the goal is exactly the target of mul_add</p>
+
+<a name="163037103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163037103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163037103">Joseph Corneli (Apr 10 2019 at 19:22)</a>:</h4>
+<p>aha, that's better</p>
+
+<a name="163037120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163037120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163037120">Kevin Buzzard (Apr 10 2019 at 19:22)</a>:</h4>
+<p>sorry, my bad, trying to do too many things at once.</p>
+
+<a name="163037245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/factoring%20out%20a%20constant%20from%20a%20linear%20map/near/163037245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99759factoringoutaconstantfromalinearmap.html#163037245">Joseph Corneli (Apr 10 2019 at 19:24)</a>:</h4>
+<p>no worries! Still much faster than me monkey-typing here.</p>
+
 
 {% endraw %}
