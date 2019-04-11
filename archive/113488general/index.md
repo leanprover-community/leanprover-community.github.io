@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [injection on types](19798injectionontypes.html) (50 messages, latest: Apr 11 2019 at 18:35)
+* [injection on types](19798injectionontypes.html) (51 messages, latest: Apr 11 2019 at 19:53)
 
 * [Lean T-shirt](58924LeanTshirt.html) (16 messages, latest: Apr 11 2019 at 11:00)
 
