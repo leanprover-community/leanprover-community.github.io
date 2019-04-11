@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [define a function by cases](55997defineafunctionbycases.html) (18 messages, latest: Apr 11 2019 at 17:58)
+* [define a function by cases](55997defineafunctionbycases.html) (26 messages, latest: Apr 11 2019 at 18:14)
 
 * [black hole](76230blackhole.html) (9 messages, latest: Apr 11 2019 at 08:46)
 
