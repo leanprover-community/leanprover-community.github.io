@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cute lemma](49214Cutelemma.html) (5 messages, latest: Apr 11 2019 at 20:45)
+* [Cute lemma](49214Cutelemma.html) (12 messages, latest: Apr 11 2019 at 21:37)
 
 * [define a function by cases](55997defineafunctionbycases.html) (26 messages, latest: Apr 11 2019 at 18:14)
 
