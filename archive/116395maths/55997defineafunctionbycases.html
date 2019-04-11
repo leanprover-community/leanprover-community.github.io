@@ -56,5 +56,42 @@ x : ℝ
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/define%20a%20function%20by%20cases/near/163092505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55997defineafunctionbycases.html#163092505">Joseph Corneli (Apr 11 2019 at 11:57)</a>:</h4>
 <p>Thanks Chris.</p>
 
+<a name="163093281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/define%20a%20function%20by%20cases/near/163093281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55997defineafunctionbycases.html#163093281">Joseph Corneli (Apr 11 2019 at 12:12)</a>:</h4>
+<p>Maybe you can guess what my next question is.  I'm stuck again.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">unit_indicator</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">set</span><span class="bp">.</span><span class="n">Icc</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">on_unit</span> <span class="o">:=</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span> <span class="n">unit_indicator</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">Icc</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">on_unit_cont</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">on_unit</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">on_unit</span> <span class="n">function</span><span class="bp">.</span><span class="n">restrict</span> <span class="n">unit_indicator</span><span class="o">,</span>
+  <span class="c1">-- ...</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163093584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/define%20a%20function%20by%20cases/near/163093584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55997defineafunctionbycases.html#163093584">Chris Hughes (Apr 11 2019 at 12:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">on_unit_eq_one</span> <span class="o">:</span> <span class="n">on_unit</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">funext</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">x</span><span class="bp">.</span><span class="n">property</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">on_unit_cont</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">on_unit</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">on_unit_eq_one</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">continuous_const</span><span class="o">,</span>
+  <span class="c1">-- ...</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163093683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/define%20a%20function%20by%20cases/near/163093683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55997defineafunctionbycases.html#163093683">Joseph Corneli (Apr 11 2019 at 12:19)</a>:</h4>
+<p>Aha, "function extensionality" is great</p>
+
+<a name="163093785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/define%20a%20function%20by%20cases/near/163093785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55997defineafunctionbycases.html#163093785">Joseph Corneli (Apr 11 2019 at 12:20)</a>:</h4>
+<p>Denied by Haskellists IIUC</p>
+
 
 {% endraw %}
