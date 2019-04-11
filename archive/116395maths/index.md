@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (168 messages, latest: Apr 11 2019 at 04:27)
+* [black hole](76230blackhole.html) (4 messages, latest: Apr 11 2019 at 07:47)
 
-* [black hole](76230blackhole.html) (2 messages, latest: Apr 11 2019 at 03:18)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (168 messages, latest: Apr 11 2019 at 04:27)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (108 messages, latest: Apr 11 2019 at 02:46)
 
