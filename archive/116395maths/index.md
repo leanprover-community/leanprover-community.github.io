@@ -10,9 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (108 messages, latest: Apr 11 2019 at 02:46)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (149 messages, latest: Apr 11 2019 at 03:31)
 
-* [black hole](76230blackhole.html) (1 message, latest: Apr 11 2019 at 02:05)
+* [black hole](76230blackhole.html) (2 messages, latest: Apr 11 2019 at 03:18)
+
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (108 messages, latest: Apr 11 2019 at 02:46)
 
 * [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (11 messages, latest: Apr 10 2019 at 19:24)
 
@@ -115,8 +117,6 @@ permalink: archive/116395maths/index.html
 * [Convexity](98186Convexity.html) (38 messages, latest: Mar 08 2019 at 21:14)
 
 * [Subspaces and opens](20034Subspacesandopens.html) (14 messages, latest: Mar 08 2019 at 19:02)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (147 messages, latest: Mar 08 2019 at 18:15)
 
 * [G-modules](59534Gmodules.html) (5 messages, latest: Mar 08 2019 at 12:05)
 
