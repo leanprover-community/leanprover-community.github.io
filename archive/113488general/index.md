@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean T-shirt](58924LeanTshirt.html) (15 messages, latest: Apr 11 2019 at 10:59)
+
 * [backticks - literals inside expr](28440backticksliteralsinsideexpr.html) (28 messages, latest: Apr 11 2019 at 00:23)
 
 * [is_X_hom](66519isXhom.html) (54 messages, latest: Apr 09 2019 at 15:01)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [signal](39679signal.html) (1 message, latest: Apr 09 2019 at 11:30)
 
 * [#911 refactor group_hom](71301911refactorgrouphom.html) (15 messages, latest: Apr 09 2019 at 10:34)
-
-* [Lean T-shirt](58924LeanTshirt.html) (13 messages, latest: Apr 09 2019 at 08:20)
 
 * [conditionally run "check ... scripts" tasks on travis?](73118conditionallyruncheckscriptstasksontravis.html) (9 messages, latest: Apr 09 2019 at 02:49)
 
