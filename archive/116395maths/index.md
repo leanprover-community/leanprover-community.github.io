@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [black hole](76230blackhole.html) (4 messages, latest: Apr 11 2019 at 07:47)
+* [black hole](76230blackhole.html) (9 messages, latest: Apr 11 2019 at 08:46)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (168 messages, latest: Apr 11 2019 at 04:27)
 
