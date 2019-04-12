@@ -1,0 +1,45 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/47279discontinuityofastepfunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html">discontinuity of a step function</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163221549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163221549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163221549">Joseph Corneli (Apr 12 2019 at 19:56)</a>:</h4>
+<p>My step function:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">step_fun</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">ξ</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>Relevant lemmas: <code>continuous_iff_continuous_at</code> and <code>tendsto_nhds_nhds</code>. Using these I can change from the neighbourhoods/filters language into more typical epsilon/delta langauge.  The lemmas are if-and-only-if results, so useful for deriving the negative (discontinuity) result that I'm aiming for.</p>
+<p>Now, clearly you can choose points as close to <code>ξ</code> (<em>from the right</em>) as you wish, and their values will always be distance <code>1</code> away from <code>f ξ</code>, which is <code>1</code>.</p>
+<p>For example, setting <code>ε</code> to <code>1/2</code>, <em>there is no such</em> <code>δ&gt;0</code> with the property that <code>∀ {x : ℝ}, dist x ξ &lt; δ → dist (step_fun x) (step_fun ξ) &lt; ε)</code>. But how to get this fact across to Lean?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">constants</span> <span class="o">(</span><span class="n">ξ</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">step_fun</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">ξ</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="kn">lemma</span> <span class="n">discont_at_step</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">continuous_at</span> <span class="n">step_fun</span> <span class="n">ξ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">continuous_at</span><span class="o">,</span>
+<span class="c1">-- our goal:</span>
+<span class="c1">-- ⊢ ¬filter.tendsto step_fun (nhds ξ) (nhds (step_fun ξ))</span>
+<span class="n">rw</span> <span class="n">metric</span><span class="bp">.</span><span class="n">tendsto_nhds_nhds</span><span class="o">,</span>
+<span class="c1">-- our goal:</span>
+<span class="c1">-- ⊢ ¬∀ (ε : ℝ),</span>
+<span class="c1">--      ε &gt; 0 → (∃ (δ : ℝ) (H : δ &gt; 0),</span>
+<span class="c1">--                ∀ {x : ℝ}, dist x ξ &lt; δ → dist (step_fun x)</span>
+<span class="c1">--                                               (step_fun ξ) &lt; ε)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}

@@ -240,5 +240,22 @@ by simp --- Lo!
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/162918762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#162918762">Sebastian Ullrich (Apr 09 2019 at 15:01)</a>:</h4>
 <p>I introduced <code>infer_instance</code> just so that I could use it before the tactic framework is defined</p>
 
+<a name="163219310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_X_hom/near/163219310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66519isXhom.html#163219310">Kevin Buzzard (Apr 12 2019 at 19:28)</a>:</h4>
+<p>Here's a concrete example of what Mario is saying. I wanted to figure out where the category structure on <code>opens X</code> was coming from.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">Top</span><span class="bp">.</span><span class="n">opens</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">topological_space</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">XYZ</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">ABC</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ABC</span> <span class="c1">-- useless</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">XYZ</span> <span class="c1">-- what I wanted to know i.e. category_theory.preorder_category</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">preorder_category</span> <span class="c1">-- etc etc</span>
+</pre></div>
+
 
 {% endraw %}

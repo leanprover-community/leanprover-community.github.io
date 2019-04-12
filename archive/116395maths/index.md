@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [discontinuity of a step function](47279discontinuityofastepfunction.html) (1 message, latest: Apr 12 2019 at 19:56)
+
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (170 messages, latest: Apr 12 2019 at 16:00)
 
 * [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)

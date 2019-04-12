@@ -10,17 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp making a meal of it](35011simpmakingamealofit.html) (25 messages, latest: Apr 12 2019 at 18:59)
+* [Online Lean editor](09997OnlineLeaneditor.html) (11 messages, latest: Apr 12 2019 at 19:44)
 
-* [Online Lean editor](09997OnlineLeaneditor.html) (4 messages, latest: Apr 12 2019 at 18:20)
+* [is_X_hom](66519isXhom.html) (55 messages, latest: Apr 12 2019 at 19:28)
+
+* [simp making a meal of it](35011simpmakingamealofit.html) (25 messages, latest: Apr 12 2019 at 18:59)
 
 * [injection on types](19798injectionontypes.html) (62 messages, latest: Apr 12 2019 at 01:02)
 
 * [Lean T-shirt](58924LeanTshirt.html) (16 messages, latest: Apr 11 2019 at 11:00)
 
 * [backticks - literals inside expr](28440backticksliteralsinsideexpr.html) (28 messages, latest: Apr 11 2019 at 00:23)
-
-* [is_X_hom](66519isXhom.html) (54 messages, latest: Apr 09 2019 at 15:01)
 
 * [signal](39679signal.html) (1 message, latest: Apr 09 2019 at 11:30)
 
