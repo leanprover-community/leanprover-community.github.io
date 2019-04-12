@@ -41,5 +41,38 @@ permalink: archive/116395maths/47279discontinuityofastepfunction.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="163221868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163221868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163221868">Chris Hughes (Apr 12 2019 at 20:00)</a>:</h4>
+<p>You might need more recent mathlib for this, but Patrick's <code>push_neg</code> tactic will help. Try <code>import tactic.push_neg</code></p>
+
+<a name="163222444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163222444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163222444">Chris Hughes (Apr 12 2019 at 20:07)</a>:</h4>
+<p>Note the use of <code>push_neg</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">discont_at_step</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">continuous_at</span> <span class="n">step_fun</span> <span class="n">ξ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">continuous_at</span><span class="o">,</span>
+  <span class="c1">-- our goal:</span>
+  <span class="c1">-- ⊢ ¬filter.tendsto step_fun (nhds ξ) (nhds (step_fun ξ))</span>
+  <span class="n">rw</span> <span class="n">metric</span><span class="bp">.</span><span class="n">tendsto_nhds_nhds</span><span class="o">,</span>
+  <span class="n">push_neg</span><span class="o">,</span>
+  <span class="c1">-- goal</span>
+  <span class="c1">-- ∃ (ε : ℝ), ε &gt; 0 ∧ ∀ (δ : ℝ), δ &gt; 0 → (∃ {x : ℝ},</span>
+  <span class="c1">-- dist x ξ &lt; δ ∧ ε ≤ dist (step_fun x) (step_fun ξ))</span>
+  <span class="n">use</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="bp">⟨</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">δ</span> <span class="n">δ0</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">ξ</span> <span class="bp">+</span> <span class="n">δ</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">dist_eq</span><span class="o">,</span> <span class="n">abs_of_nonneg</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="o">(</span><span class="n">half_pos</span> <span class="n">δ0</span><span class="o">)),</span> <span class="n">half_lt_self</span> <span class="n">δ0</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">ξ</span> <span class="bp">+</span> <span class="n">δ</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">ξ</span><span class="o">,</span> <span class="k">from</span> <span class="n">not_le_of_gt</span> <span class="o">((</span><span class="n">lt_add_iff_pos_right</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">half_pos</span> <span class="n">δ0</span><span class="o">)),</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">dist_eq</span><span class="o">,</span> <span class="n">step_fun</span><span class="o">,</span> <span class="n">le_refl</span><span class="o">,</span> <span class="n">this</span><span class="o">],</span>
+    <span class="n">norm_num</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163224283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163224283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163224283">Joseph Corneli (Apr 12 2019 at 20:33)</a>:</h4>
+<p>Thanks Chris! I saw <code>push_neg</code> mentioned in the commits.  I'll have to spend some time grokking the rest of the proof but it looks quite comprehensible. Cheers.</p>
+
 
 {% endraw %}
