@@ -74,5 +74,22 @@ permalink: archive/116395maths/47279discontinuityofastepfunction.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163224283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163224283">Joseph Corneli (Apr 12 2019 at 20:33)</a>:</h4>
 <p>Thanks Chris! I saw <code>push_neg</code> mentioned in the commits.  I'll have to spend some time grokking the rest of the proof but it looks quite comprehensible. Cheers.</p>
 
+<a name="163226522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163226522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163226522">Patrick Massot (Apr 12 2019 at 21:00)</a>:</h4>
+<p>Chris is showing you the noble art of knowing all elementary inequality lemmas of mathlib, but there dark side is much quicker, you can replace the end of the proof by:</p>
+<div class="codehilite"><pre><span></span>  { rw [real.dist_eq, abs_of_nonneg] ; linarith },
+  { have I1 : ¬ ξ + δ / 2 ≤ ξ, by linarith,
+    have I2 : ξ ≤ ξ, by linarith,
+    have I3 : (2: ℝ)⁻¹ ≤ 1, by norm_num,
+    simp [real.dist_eq, step_fun, I1, I2, I3] }
+</pre></div>
+
+
+<p>The second half is a bit disappointing, I guess one could have find a better tactic here. Scott?</p>
+
+<a name="163226646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discontinuity%20of%20a%20step%20function/near/163226646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/47279discontinuityofastepfunction.html#163226646">Patrick Massot (Apr 12 2019 at 21:02)</a>:</h4>
+<p>Also, Joe, what is the point of having xi declared as a constant?</p>
+
 
 {% endraw %}

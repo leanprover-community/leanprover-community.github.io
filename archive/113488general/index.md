@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Online Lean editor](09997OnlineLeaneditor.html) (11 messages, latest: Apr 12 2019 at 19:44)
+* [is_X_hom](66519isXhom.html) (56 messages, latest: Apr 12 2019 at 21:04)
 
-* [is_X_hom](66519isXhom.html) (55 messages, latest: Apr 12 2019 at 19:28)
+* [Online Lean editor](09997OnlineLeaneditor.html) (11 messages, latest: Apr 12 2019 at 19:44)
 
 * [simp making a meal of it](35011simpmakingamealofit.html) (25 messages, latest: Apr 12 2019 at 18:59)
 
