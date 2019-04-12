@@ -321,5 +321,20 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/injection%20on%20types/near/163145782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19798injectionontypes.html#163145782">Scott Olson (Apr 11 2019 at 23:18)</a>:</h4>
 <p>I hadn't thought about classical reasoning breaking parametricity but that makes sense. Anything that lets you match on opaque types in some way means you don't actually have parametric polymophism, you have ad hoc polymorphism.</p>
 
+<a name="163149937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/injection%20on%20types/near/163149937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19798injectionontypes.html#163149937">Scott Olson (Apr 12 2019 at 00:42)</a>:</h4>
+<p>To make things completely concrete, this is the classical counterexample to parametricity I didn't think about that was mentioned:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">non_id</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">bool</span>
+<span class="k">then</span> <span class="n">h</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">bnot</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">mp</span> <span class="n">x</span><span class="o">))</span>
+<span class="k">else</span> <span class="n">x</span>
+</pre></div>
+
+<a name="163150126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/injection%20on%20types/near/163150126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19798injectionontypes.html#163150126">Mario Carneiro (Apr 12 2019 at 00:46)</a>:</h4>
+<p>Notably, this definition is <code>noncomputable</code>. It is believed (but not proven, I think) that any computable definition of id is defeq to the obvious one</p>
+
 
 {% endraw %}
