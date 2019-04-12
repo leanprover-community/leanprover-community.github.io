@@ -828,5 +828,14 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163067456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163067456">Patrick Thomas (Apr 11 2019 at 03:47)</a>:</h4>
 <p>Does the use of the <code>by_cases</code> tactic mean that the proof requires classical reasoning?</p>
 
+<a name="163189461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163189461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163189461">Fabian Glöckle (Apr 12 2019 at 13:32)</a>:</h4>
+<p>The <code>by_cases</code>tactic  needs that the proposition is <code>decidable</code>, and tries to create such an instance by typeclass inference. Decidability can be proven within a theory (like the decidable equality of <code>nat</code>in <code>data/nat/basic.lean</code>: <code>instance : decidable_eq ℕ</code>) or be assumed as a classical axiom. This is the line</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+<p>you find in certain files.</p>
+
 
 {% endraw %}
