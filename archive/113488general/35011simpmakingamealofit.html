@@ -1,0 +1,106 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/35011simpmakingamealofit.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html">simp making a meal of it</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163198292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163198292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163198292">Kevin Buzzard (Apr 12 2019 at 15:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simplify</span><span class="bp">.</span><span class="n">rewrite</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">0. [simplify.rewrite] [mul_inv_rev]: (g * h)⁻¹ ==&gt; h⁻¹ * g⁻¹</span>
+<span class="cm">1. [simplify.rewrite] [mul_right_inj]: h⁻¹ * g⁻¹ = h⁻¹ * g⁻¹ ==&gt; h⁻¹ = h⁻¹</span>
+<span class="cm">2. [simplify.rewrite] [inv_inj&#39;]: h⁻¹ = h⁻¹ ==&gt; h = h</span>
+<span class="cm">3. [simplify.rewrite] [eq_self_iff_true]: h = h ==&gt; true</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p><code>simp</code> is making a bit of a meal of this one. Is that to be expected? It doesn't try <code>rfl</code> earlier?</p>
+
+<a name="163199316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199316">Reid Barton (Apr 12 2019 at 15:15)</a>:</h4>
+<p><code>a = a</code> doesn't syntactically match the goal, because the two sides are not syntactically the same</p>
+
+<a name="163199324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199324">Johan Commelin (Apr 12 2019 at 15:16)</a>:</h4>
+<p>Why do you always want the shortest path? You should enjoy the trip, and all the scenery. "The journey is the destination"...</p>
+
+<a name="163199382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199382">Reid Barton (Apr 12 2019 at 15:16)</a>:</h4>
+<p>I guess this is the minimal example of our category theory <code>comp_id</code> woes</p>
+
+<a name="163199443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199443">Johan Commelin (Apr 12 2019 at 15:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Do you mean that <code>a</code> doesn't match <code>h⁻¹ * g⁻¹</code>? That's a pity...</p>
+
+<a name="163199465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199465">Reid Barton (Apr 12 2019 at 15:17)</a>:</h4>
+<p><code>a</code> can't match both sides at once</p>
+
+<a name="163199519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199519">Johan Commelin (Apr 12 2019 at 15:17)</a>:</h4>
+<p>After the 1st simplification step, both sides are identical, right?</p>
+
+<a name="163199597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199597">Reid Barton (Apr 12 2019 at 15:18)</a>:</h4>
+<p>Ohh, you mean after the first step</p>
+
+<a name="163199621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199621">Reid Barton (Apr 12 2019 at 15:18)</a>:</h4>
+<p>yes, then it could. I guess it just applies simp lemmas in some random order</p>
+
+<a name="163199892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163199892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163199892">Rob Lewis (Apr 12 2019 at 15:21)</a>:</h4>
+<p>When I try this it gets to true in two steps. Are you importing anything?</p>
+<div class="codehilite"><pre><span></span>0. [simplify.rewrite] [mul_inv_rev]: (g * h)⁻¹ ==&gt; h⁻¹ * g⁻¹
+1. [simplify.rewrite] [eq_self_iff_true]: h⁻¹ * g⁻¹ = h⁻¹ * g⁻¹ ==&gt; true
+</pre></div>
+
+<a name="163200007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163200007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163200007">Rob Lewis (Apr 12 2019 at 15:22)</a>:</h4>
+<p>What the hell, both of those line numbers should be 0, Zulip is rewriting the second to 1...</p>
+
+<a name="163200015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163200015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163200015">Rob Lewis (Apr 12 2019 at 15:22)</a>:</h4>
+<p>That's confusing.</p>
+
+<a name="163200375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163200375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163200375">Reid Barton (Apr 12 2019 at 15:26)</a>:</h4>
+<p>Oops, I just realized your original statement is not true by defeq</p>
+
+<a name="163203004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163203004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163203004">Kevin Buzzard (Apr 12 2019 at 15:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">concrete_category</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simplify</span><span class="bp">.</span><span class="n">rewrite</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I had a random import at the top of my scratch file! <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span> why did this happen?</p>
+
+<a name="163203098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163203098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163203098">Kevin Buzzard (Apr 12 2019 at 15:58)</a>:</h4>
+<p>Oh -- they are importing algebra.group</p>
+
+<a name="163203126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163203126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163203126">Kevin Buzzard (Apr 12 2019 at 15:59)</a>:</h4>
+<p>I want Lean to try eq_self_iff_true before some random lemmas in algebra_group. What order does simp look for its lemmas?</p>
+
+
+{% endraw %}

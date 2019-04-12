@@ -10,13 +10,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)
+
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (169 messages, latest: Apr 12 2019 at 15:24)
+
 * [Cute lemma](49214Cutelemma.html) (12 messages, latest: Apr 11 2019 at 21:37)
 
 * [define a function by cases](55997defineafunctionbycases.html) (26 messages, latest: Apr 11 2019 at 18:14)
 
 * [black hole](76230blackhole.html) (9 messages, latest: Apr 11 2019 at 08:46)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (168 messages, latest: Apr 11 2019 at 04:27)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (108 messages, latest: Apr 11 2019 at 02:46)
 
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [nat.cast_coe](45907natcastcoe.html) (6 messages, latest: Apr 09 2019 at 18:09)
 
 * [Eliminating into Prop woes](75403EliminatingintoPropwoes.html) (3 messages, latest: Apr 09 2019 at 16:42)
-
-* [cast woes](88074castwoes.html) (76 messages, latest: Apr 09 2019 at 16:42)
 
 * [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
 
