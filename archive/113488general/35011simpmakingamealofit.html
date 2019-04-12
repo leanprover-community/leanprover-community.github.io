@@ -102,5 +102,51 @@ permalink: archive/113488general/35011simpmakingamealofit.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163203126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163203126">Kevin Buzzard (Apr 12 2019 at 15:59)</a>:</h4>
 <p>I want Lean to try eq_self_iff_true before some random lemmas in algebra_group. What order does simp look for its lemmas?</p>
 
+<a name="163203197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163203197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163203197">Kevin Buzzard (Apr 12 2019 at 16:00)</a>:</h4>
+<p>I also don't know how to work out how they are getting to algebra.group</p>
+
+<a name="163204710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163204710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163204710">Rob Lewis (Apr 12 2019 at 16:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simplify</span><span class="bp">.</span><span class="n">rewrite</span> <span class="n">true</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">1000000</span><span class="o">]</span> <span class="n">eq_self_iff_true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is there any danger to setting <code>eq_self_iff_true</code> to be high priority globally?</p>
+
+<a name="163204907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163204907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163204907">Rob Lewis (Apr 12 2019 at 16:24)</a>:</h4>
+<p>I wish I had tried this while I was still at the office so I could profile on my desktop...</p>
+
+<a name="163205668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163205668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163205668">Jesse Michael Han (Apr 12 2019 at 16:35)</a>:</h4>
+<p>on my machine, with the <code>category_theory</code> import, execution time of <code>simp</code> is like <code>650ms</code>, but with just the <code>algebra.group</code> import, it goes back down to <code>177ms</code> (with the same unnecessarily large simp set)</p>
+
+<a name="163205799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163205799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163205799">Jesse Michael Han (Apr 12 2019 at 16:37)</a>:</h4>
+<p>sadly <code>eblast</code> is slower than <code>simp</code> in either case (and i imagine there are far more <code>simp</code> lemmas than <code>ematch</code> lemmas in the imports):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">ematch</span><span class="o">]</span> <span class="n">mul_inv_rev</span> <span class="n">mul_right_inj</span> <span class="n">eq_self_iff_true</span> <span class="n">inv_inj&#39;</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">h</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>  <span class="c1">-- 300ms</span>
+</pre></div>
+
+<a name="163206328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163206328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163206328">Rob Lewis (Apr 12 2019 at 16:44)</a>:</h4>
+<p>I'm curious about the effect if you set priority 1000000 low in the import hierarchy. Does it make a noticeable difference to compiling mathlib?</p>
+
+<a name="163206366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20making%20a%20meal%20of%20it/near/163206366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35011simpmakingamealofit.html#163206366">Rob Lewis (Apr 12 2019 at 16:45)</a>:</h4>
+<p>I'm trying while I make dinner.</p>
+
 
 {% endraw %}

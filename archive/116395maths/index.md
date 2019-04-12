@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (170 messages, latest: Apr 12 2019 at 16:00)
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (169 messages, latest: Apr 12 2019 at 15:24)
+* [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)
 
 * [Cute lemma](49214Cutelemma.html) (12 messages, latest: Apr 11 2019 at 21:37)
 

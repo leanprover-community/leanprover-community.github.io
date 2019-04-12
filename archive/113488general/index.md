@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp making a meal of it](35011simpmakingamealofit.html) (16 messages, latest: Apr 12 2019 at 15:59)
+* [simp making a meal of it](35011simpmakingamealofit.html) (23 messages, latest: Apr 12 2019 at 16:45)
 
-* [Online Lean editor](09997OnlineLeaneditor.html) (2 messages, latest: Apr 12 2019 at 15:24)
+* [Online Lean editor](09997OnlineLeaneditor.html) (3 messages, latest: Apr 12 2019 at 16:19)
 
 * [injection on types](19798injectionontypes.html) (62 messages, latest: Apr 12 2019 at 01:02)
 
