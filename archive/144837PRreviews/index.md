@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (26 messages, latest: Apr 10 2019 at 18:37)
+* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (30 messages, latest: Apr 13 2019 at 08:05)
 
 * [#893 whiskering natural isomorphisms](14855893whiskeringnaturalisomorphisms.html) (2 messages, latest: Apr 08 2019 at 23:56)
 
