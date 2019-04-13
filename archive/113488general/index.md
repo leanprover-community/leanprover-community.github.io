@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [is_X_hom](66519isXhom.html) (56 messages, latest: Apr 12 2019 at 21:04)
+* [is_X_hom](66519isXhom.html) (57 messages, latest: Apr 12 2019 at 23:02)
 
 * [Online Lean editor](09997OnlineLeaneditor.html) (11 messages, latest: Apr 12 2019 at 19:44)
 
