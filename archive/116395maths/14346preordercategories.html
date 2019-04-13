@@ -15,5 +15,61 @@ permalink: archive/116395maths/14346preordercategories.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/162893227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#162893227">Johan Commelin (Apr 09 2019 at 09:04)</a>:</h4>
 <p>Now that categories live in <code>Prop</code>, should we turn preorder categories into <code>category</code> instead of <code>small_category</code> to get rid of the <code>ulift</code>-<code>plift</code> dance? <a href="https://github.com/leanprover-community/mathlib/blob/2f088fc1cb98c6e789f3c61e594e9c85a121d139/src/category_theory/category.lean#L117" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/2f088fc1cb98c6e789f3c61e594e9c85a121d139/src/category_theory/category.lean#L117">https://github.com/leanprover-community/mathlib/blob/2f088fc1cb98c6e789f3c61e594e9c85a121d139/src/category_theory/category.lean#L117</a></p>
 
+<a name="163265564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265564">Johan Commelin (Apr 13 2019 at 13:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> What do you think about this? (Also in light of <a href="https://github.com/leanprover-community/mathlib/issues/926" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/926">#926</a>.)</p>
+
+<a name="163265579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265579">Scott Morrison (Apr 13 2019 at 13:29)</a>:</h4>
+<p>No, it turns out to be a bad idea. I spent a while using it</p>
+
+<a name="163265580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265580">Scott Morrison (Apr 13 2019 at 13:29)</a>:</h4>
+<p>in fact, the whole generalisation to <code>Sort</code> was a bit dubious</p>
+
+<a name="163265624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265624">Johan Commelin (Apr 13 2019 at 13:30)</a>:</h4>
+<p>Hmm... that's a pity</p>
+
+<a name="163265628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265628">Scott Morrison (Apr 13 2019 at 13:30)</a>:</h4>
+<p>it's _possible_ that there is a good fix, actually</p>
+
+<a name="163265638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265638">Scott Morrison (Apr 13 2019 at 13:31)</a>:</h4>
+<p>the problem was that when morphisms are in <code>Prop</code>, because of proof irrelevance the simplifier won't touch them</p>
+
+<a name="163265642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265642">Scott Morrison (Apr 13 2019 at 13:31)</a>:</h4>
+<p>so sometimes I'd have something I knew was the identity, but couldn't get there by simp</p>
+
+<a name="163265645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265645">Scott Morrison (Apr 13 2019 at 13:31)</a>:</h4>
+<p>and then if I had a functor into a "honest" category, I couldn't show that <code>F.map f</code> was the identity.</p>
+
+<a name="163265703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265703">Johan Commelin (Apr 13 2019 at 13:32)</a>:</h4>
+<p>Hmm... I see. So you would need simp-lemmas specialised to "homs-in-Prop" categories...</p>
+
+<a name="163265706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265706">Scott Morrison (Apr 13 2019 at 13:32)</a>:</h4>
+<p>a possible way to fix it is just to state the lemma that if <code>f : X \hom X</code> is Prop level, then <code>F.map f = eq_to_hom (congr_arg F.obj X)</code></p>
+
+<a name="163265718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265718">Johan Commelin (Apr 13 2019 at 13:33)</a>:</h4>
+<p>That simplify <code>F.map f</code> for any <code>f : X \hom X</code> to the identity on <code>F.obj X</code></p>
+
+<a name="163265719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265719">Scott Morrison (Apr 13 2019 at 13:33)</a>:</h4>
+<p>no -- it's important to use <code>eq_to_hom</code> if you don't want eq.rec hell :-)</p>
+
+<a name="163265722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265722">Scott Morrison (Apr 13 2019 at 13:33)</a>:</h4>
+<p>I may have actually tried this. It's too late for me to remember.</p>
+
+<a name="163265724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/preorder%20categories/near/163265724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14346preordercategories.html#163265724">Scott Morrison (Apr 13 2019 at 13:33)</a>:</h4>
+<p>...</p>
+
 
 {% endraw %}

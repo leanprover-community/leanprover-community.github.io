@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [preorder categories](14346preordercategories.html) (15 messages, latest: Apr 13 2019 at 13:33)
+
 * [discontinuity of a step function](47279discontinuityofastepfunction.html) (6 messages, latest: Apr 12 2019 at 21:02)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (170 messages, latest: Apr 12 2019 at 16:00)
@@ -35,8 +37,6 @@ permalink: archive/116395maths/index.html
 * [Eliminating into Prop woes](75403EliminatingintoPropwoes.html) (3 messages, latest: Apr 09 2019 at 16:42)
 
 * [presheaves](99031presheaves.html) (11 messages, latest: Apr 09 2019 at 10:56)
-
-* [preorder categories](14346preordercategories.html) (1 message, latest: Apr 09 2019 at 09:04)
 
 * [has_sum / has_fderiv](20955hassumhasfderiv.html) (39 messages, latest: Apr 09 2019 at 08:44)
 
