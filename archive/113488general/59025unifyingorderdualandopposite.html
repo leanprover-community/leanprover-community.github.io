@@ -1,0 +1,67 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/59025unifyingorderdualandopposite.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html">unifying `order_dual` and `opposite`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163257782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257782">Scott Morrison (Apr 13 2019 at 09:32)</a>:</h4>
+<p>I would really like to unify <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/basic.lean#L127" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/basic.lean#L127"><code>order_dual</code></a> in <code>order/basic.lean</code> with <a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/opposites.lean#L35" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/opposites.lean#L35"><code>opposite</code></a> in <code>category_theory/opposites.lean</code>.</p>
+
+<a name="163257839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257839">Scott Morrison (Apr 13 2019 at 09:34)</a>:</h4>
+<p>They are talking about exactly the same thing, and to do presheafs and sheafs nicely I think we'll want to reflect a lot of the order structure on open sets up in category theoretic language. On the category theory side we'll be talking about <code>(opens X)\op</code>, and it's very sad at the moment there isn't just a <code>complete_lattice</code> immediately available, precisely because <code>order_dual</code> and <code>opposite</code> are not identical.</p>
+
+<a name="163257852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257852">Scott Morrison (Apr 13 2019 at 09:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, any ideas about how to proceed?</p>
+
+<a name="163257899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257899">Mario Carneiro (Apr 13 2019 at 09:36)</a>:</h4>
+<p>That sounds difficult... You would have to have <code>preorder</code> be the same thing as <code>category</code></p>
+
+<a name="163257901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257901">Scott Morrison (Apr 13 2019 at 09:36)</a>:</h4>
+<p>Why is that?</p>
+
+<a name="163257912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257912">Scott Morrison (Apr 13 2019 at 09:37)</a>:</h4>
+<p>I was just thinking to move the definition <code>def opposite (C : Sort u₁) : Sort u₁ := C</code> (but nothing else) way down the import tree, and then search and replace <code>order_dual</code> for <code>opposite</code>.</p>
+
+<a name="163257915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257915">Mario Carneiro (Apr 13 2019 at 09:37)</a>:</h4>
+<p>You could equip <code>opposite</code> with a preorder separate from its category, although you then have a diamond</p>
+
+<a name="163257917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257917">Scott Morrison (Apr 13 2019 at 09:37)</a>:</h4>
+<p>oh, I see, a diamond</p>
+
+<a name="163257961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257961">Scott Morrison (Apr 13 2019 at 09:38)</a>:</h4>
+<p>there would be two ways to get <code>category (opens X)\op</code></p>
+
+<a name="163257963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257963">Scott Morrison (Apr 13 2019 at 09:38)</a>:</h4>
+<p>either make the opposite preorder, then build a category from that</p>
+
+<a name="163257965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257965">Scott Morrison (Apr 13 2019 at 09:38)</a>:</h4>
+<p>or make the category from the preorder, and take the opposite category</p>
+
+<a name="163257966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257966">Scott Morrison (Apr 13 2019 at 09:38)</a>:</h4>
+<p>... tedious</p>
+
+<a name="163257967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unifying%20%60order_dual%60%20and%20%60opposite%60/near/163257967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59025unifyingorderdualandopposite.html#163257967">Mario Carneiro (Apr 13 2019 at 09:38)</a>:</h4>
+<p>if you are lucky it might be defeq</p>
+
+
+{% endraw %}

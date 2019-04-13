@@ -1,0 +1,81 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/86531multithreadingintactics.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html">multithreading in tactics?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163257466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163257466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163257466">Scott Morrison (Apr 13 2019 at 09:25)</a>:</h4>
+<p>There's no access to multithreading from inside a <code>begin ... end</code> block, is there?</p>
+
+<a name="163257478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163257478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163257478">Scott Morrison (Apr 13 2019 at 09:25)</a>:</h4>
+<p><code>library_search</code> would <em>love</em> to fire off multiple tasks and just get an answer from the first one to succeed.</p>
+
+<a name="163257976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163257976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163257976">Mario Carneiro (Apr 13 2019 at 09:39)</a>:</h4>
+<p>use <code>task</code></p>
+
+<a name="163257977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163257977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163257977">Mario Carneiro (Apr 13 2019 at 09:39)</a>:</h4>
+<p>I've tested it to work in tactics</p>
+
+<a name="163257979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163257979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163257979">Scott Morrison (Apr 13 2019 at 09:39)</a>:</h4>
+<p>can you fire off 10, and ask for the first completion?</p>
+
+<a name="163258025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258025">Mario Carneiro (Apr 13 2019 at 09:40)</a>:</h4>
+<p>Not sure about nondeterministic uses though</p>
+
+<a name="163258028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258028">Mario Carneiro (Apr 13 2019 at 09:40)</a>:</h4>
+<p>I had some proposals for nondeterminism primitives but they never landed in core AFAIK</p>
+
+<a name="163258101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258101">Scott Morrison (Apr 13 2019 at 09:43)</a>:</h4>
+<p>It seems there's no way to get the first completion. Is this the entire API?</p>
+<div class="codehilite"><pre><span></span>meta constant {u} task : Type u → Type u
+
+namespace task
+
+meta constant {u} get {α : Type u} (t : task α) : α
+protected meta constant {u} pure {α : Type u} (t : α) : task α
+protected meta constant {u v} map {α : Type u} {β : Type v} (f : α → β) (t : task α) : task β
+protected meta constant {u} flatten {α : Type u} : task (task α) → task α
+
+protected meta def {u v} bind {α : Type u} {β : Type v} (t : task α) (f : α → task β) : task β :=
+task.flatten (task.map f t)
+
+@[inline]
+meta def {u} delay {α : Type u} (f : unit → α) : task α :=
+task.map f (task.pure ())
+
+end task
+</pre></div>
+
+<a name="163258170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258170">Mario Carneiro (Apr 13 2019 at 09:45)</a>:</h4>
+<p>yes, that's it. It's more powerful than my initial impression, but much less powerful than general threading</p>
+
+<a name="163258175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258175">Mario Carneiro (Apr 13 2019 at 09:45)</a>:</h4>
+<p>remember nondeterminism + functional programming = bad</p>
+
+<a name="163258223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258223">Mario Carneiro (Apr 13 2019 at 09:46)</a>:</h4>
+<p>But it's meta anyway so I don't really know why the kid gloves</p>
+
+<a name="163258233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multithreading%20in%20tactics%3F/near/163258233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86531multithreadingintactics.html#163258233">Mario Carneiro (Apr 13 2019 at 09:46)</a>:</h4>
+<p>in fact this could probably just have the meta removed, it's a perfectly valid pure interface</p>
+
+
+{% endraw %}
