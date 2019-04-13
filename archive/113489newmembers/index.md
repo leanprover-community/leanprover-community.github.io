@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [simpler proof 0<2?](92160simplerproof02.html) (11 messages, latest: Apr 13 2019 at 00:55)
+* [simpler proof 0<2?](92160simplerproof02.html) (17 messages, latest: Apr 13 2019 at 01:43)
 
 * [Induction](51886Induction.html) (110 messages, latest: Apr 12 2019 at 13:32)
 

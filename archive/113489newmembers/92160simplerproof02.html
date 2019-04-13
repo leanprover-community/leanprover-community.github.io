@@ -66,5 +66,41 @@ permalink: archive/113489newmembers/92160simplerproof02.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163239606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163239606">Scott Morrison (Apr 13 2019 at 00:55)</a>:</h4>
 <p>I wonder a bit why we don't call <code>dsimp</code> on the generated proofs themselves, for things like norm_num. We don't have all the relevant lemmas written for simplifying proofs themselves, but I think sometimes it's valuable --- especially if people are copying and pasting tactic generated proofs.</p>
 
+<a name="163241061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241061">Mario Carneiro (Apr 13 2019 at 01:30)</a>:</h4>
+<p>I've tried it, lean doesn't like to simplify proofs</p>
+
+<a name="163241079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241079">Mario Carneiro (Apr 13 2019 at 01:31)</a>:</h4>
+<p>which means you have to deal with any cruft added by upstream tactics (this one is simp's fault)</p>
+
+<a name="163241284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241284">Mario Carneiro (Apr 13 2019 at 01:36)</a>:</h4>
+<p>There are a lot of easy simplifications you can apply; one easy one I would like to do is if a subterm of P proves the same theorem T as P itself, then you can replace P with the subterm. This looks really obviously unprofessional in <code>#explode</code>, I'm thinking "why are you still working? You did it already". This is part of the metamath workflow, but somehow there isn't a good way to do this in lean and so <code>#print foo</code> just shows you crappy proofs most of the time</p>
+
+<a name="163241546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241546">Scott Morrison (Apr 13 2019 at 01:42)</a>:</h4>
+<p>Hmm... I'm pretty sure I've simplified proofs in the past. I've certainly made use of the lemmas</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma congr_arg_refl {α : Sort*} {β : Sort*} {f : α → β} {a : α} :
+  congr_arg f (eq.refl a) = eq.refl (f a) := rfl
+
+@[simp] lemma congr_fun_refl {α : Sort*} {β : Sort*} {f : α → β} {a : α} :
+  congr_fun (eq.refl f) a = eq.refl (f a) := rfl
+
+@[simp] lemma congr_refl_fun {α : Sort*} {β : Sort*} {f : α → β} {a₁ a₂ : α} (h : a₁ = a₂) :
+  congr (eq.refl f) h = congr_arg f h := rfl
+
+@[simp] lemma congr_refl_arg {α : Sort*} {β : Sort*} {f₁ f₂ : α → β} {a : α} (h : f₁ = f₂) :
+  congr h (eq.refl a) = congr_fun h a := rfl
+</pre></div>
+
+<a name="163241554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241554">Scott Morrison (Apr 13 2019 at 01:42)</a>:</h4>
+<p>I wonder when you can and can't run the simplifier on proofs.</p>
+
+<a name="163241586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simpler%20proof%200%3C2%3F/near/163241586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92160simplerproof02.html#163241586">Scott Morrison (Apr 13 2019 at 01:43)</a>:</h4>
+<p>I've needed these lemmas times that a strange eq.rec has appeared, and I can't even see the underlying non-definitional equality that caused the problem, because it's stacked up inside a million <code>congr</code> and <code>eq.mpr</code> and <code>eq.symm</code>s, etc.</p>
+
 
 {% endraw %}
