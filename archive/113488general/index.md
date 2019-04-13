@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [multithreading in tactics?](86531multithreadingintactics.html) (12 messages, latest: Apr 13 2019 at 09:46)
+* [unifying `order_dual` and `opposite`](59025unifyingorderdualandopposite.html) (14 messages, latest: Apr 13 2019 at 11:47)
 
-* [unifying `order_dual` and `opposite`](59025unifyingorderdualandopposite.html) (13 messages, latest: Apr 13 2019 at 09:38)
+* [multithreading in tactics?](86531multithreadingintactics.html) (12 messages, latest: Apr 13 2019 at 09:46)
 
 * [is_X_hom](66519isXhom.html) (57 messages, latest: Apr 12 2019 at 23:02)
 
