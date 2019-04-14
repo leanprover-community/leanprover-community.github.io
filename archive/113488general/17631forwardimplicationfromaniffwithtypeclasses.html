@@ -1,0 +1,83 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html">forward implication from an `iff`, with typeclasses</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163308580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308580">Scott Morrison (Apr 14 2019 at 09:05)</a>:</h4>
+<p>I've discovered a gap in <code>library_search</code>, and am having trouble fixing it.</p>
+
+<a name="163308626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308626">Scott Morrison (Apr 14 2019 at 09:06)</a>:</h4>
+<p>The essential problem is that many library lemmas are <code>iff</code>, and we have to construct the forward and backward implications separately, so they can be <code>apply</code>d.</p>
+
+<a name="163308627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308627">Scott Morrison (Apr 14 2019 at 09:06)</a>:</h4>
+<p>It's very important that this construction step is fast, because we're repeating this step over every relevant imported lemma in the library.</p>
+
+<a name="163308686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308686">Scott Morrison (Apr 14 2019 at 09:08)</a>:</h4>
+<p>My current approach is to use <br>
+<code>iff_mp_core</code> in <code>tactic/basic.lean</code>. This takes an expression along with its known type, and builds the corresponding <code>.mp</code> after dropping down through all the arguments.</p>
+
+<a name="163308696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308696">Scott Morrison (Apr 14 2019 at 09:09)</a>:</h4>
+<p>As an example, on <code>le_mul_iff_one_le_left</code> this creates the expression</p>
+<div class="codehilite"><pre><span></span>λ {α : Type u} [_inst_1 : linear_ordered_semiring α] {a b : α} (hb : b &gt; 0), (le_mul_iff_one_le_left hb).mp
+</pre></div>
+
+<a name="163308744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308744">Scott Morrison (Apr 14 2019 at 09:10)</a>:</h4>
+<p>and at this point you can see my problem... The instance <code>[_inst_1]</code> is not available in the later arguments or body of the lambda, so we get errors:</p>
+
+<a name="163308746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308746">Scott Morrison (Apr 14 2019 at 09:10)</a>:</h4>
+<p>e.g. </p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+α : Type u,
+_inst_1 : linear_ordered_semiring α,
+a b : α
+⊢ has_zero αLean
+</pre></div>
+
+
+<p>at <code>b &gt; 0</code>.</p>
+
+<a name="163308747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163308747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163308747">Scott Morrison (Apr 14 2019 at 09:10)</a>:</h4>
+<p>... help?!</p>
+
+<a name="163309244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309244">Mario Carneiro (Apr 14 2019 at 09:27)</a>:</h4>
+<p>Why don't you skip the <code>apply</code> altogether and use <code>unify</code> instead?</p>
+
+<a name="163309301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309301">Mario Carneiro (Apr 14 2019 at 09:29)</a>:</h4>
+<p>actually I can't see the problem as you have articulated it. The <code>iff_mp_core</code> expression already has the instances filled in</p>
+
+<a name="163309686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309686">Scott Morrison (Apr 14 2019 at 09:42)</a>:</h4>
+<p>The problem is that the expression that <code>iff_mp_core</code> produces doesn't even typecheck</p>
+
+<a name="163309692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309692">Scott Morrison (Apr 14 2019 at 09:42)</a>:</h4>
+<p>Because when we put all the lambdas back in place, the instances don't enter the instance cache</p>
+
+<a name="163309709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309709">Scott Morrison (Apr 14 2019 at 09:43)</a>:</h4>
+<p>Note that <code>iff_mp_core</code> is not using <code>to_expr</code> or anything, it's just building <code>expr</code> objects by hand.</p>
+
+<a name="163309777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309777">Scott Morrison (Apr 14 2019 at 09:45)</a>:</h4>
+<p>Sorry, I'll try to make a MWE.</p>
+
+
+{% endraw %}
