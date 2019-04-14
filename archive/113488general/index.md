@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Procedure for PRs](26950ProcedureforPRs.html) (1 message, latest: Apr 14 2019 at 13:48)
+* [dreaded red blocks of death are back](09383dreadedredblocksofdeathareback.html) (2 messages, latest: Apr 14 2019 at 14:38)
+
+* [Procedure for PRs](26950ProcedureforPRs.html) (4 messages, latest: Apr 14 2019 at 14:29)
 
 * [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (12 messages, latest: Apr 14 2019 at 12:51)
 
