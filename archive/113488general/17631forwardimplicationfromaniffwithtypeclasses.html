@@ -79,5 +79,272 @@ a b : α
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163309777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163309777">Scott Morrison (Apr 14 2019 at 09:45)</a>:</h4>
 <p>Sorry, I'll try to make a MWE.</p>
 
+<a name="163310324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163310324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163310324">Mario Carneiro (Apr 14 2019 at 10:02)</a>:</h4>
+<p>It is exactly because it is building exprs by hand that it doesn't have to worry about typeclass inference or to_expr or anything</p>
+
+<a name="163310328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163310328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163310328">Mario Carneiro (Apr 14 2019 at 10:02)</a>:</h4>
+<p>it's just a fully elaborated and type correct expression</p>
+
+<a name="163310929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163310929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163310929">Scott Morrison (Apr 14 2019 at 10:22)</a>:</h4>
+<p>Okay, I agree, my diagnosis of the problem was completely wrong. Nevertheless, I can't get <code>apply</code> to work here. Here's a self-contained instance of the problem:</p>
+<div class="codehilite"><pre><span></span>import algebra.ordered_ring
+
+#print le_mul_iff_one_le_left
+-- theorem le_mul_iff_one_le_left : ∀ {α : Type u} [_inst_1 : linear_ordered_semiring α] {a b : α}, b &gt; 0 → (b ≤ a * b ↔ 1 ≤ a) :=
+
+-- This works fine:
+def oom {a b : ℕ} (h : 0 &lt; b) (w : 1 ≤ a) : b ≤ a * b :=
+(le_mul_iff_one_le_left h).mpr w
+
+open tactic
+meta def f : tactic unit :=
+do d ← get_decl `le_mul_iff_one_le_left,
+   let n := d.to_name,
+   let t := d.type,
+   e ← mk_const n,
+   mp ← iff_mpr_core e t,
+   apply mp,
+   skip
+
+example {a b : ℕ} : b ≤ a * b :=
+begin
+  f,
+/-
+invalid apply tactic, failed to unify
+  b ≤ a * b
+with
+  ?m_3 ≤ ?m_4 * ?m_3
+-/
+end
+</pre></div>
+
+<a name="163310942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163310942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163310942">Scott Morrison (Apr 14 2019 at 10:23)</a>:</h4>
+<p>oh, crap, it's universes:</p>
+<div class="codehilite"><pre><span></span>set_option pp.all true
+
+example {a b : ℕ} : b ≤ a * b :=
+begin
+  f,
+/-
+invalid apply tactic, failed to unify
+  @has_le.le.{0} nat nat.has_le b (@has_mul.mul.{0} nat nat.has_mul a b)
+with
+  @has_le.le.{u} ?m_1
+    (@preorder.to_has_le.{u} ?m_1
+       (@partial_order.to_preorder.{u} ?m_1
+          (@ordered_comm_monoid.to_partial_order.{u} ?m_1
+             (@ordered_cancel_comm_monoid.to_ordered_comm_monoid.{u} ?m_1
+                (@ordered_semiring.to_ordered_cancel_comm_monoid.{u} ?m_1
+                   (@linear_ordered_semiring.to_ordered_semiring.{u} ?m_1 ?m_2))))))
+    ?m_3
+    (@has_mul.mul.{u} ?m_1
+       (@mul_zero_class.to_has_mul.{u} ?m_1
+          (@semiring.to_mul_zero_class.{u} ?m_1
+             (@ordered_semiring.to_semiring.{u} ?m_1 (@linear_ordered_semiring.to_ordered_semiring.{u} ?m_1 ?m_2))))
+       ?m_4
+       ?m_3)
+-/
+end
+</pre></div>
+
+<a name="163310998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163310998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163310998">Scott Morrison (Apr 14 2019 at 10:25)</a>:</h4>
+<p>Or is it? I guess I don't know how <code>apply</code> deals with those <code>u</code>s.</p>
+
+<a name="163311368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311368">Scott Morrison (Apr 14 2019 at 10:36)</a>:</h4>
+<p>Oooh... I think I see. The type coming out of <code>d.type</code> has a fixed universe already plugged in. The type for <code>e</code> coming out of <code>mk_const</code> (correctly) has fresh universe metavariables.</p>
+
+<a name="163311369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311369">Scott Morrison (Apr 14 2019 at 10:36)</a>:</h4>
+<p>Wah!</p>
+
+<a name="163311380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311380">Scott Morrison (Apr 14 2019 at 10:37)</a>:</h4>
+<p>I think this means I have to run <code>infer_type e</code> instead of just using <code>d.type</code>.<br>
+<span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="163311384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311384">Scott Morrison (Apr 14 2019 at 10:37)</a>:</h4>
+<p>Unfortunately this is slow, and will kill <code>library_search</code>, I think. :-(</p>
+
+<a name="163311446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311446">Mario Carneiro (Apr 14 2019 at 10:39)</a>:</h4>
+<p>just create a bunch of metavariables for the declaration's universe variables and substitute</p>
+
+<a name="163311515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311515">Scott Morrison (Apr 14 2019 at 10:41)</a>:</h4>
+<p>It seems <code>infer_type</code> is not actually a problem (this is strange, as previously it seemed it was).</p>
+
+<a name="163311518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311518">Scott Morrison (Apr 14 2019 at 10:41)</a>:</h4>
+<p>Let me actually profile before deciding whether to do the universe substitution.</p>
+
+<a name="163311564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311564">Scott Morrison (Apr 14 2019 at 10:42)</a>:</h4>
+<p>In any case:</p>
+<div class="codehilite"><pre><span></span>example {a b : ℕ} (h : a ≥ 1): b ≤ a * b :=
+by library_search -- exact le_mul_of_ge_one_left&#39; (by norm_num) h
+</pre></div>
+
+<a name="163311566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311566">Scott Morrison (Apr 14 2019 at 10:42)</a>:</h4>
+<p>(well, not quite --- it does run <code>norm_num</code> to discharge the arithmetic goals, but for now it prints the term <code>norm_num</code> produces, which is no good)</p>
+
+<a name="163311567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311567">Mario Carneiro (Apr 14 2019 at 10:42)</a>:</h4>
+<p>the <code>expr</code> substitution functions should be very fast, faster than <code>apply</code> since <code>apply</code> does that among many other things</p>
+
+<a name="163311570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311570">Scott Morrison (Apr 14 2019 at 10:42)</a>:</h4>
+<p>I know how to fix this, but need to work out how to do substring replacement. :-)</p>
+
+<a name="163311580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311580">Mario Carneiro (Apr 14 2019 at 10:43)</a>:</h4>
+<p>what's the issue / what are you aiming for?</p>
+
+<a name="163311581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311581">Scott Morrison (Apr 14 2019 at 10:43)</a>:</h4>
+<p>The problem has just been the <code>library_search</code> has to date been failing to apply any <code>iff</code> lemmas that involved universes!</p>
+
+<a name="163311583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311583">Scott Morrison (Apr 14 2019 at 10:43)</a>:</h4>
+<p>Which is a lot of them</p>
+
+<a name="163311585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311585">Mario Carneiro (Apr 14 2019 at 10:43)</a>:</h4>
+<p>you shouldn't be running <code>norm_num</code> as part of a library search, that will kill your performance</p>
+
+<a name="163311597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311597">Scott Morrison (Apr 14 2019 at 10:44)</a>:</h4>
+<p>hmm..</p>
+
+<a name="163311632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311632">Scott Morrison (Apr 14 2019 at 10:44)</a>:</h4>
+<p>it seems okay on my example set</p>
+
+<a name="163311636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311636">Mario Carneiro (Apr 14 2019 at 10:44)</a>:</h4>
+<p>I'm really confused on your goals now though</p>
+
+<a name="163311640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311640">Scott Morrison (Apr 14 2019 at 10:44)</a>:</h4>
+<p>oh, sorry</p>
+
+<a name="163311641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311641">Scott Morrison (Apr 14 2019 at 10:44)</a>:</h4>
+<p>the norm_num issue is separate</p>
+
+<a name="163311642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311642">Mario Carneiro (Apr 14 2019 at 10:44)</a>:</h4>
+<p>It should be a really simple dumb search to be performant on the whole library</p>
+
+<a name="163311653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311653">Scott Morrison (Apr 14 2019 at 10:45)</a>:</h4>
+<p>okay... let's now change topics to norm_num. :-)</p>
+
+<a name="163311654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311654">Mario Carneiro (Apr 14 2019 at 10:45)</a>:</h4>
+<p>if you can't afford to substitute metavariables you certainly can't afford <code>norm_num</code></p>
+
+<a name="163311655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311655">Scott Morrison (Apr 14 2019 at 10:45)</a>:</h4>
+<p>I really want to be able to solve problems like this:</p>
+<div class="codehilite"><pre><span></span>example {a b : ℕ} (h : a * 2 ≤ b) : a ≤ b / 2 :=
+by library_search -- exact (nat.le_div_iff_mul_le a b XXX).mpr h
+</pre></div>
+
+<a name="163311662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311662">Scott Morrison (Apr 14 2019 at 10:46)</a>:</h4>
+<p>where <code>XXX</code> should be <code>dec_trivial</code> or <code>(by norm_num)</code></p>
+
+<a name="163311704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311704">Scott Morrison (Apr 14 2019 at 10:46)</a>:</h4>
+<p>The problem is that too many library lemmas have arithmetic side conditions.</p>
+
+<a name="163311706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311706">Mario Carneiro (Apr 14 2019 at 10:46)</a>:</h4>
+<p>You should note the initial success to shortlist it and come back to it later</p>
+
+<a name="163311717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311717">Mario Carneiro (Apr 14 2019 at 10:47)</a>:</h4>
+<p>Or just give them back as subgoals</p>
+
+<a name="163311764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311764">Scott Morrison (Apr 14 2019 at 10:48)</a>:</h4>
+<p>no, giving back subgoals won't work --- there are way too many lemmas that successfully <code>apply</code>, but the hypotheses are just completely irrelevant to the problem you're actually working on</p>
+
+<a name="163311770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311770">Mario Carneiro (Apr 14 2019 at 10:48)</a>:</h4>
+<p>I think a useful and general approach is to try to rank successes by how similar they are to the goal</p>
+
+<a name="163311787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311787">Mario Carneiro (Apr 14 2019 at 10:49)</a>:</h4>
+<p>i.e. don't necessarily close the goal outright but give some possible matching lemmas</p>
+
+<a name="163311790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311790">Scott Morrison (Apr 14 2019 at 10:49)</a>:</h4>
+<p>Sorry -- do you mean how similar the newly generated goals (after the initial apply) are to the original goal?</p>
+
+<a name="163311842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311842">Scott Morrison (Apr 14 2019 at 10:50)</a>:</h4>
+<p>The problem is there are many lemmas whose conclusion is just <code>a \leq b</code>, and they only really differ in their hypotheses.</p>
+
+<a name="163311844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311844">Mario Carneiro (Apr 14 2019 at 10:50)</a>:</h4>
+<p>I mean how "deeply" the goal and hypotheses match with the target and things in the context</p>
+
+<a name="163311856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311856">Scott Morrison (Apr 14 2019 at 10:51)</a>:</h4>
+<p>Ok.</p>
+
+<a name="163311864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311864">Scott Morrison (Apr 14 2019 at 10:51)</a>:</h4>
+<p>So at the moment I only report lemmas that match so deeply that <code>solve_by_elim</code> can solve all the newly generated goals, from local hypotheses</p>
+
+<a name="163311866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311866">Mario Carneiro (Apr 14 2019 at 10:51)</a>:</h4>
+<p>I'm still thinking one step proofs here, but it's not an immediate fail if some hypotheses can't be found in the context</p>
+
+<a name="163311911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311911">Scott Morrison (Apr 14 2019 at 10:52)</a>:</h4>
+<p>Okay.</p>
+
+<a name="163311928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311928">Mario Carneiro (Apr 14 2019 at 10:53)</a>:</h4>
+<p>If you like, you could try splitting into two tactics, one that finds likely candidates and another more <code>tidy</code>-like tactic that tries to kill the subgoals of the candidates</p>
+
+<a name="163311929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311929">Scott Morrison (Apr 14 2019 at 10:53)</a>:</h4>
+<p>Even just: "Apply a library lemma, and then as many as possible local hypotheses. Return the library lemma for which some combination of [number of applied hypotheses]/[number of remaining goals] is 'best'".</p>
+
+<a name="163311936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311936">Scott Morrison (Apr 14 2019 at 10:53)</a>:</h4>
+<p>This follows your description of trying to get good "matching" with the local goals/hypotheses</p>
+
+<a name="163311998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163311998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163311998">Mario Carneiro (Apr 14 2019 at 10:55)</a>:</h4>
+<p>Especially if you can't close the goal, though, I think you should consider reporting multiple matches. If you can display the subgoals for each case I could quickly look through them to see things like "this one needs 0 &gt; 2, no good, that one needs 2 | x, no good, that one says x &lt; x + 1, ok let's try that"</p>
+
+<a name="163312119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163312119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163312119">Scott Morrison (Apr 14 2019 at 10:58)</a>:</h4>
+<p>Hmm... this sounds great, but realistically I can't work on that anytime soon.</p>
+
+<a name="163312122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163312122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163312122">Scott Morrison (Apr 14 2019 at 10:58)</a>:</h4>
+<p>I will PR a fix that deals with the universe issue.</p>
+
+<a name="163312123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163312123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163312123">Mario Carneiro (Apr 14 2019 at 10:59)</a>:</h4>
+<p>okay, just thought I would give some ideas</p>
+
+<a name="163312135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163312135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163312135">Scott Morrison (Apr 14 2019 at 10:59)</a>:</h4>
+<p>No, they are great ideas. I will attempt to write up a description of some things someone should do, and shop it around here/to students. :-)</p>
+
 
 {% endraw %}

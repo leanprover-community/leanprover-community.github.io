@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (14 messages, latest: Apr 14 2019 at 09:45)
+* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (65 messages, latest: Apr 14 2019 at 10:59)
 
 * [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (8 messages, latest: Apr 14 2019 at 07:05)
 
