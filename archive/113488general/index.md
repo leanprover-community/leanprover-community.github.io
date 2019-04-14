@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AITP](07119AITP.html) (9 messages, latest: Apr 14 2019 at 21:56)
+
 * [dreaded red blocks of death are back](09383dreadedredblocksofdeathareback.html) (7 messages, latest: Apr 14 2019 at 19:22)
 
 * [category theory universe issue?](81843categorytheoryuniverseissue.html) (5 messages, latest: Apr 14 2019 at 18:34)
@@ -1411,8 +1413,6 @@ permalink: archive/113488general/index.html
 * [tidy bug](24153tidybug.html) (41 messages, latest: Oct 03 2018 at 07:14)
 
 * [proof help](24048proofhelp.html) (14 messages, latest: Oct 03 2018 at 07:12)
-
-* [AITP](07119AITP.html) (7 messages, latest: Oct 02 2018 at 21:54)
 
 * [has_mem disjoint](60703hasmemdisjoint.html) (48 messages, latest: Oct 02 2018 at 19:23)
 
