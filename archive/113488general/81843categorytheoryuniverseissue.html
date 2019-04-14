@@ -1,0 +1,135 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/81843categorytheoryuniverseissue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html">category theory universe issue?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163327617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20universe%20issue%3F/near/163327617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html#163327617">Kevin Buzzard (Apr 14 2019 at 18:15)</a>:</h4>
+<p><strong>question in progress -- ignore for now unless you're Scott</strong></p>
+<p>I am using a slightly modified mathlib but I am hoping this isn't the issue [update: it is]. The following innocuous-looking code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">opens</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">Top</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">topological_space</span>
+
+<span class="kn">theorem</span> <span class="n">is_open_map_of_open</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_open_map</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">}</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">rintros</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">convert</span> <span class="n">is_open_inter</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ht</span> <span class="n">hs</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_preimage_eq_inter_range</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range_coe_subtype</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">is_open_map</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_open_map</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">opens</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span> <span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">functor</span><span class="bp">.</span><span class="n">is_open_map</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_open_map</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="err">⥤</span> <span class="n">opens</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="n">is_open_map</span><span class="bp">.</span><span class="n">map</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">hXY</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">ha</span><span class="o">,</span> <span class="n">ha&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">begin</span> <span class="n">rw</span> <span class="err">←</span><span class="n">ha&#39;</span><span class="o">,</span> <span class="n">use</span> <span class="n">a</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hXY</span> <span class="n">ha</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">map_id&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">map_comp&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">inclusion</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">})</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">opens</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="o">({</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="bp">.</span><span class="n">val</span><span class="o">})</span> <span class="err">⥤</span> <span class="n">opens</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="n">functor</span><span class="bp">.</span><span class="n">is_open_map</span><span class="bp">.</span><span class="n">map</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">is_open_map_of_open</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span>
+</pre></div>
+
+
+<p>doesn't work. First I show that the inclusion of an open set is an open map. Then I define a function <code>opens alpha -&gt; opens beta</code> from an open map alpha -&gt; beta. Then I beef it up into a functor. Then I try and apply it in the situation of an open map. I get an error in the def of <code>inclusion</code>, a type mismatch hundreds of lines long because <code>pp.all</code> has been switched on by Lean. </p>
+<p>The two terms look identical other than in one small place: diff output is</p>
+<div class="codehilite"><pre><span></span>&lt;     (@topological_space.opens.opens_category X)
+---
+&gt;     (@category_theory.preorder_category
+&gt;        (@topological_space.opens
+&gt;           (@coe_sort category_theory.instances.Top (@category_theory.bundled.has_coe_to_sort topological_space) X)
+&gt;           (category_theory.instances.topological_space_unbundled X))
+&gt;        (@partial_order.to_preorder
+&gt;           (@topological_space.opens
+&gt;              (@coe_sort category_theory.instances.Top (@category_theory.bundled.has_coe_to_sort topological_space) X)
+&gt;              (category_theory.instances.topological_space_unbundled X))
+&gt;           (@topological_space.opens.partial_order
+&gt;              (@coe_sort category_theory.instances.Top (@category_theory.bundled.has_coe_to_sort topological_space) X)
+&gt;              (category_theory.instances.topological_space_unbundled X))))
+</pre></div>
+
+
+<p>I then attempt to verify that these terms are the same:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">inclusion</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">})</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">opens</span> <span class="o">({</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="bp">.</span><span class="n">val</span><span class="o">})</span> <span class="err">⥤</span> <span class="n">opens</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="c1">--functor.is_open_map.map (is_open_map_of_open U.2)</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">H</span> <span class="o">:</span>     <span class="o">(</span><span class="bp">@</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span><span class="bp">.</span><span class="n">opens_category</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">preorder_category</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span>
+           <span class="o">(</span><span class="bp">@</span><span class="n">coe_sort</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">Top</span> <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">bundled</span><span class="bp">.</span><span class="n">has_coe_to_sort</span> <span class="n">topological_space</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+           <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">topological_space_unbundled</span> <span class="n">X</span><span class="o">))</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">partial_order</span><span class="bp">.</span><span class="n">to_preorder</span>
+           <span class="o">(</span><span class="bp">@</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span>
+              <span class="o">(</span><span class="bp">@</span><span class="n">coe_sort</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">Top</span> <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">bundled</span><span class="bp">.</span><span class="n">has_coe_to_sort</span> <span class="n">topological_space</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+              <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">topological_space_unbundled</span> <span class="n">X</span><span class="o">))</span>
+           <span class="o">(</span><span class="bp">@</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">opens</span><span class="bp">.</span><span class="n">partial_order</span>
+              <span class="o">(</span><span class="bp">@</span><span class="n">coe_sort</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">Top</span> <span class="o">(</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">bundled</span><span class="bp">.</span><span class="n">has_coe_to_sort</span> <span class="n">topological_space</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+              <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">topological_space_unbundled</span> <span class="n">X</span><span class="o">)))),</span>
+
+<span class="n">exact</span> <span class="n">functor</span><span class="bp">.</span><span class="n">is_open_map</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">is_open_map_of_open</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>and this time the error (in the definition of <code>H</code>) is:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  opens.opens_category = category_theory.preorder_category (opens ↥X)
+term
+  category_theory.preorder_category (opens ↥X)
+has type
+  category_theory.category.{0 v+1}
+    (@topological_space.opens.{v}
+       (@coe_sort.{v+2 v+2} category_theory.instances.Top.{v}
+          (@category_theory.bundled.has_coe_to_sort.{v+1 v+1} topological_space.{v})
+          X)
+       (category_theory.instances.topological_space_unbundled.{v} X)) : Type v
+but is expected to have type
+  category_theory.category.{v+1 (max (v+1) 1)}
+    (@topological_space.opens.{v}
+       (@coe_sort.{v+2 v+2} category_theory.instances.Top.{v}
+          (@category_theory.bundled.has_coe_to_sort.{v+1 v+1} topological_space.{v})
+          X)
+       (category_theory.instances.topological_space_unbundled.{v} X)) : Type (v+1)
+</pre></div>
+
+
+<p>This time Lean seems to have switched universes on! The two terms are equal except for universes.</p>
+<p>Is this the sort of thing I just have to deal with in category theory? <span class="user-mention" data-user-id="110032">@Reid Barton</span> ?</p>
+
+<a name="163327825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20universe%20issue%3F/near/163327825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html#163327825">Kevin Buzzard (Apr 14 2019 at 18:21)</a>:</h4>
+<p>Oh <em>boggle</em> I just checked with a vanilla mathlib and <code>category_theory.instances.Top</code> isn't there. That'll teach me to listen to Scott.</p>
+
+<a name="163328042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20universe%20issue%3F/near/163328042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html#163328042">Kevin Buzzard (Apr 14 2019 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> is this something to do with your modification <code>category_theory.instances.Top</code> of <code>category_theory.instances.topological_spaces</code> in your branch? I switched back to <code>topological_spaces</code> and now I see ulifts and plifts when I try to define the functor.</p>
+
+<a name="163328224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20universe%20issue%3F/near/163328224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html#163328224">Kevin Buzzard (Apr 14 2019 at 18:31)</a>:</h4>
+<p>This is all something to do with turning hom sets from Type v into Prop.</p>
+
+<a name="163328349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20universe%20issue%3F/near/163328349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81843categorytheoryuniverseissue.html#163328349">Kevin Buzzard (Apr 14 2019 at 18:34)</a>:</h4>
+<p>Sorry, this is an issue with some of Scott's work in progress; I'll take it to github. I can get this to with in regular mathlib.</p>
+
+
+{% endraw %}
