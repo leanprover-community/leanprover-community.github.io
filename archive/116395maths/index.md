@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [stuff we want](64767stuffwewant.html) (4 messages, latest: Apr 14 2019 at 21:57)
+* [A bunch of Lean files](73658AbunchofLeanfiles.html) (6 messages, latest: Apr 14 2019 at 22:59)
 
-* [A bunch of Lean files](73658AbunchofLeanfiles.html) (4 messages, latest: Apr 14 2019 at 21:42)
+* [stuff we want](64767stuffwewant.html) (10 messages, latest: Apr 14 2019 at 22:53)
 
 * [preorder categories](14346preordercategories.html) (15 messages, latest: Apr 13 2019 at 13:33)
 

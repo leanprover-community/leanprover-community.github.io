@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AITP](07119AITP.html) (9 messages, latest: Apr 14 2019 at 21:56)
+* [AITP](07119AITP.html) (15 messages, latest: Apr 14 2019 at 22:50)
+
+* [category theory universe issue?](81843categorytheoryuniverseissue.html) (6 messages, latest: Apr 14 2019 at 22:46)
+
+* [Procedure for PRs](26950ProcedureforPRs.html) (5 messages, latest: Apr 14 2019 at 22:44)
 
 * [dreaded red blocks of death are back](09383dreadedredblocksofdeathareback.html) (7 messages, latest: Apr 14 2019 at 19:22)
-
-* [category theory universe issue?](81843categorytheoryuniverseissue.html) (5 messages, latest: Apr 14 2019 at 18:34)
-
-* [Procedure for PRs](26950ProcedureforPRs.html) (4 messages, latest: Apr 14 2019 at 14:29)
 
 * [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (12 messages, latest: Apr 14 2019 at 12:51)
 
