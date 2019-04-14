@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Procedure for PRs](26950ProcedureforPRs.html) (1 message, latest: Apr 14 2019 at 13:48)
+
 * [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (12 messages, latest: Apr 14 2019 at 12:51)
 
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (74 messages, latest: Apr 14 2019 at 11:27)
