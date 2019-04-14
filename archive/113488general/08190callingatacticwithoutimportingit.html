@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/08190callingatacticwithoutimportingit.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08190callingatacticwithoutimportingit.html">calling a tactic without importing it</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163304043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20without%20importing%20it/near/163304043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08190callingatacticwithoutimportingit.html#163304043">Scott Morrison (Apr 14 2019 at 06:46)</a>:</h4>
+<p>I am trying to write a tactic that will invoke <code>norm_num</code>, if it has otherwise been imported, and otherwise fail. I need this to work without actually importing <code>norm_num</code>.</p>
+
+<a name="163304044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20without%20importing%20it/near/163304044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08190callingatacticwithoutimportingit.html#163304044">Scott Morrison (Apr 14 2019 at 06:46)</a>:</h4>
+<p>Any suggestions?</p>
+
+<a name="163304201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20without%20importing%20it/near/163304201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08190callingatacticwithoutimportingit.html#163304201">Mario Carneiro (Apr 14 2019 at 06:51)</a>:</h4>
+<p>search for <code>norm_num</code> in the environment and call <code>eval_expr</code> on it</p>
+
+<a name="163304396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20without%20importing%20it/near/163304396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08190callingatacticwithoutimportingit.html#163304396">Mario Carneiro (Apr 14 2019 at 06:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span> <span class="c1">-- remove me</span>
+
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">interactive</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">try</span> <span class="o">{</span> <span class="n">do</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">norm_num1</span><span class="o">,</span>
+  <span class="n">f</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="o">(</span><span class="n">loc</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">loc</span><span class="bp">.</span><span class="n">ns</span> <span class="o">[</span><span class="n">none</span><span class="o">])</span> <span class="o">}</span>
+</pre></div>
+
+
+{% endraw %}
