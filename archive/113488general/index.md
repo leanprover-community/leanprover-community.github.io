@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (74 messages, latest: Apr 14 2019 at 11:27)
+* [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (12 messages, latest: Apr 14 2019 at 12:51)
 
-* [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (8 messages, latest: Apr 14 2019 at 07:05)
+* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (74 messages, latest: Apr 14 2019 at 11:27)
 
 * [unifying `order_dual` and `opposite`](59025unifyingorderdualandopposite.html) (14 messages, latest: Apr 13 2019 at 11:47)
 
