@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (201 messages, latest: Apr 15 2019 at 08:18)
+
 * [AITP](07119AITP.html) (16 messages, latest: Apr 15 2019 at 07:14)
 
 * [appveyor](53975appveyor.html) (2 messages, latest: Apr 15 2019 at 06:58)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (199 messages, latest: Apr 15 2019 at 06:57)
 
 * [Procedure for PRs](26950ProcedureforPRs.html) (6 messages, latest: Apr 14 2019 at 23:26)
 
