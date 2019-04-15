@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (196 messages, latest: Apr 15 2019 at 05:22)
+
 * [appveyor](53975appveyor.html) (1 message, latest: Apr 15 2019 at 04:09)
 
 * [Procedure for PRs](26950ProcedureforPRs.html) (6 messages, latest: Apr 14 2019 at 23:26)
@@ -311,8 +313,6 @@ permalink: archive/113488general/index.html
 * [representing math structures](94437representingmathstructures.html) (2 messages, latest: Mar 05 2019 at 12:07)
 
 * [deterministic timeout with ideal.quotient.mk](75556deterministictimeoutwithidealquotientmk.html) (9 messages, latest: Mar 05 2019 at 02:34)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (191 messages, latest: Mar 03 2019 at 21:25)
 
 * [history](44883history.html) (29 messages, latest: Mar 03 2019 at 14:29)
 
