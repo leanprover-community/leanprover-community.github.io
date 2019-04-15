@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#927 operator norm](08942927operatornorm.html) (1 message, latest: Apr 15 2019 at 09:48)
+
 * [#923 ring of ctu functions](49740923ringofctufunctions.html) (1 message, latest: Apr 15 2019 at 08:45)
 
 * [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (35 messages, latest: Apr 14 2019 at 08:59)
