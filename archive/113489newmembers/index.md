@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Installing mathlib](63351Installingmathlib.html) (68 messages, latest: Apr 15 2019 at 20:49)
+
 * [prove that option coercion of value equals (some value)](28136provethatoptioncoercionofvalueequalssomevalue.html) (13 messages, latest: Apr 15 2019 at 14:48)
 
 * [simpler proof 0<2?](92160simplerproof02.html) (19 messages, latest: Apr 13 2019 at 02:29)
@@ -19,8 +21,6 @@ permalink: archive/113489newmembers/index.html
 * [noob question(s)](52075noobquestions.html) (324 messages, latest: Apr 09 2019 at 22:43)
 
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
-
-* [Installing mathlib](63351Installingmathlib.html) (52 messages, latest: Apr 05 2019 at 17:45)
 
 * [transcendental number](40544transcendentalnumber.html) (10 messages, latest: Apr 05 2019 at 16:13)
 
