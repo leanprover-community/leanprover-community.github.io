@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cache regenerating](87472cacheregenerating.html) (2 messages, latest: Apr 15 2019 at 10:39)
+* [eblast](79292eblast.html) (7 messages, latest: Apr 15 2019 at 11:31)
+
+* [cache regenerating](87472cacheregenerating.html) (6 messages, latest: Apr 15 2019 at 11:05)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (201 messages, latest: Apr 15 2019 at 08:18)
 
@@ -287,8 +289,6 @@ permalink: archive/113488general/index.html
 * [Leanpkg Windows weirdness](67234LeanpkgWindowsweirdness.html) (1 message, latest: Mar 07 2019 at 21:51)
 
 * [power series](15161powerseries.html) (12 messages, latest: Mar 07 2019 at 11:08)
-
-* [eblast](79292eblast.html) (6 messages, latest: Mar 07 2019 at 00:14)
 
 * [bilinear maps](97496bilinearmaps.html) (4 messages, latest: Mar 06 2019 at 22:56)
 

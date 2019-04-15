@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [prove that option coercion of value equals (some value)](28136provethatoptioncoercionofvalueequalssomevalue.html) (11 messages, latest: Apr 15 2019 at 11:42)
+
 * [simpler proof 0<2?](92160simplerproof02.html) (19 messages, latest: Apr 13 2019 at 02:29)
 
 * [Induction](51886Induction.html) (110 messages, latest: Apr 12 2019 at 13:32)

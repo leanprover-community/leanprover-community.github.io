@@ -1,0 +1,77 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html">prove that option coercion of value equals (some value)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163371206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371206">Kevin Kappelmann (Apr 15 2019 at 11:22)</a>:</h4>
+<p>Is there any "pretty" proof that coercing a value to an option type equals (some value)? For example, is there a more elegant way to prove the following example?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">val</span><span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="n">val</span> <span class="bp">=</span> <span class="o">(</span><span class="n">some</span> <span class="n">val</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">coe</span><span class="o">,</span> <span class="n">lift_t</span><span class="o">,</span> <span class="n">has_lift_t</span><span class="bp">.</span><span class="n">lift</span><span class="o">,</span> <span class="n">coe_t</span><span class="o">,</span> <span class="n">has_coe_t</span><span class="bp">.</span><span class="n">coe</span><span class="o">]</span>
+</pre></div>
+
+<a name="163371255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371255">Kevin Buzzard (Apr 15 2019 at 11:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">val</span><span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="n">val</span> <span class="bp">=</span> <span class="o">(</span><span class="n">some</span> <span class="n">val</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="163371309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371309">Kevin Kappelmann (Apr 15 2019 at 11:24)</a>:</h4>
+<p>that is indeed more elegant ;D thank you!</p>
+
+<a name="163371347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371347">Kevin Buzzard (Apr 15 2019 at 11:25)</a>:</h4>
+<p>My thought process:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">val</span><span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span><span class="o">)</span> <span class="n">val</span> <span class="bp">=</span> <span class="o">(</span><span class="n">some</span> <span class="n">val</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="c1">-- not sure how to proceed, so let&#39;s start to unfold</span>
+ <span class="n">unfold</span> <span class="n">coe</span><span class="o">,</span>
+ <span class="n">unfold</span> <span class="n">lift_t</span><span class="o">,</span>
+ <span class="n">unfold</span> <span class="n">has_lift_t</span><span class="bp">.</span><span class="n">lift</span><span class="o">,</span>
+ <span class="n">unfold</span> <span class="n">coe_t</span><span class="o">,</span>
+ <span class="n">unfold</span> <span class="n">has_coe_t</span><span class="bp">.</span><span class="n">coe</span><span class="o">,</span>
+ <span class="c1">-- hey, the goal automatically got solved!</span>
+ <span class="c1">-- And &quot;unfold&quot; didn&#39;t really do anything apart from changing things</span>
+ <span class="c1">-- to definitionally equal things.</span>
+ <span class="c1">-- So maybe `rfl` worked right from the start!</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163371409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371409">Kevin Buzzard (Apr 15 2019 at 11:26)</a>:</h4>
+<p>I should probably not confess this, but I often write code like this.</p>
+
+<a name="163371417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371417">Kevin Buzzard (Apr 15 2019 at 11:26)</a>:</h4>
+<p>When I'm not entirely sure how coercions are defined, I just unfold them manually like this</p>
+
+<a name="163371432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371432">Kevin Buzzard (Apr 15 2019 at 11:27)</a>:</h4>
+<p>and then when I've got to the actual definition, I look at the goal, copy it, write <code>change [insert goal here]</code> and then delete all the unfolds.</p>
+
+<a name="163371445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371445">Kevin Buzzard (Apr 15 2019 at 11:27)</a>:</h4>
+<p><code>change</code> (and <code>show</code>, they do the same thing) changes the goal to something definitionally equal.</p>
+
+<a name="163371587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371587">Kevin Kappelmann (Apr 15 2019 at 11:29)</a>:</h4>
+<p>Ah, I did not know about the <code>change</code> keyword. Nice to know :)</p>
+
+<a name="163371974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163371974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163371974">Johan Commelin (Apr 15 2019 at 11:36)</a>:</h4>
+<p>There is <code>unfold_coes</code>. Maybe if would have done all those unfolds in one go.</p>
+
+<a name="163372284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20that%20option%20coercion%20of%20value%20equals%20%28some%20value%29/near/163372284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28136provethatoptioncoercionofvalueequalssomevalue.html#163372284">Kevin Kappelmann (Apr 15 2019 at 11:42)</a>:</h4>
+<p>That also works, cheers!</p>
+
+
+{% endraw %}
