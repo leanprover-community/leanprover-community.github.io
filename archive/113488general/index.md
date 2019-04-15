@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (196 messages, latest: Apr 15 2019 at 05:22)
+* [appveyor](53975appveyor.html) (2 messages, latest: Apr 15 2019 at 06:58)
 
-* [appveyor](53975appveyor.html) (1 message, latest: Apr 15 2019 at 04:09)
+* [Lean + LaTeX?](57481LeanLaTeX.html) (199 messages, latest: Apr 15 2019 at 06:57)
 
 * [Procedure for PRs](26950ProcedureforPRs.html) (6 messages, latest: Apr 14 2019 at 23:26)
 
