@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#938 special shapes](47597938specialshapes.html) (1 message, latest: Apr 16 2019 at 20:45)
+
 * [#927 operator norm](08942927operatornorm.html) (3 messages, latest: Apr 16 2019 at 16:15)
 
 * [#923 ring of ctu functions](49740923ringofctufunctions.html) (1 message, latest: Apr 15 2019 at 08:45)

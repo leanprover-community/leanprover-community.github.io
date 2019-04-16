@@ -1,0 +1,105 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/21882linearindependentforfamilies.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html">linear_independent for families</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163502492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163502492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163502492">Alexander Bentkamp (Apr 16 2019 at 20:08)</a>:</h4>
+<p>For my work on eigenvectors, I need a definition of linear independence for families of vectors, not only sets, because I need to be able to talk about a family being linearly dependent if it contains the same vector twice. I've started working on this here: </p>
+<p><a href="https://github.com/leanprover-community/mathlib/commit/7a590e5a29469975798a6432e577826a81ea0b94" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/7a590e5a29469975798a6432e577826a81ea0b94">https://github.com/leanprover-community/mathlib/commit/7a590e5a29469975798a6432e577826a81ea0b94</a></p>
+<p>The crucial change I did is to replace the definition</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">lc</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">β</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>by</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">lc</span> <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ι</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>I'd like to get some feedback from you before I continue because this change breaks quite a lot of things that I need to repair.</p>
+
+<a name="163502933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163502933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163502933">Kevin Buzzard (Apr 16 2019 at 20:13)</a>:</h4>
+<p>Are you in the finite-dimensional setting? I have seen that in the finite-dimensional case one often has to deal with lists of vectors, whereas in the infinite-dimensional case it's often sets; the problems one works on are somehow different in the two cases.</p>
+
+<a name="163503092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503092">Johan Commelin (Apr 16 2019 at 20:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span> I'm not sure if it is worth it to <em>replace</em> <code>lc</code> with that definition. In particular, <code>lc</code> currently has some semantics that you won't be able to recover with your definition.</p>
+
+<a name="163503095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503095">Alexander Bentkamp (Apr 16 2019 at 20:15)</a>:</h4>
+<p>Yes, I work in the finite-dimensional setting, but if we had a definition that uses families, both lists and sets would be special cases.</p>
+
+<a name="163503104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503104">Johan Commelin (Apr 16 2019 at 20:15)</a>:</h4>
+<p>Maybe you should just make a new definition</p>
+
+<a name="163503178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503178">Johan Commelin (Apr 16 2019 at 20:16)</a>:</h4>
+<p><code>lc</code> is the type of <em>all</em> formal linear combinations. And you don't get that with the family version.</p>
+
+<a name="163503372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503372">Alexander Bentkamp (Apr 16 2019 at 20:18)</a>:</h4>
+<p>The old definition is a special case of my new one by choosing the set of vectors itself as the index set and the identity as the map. Where it matters, we could restrict ourselves to that case.</p>
+
+<a name="163503425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503425">Johan Commelin (Apr 16 2019 at 20:19)</a>:</h4>
+<p>That's true</p>
+
+<a name="163503556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503556">Johan Commelin (Apr 16 2019 at 20:20)</a>:</h4>
+<p>If you pull this off, chapeau! But I agree that it is quite non-trivial. You might want to coordinate with <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110044">@Chris Hughes</span>. This will be quite an effort, and you'll want the merge into mathlib to be as smooth as possible.</p>
+
+<a name="163503571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503571">Kevin Buzzard (Apr 16 2019 at 20:20)</a>:</h4>
+<p>Why not just make a new function <code>lc'</code> or whatever?</p>
+
+<a name="163503608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503608">Kevin Buzzard (Apr 16 2019 at 20:21)</a>:</h4>
+<blockquote>
+<p><code>lc</code> currently has some semantics that you won't be able to recover with your definition.</p>
+</blockquote>
+<p>What does the word "semantics" mean?</p>
+
+<a name="163503697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503697">Johan Commelin (Apr 16 2019 at 20:22)</a>:</h4>
+<p>Oooh, I don't actually know precisely. I meant "intended meaning".</p>
+
+<a name="163503702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503702">Johan Commelin (Apr 16 2019 at 20:22)</a>:</h4>
+<p>And I retract the claim.</p>
+
+<a name="163503707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503707">Alexander Bentkamp (Apr 16 2019 at 20:22)</a>:</h4>
+<blockquote>
+<p>Why not just make a new function lc' or whatever?</p>
+</blockquote>
+<p>I don't want to duplicate the proofs that we have about <code>lc</code>.</p>
+
+<a name="163503753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503753">Johan Commelin (Apr 16 2019 at 20:23)</a>:</h4>
+<p>I guess that several proofs will actually simplify</p>
+
+<a name="163503760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503760">Johan Commelin (Apr 16 2019 at 20:23)</a>:</h4>
+<p>Other things will become a bit more verbose</p>
+
+<a name="163503833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163503833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163503833">Neil Strickland (Apr 16 2019 at 20:24)</a>:</h4>
+<p>I am strongly in favour of this.  All sorts of things are awkward and unnatural if you define linear independence in terms of subsets, because of the fact that vectors can accidentally be equal for spurious reasons.</p>
+
+<a name="163505389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163505389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163505389">Kevin Buzzard (Apr 16 2019 at 20:43)</a>:</h4>
+<p>I must confess I was surprised when I first saw this. The justification I heard at the time was that to prove every vector space has a basis you want to use Zorn's lemma and then it's convenient to use subsets.</p>
+
+
+{% endraw %}

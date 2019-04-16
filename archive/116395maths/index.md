@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [linear_independent for families](21882linearindependentforfamilies.html) (18 messages, latest: Apr 16 2019 at 20:43)
+
 * [stuff we want](64767stuffwewant.html) (12 messages, latest: Apr 15 2019 at 12:08)
 
 * [A bunch of Lean files](73658AbunchofLeanfiles.html) (11 messages, latest: Apr 15 2019 at 02:13)
