@@ -15,5 +15,46 @@ permalink: archive/113488general/28276tailcalloptimisation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tail-call%20optimisation/near/163454363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28276tailcalloptimisation.html#163454363">Kevin Kappelmann (Apr 16 2019 at 09:37)</a>:</h4>
 <p>Is Lean supporting tail-call optimisation?</p>
 
+<a name="163457398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tail-call%20optimisation/near/163457398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28276tailcalloptimisation.html#163457398">Neil Strickland (Apr 16 2019 at 10:34)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/Efficient.20modular.20fibonacci/near/161592306" title="#narrow/stream/113488-general/topic/Efficient.20modular.20fibonacci/near/161592306">This thread</a> is relevant.  I would summarise it as saying that Mario's approach persuades Lean to do the optimisation, but it does need persuasion.  But I am not an expert on these things, and others might disagree with that summary.</p>
+
+<a name="163457406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tail-call%20optimisation/near/163457406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28276tailcalloptimisation.html#163457406">Edward Ayers (Apr 16 2019 at 10:34)</a>:</h4>
+<p>See also <a href="#narrow/stream/113488-general/topic/Tail-call.20elimination.3F" title="#narrow/stream/113488-general/topic/Tail-call.20elimination.3F">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tail-call.20elimination.3F</a></p>
+
+<a name="163457789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tail-call%20optimisation/near/163457789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28276tailcalloptimisation.html#163457789">Edward Ayers (Apr 16 2019 at 10:41)</a>:</h4>
+<p>I think the short answer is no because I would expect a TCO to optimise <code>rev_aux</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">code_gen</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">rev_aux</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span>
+<span class="bp">|</span><span class="n">acc</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">acc</span>
+<span class="bp">|</span><span class="n">acc</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rev_aux</span> <span class="o">(</span><span class="n">h</span> <span class="bp">::</span> <span class="n">acc</span><span class="o">)</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>outputs</p>
+<div class="codehilite"><pre><span></span>[compiler.code_gen]  rev_aux._main._meta_aux 3
+0: push 0
+1: builtin_cases list.cases_on, 2 4
+2: push 1
+3: goto 11
+4: push 4
+5: push 3
+6: push 1
+7: cnstr #1 2
+8: scnstr #0
+9: ginvoke rev_aux._main._meta_aux
+10: drop 2
+11: ret
+[compiler.code_gen]  rev_aux 1
+0: scnstr #0
+1: closure rev_aux._main 1
+2: ret
+</pre></div>
+
+
+<p>If I'm not mistaken TCO would replace step <code>9</code> with a <code>goto 1</code> and also some register shuffling. I could also be misinterpreting what is going on here.</p>
+
 
 {% endraw %}
