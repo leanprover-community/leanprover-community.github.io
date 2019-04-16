@@ -245,5 +245,61 @@ unsat
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163465644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163465644">Joseph Corneli (Apr 16 2019 at 12:49)</a>:</h4>
 <p>huh, OK!</p>
 
+<a name="163466523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163466523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163466523">Joseph Corneli (Apr 16 2019 at 13:01)</a>:</h4>
+<p>Well here's the z3 proof, I'm not having a moment of clarity reviewing it. </p>
+<div class="codehilite"><pre><span></span>(proof
+(let (($x160 (forall ((X Real) )(! (let (($x154 (&gt;= (- 2.0) (- 1.0))))
+ (let (($x151 (&lt;= (- 2.0) 1.0)))
+ (and $x151 $x154))) :qid k!6))
+ ))
+ (let (($x178 (forall ((X Real) )(! false :qid k!6))
+ ))
+ (let ((?x179 (lambda ((X Real) )(let ((@x173 (monotonicity (rewrite (= (&lt;= (- 2.0) 1.0) true)) (rewrite (= (&gt;= (- 2.0) (- 1.0)) false)) (= (and (&lt;= (- 2.0) 1.0) (&gt;= (- 2.0) (- 1.0))) (and true false)))))
+ (trans @x173 (rewrite (= (and true false) false)) (= (and (&lt;= (- 2.0) 1.0) (&gt;= (- 2.0) (- 1.0))) false))))
+ ))
+ (let ((@x186 (trans (quant-intro (proof-bind ?x179) (= $x160 $x178)) (elim-unused (= $x178 false)) (= $x160 false))))
+ (let (($x40 (forall ((X Real) )(! (let ((?x23 (cos X)))
+ (let (($x34 (&gt;= ?x23 (- 1.0))))
+ (let (($x25 (&lt;= ?x23 1.0)))
+ (and $x25 $x34)))) :qid k!6))
+ ))
+ (let ((?x161 (lambda ((X Real) )(let (($x154 (&gt;= (- 2.0) (- 1.0))))
+ (let (($x151 (&lt;= (- 2.0) 1.0)))
+ (let (($x157 (and $x151 $x154)))
+ (let ((?x23 (cos X)))
+ (let (($x34 (&gt;= ?x23 (- 1.0))))
+ (let (($x25 (&lt;= ?x23 1.0)))
+ (let (($x37 (and $x25 $x34)))
+ (let (($x136 (= ?x23 (- 2.0))))
+ (let (($x141 (forall ((X Real) )(! (let ((?x23 (cos X)))
+ (= ?x23 (- 2.0))) :qid k!9))
+ ))
+ (let (($x127 (forall ((X Real) )(! (= (+ (cos X) 2.0) 0.0) :qid k!9))
+ ))
+ (let ((?x142 (lambda ((X Real) )(let (($x126 (= (+ (cos X) 2.0) 0.0)))
+ (let ((@x134 (monotonicity (rewrite (= (+ (cos X) 2.0) (+ 2.0 (cos X)))) (= $x126 (= (+ 2.0 (cos X)) 0.0)))))
+ (trans @x134 (rewrite (= (= (+ 2.0 (cos X)) 0.0) (= (cos X) (- 2.0)))) (= $x126 (= (cos X) (- 2.0)))))))
+ ))
+ (let ((@x146 (mp (asserted $x127) (quant-intro (proof-bind ?x142) (= $x127 $x141)) $x141)))
+ (let ((@x156 (monotonicity (unit-resolution ((_ quant-inst X) (or (not $x141) $x136)) @x146 $x136) (= $x34 $x154))))
+ (let ((@x153 (monotonicity (unit-resolution ((_ quant-inst X) (or (not $x141) $x136)) @x146 $x136) (= $x25 $x151))))
+ (monotonicity @x153 @x156 (= $x37 $x157)))))))))))))))))
+ ))
+ (let (($x29 (forall ((X Real) )(! (let ((?x23 (cos X)))
+ (let (($x25 (&lt;= ?x23 1.0)))
+ (and $x25 (&gt;= ?x23 (- 1.0))))) :qid k!6))
+ ))
+ (let ((?x41 (lambda ((X Real) )(let ((?x23 (cos X)))
+ (let (($x34 (&gt;= ?x23 (- 1.0))))
+ (let (($x25 (&lt;= ?x23 1.0)))
+ (let (($x37 (and $x25 $x34)))
+ (let ((@x36 (monotonicity (rewrite (= (- 1.0) (- 1.0))) (= (&gt;= ?x23 (- 1.0)) $x34))))
+ (monotonicity @x36 (= (and $x25 (&gt;= ?x23 (- 1.0))) $x37))))))))
+ ))
+ (let ((@x45 (mp (asserted $x29) (quant-intro (proof-bind ?x41) (= $x29 $x40)) $x40)))
+ (mp (mp @x45 (quant-intro (proof-bind ?x161) (= $x40 $x160)) $x160) @x186 false)))))))))))
+</pre></div>
+
 
 {% endraw %}
