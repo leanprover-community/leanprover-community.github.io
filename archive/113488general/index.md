@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [eblast](79292eblast.html) (16 messages, latest: Apr 16 2019 at 12:49)
+
+* [Alternatives to eval_expr](20220Alternativestoevalexpr.html) (5 messages, latest: Apr 16 2019 at 12:27)
+
 * [tail-call optimisation](28276tailcalloptimisation.html) (5 messages, latest: Apr 16 2019 at 11:38)
 
 * [Lean + LaTeX?](57481LeanLaTeX.html) (202 messages, latest: Apr 15 2019 at 18:18)
 
 * [appveyor](53975appveyor.html) (6 messages, latest: Apr 15 2019 at 14:36)
-
-* [eblast](79292eblast.html) (8 messages, latest: Apr 15 2019 at 14:21)
 
 * [cache regenerating](87472cacheregenerating.html) (7 messages, latest: Apr 15 2019 at 13:48)
 
