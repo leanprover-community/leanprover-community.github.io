@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [cubic equation](45293cubicequation.html) (16 messages, latest: Apr 16 2019 at 04:31)
+
 * [Installing mathlib](63351Installingmathlib.html) (70 messages, latest: Apr 15 2019 at 21:24)
 
 * [prove that option coercion of value equals (some value)](28136provethatoptioncoercionofvalueequalssomevalue.html) (13 messages, latest: Apr 15 2019 at 14:48)
