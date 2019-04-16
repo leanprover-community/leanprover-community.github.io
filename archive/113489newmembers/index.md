@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (36 messages, latest: Apr 16 2019 at 08:56)
+* [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (42 messages, latest: Apr 16 2019 at 09:24)
 
 * [cubic equation](45293cubicequation.html) (16 messages, latest: Apr 16 2019 at 04:31)
 
