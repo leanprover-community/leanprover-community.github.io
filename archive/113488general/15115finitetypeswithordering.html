@@ -29,5 +29,16 @@ permalink: archive/113488general/15115finitetypeswithordering.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163496612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163496612">Neil Strickland (Apr 16 2019 at 18:56)</a>:</h4>
 <p>I also did <a href="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/enumeration.lean" target="_blank" title="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/enumeration.lean"> a version of this</a> (with a typeclass called <code>enumeration</code>).  Some version or other should be in mathlib.  I could make a PR of mine if people thought that would be useful.  I am not sure whether we need to worry about diamonds, though.  We would want to have an instance converting <code>enumeration</code> to <code>fintype</code>, and instances deriving  numerations and fintypes on <code>α × β</code> from those on <code>α</code> and <code> β</code>.  That gives two ways of getting from <code>enumeration α</code> and <code>enumeration β</code> to <code>fintype (α × β)</code>, but the target is a subsingleton so perhaps it does not matter.</p>
 
+<a name="163497618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163497618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163497618">Scott Olson (Apr 16 2019 at 19:08)</a>:</h4>
+<p>That would be cool. It's also possible to implement a derive macro for <code>fintype</code> and/or <code>enumeration</code> so something like <code>@[derive enumeration] inductive state | A | B</code> works. (I had this working with my custom <code>fintype</code>which was convenient for readable finite automata states.)</p>
+
+<a name="163497782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163497782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163497782">Johan Commelin (Apr 16 2019 at 19:10)</a>:</h4>
+<blockquote>
+<p>That gives two ways of getting from <code>enumeration α</code> and <code>enumeration β</code> to <code>fintype (α × β)</code>, but the target is a subsingleton so perhaps it does not matter.</p>
+</blockquote>
+<p>Sadly, this does matter, currently. The standard solution seems to be to make <code>enumeration</code> redundant by adding the <code>fintype</code> instance into it (i.e. by extending <code>fintype</code>). You can provide a constructor which doesn't need the <code>fintype</code> instance, but in this way you can make sure that the product will have the correct <code>fintype</code> instance.</p>
+
 
 {% endraw %}

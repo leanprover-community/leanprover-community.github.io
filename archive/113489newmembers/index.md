@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (43 messages, latest: Apr 16 2019 at 17:00)
+* [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (47 messages, latest: Apr 16 2019 at 19:54)
 
 * [Installing mathlib](63351Installingmathlib.html) (73 messages, latest: Apr 16 2019 at 11:24)
 
