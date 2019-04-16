@@ -1,0 +1,33 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/15115finitetypeswithordering.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html">finite types with ordering</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163495535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163495535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163495535">Scott Olson (Apr 16 2019 at 18:43)</a>:</h4>
+<p>In a couple of my projects I've found the need for a typeclass for finite types which either support a decidable_linear_order, or equivalently, have decidable_eq and a universe list (not just a universe finset). The trouble with using <code>[fintype a] [decidable_linear_order a]</code> itself is that it rules out lots of core types like <code>unit</code> which don't have <code>decidable_linear_order</code> unless I do it myself. Another option I found which works pretty well is <code>[fintype a] [encodable a]</code> which has greater coverage but seems somewhat roundabout and perhaps an abuse of encodable.</p>
+<p>In fact, before I found mathlib I had defined my own <code>fintype</code> for these purposes which used a nodup universal list, but it's a lot of unnecessary duplication of work.</p>
+<p>I guess my question is, what approach would people recommend?</p>
+
+<a name="163496326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163496326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163496326">Johan Commelin (Apr 16 2019 at 18:52)</a>:</h4>
+<p>I would PR an instance of <code>decidable_linear_order</code> for <code>unit</code> and the other types for which you think it should exist.</p>
+
+<a name="163496531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163496531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163496531">Scott Olson (Apr 16 2019 at 18:55)</a>:</h4>
+<p>Hmm, yeah, I'm not sure why I didn't consider that... it's probably the simplest way to go.</p>
+
+<a name="163496612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20types%20with%20ordering/near/163496612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15115finitetypeswithordering.html#163496612">Neil Strickland (Apr 16 2019 at 18:56)</a>:</h4>
+<p>I also did <a href="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/enumeration.lean" target="_blank" title="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/enumeration.lean"> a version of this</a> (with a typeclass called <code>enumeration</code>).  Some version or other should be in mathlib.  I could make a PR of mine if people thought that would be useful.  I am not sure whether we need to worry about diamonds, though.  We would want to have an instance converting <code>enumeration</code> to <code>fintype</code>, and instances deriving  numerations and fintypes on <code>α × β</code> from those on <code>α</code> and <code> β</code>.  That gives two ways of getting from <code>enumeration α</code> and <code>enumeration β</code> to <code>fintype (α × β)</code>, but the target is a subsingleton so perhaps it does not matter.</p>
+
+
+{% endraw %}

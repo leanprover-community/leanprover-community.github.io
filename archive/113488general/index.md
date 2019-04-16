@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [finite types with ordering](15115finitetypeswithordering.html) (4 messages, latest: Apr 16 2019 at 18:56)
+
 * [eblast](79292eblast.html) (18 messages, latest: Apr 16 2019 at 15:33)
 
 * [cache-olean](72177cacheolean.html) (3 messages, latest: Apr 16 2019 at 15:18)
