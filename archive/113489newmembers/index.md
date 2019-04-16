@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (36 messages, latest: Apr 16 2019 at 08:56)
+
 * [cubic equation](45293cubicequation.html) (16 messages, latest: Apr 16 2019 at 04:31)
 
 * [Installing mathlib](63351Installingmathlib.html) (70 messages, latest: Apr 15 2019 at 21:24)
