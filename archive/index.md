@@ -20,9 +20,9 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [concrete semantics](187724concretesemantics/index.html) (4 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (5 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (4 topics)
+* [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
 
 {% include archive_update.html %}
