@@ -105,5 +105,65 @@ permalink: archive/116395maths/21882linearindependentforfamilies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163512432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163512432">Alexander Bentkamp (Apr 16 2019 at 22:22)</a>:</h4>
 <p>That was easier than I thought: <a href="https://github.com/leanprover-community/mathlib/pull/943" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/943">https://github.com/leanprover-community/mathlib/pull/943</a></p>
 
+<a name="163519553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163519553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163519553">Chris Hughes (Apr 17 2019 at 00:27)</a>:</h4>
+<p>Do we want the <code>beta</code> and <code>iota - &gt; beta</code> arguments for <code>lc</code>, given that they're not used?</p>
+
+<a name="163519920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163519920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163519920">Alexander Bentkamp (Apr 17 2019 at 00:34)</a>:</h4>
+<p>Good point. I will try to remove them and see what happens.</p>
+
+<a name="163520237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520237">Mario Carneiro (Apr 17 2019 at 00:40)</a>:</h4>
+<p>I agree that linear independence should be in terms of families rather than sets, and <code>lc</code> itself seems a bit overly specific, but the definition of <code>lc</code> in Alex's first post doesn't make any sense (EDIT: I see chris also noted this)</p>
+
+<a name="163520273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520273">Mario Carneiro (Apr 17 2019 at 00:41)</a>:</h4>
+<p>It would be nice if there is an obvious generalization of <code>lc</code> that makes sense for families such that the submodule based definition of <code>linear_independent</code> stays the same</p>
+
+<a name="163520359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520359">Mario Carneiro (Apr 17 2019 at 00:43)</a>:</h4>
+<p>In PR <a href="https://github.com/leanprover-community/mathlib/issues/943" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/943">#943</a> the definition of <code>linear_independent</code> is still over a set, rather than a family?</p>
+
+<a name="163520427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520427">Alexander Bentkamp (Apr 17 2019 at 00:44)</a>:</h4>
+<p>It's over a set of indices of the family</p>
+
+<a name="163520435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520435">Alexander Bentkamp (Apr 17 2019 at 00:44)</a>:</h4>
+<p>So it can contain duplicate vectors</p>
+
+<a name="163520446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520446">Mario Carneiro (Apr 17 2019 at 00:44)</a>:</h4>
+<p>I think it can just be the entire family, the set isn't needed</p>
+
+<a name="163520464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520464">Mario Carneiro (Apr 17 2019 at 00:45)</a>:</h4>
+<p>we can compose with <code>subtype.val</code> to recover sets when needed</p>
+
+<a name="163520657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520657">Mario Carneiro (Apr 17 2019 at 00:48)</a>:</h4>
+<p>Okay, so I'm catching up here, but I think what we want is for <code>lc</code> to denote <code>iota -&gt;0 alpha</code>, that is, finitely supported coefficients, and <code>lc.total</code> now takes a separate argument <code>iota -&gt; beta</code> for the family</p>
+
+<a name="163520668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520668">Mario Carneiro (Apr 17 2019 at 00:48)</a>:</h4>
+<p>That's basically the same as what you have except that <code>lc</code> doesn't take the family as input</p>
+
+<a name="163520711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520711">Alexander Bentkamp (Apr 17 2019 at 00:49)</a>:</h4>
+<p>Yes, I am already working on removing the arguments <code>beta</code> and <code>v</code> where they are not needed.</p>
+
+<a name="163520783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520783">Mario Carneiro (Apr 17 2019 at 00:50)</a>:</h4>
+<p>so <code>lc.supported</code> isn't needed anymore in the definition of <code>linear_independent</code>, it can just be <code>(lc.total alpha v).ker = bot</code> where <code>v : iota -&gt; beta</code></p>
+
+<a name="163520810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163520810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163520810">Mario Carneiro (Apr 17 2019 at 00:51)</a>:</h4>
+<p>in place of <code>lc.supported</code> we have some rules about how <code>lc.total</code> interacts with composition of the valuation functions</p>
+
+<a name="163521031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163521031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163521031">Alexander Bentkamp (Apr 17 2019 at 00:56)</a>:</h4>
+<p>Ok, I'll try that.</p>
+
 
 {% endraw %}
