@@ -181,5 +181,56 @@ permalink: archive/116395maths/21882linearindependentforfamilies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163523713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163523713">Mario Carneiro (Apr 17 2019 at 01:57)</a>:</h4>
 <p>I actually think that in almost all cases we care about linearly independent families, not sets. The only counterexample is the zorn's lemma proof of existence of a basis, but that has more to do with the particulars of that proof and shouldn't affect the rest of the development</p>
 
+<a name="163526777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163526777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163526777">Alexander Bentkamp (Apr 17 2019 at 03:04)</a>:</h4>
+<p>How can lemmas like<br>
+- A subset of a lin. indep. set is lin. indep.<br>
+- If two sets are lin. indep. and their spans are disjoint, their union is lin. indep.<br>
+best be formulated then?</p>
+
+<a name="163527073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527073">Mario Carneiro (Apr 17 2019 at 03:10)</a>:</h4>
+<p>subset is lin indep becomes f linind -&gt; g injective -&gt; g o f linind</p>
+
+<a name="163527264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527264">Mario Carneiro (Apr 17 2019 at 03:15)</a>:</h4>
+<p>union linind becomes something about <code>sum.elim f g</code> (that function might not exist now that I come to think of it, it's nondependent <code>sum.rec</code>). If <code>f : I -&gt; A</code> and <code>g : J -&gt; A</code> are linind and <code>span (range f) \cap span (range g) = bot</code> then <code>sum.elim f g : I + J -&gt; A</code> is linind</p>
+
+<a name="163527293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527293">Mario Carneiro (Apr 17 2019 at 03:15)</a>:</h4>
+<p>I'm not totally happy with <code>span (range f)</code> but it does the job and I don't think there is another notation for it</p>
+
+<a name="163527357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527357">Alexander Bentkamp (Apr 17 2019 at 03:16)</a>:</h4>
+<p>I am more worried about the <code>I + J</code>. This looks like dependent type hell :-)</p>
+
+<a name="163527358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527358">Mario Carneiro (Apr 17 2019 at 03:16)</a>:</h4>
+<p>no dependent types</p>
+
+<a name="163527367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527367">Mario Carneiro (Apr 17 2019 at 03:17)</a>:</h4>
+<p>that's just a plain old sum</p>
+
+<a name="163527374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527374">Mario Carneiro (Apr 17 2019 at 03:17)</a>:</h4>
+<p>The theorems about postcomposition with injective functions will allow you to use equivs if that representation doesn't make you happy</p>
+
+<a name="163527434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527434">Mario Carneiro (Apr 17 2019 at 03:19)</a>:</h4>
+<p>I don't think the original theorem ever applies when the union is not disjoint, so it should be fine</p>
+
+<a name="163527445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527445">Alexander Bentkamp (Apr 17 2019 at 03:19)</a>:</h4>
+<p>Ok, that's right.</p>
+
+<a name="163527446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527446">Mario Carneiro (Apr 17 2019 at 03:19)</a>:</h4>
+<p>except maybe in weird trivial cases like the zero ring</p>
+
+<a name="163527612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/163527612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#163527612">Alexander Bentkamp (Apr 17 2019 at 03:23)</a>:</h4>
+<p>I am worried about a user who actually would like to use sets, but is forced to use the subtypes corresponding to those sets. Then <code>↑s + ↑t</code> would be a different type than <code>↑ (s ⋃ t)</code>, which can be annoying.</p>
+
 
 {% endraw %}
