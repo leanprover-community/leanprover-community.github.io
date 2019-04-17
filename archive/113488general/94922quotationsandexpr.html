@@ -1,0 +1,82 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/94922quotationsandexpr.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html">quotations and expr</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163580955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163580955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163580955">Fabian Glöckle (Apr 17 2019 at 17:11)</a>:</h4>
+<p>Hello, I am new to metaprogramming and am stuck at the following:<br>
+I want to create a <code>declaration</code> which depends on a given <code>name</code> variable, like the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_easy_decl</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">declaration</span> <span class="o">:=</span>
+<span class="n">mk_definition</span> <span class="bp">`</span><span class="n">my_def</span> <span class="o">[]</span> <span class="bp">`</span><span class="o">(</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="n">x</span> <span class="o">[])</span>
+</pre></div>
+
+
+<p>Because my intended term is more complicated than this MWE, I was hoping to achieve the same result with reflection along the lines of</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_easy_decl&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">declaration</span> <span class="o">:=</span>
+<span class="n">mk_definition</span> <span class="bp">`</span><span class="n">my_def</span> <span class="o">[]</span> <span class="bp">`</span><span class="o">(</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Because <code>declaration</code>needs an <code>expr</code>(not <code>expr ff</code>), I cannot use double backtick quotation. Single backtick quotation and <code>%%</code>as above  yield</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">expr</span><span class="bp">.</span><span class="n">subst</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="bp">_</span><span class="n">x_1</span> <span class="o">:</span> <span class="err">?</span><span class="bp">_</span><span class="n">mlocal</span><span class="bp">._</span><span class="n">fresh</span><span class="bp">.</span><span class="mi">3030</span><span class="bp">.</span><span class="mi">69</span><span class="o">),</span> <span class="bp">_</span><span class="n">x_1</span><span class="o">)</span>
+<span class="n">term</span>
+  <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="bp">_</span><span class="n">x_1</span> <span class="o">:</span> <span class="err">?</span><span class="bp">_</span><span class="n">mlocal</span><span class="bp">._</span><span class="n">fresh</span><span class="bp">.</span><span class="mi">3030</span><span class="bp">.</span><span class="mi">69</span><span class="o">),</span> <span class="bp">_</span><span class="n">x_1</span><span class="o">)</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">reflected</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="bp">_</span><span class="n">x_1</span> <span class="o">:</span> <span class="err">?</span><span class="n">m_1</span><span class="o">),</span> <span class="bp">_</span><span class="n">x_1</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">expr</span>
+</pre></div>
+
+<a name="163581246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163581246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163581246">Mario Carneiro (Apr 17 2019 at 17:14)</a>:</h4>
+<p>The notation <code> `(%%x) </code> doesn't make sense since that expects <code>x</code> to have type <code>expr</code> rather than <code>name</code>. It's not clear what you are aiming for here that isn't achieved by the first version</p>
+
+<a name="163581290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163581290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163581290">Mario Carneiro (Apr 17 2019 at 17:15)</a>:</h4>
+<p>In all likelihood, you will need to use <code>mk_const</code> and/or <code>to_expr</code> to turn your pexprs into exprs, and this will require <code>my_easy_decl</code> to be a tactic</p>
+
+<a name="163582029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163582029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163582029">Fabian Glöckle (Apr 17 2019 at 17:23)</a>:</h4>
+<p>Thanks. I am aiming for an equivalent of the first version which does not force me to write a huge <code>expr</code> term in terms of nested constructors (because the <code>const x []</code> will just be a part of it).</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_easy_decl&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">declaration</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">cx</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">x</span><span class="o">,</span>
+   <span class="n">mk_definition</span> <span class="bp">`</span><span class="n">my_def</span> <span class="o">[]</span> <span class="bp">`</span><span class="o">(</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">cx</span><span class="o">))</span>
+</pre></div>
+
+<a name="163582136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163582136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163582136">Fabian Glöckle (Apr 17 2019 at 17:24)</a>:</h4>
+<p>Now the problem is that the last term is a <code>tactic expr</code>which <code>mk_definition</code>won't accept.</p>
+
+<a name="163582613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163582613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163582613">Johan Commelin (Apr 17 2019 at 17:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="210057">@Fabian Glöckle</span> Have you seen <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md#marios-backtick-cheat-sheet" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md#marios-backtick-cheat-sheet">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md#marios-backtick-cheat-sheet</a>? I guess it might be useful.</p>
+
+<a name="163582824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163582824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163582824">Fabian Glöckle (Apr 17 2019 at 17:31)</a>:</h4>
+<p>Ah great, thanks!</p>
+
+<a name="163583505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotations%20and%20expr/near/163583505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94922quotationsandexpr.html#163583505">Fabian Glöckle (Apr 17 2019 at 17:38)</a>:</h4>
+<p>... which taught me both quotation and monads.<br>
+The following worked:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_easy_decl</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">declaration</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">cx</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">body</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">cx</span><span class="o">),</span>
+  <span class="n">pure</span> <span class="err">$</span> <span class="n">mk_definition</span> <span class="bp">`</span><span class="n">my_def</span> <span class="o">[]</span> <span class="bp">`</span><span class="o">(</span><span class="bp">ℕ</span><span class="o">)</span> <span class="n">body</span>
+</pre></div>
+
+
+<p>Thanks both of you!</p>
+
+
+{% endraw %}

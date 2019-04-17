@@ -50,5 +50,55 @@ permalink: archive/116395maths/79205whatsthelogicwithtoadditive.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/what%27s%20the%20logic%20with%20to_additive%3F/near/160483720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79205whatsthelogicwithtoadditive.html#160483720">Kevin Buzzard (Mar 11 2019 at 14:35)</a>:</h4>
 <p>Just after the part you quoted, there is what looks like an incorrect definition of a simple group. We don't want the trivial group to be simple (for the same reason we don't want 1 to be prime)</p>
 
+<a name="163581808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/what%27s%20the%20logic%20with%20to_additive%3F/near/163581808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79205whatsthelogicwithtoadditive.html#163581808">Ramon Fernandez Mir (Apr 17 2019 at 17:20)</a>:</h4>
+<p>I was trying to find in the mathlib the lemma that says that a ring homomorphism is injective if and only iff its kernel is trivial. It turns out it's not there so I thought that that would make a good first PR. It has been proved for group homomorphisms (<code>is_group_hom</code>) but not for additive group homomorphisms (<code>is_add_group_hom</code>). So my first idea was to simply tag the corresponding lemmas in <code>group_theory/subgroup.lean</code>with <code>to_additive</code> and go from there. That didn't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">inj_of_trivial_ker</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ker</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">trivial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a₁</span> <span class="n">a₂</span> <span class="n">hfa</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">ext_iff</span><span class="o">,</span> <span class="n">ker</span><span class="o">,</span> <span class="n">is_subgroup</span><span class="bp">.</span><span class="n">trivial</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">a₁</span> <span class="bp">*</span> <span class="n">a₂</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">inv_ker_one</span> <span class="n">f</span> <span class="n">hfa</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">eq_inv_of_mul_eq_one</span> <span class="n">ha</span><span class="o">,</span> <span class="n">inv_inv</span> <span class="n">a₂</span><span class="o">]</span>
+<span class="kn">end</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">is_add_group_hom</span><span class="bp">.</span><span class="n">inj_of_trivial_ker</span><span class="o">]</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">inj_of_trivial_ker</span>
+
+<span class="c">/-</span><span class="cm"> type mismatch at application</span>
+<span class="cm">  @trivial.equations._eqn_1 β _inst_2</span>
+<span class="cm">term</span>
+<span class="cm">  _inst_2</span>
+<span class="cm">has type</span>
+<span class="cm">  add_group β</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  group β -/</span>
+</pre></div>
+
+
+<p>I was trying to fix it so I thought  that getting rid of that <code>simp</code> would work as it could be changing the term in a way that the tag wasn't happy with. So I did something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">inj_of_trivial_ker</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ker</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">trivial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a₁</span> <span class="n">a₂</span> <span class="n">hfa</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">ext_iff</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">only</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">preimage</span><span class="o">,</span> <span class="n">ker</span><span class="o">,</span> <span class="n">is_subgroup</span><span class="bp">.</span><span class="n">trivial</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h</span> <span class="o">(</span><span class="n">a₁</span> <span class="bp">*</span> <span class="n">a₂</span><span class="bp">⁻¹</span><span class="o">),</span>
+  <span class="n">iterate</span> <span class="mi">2</span> <span class="o">{</span> <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton_iff</span> <span class="n">at</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">a₁</span> <span class="bp">*</span> <span class="n">a₂</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">inv_ker_one</span> <span class="n">f</span> <span class="n">hfa</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">eq_inv_of_mul_eq_one</span> <span class="n">ha</span><span class="o">,</span> <span class="n">inv_inv</span> <span class="n">a₂</span><span class="o">]</span>
+<span class="kn">end</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">is_add_group_hom</span><span class="bp">.</span><span class="n">inj_of_trivial_ker</span><span class="o">]</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">inj_of_trivial_ker</span>
+</pre></div>
+
+
+<p>And it worked! Why? Should it work? Are we doing something wrong with the simplification lemmas? Maybe some <code>@[simp]</code> tags missing? Or is there something wrong with <code>to_additive</code>? </p>
+<p>Then I discovered that a much cleaner way of solving it was to simply add:</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">trivial</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span><span class="o">]</span> <span class="n">is_subgroup</span><span class="bp">.</span><span class="n">trivial</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span>
+</pre></div>
+
+
+<p>which was the piece of information missing. However, I still think it'd be very useful if someone could clarify what's happening behind the scenes.</p>
+
 
 {% endraw %}

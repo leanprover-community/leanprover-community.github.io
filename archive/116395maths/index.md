@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (9 messages, latest: Apr 17 2019 at 17:20)
+
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (171 messages, latest: Apr 17 2019 at 17:00)
+
 * [linear_independent for families](21882linearindependentforfamilies.html) (60 messages, latest: Apr 17 2019 at 12:51)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (111 messages, latest: Apr 17 2019 at 12:45)
@@ -21,8 +25,6 @@ permalink: archive/116395maths/index.html
 * [preorder categories](14346preordercategories.html) (15 messages, latest: Apr 13 2019 at 13:33)
 
 * [discontinuity of a step function](47279discontinuityofastepfunction.html) (6 messages, latest: Apr 12 2019 at 21:02)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (170 messages, latest: Apr 12 2019 at 16:00)
 
 * [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)
 
@@ -113,8 +115,6 @@ permalink: archive/116395maths/index.html
 * [subring diamond](57559subringdiamond.html) (23 messages, latest: Mar 12 2019 at 12:16)
 
 * [topological groups/add_groups](02101topologicalgroupsaddgroups.html) (20 messages, latest: Mar 11 2019 at 16:33)
-
-* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (8 messages, latest: Mar 11 2019 at 14:35)
 
 * [continuity and nhds](98423continuityandnhds.html) (3 messages, latest: Mar 11 2019 at 11:58)
 

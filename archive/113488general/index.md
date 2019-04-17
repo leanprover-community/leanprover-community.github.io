@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quotations and expr](94922quotationsandexpr.html) (8 messages, latest: Apr 17 2019 at 17:38)
+
 * [rw under a union](73586rwunderaunion.html) (222 messages, latest: Apr 17 2019 at 16:31)
 
 * [Lean T-shirt](58924LeanTshirt.html) (22 messages, latest: Apr 17 2019 at 14:15)
