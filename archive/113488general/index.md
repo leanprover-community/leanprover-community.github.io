@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [eblast](79292eblast.html) (21 messages, latest: Apr 17 2019 at 10:44)
+* [Lean T-shirt](58924LeanTshirt.html) (19 messages, latest: Apr 17 2019 at 12:57)
 
-* [Lean T-shirt](58924LeanTshirt.html) (18 messages, latest: Apr 17 2019 at 10:37)
+* [eblast](79292eblast.html) (21 messages, latest: Apr 17 2019 at 10:44)
 
 * [finite types with ordering](15115finitetypeswithordering.html) (6 messages, latest: Apr 16 2019 at 19:10)
 

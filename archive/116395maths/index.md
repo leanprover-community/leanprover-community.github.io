@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (110 messages, latest: Apr 17 2019 at 10:27)
+* [linear_independent for families](21882linearindependentforfamilies.html) (60 messages, latest: Apr 17 2019 at 12:51)
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (59 messages, latest: Apr 17 2019 at 08:05)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (111 messages, latest: Apr 17 2019 at 12:45)
 
 * [stuff we want](64767stuffwewant.html) (12 messages, latest: Apr 15 2019 at 12:08)
 
