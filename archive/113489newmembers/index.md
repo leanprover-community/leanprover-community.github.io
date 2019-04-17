@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [expr: fields and @](45316exprfieldsand.html) (2 messages, latest: Apr 17 2019 at 20:50)
+
 * [Installing mathlib](63351Installingmathlib.html) (77 messages, latest: Apr 17 2019 at 18:42)
 
 * [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (47 messages, latest: Apr 16 2019 at 19:54)
