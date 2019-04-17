@@ -1,0 +1,71 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/00103qpfnoconfusion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00103qpfnoconfusion.html">qpf/no_confusion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163593491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/qpf/no_confusion/near/163593491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00103qpfnoconfusion.html#163593491">matt rice (Apr 17 2019 at 19:27)</a>:</h4>
+<p>sorry for the millions of qpf questions, a bit stuck on this one<br>
+This was originally about another data type, but I figured it would be easiest to just reformulate under option</p>
+<p>I have this little proof here, (on the normal lean inductive option), which I didn't see in mathlib or core btw</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">option</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">option</span><span class="bp">.</span><span class="n">neq_of_none_some</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+<span class="o">:</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">none</span><span class="o">)</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">some</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>I had managed to get it working relatively unscathed with the qpf parser</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fix</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">equations</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">namespace</span> <span class="n">opt&#39;</span>
+    <span class="n">qpf</span> <span class="n">opt&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+    <span class="bp">|</span> <span class="n">none</span> <span class="o">:</span> <span class="n">opt&#39;</span>
+    <span class="bp">|</span> <span class="n">some</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">opt&#39;</span>
+
+    <span class="n">def</span> <span class="n">opt&#39;</span><span class="bp">.</span><span class="n">neq_of_none_some</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+    <span class="o">:</span> <span class="o">(</span><span class="n">opt&#39;</span><span class="bp">.</span><span class="n">none</span> <span class="n">α</span><span class="o">)</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">opt&#39;</span><span class="bp">.</span><span class="n">some</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">opt&#39;</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span>
+<span class="kn">end</span> <span class="n">opt&#39;</span>
+</pre></div>
+
+
+<p>When i tried to change <del>qpf opt' (α : Type)</del>  into <em>data opt (α : Type)</em><br>
+The no_confusion function is then derived under opt.shape.no_confusion,<br>
+but the signature has changed to accepting an equality between opt.shapes rather.</p>
+<p>I haven't figured out how to go from the original equality into the shape one (see the sorry below).</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">opt</span>
+    <span class="n">data</span> <span class="n">opt</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+    <span class="bp">|</span> <span class="n">none</span> <span class="o">:</span> <span class="n">opt</span>
+    <span class="bp">|</span> <span class="n">some</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">opt</span>
+
+    <span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">opt</span><span class="bp">.</span><span class="n">shape</span><span class="bp">.</span><span class="n">no_confusion</span>
+    <span class="n">def</span> <span class="n">opt</span><span class="bp">.</span><span class="n">neq_of_none_some</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+    <span class="o">:</span> <span class="o">(</span><span class="n">opt</span><span class="bp">.</span><span class="n">none</span> <span class="n">α</span><span class="o">)</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">opt</span><span class="bp">.</span><span class="n">some</span> <span class="n">α</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="n">opt</span><span class="bp">.</span><span class="n">shape</span><span class="bp">.</span><span class="n">none</span> <span class="n">α</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">opt</span><span class="bp">.</span><span class="n">shape</span><span class="bp">.</span><span class="n">some</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span>
+          <span class="k">by</span> <span class="n">sorry</span><span class="o">,</span>
+       <span class="n">opt</span><span class="bp">.</span><span class="n">shape</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h&#39;</span><span class="o">)</span>
+<span class="kn">end</span> <span class="n">opt</span>
+</pre></div>
+
+<a name="163594980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/qpf/no_confusion/near/163594980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00103qpfnoconfusion.html#163594980">Simon Hudon (Apr 17 2019 at 19:46)</a>:</h4>
+<p>I don't think we generate <code>no_confusion</code> for the data types yet but it should be fairly easy to add it because I already have code that does that. I can create a branch with code if you like. I'm trying to not touch the <code>master</code> branch at the moment so that it can serve as a stable state for the reviewer of my paper.</p>
+
+<a name="163595349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/qpf/no_confusion/near/163595349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00103qpfnoconfusion.html#163595349">matt rice (Apr 17 2019 at 19:52)</a>:</h4>
+<p>I can just leave it as a sorry for now, but a branch would be fine too, either way</p>
+
+
+{% endraw %}
