@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [finite types with ordering](15115finitetypeswithordering.html) (6 messages, latest: Apr 16 2019 at 19:10)
+* [eblast](79292eblast.html) (21 messages, latest: Apr 17 2019 at 10:44)
 
-* [eblast](79292eblast.html) (18 messages, latest: Apr 16 2019 at 15:33)
+* [Lean T-shirt](58924LeanTshirt.html) (18 messages, latest: Apr 17 2019 at 10:37)
+
+* [finite types with ordering](15115finitetypeswithordering.html) (6 messages, latest: Apr 16 2019 at 19:10)
 
 * [cache-olean](72177cacheolean.html) (3 messages, latest: Apr 16 2019 at 15:18)
 
@@ -49,8 +51,6 @@ permalink: archive/113488general/index.html
 * [simp making a meal of it](35011simpmakingamealofit.html) (25 messages, latest: Apr 12 2019 at 18:59)
 
 * [injection on types](19798injectionontypes.html) (62 messages, latest: Apr 12 2019 at 01:02)
-
-* [Lean T-shirt](58924LeanTshirt.html) (16 messages, latest: Apr 11 2019 at 11:00)
 
 * [backticks - literals inside expr](28440backticksliteralsinsideexpr.html) (28 messages, latest: Apr 11 2019 at 00:23)
 
