@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (109 messages, latest: Apr 17 2019 at 09:12)
+
 * [linear_independent for families](21882linearindependentforfamilies.html) (59 messages, latest: Apr 17 2019 at 08:05)
 
 * [stuff we want](64767stuffwewant.html) (12 messages, latest: Apr 15 2019 at 12:08)
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [define a function by cases](55997defineafunctionbycases.html) (26 messages, latest: Apr 11 2019 at 18:14)
 
 * [black hole](76230blackhole.html) (9 messages, latest: Apr 11 2019 at 08:46)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (108 messages, latest: Apr 11 2019 at 02:46)
 
 * [factoring out a constant from a linear map](99759factoringoutaconstantfromalinearmap.html) (11 messages, latest: Apr 10 2019 at 19:24)
 
