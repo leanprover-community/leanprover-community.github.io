@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [rw under a union](73586rwunderaunion.html) (222 messages, latest: Apr 17 2019 at 16:31)
+
 * [Lean T-shirt](58924LeanTshirt.html) (22 messages, latest: Apr 17 2019 at 14:15)
 
 * [eblast](79292eblast.html) (21 messages, latest: Apr 17 2019 at 10:44)
@@ -2547,8 +2549,6 @@ permalink: archive/113488general/index.html
 * [simp theorem iff true](63555simptheoremifftrue.html) (16 messages, latest: May 18 2018 at 11:57)
 
 * [$ annoyance](39393annoyance.html) (37 messages, latest: May 18 2018 at 03:19)
-
-* [rw under a union](73586rwunderaunion.html) (220 messages, latest: May 17 2018 at 20:56)
 
 * [∈](69203.html) (9 messages, latest: May 17 2018 at 13:40)
 
