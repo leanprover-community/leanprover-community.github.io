@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [eblast](79292eblast.html) (25 messages, latest: Apr 17 2019 at 22:10)
+
 * [qpf/no_confusion](00103qpfnoconfusion.html) (4 messages, latest: Apr 17 2019 at 20:23)
 
 * [quotations and expr](94922quotationsandexpr.html) (8 messages, latest: Apr 17 2019 at 17:38)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [rw under a union](73586rwunderaunion.html) (222 messages, latest: Apr 17 2019 at 16:31)
 
 * [Lean T-shirt](58924LeanTshirt.html) (22 messages, latest: Apr 17 2019 at 14:15)
-
-* [eblast](79292eblast.html) (21 messages, latest: Apr 17 2019 at 10:44)
 
 * [finite types with ordering](15115finitetypeswithordering.html) (6 messages, latest: Apr 16 2019 at 19:10)
 

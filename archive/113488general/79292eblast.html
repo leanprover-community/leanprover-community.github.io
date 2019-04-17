@@ -354,5 +354,39 @@ unsat
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163549505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163549505">Joseph Corneli (Apr 17 2019 at 10:44)</a>:</h4>
 <p>Am I correct in thinking that that's the code you have at <a href="https://github.com/semorrison/lean-rewrite-search" target="_blank" title="https://github.com/semorrison/lean-rewrite-search">https://github.com/semorrison/lean-rewrite-search</a> ?</p>
 
+<a name="163605299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163605299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163605299">Jesse Michael Han (Apr 17 2019 at 22:08)</a>:</h4>
+<p>a pleasant example, from one of Pitt's linear algebra prelims:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">adj</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">lemma</span> <span class="n">adj_adj</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">adj</span> <span class="o">(</span><span class="n">adj</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="kn">theorem</span> <span class="n">adj_antimul</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">adj</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">adj</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">adj</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ematch</span><span class="o">]</span><span class="n">def</span> <span class="n">is_unitary</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">adj</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">))</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">ematch</span><span class="o">]</span> <span class="n">mul_assoc</span> <span class="c1">-- sadly necessary</span>
+
+<span class="kn">theorem</span> <span class="n">normal_of_adjoint_eq_unitary_self</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">is_unitary</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">adj</span> <span class="n">T</span> <span class="bp">=</span> <span class="n">U</span> <span class="bp">*</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">T</span> <span class="bp">*</span> <span class="o">(</span><span class="n">adj</span> <span class="n">T</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">adj</span> <span class="n">T</span><span class="o">)</span> <span class="bp">*</span> <span class="n">T</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span>
+</pre></div>
+
+<a name="163605334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163605334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163605334">Jesse Michael Han (Apr 17 2019 at 22:09)</a>:</h4>
+<p><del>i'm very pleased that it even knows to insert the <code>1</code> and rewrite backwards using <code>is_unitary</code></del> oops, it only needs to reassociate and then rewrite with <code>is_unitary</code></p>
+
+<a name="163605358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163605358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163605358">Kevin Buzzard (Apr 17 2019 at 22:10)</a>:</h4>
+<p>You should have seen the automatic theorem provers in action at AITP last week :-)</p>
+
+<a name="163605439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eblast/near/163605439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79292eblast.html#163605439">Kevin Buzzard (Apr 17 2019 at 22:10)</a>:</h4>
+<p>But IIRC Lean is supposed to be bridging the gap between ATPs and ITPs so this is definitely a step in the right direction :-)</p>
+
 
 {% endraw %}

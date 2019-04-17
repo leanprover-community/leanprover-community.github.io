@@ -19,5 +19,29 @@ permalink: archive/113489newmembers/45316exprfieldsand.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163599659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163599659">Fabian Glöckle (Apr 17 2019 at 20:50)</a>:</h4>
 <p>To be more precise, I want the <code>has_add.add</code> part to be dynamic (generated from a string to also support <code>has_mul.mul</code> etc.); the <code>@</code>is always needed.</p>
 
+<a name="163605271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163605271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163605271">Fabian Glöckle (Apr 17 2019 at 22:08)</a>:</h4>
+<p>Is the <code>@</code> an <code>annotation</code>? My tests indicate no...</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">diagnose</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">option</span> <span class="o">(</span><span class="n">name</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">exp</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="o">),</span>
+   <span class="n">res</span> <span class="err">←</span> <span class="n">pure</span> <span class="err">$</span> <span class="n">expr</span><span class="bp">.</span><span class="n">is_annotation</span> <span class="n">exp</span><span class="o">,</span>
+   <span class="n">type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">exp</span><span class="o">,</span>
+   <span class="n">trace</span> <span class="n">type</span><span class="o">,</span>
+   <span class="n">trace</span> <span class="n">res</span><span class="o">,</span>
+   <span class="n">return</span> <span class="n">res</span>
+</pre></div>
+
+
+<p>--&gt; trace output:</p>
+<div class="codehilite"><pre><span></span><span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="n">none</span>
+</pre></div>
+
+
+<p>without the <code>@</code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">?</span><span class="n">m_1</span> <span class="bp">→</span> <span class="err">?</span><span class="n">m_1</span> <span class="bp">→</span> <span class="err">?</span><span class="n">m_1</span>
+<span class="n">none</span>
+</pre></div>
+
 
 {% endraw %}
