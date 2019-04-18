@@ -54,5 +54,89 @@ permalink: archive/144837PRreviews/50528878removedependencies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163680119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163680119">Mario Carneiro (Apr 18 2019 at 18:57)</a>:</h4>
 <p>can you post the pp.all expression? There shouldn't be an ambiguity like that</p>
 
+<a name="163685814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163685814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163685814">Rob Lewis (Apr 18 2019 at 20:03)</a>:</h4>
+<p>Hmm? I think I'm misunderstanding, there's no ambiguity. The line <code>have := lt_floor_add_one (x + 1 / 2)</code> gives you hypothesis <code>this : x + 1 / 2 &lt; ↑⌊x + 1 / 2⌋ + 1</code>. The goal is <code>x - ↑⌊x + 1 / 2⌋ ≤ 1 / 2 ∧ ↑⌊x + 1 / 2⌋ - x ≤ 1 / 2</code>, and the cast is there from the beginning. Unsurprisingly, the term in the <code>set</code> line matches the one in the goal, since they're both coming from elaborating user input in the same place. But it isn't matching the output of <code>lt_floor_add_one</code>.</p>
+
+<a name="163685850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163685850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163685850">Rob Lewis (Apr 18 2019 at 20:03)</a>:</h4>
+<p>Here's the pp.all output, which I admit I didn't try very hard to parse.<br>
+(Edit - one sec, this was too long to paste) <a href="user_uploads/3121/EhwfEjxO2Gw4ohHk-L3CCT6_/trace.txt" target="_blank" title="user_uploads/3121/EhwfEjxO2Gw4ohHk-L3CCT6_/trace.txt">trace.txt</a></p>
+
+<a name="163686033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686033">Rob Lewis (Apr 18 2019 at 20:06)</a>:</h4>
+<p>No easy solution comes to mind. Paul-Nicolas and I have been looking at casts quite a bit lately, and debugging them is horrible, nothing less than pp.all helps.</p>
+
+<a name="163686162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686162">Rob Lewis (Apr 18 2019 at 20:07)</a>:</h4>
+<p>And I don't have time at the moment to chase down why changing imports leads to a different instance.</p>
+
+<a name="163686209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686209">Rob Lewis (Apr 18 2019 at 20:08)</a>:</h4>
+<p>Well, an easy solution for this particular case is to give explicit types to the <code>have</code> statements.</p>
+
+<a name="163687636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163687636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163687636">Mario Carneiro (Apr 18 2019 at 20:24)</a>:</h4>
+<p>I am probably misunderstanding too, but isn't <code>↑⌊x + 1 / 2⌋</code> just a variable here from linarith's point of view? I thought that you were saying that the different occurrences of <code>↑⌊x + 1 / 2⌋</code> had different coes and end up as different variables so it isn't provable</p>
+
+<a name="163687790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163687790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163687790">Mario Carneiro (Apr 18 2019 at 20:26)</a>:</h4>
+<p>(PS: coes are ridiculously large. I wonder if we can get a performance improvement by making <code>int.cast</code> depend on a <code>[ring A]</code> rather than <code>[has_zero A] [has_one A] [has_neg A] [has_add A]</code>)</p>
+
+<a name="163688513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688513">Rob Lewis (Apr 18 2019 at 20:36)</a>:</h4>
+<p>Yes, that's exactly what's happening. Specifically, the <code>has_lift_t</code> instances must be defeq but not syntactically equal. I actually thought there was some support in <code>simp</code> to normalize these kinds of things, but maybe there are simp lemmas missing.</p>
+
+<a name="163688536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688536">Rob Lewis (Apr 18 2019 at 20:37)</a>:</h4>
+<p>I'd be in favor of that change to <code>int.cast</code>.</p>
+
+<a name="163688551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688551">Simon Hudon (Apr 18 2019 at 20:37)</a>:</h4>
+<p>That sounds like a good idea to me</p>
+
+<a name="163688676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688676">Rob Lewis (Apr 18 2019 at 20:39)</a>:</h4>
+<p>I'm not sure how much of a performance gain it will be, but at least it will shrink the pp.all output a bit, and I don't think it will hurt anything.</p>
+
+<a name="163689004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689004">Mario Carneiro (Apr 18 2019 at 20:43)</a>:</h4>
+<p>A more robust method is to keep track of all the variable replacements, and whenever you find a new atom you see if it defeq matches a previous one and use that variable instead of making a new one</p>
+
+<a name="163689086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689086">Simon Hudon (Apr 18 2019 at 20:44)</a>:</h4>
+<p>That sounds very cumbersome</p>
+
+<a name="163689113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689113">Mario Carneiro (Apr 18 2019 at 20:45)</a>:</h4>
+<p>Surely it already has to be done to some extent; you are traversing the term(s) to find unique atoms, and this is just modifying the equality test</p>
+
+<a name="163689133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689133">Mario Carneiro (Apr 18 2019 at 20:45)</a>:</h4>
+<p>It's <code>pw_filter</code> but with a monadic predicate</p>
+
+<a name="163689363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689363">Simon Hudon (Apr 18 2019 at 20:48)</a>:</h4>
+<p>Are you talking about change <code>simp</code> or <code>linarith</code>?</p>
+
+<a name="163689381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689381">Mario Carneiro (Apr 18 2019 at 20:48)</a>:</h4>
+<p>linarith, in its atom matching step</p>
+
+<a name="163689439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689439">Kevin Buzzard (Apr 18 2019 at 20:49)</a>:</h4>
+<blockquote>
+<p>(PS: coes are ridiculously large. I wonder if we can get a performance improvement by making <code>int.cast</code> depend on a <code>[ring A]</code> rather than <code>[has_zero A] [has_one A] [has_neg A] [has_add A]</code>)</p>
+</blockquote>
+<p>You mean <code>[has_neg A] [has_add A] [has_zero A] [has_one A]</code>, right? ;-)</p>
+
+<a name="163689554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689554">Mario Carneiro (Apr 18 2019 at 20:51)</a>:</h4>
+<p>If school has taught me nothing else it's that a permutation of the correct answer is a correct answer</p>
+
+<a name="163689576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689576">Kevin Buzzard (Apr 18 2019 at 20:51)</a>:</h4>
+<p>If all this CS stuff has taught me anything, it's that runtime matters</p>
+
 
 {% endraw %}
