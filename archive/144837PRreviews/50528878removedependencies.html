@@ -42,5 +42,17 @@ permalink: archive/144837PRreviews/50528878removedependencies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673783">Simon Hudon (Apr 18 2019 at 17:48)</a>:</h4>
 <p>Also, when I look at the transitive closure of the import graph and I look at the modules that are no longer visible after eliminating spurious dependencies, adding those imports to <code>tactic/linarith.lean</code> or <code>algebra/archimedean.lean</code> doesn't fix the problem.</p>
 
+<a name="163679348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163679348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163679348">Rob Lewis (Apr 18 2019 at 18:47)</a>:</h4>
+<p>The problem is that the casts to α that appear in the <code>have</code>statements are different from the one that appears in the goal. Changing the imports somehow changed the path that gets found from ℤ to α. So <code>linarith</code> sees the two cast expressions as different, and won't cancel them. You can see this if you add the line <code>set v := (↑⌊x + 1 / 2⌋ : α)</code> before the <code>split</code>. It rewrites the goal to <code>v</code> but not the hypotheses.</p>
+
+<a name="163679503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163679503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163679503">Simon Hudon (Apr 18 2019 at 18:49)</a>:</h4>
+<p>Ok so that's more an issue with <code>coe</code> than with <code>linarith</code>. Any suggestion on not getting caught like that in the future? (also fixing this problem)</p>
+
+<a name="163680119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163680119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163680119">Mario Carneiro (Apr 18 2019 at 18:57)</a>:</h4>
+<p>can you post the pp.all expression? There shouldn't be an ambiguity like that</p>
+
 
 {% endraw %}

@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [using_well_founded](47902usingwellfounded.html) (25 messages, latest: Apr 18 2019 at 17:57)
+* [Lean segfaulting](48154Leansegfaulting.html) (8 messages, latest: Apr 18 2019 at 18:26)
+
+* [using_well_founded](47902usingwellfounded.html) (26 messages, latest: Apr 18 2019 at 18:07)
 
 * [omega](89194omega.html) (20 messages, latest: Apr 18 2019 at 17:36)
 

@@ -1,0 +1,75 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/48154Leansegfaulting.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html">Lean segfaulting</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163675426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163675426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163675426">Koundinya Vajjha (Apr 18 2019 at 18:06)</a>:</h4>
+<p>I just came across this and I am unsure of why this causes the Lean server to segfault on my machine:<br>
+I am writing a tactic to revert all propositions in a theorem. </p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">revert_props</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+    <span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+       <span class="n">lst</span> <span class="err">←</span> <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">ctx</span><span class="o">,</span>
+       <span class="n">foo</span> <span class="err">←</span> <span class="n">mfilter</span> <span class="n">is_prop</span> <span class="n">lst</span><span class="o">,</span>
+       <span class="n">g</span> <span class="err">←</span> <span class="n">mmap</span> <span class="n">revert</span> <span class="n">foo</span><span class="o">,</span>
+       <span class="n">skip</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">e</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₃</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- revert_props, -- causes a segfault</span>
+  <span class="n">guard_target</span> <span class="o">(</span><span class="n">b</span> <span class="bp">∧</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">g</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">d</span> <span class="bp">→</span> <span class="n">e</span><span class="o">)</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">true</span><span class="o">,</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I am concerned if <code>mmap revert foo</code> is the right way to do what I had in mind.</p>
+
+<a name="163675942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163675942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163675942">Mario Carneiro (Apr 18 2019 at 18:12)</a>:</h4>
+<p>I recall <code>revert</code> having a bug in it that causes a segfault, although I thought it was fixed</p>
+
+<a name="163676018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163676018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163676018">Koundinya Vajjha (Apr 18 2019 at 18:13)</a>:</h4>
+<p>Does this mean I can skip Q1 for tomorrow's ITP homework?</p>
+
+<a name="163676502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163676502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163676502">Mario Carneiro (Apr 18 2019 at 18:19)</a>:</h4>
+<p>no, there is a bug in your code</p>
+
+<a name="163676584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163676584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163676584">Mario Carneiro (Apr 18 2019 at 18:20)</a>:</h4>
+<p>the bug in lean is that it segfaults instead of just failing the tactic, but you called <code>revert</code> wrong</p>
+
+<a name="163676971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163676971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163676971">Mario Carneiro (Apr 18 2019 at 18:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Here's a MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">revert</span>
+</pre></div>
+
+
+<p>It looks like <code>local_context::find_local_decl</code> asserts that the input is a local constant rather than returning none like you might expect</p>
+
+<a name="163677143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163677143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163677143">Simon Hudon (Apr 18 2019 at 18:26)</a>:</h4>
+<p>I'll have a look</p>
+
+<a name="163677201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163677201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163677201">Mario Carneiro (Apr 18 2019 at 18:26)</a>:</h4>
+<p>maybe <code>revert()</code> in <code>revert_tactic.cpp</code> should have a check in the for loop</p>
+
+
+{% endraw %}

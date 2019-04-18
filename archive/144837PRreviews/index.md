@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#878  remove dependencies](50528878removedependencies.html) (7 messages, latest: Apr 18 2019 at 17:48)
+* [#878  remove dependencies](50528878removedependencies.html) (10 messages, latest: Apr 18 2019 at 18:57)
 
-* [#931 complete lattices have (co)limits](13196931completelatticeshavecolimits.html) (2 messages, latest: Apr 18 2019 at 17:34)
+* [#931 complete lattices have (co)limits](13196931completelatticeshavecolimits.html) (5 messages, latest: Apr 18 2019 at 18:09)
 
 * [#927 operator norm](08942927operatornorm.html) (4 messages, latest: Apr 17 2019 at 09:42)
 
