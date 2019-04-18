@@ -203,5 +203,44 @@ permalink: archive/144837PRreviews/50528878removedependencies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694458">Rob Lewis (Apr 18 2019 at 22:00)</a>:</h4>
 <p>Kevin, I think the coercions are a red herring. An automated proof broke, because changing imports caused some type class instances to be inferred differently, and the syntactic difference confuses <code>linarith</code>. There's an easy enough way to make <code>linarith</code> ignore the syntactic difference, but it only works if the same change happens to <code>ring</code>.</p>
 
+<a name="163694536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694536">Rob Lewis (Apr 18 2019 at 22:00)</a>:</h4>
+<blockquote>
+<p>Would it help to canonicalize expressions so that their structure is completely conform to the language of rings?</p>
+</blockquote>
+<p>I'm not sure what you mean, help what?</p>
+
+<a name="163694612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694612">Rob Lewis (Apr 18 2019 at 22:02)</a>:</h4>
+<p>Again, I don't know the details of <code>ring</code> so well, Mario would need to weigh in to say how big a change this would be.</p>
+
+<a name="163694717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694717">Kevin Buzzard (Apr 18 2019 at 22:03)</a>:</h4>
+<p>Obviously I know far less about what's going on than you do -- but you can't just force all type class instances to be "the right ones that we chose once and for all"?</p>
+
+<a name="163694768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694768">Kevin Buzzard (Apr 18 2019 at 22:04)</a>:</h4>
+<p>Syntactically?</p>
+
+<a name="163694894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694894">Simon Hudon (Apr 18 2019 at 22:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  That's the solution adopted in Haskell and you need some strong assumptions about the type class system in order to make that work. Lean is too permissive for us to make that work</p>
+
+<a name="163694907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694907">Simon Hudon (Apr 18 2019 at 22:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Instead of answering your question, I think I'll wait for Mario to comment</p>
+
+<a name="163695095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163695095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163695095">Rob Lewis (Apr 18 2019 at 22:10)</a>:</h4>
+<p>And while we're waiting, I'm headed to bed <span aria-label="sleeping" class="emoji emoji-1f634" role="img" title="sleeping">:sleeping:</span></p>
+
+<a name="163695112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163695112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163695112">Simon Hudon (Apr 18 2019 at 22:10)</a>:</h4>
+<p>Sleep tight!</p>
+
+<a name="163697662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163697662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163697662">Mario Carneiro (Apr 18 2019 at 22:55)</a>:</h4>
+<p>The main problem with this change in both linarith and ring is that they rely on a total order on expressions (<code>expr.lt</code>) for which the lt-comparable exprs are syntactically equal. There is no analogous total order up to defeq, at least not anything cheap. So we basically have to preprocess the term and replace all atoms with numbered variables to impose a local order</p>
+
 
 {% endraw %}
