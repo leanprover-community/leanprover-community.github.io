@@ -1995,5 +1995,169 @@ And if I don't want to force two variables to be both for example <code>Type 2</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163636992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163636992">Kevin Buzzard (Apr 18 2019 at 09:59)</a>:</h4>
 <p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md</a></p>
 
+<a name="163637060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637060">Kevin Buzzard (Apr 18 2019 at 10:00)</a>:</h4>
+<p>Your link there is to an out of date file :-/ That's Lean 2 you're looking at</p>
+
+<a name="163637073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637073">Kevin Buzzard (Apr 18 2019 at 10:00)</a>:</h4>
+<p>You can use <code>conv</code> to zoom directly into the right hand side with <code>conv in</code> or <code>conv at</code> or something, I can never remember the details, but they're clearly documented in Patrick's conv.md write-up</p>
+
+<a name="163637094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637094">Kevin Kappelmann (Apr 18 2019 at 10:01)</a>:</h4>
+<p>Oh damn, google fooled me</p>
+
+<a name="163637097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637097">Kevin Buzzard (Apr 18 2019 at 10:01)</a>:</h4>
+<p>That way you avoid the <code>to_rhs</code> conv-mode tactic</p>
+
+<a name="163637103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637103">Kevin Buzzard (Apr 18 2019 at 10:01)</a>:</h4>
+<blockquote>
+<p>Oh damn, google fooled me</p>
+</blockquote>
+<p>call them up and complain</p>
+
+<a name="163637176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637176">Kevin Buzzard (Apr 18 2019 at 10:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span> <span class="c1">-- this is obviously false</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="k">begin</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">P</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163637250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637250">Kevin Buzzard (Apr 18 2019 at 10:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">42</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span> <span class="c1">-- this is obviously false</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">42</span><span class="o">),</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">),</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163637270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637270">Kevin Buzzard (Apr 18 2019 at 10:03)</a>:</h4>
+<p>This way avoids conv mode and is more precise about what you want done</p>
+
+<a name="163637329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637329">Kevin Buzzard (Apr 18 2019 at 10:04)</a>:</h4>
+<p>What exactly are you looking for? Tactic-writers here are very good.</p>
+
+<a name="163637360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637360">Kevin Buzzard (Apr 18 2019 at 10:04)</a>:</h4>
+<p>People can just make new stuff. Lean tactics are written in Lean and some people (not me though! I'm a mathematician) can just knock them off before breakfast.</p>
+
+<a name="163637832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637832">Kevin Kappelmann (Apr 18 2019 at 10:11)</a>:</h4>
+<p>Basically, I had a rather long equation of the form <code>l=r</code> and I wanted to unfold an expression in <code>r</code> by its definition, which again, is a rather long term. Hence, I neither want to re-state the whole goal nor the result of the unfolded definition. What I want to do is something like</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">P</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span> <span class="c1">-- this should unfold the second occurrence of P in the goal (or the third if you count from zero)</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163637905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637905">Kevin Buzzard (Apr 18 2019 at 10:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> is that already a tactic, do you know?</p>
+
+<a name="163637917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163637917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163637917">Kevin Buzzard (Apr 18 2019 at 10:12)</a>:</h4>
+<p>Is there any obstruction to making it?</p>
+
+<a name="163638014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638014">Kevin Buzzard (Apr 18 2019 at 10:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> you could just do all the unfolds manually, ignore what happens to <code>l</code>, and then once you've got <code>r</code> into the form you want you can just delet everything and write <code>show _ = [what you want r to be]</code></p>
+
+<a name="163638029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638029">Kevin Buzzard (Apr 18 2019 at 10:14)</a>:</h4>
+<p>(the point being that <code>show</code> will take <code>_</code> for the left hand side)</p>
+
+<a name="163638165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638165">Kevin Buzzard (Apr 18 2019 at 10:16)</a>:</h4>
+<p>I think I've now told you all the tricks I know -- but I can see that your proposed idea is nicer. It might be a pain though -- if you want to unfold a bunch of stuff in <code>r</code> but not in <code>l</code> you might have to keep changing the numbers, depending on which things you want to unfold in <code>r</code> also show up in <code>l</code>. I think that if you're adamant that you want to change <code>r</code> and leave <code>l</code> untouched, just use <code>conv</code> mode and <code>to_rhs</code>. That's only a couple of lines and I think it's better than your idea because of the issue with numbers perhaps changing depending on exactly you want to unfold.</p>
+
+<a name="163638189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638189">Gabriel Ebner (Apr 18 2019 at 10:17)</a>:</h4>
+<p>Yes, you can do this with <code>conv</code>.  Unfortunately, <code>unfold</code> isn't wrapped so you need to use <code>simp</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">conv</span> <span class="o">{</span> <span class="n">for</span> <span class="o">(</span><span class="n">P</span> <span class="bp">_</span><span class="o">)</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">P</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+</pre></div>
+
+<a name="163638194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638194">Kevin Buzzard (Apr 18 2019 at 10:17)</a>:</h4>
+<p>OTOH I guess your idea has its merits when there is more than one occurrence of P in the RHS.</p>
+
+<a name="163638210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638210">Kevin Buzzard (Apr 18 2019 at 10:17)</a>:</h4>
+<p>Aah, I'd forgotten <code>conv</code> could take numbers!</p>
+
+<a name="163638215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638215">Kevin Buzzard (Apr 18 2019 at 10:17)</a>:</h4>
+<p>Thanks Gabriel</p>
+
+<a name="163638303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638303">Kevin Buzzard (Apr 18 2019 at 10:18)</a>:</h4>
+<p>hey what is this voodoo? <code>for</code>? I thought functional languages didn't have <code>for</code> loops!</p>
+
+<a name="163638383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638383">Kevin Buzzard (Apr 18 2019 at 10:20)</a>:</h4>
+<p>Aah yes, I see now that <code>for</code> is documented in the <code>conv</code> document I linked to earlier.</p>
+
+<a name="163638461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638461">Kevin Buzzard (Apr 18 2019 at 10:20)</a>:</h4>
+<p>It's about time I re-read it :D</p>
+
+<a name="163638592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638592">Kevin Buzzard (Apr 18 2019 at 10:22)</a>:</h4>
+<p>I'll show you a Lean trick Kevin. </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">42</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">P</span>
+
+<span class="c1">-- P.equations._eqn_1 : ∀ (n : ℕ), P n = (n &gt; 42)</span>
+</pre></div>
+
+
+<p>When you define <code>P</code>, Lean makes one or more "equation lemmas" for it. <code>unfold P</code> is basically the same as <code>simp only [P.equations._eqn_1]</code> or <code>simp only [P]</code> for short. It's a shame there's no <code>unfold</code> in <code>conv</code> mode, but these are the tricks you can use to emulate it.</p>
+
+<a name="163638639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638639">Kevin Buzzard (Apr 18 2019 at 10:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">42</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span> <span class="c1">-- this is obviously false</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">P</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">),</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163638662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638662">Kevin Kappelmann (Apr 18 2019 at 10:23)</a>:</h4>
+<p>Okay, I summarise: <code>conv</code> is pretty useful, I should read about it, and I guess it should also be included in the official docs at some point to avoid noobs like me wondering how to rewrite subterms :p</p>
+
+<a name="163638723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638723">Kevin Buzzard (Apr 18 2019 at 10:24)</a>:</h4>
+<p>The Lean team is currently working on Lean 4, I don't think they're interested in documentation-writing at the minute.</p>
+
+<a name="163638734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638734">Kevin Buzzard (Apr 18 2019 at 10:24)</a>:</h4>
+<p>If Lean 4 is a success then we'll all be porting the docs over to there</p>
+
+<a name="163638750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638750">Kevin Buzzard (Apr 18 2019 at 10:25)</a>:</h4>
+<p>The community-written docs are really helpful for technical questions not covered by Theorem Proving In Lean.</p>
+
+<a name="163638771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638771">Kevin Buzzard (Apr 18 2019 at 10:25)</a>:</h4>
+<p>They all live in the mathlib repo but they're not really anything to do with mathlib, they're just where these community-generated docs ended up.</p>
+
+<a name="163638971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163638971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163638971">Kevin Kappelmann (Apr 18 2019 at 10:29)</a>:</h4>
+<p>I see. I think rewriting subterms is quite common though, so I would mention it at least in the official doc. Anyway, thanks Kevin &amp; Gabriel :)</p>
+
 
 {% endraw %}
