@@ -43,5 +43,32 @@ permalink: archive/113489newmembers/45316exprfieldsand.html
 <span class="n">none</span>
 </pre></div>
 
+<a name="163612370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163612370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163612370">Simon Hudon (Apr 18 2019 at 00:13)</a>:</h4>
+<p><code>@</code> is used by the elaborator. It is only present pre-terms (i.e. <code>pexpr</code>). Consider:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="k">let</span> <span class="n">e</span> <span class="o">:=</span> <span class="bp">``</span><span class="o">(</span><span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span> <span class="o">),</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">e</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">,</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">e</span><span class="bp">.</span><span class="n">is_annotation</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">e</span> <span class="o">:=</span> <span class="bp">``</span><span class="o">(</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span> <span class="o">),</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">e</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">,</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">e</span><span class="bp">.</span><span class="n">is_annotation</span>
+
+<span class="n">run_cmd</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="163612381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163612381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163612381">Simon Hudon (Apr 18 2019 at 00:13)</a>:</h4>
+<p>It prints:</p>
+<div class="codehilite"><pre><span></span>[macro annotation (const has_add.add [])]
+(some (@, has_add.add))
+(const has_add.add [])
+none
+</pre></div>
+
+<a name="163612432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163612432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163612432">Simon Hudon (Apr 18 2019 at 00:14)</a>:</h4>
+<p><code> ``(@has_add.add)</code> is a pre-term but <code>to_expr</code> makes it into a term</p>
+
 
 {% endraw %}
