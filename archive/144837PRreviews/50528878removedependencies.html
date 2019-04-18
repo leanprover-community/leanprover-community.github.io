@@ -138,5 +138,70 @@ permalink: archive/144837PRreviews/50528878removedependencies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689576">Kevin Buzzard (Apr 18 2019 at 20:51)</a>:</h4>
 <p>If all this CS stuff has taught me anything, it's that runtime matters</p>
 
+<a name="163692195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163692195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163692195">Rob Lewis (Apr 18 2019 at 21:27)</a>:</h4>
+<p>This would be reasonable, but I think the same change would need to be made in ring, or else the verification step will fail.</p>
+
+<a name="163693021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693021">Simon Hudon (Apr 18 2019 at 21:39)</a>:</h4>
+<p>Are you referring to Mario's proposed fix?</p>
+
+<a name="163693314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693314">Rob Lewis (Apr 18 2019 at 21:43)</a>:</h4>
+<p>Yes, to Mario's proposed change for how <code>linarith</code> identifies variables. If it identifies them up to definitional equality, instead of syntactic, the search step will succeed in the broken proof in <code>archimedean.lean</code>. But I think the verification step will still fail, since <code>ring</code> also seems to identify variables syntactically.</p>
+
+<a name="163693401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693401">Rob Lewis (Apr 18 2019 at 21:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">id</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="163693443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693443">Kevin Buzzard (Apr 18 2019 at 21:45)</a>:</h4>
+<p>I guess <code>ring</code> doesn't have a clue what this random function <code>id</code> is?</p>
+
+<a name="163693529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693529">Kevin Buzzard (Apr 18 2019 at 21:46)</a>:</h4>
+<p>Right -- it's working up to syntactic equality, that's the point you're making</p>
+
+<a name="163693568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693568">Simon Hudon (Apr 18 2019 at 21:47)</a>:</h4>
+<p>I think I'm finally agreeing with Mario. If you check only syntactically, you can get thrown off by the silliest thing like aliases</p>
+
+<a name="163693719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693719">Rob Lewis (Apr 18 2019 at 21:49)</a>:</h4>
+<p>The details of the implementation of <code>ring</code> aren't fresh in my mind, but I suspect it's not such an easy change to make there.</p>
+
+<a name="163693724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693724">Kevin Buzzard (Apr 18 2019 at 21:49)</a>:</h4>
+<p>In practice things like aliases and not unfolding things to defeq things haven't even been a problem for me as a <code>ring</code> user.</p>
+
+<a name="163693741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693741">Kevin Buzzard (Apr 18 2019 at 21:49)</a>:</h4>
+<p>If an equation is in the form <code>x - id x</code> then I figure it's not yet ready for <code>ring</code> and I fix it up.</p>
+
+<a name="163693820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693820">Rob Lewis (Apr 18 2019 at 21:50)</a>:</h4>
+<p>But what if it's in the form <code>↑⌊x + 1 / 2⌋ - ↑⌊x + 1 / 2⌋</code>?</p>
+
+<a name="163693861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693861">Kevin Buzzard (Apr 18 2019 at 21:51)</a>:</h4>
+<p>Well that's an interesting question! My instinct as a <code>ring</code> user and someone who knows how to battle off <code>coe</code>s would be to remove all the arrows first before trying to use <code>ring</code></p>
+
+<a name="163693882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693882">Kevin Buzzard (Apr 18 2019 at 21:52)</a>:</h4>
+<p>i.e. change it to <code>↑(⌊x + 1 / 2⌋ - ⌊x + 1 / 2⌋)</code></p>
+
+<a name="163693938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693938">Simon Hudon (Apr 18 2019 at 21:52)</a>:</h4>
+<p>Would it help to canonicalize expressions so that their structure is completely conform to the language of rings?</p>
+
+<a name="163694156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694156">Kevin Buzzard (Apr 18 2019 at 21:56)</a>:</h4>
+<p>Isn't there a canonical coercion from A to B whenever A &lt;= B in nat int rat real complex? And any coercion will be defeq to that. There's also at most one canonical coercion from nat int rat to a random ring. Can't you just make sure all coercions are the syntactically the canonical ones at every stage?</p>
+
+<a name="163694458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694458">Rob Lewis (Apr 18 2019 at 22:00)</a>:</h4>
+<p>Kevin, I think the coercions are a red herring. An automated proof broke, because changing imports caused some type class instances to be inferred differently, and the syntactic difference confuses <code>linarith</code>. There's an easy enough way to make <code>linarith</code> ignore the syntactic difference, but it only works if the same change happens to <code>ring</code>.</p>
+
 
 {% endraw %}
