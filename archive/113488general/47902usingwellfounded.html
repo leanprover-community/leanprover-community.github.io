@@ -89,5 +89,76 @@ My problem is that it can't prove that my definition of <code>append</code> is t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/132953908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#132953908">Edward Ayers (Aug 28 2018 at 21:36)</a>:</h4>
 <p>thanks Leo! sorry I didn't spot them.</p>
 
+<a name="163673121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673121">Sebastien Gouezel (Apr 18 2019 at 17:41)</a>:</h4>
+<p>I am trying to define a function using the equation compiler, but I don't understand how one is supposed to use <code>using_well_founded</code>. Here is a minimal example:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="err">⊤</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">n</span><span class="o">,</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">coe_lt_top</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">(</span><span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">}</span>
+<span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨</span><span class="o">(</span><span class="bp">&lt;</span><span class="o">),</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">well_founded_lt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_wf</span><span class="bp">⟩</span><span class="o">],</span>
+<span class="n">dec_tac</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">assumption</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>This fails with the message</p>
+<div class="codehilite"><pre><span></span><span class="n">The</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">failure</span> <span class="n">state</span> <span class="n">for</span> <span class="n">the</span> <span class="n">decreasing</span> <span class="n">tactic</span><span class="bp">.</span>
+<span class="n">nested</span> <span class="n">exception</span> <span class="n">message</span><span class="o">:</span>
+<span class="n">assumption</span> <span class="n">tactic</span> <span class="n">failed</span>
+</pre></div>
+
+<a name="163673410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673410">Simon Hudon (Apr 18 2019 at 17:44)</a>:</h4>
+<p>Can you remove the <code>by</code>? You can do the same without it</p>
+
+<a name="163673533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673533">Sebastien Gouezel (Apr 18 2019 at 17:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span>
+    <span class="k">have</span> <span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="err">⊤</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">n</span><span class="o">,</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">coe_lt_top</span> <span class="n">n</span><span class="o">,</span>
+    <span class="o">(</span><span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span>
+<span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨</span><span class="o">(</span><span class="bp">&lt;</span><span class="o">),</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">well_founded_lt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_wf</span><span class="bp">⟩</span><span class="o">],</span>
+<span class="n">dec_tac</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">assumption</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>fails in the same way.</p>
+
+<a name="163673628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673628">Mario Carneiro (Apr 18 2019 at 17:46)</a>:</h4>
+<p>You have to use the term mode <code>have</code></p>
+
+<a name="163673656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673656">Mario Carneiro (Apr 18 2019 at 17:46)</a>:</h4>
+<p>oh but the second one also fails?</p>
+
+<a name="163673793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673793">Mario Carneiro (Apr 18 2019 at 17:48)</a>:</h4>
+<p>oh, of course <code>assumption</code> fails here, you didn't give the right decreasing proof</p>
+
+<a name="163673878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163673878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163673878">Mario Carneiro (Apr 18 2019 at 17:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="err">⊤</span> <span class="o">:=</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">coe_lt_top</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">P</span> <span class="n">n</span>
+<span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨</span><span class="o">(</span><span class="bp">&lt;</span><span class="o">),</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">well_founded_lt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_wf</span><span class="bp">⟩</span><span class="o">],</span>
+<span class="n">dec_tac</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">assumption</span> <span class="o">}</span>
+</pre></div>
+
+<a name="163674569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using_well_founded/near/163674569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47902usingwellfounded.html#163674569">Sebastien Gouezel (Apr 18 2019 at 17:57)</a>:</h4>
+<p>Thanks a lot. The problem is that <code>assumption</code> will not apply the parameter <code>n</code> to what I have proved previously, it has to be proved in the exact form it needs. Would the following be acceptable style?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span>
+<span class="n">using_well_founded</span> <span class="o">{</span>
+  <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">well_founded_lt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_wf</span><span class="bp">⟩</span><span class="o">],</span>
+  <span class="n">dec_tac</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">apply</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">coe_lt_top</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}

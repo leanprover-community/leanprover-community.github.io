@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [omega](89194omega.html) (19 messages, latest: Apr 18 2019 at 16:18)
+* [using_well_founded](47902usingwellfounded.html) (25 messages, latest: Apr 18 2019 at 17:57)
+
+* [omega](89194omega.html) (20 messages, latest: Apr 18 2019 at 17:36)
 
 * [eblast](79292eblast.html) (25 messages, latest: Apr 17 2019 at 22:10)
 
@@ -1807,8 +1809,6 @@ permalink: archive/113488general/index.html
 * [potential projects](80411potentialprojects.html) (4 messages, latest: Aug 29 2018 at 07:34)
 
 * [structural recursion](63764structuralrecursion.html) (2 messages, latest: Aug 29 2018 at 03:35)
-
-* [using_well_founded](47902usingwellfounded.html) (17 messages, latest: Aug 28 2018 at 21:36)
 
 * [lifting the tactic monad](87862liftingthetacticmonad.html) (32 messages, latest: Aug 28 2018 at 11:51)
 

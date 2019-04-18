@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/50528878removedependencies.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html">#878  remove dependencies</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163672908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163672908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163672908">Simon Hudon (Apr 18 2019 at 17:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Can you follow up on this please? </p>
+<blockquote>
+<p>There's a proof in algebra.archimedean that uses linarith and now fails because I changed the imports. Any idea why?</p>
+</blockquote>
+
+<a name="163673468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673468">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Ah, sorry. I didn't see the notification.</p>
+
+<a name="163673503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673503">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Short answer: no idea. linarith should be unaffected by imports, it doesn't use anything outside of the local context.</p>
+
+<a name="163673518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673518">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>I'll look closer when I have a chance.</p>
+
+<a name="163673530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673530">Simon Hudon (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Cool, thanks</p>
+
+<a name="163673673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673673">Simon Hudon (Apr 18 2019 at 17:47)</a>:</h4>
+<p>preliminary investigation tells me that all the definitions and constants that go in the proof when it succeeds are still visible by both <code>tactic/linarith.lean</code> and <code>algebra/archimedean.lean</code> when I change the imports.</p>
+
+<a name="163673783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673783">Simon Hudon (Apr 18 2019 at 17:48)</a>:</h4>
+<p>Also, when I look at the transitive closure of the import graph and I look at the modules that are no longer visible after eliminating spurious dependencies, adding those imports to <code>tactic/linarith.lean</code> or <code>algebra/archimedean.lean</code> doesn't fix the problem.</p>
+
+
+{% endraw %}
