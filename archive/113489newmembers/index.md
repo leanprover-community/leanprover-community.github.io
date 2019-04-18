@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (342 messages, latest: Apr 18 2019 at 09:59)
+
 * [expr: fields and @](45316exprfieldsand.html) (7 messages, latest: Apr 18 2019 at 01:25)
 
 * [Installing mathlib](63351Installingmathlib.html) (77 messages, latest: Apr 17 2019 at 18:42)
@@ -23,8 +25,6 @@ permalink: archive/113489newmembers/index.html
 * [simpler proof 0<2?](92160simplerproof02.html) (19 messages, latest: Apr 13 2019 at 02:29)
 
 * [Induction](51886Induction.html) (110 messages, latest: Apr 12 2019 at 13:32)
-
-* [noob question(s)](52075noobquestions.html) (324 messages, latest: Apr 09 2019 at 22:43)
 
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
 
