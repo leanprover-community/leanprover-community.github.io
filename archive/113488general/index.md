@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean segfaulting](48154Leansegfaulting.html) (10 messages, latest: Apr 18 2019 at 21:41)
+* [generalizing](97568generalizing.html) (11 messages, latest: Apr 18 2019 at 23:36)
 
-* [generalizing](97568generalizing.html) (7 messages, latest: Apr 18 2019 at 20:48)
+* [Lean segfaulting](48154Leansegfaulting.html) (10 messages, latest: Apr 18 2019 at 21:41)
 
 * [Lean tutorial broken](10454Leantutorialbroken.html) (8 messages, latest: Apr 18 2019 at 20:45)
 
