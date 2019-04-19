@@ -1,0 +1,101 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/50307howtoprovesimplestuffs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html">how to prove simple stuffs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163758727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163758727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163758727">Truong Nguyen (Apr 19 2019 at 19:27)</a>:</h4>
+<p>Hi everyone,<br>
+I am quite new to lean, I want to prove some stuff like these:<br>
+3 &lt; 7,<br>
+2 * 4 &lt; 9</p>
+<p>or some other logical statement:<br>
+p /\ q &lt;-&gt; q /\ p,<br>
+or <br>
+p /\ q -&gt; p</p>
+<p>Do you know a good way to prove these stuffs?</p>
+
+<a name="163758768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163758768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163758768">Kevin Buzzard (Apr 19 2019 at 19:27)</a>:</h4>
+<p>For numerical stuff, you can use <code>norm_num</code>. For logic, you should read Theorem Proving In Lean, which covers all this stuff in great detail.</p>
+
+<a name="163758840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163758840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163758840">Kevin Buzzard (Apr 19 2019 at 19:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">9</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+<a name="163759301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759301">Truong Nguyen (Apr 19 2019 at 19:35)</a>:</h4>
+<p>Thanks, I read the Theorem Proving in Lean. So for logical statement, we have to do it manually, by applying: <a href="http://iff.mp" target="_blank" title="http://iff.mp">iff.mp</a>, iff.mpr and so on.<br>
+No, faster way, right?</p>
+
+<a name="163759377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759377">Kevin Buzzard (Apr 19 2019 at 19:36)</a>:</h4>
+<p>There are super-short ways to do it in term mode, and super-clear ways to do it in tactic mode. But to understand what's going on, you have to read Theorem Proving In Lean.</p>
+
+<a name="163759447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759447">Kevin Buzzard (Apr 19 2019 at 19:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span> <span class="bp">↔</span> <span class="n">q</span> <span class="bp">∧</span> <span class="n">p</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">hp</span><span class="o">,</span> <span class="n">hq</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hq</span><span class="o">,</span> <span class="n">hp</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">hq</span><span class="o">,</span> <span class="n">hp</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hp</span><span class="o">,</span> <span class="n">hq</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+<a name="163759460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759460">Kevin Buzzard (Apr 19 2019 at 19:37)</a>:</h4>
+<p>This is all explained in Theorem Proving In Lean.</p>
+
+<a name="163759588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759588">Kevin Buzzard (Apr 19 2019 at 19:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span> <span class="bp">↔</span> <span class="n">q</span> <span class="bp">∧</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">hpq</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hpq</span> <span class="k">with</span> <span class="n">hp</span> <span class="n">hq</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">hq</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hp</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">hqp</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hqp</span> <span class="k">with</span> <span class="n">hq</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hq</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This is also all explained in Theorem Proving In Lean. They spend a lot of time on basic logic stuff like this!</p>
+
+<a name="163759757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163759757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163759757">Kevin Buzzard (Apr 19 2019 at 19:41)</a>:</h4>
+<p>Chapter 5 is on tactic mode and in my mind tactic mode is the best place to start, although I have a more mathematical background than the computer science users of the software, who prefer term mode.</p>
+
+<a name="163760534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163760534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163760534">Patrick Massot (Apr 19 2019 at 19:54)</a>:</h4>
+<p>I'm not sure I understand the question. There are magic tactic that will prove such a goal in one line, but this won't teach you much</p>
+
+<a name="163760544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163760544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163760544">Kevin Buzzard (Apr 19 2019 at 19:54)</a>:</h4>
+<p>Oh yeah that's true; you can solve it all using heavy machinery :D</p>
+
+<a name="163760580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20simple%20stuffs/near/163760580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50307howtoprovesimplestuffs.html#163760580">Kevin Buzzard (Apr 19 2019 at 19:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span> <span class="bp">↔</span> <span class="n">q</span> <span class="bp">∧</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tauto</span>
+</pre></div>
+
+
+<p>These tactics are not explained in TPIL though.</p>
+
+
+{% endraw %}

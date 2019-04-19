@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (12 messages, latest: Apr 19 2019 at 19:55)
+
 * [linear_independent for families](21882linearindependentforfamilies.html) (62 messages, latest: Apr 19 2019 at 05:27)
 
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
