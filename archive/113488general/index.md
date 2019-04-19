@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [generalizing](97568generalizing.html) (14 messages, latest: Apr 19 2019 at 05:57)
+* [generalizing](97568generalizing.html) (15 messages, latest: Apr 19 2019 at 14:10)
 
 * [Interactive versions of tactics](16792Interactiveversionsoftactics.html) (3 messages, latest: Apr 19 2019 at 02:58)
 
