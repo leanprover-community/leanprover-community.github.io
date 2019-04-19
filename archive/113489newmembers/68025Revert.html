@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/68025Revert.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html">Revert</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163735781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163735781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163735781">bulut (Apr 19 2019 at 13:39)</a>:</h4>
+<p>What does the revert tactic exactly do?</p>
+
+<a name="163735986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163735986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163735986">Kevin Buzzard (Apr 19 2019 at 13:42)</a>:</h4>
+<p>The opposite of <code>intro</code>.</p>
+
+<a name="163735991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163735991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163735991">Kevin Buzzard (Apr 19 2019 at 13:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">hPQ</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">hP</span> <span class="o">:</span> <span class="n">P</span><span class="o">)</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">hP</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">hP</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">hP</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hPQ</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163736368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163736368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163736368">bulut (Apr 19 2019 at 13:48)</a>:</h4>
+<p>So if the goal is to prove P, revert hQ (where hQ has type Q) changes the goal to Q-&gt;P?</p>
+
+<a name="163736472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163736472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163736472">Kevin Buzzard (Apr 19 2019 at 13:50)</a>:</h4>
+<p>Yup.</p>
+
+<a name="163736517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163736517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163736517">bulut (Apr 19 2019 at 13:51)</a>:</h4>
+<p>Thank you!</p>
+
+<a name="163736519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Revert/near/163736519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68025Revert.html#163736519">Kevin Buzzard (Apr 19 2019 at 13:51)</a>:</h4>
+<p>You can check that like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">hQ</span> <span class="o">:</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">hQ</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The nice thing about Lean is that if you can precisely formalise a question (like yours above) then you don't even need to ask it, you can just ask Lean :D</p>
+
+
+{% endraw %}
