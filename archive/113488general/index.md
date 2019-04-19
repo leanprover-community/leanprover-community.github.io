@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [generalizing](97568generalizing.html) (11 messages, latest: Apr 18 2019 at 23:36)
+* [Lean tutorial broken](10454Leantutorialbroken.html) (9 messages, latest: Apr 19 2019 at 00:22)
+
+* [generalizing](97568generalizing.html) (12 messages, latest: Apr 19 2019 at 00:21)
+
+* [Interactive versions of tactics](16792Interactiveversionsoftactics.html) (2 messages, latest: Apr 19 2019 at 00:19)
 
 * [Lean segfaulting](48154Leansegfaulting.html) (10 messages, latest: Apr 18 2019 at 21:41)
-
-* [Lean tutorial broken](10454Leantutorialbroken.html) (8 messages, latest: Apr 18 2019 at 20:45)
 
 * [using_well_founded](47902usingwellfounded.html) (26 messages, latest: Apr 18 2019 at 18:07)
 
