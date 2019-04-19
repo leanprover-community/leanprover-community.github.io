@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean killed my machine](58225leankilledmymachine.html) (4 messages, latest: Apr 19 2019 at 16:18)
+
 * [generalizing](97568generalizing.html) (15 messages, latest: Apr 19 2019 at 14:10)
 
 * [Interactive versions of tactics](16792Interactiveversionsoftactics.html) (3 messages, latest: Apr 19 2019 at 02:58)
