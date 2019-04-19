@@ -246,5 +246,17 @@ permalink: archive/144837PRreviews/50528878removedependencies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163707551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163707551">Mario Carneiro (Apr 19 2019 at 02:26)</a>:</h4>
 <p>see <a href="https://github.com/leanprover-community/mathlib/issues/949" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/949">#949</a></p>
 
+<a name="163717543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163717543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163717543">Rob Lewis (Apr 19 2019 at 06:42)</a>:</h4>
+<blockquote>
+<p>The main problem with this change in both linarith and ring is that they rely on a total order on expressions (<code>expr.lt</code>) for which the lt-comparable exprs are syntactically equal. There is no analogous total order up to defeq, at least not anything cheap. So we basically have to preprocess the term and replace all atoms with numbered variables to impose a local order</p>
+</blockquote>
+<p>This basically happens in <code>linarith</code> already. Linear expressions are represented with <code>rb_map ℕ ℤ</code>. Pretty sure there are only two places that have to change:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296">https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296</a> and just below at 310. That function becomes a bit less efficient, because you have to walk through the whole key list checking for defeq instead of using <code>rb_map.find</code>. But this shouldn't be noticeable.</p>
+
+<a name="163717740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163717740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163717740">Rob Lewis (Apr 19 2019 at 06:47)</a>:</h4>
+<p>I have a lot to do today and I'm not in the office. But when I have a few minutes I'll take a shot at changing this on top of your pr.</p>
+
 
 {% endraw %}
