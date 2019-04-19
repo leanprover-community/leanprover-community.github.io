@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
+* [linear_independent for families](21882linearindependentforfamilies.html) (62 messages, latest: Apr 19 2019 at 05:27)
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (61 messages, latest: Apr 18 2019 at 12:40)
+* [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (171 messages, latest: Apr 17 2019 at 17:00)
 
