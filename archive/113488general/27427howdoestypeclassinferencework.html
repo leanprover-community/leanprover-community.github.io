@@ -560,5 +560,37 @@ and I think it found it just trying in some random order, respecting priorities<
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163799332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163799332">Kevin Buzzard (Apr 20 2019 at 11:24)</a>:</h4>
 <p>oh crap, chores beckon. Back in 30 minutes. I want to understand why we're using up 8 levels for each extra int.</p>
 
+<a name="163801969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163801969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163801969">Kevin Buzzard (Apr 20 2019 at 12:42)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/johoelzl/tc-log-parser" target="_blank" title="https://github.com/johoelzl/tc-log-parser">https://github.com/johoelzl/tc-log-parser</a></p>
+</blockquote>
+<p>Has anyone talked to Sebastian or Leo about this issue?</p>
+
+<a name="163802053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802053">Kevin Buzzard (Apr 20 2019 at 12:45)</a>:</h4>
+<p><code>#print notation × -- _ </code>×<code>:35 _:34 := prod #1 #0</code> -- <code>\times</code> is right associative!</p>
+
+<a name="163802228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802228">Kevin Buzzard (Apr 20 2019 at 12:51)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances] (1) ?x_3 : add_group ℤ := @prod.add_group ?x_5 ?x_6 ?x_7 ?x_8
+failed is_def_eq
+</pre></div>
+
+
+<p>That fails because <code>int</code> isn't <code>prod ?x ?y</code> for any choices of <code>?x</code> and <code>?y</code>. But</p>
+<div class="codehilite"><pre><span></span>[class_instances] (3) ?x_34 : nonneg_comm_group ℤ := @linear_nonneg_ring.to_nonneg_comm_group ?x_35 ?x_36
+[class_instances] (3) ?x_34 : nonneg_comm_group ℤ := @nonneg_ring.to_nonneg_comm_group ?x_35 ?x_36
+</pre></div>
+
+
+<p>That's a different failure, right? Lean figured that if it could find a term of type <code>linear_nonneg_ring ℤ</code> then it would be done, but it does not even write</p>
+<div class="codehilite"><pre><span></span>[class_instances] (4) ?x_36 : linear_nonneg_ring ℤ := ...
+</pre></div>
+
+
+<p>--- why not? </p>
+<p>How do I find every instance of <code>X1 -&gt; X2 -&gt; ... -&gt; Xn -&gt; linear_nonneg_ring x</code> in Lean's type class inference system? Here n can be 0.</p>
+
 
 {% endraw %}

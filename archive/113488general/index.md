@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Red bug](01690Redbug.html) (2 messages, latest: Apr 20 2019 at 11:40)
+* [how does type class inference work?](27427howdoestypeclassinferencework.html) (101 messages, latest: Apr 20 2019 at 12:51)
 
-* [how does type class inference work?](27427howdoestypeclassinferencework.html) (98 messages, latest: Apr 20 2019 at 11:24)
+* [Red bug](01690Redbug.html) (3 messages, latest: Apr 20 2019 at 12:24)
 
 * [has_reflect in interactive.parse](73055hasreflectininteractiveparse.html) (27 messages, latest: Apr 20 2019 at 08:36)
 
