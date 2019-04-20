@@ -195,5 +195,62 @@ My guess is that this would be more appropriate at part of the mathlib travis bu
 <p>More on firefox issues: After playing around more with <code>lean-web-editor</code> and <code>lean-client-js-browser</code>, I think the issue is with the 3.4.1 wasm builds of lean. In particular, <a href="https://leanprover.github.io/live/3.3.0" target="_blank" title="https://leanprover.github.io/live/3.3.0">the 3.3.0 version</a> works fine for me in firefox. Was something changed between 3.3.0 and 3.4.1  that could have broken firefox compatibility? <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> </p>
 <p>Unfortunately, <a href="#narrow/stream/113488-general/subject/lean-web-editor.20not.20compiling.3F/near/124566399" title="#narrow/stream/113488-general/subject/lean-web-editor.20not.20compiling.3F/near/124566399">per earlier discussion here</a>, compiling a wasm build with emscripten requires linux, so it will be hard for me to investigate this further on my own.</p>
 
+<a name="163780716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163780716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163780716">Bryan Gin-ge Chen (Apr 20 2019 at 02:09)</a>:</h4>
+<p>Update: I gave this another shot tonight and I was able to build lean 3.4.2 with emscripten on macOS with a few changes that I'm <a href="https://github.com/leanprover-community/lean/pull/17" target="_blank" title="https://github.com/leanprover-community/lean/pull/17">PR'ing</a> to community lean. In the meantime it also looks like all the Firefox issues have gone away (at least in firefox 66.0.3).</p>
+
+<a name="163781340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781340">Kevin Buzzard (Apr 20 2019 at 02:27)</a>:</h4>
+<p>Can you make a build which also imports mathlib and another arbitrary project? For things like an introductory analysis class, this is the sort of thing one would need.</p>
+
+<a name="163781344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781344">Kevin Buzzard (Apr 20 2019 at 02:27)</a>:</h4>
+<p>Well done, by the way! I tried all this in 2018 and it was a nightmare.</p>
+
+<a name="163781390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781390">Kevin Buzzard (Apr 20 2019 at 02:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="132175">@Mohammad Pedramfar</span> this might be of interest to you.</p>
+
+<a name="163781415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781415">Simon Hudon (Apr 20 2019 at 02:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think we could make a build in the mathlib repo to check various versions of Lean against mathlib</p>
+
+<a name="163781458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781458">Bryan Gin-ge Chen (Apr 20 2019 at 02:30)</a>:</h4>
+<p>Sure, you can do that with the <code>mk_library.py</code> script in lean-web-editor.</p>
+<p>My impression was Mohammed was already able to get that working <a href="#narrow/stream/113488-general/topic/Online.20Lean.20editor/near/163220532" title="#narrow/stream/113488-general/topic/Online.20Lean.20editor/near/163220532">here</a> though?</p>
+
+<a name="163781478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781478">Bryan Gin-ge Chen (Apr 20 2019 at 02:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> maybe we could have a community version of the lean web editor with an up-to-date version of mathlib / other libraries?</p>
+
+<a name="163781527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781527">Kevin Buzzard (Apr 20 2019 at 02:32)</a>:</h4>
+<p>The last time I talked to him, it "worked" in the sense that if you went to the firefox page and then waited for ten minutes, everything would finish compiling and then things would work fine.</p>
+
+<a name="163781531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781531">Simon Hudon (Apr 20 2019 at 02:33)</a>:</h4>
+<p>I'm all for but I know next to nothing about the web editor</p>
+
+<a name="163781592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781592">Kevin Buzzard (Apr 20 2019 at 02:34)</a>:</h4>
+<p>If I can get lean + mathlib + xena running with zero start-up time in the Lean web editor I might be able to persuade my department to pay for hosting, because I will be able to use it for teaching.</p>
+
+<a name="163781596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781596">Kevin Buzzard (Apr 20 2019 at 02:34)</a>:</h4>
+<p>xena is just an example -- any repo which I can update and then recompile and get it all working, reliably, will do.</p>
+
+<a name="163781667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781667">Kevin Buzzard (Apr 20 2019 at 02:37)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="163781797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781797">Bryan Gin-ge Chen (Apr 20 2019 at 02:40)</a>:</h4>
+<p>On my laptop the editor starts working after a few seconds or so (including downloading files into the browser cache, etc.), though I'm just using mathlib and the other default libraries in the lean-web-editor leanpkg.toml . I haven't tried other packages there yet.</p>
+
+<a name="163781810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/163781810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#163781810">Simon Hudon (Apr 20 2019 at 02:41)</a>:</h4>
+<p>There is something in the Haskell community called Stackage. It's a curated collection of Haskell packages together with a version GHC (the main Haskell compiler) in which all the packages work together. I'd like to do that with Lean. Have a monthly snapshot of the Lean ecosystem in such a way that all the versions picked for every package work together. We make sure to test all of them together.</p>
+
 
 {% endraw %}

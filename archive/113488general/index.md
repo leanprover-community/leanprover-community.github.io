@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (53 messages, latest: Apr 20 2019 at 02:41)
+
 * [Does doing recursive definitions add new axioms?](47956Doesdoingrecursivedefinitionsaddnewaxioms.html) (5 messages, latest: Apr 19 2019 at 23:55)
 
 * [Univalence axiom](96233Univalenceaxiom.html) (2 messages, latest: Apr 19 2019 at 23:52)
@@ -1069,8 +1071,6 @@ permalink: archive/113488general/index.html
 * [tfae bug](14623tfaebug.html) (56 messages, latest: Nov 19 2018 at 21:52)
 
 * [poor man's hint database](85855poormanshintdatabase.html) (14 messages, latest: Nov 19 2018 at 09:22)
-
-* [online leanprover](19268onlineleanprover.html) (39 messages, latest: Nov 18 2018 at 19:48)
 
 * [(¬ Q → ¬ P) → (P → Q)](43567QPPQ.html) (8 messages, latest: Nov 18 2018 at 19:38)
 
