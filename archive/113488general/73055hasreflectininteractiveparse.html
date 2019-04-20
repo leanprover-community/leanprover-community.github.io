@@ -76,5 +76,107 @@ permalink: archive/113488general/73055hasreflectininteractiveparse.html
 
 <p>the <code>xyzzy</code> parser doesn't need to provide a has_reflect instance for <code>nat -&gt; nat</code> because the end result passed to parse is a <code>nat</code></p>
 
+<a name="163792851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163792851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163792851">Keeley Hoek (Apr 20 2019 at 08:03)</a>:</h4>
+<p>I believe I understand your last comment, but I think there still is a distinction. Because the parser works as you describe, it should be impossible for a user defined parser to parse a <code>tactic unit</code>, since once constructed it is too late for a <code>tactic unit</code> to be turned back into an <code>expr</code>, required for emitting by the parser. On the other hand, a "parser" written in core lean could happily parse a tactic unit but keep it in expr form (as essentially happens when a nested tactic block parsed in the current parser), and then emit the <code>expr</code> form directly so that we really can just read a <code>tactic unit</code> block from interactive mode.</p>
+<p>Do you think what I'm say makes sense, or am I still confused?</p>
+
+<a name="163793037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793037">Mario Carneiro (Apr 20 2019 at 08:06)</a>:</h4>
+<p>What we can do is rather than parse a <code>tactic unit</code> we have a <code>parser expr</code> that produces an expr representing a tactic</p>
+
+<a name="163793040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793040">Mario Carneiro (Apr 20 2019 at 08:06)</a>:</h4>
+<p>Obviously <code>expr</code> has a reflect instance</p>
+
+<a name="163793205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793205">Keeley Hoek (Apr 20 2019 at 08:11)</a>:</h4>
+<p>Sure, that absolutely makes sense. There is also some scope for a generalisation</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">structure</span> <span class="n">reflected_value</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">[</span><span class="n">reflect</span> <span class="o">:</span> <span class="n">reflected</span> <span class="n">val</span><span class="o">]</span>
+
+<span class="n">meta</span> <span class="n">class</span> <span class="n">reflectable_parser</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">full</span> <span class="o">:</span> <span class="n">parser</span> <span class="o">(</span><span class="n">reflected_value</span> <span class="n">α</span><span class="o">))</span>
+<span class="o">(</span><span class="n">valid</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">reflected_value</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">full</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">parse</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">reflectable_parser</span> <span class="n">p</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>What do you think about that? I guess one interpretation is that I'm type-safing your plain <code>parser expr</code> construction.</p>
+
+<a name="163793210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793210">Keeley Hoek (Apr 20 2019 at 08:11)</a>:</h4>
+<p>Of course there is an instance</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">r</span> <span class="o">:</span> <span class="n">has_reflect</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">reflectable_parser</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">(</span><span class="n">do</span> <span class="n">v</span> <span class="err">←</span> <span class="n">p</span><span class="o">,</span> <span class="n">return</span> <span class="bp">⟨</span><span class="n">v</span><span class="bp">⟩</span><span class="o">),</span> <span class="bp">_⟩</span>
+</pre></div>
+
+<a name="163793212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793212">Keeley Hoek (Apr 20 2019 at 08:11)</a>:</h4>
+<p>(I'm trying to write this in a way which wouldn't break code which compiles against vanilla lean.)</p>
+
+<a name="163793465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793465">Mario Carneiro (Apr 20 2019 at 08:19)</a>:</h4>
+<p>so what's the new power with this? Are you going to add <code>itactic</code> as a parser and give it a <code>reflectable_parser</code> instance?</p>
+
+<a name="163793512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793512">Keeley Hoek (Apr 20 2019 at 08:20)</a>:</h4>
+<p>That's what I was thinking. I could just do the <code>parser expr</code> thing if you want. :)</p>
+
+<a name="163793522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793522">Mario Carneiro (Apr 20 2019 at 08:21)</a>:</h4>
+<p>Here's the parser expr approach with <code>itactic</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">constant</span> <span class="n">itactic&#39;</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">run_itactic</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">monad</span><span class="bp">.</span><span class="n">join</span> <span class="err">$</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">eval_expr</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="n">e</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">repeat&#39;</span>
+  <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">itactic&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">run_itactic</span> <span class="n">e</span><span class="o">)</span>
+</pre></div>
+
+
+<p>there is an obvious ergonomic loss with this, but I'm not a fan of lean magic</p>
+
+<a name="163793527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793527">Keeley Hoek (Apr 20 2019 at 08:21)</a>:</h4>
+<p>(I would really implement <code>itactic</code> as a <code>parser (reflected_value (tactic unit))</code>, and then make the normal <code>parser (tactic unit)</code> and instance in lean from it.)</p>
+<p>Sure.</p>
+
+<a name="163793658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793658">Keeley Hoek (Apr 20 2019 at 08:25)</a>:</h4>
+<p>One thing with this approach actually is that we still have to leave <code>tactic.interative.itactic</code> implemented the same way in lean, instead of being able to define <code>def tactic.interative.itactic := interactive.parse lean.parser.itactic</code>, and eliminate the need for how it was hard-implemented the old way.</p>
+
+<a name="163793703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793703">Mario Carneiro (Apr 20 2019 at 08:26)</a>:</h4>
+<p>well you can still replace uses of <code>itactic</code> with the parser, but the interface is different</p>
+
+<a name="163793706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793706">Mario Carneiro (Apr 20 2019 at 08:26)</a>:</h4>
+<p>also you can't define things to be <code>parse bla</code> because <code>parse</code> is lean magic</p>
+
+<a name="163793717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793717">Mario Carneiro (Apr 20 2019 at 08:27)</a>:</h4>
+<p>If <code>itactic</code> stops being magic then it will have to be changed in uses anyway</p>
+
+<a name="163793881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793881">Mario Carneiro (Apr 20 2019 at 08:32)</a>:</h4>
+<p>Actually I think I like <code>reflectable_parser</code> better than my idea</p>
+
+<a name="163793899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793899">Mario Carneiro (Apr 20 2019 at 08:33)</a>:</h4>
+<p>It will cause some unnecessary expr quoting and interpretation inside tactic scripts</p>
+
+<a name="163793948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163793948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163793948">Mario Carneiro (Apr 20 2019 at 08:34)</a>:</h4>
+<p>I would drop the <code>valid</code> field of <code>reflectable parser</code> though</p>
+
+<a name="163794012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_reflect%20in%20interactive.parse/near/163794012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73055hasreflectininteractiveparse.html#163794012">Keeley Hoek (Apr 20 2019 at 08:36)</a>:</h4>
+<p>Ok, and ok cool</p>
+
 
 {% endraw %}
