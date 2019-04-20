@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simple question](66563simplequestion.html) (7 messages, latest: Apr 20 2019 at 16:56)
+
 * [how does type class inference work?](27427howdoestypeclassinferencework.html) (150 messages, latest: Apr 20 2019 at 15:56)
 
 * [Lean Community Fork](51160LeanCommunityFork.html) (11 messages, latest: Apr 20 2019 at 15:07)
