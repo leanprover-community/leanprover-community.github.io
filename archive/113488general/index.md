@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [clearing all hypothesis](76367clearingallhypothesis.html) (23 messages, latest: Apr 20 2019 at 22:56)
+
+* [sorrying a set of goals](40822sorryingasetofgoals.html) (1 message, latest: Apr 20 2019 at 22:15)
+
 * [simple question](66563simplequestion.html) (7 messages, latest: Apr 20 2019 at 16:56)
 
 * [how does type class inference work?](27427howdoestypeclassinferencework.html) (150 messages, latest: Apr 20 2019 at 15:56)

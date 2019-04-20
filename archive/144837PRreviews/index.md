@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#927 operator norm](08942927operatornorm.html) (8 messages, latest: Apr 20 2019 at 20:44)
+* [#927 operator norm](08942927operatornorm.html) (9 messages, latest: Apr 20 2019 at 22:06)
 
 * [#878  remove dependencies](50528878removedependencies.html) (63 messages, latest: Apr 19 2019 at 17:33)
 
