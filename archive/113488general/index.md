@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Red bug](01690Redbug.html) (2 messages, latest: Apr 20 2019 at 11:40)
+
+* [how does type class inference work?](27427howdoestypeclassinferencework.html) (98 messages, latest: Apr 20 2019 at 11:24)
+
 * [has_reflect in interactive.parse](73055hasreflectininteractiveparse.html) (27 messages, latest: Apr 20 2019 at 08:36)
 
 * [online leanprover](19268onlineleanprover.html) (53 messages, latest: Apr 20 2019 at 02:41)
@@ -17,8 +21,6 @@ permalink: archive/113488general/index.html
 * [Does doing recursive definitions add new axioms?](47956Doesdoingrecursivedefinitionsaddnewaxioms.html) (5 messages, latest: Apr 19 2019 at 23:55)
 
 * [Univalence axiom](96233Univalenceaxiom.html) (2 messages, latest: Apr 19 2019 at 23:52)
-
-* [Red bug](01690Redbug.html) (1 message, latest: Apr 19 2019 at 20:06)
 
 * [lean killed my machine](58225leankilledmymachine.html) (6 messages, latest: Apr 19 2019 at 17:27)
 
@@ -905,8 +907,6 @@ permalink: archive/113488general/index.html
 * [tactic.to_expr](06120tactictoexpr.html) (5 messages, latest: Dec 11 2018 at 18:42)
 
 * [Lean library fixes](03125Leanlibraryfixes.html) (19 messages, latest: Dec 11 2018 at 18:22)
-
-* [how does type class inference work?](27427howdoestypeclassinferencework.html) (70 messages, latest: Dec 10 2018 at 19:20)
 
 * [Character encoding of VM](93837CharacterencodingofVM.html) (28 messages, latest: Dec 10 2018 at 12:29)
 
