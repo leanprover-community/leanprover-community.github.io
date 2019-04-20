@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html">Does doing recursive definitions add new axioms?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163774662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20doing%20recursive%20definitions%20add%20new%20axioms%3F/near/163774662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html#163774662">Thomas Scholz (Apr 19 2019 at 23:42)</a>:</h4>
+<p>How does the process of inductively defining a new data type or doing recursive definitions function in the formal foundation underlying Lean? In first-order logic, the recursive definition of addition in Peano arithmetic corresponds to the addition of two <em>axioms</em><br>
+- <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∀</mi><mi>n</mi><mi mathvariant="normal">.</mi><mspace width="0.16667em"></mspace><mi>n</mi><mo>+</mo><mn>0</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\forall n.\, n + 0 = n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathrm">∀</span><span class="mord mathit">n</span><span class="mord mathrm">.</span><span class="mord mathit"><span class="mspace thinspace"></span><span class="mord mathit">n</span></span><span class="mbin">+</span><span class="mord mathrm">0</span><span class="mrel">=</span><span class="mord mathit">n</span></span></span></span><br>
+- <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∀</mi><mi>m</mi><mo separator="true">,</mo><mi>n</mi><mi mathvariant="normal">.</mi><mspace width="0.16667em"></mspace><mi>n</mi><mo>+</mo><mi>s</mi><mo>(</mo><mi>m</mi><mo>)</mo><mo>=</mo><mi>s</mi><mo>(</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\forall m, n.\, n + s(m) = s(n+m)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">∀</span><span class="mord mathit">m</span><span class="mpunct">,</span><span class="mord mathit">n</span><span class="mord mathrm">.</span><span class="mord mathit"><span class="mspace thinspace"></span><span class="mord mathit">n</span></span><span class="mbin">+</span><span class="mord mathit">s</span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit">s</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mbin">+</span><span class="mord mathit">m</span><span class="mclose">)</span></span></span></span><br>
+But in type theory and Lean, the use of recursive definitions does not yield to expanding the formal system by new axioms, isn't it? I suppose that the possibility of recursive definitions, rather, is like a built-in feature of the formal system.<br>
+But how does this function if not adding new axioms for each definition? What are the inference rules of the formal system that allow to use recursive definitions without adding new axioms each time?</p>
+
+<a name="163774872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20doing%20recursive%20definitions%20add%20new%20axioms%3F/near/163774872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html#163774872">Simon Hudon (Apr 19 2019 at 23:47)</a>:</h4>
+<p>Lean's dependent type theory formalizes inductive types using recursors. If we take the example of <code>nat</code>, the declaration:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">nat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span>
+</pre></div>
+
+
+<p>adds the following axioms / constants:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">nat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="kn">constant</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span>
+<span class="kn">constant</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">},</span> <span class="n">C</span> <span class="n">zero</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">C</span> <span class="n">n</span> <span class="bp">-&gt;</span> <span class="n">C</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="bp">-&gt;</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">C</span> <span class="n">n</span>
+</pre></div>
+
+<a name="163774946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20doing%20recursive%20definitions%20add%20new%20axioms%3F/near/163774946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html#163774946">Simon Hudon (Apr 19 2019 at 23:48)</a>:</h4>
+<p>Once you have those, every recursive definition about <code>nat</code> can be expressed using <code>nat.rec</code></p>
+
+<a name="163775061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20doing%20recursive%20definitions%20add%20new%20axioms%3F/near/163775061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html#163775061">Thomas Scholz (Apr 19 2019 at 23:51)</a>:</h4>
+<p>Ok, thanks very much!<br>
+And what are the inference rules of the formal system underlying Lean that create these axioms / constants from inductive definitions?</p>
+
+<a name="163775228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20doing%20recursive%20definitions%20add%20new%20axioms%3F/near/163775228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47956Doesdoingrecursivedefinitionsaddnewaxioms.html#163775228">Simon Hudon (Apr 19 2019 at 23:55)</a>:</h4>
+<p>You may find that answer is <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s master thesis: <a href="https://github.com/digama0/lean-type-theory/releases" target="_blank" title="https://github.com/digama0/lean-type-theory/releases">https://github.com/digama0/lean-type-theory/releases</a></p>
+
+
+{% endraw %}

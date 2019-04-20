@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Does doing recursive definitions add new axioms?](47956Doesdoingrecursivedefinitionsaddnewaxioms.html) (5 messages, latest: Apr 19 2019 at 23:55)
+
+* [Univalence axiom](96233Univalenceaxiom.html) (2 messages, latest: Apr 19 2019 at 23:52)
+
 * [Red bug](01690Redbug.html) (1 message, latest: Apr 19 2019 at 20:06)
 
 * [lean killed my machine](58225leankilledmymachine.html) (6 messages, latest: Apr 19 2019 at 17:27)
