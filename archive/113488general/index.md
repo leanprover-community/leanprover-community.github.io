@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean Community Fork](51160LeanCommunityFork.html) (3 messages, latest: Apr 20 2019 at 13:41)
+* [Lean Community Fork](51160LeanCommunityFork.html) (10 messages, latest: Apr 20 2019 at 14:53)
 
-* [how does type class inference work?](27427howdoestypeclassinferencework.html) (126 messages, latest: Apr 20 2019 at 13:35)
+* [how does type class inference work?](27427howdoestypeclassinferencework.html) (140 messages, latest: Apr 20 2019 at 14:49)
 
 * [Red bug](01690Redbug.html) (3 messages, latest: Apr 20 2019 at 12:24)
 

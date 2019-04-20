@@ -785,5 +785,61 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803801">Kevin Buzzard (Apr 20 2019 at 13:35)</a>:</h4>
 <p>I told my son that in Lean and mathlib they try to avoid loops. We don't want P6 -&gt; P7 and P7 -&gt; P6.</p>
 
+<a name="163804623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804623">Mario Carneiro (Apr 20 2019 at 14:00)</a>:</h4>
+<p>We don't, unless we do</p>
+
+<a name="163804626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804626">Mario Carneiro (Apr 20 2019 at 14:00)</a>:</h4>
+<p>Most types are not marked reducible for exactly this reason</p>
+
+<a name="163804640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804640">Mario Carneiro (Apr 20 2019 at 14:01)</a>:</h4>
+<p>but reducible types are transparent to typeclass inference, which can be convenient if you want to inherit all the typeclasses from the original</p>
+
+<a name="163804686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804686">Kevin Buzzard (Apr 20 2019 at 14:02)</a>:</h4>
+<p>There are lots of implementations of prolog</p>
+
+<a name="163804687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804687">Kevin Buzzard (Apr 20 2019 at 14:02)</a>:</h4>
+<p>Why doesn't Leo just use one of these and get it to solve typeclass problems for him?</p>
+
+<a name="163804688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804688">Mario Carneiro (Apr 20 2019 at 14:02)</a>:</h4>
+<p>prolog is quite a bit better at this than lean</p>
+
+<a name="163804699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804699">Mario Carneiro (Apr 20 2019 at 14:03)</a>:</h4>
+<p>there are mechanisms for controlling the search, avoiding backtracking and ordering rules, etc</p>
+
+<a name="163804769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804769">Kevin Buzzard (Apr 20 2019 at 14:04)</a>:</h4>
+<p>I don't really know if typeclass search is actually an issue in practice, but I guess one day it might become an issue</p>
+
+<a name="163804789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804789">Kevin Buzzard (Apr 20 2019 at 14:05)</a>:</h4>
+<p>I guess my students having hard-to-debug code because they accidentally coerced an int to a nat is an issue</p>
+
+<a name="163804850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804850">Kevin Buzzard (Apr 20 2019 at 14:06)</a>:</h4>
+<p>I am completely confused by this still. Why does Lean try to solve [has_zero nat] in lots of ways and then have [has_neg nat] fail every time?</p>
+
+<a name="163804853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804853">Kevin Buzzard (Apr 20 2019 at 14:06)</a>:</h4>
+<p>That's my understanding of what was going on there</p>
+
+<a name="163804868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804868">Kevin Buzzard (Apr 20 2019 at 14:07)</a>:</h4>
+<p>Lots of different but defeq solutions to 0 and 1</p>
+
+<a name="163804876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163804876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163804876">Kevin Buzzard (Apr 20 2019 at 14:07)</a>:</h4>
+<p>And then a possibly expensive add and a failing neg</p>
+
+<a name="163806231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163806231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163806231">Mario Carneiro (Apr 20 2019 at 14:49)</a>:</h4>
+<p>My view on this is that typeclass inference needs a major rewrite, we can do much better than what we have today</p>
+
 
 {% endraw %}
