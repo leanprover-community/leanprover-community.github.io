@@ -592,5 +592,198 @@ failed is_def_eq
 <p>--- why not? </p>
 <p>How do I find every instance of <code>X1 -&gt; X2 -&gt; ... -&gt; Xn -&gt; linear_nonneg_ring x</code> in Lean's type class inference system? Here n can be 0.</p>
 
+<a name="163802650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802650">Kevin Buzzard (Apr 20 2019 at 13:04)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : inhabited ℕ := @quotient_add_group.inhabited ?x_1 ?x_2 ?x_3 ?x_4 ?x_5
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @quotient_group.inhabited ?x_6 ?x_7 ?x_8 ?x_9 ?x_10
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @parser.inhabited ?x_11
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @array.inhabited ?x_12 ?x_13 ?x_14
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @d_array.inhabited ?x_15 ?x_16 ?x_17
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @vector.inhabited ?x_18 ?x_19 ?x_20
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @finset.inhabited ?x_21
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @multiset.inhabited ?x_22
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := int.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @unique.inhabited ?x_23 ?x_24
+[class_instances] (1) ?x_24 : unique ℕ := punit.unique
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @psigma.inhabited ?x_1 ?x_2 ?x_3 ?x_4
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @sigma.inhabited ?x_5 ?x_6 ?x_7 ?x_8
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @set.inhabited ?x_9
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := tactic.rcases_patt_inverted.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := tactic.rcases_patt.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := punit.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := occurrences.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := environment.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := expr.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := level.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := format.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := options.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := option.inhabited ?x_10
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := name.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @sum.inhabited_right ?x_11 ?x_12 ?x_13
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @sum.inhabited_left ?x_14 ?x_15 ?x_16
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := @subtype.inhabited ?x_17 ?x_18 ?x_19 ?x_20
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := string.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := char.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := list.inhabited ?x_21
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited ℕ := nat.inhabited
+</pre></div>
+
+
+<p>Even though, when I make a term of type <code>inhabited ℕ</code> as an instance, Lean by default calls it <code>nat.inhabited</code> -- even though this, Lean doesn't think to look for <code>nat.inhabited</code> as the answer when it's trying to solve <code>inhabited ℕ</code> using type class inference?</p>
+
+<a name="163802801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802801">Kevin Buzzard (Apr 20 2019 at 13:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>...
+[class_instances] (0) ?x_0 : inhabited Prop := string.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := char.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := list.inhabited ?x_21
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := nat.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := @prod.inhabited ?x_22 ?x_23 ?x_24 ?x_25
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := true.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := bool.inhabited
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := @pi.inhabited ?x_26 ?x_27 ?x_28
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := @fun.inhabited ?x_29 ?x_30 ?x_31
+failed is_def_eq
+[class_instances] (0) ?x_0 : inhabited Prop := prop.inhabited
+</pre></div>
+
+
+<p>You are so dumb Lean! What did you think it was going to be called??</p>
+
+<a name="163802803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802803">Keeley Hoek (Apr 20 2019 at 13:08)</a>:</h4>
+<p>Hahaha!</p>
+
+<a name="163802818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802818">Kevin Buzzard (Apr 20 2019 at 13:09)</a>:</h4>
+<p>36 failures before it hit upon that one</p>
+
+<a name="163802824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163802824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163802824">Keeley Hoek (Apr 20 2019 at 13:09)</a>:</h4>
+<p>:D</p>
+
+<a name="163803111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803111">Mario Carneiro (Apr 20 2019 at 13:17)</a>:</h4>
+<p>Actually that's a really good point. With a proper indexing lean could just guess the name and skip the search</p>
+
+<a name="163803161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803161">Mario Carneiro (Apr 20 2019 at 13:19)</a>:</h4>
+<p>The answer to your earlier question is <code>#print instances linear_nonneg_ring</code></p>
+
+<a name="163803175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803175">Mario Carneiro (Apr 20 2019 at 13:19)</a>:</h4>
+<p>There are no instances of <code>linear_nonneg_ring</code>, so it probably performed the (empty) search and that's why you don't see it</p>
+
+<a name="163803240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803240">Kevin Buzzard (Apr 20 2019 at 13:20)</a>:</h4>
+<p>Thanks. I just learnt about <code>#print instances</code> from re-reading TPIL.</p>
+
+<a name="163803272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803272">Kevin Buzzard (Apr 20 2019 at 13:21)</a>:</h4>
+<p>OK so I tried to explain type class inference to my 16 year old son and basically I realised that I had to abstract it before I could explain it. How does this sound?</p>
+
+<a name="163803329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803329">Kevin Buzzard (Apr 20 2019 at 13:22)</a>:</h4>
+<p>We have 1000 puzzles, P1 up to P1000. We also have a bunch of techniques: each technique is of the form "if you can solve this finite set of puzzles, you can also solve that puzzle". For example if you can solve P1 and P3 and P10, you can also solve P11.</p>
+
+<a name="163803345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803345">Kevin Buzzard (Apr 20 2019 at 13:23)</a>:</h4>
+<p>A degenerate example of a technique is "if you can solve no puzzles at all, then you can solve P1"</p>
+
+<a name="163803348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803348">Kevin Buzzard (Apr 20 2019 at 13:23)</a>:</h4>
+<p>The question is: "solve puzzle 53"</p>
+
+<a name="163803351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803351">Kevin Buzzard (Apr 20 2019 at 13:23)</a>:</h4>
+<p>(using only the techniques you have).</p>
+
+<a name="163803407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803407">Kevin Buzzard (Apr 20 2019 at 13:24)</a>:</h4>
+<p>My son suggested first solving all the puzzles which need no input; I guess that's all the instances which are just of the form <code>ring int</code> or whatever.</p>
+
+<a name="163803420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803420">Kevin Buzzard (Apr 20 2019 at 13:25)</a>:</h4>
+<p>Now is this the point where I need to understand what a prolog-like search is?</p>
+
+<a name="163803433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803433">Kevin Buzzard (Apr 20 2019 at 13:26)</a>:</h4>
+<p>If this were an IOI problem, I would be told how many puzzles there were and how many techniques.</p>
+
+<a name="163803483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803483">Kevin Buzzard (Apr 20 2019 at 13:26)</a>:</h4>
+<p>Each technique is an instance in Lean I guess.</p>
+
+<a name="163803487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803487">Chris Hughes (Apr 20 2019 at 13:26)</a>:</h4>
+<blockquote>
+<p>Actually that's a really good point. With a proper indexing lean could just guess the name and skip the search</p>
+</blockquote>
+<p>How much easier is checking whether a bunch of strings matches <code>prop.inhabited</code> than checking whether a bunch of Types matches <code>inhabited Prop</code>?</p>
+<p>Also, I'm surprised that the error is <code>failed is_def_eq</code>. Doesn't type class inference care about syntactic equality?</p>
+
+<a name="163803488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803488">Kevin Buzzard (Apr 20 2019 at 13:26)</a>:</h4>
+<p>Oh -- my son is asking if there can be loops!</p>
+
+<a name="163803637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803637">Mario Carneiro (Apr 20 2019 at 13:30)</a>:</h4>
+<p>It's much easier to check whether <code>prop.inhabited</code> is what we want, because we don't have to linearly search through instances, we can just jump straight to the def by name</p>
+
+<a name="163803658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803658">Mario Carneiro (Apr 20 2019 at 13:31)</a>:</h4>
+<p>It uses defeq with a really strict unfold predicate</p>
+
+<a name="163803710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803710">Mario Carneiro (Apr 20 2019 at 13:32)</a>:</h4>
+<p>so that it can handle reducible defs and beta reduction</p>
+
+<a name="163803782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803782">Kevin Buzzard (Apr 20 2019 at 13:34)</a>:</h4>
+<p>I thought that the whole point of wrapper types was that you absolutely did not want Lean to solve <code>has_add my_int</code> by noticing that <code>my_int</code> was defined to be <code>int</code> and solving <code>has_add int</code></p>
+
+<a name="163803801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20type%20class%20inference%20work%3F/near/163803801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27427howdoestypeclassinferencework.html#163803801">Kevin Buzzard (Apr 20 2019 at 13:35)</a>:</h4>
+<p>I told my son that in Lean and mathlib they try to avoid loops. We don't want P6 -&gt; P7 and P7 -&gt; P6.</p>
+
 
 {% endraw %}
