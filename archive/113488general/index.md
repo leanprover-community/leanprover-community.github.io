@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [clearing all hypothesis](76367clearingallhypothesis.html) (23 messages, latest: Apr 20 2019 at 22:56)
+* [manually compiling a dependency](73478manuallycompilingadependency.html) (5 messages, latest: Apr 20 2019 at 23:07)
+
+* [clearing all hypothesis](76367clearingallhypothesis.html) (25 messages, latest: Apr 20 2019 at 23:03)
 
 * [sorrying a set of goals](40822sorryingasetofgoals.html) (1 message, latest: Apr 20 2019 at 22:15)
 

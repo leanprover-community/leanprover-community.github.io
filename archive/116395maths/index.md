@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (177 messages, latest: Apr 20 2019 at 23:49)
+
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
 * [linear_independent for families](21882linearindependentforfamilies.html) (62 messages, latest: Apr 19 2019 at 05:27)
 
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (171 messages, latest: Apr 17 2019 at 17:00)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (111 messages, latest: Apr 17 2019 at 12:45)
 
