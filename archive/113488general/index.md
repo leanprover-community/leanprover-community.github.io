@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [battling with large pp.all terms](26351battlingwithlargeppallterms.html) (19 messages, latest: Apr 21 2019 at 16:14)
+
 * [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (6 messages, latest: Apr 21 2019 at 07:05)
 
 * [strange [ ]'s in my goal](91079strangesinmygoal.html) (16 messages, latest: Apr 21 2019 at 05:07)
-
-* [battling with large pp.all terms](26351battlingwithlargeppallterms.html) (18 messages, latest: Apr 21 2019 at 05:02)
 
 * [what is a diamond?](58637whatisadiamond.html) (3 messages, latest: Apr 21 2019 at 04:09)
 
