@@ -2163,5 +2163,192 @@ And if I don't want to force two variables to be both for example <code>Type 2</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163648072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163648072">Jesse Michael Han (Apr 18 2019 at 12:52)</a>:</h4>
 <p>you can use underscores with <code>change</code> and Lean will try to infer what should be there from the current goal. that way <code>change _ = new_rhs</code> lets you avoid copy-pasting the entire left hand side</p>
 
+<a name="163860118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860118">Greg Conneen (Apr 21 2019 at 17:24)</a>:</h4>
+<p>How would I go about proving ∀ x : ℤ, even x ∨ odd x? I have even and odd as<br>
+def even : ℤ → Prop := λ n, ∃ m : ℤ, 2*m = n<br>
+def odd : ℤ → Prop := λ n, ∃ m : ℤ, 2*m + 1 = n<br>
+I assume that I would first have to show that odd is equivalent to not even, then apply classical.em. However, I'm having trouble proving odd x ↔ ¬(even x)</p>
+
+<a name="163860254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860254">Kevin Buzzard (Apr 21 2019 at 17:28)</a>:</h4>
+<p>My instinct would be to prove even n -&gt; odd (n+1) etc, and then prove by induction that every integer was odd or even.</p>
+
+<a name="163860266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860266">Kevin Buzzard (Apr 21 2019 at 17:28)</a>:</h4>
+<p>There are induction hypotheses of the form (P 0 and (forall n, P n -&gt; P(n+1)) and (forall N, P(n)-&gt;P(n-1))) implies P(n) for all n</p>
+
+<a name="163860279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860279">Greg Conneen (Apr 21 2019 at 17:29)</a>:</h4>
+<p>Ah, I see. That makes sense. I'm not familiar enough with induction in Lean yet, but I'll try it out</p>
+
+<a name="163860281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860281">Greg Conneen (Apr 21 2019 at 17:29)</a>:</h4>
+<p>thank you, I'll respond again if I'm stuck on the inductive bit</p>
+
+<a name="163860285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860285">Kevin Buzzard (Apr 21 2019 at 17:29)</a>:</h4>
+<p>If you just apply the induction tactic out of the box, you'll get an unpleasant surprise</p>
+
+<a name="163860338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860338">Kevin Buzzard (Apr 21 2019 at 17:30)</a>:</h4>
+<p>You'll end up with some question about natural numbers instead, and it will be pain converting from naturals to integers.</p>
+
+<a name="163860351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860351">Kevin Buzzard (Apr 21 2019 at 17:30)</a>:</h4>
+<p>You'll need to find an appropriate custom induction term in the library.</p>
+
+<a name="163860369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860369">Greg Conneen (Apr 21 2019 at 17:31)</a>:</h4>
+<p>Oh, okay. I'm not familiar enough with the library to get started with that. Where would I go to look for something like that?</p>
+
+<a name="163860373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860373">Kevin Buzzard (Apr 21 2019 at 17:31)</a>:</h4>
+<p><code>int.induction_on</code> should be fine for you.</p>
+
+<a name="163860436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860436">Kevin Buzzard (Apr 21 2019 at 17:33)</a>:</h4>
+<p><code>import data.int.basic</code> at the top of your file (you'll need the maths library mathlib) and then apply that function, and you'll be left with goals of the form "n even or n odd -&gt; n+1 even or n+1 odd" which you should be able to cope with. Prove n even -&gt; n+1 odd and the other three results (e.g. n odd -&gt; n-1 even) first and then use them all to prove the result.</p>
+
+<a name="163860497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860497">Greg Conneen (Apr 21 2019 at 17:34)</a>:</h4>
+<p>Neat. I have mathlib, but I find most of the algebra/analysis files unreadable despite being highly competent with the material on paper. Are there any other packages you would recommend before diving into that level of material?</p>
+
+<a name="163860556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860556">Kevin Buzzard (Apr 21 2019 at 17:36)</a>:</h4>
+<p>I would recommend doing just what you're doing -- writing material yourself. I agree that the library is impenetrable for a beginner. Proofs are specifically shortened for efficiency reasons, they are not written to be readable. We are still lacking a bunch of good teaching material for mathematicians; I intend to make some this summer, however I also said that last summer.</p>
+
+<a name="163860618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860618">Kevin Buzzard (Apr 21 2019 at 17:38)</a>:</h4>
+<p>Here's me trying to do some problem sheets which we give to 1st year mathematicians at Imperial: <a href="https://github.com/ImperialCollegeLondon/M1F_example_sheets" target="_blank" title="https://github.com/ImperialCollegeLondon/M1F_example_sheets">https://github.com/ImperialCollegeLondon/M1F_example_sheets</a></p>
+
+<a name="163860637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860637">Greg Conneen (Apr 21 2019 at 17:39)</a>:</h4>
+<p>Oh wow, that's a substantial amount of material. Thank you so much!</p>
+
+<a name="163860684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860684">Kevin Buzzard (Apr 21 2019 at 17:40)</a>:</h4>
+<p>The proofs are written in a far more longwinded way, they might be more instructional but there are still not many comments.</p>
+
+<a name="163860685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860685">Kevin Buzzard (Apr 21 2019 at 17:40)</a>:</h4>
+<p>You can step through them in tactic mode and watch the state change, of course.</p>
+
+<a name="163860739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860739">Greg Conneen (Apr 21 2019 at 17:42)</a>:</h4>
+<p>Right, I think that as long as I can just run through the tactic state I should be fine. Are there solutions for every single exercise?</p>
+
+<a name="163860801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860801">Greg Conneen (Apr 21 2019 at 17:44)</a>:</h4>
+<p>Also, despite there being a real numbers package in mathlib, I've never seen it before. That's super useful!</p>
+
+<a name="163860817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860817">Greg Conneen (Apr 21 2019 at 17:45)</a>:</h4>
+<p>oh wow, there's also complex numbers defined. That's amazing</p>
+
+<a name="163860818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860818">Kevin Buzzard (Apr 21 2019 at 17:45)</a>:</h4>
+<p>I don't think I managed every single exercise. There were some which were hard to formalise.</p>
+
+<a name="163860865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860865">Kevin Buzzard (Apr 21 2019 at 17:46)</a>:</h4>
+<p>Those answers are really just a big work in progress. They were just me trying to figure out if Lean was ready for a beginning undergraduate level maths course. It was.</p>
+
+<a name="163860866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860866">Greg Conneen (Apr 21 2019 at 17:46)</a>:</h4>
+<p>Are you a professor at Imperial?</p>
+
+<a name="163860867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860867">Kevin Buzzard (Apr 21 2019 at 17:46)</a>:</h4>
+<p>Yes</p>
+
+<a name="163860881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860881">Greg Conneen (Apr 21 2019 at 17:47)</a>:</h4>
+<p>Oh, that's awesome. I'm just an undergrad math student</p>
+
+<a name="163860882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860882">Kevin Buzzard (Apr 21 2019 at 17:48)</a>:</h4>
+<p>I felt like that when I was trying to get Lean to do my own problem sheets.</p>
+
+<a name="163860993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163860993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163860993">Greg Conneen (Apr 21 2019 at 17:50)</a>:</h4>
+<p>Haha yeah, the professor here at UVA has a tough time teaching Lean. It seems like it's one of those things where many trivial proofs on paper are just very difficult to formalise, despite familiarity</p>
+
+<a name="163861008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861008">Kevin Buzzard (Apr 21 2019 at 17:51)</a>:</h4>
+<p>Yes. I spent about a year being very frustrated with not being able to make Lean do obvious things. I'm now finally over that initial learning hump and I can write even research level maths in Lean now, although it can take a long time.</p>
+
+<a name="163861071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861071">Greg Conneen (Apr 21 2019 at 17:53)</a>:</h4>
+<p>Well congrats. I hope to get to that point someday. What maths research have you been able to formalise in Lean?</p>
+
+<a name="163861075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861075">Kevin Buzzard (Apr 21 2019 at 17:53)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean-perfectoid-spaces" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces">https://github.com/leanprover-community/lean-perfectoid-spaces</a></p>
+
+<a name="163861076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861076">Kevin Buzzard (Apr 21 2019 at 17:53)</a>:</h4>
+<p>It's not finished yet but we're getting there.</p>
+
+<a name="163861121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861121">Kevin Buzzard (Apr 21 2019 at 17:54)</a>:</h4>
+<p>I've just spent the last 30 minutes staring at <a href="#narrow/stream/116395-maths/topic/Cute.20lemma/near/163135381" title="#narrow/stream/116395-maths/topic/Cute.20lemma/near/163135381">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cute.20lemma/near/163135381</a></p>
+
+<a name="163861130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861130">Kevin Buzzard (Apr 21 2019 at 17:54)</a>:</h4>
+<p>some technical lemma about topological spaces which we need.</p>
+
+<a name="163861147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861147">Greg Conneen (Apr 21 2019 at 17:55)</a>:</h4>
+<p>that's... absolutely amazing. I never imagined we could do something like this in Lean so soon.</p>
+
+<a name="163861149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861149">Kevin Buzzard (Apr 21 2019 at 17:55)</a>:</h4>
+<p>Yeah me neither</p>
+
+<a name="163861150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861150">Kevin Buzzard (Apr 21 2019 at 17:55)</a>:</h4>
+<p>I've had a huge amount of support from other people here</p>
+
+<a name="163861156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861156">Kevin Buzzard (Apr 21 2019 at 17:56)</a>:</h4>
+<p>18 months ago there weren't even complex numbers</p>
+
+<a name="163861201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861201">Kevin Buzzard (Apr 21 2019 at 17:56)</a>:</h4>
+<p>Now we have schemes <a href="https://github.com/ramonfmir/lean-scheme" target="_blank" title="https://github.com/ramonfmir/lean-scheme">https://github.com/ramonfmir/lean-scheme</a> and they work</p>
+
+<a name="163861203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861203">Greg Conneen (Apr 21 2019 at 17:56)</a>:</h4>
+<p>Wow. Yeah, I'm now very happy that I've been introduced to this chat by Dr. Hölzl</p>
+
+<a name="163861205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861205">Greg Conneen (Apr 21 2019 at 17:56)</a>:</h4>
+<p>Oh wow, algebraic geometry? I'll have to tell my advisor about this</p>
+
+<a name="163861218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861218">Kevin Buzzard (Apr 21 2019 at 17:57)</a>:</h4>
+<p>we have stuff which reflects the interests of the people involved, I guess.</p>
+
+<a name="163861264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861264">Greg Conneen (Apr 21 2019 at 17:58)</a>:</h4>
+<p>Thank you so much for all this info. I really appreciate it. I look forward to participating more in the future, when I get a little bit more acquainted with Lean.</p>
+
+<a name="163861269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861269">Kevin Buzzard (Apr 21 2019 at 17:58)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/Taking.20the.20Stacks.20Project.20formalisation.20forward" title="#narrow/stream/116395-maths/topic/Taking.20the.20Stacks.20Project.20formalisation.20forward">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Taking.20the.20Stacks.20Project.20formalisation.20forward</a></p>
+
+<a name="163861270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861270">Kevin Buzzard (Apr 21 2019 at 17:58)</a>:</h4>
+<p>That's the schemes thread</p>
+
+<a name="163861273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861273">Kevin Buzzard (Apr 21 2019 at 17:58)</a>:</h4>
+<p>we're going to re-write it using the category theory library; at the minute we make all the categories by hand.</p>
+
+<a name="163861283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163861283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163861283">Kevin Buzzard (Apr 21 2019 at 17:59)</a>:</h4>
+<p>There are universe issues, as ever in category theory, so it gets a bit hairy because you have to do it all properly in a system like this</p>
+
 
 {% endraw %}
