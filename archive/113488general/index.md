@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (5 messages, latest: Apr 21 2019 at 05:50)
+* [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (6 messages, latest: Apr 21 2019 at 07:05)
 
 * [strange [ ]'s in my goal](91079strangesinmygoal.html) (16 messages, latest: Apr 21 2019 at 05:07)
 
