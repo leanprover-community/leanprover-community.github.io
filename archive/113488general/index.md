@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (54 messages, latest: Apr 21 2019 at 20:42)
+
 * [manually compiling a dependency](73478manuallycompilingadependency.html) (7 messages, latest: Apr 21 2019 at 18:25)
 
 * [battling with large pp.all terms](26351battlingwithlargeppallterms.html) (19 messages, latest: Apr 21 2019 at 16:14)
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [Red bug](01690Redbug.html) (3 messages, latest: Apr 20 2019 at 12:24)
 
 * [has_reflect in interactive.parse](73055hasreflectininteractiveparse.html) (27 messages, latest: Apr 20 2019 at 08:36)
-
-* [online leanprover](19268onlineleanprover.html) (53 messages, latest: Apr 20 2019 at 02:41)
 
 * [Does doing recursive definitions add new axioms?](47956Doesdoingrecursivedefinitionsaddnewaxioms.html) (5 messages, latest: Apr 19 2019 at 23:55)
 
