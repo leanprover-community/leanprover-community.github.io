@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [last commit which compiles with no errors](87427lastcommitwhichcompileswithnoerrors.html) (20 messages, latest: Apr 21 2019 at 01:44)
+* [clearing all hypothesis](76367clearingallhypothesis.html) (43 messages, latest: Apr 21 2019 at 02:37)
+
+* [VS Code info view suppress warnings](38938VSCodeinfoviewsuppresswarnings.html) (4 messages, latest: Apr 21 2019 at 02:19)
+
+* [last commit which compiles with no errors](87427lastcommitwhichcompileswithnoerrors.html) (23 messages, latest: Apr 21 2019 at 02:12)
 
 * [suppressing warnings in `leanpkg build`](14422suppressingwarningsinleanpkgbuild.html) (3 messages, latest: Apr 21 2019 at 01:00)
-
-* [clearing all hypothesis](76367clearingallhypothesis.html) (40 messages, latest: Apr 21 2019 at 00:56)
 
 * [Lean Community Fork](51160LeanCommunityFork.html) (43 messages, latest: Apr 21 2019 at 00:39)
 
