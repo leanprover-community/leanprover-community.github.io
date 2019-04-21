@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (177 messages, latest: Apr 20 2019 at 23:49)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (179 messages, latest: Apr 21 2019 at 00:34)
 
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
