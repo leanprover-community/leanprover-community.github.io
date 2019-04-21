@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [manually compiling a dependency](73478manuallycompilingadependency.html) (7 messages, latest: Apr 21 2019 at 18:25)
+
 * [battling with large pp.all terms](26351battlingwithlargeppallterms.html) (19 messages, latest: Apr 21 2019 at 16:14)
 
 * [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (6 messages, latest: Apr 21 2019 at 07:05)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [suppressing warnings in `leanpkg build`](14422suppressingwarningsinleanpkgbuild.html) (3 messages, latest: Apr 21 2019 at 01:00)
 
 * [Lean Community Fork](51160LeanCommunityFork.html) (43 messages, latest: Apr 21 2019 at 00:39)
-
-* [manually compiling a dependency](73478manuallycompilingadependency.html) (5 messages, latest: Apr 20 2019 at 23:07)
 
 * [sorrying a set of goals](40822sorryingasetofgoals.html) (1 message, latest: Apr 20 2019 at 22:15)
 
