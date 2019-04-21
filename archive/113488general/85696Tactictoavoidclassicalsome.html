@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/85696Tactictoavoidclassicalsome.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html">Tactic to avoid `classical.some`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163835931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20avoid%20%60classical.some%60/near/163835931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html#163835931">Kevin Buzzard (Apr 21 2019 at 05:16)</a>:</h4>
+<p>My goal was this:</p>
+<div class="codehilite"><pre><span></span>⊢ comm_ring.zero (ring_completion (valuation_field (out (⟨⟨v, _⟩, _⟩.val)))) =
+    domain.zero (ring_completion (valuation_field (out (⟨⟨v, _⟩, _⟩.val))))
+</pre></div>
+
+
+<p>and I tried <code>dunfold out</code>. This took me to the following slightly scary goal:</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">comm_ring</span><span class="bp">.</span><span class="n">zero</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valuation_field</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="bp">_</span><span class="o">)))</span> <span class="bp">=</span>
+    <span class="n">domain</span><span class="bp">.</span><span class="n">zero</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valuation_field</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="bp">_</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>I don't like <code>classical.some</code>s in my term. They come with a corresponding very helpful <code>classical.some_spec</code> which is hard to keep track of if you have proof terms turned off. Was <code>dunfold out</code> an incorrect move? How can I get the correct <code>some_spec</code>s into my context somehow?</p>
+
+<a name="163836068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20avoid%20%60classical.some%60/near/163836068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html#163836068">Mario Carneiro (Apr 21 2019 at 05:21)</a>:</h4>
+<p>what about <code>generalize : (out (⟨⟨v, _⟩, _⟩.val)) = k</code>?</p>
+
+<a name="163836130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20avoid%20%60classical.some%60/near/163836130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html#163836130">Mario Carneiro (Apr 21 2019 at 05:22)</a>:</h4>
+<p>A tactic like <code>split_ifs</code> for <code>classical.some</code> would be nice</p>
+
+<a name="163836461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20avoid%20%60classical.some%60/near/163836461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html#163836461">Simon Hudon (Apr 21 2019 at 05:33)</a>:</h4>
+<p>I think you will find such a tactic here: <a href="https://github.com/unitb/lean-lib/blob/master/src/util/classical.lean" target="_blank" title="https://github.com/unitb/lean-lib/blob/master/src/util/classical.lean">https://github.com/unitb/lean-lib/blob/master/src/util/classical.lean</a></p>
+
+<a name="163837020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20avoid%20%60classical.some%60/near/163837020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85696Tactictoavoidclassicalsome.html#163837020">Simon Hudon (Apr 21 2019 at 05:50)</a>:</h4>
+<p>I can PR it tomorrow. Or if you need it urgently, feel free to take it</p>
+
+
+{% endraw %}

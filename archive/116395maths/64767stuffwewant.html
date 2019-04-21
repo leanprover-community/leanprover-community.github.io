@@ -85,5 +85,102 @@ permalink: archive/116395maths/64767stuffwewant.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835014">Mario Carneiro (Apr 21 2019 at 04:52)</a>:</h4>
 <p>no surreals, go for it</p>
 
+<a name="163835362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835362">Kevin Buzzard (Apr 21 2019 at 05:03)</a>:</h4>
+<p>There are hyperreals!</p>
+
+<a name="163835434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835434">Kevin Buzzard (Apr 21 2019 at 05:05)</a>:</h4>
+<p>That Conway stuff -- I went back to Conway's book, and he's clearly aware of the foundational issues surrounding his constructions of numbers and games. It seems to me that these definitions are proper classes. Hence I would expect to be able to define a game recursively like before, except only using subsets of Game from Type 0 in some sense -- I want to stop the diagonalisation argument from failing because of ulift issues. Is this possible?</p>
+
+<a name="163835519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835519">Adrian Chu (Apr 21 2019 at 05:07)</a>:</h4>
+<p>each individual surreal number is a set, but the collection of all surreals is a class</p>
+
+<a name="163835558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835558">Mario Carneiro (Apr 21 2019 at 05:07)</a>:</h4>
+<p>lean doesn't do classes, it does universe parametric types</p>
+
+<a name="163835606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835606">Mario Carneiro (Apr 21 2019 at 05:08)</a>:</h4>
+<p><code>ordinal.{u} : Type (u+1)</code></p>
+
+<a name="163835632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835632">Kevin Buzzard (Apr 21 2019 at 05:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">game</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">L</span> <span class="n">R</span> <span class="o">:</span> <span class="n">list</span> <span class="n">game</span><span class="o">,</span> <span class="n">game</span>
+</pre></div>
+
+
+<p>This was Scott's original formalization of Conway's notion of a game.</p>
+
+<a name="163835735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835735">Kevin Buzzard (Apr 21 2019 at 05:10)</a>:</h4>
+<p>This version</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">inductive</span> <span class="n">game</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">L</span> <span class="n">R</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">game</span><span class="o">,</span> <span class="n">game</span>
+</pre></div>
+
+
+<p>is maybe not inconsistent, but is not strong enough to capture Conway's powerful notion.</p>
+
+<a name="163835757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835757">Kevin Buzzard (Apr 21 2019 at 05:11)</a>:</h4>
+<p>Mario's diagonalisation argument is here:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">function</span>
+
+<span class="kn">constant</span> <span class="n">game</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="o">:</span> <span class="n">set</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">game</span>
+<span class="kn">constant</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">g</span><span class="o">,</span> <span class="n">C</span> <span class="n">g</span>
+<span class="kn">axiom</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec_eq</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">))</span> <span class="o">(</span><span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="n">H</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="n">H</span> <span class="n">L</span> <span class="n">R</span>
+
+<span class="n">def</span> <span class="n">game</span><span class="bp">.</span><span class="n">right</span> <span class="o">:</span> <span class="n">game</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">game</span> <span class="o">:=</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span> <span class="n">R</span><span class="o">,</span> <span class="n">R</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="o">(</span><span class="n">L</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="n">L</span> <span class="n">R</span><span class="o">)</span><span class="bp">.</span><span class="n">right</span> <span class="bp">=</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">game</span><span class="bp">.</span><span class="n">rec_eq</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">cantor_injective</span> <span class="n">game</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">intro</span> <span class="err">∅</span><span class="o">)</span> <span class="err">$</span>
+<span class="bp">λ</span> <span class="n">R</span> <span class="n">R&#39;</span> <span class="n">e</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="err">∅</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span>
+  <span class="o">(</span><span class="n">congr_arg</span> <span class="n">game</span><span class="bp">.</span><span class="n">right</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">game</span><span class="bp">.</span><span class="n">right_eq</span> <span class="err">∅</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="163835804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835804">Kevin Buzzard (Apr 21 2019 at 05:12)</a>:</h4>
+<p>So it seems to me that thus far we have failed to define a Conway game in Lean and I for one am unsure how to proceed.</p>
+
+<a name="163835864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835864">Keeley Hoek (Apr 21 2019 at 05:14)</a>:</h4>
+<p>What if <code>game</code>s take a universe parameter</p>
+
+<a name="163835867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835867">Keeley Hoek (Apr 21 2019 at 05:14)</a>:</h4>
+<p>And their "inner games" are one universe lower</p>
+
+<a name="163835937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835937">Mario Carneiro (Apr 21 2019 at 05:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">pSurreal</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">pSurreal</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">β</span> <span class="bp">→</span> <span class="n">pSurreal</span><span class="o">)</span> <span class="bp">→</span> <span class="n">pSurreal</span>
+</pre></div>
+
+
+<p>I'm reading the definition of le, well formed, and the equivalence relation, and it's a complicated mutual induction, but this is the basic structure</p>
+
+<a name="163835945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835945">Kevin Buzzard (Apr 21 2019 at 05:17)</a>:</h4>
+<p>And what happens to the diagonal argument?</p>
+
+<a name="163835946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835946">Mario Carneiro (Apr 21 2019 at 05:17)</a>:</h4>
+<p>they are well founded just as in Conway's construction</p>
+
+<a name="163835991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuff%20we%20want/near/163835991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/64767stuffwewant.html#163835991">Mario Carneiro (Apr 21 2019 at 05:18)</a>:</h4>
+<p>you can't make a surreal number from any set of surreal numbers, only a set composed of previously constructed surreals</p>
+
 
 {% endraw %}
