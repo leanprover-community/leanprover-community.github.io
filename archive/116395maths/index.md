@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [stuff we want](64767stuffwewant.html) (39 messages, latest: Apr 21 2019 at 10:15)
+* [stuff we want](64767stuffwewant.html) (40 messages, latest: Apr 21 2019 at 13:54)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (179 messages, latest: Apr 21 2019 at 00:34)
 
