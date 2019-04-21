@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (118 messages, latest: Apr 21 2019 at 01:43)
+
 * [Revert](68025Revert.html) (10 messages, latest: Apr 19 2019 at 14:22)
 
 * [noob question(s)](52075noobquestions.html) (374 messages, latest: Apr 18 2019 at 12:52)
@@ -27,8 +29,6 @@ permalink: archive/113489newmembers/index.html
 * [prove that option coercion of value equals (some value)](28136provethatoptioncoercionofvalueequalssomevalue.html) (13 messages, latest: Apr 15 2019 at 14:48)
 
 * [simpler proof 0<2?](92160simplerproof02.html) (19 messages, latest: Apr 13 2019 at 02:29)
-
-* [Induction](51886Induction.html) (110 messages, latest: Apr 12 2019 at 13:32)
 
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
 

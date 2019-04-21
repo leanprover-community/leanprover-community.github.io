@@ -23,5 +23,76 @@ permalink: archive/113488general/87427lastcommitwhichcompileswithnoerrors.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827129">Mario Carneiro (Apr 21 2019 at 00:58)</a>:</h4>
 <p>it's also not hard to bisect based on the commit times</p>
 
+<a name="163827202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827202">Kevin Buzzard (Apr 21 2019 at 01:00)</a>:</h4>
+<p>Is there some automation I can use? Assume my history is completely linear. I want to know the last time <code>leanpkg build</code> built my repo within some commit range.</p>
+
+<a name="163827214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827214">Mario Carneiro (Apr 21 2019 at 01:01)</a>:</h4>
+<p>does your leanpkg.toml have commit SHAs in it?</p>
+
+<a name="163827266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827266">Mario Carneiro (Apr 21 2019 at 01:02)</a>:</h4>
+<p>this is actually why leanpkg didn't support branch references for a while... they are not reproducible - you can build the exact same project on two days and get a different result</p>
+
+<a name="163827281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827281">Mario Carneiro (Apr 21 2019 at 01:03)</a>:</h4>
+<p>if this matters for your application you should use commit references rather than branch references</p>
+
+<a name="163827284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827284">Simon Hudon (Apr 21 2019 at 01:03)</a>:</h4>
+<p>Can't you use both?</p>
+
+<a name="163827309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827309">Mario Carneiro (Apr 21 2019 at 01:04)</a>:</h4>
+<p>?</p>
+
+<a name="163827344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827344">Simon Hudon (Apr 21 2019 at 01:05)</a>:</h4>
+<p>both a commit and a branch reference?</p>
+
+<a name="163827400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827400">Mario Carneiro (Apr 21 2019 at 01:07)</a>:</h4>
+<p>what does that mean?</p>
+
+<a name="163827464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827464">Keeley Hoek (Apr 21 2019 at 01:08)</a>:</h4>
+<p>like this?</p>
+<div class="codehilite"><pre><span></span>[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover/mathlib&quot;, branch = &quot;master&quot;, rev = &quot;c1aff1b5c52b7996d69da2d2522cd696d811ed06&quot;}
+</pre></div>
+
+<a name="163827481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163827481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163827481">Simon Hudon (Apr 21 2019 at 01:09)</a>:</h4>
+<p>That would mean that, if you do <code>leanpkg configure</code>, it checks out the commit. If you do <code>leanpkg update</code> it gets the head of the branch, replace the sha commit with the new one and does the rest of the expected stuff</p>
+
+<a name="163828263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828263">Kevin Buzzard (Apr 21 2019 at 01:31)</a>:</h4>
+<p>So I could imagine Lean schemes tracking a perfectoid branch of mathlib, which Scott updates occasionally. This system makes that easy.</p>
+
+<a name="163828309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828309">Kevin Buzzard (Apr 21 2019 at 01:32)</a>:</h4>
+<p>We're basically forking mathlib and claiming that our version is better than yours because it contains some high-risk category theory code</p>
+
+<a name="163828323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828323">Mario Carneiro (Apr 21 2019 at 01:33)</a>:</h4>
+<p>or you could PR some stuff...</p>
+
+<a name="163828577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828577">Kevin Buzzard (Apr 21 2019 at 01:40)</a>:</h4>
+<p>Right, I could add my crappy code to Scott's branch and he could just accept it and hang the quality control if he felt it was the most fun way to proceed</p>
+
+<a name="163828589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828589">Kevin Buzzard (Apr 21 2019 at 01:41)</a>:</h4>
+<p><code>simp, dsimp, simp, dsimp</code> I ask you. Is all that nonsense fixed in the fork?</p>
+
+<a name="163828653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828653">Mario Carneiro (Apr 21 2019 at 01:43)</a>:</h4>
+<p>no one's touched <code>simp</code>... yet</p>
+
+<a name="163828660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/last%20commit%20which%20compiles%20with%20no%20errors/near/163828660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87427lastcommitwhichcompileswithnoerrors.html#163828660">Simon Hudon (Apr 21 2019 at 01:44)</a>:</h4>
+<p>What is broken about <code>simp</code>?</p>
+
 
 {% endraw %}

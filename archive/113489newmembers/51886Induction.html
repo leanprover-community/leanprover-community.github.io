@@ -837,5 +837,59 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 
 <p>you find in certain files.</p>
 
+<a name="163827840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163827840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163827840">Patrick Thomas (Apr 21 2019 at 01:19)</a>:</h4>
+<p>How is a function with <code>if...then...else</code> used? For example, how would one prove the example in the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">var</span> <span class="o">:=</span> <span class="bp">ℕ</span>
+
+<span class="kn">inductive</span> <span class="n">pre_term</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">abs</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+
+<span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">))</span>
+
+<span class="kn">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">var</span>
+<span class="kn">variable</span> <span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span>
+
+<span class="kn">example</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span>
+</pre></div>
+
+<a name="163827897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163827897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163827897">Simon Hudon (Apr 21 2019 at 01:20)</a>:</h4>
+<p><code>split_ifs</code> is your friend when you see <code>ite</code> or <code>dite</code> (the functions underneath the <code>if _ then _ else _</code>) in your goal</p>
+
+<a name="163828103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828103">Patrick Thomas (Apr 21 2019 at 01:26)</a>:</h4>
+<p>I don't think I see <code>ite</code> or <code>dite</code>? Maybe the goal hasn't been broken down enough yet?</p>
+
+<a name="163828187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828187">Simon Hudon (Apr 21 2019 at 01:29)</a>:</h4>
+<p>First unfold <code>sub</code>, then you'll see it</p>
+
+<a name="163828451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828451">Patrick Thomas (Apr 21 2019 at 01:36)</a>:</h4>
+<p>I'm sorry, I'm new to tactics. Would you mind giving an example? I'd be curious how to use <code>sub</code> without tactics as well.</p>
+
+<a name="163828508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828508">Mario Carneiro (Apr 21 2019 at 01:38)</a>:</h4>
+<p>without tactics:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">if_pos</span> <span class="n">h</span>
+</pre></div>
+
+<a name="163828523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828523">Mario Carneiro (Apr 21 2019 at 01:39)</a>:</h4>
+<p>with tactics:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span><span class="n">unfold</span> <span class="n">sub</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]}</span>
+</pre></div>
+
+<a name="163828654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/163828654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#163828654">Patrick Thomas (Apr 21 2019 at 01:43)</a>:</h4>
+<p>Thank you!</p>
+
 
 {% endraw %}
