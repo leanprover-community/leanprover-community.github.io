@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [stuff we want](64767stuffwewant.html) (17 messages, latest: Apr 21 2019 at 04:52)
+
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (179 messages, latest: Apr 21 2019 at 00:34)
 
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (111 messages, latest: Apr 17 2019 at 12:45)
-
-* [stuff we want](64767stuffwewant.html) (12 messages, latest: Apr 15 2019 at 12:08)
 
 * [A bunch of Lean files](73658AbunchofLeanfiles.html) (11 messages, latest: Apr 15 2019 at 02:13)
 

@@ -1,0 +1,102 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/26351battlingwithlargeppallterms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html">battling with large pp.all terms</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="163834514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834514">Kevin Buzzard (Apr 21 2019 at 04:36)</a>:</h4>
+<p>Is it possible to have some sort of tool where large pp.all terms can be folded up in manageable ways -- I am looking at a term that starts <code>@eq alpha (XXXXXXXXXXXXXXXX...) (YYYYYYYYYYYYYYYYYYY.....)</code> and I would like to see the head term of  <code>YYYYY...</code> but it's hard to find in the <code>pp.all</code> output.</p>
+
+<a name="163834593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834593">Simon Hudon (Apr 21 2019 at 04:39)</a>:</h4>
+<p>Have you tried other <code>pp</code> options?</p>
+
+<a name="163834597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834597">Mario Carneiro (Apr 21 2019 at 04:39)</a>:</h4>
+<p>I would get the expr out with tactics</p>
+
+<a name="163834656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834656">Mario Carneiro (Apr 21 2019 at 04:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">fooooooo</span> <span class="n">barrrrrrrrr</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fooooooo</span> <span class="bp">=</span> <span class="n">barrrrrrrrr</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="bp">_</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">e</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="n">pp</span> <span class="n">e</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span>
+</pre></div>
+
+<a name="163834704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834704">Kevin Buzzard (Apr 21 2019 at 04:42)</a>:</h4>
+<p><code>convert rfl</code> is not safe to use! You don't want to try proving <code>mul_comm</code> with it. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span>  <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">intros</span><span class="o">,</span>
+<span class="n">convert</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- ⊢ b = a</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I would like to be able to do some more delicate analysis</p>
+
+<a name="163834717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834717">Mario Carneiro (Apr 21 2019 at 04:43)</a>:</h4>
+<p>there is a :1 argument for <code>convert</code> I think</p>
+
+<a name="163834764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834764">Mario Carneiro (Apr 21 2019 at 04:44)</a>:</h4>
+<p><code>convert rfl using 0</code></p>
+
+<a name="163834834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834834">Mario Carneiro (Apr 21 2019 at 04:47)</a>:</h4>
+<p>hm, <code>congr' 0</code> fails because it makes no progress. I think <code>convert</code> needs to be fixed to reflect that</p>
+
+<a name="163834887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834887">Mario Carneiro (Apr 21 2019 at 04:48)</a>:</h4>
+<p>oh but in your case it's fine because you want <code>congr' 1</code> anyway</p>
+
+<a name="163834897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834897">Mario Carneiro (Apr 21 2019 at 04:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_group</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span>  <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">intros</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">rfl</span> <span class="kn">using</span> <span class="mi">1</span><span class="o">,</span> <span class="c1">-- ⊢ b * a = a * b</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="163834898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834898">Mario Carneiro (Apr 21 2019 at 04:49)</a>:</h4>
+<p>that said, <code>convert rfl</code> looks pretty useless</p>
+
+<a name="163834964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834964">Kevin Buzzard (Apr 21 2019 at 04:51)</a>:</h4>
+<p><code>convert </code>rfl` is really good when you have two terms which are defeq up to subsingleton typeclass inference equality issues</p>
+
+<a name="163834969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834969">Mario Carneiro (Apr 21 2019 at 04:51)</a>:</h4>
+<p>isn't that just <code>congr'</code>?</p>
+
+<a name="163834970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163834970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163834970">Kevin Buzzard (Apr 21 2019 at 04:51)</a>:</h4>
+<p>This happened to me a fair bit when I was doing sheaves.</p>
+
+<a name="163835016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163835016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163835016">Kevin Buzzard (Apr 21 2019 at 04:52)</a>:</h4>
+<p>Maybe; I don't know the difference between <code>congr</code> and <code>congr'</code>, I don't really understand them properly.</p>
+
+<a name="163835019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163835019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163835019">Mario Carneiro (Apr 21 2019 at 04:52)</a>:</h4>
+<p><code>congr'</code> is <code>congr</code> with bugfixes</p>
+
+<a name="163835020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/battling%20with%20large%20pp.all%20terms/near/163835020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26351battlingwithlargeppallterms.html#163835020">Mario Carneiro (Apr 21 2019 at 04:52)</a>:</h4>
+<p>and a depth limiter</p>
+
+
+{% endraw %}

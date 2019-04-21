@@ -10,6 +10,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [strange [ ]'s in my goal](91079strangesinmygoal.html) (6 messages, latest: Apr 21 2019 at 04:59)
+
+* [battling with large pp.all terms](26351battlingwithlargeppallterms.html) (17 messages, latest: Apr 21 2019 at 04:52)
+
+* [what is a diamond?](58637whatisadiamond.html) (3 messages, latest: Apr 21 2019 at 04:09)
+
 * [clearing all hypothesis](76367clearingallhypothesis.html) (43 messages, latest: Apr 21 2019 at 02:37)
 
 * [VS Code info view suppress warnings](38938VSCodeinfoviewsuppresswarnings.html) (4 messages, latest: Apr 21 2019 at 02:19)
