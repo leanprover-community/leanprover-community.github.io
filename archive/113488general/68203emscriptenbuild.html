@@ -97,5 +97,34 @@ make: *** [Makefile:163: all] Error 2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125891597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68203emscriptenbuild.html#125891597">Sebastian Ullrich (Apr 30 2018 at 12:31)</a>:</h4>
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Seems to work, thanks!</p>
 
+<a name="163916548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/163916548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68203emscriptenbuild.html#163916548">Bryan Gin-ge Chen (Apr 22 2019 at 16:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> I've been digging into the emscripten build for lean and am trying to figure out how to get a reasonable test setup working in the community fork (see <a href="https://github.com/leanprover-community/lean/pull/17" target="_blank" title="https://github.com/leanprover-community/lean/pull/17">this PR</a>). I'd appreciate any advice or suggestions if you've got time.</p>
+<p>Here's where I'm at: I've managed to build the js and wasm files that are used by <code>lean-web-editor</code>, but I am having trouble with the other build outputs.  <code>ctest</code> seems to rely on a shell script <code>lean</code> which runs  <code>lean.js</code> and <code>lean.wasm</code> using <code>node</code>. This fails for me with the following error (and I get similar errors for <code>leanchecker</code>):</p>
+<div class="codehilite"><pre><span></span>{ Error
+    at new ErrnoError (.../lean/build/emscripten/shell/lean.js:1:72345)
+    at Object.getMode (.../lean/build/emscripten/shell/lean.js:1:40486)
+    at Object.mount (.../lean/build/emscripten/shell/lean.js:1:40042)
+    at Object.mount (.../lean/build/emscripten/shell/lean.js:1:56062)
+    at Array.ASM_CONSTS (.../lean/build/emscripten/shell/lean.js:1:15742)
+    at _emscripten_asm_const_i (.../lean/build/emscripten/shell/lean.js:1:15892)
+    at wasm-function[11542]:20
+    at Object.Module._main (.../lean/build/emscripten/shell/lean.js:1:123255)
+    at Object.callMain (.../lean/build/emscripten/shell/lean.js:1:128352)
+    at doRun (.../lean/build/emscripten/shell/lean.js:1:129028)
+  node: undefined,
+  setErrno: [Function],
+  errno: 2,
+  message: &#39;FS error&#39; }
+</pre></div>
+
+
+<p>Any ideas on how to get it running again? I tried adding:</p>
+<div class="codehilite"><pre><span></span>    set_target_properties(lean PROPERTIES LINK_FLAGS &quot;-s WASM=0 ${LEAN_JS_OPTS}&quot;)
+</pre></div>
+
+
+<p>in <code>src/shell/CMakeLists.txt</code> since <code>LEAN_JS_OPTS</code> contains <code>"-s 'EXTRA_EXPORTED_RUNTIME_METHODS=[\"FS\"]'"</code> but it didn't seem to do anything. (<code>-s WASM=1</code> didn't work either)</p>
+
 
 {% endraw %}
