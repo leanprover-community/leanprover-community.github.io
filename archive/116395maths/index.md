@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [presenting a polynomial](83077presentingapolynomial.html) (1 message, latest: Apr 22 2019 at 14:40)
+
 * [stuff we want](64767stuffwewant.html) (51 messages, latest: Apr 21 2019 at 16:06)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (179 messages, latest: Apr 21 2019 at 00:34)
