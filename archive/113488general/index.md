@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simple question](66563simplequestion.html) (16 messages, latest: Apr 22 2019 at 04:05)
+
 * [online leanprover](19268onlineleanprover.html) (54 messages, latest: Apr 21 2019 at 20:42)
 
 * [manually compiling a dependency](73478manuallycompilingadependency.html) (7 messages, latest: Apr 21 2019 at 18:25)
@@ -33,8 +35,6 @@ permalink: archive/113488general/index.html
 * [Lean Community Fork](51160LeanCommunityFork.html) (43 messages, latest: Apr 21 2019 at 00:39)
 
 * [sorrying a set of goals](40822sorryingasetofgoals.html) (1 message, latest: Apr 20 2019 at 22:15)
-
-* [simple question](66563simplequestion.html) (7 messages, latest: Apr 20 2019 at 16:56)
 
 * [how does type class inference work?](27427howdoestypeclassinferencework.html) (150 messages, latest: Apr 20 2019 at 15:56)
 
