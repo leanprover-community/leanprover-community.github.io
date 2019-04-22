@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simple question](66563simplequestion.html) (22 messages, latest: Apr 22 2019 at 11:59)
+* [simple question](66563simplequestion.html) (23 messages, latest: Apr 22 2019 at 12:00)
 
 * [online leanprover](19268onlineleanprover.html) (54 messages, latest: Apr 21 2019 at 20:42)
 
