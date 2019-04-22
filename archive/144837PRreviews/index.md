@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (4 messages, latest: Apr 22 2019 at 04:07)
+* [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (11 messages, latest: Apr 22 2019 at 19:55)
 
 * [#927 operator norm](08942927operatornorm.html) (9 messages, latest: Apr 20 2019 at 22:06)
 
