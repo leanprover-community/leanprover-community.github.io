@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simple question](66563simplequestion.html) (25 messages, latest: Apr 23 2019 at 06:46)
+
 * [emscripten build](68203emscriptenbuild.html) (15 messages, latest: Apr 22 2019 at 18:51)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (4 messages, latest: Apr 22 2019 at 17:44)
 
 * [Convert trace](60849Converttrace.html) (4 messages, latest: Apr 22 2019 at 17:11)
-
-* [simple question](66563simplequestion.html) (24 messages, latest: Apr 22 2019 at 13:42)
 
 * [online leanprover](19268onlineleanprover.html) (54 messages, latest: Apr 21 2019 at 20:42)
 

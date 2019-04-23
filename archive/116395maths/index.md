@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (64 messages, latest: Apr 23 2019 at 03:57)
+* [linear_independent for families](21882linearindependentforfamilies.html) (68 messages, latest: Apr 23 2019 at 06:24)
+
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
 
 * [presenting a polynomial](83077presentingapolynomial.html) (7 messages, latest: Apr 22 2019 at 18:35)
 
 * [stuff we want](64767stuffwewant.html) (51 messages, latest: Apr 21 2019 at 16:06)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (179 messages, latest: Apr 21 2019 at 00:34)
 
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
