@@ -2843,5 +2843,67 @@ foobar
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163999130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163999130">Greg Conneen (Apr 23 2019 at 15:17)</a>:</h4>
 <p>Okay, I will</p>
 
+<a name="164003046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003046">Greg Conneen (Apr 23 2019 at 16:01)</a>:</h4>
+<p>I've got it.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">tern_add</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span><span class="bp">+</span><span class="n">c</span>
+<span class="kn">instance</span> <span class="n">int_semiheap</span> <span class="o">:</span> <span class="n">semiheap</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">apply</span> <span class="n">semiheap</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="n">tern_add</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">tern_add</span><span class="o">,</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">tern_add</span><span class="o">,</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="164003070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003070">Greg Conneen (Apr 23 2019 at 16:01)</a>:</h4>
+<p>Thank you so much for your help.</p>
+
+<a name="164003572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003572">Patrick Massot (Apr 23 2019 at 16:06)</a>:</h4>
+<p>Does that code compile?</p>
+
+<a name="164003623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003623">Patrick Massot (Apr 23 2019 at 16:07)</a>:</h4>
+<p>Anyway, the point is you had to prove only para-associativity equalities instead of three</p>
+
+<a name="164003676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003676">Patrick Massot (Apr 23 2019 at 16:07)</a>:</h4>
+<p>You can also study (after adding <code>import tactic.abel</code> on top of your file):</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">tern_add</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span><span class="bp">+</span><span class="n">c</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">semiheap</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">tern_op</span> <span class="o">:=</span> <span class="n">tern_add</span><span class="o">,</span>
+  <span class="n">para_assoc1</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">[</span><span class="n">tern_add</span><span class="o">],</span> <span class="n">abel</span> <span class="o">},</span>
+  <span class="n">para_assoc2</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">[</span><span class="n">tern_add</span><span class="o">],</span> <span class="n">abel</span> <span class="o">},</span>
+  <span class="n">para_assoc3</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">[</span><span class="n">tern_add</span><span class="o">],</span> <span class="n">abel</span> <span class="o">}</span> <span class="o">}</span>
+
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">semiheap</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="n">semiheap</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="n">tern_add</span> <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">tern_add</span><span class="o">],</span> <span class="n">abel</span> <span class="o">})</span> <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">tern_add</span><span class="o">],</span> <span class="n">abel</span> <span class="o">}</span>
+</pre></div>
+
+<a name="164003782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003782">Patrick Massot (Apr 23 2019 at 16:08)</a>:</h4>
+<p>you can also replace <code>dsimp [tern_add]</code> by <code>unfold tern_add</code></p>
+
+<a name="164003941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164003941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164003941">Greg Conneen (Apr 23 2019 at 16:10)</a>:</h4>
+<p>Okay, I will. I'm currently implementing heaps as an extension of semiheaps. How do I avoid having to write the notation as a field over and over?</p>
+
+<a name="164004090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164004090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164004090">Patrick Massot (Apr 23 2019 at 16:12)</a>:</h4>
+<p>you need to reissue the notation command after the semiheap definition. The one inside the definition has limited scope</p>
+
+<a name="164004118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164004118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164004118">Greg Conneen (Apr 23 2019 at 16:12)</a>:</h4>
+<p>Gotcha. So at most I'll only have to write it twice</p>
+
+<a name="164004140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164004140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164004140">Patrick Massot (Apr 23 2019 at 16:13)</a>:</h4>
+<p>yes</p>
+
 
 {% endraw %}
