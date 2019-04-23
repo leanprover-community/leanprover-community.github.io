@@ -91,5 +91,36 @@ none
 
 <p>to the environment with <code>has_add.add</code>being a template parameter which could also be set to <code>has_mul.mul</code>.</p>
 
+<a name="163997876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/163997876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#163997876">Fabian Glöckle (Apr 23 2019 at 15:03)</a>:</h4>
+<p>Do my questions make sense? Can I further elaborate on anything? Any help is appreciated <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="164000124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000124">Simon Hudon (Apr 23 2019 at 15:28)</a>:</h4>
+<p>Hey! Sorry I forgot to answer</p>
+
+<a name="164000326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000326">Simon Hudon (Apr 23 2019 at 15:30)</a>:</h4>
+<p>You don't need to generate <code>@</code> to create that definition. The following has the same effect:</p>
+<div class="codehilite"><pre><span></span><span class="n">do</span> <span class="n">add</span> <span class="bp">&lt;-</span> <span class="n">mk_const</span> <span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span>
+   <span class="n">return</span> <span class="err">$</span> <span class="n">add</span> <span class="n">α</span> <span class="n">i₁</span> <span class="n">x</span> <span class="n">y</span>
+</pre></div>
+
+<a name="164000373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000373">Simon Hudon (Apr 23 2019 at 15:31)</a>:</h4>
+<p>or more simply: <code>mk_mapp `has_add.add [α,i₁,x,y]</code></p>
+
+<a name="164000645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000645">Simon Hudon (Apr 23 2019 at 15:34)</a>:</h4>
+<p>While in writing an expression like <code>@has_add.add α i₁ x y</code> you need the added tool of <code>@</code> to specify implicit arguments, in building <code>expr</code> trees, you have to work harder if you want to omit an implicit argument. That's because <code>app f x</code> means the same whether the type of the expression <code>f</code> is <code>Π x : t, t'</code> or <code>Π {x : t}, t'</code>.</p>
+
+<a name="164000846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000846">Simon Hudon (Apr 23 2019 at 15:37)</a>:</h4>
+<p>If you want to omit the first implicit argument, you have to first discover that it is indeed an implicit argument, then, you have to create a meta variable <code>v</code> of the right type and feed it to <code>f</code>: <code>app f v</code>. Then you have "omitted" the first arguments: you're relying on unification to figure out what it is</p>
+
+<a name="164000975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164000975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164000975">Simon Hudon (Apr 23 2019 at 15:38)</a>:</h4>
+<p>You can also use <code>tactic.mk_app</code> which behaves very similarly to what I described</p>
+
 
 {% endraw %}

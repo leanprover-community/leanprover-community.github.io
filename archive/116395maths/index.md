@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (68 messages, latest: Apr 23 2019 at 06:24)
+* [linear_independent for families](21882linearindependentforfamilies.html) (70 messages, latest: Apr 23 2019 at 15:43)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
 
