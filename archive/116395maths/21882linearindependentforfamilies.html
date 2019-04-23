@@ -371,5 +371,41 @@ best be formulated then?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164028811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164028811">Alexander Bentkamp (Apr 23 2019 at 20:53)</a>:</h4>
 <p>Yes, <code>map_domain</code> and <code>emb_domain</code> are in the wrong direction. And I don't see how I could modify <code>subtype_domain</code> to work with an injection...</p>
 
+<a name="164034774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164034774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164034774">Alexander Bentkamp (Apr 23 2019 at 22:16)</a>:</h4>
+<p>I found this solution, which is quite ok I think:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum_elim_left</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">support</span> <span class="o">:=</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_preimage</span> <span class="o">(</span><span class="bp">@</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span><span class="bp">.</span><span class="n">inj</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">l</span><span class="bp">.</span><span class="n">support</span><span class="bp">.</span><span class="n">finite_to_set</span><span class="o">)</span><span class="bp">.</span><span class="n">to_finset</span><span class="o">,</span>
+  <span class="n">to_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">l</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="n">a</span><span class="o">)),</span>
+  <span class="n">mem_support_to_fun</span> <span class="o">:=</span>
+    <span class="k">begin</span>
+      <span class="n">intros</span> <span class="n">a</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">to_finset</span><span class="o">]</span>
+    <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>*Edit: I removed a few spurious type assumptions</p>
+
+<a name="164035013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164035013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164035013">Mario Carneiro (Apr 23 2019 at 22:20)</a>:</h4>
+<p>I think <code>emb_domain</code> should work the other way around, using essentially the proof you gave with a variable in place of <code>sum.inl.inj</code></p>
+
+<a name="164035036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164035036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164035036">Mario Carneiro (Apr 23 2019 at 22:21)</a>:</h4>
+<p>Actually I'm surprised <code>emb_domain</code> exists at all, since it's a special case of <code>map_domain</code>. Maybe it's for the defeqs?</p>
+
+<a name="164035208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164035208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164035208">Alexander Bentkamp (Apr 23 2019 at 22:23)</a>:</h4>
+<p>map_domain works only if beta is a <code>add_comm_monoid</code>.</p>
+
+<a name="164035510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164035510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164035510">Mario Carneiro (Apr 23 2019 at 22:28)</a>:</h4>
+<p>I guess the most general precondition for which precomp is well defined is that the fibers of the function are fintypes</p>
+
+<a name="164035561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164035561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164035561">Alexander Bentkamp (Apr 23 2019 at 22:29)</a>:</h4>
+<p>I'll see what I can do.</p>
+
 
 {% endraw %}

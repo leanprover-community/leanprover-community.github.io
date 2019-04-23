@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (80 messages, latest: Apr 23 2019 at 20:53)
+* [presenting a polynomial](83077presentingapolynomial.html) (10 messages, latest: Apr 23 2019 at 22:33)
+
+* [linear_independent for families](21882linearindependentforfamilies.html) (86 messages, latest: Apr 23 2019 at 22:29)
 
 * [What is this lemma called?](97145Whatisthislemmacalled.html) (19 messages, latest: Apr 23 2019 at 19:05)
 
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [stuff we want](64767stuffwewant.html) (55 messages, latest: Apr 23 2019 at 17:19)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
-
-* [presenting a polynomial](83077presentingapolynomial.html) (7 messages, latest: Apr 22 2019 at 18:35)
 
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
