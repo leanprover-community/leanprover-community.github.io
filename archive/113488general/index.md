@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [I don't get `simp`](99775Idontgetsimp.html) (3 messages, latest: Apr 23 2019 at 18:45)
+* [I don't get `simp`](99775Idontgetsimp.html) (7 messages, latest: Apr 23 2019 at 19:52)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (7 messages, latest: Apr 23 2019 at 17:48)
 

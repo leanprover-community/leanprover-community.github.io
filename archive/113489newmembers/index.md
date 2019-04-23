@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [expr: fields and @](45316exprfieldsand.html) (20 messages, latest: Apr 23 2019 at 18:27)
+* [expr: fields and @](45316exprfieldsand.html) (59 messages, latest: Apr 23 2019 at 19:59)
 
-* [noob question(s)](52075noobquestions.html) (530 messages, latest: Apr 23 2019 at 16:13)
+* [noob question(s)](52075noobquestions.html) (564 messages, latest: Apr 23 2019 at 19:50)
 
 * [Induction](51886Induction.html) (118 messages, latest: Apr 21 2019 at 01:43)
 

@@ -160,5 +160,221 @@ none
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164015854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164015854">Simon Hudon (Apr 23 2019 at 18:27)</a>:</h4>
 <p>Instead of using <code>Π</code> and <code>λ</code> in your quasiquotes, use <code>mk_local'</code> to create variables like <code>α</code> and <code>β</code> and the instances, then you use <code>to_expr</code> and quasiquotes to create <code> ``((%%α → %%β) → Prop)</code>and you use <code>pis</code> to create the pis and similarly with <code>lambdas</code> to create the lambdas.</p>
 
+<a name="164019455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164019455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164019455">Fabian Glöckle (Apr 23 2019 at 19:04)</a>:</h4>
+<p>very convenient :)<br>
+I tried:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">add_compatible_def</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="k">let</span> <span class="n">has_x_name</span> <span class="o">:=</span> <span class="n">name</span><span class="bp">.</span><span class="n">mk_string</span> <span class="o">(</span><span class="n">string</span><span class="bp">.</span><span class="n">append</span> <span class="s2">&quot;has_&quot;</span> <span class="n">x</span><span class="o">)</span> <span class="n">name</span><span class="bp">.</span><span class="n">anonymous</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">has_x_x_name</span> <span class="o">:=</span> <span class="n">name</span><span class="bp">.</span><span class="n">mk_string</span> <span class="n">x</span> <span class="n">has_x_name</span><span class="o">,</span>
+   <span class="n">has_x</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">has_x_name</span><span class="o">,</span>
+   <span class="n">has_x_x</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">has_x_x_name</span><span class="o">,</span>
+   <span class="n">α</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">α</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">sort</span> <span class="o">(</span><span class="n">level</span><span class="bp">.</span><span class="n">succ</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">)),</span>
+   <span class="n">β</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">β</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">sort</span> <span class="o">(</span><span class="n">level</span><span class="bp">.</span><span class="n">succ</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">)),</span>
+   <span class="n">i₁</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">i₁</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">inst_implicit</span> <span class="o">(</span><span class="n">has_x</span> <span class="n">α</span><span class="o">),</span>
+   <span class="n">i₂</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">i₂</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">inst_implicit</span> <span class="o">(</span><span class="n">has_x</span> <span class="n">β</span><span class="o">),</span>
+   <span class="n">type_main</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">((</span><span class="err">%%</span><span class="n">α</span> <span class="bp">→</span> <span class="err">%%</span><span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">decl_type</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">pis</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">β</span><span class="o">,</span> <span class="n">i₁</span><span class="o">,</span> <span class="n">i₂</span><span class="o">]</span> <span class="n">type_main</span><span class="o">,</span>
+   <span class="n">f</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">f</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">pi</span> <span class="bp">`</span><span class="n">a</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="n">α</span> <span class="n">β</span><span class="o">),</span>
+   <span class="n">x</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">x</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">y</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">app₁</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="n">has_x_x_name</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">i₁</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">],</span>
+   <span class="n">app₂</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="n">has_x_x_name</span> <span class="o">[</span><span class="n">β</span><span class="o">,</span> <span class="n">i₂</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)],</span>
+   <span class="n">body_main</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">f</span> <span class="o">(</span><span class="err">%%</span><span class="n">app₁</span><span class="o">)</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">app₂</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">decl_body</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">lambdas</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">β</span><span class="o">,</span> <span class="n">i₁</span><span class="o">,</span> <span class="n">i₂</span><span class="o">,</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pis</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">]</span> <span class="n">body_main</span><span class="o">),</span>
+  <span class="c1">--  decl_body ← to_expr ``(λ (α : Type) (β : Type) [i₁ : %%has_x α] [i₂ : %%has_x β] (f : α → β),</span>
+  <span class="c1">--                         ∀ {x y : α}, f (%%has_x_x α i₁ x y) = %%has_x_x β i₂ (f x) (f y)),</span>
+   <span class="n">trace</span> <span class="n">decl_type</span><span class="o">,</span>
+   <span class="n">trace</span> <span class="n">decl_body</span><span class="o">,</span>
+   <span class="n">decl</span> <span class="err">←</span> <span class="n">pure</span> <span class="err">$</span> <span class="n">mk_definition</span> <span class="bp">`</span><span class="n">compatible</span> <span class="o">[</span><span class="bp">`</span><span class="n">u</span><span class="o">,</span> <span class="bp">`</span><span class="n">v</span><span class="o">]</span> <span class="n">decl_type</span> <span class="n">decl_body</span><span class="o">,</span>
+   <span class="n">add_decl</span> <span class="n">decl</span>
+</pre></div>
+
+
+<p>It throws</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">app_builder</span><span class="o">]</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">an</span> <span class="err">&#39;</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add&#39;</span><span class="bp">-</span><span class="n">application</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">solve</span> <span class="n">unification</span> <span class="n">constraint</span> <span class="n">for</span> <span class="bp">#</span><span class="mi">2</span> <span class="n">argument</span> <span class="o">(</span><span class="n">has_add</span> <span class="n">α</span> <span class="bp">=</span><span class="err">?</span><span class="bp">=</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+
+<p>What is the mistake?</p>
+
+<a name="164019556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164019556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164019556">Simon Hudon (Apr 23 2019 at 19:05)</a>:</h4>
+<p>use <code>mk_mapp</code> instead of <code>mk_app</code></p>
+
+<a name="164019854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164019854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164019854">Fabian Glöckle (Apr 23 2019 at 19:08)</a>:</h4>
+<p>replacing with</p>
+<div class="codehilite"><pre><span></span>   <span class="n">app₁</span> <span class="err">←</span> <span class="n">mk_mapp</span> <span class="n">has_x_x_name</span> <span class="o">[</span><span class="n">some</span> <span class="n">α</span><span class="o">,</span> <span class="n">some</span> <span class="n">i₁</span><span class="o">,</span> <span class="n">some</span> <span class="n">x</span><span class="o">,</span> <span class="n">some</span> <span class="n">y</span><span class="o">],</span>
+   <span class="n">app₂</span> <span class="err">←</span> <span class="n">mk_mapp</span> <span class="n">has_x_x_name</span> <span class="o">[</span><span class="n">some</span> <span class="n">β</span><span class="o">,</span> <span class="n">some</span> <span class="n">i₂</span><span class="o">,</span> <span class="n">some</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="n">some</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)],</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="164020114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020114">Simon Hudon (Apr 23 2019 at 19:11)</a>:</h4>
+<p>Yes</p>
+
+<a name="164020131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020131">Simon Hudon (Apr 23 2019 at 19:11)</a>:</h4>
+<p>Instead of <code>has_x_x_name</code> you can use <code> ``has_add.add</code></p>
+
+<a name="164020266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020266">Fabian Glöckle (Apr 23 2019 at 19:12)</a>:</h4>
+<p>Replacing these lines I still get the same error</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">app_builder</span><span class="o">]</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">an</span> <span class="err">&#39;</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add&#39;</span><span class="bp">-</span><span class="n">application</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">solve</span> <span class="n">unification</span> <span class="n">constraint</span> <span class="n">for</span> <span class="bp">#</span><span class="mi">1</span> <span class="n">argument</span> <span class="o">(</span><span class="n">has_add</span> <span class="n">α</span> <span class="bp">=</span><span class="err">?</span><span class="bp">=</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+<a name="164020322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020322">Fabian Glöckle (Apr 23 2019 at 19:13)</a>:</h4>
+<blockquote>
+<p>Instead of <code>has_x_x_name</code> you can use <code> ``has_add.add</code></p>
+</blockquote>
+<p>Yes, in the end I wanted to be able to write <code>add_compatible_def "mul"</code> or similar</p>
+
+<a name="164020329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020329">Simon Hudon (Apr 23 2019 at 19:13)</a>:</h4>
+<p>try putting <code>set_option pp.implicit true</code> before your proof</p>
+
+<a name="164020482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020482">Fabian Glöckle (Apr 23 2019 at 19:15)</a>:</h4>
+<p>I put it above the definition, but to no effect..</p>
+
+<a name="164020515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020515">Simon Hudon (Apr 23 2019 at 19:15)</a>:</h4>
+<p>The error message should change</p>
+
+<a name="164020598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020598">Fabian Glöckle (Apr 23 2019 at 19:16)</a>:</h4>
+<p>still </p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">app_builder</span><span class="o">]</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">an</span> <span class="err">&#39;</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add&#39;</span><span class="bp">-</span><span class="n">application</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">solve</span> <span class="n">unification</span> <span class="n">constraint</span> <span class="n">for</span> <span class="bp">#</span><span class="mi">2</span> <span class="n">argument</span> <span class="o">(</span><span class="n">has_add</span> <span class="n">α</span> <span class="bp">=</span><span class="err">?</span><span class="bp">=</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+<a name="164020628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020628">Fabian Glöckle (Apr 23 2019 at 19:16)</a>:</h4>
+<p>the number of the argument? <code>#1</code> and <code>#2</code></p>
+
+<a name="164020692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020692">Simon Hudon (Apr 23 2019 at 19:17)</a>:</h4>
+<p>Try replacing <code>some i₁</code> with <code>none</code></p>
+
+<a name="164020804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164020804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164020804">Fabian Glöckle (Apr 23 2019 at 19:18)</a>:</h4>
+<p>[app_builder] failed to create an 'has_add.add'-application, there are missing implicit arguments</p>
+
+<a name="164021444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021444">Simon Hudon (Apr 23 2019 at 19:25)</a>:</h4>
+<p>If you add <code>infer_type app₁ &gt;&gt;= trace</code> before <code>mk_mapp</code>, what does it print?</p>
+
+<a name="164021614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021614">Fabian Glöckle (Apr 23 2019 at 19:27)</a>:</h4>
+<p>we don't reach this point</p>
+
+<a name="164021706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021706">Fabian Glöckle (Apr 23 2019 at 19:28)</a>:</h4>
+<p>i.e. still the error</p>
+
+<a name="164021790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021790">Simon Hudon (Apr 23 2019 at 19:29)</a>:</h4>
+<p>How far does it get?</p>
+
+<a name="164021928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021928">Fabian Glöckle (Apr 23 2019 at 19:30)</a>:</h4>
+<p>till the <code>mk_mapp</code> I assume</p>
+
+<a name="164021955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164021955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164021955">Simon Hudon (Apr 23 2019 at 19:30)</a>:</h4>
+<p>So if you put it before, it should print something</p>
+
+<a name="164022068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022068">Fabian Glöckle (Apr 23 2019 at 19:31)</a>:</h4>
+<p>but you want trace information on <code>app1</code>?<br>
+then I can't put it above its definition</p>
+
+<a name="164022175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022175">Simon Hudon (Apr 23 2019 at 19:32)</a>:</h4>
+<p>Right, my bad</p>
+
+<a name="164022204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022204">Fabian Glöckle (Apr 23 2019 at 19:32)</a>:</h4>
+<blockquote>
+<p>till the <code>mk_mapp</code> I assume</p>
+</blockquote>
+<p>the error is <code>app_builder_exception, more information can be obtained using command set_option trace.app_builder true</code></p>
+
+<a name="164022252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022252">Simon Hudon (Apr 23 2019 at 19:33)</a>:</h4>
+<p>I thought you had done that already</p>
+
+<a name="164022276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022276">Fabian Glöckle (Apr 23 2019 at 19:33)</a>:</h4>
+<p>(which I already used when I pasted the error messages above)</p>
+
+<a name="164022318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022318">Fabian Glöckle (Apr 23 2019 at 19:34)</a>:</h4>
+<p>yes</p>
+
+<a name="164022548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022548">Fabian Glöckle (Apr 23 2019 at 19:36)</a>:</h4>
+<p><code>infer_type i₁ &gt;&gt;= trace</code> btw gives <code>has_add α</code> as expected</p>
+
+<a name="164022575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164022575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164022575">Simon Hudon (Apr 23 2019 at 19:36)</a>:</h4>
+<p>Then try replacing <code>app₁ ← mk_app has_x_x_name [α, i₁, x, y]</code> with <code>app₁ ← to_expr ``(@has_add.add %%α %%i₁ %%x %%y),</code> to see what kind of error we can get</p>
+
+<a name="164023028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023028">Fabian Glöckle (Apr 23 2019 at 19:41)</a>:</h4>
+<p>strangely, it worked to replace only <code>app1</code>in this way, leaving <code>app2</code> as is</p>
+
+<a name="164023047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023047">Fabian Glöckle (Apr 23 2019 at 19:41)</a>:</h4>
+<p>the trace of <code>decl_body</code>is <code>λ (α β : Type) [i₁ : has_add α] [i₂ : has_add β] (f : α → β), ∀ {x y : α}, f (x + y) = f x + f y</code></p>
+
+<a name="164023128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023128">Fabian Glöckle (Apr 23 2019 at 19:42)</a>:</h4>
+<p>however, lean still reports </p>
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">add</span> <span class="n">declaration</span> <span class="err">&#39;</span><span class="n">compatible&#39;</span> <span class="n">to</span> <span class="n">environment</span><span class="o">,</span> <span class="n">type</span> <span class="n">has</span> <span class="n">metavariables</span>
+  <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">i₁</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">i₂</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">β</span><span class="o">],</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+</pre></div>
+
+<a name="164023286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023286">Simon Hudon (Apr 23 2019 at 19:44)</a>:</h4>
+<p>The issue is with:</p>
+<div class="codehilite"><pre><span></span>   <span class="n">has_x</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">has_x_name</span><span class="o">,</span>
+   <span class="n">has_x_x</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">has_x_x_name</span><span class="o">,</span>
+</pre></div>
+
+<a name="164023344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023344">Simon Hudon (Apr 23 2019 at 19:45)</a>:</h4>
+<p>Try putting this somewhere above your proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">universes</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span>
+</pre></div>
+
+<a name="164023368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023368">Simon Hudon (Apr 23 2019 at 19:45)</a>:</h4>
+<p>It will show you that <code>has_add.add</code> has one universe parameter <code>u_1</code>. Do you see that?</p>
+
+<a name="164023685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023685">Fabian Glöckle (Apr 23 2019 at 19:49)</a>:</h4>
+<p>genius! here we go <code>(has_add.{0} α =?= has_add.{?l_1} α)</code> is the error from before I didn't understand</p>
+
+<a name="164023759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023759">Johan Commelin (Apr 23 2019 at 19:50)</a>:</h4>
+<p>Too bad there isn't a universe-emoji...</p>
+
+<a name="164023806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164023806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164023806">Fabian Glöckle (Apr 23 2019 at 19:51)</a>:</h4>
+<p>:D <span aria-label="night sky" class="emoji emoji-1f30c" role="img" title="night sky">:night_sky:</span></p>
+
+<a name="164024198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164024198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164024198">Fabian Glöckle (Apr 23 2019 at 19:55)</a>:</h4>
+<p>now the question is how to (dynamically) construct the <code>has_add</code>constant with the right universe?</p>
+
+<a name="164024484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164024484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164024484">Mario Carneiro (Apr 23 2019 at 19:59)</a>:</h4>
+<p>use <code>unify</code> to determine the universe variables</p>
+
 
 {% endraw %}

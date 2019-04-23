@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What is this lemma called?](97145Whatisthislemmacalled.html) (9 messages, latest: Apr 23 2019 at 18:59)
+* [What is this lemma called?](97145Whatisthislemmacalled.html) (19 messages, latest: Apr 23 2019 at 19:05)
 
 * [open_embedding](56209openembedding.html) (3 messages, latest: Apr 23 2019 at 18:15)
 
