@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type theory of Lean](83571TypetheoryofLean.html) (5 messages, latest: Apr 23 2019 at 13:41)
+* [VScode extension](56578VScodeextension.html) (404 messages, latest: Apr 23 2019 at 14:30)
 
-* [VScode extension](56578VScodeextension.html) (402 messages, latest: Apr 23 2019 at 13:36)
+* [Type theory of Lean](83571TypetheoryofLean.html) (5 messages, latest: Apr 23 2019 at 13:41)
 
 * [option.retract](02493optionretract.html) (3 messages, latest: Apr 23 2019 at 12:49)
 

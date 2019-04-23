@@ -2580,5 +2580,200 @@ foobar
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163990426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163990426">Kevin Buzzard (Apr 23 2019 at 13:36)</a>:</h4>
 <p>For reasons that you don't need to worry about and which might change, Lean keeps a ring in two packages not one. The first is a type called something like R. The second is a whole bunch of data which might be called something like <code>_inst_1 : ring R</code> and which you should never need to look at, but it's here that all the multiplication and the addition and the zero and the axioms are all stored. You will probably not need to dig out the axioms, you should just be applying lemmas, if you're doing mathematics -- but sometimes it's important to know where Lean magics up e.g. the proof of the distributivity law for the integers, and if you want to know this then you need to know about typeclass inference.</p>
 
+<a name="163993041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993041">Greg Conneen (Apr 23 2019 at 14:10)</a>:</h4>
+<p>What if I wanted to talk about a ternary operator instead of a binary one (I want to define an algebraic heap)? I can't use has_mul, since it's strictly binary...</p>
+
+<a name="163993235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993235">Andrew Ashworth (Apr 23 2019 at 14:12)</a>:</h4>
+<p>yup</p>
+
+<a name="163993287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993287">Andrew Ashworth (Apr 23 2019 at 14:13)</a>:</h4>
+<p>what exactly is your question about ternary operators?</p>
+
+<a name="163993708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993708">Greg Conneen (Apr 23 2019 at 14:17)</a>:</h4>
+<p>I want to define a class, let's start with semiheap. I only need it to have the following property, called para-associativity:</p>
+<div class="codehilite"><pre><span></span><span class="k">forall</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="n">alpha</span><span class="o">,</span> <span class="o">[[</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">]</span> <span class="n">d</span> <span class="n">e</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="n">a</span> <span class="o">[</span><span class="n">d</span> <span class="n">c</span> <span class="n">b</span><span class="o">]</span> <span class="n">e</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="n">a</span> <span class="n">b</span> <span class="o">[</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">]]</span>
+</pre></div>
+
+
+<p>where [a b c] is a ternary operator. Although, If I have to use different notation given Lean's use of square brackets, that's fine</p>
+
+<a name="163993810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993810">Greg Conneen (Apr 23 2019 at 14:19)</a>:</h4>
+<p>I assume I have to define some sort of infix for a ternary operator, but I don't know how to implement that</p>
+
+<a name="163993844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993844">Johan Commelin (Apr 23 2019 at 14:19)</a>:</h4>
+<p>Does the operator have a "canonical" name in the literature?</p>
+
+<a name="163993867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993867">Andrew Ashworth (Apr 23 2019 at 14:19)</a>:</h4>
+<p>section 10.3 in TPIL describes notation</p>
+
+<a name="163993868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993868">Johan Commelin (Apr 23 2019 at 14:19)</a>:</h4>
+<p>You will first want to define it without the ternary notation.</p>
+
+<a name="163993885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163993885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163993885">Johan Commelin (Apr 23 2019 at 14:19)</a>:</h4>
+<p>Afterward, you can define the notation, and start using it.</p>
+
+<a name="163994014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994014">Greg Conneen (Apr 23 2019 at 14:20)</a>:</h4>
+<p>Okay. I assume that I need to give it an operation on 3 elements, then state the rule</p>
+
+<a name="163994076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994076">Greg Conneen (Apr 23 2019 at 14:21)</a>:</h4>
+<p>And no, unfortunately there's not really a canonical name for the operator. It's just a ternary operation, in the same way that the standard operation a group deals with is just a binary one</p>
+
+<a name="163994086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994086">Johan Commelin (Apr 23 2019 at 14:22)</a>:</h4>
+<p>Yup. So you want fields</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">tern_op</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">semi_assoc</span> <span class="o">:</span> <span class="err">\</span><span class="n">for</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">,</span> <span class="n">blabla</span><span class="o">)</span>
+</pre></div>
+
+<a name="163994154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994154">Johan Commelin (Apr 23 2019 at 14:22)</a>:</h4>
+<blockquote>
+<p>And no, unfortunately there's not really a canonical name for the operator. It's just a ternary operation, in the same way that the standard operation a group deals with is just a binary one</p>
+</blockquote>
+<p>We "canonically" call it <em>multiplication</em>.</p>
+
+<a name="163994218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994218">Greg Conneen (Apr 23 2019 at 14:23)</a>:</h4>
+<p>Ah, I see. That makes sense. Although, most mathematicians I know don't like to be so restrictive in terminology :P</p>
+
+<a name="163994232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994232">Johan Commelin (Apr 23 2019 at 14:23)</a>:</h4>
+<p>I was just wondering whether there was a good alternative to <code>tern_op</code>.</p>
+
+<a name="163994355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994355">Greg Conneen (Apr 23 2019 at 14:24)</a>:</h4>
+<p>Yeah, I figured that's what you were after. Heaps aren't really a common algebraic structure, I'm really just trying to implement this so I have a better understanding of how Lean deals with structures/classes</p>
+
+<a name="163994731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994731">Greg Conneen (Apr 23 2019 at 14:29)</a>:</h4>
+<p>Also, am I able to say that 3 things are equal in one field without using "and"?</p>
+
+<a name="163994748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994748">Greg Conneen (Apr 23 2019 at 14:29)</a>:</h4>
+<p>like how I wrote above</p>
+
+<a name="163994885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163994885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163994885">Patrick Massot (Apr 23 2019 at 14:31)</a>:</h4>
+<p>there are stupid indirect ways to say it, but using <code>and</code> is the reasonable one</p>
+
+<a name="163995024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995024">Greg Conneen (Apr 23 2019 at 14:32)</a>:</h4>
+<p>Okay. Unfortunate, but I guess it's better than defining two separate fields</p>
+
+<a name="163995099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995099">Patrick Massot (Apr 23 2019 at 14:33)</a>:</h4>
+<p>If you really want to you can build an API around this</p>
+
+<a name="163995181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995181">Greg Conneen (Apr 23 2019 at 14:34)</a>:</h4>
+<p>No thank you lol</p>
+
+<a name="163995227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995227">Patrick Massot (Apr 23 2019 at 14:34)</a>:</h4>
+<p>You will need lemmas about heaps saying that anyway</p>
+
+<a name="163995273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995273">Patrick Massot (Apr 23 2019 at 14:35)</a>:</h4>
+<p>Whatever is inside your field, you'll want a lemma asserting the three relevant equalities</p>
+
+<a name="163995312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995312">Greg Conneen (Apr 23 2019 at 14:35)</a>:</h4>
+<p>I don't know what you mean</p>
+
+<a name="163995379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995379">Greg Conneen (Apr 23 2019 at 14:36)</a>:</h4>
+<p>Why would I need a lemma? Are you talking about showing that some object is a heap?</p>
+
+<a name="163995408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995408">Greg Conneen (Apr 23 2019 at 14:36)</a>:</h4>
+<p>I'd expect that just implementing the classes wouldn't require lemmas</p>
+
+<a name="163995431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995431">Johan Commelin (Apr 23 2019 at 14:36)</a>:</h4>
+<p>No, he is talking about making it usable</p>
+
+<a name="163995485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995485">Greg Conneen (Apr 23 2019 at 14:37)</a>:</h4>
+<p>Oh, okay. So I can't refer to the fields until I define lemmas for them?</p>
+
+<a name="163995586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995586">Patrick Massot (Apr 23 2019 at 14:39)</a>:</h4>
+<p>You will have:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">heap</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">...</span>
+
+<span class="kn">namespace</span> <span class="n">heap</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">heap</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">lemma</span> <span class="n">assoc1</span>  <span class="o">:</span> <span class="o">[[</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">]</span> <span class="n">d</span> <span class="n">e</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="n">a</span> <span class="o">[</span><span class="n">d</span> <span class="n">c</span> <span class="n">b</span><span class="o">]</span> <span class="n">e</span><span class="o">]</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">assoc2</span>  <span class="o">:</span> <span class="o">[</span><span class="n">a</span> <span class="o">[</span><span class="n">d</span> <span class="n">c</span> <span class="n">b</span><span class="o">]</span> <span class="n">e</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="n">a</span> <span class="n">b</span> <span class="o">[</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">]]</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">assoc3</span>  <span class="o">:</span> <span class="o">[[</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">]</span> <span class="n">d</span> <span class="n">e</span><span class="o">]</span> <span class="bp">=</span> <span class="o">[</span><span class="n">a</span> <span class="n">b</span> <span class="o">[</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">]]</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">end</span> <span class="n">heap</span>
+</pre></div>
+
+<a name="163995601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995601">Chris Hughes (Apr 23 2019 at 14:39)</a>:</h4>
+<p>I would have three fields rather than an <code>and</code></p>
+
+<a name="163995610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995610">Johan Commelin (Apr 23 2019 at 14:39)</a>:</h4>
+<p>You can refer to them, otherwise you can't state the lemmas. What Patrick is saying is that with only the fields you'll have something that is cumbersome to use.</p>
+
+<a name="163995614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995614">Greg Conneen (Apr 23 2019 at 14:39)</a>:</h4>
+<p>yeah I'm putting it into 3 fields. I've realised that's easier</p>
+
+<a name="163995629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995629">Patrick Massot (Apr 23 2019 at 14:39)</a>:</h4>
+<p>The point is: whatever the implementaion chosen, after writing  those three lemmas, you will have your three equalities</p>
+
+<a name="163995708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995708">Greg Conneen (Apr 23 2019 at 14:40)</a>:</h4>
+<p>What does that change? Just being able to refer to the property without using semiheap.*?</p>
+
+<a name="163995709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995709">Patrick Massot (Apr 23 2019 at 14:40)</a>:</h4>
+<p>Of course if you put all three lemmas as fields then you don't have to state theses lemmas to use them (unless for some reason you want to change binder types, but that's a more advanced discussion)</p>
+
+<a name="163995722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995722">Greg Conneen (Apr 23 2019 at 14:41)</a>:</h4>
+<p>Also, is Type* a way of referring to an arbitrary Type level without defining a universe?</p>
+
+<a name="163995769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995769">Patrick Massot (Apr 23 2019 at 14:41)</a>:</h4>
+<p>And if you use redundant fields like that you will probably want a custom constructor</p>
+
+<a name="163995886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995886">Greg Conneen (Apr 23 2019 at 14:43)</a>:</h4>
+<p>How would a custom constructor help me?</p>
+
+<a name="163995931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163995931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163995931">Greg Conneen (Apr 23 2019 at 14:43)</a>:</h4>
+<p>Sorry, but I'm still very new, and I don't really see the big picture yet</p>
+
+<a name="163996078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163996078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163996078">Patrick Massot (Apr 23 2019 at 14:45)</a>:</h4>
+<p>I think the discussion would be much easier if you write something and then we comment it</p>
+
+<a name="163996098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163996098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163996098">Patrick Massot (Apr 23 2019 at 14:45)</a>:</h4>
+<p>Abstract discussion won't help</p>
+
+<a name="163996115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163996115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163996115">Greg Conneen (Apr 23 2019 at 14:45)</a>:</h4>
+<p>Yeah I agree. I'll post in just a second</p>
+
 
 {% endraw %}
