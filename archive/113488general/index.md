@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Type theory of Lean](83571TypetheoryofLean.html) (5 messages, latest: Apr 23 2019 at 13:41)
+
+* [VScode extension](56578VScodeextension.html) (402 messages, latest: Apr 23 2019 at 13:36)
+
 * [option.retract](02493optionretract.html) (3 messages, latest: Apr 23 2019 at 12:49)
 
 * [simple question](66563simplequestion.html) (25 messages, latest: Apr 23 2019 at 06:46)
 
 * [emscripten build](68203emscriptenbuild.html) (15 messages, latest: Apr 22 2019 at 18:51)
-
-* [Type theory of Lean](83571TypetheoryofLean.html) (4 messages, latest: Apr 22 2019 at 17:44)
 
 * [Convert trace](60849Converttrace.html) (4 messages, latest: Apr 22 2019 at 17:11)
 
@@ -179,8 +181,6 @@ permalink: archive/113488general/index.html
 * [tactic-block-local caching](46742tacticblocklocalcaching.html) (2 messages, latest: Apr 03 2019 at 09:56)
 
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (36 messages, latest: Apr 03 2019 at 00:41)
-
-* [VScode extension](56578VScodeextension.html) (394 messages, latest: Apr 02 2019 at 22:42)
 
 * [transfer between isomorphic types](89154transferbetweenisomorphictypes.html) (26 messages, latest: Apr 02 2019 at 18:51)
 

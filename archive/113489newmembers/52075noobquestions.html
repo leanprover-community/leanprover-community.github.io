@@ -2422,5 +2422,163 @@ I assume that I would first have to show that odd is equivalent to not even, the
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163985995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163985995">Greg Conneen (Apr 23 2019 at 12:49)</a>:</h4>
 <p>I've read the entirety of TPIL. I'm just still having trouble with implementation. I guess I'll tinker around with it a bit more</p>
 
+<a name="163988098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988098">Greg Conneen (Apr 23 2019 at 13:09)</a>:</h4>
+<p>Okay, so if a group is defined like this</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">group</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="n">fields</span><span class="o">:</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">mul</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c_1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c_1</span><span class="o">)</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">one</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">mul_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>the way I would make something like this would be</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">fake_group</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>except, I want to change group α to fake_group α and I don't understand how to do that. I also in general don't understand the bracket notation or what pi does.</p>
+
+<a name="163988588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988588">Johan Commelin (Apr 23 2019 at 13:14)</a>:</h4>
+<p>Note, you can use</p>
+<div class="codehilite"><pre><span></span>```lean
+foobar
+```
+</pre></div>
+
+
+<p>to get code blocks with syntax highlighting</p>
+
+<a name="163988616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988616">Greg Conneen (Apr 23 2019 at 13:15)</a>:</h4>
+<p>oh okay, thanks</p>
+
+<a name="163988667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988667">Johan Commelin (Apr 23 2019 at 13:16)</a>:</h4>
+<p>Note that a group is not defined the way you did. (Internally that is what Lean sees, maybe. But it isn't how it's written in the Lean source files.)</p>
+
+<a name="163988729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988729">Johan Commelin (Apr 23 2019 at 13:16)</a>:</h4>
+<p>Tip: write <code>#print group</code> in VScode, and <code>Ctrl</code>-click on <code>group</code>.</p>
+
+<a name="163988749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988749">Johan Commelin (Apr 23 2019 at 13:16)</a>:</h4>
+<p>Or put your cursor on <code>group</code> and hit <code>Ctrl - Shift - F10</code></p>
+
+<a name="163988801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988801">Greg Conneen (Apr 23 2019 at 13:17)</a>:</h4>
+<p>ohhhh I see. So a group is simply an extension of a monoid, which I assume is an extension of a semigroup.</p>
+
+<a name="163988875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163988875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163988875">Greg Conneen (Apr 23 2019 at 13:18)</a>:</h4>
+<p>...which it is, 4 lines above. Thank you so much.</p>
+
+<a name="163989273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989273">Greg Conneen (Apr 23 2019 at 13:22)</a>:</h4>
+<p>So, in general, classes are used in the backend, but Lean interprets them as structures. What's the difference?</p>
+
+<a name="163989367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989367">Greg Conneen (Apr 23 2019 at 13:23)</a>:</h4>
+<p>Also, is there any way to formalise has_mul and has_one without extending those classes?</p>
+
+<a name="163989436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989436">Johan Commelin (Apr 23 2019 at 13:24)</a>:</h4>
+<p>No the difference between classes and structures is type class inference</p>
+
+<a name="163989470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989470">Johan Commelin (Apr 23 2019 at 13:24)</a>:</h4>
+<blockquote>
+<p>Also, is there any way to formalise has_mul and has_one without extending those classes?</p>
+</blockquote>
+<p>Just copy paste their definitions.</p>
+
+<a name="163989477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989477">Greg Conneen (Apr 23 2019 at 13:24)</a>:</h4>
+<p>I don't know what you mean by that</p>
+
+<a name="163989478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989478">Johan Commelin (Apr 23 2019 at 13:24)</a>:</h4>
+<p>The word <code>class</code> is a red herring in this discussion</p>
+
+<a name="163989495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989495">Johan Commelin (Apr 23 2019 at 13:24)</a>:</h4>
+<p>You could write <code>structure</code> everywhere</p>
+
+<a name="163989589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989589">Greg Conneen (Apr 23 2019 at 13:25)</a>:</h4>
+<p>gotcha. So the only difference is that structures are't able to inherit the properties of other structures. So when would you use a structure over a class?</p>
+
+<a name="163989676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989676">Johan Commelin (Apr 23 2019 at 13:26)</a>:</h4>
+<p>No, structures can inherit</p>
+
+<a name="163989696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989696">Johan Commelin (Apr 23 2019 at 13:26)</a>:</h4>
+<p>The difference is "type class instance". Search for that in TPIL.</p>
+
+<a name="163989699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989699">Greg Conneen (Apr 23 2019 at 13:26)</a>:</h4>
+<p>oh. Then what do you mean by "type class inference?"</p>
+
+<a name="163989710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989710">Greg Conneen (Apr 23 2019 at 13:27)</a>:</h4>
+<p>oh okay, gotcha</p>
+
+<a name="163989725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989725">Greg Conneen (Apr 23 2019 at 13:27)</a>:</h4>
+<p>must've skimmed over that section</p>
+
+<a name="163989731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989731">Johan Commelin (Apr 23 2019 at 13:27)</a>:</h4>
+<p>inference, not inheritance <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="163989753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989753">Johan Commelin (Apr 23 2019 at 13:27)</a>:</h4>
+<p>/me never read TPIL in detail. I'm a cargo cult Leaner.</p>
+
+<a name="163989760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989760">Kevin Buzzard (Apr 23 2019 at 13:27)</a>:</h4>
+<p>The difference between a structure and a class is that classes are structures with extra magical sauce.</p>
+
+<a name="163989767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989767">Greg Conneen (Apr 23 2019 at 13:27)</a>:</h4>
+<p>Ah, that's my confusion. Thank you for being patient with me</p>
+
+<a name="163989772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989772">Kevin Buzzard (Apr 23 2019 at 13:27)</a>:</h4>
+<p>I was trying to write some advanced notes on type class inference</p>
+
+<a name="163989828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989828">Kevin Buzzard (Apr 23 2019 at 13:28)</a>:</h4>
+<p>but before I wrote them I wrote some basic notes on type class inference for mathematicians</p>
+
+<a name="163989843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989843">Kevin Buzzard (Apr 23 2019 at 13:28)</a>:</h4>
+<p>These might help. They present the same material as in TPIL but in a way far more suited to mathematicians.</p>
+
+<a name="163989867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163989867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163989867">Kevin Buzzard (Apr 23 2019 at 13:28)</a>:</h4>
+<p>They're in a branch of mathlib, hang on, I'll dig it out. I'm actually on an aeroplane at this point</p>
+
+<a name="163990167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163990167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163990167">Kevin Buzzard (Apr 23 2019 at 13:32)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/kbuzzard_typeclass_inference_doc/docs/extras/typeclass_inference.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/kbuzzard_typeclass_inference_doc/docs/extras/typeclass_inference.md">https://github.com/leanprover-community/mathlib/blob/kbuzzard_typeclass_inference_doc/docs/extras/typeclass_inference.md</a></p>
+
+<a name="163990228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163990228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163990228">Kevin Buzzard (Apr 23 2019 at 13:33)</a>:</h4>
+<p>I found typeclass inference really hard to learn. It was only when I began to try to do normal maths in Lean that I began to see the point of it and understand it properly.</p>
+
+<a name="163990426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/163990426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#163990426">Kevin Buzzard (Apr 23 2019 at 13:36)</a>:</h4>
+<p>For reasons that you don't need to worry about and which might change, Lean keeps a ring in two packages not one. The first is a type called something like R. The second is a whole bunch of data which might be called something like <code>_inst_1 : ring R</code> and which you should never need to look at, but it's here that all the multiplication and the addition and the zero and the axioms are all stored. You will probably not need to dig out the axioms, you should just be applying lemmas, if you're doing mathematics -- but sometimes it's important to know where Lean magics up e.g. the proof of the distributivity law for the integers, and if you want to know this then you need to know about typeclass inference.</p>
+
 
 {% endraw %}
