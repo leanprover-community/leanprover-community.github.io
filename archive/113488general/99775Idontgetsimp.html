@@ -38,5 +38,18 @@ permalink: archive/113488general/99775Idontgetsimp.html
 
 <p>I can't get <code>simp</code> to work. I am unclear about whether we should need the lemma at all. How does all this work? Not understanding how to use <code>simp</code> properly in my own API's is bad; I would like to learn how to write better API's. Are there rules saying what should and should not go into a <code>simp</code> lemma? How come I can prove <code>units.coe_inv'</code> using <code>simp</code> but I can't prove the lemma in the form Patrick gave to me using <code>simp</code>? How do I make <code>simp</code> work better for me?</p>
 
+<a name="164016545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164016545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164016545">Jesse Michael Han (Apr 23 2019 at 18:33)</a>:</h4>
+<p><code>simp</code> lemmas will trigger on a syntactic match, so if one hasn't been careful with sticking to a canonical form, a <code>change</code> is sometimes required:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">thing_which_will_do</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span><span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="err">↑</span><span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span><span class="o">),</span> <span class="n">simp</span><span class="o">}</span>
+</pre></div>
+
+<a name="164017627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164017627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164017627">Jesse Michael Han (Apr 23 2019 at 18:45)</a>:</h4>
+<p>i'm not sure if it would be feasible to try to have <code>simp</code> lemmas trigger on successful unification instead of a syntactic match. it would make <code>simp</code> a lot slower, and for definitionally-provable <code>simp</code> lemmas it would naiively just try them over and over again.</p>
+<p>maybe a tactic which just attempts to rewrite subterms to all the definitionally equal things it can think of would be useful for these kinds of situations. (we should call it <code>dblast</code>)</p>
+
 
 {% endraw %}

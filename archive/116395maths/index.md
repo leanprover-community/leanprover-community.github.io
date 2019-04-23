@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [open_embedding](56209openembedding.html) (2 messages, latest: Apr 23 2019 at 17:41)
+* [What is this lemma called?](97145Whatisthislemmacalled.html) (9 messages, latest: Apr 23 2019 at 18:59)
+
+* [open_embedding](56209openembedding.html) (3 messages, latest: Apr 23 2019 at 18:15)
 
 * [stuff we want](64767stuffwewant.html) (55 messages, latest: Apr 23 2019 at 17:19)
 
