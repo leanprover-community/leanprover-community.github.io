@@ -318,5 +318,58 @@ best be formulated then?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164001422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164001422">Mario Carneiro (Apr 23 2019 at 15:43)</a>:</h4>
 <p>For the theorem I would use not nonempty as an assumption, so it is maximally applicable</p>
 
+<a name="164025529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164025529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164025529">Alexander Bentkamp (Apr 23 2019 at 20:11)</a>:</h4>
+<p>I am trying to define <code>def finsupp.sum_elim_left {α β γ : Type*} [has_zero γ] (l : α ⊕ β →₀ γ) : α →₀ γ</code>, which should simply ignore the values on <code>β</code>. Anything that I can come up with seems far too complicated. Any suggestions?</p>
+
+<a name="164025656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164025656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164025656">Kevin Buzzard (Apr 23 2019 at 20:13)</a>:</h4>
+<p>I would just precompose with the injection alpha -&gt; alpha + beta I guess.</p>
+
+<a name="164025660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164025660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164025660">Mario Carneiro (Apr 23 2019 at 20:13)</a>:</h4>
+<p><code>map_domain inl</code>?</p>
+
+<a name="164025759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164025759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164025759">Mario Carneiro (Apr 23 2019 at 20:14)</a>:</h4>
+<p>I guess you need to know some finiteness property of the function in order for preimages to work like that</p>
+
+<a name="164025943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164025943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164025943">Kevin Buzzard (Apr 23 2019 at 20:17)</a>:</h4>
+<p>If you use <code>map_domain</code>, don't you need a map from alpha+beta to alpha? This might be problematic if alpha is empty and beta is not. Or have I got things the wrong way around?</p>
+
+<a name="164026240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164026240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164026240">Kevin Buzzard (Apr 23 2019 at 20:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Given `f : α₁ ↪ α₂` and `v : α₁ →₀ β`, `emb_domain f v : α₂ →₀ β` is the finitely supported</span>
+<span class="cm">function whose value at `f a : α₂` is `v a`. For a `a : α₁` outside the domain of `f` it is zero. -/</span>
+<span class="n">def</span> <span class="n">emb_domain</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α₁</span> <span class="err">↪</span> <span class="n">α₂</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">α₁</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α₂</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>I think that's what you're after</p>
+
+<a name="164026303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164026303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164026303">Kevin Buzzard (Apr 23 2019 at 20:21)</a>:</h4>
+<p>no that's still the wrong way round</p>
+
+<a name="164027193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164027193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164027193">Kevin Buzzard (Apr 23 2019 at 20:33)</a>:</h4>
+<p>The closest I can find is</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- `subtype_domain p f` is the restriction of the finitely supported function</span>
+<span class="cm">  `f` to the subtype `p`. -/</span>
+<span class="n">def</span> <span class="n">subtype_domain</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">p</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">subtype</span> <span class="n">p</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>But this is not ideal -- it should be Stricklandized into a definition which works for an arbitrary injection gamma -&gt; alpha, not just a subtype.</p>
+
+<a name="164027283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164027283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164027283">Kevin Buzzard (Apr 23 2019 at 20:34)</a>:</h4>
+<p>What I am surprised by here is that finsupp has been used extensively in a lot of APIs so I am pretty sure I must have missed it -- someone would surely have spotted this by now.</p>
+
+<a name="164028811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear_independent%20for%20families/near/164028811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21882linearindependentforfamilies.html#164028811">Alexander Bentkamp (Apr 23 2019 at 20:53)</a>:</h4>
+<p>Yes, <code>map_domain</code> and <code>emb_domain</code> are in the wrong direction. And I don't see how I could modify <code>subtype_domain</code> to work with an injection...</p>
+
 
 {% endraw %}

@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [linear_independent for families](21882linearindependentforfamilies.html) (80 messages, latest: Apr 23 2019 at 20:53)
+
 * [What is this lemma called?](97145Whatisthislemmacalled.html) (19 messages, latest: Apr 23 2019 at 19:05)
 
 * [open_embedding](56209openembedding.html) (3 messages, latest: Apr 23 2019 at 18:15)
 
 * [stuff we want](64767stuffwewant.html) (55 messages, latest: Apr 23 2019 at 17:19)
-
-* [linear_independent for families](21882linearindependentforfamilies.html) (70 messages, latest: Apr 23 2019 at 15:43)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
 

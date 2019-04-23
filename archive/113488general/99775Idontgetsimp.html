@@ -71,5 +71,61 @@ permalink: archive/113488general/99775Idontgetsimp.html
 <p>maybe it wouldn't be hard to write a tool which checks what the preferred definitionally-equivalent version of a given term is in the imported libraries. but right now, i think the task of ensuring uniform conventions falls to the <code>mathlib</code> maintainers.</p>
 <p>sometimes, if you aren't careful in writing a library, you find yourself with two different families of <code>simp</code> lemmas with different conventions, and then things become very unpleasant (this has happened to me)</p>
 
+<a name="164024695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164024695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164024695">Mario Carneiro (Apr 23 2019 at 20:00)</a>:</h4>
+<p>in this case the preference is for <code>(x : α)⁻¹</code></p>
+
+<a name="164024709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164024709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164024709">Mario Carneiro (Apr 23 2019 at 20:01)</a>:</h4>
+<p>they should be defeq btw</p>
+
+<a name="164024821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164024821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164024821">Mario Carneiro (Apr 23 2019 at 20:02)</a>:</h4>
+<p>oh wait, nvm, it's defeq to <code>(x⁻¹ : α)</code> but the other way around depends on division_ring axioms</p>
+
+<a name="164024961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164024961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164024961">Kevin Buzzard (Apr 23 2019 at 20:04)</a>:</h4>
+<p>Right. I know how to prove it. The question is whether <code>simp</code> should prove it, or whether we should not even be formulating the statement this way at all, or something else?</p>
+
+<a name="164025067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025067">Patrick Massot (Apr 23 2019 at 20:05)</a>:</h4>
+<p>I think Jesse and Mario are trying to answer the question. Once we know what is favored by the library, we must hunt for the bad simp lemma that brought a forbidden form</p>
+
+<a name="164025166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025166">Kevin Buzzard (Apr 23 2019 at 20:06)</a>:</h4>
+<p>Are there simp lemmas of the form <code>bad way to say something = good way to say it</code>?</p>
+
+<a name="164025213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025213">Kevin Buzzard (Apr 23 2019 at 20:07)</a>:</h4>
+<p>e.g is <code>x.inv = (x⁻¹ : units alpha))</code> a simp lemma? That's saying that a bad way is a good way (if x is a unit). I think.</p>
+
+<a name="164025224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025224">Mario Carneiro (Apr 23 2019 at 20:07)</a>:</h4>
+<p>yes</p>
+
+<a name="164025286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025286">Jesse Michael Han (Apr 23 2019 at 20:08)</a>:</h4>
+<p>in this case i don't see why not (i don't see how marking it <code>simp</code> would throw it into a loop)</p>
+
+<a name="164025288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025288">Kevin Buzzard (Apr 23 2019 at 20:08)</a>:</h4>
+<p>And <code>simp</code> would never apply them in reverse to get an unconventional thing?</p>
+
+<a name="164025296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025296">Mario Carneiro (Apr 23 2019 at 20:08)</a>:</h4>
+<p>right</p>
+
+<a name="164025333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025333">Kevin Buzzard (Apr 23 2019 at 20:08)</a>:</h4>
+<p>I see. So Patrick the onus seems to be on us to find out why we thought we needed this lemma.</p>
+
+<a name="164025535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025535">Mario Carneiro (Apr 23 2019 at 20:12)</a>:</h4>
+<p>If you never write the bad way and no simp lemma generates it, then this bad way fixing lemma will never be invoked. So it is often omitted</p>
+
+<a name="164025620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164025620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164025620">Mario Carneiro (Apr 23 2019 at 20:12)</a>:</h4>
+<p>It's good documentation though, since it indicates that the bad way is a bad way according to the local convention. Otherwise you have to know the mind of the author</p>
+
 
 {% endraw %}

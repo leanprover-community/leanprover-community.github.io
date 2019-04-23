@@ -376,5 +376,63 @@ then I can't put it above its definition</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164024484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164024484">Mario Carneiro (Apr 23 2019 at 19:59)</a>:</h4>
 <p>use <code>unify</code> to determine the universe variables</p>
 
+<a name="164025449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164025449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164025449">Mario Carneiro (Apr 23 2019 at 20:10)</a>:</h4>
+<p>In this case, it seems like you are assuming that <code>has_x</code> already exists and has type <code>has_[x] : Type u -&gt; Type u</code>. In that case, you can replace the <code>mk_const</code> invocations, which create a universe metavariable, with an explicit <code>expr.const</code> with universe <code>u = 0</code> (replace the <code>has_x</code> and <code>has_x_x</code> lines with these):</p>
+<div class="codehilite"><pre><span></span>   <span class="k">let</span> <span class="n">has_x</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">has_x_name</span> <span class="o">[</span><span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">],</span>
+   <span class="k">let</span> <span class="n">has_x_x</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">has_x_x_name</span> <span class="o">[</span><span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">],</span>
+</pre></div>
+
+<a name="164025798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164025798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164025798">Fabian Glöckle (Apr 23 2019 at 20:15)</a>:</h4>
+<p>Yes that is what I assume, and it works this way!</p>
+
+<a name="164025819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164025819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164025819">Fabian Glöckle (Apr 23 2019 at 20:15)</a>:</h4>
+<p>And all predefined has_... live in universe zero?</p>
+
+<a name="164025914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164025914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164025914">Mario Carneiro (Apr 23 2019 at 20:16)</a>:</h4>
+<p>no, they have type <code>Type u -&gt; Type u</code>, so if you want alpha to have <code>Type 0</code> then you have to set <code>u = 0</code></p>
+
+<a name="164026187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026187">Fabian Glöckle (Apr 23 2019 at 20:20)</a>:</h4>
+<p>how would I achieve the effect of  <code>α β : Type*</code>?</p>
+
+<a name="164026380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026380">Fabian Glöckle (Apr 23 2019 at 20:22)</a>:</h4>
+<p><code>mk_meta_univ</code>?</p>
+
+<a name="164026435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026435">Simon Hudon (Apr 23 2019 at 20:23)</a>:</h4>
+<p><code>(α β : Type*)</code> is short for <code>(α : Type u) (β : Type v)</code> where <code>u</code> and <code>v</code> are not meta universes but universe parameters</p>
+
+<a name="164026540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026540">Patrick Massot (Apr 23 2019 at 20:25)</a>:</h4>
+<p>Be careful that last message is unfortunately inaccurate, this is a well known bug</p>
+
+<a name="164026665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026665">Fabian Glöckle (Apr 23 2019 at 20:26)</a>:</h4>
+<blockquote>
+<p><code>(α β : Type*)</code> is short for <code>(α : Type u) (β : Type v)</code> where <code>u</code> and <code>v</code> are not meta universes but universe parameters</p>
+</blockquote>
+<p>how can I declare universe parameters for my declaration?</p>
+
+<a name="164026896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164026896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164026896">Fabian Glöckle (Apr 23 2019 at 20:29)</a>:</h4>
+<p>like a normal function parameter?</p>
+
+<a name="164027015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164027015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164027015">Fabian Glöckle (Apr 23 2019 at 20:31)</a>:</h4>
+<p><code>meta def add_compatible_def (x : string) (u v : level): command</code> ?</p>
+
+<a name="164027322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164027322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164027322">Fabian Glöckle (Apr 23 2019 at 20:35)</a>:</h4>
+<p>ah, there is <code>level.param</code></p>
+
+<a name="164028913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164028913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164028913">Fabian Glöckle (Apr 23 2019 at 20:54)</a>:</h4>
+<p>and the level list in <code>declaration.defn</code></p>
+
 
 {% endraw %}
