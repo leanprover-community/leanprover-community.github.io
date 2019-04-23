@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ArXiv and `listings`](59627ArXivandlistings.html) (1 message, latest: Apr 23 2019 at 20:25)
+* [I don't get `simp`](99775Idontgetsimp.html) (22 messages, latest: Apr 23 2019 at 21:08)
 
-* [I don't get `simp`](99775Idontgetsimp.html) (21 messages, latest: Apr 23 2019 at 20:12)
+* [ArXiv and `listings`](59627ArXivandlistings.html) (1 message, latest: Apr 23 2019 at 20:25)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (7 messages, latest: Apr 23 2019 at 17:48)
 
