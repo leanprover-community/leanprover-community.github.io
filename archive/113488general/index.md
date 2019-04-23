@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type theory of Lean](83571TypetheoryofLean.html) (6 messages, latest: Apr 23 2019 at 15:13)
+* [I don't get `simp`](99775Idontgetsimp.html) (1 message, latest: Apr 23 2019 at 17:55)
+
+* [Type theory of Lean](83571TypetheoryofLean.html) (7 messages, latest: Apr 23 2019 at 17:48)
 
 * [VScode extension](56578VScodeextension.html) (404 messages, latest: Apr 23 2019 at 14:30)
 

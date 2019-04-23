@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [stuff we want](64767stuffwewant.html) (53 messages, latest: Apr 23 2019 at 16:44)
+* [open_embedding](56209openembedding.html) (2 messages, latest: Apr 23 2019 at 17:41)
+
+* [stuff we want](64767stuffwewant.html) (55 messages, latest: Apr 23 2019 at 17:19)
 
 * [linear_independent for families](21882linearindependentforfamilies.html) (70 messages, latest: Apr 23 2019 at 15:43)
 

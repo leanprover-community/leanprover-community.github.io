@@ -1,0 +1,42 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/99775Idontgetsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html">I don't get `simp`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164012990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20don%27t%20get%20%60simp%60/near/164012990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99775Idontgetsimp.html#164012990">Kevin Buzzard (Apr 23 2019 at 17:55)</a>:</h4>
+<p>I have been doing a lot of mathematics in Lean recently -- not plumbing, but high-level stuff, API-making. I never tag anything with <code>simp</code> though, because I don't know how <code>simp</code> works. My favourite tactic is rfl and a lot of my proofs are of the form <code>rw [A,B,C], show X, rw [D,E,F], show Y, rwa [G,H]</code>. I have no feeling as to whether <code>G</code> and <code>H</code> should be <code>simp</code> lemmas, or even if the assertion that <code>Y</code> is equal to the thing I changed into <code>Y</code> with the <code>show</code> command should be a simp lemma, even though the proof is <code>rfl</code>.</p>
+<p>Yesterday Patrick was frustrated because some complete triviality which to a mathematician's eyes looks like the statement <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mi>x</mi><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">1/x = 1/x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit">x</span><span class="mrel">=</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit">x</span></span></span></span> could not be proved with refl or simp, so he formalised a statement which would suffice for his purposes and asked me if I could prove it for him (because like doing these little puzzles and Patrick has no time for them).</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">thing_which_will_do</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I tried <code>simp</code> and it didn't work, so I opened up the division ring API and had a look. Note that I say this, but there is no division ring API really, there are a bunch of lemmas which might be in the division ring namespace, or might ask for division ring instances using type class inference, or they might be in completely different namespaces like the semiring namespace but they apply to division rings anyway even though this is not explicitly noted in mathlib (should it be?) and they're scattered around, but I know my way around now. A mathematician-sanitised version of  <code>#print prefix division_ring</code> would be really nice, we don't care much about recursors and assertions about size_of, we just want to see universal properties and basic lemmas. What I guess I would like to have access to is some sort of "mathematician's API for division rings in Lean", where we get to see once and for all what we are supposed to be using. I would also need a "mathematician's API for units of a ring in Lean" I think -- but once I have these, will I see <code>x.inv</code> in them? This could also be written as <code>((x⁻¹ : units α) : α)</code>. Is this somehow the "correct" way to access the <code>inv</code> field for a unit?</p>
+<p>Here is my proposed proof of Patrick's lemma. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">units</span><span class="bp">.</span><span class="n">coe_inv&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+
+<span class="c1">-- Should the only simp lemma mentioning x.inv be that x.inv is ((x⁻¹ : units α) : α) ?</span>
+
+<span class="kn">lemma</span> <span class="n">thing_which_will_do</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:=</span>
+<span class="c1">-- by simp #exit -- doesn&#39;t work</span>
+<span class="o">(</span><span class="n">units</span><span class="bp">.</span><span class="n">coe_inv&#39;</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="c1">-- why doesn&#39;t simp work yet?</span>
+</pre></div>
+
+
+<p>I can't get <code>simp</code> to work. I am unclear about whether we should need the lemma at all. How does all this work? Not understanding how to use <code>simp</code> properly in my own API's is bad; I would like to learn how to write better API's. Are there rules saying what should and should not go into a <code>simp</code> lemma? How come I can prove <code>units.coe_inv'</code> using <code>simp</code> but I can't prove the lemma in the form Patrick gave to me using <code>simp</code>? How do I make <code>simp</code> work better for me?</p>
+
+
+{% endraw %}
