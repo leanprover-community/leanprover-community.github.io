@@ -1,0 +1,167 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/39968Roastme.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html">"Roast" me</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164047831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164047831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164047831">Alex J. Best (Apr 24 2019 at 02:34)</a>:</h4>
+<p>Hi everyone,  I've been learning on my own for a little while, trying some of <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> s "material for mathematicians who want to learn Lean" and other things here and there.<br>
+I figured I should try and stamp out any bad habits now  before they get too ingrained. So if anyone has a minute and fancies critiquing some lean code I'd be very happy to hear at this point what I can do better / differently. Indeed I know there are a lot of more advanced techniques that I don't use so a pointer to the names of and where they can be used below would be great. The code is my attempt at sheet 4 from &lt;<a href="https://wwwf.imperial.ac.uk/~buzzard/lean_together/source/leantogether.html" target="_blank" title="https://wwwf.imperial.ac.uk/~buzzard/lean_together/source/leantogether.html">https://wwwf.imperial.ac.uk/~buzzard/lean_together/source/leantogether.html</a>&gt; so some of it is Kevins example code but most (especially after ext) is mine.</p>
+<p>Some actual questions:<br>
+- The biggest problem I had that I spent several hours bashing my head against was not being able to unfold <code>mul</code> if it was written as notation <code>*</code> without first doing <code>simp only [(*)]</code>. Is there any way around this? It seems strange that the presence of notation can have such an impact.<br>
+- Is there a way to have an comm_ring instance automatically get fields from add_comm_group,  or is it instead the case that once the comm_ring instance is proved the add_comm_group one should be deleted?<br>
+- Also I'm pretty sure I overuse ring and squeeze_simp? Is there a better way to go in places like that?</p>
+<p>Thanks!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- now we have the field of real numbers</span>
+
+<span class="c1">-- So now we can build the complex numbers as an ordered pair of reals.</span>
+<span class="kn">structure</span> <span class="n">my_complex</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">re&#39;</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">im&#39;</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ℂ</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">my_complex</span>
+
+<span class="kn">namespace</span> <span class="n">my_complex</span>
+
+<span class="c1">-- now some computer science boilerplate.</span>
+
+<span class="c1">-- First define the two projections from the complexes back to the reals.</span>
+<span class="c1">-- These are great examples of &quot;eliminators&quot; -- functions on the complex numbers.</span>
+<span class="kn">definition</span> <span class="n">re</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℝ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">x</span>
+
+<span class="kn">definition</span> <span class="n">im</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℝ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">y</span>
+
+<span class="c1">-- You can also use this ⟨x, y⟩ notation to make the constructor.</span>
+<span class="c1">-- Here the 0&#39;s are (0 : ℝ)</span>
+<span class="kn">definition</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩</span>
+<span class="kn">definition</span> <span class="n">one</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="c1">-- zero notation</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">my_complex</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">my_complex</span><span class="bp">.</span><span class="n">one</span><span class="bp">⟩</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="c1">-- now works</span>
+
+<span class="c1">-- how to make 3 + 4i</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="bp">⟩</span>
+
+<span class="c1">-- Now we should prove that the constructor applied to the eliminators</span>
+<span class="c1">-- gets us back to where we started.</span>
+<span class="kn">theorem</span> <span class="n">eta</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">re</span> <span class="n">z</span><span class="o">,</span> <span class="n">im</span> <span class="n">z</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">z</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">z</span> <span class="k">with</span> <span class="n">x</span> <span class="n">y</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="c1">-- Now we should prove the extensionality lemma for complex numbers;</span>
+<span class="c1">-- two complex numbers are equal if and only if their real and imaginary</span>
+<span class="c1">-- parts are equal. One way is trivial; here&#39;s the other way.</span>
+<span class="kn">theorem</span> <span class="n">ext</span> <span class="o">(</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hre</span> <span class="o">:</span> <span class="n">re</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">re</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">Him</span> <span class="o">:</span> <span class="n">im</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">im</span> <span class="n">w</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">z</span> <span class="bp">=</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">w</span> <span class="k">with</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">eta</span> <span class="n">z</span><span class="o">,</span>
+  <span class="c1">-- this is the goal now:</span>
+  <span class="k">show</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">re</span> <span class="n">z</span><span class="o">,</span> <span class="n">im</span> <span class="n">z</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">Hre</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">Him</span><span class="o">,</span>
+  <span class="c1">-- the goal is now true by definition</span>
+  <span class="k">show</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">refl</span>
+<span class="kn">end</span>
+
+<span class="c1">-- complex conjugation is a great example of seeing the constructor</span>
+<span class="c1">-- and eliminator both in action.</span>
+<span class="kn">definition</span> <span class="n">conj</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="bp">-</span><span class="n">y</span><span class="bp">⟩</span>
+
+<span class="kn">definition</span> <span class="n">neg</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨-</span><span class="n">x</span><span class="o">,</span> <span class="bp">-</span><span class="n">y</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">re_of_neg</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">neg</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">=</span> <span class="bp">-</span>  <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">re&#39;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">ar</span> <span class="n">ac</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">neg</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">im_of_neg</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">neg</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">=</span> <span class="bp">-</span>  <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">im&#39;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">ar</span> <span class="n">ac</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">neg</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="bp">⟨</span> <span class="n">x</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">⟩</span> <span class="o">)</span>
+
+<span class="c1">-- add the notation</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">my_complex</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">mul</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">:</span><span class="n">ℂ</span><span class="o">,</span> <span class="bp">⟨</span> <span class="n">x</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">-</span> <span class="n">x</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="n">re&#39;</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="n">im&#39;</span> <span class="bp">⟩</span> <span class="o">)</span>
+
+<span class="c1">-- add the notation</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">my_complex</span><span class="bp">.</span><span class="n">mul</span><span class="bp">⟩</span>
+
+<span class="c1">--set_option trace.simp_lemmas true</span>
+
+<span class="c1">-- Can you prove this?</span>
+
+<span class="kn">theorem</span> <span class="n">add_mul</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">*</span><span class="o">),</span> <span class="o">(</span><span class="bp">+</span><span class="o">)],</span>
+<span class="n">unfold</span> <span class="n">add</span> <span class="n">mul</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_eq_add_neg</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">],</span>
+<span class="n">apply</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span> <span class="k">by</span> <span class="n">ring</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">mul_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">*</span><span class="o">),</span> <span class="o">(</span><span class="bp">+</span><span class="o">)],</span>
+<span class="n">unfold</span> <span class="n">add</span> <span class="n">mul</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_eq_add_neg</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">],</span>
+<span class="n">apply</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span> <span class="k">by</span> <span class="n">ring</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="c1">-- Can you construct terms of these types?</span>
+
+<span class="kn">instance</span> <span class="n">cacg</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">ℂ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">+</span><span class="o">)],</span> <span class="n">unfold</span> <span class="n">add</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">and_self</span><span class="o">,</span> <span class="n">add_right_inj</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">]</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">zero</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">add</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">zero</span><span class="o">,</span> <span class="n">repeat</span><span class="o">{</span><span class="n">rw</span> <span class="n">zero_add</span><span class="o">},</span> <span class="n">rw</span> <span class="err">←</span><span class="o">(</span><span class="n">eta</span> <span class="n">a</span><span class="o">)</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">+</span><span class="o">)],</span> <span class="n">unfold</span> <span class="n">add</span><span class="o">,</span> <span class="n">rw</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">zero</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">],</span> <span class="n">rw</span> <span class="err">←</span><span class="o">(</span><span class="n">eta</span> <span class="n">a</span><span class="o">)</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="n">neg</span><span class="o">,</span>
+  <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">neg</span> <span class="n">add</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">im_of_neg</span><span class="o">,</span> <span class="n">add_left_neg</span><span class="o">,</span> <span class="n">re_of_neg</span><span class="o">],</span> <span class="n">refl</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">+</span><span class="o">)]</span><span class="bp">;</span> <span class="n">unfold</span> <span class="n">add</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">forall_2_true_iff</span><span class="o">,</span> <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">and_self</span><span class="o">,</span> <span class="n">add_right_inj</span><span class="o">]}</span>
+
+<span class="kn">instance</span> <span class="n">cacr</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">ℂ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="n">add</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">cacg</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">zero</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">cacg</span><span class="bp">.</span><span class="n">zero_add</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">cacg</span><span class="bp">.</span><span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="n">neg</span><span class="o">,</span>
+  <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">cacg</span><span class="bp">.</span><span class="n">add_left_neg</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="n">my_complex</span><span class="bp">.</span><span class="n">cacg</span><span class="bp">.</span><span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="n">mul</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">*</span><span class="o">)],</span> <span class="n">unfold</span> <span class="n">mul</span><span class="o">,</span> <span class="n">apply</span> <span class="n">ext</span><span class="o">,</span> <span class="n">repeat</span><span class="o">{</span> <span class="n">ring</span><span class="o">},</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="n">one</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">ar</span> <span class="n">ai</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">mul</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">sub_eq_add_neg</span><span class="o">],</span> <span class="n">unfold</span> <span class="n">one</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">,</span> <span class="n">and_self</span><span class="o">,</span> <span class="n">neg_zero</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">,</span> <span class="n">eq_self_iff_true</span><span class="o">],</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">*</span><span class="o">)],</span> <span class="n">intro</span><span class="o">,</span> <span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">ar</span> <span class="n">ai</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">mul</span> <span class="n">one</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="n">mul_add</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="n">add_mul</span><span class="o">,</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[(</span><span class="bp">*</span><span class="o">)],</span> <span class="n">unfold</span> <span class="n">mul</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">sub_eq_add_neg</span><span class="o">],</span> <span class="n">intros</span><span class="o">,</span> <span class="n">apply</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">ring</span><span class="o">}</span> <span class="kn">end</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">my_complex</span>
+</pre></div>
+
+
+{% endraw %}
