@@ -10,15 +10,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [presenting a polynomial](83077presentingapolynomial.html) (11 messages, latest: Apr 23 2019 at 23:10)
+* [stuff we want](64767stuffwewant.html) (61 messages, latest: Apr 24 2019 at 04:48)
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (86 messages, latest: Apr 23 2019 at 22:29)
+* [presenting a polynomial](83077presentingapolynomial.html) (13 messages, latest: Apr 24 2019 at 04:43)
+
+* [linear_independent for families](21882linearindependentforfamilies.html) (87 messages, latest: Apr 24 2019 at 04:15)
 
 * [What is this lemma called?](97145Whatisthislemmacalled.html) (19 messages, latest: Apr 23 2019 at 19:05)
 
 * [open_embedding](56209openembedding.html) (3 messages, latest: Apr 23 2019 at 18:15)
-
-* [stuff we want](64767stuffwewant.html) (55 messages, latest: Apr 23 2019 at 17:19)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
 
