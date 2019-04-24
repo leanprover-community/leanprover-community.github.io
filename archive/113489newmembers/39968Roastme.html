@@ -224,5 +224,239 @@ I figured I should try and stamp out any bad habits now  before they get too ing
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164053659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164053659">Mario Carneiro (Apr 24 2019 at 04:52)</a>:</h4>
 <p>I won't tell you not to use <code>ring</code> and <code>squeeze_simp</code>, especially on this example. This is one of the best applications of <code>ring</code> out there</p>
 
+<a name="164054324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054324">Kevin Buzzard (Apr 24 2019 at 05:11)</a>:</h4>
+<p>I now think that these are bad definitions:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">re</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℝ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>[I guess I wrote these, not you].</p>
+
+<a name="164054390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054390">Kevin Buzzard (Apr 24 2019 at 05:13)</a>:</h4>
+<p>The problem with them is that if Lean is just faced with a complex number <code>z</code> it doesn't know how to compute its real part. We have to do cases on <code>z</code> first, to break it up into the pair <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(x,y)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">x</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> before we can run this function, and that is an unnecessary step. I think a better definition is that <code>re z := z.re'</code>.</p>
+
+<a name="164054404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054404">Kevin Buzzard (Apr 24 2019 at 05:13)</a>:</h4>
+<p>I had not understood this subtlety when I wrote that example, I suspect.</p>
+
+<a name="164054467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054467">Alex J. Best (Apr 24 2019 at 05:14)</a>:</h4>
+<blockquote>
+<p>Use simp lemmas! You will notice that the real <code>data.complex.basic</code> has simp lemmas like <code>(x + y).re = x.re + y.re</code>, which are proven by <code>rfl</code> but when you mark them as <code>@[simp]</code> they will be invoked to simplify an addition or multiplication that is written in terms of projections.</p>
+</blockquote>
+<p>Yeah I found I really needed these to convince lean that the real and imaginary components of a negative where as expected.<br>
+I'll try and get into the habit of writing as many down as possible after every definition I guess.</p>
+
+<a name="164054506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054506">Alex J. Best (Apr 24 2019 at 05:15)</a>:</h4>
+<blockquote>
+<p>The problem with them is that if Lean is just faced with a complex number <code>z</code> it doesn't know how to compute its real part. We have to do cases on <code>z</code> first, to break it up into the pair <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(x,y)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">x</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> before we can run this function, and that is an unnecessary step. I think a better definition is that <code>re z := z.re'</code>.</p>
+</blockquote>
+<p>Oh great, I wondered if something like this could be true,  I'll see how many cases I can remove then ;)</p>
+
+<a name="164054575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054575">Kevin Buzzard (Apr 24 2019 at 05:16)</a>:</h4>
+<p>If you redefine re and im then all your code will break, but hopefully fixing it will be less painful than writing it the first time.</p>
+
+<a name="164054590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054590">Kevin Buzzard (Apr 24 2019 at 05:16)</a>:</h4>
+<p>And as Mario says, for all the algebra calculations you can use <code>ring</code></p>
+
+<a name="164054750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054750">Kevin Buzzard (Apr 24 2019 at 05:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">my_complex</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">re&#39;</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">im&#39;</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="kn">definition</span> <span class="n">re</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">z</span><span class="bp">.</span><span class="n">re&#39;</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> so if I do things like this, do I now have to decide whether the "official" version of the real part of <code>z</code> is <code>z.re'</code> or <code>re z</code>? And now all the <code>simp</code> lemmas I make should stick to precisely one of these notations? And should there be a simp lemma <code>z.re' = re z</code> to push Lean into this canonical choice? And which is the best choice for the canonical notation? The function or the projection?</p>
+
+<a name="164054802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054802">Alex J. Best (Apr 24 2019 at 05:20)</a>:</h4>
+<p>It didn't break after changing re and im it seems? I guess the definition is the same really and if I've got a cases somewhere it still goes through</p>
+
+<a name="164054803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054803">Mario Carneiro (Apr 24 2019 at 05:20)</a>:</h4>
+<p>The use of a prime is a pretty clear indication that it's not the preferred one</p>
+
+<a name="164054807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054807">Kevin Buzzard (Apr 24 2019 at 05:20)</a>:</h4>
+<p>You tell Alex to use simp lemmas, but I am not sure I know how to use them myself.</p>
+
+<a name="164054817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054817">Mario Carneiro (Apr 24 2019 at 05:20)</a>:</h4>
+<p>Can't you just call the parts <code>re</code> and <code>im</code>?</p>
+
+<a name="164054830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054830">Kevin Buzzard (Apr 24 2019 at 05:21)</a>:</h4>
+<blockquote>
+<p>The use of a prime is a pretty clear indication that it's not the preferred one</p>
+</blockquote>
+<p>But I think I made up this notation myself, I didn't want to confuse the user so I put a prime by an arbitrary one. I think...or did I steal it from mathlib</p>
+
+<a name="164054887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054887">Kevin Buzzard (Apr 24 2019 at 05:22)</a>:</h4>
+<blockquote>
+<p>Can't you just call the parts <code>re</code> and <code>im</code>?</p>
+</blockquote>
+<p>Sure I could. What I am trying to ask is which one should be the canonical choice as far as <code>simp</code> is concerned? Have I got this right now? I am supposed to choose a canonical way of talking about the real part of a complex number, and then forget that there are two ways of doing it?</p>
+
+<a name="164054890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054890">Mario Carneiro (Apr 24 2019 at 05:22)</a>:</h4>
+<p>I mean skip the definition</p>
+
+<a name="164054895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054895">Kevin Buzzard (Apr 24 2019 at 05:22)</a>:</h4>
+<p>right</p>
+
+<a name="164054901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054901">Kevin Buzzard (Apr 24 2019 at 05:22)</a>:</h4>
+<p>Is that the best idea? I have no basis for judgement</p>
+
+<a name="164054902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054902">Mario Carneiro (Apr 24 2019 at 05:22)</a>:</h4>
+<p>just use the projections directly, then there is no question which to use because there's only one</p>
+
+<a name="164054913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054913">Kevin Buzzard (Apr 24 2019 at 05:23)</a>:</h4>
+<p>But mathematicians use the functions a lot.</p>
+
+<a name="164054914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054914">Mario Carneiro (Apr 24 2019 at 05:23)</a>:</h4>
+<p>there are some cases where the projection can behave a little strange, or maybe you want to change the namespace, etc</p>
+
+<a name="164054915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054915">Kevin Buzzard (Apr 24 2019 at 05:23)</a>:</h4>
+<p>They're part of our interface.</p>
+
+<a name="164054926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054926">Mario Carneiro (Apr 24 2019 at 05:23)</a>:</h4>
+<p>in this case I don't see why it's needed</p>
+
+<a name="164054930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054930">Kevin Buzzard (Apr 24 2019 at 05:23)</a>:</h4>
+<p>I think it was me beginning to think about formal APIs</p>
+
+<a name="164054939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054939">Mario Carneiro (Apr 24 2019 at 05:24)</a>:</h4>
+<p>But if you want to make a def then presumably you want to also use a simp lemma to rewrite the projection into that def</p>
+
+<a name="164054983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054983">Kevin Buzzard (Apr 24 2019 at 05:24)</a>:</h4>
+<p>If you say so!</p>
+
+<a name="164054984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054984">Kevin Buzzard (Apr 24 2019 at 05:24)</a>:</h4>
+<p>I don't know how to use <code>simp</code> at all.</p>
+
+<a name="164054986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054986">Mario Carneiro (Apr 24 2019 at 05:24)</a>:</h4>
+<p>that is, pick a preferred way to write things and use it consistently</p>
+
+<a name="164054989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164054989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164054989">Kevin Buzzard (Apr 24 2019 at 05:24)</a>:</h4>
+<p>But I'm beginning to get the hang of it. I would have guessed what you said</p>
+
+<a name="164055024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055024">Kevin Buzzard (Apr 24 2019 at 05:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="132858">@Ramon Fernandez Mir</span> was complaining the other day that he could not find <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><msup><mi>a</mi><mi>n</mi></msup><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>a</mi><msup><mo>)</mo><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">f(a^n)=f(a)^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span> for ring homoorphisms, and then it turned out it wasn't called something like <code>is_ring_hom.map_pow</code> it was called something like <code>is_monoid_hom.map_pow</code>. I suggested he just defined the former to be the latter, but he wasn't sure if that was mathlib style.</p>
+
+<a name="164055073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055073">Kevin Buzzard (Apr 24 2019 at 05:26)</a>:</h4>
+<p>On the other hand, it is the sort of thing a mathematician would expect to find in an interface</p>
+
+<a name="164055077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055077">Mario Carneiro (Apr 24 2019 at 05:26)</a>:</h4>
+<p>That's an alias, we've discussed that before</p>
+
+<a name="164055078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055078">Kevin Buzzard (Apr 24 2019 at 05:26)</a>:</h4>
+<p>Mathematicians would expect <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>e</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">Re(z)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathit">e</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="164055081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055081">Kevin Buzzard (Apr 24 2019 at 05:26)</a>:</h4>
+<p>But does it get defined in mathlib?</p>
+
+<a name="164055085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055085">Kevin Buzzard (Apr 24 2019 at 05:26)</a>:</h4>
+<p>Or does it get defined somewhere else?</p>
+
+<a name="164055097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055097">Mario Carneiro (Apr 24 2019 at 05:27)</a>:</h4>
+<p>I'd like better lean support for them, but making theorem copies with different names is one way to achieve it</p>
+
+<a name="164055104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055104">Kevin Buzzard (Apr 24 2019 at 05:27)</a>:</h4>
+<p>If I write a new theory and I only want to expose some parts of the API to users, is there a way to do that?</p>
+
+<a name="164055105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055105">Mario Carneiro (Apr 24 2019 at 05:27)</a>:</h4>
+<p>There are only a handful of aliases in mathlib, but they aren't forbidden</p>
+
+<a name="164055110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055110">Kevin Buzzard (Apr 24 2019 at 05:27)</a>:</h4>
+<p>I was thinking of offering users a Lean file with constants and axioms, so they can only access what I want them to access.</p>
+
+<a name="164055157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055157">Kevin Buzzard (Apr 24 2019 at 05:28)</a>:</h4>
+<p>so e.g. the user would get a complex numbers, but <a href="http://z.re" target="_blank" title="http://z.re">z.re</a>' would not even make sense</p>
+
+<a name="164055161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055161">Kevin Buzzard (Apr 24 2019 at 05:28)</a>:</h4>
+<p>because they had to use <code>re z</code></p>
+
+<a name="164055164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055164">Kevin Buzzard (Apr 24 2019 at 05:28)</a>:</h4>
+<p>This would make elaboration quicker maybe?</p>
+
+<a name="164055166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055166">Kevin Buzzard (Apr 24 2019 at 05:28)</a>:</h4>
+<p>It would make people write different code, possibly better code</p>
+
+<a name="164055167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055167">Mario Carneiro (Apr 24 2019 at 05:28)</a>:</h4>
+<p>the lack of definitional equality will make some things easier and some things impossible</p>
+
+<a name="164055171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055171">Kevin Buzzard (Apr 24 2019 at 05:29)</a>:</h4>
+<p>aah I see</p>
+
+<a name="164055181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055181">Mario Carneiro (Apr 24 2019 at 05:29)</a>:</h4>
+<p>if you are trying to teach them not to write theorems that depend on definitional equality it's not a bad plan</p>
+
+<a name="164055190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055190">Mario Carneiro (Apr 24 2019 at 05:29)</a>:</h4>
+<p>like if, say, someone decides to make <code>real</code> irreducible one day and all the proofs break :)</p>
+
+<a name="164055240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055240">Kevin Buzzard (Apr 24 2019 at 05:30)</a>:</h4>
+<p>that was still a good change</p>
+
+<a name="164055248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055248">Mario Carneiro (Apr 24 2019 at 05:30)</a>:</h4>
+<p>sure, it was enforcing a contract; it wasn't until we enforced it that we realized it was being completely ignored</p>
+
+<a name="164055261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055261">Kevin Buzzard (Apr 24 2019 at 05:31)</a>:</h4>
+<p>One of the questions on the undergraduate analysis example sheet was "assume a bunch of stuff. Now given a real number, prove that there's a Cauchy sequence consisting entirely of rational numbers which converges to it". And I just thought "this isn't too hard in Lean.."</p>
+
+<a name="164055269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055269">Kevin Buzzard (Apr 24 2019 at 05:31)</a>:</h4>
+<p>Lucky we didn't use Dedekind cuts :-)</p>
+
+<a name="164055320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055320">Mario Carneiro (Apr 24 2019 at 05:32)</a>:</h4>
+<p>"now given a real number, show there is a set of rational numbers whose supremum is that number"</p>
+
+<a name="164055334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%22Roast%22%20me/near/164055334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39968Roastme.html#164055334">Kevin Buzzard (Apr 24 2019 at 05:33)</a>:</h4>
+<p>It also indicates how mathematicians think about the reals -- just some God-given totally ordered complete archimedean field whose definition(s) they forgot a long time ago.</p>
+
 
 {% endraw %}
