@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simple question](66563simplequestion.html) (37 messages, latest: Apr 24 2019 at 08:59)
+
 * [ArXiv and `listings`](59627ArXivandlistings.html) (2 messages, latest: Apr 23 2019 at 23:07)
 
 * [I don't get `simp`](99775Idontgetsimp.html) (22 messages, latest: Apr 23 2019 at 21:08)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (404 messages, latest: Apr 23 2019 at 14:30)
 
 * [option.retract](02493optionretract.html) (3 messages, latest: Apr 23 2019 at 12:49)
-
-* [simple question](66563simplequestion.html) (25 messages, latest: Apr 23 2019 at 06:46)
 
 * [emscripten build](68203emscriptenbuild.html) (15 messages, latest: Apr 22 2019 at 18:51)
 
