@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [presenting a polynomial](83077presentingapolynomial.html) (10 messages, latest: Apr 23 2019 at 22:33)
+* [presenting a polynomial](83077presentingapolynomial.html) (11 messages, latest: Apr 23 2019 at 23:10)
 
 * [linear_independent for families](21882linearindependentforfamilies.html) (86 messages, latest: Apr 23 2019 at 22:29)
 
