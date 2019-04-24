@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Type theory of Lean](83571TypetheoryofLean.html) (8 messages, latest: Apr 24 2019 at 12:15)
+
+* [tauto weaker than expected](48042tautoweakerthanexpected.html) (22 messages, latest: Apr 24 2019 at 12:06)
+
 * [simple question](66563simplequestion.html) (37 messages, latest: Apr 24 2019 at 08:59)
 
 * [ArXiv and `listings`](59627ArXivandlistings.html) (2 messages, latest: Apr 23 2019 at 23:07)
 
 * [I don't get `simp`](99775Idontgetsimp.html) (22 messages, latest: Apr 23 2019 at 21:08)
-
-* [Type theory of Lean](83571TypetheoryofLean.html) (7 messages, latest: Apr 23 2019 at 17:48)
 
 * [VScode extension](56578VScodeextension.html) (404 messages, latest: Apr 23 2019 at 14:30)
 
@@ -273,8 +275,6 @@ permalink: archive/113488general/index.html
 * [a tactic to induce a crash?](12742atactictoinduceacrash.html) (13 messages, latest: Mar 21 2019 at 07:21)
 
 * [equiv_of_functor](65727equivoffunctor.html) (5 messages, latest: Mar 21 2019 at 00:46)
-
-* [tauto weaker than expected](48042tautoweakerthanexpected.html) (20 messages, latest: Mar 20 2019 at 22:34)
 
 * [calculate with mod](09163calculatewithmod.html) (8 messages, latest: Mar 20 2019 at 22:04)
 
