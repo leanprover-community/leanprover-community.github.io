@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (26 messages, latest: Apr 25 2019 at 14:47)
+* [Type theory of Lean](83571TypetheoryofLean.html) (16 messages, latest: Apr 25 2019 at 15:50)
+
+* [A newcomer's opinion](34360Anewcomersopinion.html) (29 messages, latest: Apr 25 2019 at 15:09)
 
 * [Simp bug](12440Simpbug.html) (3 messages, latest: Apr 25 2019 at 14:43)
 
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [Univalence axiom](96233Univalenceaxiom.html) (6 messages, latest: Apr 25 2019 at 13:22)
 
 * [deterministic time-out](74761deterministictimeout.html) (39 messages, latest: Apr 25 2019 at 09:24)
-
-* [Type theory of Lean](83571TypetheoryofLean.html) (13 messages, latest: Apr 25 2019 at 04:11)
 
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (26 messages, latest: Apr 24 2019 at 13:27)
 
