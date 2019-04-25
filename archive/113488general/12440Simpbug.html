@@ -1,0 +1,38 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/12440Simpbug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/12440Simpbug.html">Simp bug</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164175374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20bug/near/164175374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12440Simpbug.html#164175374">Chris Hughes (Apr 25 2019 at 14:31)</a>:</h4>
+<p>This gives me <code>excessive memory consumption detected at 'whnf' (potential solution: increase memory consumption threshold)</code> Does anyone else get this error?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">topology</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">real</span> <span class="n">topology</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">lemma</span> <span class="n">poly_eq_poly</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="kn">eval</span> <span class="n">x</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">C</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">X</span> <span class="bp">+</span> <span class="n">C</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="164175682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20bug/near/164175682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12440Simpbug.html#164175682">Rob Lewis (Apr 25 2019 at 14:34)</a>:</h4>
+<p>I noticed this working on the cap set proof. It's been on my list to debug properly but I haven't found the time. You can work around it by disabling one of the options to <code>simp</code> (<code>use_axioms</code> iirc, but I'm not confident there).</p>
+
+<a name="164176410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20bug/near/164176410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12440Simpbug.html#164176410">Rob Lewis (Apr 25 2019 at 14:43)</a>:</h4>
+<p>Hmm, it's not <code>use_axioms</code>.</p>
+
+
+{% endraw %}

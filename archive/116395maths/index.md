@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [pullback ring topology?](72027pullbackringtopology.html) (29 messages, latest: Apr 25 2019 at 07:39)
+* [stuff we want](64767stuffwewant.html) (78 messages, latest: Apr 25 2019 at 14:34)
 
-* [stuff we want](64767stuffwewant.html) (77 messages, latest: Apr 25 2019 at 07:24)
+* [pullback ring topology?](72027pullbackringtopology.html) (29 messages, latest: Apr 25 2019 at 07:39)
 
 * [linear_independent for families](21882linearindependentforfamilies.html) (91 messages, latest: Apr 24 2019 at 19:14)
 

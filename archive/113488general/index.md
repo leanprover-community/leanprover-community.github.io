@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (37 messages, latest: Apr 25 2019 at 13:58)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (26 messages, latest: Apr 25 2019 at 14:47)
+
+* [Simp bug](12440Simpbug.html) (3 messages, latest: Apr 25 2019 at 14:43)
+
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (38 messages, latest: Apr 25 2019 at 14:20)
 
 * [Building Lean 4](06147BuildingLean4.html) (7 messages, latest: Apr 25 2019 at 13:55)
 
 * [Univalence axiom](96233Univalenceaxiom.html) (6 messages, latest: Apr 25 2019 at 13:22)
-
-* [A newcomer's opinion](34360Anewcomersopinion.html) (13 messages, latest: Apr 25 2019 at 11:44)
 
 * [deterministic time-out](74761deterministictimeout.html) (39 messages, latest: Apr 25 2019 at 09:24)
 
