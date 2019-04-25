@@ -1,0 +1,64 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/06147BuildingLean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html">Building Lean 4</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164169157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169157">Edward Ayers (Apr 25 2019 at 13:22)</a>:</h4>
+<p>I thought I'd just write my experience building Lean 4 from source here. I did this on a mac.</p>
+<p>There will probably be errors and I want to say that "we are not ready to help you build lean 4" is a completely reasonable answer to any problems I have. </p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/leanprover/lean4
+<span class="nb">cd</span> lean
+mkdir -p build/debug
+<span class="nb">cd</span> build/debug
+cmake -D <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>DEBUG ../../src
+make
+</pre></div>
+
+
+<p>This failed with "fatal error: 'wchar.h' file not found". <br>
+Which was fixed per <a href="https://stackoverflow.com/questions/26185978/macos-wchar-h-file-not-found" target="_blank" title="https://stackoverflow.com/questions/26185978/macos-wchar-h-file-not-found">https://stackoverflow.com/questions/26185978/macos-wchar-h-file-not-found</a></p>
+<div class="codehilite"><pre><span></span>open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+</pre></div>
+
+
+<p><code>[ 81%] Built target lean_stage0</code> took a long time to finish.</p>
+<p>It's now built successfully.</p>
+
+<a name="164169328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169328">Patrick Massot (Apr 25 2019 at 13:24)</a>:</h4>
+<blockquote>
+<p>It's now built successfully.</p>
+</blockquote>
+<p>So? Can it define perfectoid spaces all by itself?</p>
+
+<a name="164169488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169488">Edward Ayers (Apr 25 2019 at 13:26)</a>:</h4>
+<p>I can't get the lean3 vscode extension to play ball with lean4 which isn't that surprising.</p>
+
+<a name="164169529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169529">Edward Ayers (Apr 25 2019 at 13:27)</a>:</h4>
+<p>All the tests passed except the style check.</p>
+
+<a name="164169549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169549">Gabriel Ebner (Apr 25 2019 at 13:27)</a>:</h4>
+<p>The editor tooling story is still a bit rough for Lean 4.  At the moment, there is only the <code>lean4-mode</code> for emacs, which recompiles the whole file every single time (a bit slow) and doesn't have go-to-definition or any of the other nice features.</p>
+
+<a name="164169740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164169740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164169740">Gabriel Ebner (Apr 25 2019 at 13:30)</a>:</h4>
+<p>I wanted to work on a language server for Lean 4 (I got to a point where I could see diagnostics in vscode <a href="https://github.com/gebner/lean4/tree/server" target="_blank" title="https://github.com/gebner/lean4/tree/server">https://github.com/gebner/lean4/tree/server</a>).  But then I didn't have much time the last few months (I should be writing a thesis).</p>
+
+<a name="164171959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20Lean%204/near/164171959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06147BuildingLean4.html#164171959">Patrick Massot (Apr 25 2019 at 13:55)</a>:</h4>
+<p>Gabriel, nobody needs to apologize for anything. All contributors of Lean already made an amazing job, and we all have much to do.</p>
+
+
+{% endraw %}

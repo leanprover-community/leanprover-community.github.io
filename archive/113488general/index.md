@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (32 messages, latest: Apr 25 2019 at 12:52)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (37 messages, latest: Apr 25 2019 at 13:58)
+
+* [Building Lean 4](06147BuildingLean4.html) (7 messages, latest: Apr 25 2019 at 13:55)
+
+* [Univalence axiom](96233Univalenceaxiom.html) (6 messages, latest: Apr 25 2019 at 13:22)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (13 messages, latest: Apr 25 2019 at 11:44)
 
@@ -65,8 +69,6 @@ permalink: archive/113488general/index.html
 * [has_reflect in interactive.parse](73055hasreflectininteractiveparse.html) (27 messages, latest: Apr 20 2019 at 08:36)
 
 * [Does doing recursive definitions add new axioms?](47956Doesdoingrecursivedefinitionsaddnewaxioms.html) (5 messages, latest: Apr 19 2019 at 23:55)
-
-* [Univalence axiom](96233Univalenceaxiom.html) (2 messages, latest: Apr 19 2019 at 23:52)
 
 * [lean killed my machine](58225leankilledmymachine.html) (6 messages, latest: Apr 19 2019 at 17:27)
 
