@@ -26,5 +26,25 @@ permalink: archive/113489newmembers/80700arithmeticproofwithbigconstants.html
 
 <p>works fine. So how come when constructing proof terms it chokes on such small numbers?</p>
 
+<a name="164134672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arithmetic%20proof%20with%20big%20constants/near/164134672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80700arithmeticproofwithbigconstants.html#164134672">Simon Hudon (Apr 25 2019 at 01:14)</a>:</h4>
+<p>try <code>import tactic.norm_num</code> and <code>by norm_num</code> (from mathlib)</p>
+
+<a name="164134762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arithmetic%20proof%20with%20big%20constants/near/164134762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80700arithmeticproofwithbigconstants.html#164134762">Simon Hudon (Apr 25 2019 at 01:17)</a>:</h4>
+<p><code>#eval</code> uses the virtual machine to do its computation. In the virtual machine, natural numbers are implemented very efficiently: it uses <code>libgmp</code>. With <code>rfl</code>, the computation is done using logical reduction rules the definition of <code>nat</code> in the logic is very inefficient: it uses unary representation.</p>
+
+<a name="164135838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arithmetic%20proof%20with%20big%20constants/near/164135838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80700arithmeticproofwithbigconstants.html#164135838">Travis Hance (Apr 25 2019 at 01:44)</a>:</h4>
+<p>That worked. Thank you!</p>
+
+<a name="164135912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arithmetic%20proof%20with%20big%20constants/near/164135912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80700arithmeticproofwithbigconstants.html#164135912">Travis Hance (Apr 25 2019 at 01:46)</a>:</h4>
+<p>I see the proof term it generates is doing some binary representation thing. That's pretty neat.</p>
+
+<a name="164136024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arithmetic%20proof%20with%20big%20constants/near/164136024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80700arithmeticproofwithbigconstants.html#164136024">Simon Hudon (Apr 25 2019 at 01:49)</a>:</h4>
+<p>Yes, that's the cool thing about numerals. the lexeme <code>10 </code> is syntactic sugar for <code>bit0 (bit1 (bit0 one))</code> which are functions that evaluate into <code>succ</code> and <code>zero</code> (in the case of <code>nat</code>) but which don't have to be evaluated to do arithmetic.</p>
+
 
 {% endraw %}

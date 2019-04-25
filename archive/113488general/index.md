@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tauto weaker than expected](48042tautoweakerthanexpected.html) (26 messages, latest: Apr 24 2019 at 13:27)
+* [Type theory of Lean](83571TypetheoryofLean.html) (10 messages, latest: Apr 25 2019 at 01:34)
 
-* [Type theory of Lean](83571TypetheoryofLean.html) (8 messages, latest: Apr 24 2019 at 12:15)
+* [tauto weaker than expected](48042tautoweakerthanexpected.html) (26 messages, latest: Apr 24 2019 at 13:27)
 
 * [simple question](66563simplequestion.html) (37 messages, latest: Apr 24 2019 at 08:59)
 
