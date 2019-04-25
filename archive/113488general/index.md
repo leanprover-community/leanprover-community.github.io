@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (42 messages, latest: Apr 25 2019 at 16:23)
+
 * [Type theory of Lean](83571TypetheoryofLean.html) (16 messages, latest: Apr 25 2019 at 15:50)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (29 messages, latest: Apr 25 2019 at 15:09)
 
 * [Simp bug](12440Simpbug.html) (3 messages, latest: Apr 25 2019 at 14:43)
-
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (38 messages, latest: Apr 25 2019 at 14:20)
 
 * [Building Lean 4](06147BuildingLean4.html) (7 messages, latest: Apr 25 2019 at 13:55)
 
