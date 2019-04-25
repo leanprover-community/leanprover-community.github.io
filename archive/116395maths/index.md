@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [stuff we want](64767stuffwewant.html) (78 messages, latest: Apr 25 2019 at 14:34)
+* [stuff we want](64767stuffwewant.html) (79 messages, latest: Apr 25 2019 at 17:30)
 
 * [pullback ring topology?](72027pullbackringtopology.html) (29 messages, latest: Apr 25 2019 at 07:39)
 

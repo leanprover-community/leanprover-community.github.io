@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ArXiv and `listings`](59627ArXivandlistings.html) (4 messages, latest: Apr 25 2019 at 17:21)
+
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (42 messages, latest: Apr 25 2019 at 16:23)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (16 messages, latest: Apr 25 2019 at 15:50)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [tauto weaker than expected](48042tautoweakerthanexpected.html) (26 messages, latest: Apr 24 2019 at 13:27)
 
 * [simple question](66563simplequestion.html) (37 messages, latest: Apr 24 2019 at 08:59)
-
-* [ArXiv and `listings`](59627ArXivandlistings.html) (2 messages, latest: Apr 23 2019 at 23:07)
 
 * [I don't get `simp`](99775Idontgetsimp.html) (22 messages, latest: Apr 23 2019 at 21:08)
 
