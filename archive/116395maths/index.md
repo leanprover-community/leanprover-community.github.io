@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linear_independent for families](21882linearindependentforfamilies.html) (91 messages, latest: Apr 24 2019 at 19:14)
+* [stuff we want](64767stuffwewant.html) (65 messages, latest: Apr 25 2019 at 00:37)
 
-* [stuff we want](64767stuffwewant.html) (63 messages, latest: Apr 24 2019 at 15:04)
+* [linear_independent for families](21882linearindependentforfamilies.html) (91 messages, latest: Apr 24 2019 at 19:14)
 
 * [presenting a polynomial](83077presentingapolynomial.html) (13 messages, latest: Apr 24 2019 at 04:43)
 
