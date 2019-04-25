@@ -174,5 +174,21 @@ permalink: archive/113488general/74761deterministictimeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20time-out/near/164153090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74761deterministictimeout.html#164153090">Kevin Buzzard (Apr 25 2019 at 08:43)</a>:</h4>
 <p>Mario -- many thanks indeed. These ideas are exactly the tool I need to debug this very frustrating issue.</p>
 
+<a name="164154954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20time-out/near/164154954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74761deterministictimeout.html#164154954">Kevin Buzzard (Apr 25 2019 at 09:17)</a>:</h4>
+<p>OK wonderful -- I have got to the heart of things!</p>
+<p>I have <code>X : Type</code> and then <code>def Y (v : random_parameter) := X</code>, so <code>X</code> and <code>Y v</code> are defeq. I now have uniform space structures on X and Y, and I think of them as defeq too, but Lean does not even understand what that assertion means because they are terms of different types.</p>
+<p>OK so the actual thing I want is the following: I have a multiplication defined on <code>ring_completion X</code> and a multiplication defined on <code>ring_completion (Y v)</code> and the multiplications are defined using some continuous extension of a topology coming from the uniform space structures which I think of as defeq but which are not because this doesn't make sense. I think of these multiplications as defeq. But they are not. And Lean is struggling to prove that the map which I would call the identity map is a monoid homomorphism, because to identify the multiplications it needs to identify the structures all the way down.</p>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> this is another instance of missing transfer functionality, isn't it? I can give you an <code>equiv f:X -&gt; Y</code> and now I want an equiv <code>u(f): uniform_space X -&gt; uniform_space Y</code>and <code>t(f): topological_ring X -&gt; topological_ring Y </code> and then I want an equiv <code>topological_ring (@ring_completion uX tX X) -&gt; topological_ring (@ring_completion (u(f) uX) (t(f) tX) Y)</code>. Am I making sense here? In our case <code>X -&gt; Y</code> is <code>id</code> but even in this case we're having problems. Should we be? Perhaps we have made an actual maths error under the hood somewhere and our ring structures are really "what I would call defeq".</p>
+<p>equal are multiplications defined using the topological structures coming from the ring completions which use these uniform structures</p>
+
+<a name="164155164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20time-out/near/164155164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74761deterministictimeout.html#164155164">Mario Carneiro (Apr 25 2019 at 09:21)</a>:</h4>
+<p>From your description of <code>X</code> and <code>Y v</code>, they should actually be defeq, and you can take typeclass arguments from one and use it for the other. But because <code>Y</code> is not a reducible def, it will affect typeclass inference, i.e. it will probably find different instances, and those instances might not be defeq to the ones you get with <code>X</code></p>
+
+<a name="164155327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20time-out/near/164155327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74761deterministictimeout.html#164155327">Kevin Buzzard (Apr 25 2019 at 09:24)</a>:</h4>
+<p>Yes, I think my underlying problem must be a mathematical one</p>
+
 
 {% endraw %}
