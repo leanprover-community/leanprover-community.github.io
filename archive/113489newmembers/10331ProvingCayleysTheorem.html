@@ -42,5 +42,44 @@ permalink: archive/113489newmembers/10331ProvingCayleysTheorem.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164188856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164188856">Greg Conneen (Apr 25 2019 at 17:00)</a>:</h4>
 <p>I understand. I've gotten used to hunting around mathlib for interesting and useful files, I just simply didn't think to look for such a file</p>
 
+<a name="164210477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210477">Kevin Buzzard (Apr 25 2019 at 21:15)</a>:</h4>
+<p>Mathlib is a maze and it's extremely difficult to navigate it alone. I attempted to document some of what was there when I was just starting out, and I wrote some kind-of useless files, which perhaps helped nobody, but the attempt to write them at least made me look at every single Lean file in mathlib at least once. Of course back then mathlib was 1/3rd the size!</p>
+
+<a name="164210618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210618">Johan Commelin (Apr 25 2019 at 21:17)</a>:</h4>
+<p>I'm wondering, is the proof of Cayley's theorem just <code>funext</code> and <code>mul_assoc</code>?</p>
+
+<a name="164210660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210660">Johan Commelin (Apr 25 2019 at 21:17)</a>:</h4>
+<p>Ooh, we might need one more <code>ext</code> at the start.</p>
+
+<a name="164210762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210762">Mario Carneiro (Apr 25 2019 at 21:19)</a>:</h4>
+<p>It's pretty crazy that since I gave my talk on the status of mathlib last year, mathlib has roughly doubled in size, and the number of contributors has gone up tenfold</p>
+
+<a name="164210900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210900">Johan Commelin (Apr 25 2019 at 21:20)</a>:</h4>
+<p>Hmm... maybe you should give another talk. Let's see what happens?</p>
+
+<a name="164210951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210951">Kevin Buzzard (Apr 25 2019 at 21:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span> There are two kinds of bijections in Lean; there are functions f : X -&gt; Y equipped with an inverse function g : Y -&gt; X and proofs that fg and gf are identity; those pieces of data are terms of type <code>equiv X Y</code>. There are also functions f : X -&gt; Y plus a proof that these functions are injective and surjective. In constructive mathematics or computable mathematics or whatever weird kind of mathematics some computer scientists do, these two concepts are <em>not the same</em>. The problem is that the statement that f is bijective only gives you a <em>theorem</em> that for all y in Y there exists a unique x in X such that f(x)=y. To define the inverse function g you need an algorithm which spits this x out, i.e. "gets data from a proposition", and this is problematic. Even if f is computable, its inverse might not be -- given the algorithm which computes f, how do you get an algorithm which computes its inverse (especially if X is uncountable?). <code>equiv</code> is the "stronger" notion -- one can prove that equivs are bijective. To get a bijective map from an equiv you will have to struggle a bit more and switch on some stuff which I always have switched on anyway so I can't remember what it is exactly. noncomputability? The axiom of choice? Something like that.</p>
+
+<a name="164211040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211040">Kevin Buzzard (Apr 25 2019 at 21:22)</a>:</h4>
+<p>For a general S, an injective function of course isn't bijective. Defining bijective functions in Lean is easy. You should prove that a composite of two injective functions is injective and the composite of two surjective functions is surjective, in tactic mode, as warm-up for this.</p>
+
+<a name="164211051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211051">Koundinya Vajjha (Apr 25 2019 at 21:23)</a>:</h4>
+<blockquote>
+<p>Mathlib is a maze and it's extremely difficult to navigate it alone. I attempted to document some of what was there when I was just starting out, and I wrote some kind-of useless files, which perhaps helped nobody, but the attempt to write them at least made me look at every single Lean file in mathlib at least once. Of course back then mathlib was 1/3rd the size!</p>
+</blockquote>
+<p>I myself was wondering about this. An ideal solution would be something like the archive of formal proofs for Lean, but all tied together with informal docstrings.</p>
+
+<a name="164211334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211334">Kevin Buzzard (Apr 25 2019 at 21:26)</a>:</h4>
+<p>PS proving that an injective function from a finite set to itself is also surjective is not easy at all -- you are deluding yourself because you have an extremely accurate but unfortunately very geometric model of a finite set. Lean's definition of a finite set is equivalence classes of lists with no duplicate elements, so any proofs in the API will involve lifting to lists and then proving that things are constant on equivalence classes -- put it another way -- you have to order the set, prove or construct something with the ordered set (typically by induction on the size) and then prove that what you did was independent of the order. This can involve a very delicate induction, because the permutations of a finite set are generated by certain explicit permutations built into Lean. Everything about finite sets is much harder than you think. Fortunately the nice computer scientists wrote a gigantic API for finite sets so that mathematicians can use them the way they like to use them -- but don't be blinded by this -- finite sets are hard, and proving that an injective map is also surjective from first principles is hard.</p>
+
 
 {% endraw %}
