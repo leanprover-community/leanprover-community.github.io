@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (2 messages, latest: Apr 25 2019 at 10:51)
+
+* [A newcomer's opinion](34360Anewcomersopinion.html) (9 messages, latest: Apr 25 2019 at 10:28)
+
 * [deterministic time-out](74761deterministictimeout.html) (39 messages, latest: Apr 25 2019 at 09:24)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (13 messages, latest: Apr 25 2019 at 04:11)

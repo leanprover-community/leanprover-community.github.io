@@ -1,0 +1,63 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/34360Anewcomersopinion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html">A newcomer's opinion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164157809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164157809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164157809">Adrian Chu (Apr 25 2019 at 10:08)</a>:</h4>
+<p>I am still very new to lean but I have been browsing through mathlib these days. I would like to share one obstacle I observed that an ordinary mathematician would face when trying to understanding lean code. That is, <strong>abbreviation of mathematical terms</strong>.  For example, look at this definition of an outer measure:</p>
+<div class="codehilite"><pre><span></span>structure outer_measure (α : Type*) :=
+(measure_of : set α → ennreal)
+(empty : measure_of ∅ = 0)
+(mono : ∀{s₁ s₂}, s₁ ⊆ s₂ → measure_of s₁ ≤ measure_of s₂)
+(Union_nat : ∀(s:ℕ → set α), measure_of (⋃i, s i) ≤ (∑i, measure_of (s i)))
+</pre></div>
+
+
+<p>In this case, since I am familiar with the definition, I can guess that ennreal = extented non-negative reals, mono=monotonicity, Union_nat= countable subadditivity. But others might get it. Moreover, sometimes the abbreviation is long and odd looking and it's hard to guess its meaning. I understand that abbreviation can shorten the code, but I would argue that in the statement of major definitions or theorems, it worthes avoiding abbreviation in order to increase the readability to ordinary mathematicians.</p>
+
+<a name="164157992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164157992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164157992">Chris Hughes (Apr 25 2019 at 10:12)</a>:</h4>
+<p>If you hover over <code>ennreal</code> it should tell you what it is.</p>
+
+<a name="164158093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158093">Adrian Chu (Apr 25 2019 at 10:14)</a>:</h4>
+<blockquote>
+<p>If you hover over <code>ennreal</code> it should tell you what it is.</p>
+</blockquote>
+<p>I can't see it in mathlib. But even if so, there are still many examples of abbreviation causing confusion.</p>
+
+<a name="164158454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158454">Mario Carneiro (Apr 25 2019 at 10:21)</a>:</h4>
+<p>The naming follows a somewhat rigid convention in order to make it easier to guess the names of theorems. Mathematicians are not globally consistent in how things get named, so if you try to follow that kind of pattern you end up confusing even yourself after a while</p>
+
+<a name="164158530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158530">Mario Carneiro (Apr 25 2019 at 10:22)</a>:</h4>
+<p>For the particular case of fields of <code>outer_measure</code>, I wouldn't associate much to the particular names. It's just a bunch of axioms</p>
+
+<a name="164158563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158563">Mario Carneiro (Apr 25 2019 at 10:23)</a>:</h4>
+<p>For example in most presentations of, say, vector spaces you find in textbooks it's just a list of equalities. You can give them names, but they aren't that helpful</p>
+
+<a name="164158657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158657">Mario Carneiro (Apr 25 2019 at 10:25)</a>:</h4>
+<p>It's true that it is somewhat of an idiolect that you have to learn, but there is no way around that. Using mathematician naming for the things that mathematicians bothered to name would just make it a more inconsistent language</p>
+
+<a name="164158814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158814">Adrian Chu (Apr 25 2019 at 10:28)</a>:</h4>
+<p>could you explain the rigid convension a bit?</p>
+
+<a name="164158822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164158822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164158822">Mario Carneiro (Apr 25 2019 at 10:28)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/naming.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/naming.md">https://github.com/leanprover-community/mathlib/blob/master/docs/naming.md</a></p>
+
+
+{% endraw %}
