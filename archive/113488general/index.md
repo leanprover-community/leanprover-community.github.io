@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (40 messages, latest: Apr 25 2019 at 23:00)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (43 messages, latest: Apr 26 2019 at 00:35)
 
 * [Lean in the wild](43625Leaninthewild.html) (71 messages, latest: Apr 25 2019 at 21:51)
 
