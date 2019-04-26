@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (79 messages, latest: Apr 26 2019 at 06:49)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (80 messages, latest: Apr 26 2019 at 07:31)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (44 messages, latest: Apr 26 2019 at 05:06)
 
