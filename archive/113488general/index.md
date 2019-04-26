@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (43 messages, latest: Apr 26 2019 at 03:59)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (45 messages, latest: Apr 26 2019 at 04:54)
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (44 messages, latest: Apr 26 2019 at 01:40)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (43 messages, latest: Apr 26 2019 at 03:59)
 
 * [Lean in the wild](43625Leaninthewild.html) (71 messages, latest: Apr 25 2019 at 21:51)
 
