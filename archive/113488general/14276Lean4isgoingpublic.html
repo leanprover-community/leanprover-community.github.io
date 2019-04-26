@@ -246,5 +246,31 @@ permalink: archive/113488general/14276Lean4isgoingpublic.html
 <p><a href="/user_uploads/3121/QeoEsvkGX0Ss-mNhJtX9MCAz/winnie_meme.png" target="_blank" title="winnie_meme.png"></a></p>
 <div class="message_inline_image"><a href="/user_uploads/3121/QeoEsvkGX0Ss-mNhJtX9MCAz/winnie_meme.png" target="_blank" title=""><img src="/user_uploads/3121/QeoEsvkGX0Ss-mNhJtX9MCAz/winnie_meme.png"></a></div>
 
+<a name="164302364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164302364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164302364">Koundinya Vajjha (Apr 26 2019 at 22:16)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">partial</span> <span class="n">def</span> <span class="n">shrink</span> <span class="o">:</span> <span class="n">Array</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Nat</span> <span class="bp">→</span> <span class="n">Array</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">a</span><span class="bp">.</span><span class="n">size</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="n">shrink</span> <span class="n">a</span><span class="bp">.</span><span class="n">pop</span> <span class="n">n</span>
+</pre></div>
+
+
+<ul>
+<li>Oh wow, built in partial definitions! I will have to see how this interacts with the type system</li>
+</ul>
+</blockquote>
+<p>What are partial definitions?</p>
+
+<a name="164302749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164302749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164302749">Mario Carneiro (Apr 26 2019 at 22:23)</a>:</h4>
+<p>that's a good question. At a glance, I would say it's the analogue of <code>meta</code> that allows non-well founded recursions</p>
+
+<a name="164302953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164302953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164302953">Mario Carneiro (Apr 26 2019 at 22:26)</a>:</h4>
+<p>There are some things you can say about partial definitions that is a little stronger than <code>meta</code>. In particular, although there are obviously partial proofs of false, there is a non-meta notion of "domain" of a partial function, and you can extract a real value from a partial function within its domain. But that's just wishful thinking; probably this is just a viral marker like <code>meta</code> and you don't have direct access to the domain predicate</p>
+
+<a name="164303966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164303966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164303966">Joe Hendrix (Apr 26 2019 at 22:46)</a>:</h4>
+<p>Partial functions require that Lean can show the result type is inhabited; I don't think <code>meta</code> requires that.</p>
+
 
 {% endraw %}
