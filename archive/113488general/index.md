@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Univalence axiom](96233Univalenceaxiom.html) (76 messages, latest: Apr 26 2019 at 16:52)
+* [Univalence axiom](96233Univalenceaxiom.html) (99 messages, latest: Apr 26 2019 at 17:56)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (50 messages, latest: Apr 26 2019 at 15:21)
 

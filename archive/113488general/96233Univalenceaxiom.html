@@ -358,5 +358,138 @@ Alas, assuming univalence for this <code>hott_eq</code> is also inconsistent in 
 <p>Let me explain what is the first order logic of a structure. You have some symbols, and you are only allowed to write formulas using these symbols and quantifiers and free variables. For instance, in the language of groups (with multiplication, neutral element and inverses), you can write the formula <code>∃x, ∀y, ∃z, y=z*z ∨ y = z*z*x</code>. It is true in some groups, and not true in some other groups (this one is true in ℤ but not in ℤ^2, for instance). I claim that if such a formula is true in a group, it is obviously true in an isomorphic group (induction over the length of the formula, this is completely algorithmic). And this is not specific at all to groups: whatever structure with some language, isomorphisms will respect true formulas. You can add to your language more symbols such as <code>∈</code>, or <code>⊆</code> and then you can express more statements but that they are still all respected with any notion of isomorphism. </p>
 <p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. And with this point of view isomorphism invariance is obvious for all these statements.</p>
 
+<a name="164279268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279268">Fabian Glöckle (Apr 26 2019 at 17:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I think deciding which parts of the implementation of a certain structure are allowed to be "used / unfolded" within a theory and which aren't, can't only be decided syntactically. What you are describing, is to my mind the human intelligence to have a higher level model of a structure apart from its technical implementation (the reals as a continuum, not as Dedekind cuts / equivalence classes of Cauchy sequences; this is also the reason why people rarely prove that different implementations of an idea are in fact equivalent).<br>
+There have been several attempts at trying to make the term "within the scope of a theory / respecting a theory" precise.<br>
+First order model theory, as <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> describes, defines a language for a structure; isomorphism is then what is compatible with all parts of the language.<br>
+Category theory allows us to create an abstract notion of morphism and says that valid constructions are only those which respect isomorphisms (in the sense of morphisms with a two-sided inverse).<br>
+I think it is because we check definitions for their compatibility with a theory that we consider the question "is a scheme which is isomorphic to an affine scheme affine?" tautological. But this already assumes "affine-ness" to be well-defined with respect to the theory of schemes.</p>
+
+<a name="164279648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279648">Kevin Buzzard (Apr 26 2019 at 17:13)</a>:</h4>
+<blockquote>
+<p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. </p>
+</blockquote>
+<p>I do not understand this at all. Here is <a href="https://en.wikipedia.org/wiki/Global_dimension" target="_blank" title="https://en.wikipedia.org/wiki/Global_dimension">the Wikipedia page on global dimension of rings</a>. I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions. How do you do this in first order logic? Where and how is all this extra structure being represented in Lean, and what properties does this extra structure have?</p>
+
+<a name="164279669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279669">Kevin Buzzard (Apr 26 2019 at 17:13)</a>:</h4>
+<p>Can isomorphism of schemes be expressed in first order logic? Can isomorphism of topological spaces?</p>
+
+<a name="164279718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279718">Kevin Buzzard (Apr 26 2019 at 17:14)</a>:</h4>
+<p>I don't even know what these questions mean.</p>
+
+<a name="164279737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279737">Kevin Buzzard (Apr 26 2019 at 17:14)</a>:</h4>
+<p>I just want to see it in Lean, that's the only thing I understand properly.</p>
+
+<a name="164279817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279817">Chris Hughes (Apr 26 2019 at 17:15)</a>:</h4>
+<p>Aren't most of the properties we care about not part of the first order structure? Could I do state something like 'the product of all elements of a finite monoid is 1'. This seems to involve proving some equivalence of properties between finset A and finset B, and any proof that this property is preserved will require induction on a list.</p>
+
+<a name="164280104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280104">Kevin Buzzard (Apr 26 2019 at 17:19)</a>:</h4>
+<p>Here's a basic thing I don't understand. If I see the definition of a ring in Lean, I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism. If I see the definition of a topological space, I cannot guess the definition of morphism (i.e. a computer can't) because there are two choices. If I see the definition of a partial order again there seem to be two choices: either <code>a &lt; b -&gt; f a &lt; f b</code> or <code>a &lt; b &lt;-&gt; f a &lt; f b</code>. Both might be used in mathematics. But I can guess what an isomorphism is, and miraculously this <em>canonical</em> notion of isomorphism is independent of the choice I made for my morphisms. Some stuff is happening automatically and some stuff isn't. Oh! Is it not a typeclass but some sort of weird new tag controlled by a machine? Is this the hold-up? It has to be tags so it's fiddly as hell and most of us can't do it? I can't have a "mathematician-approved for isomorphisms" Prop-valued tag?</p>
+
+<a name="164280106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280106">Fabian Glöckle (Apr 26 2019 at 17:19)</a>:</h4>
+<blockquote>
+<p>I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions.</p>
+</blockquote>
+<p>The moment you call it a "property of rings", you are asserting that this property respects ring-isos.</p>
+
+<a name="164280231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280231">Fabian Glöckle (Apr 26 2019 at 17:21)</a>:</h4>
+<blockquote>
+<p>I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism</p>
+</blockquote>
+<p>I am currently writing a command which is supposed to do exactly this. Given a <code>has_xyz</code>, generate the type of functions respecting <code>xyz</code></p>
+
+<a name="164280235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280235">Kevin Buzzard (Apr 26 2019 at 17:21)</a>:</h4>
+<p>I know, but what I am saying is that there is nothing mathematically interesting that can be said about predicates on the type of all rings which are <em>not</em> "properties of rings", because we don't talk about such ugly predicates -- they are no use to us. But they can be made in Lean, unfortunately.</p>
+
+<a name="164280248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280248">Sebastien Gouezel (Apr 26 2019 at 17:21)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. </p>
+</blockquote>
+<p>I do not understand this at all. Here is <a href="https://en.wikipedia.org/wiki/Global_dimension" target="_blank" title="https://en.wikipedia.org/wiki/Global_dimension">the Wikipedia page on global dimension of rings</a>. I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions. How do you do this in first order logic? Where and how is all this extra structure being represented in Lean, and what properties does this extra structure have?</p>
+</blockquote>
+<p>This one is hard to express in first-order logic as it is quantifying over all A-modules. To me, it is not obvious even from a mathematical point of view. Think of a ring R in some universe u, and some other ring S in some universe v, which are isomorphic. Maybe it is possible to construct in universe v some S-module which has no analogue in universe u (maybe because its cardinality is larger than any set in universe u), and this S-module is precisely the one that plays a role in the definition.</p>
+<p>On the other hand, for most properties which are obviously invariant from the definition (being principal or Euclidean, say), this can be expressed in first-order logic.</p>
+
+<a name="164280315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280315">Kevin Buzzard (Apr 26 2019 at 17:22)</a>:</h4>
+<p>I think that definitional type equality should be banned and replaced with mathematical equality of mathematical structures.</p>
+
+<a name="164280379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280379">Kevin Buzzard (Apr 26 2019 at 17:23)</a>:</h4>
+<p>Sebastien  I am most definitely happy to restrict to objects in one universe. Mathematicians never need any more in practice, right?</p>
+
+<a name="164280495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280495">Kevin Buzzard (Apr 26 2019 at 17:25)</a>:</h4>
+<p>I think a better example schemes. Let's do them. How do you express schemes in first order logic? A scheme is a topological space equipped with a functor from some (small) category made from the open sets to the (large) category of rings, plus some axioms that need not concern us but which I can assure you can be written in maths mode.</p>
+
+<a name="164280540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280540">Kevin Buzzard (Apr 26 2019 at 17:25)</a>:</h4>
+<p>And I want to prove that if S and T are isomorphic schemes and S is Noetherian then T is Noetherian.</p>
+
+<a name="164280652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280652">Kevin Buzzard (Apr 26 2019 at 17:27)</a>:</h4>
+<p>This is a baby example -- this is only MSc. Perfectoid spaces are much more complicated objects. But I can guarantee the purity of the make, because they were made by mathematicians. Can I do this in first order logic? Can I do this in Lean?</p>
+
+<a name="164280820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280820">Sebastien Gouezel (Apr 26 2019 at 17:28)</a>:</h4>
+<p>If you try to write down the definition of noetherian unfolding everything, you will see it boils down to a complicated formula with a lot of quantifiers but just involving the objects you are working with. So this is definitely a first order formula in the appropriate language, yes.</p>
+
+<a name="164280863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280863">Sebastien Gouezel (Apr 26 2019 at 17:29)</a>:</h4>
+<p>Of course, I am not expecting you to unfold everything by hand, a computer can do this much better than you!</p>
+
+<a name="164281203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281203">Kevin Buzzard (Apr 26 2019 at 17:32)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism</p>
+</blockquote>
+<p>I am currently writing a command which is supposed to do exactly this. Given a <code>has_xyz</code>, generate the type of functions respecting <code>xyz</code></p>
+</blockquote>
+<p>What will you do for topological spaces and for binary relations? How many choices do you have for the homomorphisms? What about the isomorphisms though? Do you agree that there are two different questions here -- generating morphisms and generating isomorphisms i.e. generating the groupoid associated to the structure. </p>
+<p>Do you see any difference between bundled and unbundled objects? In a parallel universe Lean could have had bundled groups. Just one type! It would have looked something like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">Group</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="c1">-- or Type*, I don&#39;t care, but putting in the star makes it harder work</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">-&gt;</span> <span class="n">G</span> <span class="bp">-&gt;</span> <span class="n">G</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">mul</span> <span class="n">one</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g</span><span class="o">)</span>
+<span class="bp">...</span>
+</pre></div>
+
+<a name="164281450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281450">Kevin Buzzard (Apr 26 2019 at 17:35)</a>:</h4>
+<blockquote>
+<p>If you try to write down the definition of noetherian unfolding everything, you will see it boils down to a complicated formula with a lot of quantifiers but just involving the objects you are working with. So this is definitely a first order formula in the appropriate language, yes.</p>
+</blockquote>
+<p>So there is a "first order language of schemes"? Even though schemes involve something which can't be done in Isabelle within its typeclass framework?</p>
+
+<a name="164281464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281464">Fabian Glöckle (Apr 26 2019 at 17:35)</a>:</h4>
+<p>I think the category theory approach about defining morphisms as stronger than the first order approach<br>
+(because at some point, the tools for moving parts of structures back and forth become higher-order, think of sheaf pullbacks in morphism definitions)</p>
+
+<a name="164281619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281619">Fabian Glöckle (Apr 26 2019 at 17:37)</a>:</h4>
+<p>And I think the correct order is "define morphisms" -&gt; "isomophisms as morphisms with a two-sided inverse" -&gt; "everything that respects isomorphisms is a sensible definition"</p>
+
+<a name="164283369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164283369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164283369">Fabian Glöckle (Apr 26 2019 at 17:56)</a>:</h4>
+<blockquote>
+<p>What will you do for topological spaces and for binary relations? How many choices do you have for the homomorphisms? What about the isomorphisms though? Do you agree that there are two different questions here -- generating morphisms and generating isomorphisms i.e. generating the groupoid associated to the structure. </p>
+</blockquote>
+<p>Okay I understand what you are saying. But then if I think about two different foundational systems for mathematics, the associated groupoids of a structure can be "different" (whatever that means). From a metamathematical point of view, asking about how the groupoid looks is not well-defined. Hence the decision for the univalence axiom to compress it as much as possible (to the hott_eq groupoid).</p>
+
 
 {% endraw %}
