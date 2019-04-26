@@ -462,5 +462,187 @@ What does <code>[app_builder] failed to create an 'mul_compatible'-application, 
    <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="bp">`</span><span class="n">id_compatible</span> <span class="o">[]</span> <span class="n">decl_type</span> <span class="o">(</span><span class="n">task</span><span class="bp">.</span><span class="n">pure</span> <span class="n">decl_body</span><span class="o">)</span>
 </pre></div>
 
+<a name="164274434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164274434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164274434">Fabian Glöckle (Apr 26 2019 at 16:00)</a>:</h4>
+<p>I'd like to generate the lemma <code>mul_compatible_id'</code>by code in a way such that I can later adapt it to other <code>has_x</code>situations (hence no quasiquotations).</p>
+
+<a name="164274518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164274518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164274518">Fabian Glöckle (Apr 26 2019 at 16:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you have an idea what I did wrong?</p>
+
+<a name="164274604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164274604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164274604">Kevin Buzzard (Apr 26 2019 at 16:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="210057">@Fabian Glöckle</span> do you have any comments on the univalence thread going on in the main chat?</p>
+
+<a name="164274763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164274763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164274763">Simon Hudon (Apr 26 2019 at 16:05)</a>:</h4>
+<p>That's an error given by <code>mk_app</code> or <code>mk_mapp</code></p>
+
+<a name="164274904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164274904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164274904">Simon Hudon (Apr 26 2019 at 16:07)</a>:</h4>
+<p>There's an option that you can set to give more details about the application you're trying to build. The error message should mention which one</p>
+
+<a name="164275383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164275383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164275383">Fabian Glöckle (Apr 26 2019 at 16:14)</a>:</h4>
+<p>The error message is </p>
+<div class="codehilite"><pre><span></span>app_builder_exception, more information can be obtained using command `set_option trace.app_builder true`
+</pre></div>
+
+
+<p>what I posted is already message from activating <code>trace.app_builder</code></p>
+
+<a name="164275410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164275410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164275410">Edward Ayers (Apr 26 2019 at 16:14)</a>:</h4>
+<p>I got <code>[app_builder] failed to create an 'mul_compatible''-application, failed to solve unification constraint for #4 argument (has_mul α =?= has_mul α)</code></p>
+
+<a name="164275657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164275657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164275657">Simon Hudon (Apr 26 2019 at 16:18)</a>:</h4>
+<p>try <code>set_option pp.implicit true</code> and <code>set_option pp.universes true</code></p>
+
+<a name="164275716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164275716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164275716">Edward Ayers (Apr 26 2019 at 16:19)</a>:</h4>
+<div class="codehilite"><pre><span></span>[app_builder] failed to create an &#39;mul_compatible&#39;&#39;-application, failed to solve unification constraint for #4 argument (has_mul.{0} α =?= has_mul.{?l_1} α)
+</pre></div>
+
+<a name="164275996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164275996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164275996">Kevin Buzzard (Apr 26 2019 at 16:22)</a>:</h4>
+<p>I can solve that one</p>
+
+<a name="164276004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276004">Kevin Buzzard (Apr 26 2019 at 16:23)</a>:</h4>
+<p>Maybe I should apply for a job at MS</p>
+
+<a name="164276027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276027">Fabian Glöckle (Apr 26 2019 at 16:23)</a>:</h4>
+<blockquote>
+<p>I got <code>[app_builder] failed to create an 'mul_compatible''-application, failed to solve unification constraint for #4 argument (has_mul α =?= has_mul α)</code></p>
+</blockquote>
+<p>Sorry, you are right. Replacing the first line of the metacommand with </p>
+<div class="codehilite"><pre><span></span><span class="k">let</span> <span class="n">has_mul</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">const</span> <span class="bp">`</span><span class="n">has_mul</span> <span class="o">[</span><span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">],</span>
+</pre></div>
+
+
+<p>gives my error</p>
+
+<a name="164276046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276046">Fabian Glöckle (Apr 26 2019 at 16:23)</a>:</h4>
+<p>Now we should have a minimal working example</p>
+
+<a name="164276117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276117">Kevin Buzzard (Apr 26 2019 at 16:24)</a>:</h4>
+<p>Fabian, remember also to build a proper ZFC version of your tactic, which only allows Type and Prop for most basic definitions</p>
+
+<a name="164276173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276173">Fabian Glöckle (Apr 26 2019 at 16:25)</a>:</h4>
+<p>?</p>
+
+<a name="164276180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276180">Kevin Buzzard (Apr 26 2019 at 16:25)</a>:</h4>
+<p>You can't talk about terms in higher universes</p>
+
+<a name="164276332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276332">Fabian Glöckle (Apr 26 2019 at 16:27)</a>:</h4>
+<p>:D no that was not the problem (though I still do not understand how to use universe parameters when building code)</p>
+
+<a name="164276410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276410">Kevin Buzzard (Apr 26 2019 at 16:28)</a>:</h4>
+<p>Most mathematicians don't need those higher universes, so write a version that only works for things in Type and my mathematician's wager is that this never bothers us at all. I'm not really suggesting you do it, it's just that I am getting more and more weirded out by all this insistence on polymorphism when all it has done for me as a mathematician was cause me problems</p>
+
+<a name="164276434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276434">Edward Ayers (Apr 26 2019 at 16:28)</a>:</h4>
+<p>Ah, the problem is that <code>mk_app `mul_compatible' [α, α, i, i, ida α, x, y]</code> is not allowed because <code>mul_compatible'</code> only accepts 5 arguments.</p>
+
+<a name="164276570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276570">Edward Ayers (Apr 26 2019 at 16:30)</a>:</h4>
+<p>It's a shame Lean couldn't do that unification problem.</p>
+
+<a name="164276580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276580">Fabian Glöckle (Apr 26 2019 at 16:30)</a>:</h4>
+<p>Oh right; i had thought it appeared in the first one :o</p>
+
+<a name="164276624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164276624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164276624">Fabian Glöckle (Apr 26 2019 at 16:30)</a>:</h4>
+<p>what would i do to specify the right type for the <code>rfl</code> (and do I need to?)</p>
+
+<a name="164277125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164277125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164277125">Edward Ayers (Apr 26 2019 at 16:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+
+<span class="n">def</span> <span class="n">mul_compatible&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>  <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{</span><span class="n">x0</span> <span class="n">x1</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">f</span> <span class="o">(</span><span class="n">x0</span> <span class="bp">*</span> <span class="n">x1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x0</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">x1</span>
+
+<span class="kn">lemma</span> <span class="n">mul_compatible_id&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]:</span> <span class="n">mul_compatible&#39;</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">add_compatible_id_lemma</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">has_mul</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">pure</span> <span class="err">$</span> <span class="n">const</span> <span class="bp">`</span><span class="n">has_mul</span> <span class="o">[</span><span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">],</span>
+   <span class="n">α</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">α</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="o">(</span><span class="n">sort</span> <span class="o">(</span><span class="n">level</span><span class="bp">.</span><span class="n">succ</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">)),</span>
+   <span class="n">i</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">i</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">inst_implicit</span> <span class="o">(</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">),</span>
+   <span class="n">ida</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">pure</span> <span class="err">$</span> <span class="n">const</span> <span class="bp">`</span><span class="n">id</span> <span class="o">[</span><span class="n">level</span><span class="bp">.</span><span class="n">succ</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">],</span>
+   <span class="n">stmt</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">mul_compatible&#39;</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">α</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">ida</span> <span class="n">α</span><span class="o">],</span>  <span class="c1">-- &lt;-- error here</span>
+  <span class="k">let</span> <span class="n">decl_type</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">pis</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">i</span><span class="o">]</span> <span class="n">stmt</span><span class="o">,</span>
+
+   <span class="n">x</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">x</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">y</span> <span class="err">←</span> <span class="n">mk_local&#39;</span> <span class="bp">`</span><span class="n">y</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="n">α</span><span class="o">,</span>
+   <span class="n">xy</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="o">[</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">],</span>
+   <span class="n">rf</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">rfl</span> <span class="o">[</span><span class="n">xy</span><span class="o">],</span>
+   <span class="k">let</span> <span class="n">decl_body</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">lambdas</span> <span class="o">[</span><span class="n">α</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">]</span> <span class="o">(</span><span class="n">rf</span><span class="o">),</span>
+   <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="bp">`</span><span class="n">id_compatible</span> <span class="o">[]</span> <span class="n">decl_type</span> <span class="o">(</span><span class="n">task</span><span class="bp">.</span><span class="n">pure</span> <span class="n">decl_body</span><span class="o">)</span>
+
+<span class="c1">-- set_option trace.app_builder true</span>
+<span class="c1">-- set_option pp.all true</span>
+<span class="c1">-- set_option formatter.hide_full_terms false</span>
+<span class="n">run_cmd</span> <span class="n">do</span> <span class="o">{</span>
+  <span class="n">add_compatible_id_lemma</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="164277207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164277207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164277207">Edward Ayers (Apr 26 2019 at 16:38)</a>:</h4>
+<p><code>#check id_compatible</code> works for me.</p>
+
+<a name="164277631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164277631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164277631">Fabian Glöckle (Apr 26 2019 at 16:44)</a>:</h4>
+<p>Oh great, thanks<br>
+It turns out these weren't issues with metaprogramming but with understanding the <code>rfl</code>proof :D</p>
+
+<a name="164277858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164277858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164277858">Fabian Glöckle (Apr 26 2019 at 16:48)</a>:</h4>
+<p>I really appreciate the helpful atmosphere here, thanks again!!</p>
+
+<a name="164277888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164277888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164277888">Edward Ayers (Apr 26 2019 at 16:48)</a>:</h4>
+<p>You can get Lean to do most of the work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+
+<span class="n">def</span> <span class="n">mul_compatible&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>  <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{</span><span class="n">x0</span> <span class="n">x1</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">f</span> <span class="o">(</span><span class="n">x0</span> <span class="bp">*</span> <span class="n">x1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x0</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">x1</span>
+
+<span class="kn">lemma</span> <span class="n">mul_compatible_id&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]:</span> <span class="n">mul_compatible&#39;</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">add_compatible_id_lemma</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span>
+   <span class="n">target</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">],</span> <span class="n">mul_compatible&#39;</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)),</span>
+   <span class="n">g</span> <span class="err">←</span> <span class="n">mk_mvar</span><span class="o">,</span>
+   <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">set_goals</span> <span class="o">[</span><span class="n">g</span><span class="o">],</span>
+   <span class="n">change</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">intro_lst</span> <span class="o">[</span><span class="bp">`</span><span class="n">α</span><span class="o">,</span> <span class="bp">`</span><span class="n">i</span><span class="o">,</span> <span class="bp">`</span><span class="n">x</span><span class="o">,</span><span class="bp">`</span><span class="n">y</span><span class="o">],</span> <span class="c1">-- or just `intron 4`</span>
+   <span class="n">reflexivity</span><span class="o">,</span>
+   <span class="n">set_goals</span> <span class="n">gs</span><span class="o">,</span>
+   <span class="n">g</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">g</span><span class="o">,</span>
+   <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="bp">`</span><span class="n">id_compatible</span> <span class="o">[]</span> <span class="n">target</span> <span class="o">(</span><span class="n">task</span><span class="bp">.</span><span class="n">pure</span> <span class="n">g</span><span class="o">)</span>
+
+
+<span class="n">run_cmd</span> <span class="n">do</span> <span class="o">{</span>
+  <span class="n">add_compatible_id_lemma</span>
+<span class="o">}</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">id_compatible</span>
+</pre></div>
+
+<a name="164278099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164278099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164278099">Edward Ayers (Apr 26 2019 at 16:51)</a>:</h4>
+<p>Can anyone golf this down further?</p>
+
 
 {% endraw %}
