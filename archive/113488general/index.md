@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (48 messages, latest: Apr 26 2019 at 12:15)
+* [Univalence axiom](96233Univalenceaxiom.html) (26 messages, latest: Apr 26 2019 at 14:59)
+
+* [what is a diamond?](58637whatisadiamond.html) (7 messages, latest: Apr 26 2019 at 14:59)
+
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (49 messages, latest: Apr 26 2019 at 14:03)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (83 messages, latest: Apr 26 2019 at 12:04)
 
@@ -23,8 +27,6 @@ permalink: archive/113488general/index.html
 * [Simp bug](12440Simpbug.html) (3 messages, latest: Apr 25 2019 at 14:43)
 
 * [Building Lean 4](06147BuildingLean4.html) (7 messages, latest: Apr 25 2019 at 13:55)
-
-* [Univalence axiom](96233Univalenceaxiom.html) (6 messages, latest: Apr 25 2019 at 13:22)
 
 * [deterministic time-out](74761deterministictimeout.html) (39 messages, latest: Apr 25 2019 at 09:24)
 
@@ -51,8 +53,6 @@ permalink: archive/113488general/index.html
 * [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (6 messages, latest: Apr 21 2019 at 07:05)
 
 * [strange [ ]'s in my goal](91079strangesinmygoal.html) (16 messages, latest: Apr 21 2019 at 05:07)
-
-* [what is a diamond?](58637whatisadiamond.html) (3 messages, latest: Apr 21 2019 at 04:09)
 
 * [clearing all hypothesis](76367clearingallhypothesis.html) (43 messages, latest: Apr 21 2019 at 02:37)
 

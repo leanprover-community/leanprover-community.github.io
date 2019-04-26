@@ -45,5 +45,91 @@ This is true for the group <code>G</code>, but not in general for arbitary group
 "Isomorphic groups have the same (structural) properties."?<br>
 Or are such statements rather meta properties in HoTT?</p>
 
+<a name="164267742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164267742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164267742">Floris van Doorn (Apr 26 2019 at 14:43)</a>:</h4>
+<p>Yes, in HoTT you can easily prove  that isomorphic groups have the same properties. The formal statement could be something like</p>
+<div class="codehilite"><pre><span></span>∀(G H : Group), G ≅ H → ∀(P : G → Prop), P G ↔ P H
+</pre></div>
+
+
+<p>Note that <code>G</code> and <code>H</code> share all properties that can be expressed in the type theory. This might look a bit weird from a set-theoretic perspective: <code>G</code> and <code>H</code> could have different elements. However, in type theory you cannot really express that.</p>
+<p>Aside: with <code>Prop</code> above I mean all types that have at most 1 element. You can replace <code>Prop</code> by <code>Type</code> and the statement would still be true.</p>
+
+<a name="164267983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164267983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164267983">Kevin Buzzard (Apr 26 2019 at 14:45)</a>:</h4>
+<p>I don't really have time right now to start playing with this Voevodsky stuff where you work in Coq and have this extra axiom. Is there a way of doing this sort of stuff in Lean 3? Lean 4?</p>
+
+<a name="164268120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268120">Kevin Buzzard (Apr 26 2019 at 14:47)</a>:</h4>
+<p>I went out for a meal this week with a strong algebraist and I asked him to prove that if R and S were isomorphic rings and R was Gorenstein then S was Gorenstein and he simply did not know where to start. He said it was obvious.</p>
+
+<a name="164268139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268139">Kevin Buzzard (Apr 26 2019 at 14:47)</a>:</h4>
+<p>Mathematicians are really good at this. What are we doing?</p>
+
+<a name="164268259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268259">Kevin Buzzard (Apr 26 2019 at 14:48)</a>:</h4>
+<p>Is there some sort of univalence conjecture that one can formalise in Lean? Stating that for all structures in a certain typeclass this basic property of "being the same" manages to permeate through -- the correct notion of equiv.</p>
+
+<a name="164268311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268311">Kevin Buzzard (Apr 26 2019 at 14:49)</a>:</h4>
+<p>There are two notions as well, I think: one a prop and one a type.</p>
+
+<a name="164268328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268328">Kevin Buzzard (Apr 26 2019 at 14:49)</a>:</h4>
+<p>How does one formalise what I'm saying in Lean?</p>
+
+<a name="164268415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268415">Kevin Buzzard (Apr 26 2019 at 14:50)</a>:</h4>
+<p>There's some sort of statement whose proof is "by pure mathematician's secret power"</p>
+
+<a name="164268440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268440">Kevin Buzzard (Apr 26 2019 at 14:50)</a>:</h4>
+<p>it's our heavy rfl</p>
+
+<a name="164268512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268512">Kevin Buzzard (Apr 26 2019 at 14:51)</a>:</h4>
+<p>and everyone always tells me to go and do HOTT. I just want someone to do it for me ;-) or at least tell me what I should be formalising.</p>
+
+<a name="164268541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268541">Kevin Buzzard (Apr 26 2019 at 14:51)</a>:</h4>
+<p>I can quite believe that this is all very well understood by some people.</p>
+
+<a name="164268669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268669">Kevin Buzzard (Apr 26 2019 at 14:53)</a>:</h4>
+<p>Is it some mathematician monad or something?</p>
+
+<a name="164268836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268836">Kevin Buzzard (Apr 26 2019 at 14:54)</a>:</h4>
+<p>"they are the same to a mathematician, who works in ZFC but has made a solomn promise never to do anything naughty such as looking at elements of elements of groups in set theory"</p>
+
+<a name="164268873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268873">Kevin Buzzard (Apr 26 2019 at 14:55)</a>:</h4>
+<p>You're in the typeclass of you're the kind of structure which a mathematician would find acceptable.</p>
+
+<a name="164269049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269049">Greg Conneen (Apr 26 2019 at 14:56)</a>:</h4>
+<p>I don't know enough about Lean to formalise something like this, but I think cheeky way to circumvent this is start with the proposition above by <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> as the definition of isomorphic mathematical structures, rather than an axiom. However, I don't know that such a definition would lend itself to being useful to Lean.</p>
+
+<a name="164269068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269068">Kevin Buzzard (Apr 26 2019 at 14:56)</a>:</h4>
+<p>Ask a research mathematician who doesn't know anything about schemes the following question: "Say X and Y are schemes, and X and Y are isomorphic. Say X is affine. Do you think Y is also affine?". They would answer "yeah, probably. "</p>
+
+<a name="164269221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269221">Greg Conneen (Apr 26 2019 at 14:58)</a>:</h4>
+<p>I know very little about schemes, despite my advisor being an algebraic geometer. However, I can say beyond a shadow of a doubt that two isomorphic schemes would both be affine if one is.</p>
+
+<a name="164269270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269270">Greg Conneen (Apr 26 2019 at 14:58)</a>:</h4>
+<p>That's not because I've run into this before; it's because I know how mathematicians use the word isomorphic</p>
+
+<a name="164269309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269309">Kevin Buzzard (Apr 26 2019 at 14:59)</a>:</h4>
+<p>Because schemes have a certain public interface which is mathematician-acceptable; there's a topological space, there's a functor from the open sets, but there's definitely no looking at elements of the topological space -- those are "unopenable sets" -- I think they're more like terms in type theory (terms that aren't types).</p>
+
+<a name="164269341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269341">Kevin Buzzard (Apr 26 2019 at 14:59)</a>:</h4>
+<p>It's our super-power!</p>
+
 
 {% endraw %}
