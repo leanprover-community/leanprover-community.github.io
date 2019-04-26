@@ -644,5 +644,17 @@ It turns out these weren't issues with metaprogramming but with understanding th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164278099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164278099">Edward Ayers (Apr 26 2019 at 16:51)</a>:</h4>
 <p>Can anyone golf this down further?</p>
 
+<a name="164290603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/164290603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#164290603">Simon Hudon (Apr 26 2019 at 19:24)</a>:</h4>
+<p>Try:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">add_compatible_id_lemma</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">target</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">],</span> <span class="n">mul_compatible&#39;</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)),</span>
+   <span class="o">(</span><span class="bp">_</span><span class="o">,</span><span class="n">g</span><span class="o">)</span> <span class="err">←</span> <span class="n">solve_aux</span> <span class="n">target</span> <span class="err">$</span> <span class="n">do</span>
+   <span class="o">{</span> <span class="n">intro_lst</span> <span class="o">[</span><span class="bp">`</span><span class="n">α</span><span class="o">,</span> <span class="bp">`</span><span class="n">i</span><span class="o">,</span> <span class="bp">`</span><span class="n">x</span><span class="o">,</span><span class="bp">`</span><span class="n">y</span><span class="o">],</span> <span class="c1">-- or just `intron 4`</span>
+     <span class="n">reflexivity</span> <span class="o">},</span>
+   <span class="n">g</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">g</span><span class="o">,</span>
+   <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="bp">`</span><span class="n">id_compatible</span> <span class="o">[]</span> <span class="n">target</span> <span class="o">(</span><span class="n">task</span><span class="bp">.</span><span class="n">pure</span> <span class="n">g</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
