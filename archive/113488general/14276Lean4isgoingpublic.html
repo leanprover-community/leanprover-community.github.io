@@ -191,5 +191,30 @@ permalink: archive/113488general/14276Lean4isgoingpublic.html
 
 <p>I wonder what constants with definitions means</p>
 
+<a name="164233317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164233317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164233317">Mario Carneiro (Apr 26 2019 at 05:06)</a>:</h4>
+<p>A few more notes to self about new stuff:</p>
+<ul>
+<li><code>meta</code> has been renamed <code>unsafe</code> (good idea)</li>
+<li><code>@[macroInline]</code>?</li>
+<li>we have a lot of <code>extern cpp</code> now, I'm curious how that works.</li>
+<li><code>==</code> now means boolean equals instead of <code>Heq</code> (which has taken both notations <code>≅</code> and <code>~=</code>)</li>
+<li><code>drec</code> seems to have grown an <code>n</code> (i.e. <code>Eq.ndrec</code>), I'm not sure what it stands for</li>
+<li><code>@[inlineIfReduce, nospecialize] def Decidable.toBool (p : Prop) [h : Decidable p] : Bool</code>: oh boy, new attributes</li>
+<li><code>Array</code> is the new name for <code>buffer</code>, <code>array</code> seems to be gone. They are implemented as array lists instead of persistent arrays now (+1 from me)</li>
+</ul>
+<div class="codehilite"><pre><span></span>partial def shrink : Array α → Nat → Array α
+| a n := if n ≥ a.size then a else shrink a.pop n
+</pre></div>
+
+
+<ul>
+<li>Oh wow, built in partial definitions! I will have to see how this interacts with the type system</li>
+<li>Everything is <code>Bool</code> now instead of <code>Prop</code>. Not sure how this will interact with pure mathematics stuff</li>
+<li><code>Expr</code> is non-meta! Woohoo!</li>
+<li>I think <code>tactic</code> is also non-meta, and has been renamed <code>ElaboratorM</code></li>
+<li><a href="https://github.com/leanprover/lean4/blob/master/library/init/lean/compiler/ir.lean#L10-L11" target="_blank" title="https://github.com/leanprover/lean4/blob/master/library/init/lean/compiler/ir.lean#L10-L11">https://github.com/leanprover/lean4/blob/master/library/init/lean/compiler/ir.lean#L10-L11</a> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Is the article "Counting Immutable Beans" available anywhere?</li>
+</ul>
+
 
 {% endraw %}
