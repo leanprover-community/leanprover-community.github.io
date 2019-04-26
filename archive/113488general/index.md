@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Univalence axiom](96233Univalenceaxiom.html) (26 messages, latest: Apr 26 2019 at 14:59)
+* [Univalence axiom](96233Univalenceaxiom.html) (73 messages, latest: Apr 26 2019 at 15:45)
 
-* [what is a diamond?](58637whatisadiamond.html) (7 messages, latest: Apr 26 2019 at 14:59)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (50 messages, latest: Apr 26 2019 at 15:21)
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (49 messages, latest: Apr 26 2019 at 14:03)
+* [what is a diamond?](58637whatisadiamond.html) (10 messages, latest: Apr 26 2019 at 15:18)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (83 messages, latest: Apr 26 2019 at 12:04)
 
