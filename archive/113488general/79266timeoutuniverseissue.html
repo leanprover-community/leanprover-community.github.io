@@ -1,0 +1,31 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/79266timeoutuniverseissue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/79266timeoutuniverseissue.html">timeout universe issue</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164341486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20universe%20issue/near/164341486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79266timeoutuniverseissue.html#164341486">Kevin Buzzard (Apr 27 2019 at 15:54)</a>:</h4>
+<p>I have spent many hours over the last few weeks trying to make this compile (from deep within the perfectoid project):</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">valuation_on_completion</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">valuation</span>
+    <span class="o">(</span><span class="n">ring_completion</span>
+      <span class="o">(</span><span class="n">valuation</span><span class="bp">.</span><span class="n">valuation_field</span> <span class="n">v</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">value_group</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">valuation</span><span class="bp">.</span><span class="n">completion_extend</span> <span class="o">(</span><span class="n">valuation_field</span><span class="bp">.</span><span class="n">canonical_valuation</span> <span class="n">v</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I would get deterministic timeouts which were extremely hard to debug.</p>
+<p>Today I idly changed <code>Type*</code> to <code>Type u</code> and all the issues immediately went away.</p>
+<p>Thanks Lean.</p>
+
+
+{% endraw %}
