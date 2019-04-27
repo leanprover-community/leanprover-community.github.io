@@ -272,5 +272,53 @@ permalink: archive/113488general/14276Lean4isgoingpublic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164303966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164303966">Joe Hendrix (Apr 26 2019 at 22:46)</a>:</h4>
 <p>Partial functions require that Lean can show the result type is inhabited; I don't think <code>meta</code> requires that.</p>
 
+<a name="164305606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164305606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164305606">Mario Carneiro (Apr 26 2019 at 23:19)</a>:</h4>
+<p>Not necessarily. A partial function from A to B is really a function from A to (optional B) for some sense of "optional", and so it is always inhabited (by bottom)</p>
+
+<a name="164305710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164305710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164305710">Mario Carneiro (Apr 26 2019 at 23:20)</a>:</h4>
+<p>If lean gets native support for <code>partial</code> functions and definitions, then I imagine it will act something like Haskell's "bottom" value inhabiting all (partial) types</p>
+
+<a name="164305779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164305779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164305779">Mario Carneiro (Apr 26 2019 at 23:22)</a>:</h4>
+<p>This isn't really a new feature - lean 3 <code>meta</code> allows you to write nonterminating computations already - but the separation of <code>meta</code> into <code>partial</code> (meaning unqualified recursion is okay) and <code>unsafe</code> (meaning you are doing something not necessarily sound with the VM representation) seems like a good idea</p>
+
+<a name="164306051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306051">Joe Hendrix (Apr 26 2019 at 23:28)</a>:</h4>
+<p>You may be right.  I'm just speaking from what I've seen trying out Lean 4.</p>
+
+<a name="164306064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306064">Mario Carneiro (Apr 26 2019 at 23:29)</a>:</h4>
+<p>oh, are you saying that the lean 4 typechecker is asking for a proof of inhabited?</p>
+
+<a name="164306068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306068">Mario Carneiro (Apr 26 2019 at 23:29)</a>:</h4>
+<p>that's pretty weird if so, because it can't ever use that value</p>
+
+<a name="164306132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306132">Mario Carneiro (Apr 26 2019 at 23:30)</a>:</h4>
+<p>I guess it's a low tech way to avoid inconsistency, but it is not maximally expressive</p>
+
+<a name="164306153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306153">Mario Carneiro (Apr 26 2019 at 23:31)</a>:</h4>
+<p>I haven't actually tried to run lean 4 yet, I'm just reading the code</p>
+
+<a name="164306439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306439">Joe Hendrix (Apr 26 2019 at 23:37)</a>:</h4>
+<p>I've only done a bit of programming, but found it useful so far.  I found it tedious to use combinator-based parsers in Lean 3, but the result types of a parser are pretty much always inhabited.  I haven't tried out proving things though.</p>
+
+<a name="164306510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306510">Mario Carneiro (Apr 26 2019 at 23:39)</a>:</h4>
+<p>My first impression is that lean 4 has skewed a lot more towards programming, possibly at the expense of mathematics. We will have to see</p>
+
+<a name="164306579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306579">Mario Carneiro (Apr 26 2019 at 23:40)</a>:</h4>
+<p>Of course the lack of a tactic framework means we won't be porting mathlib any time soon... although possibly lean 4 allows us to write our own tactic framework now?</p>
+
+<a name="164306657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%204%20is%20going%20public/near/164306657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14276Lean4isgoingpublic.html#164306657">Mario Carneiro (Apr 26 2019 at 23:42)</a>:</h4>
+<p>Isn't the lean 4 parser also combinator based? It looks like they built on Haskell's Parsec library</p>
+
 
 {% endraw %}
