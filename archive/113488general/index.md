@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [debugging to_additive](53081debuggingtoadditive.html) (7 messages, latest: Apr 27 2019 at 16:19)
+* [debugging to_additive](53081debuggingtoadditive.html) (10 messages, latest: Apr 27 2019 at 19:54)
+
+* [search for a buggy lemma](25993searchforabuggylemma.html) (3 messages, latest: Apr 27 2019 at 19:33)
 
 * [timeout universe issue](79266timeoutuniverseissue.html) (1 message, latest: Apr 27 2019 at 15:54)
 

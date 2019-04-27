@@ -100,5 +100,17 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164342522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164342522">Kevin Buzzard (Apr 27 2019 at 16:19)</a>:</h4>
 <p>There's no better way? I was lucky that <code>mul_X</code> was defined and <code>add_X</code> was not; if it had been defined but not given the attribute I suspect this method would have failed.</p>
 
+<a name="164350862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164350862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164350862">Mario Carneiro (Apr 27 2019 at 19:49)</a>:</h4>
+<p>The error actually tells you which to_additive tag is missing, if you know where to look. The error says it tried to apply <code>open_subgroup.is_open</code>, but it is expecting a <code>group</code> and it was given an <code>add_group</code>. That's because <code>group</code> got translated correctly but <code>open_subgroup.is_open</code> didn't. So double check that <code>open_subgroup.is_open</code> has a <code>@[to_additive open_add_subgroup.is_open]</code> annotation</p>
+
+<a name="164351014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351014">Kevin Buzzard (Apr 27 2019 at 19:53)</a>:</h4>
+<p>Yes, that was exactly the problem. I should have read the error more carefully instead of just throwing my hands in the air!</p>
+
+<a name="164351065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351065">Kevin Buzzard (Apr 27 2019 at 19:54)</a>:</h4>
+<p>We had defined <code>open_subgroup.is_open</code> ,  left a gap, and then defined <code>open_add_subgroup.is_open</code> and added the annotation then. Is it safe to just put the annotation before the first definition instead of after the second one? I still don't feel I quite know how these things work. We should do something with equation lemmas too, right?</p>
+
 
 {% endraw %}
