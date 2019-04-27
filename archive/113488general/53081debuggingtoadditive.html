@@ -112,5 +112,33 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351065">Kevin Buzzard (Apr 27 2019 at 19:54)</a>:</h4>
 <p>We had defined <code>open_subgroup.is_open</code> ,  left a gap, and then defined <code>open_add_subgroup.is_open</code> and added the annotation then. Is it safe to just put the annotation before the first definition instead of after the second one? I still don't feel I quite know how these things work. We should do something with equation lemmas too, right?</p>
 
+<a name="164351365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351365">Mario Carneiro (Apr 27 2019 at 20:02)</a>:</h4>
+<p>You can either write <code>open_subgroup.is_open</code> with a <code>@[to_additive open_add_subgroup.is_open]</code> annotation, and it will be generated automatically, or you can write <code>open_subgroup.is_open</code> and <code>open_add_subgroup.is_open</code> and put <code>attribute [to_additive open_add_subgroup.is_open] open_subgroup.is_open</code> afterwards. This will add the tag but will not create the theorem, which can be useful if the proof is not automatic for some reason</p>
+
+<a name="164351381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351381">Kevin Buzzard (Apr 27 2019 at 20:03)</a>:</h4>
+<p>But what about all of the equation lemmas etc? We also then have to tag all of these, right? this is the impression I'm getting from looking at mathlib.</p>
+
+<a name="164351383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351383">Mario Carneiro (Apr 27 2019 at 20:03)</a>:</h4>
+<p>For <code>def</code>s, you also have to mark the equation lemmas with <code>to_additive</code></p>
+
+<a name="164351386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351386">Kevin Buzzard (Apr 27 2019 at 20:03)</a>:</h4>
+<p>Right. Can't this be done automatically?</p>
+
+<a name="164351389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351389">Mario Carneiro (Apr 27 2019 at 20:03)</a>:</h4>
+<p>in principle</p>
+
+<a name="164351441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351441">Mario Carneiro (Apr 27 2019 at 20:04)</a>:</h4>
+<p>right now <code>to_additive</code> doesn't do this because it's not easy to find out when this is necessary</p>
+
+<a name="164351474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351474">Mario Carneiro (Apr 27 2019 at 20:05)</a>:</h4>
+<p>Also you can't create equation lemmas manually (they have a special internal tag that isn't accessible to tactics) so it's not a perfect replica</p>
+
 
 {% endraw %}

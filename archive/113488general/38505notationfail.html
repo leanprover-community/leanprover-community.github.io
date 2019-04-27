@@ -1,0 +1,69 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/38505notationfail.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38505notationfail.html">notation fail</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164352552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20fail/near/164352552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38505notationfail.html#164352552">Kevin Buzzard (Apr 27 2019 at 20:37)</a>:</h4>
+<p>I am in a situation where this term compiles fine:</p>
+<div class="codehilite"><pre><span></span><span class="n">nonempty</span> <span class="o">(</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">equiv</span> <span class="o">(</span><span class="n">locally_ringed_valued_space</span><span class="bp">.</span><span class="n">to_</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">restrict</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">Spa</span> <span class="n">A</span><span class="o">))</span>
+</pre></div>
+
+
+<p>but if I put</p>
+<div class="codehilite"><pre><span></span><span class="kn">notation</span> <span class="n">A</span> <span class="bp">`</span> <span class="err">≅</span> <span class="bp">`</span><span class="o">:</span><span class="mi">50</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">equiv</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and try </p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">locally_ringed_valued_space</span><span class="bp">.</span><span class="n">to_</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">restrict</span> <span class="n">U</span><span class="o">)</span> <span class="err">≅</span> <span class="o">(</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">Spa</span> <span class="n">A</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I get the error</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  (λ (x_1 : 𝒞 ↥U) (x_2 : 𝒞 ?m_1[x_1]), x_1 ≅ x_2)
+    (𝒞.restrict U (𝒱.to_𝒞 locally_ringed_valued_space))
+    (𝒞.Spa A)
+term
+  𝒞.Spa A
+has type
+  𝒞 ↥(Spa A) : Type (?+1)
+but is expected to have type
+  𝒞 ?m_1[𝒞.restrict U (𝒱.to_𝒞 locally_ringed_valued_space)] : Type (max ? (?+1))
+</pre></div>
+
+
+<p>Similarly if I switch the two terms around I get</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  (λ (x_1 : 𝒞 ↥(Spa A)) (x_2 : 𝒞 ?m_1[x_1]), x_1 ≅ x_2) (𝒞.Spa A)
+    (𝒞.restrict U (𝒱.to_𝒞 locally_ringed_valued_space))
+term
+  𝒞.restrict U (𝒱.to_𝒞 locally_ringed_valued_space)
+has type
+  𝒞 ↥U : Type (max u (?+1))
+but is expected to have type
+  𝒞 ?m_1[𝒞.Spa A] : Type (max ? (?+1))
+</pre></div>
+
+
+<p>Is this a limitation of notation somehow? I'd be surprised -- I'd be more likely to believe that I'm not using it correctly or I've made some other error. If notation is just syntactic sugar then as far as I can see the thing that's failing just directly translates into the thing that's succeeding.</p>
+
+<a name="164352698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20fail/near/164352698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38505notationfail.html#164352698">Kevin Buzzard (Apr 27 2019 at 20:40)</a>:</h4>
+<p>Oh! I've got to the bottom of it and it's part of the story which I didn't mention. The <code>\iso</code> notation is overloaded, and for some reason Lean isn't trying as hard to unify because it is not sure which function I mean. If I change my notation to an un-overloaded one then it works.</p>
+
+<a name="164352714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20fail/near/164352714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38505notationfail.html#164352714">Kevin Buzzard (Apr 27 2019 at 20:41)</a>:</h4>
+<p>I guess Lean is being more cautious in trying to unify because it doesn't want to end up spending a lot of time trying to typecheck something which doesn't typecheck, or something.</p>
+
+
+{% endraw %}
