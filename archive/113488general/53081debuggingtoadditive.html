@@ -76,5 +76,21 @@ but is expected to have type
 <p>and my interpretation of this error is "the <code>to_additive</code> algorithm failed". Indeed if I comment out <code>@[to_additive open_add_subgroup.is_closed]</code> the error goes away.</p>
 <p>How do I begin to debug this issue? I would prefer an answer which didn't involve bisection (i.e. attempting to prove smaller and smaller lemmas using automation) -- that's what I'm trying to avoid.</p>
 
+<a name="164328155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328155">Patrick Massot (Apr 27 2019 at 10:04)</a>:</h4>
+<p>Maybe one intermediate lemma used in the proof misses a <code>to_additive</code> tag</p>
+
+<a name="164328179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328179">Kevin Buzzard (Apr 27 2019 at 10:06)</a>:</h4>
+<p>Right. But Lean knows which one, and yet the only way I know of for finding out for myself is by a tedious process involving lots of sublemmas half the size of the previous sublemma. Whereas Lean knows right now.</p>
+
+<a name="164328668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328668">Sebastien Gouezel (Apr 27 2019 at 10:18)</a>:</h4>
+<p>Offtopic, but your first lemma's assumptions are too strong: you just need <code>s</code> to contain a nonempty open set.</p>
+
+<a name="164328838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328838">Kevin Buzzard (Apr 27 2019 at 10:23)</a>:</h4>
+<p>Indeed! Nice catch, thanks.</p>
+
 
 {% endraw %}
