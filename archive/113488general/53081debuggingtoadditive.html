@@ -1,0 +1,80 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53081debuggingtoadditive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html">debugging to_additive</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164327849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164327849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164327849">Kevin Buzzard (Apr 27 2019 at 09:55)</a>:</h4>
+<p>I'm writing code about open subgroups. Patrick wrote the first lemma here and I wrote the second. Note: this is not a MWE, the WE is "clone the perfectoid project and try this in <code>for_mathlib/nonarchimedean/open_subgroup</code>" and I'm not going to minimise right now because I'm looking for techniques, not answers.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">open_add_subgroup</span><span class="bp">.</span><span class="n">is_open_of_open_add_subgroup</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">is_open_of_open_subgroup</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_subgroup</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">U</span> <span class="o">:</span> <span class="n">open_subgroup</span> <span class="n">G</span><span class="o">,</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">is_open_iff_forall_mem_open</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">h₂</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">U</span><span class="o">,</span> <span class="n">h₁U</span><span class="o">,</span> <span class="n">h₂U</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span> <span class="n">at</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">hu</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">hu</span> <span class="n">hx</span> <span class="o">},</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">continuous_mul</span> <span class="n">continuous_id</span> <span class="n">continuous_const</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">h₁U</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply_instance</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h₂U</span><span class="bp">.</span><span class="n">to_is_submonoid</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">open_add_subgroup</span><span class="bp">.</span><span class="n">is_closed</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">open_subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)),</span>
+  <span class="n">rw</span> <span class="n">is_open_iff_forall_mem_open</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">u</span> <span class="n">hux</span><span class="o">,</span>
+    <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span> <span class="n">at</span> <span class="n">hux</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_compl_iff</span> <span class="n">at</span> <span class="n">hx</span> <span class="err">⊢</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">hu</span><span class="o">,</span> <span class="n">apply</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="o">(</span><span class="n">is_subgroup</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hux</span><span class="o">)</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">continuous_mul</span> <span class="n">continuous_id</span> <span class="n">continuous_const</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">U</span><span class="bp">.</span><span class="n">is_open</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply_instance</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_inv_self</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>First lemma works fine. Second lemma gives error</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  @open_subgroup.is_open G _inst_1
+term
+  _inst_1
+has type
+  add_group G
+but is expected to have type
+  group G
+</pre></div>
+
+
+<p>and my interpretation of this error is "the <code>to_additive</code> algorithm failed". Indeed if I comment out <code>@[to_additive open_add_subgroup.is_closed]</code> the error goes away.</p>
+<p>How do I begin to debug this issue? I would prefer an answer which didn't involve bisection (i.e. attempting to prove smaller and smaller lemmas using automation) -- that's what I'm trying to avoid.</p>
+
+
+{% endraw %}
