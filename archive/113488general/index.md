@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout universe issue](79266timeoutuniverseissue.html) (1 message, latest: Apr 27 2019 at 15:54)
+* [debugging to_additive](53081debuggingtoadditive.html) (7 messages, latest: Apr 27 2019 at 16:19)
 
-* [debugging to_additive](53081debuggingtoadditive.html) (5 messages, latest: Apr 27 2019 at 10:23)
+* [timeout universe issue](79266timeoutuniverseissue.html) (1 message, latest: Apr 27 2019 at 15:54)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (66 messages, latest: Apr 26 2019 at 23:42)
 
