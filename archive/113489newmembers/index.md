@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [INduction](74638INduction.html) (6 messages, latest: Apr 27 2019 at 21:49)
+* [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
 
-* [Induction](51886Induction.html) (121 messages, latest: Apr 27 2019 at 21:33)
+* [Induction](51886Induction.html) (124 messages, latest: Apr 27 2019 at 22:07)
 
 * [Jose Balado](77525JoseBalado.html) (37 messages, latest: Apr 27 2019 at 20:04)
 
