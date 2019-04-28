@@ -923,5 +923,47 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164398291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164398291">Patrick Thomas (Apr 28 2019 at 17:40)</a>:</h4>
 <p>I guess I mean: What is being substituted for what in the definition of <code>if_pos</code> and how does it decide on those particular substitutions? Is there a way in Visual Studio to see what substitutions are being made?</p>
 
+<a name="164402688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164402688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164402688">Alistair Tucker (Apr 28 2019 at 19:24)</a>:</h4>
+<p>You mean the implicit arguments to if_pos? The stuff in curly brackets?</p>
+
+<a name="164402763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164402763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164402763">Alistair Tucker (Apr 28 2019 at 19:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">if_pos</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="bp">_</span> <span class="n">h</span> <span class="n">pre_term</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+<a name="164402862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164402862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164402862">Mario Carneiro (Apr 28 2019 at 19:29)</a>:</h4>
+<blockquote>
+<p>How does the <code>if_pos</code> example know which constructor of <code>sub</code> to use? Can it be explicitly told?</p>
+</blockquote>
+<p><code>sub</code> doesn't have constructors - it's a recursive definition. So <code>sub (pre_term.var y) x N</code> and <code>if x = y then N else (pre_term.var y)</code> are the same thing from lean's point of view, there is no constructor application to turn one into the other, just definitional unfolding</p>
+
+<a name="164403801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164403801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164403801">Kevin Buzzard (Apr 28 2019 at 19:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">if_pos</span> <span class="n">h</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">if_pos</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">if_pos : ?M_1 → ∀ {α : Sort u_1} {t e : α}, ite ?M_1 t e = t</span>
+<span class="cm">-/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">if_pos</span> <span class="c1">-- sometimes output is clearer</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">if_pos : ∀ {c : Prop} [h : decidable c],</span>
+<span class="cm">  c → ∀ {α : Sort u_1} {t e : α}, ite c t e = t</span>
+<span class="cm">-/</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">if_pos</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="164403889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164403889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164403889">Kevin Buzzard (Apr 28 2019 at 19:52)</a>:</h4>
+<p>Of the five inputs to <code>if_pos</code> that you didn't give, four were worked out by just thinking about the types of things, and the value of <code>h : decidable c</code> was supplied by the type class inference system.</p>
+
+<a name="164403916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164403916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164403916">Kevin Buzzard (Apr 28 2019 at 19:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">N</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">if_pos</span> <span class="bp">_</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span> <span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
 
 {% endraw %}
