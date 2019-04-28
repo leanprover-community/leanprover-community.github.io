@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (125 messages, latest: Apr 28 2019 at 17:40)
+
 * [Jose Balado](77525JoseBalado.html) (92 messages, latest: Apr 28 2019 at 15:09)
 
 * [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
-
-* [Induction](51886Induction.html) (124 messages, latest: Apr 27 2019 at 22:07)
 
 * [Proving Cayley's Theorem](10331ProvingCayleysTheorem.html) (80 messages, latest: Apr 26 2019 at 22:29)
 
