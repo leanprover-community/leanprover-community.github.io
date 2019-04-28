@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3040 messages, latest: Apr 28 2019 at 19:21)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3042 messages, latest: Apr 28 2019 at 20:36)
+
+* [Multiple differentiability](89979Multipledifferentiability.html) (10 messages, latest: Apr 28 2019 at 20:28)
 
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (27 messages, latest: Apr 26 2019 at 19:32)
 
