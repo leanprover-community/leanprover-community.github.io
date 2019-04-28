@@ -10,11 +10,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#878  remove dependencies](50528878removedependencies.html) (64 messages, latest: Apr 28 2019 at 21:52)
+
 * [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (12 messages, latest: Apr 23 2019 at 04:59)
 
 * [#927 operator norm](08942927operatornorm.html) (9 messages, latest: Apr 20 2019 at 22:06)
-
-* [#878  remove dependencies](50528878removedependencies.html) (63 messages, latest: Apr 19 2019 at 17:33)
 
 * [#931 complete lattices have (co)limits](13196931completelatticeshavecolimits.html) (5 messages, latest: Apr 18 2019 at 18:09)
 
