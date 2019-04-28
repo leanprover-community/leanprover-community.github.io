@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2969 messages, latest: Apr 28 2019 at 11:45)
+
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (27 messages, latest: Apr 26 2019 at 19:32)
 
 * [stuff we want](64767stuffwewant.html) (79 messages, latest: Apr 25 2019 at 17:30)
@@ -117,8 +119,6 @@ permalink: archive/116395maths/index.html
 * [bounds](43084bounds.html) (43 messages, latest: Mar 17 2019 at 17:11)
 
 * [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (14 messages, latest: Mar 14 2019 at 21:22)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2962 messages, latest: Mar 13 2019 at 08:04)
 
 * [filter bases](55413filterbases.html) (29 messages, latest: Mar 12 2019 at 15:53)
 
