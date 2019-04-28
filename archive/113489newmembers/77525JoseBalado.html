@@ -261,5 +261,162 @@ example (p q : Prop) : ¬(p ∨ q) ↔ ¬p ∧ ¬q := not_or_distrib
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164351448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164351448">Kevin Buzzard (Apr 27 2019 at 20:04)</a>:</h4>
 <p>Make sure you figure out the <code>update_mathlib</code> magic sauce</p>
 
+<a name="164386878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164386878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164386878">Jose Balado (Apr 28 2019 at 13:22)</a>:</h4>
+<p>Sorry <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , I was unable to install mathlib. I don't use python so probably I am doing something wrong, but after installing <code>pip</code>, and <code>setuptools</code> with the <code>--user</code> option, I was able to run this command and it all seemed fine:</p>
+<div class="codehilite"><pre><span></span>curl https://raw.githubusercontent.com/leanprover-community/mathlib/master/scripts/remote-install-update-mathlib.sh -sSf | sh
+</pre></div>
+
+
+<p>but this <code>mathlib scripts are already added to $PATH in .profile</code> doesn't seem to work on Linux Mint/Ubuntu.</p>
+<p>And when I go to <code>~/.mathlib/bin</code> and execute <code>./update-mathlib</code> I got this error:</p>
+<div class="codehilite"><pre><span></span>/home/aris/.local/lib/python3.5/site-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.25.1) or chardet (3.0.4) doesn&#39;t match a supported version!
+  RequestsDependencyWarning)
+Error: No leanpkg.toml found
+</pre></div>
+
+
+<p>If I download the repository <code>mathlib-scripts-###-###-###.tar.gz</code> and run <code>./update-mathlib.py</code><br>
+I got this:</p>
+<div class="codehilite"><pre><span></span>/home/aris/.local/lib/python3.5/site-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.25.1) or chardet (3.0.4) doesn&#39;t match a supported version!
+  RequestsDependencyWarning)
+Traceback (most recent call last):
+  File &quot;./update-mathlib.py&quot;, line 25, in &lt;module&gt;
+    lib = leanpkg[&#39;dependencies&#39;][&#39;mathlib&#39;]
+KeyError: &#39;mathlib&#39;
+</pre></div>
+
+
+<p>Will it be possible to manually copy that definition directly <code>not_or_distrib</code> or perhaps manually copy the folder <code>logic</code> from mathlib to where my exercises are and import the logic library with <code>import</code>?<br>
+Thanks</p>
+
+<a name="164386896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164386896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164386896">Patrick Massot (Apr 28 2019 at 13:23)</a>:</h4>
+<p>you are meant to run <code>update-mathlib</code> inside your project root folder</p>
+
+<a name="164386909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164386909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164386909">Patrick Massot (Apr 28 2019 at 13:23)</a>:</h4>
+<p>Could you please try that and report here?</p>
+
+<a name="164386984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164386984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164386984">Jose Balado (Apr 28 2019 at 13:25)</a>:</h4>
+<p>Thanks Patrick, if I run inside my project: <code>update-mathlib</code></p>
+<div class="codehilite"><pre><span></span>/home/aris/.local/lib/python3.5/site-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.25.1) or chardet (3.0.4) doesn&#39;t match a supported version!
+  RequestsDependencyWarning)
+Error: No leanpkg.toml found
+</pre></div>
+
+<a name="164387035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387035">Patrick Massot (Apr 28 2019 at 13:26)</a>:</h4>
+<p>I need more info: where exactly did you run that command, and what is the content of that directory?</p>
+
+<a name="164387057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387057">Jose Balado (Apr 28 2019 at 13:27)</a>:</h4>
+<p>but I had manually <code>update-mathlib</code> to the <code>.
+bashrc</code> file</p>
+<div class="codehilite"><pre><span></span>export PATH=&quot;$HOME/.elan/bin:$PATH&quot;
+export PATH=&quot;$HOME/.mathlib/bin:$PATH&quot;
+</pre></div>
+
+<a name="164387107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387107">Jose Balado (Apr 28 2019 at 13:28)</a>:</h4>
+<p>The content is just a file called: <code>3.Propositions_and_Proofs.lean</code></p>
+
+<a name="164387111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387111">Patrick Massot (Apr 28 2019 at 13:28)</a>:</h4>
+<p>Then this is not a project</p>
+
+<a name="164387114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387114">Jose Balado (Apr 28 2019 at 13:28)</a>:</h4>
+<p>is a folder where I run this project using VSCode</p>
+
+<a name="164387118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387118">Patrick Massot (Apr 28 2019 at 13:29)</a>:</h4>
+<p>did you use <code>leanpkg new</code>?</p>
+
+<a name="164387139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387139">Patrick Massot (Apr 28 2019 at 13:29)</a>:</h4>
+<p>We cannot do much for you if you don't follow the instructions at <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package">https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package</a></p>
+
+<a name="164387198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387198">Jose Balado (Apr 28 2019 at 13:30)</a>:</h4>
+<p>Ah, thanks Patrick, that must be it</p>
+
+<a name="164387205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387205">Patrick Massot (Apr 28 2019 at 13:30)</a>:</h4>
+<p>The end of those instructions is outdated in the sense that it doesn't use <code>update-mathlib</code>, but everything up to installation of uncompiled mathlib is ok</p>
+
+<a name="164387302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387302">Jose Balado (Apr 28 2019 at 13:32)</a>:</h4>
+<p>Didn't know that way of running Lean, will work on that, thanks.<br>
+I was simply using VSCode to run Lean, a little like in the browser, and following <code>Theorem Proving in Lean</code>.<br>
+Will try that</p>
+
+<a name="164387523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387523">Kevin Buzzard (Apr 28 2019 at 13:37)</a>:</h4>
+<blockquote>
+<p>We cannot do much for you if you don't follow the instructions at <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package">https://github.com/leanprover-community/mathlib/blob/master/docs/elan.md#scenario-1-start-a-new-package</a></p>
+</blockquote>
+<p>We need to make it easier for beginners.</p>
+
+<a name="164387529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387529">Patrick Massot (Apr 28 2019 at 13:37)</a>:</h4>
+<p>Yes I know</p>
+
+<a name="164387545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387545">Patrick Massot (Apr 28 2019 at 13:37)</a>:</h4>
+<p>Now my teaching and my perfectoid spaces are done, I firmly intend to come back to this</p>
+
+<a name="164387553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387553">Kevin Buzzard (Apr 28 2019 at 13:37)</a>:</h4>
+<p>Can't we make some Lean sample project, and host it on community mathlib?</p>
+
+<a name="164387644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387644">Kevin Buzzard (Apr 28 2019 at 13:39)</a>:</h4>
+<p>A sample project with Lean 3.4.2 and mathlib some version <em>guaranteed</em> to be (a) relatively close to <code>master</code> and (b) <code>update-mathlib</code> <em>must</em> work? And a src directory with a random theorem, like a maths proof involving equivalence relations or something.</p>
+
+<a name="164387674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387674">Kevin Buzzard (Apr 28 2019 at 13:39)</a>:</h4>
+<p>And also a file in it called CLICK_HERE_TO_INSTALL_ALL_LEAN_THINGS.exe</p>
+
+<a name="164387763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387763">Kevin Buzzard (Apr 28 2019 at 13:40)</a>:</h4>
+<p>and then we just tell people to clone it and click on the right thing</p>
+
+<a name="164387787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164387787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164387787">Kevin Buzzard (Apr 28 2019 at 13:41)</a>:</h4>
+<p>and it installs VS Code and the Lean extension and it all just works</p>
+
+<a name="164388180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388180">Patrick Massot (Apr 28 2019 at 13:48)</a>:</h4>
+<p>This is not so easy to do in a platform-independent way</p>
+
+<a name="164388205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388205">Patrick Massot (Apr 28 2019 at 13:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="219844">@Jose Balado</span> did you follow the instruction? Anything you hide from us is preventing us to improve the instructions from beginners.</p>
+
+<a name="164388293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388293">Jose Balado (Apr 28 2019 at 13:51)</a>:</h4>
+<p>Thanks Patrick will let you know as soon as possible, but not sure if today :)</p>
+
+<a name="164388295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388295">Jose Balado (Apr 28 2019 at 13:51)</a>:</h4>
+<p>Well, I think if I had read everything I would have realized about that. The thing is that that the  <code>elan</code> plugin for VSCode makes things so simple to start working that I didn't even put more attention to the rest of the README.md. I was just very happy reading <code>Theorem Proving in Lean</code> and doing  proofs of theorems.<br>
+I of course had a vague idea that there should be a way to create packages and link libraries in Lean, but didn't really worry about that.<br>
+Some time ago I tried to install Agda, but gave up as soon as I was able to magically run Lean through VSCode.<br>
+I think what you are proposing of a sample project and just click here and have everything working would be fantastic, mostly for people that are completely on their own, without an instructor or any one to help you by your side.</p>
+
+<a name="164388445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388445">Patrick Massot (Apr 28 2019 at 13:54)</a>:</h4>
+<p>I really don't understand how long it can take to run this <code>leanpkg +3.4.2 new my_playground</code>, <code>cd my_playground</code>, <code>leanpkg add leanprover/mathlib</code> and <code>update-mathlib</code></p>
+
+<a name="164388462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388462">Patrick Massot (Apr 28 2019 at 13:55)</a>:</h4>
+<p>On my machine it literally takes less than ten seconds if I copy paste the commands</p>
+
+<a name="164388553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Jose%20Balado/near/164388553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77525JoseBalado.html#164388553">Jose Balado (Apr 28 2019 at 13:58)</a>:</h4>
+<p>Well yes, I tried that, and to that point it worked, but to be sure I need understand what I am doing, try to prove a theorem, import that library, and see if everything is working.</p>
+
 
 {% endraw %}

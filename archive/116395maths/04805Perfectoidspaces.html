@@ -13825,5 +13825,89 @@ And now the definition of <code>Huber_ring</code> becomes something like</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164383951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164383951">Patrick Massot (Apr 28 2019 at 12:04)</a>:</h4>
 <p>Now we have a lot of cleanup to do, and we would like to ask Travis to check each push. Does anyone has an example of a Lean project using mathlib that is Travis-checked?</p>
 
+<a name="164386450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386450">Kenny Lau (Apr 28 2019 at 13:10)</a>:</h4>
+<p>Is this the main result?</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">perfectoid_space</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">adic_space</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">perfectoid_cover</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">Huber_pair</span><span class="o">)</span> <span class="o">[</span><span class="n">perfectoid_ring</span> <span class="n">A</span><span class="o">],</span>
+  <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">Spa</span> <span class="n">A</span><span class="o">)</span> <span class="err">≅</span><span class="bp">_</span><span class="err">𝒞</span> <span class="o">(</span><span class="n">locally_ringed_valued_space</span><span class="bp">.</span><span class="n">to_</span><span class="err">𝒞</span><span class="bp">.</span><span class="n">restrict</span> <span class="n">U</span><span class="o">))</span>
+</pre></div>
+
+<a name="164386669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386669">Patrick Massot (Apr 28 2019 at 13:16)</a>:</h4>
+<p>Yes</p>
+
+<a name="164386670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386670">Patrick Massot (Apr 28 2019 at 13:16)</a>:</h4>
+<p>The main result is that Lean understands this definition</p>
+
+<a name="164386798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386798">Kevin Buzzard (Apr 28 2019 at 13:20)</a>:</h4>
+<p>Although it is most definitely clear that dependent type theory understands this definition, it was not always clear, near the end, that Lean 3 was powerful enough to handle it, at least with the code we were writing. As you'll be easily able to see from looking at the repo Kenny, some of it has been written with quite some care (indeed a lot of thought went into some of it), and other parts were just slapped down and called <code>r_o_d_completion.lean</code> because I knew we just needed a bunch of abstract stuff which was easy to write so I just splurged it out paying very little attention to things like good naming conventions. The repo still needs a lot of work before it is respectable.</p>
+
+<a name="164386953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386953">Kevin Buzzard (Apr 28 2019 at 13:24)</a>:</h4>
+<p>This was the last file we wrote: <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/field.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/field.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/field.lean</a></p>
+
+<a name="164386954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386954">Kevin Buzzard (Apr 28 2019 at 13:24)</a>:</h4>
+<p>I had a very lackadaisical approach to planning.</p>
+
+<a name="164386959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386959">Kevin Buzzard (Apr 28 2019 at 13:24)</a>:</h4>
+<p>Patrick kept asking me to write proper roadmaps. I was really bad at this. I would just write a normal mathematical document.</p>
+
+<a name="164386979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386979">Kevin Buzzard (Apr 28 2019 at 13:25)</a>:</h4>
+<p>Patrick would extrapolate what I needed from the theory of topological rings and valuations (answer : loads and loads and loads of stuff that wasn't in mathlib but was in Bourbaki)</p>
+
+<a name="164386989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164386989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164386989">Kevin Buzzard (Apr 28 2019 at 13:25)</a>:</h4>
+<p>and then make it and then ask me again for a roadmap and I'd be saying "oh yeah, do have this random result about completions of topological rings which I never mentioned before and is another 10 pages of Bourbaki?"</p>
+
+<a name="164387055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387055">Kevin Buzzard (Apr 28 2019 at 13:27)</a>:</h4>
+<p>And the final iteration, about three weeks ago, was when I said "oh by the way did I mention that I need that a valuation on a field extends to a valuation on the completion of the field for the valuation topology? It's sort of obvious by continuity..."</p>
+
+<a name="164387104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387104">Kevin Buzzard (Apr 28 2019 at 13:28)</a>:</h4>
+<p>and Patrick was like "aargh you do realise that this is three more pages of Bourbaki why did you not mention this before" (answer: because Kevin thought it would probably be obvious by continuity).</p>
+
+<a name="164387109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387109">Kevin Buzzard (Apr 28 2019 at 13:28)</a>:</h4>
+<p>and then it turns out that at some point Bourbaki go "oh yeah, and this bit is obvious by continuity" <em>rofl</em></p>
+
+<a name="164387152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387152">Kevin Buzzard (Apr 28 2019 at 13:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> what is the reference for that bit? There was the valuation on the units of K extending to the units of the completion, and also another bit about cauchy filters which didn't tend to zero</p>
+
+<a name="164387199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387199">Kevin Buzzard (Apr 28 2019 at 13:30)</a>:</h4>
+<p>I should publically apologise to Patrick for not ever making a good roadmap.</p>
+
+<a name="164387225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387225">Kevin Buzzard (Apr 28 2019 at 13:31)</a>:</h4>
+<p>I found all the material straightforward modulo "bits which looked easy but actually I'd never read the details of and thought would be fine". It took me a long time to get to grips with the grim reality</p>
+
+<a name="164387229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387229">Kevin Buzzard (Apr 28 2019 at 13:31)</a>:</h4>
+<p>Maths is hard.</p>
+
+<a name="164387238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387238">Kevin Buzzard (Apr 28 2019 at 13:32)</a>:</h4>
+<p>I kept thinking "oh, and the rest is surely easy" when it really was not easy.</p>
+
+<a name="164387284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387284">Patrick Massot (Apr 28 2019 at 13:32)</a>:</h4>
+<p>The reference is in Bourabaki <em>Algèbre commutative</em> Chapter VI, 5.3</p>
+
+<a name="164387290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387290">Kevin Buzzard (Apr 28 2019 at 13:32)</a>:</h4>
+<p>Look at my ridiculous prediction from September 21st last year.</p>
+
+<a name="164387342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfectoid%20spaces/near/164387342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04805Perfectoidspaces.html#164387342">Kevin Buzzard (Apr 28 2019 at 13:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I'd be interest to see you formalise a proof of some of the statements in Bourbaki, even if you're allowed to assume that everything in Bourbaki up to that point had been formalised. Is it Ok to post a screenshot of material?</p>
+
 
 {% endraw %}
