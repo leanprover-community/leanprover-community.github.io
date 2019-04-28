@@ -1,0 +1,98 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/58705equivmodule.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html">equiv module</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164380313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164380313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164380313">Hoang Le Truong (Apr 28 2019 at 10:21)</a>:</h4>
+<p>I want to construct the following theorem:</p>
+<p>if <code>α</code> has a <code> γ </code>- module structure and <code>α ≃ β</code> then β has <code> γ </code>- module structure<br>
+I have a problem.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">data.equiv.algebra</span>  <span class="nn">algebra.module</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+<span class="n">variables</span> <span class="p">{</span><span class="err">α</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">u</span><span class="p">}</span> <span class="p">{</span><span class="err">β</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">v</span><span class="p">}</span> <span class="p">{</span><span class="err">γ</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">w</span><span class="p">}</span>
+<span class="nb">open</span> <span class="n">equiv</span>
+
+<span class="n">namespace</span> <span class="n">equiv</span>
+<span class="n">section</span> <span class="n">instances</span>
+<span class="n">variables</span> <span class="p">(</span><span class="n">e</span> <span class="p">:</span> <span class="err">α</span> <span class="err">≃</span> <span class="err">β</span><span class="p">)</span>
+<span class="n">protected</span> <span class="k">def</span> <span class="nf">has_scalar</span> <span class="p">[</span><span class="n">has_scalar</span> <span class="err">γ</span> <span class="err">β</span><span class="p">]</span> <span class="p">:</span> <span class="n">has_scalar</span> <span class="err">γ</span> <span class="err">α</span> <span class="p">:</span><span class="o">=</span> <span class="err">⟨λ</span> <span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="err">γ</span><span class="p">)</span>  <span class="n">x</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">symm</span> <span class="p">(</span> <span class="n">a</span> <span class="err">•</span> <span class="n">e</span> <span class="n">x</span><span class="p">)</span><span class="err">⟩</span>
+
+<span class="n">lemma</span> <span class="n">smul_def</span> <span class="p">[</span><span class="n">has_scalar</span> <span class="err">γ</span> <span class="err">β</span><span class="p">]</span> <span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="err">γ</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="err">α</span><span class="p">)</span> <span class="p">:</span>
+  <span class="nd">@has_scalar.smul</span> <span class="n">_</span> <span class="n">_</span> <span class="p">(</span><span class="n">equiv</span><span class="o">.</span><span class="n">has_scalar</span> <span class="n">e</span><span class="p">)</span> <span class="n">a</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">symm</span> <span class="p">(</span> <span class="n">a</span> <span class="err">•</span> <span class="n">e</span> <span class="n">x</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="n">rfl</span>
+
+<span class="n">protected</span> <span class="k">def</span> <span class="nf">mul_action</span> <span class="p">[</span><span class="n">monoid</span> <span class="err">γ</span><span class="p">][</span><span class="n">mul_action</span> <span class="err">γ</span>  <span class="err">β</span><span class="p">]</span> <span class="p">:</span> <span class="n">mul_action</span> <span class="err">γ</span>  <span class="err">α</span> <span class="p">:</span><span class="o">=</span>
+<span class="p">{</span> <span class="n">one_smul</span> <span class="p">:</span><span class="o">=</span> <span class="n">by</span> <span class="n">simp</span> <span class="p">[</span><span class="n">smul_def</span><span class="p">],</span>
+  <span class="n">mul_smul</span> <span class="p">:</span><span class="o">=</span> <span class="n">by</span> <span class="n">simp</span> <span class="p">[</span><span class="n">smul_def</span><span class="p">,</span> <span class="n">mul_action</span><span class="o">.</span><span class="n">mul_smul</span><span class="p">],</span>
+  <span class="o">..</span><span class="n">equiv</span><span class="o">.</span><span class="n">has_scalar</span> <span class="n">e</span>  <span class="p">}</span>
+
+<span class="n">protected</span> <span class="k">def</span> <span class="nf">distrib_mul_action</span> <span class="p">[</span><span class="n">monoid</span> <span class="err">γ</span><span class="p">]</span> <span class="p">[</span><span class="n">add_monoid</span> <span class="err">β</span><span class="p">]</span>  <span class="p">[</span><span class="n">distrib_mul_action</span> <span class="err">γ</span>  <span class="err">β</span><span class="p">]</span> <span class="p">:</span> <span class="n">distrib_mul_action</span> <span class="err">γ</span> <span class="err">α</span>  <span class="p">:</span><span class="o">=</span>
+<span class="p">{</span> <span class="n">smul_add</span>  <span class="p">:</span><span class="o">=</span> <span class="n">by</span> <span class="n">simp</span> <span class="p">[</span><span class="n">smul_def</span><span class="p">],</span>
+  <span class="n">smul_zero</span> <span class="p">:</span><span class="o">=</span> <span class="n">by</span> <span class="n">simp</span> <span class="p">[</span><span class="n">zero_def</span><span class="p">,</span> <span class="n">smul_def</span><span class="p">,</span> <span class="n">distrib_mul_action</span><span class="p">],</span>
+  <span class="o">..</span><span class="n">equiv</span><span class="o">.</span><span class="n">mul_action</span> <span class="n">e</span><span class="p">,</span>
+  <span class="o">..</span><span class="n">equiv</span><span class="o">.</span><span class="n">add_monoid</span> <span class="n">e</span>
+<span class="p">}</span>
+
+<span class="n">end</span> <span class="n">instances</span>
+<span class="n">end</span> <span class="n">equiv</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="nb">type</span> <span class="k">class</span> <span class="nc">instance</span> <span class="k">for</span>
+<span class="err">α</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">u</span><span class="p">,</span>
+<span class="err">β</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">v</span><span class="p">,</span>
+<span class="err">γ</span> <span class="p">:</span> <span class="n">Type</span> <span class="n">w</span><span class="p">,</span>
+<span class="n">e</span> <span class="p">:</span> <span class="err">α</span> <span class="err">≃</span> <span class="err">β</span><span class="p">,</span>
+<span class="n">_inst_1</span> <span class="p">:</span> <span class="n">monoid</span> <span class="err">γ</span><span class="p">,</span>
+<span class="n">_inst_2</span> <span class="p">:</span> <span class="n">add_monoid</span> <span class="err">β</span><span class="p">,</span>
+<span class="n">_inst_3</span> <span class="p">:</span> <span class="n">distrib_mul_action</span> <span class="err">γ</span> <span class="err">β</span>
+<span class="err">⊢</span> <span class="n">add_monoid</span> <span class="err">α</span>
+</pre></div>
+
+
+<p>How can fix it?</p>
+
+<a name="164380548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164380548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164380548">Kevin Buzzard (Apr 28 2019 at 10:28)</a>:</h4>
+<p>Yeah, you're not the only one with this sort of problem</p>
+
+<a name="164380559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164380559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164380559">Kevin Buzzard (Apr 28 2019 at 10:29)</a>:</h4>
+<p>The computer scientists are working on it</p>
+
+<a name="164380560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164380560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164380560">Chris Hughes (Apr 28 2019 at 10:29)</a>:</h4>
+<p>If you go into <code>data.equiv.algebra</code>, there are a bunch of definitions that will let you transfer the ring structure from alpha to beta.</p>
+
+<a name="164380832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164380832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164380832">Hoang Le Truong (Apr 28 2019 at 10:37)</a>:</h4>
+<p>@<strong> Chris Hughes</strong> I read <code>data.equiv.algebra</code> but I don't understand how to fix it. What is hidden in this error?</p>
+
+<a name="164381005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164381005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164381005">Hoang Le Truong (Apr 28 2019 at 10:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Yes, I need the computer scientist to explain this error.</p>
+
+<a name="164381147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv%20module/near/164381147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58705equivmodule.html#164381147">Chris Hughes (Apr 28 2019 at 10:47)</a>:</h4>
+<p>The error is that Lean doesn't know what the <code>add_monoid</code> structure is on <code>α</code>. You can fix this by putting an <code>add_monoid</code> structure on <code>α</code> like this.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">add_monoid</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">add_monoid</span> <span class="n">e</span>
+</pre></div>
+
+
+<p>Depending on your application, it might just be better to make <code>add_monoid α</code> an assumption, and stipulate that <code>e</code> is an<code>add_equiv</code></p>
+
+
+{% endraw %}
