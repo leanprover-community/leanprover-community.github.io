@@ -1,0 +1,34 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/48465nestedinductivetype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html">nested inductive type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164436786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/164436786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#164436786">Björn Fischer (Apr 29 2019 at 09:17)</a>:</h4>
+<p>Is it possible to define a nested inductive type on a vector-like structure instead of lists?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">expression</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">{</span><span class="n">dim</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">idx</span> <span class="o">:</span> <span class="n">vector</span> <span class="o">(</span><span class="n">expression</span><span class="o">)</span> <span class="n">dim</span><span class="o">)</span> <span class="c">/-</span><span class="cm"> omitted constraints on dim -/</span> <span class="o">:</span> <span class="n">expression</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="o">:</span> <span class="n">expression</span>
+</pre></div>
+
+
+<p>I get the following error: nested occurrence [...] contains variables that are not parameters.</p>
+
+<a name="164437039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/164437039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#164437039">Chris Hughes (Apr 29 2019 at 09:21)</a>:</h4>
+<p>I think this is an inductive recursive type, since it depends on the <code>length</code> function for lists. I don't think this is possible.</p>
+
+<a name="164437742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/164437742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#164437742">Mario Carneiro (Apr 29 2019 at 09:33)</a>:</h4>
+<p>This isn't an inductive recursive, but it's not a supported nested inductive. The easiest solution is to use <code>fin dim -&gt; expression</code> instead of <code>vector expression dim</code></p>
+
+
+{% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nested inductive type](48465nestedinductivetype.html) (3 messages, latest: Apr 29 2019 at 09:33)
+
 * [equiv module](58705equivmodule.html) (10 messages, latest: Apr 28 2019 at 11:23)
 
 * [notation fail](38505notationfail.html) (3 messages, latest: Apr 27 2019 at 20:41)
