@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (86 messages, latest: Apr 29 2019 at 12:31)
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (84 messages, latest: Apr 29 2019 at 11:05)
+* [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (70 messages, latest: Apr 29 2019 at 11:05)
 

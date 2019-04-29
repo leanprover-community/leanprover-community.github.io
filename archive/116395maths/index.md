@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (28 messages, latest: Apr 29 2019 at 12:31)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3049 messages, latest: Apr 29 2019 at 08:15)
 
 * [Multiple differentiability](89979Multipledifferentiability.html) (38 messages, latest: Apr 29 2019 at 07:36)
-
-* [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (27 messages, latest: Apr 26 2019 at 19:32)
 
 * [stuff we want](64767stuffwewant.html) (79 messages, latest: Apr 25 2019 at 17:30)
 
