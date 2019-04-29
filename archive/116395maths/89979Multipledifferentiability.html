@@ -85,5 +85,117 @@ permalink: archive/116395maths/89979Multipledifferentiability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164429440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164429440">Mario Carneiro (Apr 29 2019 at 06:51)</a>:</h4>
 <p>I think this definition should be done in two parts rather than using a messy recursion. Define what C^k means first for k : nat, and then define it for <code>k : enat</code> by extension</p>
 
+<a name="164429848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164429848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164429848">Sebastien Gouezel (Apr 29 2019 at 07:01)</a>:</h4>
+<p>That's what I had done first. But then it means that all proofs have to be done twice, first for finite differentiability using nat induction, and then for enat. With two different lemmas each time, the auxiliary one on nat and then the main one on enat. I got tired of this after ten identical repetitions of proofs, then I tried the inductive definition in <code>with_top nat</code> and it turned out to be completely smooth. Here is a random proof in this file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">times_cont_diff_on</span><span class="bp">.</span><span class="n">congr_mono</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">times_cont_diff_on</span> <span class="n">k</span> <span class="n">n</span> <span class="n">f</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">unique_diff_on</span> <span class="n">k</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s₁</span><span class="o">,</span> <span class="n">f₁</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">s₁</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">times_cont_diff_on</span> <span class="n">k</span> <span class="n">n</span> <span class="n">f₁</span> <span class="n">s₁</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">unfreeze_local_instances</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="kn">using</span> <span class="n">with_top_nat_induction</span> <span class="k">with</span> <span class="n">n</span> <span class="n">IH</span> <span class="n">Itop</span> <span class="n">generalizing</span> <span class="n">F</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">continuous_on</span><span class="bp">.</span><span class="n">congr_mono</span> <span class="n">H</span> <span class="n">h</span> <span class="n">h₁</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="bp">⟨</span><span class="n">fdifferentiable_on</span><span class="bp">.</span><span class="n">congr_mono</span> <span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">IH</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">differentiable_at_within</span><span class="bp">.</span><span class="n">fderiv_at_within_congr_mono</span>
+      <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">hx</span><span class="o">))</span> <span class="n">h</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span> <span class="n">hx</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="n">x</span> <span class="n">hx</span><span class="o">)</span> <span class="n">h₁</span><span class="o">,</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="k">assume</span> <span class="n">n</span><span class="o">,</span> <span class="n">exact</span> <span class="n">Itop</span> <span class="n">n</span> <span class="o">(</span><span class="n">H</span> <span class="n">n</span><span class="o">)</span> <span class="n">h</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It used to be much more tedious with nat induction and then enat extension.</p>
+
+<a name="164429994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164429994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164429994">Mario Carneiro (Apr 29 2019 at 07:05)</a>:</h4>
+<p>wouldn't it be the same with the appropriate induction lemma?</p>
+
+<a name="164430145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430145">Sebastien Gouezel (Apr 29 2019 at 07:09)</a>:</h4>
+<p>I had more difficulties with the two definitions on nat and enat as things were less defeq, so I had to do more things by hand. But in retrospect I don't see why this was the case, so maybe I'll try again. In the end, both definitions, if well crafted, should give the same proofs!</p>
+
+<a name="164430146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430146">Mario Carneiro (Apr 29 2019 at 07:09)</a>:</h4>
+<p>I think there are actually two definitions here, though, and mixing them is part of the problem for this question</p>
+
+<a name="164430208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430208">Mario Carneiro (Apr 29 2019 at 07:10)</a>:</h4>
+<p>For your C^k universe problem, I think you want to define "L is the k times differential of f at x"</p>
+
+<a name="164430210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430210">Mario Carneiro (Apr 29 2019 at 07:10)</a>:</h4>
+<p>which lives in some space like <code>E^k -&gt;l F</code></p>
+
+<a name="164430278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430278">Mario Carneiro (Apr 29 2019 at 07:12)</a>:</h4>
+<p>You could either define that recursively or inductively. If you do it recursively then since you want that space to live in <code>max u v</code>, at <code>k = 0</code> it's <code>ulift F</code> or something equivalent to it</p>
+
+<a name="164430358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430358">Mario Carneiro (Apr 29 2019 at 07:14)</a>:</h4>
+<p>Actually, I guess a witness for C^k requires a whole list of different <code>E^k' -&gt;l F</code> functions (for <code>k' &lt;= k</code>)?</p>
+
+<a name="164430368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430368">Sebastien Gouezel (Apr 29 2019 at 07:14)</a>:</h4>
+<p>No, the k-th derivative lives in a much more complicated space. Either <code>E -&gt;l (E -&gt;l (E -&gt;l ... F))))</code>, or the space of <code>k</code>-linear maps from <code>E^k</code> to <code>F</code> (but the natural space from the inductive definition is the first one). In general, one never uses the <code>k</code>-th derivative beyond <code>k=2</code>, so I am really going for an existence result.</p>
+
+<a name="164430395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430395">Mario Carneiro (Apr 29 2019 at 07:15)</a>:</h4>
+<p>Sure, but I still think being able to name the objects is useful</p>
+
+<a name="164430447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430447">Mario Carneiro (Apr 29 2019 at 07:16)</a>:</h4>
+<p>When I say <code>E^k -&gt;l F</code> I really mean what you said, it's a new definition like <code>E -&gt;l ... -&gt;l F</code></p>
+
+<a name="164430453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430453">Mario Carneiro (Apr 29 2019 at 07:16)</a>:</h4>
+<p>I think that can be expressed as a unary function though, from the tensor product space</p>
+
+<a name="164430469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430469">Sebastien Gouezel (Apr 29 2019 at 07:17)</a>:</h4>
+<p>For instance, when you prove that the composition of C^k functions is C^k, you definitely don't want to exhibit the derivative!</p>
+
+<a name="164430479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430479">Mario Carneiro (Apr 29 2019 at 07:17)</a>:</h4>
+<p>I'm not convinced that's true... we probably want the appropriate operators on tensors anyway</p>
+
+<a name="164430527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430527">Sebastien Gouezel (Apr 29 2019 at 07:18)</a>:</h4>
+<p>With tensor products, there are difficulties here as we are really talking about normed spaces, and there are many possible norms on a tensor product, that are not equivalent in general.</p>
+
+<a name="164430544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430544">Mario Carneiro (Apr 29 2019 at 07:19)</a>:</h4>
+<p>this new definition gives you the opportunity to pick the right one, though</p>
+
+<a name="164430553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430553">Mario Carneiro (Apr 29 2019 at 07:19)</a>:</h4>
+<p>I admit it's not the approach that leads to the least additional work</p>
+
+<a name="164430567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430567">Mario Carneiro (Apr 29 2019 at 07:20)</a>:</h4>
+<p>but I'm trying to gauge if this extra work is worth it for library building reasons</p>
+
+<a name="164430882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164430882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164430882">Sebastien Gouezel (Apr 29 2019 at 07:25)</a>:</h4>
+<p>There is no "right" norm on tensor products, unfortunately. I just checked <a href="https://en.wikipedia.org/wiki/Topological_tensor_product" target="_blank" title="https://en.wikipedia.org/wiki/Topological_tensor_product">https://en.wikipedia.org/wiki/Topological_tensor_product</a>, which starts with the sentence "the theory is notoriously subtle" :)</p>
+
+<a name="164431043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164431043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164431043">Johan Commelin (Apr 29 2019 at 07:29)</a>:</h4>
+<p>We need the "dangerous bend" emoji of Bourbaki/Knuth</p>
+
+<a name="164431136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164431136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164431136">Mario Carneiro (Apr 29 2019 at 07:31)</a>:</h4>
+<p>The first questions that come to mind are: does it matter which of these norms we take? Apparently some norm is definable, and there is some space of them, but maybe they are all topologically equivalent or have the same little O sets</p>
+
+<a name="164431312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164431312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164431312">Mario Carneiro (Apr 29 2019 at 07:34)</a>:</h4>
+<p>Assuming these issues of the tensor product cannot be resolved, it is still possible to define the space <code>E ^[n]-&gt;l F</code> (or whatever notation) via iteration of <code>E -&gt;l</code> on <code>ulift F</code></p>
+
+<a name="164431341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164431341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164431341">Mario Carneiro (Apr 29 2019 at 07:35)</a>:</h4>
+<p>and then given <code>f : E ^[n]-&gt;l F</code> and <code>x : E^n</code> you can define <code>f x : F</code></p>
+
+<a name="164431403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164431403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164431403">Mario Carneiro (Apr 29 2019 at 07:36)</a>:</h4>
+<p>That is, you can still treat it like the space <code>E^n -&gt; F</code> but its norm is derived from <code>E -&gt; ... -&gt; F</code></p>
+
 
 {% endraw %}
