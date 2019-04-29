@@ -620,5 +620,57 @@ But there's also the problem of the simpa equivalent of norm_coe, which right no
 So I'm taking any ideas to name these tactics as clearly <br>
 as possible</p>
 
+<a name="164449657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164449657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164449657">Paul-Nicolas Madelaine (Apr 29 2019 at 13:01)</a>:</h4>
+<p>Hello everyone,<br>
+I've worked a lot on trying to improve the code and make it as clear and usable as possible.</p>
+<p>There are now 5 tactics:<br>
+- norm_cast<br>
+- rw_mod_cast, that applies a list of rw rules and normalizes between them<br>
+- apply_mod_cast, that normalizes the goal and a given expression, and then applies the expression<br>
+- exact_mod_cast, that is similar to apply_mod_cast but for exact<br>
+- assumption_mod_cast, that normalizes the goal and all the expressions from the context, then uses assumption</p>
+<p>I've also copied padics files from mathlib and tried to improve the proofs using these tactics.</p>
+<p>I'm waiting for any feedback about what should be changed or added to the tactics,<br>
+and whether they could be added to mathlib</p>
+
+<a name="164450180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450180">Patrick Massot (Apr 29 2019 at 13:06)</a>:</h4>
+<p>Thank you very much for this work! I'm not fighting those kinds of problems those days, but I'll try to find some time to come back to projects I used to work on but gave up because of those issues. Do you know whether your work could be adapted to other coercions and casts? In the perfectoid project we also have many coercion fights, but with more complicated types that nat or int.</p>
+
+<a name="164450692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450692">Kevin Buzzard (Apr 29 2019 at 13:12)</a>:</h4>
+<p>Here was an example we ran into -- if K was a field and K-hat was its completion (with respect to some topology blah blah blah), also a field in cases of interest, then we had an injective map from K to K-hat (a coercion, in fact), so we had a proof that if x was non-zero then coe(x) was also non-zero. Now say x is non-zero. The constructor<code> units.mk0</code> can be used to make a unit out of x, which a mathematician would also call x. The fact that the unit x got coerced into the unit (coe x) was not <code>rfl</code> because we needed to apply <code>units.ext</code>. Mathematicians find these sorts of goals very frustrating because we don't want to waste our time proving x=x, and when rfl doesn't work it's frustrating. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> do you know what -- I think we needed some unit predicate instead of explicitly carrying around the useless inverse which we never used (because it's uniquely determined by x).</p>
+
+<a name="164450784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450784">Paul-Nicolas Madelaine (Apr 29 2019 at 13:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> <br>
+The only thing to do to make it work on other types of casts should be (theoretically) to add new lemmas to the set of norm_cast lemmas.<br>
+But in practiced I've only used it on nat/int/rat/reals and padics, so I definitely have to try using it on more complex examples.</p>
+
+<a name="164450872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450872">Kevin Buzzard (Apr 29 2019 at 13:15)</a>:</h4>
+<p>I think the main problems my students had were all with these use examples (nat/int/rat/real) -- it will be interesting to see how much better you have made their lives!</p>
+
+<a name="164450998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450998">Patrick Massot (Apr 29 2019 at 13:17)</a>:</h4>
+<p>I think what really need now is documentation of your work. We have the test file, which is much better than nothing, but we also need some documentation <em>text</em>, explaining what the tactics are doing, roughly how they are doing it, what we can hope for, what is out of scope, how to add new lemmas, etc. I know it's no fun at all. But a <em>lot</em> of software development (especially in free software) turn out to be useless for lack of documentation</p>
+
+<a name="164451116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451116">Paul-Nicolas Madelaine (Apr 29 2019 at 13:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I didn't understand every detail of the example by lack of mathematical background, but the units.ext should be rewritten as an equivalence to be used in the current version of my code. apart from this it should work.</p>
+
+<a name="164451248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451248">Paul-Nicolas Madelaine (Apr 29 2019 at 13:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="210574">@Patrick Massot</span> I recently added comments to the norm_cast file, but I will try to rewrite a more detailed documentation page if that's necessary</p>
+
+<a name="164451468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451468">Patrick Massot (Apr 29 2019 at 13:23)</a>:</h4>
+<p>Your comments in <code>norm_cast</code> seem helpful for people who want to improve the tactics, not for users</p>
+
+<a name="164451508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451508">Patrick Massot (Apr 29 2019 at 13:23)</a>:</h4>
+<p>And the user facing tactis (the interactive ones) don't even have docstrings</p>
+
 
 {% endraw %}

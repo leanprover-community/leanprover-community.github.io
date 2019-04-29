@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (87 messages, latest: Apr 29 2019 at 13:23)
+
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (28 messages, latest: Apr 29 2019 at 12:31)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3049 messages, latest: Apr 29 2019 at 08:15)
@@ -41,8 +43,6 @@ permalink: archive/116395maths/index.html
 * [preorder categories](14346preordercategories.html) (15 messages, latest: Apr 13 2019 at 13:33)
 
 * [discontinuity of a step function](47279discontinuityofastepfunction.html) (6 messages, latest: Apr 12 2019 at 21:02)
-
-* [cast woes](88074castwoes.html) (77 messages, latest: Apr 12 2019 at 15:25)
 
 * [Cute lemma](49214Cutelemma.html) (12 messages, latest: Apr 11 2019 at 21:37)
 
