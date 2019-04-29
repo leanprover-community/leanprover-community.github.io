@@ -212,5 +212,68 @@ permalink: archive/116395maths/89979Multipledifferentiability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164483221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164483221">Kevin Buzzard (Apr 29 2019 at 19:55)</a>:</h4>
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> what do you think about the claim that mathematicians may as well just work in <code>Type u</code> and not ever use more than one universe in their work?</p>
 
+<a name="164484061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164484061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164484061">Johannes Hölzl (Apr 29 2019 at 20:05)</a>:</h4>
+<p>You mean work in <code>Type 0</code>? I'm coming from a HOL background, and I see that everything can be done in <code>Type 0</code> (AFAIK arithmetic even in second-order logic) . But it is a annoying restriction which is hard to work around.I would prefer two different universes for <code>E</code> and <code>F</code>. We have the problem already for <code>dim</code>, where many rules are restricted to be in one universe (saving some <code>ulift</code> etc.).</p>
+
+<a name="164484463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164484463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164484463">Kevin Buzzard (Apr 29 2019 at 20:10)</a>:</h4>
+<p>I know that you guys are not a fan of <code>Type 0</code>. I was proposing <code>Type u</code> as a way of meeting you in the middle. I don't want to ever consider a category with objects in some universe <code>u</code> and morphisms in some random unrelated universe <code>v</code>. These things do not even show up in mathematics -- there is always a relation between u and v (small categories or large ones). But the "maximally universe polymorphic" mantra coming from the CS people who know type theory says that this is how it should be done. Mathematicians are running into issues with this when more than one universe is involved.</p>
+
+<a name="164484839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164484839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164484839">Jesse Michael Han (Apr 29 2019 at 20:15)</a>:</h4>
+<p>a concrete example which came up in discussion is Lean's treatment of ordinals, which, being isomorphism classes of well-ordered types, live one universe level up. Johannes mentioned that it's not possible to do this in just <code>Type 0</code>, and that some workaround must be implemented.</p>
+<p>i think mathematicians would prefer being able to rigorously think of ordinals as giant equivalence classes whenever it's convenient. (arguably this falls under the scope of kevin's argument---i haven't seen an example where more than two type universes are needed... yet)</p>
+
+<a name="164485119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164485119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164485119">Johannes Hölzl (Apr 29 2019 at 20:19)</a>:</h4>
+<p>Well as a computer scientist I also only want to work in <code>Type u</code> (or even better in <code>Type 0</code>). Or better: as a user I only want to work in <code>Type 0</code> (and in the worst case in a fixed type universe <code>u</code>).</p>
+<p>But as a library developer were other people should use and apply my theorems I know that for some cases different type universes are neccesary, and it is usually very hard to introduce them afterwards. </p>
+<p>So this is not a question between CS and math. It is a question between easy but restricted and harder but in difficult cases easier to apply.</p>
+
+<a name="164485240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164485240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164485240">Kevin Buzzard (Apr 29 2019 at 20:20)</a>:</h4>
+<p>But if we did the entire corpus of mathematics with only one universe (I don't know if you realise this but this is what is done in practice) then no mathematician would ever notice if our maths libraries only had one universe in.</p>
+
+<a name="164486494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164486494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164486494">Johannes Hölzl (Apr 29 2019 at 20:36)</a>:</h4>
+<p>Kevin there is a difference between doing everything in one type universe from the perspective of not doing it in a formal way. and doing it in one type universe from the perspective of doing it formally in DTT.</p>
+
+<a name="164486534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164486534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164486534">Kevin Buzzard (Apr 29 2019 at 20:37)</a>:</h4>
+<p>I can believe you, but I don't really understand this difference properly.</p>
+
+<a name="164486634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164486634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164486634">Kevin Buzzard (Apr 29 2019 at 20:38)</a>:</h4>
+<p>All I know is that if Sebastien runs into issues like the above issue and then has to work hard to get around things, and there are <em>no set-theoretic issues</em>, then in my opinion he is being too universe-polymorphic for mathematics.</p>
+
+<a name="164486867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164486867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164486867">Johannes Hölzl (Apr 29 2019 at 20:41)</a>:</h4>
+<p>Or we need a better understanding / methods / tools / syntax to handle the universe polymorphism. This could also go in the direction that we write a constant with only one universe parameter, but have some "magical" tools which generalize this parameter into multiple different ones.</p>
+
+<a name="164487080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164487080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164487080">Johannes Hölzl (Apr 29 2019 at 20:44)</a>:</h4>
+<p>But currently I don't see a good solution here. A solution is surely to go with one parameter and when somebody runs into a problem with multiple parameters they need to deal with it (including rewriting the theory)</p>
+
+<a name="164487459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164487459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164487459">Chris Hughes (Apr 29 2019 at 20:49)</a>:</h4>
+<p>It's not that hard to prove it for <code>u v</code>,  given a proof for <code>u u</code>, just by proving everything's isomorphic to something in <code>max u v</code> surely?</p>
+
+<a name="164487474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164487474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164487474">Chris Hughes (Apr 29 2019 at 20:49)</a>:</h4>
+<p>You don't need to rewrite the theory.</p>
+
+<a name="164487761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164487761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164487761">Johannes Hölzl (Apr 29 2019 at 20:52)</a>:</h4>
+<p>Yes, but it requires infrastructure w.r.t isophisms between different type universes.</p>
+
+<a name="164488124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164488124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164488124">Patrick Massot (Apr 29 2019 at 20:57)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> ! It's nice to see you here. How is your new life?</p>
+
+<a name="164488294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiple%20differentiability/near/164488294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89979Multipledifferentiability.html#164488294">Johannes Hölzl (Apr 29 2019 at 20:59)</a>:</h4>
+<p>It's good here! (but we have more rain than Amsterdam)</p>
+
 
 {% endraw %}

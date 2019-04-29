@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Multiple differentiability](89979Multipledifferentiability.html) (40 messages, latest: Apr 29 2019 at 19:55)
+* [Multiple differentiability](89979Multipledifferentiability.html) (55 messages, latest: Apr 29 2019 at 20:59)
+
+* [condensed mathematics](39396condensedmathematics.html) (6 messages, latest: Apr 29 2019 at 20:36)
 
 * [cast woes](88074castwoes.html) (90 messages, latest: Apr 29 2019 at 15:47)
 
