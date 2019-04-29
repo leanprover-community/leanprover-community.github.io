@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [A newcomer's opinion](34360Anewcomersopinion.html) (132 messages, latest: Apr 29 2019 at 19:54)
+
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
+
 * [Assumptions about data produced by `classical.choice`](21205Assumptionsaboutdataproducedbyclassicalchoice.html) (9 messages, latest: Apr 29 2019 at 18:27)
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (123 messages, latest: Apr 29 2019 at 18:27)
-
 * [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
-
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (70 messages, latest: Apr 29 2019 at 11:05)
 
 * [equiv module](58705equivmodule.html) (10 messages, latest: Apr 28 2019 at 11:23)
 
