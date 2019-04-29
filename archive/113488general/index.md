@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (69 messages, latest: Apr 29 2019 at 10:54)
+
 * [nested inductive type](48465nestedinductivetype.html) (3 messages, latest: Apr 29 2019 at 09:33)
 
 * [equiv module](58705equivmodule.html) (10 messages, latest: Apr 28 2019 at 11:23)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [timeout universe issue](79266timeoutuniverseissue.html) (6 messages, latest: Apr 27 2019 at 20:10)
 
 * [debugging to_additive](53081debuggingtoadditive.html) (17 messages, latest: Apr 27 2019 at 20:05)
-
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (66 messages, latest: Apr 26 2019 at 23:42)
 
 * [Univalence axiom](96233Univalenceaxiom.html) (124 messages, latest: Apr 26 2019 at 22:14)
 
