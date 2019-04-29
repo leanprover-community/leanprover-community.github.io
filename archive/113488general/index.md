@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (94 messages, latest: Apr 29 2019 at 13:51)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (95 messages, latest: Apr 29 2019 at 15:47)
 
 * [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
 

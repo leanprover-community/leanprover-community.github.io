@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cast woes](88074castwoes.html) (87 messages, latest: Apr 29 2019 at 13:23)
+* [cast woes](88074castwoes.html) (90 messages, latest: Apr 29 2019 at 15:47)
 
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (28 messages, latest: Apr 29 2019 at 12:31)
 
