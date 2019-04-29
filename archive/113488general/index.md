@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (95 messages, latest: Apr 29 2019 at 15:47)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (105 messages, latest: Apr 29 2019 at 17:59)
+
+* [Assumptions about data produced by `classical.choice`](21205Assumptionsaboutdataproducedbyclassicalchoice.html) (6 messages, latest: Apr 29 2019 at 17:57)
 
 * [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
 
