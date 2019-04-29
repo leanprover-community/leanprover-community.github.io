@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (69 messages, latest: Apr 29 2019 at 10:54)
+* [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
 
-* [nested inductive type](48465nestedinductivetype.html) (3 messages, latest: Apr 29 2019 at 09:33)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (84 messages, latest: Apr 29 2019 at 11:05)
+
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (70 messages, latest: Apr 29 2019 at 11:05)
 
 * [equiv module](58705equivmodule.html) (10 messages, latest: Apr 28 2019 at 11:23)
 
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [Univalence axiom](96233Univalenceaxiom.html) (124 messages, latest: Apr 26 2019 at 22:14)
 
 * [what is a diamond?](58637whatisadiamond.html) (10 messages, latest: Apr 26 2019 at 15:18)
-
-* [A newcomer's opinion](34360Anewcomersopinion.html) (83 messages, latest: Apr 26 2019 at 12:04)
 
 * [Lean in the wild](43625Leaninthewild.html) (71 messages, latest: Apr 25 2019 at 21:51)
 
