@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3051 messages, latest: Apr 30 2019 at 12:59)
+
 * [condensed mathematics](39396condensedmathematics.html) (178 messages, latest: Apr 30 2019 at 09:31)
 
 * [Multiple differentiability](89979Multipledifferentiability.html) (69 messages, latest: Apr 29 2019 at 21:31)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [cast woes](88074castwoes.html) (90 messages, latest: Apr 29 2019 at 15:47)
 
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (28 messages, latest: Apr 29 2019 at 12:31)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3049 messages, latest: Apr 29 2019 at 08:15)
 
 * [stuff we want](64767stuffwewant.html) (79 messages, latest: Apr 25 2019 at 17:30)
 
