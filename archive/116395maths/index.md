@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3061 messages, latest: Apr 30 2019 at 13:08)
+* [condensed mathematics](39396condensedmathematics.html) (182 messages, latest: Apr 30 2019 at 14:53)
 
-* [condensed mathematics](39396condensedmathematics.html) (178 messages, latest: Apr 30 2019 at 09:31)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3061 messages, latest: Apr 30 2019 at 13:08)
 
 * [Multiple differentiability](89979Multipledifferentiability.html) (69 messages, latest: Apr 29 2019 at 21:31)
 
