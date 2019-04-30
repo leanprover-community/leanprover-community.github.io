@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (12 messages, latest: Apr 30 2019 at 17:56)
+
+* [library_search](97355librarysearch.html) (12 messages, latest: Apr 30 2019 at 17:49)
+
 * [leandoc](38167leandoc.html) (2 messages, latest: Apr 30 2019 at 13:01)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (238 messages, latest: Apr 30 2019 at 08:57)
@@ -409,8 +413,6 @@ permalink: archive/113488general/index.html
 * [letI etc](54219letIetc.html) (10 messages, latest: Mar 05 2019 at 18:45)
 
 * [equiv identifying sets](99972equividentifyingsets.html) (4 messages, latest: Mar 05 2019 at 18:19)
-
-* [library_search](97355librarysearch.html) (11 messages, latest: Mar 05 2019 at 17:37)
 
 * [lift (f \circ of) = f](49724liftfcircoff.html) (1 message, latest: Mar 05 2019 at 13:38)
 
