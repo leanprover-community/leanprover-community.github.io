@@ -65,5 +65,226 @@ which is the line that gives the error message.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164575392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164575392">Rob Lewis (Apr 30 2019 at 20:49)</a>:</h4>
 <p>The vertical bar thing drives me nuts. I've been using this notation for years and I still mix the two up periodically. It never sticks in my brain.</p>
 
+<a name="164577311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577311">Travis Hance (Apr 30 2019 at 21:12)</a>:</h4>
+<p>to tack onto this question, what exactly <em>does</em> the "maximum class-instance resolution depth has been reached" error message mean, in general? Every time I see it I know it just means I have a type error <em>somewhere</em> but the error never helps me find it and part of that is because I don't know what it means.</p>
+
+<a name="164577353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577353">Patrick Massot (Apr 30 2019 at 21:13)</a>:</h4>
+<p>Do you know the basics of the type class system?</p>
+
+<a name="164577361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577361">Kevin Buzzard (Apr 30 2019 at 21:13)</a>:</h4>
+<p>What it actually means is that Lean was trying to solve a typeclass problem, and it failed because it gave up</p>
+
+<a name="164577370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577370">Kevin Buzzard (Apr 30 2019 at 21:13)</a>:</h4>
+<p>because things weren't looking good</p>
+
+<a name="164577438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577438">Kevin Buzzard (Apr 30 2019 at 21:14)</a>:</h4>
+<p>What is misleading about the message is that sometimes Lean is trying to solve a completely random problem which you had no intention of making it solve; that's what was happening above.</p>
+
+<a name="164577501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577501">Kevin Buzzard (Apr 30 2019 at 21:15)</a>:</h4>
+<p>The real error was some subtle syntax error (<code>|</code> instead of <code>\|</code>) and Lean got completely confused; the error message was ultimately irrelevant.</p>
+
+<a name="164577751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577751">Kenny Lau (Apr 30 2019 at 21:18)</a>:</h4>
+<p>yeah Lean can work on its error messages</p>
+
+<a name="164577788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577788">Kevin Buzzard (Apr 30 2019 at 21:19)</a>:</h4>
+<p>The <code>|</code> indicates the end of something, so Lean was faced with <code>¬ p</code> with <code>p : nat</code></p>
+
+<a name="164577793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577793">Kenny Lau (Apr 30 2019 at 21:19)</a>:</h4>
+<p>but again, [insert saying about how it's easy to complain]</p>
+
+<a name="164577808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577808">Simon Hudon (Apr 30 2019 at 21:19)</a>:</h4>
+<p>If you had to choose three error messages that you want to be more informative, which ones would it be?</p>
+
+<a name="164577871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577871">Patrick Massot (Apr 30 2019 at 21:20)</a>:</h4>
+<p>Error message craft is highly non-trivial. In this case I would say that maximal depth error message would be much easier if it included an indication of what type class problem it failed to solve</p>
+
+<a name="164577886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577886">Patrick Massot (Apr 30 2019 at 21:20)</a>:</h4>
+<p>That one would certainly be in my top 3</p>
+
+<a name="164577930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577930">Kevin Buzzard (Apr 30 2019 at 21:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">maximum class-instance resolution depth has been reached yada yada</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="164577954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577954">Kevin Buzzard (Apr 30 2019 at 21:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- import data.nat.prime</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  ¬p</span>
+<span class="cm">term</span>
+<span class="cm">  p</span>
+<span class="cm">has type</span>
+<span class="cm">  ℕ</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  Prop</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="164577967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577967">Simon Hudon (Apr 30 2019 at 21:21)</a>:</h4>
+<p>Excellent. How would you feel about a sort of introductory paragraph (or link to one) about type class search, instance problem and the main candidates tried?</p>
+
+<a name="164577984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164577984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164577984">Kevin Buzzard (Apr 30 2019 at 21:22)</a>:</h4>
+<p>So it's the import which causes it, on this occasion. Of course, the input is garbage</p>
+
+<a name="164578062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578062">Kevin Buzzard (Apr 30 2019 at 21:22)</a>:</h4>
+<p>Whenever I see it I assume it's user error (i.e. my fault) rather than Lean actually failing to do type class inference</p>
+
+<a name="164578078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578078">Simon Hudon (Apr 30 2019 at 21:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> It might be worth opening an issue to start pitching specific improvements</p>
+
+<a name="164578239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578239">Patrick Massot (Apr 30 2019 at 21:24)</a>:</h4>
+<p>Simon, I don't understand. Do you mean you want a link in the error message?</p>
+
+<a name="164578251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578251">Patrick Massot (Apr 30 2019 at 21:24)</a>:</h4>
+<p>opening an issue where?</p>
+
+<a name="164578264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578264">Patrick Massot (Apr 30 2019 at 21:24)</a>:</h4>
+<p>In the community fork?</p>
+
+<a name="164578309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578309">Kevin Buzzard (Apr 30 2019 at 21:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="219422">@Travis Hance</span> the answer to your question is that there's a thing called typeclass inference, which is invoked whenever you leave out an input to a function but the input is in <code>[]</code> square brackets. Lean invokes an algorithm called the type class inference algorithm, which searches through a database trying to find the term you didn't supply explicitly. If the algorithm is called accidentally then of course it can fail -- the unhelpful error message just means "you called typeclass inference and it didn't work"</p>
+
+<a name="164578499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578499">Simon Hudon (Apr 30 2019 at 21:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> yes community fork. And the link I'm talking about is like Rust errors: <a href="https://doc.rust-lang.org/edition-guide/rust-2018/the-compiler/improved-error-messages.html" target="_blank" title="https://doc.rust-lang.org/edition-guide/rust-2018/the-compiler/improved-error-messages.html">https://doc.rust-lang.org/edition-guide/rust-2018/the-compiler/improved-error-messages.html</a></p>
+
+<a name="164578564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578564">Simon Hudon (Apr 30 2019 at 21:28)</a>:</h4>
+<p>When you have an error in Rust, it gives you a rule number and if you query the compiler about that rule it explains why it's there.</p>
+
+<a name="164578570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578570">Rob Lewis (Apr 30 2019 at 21:28)</a>:</h4>
+<p>Printing the failing problem would be nice. But a lot of time time, the question isn't really which problem it failed to solve, it's why the search went deep before failing.</p>
+
+<a name="164578574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578574">Kevin Buzzard (Apr 30 2019 at 21:28)</a>:</h4>
+<p>In this case Lean saw <code>¬ p</code> and thought "hmm, <code>p</code> is a natural and it's supposed to be a proposition, that must mean that there is a coercion from naturals to propositions, I'll pass that over to the type class inference system because that handles coercions, and I'll leave it looking for a natural map from natural numbers to true/false statements". Lean fails to find that natural map, because nobody told Lean such a map, but unfortuately along the way it gets very keen on the idea of using <code>canonically_ordered_comm_semiring</code> in some way, and ends up in an infinite loop.</p>
+
+<a name="164578587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578587">Rob Lewis (Apr 30 2019 at 21:28)</a>:</h4>
+<p>In Kevin's example, the culprit is <code>with_top.canonically_ordered_comm_semiring</code> looping for some reason.</p>
+
+<a name="164578612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578612">Kevin Buzzard (Apr 30 2019 at 21:29)</a>:</h4>
+<p>The garbage out is because of the garbage input -- trying to coerce a natural to a proposition.</p>
+
+<a name="164578722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578722">Kevin Buzzard (Apr 30 2019 at 21:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">canonically_ordered_comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">canonically_ordered_comm_semiring</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>in <code>ordered_ring</code>, which for some reason is being imported by <code>data.nat.prime</code></p>
+
+<a name="164578796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578796">Patrick Massot (Apr 30 2019 at 21:31)</a>:</h4>
+<p>Oh my God. When I read Kevin's message I thought it was a joke, because we suffered of lot with <code>with_zero</code> and ordered commutative monoids in the perfectoid project. But it seems <code>with_top.canonically_ordered_comm_semiring</code> is indeed involved here</p>
+
+<a name="164578872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578872">Patrick Massot (Apr 30 2019 at 21:32)</a>:</h4>
+<blockquote>
+<p>Printing the failing problem would be nice. But a lot of time time, the question isn't really which problem it failed to solve, it's why the search went deep before failing.</p>
+</blockquote>
+<p>I think what you ask is complicated. Displaying the failing problem would already be immensely useful</p>
+
+<a name="164578902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578902">Patrick Massot (Apr 30 2019 at 21:33)</a>:</h4>
+<p>for instance, you could see immediately that Lean went looking for a coercion from nat to Prop in that case</p>
+
+<a name="164578937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578937">Simon Hudon (Apr 30 2019 at 21:34)</a>:</h4>
+<p>I agree, that would be a good start</p>
+
+<a name="164578996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164578996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164578996">Kevin Buzzard (Apr 30 2019 at 21:34)</a>:</h4>
+<p><code>data.nat.basic</code> imports <code>algebra.ordered_ring</code> which contains the offending instance.</p>
+
+<a name="164579017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579017">Simon Hudon (Apr 30 2019 at 21:35)</a>:</h4>
+<p>Is that in mathlib? Is it universally problematic?</p>
+
+<a name="164579032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579032">Kevin Buzzard (Apr 30 2019 at 21:35)</a>:</h4>
+<p>Yes this is all mathlib</p>
+
+<a name="164579040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579040">Patrick Massot (Apr 30 2019 at 21:35)</a>:</h4>
+<p>It doesn't sound quite right that basics of natural numbers involves canonically ordered commutative semi-ring. That must be my mathematician bad habits...</p>
+
+<a name="164579048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579048">Kevin Buzzard (Apr 30 2019 at 21:35)</a>:</h4>
+<p>it's OK, I don't think data.nat.basic is used very much</p>
+
+<a name="164579082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579082">Kevin Buzzard (Apr 30 2019 at 21:36)</a>:</h4>
+<p>sounds pretty obscure to me</p>
+
+<a name="164579132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579132">Kevin Buzzard (Apr 30 2019 at 21:36)</a>:</h4>
+<p>to be honest I am extremely surprised I didn't see this loop earlier</p>
+
+<a name="164579291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579291">Kevin Buzzard (Apr 30 2019 at 21:39)</a>:</h4>
+<blockquote>
+<p>If you had to choose three error messages that you want to be more informative, which ones would it be?</p>
+</blockquote>
+<p><code>deterministic timeout</code> was my <a href="https://github.com/leanprover-community/mathlib/issues/1" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1">#1</a> choice last week when we were in perfectoid hell</p>
+
+<a name="164579312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579312">Kevin Buzzard (Apr 30 2019 at 21:39)</a>:</h4>
+<p>It should have said "just change that <code>Type*</code> to <code>Type u</code> and I'll stop complaining"</p>
+
+<a name="164579328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579328">Rob Lewis (Apr 30 2019 at 21:39)</a>:</h4>
+<blockquote>
+<p>I think what you ask is complicated. Displaying the failing problem would already be immensely useful</p>
+</blockquote>
+<p>Oh, of course. "Why the search went deep" doesn't really have a well-defined answer. Printing the failing target is helpful when you accidentally invoke type class problems, and it's simple enough to do. But in that situation, you often don't want type class inference to time out, you want it to fail fast. It would be better to see a standard type checking error there than any kind of type class message.</p>
+
+<a name="164579398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579398">Kevin Buzzard (Apr 30 2019 at 21:40)</a>:</h4>
+<p>Without the import you get the standard typechecking error, as you know</p>
+
+<a name="164579513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579513">Rob Lewis (Apr 30 2019 at 21:42)</a>:</h4>
+<p>Right. That instance is worrying. It seems like there are too many metavariables for it to be applied here, so I'm not sure exactly why it's looping.</p>
+
+<a name="164579520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579520">Rob Lewis (Apr 30 2019 at 21:43)</a>:</h4>
+<p>But it's late, I'm exhausted, not gonna investigate now.</p>
+
+<a name="164579552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579552">Patrick Massot (Apr 30 2019 at 21:43)</a>:</h4>
+<p>Have a good night! (I should go to bed too)</p>
+
 
 {% endraw %}
