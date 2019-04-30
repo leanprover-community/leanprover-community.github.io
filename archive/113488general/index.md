@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [eblast](79292eblast.html) (27 messages, latest: Apr 29 2019 at 23:03)
+
 * [A newcomer's opinion](34360Anewcomersopinion.html) (141 messages, latest: Apr 29 2019 at 20:29)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
@@ -101,8 +103,6 @@ permalink: archive/113488general/index.html
 * [using_well_founded](47902usingwellfounded.html) (26 messages, latest: Apr 18 2019 at 18:07)
 
 * [omega](89194omega.html) (20 messages, latest: Apr 18 2019 at 17:36)
-
-* [eblast](79292eblast.html) (25 messages, latest: Apr 17 2019 at 22:10)
 
 * [qpf/no_confusion](00103qpfnoconfusion.html) (4 messages, latest: Apr 17 2019 at 20:23)
 
