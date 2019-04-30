@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (12 messages, latest: Apr 30 2019 at 17:56)
+* [leandoc](38167leandoc.html) (13 messages, latest: Apr 30 2019 at 18:32)
 
-* [library_search](97355librarysearch.html) (12 messages, latest: Apr 30 2019 at 17:49)
+* [library_search](97355librarysearch.html) (19 messages, latest: Apr 30 2019 at 18:27)
 
-* [leandoc](38167leandoc.html) (2 messages, latest: Apr 30 2019 at 13:01)
+* [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (28 messages, latest: Apr 30 2019 at 18:20)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (238 messages, latest: Apr 30 2019 at 08:57)
 

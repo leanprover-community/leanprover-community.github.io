@@ -22,5 +22,51 @@ Let's see how fast we can throw something together!</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164536497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164536497">Kevin Buzzard (Apr 30 2019 at 13:01)</a>:</h4>
 <p>There is no book which defines a perfectoid space. All we have is research articles and random pdfs written by graduate students and post-docs who were typically preparing for a talk they had to give on perfectoid spaces. It would be great to turn the Lean definition into a useful resource. I can write the LaTeX around the definition (as could Johan) but some sort of cool way of jumping around between definitions would be brilliant.</p>
 
+<a name="164562418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562418">Koundinya Vajjha (Apr 30 2019 at 18:21)</a>:</h4>
+<p>Here was something I had in mind: with the new Lean 4 parser, it should be theoretically possible to extend the tactic monad with state to capture the tactics being invoked (the tactics are erased after they are parsed in Lean 3).<br>
+This would look like a tactic class <code>begin [foo] ... end</code>, which would parse tactics as they are written and docstrings as well to produce Patrick's webpage-like output.<br>
+I don't know to what extent this is possible but.</p>
+
+<a name="164562781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562781">Patrick Massot (Apr 30 2019 at 18:24)</a>:</h4>
+<p>I hope all this will be much easier with Lean 4. But we can already ask Lean information about each and every position in the file.</p>
+
+<a name="164562849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562849">Patrick Massot (Apr 30 2019 at 18:25)</a>:</h4>
+<p>It's only a matter of patience to write a version of format_lean that display information about everything</p>
+
+<a name="164563169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563169">Patrick Massot (Apr 30 2019 at 18:28)</a>:</h4>
+<p>In <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372</a> you can see python asking for the tactic state at start and end of each proof line. You can replace that with a loop on each character in the line, recording everything (with shared information when the state is constant) and add request for definitions</p>
+
+<a name="164563242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563242">Simon Hudon (Apr 30 2019 at 18:29)</a>:</h4>
+<p>For such a leandoc tool, do you need to know about <code>variable</code> construct? If not, you might already be able to render it from <code>olean</code> files</p>
+
+<a name="164563302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563302">Simon Hudon (Apr 30 2019 at 18:29)</a>:</h4>
+<p>Oh nice! I didn't know you were already this far ahead</p>
+
+<a name="164563389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563389">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p>Did you look at my lectures notes?</p>
+
+<a name="164563404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563404">Simon Hudon (Apr 30 2019 at 18:30)</a>:</h4>
+<p>No</p>
+
+<a name="164563425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563425">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p><a href="https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html" target="_blank" title="https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html">https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html</a></p>
+
+<a name="164563433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563433">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p>It does display tactic state</p>
+
+<a name="164563568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563568">Simon Hudon (Apr 30 2019 at 18:32)</a>:</h4>
+<p>That's so cool!</p>
+
 
 {% endraw %}
