@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [eblast](79292eblast.html) (27 messages, latest: Apr 29 2019 at 23:03)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (148 messages, latest: Apr 30 2019 at 04:52)
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (141 messages, latest: Apr 29 2019 at 20:29)
+* [eblast](79292eblast.html) (27 messages, latest: Apr 29 2019 at 23:03)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
 
