@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [foreign function interface](69026foreignfunctioninterface.html) (24 messages, latest: May 01 2019 at 02:48)
+
 * [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (1 message, latest: May 01 2019 at 01:23)
 
 * [leandoc](38167leandoc.html) (19 messages, latest: Apr 30 2019 at 23:02)

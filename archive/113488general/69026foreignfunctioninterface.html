@@ -1,0 +1,119 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/69026foreignfunctioninterface.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html">foreign function interface</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164593325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164593325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164593325">James King (May 01 2019 at 02:01)</a>:</h4>
+<p>Hey -- I'm working out how to add a foreign function interface to Lean's VM so that Lean code can call into libraries written in C/C++. Ideas and feedback on how to achieve this are welcome. I've started a branch at <a href="https://github.com/agentultra/lean/tree/feature/vm-dynload" target="_blank" title="https://github.com/agentultra/lean/tree/feature/vm-dynload">https://github.com/agentultra/lean/tree/feature/vm-dynload</a> for adding the low-level plumbing.</p>
+
+<a name="164594296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594296">Mario Carneiro (May 01 2019 at 02:25)</a>:</h4>
+<p>You should coordinate with <span class="user-mention" data-user-id="110026">@Simon Hudon</span>, who has also been working on FFI in the leanprover-community fork</p>
+
+<a name="164594365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594365">Mario Carneiro (May 01 2019 at 02:26)</a>:</h4>
+<p>assuming you aren't already working on the same project as Simon's been discussing</p>
+
+<a name="164594381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594381">James King (May 01 2019 at 02:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I am working with him on it... he has convinced me to get involved with Lean. :)</p>
+
+<a name="164594469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594469">Mario Carneiro (May 01 2019 at 02:28)</a>:</h4>
+<p>First, I would want to see what's the minimum implementation that is fully expressive</p>
+
+<a name="164594560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594560">Simon Hudon (May 01 2019 at 02:31)</a>:</h4>
+<p>What I'm thinking is that you could load a <code>.so</code> file with</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">load_external</span> <span class="s2">&quot;file.so&quot;</span> <span class="s2">&quot;init_function&quot;</span> <span class="s2">&quot;finalize_function&quot;</span>
+</pre></div>
+
+
+<p>and then add bindings with:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">ffi</span> <span class="s2">&quot;file.so&quot;</span> <span class="s2">&quot;int c_add (int,int)&quot;</span><span class="o">]</span>
+<span class="kn">constant</span> <span class="n">external_add_fn</span> <span class="o">:</span> <span class="n">c_int</span> <span class="bp">-&gt;</span> <span class="n">c_int</span> <span class="bp">-&gt;</span> <span class="n">c_int</span>
+</pre></div>
+
+<a name="164594570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594570">Simon Hudon (May 01 2019 at 02:31)</a>:</h4>
+<p>And I'm thinking of accumulating <code>.so</code> objects in the `environment object</p>
+
+<a name="164594653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594653">Mario Carneiro (May 01 2019 at 02:33)</a>:</h4>
+<p>how can you call a function using a string description like that?</p>
+
+<a name="164594655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594655">Mario Carneiro (May 01 2019 at 02:33)</a>:</h4>
+<p>in the c++</p>
+
+<a name="164594750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594750">James King (May 01 2019 at 02:35)</a>:</h4>
+<p>We may need some way of telling the Lean code how to call the function. I was thinking we'd try using the <code>dlopen</code>/<code>dlsym</code> API</p>
+
+<a name="164594796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594796">Simon Hudon (May 01 2019 at 02:36)</a>:</h4>
+<p>How does it work?</p>
+
+<a name="164594799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594799">Mario Carneiro (May 01 2019 at 02:36)</a>:</h4>
+<p>I think you just get a void* function pointer</p>
+
+<a name="164594801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594801">James King (May 01 2019 at 02:37)</a>:</h4>
+<p>Well... it's all <code>void *</code> pointers</p>
+
+<a name="164594841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594841">Mario Carneiro (May 01 2019 at 02:37)</a>:</h4>
+<p>I don't know if it's possible to dynamically call a function with a runtime known type</p>
+
+<a name="164594892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594892">Simon Hudon (May 01 2019 at 02:38)</a>:</h4>
+<p>Right, as far as the <code>.so</code> file is concerned, only the function name matters. The rest of the string is to help us validate and marshal data</p>
+
+<a name="164594918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594918">Mario Carneiro (May 01 2019 at 02:39)</a>:</h4>
+<p>but how can we adhere to C calling convention with a number of arguments only known at runtime</p>
+
+<a name="164594920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594920">Simon Hudon (May 01 2019 at 02:39)</a>:</h4>
+<p>You load the <code>so</code> file, you get a <code>void *</code>, you cast it in the right type to do the call (or, in our case, into a <code>type fn_name(...)</code> function I assume) and then you call</p>
+
+<a name="164594980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594980">Simon Hudon (May 01 2019 at 02:40)</a>:</h4>
+<p>We're going to need to manipulate the call stack to some extent</p>
+
+<a name="164594985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164594985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164594985">James King (May 01 2019 at 02:40)</a>:</h4>
+<p>I think so too.</p>
+
+<a name="164595001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164595001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164595001">Mario Carneiro (May 01 2019 at 02:41)</a>:</h4>
+<p><a href="https://sourceware.org/libffi/" target="_blank" title="https://sourceware.org/libffi/">https://sourceware.org/libffi/</a> ?</p>
+
+<a name="164595061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164595061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164595061">James King (May 01 2019 at 02:42)</a>:</h4>
+<p>That would make things nice and easy.</p>
+
+<a name="164595074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164595074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164595074">Simon Hudon (May 01 2019 at 02:43)</a>:</h4>
+<p>Sounds like a nice tool</p>
+
+<a name="164595133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164595133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164595133">James King (May 01 2019 at 02:44)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>!</p>
+
+<a name="164595289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/164595289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#164595289">Mario Carneiro (May 01 2019 at 02:48)</a>:</h4>
+<p>See also the manual <a href="http://www.chiark.greenend.org.uk/doc/libffi-dev/html/" target="_blank" title="http://www.chiark.greenend.org.uk/doc/libffi-dev/html/">http://www.chiark.greenend.org.uk/doc/libffi-dev/html/</a>, which was surprisingly hard to find</p>
+
+
+{% endraw %}
