@@ -24,5 +24,113 @@ permalink: archive/113488general/16271alternatenotationfornatcast.html
 
 <p>That's the up-up sign <code>↟ = \uu</code>; I'm open to other notational choices. The important thing is that it's <em>not</em> a coercion, which can cause unpleasant surprises because it's a computationally very expensive operation. Also because it is not hooked into the coercion framework there is no question of transitivity searches for these instances, and taking these out of the coercion framework fixes the issue with forward searching for coercions.</p>
 
+<a name="164598787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598787">Johan Commelin (May 01 2019 at 04:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Does this mean that we will always have to explicitly type <code>\uu</code> in front if natural numbers if we want to cast them? (Will the casts to <code>int</code>, <code>rat</code>, <code>real</code>, and <code>complex</code> still be coercions?)</p>
+
+<a name="164598788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598788">Mario Carneiro (May 01 2019 at 04:17)</a>:</h4>
+<p>yes</p>
+
+<a name="164598839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598839">Mario Carneiro (May 01 2019 at 04:18)</a>:</h4>
+<p>the casts from other number types will be using this new notation as well</p>
+
+<a name="164598861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598861">Mario Carneiro (May 01 2019 at 04:19)</a>:</h4>
+<p>We could define coercions as well between the number types specifically, but I don't think it's a good idea to have too many ways to say this</p>
+
+<a name="164598919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598919">Mario Carneiro (May 01 2019 at 04:20)</a>:</h4>
+<p>The coercion from nat to int will still be the coercion <code>int.of_nat</code></p>
+
+<a name="164598938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598938">Johan Commelin (May 01 2019 at 04:21)</a>:</h4>
+<p>It still feels like duct tape to me.</p>
+
+<a name="164598982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598982">Johan Commelin (May 01 2019 at 04:22)</a>:</h4>
+<p>The coercion framework ought to be able to take care of this.</p>
+
+<a name="164598994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164598994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164598994">Mario Carneiro (May 01 2019 at 04:23)</a>:</h4>
+<p>I don't think it's possible for the coercion framework to handle this, support transitivity, and be implemented by typeclass inference</p>
+
+<a name="164599062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599062">Johan Commelin (May 01 2019 at 04:24)</a>:</h4>
+<p>Can we make type class inference smarter, to solve this issue?</p>
+
+<a name="164599074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599074">Mario Carneiro (May 01 2019 at 04:25)</a>:</h4>
+<p>But actually I think the explicit arrow is a good thing here. The arrow is already present whenever you print statements or are proving things, so hiding it completely is not really useful for proving stuff. It might be useful for the programmers, but they have already weighed in against this coercion</p>
+
+<a name="164599143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599143">Mario Carneiro (May 01 2019 at 04:26)</a>:</h4>
+<p>If hiding it completely meant you didn't have to invoke any theorems or anything and they were just the same, I would be on board, but if you have to manipulate it then hiding the function is counterproductive</p>
+
+<a name="164599155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599155">Johan Commelin (May 01 2019 at 04:26)</a>:</h4>
+<p>The cool thing is that it isn't present when you are reading things. I like the cleaner statements</p>
+
+<a name="164599186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599186">Mario Carneiro (May 01 2019 at 04:27)</a>:</h4>
+<p>there is still a type ascription, usually. Double type ascriptions always look weird</p>
+
+<a name="164599187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599187">Johan Commelin (May 01 2019 at 04:27)</a>:</h4>
+<p>Also... you could argue the same about coercions in general. Why shouldn't we always write the arrow?</p>
+
+<a name="164599190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599190">Mario Carneiro (May 01 2019 at 04:27)</a>:</h4>
+<p>why shouldn't we?</p>
+
+<a name="164599244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599244">Johan Commelin (May 01 2019 at 04:28)</a>:</h4>
+<p>What is the fundamental difference between a <code>cast</code> and a <code>coe</code>? In my mind they are the same thing.</p>
+
+<a name="164599259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599259">Mario Carneiro (May 01 2019 at 04:29)</a>:</h4>
+<p>Like I said, it can be useful in programming contexts where the coercion appears only once, in the program text, and you are never going to go back through this term. But for defs and theorems in mathematics, you are always coming back to the statements later so that doesn't apply</p>
+
+<a name="164599319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599319">Johan Commelin (May 01 2019 at 04:30)</a>:</h4>
+<p>No, I don't get it. Sorry for being dense. What makes a cast a cast and a coe a coe?</p>
+
+<a name="164599320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599320">Mario Carneiro (May 01 2019 at 04:30)</a>:</h4>
+<p>There isn't really a difference, they are basically accomplishing the same thing. In this case the distinguishing feature is that all the <code>cast</code> instances are blanket instances on the codomain, while <code>coe</code> instances usually have a simpler RHS</p>
+
+<a name="164599334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599334">Johan Commelin (May 01 2019 at 04:31)</a>:</h4>
+<p>Ok, I see.</p>
+
+<a name="164599335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599335">Mario Carneiro (May 01 2019 at 04:31)</a>:</h4>
+<p>(that was a response to the "always write the arrow" comment)</p>
+
+<a name="164599401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599401">Mario Carneiro (May 01 2019 at 04:32)</a>:</h4>
+<p>In particular, <code>coe_trans</code> instances require the problem <code>has_coe a ?b</code> to have a finite number of instances for any concrete <code>a</code></p>
+
+<a name="164599466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599466">Johan Commelin (May 01 2019 at 04:34)</a>:</h4>
+<p>Can't we make type class inference smarter?</p>
+
+<a name="164599482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599482">Johan Commelin (May 01 2019 at 04:35)</a>:</h4>
+<p>My brain is able to solve these problems very quickly. And it never explicitly considered <code>cast</code>s and <code>coe</code>s as different things</p>
+
+<a name="164599619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599619">Mario Carneiro (May 01 2019 at 04:39)</a>:</h4>
+<p>We almost never use coe transitivity in practice, and in fact we have to rewrite it away when it appears, but I'm sure there is some edge case where it's needed</p>
+
+<a name="164599696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164599696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164599696">Mario Carneiro (May 01 2019 at 04:41)</a>:</h4>
+<p>Also typeclass inference isn't very smart (aka "prolog-like search"). We could make it smarter but it wouldn't be typeclass inference anymore, and it probably wouldn't be as much of a swiss army knife</p>
+
+<a name="164600403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164600403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164600403">Johan Commelin (May 01 2019 at 04:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Is there any literature about type class inference and the problems and challenges involved? I know about prolog-like search... but I would like to read a survey of the alternatives and their downsides.</p>
+
 
 {% endraw %}
