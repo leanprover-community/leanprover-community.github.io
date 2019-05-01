@@ -312,5 +312,25 @@ which is the line that gives the error message.</p>
 
 <p>This is an instance which invents <code>b</code> from nothing, as a metavariable. It solves <code>has_coe_to_sort a</code> by trying to solve <code>has_coe_t_aux a ?b</code> (which quickly boils down to solving <code>has_coe a ?b</code>) and then if that is successful it looks for <code>has_coe_to_sort b</code>. This kind of forward searching doesn't work with the mathlib instances, since you can't enumerate all the types which have coercions from nat (there are infinitely many). In fact due to the DFS search order it never gets around to checking any of them and instead builds infinitely large instances and overflows.</p>
 
+<a name="164589824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164589824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164589824">Floris van Doorn (May 01 2019 at 00:40)</a>:</h4>
+<p>It would be nice if type class inference stops when its argument is a metavariable (note: I'm not saying it should stop when its argument <em>contains</em> a metavariable), so that <code>nat.cast_coe</code> would just fail, because the type class inference gives up once it has to find an instance of <code>has_one ?x</code>. If we ever rely on type class inference continuing in these cases, we should just provide more information.</p>
+
+<a name="164590476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164590476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164590476">Mario Carneiro (May 01 2019 at 00:54)</a>:</h4>
+<p>We could have a marker <code>in_param</code> that says "this argument must be a concrete type for this to trigger", or at least it shouldn't instantiate a metavariable in this slot. Better yet, it seems like this should be the default behavior for anything other than <code>out_param</code></p>
+
+<a name="164590506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164590506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164590506">Mario Carneiro (May 01 2019 at 00:55)</a>:</h4>
+<p>In this case, that means that <code>canonically_ordered_comm_semiring ?x_26 := @with_top.canonically_ordered_comm_semiring </code> would not unify, because the metavar <code>?x_26</code> is treated as a constant</p>
+
+<a name="164590604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164590604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164590604">Mario Carneiro (May 01 2019 at 00:57)</a>:</h4>
+<p>Of course this sort of defeats the purpose of using a metavariable to begin with, but like I said, <code>has_coe</code> seems confused about whether its inputs are outputs or not</p>
+
+<a name="164590660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164590660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164590660">Mario Carneiro (May 01 2019 at 00:58)</a>:</h4>
+<p><code>coe_sort_trans</code> seems like a very suspicious instance</p>
+
 
 {% endraw %}
