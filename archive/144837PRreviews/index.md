@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#966 more derivatives](29410966morederivatives.html) (9 messages, latest: May 01 2019 at 18:59)
+* [#966 more derivatives](29410966morederivatives.html) (13 messages, latest: May 01 2019 at 19:47)
 
 * [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (19 messages, latest: May 01 2019 at 18:10)
 
