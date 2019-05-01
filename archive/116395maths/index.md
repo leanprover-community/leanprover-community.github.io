@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cover with property](63841coverwithproperty.html) (2 messages, latest: May 01 2019 at 07:14)
+
 * [condensed mathematics](39396condensedmathematics.html) (182 messages, latest: Apr 30 2019 at 14:53)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3061 messages, latest: Apr 30 2019 at 13:08)
