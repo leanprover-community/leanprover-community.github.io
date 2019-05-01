@@ -10,9 +10,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#878  remove dependencies](50528878removedependencies.html) (64 messages, latest: Apr 28 2019 at 21:52)
+* [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (14 messages, latest: May 01 2019 at 17:59)
 
-* [#951 inj_iff_trivial_ker](53107951injifftrivialker.html) (12 messages, latest: Apr 23 2019 at 04:59)
+* [#966 more derivatives](29410966morederivatives.html) (1 message, latest: May 01 2019 at 17:42)
+
+* [#878  remove dependencies](50528878removedependencies.html) (64 messages, latest: Apr 28 2019 at 21:52)
 
 * [#927 operator norm](08942927operatornorm.html) (9 messages, latest: Apr 20 2019 at 22:06)
 
