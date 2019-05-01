@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [foreign function interface](69026foreignfunctioninterface.html) (30 messages, latest: May 01 2019 at 14:47)
+* [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 
-* [transport and parametricity](74751transportandparametricity.html) (11 messages, latest: May 01 2019 at 13:43)
+* [foreign function interface](69026foreignfunctioninterface.html) (30 messages, latest: May 01 2019 at 14:47)
 
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
