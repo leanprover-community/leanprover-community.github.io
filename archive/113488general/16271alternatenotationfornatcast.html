@@ -1,0 +1,28 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/16271alternatenotationfornatcast.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html">alternate notation for nat.cast?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164591680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternate%20notation%20for%20nat.cast%3F/near/164591680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16271alternatenotationfornatcast.html#164591680">Mario Carneiro (May 01 2019 at 01:23)</a>:</h4>
+<p>This is a response to issues like <a href="#narrow/stream/113489-new-members/topic/Weird.20error.20message/near/164587381" title="#narrow/stream/113489-new-members/topic/Weird.20error.20message/near/164587381">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Weird.20error.20message/near/164587381</a> and <a href="https://github.com/leanprover-community/mathlib/issues/946" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/946">#946</a> . What do people think about having a separate notation just for <code>nat.cast</code> and friends? Like so:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_cast</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">cast</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="kn">prefix</span> <span class="bp">`</span><span class="err">↟</span><span class="bp">`</span><span class="o">:</span><span class="n">max</span> <span class="o">:=</span> <span class="n">has_cast</span><span class="bp">.</span><span class="n">cast</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_cast</span> <span class="bp">ℕ</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_cast</span> <span class="bp">ℤ</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_cast</span> <span class="n">ℚ</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>That's the up-up sign <code>↟ = \uu</code>; I'm open to other notational choices. The important thing is that it's <em>not</em> a coercion, which can cause unpleasant surprises because it's a computationally very expensive operation. Also because it is not hooked into the coercion framework there is no question of transitivity searches for these instances, and taking these out of the coercion framework fixes the issue with forward searching for coercions.</p>
+
+
+{% endraw %}
