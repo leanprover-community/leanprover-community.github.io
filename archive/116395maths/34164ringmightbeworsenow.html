@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/34164ringmightbeworsenow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html">`ring` might be worse now?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164608824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164608824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164608824">Kevin Buzzard (May 01 2019 at 08:30)</a>:</h4>
+<p>Although I didn't check, I think there's evidence in my files that <code>ring</code> used to work here:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">X</span> <span class="bp">*</span> <span class="n">X</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">deterministic timeout</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="164608847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164608847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164608847">Kevin Buzzard (May 01 2019 at 08:31)</a>:</h4>
+<p>Sorry, I forgot the computer science word for "it used to work and now it doesn't". I might be wrong anyway -- but it looks like the sort of thing that <code>ring</code> should do...</p>
+
+<a name="164609573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164609573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164609573">Kenny Lau (May 01 2019 at 08:47)</a>:</h4>
+<p>it's called backwards compatibility?</p>
+
+<a name="164609636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164609636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164609636">Kevin Buzzard (May 01 2019 at 08:49)</a>:</h4>
+<p>Regression was the word I was looking for</p>
+
+<a name="164609816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164609816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164609816">Chris Hughes (May 01 2019 at 08:53)</a>:</h4>
+<p>Possibly related to this. This code is also incredibly slow.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">X</span> <span class="bp">*</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">pow_two</span><span class="o">],</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
