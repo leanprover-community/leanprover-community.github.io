@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [foreign function interface](69026foreignfunctioninterface.html) (25 messages, latest: May 01 2019 at 12:58)
+* [transport and parametricity](74751transportandparametricity.html) (11 messages, latest: May 01 2019 at 13:43)
 
-* [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (29 messages, latest: May 01 2019 at 11:51)
+* [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
+
+* [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (30 messages, latest: May 01 2019 at 13:19)
+
+* [foreign function interface](69026foreignfunctioninterface.html) (25 messages, latest: May 01 2019 at 12:58)
 
 * [leandoc](38167leandoc.html) (19 messages, latest: Apr 30 2019 at 23:02)
 
@@ -21,8 +25,6 @@ permalink: archive/113488general/index.html
 * [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (28 messages, latest: Apr 30 2019 at 18:20)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (238 messages, latest: Apr 30 2019 at 08:57)
-
-* [eblast](79292eblast.html) (27 messages, latest: Apr 29 2019 at 23:03)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
 
