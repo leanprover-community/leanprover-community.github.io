@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Weird error message](91403Weirderrormessage.html) (73 messages, latest: May 01 2019 at 06:58)
+* [Jose Balado](77525JoseBalado.html) (94 messages, latest: May 01 2019 at 10:15)
 
-* [Jose Balado](77525JoseBalado.html) (93 messages, latest: Apr 30 2019 at 23:15)
+* [Weird error message](91403Weirderrormessage.html) (73 messages, latest: May 01 2019 at 06:58)
 
 * [noob question(s)](52075noobquestions.html) (583 messages, latest: Apr 30 2019 at 03:01)
 
