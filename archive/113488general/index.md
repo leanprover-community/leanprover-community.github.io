@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [foreign function interface](69026foreignfunctioninterface.html) (30 messages, latest: May 01 2019 at 14:47)
+
 * [transport and parametricity](74751transportandparametricity.html) (11 messages, latest: May 01 2019 at 13:43)
 
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
 * [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (30 messages, latest: May 01 2019 at 13:19)
-
-* [foreign function interface](69026foreignfunctioninterface.html) (25 messages, latest: May 01 2019 at 12:58)
 
 * [leandoc](38167leandoc.html) (19 messages, latest: Apr 30 2019 at 23:02)
 
