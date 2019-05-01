@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Weird error message](91403Weirderrormessage.html) (60 messages, latest: Apr 30 2019 at 21:43)
+* [Weird error message](91403Weirderrormessage.html) (62 messages, latest: Apr 30 2019 at 23:53)
+
+* [Jose Balado](77525JoseBalado.html) (93 messages, latest: Apr 30 2019 at 23:15)
 
 * [noob question(s)](52075noobquestions.html) (583 messages, latest: Apr 30 2019 at 03:01)
 
 * [Induction](51886Induction.html) (131 messages, latest: Apr 28 2019 at 19:53)
-
-* [Jose Balado](77525JoseBalado.html) (92 messages, latest: Apr 28 2019 at 15:09)
 
 * [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
 

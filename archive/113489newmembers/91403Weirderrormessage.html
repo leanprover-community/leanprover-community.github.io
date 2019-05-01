@@ -286,5 +286,31 @@ which is the line that gives the error message.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164579552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164579552">Patrick Massot (Apr 30 2019 at 21:43)</a>:</h4>
 <p>Have a good night! (I should go to bed too)</p>
 
+<a name="164585031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164585031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164585031">Mario Carneiro (Apr 30 2019 at 23:09)</a>:</h4>
+<p>There is nothing wrong with that instance as written. I assume it is trying to solve a <code>canonically_ordered_comm_semiring ?</code> kind of problem?</p>
+
+<a name="164587381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20error%20message/near/164587381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91403Weirderrormessage.html#164587381">Mario Carneiro (Apr 30 2019 at 23:53)</a>:</h4>
+<p>Here's an abbreviated trace:</p>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_3 : has_coe_to_sort ℕ := @coe_sort_trans ?x_5 ?x_6 ?x_7 ?x_8
+[class_instances] (1) ?x_7 : has_coe_t_aux ℕ ?x_6 := @coe_base_aux ?x_9 ?x_10 ?x_11
+[class_instances] (2) ?x_11 : has_coe ℕ ?x_10 := @nat.cast_coe ?x_14 ?x_15 ?x_16 ?x_17
+[class_instances] (3) ?x_16 : has_one (with_zero ?x_18) := @with_zero.has_one ?x_24 ?x_25
+[class_instances] (4) ?x_25 : has_one ?x_24 := @with_top.has_one ?x_26 ?x_27 ?x_28
+[class_instances] (5) ?x_27 : canonically_ordered_comm_semiring ?x_26 := @with_top.canonically_ordered_comm_semiring ?x_29 ?x_30 ?x_31 ?x_32 ?x_33
+[class_instances] (6) ?x_30 : canonically_ordered_comm_semiring ?x_29 := @with_top.canonically_ordered_comm_semiring ?x_34 ?x_35 ?x_36 ?x_37 ?x_38
+...
+</pre></div>
+
+
+<p>The problem is a confusion of whether typeclass parameters are supposed to be input or output parameters. The <code>canonically_ordered_comm_semiring</code> instance assumes it will only ever be called on a concrete type, so the metavariable indicates the problem lies elsewhere. Similarly, <code>with_zero.has_one</code> assumes it is being called on a concrete type. So we must conclude that for <code>nat.cast_coe</code> to work correctly, it must only be called on concrete types. But that's not how the <code>coe</code> instances work, in particular <code>coe_sort_trans</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">coe_sort_trans</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">has_coe_t_aux</span> <span class="n">a</span> <span class="n">b</span><span class="o">]</span> <span class="o">[</span><span class="n">has_coe_to_sort</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">u₃</span><span class="o">}</span> <span class="n">b</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₃</span><span class="o">}</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>This is an instance which invents <code>b</code> from nothing, as a metavariable. It solves <code>has_coe_to_sort a</code> by trying to solve <code>has_coe_t_aux a ?b</code> (which quickly boils down to solving <code>has_coe a ?b</code>) and then if that is successful it looks for <code>has_coe_to_sort b</code>. This kind of forward searching doesn't work with the mathlib instances, since you can't enumerate all the types which have coercions from nat (there are infinitely many). In fact due to the DFS search order it never gets around to checking any of them and instead builds infinitely large instances and overflows.</p>
+
 
 {% endraw %}
