@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [leandoc](38167leandoc.html) (21 messages, latest: May 01 2019 at 16:59)
+
 * [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (30 messages, latest: May 01 2019 at 14:47)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
 * [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (30 messages, latest: May 01 2019 at 13:19)
-
-* [leandoc](38167leandoc.html) (19 messages, latest: Apr 30 2019 at 23:02)
 
 * [library_search](97355librarysearch.html) (19 messages, latest: Apr 30 2019 at 18:27)
 
