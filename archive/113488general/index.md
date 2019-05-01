@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (28 messages, latest: May 01 2019 at 04:59)
+* [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (29 messages, latest: May 01 2019 at 11:51)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (24 messages, latest: May 01 2019 at 02:48)
 
