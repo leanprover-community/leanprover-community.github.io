@@ -15,5 +15,37 @@ permalink: archive/144837PRreviews/29410966morederivatives.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164641435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164641435">Johan Commelin (May 01 2019 at 17:42)</a>:</h4>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Nice work! Monster PR again (-; Can we now prove that <code>exp</code> is the derivative of <code>exp</code>?</p>
 
+<a name="164646385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164646385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164646385">Sebastien Gouezel (May 01 2019 at 18:40)</a>:</h4>
+<p>Not really a monster PR, as a good part of it is mostly boring boilerplate, but necessary to make sure than all natural functions one might want to use are indeed there. Have a look at <a href="https://github.com/sgouezel/mathlib/blob/41cdebbc91e326c6a702f0b9ef7935fe853b4e66/src/analysis/normed_space/deriv.lean#L555" target="_blank" title="https://github.com/sgouezel/mathlib/blob/41cdebbc91e326c6a702f0b9ef7935fe853b4e66/src/analysis/normed_space/deriv.lean#L555">https://github.com/sgouezel/mathlib/blob/41cdebbc91e326c6a702f0b9ef7935fe853b4e66/src/analysis/normed_space/deriv.lean#L555</a> and at the next 400 lines, say :)</p>
+
+<a name="164646621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164646621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164646621">Sebastien Gouezel (May 01 2019 at 18:43)</a>:</h4>
+<p>Many further things are needed to prove (without add hoc arguments) that the derivative of <code>exp</code> is <code>exp</code>: power series, term by term differentiation, and one-dimensional derivative. I am not going in this direction, my goal is to do manifolds and I don't need <code>exp</code> for this -- well, until I do Lie groups...</p>
+
+<a name="164647227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647227">Kevin Buzzard (May 01 2019 at 18:50)</a>:</h4>
+<p>Manifolds will be a wonderful addition to Lean :-)</p>
+
+<a name="164647254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647254">Patrick Massot (May 01 2019 at 18:51)</a>:</h4>
+<p>Sébastien, did you get the opportunity to discuss manifolds with Assia?</p>
+
+<a name="164647477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647477">Sebastien Gouezel (May 01 2019 at 18:53)</a>:</h4>
+<p>Except that to prove anything serious on manifolds I will need partitions of unity, and for this I will need bump functions, and for this I need to know that <code>exp(1/x)</code> is infinitely flat, and for this I need the derivative of <code>exp</code>. It is really hard to construct anything serious when the bases are not here yet!</p>
+
+<a name="164647542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647542">Sebastien Gouezel (May 01 2019 at 18:54)</a>:</h4>
+<p>And I would also need convolution to smoothen functions, and for this I need integrals :(</p>
+
+<a name="164647573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647573">Patrick Massot (May 01 2019 at 18:54)</a>:</h4>
+<p>Why don't you do integrals? It shouldn't take you more than a couple of days, right?</p>
+
+<a name="164647958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164647958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164647958">Sebastien Gouezel (May 01 2019 at 18:59)</a>:</h4>
+<p>Defining it would not be too bad, but proving all the useful bits is a lot of work. I think <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>  mentioned he wanted to give this to a student.</p>
+
 
 {% endraw %}
