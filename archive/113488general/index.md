@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Install documentation](54866Installdocumentation.html) (114 messages, latest: May 02 2019 at 16:59)
+* [Install documentation](54866Installdocumentation.html) (140 messages, latest: May 02 2019 at 17:58)
+
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (11 messages, latest: May 02 2019 at 17:40)
 
 * [update-mathlib](82898updatemathlib.html) (12 messages, latest: May 02 2019 at 15:41)
 
 * [leandoc](38167leandoc.html) (63 messages, latest: May 02 2019 at 14:40)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (18 messages, latest: May 02 2019 at 12:59)
-
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (9 messages, latest: May 02 2019 at 12:50)
 
 * [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 

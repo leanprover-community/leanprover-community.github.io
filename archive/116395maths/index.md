@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
+* [`ring` might be worse now?](34164ringmightbeworsenow.html) (7 messages, latest: May 02 2019 at 17:31)
 
-* [`ring` might be worse now?](34164ringmightbeworsenow.html) (5 messages, latest: May 01 2019 at 08:53)
+* [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
 
 * [cover with property](63841coverwithproperty.html) (2 messages, latest: May 01 2019 at 07:14)
 
