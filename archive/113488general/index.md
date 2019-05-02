@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (16 messages, latest: May 02 2019 at 02:37)
+* [leandoc](38167leandoc.html) (38 messages, latest: May 02 2019 at 08:47)
 
-* [leandoc](38167leandoc.html) (37 messages, latest: May 02 2019 at 02:08)
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (1 message, latest: May 02 2019 at 08:13)
+
+* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (16 messages, latest: May 02 2019 at 02:37)
 
 * [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 
