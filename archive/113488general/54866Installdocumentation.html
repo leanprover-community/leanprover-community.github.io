@@ -587,5 +587,146 @@ permalink: archive/113488general/54866Installdocumentation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164729974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164729974">Patrick Massot (May 02 2019 at 17:58)</a>:</h4>
 <p>We're not there yet</p>
 
+<a name="164730173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164730173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164730173">Patrick Massot (May 02 2019 at 18:00)</a>:</h4>
+<p>People used to Debian are probably spoiled children, but we still want them on board. It's a bit unfortunate that they are the same people that will read "If you get stuck, please come to the chat room to ask for assistance.", follow the link, see you need to register on Zulip, and walk away</p>
+
+<a name="164730541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164730541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164730541">Simon Hudon (May 02 2019 at 18:03)</a>:</h4>
+<p>How hard would it be to create a <code>lean-mathlib</code> package for <code>apt-get</code>?</p>
+
+<a name="164730690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164730690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164730690">Johan Commelin (May 02 2019 at 18:05)</a>:</h4>
+<blockquote>
+<p>Whilst I was doing that, someone with some non-standard linux was trying to install it as well, but when they tried update-mathlib they had the wrong python or the wrong pip or something, and ended up having to upgrade their entire system to fix the problem -- it was "something they'd been meaning to do for months" but still.</p>
+</blockquote>
+<p>Well... people with non-standard linux are used to hacking their way through intallation instructions. They inflict that upon themselves. (I know this by experience.) I don't think we need to worry about them. They'll be fine (and happy).</p>
+
+<a name="164731601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164731601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164731601">Kevin Buzzard (May 02 2019 at 18:14)</a>:</h4>
+<p>Yes, the guy with the non-standard linux took far more than 20 minutes to install mathlib but seemed very happy with the situation at all points. The person with the mac was perplexed that it took so long. They also had to install homebrew or brew or whatever that package manager thing is called.</p>
+
+<a name="164731663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164731663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164731663">Patrick Massot (May 02 2019 at 18:15)</a>:</h4>
+<blockquote>
+<p>How hard would it be to create a <code>lean-mathlib</code> package for <code>apt-get</code>?</p>
+</blockquote>
+<p>There are two very different version of that question.</p>
+<ul>
+<li>
+<p>Creating a <code>leanmathlib.deb</code> that we could put on a website and tell people: download that file and <code>sudo dpkg -i lean-mathlib.deb</code>. This is very easy. I've done it for my department, so that computer people could deploy Lean in our teaching computer room</p>
+</li>
+<li>
+<p>Getting <code>lean</code> in the Debian/Ubuntu repositories is much harder. There are quality requirements here. And it starts with: we should get the source code for Lean and the package must be able to build lean from source. And then someone has to promise to maintain it. It looks easy right now, but wait for Lean 4...</p>
+</li>
+</ul>
+
+<a name="164731940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164731940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164731940">Patrick Massot (May 02 2019 at 18:18)</a>:</h4>
+<p>I'm lying a bit about the first version. I didn't handle elan, only a fixed version of Lean with a fixed version of mathlib</p>
+
+<a name="164732315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732315">Johan Commelin (May 02 2019 at 18:22)</a>:</h4>
+<p>We've talked about this before I think: and someone said that some big company (like MS) might have people who build and maintain such software packages. That could work really well.</p>
+
+<a name="164732377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732377">Johan Commelin (May 02 2019 at 18:23)</a>:</h4>
+<p>Also... we'd never want to package mathlib. It is <em>way</em> too rolling release</p>
+
+<a name="164732495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732495">Simon Hudon (May 02 2019 at 18:24)</a>:</h4>
+<p>What I would do is package the scripts for getting it</p>
+
+<a name="164732526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732526">Patrick Massot (May 02 2019 at 18:24)</a>:</h4>
+<p>You can still dream of a day where "all elementary stuff" will be in mathlib, and most people won't need to update daily</p>
+
+<a name="164732530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732530">Simon Hudon (May 02 2019 at 18:24)</a>:</h4>
+<p>But I think the future is a bit too uncertain</p>
+
+<a name="164732567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732567">Patrick Massot (May 02 2019 at 18:25)</a>:</h4>
+<p>Packaging for Debian wouldn't much sense at this point</p>
+
+<a name="164732578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732578">Johan Commelin (May 02 2019 at 18:25)</a>:</h4>
+<p>For now I would just focus on providing our own <code>curl bla | bash</code> installer</p>
+
+<a name="164732585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732585">Patrick Massot (May 02 2019 at 18:25)</a>:</h4>
+<p>yes</p>
+
+<a name="164732588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732588">Johan Commelin (May 02 2019 at 18:25)</a>:</h4>
+<p>Also, integration with the VScode extension is a big win</p>
+
+<a name="164732597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732597">Johan Commelin (May 02 2019 at 18:25)</a>:</h4>
+<p>We could extend that...</p>
+
+<a name="164732616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732616">Patrick Massot (May 02 2019 at 18:26)</a>:</h4>
+<p>Honestly, my plan is the opposite</p>
+
+<a name="164732673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732673">Johan Commelin (May 02 2019 at 18:26)</a>:</h4>
+<p>Why that?</p>
+
+<a name="164732694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732694">Patrick Massot (May 02 2019 at 18:26)</a>:</h4>
+<p>I want to include downloading VScode and installing the Lean extension as part of the <code>curl... | bash</code> thing</p>
+
+<a name="164732697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732697">Johan Commelin (May 02 2019 at 18:26)</a>:</h4>
+<p>You want <code>elan</code> to install VScode (-; <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="164732727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732727">Simon Hudon (May 02 2019 at 18:27)</a>:</h4>
+<p>I think that's reasonable</p>
+
+<a name="164732749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732749">Simon Hudon (May 02 2019 at 18:27)</a>:</h4>
+<p>Also, I would include a <code>--emacs</code> option</p>
+
+<a name="164732769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732769">Patrick Massot (May 02 2019 at 18:27)</a>:</h4>
+<p>I tried on real students: finding that extension icon you need to click is far more difficult than copy-paste something in a terminal</p>
+
+<a name="164732862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732862">Johan Commelin (May 02 2019 at 18:28)</a>:</h4>
+<blockquote>
+<p>Also, I would include a <code>--emacs</code> option</p>
+</blockquote>
+<p>There are no options... only different <code>curl bla | bash</code> lines.</p>
+
+<a name="164732904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732904">Simon Hudon (May 02 2019 at 18:28)</a>:</h4>
+<p>Indeed :P</p>
+
+<a name="164732961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732961">Patrick Massot (May 02 2019 at 18:29)</a>:</h4>
+<p>I see half of my students on Tuesday and half on Friday. During the first week I can tell you I spend my Wednesday creating screenshots to distribute to students</p>
+
+<a name="164732984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164732984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164732984">Johan Commelin (May 02 2019 at 18:29)</a>:</h4>
+<p>Or maybe a question...</p>
+<div class="codehilite"><pre><span></span>Do you want
+ (i)  VScode or
+ (ii) (((super-(world-(domination))-editor) Emacs))?
+</pre></div>
+
+<a name="164733090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164733090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164733090">Patrick Massot (May 02 2019 at 18:30)</a>:</h4>
+<p>I wouldn't even bother. People who will prefer emacs over VScode can take care of themselves</p>
+
+<a name="164733111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164733111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164733111">Johan Commelin (May 02 2019 at 18:30)</a>:</h4>
+<p>Right... they fall in the same category as "non-standard Linux"-users</p>
+
+<a name="164733630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Install%20documentation/near/164733630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54866Installdocumentation.html#164733630">Simon Hudon (May 02 2019 at 18:37)</a>:</h4>
+<p>I think we can have an easy path for the emacs user but I wouldn't ask most user what editor they want</p>
+
 
 {% endraw %}

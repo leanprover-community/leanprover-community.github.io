@@ -79,5 +79,29 @@ permalink: archive/116395maths/34164ringmightbeworsenow.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164727669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164727669">Kevin Buzzard (May 02 2019 at 17:31)</a>:</h4>
 <p>ha ha, my coefficients are integers and Chris just pointed out that <code>dec_trivial</code> works :D</p>
 
+<a name="164730409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164730409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164730409">Johan Commelin (May 02 2019 at 18:02)</a>:</h4>
+<p>I really need to figure out when <code>dec_trivial</code> can prove something? Is there a good documentation somewhere? The bit in TPIL is really short. I tried proving <code>n + 3 = 3 + n</code>, with <code>(n : nat)</code> and that didn't fly... so I was confused.</p>
+
+<a name="164731047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164731047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164731047">Chris Hughes (May 02 2019 at 18:09)</a>:</h4>
+<p><code>n + 3 = 3 + n</code> won't work because it depends on a variable, so <code>nat.decidable_eq (n + 3) (3 + n)</code> cannot be reduced. The equality of polynomials does not depend on any variables.</p>
+
+<a name="164731077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164731077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164731077">Chris Hughes (May 02 2019 at 18:09)</a>:</h4>
+<p>And <code>polynomial int</code> has <code>decidable_eq</code></p>
+
+<a name="164731162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164731162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164731162">Kevin Buzzard (May 02 2019 at 18:10)</a>:</h4>
+<p><code>dec_trivial</code> works if there's a trivial algorithm to decide whether what you want is true or not :-) Induction is definitely not trivial in this  context! <code>4 + 3 = 3 + 4</code> would be fine though, because everything is computable so both terms will reduce to a natural number; there's the algorithm to check to see if they're equal.</p>
+
+<a name="164731238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164731238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164731238">Chris Hughes (May 02 2019 at 18:11)</a>:</h4>
+<p>It's like you can't <code>#eval (2 * n) % 2</code>. Deciding something is the same as evaluating the decidable instance.</p>
+
+<a name="164731581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164731581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164731581">Johan Commelin (May 02 2019 at 18:14)</a>:</h4>
+<p>Aha...</p>
+
 
 {% endraw %}
