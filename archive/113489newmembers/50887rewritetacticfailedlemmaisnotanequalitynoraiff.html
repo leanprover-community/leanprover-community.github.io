@@ -1,0 +1,94 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html">rewrite tactic failed, lemma is not an equality nor a iff</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164706079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164706079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164706079">Kevin Kappelmann (May 02 2019 at 13:07)</a>:</h4>
+<p>Hi, I am having some rewriting issues. When I try to rewrite an obtained equality without explicitly re-stating the type, the rewriter fails returning <code>rewrite tactic failed, lemma is not an equality nor a iff</code>. However, when I explicitly re-state the type, the rewriter succeeds. Here is an example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">archimedean</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_linear_ordered_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">floor_ring</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">my_eq_lemma</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">fract_c_not_zero</span> <span class="o">:</span> <span class="n">fract</span> <span class="n">c</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="err">⌊</span><span class="n">c</span><span class="err">⌋</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">fract</span> <span class="n">c</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="err">⌊</span><span class="n">c</span><span class="err">⌋</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">my_eq</span><span class="o">,</span> <span class="k">from</span> <span class="n">my_eq_lemma</span> <span class="n">a</span> <span class="n">b</span> <span class="n">hyp</span><span class="o">,</span> <span class="c1">-- my_eq : a + (fract c)⁻¹ * (b + ↑⌊c⌋ * a) = (fract c)⁻¹ * (a * c + b)</span>
+<span class="n">rw</span> <span class="n">my_eq</span> <span class="c1">-- rewrite tactic failed, lemma is not an equality nor a iff</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">fract</span> <span class="n">c</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="err">⌊</span><span class="n">c</span><span class="err">⌋</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">my_eq</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="err">⌊</span><span class="n">c</span><span class="err">⌋</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">fract</span> <span class="n">c</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">),</span> <span class="k">from</span> <span class="n">my_eq_lemma</span> <span class="n">a</span> <span class="n">b</span> <span class="n">hyp</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">my_eq</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I would like to avoid re-stating the type as in my actual use case, the type is even longer. Any ideas? <code>simp only [my_eq]</code> also does not seem to work.</p>
+
+<a name="164706383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164706383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164706383">Kevin Kappelmann (May 02 2019 at 13:10)</a>:</h4>
+<p>Oops, gimme a second, some typos in the example.<br>
+Edit: Fixed it.</p>
+
+<a name="164706775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164706775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164706775">Floris van Doorn (May 02 2019 at 13:16)</a>:</h4>
+<p>If I replace the line by <code>have my_eq := my_eq_lemma a b hyp</code> the small example work for me. Does this work in the actual use case?<br>
+I don't know what is going on though.</p>
+
+<a name="164707127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707127">Patrick Massot (May 02 2019 at 13:21)</a>:</h4>
+<p>That's a nice one. Using <code>set option pp.all true</code> shows 100% same tactic state in both example</p>
+
+<a name="164707303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707303">Kevin Buzzard (May 02 2019 at 13:23)</a>:</h4>
+<blockquote>
+<p>I would like to avoid re-stating the type as in my actual use case, the type is even longer. Any ideas? </p>
+</blockquote>
+<p>You can take short cuts with <code>change</code> / <code>show</code> sometimes -- e.g. <code>show _ = 0</code> works fine if you're just trying to simplify the right hand side to something definitionally equal.</p>
+
+<a name="164707586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707586">Floris van Doorn (May 02 2019 at 13:26)</a>:</h4>
+<p>They are different with the option <code>set_option pp.instantiate_mvars false</code>.</p>
+<p>This gives a clue of what is going on. If you say <code>have my_eq, from my_eq_lemma a b hyp</code> then you are doing two steps: first you add a new fact whose type and definition are metavariables, and then you provide the definition, while with the <code>have my_eq := ...</code> notation this is one step. Somehow the type of <code>my_eq</code> is not updated (enough) when doing two steps. </p>
+<p>Probably the rewrite tactic needs to call <code>instantiate_mvars</code> on the type of the expression it is rewriting with.</p>
+
+<a name="164707626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707626">Kevin Kappelmann (May 02 2019 at 13:27)</a>:</h4>
+<blockquote>
+<p>If I replace the line by <code>have my_eq := my_eq_lemma a b hyp</code> the small example work for me. Does this work in the actual use case?<br>
+I don't know what is going on though.</p>
+</blockquote>
+<p>Ahw, that does work, yeah! :)</p>
+
+<a name="164707866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707866">Edward Ayers (May 02 2019 at 13:30)</a>:</h4>
+<p>Interestingly, <code>have my_eq : a + _ = _, from my_eq_lemma a b hyp, </code> works but <code>have my_eq : a_ = _, from my_eq_lemma a b hyp, </code> doesn't work for me. The error being <code>rewrite tactic failed, lemma lhs is a metavariable</code></p>
+
+<a name="164707938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164707938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164707938">Edward Ayers (May 02 2019 at 13:31)</a>:</h4>
+<p>So I think the problem is that <code>rw x</code> is not instantiating the metavariables on <code>x</code> before trying to rewrite with it.</p>
+
+<a name="164708120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164708120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164708120">Edward Ayers (May 02 2019 at 13:33)</a>:</h4>
+<p>ah floris beat me</p>
+
+<a name="164708356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164708356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164708356">Edward Ayers (May 02 2019 at 13:36)</a>:</h4>
+<p>Seems a shame that <code>rw</code> doesn't automatically try to instantiate mvars.</p>
+
+
+{% endraw %}
