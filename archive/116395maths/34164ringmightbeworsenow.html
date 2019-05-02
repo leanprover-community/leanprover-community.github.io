@@ -107,5 +107,98 @@ permalink: archive/116395maths/34164ringmightbeworsenow.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164740012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164740012">Mario Carneiro (May 02 2019 at 19:57)</a>:</h4>
 <p>An easy solution to these kinds of problems is to make a lemma to generalize over all types with appropriate structure, rather than relying on <code>polynomial</code>'s horrible instance searches</p>
 
+<a name="164740361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164740361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164740361">Chris Hughes (May 02 2019 at 20:01)</a>:</h4>
+<p>That's not an easy solution. Particularly to the simp issue.</p>
+
+<a name="164740737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164740737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164740737">Kevin Buzzard (May 02 2019 at 20:05)</a>:</h4>
+<p>I am looking at code which was written in something like Jan and which has all this <code>simp</code> stuff about polynomials and everything is now hanging. I'm trying to fix it but this basically entails removing all use of <code>simp</code> :-/</p>
+
+<a name="164742202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742202">Mario Carneiro (May 02 2019 at 20:23)</a>:</h4>
+<p>Except for theorems that are doing induction on polynomials or something, you can always just state the theorem in a general ring and specialize</p>
+
+<a name="164742312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742312">Patrick Massot (May 02 2019 at 20:25)</a>:</h4>
+<p>That's a workaround, not a solution</p>
+
+<a name="164742483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742483">Mario Carneiro (May 02 2019 at 20:27)</a>:</h4>
+<p>that's right</p>
+
+<a name="164742592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742592">Mario Carneiro (May 02 2019 at 20:29)</a>:</h4>
+<p>To be fair, it's actually the most efficient way to prove it if you consider the underlying proof term. You don't want to do that horrible instance search hundreds of times inside <code>ring</code></p>
+
+<a name="164742607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742607">Chris Hughes (May 02 2019 at 20:29)</a>:</h4>
+<p>And it's not a workaround for <code>simp</code>, because that does things specific to polynomials.</p>
+
+<a name="164742617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742617">Patrick Massot (May 02 2019 at 20:29)</a>:</h4>
+<p>I can totally believe that. But this is not what the end-user wants to hear...</p>
+
+<a name="164742622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742622">Rob Lewis (May 02 2019 at 20:29)</a>:</h4>
+<p>The polynomial issues are another symptom of what Johannes describes here: <a href="#narrow/stream/113488-general/topic/Problem.20with.20type.20class.20search" title="#narrow/stream/113488-general/topic/Problem.20with.20type.20class.20search">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problem.20with.20type.20class.20search</a><br>
+I had a chance to look back at my scribbled notes from dealing with this in the cap set proof. The <code>polynomial.subsingleton</code> instance is the culprit. Changing that to a local instance allows <code>simp</code> (and <code>ring</code>) to work fine on polynomials.</p>
+
+<a name="164742686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742686">Rob Lewis (May 02 2019 at 20:30)</a>:</h4>
+<p>I'm not sure if this instance is used other places in mathlib. I'm compiling now to test.</p>
+
+<a name="164742758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742758">Rob Lewis (May 02 2019 at 20:31)</a>:</h4>
+<p>I also swear I found a way to get <code>simp</code> to work, without removing this instance. But it didn't make it into the final proof, or my notes, and I can't figure it out now. So that memory might be made up.</p>
+
+<a name="164742764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742764">Mario Carneiro (May 02 2019 at 20:31)</a>:</h4>
+<p>Why would that cause problems? <code>simp</code> uses <code>congr</code>, which exploratively searches for <code>subsingleton</code> instances. So it tries to prove <code>subsingleton (polynomial A)</code>, finds all the required structure on A, fails to find <code>subsingleton A</code>, and is done</p>
+
+<a name="164742823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742823">Mario Carneiro (May 02 2019 at 20:32)</a>:</h4>
+<p>I guess we might be able to speed this up by putting the subsingleton instance first, before the ring structure</p>
+
+<a name="164742861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742861">Rob Lewis (May 02 2019 at 20:33)</a>:</h4>
+<p>There's some instance that leads to <code>subsingleton</code> through the algebraic hierarchy, iirc. I'm compiling mathlib now and don't want to change things back to see the trace again, I should have copied it.</p>
+
+<a name="164742889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742889">Rob Lewis (May 02 2019 at 20:33)</a>:</h4>
+<p>Yeah, that's it.</p>
+
+<a name="164742906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742906">Rob Lewis (May 02 2019 at 20:34)</a>:</h4>
+<p>Changing the order of those should fix it.</p>
+
+<a name="164742953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164742953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164742953">Rob Lewis (May 02 2019 at 20:34)</a>:</h4>
+<p>That's a better fix than making the instance local.</p>
+
+<a name="164743043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743043">Patrick Massot (May 02 2019 at 20:35)</a>:</h4>
+<p>I'm not sure I understand. Are you solving the polynomial hell issue that has been a plague for one year? Or only the new part of it?</p>
+
+<a name="164743675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743675">Rob Lewis (May 02 2019 at 20:43)</a>:</h4>
+<p>This was introduced in <a href="https://github.com/leanprover-community/mathlib/pull/530" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/530">https://github.com/leanprover-community/mathlib/pull/530</a> , so since January. Which sounds right. I don't remember these issues in the Hensel's Lemma proof, but they were there in the cap set proof.</p>
+
+<a name="164743732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743732">Rob Lewis (May 02 2019 at 20:44)</a>:</h4>
+<p>What's the year long plague?</p>
+
+<a name="164743758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743758">Patrick Massot (May 02 2019 at 20:44)</a>:</h4>
+<p>Maybe I'm exaggerating, we need to Zulip search</p>
+
+<a name="164743787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743787">Patrick Massot (May 02 2019 at 20:45)</a>:</h4>
+<p>or ask <span class="user-mention" data-user-id="110064">@Kenny Lau</span> if he remembers when he started to hate polynomials</p>
+
+<a name="164743893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164743893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164743893">Rob Lewis (May 02 2019 at 20:46)</a>:</h4>
+<p>But ultimately, this is also just fixing a symptom. We're abusing type class search. This is the same thing that caused the <code>int-&gt;nat</code> coercion issue, and eventually we'll find a case that can't be fixed by reordering instances.</p>
+
 
 {% endraw %}
