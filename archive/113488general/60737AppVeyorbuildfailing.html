@@ -19,5 +19,29 @@ permalink: archive/113488general/60737AppVeyorbuildfailing.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164669368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164669368">Bryan Gin-ge Chen (May 02 2019 at 00:12)</a>:</h4>
 <p><a href="https://ci.appveyor.com/project/cipher1024/mathlib-3r2np/builds/24238291/job/d04otgisfgfdeyna#L156" target="_blank" title="https://ci.appveyor.com/project/cipher1024/mathlib-3r2np/builds/24238291/job/d04otgisfgfdeyna#L156">The issue</a> seems to be that the <code>update-mathlib</code> test makes several requests to the github API and this is being rate-limited. (This seems to be hitting several other PRs as well).</p>
 
+<a name="164671669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164671669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164671669">Scott Morrison (May 02 2019 at 01:04)</a>:</h4>
+<p>I'd really like to see these script tests disabled for PRs that don't modify the scripts.</p>
+
+<a name="164671814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164671814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164671814">Simon Hudon (May 02 2019 at 01:08)</a>:</h4>
+<p>Yeah, the thing is that we can do that for travis but even if we don't run those tests, GitHub will expect a successful AppVeyor test</p>
+
+<a name="164671890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164671890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164671890">Bryan Gin-ge Chen (May 02 2019 at 01:09)</a>:</h4>
+<p>Can we wrap the appveyor script in some fancy <code>git diff</code> conditional?</p>
+
+<a name="164672058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164672058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164672058">Bryan Gin-ge Chen (May 02 2019 at 01:13)</a>:</h4>
+<p>Maybe something like <code>if [[ -n $(git diff HEAD master scripts/)]]</code></p>
+
+<a name="164672252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164672252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164672252">Bryan Gin-ge Chen (May 02 2019 at 01:17)</a>:</h4>
+<p>Oh wait, I guess there's some commented out lines that do the same thing.</p>
+
+<a name="164672335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AppVeyor%20build%20failing/near/164672335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60737AppVeyorbuildfailing.html#164672335">Simon Hudon (May 02 2019 at 01:18)</a>:</h4>
+<p>that's try but you need to make a trivial build happen when those conditions aren't satisfied.</p>
+
 
 {% endraw %}
