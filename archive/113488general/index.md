@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (8 messages, latest: May 02 2019 at 01:18)
+* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (16 messages, latest: May 02 2019 at 02:37)
 
-* [leandoc](38167leandoc.html) (35 messages, latest: May 01 2019 at 17:53)
+* [leandoc](38167leandoc.html) (37 messages, latest: May 02 2019 at 02:08)
 
 * [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 
