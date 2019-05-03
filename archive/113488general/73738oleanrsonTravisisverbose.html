@@ -74,5 +74,116 @@ category_theory.natural_isomorphism
 
 <p>but in fact none of those three was necessary (presumably because they are already implied by other existing imports)</p>
 
+<a name="164785066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164785066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164785066">Scott Morrison (May 03 2019 at 11:02)</a>:</h4>
+<p>I think overall I <em>don't</em> like this as a travis test.</p>
+
+<a name="164785074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164785074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164785074">Scott Morrison (May 03 2019 at 11:02)</a>:</h4>
+<p>The PR process is already soul-crushing, and having yet another potential hiccup in the hours long process of waiting until travis is happy is just unbearable.</p>
+
+<a name="164785095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164785095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164785095">Scott Morrison (May 03 2019 at 11:03)</a>:</h4>
+<p>I would prefer that we just run <code>olean-rs</code> every couple of months and make a single PR with lots of import fixing.</p>
+
+<a name="164785100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164785100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164785100">Johan Commelin (May 03 2019 at 11:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I think this one at least needs more testing. Can we disable it?</p>
+
+<a name="164785155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164785155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164785155">Johan Commelin (May 03 2019 at 11:04)</a>:</h4>
+<blockquote>
+<p>I would prefer that we just run <code>olean-rs</code> every couple of months and make a single PR with lots of import fixing.</p>
+</blockquote>
+<p>This PR could potentially even be scriptable, right? <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="164786058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786058">Scott Morrison (May 03 2019 at 11:22)</a>:</h4>
+<p>Yeah... I've just sat through a 45 minute build in order to see a second error message from olean-rs. This step in the PR process basically makes it compulsory for all PR authors to install a local copy of olean-rs, which is not okay.</p>
+
+<a name="164786444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786444">Mario Carneiro (May 03 2019 at 11:31)</a>:</h4>
+<p>import optimization on every commit is silly</p>
+
+<a name="164786514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786514">Patrick Massot (May 03 2019 at 11:32)</a>:</h4>
+<p>I wouldn't write "silly", but it certainly sounds like an unconvenient overkill</p>
+
+<a name="164786529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786529">Mario Carneiro (May 03 2019 at 11:33)</a>:</h4>
+<p>Maybe it would be okay if it was an automatic cleanup, but travis just saying "you weren't optimal, so you lose" is a recipe for stress</p>
+
+<a name="164786622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786622">Johan Commelin (May 03 2019 at 11:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you know how to disable the test?</p>
+
+<a name="164786658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786658">Mario Carneiro (May 03 2019 at 11:35)</a>:</h4>
+<p>just restore the travis.yml to what it was before Simon added the test?</p>
+
+<a name="164786668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786668">Johan Commelin (May 03 2019 at 11:35)</a>:</h4>
+<p>Should I try to do that?</p>
+
+<a name="164786671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786671">Mario Carneiro (May 03 2019 at 11:36)</a>:</h4>
+<p>There are other linter warnings we might want to run, but the import test is the only one that's implemented so far</p>
+
+<a name="164786729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786729">Mario Carneiro (May 03 2019 at 11:36)</a>:</h4>
+<p>and it's not worth interrupting someone's workflow for that</p>
+
+<a name="164786735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786735">Mario Carneiro (May 03 2019 at 11:36)</a>:</h4>
+<p>stuff like indentation would be a better test</p>
+
+<a name="164786747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786747">Johan Commelin (May 03 2019 at 11:37)</a>:</h4>
+<p>I guess we need to remove these 4 lines <a href="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L57-L60" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L57-L60">https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L57-L60</a></p>
+
+<a name="164786839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786839">Johan Commelin (May 03 2019 at 11:38)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/973" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/973">#973</a></p>
+
+<a name="164786848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786848">Johan Commelin (May 03 2019 at 11:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> should we just merge this? Or should this go through Travis + Mergify?</p>
+
+<a name="164786876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786876">Mario Carneiro (May 03 2019 at 11:39)</a>:</h4>
+<p>you should usually test travis changes first, let it run</p>
+
+<a name="164786880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786880">Patrick Massot (May 03 2019 at 11:39)</a>:</h4>
+<p>I would even had instructed Travis to keep away from this commit (using <code>[ci skip]</code> in the commit message)</p>
+
+<a name="164786931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786931">Patrick Massot (May 03 2019 at 11:40)</a>:</h4>
+<p>Travis could feel we are rebelling, and reject the commit</p>
+
+<a name="164786932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786932">Mario Carneiro (May 03 2019 at 11:40)</a>:</h4>
+<p>isn't it <code>[ci-skip]</code>?</p>
+
+<a name="164786947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786947">Johan Commelin (May 03 2019 at 11:40)</a>:</h4>
+<p>Next time I'll add both (-;</p>
+
+<a name="164786966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786966">Patrick Massot (May 03 2019 at 11:41)</a>:</h4>
+<p><a href="https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build" target="_blank" title="https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build">https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build</a></p>
+
+<a name="164786967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164786967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164786967">Patrick Massot (May 03 2019 at 11:41)</a>:</h4>
+<p>no dash</p>
+
+<a name="164787032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164787032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164787032">Patrick Massot (May 03 2019 at 11:42)</a>:</h4>
+<p>Maybe you are confused because <code>[travis-ci skip]</code> is a thing</p>
+
+<a name="164787323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164787323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164787323">Scott Morrison (May 03 2019 at 11:47)</a>:</h4>
+<p>I also just got an error message that <code>make unused</code> took longer than 10 minutes: <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/527719987" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/527719987">https://travis-ci.org/leanprover-community/mathlib/jobs/527719987</a></p>
+
 
 {% endraw %}

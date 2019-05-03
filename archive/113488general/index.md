@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (13 messages, latest: May 03 2019 at 11:00)
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (40 messages, latest: May 03 2019 at 11:47)
+
+* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
 * [update-mathlib](82898updatemathlib.html) (21 messages, latest: May 03 2019 at 10:19)
 
@@ -155,8 +157,6 @@ permalink: archive/113488general/index.html
 * [dreaded red blocks of death are back](09383dreadedredblocksofdeathareback.html) (7 messages, latest: Apr 14 2019 at 19:22)
 
 * [calling a tactic without importing it](08190callingatacticwithoutimportingit.html) (12 messages, latest: Apr 14 2019 at 12:51)
-
-* [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (74 messages, latest: Apr 14 2019 at 11:27)
 
 * [unifying `order_dual` and `opposite`](59025unifyingorderdualandopposite.html) (14 messages, latest: Apr 13 2019 at 11:47)
 

@@ -382,5 +382,26 @@ by library_search -- exact (nat.le_div_iff_mul_le a b XXX).mpr h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/163313097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#163313097">Scott Morrison (Apr 14 2019 at 11:27)</a>:</h4>
 <p>It looks like running <code>infer_type</code> costs about a 10% increase in runtime in the <code>library_search</code> tests, so I'll avoid it, I guess.</p>
 
+<a name="164785280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/164785280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#164785280">Scott Morrison (May 03 2019 at 11:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I never got this working, but I've made a [WIP] PR that shows the problem I ran into. <a href="https://github.com/leanprover-community/mathlib/issues/967" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/967">#967</a> I'm attempt to update the universe levels in <code>d.type</code> use the new universes from <code>e &lt;- mk_const d.to_name</code>, but apparently I'm not getting them all.</p>
+
+<a name="164785286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/164785286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#164785286">Scott Morrison (May 03 2019 at 11:07)</a>:</h4>
+<p>Possibly I'm just doing something dumb as I traverse the <code>expr</code>.</p>
+
+<a name="164786349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/164786349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#164786349">Mario Carneiro (May 03 2019 at 11:29)</a>:</h4>
+<p>you wrote your own <code>instantiate_univ_params</code>?</p>
+
+<a name="164786355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forward%20implication%20from%20an%20%60iff%60%2C%20with%20typeclasses/near/164786355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17631forwardimplicationfromaniffwithtypeclasses.html#164786355">Mario Carneiro (May 03 2019 at 11:29)</a>:</h4>
+<p>try this instead:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">decl_mk_const</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">expr</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">subst</span> <span class="err">←</span> <span class="n">d</span><span class="bp">.</span><span class="n">univ_params</span><span class="bp">.</span><span class="n">mmap</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">u</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">u</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">e</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">subst</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="n">d</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">instantiate_univ_params</span> <span class="n">subst</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
