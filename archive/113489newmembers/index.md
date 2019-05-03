@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to define angle? Is function arccos  available ?](31168HowtodefineangleIsfunctionarccosavailable.html) (4 messages, latest: May 03 2019 at 05:30)
+
 * [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (11 messages, latest: May 02 2019 at 13:36)
 
 * [Jose Balado](77525JoseBalado.html) (94 messages, latest: May 01 2019 at 10:15)
