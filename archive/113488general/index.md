@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (40 messages, latest: May 03 2019 at 11:47)
+* [travis-ci/{push,pr}](22440traviscipushpr.html) (3 messages, latest: May 03 2019 at 12:55)
+
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (42 messages, latest: May 03 2019 at 12:17)
 
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
