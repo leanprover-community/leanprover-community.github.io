@@ -1307,5 +1307,59 @@ Such a function seems to be a very important ingredient for AI approaches to gam
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803824">Reid Barton (May 03 2019 at 15:28)</a>:</h4>
 <p>GamePad (<a href="https://arxiv.org/abs/1806.00608" target="_blank" title="https://arxiv.org/abs/1806.00608">https://arxiv.org/abs/1806.00608</a>) is another project similar to HOList I guess, but for Coq</p>
 
+<a name="164806904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164806904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164806904">Kevin Buzzard (May 03 2019 at 16:11)</a>:</h4>
+<blockquote>
+<p>I have thought about it, but I don't know how you would measure progress in a proof</p>
+</blockquote>
+<p>This was pointed out to be a serious issue at AITP by one of the google speakers. It's hard to train an AI with such a poor definition of progress as the one we have: either "no, you have not done it, 0 points" or "yes, you have done it, all the points"</p>
+
+<a name="164807087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164807087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164807087">Olli (May 03 2019 at 16:13)</a>:</h4>
+<p>A really simple example:<br>
+<code>(h : p ∧ q) : q ∧ p</code></p>
+<p>So we are looking for a strategy for a game <code>q ∧ p</code>, where we have another game <code>p ∧ q</code> as a resource (hypothesis).</p>
+<p>Since we are playing the and-game, the Falsifier gets to choose between <code>p</code> and <code>q</code>, and because we think of our strategy as a proof, then this means we have to describe what we would do in either case.</p>
+<p>If F chooses <code>p</code>, then if we can provide a <code>p</code> then we win. We can get <code>p</code> by playing through our resource, where now the roles are reversed, which means we get to choose. Se we of course choose <code>p</code> and win this game. If F chooses <code>q</code> we similarly choose <code>q</code> from our hypotheses and thus we win the game regardless of what F chose.</p>
+<p>Why are the roles reversed when we play in the resource game? Well I have to confess I am not sure if I know how to explain it, but I can make a few observations:</p>
+<p>Classically A → B is the same as ¬A ∨ B, so an implies-game is a game where the Verifier gets to choose between playing the B-game or the reverse game of A.</p>
+<p>So in our example if we instead are proving (p ∧ q) → (q ∧ p) which we kind of are, then this is a bigger game that is classically the ¬(p ∧ q) ∨ (q ∧ p) game, and because we are at the disjunction-node, the Verifier can choose to play the reverse game ¬(p ∧ q) which is just the game (p ∧ q) with the roles reversed. This means that eventhough we are dealing with an and-game, this time we the Verifier get to choose.</p>
+
+<a name="164807162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164807162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164807162">Kevin Buzzard (May 03 2019 at 16:14)</a>:</h4>
+<p>The holist link -- that's exactly the google people who were at AITP. <a href="https://arxiv.org/abs/1904.03241" target="_blank" title="https://arxiv.org/abs/1904.03241">https://arxiv.org/abs/1904.03241</a> . Szegedy was the guy who thinks maths will be done better by computers than by humans within 10 years. I talked to the authors of that project and they said that to a large extent their work was system-agnostic so could certainly be applied to Lean. They then asked me a couple of of technical questions about accessing Lean stuff programatically which I had no clue about.</p>
+
+<a name="164808120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164808120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164808120">Adrian Chu (May 03 2019 at 16:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="126113">@Olli</span> can you please run through the steps of the example in your last paragraph ?</p>
+
+<a name="164808879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164808879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164808879">Olli (May 03 2019 at 16:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="218709">@Adrian Chu</span> I don't quite understand the game semantics of implication, so it is possible that the last paragraph I wrote is just confusing things, like I said I only came upon this concept a few weeks ago so I don't know if I understand it well enough to explain it, I just thought of it might be relevant to AITP</p>
+
+<a name="164809024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809024">Olli (May 03 2019 at 16:39)</a>:</h4>
+<p>although, <code>¬(p ∧ q) ∨ (q ∧ p)</code> is a theorem, so there should be a way of explaining its proof as a strategy in a game</p>
+
+<a name="164809075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809075">Nicholas Scheel (May 03 2019 at 16:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="126113">@Olli</span> Yes, I think this is a simple manifestation of the duality of implication</p>
+
+<a name="164809180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809180">Nicholas Scheel (May 03 2019 at 16:40)</a>:</h4>
+<p>Having hypotheses in scope is the "opposite" of having a goal to prove</p>
+
+<a name="164809203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809203">Nicholas Scheel (May 03 2019 at 16:40)</a>:</h4>
+<p>In your game-theoretic example, this is shown in who gets to choose what</p>
+
+<a name="164809282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809282">Nicholas Scheel (May 03 2019 at 16:42)</a>:</h4>
+<p>another way to see it is that <code>q ∧ p</code> is a stronger hypothesis but harder to prove than <code>q ∨ p</code></p>
+
+<a name="164809716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164809716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164809716">Olli (May 03 2019 at 16:46)</a>:</h4>
+<p>yeah I was going to mention how in sequent calculus we can treat everything to the left of the turnstile as being implicitly in conjunction, whereas the right hand side is in disjunction, which I guess is another manifestation of what you said</p>
+
 
 {% endraw %}

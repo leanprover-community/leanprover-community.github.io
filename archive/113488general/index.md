@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (284 messages, latest: May 03 2019 at 15:28)
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (47 messages, latest: May 03 2019 at 16:53)
+
+* [A newcomer's opinion](34360Anewcomersopinion.html) (295 messages, latest: May 03 2019 at 16:46)
 
 * [travis-ci/{push,pr}](22440traviscipushpr.html) (12 messages, latest: May 03 2019 at 14:24)
 
 * [Install documentation](54866Installdocumentation.html) (198 messages, latest: May 03 2019 at 14:10)
-
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (43 messages, latest: May 03 2019 at 13:25)
 
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
