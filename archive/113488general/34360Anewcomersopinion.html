@@ -1235,5 +1235,77 @@ permalink: archive/113488general/34360Anewcomersopinion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164801172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164801172">Adrian Chu (May 03 2019 at 14:57)</a>:</h4>
 <p>how exactly is it related to  Curry-Howard isomorphism??</p>
 
+<a name="164802598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164802598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164802598">Olli (May 03 2019 at 15:14)</a>:</h4>
+<p>you can think of a logical formula as a game, where each sub-expression represents a sub game-tree with the rules, where the play/proof advances play by play:</p>
+<ul>
+<li>the game is between the Verifier and Falsifier, and it ends when there are only atomic expressions left. If the expression is <code>true</code> then V wins, and if it is <code>false</code> then F wins.</li>
+<li>each logical operation is given meaning according to how it advances the game, so:<ul>
+<li><code>A ∧ B</code> is a node in which the Falsifier gets to choose between A or B.</li>
+<li><code>A ∨ B</code> the same, but V gets to decide instead</li>
+<li><code>∀ (x : A), body</code> the Falsifier chooses a value of A for which the play continues in body</li>
+</ul>
+</li>
+</ul>
+<p>etc. The game is winnable by the Verifier if he has a winning strategy against an omniscient opponent.</p>
+
+<a name="164802776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164802776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164802776">Olli (May 03 2019 at 15:16)</a>:</h4>
+<p>and you can have this same framing but where the game is played between the Computer and Environment instead, where Computer has the same role as the Verifier and Environment is the Falsifier</p>
+
+<a name="164802844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164802844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164802844">Olli (May 03 2019 at 15:17)</a>:</h4>
+<p>the proof / program is then viewed as a strategy in a game</p>
+
+<a name="164803199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803199">Adrian Chu (May 03 2019 at 15:21)</a>:</h4>
+<p>is this a non-cooperative game in some sense?</p>
+
+<a name="164803235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803235">Olli (May 03 2019 at 15:21)</a>:</h4>
+<p>yes, you could say it is zero-sum</p>
+
+<a name="164803244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803244">Johan Commelin (May 03 2019 at 15:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="126113">@Olli</span> for a lot of games, there is some sort of function that gives the winning chances for V (or F). I.e., given the current position in the game, who is likely to win.<br>
+Such a function seems to be a very important ingredient for AI approaches to games. Do you have a similar function for your game Logic?</p>
+
+<a name="164803329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803329">Olli (May 03 2019 at 15:22)</a>:</h4>
+<p>oh yeah I forgot to mention the interpretation of <code>¬</code>, which simply swaps the roles between Verifier/Computer and Falsifier/Environment</p>
+
+<a name="164803393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803393">Olli (May 03 2019 at 15:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> I have only just started reading about this area, so no I don't</p>
+
+<a name="164803495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803495">Olli (May 03 2019 at 15:24)</a>:</h4>
+<p>I have thought about it, but I don't know how you would measure progress in a proof</p>
+
+<a name="164803513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803513">Olli (May 03 2019 at 15:24)</a>:</h4>
+<p>I don't have a lot of experience with ITP or proving things in general, I've just messed around with Lean</p>
+
+<a name="164803520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803520">Adrian Chu (May 03 2019 at 15:24)</a>:</h4>
+<p>can you give a very simple example, step by step, to illustrate ?</p>
+
+<a name="164803571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803571">Adrian Chu (May 03 2019 at 15:25)</a>:</h4>
+<p>because this idea sound very interesting to me :)</p>
+
+<a name="164803692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803692">Alex J. Best (May 03 2019 at 15:26)</a>:</h4>
+<p>You might be interested in HOList / DeepHol: <a href="https://sites.google.com/view/holist/home" target="_blank" title="https://sites.google.com/view/holist/home">https://sites.google.com/view/holist/home</a> , see the ICML paper link there.</p>
+<p>I wonder how tough it would be to make a lean backend for their code?</p>
+
+<a name="164803696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803696">Olli (May 03 2019 at 15:26)</a>:</h4>
+<p>let me try to find an example from the Lean tutorial and see if I can write the game semantic interpretation for it</p>
+
+<a name="164803824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20newcomer%27s%20opinion/near/164803824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34360Anewcomersopinion.html#164803824">Reid Barton (May 03 2019 at 15:28)</a>:</h4>
+<p>GamePad (<a href="https://arxiv.org/abs/1806.00608" target="_blank" title="https://arxiv.org/abs/1806.00608">https://arxiv.org/abs/1806.00608</a>) is another project similar to HOList I guess, but for Coq</p>
+
 
 {% endraw %}

@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to define angle? Is function arccos  available ?](31168HowtodefineangleIsfunctionarccosavailable.html) (7 messages, latest: May 03 2019 at 10:00)
+* [using exists](90887usingexists.html) (7 messages, latest: May 03 2019 at 15:39)
+
+* [How to define angle? Is function arccos  available ?](31168HowtodefineangleIsfunctionarccosavailable.html) (11 messages, latest: May 03 2019 at 15:30)
 
 * [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (11 messages, latest: May 02 2019 at 13:36)
 
