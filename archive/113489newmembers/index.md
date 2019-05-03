@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (21 messages, latest: May 03 2019 at 18:52)
+* [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (24 messages, latest: May 03 2019 at 19:21)
 
 * [Induction](51886Induction.html) (132 messages, latest: May 03 2019 at 18:45)
 

@@ -144,5 +144,29 @@ instance add_monoid_integrable&#39; : add_monoid (subtype (ball (0 : α →ₘ �
 <span class="n">subtype</span><span class="bp">.</span><span class="n">add_monoid</span>
 </pre></div>
 
+<a name="164820865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164820865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164820865">Joe (May 03 2019 at 19:01)</a>:</h4>
+<p>You are right. So I don't know why lean looks for the wrong property ... </p>
+<p>I paste my code here. This is the working version. If I comment out <code>instance foo'</code>, then the last line will fail.</p>
+<div class="codehilite"><pre><span></span>variables {γ : Type w} [normed_group γ] [second_countable_topology γ] [topological_add_group γ]
+
+instance foo : is_add_submonoid (ball (0 : α →ₘ γ) ⊤) :=
+{ ... }
+
+instance add_monoid_integrable : add_monoid (ball (0 : α →ₘ γ) ⊤) := subtype.add_monoid
+
+instance foo&#39; : is_add_submonoid (λ y : α →ₘ γ, edist y 0 &lt; ⊤) := sorry
+
+instance add_monoid_integrable&#39; : add_monoid (subtype (ball (0 : α →ₘ γ) ⊤)) := subtype.add_monoid
+</pre></div>
+
+<a name="164821380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164821380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164821380">Chris Hughes (May 03 2019 at 19:09)</a>:</h4>
+<p>I imagine that it's because it thinks <code>(λ y : α →ₘ γ, edist y 0 &lt; ⊤)</code> has type <code>(α →ₘ γ) → Prop</code>, so it looks for an instance on that Type, and rejects the instance that uses <code>set (α →ₘ γ)</code>, even though these two type are defeq.</p>
+
+<a name="164822345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164822345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164822345">Joe (May 03 2019 at 19:21)</a>:</h4>
+<p>Thank you. I think you are right. Using explicit form <code>@subtype.add_monoid _ _ _ ae_eq_fun.is_add_submonoid</code>solves the problem.</p>
+
 
 {% endraw %}
