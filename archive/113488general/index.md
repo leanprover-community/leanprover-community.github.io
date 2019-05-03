@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (240 messages, latest: May 03 2019 at 04:21)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (242 messages, latest: May 03 2019 at 06:05)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (34 messages, latest: May 03 2019 at 02:14)
 
