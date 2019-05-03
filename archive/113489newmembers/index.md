@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (21 messages, latest: May 03 2019 at 18:52)
+
+* [Induction](51886Induction.html) (132 messages, latest: May 03 2019 at 18:45)
+
 * [using exists](90887usingexists.html) (7 messages, latest: May 03 2019 at 15:39)
 
 * [How to define angle? Is function arccos  available ?](31168HowtodefineangleIsfunctionarccosavailable.html) (11 messages, latest: May 03 2019 at 15:30)
@@ -21,8 +25,6 @@ permalink: archive/113489newmembers/index.html
 * [Weird error message](91403Weirderrormessage.html) (73 messages, latest: May 01 2019 at 06:58)
 
 * [noob question(s)](52075noobquestions.html) (583 messages, latest: Apr 30 2019 at 03:01)
-
-* [Induction](51886Induction.html) (131 messages, latest: Apr 28 2019 at 19:53)
 
 * [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
 

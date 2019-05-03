@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [squeeze_dsimp?](80798squeezedsimp.html) (14 messages, latest: May 03 2019 at 18:43)
+
+* [New record](10826Newrecord.html) (17 messages, latest: May 03 2019 at 18:25)
+
 * [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (57 messages, latest: May 03 2019 at 17:38)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (300 messages, latest: May 03 2019 at 17:22)
@@ -463,8 +467,6 @@ permalink: archive/113488general/index.html
 * [Apply composition](01467Applycomposition.html) (2 messages, latest: Feb 27 2019 at 09:46)
 
 * [Is free group a "recursive type"?](70986Isfreegrouparecursivetype.html) (89 messages, latest: Feb 27 2019 at 02:18)
-
-* [New record](10826Newrecord.html) (16 messages, latest: Feb 27 2019 at 00:07)
 
 * [understanding simp](11344understandingsimp.html) (3 messages, latest: Feb 26 2019 at 16:15)
 

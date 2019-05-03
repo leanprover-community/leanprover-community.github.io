@@ -1,0 +1,148 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/57873Howtoprovesubtypeinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html">How to prove subtype instances?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164816342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164816342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164816342">Joe (May 03 2019 at 18:06)</a>:</h4>
+<p>Let's say we have a predicate <code>p : set α</code>, and I have proved that </p>
+<div class="codehilite"><pre><span></span>instance : is_add_submonoid p  :=
+</pre></div>
+
+
+<p>and so we have</p>
+<div class="codehilite"><pre><span></span>instance  : add_monoid p := subtype.add_monoid
+</pre></div>
+
+
+<p>But now I'm not sure how to prove </p>
+<div class="codehilite"><pre><span></span>instance : add_monoid (subtype p) :=
+</pre></div>
+
+
+<p>Perhaps I need to use the fact that <code>subtype.val</code> is a monoid homomorphism, or is there a easier method?</p>
+
+<a name="164816490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164816490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164816490">Johan Commelin (May 03 2019 at 18:08)</a>:</h4>
+<p><code>p</code> in the second example is coerced to <code>subtype p</code>. So the same proof should work.</p>
+
+<a name="164817546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164817546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164817546">Joe (May 03 2019 at 18:20)</a>:</h4>
+<p>Thank you. So I guess the problem must be at somewhere else. I'll look into it. </p>
+<p>This is what I have right now</p>
+<div class="codehilite"><pre><span></span>instance add_monoid_integrable : add_monoid (ball (0 : α →ₘ γ) ⊤) := subtype.add_monoid
+instance add_monoid_integrable&#39; : add_monoid (subtype (ball (0 : α →ₘ γ) ⊤)) := subtype.add_monoid
+</pre></div>
+
+
+<p>The first line succeeds. The second line gives me a "maximum class_instance resolution depth has been reached" error.</p>
+
+<a name="164818878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164818878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164818878">Joe (May 03 2019 at 18:36)</a>:</h4>
+<p>Looks like the first line is looking for </p>
+<div class="codehilite"><pre><span></span>is_add_submonoid (ball (0 : α →ₘ γ) ⊤)
+</pre></div>
+
+
+<p>Instead, the second line is looking for </p>
+<div class="codehilite"><pre><span></span>is_add_submonoid (λ y : α →ₘ γ, edist y 0 &lt; ⊤)
+</pre></div>
+
+
+<p>How strange this is...  The definition of <code>ball</code> is </p>
+<div class="codehilite"><pre><span></span>def ball (x : α) (ε : ennreal) : set α := {y | edist y x &lt; ε}
+</pre></div>
+
+<a name="164818959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164818959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164818959">Johan Commelin (May 03 2019 at 18:36)</a>:</h4>
+<p>Can you give more context?</p>
+
+<a name="164818988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164818988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164818988">Johan Commelin (May 03 2019 at 18:37)</a>:</h4>
+<p>What <code>variables</code> do you have in place... etc...</p>
+
+<a name="164819242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819242">Joe (May 03 2019 at 18:40)</a>:</h4>
+<p>We have <code>[measure_space α]</code> and </p>
+<div class="codehilite"><pre><span></span>[normed_group γ] [second_countable_topology γ] [topological_add_group γ]
+</pre></div>
+
+<a name="164819284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819284">Joe (May 03 2019 at 18:41)</a>:</h4>
+<p><code>α →ₘ γ</code> is a quotient over functions.</p>
+
+<a name="164819306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819306">Joe (May 03 2019 at 18:41)</a>:</h4>
+<p><code>def ae_eq_fun : Type (max u v) := quotient (ae_eq_fun.setoid α β)</code> is its definition.</p>
+
+<a name="164819390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819390">Johan Commelin (May 03 2019 at 18:42)</a>:</h4>
+<p>Ok</p>
+
+<a name="164819464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819464">Johan Commelin (May 03 2019 at 18:43)</a>:</h4>
+<p>And what do you want to achieve?</p>
+
+<a name="164819479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819479">Joe (May 03 2019 at 18:43)</a>:</h4>
+<p><code>edist</code> on <code>α →ₘ γ</code> is supposed to be the l1-norm. <code>(ball (0 : α →ₘ γ) ⊤)</code> means the function is integrable.</p>
+
+<a name="164819540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819540">Joe (May 03 2019 at 18:44)</a>:</h4>
+<p>So the goal is to prove that the space of integrable functions is a <code>normed_space</code> if it codoman is a <code>normed_space</code>.</p>
+
+<a name="164819552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819552">Johan Commelin (May 03 2019 at 18:44)</a>:</h4>
+<p>Aha, nice</p>
+
+<a name="164819579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819579">Johan Commelin (May 03 2019 at 18:45)</a>:</h4>
+<p>Have you been able to state that theorem (with <code>sorry</code> as proof)?</p>
+
+<a name="164819595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819595">Joe (May 03 2019 at 18:45)</a>:</h4>
+<p><code>integrable</code> is defined as <code>def integrable [has_zero γ] := subtype (ball (0 : α →ₘ γ) ⊤)</code></p>
+
+<a name="164819639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819639">Joe (May 03 2019 at 18:46)</a>:</h4>
+<p>Yes. Using <code>sorry</code> works</p>
+
+<a name="164819666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819666">Joe (May 03 2019 at 18:46)</a>:</h4>
+<p>If I add</p>
+<div class="codehilite"><pre><span></span>instance : is_add_submonoid (λ y : α →ₘ γ, edist y 0 &lt; ⊤) := sorry
+</pre></div>
+
+
+<p>it also works.</p>
+
+<a name="164819700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819700">Joe (May 03 2019 at 18:47)</a>:</h4>
+<p>If we only have </p>
+<div class="codehilite"><pre><span></span>instance : is_add_submonoid (ball (0 : α →ₘ γ) ⊤) :=
+</pre></div>
+
+
+<p>then the second line will fail.</p>
+
+<a name="164819717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164819717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164819717">Johan Commelin (May 03 2019 at 18:47)</a>:</h4>
+<p>Hmmm, that's annoying</p>
+
+<a name="164820091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164820091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164820091">Chris Hughes (May 03 2019 at 18:52)</a>:</h4>
+<p>subtype.add_monoid with this works <code>set \a</code> has been replaced with <code>\a \r Prop</code></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">is_add_submonoid</span> <span class="n">p</span><span class="o">]:</span> <span class="n">add_monoid</span> <span class="o">(</span><span class="n">subtype</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">subtype</span><span class="bp">.</span><span class="n">add_monoid</span>
+</pre></div>
+
+
+{% endraw %}

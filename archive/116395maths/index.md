@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3062 messages, latest: May 03 2019 at 17:54)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3063 messages, latest: May 03 2019 at 18:01)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (40 messages, latest: May 03 2019 at 04:13)
 
