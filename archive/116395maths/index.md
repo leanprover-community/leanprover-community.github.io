@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3062 messages, latest: May 03 2019 at 17:54)
+
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (40 messages, latest: May 03 2019 at 04:13)
 
 * [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
 
 * [cover with property](63841coverwithproperty.html) (2 messages, latest: May 01 2019 at 07:14)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3061 messages, latest: Apr 30 2019 at 13:08)
 
 * [Multiple differentiability](89979Multipledifferentiability.html) (69 messages, latest: Apr 29 2019 at 21:31)
 

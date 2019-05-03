@@ -213,5 +213,45 @@ category_theory.natural_isomorphism
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164810253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164810253">Simon Hudon (May 03 2019 at 16:53)</a>:</h4>
 <p>It's easy to fix the timeout issue. <span class="user-mention" data-user-id="110087">@Scott Morrison</span> Would it make things better if the problem was reported as soon as the file was built? That's easy to do.</p>
 
+<a name="164811442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164811442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164811442">Johan Commelin (May 03 2019 at 17:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> We will need better instructions for PR authors. Most of them haven't even heard of <code>olean-rs</code>. Also... Scott reported false positives by <code>olean-rs</code>. I think that justifies disabling the checks for now. Moreover, if <code>olean-rs</code> could output a <code>sed</code>-script that will automatically fix all my imports, than it's really easy to use. The manual-iterative process is not a good thing.</p>
+
+<a name="164811491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164811491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164811491">Johan Commelin (May 03 2019 at 17:07)</a>:</h4>
+<p>The back-and-forth with Travis takes &gt;40 minutes per cycle. That isn't realistically workable.</p>
+
+<a name="164812543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164812543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164812543">Simon Hudon (May 03 2019 at 17:20)</a>:</h4>
+<p>I could get <code>script/setup-dev-scripts.py</code> to install <code>olean-rs</code> (and maybe we could rename it to <code>leant</code>)</p>
+
+<a name="164812570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164812570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164812570">Simon Hudon (May 03 2019 at 17:20)</a>:</h4>
+<p>As for automatically applying the changes, we're not there yet. It would be an improvement but it is not necessary</p>
+
+<a name="164812719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164812719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164812719">Simon Hudon (May 03 2019 at 17:22)</a>:</h4>
+<p>What we can do is get the errors to reported earlier in the build. With travis caching the build, the first file it compiles should be one you changed and we should check it right away so that the build fails quickly if you messed up</p>
+
+<a name="164812774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164812774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164812774">Simon Hudon (May 03 2019 at 17:23)</a>:</h4>
+<p>If you don't want to wait for travis to do it, you can do it on your own machine and we can make it easy to install</p>
+
+<a name="164813059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164813059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164813059">Johan Commelin (May 03 2019 at 17:27)</a>:</h4>
+<p>We first need to make it easy to install and use. And we need Travis to fail fast. After that, we can enable the check. Currently the community wasn't ready for this check yet.</p>
+
+<a name="164813444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164813444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164813444">Simon Hudon (May 03 2019 at 17:31)</a>:</h4>
+<p>Ok, I'll work on that</p>
+
+<a name="164813475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164813475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164813475">Johan Commelin (May 03 2019 at 17:31)</a>:</h4>
+<p>Thank you so much!</p>
+
+<a name="164814021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs%20on%20Travis%20is%20verbose/near/164814021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73738oleanrsonTravisisverbose.html#164814021">Simon Hudon (May 03 2019 at 17:38)</a>:</h4>
+<p><span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
 
 {% endraw %}

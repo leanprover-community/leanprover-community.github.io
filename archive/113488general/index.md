@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (47 messages, latest: May 03 2019 at 16:53)
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (57 messages, latest: May 03 2019 at 17:38)
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (295 messages, latest: May 03 2019 at 16:46)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (300 messages, latest: May 03 2019 at 17:22)
 
 * [travis-ci/{push,pr}](22440traviscipushpr.html) (12 messages, latest: May 03 2019 at 14:24)
 
