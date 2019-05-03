@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [travis-ci/{push,pr}](22440traviscipushpr.html) (3 messages, latest: May 03 2019 at 12:55)
+* [Install documentation](54866Installdocumentation.html) (190 messages, latest: May 03 2019 at 13:58)
 
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (42 messages, latest: May 03 2019 at 12:17)
+* [travis-ci/{push,pr}](22440traviscipushpr.html) (11 messages, latest: May 03 2019 at 13:55)
+
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (43 messages, latest: May 03 2019 at 13:25)
 
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [A newcomer's opinion](34360Anewcomersopinion.html) (242 messages, latest: May 03 2019 at 06:05)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (34 messages, latest: May 03 2019 at 02:14)
-
-* [Install documentation](54866Installdocumentation.html) (187 messages, latest: May 02 2019 at 23:01)
 
 * [leandoc](38167leandoc.html) (63 messages, latest: May 02 2019 at 14:40)
 
