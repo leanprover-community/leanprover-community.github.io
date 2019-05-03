@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [category theory](81338categorytheory.html) (5 messages, latest: May 03 2019 at 22:40)
+
+* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (103 messages, latest: May 03 2019 at 22:23)
+
+* [New record](10826Newrecord.html) (20 messages, latest: May 03 2019 at 20:20)
+
 * [squeeze_dsimp?](80798squeezedsimp.html) (14 messages, latest: May 03 2019 at 18:43)
-
-* [New record](10826Newrecord.html) (17 messages, latest: May 03 2019 at 18:25)
-
-* [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (57 messages, latest: May 03 2019 at 17:38)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (300 messages, latest: May 03 2019 at 17:22)
 

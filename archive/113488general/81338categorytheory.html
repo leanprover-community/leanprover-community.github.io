@@ -1,0 +1,43 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/81338categorytheory.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html">category theory</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164835175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164835175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164835175">Floris van Doorn (May 03 2019 at 22:23)</a>:</h4>
+<p>I'm working a bit on the category theory library in the branch <code>limits-isos</code>. My initial goal was to show that if <code>C</code> has products/coproducts/..., then <code>Cᵒᵖ</code> has coproducts/products/..., but I've also been changing some other things, like the definition of <code>equivalence</code> (now it's an adjoint equivalence).</p>
+<p>One thing I want to change is that if we have a natural transformation <code>α : F ⟶ G</code>, I would like to write <code>α.app</code> for its action on objects. The problem is that the type of <code>α</code> is <code>has_hom.hom</code> and the full name of <code>app</code> is <code>nat_trans.app</code>, so it often doesn't work (it works sometimes, but not reliably, and I don't know why it sometimes doesn't work). <br>
+I tried to add a declaration</p>
+<div class="codehilite"><pre><span></span>@[reducible] def has_hom.hom.app {F G : C ⥤ D} (α : F ⟶ G) (X : C) : F.obj X ⟶ G.obj X := nat_trans.app α X
+</pre></div>
+
+
+<p>This works, but now we have two versions of <code>app</code> which are not syntactically equal, which causes major headaches when rewriting/simplifying. In the branch <code>limits-isos</code> tried to get it to work, but in some rare cases <code>α.app</code> will actually use <code>nat_trans.app</code>, which is undesirable.</p>
+<p>Any suggestions to resolve this? I'm now leaning towards removing <code>has_hom.hom.app</code> and live with the fact that we sometimes have to write <code>nat_trans.app α</code> instead of <code>α.app</code></p>
+
+<a name="164835914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164835914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164835914">Mario Carneiro (May 03 2019 at 22:36)</a>:</h4>
+<p>shouldn't it unfold to <code>nat_trans</code> in this example, so <code>α.app</code> means <code>nat_trans.app α</code>?</p>
+
+<a name="164835949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164835949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164835949">Mario Carneiro (May 03 2019 at 22:37)</a>:</h4>
+<p>I think adding <code>has_hom.hom.app</code> will not make this better</p>
+
+<a name="164836008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164836008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164836008">Mario Carneiro (May 03 2019 at 22:38)</a>:</h4>
+<p>but I'm curious to see your problem cases where <code>α.app</code> doesn't work</p>
+
+<a name="164836140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164836140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164836140">Floris van Doorn (May 03 2019 at 22:40)</a>:</h4>
+<p>I'll undo the change and double check where I ran into problems. Maybe it was a case where the category instance wasn't synthesized yet.</p>
+
+
+{% endraw %}

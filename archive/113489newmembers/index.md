@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (24 messages, latest: May 03 2019 at 19:21)
+* [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (30 messages, latest: May 03 2019 at 22:51)
+
+* [noob question(s)](52075noobquestions.html) (584 messages, latest: May 03 2019 at 21:45)
 
 * [Induction](51886Induction.html) (132 messages, latest: May 03 2019 at 18:45)
 
@@ -23,8 +25,6 @@ permalink: archive/113489newmembers/index.html
 * [Jose Balado](77525JoseBalado.html) (94 messages, latest: May 01 2019 at 10:15)
 
 * [Weird error message](91403Weirderrormessage.html) (73 messages, latest: May 01 2019 at 06:58)
-
-* [noob question(s)](52075noobquestions.html) (583 messages, latest: Apr 30 2019 at 03:01)
 
 * [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
 

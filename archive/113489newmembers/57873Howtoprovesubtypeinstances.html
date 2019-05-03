@@ -168,5 +168,33 @@ instance add_monoid_integrable&#39; : add_monoid (subtype (ball (0 : α →ₘ �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164822345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164822345">Joe (May 03 2019 at 19:21)</a>:</h4>
 <p>Thank you. I think you are right. Using explicit form <code>@subtype.add_monoid _ _ _ ae_eq_fun.is_add_submonoid</code>solves the problem.</p>
 
+<a name="164829118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164829118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164829118">Mario Carneiro (May 03 2019 at 20:49)</a>:</h4>
+<p>Why are you writing <code>subtype (ball 0 T)</code> anyway? Usually we write <code>subtype p</code> as <code>{x // p x}</code>, but in your case that means <code>{x // ball 0 T x}</code>, where the abstraction that <code>ball</code> is a set has been broken by using application directly. The mathlib instances only work if you don't break the abstraction barriers, i.e. using a <code>A -&gt; Prop</code> where a <code>set A</code> is expected or vice versa.</p>
+
+<a name="164836624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164836624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164836624">Joe (May 03 2019 at 22:49)</a>:</h4>
+<p>I defined <code>integrable</code> as <code>def integrable [has_zero γ] := subtype (ball (0 : α →ₘ γ) ⊤)</code>, so I guess there is no choice if I want to show that <code>integrable</code> is an <code>add_monoid</code> or <code>add_comm_group</code>. </p>
+<p>The behavior does seem to be weird. For example, in the following proof I have to go into tactic mode.</p>
+<div class="codehilite"><pre><span></span>instance : add_comm_group (integrable α γ) :=
+  @subtype.add_comm_group _ _ _ (by exact integrable.is_add_subgroup)
+</pre></div>
+
+<a name="164836691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164836691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164836691">Mario Carneiro (May 03 2019 at 22:50)</a>:</h4>
+<p>You should just say <code>def integrable [has_zero γ] : Type* := ball (0 : α →ₘ γ) ⊤</code></p>
+
+<a name="164836707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164836707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164836707">Joe (May 03 2019 at 22:50)</a>:</h4>
+<p>Oh, this seems to be better. I don't know it is allowed.</p>
+
+<a name="164836733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164836733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164836733">Mario Carneiro (May 03 2019 at 22:51)</a>:</h4>
+<p>that's adding a coercion from set to Type, which is what the mathlib instances are expecting to see</p>
+
+<a name="164836735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20subtype%20instances%3F/near/164836735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57873Howtoprovesubtypeinstances.html#164836735">Joe (May 03 2019 at 22:51)</a>:</h4>
+<p>Yes, you're right, it works. This is so good!</p>
+
 
 {% endraw %}
