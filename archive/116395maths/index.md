@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`ring` might be worse now?](34164ringmightbeworsenow.html) (39 messages, latest: May 02 2019 at 21:14)
+* [`ring` might be worse now?](34164ringmightbeworsenow.html) (40 messages, latest: May 03 2019 at 04:13)
 
 * [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
 

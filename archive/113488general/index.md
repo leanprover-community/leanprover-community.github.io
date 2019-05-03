@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [A newcomer's opinion](34360Anewcomersopinion.html) (240 messages, latest: May 03 2019 at 04:21)
+
 * [foreign function interface](69026foreignfunctioninterface.html) (34 messages, latest: May 03 2019 at 02:14)
 
 * [Install documentation](54866Installdocumentation.html) (187 messages, latest: May 02 2019 at 23:01)
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [library_search](97355librarysearch.html) (19 messages, latest: Apr 30 2019 at 18:27)
 
 * [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (28 messages, latest: Apr 30 2019 at 18:20)
-
-* [A newcomer's opinion](34360Anewcomersopinion.html) (238 messages, latest: Apr 30 2019 at 08:57)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
 
