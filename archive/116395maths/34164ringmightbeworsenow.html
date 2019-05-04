@@ -218,5 +218,24 @@ I had a chance to look back at my scribbled notes from dealing with this in the 
 <p>The <code>decidable_eq</code> problems mentioned at <a href="#narrow/stream/113488-general/topic/free_comm_ring" title="#narrow/stream/113488-general/topic/free_comm_ring">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free_comm_ring</a> are a big one. I don't quite see the root of this problem, except that <code>mv_polynomial</code> leans too heavily on <code>decidable_eq</code>, and huge repeated searches for these instances seroiusly slow everything down. Playing around with instance priority can make a big difference here. E.g. if you're only considering two types <code>A</code> and <code>int</code>, where decidable equality on <code>A</code> is classical, set the priority for the classical instance to some big N and the priority for <code>int.decidable_eq</code> to N+1. This helps the first proof in that file, not so much the second.</p>
 <p>There's another thing. The category theory library doubles the number of <code>subsingleton</code> instances, which <code>simp</code> checks repeatedly. None of them look particularly bad on their own. But replacing some of the <code>simp only [...]</code> calls with <code>simp only []; sorry</code>,  and then deleting the <code>simp only []</code> part, you see that <code>simp only []</code> is taking about a second per call. This is only like 15% of the time in the second proof, but it's still surprising.</p>
 
+<a name="164869581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164869581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164869581">Mario Carneiro (May 04 2019 at 14:02)</a>:</h4>
+<p>I've said this before, but I think we should just remove the <code>decidable_eq</code> constraint for polynomial. It's not an efficient computational representation anyway, so I'm not that concerned about going noncomputable</p>
+
+<a name="164871049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164871049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164871049">Rob Lewis (May 04 2019 at 14:44)</a>:</h4>
+<p>We computed <code>polynomial.eval</code> at least once in the cap set proof. I'm sure it's avoidable, and worth giving up if it fixes issues here. But computability can be convenient.</p>
+
+<a name="164871056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164871056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164871056">Rob Lewis (May 04 2019 at 14:45)</a>:</h4>
+<p>Actually, I think that was a univariate polynomial.</p>
+
+<a name="164871394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60ring%60%20might%20be%20worse%20now%3F/near/164871394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34164ringmightbeworsenow.html#164871394">Kevin Buzzard (May 04 2019 at 14:53)</a>:</h4>
+<blockquote>
+<p>I've said this before, but I think we should just remove the <code>decidable_eq</code> constraint for polynomial. It's not an efficient computational representation anyway, so I'm not that concerned about going noncomputable</p>
+</blockquote>
+<p>You mean <code>polynomial</code> or <code>mv_polynomial</code> or both? Not that I understand at all the subtleties of what is going on here...</p>
+
 
 {% endraw %}

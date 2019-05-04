@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`ring` might be worse now?](34164ringmightbeworsenow.html) (41 messages, latest: May 04 2019 at 13:49)
+* [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3063 messages, latest: May 03 2019 at 18:01)
 
