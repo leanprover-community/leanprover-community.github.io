@@ -102,7 +102,7 @@ permalink: archive/113488general/index.html
 
 * [Tactic to avoid `classical.some`](85696Tactictoavoidclassicalsome.html) (6 messages, latest: Apr 21 2019 at 07:05)
 
-* [strange [ ]'s in my goal](91079strangesinmygoal.html) (16 messages, latest: Apr 21 2019 at 05:07)
+* [strange \[ \]'s in my goal](91079strangesinmygoal.html) (16 messages, latest: Apr 21 2019 at 05:07)
 
 * [clearing all hypothesis](76367clearingallhypothesis.html) (43 messages, latest: Apr 21 2019 at 02:37)
 
@@ -1058,7 +1058,7 @@ permalink: archive/113488general/index.html
 
 * [deconstruct sigma types](72117deconstructsigmatypes.html) (27 messages, latest: Nov 30 2018 at 17:04)
 
-* [[0,infty]](478070infty.html) (31 messages, latest: Nov 30 2018 at 14:46)
+* [\[0,infty\]](478070infty.html) (31 messages, latest: Nov 30 2018 at 14:46)
 
 * [Ideal has_mem](99706Idealhasmem.html) (53 messages, latest: Nov 30 2018 at 12:24)
 
@@ -1144,7 +1144,7 @@ permalink: archive/113488general/index.html
 
 * [Leroy entering Collège de France](84929LeroyenteringCollgedeFrance.html) (1 message, latest: Nov 21 2018 at 10:54)
 
-* [@[derive has_reflect]](91640derivehasreflect.html) (6 messages, latest: Nov 21 2018 at 06:12)
+* [@\[derive has_reflect\]](91640derivehasreflect.html) (6 messages, latest: Nov 21 2018 at 06:12)
 
 * [induction bug](96716inductionbug.html) (1 message, latest: Nov 20 2018 at 22:46)
 
@@ -1388,7 +1388,7 @@ permalink: archive/113488general/index.html
 
 * [beta meta](81924betameta.html) (3 messages, latest: Oct 17 2018 at 19:43)
 
-* [attribute [class] nat.prime](35665attributeclassnatprime.html) (2 messages, latest: Oct 17 2018 at 07:54)
+* [attribute \[class\] nat.prime](35665attributeclassnatprime.html) (2 messages, latest: Oct 17 2018 at 07:54)
 
 * [p-th root](98462pthroot.html) (4 messages, latest: Oct 16 2018 at 22:40)
 
@@ -1516,7 +1516,7 @@ permalink: archive/113488general/index.html
 
 * [mul and add type class hierarchies](98442mulandaddtypeclasshierarchies.html) (6 messages, latest: Oct 04 2018 at 08:08)
 
-* [local attribute [instance] classical.prop_decidable](19351localattributeinstanceclassicalpropdecidable.html) (2 messages, latest: Oct 03 2018 at 22:36)
+* [local attribute \[instance\] classical.prop_decidable](19351localattributeinstanceclassicalpropdecidable.html) (2 messages, latest: Oct 03 2018 at 22:36)
 
 * [trace simp!](72554tracesimp.html) (3 messages, latest: Oct 03 2018 at 21:03)
 
@@ -1654,7 +1654,7 @@ permalink: archive/113488general/index.html
 
 * [Antiquoting inside a tactic quotation](33133Antiquotinginsideatacticquotation.html) (16 messages, latest: Sep 17 2018 at 15:47)
 
-* [simpa using h vs simp at h, simp [h]](61101simpausinghvssimpathsimph.html) (10 messages, latest: Sep 17 2018 at 13:50)
+* [simpa using h vs simp at h, simp \[h\]](61101simpausinghvssimpathsimph.html) (10 messages, latest: Sep 17 2018 at 13:50)
 
 * [vscode input completions for markdown](01772vscodeinputcompletionsformarkdown.html) (3 messages, latest: Sep 17 2018 at 09:55)
 
@@ -1968,7 +1968,7 @@ permalink: archive/113488general/index.html
 
 * [Default arguments with type parameter](35579Defaultargumentswithtypeparameter.html) (7 messages, latest: Aug 18 2018 at 11:58)
 
-* [[meta] reduce an expr](53958metareduceanexpr.html) (7 messages, latest: Aug 17 2018 at 20:08)
+* [\[meta\] reduce an expr](53958metareduceanexpr.html) (7 messages, latest: Aug 17 2018 at 20:08)
 
 * [create alias](56063createalias.html) (46 messages, latest: Aug 17 2018 at 15:53)
 
@@ -1984,7 +1984,7 @@ permalink: archive/113488general/index.html
 
 * [Teaching lean to high school students](59753Teachingleantohighschoolstudents.html) (72 messages, latest: Aug 16 2018 at 09:57)
 
-* [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html) (25 messages, latest: Aug 14 2018 at 22:42)
+* [building @\[extensionality\] lemmas for structures](24753buildingextensionalitylemmasforstructures.html) (25 messages, latest: Aug 14 2018 at 22:42)
 
 * [LEAN_PATH](92013LEANPATH.html) (1 message, latest: Aug 14 2018 at 21:55)
 
@@ -2010,7 +2010,7 @@ permalink: archive/113488general/index.html
 
 * [Tail-call elimination?](22700Tailcallelimination.html) (4 messages, latest: Aug 12 2018 at 17:18)
 
-* [[vscode] completions](38122vscodecompletions.html) (32 messages, latest: Aug 12 2018 at 17:15)
+* [\[vscode\] completions](38122vscodecompletions.html) (32 messages, latest: Aug 12 2018 at 17:15)
 
 * [`a = b := rfl`](96988abrfl.html) (73 messages, latest: Aug 12 2018 at 13:25)
 
@@ -3098,7 +3098,7 @@ permalink: archive/113488general/index.html
 
 * [what is the purpose of is_subgroup](18151whatisthepurposeofissubgroup.html) (7 messages, latest: Apr 03 2018 at 04:08)
 
-* [@[reducible]](98536reducible.html) (21 messages, latest: Apr 03 2018 at 03:51)
+* [@\[reducible\]](98536reducible.html) (21 messages, latest: Apr 03 2018 at 03:51)
 
 * [Will simp go in a loop?](58617Willsimpgoinaloop.html) (5 messages, latest: Apr 03 2018 at 03:38)
 
@@ -3156,7 +3156,7 @@ permalink: archive/113488general/index.html
 
 * [fin has no recursor](03820finhasnorecursor.html) (4 messages, latest: Mar 30 2018 at 07:18)
 
-* [`[a,a+1,a+2,...,b-1]`?](65518aa1a2b1.html) (5 messages, latest: Mar 30 2018 at 02:23)
+* [`\[a,a+1,a+2,...,b-1\]`?](65518aa1a2b1.html) (5 messages, latest: Mar 30 2018 at 02:23)
 
 * [idly trying software foundations](84549idlytryingsoftwarefoundations.html) (292 messages, latest: Mar 29 2018 at 20:38)
 

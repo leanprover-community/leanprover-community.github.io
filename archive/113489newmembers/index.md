@@ -314,7 +314,7 @@ permalink: archive/113489newmembers/index.html
 
 * [reasoning about empty set in lean](27988reasoningaboutemptysetinlean.html) (13 messages, latest: Dec 02 2018 at 17:17)
 
-* [term has type p y but is expected to have type p ?m_1[_]](06213termhastypepybutisexpectedtohavetypepm1.html) (28 messages, latest: Dec 02 2018 at 17:06)
+* [term has type p y but is expected to have type p ?m_1\[_\]](06213termhastypepybutisexpectedtohavetypepm1.html) (28 messages, latest: Dec 02 2018 at 17:06)
 
 * [pairs equal iff projections are?](16724pairsequaliffprojectionsare.html) (12 messages, latest: Dec 02 2018 at 13:04)
 
@@ -478,7 +478,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Why doesn't exists.intro give err for witness of wrong type](03603Whydoesntexistsintrogiveerrforwitnessofwrongtype.html) (11 messages, latest: Oct 19 2018 at 15:58)
 
-* [attribute [intro]](35417attributeintro.html) (1 message, latest: Oct 19 2018 at 00:01)
+* [attribute \[intro\]](35417attributeintro.html) (1 message, latest: Oct 19 2018 at 00:01)
 
 * [ordered pairs](57893orderedpairs.html) (75 messages, latest: Oct 18 2018 at 23:49)
 

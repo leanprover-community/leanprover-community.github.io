@@ -94,7 +94,7 @@ permalink: archive/116395maths/index.html
 
 * [matrix](88278matrix.html) (11 messages, latest: Apr 03 2019 at 19:22)
 
-* [continuity of 1/x on (0,1]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
+* [continuity of 1/x on (0,1\]](99795continuityof1xon01.html) (10 messages, latest: Apr 01 2019 at 16:42)
 
 * [locally ringed spaces in Isabelle](00385locallyringedspacesinIsabelle.html) (46 messages, latest: Apr 01 2019 at 16:29)
 
@@ -840,7 +840,7 @@ permalink: archive/116395maths/index.html
 
 * [reductions](84929reductions.html) (14 messages, latest: May 27 2018 at 22:42)
 
-* [ℤ[(1+√d)/2]](007291d2.html) (183 messages, latest: May 27 2018 at 17:00)
+* [ℤ\[(1+√d)/2\]](007291d2.html) (183 messages, latest: May 27 2018 at 17:00)
 
 * [strictification](56592strictification.html) (9 messages, latest: May 26 2018 at 20:37)
 

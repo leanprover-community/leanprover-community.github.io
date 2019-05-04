@@ -26,7 +26,7 @@ permalink: archive/144837PRreviews/index.html
 
 * [#923 ring of ctu functions](49740923ringofctufunctions.html) (1 message, latest: Apr 15 2019 at 08:45)
 
-* [#726 bundled bounded linear maps [wip]](27446726bundledboundedlinearmapswip.html) (35 messages, latest: Apr 14 2019 at 08:59)
+* [#726 bundled bounded linear maps \[wip\]](27446726bundledboundedlinearmapswip.html) (35 messages, latest: Apr 14 2019 at 08:59)
 
 * [#893 whiskering natural isomorphisms](14855893whiskeringnaturalisomorphisms.html) (2 messages, latest: Apr 08 2019 at 23:56)
 
@@ -108,7 +108,7 @@ permalink: archive/144837PRreviews/index.html
 
 * [#728 continuation passing monad](45060728continuationpassingmonad.html) (12 messages, latest: Feb 15 2019 at 06:05)
 
-* [#726 operator norm [wip]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
+* [#726 operator norm \[wip\]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
 
 * [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (46 messages, latest: Feb 12 2019 at 14:51)
 
