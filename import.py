@@ -49,7 +49,7 @@ def sanitize_stream(stream_name, stream_id):
 
 # escape | character with \|
 def escape_pipes(s):
-    return s.replace('|','\|')
+    return s.replace('|','\|').replace(']','\]').replace('[','\[')
 
 ## retrieve information from Zulip
 
