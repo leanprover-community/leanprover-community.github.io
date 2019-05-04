@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (308 messages, latest: May 04 2019 at 08:18)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (312 messages, latest: May 04 2019 at 09:12)
 
 * [May the 4th](84377Maythe4th.html) (1 message, latest: May 04 2019 at 05:48)
 
