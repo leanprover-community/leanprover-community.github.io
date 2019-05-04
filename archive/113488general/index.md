@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A newcomer's opinion](34360Anewcomersopinion.html) (304 messages, latest: May 03 2019 at 23:57)
+* [A newcomer's opinion](34360Anewcomersopinion.html) (305 messages, latest: May 04 2019 at 03:55)
 
 * [category theory](81338categorytheory.html) (5 messages, latest: May 03 2019 at 22:40)
 
