@@ -3175,5 +3175,233 @@ foobar
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164832882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164832882">Simon Hudon (May 03 2019 at 21:45)</a>:</h4>
 <p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> I now have a fix for your <code>let</code> / <code>case</code> issue. It should be in the next nightly build of Lean 3.5.0c</p>
 
+<a name="164884660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884660">Greg Conneen (May 04 2019 at 20:07)</a>:</h4>
+<p>Real quick, what is a meta variable and why is <code>tactic.finish</code> absolutely packed with them? I'm not sure exactly what's going on, but it seems that any trivial propositional technique is proven immediately with <code>by finish</code></p>
+
+<a name="164884711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884711">Patrick Massot (May 04 2019 at 20:08)</a>:</h4>
+<p>What do you mean <code>finish</code> is packed with metavariable?</p>
+
+<a name="164884724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884724">Patrick Massot (May 04 2019 at 20:09)</a>:</h4>
+<p>A meta-variable is a kind of hole Lean will have to fill in. It can be the goal you need to solve or some implicit argument to be inferred by unification</p>
+
+<a name="164884862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884862">Greg Conneen (May 04 2019 at 20:13)</a>:</h4>
+<p>I just mean that when I pressed <code>Ctrl-Click</code> on <code>tactic.finish</code>, I came upon a file that was filled with the keyword <code>meta</code> and I wasn't sure what any of it meant</p>
+
+<a name="164884865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884865">Patrick Massot (May 04 2019 at 20:14)</a>:</h4>
+<p>oohh</p>
+
+<a name="164884911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884911">Patrick Massot (May 04 2019 at 20:14)</a>:</h4>
+<p>that's a different meta</p>
+
+<a name="164884923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884923">Greg Conneen (May 04 2019 at 20:15)</a>:</h4>
+<p>I suppose so, I just assumed that <code>meta def</code> was defining a metavariable, although I suppose that wouldn't make sense given my preconceived notion of what a metavariable is</p>
+
+<a name="164884925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884925">Patrick Massot (May 04 2019 at 20:15)</a>:</h4>
+<p><code>meta</code> in this context means "unsafe". It's code that won't be checked by Lean. It particular it doesn't have to be provably terminating</p>
+
+<a name="164884946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884946">Greg Conneen (May 04 2019 at 20:15)</a>:</h4>
+<p>Why would one ever need such a thing?</p>
+
+<a name="164884950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164884950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164884950">Patrick Massot (May 04 2019 at 20:15)</a>:</h4>
+<p>Typically tactics (the commands you type between begin and end) are meta. They produce proofs that <em>will</em> be checked by Lean. But the way they produces those proofs is freestyle</p>
+
+<a name="164885023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885023">Greg Conneen (May 04 2019 at 20:17)</a>:</h4>
+<p>Ah, okay. So it's not just a cheeky way of making axioms. So the reason I can solve so many things with <code>by finish</code> is because all of the structures in <code>finish</code> are using this meta keyword? I assume without it, there wouldn't be a way of taking arbitrary propositions and figuring out how to solve them</p>
+
+<a name="164885069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885069">Greg Conneen (May 04 2019 at 20:18)</a>:</h4>
+<p>That is, <code>finish</code> wouldn't know how to solve a proposition handed to it if it weren't in a specific order of some sort</p>
+
+<a name="164885070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885070">Scott Morrison (May 04 2019 at 20:18)</a>:</h4>
+<p><code>meta</code> code can do non-terminating recursion, and it can also work with "reflected" versions of mathematical objects, i.e. their actual representations as <code>expr</code> objects in the C++ code.</p>
+
+<a name="164885074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885074">Patrick Massot (May 04 2019 at 20:18)</a>:</h4>
+<p><code>finish</code> constructs a proof for you</p>
+
+<a name="164885086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885086">Greg Conneen (May 04 2019 at 20:19)</a>:</h4>
+<p>Okay, that's really cool <span class="user-mention" data-user-id="110087">@Scott Morrison</span></p>
+
+<a name="164885089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885089">Patrick Massot (May 04 2019 at 20:19)</a>:</h4>
+<p>I don't think there is any risk of non-termination here. But the type of Lean expressions is meta, for reasons too long to explain (unless you understand what Scott wrote)</p>
+
+<a name="164885133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885133">Scott Morrison (May 04 2019 at 20:20)</a>:</h4>
+<p>This is one of the lovely things about Lean --- you can write new tactics (i.e. programs that construct proofs, but aren't necessarily themselves correct) in Lean itself.</p>
+
+<a name="164885135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885135">Greg Conneen (May 04 2019 at 20:20)</a>:</h4>
+<p>I understand C++ enough to generally know what he means</p>
+
+<a name="164885145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885145">Scott Morrison (May 04 2019 at 20:20)</a>:</h4>
+<p>In previous interactive theorem provers you needed to step out, either into the base implementation language, or some DSL, to write new tactics.</p>
+
+<a name="164885155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885155">Greg Conneen (May 04 2019 at 20:21)</a>:</h4>
+<p>So, even with meta, there's still no way to prove false? Because a bad tactic won't construct a good proof?</p>
+
+<a name="164885159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885159">Greg Conneen (May 04 2019 at 20:21)</a>:</h4>
+<p>That makes sense</p>
+
+<a name="164885161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885161">Scott Morrison (May 04 2019 at 20:21)</a>:</h4>
+<p>The <code>meta</code> keyword <em>protects</em> the real maths from these "helper" functions that we write to help construct proofs.</p>
+
+<a name="164885165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885165">Greg Conneen (May 04 2019 at 20:21)</a>:</h4>
+<p>ahh</p>
+
+<a name="164885169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885169">Scott Morrison (May 04 2019 at 20:22)</a>:</h4>
+<p>Exactly. The tactic framework lets you <em>run</em> meta code to produce proof terms, but those proof terms will be rejected if they refer to any <code>meta</code> functions.</p>
+
+<a name="164885214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885214">Greg Conneen (May 04 2019 at 20:22)</a>:</h4>
+<p>so, how would a noob go about using meta? Or, should I just not even touch the thing?</p>
+
+<a name="164885226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885226">Patrick Massot (May 04 2019 at 20:23)</a>:</h4>
+<p>It depends on your taste, background and goals</p>
+
+<a name="164885227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885227">Scott Morrison (May 04 2019 at 20:23)</a>:</h4>
+<p>Read <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md</a></p>
+
+<a name="164885234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885234">Scott Morrison (May 04 2019 at 20:23)</a>:</h4>
+<p>And start reading all the files in <code>src/tactic/</code> in the mathlib repository.</p>
+
+<a name="164885236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885236">Scott Morrison (May 04 2019 at 20:23)</a>:</h4>
+<p>and ask here :-)</p>
+
+<a name="164885242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885242">Patrick Massot (May 04 2019 at 20:23)</a>:</h4>
+<p>Yes, reading that tutorial will give you a first glance at what it looks like</p>
+
+<a name="164885244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885244">Patrick Massot (May 04 2019 at 20:24)</a>:</h4>
+<p>Reading <code>src/tactic/</code> will give you a lot more (after a <em>lot</em> more time)</p>
+
+<a name="164885297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885297">Greg Conneen (May 04 2019 at 20:24)</a>:</h4>
+<p>Great, thank you. My goal generally is to git gud in Lean, but eventually I want to start implementing some actual maths. I expect that will take me some time, given I'll have to read quite a bit of mathlib</p>
+
+<a name="164885311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885311">Patrick Massot (May 04 2019 at 20:25)</a>:</h4>
+<p>You don't have to read all of mathlib before starting to implement actual maths</p>
+
+<a name="164885428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885428">Greg Conneen (May 04 2019 at 20:28)</a>:</h4>
+<p>sure, but I'd like to understand a chunk of what's already there on a fundamental level</p>
+
+<a name="164885432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885432">Scott Morrison (May 04 2019 at 20:28)</a>:</h4>
+<p>Do you have an idea what maths you'd like to do?</p>
+
+<a name="164885440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885440">Scott Morrison (May 04 2019 at 20:29)</a>:</h4>
+<p>If you're ever tempted to add documentation to stuff you're reading, documentation-only pull requests are very welcome. :-)</p>
+
+<a name="164885457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885457">Greg Conneen (May 04 2019 at 20:29)</a>:</h4>
+<p>I'd like to define a manifold, and maybe prove the inverse/implicit function theorem</p>
+
+<a name="164885514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885514">Greg Conneen (May 04 2019 at 20:30)</a>:</h4>
+<p>I just really need to look over how topology and euclidean space are implemented first</p>
+
+<a name="164885519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885519">Greg Conneen (May 04 2019 at 20:30)</a>:</h4>
+<p>Also, do we have the definition of a metric space?</p>
+
+<a name="164885594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885594">Kevin Buzzard (May 04 2019 at 20:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span> If you want to implement some actual maths in Lean, then don't try to get good at Lean first, just try to implement some actual maths in Lean, get stuck, ask for help here, and you will succeed.</p>
+
+<a name="164885598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885598">Sebastien Gouezel (May 04 2019 at 20:32)</a>:</h4>
+<p>I am precisely working on the definition of a manifold. Work in progress (very much in a preliminary state) at <a href="https://github.com/sgouezel/mathlib/blob/aa7fbab39d1e6a01665e24e6197b09338e855467/src/geometry/manifolds/basic.lean#L1598" target="_blank" title="https://github.com/sgouezel/mathlib/blob/aa7fbab39d1e6a01665e24e6197b09338e855467/src/geometry/manifolds/basic.lean#L1598">https://github.com/sgouezel/mathlib/blob/aa7fbab39d1e6a01665e24e6197b09338e855467/src/geometry/manifolds/basic.lean#L1598</a></p>
+
+<a name="164885608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885608">Kevin Buzzard (May 04 2019 at 20:32)</a>:</h4>
+<p>I have no idea how to write tactics. Tactics are written in meta code because they can fail. You don't need to know anything about tactic-writing (which is what people use meta code for) to write maths.</p>
+
+<a name="164885624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885624">Kevin Buzzard (May 04 2019 at 20:33)</a>:</h4>
+<p>However, what you do need to know is what is already there and what is being worked on, because this changes <em>fast</em> here</p>
+
+<a name="164885676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885676">Kevin Buzzard (May 04 2019 at 20:34)</a>:</h4>
+<p>Yes we have metric spaces. You can see this yourself by firing up a project with mathlib as a dependency in VS Code and searching for metric space. This is a really important beginner skill to learn.</p>
+
+<a name="164885695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885695">Kevin Buzzard (May 04 2019 at 20:35)</a>:</h4>
+<p>Make sure that "the cog doesn't have a box around it" in "files to exclude" in VS Code. That way you can search your dependencies.</p>
+
+<a name="164885701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885701">Kevin Buzzard (May 04 2019 at 20:35)</a>:</h4>
+<p>Several people would like to define manifolds and people are sort of in the middle of things, so it might not be a perfect project right now for a beginner.</p>
+
+<a name="164885752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885752">Kevin Buzzard (May 04 2019 at 20:36)</a>:</h4>
+<p>Definitions are harder than theorems; proofs can be sloppy but it's important to get definitions right.</p>
+
+<a name="164885756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885756">Kevin Buzzard (May 04 2019 at 20:36)</a>:</h4>
+<p>One big obstruction to doing much with manifolds is that we don't have enough calculus, but again people are working on this and things are changing fast.</p>
+
+<a name="164885771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885771">Kevin Buzzard (May 04 2019 at 20:37)</a>:</h4>
+<p>Bump functions are still a little out of reach at the minute, but it won't be long until we have them.</p>
+
+<a name="164885840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885840">Kevin Buzzard (May 04 2019 at 20:38)</a>:</h4>
+<p>For polynomials we have multivariable ones and single variable ones; I am not an expert in either analysis or Lean-analysis, but I am wondering whether we are going to need a robust theory of calculus in one real variable, proving basic theorems such that the derivative of the integral is the function. I don't think we even have that.</p>
+
+<a name="164885857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885857">Kevin Buzzard (May 04 2019 at 20:39)</a>:</h4>
+<p>We have no complex analysis worth mentioning, not even integrating along a reasonable path.</p>
+
+<a name="164885923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164885923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164885923">Kevin Buzzard (May 04 2019 at 20:40)</a>:</h4>
+<p>Because of our lack of analysis, this makes manifolds harder to do, however having goals like manifolds in mind is driving the library forwards in the right direction (as far as I am concerned). Lean seems to me to be focussing on the kind of mathematics mathematicians do, as opposed to the kind of mathematics that computer scientists have managed to pick up somehow.</p>
+
+<a name="164886015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164886015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164886015">Greg Conneen (May 04 2019 at 20:43)</a>:</h4>
+<p>Gotcha, thanks for the information. Do you think that complex would be a good thing to get working on, or do we not have it because it's hard to implement?</p>
+
+<a name="164886260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164886260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164886260">Kevin Buzzard (May 04 2019 at 20:49)</a>:</h4>
+<p>I am not an analyst and it's been nearly 30 years since I thought about the basics, Cauchy's integral formula etc. I've never taught the course either, so I am not the person to ask.</p>
+
+<a name="164886319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164886319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164886319">Kevin Buzzard (May 04 2019 at 20:50)</a>:</h4>
+<p>One thing I know was an issue is that someone has to make a decision about in what generality to define path integrals -- C^infinity paths isn't good enough because you want to integrate round semicircles and rectangles etc.</p>
+
+<a name="164886332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164886332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164886332">Kevin Buzzard (May 04 2019 at 20:51)</a>:</h4>
+<p>I really don't know what's there already though; I know a lot of the algebra stuff in Lean but the analysis stuff is changing quickly at the minute.</p>
+
+<a name="164886554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/164886554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#164886554">Patrick Massot (May 04 2019 at 20:56)</a>:</h4>
+<p>Kevin, the way this is going, we'll soon have manifolds with boundary <em>and</em> corners. When we'll have differential forms this will be much more than enough for rectangle and semi-circles</p>
+
 
 {% endraw %}

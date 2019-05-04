@@ -235,5 +235,22 @@ Alternatively, they should start proving that <code>exp</code> is the derivative
 </blockquote>
 <p>What kind of automation do you have in mind?</p>
 
+<a name="164885522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164885522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164885522">Sebastien Gouezel (May 04 2019 at 20:30)</a>:</h4>
+<p>First, automation to show that a complicated function, built out of elementary pieces, is differentiable. I.e., apply iteratively all the rules differentiable.add, differentiable.sub, differentiable.smul, and so on. This is just a matter of setting up a list of the theorems one wants to apply, and try to apply iteratively all of them, except that <code>apply</code> does not work very well in this context (known bug or limitation, I think, when there are too many forall's in definitions you need to help <code>apply</code> by providing just the right number of underscores).This kind of thing would also be needed for continuity, for measurability, and so on.</p>
+<p>And second, automation to check that the derivative of a function is given by some other function, again by applying iteratively the algorithmic formulas for the derivative until there is nothing left.</p>
+
+<a name="164885938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164885938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164885938">Kevin Buzzard (May 04 2019 at 20:41)</a>:</h4>
+<p>Can type class inference not prove that complicated functions are differentiable?</p>
+
+<a name="164886004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164886004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164886004">Reid Barton (May 04 2019 at 20:42)</a>:</h4>
+<p>Did <code>back</code> ever get merged? If so I could PR my <code>continuity</code> tactic at some point</p>
+
+<a name="164886096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23966%20more%20derivatives/near/164886096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29410966morederivatives.html#164886096">Reid Barton (May 04 2019 at 20:45)</a>:</h4>
+<p>Type class inference doesn't work too well for checking continuity because the basic tool is <code>continuous.comp</code> but the type class system is too simple to understand when applying <code>continuous.comp</code> is a good idea (and probably rightfully so)</p>
+
 
 {% endraw %}
