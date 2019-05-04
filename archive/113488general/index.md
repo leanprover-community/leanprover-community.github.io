@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [free_comm_ring](07101freecommring.html) (58 messages, latest: May 04 2019 at 12:13)
+
 * [A newcomer's opinion](34360Anewcomersopinion.html) (312 messages, latest: May 04 2019 at 09:12)
 
 * [May the 4th](84377Maythe4th.html) (1 message, latest: May 04 2019 at 05:48)
@@ -489,8 +491,6 @@ permalink: archive/113488general/index.html
 * ["correct" free semigroup](57076correctfreesemigroup.html) (69 messages, latest: Feb 25 2019 at 07:09)
 
 * [what's going on with `decidable_prime`?](89540whatsgoingonwithdecidableprime.html) (14 messages, latest: Feb 24 2019 at 21:30)
-
-* [free_comm_ring](07101freecommring.html) (57 messages, latest: Feb 24 2019 at 19:22)
 
 * [Better way to add well-founded instance](33471Betterwaytoaddwellfoundedinstance.html) (18 messages, latest: Feb 24 2019 at 10:13)
 
