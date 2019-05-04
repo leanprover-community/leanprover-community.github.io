@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [expr: fields and @](45316exprfieldsand.html) (107 messages, latest: May 04 2019 at 08:56)
+
 * [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (30 messages, latest: May 03 2019 at 22:51)
 
 * [noob question(s)](52075noobquestions.html) (584 messages, latest: May 03 2019 at 21:45)
@@ -29,8 +31,6 @@ permalink: archive/113489newmembers/index.html
 * [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
 
 * [Proving Cayley's Theorem](10331ProvingCayleysTheorem.html) (80 messages, latest: Apr 26 2019 at 22:29)
-
-* [expr: fields and @](45316exprfieldsand.html) (104 messages, latest: Apr 26 2019 at 20:10)
 
 * [arithmetic proof with big constants](80700arithmeticproofwithbigconstants.html) (36 messages, latest: Apr 25 2019 at 07:41)
 
