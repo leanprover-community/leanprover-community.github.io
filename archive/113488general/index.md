@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [category theory](81338categorytheory.html) (7 messages, latest: May 04 2019 at 22:59)
+
 * [free_comm_ring](07101freecommring.html) (58 messages, latest: May 04 2019 at 12:13)
 
 * [A newcomer's opinion](34360Anewcomersopinion.html) (312 messages, latest: May 04 2019 at 09:12)
 
 * [May the 4th](84377Maythe4th.html) (1 message, latest: May 04 2019 at 05:48)
-
-* [category theory](81338categorytheory.html) (5 messages, latest: May 03 2019 at 22:40)
 
 * [olean-rs on Travis is verbose](73738oleanrsonTravisisverbose.html) (103 messages, latest: May 03 2019 at 22:23)
 

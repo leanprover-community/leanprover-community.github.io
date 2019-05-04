@@ -39,5 +39,34 @@ I tried to add a declaration</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164836140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164836140">Floris van Doorn (May 03 2019 at 22:40)</a>:</h4>
 <p>I'll undo the change and double check where I ran into problems. Maybe it was a case where the category instance wasn't synthesized yet.</p>
 
+<a name="164890894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164890894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164890894">Floris van Doorn (May 04 2019 at 22:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">id_app</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">X</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>gives (with <code>pp.implicit</code> set to <code>true</code>)</p>
+<div class="codehilite"><pre><span></span>invalid field notation, &#39;app&#39; is not a valid &quot;field&quot; because environment does not contain &#39;category_theory.has_hom.hom.app&#39;
+  𝟙 F
+which has type
+  F ⟶ F
+Additional information:
+d:\projects\mathlib\src\category_theory\functor_category.lean:42:48: context: invalid field notation, &#39;app&#39; is not a valid &quot;field&quot; because environment does not contain &#39;category_theory.has_hom.rec.app&#39;
+  𝟙 F
+which has type
+  @has_hom.rec (C ⥤ D) (λ [c : has_hom (C ⥤ D)], C ⥤ D → C ⥤ D → Sort ?)
+    (λ (hom : C ⥤ D → C ⥤ D → Sort ?), hom)
+    (@category_struct.to_has_hom (C ⥤ D) ?m_1)
+    F
+    F
+</pre></div>
+
+
+<p>Using <code>(𝟙 F : F ⟶ F).app</code> does work.</p>
+
+<a name="164890908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory/near/164890908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81338categorytheory.html#164890908">Floris van Doorn (May 04 2019 at 22:59)</a>:</h4>
+<p>So it seems that sometimes the functor category instance wasn't synthesized yet. But so far this happens only a couple of times, so it seems very manageable.</p>
+
 
 {% endraw %}
