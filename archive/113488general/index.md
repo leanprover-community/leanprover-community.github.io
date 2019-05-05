@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [3.4.2 branch](99076342branch.html) (18 messages, latest: May 05 2019 at 22:20)
+
 * [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (21 messages, latest: May 05 2019 at 21:25)
-
-* [3.4.2 branch](99076342branch.html) (15 messages, latest: May 05 2019 at 20:27)
 
 * [3.4.2 tag](75058342tag.html) (1 message, latest: May 05 2019 at 18:59)
 
