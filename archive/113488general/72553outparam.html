@@ -238,5 +238,34 @@ permalink: archive/113488general/72553outparam.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164922955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164922955">Mario Carneiro (May 05 2019 at 14:59)</a>:</h4>
 <p>I mean that you have specialized to C^1 but the definition works in any groupoid, or at least that part of it does</p>
 
+<a name="164923063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164923063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164923063">Mario Carneiro (May 05 2019 at 15:01)</a>:</h4>
+<p>Also, given that the C^1 groupoid is data here, I think that those instances you just said are going to cause diamond problems</p>
+
+<a name="164923205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164923205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164923205">Mario Carneiro (May 05 2019 at 15:04)</a>:</h4>
+<p>Looking at your definition of manifold, it seems like <code>G</code> isn't actually necessary to define the manifold itself. You can have one manifold structure and assert that it is compatible with a variety of groupoids</p>
+
+<a name="164923296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164923296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164923296">Mario Carneiro (May 05 2019 at 15:06)</a>:</h4>
+<p>That also solves the problem of these composite constraints in the typeclass, since you then have <code>[manifold A B] [is_C1_manifold A B]</code> instead of <code>[manifold A (C1_groupoid A) B]</code></p>
+
+<a name="164923307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164923307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164923307">Mario Carneiro (May 05 2019 at 15:07)</a>:</h4>
+<p>where <code>is_C1_manifold</code> is a Prop</p>
+
+<a name="164923427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164923427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164923427">Sebastien Gouezel (May 05 2019 at 15:11)</a>:</h4>
+<p>I agree it is a good idea to separate the manifold structure, i.e., the data given by the charts, from the regularity of the charts, i.e., the fact that the charts belong to some groupoid. I'll try this route, thanks!</p>
+
+<a name="164924256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164924256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164924256">Sebastien Gouezel (May 05 2019 at 15:34)</a>:</h4>
+<p>In fact, I am not so sure I gain anything with this. The two options are</p>
+<ul>
+<li>Just a typeclass <code>[manifold A G B]</code>, which contains data (the charts) and a proposition (the fact that the changes of charts belong to <code>G</code>)</li>
+<li>Two typeclasses, <code>[manifold A B]</code> containing the charts, and <code>[has_smoothness_class A G B]</code> (assuming <code>[manifold A B]</code>), which is only Prop, asserting that the changes of charts belong to <code>G</code>.</li>
+</ul>
+<p>Whe one sets up instances, with the second point of view the set of charts is fixed, and one only asserts, say, that if a manifold is C^oo then it is C^1 for the same charts. In the first approach, one would get an instance from <code>[manifold A (C^oo) B]</code> to <code>[manifold A C^1 B]</code>, keeping the same charts but asserting that they belong to the larger groupoid <code>C^1</code>. I don't see why the first approach would give rise to diamonds, as the data between the instances does not change, so whatever the path between the instances one should get defeq stuff, right?</p>
+
 
 {% endraw %}
