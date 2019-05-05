@@ -295,5 +295,24 @@ permalink: archive/113488general/72553outparam.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164926147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164926147">Mario Carneiro (May 05 2019 at 16:25)</a>:</h4>
 <p>because the dependencies are different, these can't even be propositionally equal</p>
 
+<a name="164927540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164927540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164927540">Sebastien Gouezel (May 05 2019 at 17:03)</a>:</h4>
+<p>I still don't get it, sorry, I am a little bit slow. Suppose you have three instances</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">C1_of_C3</span> <span class="o">[</span><span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">3</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">1</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span>
+<span class="kn">instance</span> <span class="n">C2_of_C3</span> <span class="o">[</span><span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">3</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">2</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span>
+<span class="kn">instance</span> <span class="n">C1_of_C2</span> <span class="o">[</span><span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">2</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">manifold</span> <span class="o">(</span><span class="n">C</span><span class="err">^</span><span class="mi">1</span><span class="bp">_</span><span class="n">groupoid</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span>
+</pre></div>
+
+
+<p>Then the path C1_of_C3 seems to me to be completely equivalent to the composition of C2_of_C3 and C1_of_C2. And the types do not seem to depend on the chosen path.</p>
+
+<a name="164928029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164928029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164928029">Mario Carneiro (May 05 2019 at 17:17)</a>:</h4>
+<p>Actually I think I'm the one that's slow. Feel free to ignore my ramblings, I must be tired. I think you are right. However, this kind of instance search seems like a bad idea - there are lots and lots of values of k in C^k, and I'm sure in the right context you will be able to get some silliness like a search for <code>has_zero nat</code> ending up at <code>manifold (C^57_groupoid R) nat</code></p>
+
+<a name="164928400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164928400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164928400">Sebastien Gouezel (May 05 2019 at 17:29)</a>:</h4>
+<p>I am only planning to register the ones with 0, 1 and infinity. And prove the general statement, but not register it as an instance (if necessary, it can be registered locally).</p>
+
 
 {% endraw %}
