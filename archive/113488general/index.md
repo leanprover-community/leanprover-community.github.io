@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [out_param](72553outparam.html) (7 messages, latest: May 05 2019 at 09:48)
+
 * [category theory](81338categorytheory.html) (7 messages, latest: May 04 2019 at 22:59)
 
 * [free_comm_ring](07101freecommring.html) (58 messages, latest: May 04 2019 at 12:13)
@@ -357,8 +359,6 @@ permalink: archive/113488general/index.html
 * [Lean vs dependent type theory](68766Leanvsdependenttypetheory.html) (14 messages, latest: Mar 17 2019 at 17:18)
 
 * [maximal elements](32903maximalelements.html) (38 messages, latest: Mar 17 2019 at 12:31)
-
-* [out_param](72553outparam.html) (6 messages, latest: Mar 17 2019 at 11:40)
 
 * [simp lemmas and reducible definitions](92887simplemmasandreducibledefinitions.html) (4 messages, latest: Mar 16 2019 at 22:00)
 

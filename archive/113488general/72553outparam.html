@@ -41,5 +41,42 @@ permalink: archive/113488general/72553outparam.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/160995442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#160995442">Sebastien Gouezel (Mar 17 2019 at 11:40)</a>:</h4>
 <p>Thansk for the pointer. Indeed, this is the very same question!</p>
 
+<a name="164911736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164911736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164911736">Sebastien Gouezel (May 05 2019 at 09:48)</a>:</h4>
+<p>I am having problems with out_param in the following situation. Suppose <code>M</code> is a <code>C^1</code> manifold, with respect to a base field <code>k</code> and a model vector space <code>E</code>. I want to define the tangent space at a point <code>x</code>, by taking equivalence classes of vectors in charts. The maths are not important. The point is that <code>k</code> is relevant (you may want to consider a complex manifold as a real manifold), so just as for linear maps it should be explicit in the definition of the tangent space. However, there will always be one single model space <code>E</code>, so I don't want to have it as an explicit parameter in the definition: it should rather be inferred from the manifold instance in the context. I tried to write this as (with everything in <code>Type</code> to avoid potential universe issues):</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">tangent_space_unfolded</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">manifold</span> <span class="n">E</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="mi">1</span> <span class="n">k</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+  <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">local_homeomorph</span> <span class="n">M</span> <span class="n">E</span> <span class="bp">//</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">chart</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="mi">1</span> <span class="n">k</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span> <span class="bp">∧</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">e</span><span class="bp">.</span><span class="n">source</span><span class="o">}</span> <span class="bp">×</span> <span class="n">E</span>
+</pre></div>
+
+
+<p>(notice the <code>out_param</code> on <code>E</code> and <code>normed_space k E</code>). However, when I try to use this definition, <code>E</code> is not inferred. For instance, with</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">tangent_vector_equiv_rel</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">manifold</span> <span class="n">E</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="mi">1</span> <span class="n">k</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">tangent_space_unfolded</span> <span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">true</span>
+</pre></div>
+
+
+<p>I get the red squiggle under <code>p : tangent_space_unfolded k x</code> with the complaint</p>
+<div class="codehilite"><pre><span></span><span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+<span class="kn">context</span><span class="o">:</span>
+<span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">,</span>
+<span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">M</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">manifold</span> <span class="n">E</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="mi">1</span> <span class="n">k</span> <span class="n">E</span><span class="o">)</span> <span class="n">M</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">M</span>
+<span class="err">⊢</span> <span class="n">out_param</span> <span class="kt">Type</span>
+</pre></div>
+
+
+<p>If I make the parameter <code>E</code> explicit, on the other hand, everything is fine.</p>
+<p>There are very few places in the library where <code>out_param</code> is used, so I don't have enough examples (or documentation) to understand what the right syntax should be. Is it impossible to do what I would like?</p>
+
 
 {% endraw %}
