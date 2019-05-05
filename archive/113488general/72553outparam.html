@@ -78,5 +78,85 @@ permalink: archive/113488general/72553outparam.html
 <p>If I make the parameter <code>E</code> explicit, on the other hand, everything is fine.</p>
 <p>There are very few places in the library where <code>out_param</code> is used, so I don't have enough examples (or documentation) to understand what the right syntax should be. Is it impossible to do what I would like?</p>
 
+<a name="164912212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912212">Mario Carneiro (May 05 2019 at 10:01)</a>:</h4>
+<p>out_param goes on instances and class definitions</p>
+
+<a name="164912263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912263">Mario Carneiro (May 05 2019 at 10:02)</a>:</h4>
+<p>you can't just put it on a single definition, it's tied in to the whole instance search problem for that typeclass</p>
+
+<a name="164912316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912316">Mario Carneiro (May 05 2019 at 10:04)</a>:</h4>
+<p>In this case, if you want <code>k</code> to determine <code>E</code> in <code>normed_space</code>, you would need to mark <code>E</code> as <code>out_param</code> in the definition of <code>normed_space</code>. I guess that's not what you want</p>
+
+<a name="164912334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912334">Sebastien Gouezel (May 05 2019 at 10:04)</a>:</h4>
+<p>I don't want <code>k</code> to determine <code>E</code>, I want the manifold instance together with <code>k</code> to determine <code>E</code>.</p>
+
+<a name="164912354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912354">Mario Carneiro (May 05 2019 at 10:05)</a>:</h4>
+<p>but the manifold instance already mentions E</p>
+
+<a name="164912407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912407">Mario Carneiro (May 05 2019 at 10:06)</a>:</h4>
+<p>So you want to trigger the search <code>manifold ?E (times_cont_diff_groupoid 1 k ?E) M</code>?</p>
+
+<a name="164912409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912409">Sebastien Gouezel (May 05 2019 at 10:06)</a>:</h4>
+<p>Yes. I guess I don't understand at all what out_param does. What I would like to happen when Lean encounters <code>tangent_space k x</code>: it looks in the context for a instance of <code>manifold ?m1 (times_cont_diff_groupoid 1 k ?m1) M</code>, and if it finds one it picks it at <code>E</code>.</p>
+
+<a name="164912420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912420">Mario Carneiro (May 05 2019 at 10:07)</a>:</h4>
+<p>or is it <code>manifold ?E ?X M</code></p>
+
+<a name="164912424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912424">Mario Carneiro (May 05 2019 at 10:08)</a>:</h4>
+<p>what is that second argument?</p>
+
+<a name="164912467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912467">Sebastien Gouezel (May 05 2019 at 10:08)</a>:</h4>
+<p>It is really <code>manifold ?m1 (times_cont_diff_groupoid 1 k ?m1) M</code> that it should look for.</p>
+
+<a name="164912470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912470">Sebastien Gouezel (May 05 2019 at 10:08)</a>:</h4>
+<p>It is a groupoid, i.e., a set of local homeomorphisms between <code>M</code> and <code>E</code>.</p>
+
+<a name="164912539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912539">Mario Carneiro (May 05 2019 at 10:10)</a>:</h4>
+<p>can you make another class?</p>
+
+<a name="164912541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912541">Mario Carneiro (May 05 2019 at 10:10)</a>:</h4>
+<p>like <code>model_space M ?E</code> or something</p>
+
+<a name="164912543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912543">Mario Carneiro (May 05 2019 at 10:10)</a>:</h4>
+<p>that implies <code>manifold ?E (times_cont_diff_groupoid 1 k ?E) M</code></p>
+
+<a name="164912624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912624">Mario Carneiro (May 05 2019 at 10:13)</a>:</h4>
+<p>I am wary of that typeclass arg. You can probably make lean search for it because lean typeclass search has no hygiene, but that's also why typeclass search is starting to fall over in mathlib</p>
+
+<a name="164912628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912628">Sebastien Gouezel (May 05 2019 at 10:13)</a>:</h4>
+<p>What I could do is mark <code>E</code> as out_param in the definition of manifold. Except that this is not OK as there can be different model spaces depending on whether one considers a space as a real or complex manifold. So, it would really have to depend on both <code>k</code> and <code>M</code>. I can build a new class <code>smooth_manifold k ?E M</code> with <code>E</code> as an out_param, and see how this goes.</p>
+
+<a name="164912685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164912685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164912685">Sebastien Gouezel (May 05 2019 at 10:15)</a>:</h4>
+<p>Being a manifold is definitely a type class, just as good as being a ring or a topological space. The only difference is that it has more structure built in, so it depends on more stuff but that's the way math is.</p>
+
+<a name="164913172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164913172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164913172">Mario Carneiro (May 05 2019 at 10:28)</a>:</h4>
+<p>The problem isn't the math, it's the use of <code>(times_cont_diff_groupoid 1 k ?E)</code> as one of the arguments to the class. It's too dependent for my liking (it's not even a type IIUC)</p>
+
+<a name="164913454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164913454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164913454">Sebastien Gouezel (May 05 2019 at 10:36)</a>:</h4>
+<p>For each groupoid <code>G</code>, you have a notion of manifold based on this groupoid. For instance, <code>C^infty</code> manifolds, or manifolds with boundary, or manifold with corners, or contact manifolds, or orientable manifolds, or whatever. Each of these structures gives you access to some objects on the manifold. My idea is to set up a set of instances between these structures, so that when you have a contact manifold then you also get automatically a smooth structure, an oriented structure, and so on, just by typeclass inference. I have the impression that this is precisely the kind of things at which typeclass inference is good, but maybe I am missing something.</p>
+
+<a name="164913667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164913667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164913667">Mario Carneiro (May 05 2019 at 10:43)</a>:</h4>
+<p>could you put the definition of <code>manifold</code>? I'm confused about the type of everything here</p>
+
 
 {% endraw %}
