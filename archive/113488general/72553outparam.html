@@ -178,5 +178,61 @@ permalink: archive/113488general/72553outparam.html
 
 <p>One could also go for a manifold structure just by picking the charts and the cover condition (this would be a <code>has_chart</code> class, say, similar to <code>has_add</code> and friends), and say that the manifold structure is compatible with a given groupoid if the compat condition holds (in the same way as one can add properties extending <code>has_add</code> making it into a group, a ring, a module, and so on).</p>
 
+<a name="164918445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918445">Mario Carneiro (May 05 2019 at 13:00)</a>:</h4>
+<p>Okay, I see. I guess this definition of <code>manifold</code> differs from the earlier one though, since <code>α</code> is implicit now but the other one had three explicit args</p>
+
+<a name="164918467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918467">Mario Carneiro (May 05 2019 at 13:02)</a>:</h4>
+<p>The order of inference still seems a bit weird to me. Can't manifolds have multiple model vector spaces? Like a manifold with different dimensions at different points</p>
+
+<a name="164918521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918521">Sebastien Gouezel (May 05 2019 at 13:02)</a>:</h4>
+<p>Yes, you're right. I had tried to make the argument explicit to see if it made a difference, but it didn't so I came back to my original definition with alpha implicit.</p>
+
+<a name="164918552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918552">Mario Carneiro (May 05 2019 at 13:04)</a>:</h4>
+<p>It seems pretty natural to me that you should say M is a C^1 R^n manifold, and both R,n,M are required args</p>
+
+<a name="164918598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918598">Sebastien Gouezel (May 05 2019 at 13:04)</a>:</h4>
+<p>In the most standard definition, the model space is the same everywhere (and so the dimension is the same everywhere). If you really want to have a manifold with different local dimensions with this definition, you can by taking as a model space the union of all R^n over varying n, but this is not very natural.</p>
+
+<a name="164918604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918604">Mario Carneiro (May 05 2019 at 13:04)</a>:</h4>
+<p>that's not a vector space</p>
+
+<a name="164918609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918609">Sebastien Gouezel (May 05 2019 at 13:04)</a>:</h4>
+<p>The thing is that the groupoid <code>G</code> already contains the information about alpha.</p>
+
+<a name="164918627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918627">Sebastien Gouezel (May 05 2019 at 13:05)</a>:</h4>
+<p>The model space does not need to be a vector space (and in many applications it isn't)</p>
+
+<a name="164918923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918923">Sebastien Gouezel (May 05 2019 at 13:12)</a>:</h4>
+<p>An important example to keep in mind, however, is a complex manifold of dimension <code>n</code>, modelled over <code>C^n</code>, that you also want to think of as a manifold of dimension <code>2n</code> modelled over <code>R^{2n}</code>. So not everything can be implicit.</p>
+
+<a name="164918936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918936">Mario Carneiro (May 05 2019 at 13:13)</a>:</h4>
+<p>I think I want this definition to be explicit in all the args k E G M</p>
+
+<a name="164918986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164918986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164918986">Mario Carneiro (May 05 2019 at 13:14)</a>:</h4>
+<p>but you should keep things variable when possible. For example <code>tangent_space_unfolded</code> seems to be unnecessarily specializing on the groupoid</p>
+
+<a name="164919128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164919128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164919128">Mario Carneiro (May 05 2019 at 13:18)</a>:</h4>
+<p>Even if there is "only one" model space up to isomorphism doesn't mean there's only one up to defeq</p>
+
+<a name="164919149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164919149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164919149">Mario Carneiro (May 05 2019 at 13:19)</a>:</h4>
+<p>In particular I'm sure there will be ways to combine stuff in mathlib to get other isomorphic things like (R^2)^n that we also want to talk about</p>
+
+<a name="164920531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164920531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164920531">Sebastien Gouezel (May 05 2019 at 13:57)</a>:</h4>
+<p>You want to be able to speak of the tangent space to many manifolds, for instance to C^infty manifolds or to contact manifolds. If there is an instance saying that a C^infty manifold is a C^1 manifold, or that a contact manifold is a C^1 manifold, then you get the tangent space for all of them at once.</p>
+
 
 {% endraw %}
