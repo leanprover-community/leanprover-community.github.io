@@ -90,5 +90,43 @@ I don't know what is going on though.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164708356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164708356">Edward Ayers (May 02 2019 at 13:36)</a>:</h4>
 <p>Seems a shame that <code>rw</code> doesn't automatically try to instantiate mvars.</p>
 
+<a name="164978212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164978212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164978212">Kevin Kappelmann (May 06 2019 at 12:36)</a>:</h4>
+<p>I keep on running into this issue btw. Another example: </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rat_num_lt_denom</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">q_lt_one</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span><span class="bp">.</span><span class="n">num</span> <span class="bp">&lt;</span> <span class="n">q</span><span class="bp">.</span><span class="n">denom</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">one_times_denom_eq_denom</span><span class="o">,</span> <span class="k">from</span> <span class="n">one_mul</span> <span class="n">q</span><span class="bp">.</span><span class="n">denom</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span><span class="n">one_times_denom_eq_denom</span><span class="o">,</span> <span class="c1">-- rewrite tactic failed, lemma is not an equality nor a iff</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I just use the <code>:=</code> workaround anytime I have this issue at the moment.</p>
+
+<a name="164978361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164978361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164978361">Mario Carneiro (May 06 2019 at 12:38)</a>:</h4>
+<p>you should always use <code>:=</code> for tactic have unless you have a particular reason to do it in two stages</p>
+
+<a name="164978389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164978389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164978389">Mario Carneiro (May 06 2019 at 12:39)</a>:</h4>
+<p>despite the visual resemblance it's two tactics and that causes some information to not get around</p>
+
+<a name="164978402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164978402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164978402">Mario Carneiro (May 06 2019 at 12:39)</a>:</h4>
+<p>That said, this is a bug in <code>rw</code></p>
+
+<a name="164978566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164978566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164978566">Kevin Kappelmann (May 06 2019 at 12:42)</a>:</h4>
+<p>I should use it because of this bug or is there any other reason?</p>
+
+<a name="164979309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164979309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164979309">Mario Carneiro (May 06 2019 at 12:54)</a>:</h4>
+<p>it has more information available for elaboration in one place, so you (usually) get a more accurate result</p>
+
+<a name="164979375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20tactic%20failed%2C%20lemma%20is%20not%20an%20equality%20nor%20a%20iff/near/164979375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/50887rewritetacticfailedlemmaisnotanequalitynoraiff.html#164979375">Mario Carneiro (May 06 2019 at 12:55)</a>:</h4>
+<p>it's also probably slightly faster</p>
+
 
 {% endraw %}

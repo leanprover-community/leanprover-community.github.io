@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (18 messages, latest: May 06 2019 at 12:55)
+
 * [noob question(s)](52075noobquestions.html) (642 messages, latest: May 04 2019 at 21:17)
 
 * [expr: fields and @](45316exprfieldsand.html) (107 messages, latest: May 04 2019 at 08:56)
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [using exists](90887usingexists.html) (7 messages, latest: May 03 2019 at 15:39)
 
 * [How to define angle? Is function arccos  available ?](31168HowtodefineangleIsfunctionarccosavailable.html) (11 messages, latest: May 03 2019 at 15:30)
-
-* [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (11 messages, latest: May 02 2019 at 13:36)
 
 * [Jose Balado](77525JoseBalado.html) (94 messages, latest: May 01 2019 at 10:15)
 
