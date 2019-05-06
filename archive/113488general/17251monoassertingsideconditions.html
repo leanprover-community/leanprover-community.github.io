@@ -32,5 +32,57 @@ permalink: archive/113488general/17251monoassertingsideconditions.html
 
 <p>Perhaps I don't understand the syntax for <code>mono using</code> -- what am I doing wrong?</p>
 
+<a name="164999085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%3A%20asserting%20side%20conditions/near/164999085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17251monoassertingsideconditions.html#164999085">Kevin Buzzard (May 06 2019 at 17:02)</a>:</h4>
+<p>You're not posting the full error message, for one thing:</p>
+<div class="codehilite"><pre><span></span>ambiguous match:
+
+mul_mono_nonpos
+0 ≥ abs (of s)
+of (d / abs s / 2) ≤ abs (x - of r)
+
+mul_mono_nonneg
+0 ≤
+  abs (of s)
+abs (x - of r) ≤ of (d / abs s / 2)
+
+Tip: try asserting a side condition to distinguish between the lemmas
+state:
+x y : ℝ*,
+r s : ℝ,
+hxr : is_st x r,
+hys : is_st y s,
+hs : s ≠ 0,
+hxr&#39; : ∀ (δ : ℝ), δ &gt; 0 → abs (x - ↑r) &lt; ↑δ,
+hys&#39; : ∀ (δ : ℝ), δ &gt; 0 → abs (y - ↑s) &lt; ↑δ,
+h : ∃ (r s : ℝ), ↑r &lt; abs x ∧ abs x &lt; ↑s,
+u : ℝ,
+h&#39; : ∃ (s : ℝ), ↑u &lt; abs x ∧ abs x &lt; ↑s,
+t : ℝ,
+_x : ↑u &lt; abs x ∧ abs x &lt; ↑t,
+_fun_match : ↑u &lt; abs x ∧ abs x &lt; ↑t → is_st (x * y) (r * s),
+hu : ↑u &lt; abs x,
+ht : abs x &lt; ↑t,
+d : ℝ,
+hd : d &gt; 0
+⊢ abs (x - of r) * abs (of s) ≤ of (d / abs s / 2) * abs (of s)
+</pre></div>
+
+
+<p>And you're not revising for my exam, that's another thing ;-)</p>
+
+<a name="164999436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%3A%20asserting%20side%20conditions/near/164999436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17251monoassertingsideconditions.html#164999436">Kevin Buzzard (May 06 2019 at 17:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">mono</span> <span class="k">with</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="o">(</span><span class="n">of</span> <span class="n">s</span><span class="o">),</span> <span class="n">swap</span><span class="o">,</span>  <span class="n">exact</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">hxr&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">half_pos</span> <span class="o">(</span><span class="n">div_pos</span> <span class="n">hd</span> <span class="o">(</span><span class="n">abs_pos_of_ne_zero</span> <span class="n">hs</span><span class="o">)))),</span>
+        <span class="n">apply</span> <span class="n">abs_nonneg</span><span class="o">,</span>
+</pre></div>
+
+
+<p>seems to deal with it (you probably know what's going on better than I do with the swap and can fix things up better)</p>
+
+<a name="165000464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%3A%20asserting%20side%20conditions/near/165000464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17251monoassertingsideconditions.html#165000464">Abhimanyu Pallavi Sudhir (May 06 2019 at 17:19)</a>:</h4>
+<p>Ah, it's <code>with</code> -- I thought the keyword was <code>using</code> for some reason. Thanks.</p>
+
 
 {% endraw %}

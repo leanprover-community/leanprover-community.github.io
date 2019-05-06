@@ -1,0 +1,29 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/34618equalitybetweennaturaltransformations.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/34618equalitybetweennaturaltransformations.html">equality between natural transformations</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165001300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equality%20between%20natural%20transformations/near/165001300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34618equalitybetweennaturaltransformations.html#165001300">Floris van Doorn (May 06 2019 at 17:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span> <br>
+In <a href="https://github.com/leanprover-community/mathlib/issues/986" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/986">#986</a> the following issue came up: how do we formulate equalities between natural transformations? We can of course use <code>α = β</code>, but we can also use <code>∀X, α.app X = β.app X</code> (of course, these are equivalent). I would have a preference for the latter: I think in general equalities between morphisms are easier to work with. In either case, we should choose one of the options, and then consistently stick with it throughout the library.</p>
+<p>One disadvantage when we use <code>α = β</code> is that we sometimes have to insert unitors/associators between functors, which disappear on the morphism level. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₂</span><span class="o">}</span> <span class="n">D</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">}</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">F</span> <span class="err">⟶</span> <span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">G</span> <span class="err">⋙</span> <span class="n">F</span> <span class="err">⟶</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">whisker_left</span> <span class="n">G</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span> <span class="err">≫</span> <span class="o">(</span><span class="n">right_unitor</span> <span class="n">G</span><span class="o">)</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">F</span> <span class="err">⟶</span> <span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">G</span> <span class="err">⋙</span> <span class="n">F</span> <span class="err">⟶</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">G</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="n">β</span><span class="bp">.</span><span class="n">app</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+{% endraw %}

@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (26 messages, latest: May 06 2019 at 16:50)
+* [defunct branches](71952defunctbranches.html) (6 messages, latest: May 06 2019 at 17:41)
 
-* [mono: asserting side conditions](17251monoassertingsideconditions.html) (1 message, latest: May 06 2019 at 15:30)
+* [mono: asserting side conditions](17251monoassertingsideconditions.html) (4 messages, latest: May 06 2019 at 17:19)
 
-* [defunct branches](71952defunctbranches.html) (5 messages, latest: May 06 2019 at 15:20)
+* [transport and parametricity](74751transportandparametricity.html) (27 messages, latest: May 06 2019 at 17:05)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (27 messages, latest: May 06 2019 at 14:25)
 
