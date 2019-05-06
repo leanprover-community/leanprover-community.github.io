@@ -745,5 +745,16 @@ any ideas on how to improve this? <a href="https://github.com/faabian/mathlib/bl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165013654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165013654">Edward Ayers (May 06 2019 at 19:57)</a>:</h4>
 <p>I prefer always having local variables held in the tactic_state's context rather than using <code>mk_local</code> and friends. This is because you don't have to worry about pretty names and unique names etc. But there is nothing wrong with the <code>mk_local</code> way.</p>
 
+<a name="165014729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165014729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165014729">Edward Ayers (May 06 2019 at 20:11)</a>:</h4>
+<p>There should be a way to replace <code>count_vars</code>, <code>arrow_list</code>, with <code>tactic.mk_local_pis</code>, <code>tactic.get_pi_arity</code> and so on. They are in <code>/library/init/meta/tactic.lean</code> and <code>expr.lean</code>.</p>
+
+<a name="165017839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165017839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165017839">Edward Ayers (May 06 2019 at 20:51)</a>:</h4>
+<p>This has been a good exercise for me. Here are some problems that I had:<br>
+- If I write  <code>to_expr ```(Π {α β}, ...</code> it makes a new universe metavariable. Then I get told off for trying to make a decl with a metavariable in it. I couldn't find a nice way of telling the tactic_state to turn all remaining universe metas in to universe parameters instead. Am I not seeing the tactic? <br>
+- <code>refine_forall</code> (and <code>refine_pi</code>) is a utility function that I use a lot and find really useful. Is there a version of this in mathlib or core?<br>
+- Is it better to use <code>mk_local_pis</code> and <code>expr.pis</code> or to wrap things in tactics?</p>
+
 
 {% endraw %}

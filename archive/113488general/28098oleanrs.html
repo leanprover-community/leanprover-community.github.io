@@ -1,0 +1,336 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/28098oleanrs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html">olean-rs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165016015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016015">Johan Commelin (May 06 2019 at 20:26)</a>:</h4>
+<p>Can one easily parse some dump of <code>olean-rs</code> to find the declaration that has the longest <code>pp.implicit</code> output?</p>
+
+<a name="165016070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016070">Simon Hudon (May 06 2019 at 20:27)</a>:</h4>
+<p>It might be easier to add it as a feature of <code>olean-rs</code></p>
+
+<a name="165016085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016085">Simon Hudon (May 06 2019 at 20:27)</a>:</h4>
+<p>Why do you need that?</p>
+
+<a name="165016176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016176">Patrick Massot (May 06 2019 at 20:28)</a>:</h4>
+<p>Part of the goal of the perfectoid project was to find out whether we could write innocent looking math that would hide a huge amount of implicit arguments that Lean would figure out by itself</p>
+
+<a name="165016224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016224">Patrick Massot (May 06 2019 at 20:29)</a>:</h4>
+<p>Now we have the definition, we are looking for example of that phenomenon. Of course we know some of the stuff hiding quite a bit of complexity. But having Lean/Rust-Lean bragging a bit would help</p>
+
+<a name="165016255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016255">Johan Commelin (May 06 2019 at 20:29)</a>:</h4>
+<blockquote>
+<p>Why do you need that?</p>
+</blockquote>
+<p>Statistics... we want statistics</p>
+
+<a name="165016346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016346">Patrick Massot (May 06 2019 at 20:30)</a>:</h4>
+<p>For instance, we wrote at <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/stalk_valuation.lean#L29-L32" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/stalk_valuation.lean#L29-L32">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/stalk_valuation.lean#L29-L32</a></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">stalk_valuation</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">spa</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">valuation</span> <span class="o">(</span><span class="n">stalk_of_rings</span> <span class="o">(</span><span class="n">spa</span><span class="bp">.</span><span class="n">presheaf_of_topological_rings</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">to_presheaf_of_rings</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">value_group</span> <span class="o">(</span><span class="n">out</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">valuation</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">valuation_on_completion</span> <span class="o">(</span><span class="n">out</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">stalk_to_valuation_field</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="165016396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016396">Patrick Massot (May 06 2019 at 20:31)</a>:</h4>
+<p>But Lean reads:</p>
+<div class="codehilite"><pre><span></span>noncomputable def spa.presheaf.stalk_valuation : Π {A : Huber_pair} (x : ↥(spa A)),
+  @valuation
+    (@stalk_of_rings ↥(spa A) (spa.topological_space A)
+       (@presheaf_of_topological_rings.to_presheaf_of_rings ↥(spa A) (spa.topological_space A)
+          (spa.presheaf_of_topological_rings A))
+       x)
+    (@comm_ring.to_ring
+       (@stalk_of_rings ↥(spa A) (spa.topological_space A)
+          (@presheaf_of_topological_rings.to_presheaf_of_rings ↥(spa A) (spa.topological_space A)
+             (spa.presheaf_of_topological_rings A))
+          x)
+       (@stalk_of_rings_is_comm_ring ↥(spa A) (spa.topological_space A)
+          (@presheaf_of_topological_rings.to_presheaf_of_rings ↥(spa A) (spa.topological_space A)
+             (spa.presheaf_of_topological_rings A))
+          x))
+    (@valuation.value_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+       (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x)))
+    (@valuation.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+       (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))) :=
+λ {A : Huber_pair} (x : ↥(spa A)),
+  @valuation.comap
+    (@valuation.value_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+       (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x)))
+    (@valuation.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+       (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x))
+       (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+             (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+             x)))
+    (@ring_completion
+       (@valuation.valuation_field
+          (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x))
+          (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x))
+          ↥A
+          (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x)))
+       (@valuation_field.uniform_space
+          (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x))
+          (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x))
+          ↥A
+          (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+          (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                x))))
+    (@comm_ring.to_ring
+       (@ring_completion
+          (@valuation.valuation_field
+             (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             ↥A
+             (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x)))
+          (@valuation_field.uniform_space
+             (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             ↥A
+             (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))))
+       (@ring_completion.comm_ring
+          (@valuation.valuation_field
+             (@Spv.out_Γ ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             (@Spv.linear_ordered_comm_group ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))), x ∈ spa A)
+                   x))
+             ↥A
+             (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+             (@Spv.out ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A))
+                (@subtype.val (@Spv ↥A (@Huber_ring.to_comm_ring ↥A (Huber_pair.Huber_ring A)))
+                   (λ (x : @Spv ↥A (@Huber_ring.to_comm_ring ↥A (Hube
+</pre></div>
+
+<a name="165016481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016481">Patrick Massot (May 06 2019 at 20:32)</a>:</h4>
+<p>There is some repetition of course, but it's still nontrivial</p>
+
+<a name="165016495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016495">Simon Hudon (May 06 2019 at 20:33)</a>:</h4>
+<p>Ok, so let's define what you mean by the longest <code>pp.implicit</code> output. Do you mean a big difference between the term of the definition as displayed with <code>pp.implicit</code> vs the term as displayed without it?</p>
+
+<a name="165016519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016519">Scott Morrison (May 06 2019 at 20:33)</a>:</h4>
+<p>I don't think your message then was even complete... It truncated mid <code>Hube</code>.</p>
+
+<a name="165016543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016543">Johan Commelin (May 06 2019 at 20:33)</a>:</h4>
+<p>You don't know what a <code>Hube</code> is? <span aria-label="grimacing" class="emoji emoji-1f62c" role="img" title="grimacing">:grimacing:</span></p>
+
+<a name="165016549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016549">Patrick Massot (May 06 2019 at 20:33)</a>:</h4>
+<p>Let me try again</p>
+
+<a name="165016638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016638">Johan Commelin (May 06 2019 at 20:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I would be interested in the maximum ratio, and in just the term that has the absolutely largest <code>pp.implicit</code> output.</p>
+
+<a name="165016673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016673">Johan Commelin (May 06 2019 at 20:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Just pipe it through <code>wc -c</code> before you paste.</p>
+
+<a name="165016709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016709">Patrick Massot (May 06 2019 at 20:36)</a>:</h4>
+<p>Zulip is censoring me!</p>
+
+<a name="165016754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016754">Johan Commelin (May 06 2019 at 20:36)</a>:</h4>
+<p>It won't censor it if you pipe through <code>wc -c</code></p>
+
+<a name="165016763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016763">Patrick Massot (May 06 2019 at 20:36)</a>:</h4>
+<p><a href="https://www.math.u-psud.fr/~pmassot/implicit" target="_blank" title="https://www.math.u-psud.fr/~pmassot/implicit">https://www.math.u-psud.fr/~pmassot/implicit</a></p>
+
+<a name="165016773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016773">Patrick Massot (May 06 2019 at 20:36)</a>:</h4>
+<p>18631</p>
+
+<a name="165016803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016803">Johan Commelin (May 06 2019 at 20:37)</a>:</h4>
+<p>That's quite a beast (-;</p>
+
+<a name="165016808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016808">Kevin Buzzard (May 06 2019 at 20:37)</a>:</h4>
+<p>I don't remember using variable <code>â†¥A</code>?</p>
+
+<a name="165016825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016825">Patrick Massot (May 06 2019 at 20:37)</a>:</h4>
+<p>Your web browser is stupid</p>
+
+<a name="165016829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016829">Patrick Massot (May 06 2019 at 20:37)</a>:</h4>
+<p>tell it it's UTF8</p>
+
+<a name="165016889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016889">Kevin Buzzard (May 06 2019 at 20:38)</a>:</h4>
+<p>:-)</p>
+
+<a name="165016969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165016969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165016969">Johan Commelin (May 06 2019 at 20:39)</a>:</h4>
+<div class="codehilite"><pre><span></span>tar czf implicit.tar.gz implicit.txt <span class="o">&amp;&amp;</span> ls -l implicit.tar.gz
+-rw-r--r-- <span class="m">1</span> jmc jmc <span class="m">947</span> May  <span class="m">6</span> <span class="m">22</span>:40 implicit.tar.gz
+</pre></div>
+
+<a name="165017059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017059">Patrick Massot (May 06 2019 at 20:40)</a>:</h4>
+<p>Yeah, there is repetition...</p>
+
+<a name="165017076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017076">Simon Hudon (May 06 2019 at 20:40)</a>:</h4>
+<p>Do you want the measure to be independent of the length of the identifiers used?</p>
+
+<a name="165017093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017093">Johan Commelin (May 06 2019 at 20:41)</a>:</h4>
+<p>Hmm... that probably makes sense</p>
+
+<a name="165017123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017123">Patrick Massot (May 06 2019 at 20:41)</a>:</h4>
+<p>Simon is in Santa Claus mode, we need to take the opportunity!</p>
+
+<a name="165017146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017146">Simon Hudon (May 06 2019 at 20:42)</a>:</h4>
+<p>Haha :D</p>
+
+<a name="165017212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017212">Scott Morrison (May 06 2019 at 20:42)</a>:</h4>
+<p>I do like Johan's <code>gzip</code> measure.</p>
+
+<a name="165017214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017214">Patrick Massot (May 06 2019 at 20:42)</a>:</h4>
+<p>A goal of the project was also to provide a Lean benchmark. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> is Lean optimized to handle repeated implicit arguments s in this example?</p>
+
+<a name="165017265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017265">Scott Morrison (May 06 2019 at 20:43)</a>:</h4>
+<p>Yes. Immutable data structures for <code>expr</code> mean that repetitions are just pointers to the same sub-expression.</p>
+
+<a name="165017381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017381">Patrick Massot (May 06 2019 at 20:45)</a>:</h4>
+<p>Dear Santa,<br>
+We have been very nice all year long, doing our best to Lean the definition of perfectoid spaces. Could you also bring a nice command translating any expression into a nice graph we could then manipulate into a graph editor? I did a crappy version for my Lean Together talk, but it was ascii art only, and not very flexible.<br>
+Patrick, for the perfectoid team</p>
+
+<a name="165017391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017391">Patrick Massot (May 06 2019 at 20:45)</a>:</h4>
+<p>Thanks Scott!</p>
+
+<a name="165017682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017682">Patrick Massot (May 06 2019 at 20:49)</a>:</h4>
+<p>Speaking of graphs, an approximate dependency graph of the perfectoid space definition can be found at <a href="https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png" target="_blank" title="https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png">https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png</a></p>
+<div class="message_inline_image"><a href="https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png" target="_blank" title="https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png"><img src="https://www.math.u-psud.fr/~pmassot/perfectoid_big_labelled.png"></a></div>
+
+<a name="165017821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165017821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165017821">Patrick Massot (May 06 2019 at 20:51)</a>:</h4>
+<p>It's approximate because no competent software programmer was involved, and also because I removed <code>core.lean</code> and <code>logic.lean</code> and a couple more files. Otherwise there are too many nodes linked to everybody and automatic layout and cluster coloring gets you only one big ball</p>
+
+<a name="165018381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165018381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165018381">Simon Hudon (May 06 2019 at 20:58)</a>:</h4>
+<p>That's a very nice graph!</p>
+
+<a name="165018388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165018388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165018388">Simon Hudon (May 06 2019 at 20:58)</a>:</h4>
+<p>To be honest, this is not my cup of tea</p>
+
+<a name="165018424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean-rs/near/165018424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28098oleanrs.html#165018424">Patrick Massot (May 06 2019 at 20:59)</a>:</h4>
+<p>What is not you cup of tea?</p>
+
+
+{% endraw %}

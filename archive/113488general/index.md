@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [olean-rs](28098oleanrs.html) (40 messages, latest: May 06 2019 at 20:59)
+
+* [3.4.2 branch](99076342branch.html) (36 messages, latest: May 06 2019 at 20:24)
+
 * [defunct branches](71952defunctbranches.html) (9 messages, latest: May 06 2019 at 19:59)
 
 * [mono: asserting side conditions](17251monoassertingsideconditions.html) (5 messages, latest: May 06 2019 at 18:21)
@@ -17,8 +21,6 @@ permalink: archive/113488general/index.html
 * [transport and parametricity](74751transportandparametricity.html) (27 messages, latest: May 06 2019 at 17:05)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (27 messages, latest: May 06 2019 at 14:25)
-
-* [3.4.2 branch](99076342branch.html) (22 messages, latest: May 06 2019 at 13:50)
 
 * [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
 

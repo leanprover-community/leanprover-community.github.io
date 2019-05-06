@@ -969,5 +969,74 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/164819584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#164819584">Patrick Thomas (May 03 2019 at 18:45)</a>:</h4>
 <p>I think I understand now. Thank you!</p>
 
+<a name="165016513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165016513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165016513">Patrick Thomas (May 06 2019 at 20:33)</a>:</h4>
+<p>I was wondering if someone might be able to show me how to use the equalities <code>sub P x N = P</code> and <code>sub Q x N = Q</code> to show  that <code>pre_term.app (sub P x N) (sub Q x N) = pre_term.app P Q</code> given</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">pre_term</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">abs</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+
+<span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="c1">-- if x = y then y [ x := N ] = N else y [ x := N ] = y</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- (P Q) [ x := N ] = (P [ x := N ] Q [ x := N ])</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+
+<span class="c1">-- if x = y then ( λ y . P ) [ x := N ] = ( λ y . P ) else ( λ y . P ) [ x := N ] = ( λ y . P [ x := N ] )</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">))</span>
+</pre></div>
+
+
+<p>Thank you.</p>
+
+<a name="165016616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165016616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165016616">Kevin Buzzard (May 06 2019 at 20:34)</a>:</h4>
+<p>Can you post fully working code? It makes everyone's life easier.</p>
+
+<a name="165016626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165016626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165016626">Patrick Thomas (May 06 2019 at 20:34)</a>:</h4>
+<p>Sure, give me a second.</p>
+
+<a name="165016676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165016676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165016676">Kevin Buzzard (May 06 2019 at 20:35)</a>:</h4>
+<p>Can you formalise precisely what you want proved as well, rather than just describing it?</p>
+
+<a name="165017689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165017689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165017689">Patrick Thomas (May 06 2019 at 20:49)</a>:</h4>
+<p>I think this is a minimum working example:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">var</span> <span class="o">:=</span> <span class="bp">ℕ</span>
+
+<span class="kn">inductive</span> <span class="n">pre_term</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">abs</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+
+<span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="c1">-- if x = y then y [ x := N ] = N else y [ x := N ] = y</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- (P Q) [ x := N ] = (P [ x := N ] Q [ x := N ])</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+
+<span class="c1">-- if x = y then ( λ y . P ) [ x := N ] = ( λ y . P ) else ( λ y . P ) [ x := N ] = ( λ y . P [ x := N ] )</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">))</span>
+
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="bp">=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="165018444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/165018444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#165018444">Kevin Buzzard (May 06 2019 at 20:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="bp">=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
