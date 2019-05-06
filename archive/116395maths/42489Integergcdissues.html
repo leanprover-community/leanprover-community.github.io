@@ -1,0 +1,38 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/42489Integergcdissues.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/42489Integergcdissues.html">Integer gcd issues</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165022824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Integer%20gcd%20issues/near/165022824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42489Integergcdissues.html#165022824">Neil Strickland (May 06 2019 at 22:00)</a>:</h4>
+<p>Suppose we have <code>x,y : ℤ</code>. If I understand correctly:</p>
+<ul>
+<li><code>int.gcd x y</code> has type <code>ℕ</code>; in particular <code>int.gcd 0 (-2) = 2</code>.</li>
+<li>There is an instance of <code>gcd_domain</code> for <code>ℤ</code> which defines <code>gcd_domain.gcd x y = int.of_nat (int.gcd x y)</code>.  In particular, we have <code>gcd_domain.gcd 0 (-2) = 2</code>.  This is more or less forced by the axioms for <code>gcd_domain</code>.</li>
+<li>There is an instance of <code>euclidean_domain</code> for <code>ℤ</code>, and a function <code>euclidean_domain.gcd</code> defined using the euclidean algorithm.  This always satisfies <code>euclidean_domain.gcd 0 y = y</code> (independent of any choices about rounding up or down in the division algorithm).  In particular, we have <code>euclidean_domain.gcd 0 (-2) = -2 ≠ gcd_domain.gcd 0 (-2)</code>.</li>
+<li>mathlib currently has no results about the compatibility of these <code>gcd</code> functions.</li>
+<li>Because of this, there is no immediate way to produce <code>a</code> and <code>b</code> such that <code>int.gcd x y = a * x + b * y</code>; we need to do some messing about with cases on the signs of <code>x</code> and <code>y</code>.</li>
+</ul>
+<p>I assume that we have essentially the same issues with <code>gcd</code> of polynomials over a field.</p>
+<p>This does not seem very satisfactory.  Some possible ways to improve the situation:</p>
+<ul>
+<li>Just add a bunch of compatibility lemmas specific to <code>ℤ</code></li>
+<li>Add an instance to show that a normalization domain that is also a euclidean domain can be regarded as a gcd domain, with <code>gcd_domain.gcd x y</code> being the normalization of <code>euclidean_domain.gcd x y</code>.  Delete the direct <code>gcd_domain</code> instance for <code>ℤ</code>.</li>
+<li>Modify the definition of <code>euclidean_domain</code> so as to include a normalization function that is allowed to be the identity.  Define <code>euclidean_domain.gcd</code> to incorporate this function, so that it is possible for <code>euclidean_domain.gcd</code> to be part of a <code>gcd_domain</code> structure.  </li>
+</ul>
+<p>The second of these seems most promising to me.  Am I missing anything?</p>
+
+<a name="165024554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Integer%20gcd%20issues/near/165024554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42489Integergcdissues.html#165024554">Kevin Buzzard (May 06 2019 at 22:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> does this accurately represent the current state of things?</p>
+
+
+{% endraw %}
