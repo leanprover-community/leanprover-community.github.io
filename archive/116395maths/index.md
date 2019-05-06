@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cast woes](88074castwoes.html) (91 messages, latest: May 06 2019 at 14:37)
+* [cast woes](88074castwoes.html) (97 messages, latest: May 06 2019 at 15:51)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
 

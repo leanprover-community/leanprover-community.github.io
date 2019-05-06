@@ -1,0 +1,36 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/17251monoassertingsideconditions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/17251monoassertingsideconditions.html">mono: asserting side conditions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="164991420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%3A%20asserting%20side%20conditions/near/164991420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17251monoassertingsideconditions.html#164991420">Abhimanyu Pallavi Sudhir (May 06 2019 at 15:30)</a>:</h4>
+<p>This is one error I can't fix in <a href="https://github.com/leanprover-community/mathlib/issues/835" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/835">#835</a> -- see <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/528542225" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/528542225">https://travis-ci.org/leanprover-community/mathlib/jobs/528542225</a></p>
+<p>The error message states there is an ambiguity in using <code>mono</code> in line 466 as </p>
+<div class="codehilite"><pre><span></span><span class="n">abs</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">of</span> <span class="n">r</span><span class="o">)</span> <span class="bp">*</span> <span class="n">abs</span> <span class="o">(</span><span class="n">of</span> <span class="n">s</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">of</span> <span class="o">(</span><span class="n">d</span> <span class="bp">/</span> <span class="n">abs</span> <span class="n">s</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="n">abs</span> <span class="o">(</span><span class="n">of</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+
+<p>can be reduced either to <code>0 ≤ abs (of s) | abs (x - of r) ≤ of (d / abs s / 2)</code> or <code>abs (of s) ≤ 0 | of (d / abs s / 2) ≤ abs (x - of r)</code>. It suggests that I assert a side condition -- so I tried writing <code>mono using 0 ≤ abs (of s), </code> but this gives two errors for the <code>mono using ...</code> line:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="k">begin</span><span class="bp">-</span><span class="kn">end</span> <span class="n">expression</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">,</span><span class="err">&#39;</span> <span class="n">expected</span>
+</pre></div>
+
+
+<p>(all my brackets are closed, etc. -- I can't see what the problem is)</p>
+<p>and for the <code>exact le_of lt ...</code> line:</p>
+<div class="codehilite"><pre><span></span><span class="n">sync</span>
+</pre></div>
+
+
+<p>Perhaps I don't understand the syntax for <code>mono using</code> -- what am I doing wrong?</p>
+
+
+{% endraw %}
