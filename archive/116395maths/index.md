@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (2 messages, latest: May 06 2019 at 16:08)
+
 * [cast woes](88074castwoes.html) (97 messages, latest: May 06 2019 at 15:51)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)

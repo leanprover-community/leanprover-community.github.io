@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [expr: fields and @](45316exprfieldsand.html) (108 messages, latest: May 06 2019 at 16:14)
+
 * [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (18 messages, latest: May 06 2019 at 12:55)
 
 * [noob question(s)](52075noobquestions.html) (642 messages, latest: May 04 2019 at 21:17)
-
-* [expr: fields and @](45316exprfieldsand.html) (107 messages, latest: May 04 2019 at 08:56)
 
 * [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (30 messages, latest: May 03 2019 at 22:51)
 

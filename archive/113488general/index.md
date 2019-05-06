@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (25 messages, latest: May 06 2019 at 15:54)
+* [transport and parametricity](74751transportandparametricity.html) (26 messages, latest: May 06 2019 at 16:50)
 
 * [mono: asserting side conditions](17251monoassertingsideconditions.html) (1 message, latest: May 06 2019 at 15:30)
 
