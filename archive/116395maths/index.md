@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (91 messages, latest: May 06 2019 at 14:37)
+
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3063 messages, latest: May 03 2019 at 18:01)
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [cover with property](63841coverwithproperty.html) (2 messages, latest: May 01 2019 at 07:14)
 
 * [Multiple differentiability](89979Multipledifferentiability.html) (69 messages, latest: Apr 29 2019 at 21:31)
-
-* [cast woes](88074castwoes.html) (90 messages, latest: Apr 29 2019 at 15:47)
 
 * [More examples about logic reasoning](39714Moreexamplesaboutlogicreasoning.html) (28 messages, latest: Apr 29 2019 at 12:31)
 
