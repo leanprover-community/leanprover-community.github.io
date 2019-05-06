@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (5 messages, latest: May 06 2019 at 18:39)
+* [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (10 messages, latest: May 06 2019 at 19:48)
 
-* [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (2 messages, latest: May 06 2019 at 16:08)
+* [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (3 messages, latest: May 06 2019 at 19:29)
 
 * [cast woes](88074castwoes.html) (97 messages, latest: May 06 2019 at 15:51)
 

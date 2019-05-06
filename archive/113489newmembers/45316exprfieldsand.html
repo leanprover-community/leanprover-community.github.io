@@ -683,5 +683,67 @@ It turns out these weren't issues with metaprogramming but with understanding th
 my real code is for generic <code>has_xyz</code> though where i couldn't use quotations so easily<br>
 any ideas on how to improve this? <a href="https://github.com/faabian/mathlib/blob/meta/meta.lean" target="_blank" title="https://github.com/faabian/mathlib/blob/meta/meta.lean">https://github.com/faabian/mathlib/blob/meta/meta.lean</a></p>
 
+<a name="165011664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165011664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165011664">Edward Ayers (May 06 2019 at 19:33)</a>:</h4>
+<p>Maybe something like this. It's not much shorter but you don't have to worry about universes anywhere.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">add_compatible_def</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">):</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="k">let</span> <span class="n">has_x_name</span> <span class="o">:=</span> <span class="n">mk_simple_name</span> <span class="o">(</span><span class="s2">&quot;has_&quot;</span> <span class="bp">++</span> <span class="n">x</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">has_x_x_name</span> <span class="o">:=</span> <span class="n">has_x_name</span> <span class="bp">&lt;.&gt;</span> <span class="n">x</span><span class="o">,</span>
+   <span class="n">has_x</span> <span class="err">←</span>   <span class="n">mk_const</span> <span class="n">has_x_name</span><span class="o">,</span>
+   <span class="n">has_x_x</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">has_x_x_name</span> <span class="o">,</span>
+   <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">has_x_x</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">body</span> <span class="o">:=</span> <span class="n">binding_body</span> <span class="o">(</span><span class="n">binding_body</span> <span class="n">t</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">arity</span> <span class="o">:=</span> <span class="n">count_vars</span> <span class="o">(</span><span class="n">arrow_list</span> <span class="n">body</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">target_self</span> <span class="o">:=</span> <span class="n">codomain_is_bound</span> <span class="o">(</span><span class="n">arrow_list</span> <span class="n">body</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">target_prop</span> <span class="o">:=</span> <span class="n">codomain_is_prop</span> <span class="o">(</span><span class="n">arrow_list</span> <span class="n">body</span><span class="o">),</span>
+   <span class="n">decl_type</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="err">%%</span><span class="n">has_x</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="err">%%</span><span class="n">has_x</span> <span class="n">β</span><span class="o">],</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span>
+   <span class="o">(</span><span class="bp">_</span><span class="o">,</span><span class="n">decl_body</span><span class="o">)</span> <span class="err">←</span> <span class="n">solve_aux</span> <span class="n">decl_type</span> <span class="o">(</span><span class="n">do</span>
+     <span class="o">[</span><span class="n">α</span><span class="o">,</span><span class="n">β</span><span class="o">,</span><span class="n">i₁</span><span class="o">,</span><span class="n">i₂</span><span class="o">,</span><span class="n">f</span><span class="o">]</span> <span class="err">←</span> <span class="n">intros</span><span class="o">,</span>
+     <span class="n">vars</span> <span class="err">←</span> <span class="n">list</span><span class="bp">.</span><span class="n">mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">do</span>
+        <span class="n">refine_forall</span> <span class="o">(</span><span class="n">mk_simple_name</span> <span class="o">(</span><span class="s2">&quot;x&quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">n</span><span class="o">))</span> <span class="n">α</span>
+     <span class="o">)</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">arity</span><span class="o">,</span>
+     <span class="n">app₁</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="n">has_x_x_name</span> <span class="err">$</span> <span class="n">vars</span><span class="o">,</span>
+     <span class="n">app₂</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="n">has_x_x_name</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">app</span> <span class="n">f</span><span class="o">)</span> <span class="n">vars</span><span class="o">,</span>
+     <span class="n">body_main</span> <span class="err">←</span> <span class="k">if</span> <span class="n">target_self</span> <span class="k">then</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">f</span> <span class="o">(</span><span class="err">%%</span><span class="n">app₁</span><span class="o">)</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">app₂</span><span class="o">)</span>
+                  <span class="k">else</span> <span class="o">(</span><span class="k">if</span> <span class="n">target_prop</span> <span class="k">then</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">app₁</span> <span class="bp">↔</span> <span class="err">%%</span><span class="n">app₂</span><span class="o">)</span>
+                        <span class="k">else</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">app₁</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">app₂</span><span class="o">)),</span>
+     <span class="n">exact</span> <span class="n">body_main</span><span class="o">,</span>
+     <span class="n">pure</span> <span class="o">()</span>
+   <span class="o">),</span>
+   <span class="n">decl_body</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">decl_body</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">decl_name</span> <span class="o">:=</span> <span class="n">mk_simple_name</span> <span class="o">(</span><span class="n">x</span> <span class="bp">++</span> <span class="s2">&quot;_compatible&quot;</span><span class="o">),</span>
+   <span class="n">add_decl</span> <span class="err">$</span> <span class="n">mk_definition</span> <span class="n">decl_name</span> <span class="o">[]</span> <span class="n">decl_type</span> <span class="n">decl_body</span>  <span class="c1">-- universes here</span>
+   <span class="c1">-- todo: allow both → and ↔ for Prop-valued?</span>
+
+<span class="n">run_cmd</span> <span class="n">add_compatible_def</span> <span class="s2">&quot;mul&quot;</span>
+<span class="n">run_cmd</span> <span class="n">add_compatible_def</span> <span class="s2">&quot;ternary&quot;</span>
+<span class="n">run_cmd</span> <span class="n">add_compatible_def</span> <span class="s2">&quot;lt&quot;</span>
+<span class="n">run_cmd</span> <span class="n">add_compatible_def</span> <span class="s2">&quot;to_string&quot;</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">mul_compatible</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ternary_compatible</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">lt_compatible</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">to_string_compatible</span>
+</pre></div>
+
+<a name="165012010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165012010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165012010">Edward Ayers (May 06 2019 at 19:37)</a>:</h4>
+<p>I defined <code>refine_forall</code> as:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Take a goal `⊢ Prop` and fill with a `pi` to get a new goal `n : type ⊢ Prop` -/</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">refine_forall</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">type</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">do</span>
+    <span class="n">f_type</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="err">%%</span><span class="n">type</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span>
+    <span class="n">f</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">f_type</span><span class="o">,</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="n">type</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">app</span> <span class="n">f</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">var</span> <span class="mi">0</span><span class="o">))),</span>
+    <span class="n">set_goals</span> <span class="o">[</span><span class="n">f</span><span class="o">],</span>
+    <span class="n">intro</span> <span class="n">n</span>
+</pre></div>
+
+<a name="165012161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165012161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165012161">Edward Ayers (May 06 2019 at 19:39)</a>:</h4>
+<p>Your code looks fine. If you are having to explicitly write out universe terms then Lean probably provides a tactic that means you don't have to.</p>
+
+<a name="165013654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/expr%3A%20fields%20and%20%40/near/165013654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45316exprfieldsand.html#165013654">Edward Ayers (May 06 2019 at 19:57)</a>:</h4>
+<p>I prefer always having local variables held in the tactic_state's context rather than using <code>mk_local</code> and friends. This is because you don't have to worry about pretty names and unique names etc. But there is nothing wrong with the <code>mk_local</code> way.</p>
+
 
 {% endraw %}
