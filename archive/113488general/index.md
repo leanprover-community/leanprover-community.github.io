@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [defunct branches](71952defunctbranches.html) (6 messages, latest: May 06 2019 at 17:41)
+* [mono: asserting side conditions](17251monoassertingsideconditions.html) (5 messages, latest: May 06 2019 at 18:21)
 
-* [mono: asserting side conditions](17251monoassertingsideconditions.html) (4 messages, latest: May 06 2019 at 17:19)
+* [defunct branches](71952defunctbranches.html) (6 messages, latest: May 06 2019 at 17:41)
 
 * [transport and parametricity](74751transportandparametricity.html) (27 messages, latest: May 06 2019 at 17:05)
 
