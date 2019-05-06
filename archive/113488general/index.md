@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [transport and parametricity](74751transportandparametricity.html) (24 messages, latest: May 06 2019 at 11:31)
+
 * [3.4.2 branch](99076342branch.html) (20 messages, latest: May 06 2019 at 06:49)
 
 * [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
@@ -43,8 +45,6 @@ permalink: archive/113488general/index.html
 * [update-mathlib](82898updatemathlib.html) (21 messages, latest: May 03 2019 at 10:19)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (34 messages, latest: May 03 2019 at 02:14)
-
-* [transport and parametricity](74751transportandparametricity.html) (13 messages, latest: May 01 2019 at 15:14)
 
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
