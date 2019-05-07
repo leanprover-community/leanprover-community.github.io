@@ -27,5 +27,33 @@ Random thought: would it be evil to give the functor category an instance of <co
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165011293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165011293">Scott Morrison (May 06 2019 at 19:29)</a>:</h4>
 <p>I think I had <code>has_one</code> for the functor category at some point, then removed it again. Unfortunately I don't remember why. Probably it was "don't have different names for the same thing --- you'll find yourself having to translate unnecessarily".</p>
 
+<a name="165032282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032282">Floris van Doorn (May 07 2019 at 00:44)</a>:</h4>
+<p>It will probably be bad to make an identity morphism an instance of <code>has_one</code>: I expect that will require every <code>has_one</code> typeclass inference to run though all of the <code>category</code> instances, because maybe the current type is the type of morphisms in some category.</p>
+
+<a name="165032331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032331">Floris van Doorn (May 07 2019 at 00:45)</a>:</h4>
+<p>For <code>functor.id</code> I don't think this is a problem (<code>real</code> does not unify with <code>functor ?m ?m</code>), so that might work. One potential problem is that we probably want to write <code>1 C : functor C C</code>, with an explicit argument - which we probably cannot do with a <code>has_one</code> instance.</p>
+
+<a name="165032394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032394">Mario Carneiro (May 07 2019 at 00:46)</a>:</h4>
+<p>I think that's the bigger issue - category 1 needs an explicit argument while regular 1 doesn't</p>
+
+<a name="165032511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032511">Floris van Doorn (May 07 2019 at 00:50)</a>:</h4>
+<p>If that is the biggest issue, we could try making the <code>functor.id</code> argument implicit: often it can be inferred from context.</p>
+
+<a name="165032600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032600">Mario Carneiro (May 07 2019 at 00:51)</a>:</h4>
+<p>My guess is this won't work in most cases, lean's elaborator isn't designed to handle this</p>
+
+<a name="165032616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032616">Mario Carneiro (May 07 2019 at 00:51)</a>:</h4>
+<p>and also it's introducing another way to write id, which will need normalization to be useful</p>
+
+<a name="165032829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notations%20for%201%20in%20category%20theory/near/165032829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/50248notationsfor1incategorytheory.html#165032829">Floris van Doorn (May 07 2019 at 00:56)</a>:</h4>
+<p>My preference would be to have a global notation using some unicode <code>1</code>. There are plenty of them, so it doesn't matter to much that the notation is global.</p>
+
 
 {% endraw %}
