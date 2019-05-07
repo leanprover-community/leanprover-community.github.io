@@ -16,5 +16,61 @@ permalink: archive/144837PRreviews/38579988normcast.html
 <p>Currently there is a very long list of attributes being added starting at <a href="https://github.com/leanprover-community/mathlib/pull/988/files#diff-836b1338043521d5628c0a4b8832505dR357" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/988/files#diff-836b1338043521d5628c0a4b8832505dR357">https://github.com/leanprover-community/mathlib/pull/988/files#diff-836b1338043521d5628c0a4b8832505dR357</a><br>
 Does it make sense to move these to the respective files <code>real.lean</code> and <code>complex.lean</code> (or whatever they are). Of course some of these lemmas are in core, so then it's fine to keep them here. Do we want this tactic to depend on the complex numbers?</p>
 
+<a name="165107284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165107284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165107284">Sebastien Gouezel (May 07 2019 at 20:21)</a>:</h4>
+<p>Is it possible to have a syntax</p>
+<div class="codehilite"><pre><span></span><span class="n">attributes</span> <span class="o">[</span><span class="n">norm_cast</span><span class="o">]</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_add</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">]</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="165107335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165107335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165107335">Patrick Massot (May 07 2019 at 20:22)</a>:</h4>
+<p>you already have it</p>
+
+<a name="165107347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165107347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165107347">Patrick Massot (May 07 2019 at 20:22)</a>:</h4>
+<p>remove the s and the second series of []</p>
+
+<a name="165108000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108000">Sebastien Gouezel (May 07 2019 at 20:29)</a>:</h4>
+<p>Great! I think I would rather keep the attributes with the tactic, unless we want to start using the tactic earlier, i.e., before all the lemmas with the attributes are even defined.</p>
+
+<a name="165108605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108605">Patrick Massot (May 07 2019 at 20:35)</a>:</h4>
+<p>I just used it for the first time! The goal was <code>0 &lt; ↑n + 1</code> where coercion goes to real numbers. <code>norm_cast, linarith</code> <span aria-label="victory" class="emoji emoji-270c" role="img" title="victory">:victory:</span></p>
+
+<a name="165108793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108793">Patrick Massot (May 07 2019 at 20:37)</a>:</h4>
+<p>I can feel Rob is worried</p>
+
+<a name="165108798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108798">Patrick Massot (May 07 2019 at 20:37)</a>:</h4>
+<p>he knows what is coming</p>
+
+<a name="165108867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108867">Johan Commelin (May 07 2019 at 20:38)</a>:</h4>
+<blockquote>
+<p>he knows what is coming</p>
+</blockquote>
+<p><code>linarith_mod_cast</code> bitte</p>
+
+<a name="165108893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165108893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165108893">Johan Commelin (May 07 2019 at 20:38)</a>:</h4>
+<p>No, I think we can just chain tactics like you just did...</p>
+
+<a name="165109238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165109238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165109238">Patrick Massot (May 07 2019 at 20:42)</a>:</h4>
+<p>Bad news is importing this kills all my other proofs</p>
+
+<a name="165109259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165109259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165109259">Patrick Massot (May 07 2019 at 20:42)</a>:</h4>
+<p>I get deterministic timeout in proofs not using <code>norm_cast</code></p>
+
+<a name="165109306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23988%20norm_cast/near/165109306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/38579988normcast.html#165109306">Patrick Massot (May 07 2019 at 20:43)</a>:</h4>
+<p>that used to type check instantaneously</p>
+
 
 {% endraw %}
