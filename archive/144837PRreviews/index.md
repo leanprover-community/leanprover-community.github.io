@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#943 lc refactor](96169943lcrefactor.html) (1 message, latest: May 07 2019 at 05:29)
+* [#943 lc refactor](96169943lcrefactor.html) (5 messages, latest: May 07 2019 at 08:58)
 
 * [#966 more derivatives](29410966morederivatives.html) (57 messages, latest: May 05 2019 at 05:41)
 
