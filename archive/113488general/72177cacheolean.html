@@ -95,5 +95,39 @@ no cache found
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165180627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165180627">Simon Hudon (May 08 2019 at 17:00)</a>:</h4>
 <p>It is still not connected to Scott's server</p>
 
+<a name="165202745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165202745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165202745">Floris van Doorn (May 08 2019 at 21:27)</a>:</h4>
+<p>I tried using <code>cache-olean</code>, and it works for me. However, I'm on a Windows computer and configured git with <code>autocrlf = true</code>, so that my line endings are CRLF locally (that was what I was advised when I started using git). Running <code>cache-olean</code> changes all my line-endings to LF, and after doing <code>git checkout -- .</code> I think that Lean will try to rebuild the whole library from scratch.</p>
+<p>Should I just burn down my whole git repository to the ground and reclone it using <code>autocrlf = false</code> or is there a simpler workaround? (I don't think that any of the programs I use care whether the line endings are CRLF or LF.)</p>
+
+<a name="165204526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165204526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165204526">Simon Hudon (May 08 2019 at 21:50)</a>:</h4>
+<p>I remember seeing a commit that does what you describe but I can't seem to find it. I think <span class="user-mention" data-user-id="110087">@Scott Morrison</span> helped with this.</p>
+
+<a name="165204732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165204732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165204732">Bryan Gin-ge Chen (May 08 2019 at 21:53)</a>:</h4>
+<p>Does <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>'s fix to lean 3.4.2 <a href="https://github.com/leanprover/lean/commit/92826917a252a6092cffaf5fc5f1acb1f8cef379" target="_blank" title="https://github.com/leanprover/lean/commit/92826917a252a6092cffaf5fc5f1acb1f8cef379">here</a> apply to this problem or not?</p>
+
+<a name="165204847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165204847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165204847">Simon Hudon (May 08 2019 at 21:55)</a>:</h4>
+<p>It looks like it would. <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> can you confirm that it actually causes you to recompile?</p>
+
+<a name="165204980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/165204980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#165204980">Floris van Doorn (May 08 2019 at 21:57)</a>:</h4>
+<p>It did. The following finishes in a couple of seconds:</p>
+<div class="codehilite"><pre><span></span>git checkout blessed/lean-3.4.2
+cache-olean --fetch
+leanpkg build
+</pre></div>
+
+
+<p>The following ran for a couple of minutes until I killed it:</p>
+<div class="codehilite"><pre><span></span>git checkout blessed/lean-3.4.2
+cache-olean --fetch
+git status
+git checkout -- .
+leanpkg build
+</pre></div>
+
 
 {% endraw %}
