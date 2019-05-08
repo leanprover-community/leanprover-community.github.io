@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cache-olean](72177cacheolean.html) (4 messages, latest: May 08 2019 at 08:30)
+
 * [preorder.lift'](13800preorderlift.html) (6 messages, latest: May 08 2019 at 07:54)
 
 * [3.4.2 branch](99076342branch.html) (54 messages, latest: May 08 2019 at 03:22)
@@ -165,8 +167,6 @@ permalink: archive/113488general/index.html
 * [Lean T-shirt](58924LeanTshirt.html) (22 messages, latest: Apr 17 2019 at 14:15)
 
 * [finite types with ordering](15115finitetypeswithordering.html) (6 messages, latest: Apr 16 2019 at 19:10)
-
-* [cache-olean](72177cacheolean.html) (3 messages, latest: Apr 16 2019 at 15:18)
 
 * [Alternatives to eval_expr](20220Alternativestoevalexpr.html) (5 messages, latest: Apr 16 2019 at 12:27)
 
