@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [foreign function interface](69026foreignfunctioninterface.html) (38 messages, latest: May 08 2019 at 01:59)
+
 * [3.4.2 branch](99076342branch.html) (52 messages, latest: May 07 2019 at 14:58)
 
 * [More mono problems](11985Moremonoproblems.html) (2 messages, latest: May 07 2019 at 10:35)
@@ -53,8 +55,6 @@ permalink: archive/113488general/index.html
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
 * [update-mathlib](82898updatemathlib.html) (21 messages, latest: May 03 2019 at 10:19)
-
-* [foreign function interface](69026foreignfunctioninterface.html) (34 messages, latest: May 03 2019 at 02:14)
 
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
