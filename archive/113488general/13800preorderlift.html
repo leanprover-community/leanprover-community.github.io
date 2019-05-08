@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/13800preorderlift.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html">preorder.lift'</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165141035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165141035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165141035">Johan Commelin (May 08 2019 at 07:21)</a>:</h4>
+<p>How do people feel about adding</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- version of preorder.lift which doesn&#39;t use type class inference -/</span>
+<span class="n">def</span> <span class="n">lift&#39;</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">β</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">preorder</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">preorder</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>to mathlib? We use it twice in the perfectoid project. But we can of course also use <code>@preorder.lift _ _ </code>.<br>
+(And yes, we are quite sure we don't want to use type class instances for these preorders, because we are looking at something like the type of all preorders on a ring that satisfy blah...)</p>
+<p>If we add this to mathlib, I guess we also want <code>partial_order.lift'</code> etc, etc...</p>
+
+<a name="165141334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165141334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165141334">Mario Carneiro (May 08 2019 at 07:28)</a>:</h4>
+<p>I think you can just replace <code>preorder.lift</code> with this. It's usually used to create instances, so having a <code>by apply_instance</code> in there doesn't seem so bad</p>
+
+<a name="165141345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165141345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165141345">Mario Carneiro (May 08 2019 at 07:29)</a>:</h4>
+<p>I would put the <code>preorder</code> argument second though</p>
+
+<a name="165141441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165141441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165141441">Johan Commelin (May 08 2019 at 07:31)</a>:</h4>
+<p>Probably breaks a lot of files... and I don't have VScode atm (-; But let me see what I can do...</p>
+
+<a name="165142148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165142148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165142148">Johan Commelin (May 08 2019 at 07:47)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/995" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/995">#995</a> -- let's see what Travis says. This PR was produced using <code>grep</code> and <code>vim</code>, without running Lean...</p>
+
+<a name="165142468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift%27/near/165142468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13800preorderlift.html#165142468">Johan Commelin (May 08 2019 at 07:54)</a>:</h4>
+<p>And... I failed. Travis doesn't like it</p>
+
+
+{% endraw %}
