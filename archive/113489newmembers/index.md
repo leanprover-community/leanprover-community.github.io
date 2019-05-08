@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [VS Code: copy from Lean messages](12038VSCodecopyfromLeanmessages.html) (3 messages, latest: May 08 2019 at 16:19)
+* [VS Code: copy from Lean messages](12038VSCodecopyfromLeanmessages.html) (7 messages, latest: May 08 2019 at 19:14)
 
 * [inverse of injective functions](39084inverseofinjectivefunctions.html) (5 messages, latest: May 08 2019 at 10:31)
 
