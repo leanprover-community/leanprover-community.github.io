@@ -177,5 +177,29 @@ constant my_fun : c_int -&gt; c_pointer -&gt; c_void
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127450">James King (May 08 2019 at 01:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Good idea, thanks.</p>
 
+<a name="165127514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127514">Mario Carneiro (May 08 2019 at 02:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you think <code>c_pointer</code> should be a constant or should it be defined to be u64 or whatever</p>
+
+<a name="165127549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127549">Mario Carneiro (May 08 2019 at 02:01)</a>:</h4>
+<p>also I wonder whether we should allow people to define FFI functions that are not in <code>io</code></p>
+
+<a name="165127617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127617">Mario Carneiro (May 08 2019 at 02:03)</a>:</h4>
+<p>It doesn't really make sense for a unit-returning function to not be <code>io</code> but a regular function might be pure</p>
+
+<a name="165127686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127686">James King (May 08 2019 at 02:04)</a>:</h4>
+<p>I thought <code>io</code> made sense myself but I think <span class="user-mention" data-user-id="110026">@Simon Hudon</span> had a few insights.</p>
+
+<a name="165127726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127726">Simon Hudon (May 08 2019 at 02:06)</a>:</h4>
+<p>I would make <code>c_pointer</code> into a constant and I would allow non-<code>io</code>-returning functions</p>
+
+<a name="165127772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165127772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165127772">Simon Hudon (May 08 2019 at 02:06)</a>:</h4>
+<p>We can't check whether <code>io</code> should be required so we just have to trust the writer of the bindings</p>
+
 
 {% endraw %}
