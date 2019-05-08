@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#943 lc refactor](96169943lcrefactor.html) (6 messages, latest: May 08 2019 at 09:47)
+* [#988 norm_cast](38579988normcast.html) (22 messages, latest: May 08 2019 at 12:59)
 
-* [#988 norm_cast](38579988normcast.html) (21 messages, latest: May 08 2019 at 08:59)
+* [#943 lc refactor](96169943lcrefactor.html) (6 messages, latest: May 08 2019 at 09:47)
 
 * [#966 more derivatives](29410966morederivatives.html) (57 messages, latest: May 05 2019 at 05:41)
 
