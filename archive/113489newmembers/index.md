@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [inverse of injective functions](39084inverseofinjectivefunctions.html) (5 messages, latest: May 08 2019 at 10:31)
+
 * [Induction](51886Induction.html) (175 messages, latest: May 06 2019 at 21:53)
 
 * [expr: fields and @](45316exprfieldsand.html) (114 messages, latest: May 06 2019 at 20:51)
