@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tutorial Exercise](25037TutorialExercise.html) (10 messages, latest: May 09 2019 at 08:59)
+* [Tutorial Exercise](25037TutorialExercise.html) (14 messages, latest: May 09 2019 at 09:04)
 
 * [VS Code: copy from Lean messages](12038VSCodecopyfromLeanmessages.html) (7 messages, latest: May 08 2019 at 19:14)
 
