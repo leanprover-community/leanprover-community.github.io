@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (2 messages, latest: May 09 2019 at 21:01)
+
 * [simp_proj](13812simpproj.html) (4 messages, latest: May 09 2019 at 05:36)
 
 * [PR 1000](08196PR1000.html) (22 messages, latest: May 08 2019 at 23:50)
