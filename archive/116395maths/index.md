@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [representations](84839representations.html) (52 messages, latest: May 09 2019 at 14:59)
+* [representations](84839representations.html) (66 messages, latest: May 09 2019 at 15:06)
 
 * [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (13 messages, latest: May 07 2019 at 04:01)
 
