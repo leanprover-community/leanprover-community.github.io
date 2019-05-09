@@ -1,0 +1,90 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/84839representations.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html">representations</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165253263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253263">Johan Commelin (May 09 2019 at 13:43)</a>:</h4>
+<p>What is going on here? I was playing around with representations together with <span class="user-mention" data-user-id="220718">@Ben McDonnell</span> <br>
+After importing <code>linear_algebra.basic</code> a silly lemma broke at the bottom of the quoted code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">group_action</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- this import breaks the commented lines at the end of the file</span>
+
+<span class="n">class</span> <span class="n">group_module</span> <span class="o">(</span><span class="n">G</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">mul_action</span> <span class="n">G</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">smul_add</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">g</span> <span class="err">•</span> <span class="o">(</span><span class="n">m₁</span> <span class="bp">+</span> <span class="n">m₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m₁</span> <span class="bp">+</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m₂</span><span class="o">)</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">group_module</span><span class="bp">.</span><span class="n">smul_add</span>
+
+<span class="kn">namespace</span> <span class="n">fixed_points</span>
+<span class="kn">open</span> <span class="n">mul_action</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">group_module</span> <span class="n">G</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">add_mem</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">fixed_points</span> <span class="n">G</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">fixed_points</span> <span class="n">G</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">fixed_points</span> <span class="n">G</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_stabilizer_iff</span><span class="o">,</span> <span class="n">group_module</span><span class="bp">.</span><span class="n">smul_add</span><span class="o">,</span> <span class="n">mem_fixed_points</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="o">],</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">fixed_points</span>
+
+<span class="n">class</span> <span class="n">representation</span> <span class="o">(</span><span class="n">G</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">group_module</span> <span class="n">G</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">smul_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">g</span> <span class="err">•</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">g</span> <span class="err">•</span> <span class="n">m</span><span class="o">))</span>
+
+<span class="kn">namespace</span> <span class="n">representation</span>
+<span class="kn">open</span> <span class="n">mul_action</span> <span class="n">linear_map</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">representation</span> <span class="n">G</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="c1">-- set_option trace.class_instances true</span>
+
+<span class="c1">-- lemma smul_mem_fixed_points (r : R) (m : M) (hm : m ∈ fixed_points G M) :</span>
+<span class="c1">--   r • m ∈ fixed_points G M :=</span>
+<span class="c1">-- begin</span>
+<span class="c1">--   simp only [mem_fixed_points] at *,</span>
+<span class="c1">--   intro g,</span>
+<span class="c1">--   rw [smul_comm, hm],</span>
+<span class="c1">-- end</span>
+<span class="kn">end</span> <span class="n">representation</span>
+</pre></div>
+
+<a name="165253299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253299">Johan Commelin (May 09 2019 at 13:43)</a>:</h4>
+<p>Without the import the code runs fine. With the import it reports maximum type class error.</p>
+
+<a name="165253368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253368">Mario Carneiro (May 09 2019 at 13:44)</a>:</h4>
+<p>increase depth?</p>
+
+<a name="165253374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253374">Johan Commelin (May 09 2019 at 13:44)</a>:</h4>
+<p>I couldn't figure out which type class it is even searching for. It performs a <code>has_mul</code> search and a <code>mul_action</code> search, and it finds those two instantly.</p>
+
+<a name="165253387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253387">Johan Commelin (May 09 2019 at 13:44)</a>:</h4>
+<p>Bumping the depth to <code>100</code> didn't solve it.</p>
+
+<a name="165253550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253550">Johan Commelin (May 09 2019 at 13:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Any other ideas?</p>
+
+<a name="165253601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165253601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165253601">Johan Commelin (May 09 2019 at 13:47)</a>:</h4>
+<p>Modules work a lot better than half a year ago. But they are still pretty fragile, at least that's my impression...</p>
+
+
+{% endraw %}
