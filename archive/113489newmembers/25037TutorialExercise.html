@@ -1,0 +1,73 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/25037TutorialExercise.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html">Tutorial Exercise</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165233857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165233857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165233857">Lukas (May 09 2019 at 08:30)</a>:</h4>
+<p>I am working on the Blog article on constructing the natural numbers <a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/</a></p>
+<p>Now I am stuck in one proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">one_add_eq_succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">one</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rewrite</span> <span class="n">one</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">t</span> <span class="n">Ht</span><span class="o">,</span>
+  <span class="o">{</span>
+    <span class="n">rewrite</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span>
+    <span class="n">rewrite</span> <span class="n">add</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I think this scan be solved via succ.inj, but I do not know how to apply this here.</p>
+
+<a name="165233876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165233876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165233876">Mario Carneiro (May 09 2019 at 08:31)</a>:</h4>
+<p><code>injection</code> is the tactic version of <code>apply succ.inj</code></p>
+
+<a name="165233894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165233894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165233894">Mario Carneiro (May 09 2019 at 08:31)</a>:</h4>
+<p>or <code>cases</code> in some cases</p>
+
+<a name="165234313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165234313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165234313">Lukas (May 09 2019 at 08:39)</a>:</h4>
+<p><code>apply succ.inj</code> turns <code>⊢ succ (succ zero + t) = succ (succ t)</code> goal into <code>⊢ succ (succ (succ zero + t)) = succ (succ (succ t))</code> so it does the inverse of what I want to do.</p>
+<p>How can I apply the injection tactic here?</p>
+
+<a name="165234497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165234497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165234497">Mario Carneiro (May 09 2019 at 08:42)</a>:</h4>
+<p>oh, you want <code>congr</code> then</p>
+
+<a name="165234521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165234521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165234521">Mario Carneiro (May 09 2019 at 08:43)</a>:</h4>
+<p>if you have <code>h : succ a = succ b</code> in the context, <code>injection h</code> will turn it into <code>a = b</code></p>
+
+<a name="165234531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165234531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165234531">Mario Carneiro (May 09 2019 at 08:43)</a>:</h4>
+<p>but if <code>succ a = succ b</code> is the goal, then you don't need injectivity, that's just functions respecting equality which is <code>congr</code></p>
+
+<a name="165235045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165235045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165235045">Kevin Buzzard (May 09 2019 at 08:53)</a>:</h4>
+<p>After <code>rewrite add</code> you can use the inductive hypothesis <code>Ht</code> -- just <code>rewrite Ht</code>.</p>
+
+<a name="165235369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165235369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165235369">Kevin Buzzard (May 09 2019 at 08:58)</a>:</h4>
+<p>PS any feedback welcome. Over the summer I fully intend to expand that stuff into a more coherent and far-reaching tutorial for mathematicians, covering the naturals, the complexes, and various other ideas I have lying around.</p>
+
+<a name="165235445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165235445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165235445">Lukas (May 09 2019 at 08:59)</a>:</h4>
+<p>That should have been obvious...</p>
+
+
+{% endraw %}
