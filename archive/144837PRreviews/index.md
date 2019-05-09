@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#988 norm_cast](38579988normcast.html) (26 messages, latest: May 09 2019 at 14:31)
+* [#734 free ring](17428734freering.html) (19 messages, latest: May 09 2019 at 16:41)
 
-* [#734 free ring](17428734freering.html) (15 messages, latest: May 09 2019 at 09:00)
+* [#988 norm_cast](38579988normcast.html) (26 messages, latest: May 09 2019 at 14:31)
 
 * [#993 comp2](02762993comp2.html) (11 messages, latest: May 08 2019 at 19:13)
 
