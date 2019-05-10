@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1002 monoidal cats](306611002monoidalcats.html) (2 messages, latest: May 10 2019 at 06:44)
+* [#734 free ring](17428734freering.html) (43 messages, latest: May 10 2019 at 14:53)
 
-* [#734 free ring](17428734freering.html) (41 messages, latest: May 09 2019 at 20:39)
+* [#1002 monoidal cats](306611002monoidalcats.html) (2 messages, latest: May 10 2019 at 06:44)
 
 * [#963 set-theory cardinals etc](34695963settheorycardinalsetc.html) (1 message, latest: May 09 2019 at 17:56)
 

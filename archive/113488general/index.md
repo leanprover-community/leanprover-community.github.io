@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [pygments](17208pygments.html) (51 messages, latest: May 10 2019 at 14:00)
+* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (33 messages, latest: May 10 2019 at 14:58)
 
-* [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (2 messages, latest: May 10 2019 at 13:55)
+* [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (3 messages, latest: May 10 2019 at 14:00)
+
+* [pygments](17208pygments.html) (51 messages, latest: May 10 2019 at 14:00)
 
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (27 messages, latest: May 10 2019 at 11:09)
 
@@ -43,8 +45,6 @@ permalink: archive/113488general/index.html
 * [olean-rs](28098oleanrs.html) (47 messages, latest: May 06 2019 at 21:11)
 
 * [defunct branches](71952defunctbranches.html) (9 messages, latest: May 06 2019 at 19:59)
-
-* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (27 messages, latest: May 06 2019 at 14:25)
 
 * [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
 
