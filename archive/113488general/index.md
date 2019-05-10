@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [pygments](17208pygments.html) (51 messages, latest: May 10 2019 at 14:00)
+
+* [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (2 messages, latest: May 10 2019 at 13:55)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (27 messages, latest: May 10 2019 at 11:09)
 
 * [Binding power](34505Bindingpower.html) (25 messages, latest: May 10 2019 at 08:05)
@@ -833,8 +837,6 @@ permalink: archive/113488general/index.html
 * [Abel tactic problem](37726Abeltacticproblem.html) (4 messages, latest: Jan 16 2019 at 11:11)
 
 * [mathlib files](31957mathlibfiles.html) (107 messages, latest: Jan 16 2019 at 08:34)
-
-* [pygments](17208pygments.html) (47 messages, latest: Jan 15 2019 at 17:28)
 
 * [Problem with looping over finset](46635Problemwithloopingoverfinset.html) (12 messages, latest: Jan 15 2019 at 15:46)
 
