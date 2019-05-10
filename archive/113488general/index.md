@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (33 messages, latest: May 10 2019 at 14:58)
+* [AppVeyor build failing](60737AppVeyorbuildfailing.html) (38 messages, latest: May 10 2019 at 15:26)
+
+* [A newcomer's opinion](34360Anewcomersopinion.html) (314 messages, latest: May 10 2019 at 15:05)
 
 * [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (3 messages, latest: May 10 2019 at 14:00)
 
@@ -55,8 +57,6 @@ permalink: archive/113488general/index.html
 * [category theory](81338categorytheory.html) (7 messages, latest: May 04 2019 at 22:59)
 
 * [free_comm_ring](07101freecommring.html) (58 messages, latest: May 04 2019 at 12:13)
-
-* [A newcomer's opinion](34360Anewcomersopinion.html) (312 messages, latest: May 04 2019 at 09:12)
 
 * [May the 4th](84377Maythe4th.html) (1 message, latest: May 04 2019 at 05:48)
 
