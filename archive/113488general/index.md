@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [foreign function interface](69026foreignfunctioninterface.html) (64 messages, latest: May 10 2019 at 01:35)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (18 messages, latest: May 10 2019 at 00:53)
 
 * [simp_proj](13812simpproj.html) (6 messages, latest: May 09 2019 at 23:46)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [cache-olean](72177cacheolean.html) (23 messages, latest: May 08 2019 at 22:00)
 
 * [exists_finset_of...](71399existsfinsetof.html) (5 messages, latest: May 08 2019 at 20:40)
-
-* [foreign function interface](69026foreignfunctioninterface.html) (45 messages, latest: May 08 2019 at 19:25)
 
 * [3.4.2 branch](99076342branch.html) (55 messages, latest: May 08 2019 at 16:40)
 

@@ -214,5 +214,89 @@ constant my_fun : c_int -&gt; c_pointer -&gt; c_void
 </blockquote>
 <p>In passing, I was thinking that the <code>ffi</code> attribute could take a Lean name instead of a file name. That way, if there's any complexity around path resolution, it can be isolated into a single declaration</p>
 
+<a name="165300676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165300676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165300676">James King (May 10 2019 at 01:00)</a>:</h4>
+<p>So...</p>
+<div class="codehilite"><pre><span></span>@[ffi &#39;main]
+constant my_fun : c_int -&gt; c_pointer -&gt; c_void
+</pre></div>
+
+
+<p>Would be ideal?</p>
+
+<a name="165301037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301037">Mario Carneiro (May 10 2019 at 01:10)</a>:</h4>
+<p>what does 'main mean?</p>
+
+<a name="165301050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301050">Mario Carneiro (May 10 2019 at 01:10)</a>:</h4>
+<p>also that can probably be just <code>main</code> since we control the parser there</p>
+
+<a name="165301065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301065">James King (May 10 2019 at 01:11)</a>:</h4>
+<p>We have added a function to the environment that loads the foreign object file and stores the handle in a map</p>
+
+<a name="165301071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301071">James King (May 10 2019 at 01:11)</a>:</h4>
+<p>I was trying to follow along with <span class="user-mention" data-user-id="110026">@Simon Hudon</span> 's suggestion.</p>
+
+<a name="165301073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301073">Mario Carneiro (May 10 2019 at 01:11)</a>:</h4>
+<p>I see. What does that function look like?</p>
+
+<a name="165301126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301126">Mario Carneiro (May 10 2019 at 01:12)</a>:</h4>
+<p>are these names associated to some definitions or are they in their own namespace?</p>
+
+<a name="165301225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301225">James King (May 10 2019 at 01:15)</a>:</h4>
+<p><a href="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.h" target="_blank" title="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.h">https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.h</a><br>
+<a href="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.cpp#L33" target="_blank" title="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.cpp#L33">https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_dynload.cpp#L33</a><br>
+<a href="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_environment.cpp#L318" target="_blank" title="https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_environment.cpp#L318">https://github.com/agentultra/lean/blob/feature/vm-dynload/src/library/vm/vm_environment.cpp#L318</a></p>
+
+<a name="165301279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301279">James King (May 10 2019 at 01:16)</a>:</h4>
+<p>The foreign symbol stuff will probably go, but we basically load those objects into a map so we can associate the handle with a "Lean name" as <span class="user-mention" data-user-id="110026">@Simon Hudon</span> says</p>
+
+<a name="165301338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301338">James King (May 10 2019 at 01:18)</a>:</h4>
+<p>I'm still pretty new to Lean so forgive my ignorance of the finer points of the language/syntax; it's pretty fun learning about it this way.</p>
+
+<a name="165301633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301633">Mario Carneiro (May 10 2019 at 01:26)</a>:</h4>
+<p>What does the lean side of this look like?</p>
+
+<a name="165301675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301675">Mario Carneiro (May 10 2019 at 01:27)</a>:</h4>
+<p>I think you're doing a great job btw, I'm just thinking about what the lean user side is</p>
+
+<a name="165301737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301737">James King (May 10 2019 at 01:28)</a>:</h4>
+<p>see <code>tests/lean/vm_dynload/ffi.lean</code></p>
+
+<a name="165301765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301765">James King (May 10 2019 at 01:29)</a>:</h4>
+<p>I'm working on changing the bind function to take the argument specs to fill the <code>ffi_cif</code> struct</p>
+
+<a name="165301814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301814">Mario Carneiro (May 10 2019 at 01:30)</a>:</h4>
+<p>Why is <code>bind_foreign_symbol</code> separate from the <code>@[ffi]</code> attribute?</p>
+
+<a name="165301821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301821">Mario Carneiro (May 10 2019 at 01:30)</a>:</h4>
+<p>is there a reason they wouldn't be 1-1?</p>
+
+<a name="165301826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301826">James King (May 10 2019 at 01:30)</a>:</h4>
+<p>I think that's where I'm going to change it so that it uses this attribute part, I'm just not sure where to start to hook into that.</p>
+
+<a name="165301980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301980">Mario Carneiro (May 10 2019 at 01:35)</a>:</h4>
+<p>look for uses of <code>register_system_attribute</code> to add a new system attribute</p>
+
+<a name="165301990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/foreign%20function%20interface/near/165301990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69026foreignfunctioninterface.html#165301990">James King (May 10 2019 at 01:35)</a>:</h4>
+<p>Will do, thanks.</p>
+
 
 {% endraw %}

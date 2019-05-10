@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/81837Kindofavaguequestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html">Kind of a vague question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165302415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165302415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165302415">Joe (May 10 2019 at 01:46)</a>:</h4>
+<p>I've already done all of these, but I'm not sure if I'm on the right track: this never occurs when I do math. So I'll ask for opinions.</p>
+<p>Let's say we have a <code>normed_field K</code> and a normed space <code>γ</code> over <code>K</code>. Let <code>f : α → γ</code> be an integrable function,  which means <code>∫ ∥f x∥ dx &lt; ∞</code>. Then the l1-norm of <code>f</code> is usually defined as <code>∫ ∥f x∥ dx</code>.</p>
+<p>However <code>∫</code> (called <code>lintegral</code> in library) has type <code>(α → ennreal) → ennreal</code>, thus to define the norm of f,  we first need to write <code>∥f x∥ : ℝ</code> as <code>metric_space.edist (f x) 0 : ennreal</code>, then integrate, then turn it back to <code>real</code></p>
+<div class="codehilite"><pre><span></span>∥f∥ := ennreal.to_real (lintegral (λ x, metric_space.edist (f x) 0))
+</pre></div>
+
+
+<p>For example, if I want to do the following reasoning</p>
+<div class="codehilite"><pre><span></span>∫ ∥c • (f x)∥ dx = ∫ ∥c∥ * ∥f x∥ dx
+</pre></div>
+
+
+<p>where <code>c : K</code> and <code>f x : γ</code>. This should be killed easily by <code>norm_smul : ∥s • x∥ = ∥s∥ * ∥x∥</code>. But we cannot do that. Because what we need to prove is</p>
+<div class="codehilite"><pre><span></span>lintegral (λ x, metric_space.edist (c • (f x)) 0) = lintegral (λ x, (metric_space.edist c 0) * (metric_space.edist (f x) 0))
+</pre></div>
+
+
+<p>And to prove this, I have to first prove an "extended" version of <code>norm_smul</code>:</p>
+<div class="codehilite"><pre><span></span>metric_space.edist (s • x) 0 = (metric_space.edist s 0) * (metric_space.edist x 0)
+</pre></div>
+
+
+<p>I need other "extended" version of norm lemmas, like</p>
+<div class="codehilite"><pre><span></span>∥x + y∥ ≤ ∥x∥ + ∥y∥
+metric_space.edist (x + y) 0 ≤ metric_space.edist x 0 + metric_space.edist y 0
+</pre></div>
+
+
+<p>etc. </p>
+<p>If this has to be the case, I guess I'll just prove those "extended" version of norm lemmas and put them somewhere? If not, then I'm not sure how to modify the definition of integral.</p>
+
+
+{% endraw %}
