@@ -39,5 +39,69 @@ permalink: archive/113488general/34505Bindingpower.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165314456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165314456">Patrick Massot (May 10 2019 at 06:59)</a>:</h4>
 <p>I understand that, and actually I've get used to <code>$</code> and use it a lot now. But the context for this question forbids this trick (we want one file from the perfectoid project to be readable by mathematicians who never saw any proof assistant or functional programming language)</p>
 
+<a name="165314535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165314535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165314535">Kenny Lau (May 10 2019 at 07:01)</a>:</h4>
+<p>I'm just pointing out that nothing overrides function application iirc</p>
+
+<a name="165314938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165314938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165314938">Rob Lewis (May 10 2019 at 07:10)</a>:</h4>
+<p>You just need to set the binding precedence high enough. But this isn't intended for mathlib, right? This goes against the normal notation customs and I think it would be very confusing.</p>
+<div class="codehilite"><pre><span></span><span class="kn">infix</span> <span class="bp">`#`</span><span class="o">:</span><span class="mi">10000</span> <span class="o">:=</span> <span class="n">has_add</span><span class="bp">.</span><span class="n">add</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">5</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">2</span> <span class="bp">#</span> <span class="mi">3</span>
+</pre></div>
+
+<a name="165315133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315133">Mario Carneiro (May 10 2019 at 07:15)</a>:</h4>
+<p>Application is at precedence level 1024</p>
+
+<a name="165315161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315161">Mario Carneiro (May 10 2019 at 07:15)</a>:</h4>
+<p>also known confusingly as <code>max</code></p>
+
+<a name="165315223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315223">Mario Carneiro (May 10 2019 at 07:16)</a>:</h4>
+<p>many unary prefix and postfix notations are at precedence "max_plus" which is max + 10</p>
+
+<a name="165315313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315313">Patrick Massot (May 10 2019 at 07:18)</a>:</h4>
+<p>I tried with <code>notation</code> instead of <code>infix</code>, I guess this explains I couldn't do it</p>
+
+<a name="165315319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315319">Patrick Massot (May 10 2019 at 07:18)</a>:</h4>
+<p>but with <code>infix</code> I get weird type class search issues</p>
+
+<a name="165315345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315345">Patrick Massot (May 10 2019 at 07:19)</a>:</h4>
+<p>Lean doesn't seem to resolve instances when I use my notation (this has nothing to do with the precedence thing)</p>
+
+<a name="165315488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315488">Mario Carneiro (May 10 2019 at 07:22)</a>:</h4>
+<p>does using <code>local</code> notation/infix help?</p>
+
+<a name="165315493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315493">Patrick Massot (May 10 2019 at 07:22)</a>:</h4>
+<p>Do I need to define a class <code>has_</code>?</p>
+
+<a name="165315495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315495">Patrick Massot (May 10 2019 at 07:22)</a>:</h4>
+<p>I'll try the local thing</p>
+
+<a name="165315513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315513">Patrick Massot (May 10 2019 at 07:23)</a>:</h4>
+<p>it changes nothing</p>
+
+<a name="165315525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315525">Mario Carneiro (May 10 2019 at 07:23)</a>:</h4>
+<p>details</p>
+
+<a name="165315656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315656">Patrick Massot (May 10 2019 at 07:26)</a>:</h4>
+<p><code> notation R `∕` x :=  ideal.quotient (ideal.span ({x} : set R))</code> works fine but does not take precedence over function application. <code>infix `∕`:max_plus := λ R x, (ideal.quotient (ideal.span ({x} : set R)))</code> fails to find <code>comm_ring R</code> which is obvious</p>
+
+<a name="165315676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Binding%20power/near/165315676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34505Bindingpower.html#165315676">Patrick Massot (May 10 2019 at 07:27)</a>:</h4>
+<p>Note that this is not a regular <code>/</code> but unicode division sign</p>
+
 
 {% endraw %}
