@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [foreign function interface](69026foreignfunctioninterface.html) (65 messages, latest: May 10 2019 at 02:29)
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (19 messages, latest: May 10 2019 at 03:39)
 
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (18 messages, latest: May 10 2019 at 00:53)
+* [foreign function interface](69026foreignfunctioninterface.html) (65 messages, latest: May 10 2019 at 02:29)
 
 * [simp_proj](13812simpproj.html) (6 messages, latest: May 09 2019 at 23:46)
 
