@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (24 messages, latest: May 10 2019 at 04:11)
+* [Binding power](34505Bindingpower.html) (7 messages, latest: May 10 2019 at 06:59)
+
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (25 messages, latest: May 10 2019 at 06:08)
 
 * [foreign function interface](69026foreignfunctioninterface.html) (65 messages, latest: May 10 2019 at 02:29)
 
