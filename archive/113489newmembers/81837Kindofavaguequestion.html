@@ -44,5 +44,66 @@ metric_space.edist (x + y) 0 ≤ metric_space.edist x 0 + metric_space.edist y 0
 <p>etc. </p>
 <p>If this has to be the case, I guess I'll just prove those "extended" version of norm lemmas and put them somewhere? If not, then I'm not sure how to modify the definition of integral.</p>
 
+<a name="165302968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165302968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165302968">Mario Carneiro (May 10 2019 at 02:02)</a>:</h4>
+<p>At least <code>metric_space.edist s 0</code> is unnecessary, because it's always finite (it's a normed field not a enormed field)</p>
+
+<a name="165302983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165302983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165302983">Mario Carneiro (May 10 2019 at 02:03)</a>:</h4>
+<p>But there should also be a definition of <code>enorm</code> so you don't need all these <code>dist 0</code> things</p>
+
+<a name="165303029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303029">Mario Carneiro (May 10 2019 at 02:04)</a>:</h4>
+<p>wait, isn't the norm of <code>f</code> also always finite?</p>
+
+<a name="165303038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303038">Mario Carneiro (May 10 2019 at 02:04)</a>:</h4>
+<p>so doesn't <code>lintegral (λ x, ∥c • (f x)∥) = lintegral (λ x, ∥c∥ * ∥f x∥)</code> work?</p>
+
+<a name="165303653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303653">Joe (May 10 2019 at 02:19)</a>:</h4>
+<p>I think this does't type check, because <code>λ x : α, ∥f x∥</code> is of type <code>α → ℝ</code>, while <code>lintegral</code> expects a <code>α → ennreal</code>. Though when I tried to check the type of <code>lintegral (λ x : α, ∥f x∥)</code>, the error message is maximum class-instance</p>
+
+<a name="165303715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303715">Joe (May 10 2019 at 02:21)</a>:</h4>
+<p><code>#check lintegral (λ x : α, metric_space.edist (f x) 0)</code> easily type checks.</p>
+
+<a name="165303723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303723">Joe (May 10 2019 at 02:21)</a>:</h4>
+<p><code>#check lintegral (λ x : α, ∥f x∥)</code> fails.</p>
+
+<a name="165303772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165303772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165303772">Joe (May 10 2019 at 02:22)</a>:</h4>
+<p>with </p>
+<div class="codehilite"><pre><span></span>variables {α : Type u} [measure_space α]
+variables {K : Type*} [normed_field K]
+   {γ : Type*}  [normed_space K γ] [second_countable_topology γ] [topological_add_group γ]
+variables {c : K} {f : α → γ}
+</pre></div>
+
+<a name="165304297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304297">Mario Carneiro (May 10 2019 at 02:37)</a>:</h4>
+<p>Use <code>nnnorm</code> instead</p>
+
+<a name="165304576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304576">Joe (May 10 2019 at 02:44)</a>:</h4>
+<p>Yeah, this type checks. But I don't know. The problem is that <code>metric_space.edist</code> just appears.</p>
+
+<a name="165304599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304599">Joe (May 10 2019 at 02:45)</a>:</h4>
+<p>It appears in proofs after I unwrap all the subtypes and quotients and definitions.</p>
+
+<a name="165304676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304676">Mario Carneiro (May 10 2019 at 02:47)</a>:</h4>
+<p>then don't unwrap all the subtypes and quotients and definitions</p>
+
+<a name="165304720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304720">Mario Carneiro (May 10 2019 at 02:48)</a>:</h4>
+<p>this is a very common newbie mistake</p>
+
+<a name="165304723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kind%20of%20a%20vague%20question/near/165304723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81837Kindofavaguequestion.html#165304723">Mario Carneiro (May 10 2019 at 02:48)</a>:</h4>
+<p>only unfold what you have to</p>
+
 
 {% endraw %}
