@@ -85,5 +85,98 @@ permalink: archive/113489newmembers/25037TutorialExercise.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165235735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165235735">Kevin Buzzard (May 09 2019 at 09:04)</a>:</h4>
 <p><span class="user-mention" data-user-id="207747">@Lukas</span> I wrote that tutorial and I had no solutions to the exercises either ;-) Some students at Imperial College sent me solutions and I did dump them somewhere on the internet...perhaps in the Xena project github repository (a.k.a. pile of random Lean files which I and some students wrote when we were all complete beginners 18 months ago).</p>
 
+<a name="165327533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165327533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165327533">Lukas (May 10 2019 at 11:17)</a>:</h4>
+<p>I just came across another problem. I defined the predicate for even like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">even</span><span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">even</span> <span class="n">m</span><span class="o">)</span>
+</pre></div>
+
+
+<p>but I can not figure out a way to test this <code>#check even one</code> does only show the Type prop but not the value. <code>#reduce even zero</code> leads as expected to true, but <code>#reduce even one</code> leads <code>true → false</code> which is false, but this becomes quickly unreadable as <code>#reduce even two</code> is <code>(true → false) → false</code>.</p>
+
+<a name="165328327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165328327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165328327">Kevin Buzzard (May 10 2019 at 11:30)</a>:</h4>
+<p>I think I would be tempted to define <code>beven</code> here, a function from <code>xnat</code> to <code>bool</code>, which is defined in Lean as <code>{ff,tt}</code>, and use <code>bnot</code> instead of <code>not</code>. Then you can define <code>even</code> to mean <code>beven n = tt</code></p>
+
+<a name="165328352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165328352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165328352">Kevin Buzzard (May 10 2019 at 11:31)</a>:</h4>
+<p>PS you might have more luck with <code>#eval</code> than <code>#reduce</code>?</p>
+
+<a name="165329196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329196">Lukas (May 10 2019 at 11:45)</a>:</h4>
+<p>The definition as function from <code>xnat</code> to <code>Prop</code> is taken from the blog article. With bool, bnot the definition works. Now my implementation look like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">beven</span><span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>  <span class="n">bnot</span> <span class="o">(</span><span class="n">beven</span> <span class="n">m</span><span class="o">)</span>
+
+<span class="kn">definition</span> <span class="n">even</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">xnat</span><span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">beven</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">tt</span>
+</pre></div>
+
+
+<p><code>#reduce zero</code> no gives me <code>tt = tt</code> and <code>#reduce one</code> gives <code>tt = ff</code>.</p>
+<p>I am not yet clear if this is what I should expect. And why is the version returning a Prop better than to bool version?</p>
+
+<a name="165329267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329267">Kevin Buzzard (May 10 2019 at 11:46)</a>:</h4>
+<p>I guess the author of the blog article was quite incompetent at that time.</p>
+
+<a name="165329338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329338">Kevin Buzzard (May 10 2019 at 11:47)</a>:</h4>
+<p>To a mathematician, <code>Prop</code> and <code>bool</code> are difficult to tell apart. In Lean the key difference between them is that they sit in different places in the hierarchy. <code>bool</code> is a type, and <code>Prop</code> is a universe.</p>
+
+<a name="165329350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329350">Kevin Buzzard (May 10 2019 at 11:47)</a>:</h4>
+<p>So in type theory, <code>Prop</code> is somehow a lot bigger than <code>bool</code>.</p>
+
+<a name="165329423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329423">Kevin Buzzard (May 10 2019 at 11:48)</a>:</h4>
+<p>In type theory, there are universes, and then types in those universe, and then terms in those types. I say "in" because that's how I think of it, I guess type theorist would say "t has type T and T has type u" or something</p>
+
+<a name="165329442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329442">Kevin Buzzard (May 10 2019 at 11:48)</a>:</h4>
+<p>Because they're quite different in the type theory world, they behave quite differently.</p>
+
+<a name="165329463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329463">Kevin Buzzard (May 10 2019 at 11:49)</a>:</h4>
+<p>Both both definitions "work" and "give the right answer". I guess the big question is what you want to do with the definitions.</p>
+
+<a name="165329485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329485">Kevin Buzzard (May 10 2019 at 11:49)</a>:</h4>
+<p>Let's stick with the <code>Prop</code> version for now, if the prestigious blog writer thinks that this is a good idea.</p>
+
+<a name="165329490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329490">Kevin Buzzard (May 10 2019 at 11:49)</a>:</h4>
+<p>&lt;/sarcasm&gt;</p>
+
+<a name="165329540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329540">Kevin Buzzard (May 10 2019 at 11:50)</a>:</h4>
+<p>You can still try and prove that 2 is even</p>
+
+<a name="165329553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329553">Kevin Buzzard (May 10 2019 at 11:50)</a>:</h4>
+<p>You've got to prove <code>not not true</code></p>
+
+<a name="165329556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329556">Kevin Buzzard (May 10 2019 at 11:50)</a>:</h4>
+<p>and that should be OK, because P implies not not P</p>
+
+<a name="165329582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329582">Kevin Buzzard (May 10 2019 at 11:51)</a>:</h4>
+<p>and I can prove <code>true</code>, because that just means constructing a term of type <code>true</code> and I can look at the definition of <code>true</code> to find out what that term is called. Just write <code>#check true</code> and then right click on <code>true</code> and peek at the definition.</p>
+
+<a name="165329597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329597">Kevin Buzzard (May 10 2019 at 11:51)</a>:</h4>
+<p>eew that is a rubbish name</p>
+
+<a name="165329602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329602">Kevin Buzzard (May 10 2019 at 11:51)</a>:</h4>
+<p>that is a really confusing name</p>
+
+<a name="165329666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165329666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165329666">Kevin Buzzard (May 10 2019 at 11:52)</a>:</h4>
+<p>I think there's a tactic which proves true, called <code>trivial</code> or something</p>
+
 
 {% endraw %}

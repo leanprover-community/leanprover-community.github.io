@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
+* [Tutorial Exercise](25037TutorialExercise.html) (33 messages, latest: May 10 2019 at 11:52)
 
-* [Tutorial Exercise](25037TutorialExercise.html) (14 messages, latest: May 09 2019 at 09:04)
+* [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
 
 * [VS Code: copy from Lean messages](12038VSCodecopyfromLeanmessages.html) (7 messages, latest: May 08 2019 at 19:14)
 
