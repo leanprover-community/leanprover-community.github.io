@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Binding power](34505Bindingpower.html) (22 messages, latest: May 10 2019 at 07:27)
+* [Binding power](34505Bindingpower.html) (25 messages, latest: May 10 2019 at 08:05)
 
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (25 messages, latest: May 10 2019 at 06:08)
 
