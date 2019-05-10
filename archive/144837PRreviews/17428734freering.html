@@ -196,5 +196,20 @@ permalink: archive/144837PRreviews/17428734freering.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165342596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165342596">Johan Commelin (May 10 2019 at 14:53)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> In my opinion this PR is now ready for review again. (I'm optimistic that Travis will be happy.)</p>
 
+<a name="165369794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165369794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165369794">Mario Carneiro (May 10 2019 at 20:48)</a>:</h4>
+<p>It doesn't need to be noncomputable. It is coming from this theorem:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">subsingleton_equiv</span> <span class="o">[</span><span class="n">subsingleton</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">multiset</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">coe</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">ext_le</span>
+    <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">coe_card</span><span class="o">,</span> <span class="err">←</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">coe_card</span><span class="o">],</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out_eq</span> <span class="bp">_</span> <span class="o">})</span> <span class="err">$</span>
+    <span class="bp">λ</span> <span class="n">n</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out_eq</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>This generalizes to the basic equiv theorem that <code>quot A R ~= A</code> when <code>\all x y, R x y -&gt; x = y</code>. The inverse function is defined by <code>quot.lift</code>, not <code>quot.out</code></p>
+
 
 {% endraw %}

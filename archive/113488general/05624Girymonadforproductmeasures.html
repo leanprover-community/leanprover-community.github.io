@@ -137,5 +137,74 @@ permalink: archive/113488general/05624Girymonadforproductmeasures.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165365546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165365546">Mario Carneiro (May 10 2019 at 19:49)</a>:</h4>
 <p>because term <code>t</code> may have free references to <code>a</code> that was introduced by the do</p>
 
+<a name="165366874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165366874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165366874">Mario Carneiro (May 10 2019 at 20:06)</a>:</h4>
+<p>Actually, maybe you don't need exponential objects, if you make sure to uncurry everything. To translate the type theory bind operator to cats, suppose we have <code>G |- do a : A &lt;- f, t : T B</code> where <code>T</code> is the monad. We view this as an arrow <code>G -&gt; T B</code>, where <code>f : G -&gt; T A</code> and <code>t : G x A -&gt; T B</code>. I think it's possible to define this bind in any (category theory) monad with products, Reid and Scott will know</p>
+
+<a name="165367860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165367860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165367860">Mario Carneiro (May 10 2019 at 20:21)</a>:</h4>
+<p>At the moment I'm stuck on how to make an arrow <code>G x T A -&gt; T (G x A)</code>. This is some tensoring thing?</p>
+
+<a name="165368280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368280">Reid Barton (May 10 2019 at 20:26)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Strong_monad" target="_blank" title="https://en.wikipedia.org/wiki/Strong_monad">https://en.wikipedia.org/wiki/Strong_monad</a></p>
+
+<a name="165368292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368292">Reid Barton (May 10 2019 at 20:26)</a>:</h4>
+<p>It's not automatic in general</p>
+
+<a name="165368570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368570">Mario Carneiro (May 10 2019 at 20:30)</a>:</h4>
+<p>Does anything special happen when the monoidal product is just the categorical product there? I see references to things like all functors on Set are strong but that might have to do with the existence of exponentials</p>
+
+<a name="165368604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368604">Mario Carneiro (May 10 2019 at 20:31)</a>:</h4>
+<p>Also, this paper <a href="https://arxiv.org/pdf/1612.05939.pdf" target="_blank" title="https://arxiv.org/pdf/1612.05939.pdf">https://arxiv.org/pdf/1612.05939.pdf</a> suggests that in the case of the Giry monad even this approach won't work because it's not strong</p>
+
+<a name="165368613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368613">Koundinya Vajjha (May 10 2019 at 20:31)</a>:</h4>
+<p>I still don't quite understand. What's to stop me right now from defining my own <code>do</code> notation for this Giry monad?</p>
+
+<a name="165368625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368625">Mario Carneiro (May 10 2019 at 20:31)</a>:</h4>
+<p>the problem is that arrows are not the same as terms in type theory</p>
+
+<a name="165368634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368634">Mario Carneiro (May 10 2019 at 20:31)</a>:</h4>
+<p>terms have free variables</p>
+
+<a name="165368691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368691">Mario Carneiro (May 10 2019 at 20:32)</a>:</h4>
+<p>and you want to interpret these variables as somehow denoting certain projections from the context object <code>G</code> to make an arrow</p>
+
+<a name="165368975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165368975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165368975">Mario Carneiro (May 10 2019 at 20:36)</a>:</h4>
+<p>for example, the type theory term <code>a : A, b : B |- a : A</code> gets turned into <code>pi1 : A x B --&gt; A</code>,  and <code>a : A, b : B |- (a, (b, a)) : A x (B x A)</code> becomes <code>(pi1, (pi2, pi1)) : A x B --&gt; A x (B x A)</code></p>
+
+<a name="165369115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165369115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165369115">Mario Carneiro (May 10 2019 at 20:38)</a>:</h4>
+<p>But then the question is how to define the term <code>G |- do a &lt;- f, t</code>, where <code>G |- f : F A</code> and <code>G, a : A |- t : F B</code>? By induction we suppose we can translate <code>f</code> as an arrow <code>G --&gt; F A</code> and <code>t</code> as an arrow <code>G x A --&gt; F B</code>, but then we need an operation in the category to get from this to <code>G --&gt; F B</code> and that needs a strong monadic structure</p>
+
+<a name="165369186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165369186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165369186">Mario Carneiro (May 10 2019 at 20:39)</a>:</h4>
+<p>Over the category Type, which is what <code>[monad T]</code> is talking about, all monads are strong monads because tensorial strength is "free"</p>
+
+<a name="165369243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165369243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165369243">Mario Carneiro (May 10 2019 at 20:40)</a>:</h4>
+<p>hence <code>do</code> notation exists</p>
+
+<a name="165369262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165369262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165369262">Mario Carneiro (May 10 2019 at 20:40)</a>:</h4>
+<p>but over a general category it's not clear how to interpret the term as some arrow in the category</p>
+
+<a name="165369313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165369313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165369313">Joseph Tassarotti (May 10 2019 at 20:41)</a>:</h4>
+<p>I think there's two separate issues here: we can define a <code>do</code> notation that desugars into the <code>bind</code> defined here: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean#L144" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean#L144">https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean#L144</a>, but it may very well be the case that the function ends up not being measurable. But that's already a problem with using the <code>bind</code> directly</p>
+
+<a name="165370131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165370131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165370131">Reid Barton (May 10 2019 at 20:54)</a>:</h4>
+<p>I think what's special about Set isn't that it's cartesian closed or whatever but rather that it is the base category that we are enriched over.<br>
+That is, it is baked into the notion of "functor"</p>
+
 
 {% endraw %}

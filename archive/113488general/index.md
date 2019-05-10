@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (30 messages, latest: May 10 2019 at 19:49)
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (47 messages, latest: May 10 2019 at 20:54)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (42 messages, latest: May 10 2019 at 19:26)
 
