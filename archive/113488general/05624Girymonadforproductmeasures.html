@@ -70,5 +70,21 @@ permalink: archive/113488general/05624Girymonadforproductmeasures.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296990">Johannes Hölzl (May 09 2019 at 23:33)</a>:</h4>
 <p>But to apply it I guess the current approach is the easier one</p>
 
+<a name="165298881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165298881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165298881">Jason Rute (May 10 2019 at 00:16)</a>:</h4>
+<p>It is a nice trick (and I should never start a comment with "won't ever").  But doesn't the "set it to 0" trick violate the monadic laws, namely associativity?  For example, if <code>m</code> is the Lebesgue measure, <code>f</code> in non measurable, and <code>g x := tt</code> is constant doesn't <code>do { y &lt;- do { x &lt;- m; f x }; g y}</code> give the 0 measure, but <code>do { x &lt;- m; do { y &lt;- f x; g y }}</code> give <code>dirac tt</code>.  I think my poorly expressed point is that there isn't a way to actually make <code>measure</code> a monad in Lean which obeys the monadic axioms, but maybe I am mistaken.</p>
+
+<a name="165298986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165298986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165298986">Jason Rute (May 10 2019 at 00:19)</a>:</h4>
+<p>Either way, you clearly made the ideas useful (and I again apologize for my brash claims).</p>
+
+<a name="165299081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165299081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165299081">Mario Carneiro (May 10 2019 at 00:21)</a>:</h4>
+<p>There is of course <code>category_theory</code> for being able to talk about monads in other categories, but you are probably right that there is no lawful monad from the category of types and functions</p>
+
+<a name="165300366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165300366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165300366">Scott Morrison (May 10 2019 at 00:53)</a>:</h4>
+<p>With a PR for monoidal categories open, general monads will be available any day now. :-)</p>
+
 
 {% endraw %}
