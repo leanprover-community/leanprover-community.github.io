@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (53 messages, latest: May 10 2019 at 22:43)
+
 * [representations](84839representations.html) (66 messages, latest: May 09 2019 at 15:06)
 
 * [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (13 messages, latest: May 07 2019 at 04:01)
-
-* [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (52 messages, latest: May 07 2019 at 03:52)
 
 * [Integer gcd issues](42489Integergcdissues.html) (2 messages, latest: May 06 2019 at 22:27)
 
