@@ -22,5 +22,53 @@ permalink: archive/113488general/05624Girymonadforproductmeasures.html
 <div class="codehilite"><pre><span></span>prod M1 M2 := do { x &lt;- M1, y &lt;- M2, return (x, y) }
 </pre></div>
 
+<a name="165295344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295344">Johannes Hölzl (May 09 2019 at 23:01)</a>:</h4>
+<p>You <strong>can't</strong> write <code>do</code>, but you can still use <code>bind</code> and <code>dirac</code> (otherwise called <code>pure</code> or <code>return</code>). The interesting part is to prove commutativity, i.e. Fubini's theorem</p>
+
+<a name="165295406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295406">Johannes Hölzl (May 09 2019 at 23:02)</a>:</h4>
+<p><code>prod m1 m2 := m1.bind (fun x, m2.bind (fun y, dirac (x, y)))</code></p>
+
+<a name="165295416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295416">Koundinya Vajjha (May 09 2019 at 23:02)</a>:</h4>
+<p>Oh you <em>can</em> use <code>do</code>?</p>
+
+<a name="165295444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295444">Johannes Hölzl (May 09 2019 at 23:03)</a>:</h4>
+<p>argh sorry, fixed my message</p>
+
+<a name="165295528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295528">Koundinya Vajjha (May 09 2019 at 23:05)</a>:</h4>
+<p>Oh I see. Thanks!</p>
+
+<a name="165295538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295538">Koundinya Vajjha (May 09 2019 at 23:05)</a>:</h4>
+<p>I'll try this once I'm at my machine again.</p>
+
+<a name="165295693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165295693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165295693">Jason Rute (May 09 2019 at 23:08)</a>:</h4>
+<p>While the Giry Monad is a slick idea, it won’t ever work in Lean.  Here is why.  For a measure to be a monad, one needs to make sense of the type <code>measure A</code> where <code>A</code> is a type.  But that is not how measures work, <code>m</code> is not a measure on a type <code>A</code>, it is a measure on a space <code>A</code>.  (Either a measurable space, or for some types of measure theory, a Polish space or a locally compact Hausdorff space.)  Moreover, even if we could restrict to a set of types, we still need to restrict to only certain functions in our <code>map</code> operator.  For if <code>m</code> is a measure on the reals, and implicitly we are using the canonical Borel measurable structure of the reals, we still can’t expect <code>map f m</code> to be meaningful for every function from the reals to the reals.  Consider the indicator function of a non-measurable set.  There is no push-forward measure to be had.  The Giry monad is only a monad on a restricted type system.  (Such as where types are Polish spaces and functions are continuous maps.)   (Alternately, if by “measure”, you mean a probability measure on the full power set sigma algebra, then yes it is a monad, but unless you only care about the discrete setting, this is not what you want...)</p>
+
+<a name="165296874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296874">Johannes Hölzl (May 09 2019 at 23:30)</a>:</h4>
+<p>Uh, that's a bold claim for something which is already in mathlib: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean">https://github.com/leanprover-community/mathlib/blob/master/src/measure_theory/giry_monad.lean</a></p>
+
+<a name="165296912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296912">Jason Rute (May 09 2019 at 23:32)</a>:</h4>
+<p>Yes, I think I spoke too quickly...</p>
+
+<a name="165296951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296951">Johannes Hölzl (May 09 2019 at 23:32)</a>:</h4>
+<p>The trick is to just set it to 0 (or some null measure etc) if the function is not measurable. Then each equation one proves over the Giry monad requires the necessary measurability assumptions.</p>
+
+<a name="165296984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296984">Johannes Hölzl (May 09 2019 at 23:33)</a>:</h4>
+<p>Another way to do it would be to setup the category of measurable spaces, and show that there exists a <code>measure</code>-Endofunctor in this category, and prove that it is actually a monad</p>
+
+<a name="165296990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Giry%20monad%20for%20product%20measures/near/165296990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05624Girymonadforproductmeasures.html#165296990">Johannes Hölzl (May 09 2019 at 23:33)</a>:</h4>
+<p>But to apply it I guess the current approach is the easier one</p>
+
 
 {% endraw %}
