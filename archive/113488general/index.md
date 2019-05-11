@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (48 messages, latest: May 11 2019 at 14:14)
+
 * [simp being silly again](47148simpbeingsillyagain.html) (1 message, latest: May 11 2019 at 11:59)
 
 * [fun_setoid](29553funsetoid.html) (1 message, latest: May 11 2019 at 00:22)
 
 * [defunct branches](71952defunctbranches.html) (10 messages, latest: May 10 2019 at 23:26)
-
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (47 messages, latest: May 10 2019 at 20:54)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (42 messages, latest: May 10 2019 at 19:26)
 
