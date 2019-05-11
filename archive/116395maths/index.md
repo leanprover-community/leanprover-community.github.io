@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (6 messages, latest: May 11 2019 at 06:00)
+
 * [quasicategories](12618quasicategories.html) (6 messages, latest: May 11 2019 at 03:50)
 
 * [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (53 messages, latest: May 10 2019 at 22:43)
