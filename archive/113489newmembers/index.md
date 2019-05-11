@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tutorial Exercise](25037TutorialExercise.html) (45 messages, latest: May 11 2019 at 21:57)
+* [Tutorial Exercise](25037TutorialExercise.html) (56 messages, latest: May 11 2019 at 22:18)
 
 * [Induction](51886Induction.html) (176 messages, latest: May 11 2019 at 21:57)
 
