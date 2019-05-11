@@ -206,5 +206,58 @@ permalink: archive/113489newmembers/25037TutorialExercise.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165420416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165420416">Kevin Buzzard (May 11 2019 at 17:14)</a>:</h4>
 <p>I distinctly remember in 2017 firmly believing that every question about le on nat should almost by definition be completely trivial, because how can there even be any content?</p>
 
+<a name="165430160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165430160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165430160">Chris Hughes (May 11 2019 at 21:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  maybe you weren't so stupid <a href="https://github.com/leanprover/lean4/blob/master/library/init/data/nat/basic.lean#L47" target="_blank" title="https://github.com/leanprover/lean4/blob/master/library/init/data/nat/basic.lean#L47">https://github.com/leanprover/lean4/blob/master/library/init/data/nat/basic.lean#L47</a></p>
+
+<a name="165430209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165430209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165430209">Patrick Massot (May 11 2019 at 21:24)</a>:</h4>
+<p>I think this version is good for computation</p>
+
+<a name="165430211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165430211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165430211">Patrick Massot (May 11 2019 at 21:24)</a>:</h4>
+<p>not for proofs</p>
+
+<a name="165430216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165430216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165430216">Kevin Buzzard (May 11 2019 at 21:24)</a>:</h4>
+<p>One thing I learnt today was that my cool inductive predicate idea seems to be the worst of them all</p>
+
+<a name="165431270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165431270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165431270">Chris Hughes (May 11 2019 at 21:52)</a>:</h4>
+<p>My attempt at the proof using the inductive definition. Pretty short, but it took me a while to work it out. I also used <code>pred</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">namespace</span> <span class="n">xnat</span>
+<span class="kn">inductive</span> <span class="n">le</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">le</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">le</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">le</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="bp">`</span><span class="o">:</span> <span class="mi">50</span> <span class="o">:=</span> <span class="n">le</span>
+
+<span class="kn">lemma</span> <span class="n">le_succ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">succ</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">le</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">le_of_succ_le</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">le</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">ha</span> <span class="o">(</span><span class="n">le_succ</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">_</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">succ_le_succ</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">pred</span> <span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">pred</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">),</span>
+<span class="k">from</span> <span class="n">le</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="n">le</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="n">h</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le_of_succ_le</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">le_trans</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">hbc</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span><span class="err">&#39;</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="n">le</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hbc</span> <span class="n">hab</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="165431371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165431371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165431371">Kevin Buzzard (May 11 2019 at 21:54)</a>:</h4>
+<p>Nice!</p>
+
+<a name="165431391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165431391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165431391">Chris Hughes (May 11 2019 at 21:55)</a>:</h4>
+<p>This does illustrate a difficulty with inductive predicates. They're hard to use when not applied directly to local constants.</p>
+
+<a name="165431459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165431459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165431459">Chris Hughes (May 11 2019 at 21:57)</a>:</h4>
+<p>When you induct you want the fact that <code>succ b</code> has something to do with <code>b</code>, but the computed motives rarely give you that.</p>
+
 
 {% endraw %}
