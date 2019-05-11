@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Manifolds](12382Manifolds.html) (22 messages, latest: May 11 2019 at 10:26)
+* [Manifolds](12382Manifolds.html) (23 messages, latest: May 11 2019 at 11:22)
 
 * [quasicategories](12618quasicategories.html) (6 messages, latest: May 11 2019 at 03:50)
 
