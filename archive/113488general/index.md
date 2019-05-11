@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fun_setoid](29553funsetoid.html) (1 message, latest: May 11 2019 at 00:22)
+
 * [defunct branches](71952defunctbranches.html) (10 messages, latest: May 10 2019 at 23:26)
 
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (47 messages, latest: May 10 2019 at 20:54)
