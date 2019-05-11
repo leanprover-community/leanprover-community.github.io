@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3068 messages, latest: May 11 2019 at 18:15)
+
 * [Manifolds](12382Manifolds.html) (23 messages, latest: May 11 2019 at 11:22)
 
 * [quasicategories](12618quasicategories.html) (6 messages, latest: May 11 2019 at 03:50)
@@ -25,8 +27,6 @@ permalink: archive/116395maths/index.html
 * [cast woes](88074castwoes.html) (97 messages, latest: May 06 2019 at 15:51)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3063 messages, latest: May 03 2019 at 18:01)
 
 * [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
 

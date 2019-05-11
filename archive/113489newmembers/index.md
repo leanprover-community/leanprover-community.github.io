@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tutorial Exercise](25037TutorialExercise.html) (37 messages, latest: May 11 2019 at 17:14)
+* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (29 messages, latest: May 11 2019 at 18:52)
 
-* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (27 messages, latest: May 11 2019 at 16:23)
+* [Tutorial Exercise](25037TutorialExercise.html) (37 messages, latest: May 11 2019 at 17:14)
 
 * [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
 
