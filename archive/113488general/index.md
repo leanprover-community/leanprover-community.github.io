@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [defunct branches](71952defunctbranches.html) (10 messages, latest: May 10 2019 at 23:26)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (47 messages, latest: May 10 2019 at 20:54)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (42 messages, latest: May 10 2019 at 19:26)
@@ -45,8 +47,6 @@ permalink: archive/113488general/index.html
 * [transport and parametricity](74751transportandparametricity.html) (28 messages, latest: May 06 2019 at 22:14)
 
 * [olean-rs](28098oleanrs.html) (47 messages, latest: May 06 2019 at 21:11)
-
-* [defunct branches](71952defunctbranches.html) (9 messages, latest: May 06 2019 at 19:59)
 
 * [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
 
