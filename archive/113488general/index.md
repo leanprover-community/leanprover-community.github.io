@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [A newcomer's opinion](34360Anewcomersopinion.html) (320 messages, latest: May 11 2019 at 16:29)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (48 messages, latest: May 11 2019 at 14:14)
 
 * [simp being silly again](47148simpbeingsillyagain.html) (1 message, latest: May 11 2019 at 11:59)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [defunct branches](71952defunctbranches.html) (10 messages, latest: May 10 2019 at 23:26)
 
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (42 messages, latest: May 10 2019 at 19:26)
-
-* [A newcomer's opinion](34360Anewcomersopinion.html) (314 messages, latest: May 10 2019 at 15:05)
 
 * [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (3 messages, latest: May 10 2019 at 14:00)
 

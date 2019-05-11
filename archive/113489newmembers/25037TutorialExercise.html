@@ -182,5 +182,21 @@ permalink: archive/113489newmembers/25037TutorialExercise.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165413499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165413499">Maxim Gerspach (May 11 2019 at 14:13)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="165419614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tutorial%20Exercise/near/165419614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25037TutorialExercise.html#165419614">Kevin Buzzard (May 11 2019 at 16:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="207747">@Lukas</span> your interest made me go back to <a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">that blog post</a> and think about how I would have done it nowadays. I didn't think about even/odd but I did think about inequalities. Those 4 inequalities at the bottom were <em>terrifically</em> difficult. I didn't really know what I was doing at the time. I just tried various versions of le and lt, and I think that actually this is the best:</p>
+<div class="codehilite"><pre><span></span>def le (a b : xnat) : Prop := ∃ c, a + c = b
+</pre></div>
+
+
+<p>Using this definition of <code>le</code>, it is not too hard to prove <code>le</code> versions of all the inequalities. And conversely, this one was by far the hardest to use:</p>
+<div class="codehilite"><pre><span></span>inductive le : xnat → xnat → Prop
+| refl (a : xnat) : le a a
+| succ (a b : xnat) : le a b → le a (succ b)
+</pre></div>
+
+
+<p>Even proving a &lt;= b implies succ a &lt;= succ b was horrible with this; in the end I proved that this inductive le was the same as the easier-to-use le.</p>
+
 
 {% endraw %}
