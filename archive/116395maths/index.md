@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [representations](84839representations.html) (67 messages, latest: May 12 2019 at 08:54)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3075 messages, latest: May 11 2019 at 19:35)
 
 * [Manifolds](12382Manifolds.html) (23 messages, latest: May 11 2019 at 11:22)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [quasicategories](12618quasicategories.html) (6 messages, latest: May 11 2019 at 03:50)
 
 * [notations for 1 in category theory](50248notationsfor1incategorytheory.html) (53 messages, latest: May 10 2019 at 22:43)
-
-* [representations](84839representations.html) (66 messages, latest: May 09 2019 at 15:06)
 
 * [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (13 messages, latest: May 07 2019 at 04:01)
 
