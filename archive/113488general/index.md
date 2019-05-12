@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contraposition](54269contraposition.html) (28 messages, latest: May 12 2019 at 20:58)
+* [Lean in the wild](43625Leaninthewild.html) (73 messages, latest: May 12 2019 at 21:56)
 
-* [Sigma types](75591Sigmatypes.html) (4 messages, latest: May 12 2019 at 20:51)
+* [Sigma types](75591Sigmatypes.html) (6 messages, latest: May 12 2019 at 21:54)
+
+* [contraposition](54269contraposition.html) (29 messages, latest: May 12 2019 at 21:43)
 
 * [choose](14850choose.html) (8 messages, latest: May 12 2019 at 20:08)
-
-* [Lean in the wild](43625Leaninthewild.html) (72 messages, latest: May 12 2019 at 17:12)
 
 * [another timeout](98841anothertimeout.html) (1 message, latest: May 12 2019 at 16:58)
 
