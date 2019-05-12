@@ -1,0 +1,36 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/54269contraposition.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html">contraposition</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165462691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165462691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165462691">Patrick Massot (May 12 2019 at 12:23)</a>:</h4>
+<p>Still looking at my first year undergraduate course tactics, I see:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">contrapose</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">Q</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">Q</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span> <span class="n">hP</span><span class="o">,</span> <span class="n">by_contradiction</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="n">hP</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">parse</span> <span class="n">loc</span><span class="o">)</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="o">(</span><span class="n">tk</span><span class="o">)</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">loc</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">contrapose</span> <span class="o">(</span><span class="n">push</span> <span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">optional</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;!&quot;</span> <span class="o">))</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">:=</span>
+<span class="n">do</span>
+  <span class="n">tgt</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="k">match</span> <span class="n">tgt</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">P</span> <span class="bp">→</span> <span class="err">%%</span><span class="n">Q</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">apply</span> <span class="n">contrapose</span> <span class="err">%%</span><span class="n">P</span> <span class="err">%%</span><span class="n">Q</span><span class="o">]</span>
+  <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">skip</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="k">if</span> <span class="n">push</span><span class="bp">.</span><span class="n">is_some</span> <span class="k">then</span> <span class="n">try</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">push_neg</span> <span class="o">(</span><span class="n">ns</span> <span class="o">[</span><span class="n">none</span><span class="o">]))</span> <span class="k">else</span> <span class="n">skip</span>
+</pre></div>
+
+
+<p>Of course we can already use <code>rw not_imp_not</code> or <code>rw ← not_imp_not</code> but you need to remember this name and the direction, and you don't have integration with <code>push_neg</code>. From a pedagogical point of view, I like to say in lectures: "reasoning by contrapositive" is an important technique, here is the Lean command to do that. In the same way we have <code>by_contradiction</code> and <code>exfalso</code> that are thin wrappers around the corresponding lemmas. </p>
+<p>How people would feel if I PRed it into mathlib? I ask before writing the PR because the process involves efforts to put things at the right location, and write tests.</p>
+
+
+{% endraw %}
