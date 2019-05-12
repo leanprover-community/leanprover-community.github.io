@@ -10,15 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contraposition](54269contraposition.html) (21 messages, latest: May 12 2019 at 17:36)
+* [contraposition](54269contraposition.html) (27 messages, latest: May 12 2019 at 19:58)
+
+* [Sigma types](75591Sigmatypes.html) (1 message, latest: May 12 2019 at 19:47)
+
+* [choose](14850choose.html) (7 messages, latest: May 12 2019 at 19:35)
 
 * [Lean in the wild](43625Leaninthewild.html) (72 messages, latest: May 12 2019 at 17:12)
 
 * [another timeout](98841anothertimeout.html) (1 message, latest: May 12 2019 at 16:58)
 
 * [lean lexer (pygments)](20585leanlexerpygments.html) (8 messages, latest: May 12 2019 at 15:55)
-
-* [choose](14850choose.html) (2 messages, latest: May 12 2019 at 15:03)
 
 * [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
 
