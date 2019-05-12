@@ -352,5 +352,30 @@ After importing <code>linear_algebra.basic</code> a silly lemma broke at the bot
 
 <p>which seems to work pretty well?</p>
 
+<a name="165457091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457091">Mario Carneiro (May 12 2019 at 09:36)</a>:</h4>
+<p>I am pretty sure you can also use that to cook up a bad typeclass search</p>
+
+<a name="165457094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457094">Mario Carneiro (May 12 2019 at 09:36)</a>:</h4>
+<p>it's possible we just haven't run across it by accident yet</p>
+
+<a name="165457391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457391">Mario Carneiro (May 12 2019 at 09:46)</a>:</h4>
+<p>Here's a bad typeclass search example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="n">def</span> <span class="n">normify</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">normed_field</span> <span class="o">(</span><span class="n">normify</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">-</span><span class="n">a</span>
+</pre></div>
+
+
+<p>The reason we haven't come across this yet is because <code>normed_field</code> is pretty high in the hierarchy so there aren't many ways to get lower down yet. Here I've made up a perfectly normal instance for some made up <code>normify</code> operator that, in conjunction with <code>normed_space</code>, causes a loop that causes basically every typeclass search to overflow (like <code>has_neg A</code> here)</p>
+
 
 {% endraw %}
