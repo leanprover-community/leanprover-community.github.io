@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (53 messages, latest: May 12 2019 at 12:58)
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (54 messages, latest: May 12 2019 at 13:07)
 
 * [contraposition](54269contraposition.html) (1 message, latest: May 12 2019 at 12:23)
 
