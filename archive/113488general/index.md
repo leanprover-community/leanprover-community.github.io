@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contraposition](54269contraposition.html) (27 messages, latest: May 12 2019 at 19:58)
+* [contraposition](54269contraposition.html) (28 messages, latest: May 12 2019 at 20:58)
 
-* [Sigma types](75591Sigmatypes.html) (1 message, latest: May 12 2019 at 19:47)
+* [Sigma types](75591Sigmatypes.html) (4 messages, latest: May 12 2019 at 20:51)
 
-* [choose](14850choose.html) (7 messages, latest: May 12 2019 at 19:35)
+* [choose](14850choose.html) (8 messages, latest: May 12 2019 at 20:08)
 
 * [Lean in the wild](43625Leaninthewild.html) (72 messages, latest: May 12 2019 at 17:12)
 
