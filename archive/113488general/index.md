@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (51 messages, latest: May 12 2019 at 06:49)
+
+* [simp being silly again](47148simpbeingsillyagain.html) (2 messages, latest: May 12 2019 at 06:45)
+
 * [A newcomer's opinion](34360Anewcomersopinion.html) (320 messages, latest: May 11 2019 at 16:29)
-
-* [Giry monad for product measures](05624Girymonadforproductmeasures.html) (48 messages, latest: May 11 2019 at 14:14)
-
-* [simp being silly again](47148simpbeingsillyagain.html) (1 message, latest: May 11 2019 at 11:59)
 
 * [fun_setoid](29553funsetoid.html) (1 message, latest: May 11 2019 at 00:22)
 
