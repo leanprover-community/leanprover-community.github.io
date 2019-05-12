@@ -32,5 +32,85 @@ permalink: archive/113488general/54269contraposition.html
 <p>Of course we can already use <code>rw not_imp_not</code> or <code>rw ← not_imp_not</code> but you need to remember this name and the direction, and you don't have integration with <code>push_neg</code>. From a pedagogical point of view, I like to say in lectures: "reasoning by contrapositive" is an important technique, here is the Lean command to do that. In the same way we have <code>by_contradiction</code> and <code>exfalso</code> that are thin wrappers around the corresponding lemmas. </p>
 <p>How people would feel if I PRed it into mathlib? I ask before writing the PR because the process involves efforts to put things at the right location, and write tests.</p>
 
+<a name="165466193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165466193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165466193">Rob Lewis (May 12 2019 at 14:08)</a>:</h4>
+<p>This sounds reasonable. A useful variant might be <code>contrapose h</code>. When  the goal is <code>Q</code> with <code>h : P</code> is in the local context, this reverts <code>h</code>, does your thing, and then intros <code>h : ¬ Q</code>.</p>
+
+<a name="165466276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165466276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165466276">Patrick Massot (May 12 2019 at 14:10)</a>:</h4>
+<p>I guess adding this wouldn't cost much, and can be ignored by users who don't want it</p>
+
+<a name="165466287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165466287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165466287">Patrick Massot (May 12 2019 at 14:11)</a>:</h4>
+<p>I'll try that</p>
+
+<a name="165466892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165466892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165466892">Rob Lewis (May 12 2019 at 14:28)</a>:</h4>
+<p>By the way, are you sure the failure behavior is what you want? When the goal isn't an implies, your tactic either does nothing or reduces to <code>push_neg</code>. My instinct is that it should fail.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">contrapose</span> <span class="o">(</span><span class="n">push</span> <span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">optional</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;!&quot;</span> <span class="o">))</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">:=</span>
+<span class="n">do</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">P</span> <span class="bp">→</span> <span class="err">%%</span><span class="n">Q</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">mk_app</span> <span class="bp">`</span><span class="n">contrapose</span> <span class="o">[</span><span class="n">P</span><span class="o">,</span> <span class="n">Q</span><span class="o">]</span> <span class="bp">&gt;&gt;=</span> <span class="n">apply</span><span class="o">,</span>
+   <span class="n">when</span> <span class="n">push</span><span class="bp">.</span><span class="n">is_some</span> <span class="err">$</span> <span class="n">try</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">push_neg</span> <span class="o">(</span><span class="n">ns</span> <span class="o">[</span><span class="n">none</span><span class="o">]))</span>
+</pre></div>
+
+<a name="165466896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165466896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165466896">Patrick Massot (May 12 2019 at 14:28)</a>:</h4>
+<p>You are right, it should fail. I'll modify this</p>
+
+<a name="165467094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467094">Patrick Massot (May 12 2019 at 14:34)</a>:</h4>
+<p>Do we have a version of <code>when</code> where we get access to the assumption? (like when we do <code>if h : ... then ... else ...</code>)</p>
+
+<a name="165467107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467107">Patrick Massot (May 12 2019 at 14:35)</a>:</h4>
+<p>Oh, I didn't see you wrote some code</p>
+
+<a name="165467178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467178">Patrick Massot (May 12 2019 at 14:36)</a>:</h4>
+<p>I prefer the version I have now because it has a helpful error message</p>
+
+<a name="165467209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467209">Patrick Massot (May 12 2019 at 14:38)</a>:</h4>
+<p>Is there any advantage of <code>mk_app</code> instead of my <code>`[...]</code> (besides the fact that it looks more profesionnal)?</p>
+
+<a name="165467351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467351">Rob Lewis (May 12 2019 at 14:40)</a>:</h4>
+<p>Heh, I just noticed that <code>when</code> takes a decidable <code>Prop</code>. Figured it took a <code>bool</code>, but that's actually <code>whenb</code>.</p>
+
+<a name="165467368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467368">Rob Lewis (May 12 2019 at 14:41)</a>:</h4>
+<blockquote>
+<p>Is there any advantage of <code>mk_app</code> instead of my <code>`[...]</code> (besides the fact that it looks more profesionnal)?</p>
+</blockquote>
+<p>That, and it avoids entering interactive parsing mode. Not a big difference.</p>
+
+<a name="165467415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467415">Patrick Massot (May 12 2019 at 14:42)</a>:</h4>
+<p>Hum, I also need to learn how to assert stuff is Prop. The pattern <code>`(%%P → %%Q)</code> is not specific enough</p>
+
+<a name="165467509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467509">Rob Lewis (May 12 2019 at 14:44)</a>:</h4>
+<p><code>target &gt;&gt;= is_prop</code>?</p>
+
+<a name="165467599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467599">Patrick Massot (May 12 2019 at 14:47)</a>:</h4>
+<p>I wanted to test P and Q, but maybe testing target would be good enough</p>
+
+<a name="165467651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467651">Patrick Massot (May 12 2019 at 14:48)</a>:</h4>
+<p>no, it's not good enough</p>
+
+<a name="165467661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467661">Patrick Massot (May 12 2019 at 14:48)</a>:</h4>
+<p>It will be fooled by goals that look like <code>forall x, P x</code></p>
+
+<a name="165467678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467678">Patrick Massot (May 12 2019 at 14:49)</a>:</h4>
+<p>(and <em>yes</em>, students will try <code>contrapose</code> on such goals)</p>
+
+<a name="165467761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contraposition/near/165467761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54269contraposition.html#165467761">Patrick Massot (May 12 2019 at 14:51)</a>:</h4>
+<p>My wife asserts the goal's type is to mow the lawn. I'll read your explanations when I'll come back (there is also a tactic writing question in the choose thread, in case I'm too slow in the garden and you get bored).</p>
+
 
 {% endraw %}

@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [contraposition](54269contraposition.html) (19 messages, latest: May 12 2019 at 14:51)
+
+* [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (54 messages, latest: May 12 2019 at 13:07)
 
-* [contraposition](54269contraposition.html) (1 message, latest: May 12 2019 at 12:23)
-
 * [choose](14850choose.html) (1 message, latest: May 12 2019 at 12:07)
-
-* [pygments](17208pygments.html) (52 messages, latest: May 12 2019 at 10:22)
 
 * [simp being silly again](47148simpbeingsillyagain.html) (2 messages, latest: May 12 2019 at 06:45)
 
