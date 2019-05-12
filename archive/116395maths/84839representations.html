@@ -377,5 +377,116 @@ After importing <code>linear_algebra.basic</code> a silly lemma broke at the bot
 
 <p>The reason we haven't come across this yet is because <code>normed_field</code> is pretty high in the hierarchy so there aren't many ways to get lower down yet. Here I've made up a perfectly normal instance for some made up <code>normify</code> operator that, in conjunction with <code>normed_space</code>, causes a loop that causes basically every typeclass search to overflow (like <code>has_neg A</code> here)</p>
 
+<a name="165457852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457852">Patrick Massot (May 12 2019 at 10:00)</a>:</h4>
+<p>Mario, do you see a way to modify how type class search works that would solve this issue? Or is it the concept of type class itself that is irremediably broken and we should switch everything to unification hints?</p>
+
+<a name="165457913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457913">Mario Carneiro (May 12 2019 at 10:02)</a>:</h4>
+<p>not typeclass search per se, but "prolog-like" needs some tweaking to make it not quite so stupid in some cases, i.e. loop detection and some forward inference</p>
+
+<a name="165457929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457929">Patrick Massot (May 12 2019 at 10:03)</a>:</h4>
+<p>Is this something you could play with in the fork?</p>
+
+<a name="165457979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457979">Patrick Massot (May 12 2019 at 10:04)</a>:</h4>
+<p>It's such a fundamental part of Lean that, to me, it looks much more important to fix than VM override or FFI or pretty much anything else</p>
+
+<a name="165457982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165457982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165457982">Mario Carneiro (May 12 2019 at 10:04)</a>:</h4>
+<p>possibly... It's a really hard problem in general though, and lots and lots of words have been spent on it, months of peoples' work can gone into proposals and alterations and no one has found that silver bullet yet</p>
+
+<a name="165458002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458002">Patrick Massot (May 12 2019 at 10:05)</a>:</h4>
+<p>But prolog itself isn't so dumb, right? Why can't we look at what they do there?</p>
+
+<a name="165458003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458003">Mario Carneiro (May 12 2019 at 10:06)</a>:</h4>
+<blockquote>
+<p>It's such a fundamental part of Lean that, to me, it looks much more important to fix</p>
+</blockquote>
+<p>the problem with fixing fundamental things is that everything else has to adapt</p>
+
+<a name="165458055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458055">Mario Carneiro (May 12 2019 at 10:06)</a>:</h4>
+<p>there is a high cost of switching and only a vague promise of something better on the other end</p>
+
+<a name="165458072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458072">Patrick Massot (May 12 2019 at 10:07)</a>:</h4>
+<p>also it looks like this is not something that is currently worked on in the Lean 4 repository, so maybe there is hope to contribute some battle tested idea in this direction. Whereas things related to programming are clearly worked on by Leo and Sebastian, so everything done in the fork will be erased</p>
+
+<a name="165458074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458074">Mario Carneiro (May 12 2019 at 10:07)</a>:</h4>
+<p>Prolog gives more mechanisms for being able to control how the search goes. For example you can say "no backtracking past this point"</p>
+
+<a name="165458123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458123">Mario Carneiro (May 12 2019 at 10:08)</a>:</h4>
+<p>typeclasses are essential to lean. If you think you can sneak a change to it past leo I think you are mistaken</p>
+
+<a name="165458124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458124">Patrick Massot (May 12 2019 at 10:08)</a>:</h4>
+<p>Who said "sneak"? Of course you don't want to sneak anything</p>
+
+<a name="165458136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458136">Mario Carneiro (May 12 2019 at 10:09)</a>:</h4>
+<p>Meaning, you have to be working in conjunction with leo on the stuff</p>
+
+<a name="165458137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458137">Patrick Massot (May 12 2019 at 10:09)</a>:</h4>
+<p>I wrote "contribute a battle tested idea"</p>
+
+<a name="165458142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458142">Mario Carneiro (May 12 2019 at 10:09)</a>:</h4>
+<p>so unless he's interested in such a collaboration there's no chance of it happening in lean 4</p>
+
+<a name="165458145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458145">Mario Carneiro (May 12 2019 at 10:09)</a>:</h4>
+<p>or if he does something himself</p>
+
+<a name="165458249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458249">Mario Carneiro (May 12 2019 at 10:12)</a>:</h4>
+<p>also, nothing in the fork will be erased. I'm not sure exactly what will happen, but there is no way I am going to accept a regression like that</p>
+
+<a name="165458265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458265">Mario Carneiro (May 12 2019 at 10:13)</a>:</h4>
+<p>"replaced with something better" is okay, "deleted with no alternatives" is not</p>
+
+<a name="165458318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458318">Patrick Massot (May 12 2019 at 10:14)</a>:</h4>
+<p>Sure, you'll be able to continue using the fork if you want. But I guess most users will switch to Lean 4. And when I write "erased", I mean from the point of view of users. Nothing will be erased in the sense that the repository will still be there.</p>
+
+<a name="165458347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458347">Patrick Massot (May 12 2019 at 10:15)</a>:</h4>
+<p>Leo doesn't have to care about that fork, he won't have to "delete" anything, he can simply and rightfully ignore it</p>
+
+<a name="165458403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458403">Mario Carneiro (May 12 2019 at 10:16)</a>:</h4>
+<p>we still have to deal with integrating lean 4 and mathlib. That's not an easy task, and by the end of it we will probably know what the answer to this is</p>
+
+<a name="165458580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458580">Mario Carneiro (May 12 2019 at 10:20)</a>:</h4>
+<p>Lean 4 promises to put a lot more into lean code that we can modify. If all the stuff in the fork is now in lean, then the contents of it can simply move to mathlib</p>
+
+<a name="165458664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458664">Patrick Massot (May 12 2019 at 10:22)</a>:</h4>
+<p>I guess type class inference will stay C++ forever, it's a performance critical mission</p>
+
+<a name="165458675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458675">Mario Carneiro (May 12 2019 at 10:23)</a>:</h4>
+<p>possibly</p>
+
+<a name="165458678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458678">Mario Carneiro (May 12 2019 at 10:23)</a>:</h4>
+<p>lean is compiled now, maybe it can be made to work</p>
+
+<a name="165458726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458726">Mario Carneiro (May 12 2019 at 10:24)</a>:</h4>
+<p>I don't know if Lean 4 will ever be "open for business" as in accepting issues or PRs. It's really hard to tell if that was just a phase of lean 3 during the transition, or if that's the new normal</p>
+
+<a name="165458730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/representations/near/165458730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84839representations.html#165458730">Mario Carneiro (May 12 2019 at 10:24)</a>:</h4>
+<p>but I think the fork has a reason to exist at least until that day</p>
+
 
 {% endraw %}

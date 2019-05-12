@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [pygments](17208pygments.html) (52 messages, latest: May 12 2019 at 10:22)
+
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (51 messages, latest: May 12 2019 at 06:49)
 
 * [simp being silly again](47148simpbeingsillyagain.html) (2 messages, latest: May 12 2019 at 06:45)
@@ -23,8 +25,6 @@ permalink: archive/113488general/index.html
 * [AppVeyor build failing](60737AppVeyorbuildfailing.html) (42 messages, latest: May 10 2019 at 19:26)
 
 * [\[off-topic\] arxiv collector](93681offtopicarxivcollector.html) (3 messages, latest: May 10 2019 at 14:00)
-
-* [pygments](17208pygments.html) (51 messages, latest: May 10 2019 at 14:00)
 
 * [Binding power](34505Bindingpower.html) (25 messages, latest: May 10 2019 at 08:05)
 
