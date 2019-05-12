@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contraposition](54269contraposition.html) (19 messages, latest: May 12 2019 at 14:51)
+* [lean lexer (pygments)](20585leanlexerpygments.html) (8 messages, latest: May 12 2019 at 15:55)
+
+* [choose](14850choose.html) (2 messages, latest: May 12 2019 at 15:03)
+
+* [contraposition](54269contraposition.html) (20 messages, latest: May 12 2019 at 15:01)
 
 * [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
 
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (54 messages, latest: May 12 2019 at 13:07)
-
-* [choose](14850choose.html) (1 message, latest: May 12 2019 at 12:07)
 
 * [simp being silly again](47148simpbeingsillyagain.html) (2 messages, latest: May 12 2019 at 06:45)
 
@@ -2239,8 +2241,6 @@ permalink: archive/113488general/index.html
 * [emacs and contributions](11760emacsandcontributions.html) (4 messages, latest: Jul 25 2018 at 22:24)
 
 * [rcases abuse](72370rcasesabuse.html) (4 messages, latest: Jul 25 2018 at 15:48)
-
-* [lean lexer (pygments)](20585leanlexerpygments.html) (5 messages, latest: Jul 25 2018 at 15:01)
 
 * [∃ notation](91514notation.html) (2 messages, latest: Jul 25 2018 at 11:56)
 
