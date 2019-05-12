@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [contraposition](54269contraposition.html) (21 messages, latest: May 12 2019 at 17:36)
+
+* [Lean in the wild](43625Leaninthewild.html) (72 messages, latest: May 12 2019 at 17:12)
+
 * [another timeout](98841anothertimeout.html) (1 message, latest: May 12 2019 at 16:58)
 
 * [lean lexer (pygments)](20585leanlexerpygments.html) (8 messages, latest: May 12 2019 at 15:55)
 
 * [choose](14850choose.html) (2 messages, latest: May 12 2019 at 15:03)
-
-* [contraposition](54269contraposition.html) (20 messages, latest: May 12 2019 at 15:01)
 
 * [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
 
@@ -113,8 +115,6 @@ permalink: archive/113488general/index.html
 * [Univalence axiom](96233Univalenceaxiom.html) (124 messages, latest: Apr 26 2019 at 22:14)
 
 * [what is a diamond?](58637whatisadiamond.html) (10 messages, latest: Apr 26 2019 at 15:18)
-
-* [Lean in the wild](43625Leaninthewild.html) (71 messages, latest: Apr 25 2019 at 21:51)
 
 * [ArXiv and `listings`](59627ArXivandlistings.html) (4 messages, latest: Apr 25 2019 at 17:21)
 
